@@ -15,6 +15,7 @@
 // servidor (qué cobra): una sola regla. Sin `@/`: lo prueba `node --test`.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { LOCALE } from '../locale.ts';
 import { ZONA_HORARIA } from '../zona-horaria.ts';
 import type { PlanTarifa, Suscripcion } from '../types.ts';
 import { planCubreTipoClase } from '../bono-logic.ts';
@@ -160,8 +161,8 @@ export function motivoSinClaseSuelta(
     : { texto: 'Para cobrarle la clase suelta desde aquí, crea tu tarifa «Clase suelta» (una sesión)', aPaquetes: true };
 }
 
-const FORMATO_DIA = new Intl.DateTimeFormat('es-ES', { weekday: 'short', day: 'numeric', month: 'short', timeZone: TZ_ESTUDIO });
-const FORMATO_HORA = new Intl.DateTimeFormat('es-ES', { hour: '2-digit', minute: '2-digit', hourCycle: 'h23', timeZone: TZ_ESTUDIO });
+const FORMATO_DIA = new Intl.DateTimeFormat(LOCALE, { weekday: 'short', day: 'numeric', month: 'short', timeZone: TZ_ESTUDIO });
+const FORMATO_HORA = new Intl.DateTimeFormat(LOCALE, { hour: '2-digit', minute: '2-digit', hourCycle: 'h23', timeZone: TZ_ESTUDIO });
 
 /** «Clase suelta — Reformer, jue 2 oct 09:00»: el concepto del recibo, en hora del estudio. */
 export function conceptoDeClaseSuelta(tipoClase: string | null | undefined, inicioISO: string): string {

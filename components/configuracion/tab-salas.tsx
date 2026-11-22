@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { AyudaDelPaso } from '@/components/guia/ayuda-del-paso';
 import { useCallback, useEffect, useState } from 'react';
 import { ColorInput, ColorSwatch, Field, btnPrimary, btnSecondary, cardCls, inputCls } from '@/components/configuracion/estilos';
@@ -349,8 +350,8 @@ export function TabSalas({ showToast }: { showToast: MostrarToast }) {
                         {sala?.nombre ?? 'Sala'}{b.motivo ? ` — ${b.motivo}` : ''}
                       </p>
                       <p className="text-[12px] text-muted-foreground">
-                        Desde {new Date(b.desde).toLocaleDateString('es-ES')}
-                        {b.hasta ? ` · hasta ${new Date(b.hasta).toLocaleDateString('es-ES')}` : ' · sin fecha de arreglo'}
+                        Desde {new Date(b.desde).toLocaleDateString(LOCALE)}
+                        {b.hasta ? ` · hasta ${new Date(b.hasta).toLocaleDateString(LOCALE)}` : ' · sin fecha de arreglo'}
                       </p>
                     </div>
                     <button

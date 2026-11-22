@@ -1,3 +1,4 @@
+import { LOCALE } from '../lib/locale.ts';
 import { LEGAL } from '@/lib/legal-info';
 import { ID_AUTOR } from '@/lib/blog/autor';
 import { NAV_LINKS } from './landing/data';
@@ -71,7 +72,7 @@ export function OrganizationStructuredData() {
     '@id': ID_WEB,
     name: LEGAL.marca,
     url: LEGAL.url,
-    inLanguage: 'es-ES',
+    inLanguage: LOCALE,
     publisher: { '@id': ID_ORGANIZACION },
   };
 

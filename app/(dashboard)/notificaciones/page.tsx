@@ -4,6 +4,7 @@
 // estado de entrega por canal (fecha, destinatario, tipo, prioridad, título,
 // canales + resultado + errores). Lee /api/notifications/admin (solo staff).
 
+import { LOCALE } from '../../../lib/locale.ts';
 import { useCallback, useEffect, useState } from 'react';
 import { Bell } from 'lucide-react';
 import { PageHeader } from '@/components/ui/page-header';
@@ -45,7 +46,7 @@ const ESTADO_COLOR: Record<string, string> = {
 };
 
 function fecha(iso: string) {
-  return new Date(iso).toLocaleString('es-ES', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+  return new Date(iso).toLocaleString(LOCALE, { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
 }
 
 export default function NotificationCenterPage() {

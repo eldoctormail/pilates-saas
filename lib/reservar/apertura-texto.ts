@@ -1,3 +1,4 @@
+import { LOCALE } from '../locale.ts';
 import { diaEnEstudio } from '../calendario-hora-estudio.ts';
 import { fechaLargaEstudio, horaEstudio, masDias, TZ_ESTUDIO } from '../utils.ts';
 
@@ -21,7 +22,7 @@ export function mensajeTodaviaNoSeAbre(abre: Date, ahora: Date): string {
   return `Todavía no se puede reservar esta clase: se abre ${cuandoSeAbre(abre, ahora)}.`;
 }
 
-const CORTO = new Intl.DateTimeFormat('es-ES', { weekday: 'short', day: 'numeric', timeZone: TZ_ESTUDIO });
+const CORTO = new Intl.DateTimeFormat(LOCALE, { weekday: 'short', day: 'numeric', timeZone: TZ_ESTUDIO });
 
 /** «Se abre mar 29 · 20:00»: la etiqueta de una clase que aún no se puede reservar. */
 export function etiquetaSeAbre(abre: Date | string): string {

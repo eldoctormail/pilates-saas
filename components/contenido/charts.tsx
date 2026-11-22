@@ -3,6 +3,7 @@
 // Gráficos ligeros en SVG (sin dependencias externas). Se adaptan al tema
 // mediante currentColor / tokens y traen animación de entrada suave.
 
+import { LOCALE } from '../../lib/locale.ts';
 import { useId } from 'react';
 import { cn } from '@/lib/utils';
 
@@ -97,7 +98,7 @@ export function BarList({
               className="h-full rounded-full flex items-center justify-end px-2 transition-[width] duration-500"
               style={{ width: `${Math.max(6, (it.value / max) * 100)}%`, background: it.color }}
             >
-              <span className="text-[10px] font-bold text-white/95 tabular-nums">{it.value.toLocaleString('es-ES')}</span>
+              <span className="text-[10px] font-bold text-white/95 tabular-nums">{it.value.toLocaleString(LOCALE)}</span>
             </div>
           </div>
           {it.sub && <span className="w-14 text-right text-[11px] text-muted-foreground tabular-nums shrink-0">{it.sub}</span>}

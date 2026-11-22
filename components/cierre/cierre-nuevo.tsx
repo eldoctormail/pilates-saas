@@ -10,6 +10,7 @@
 // siempre, el del PDF y el del CSV.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { LOCALE } from '../../lib/locale.ts';
 import { Euro, FileText, Landmark, Percent, ShieldCheck } from 'lucide-react';
 import { TarjetaCifra } from '@/components/dashboard/vivo';
 import type { CierreSellado, CierreTotales } from '@/lib/fiscal/cierre-engine';
@@ -98,7 +99,7 @@ export function BarrasMensualesNuevas({ meses, anio, formato, completo }: {
   completo: boolean;
 }) {
   const max = Math.max(1, ...meses);
-  const fmtK = (n: number) => n >= 1000 ? `${(n / 1000).toLocaleString('es-ES', { maximumFractionDigits: 1 })}k` : String(Math.round(n));
+  const fmtK = (n: number) => n >= 1000 ? `${(n / 1000).toLocaleString(LOCALE, { maximumFractionDigits: 1 })}k` : String(Math.round(n));
   const vacio = completo && meses.every(v => v <= 0);
   return (
     <div className="relative">

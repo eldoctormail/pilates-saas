@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../../lib/locale.ts';
 import { useEffect, useState, type ReactNode } from 'react';
 import { Coins, Sparkles } from 'lucide-react';
 import { useStudio } from '@/lib/studio-context';
@@ -188,7 +189,7 @@ function Cabecera({ plan, cifras, moneda }: {
           <div key={d.etiqueta} className={cn(cardCls, 'min-w-0 px-3 py-3 @md/config:px-4')}>
             <dt className="text-xs leading-tight text-muted-foreground text-balance @md/config:text-sm">{d.etiqueta}</dt>
             <dd className="mt-1 text-2xl font-semibold tabular-nums text-foreground">
-              {d.valor === undefined ? <span className="inline-block h-7 w-10 animate-pulse rounded bg-muted align-middle" aria-label="Cargando" /> : d.valor.toLocaleString('es-ES')}
+              {d.valor === undefined ? <span className="inline-block h-7 w-10 animate-pulse rounded bg-muted align-middle" aria-label="Cargando" /> : d.valor.toLocaleString(LOCALE)}
             </dd>
           </div>
         ))}

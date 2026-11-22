@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../../lib/locale.ts';
 import { conMoneda } from '../../../lib/moneda.ts';
 import { useEffect, useMemo, useState, type ElementType, type ReactNode } from 'react';
 import { RefreshCw, ChevronRight } from 'lucide-react';
@@ -346,7 +347,7 @@ export default function CentroDeControlPage() {
           <p className="text-[12px] font-medium uppercase tracking-widest text-muted-foreground">
             {/* El día en Madrid, como el mensaje que hay debajo: con la zona del
                 navegador, uno en UTC a las 01:30 de Madrid ponía la fecha de ayer. */}
-            {new Date().toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', timeZone: TZ_ESTUDIO })}
+            {new Date().toLocaleDateString(LOCALE, { weekday: 'long', day: 'numeric', month: 'long', timeZone: TZ_ESTUDIO })}
           </p>
           </div>
         </div>

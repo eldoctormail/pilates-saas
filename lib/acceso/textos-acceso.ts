@@ -2,6 +2,7 @@
 // el panel y la app de la instructora, para que la misma situación no se cuente
 // de dos maneras. Puro: se prueba con `node --test`.
 
+import { LOCALE } from '../locale.ts';
 import { TZ_ESTUDIO } from '../utils.ts';
 import type { MotivoAcceso, TipoAcceso, Veredicto } from './evaluar-acceso.ts';
 
@@ -34,8 +35,8 @@ export function etiquetaEstadoReserva(estado: string | null): string {
   return ETIQUETA_ESTADO[estado] ?? estado;
 }
 
-const fmtHora = new Intl.DateTimeFormat('es-ES', { timeZone: TZ_ESTUDIO, hour: '2-digit', minute: '2-digit' });
-const fmtFecha = new Intl.DateTimeFormat('es-ES', { timeZone: TZ_ESTUDIO, weekday: 'long', day: 'numeric', month: 'long' });
+const fmtHora = new Intl.DateTimeFormat(LOCALE, { timeZone: TZ_ESTUDIO, hour: '2-digit', minute: '2-digit' });
+const fmtFecha = new Intl.DateTimeFormat(LOCALE, { timeZone: TZ_ESTUDIO, weekday: 'long', day: 'numeric', month: 'long' });
 
 export const horaAcceso = (iso: string) => fmtHora.format(new Date(iso));
 export const fechaAcceso = (iso: string) => fmtFecha.format(new Date(iso));
@@ -43,7 +44,7 @@ export const fechaAcceso = (iso: string) => fmtFecha.format(new Date(iso));
 /** «30 de junio de 2027», desde un YYYY-MM-DD (sin zona: es una fecha, no un instante). */
 export function fechaVigencia(ymd: string): string {
   const [a, m, d] = ymd.split('-').map(Number);
-  return new Intl.DateTimeFormat('es-ES', { timeZone: 'UTC', day: 'numeric', month: 'long', year: 'numeric' })
+  return new Intl.DateTimeFormat(LOCALE, { timeZone: 'UTC', day: 'numeric', month: 'long', year: 'numeric' })
     .format(new Date(Date.UTC(a, m - 1, d)));
 }
 

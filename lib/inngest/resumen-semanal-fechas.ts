@@ -9,13 +9,14 @@
 // criterio que el resto del pipeline del Umbral, que ya trabaja en fechas
 // UTC de calendario). `hoy` es lunes cuando corre el cron; la semana que
 // acaba de cerrar es [hoy-7, hoy-1].
+import { LOCALE } from '../locale.ts';
 export function semanaAnterior(hoy: Date): { lunes: string; domingo: string; rangoTexto: string } {
   const domingo = new Date(hoy);
   domingo.setUTCDate(domingo.getUTCDate() - 1);
   const lunes = new Date(domingo);
   lunes.setUTCDate(lunes.getUTCDate() - 6);
   const iso = (d: Date) => d.toISOString().slice(0, 10);
-  const rangoTexto = `${lunes.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', timeZone: 'UTC' })} – ${domingo.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', timeZone: 'UTC' })}`;
+  const rangoTexto = `${lunes.toLocaleDateString(LOCALE, { day: 'numeric', month: 'long', timeZone: 'UTC' })} – ${domingo.toLocaleDateString(LOCALE, { day: 'numeric', month: 'long', timeZone: 'UTC' })}`;
   return { lunes: iso(lunes), domingo: iso(domingo), rangoTexto };
 }
 

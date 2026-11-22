@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { conMoneda, MONEDA_SIMBOLO } from '../../lib/moneda.ts';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
@@ -31,7 +32,7 @@ type Hoja =
 type Filtro = 'TODAS' | EstadoRegalo;
 
 const AVISO_CADUCIDAD_DIAS = 30;
-const fecha = (iso: string) => new Date(`${iso}T12:00:00Z`).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' });
+const fecha = (iso: string) => new Date(`${iso}T12:00:00Z`).toLocaleDateString(LOCALE, { day: 'numeric', month: 'short', year: 'numeric' });
 const campo = 'w-full h-11 px-3 rounded-xl border border-border bg-background text-sm text-foreground placeholder:text-muted-foreground/70 transition-colors hover:border-muted-foreground/50 focus-visible:outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:opacity-60 aria-invalid:border-destructive';
 const etiqueta = 'block text-[13px] font-semibold text-foreground mb-1.5';
 const chip = 'inline-flex items-center justify-center gap-1.5 h-9 px-3.5 rounded-full border text-[13px] font-semibold transition-colors focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring/50';

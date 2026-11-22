@@ -8,6 +8,7 @@
 // Nunca comentarios (decisión del 14-sep-2026).
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { LOCALE } from '../locale.ts';
 export interface ValoracionesVista {
   /** Media de 1 a 5. */
   media: number;
@@ -19,7 +20,7 @@ export interface ValoracionesVista {
 
 export const TEXTO_SIN_VALORACIONES = 'Cuando al menos 5 clientes hayan valorado tus clases, verás aquí tu media.';
 
-const fmtDia = new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'long', timeZone: 'UTC' });
+const fmtDia = new Intl.DateTimeFormat(LOCALE, { day: 'numeric', month: 'long', timeZone: 'UTC' });
 
 /** Nunca da por buena una forma que no sea exactamente la esperada. */
 export function normalizarValoraciones(x: unknown): ValoracionesVista | null {

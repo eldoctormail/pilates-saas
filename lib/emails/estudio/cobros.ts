@@ -5,6 +5,7 @@
 // de «no hemos podido cobrar tu cuota» se lee como una broma, y un justificante
 // de pago es un documento, no una postal. El filete de color hace el aviso.
 
+import { LOCALE } from '../../locale.ts';
 import { correoEstudio, correoEstudioLibre, type MarcaCorreo } from './plantilla.ts';
 import { ACENTO } from './paleta.ts';
 import { marcaConPersonalizacion, botonConPersonalizacion, type PersonalizacionCorreo } from './clase.ts';
@@ -74,7 +75,7 @@ export interface PropsRecibo {
  * del estudio.
  */
 export function correoRecibo(p: PropsRecibo): string {
-  const fecha = new Date(p.fechaCobro).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+  const fecha = new Date(p.fechaCobro).toLocaleDateString(LOCALE, { day: 'numeric', month: 'long', year: 'numeric' });
   return correoEstudio({
     marca: p.marca,
     preheader: `Hemos recibido tu pago de ${formatEuro(p.importe)}`,

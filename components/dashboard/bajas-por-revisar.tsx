@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { useEffect, useState } from 'react';
 import { CalendarX } from 'lucide-react';
 import { listarBajasPorRevisar, revisarBajaInstructora, type BajaPorRevisar } from '@/lib/api-client';
@@ -20,7 +21,7 @@ import type { MostrarToast } from '@/components/ui/toast';
 // Solo se monta si `puedeGestionarEquipo` (el mismo gate que el servidor): el
 // motivo puede hablar de su salud.
 
-const fmtClase = new Intl.DateTimeFormat('es-ES', {
+const fmtClase = new Intl.DateTimeFormat(LOCALE, {
   weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: TZ_ESTUDIO,
 });
 

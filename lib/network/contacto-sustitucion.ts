@@ -4,6 +4,7 @@
 // a todas»). Aquí vive solo lo puro: qué se le escribe y cómo se lee la
 // respuesta del servidor. El envío es `contactarPerfilNetwork`
 // (POST /api/network/contacto), la misma vía que la ficha del perfil.
+import { LOCALE } from '../locale.ts';
 import { TZ_ESTUDIO } from '../utils.ts';
 
 /**
@@ -19,8 +20,8 @@ export function mensajeCoberturaSustitucion(clase: { tipoClase: string | null; i
 
   const inicio = new Date(clase.inicioISO);
   if (Number.isNaN(inicio.getTime())) return `Hola, buscamos a alguien que pueda cubrir ${queClase}. ¿Te encajaría?`;
-  const fecha = inicio.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', timeZone: TZ_ESTUDIO });
-  const hora = inicio.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', timeZone: TZ_ESTUDIO });
+  const fecha = inicio.toLocaleDateString(LOCALE, { weekday: 'long', day: 'numeric', month: 'long', timeZone: TZ_ESTUDIO });
+  const hora = inicio.toLocaleTimeString(LOCALE, { hour: '2-digit', minute: '2-digit', timeZone: TZ_ESTUDIO });
   return `Hola, buscamos a alguien que pueda cubrir ${queClase} el ${fecha} a las ${hora}. ¿Te encajaría?`;
 }
 

@@ -16,6 +16,7 @@
 // que le pasa la página (la BD sigue siendo autoritativa).
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { LOCALE } from '../../lib/locale.ts';
 import { conMoneda } from '../../lib/moneda.ts';
 import { useMemo, useState, useEffect, useId, useRef, memo, type CSSProperties, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
@@ -650,8 +651,8 @@ export function ReservaCalendario({
   // tira de 10 días, no un mes fijo — un mes de por medio (26 ago → 4 sep,
   // p.ej.) sigue siendo real casi la mitad del año.
   const rangoMesesDiez = useMemo(() => {
-    const mesA = diez[0].toLocaleDateString('es-ES', { month: 'long' }).toUpperCase();
-    const mesB = diez[diez.length - 1].toLocaleDateString('es-ES', { month: 'long' }).toUpperCase();
+    const mesA = diez[0].toLocaleDateString(LOCALE, { month: 'long' }).toUpperCase();
+    const mesB = diez[diez.length - 1].toLocaleDateString(LOCALE, { month: 'long' }).toUpperCase();
     return mesA === mesB ? mesA : `${mesA} — ${mesB}`;
   }, [diez]);
   // `estiloDias === 'grid'`: 7 días rodantes desde hoy (no semana natural
@@ -766,8 +767,8 @@ export function ReservaCalendario({
 
   const rangoSemanaLabel = useMemo(() => {
     const a = semana[0], b = semana[6];
-    const mesA = a.toLocaleDateString('es-ES', { month: 'short' });
-    const mesB = b.toLocaleDateString('es-ES', { month: 'short' });
+    const mesA = a.toLocaleDateString(LOCALE, { month: 'short' });
+    const mesB = b.toLocaleDateString(LOCALE, { month: 'short' });
     return mesA === mesB
       ? `${a.getDate()}–${b.getDate()} ${mesB}`
       : `${a.getDate()} ${mesA} – ${b.getDate()} ${mesB}`;
@@ -943,7 +944,7 @@ export function ReservaCalendario({
                   type="button"
                   role="tab"
                   aria-selected={isSel}
-                  aria-label={`${d.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' })}, ${n} ${n === 1 ? 'clase' : 'clases'}`}
+                  aria-label={`${d.toLocaleDateString(LOCALE, { weekday: 'long', day: 'numeric', month: 'long' })}, ${n} ${n === 1 ? 'clase' : 'clases'}`}
                   onClick={() => setSelectedDayKey(key)}
                   style={{
                     flex: 1, minWidth: 0, height: cq(72, 6.6, 84), display: 'flex', flexDirection: 'column',
@@ -1051,7 +1052,7 @@ export function ReservaCalendario({
         // Misma cuenta que el eyebrow sticky de arriba — una sola fuente de
         // verdad (`totalDiaSel`), no dos cálculos que puedan desincronizarse.
         const totalDia = totalDiaSel;
-        const dayLabel = `${capitaliza(diaSel.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' }))}${esHoy ? ' — hoy' : ''}`;
+        const dayLabel = `${capitaliza(diaSel.toLocaleDateString(LOCALE, { weekday: 'long', day: 'numeric', month: 'long' }))}${esHoy ? ' — hoy' : ''}`;
         const countLabel = error ? '—' : (totalDia ? `${totalDia} ${totalDia === 1 ? 'clase' : 'clases'}` : 'Sin clases');
         return (
           // Cabecera «día · nº de clases» + tarjetas por clase agrupadas por

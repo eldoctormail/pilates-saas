@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { useEffect, useRef, useState } from 'react';
 import { Loader2, Send, Handshake, Check } from 'lucide-react';
 import {
@@ -9,7 +10,7 @@ import {
 import type { MensajeNetwork, FormalizacionNetwork } from '@/lib/network/tipos';
 import { cn } from '@/lib/utils';
 
-const hora = (iso: string) => new Date(iso).toLocaleString('es-ES', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+const hora = (iso: string) => new Date(iso).toLocaleString(LOCALE, { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
 const TIPO_CONTRATO_LABEL = { temporal: 'temporal', indefinido: 'indefinido' } as const;
 
 // Hilo de mensajería (brief §9) — el mismo componente sirve para el lado

@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../../lib/locale.ts';
 import { VistaDeLaUrl, useUrlSigueALaVista } from '@/components/layout/vista-de-la-url';
 import { leerBorradorMensajeria } from '@/lib/opening/comunicaciones';
 import { Suspense, useState, useMemo, useId, useEffect, useCallback, useRef } from 'react';
@@ -63,7 +64,7 @@ function timeAgo(iso: string) {
   if (hrs < 24) return `hace ${hrs}h`;
   const days = Math.floor(hrs / 24);
   if (days < 7) return `hace ${days}d`;
-  return new Date(iso).toLocaleDateString('es-ES', { day: '2-digit', month: 'short' });
+  return new Date(iso).toLocaleDateString(LOCALE, { day: '2-digit', month: 'short' });
 }
 
 const PRIORIDAD_ICON = {

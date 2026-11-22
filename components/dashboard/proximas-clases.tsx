@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { CalendarClock, Clock } from 'lucide-react';
@@ -444,8 +445,8 @@ function TarjetaClase({
   // función que usa la agenda de arriba: llamar «Mañana» a un día ahí y
   // «9 sept» aquí, a dos dedos, se lee como dos días distintos.
   const palabra = tituloDia(diaEstudio, hoy);
-  const numero = dia.toLocaleDateString('es-ES', { day: 'numeric', timeZone: TZ_ESTUDIO });
-  const mes = dia.toLocaleDateString('es-ES', { month: 'short', timeZone: TZ_ESTUDIO }).replace('.', '');
+  const numero = dia.toLocaleDateString(LOCALE, { day: 'numeric', timeZone: TZ_ESTUDIO });
+  const mes = dia.toLocaleDateString(LOCALE, { month: 'short', timeZone: TZ_ESTUDIO }).replace('.', '');
 
   const cuerpo = (
     <>

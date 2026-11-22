@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { Check, RefreshCw } from 'lucide-react';
 import { colorOcupacion, ratioOcupacion } from '@/lib/ocupacion';
 import { PINTA } from '@/lib/calendario-estado';
@@ -62,7 +63,7 @@ export interface VistaAgendaProps {
   marcaDe?: (id: string) => MarcaClase | undefined;
 }
 
-const DIA_SEMANA = new Intl.DateTimeFormat('es-ES', { weekday: 'long' });
+const DIA_SEMANA = new Intl.DateTimeFormat(LOCALE, { weekday: 'long' });
 
 export function VistaAgenda({ modo, dias, seleccionadaId, marcadas, onSeleccionar, atenuada, marcaDe }: VistaAgendaProps) {
   const total = dias.reduce((n, d) => n + d.sesiones.length, 0);

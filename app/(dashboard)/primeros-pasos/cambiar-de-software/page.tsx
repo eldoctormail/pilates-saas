@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../../../lib/locale.ts';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { AlertTriangle, ArrowRight, CheckCircle2, Circle, CircleDot, ExternalLink, Loader2, ShieldAlert, Wrench } from 'lucide-react';
@@ -32,7 +33,7 @@ const CLASE_ESTADO: Record<EstadoPaso, string> = {
   BLOQUEADO: 'bg-destructive/10 text-destructive',
 };
 
-const fechaLarga = (iso: string) => new Date(`${iso}T00:00:00Z`).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+const fechaLarga = (iso: string) => new Date(`${iso}T00:00:00Z`).toLocaleDateString(LOCALE, { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 
 export default function CambiarDeSoftwarePage() {
   const { studio, socios, planesTarifa, suscripciones, sesiones, reservas } = useStudio();

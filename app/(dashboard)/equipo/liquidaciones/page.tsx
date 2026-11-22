@@ -6,6 +6,7 @@
 // le debe a cada instructora y por qué. El pago sigue haciéndose fuera de
 // Tentare; aquí solo se anota que se pagó.
 
+import { LOCALE } from '../../../../lib/locale.ts';
 import { conMoneda, MONEDA_SIMBOLO } from '../../../../lib/moneda.ts';
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
@@ -274,7 +275,7 @@ export default function LiquidacionesPage() {
 }
 
 const campoCls = 'rounded-lg border border-border bg-card px-3 py-2 text-sm text-foreground focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/15 transition-all';
-const euros = (n: number | null | undefined) => n == null ? null : n.toLocaleString('es-ES', { maximumFractionDigits: 2 });
+const euros = (n: number | null | undefined) => n == null ? null : n.toLocaleString(LOCALE, { maximumFractionDigits: 2 });
 
 function TarjetaInstructora({ instructora: i, tarifa, liq, mes, minutosFichados, pagarDuracionReal, modoEstudio, procesando, onGenerar, onTransicion, onRelacion, onTarifa }: {
   instructora: Instructor; tarifa: TarifaInstructor | undefined; liq: Liquidacion | undefined; mes: string;

@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../../../../lib/locale.ts';
 import { ZONA_HORARIA } from '../../../../../lib/zona-horaria.ts';
 import { useCallback, useEffect, useState } from 'react';
 import { StudentShell } from '@/components/student/shell/StudentShell';
@@ -21,7 +22,7 @@ import { fichar, type EstadoFichaje } from '@/lib/student/datos-fichaje';
 // mientras hay una petición en vuelo (el doble clic ya lo absorbe el servidor,
 // esto evita además dos avisos).
 
-const hora = (iso: string) => new Date(iso).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', timeZone: ZONA_HORARIA });
+const hora = (iso: string) => new Date(iso).toLocaleTimeString(LOCALE, { hour: '2-digit', minute: '2-digit', timeZone: ZONA_HORARIA });
 const duracion = (min: number) => `${Math.floor(min / 60)} h ${String(min % 60).padStart(2, '0')} min`;
 
 export default function FichajePage() {

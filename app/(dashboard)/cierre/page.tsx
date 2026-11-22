@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../../lib/locale.ts';
 import { conMoneda, LOCALE_MONEDA } from '../../../lib/moneda.ts';
 import Link from 'next/link';
 import { useCallback, useEffect, useMemo, useState } from 'react';
@@ -885,7 +886,7 @@ export default function CierreDeAnoPage() {
 // Barras mensuales, escaladas al máximo del año.
 function MonthlyBars({ meses }: { meses: number[] }) {
   const max = Math.max(1, ...meses);
-  const fmtK = (n: number) => n >= 1000 ? `${(n / 1000).toLocaleString('es-ES', { maximumFractionDigits: 1 })}k` : String(Math.round(n));
+  const fmtK = (n: number) => n >= 1000 ? `${(n / 1000).toLocaleString(LOCALE, { maximumFractionDigits: 1 })}k` : String(Math.round(n));
   return (
     <div className="grid grid-cols-12 gap-1.5 sm:gap-2 items-end px-4 sm:px-5 py-6" style={{ height: 200 }}>
       {meses.map((v, i) => (

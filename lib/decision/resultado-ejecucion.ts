@@ -15,6 +15,7 @@
 // botonera del Centro de Control, y corre con `node --test`.
 
 /** Lo que dice `cobrarReciboOffSession` de UN recibo, o por qué no se llegó a intentar. */
+import { LOCALE } from '../locale.ts';
 import { conMoneda, LOCALE_MONEDA } from '../moneda.ts';
 export interface IntentoCobro {
   ok: boolean;
@@ -190,7 +191,7 @@ function unirMotivos(motivos: readonly string[]): string {
 function trasDosPuntos(s: string): string {
   const primera = s.split(/\s/, 1)[0] ?? '';
   if (!primera || /^Stripe/.test(primera) || /[A-ZÁÉÍÓÚÑ]/.test(primera.slice(1))) return s;
-  return s.charAt(0).toLocaleLowerCase('es-ES') + s.slice(1);
+  return s.charAt(0).toLocaleLowerCase(LOCALE) + s.slice(1);
 }
 
 export const PREFIJO_SIN_CONFIRMAR = 'Sin confirmar todavía';

@@ -1,3 +1,4 @@
+import { LOCALE } from '../../../../../../lib/locale.ts';
 import { ZONA_HORARIA } from '../../../../../../lib/zona-horaria.ts';
 import { NextRequest, NextResponse } from 'next/server';
 import { getSupabaseAdmin } from '@/lib/db/supabase-admin';
@@ -208,7 +209,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     const r = await ampliarPruebaEstudio(db, id);
     if (!r.ok) return NextResponse.json({ error: r.error }, { status: r.status });
 
-    const dia = (iso: string) => new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', timeZone: ZONA_HORARIA });
+    const dia = (iso: string) => new Date(iso).toLocaleDateString(LOCALE, { day: 'numeric', month: 'long', timeZone: ZONA_HORARIA });
     await registrar(db, req, {
       actor: g.admin,
       accion: 'estudio.prueba.ampliada',

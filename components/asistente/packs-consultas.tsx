@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import Link from 'next/link';
 import { Loader2 } from 'lucide-react';
@@ -44,9 +45,9 @@ export async function comprarPack(unidades: PackConsultas['unidades'], desde: De
 }
 
 const fechaLarga = (iso: string | null | undefined) =>
-  iso ? new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric', timeZone: TZ_ESTUDIO }) : null;
+  iso ? new Date(iso).toLocaleDateString(LOCALE, { day: 'numeric', month: 'long', year: 'numeric', timeZone: TZ_ESTUDIO }) : null;
 const fechaCorta = (iso: string | null | undefined) =>
-  iso ? new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', timeZone: TZ_ESTUDIO }) : null;
+  iso ? new Date(iso).toLocaleDateString(LOCALE, { day: 'numeric', month: 'long', timeZone: TZ_ESTUDIO }) : null;
 
 /**
  * Los tres packs con su botón. Un clic abre Stripe (en la misma pestaña); si

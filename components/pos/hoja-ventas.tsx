@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { useState, useEffect, useCallback } from 'react';
 import { X, ArrowLeft, Loader2, RotateCcw, Receipt } from 'lucide-react';
 import { cn, formatEuro } from '@/lib/utils';
@@ -178,7 +179,7 @@ export function HojaVentas({ onCerrar, onCambio }: { onCerrar: () => void; onCam
                       )}
                     </p>
                     <p className="text-[12px] text-muted-foreground">
-                      {new Date(v.realizadaEn).toLocaleString('es-ES', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })}
+                      {new Date(v.realizadaEn).toLocaleString(LOCALE, { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })}
                       {' · '}{METODO[v.metodoPago] ?? v.metodoPago}
                       {v.vendidoPor && ` · ${v.vendidoPor}`}
                     </p>
@@ -193,7 +194,7 @@ export function HojaVentas({ onCerrar, onCambio }: { onCerrar: () => void; onCam
           {!cargando && detalle && (
             <div className="p-4 space-y-4">
               <div className="rounded-2xl bg-background border border-border px-4 py-3 text-[13px] space-y-1">
-                <Dato label="Cuándo" valor={new Date(detalle.venta.realizadaEn).toLocaleString('es-ES')} />
+                <Dato label="Cuándo" valor={new Date(detalle.venta.realizadaEn).toLocaleString(LOCALE)} />
                 <Dato label="Pago" valor={METODO[detalle.venta.metodoPago] ?? detalle.venta.metodoPago} />
                 {detalle.venta.vendidoPor && <Dato label="Quién cobró" valor={detalle.venta.vendidoPor} />}
                 {detalle.venta.efectivoRecibido != null && (

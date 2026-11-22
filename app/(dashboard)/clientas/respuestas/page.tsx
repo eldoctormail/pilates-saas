@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../../../lib/locale.ts';
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { Download, ListChecks, Search, Settings2 } from 'lucide-react';
@@ -79,8 +80,8 @@ function TarjetaResumen({ p, r, total }: { p: PreguntaAlta; r: ResumenPregunta; 
       )}
       {r.numeros && (
         <p className="mt-3 text-[12px] text-foreground">
-          Media <strong className="tabular-nums">{r.numeros.media.toLocaleString('es-ES')}</strong>
-          <span className="text-muted-foreground"> · de {r.numeros.min.toLocaleString('es-ES')} a {r.numeros.max.toLocaleString('es-ES')}</span>
+          Media <strong className="tabular-nums">{r.numeros.media.toLocaleString(LOCALE)}</strong>
+          <span className="text-muted-foreground"> · de {r.numeros.min.toLocaleString(LOCALE)} a {r.numeros.max.toLocaleString(LOCALE)}</span>
         </p>
       )}
     </div>

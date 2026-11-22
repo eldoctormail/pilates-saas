@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { createPortal, flushSync } from 'react-dom';
 import { usePathname, useRouter } from 'next/navigation';
@@ -65,11 +66,11 @@ const ANCHO_AGRANDADA = 'w-[min(1080px,calc(100vw-24px))]';
 
 const BOTON = 'flex size-7 shrink-0 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-2 focus-visible:outline-brand';
 
-const FORMATO_DIA = new Intl.DateTimeFormat('es-ES', { weekday: 'short', day: 'numeric', month: 'short', timeZone: TZ_ESTUDIO });
+const FORMATO_DIA = new Intl.DateTimeFormat(LOCALE, { weekday: 'short', day: 'numeric', month: 'short', timeZone: TZ_ESTUDIO });
 
-const FORMATO_DIA_SEMANA = new Intl.DateTimeFormat('es-ES', { weekday: 'short', timeZone: TZ_ESTUDIO });
-const FORMATO_NUMERO_DIA = new Intl.DateTimeFormat('es-ES', { day: 'numeric', timeZone: TZ_ESTUDIO });
-const FORMATO_MES = new Intl.DateTimeFormat('es-ES', { month: 'short', timeZone: TZ_ESTUDIO });
+const FORMATO_DIA_SEMANA = new Intl.DateTimeFormat(LOCALE, { weekday: 'short', timeZone: TZ_ESTUDIO });
+const FORMATO_NUMERO_DIA = new Intl.DateTimeFormat(LOCALE, { day: 'numeric', timeZone: TZ_ESTUDIO });
+const FORMATO_MES = new Intl.DateTimeFormat(LOCALE, { month: 'short', timeZone: TZ_ESTUDIO });
 
 const mediodia = (fecha: string) => new Date(`${fecha}T12:00:00`);
 

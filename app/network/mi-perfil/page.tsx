@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../../lib/locale.ts';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Camera, Check, Loader2, Eye, EyeOff, ShieldAlert, Star, Trash2 } from 'lucide-react';
@@ -300,7 +301,7 @@ export default function MiPerfilNetworkPage() {
               <div>
                 <p className="text-[16px] font-extrabold" style={{ color: NW_TINTA }}>{form.nombre || 'Tu nombre'}</p>
                 <p className="text-[12.5px]" style={{ color: NW_MUTED_2 }}>
-                  {form.ciudad || 'Sin ciudad'} · en Network desde {new Date(perfil.creadoEn).toLocaleDateString('es-ES', { month: 'long', year: 'numeric' })}
+                  {form.ciudad || 'Sin ciudad'} · en Network desde {new Date(perfil.creadoEn).toLocaleDateString(LOCALE, { month: 'long', year: 'numeric' })}
                 </p>
                 <button type="button" onClick={() => fileInputRef.current?.click()} className="text-[12px] font-bold mt-1" style={{ color: NW_PRODUCTO }}>
                   Cambiar foto

@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { useMemo } from 'react';
 import Link from 'next/link';
 import { Receipt } from 'lucide-react';
@@ -42,7 +43,7 @@ const BADGE: Record<EstadoRecibo, { bg: string; text: string; label: string }> =
 // de `--info`: cada fila usa el MISMO token para el tinte y para la tinta.
 
 function fecha(iso: string) {
-  return new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
+  return new Date(iso).toLocaleDateString(LOCALE, { day: 'numeric', month: 'short' });
 }
 
 export function VentasRecientes() {

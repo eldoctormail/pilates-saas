@@ -13,6 +13,7 @@
 // tests, porque es la diferencia entre avisar a tiempo y no avisar nunca.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { LOCALE } from '../locale.ts';
 import { TZ_ESTUDIO } from '../utils.ts';
 
 export interface FilaSalud {
@@ -70,7 +71,7 @@ export function saludIntegracion(fila: FilaSalud | null | undefined): SaludInteg
 export function cuando(iso: string): string {
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return '';
-  return d.toLocaleString('es-ES', {
+  return d.toLocaleString(LOCALE, {
     day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit',
     hourCycle: 'h23', timeZone: TZ_ESTUDIO,
   });

@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../../lib/locale.ts';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Send, Hash, Plus, AlertCircle, Clock, RotateCw, X, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -8,7 +9,7 @@ import { useAuth } from '@/lib/auth-context';
 import { useTeamChat, type MensajeChat } from '@/lib/stores/use-team-chat-store';
 
 function formatHora(iso: string) {
-  return new Date(iso).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+  return new Date(iso).toLocaleTimeString(LOCALE, { hour: '2-digit', minute: '2-digit' });
 }
 function mismaFechaLocal(a: Date, b: Date) {
   return a.toDateString() === b.toDateString();
@@ -20,7 +21,7 @@ function etiquetaDia(iso: string) {
   ayer.setDate(hoy.getDate() - 1);
   if (mismaFechaLocal(d, hoy)) return 'Hoy';
   if (mismaFechaLocal(d, ayer)) return 'Ayer';
-  return d.toLocaleDateString('es-ES', {
+  return d.toLocaleDateString(LOCALE, {
     day: 'numeric',
     month: 'long',
     ...(d.getFullYear() !== hoy.getFullYear() ? { year: 'numeric' } : {}),

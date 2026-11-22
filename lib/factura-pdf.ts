@@ -19,6 +19,7 @@
 // «Entorno de PRUEBAS» en la factura que descargaba la alumna. Si vuelves a
 // añadir aquí un campo de la cadena, lo estás poniendo en el papel de la
 // clienta — que es exactamente lo que este comentario intenta evitar.
+import { LOCALE } from './locale.ts';
 import { conMoneda } from './moneda.ts';
 import { qrSvgMarkup } from './qr-svg.ts';
 import { conceptoDeFactura } from './facturas/concepto.ts';
@@ -37,7 +38,7 @@ export interface ReceptorFactura {
 }
 
 function fecha(iso: string) {
-  return new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' });
+  return new Date(iso).toLocaleDateString(LOCALE, { day: 'numeric', month: 'short', year: 'numeric' });
 }
 
 // Esto se inyecta con document.write en una ventana que hereda el origen del
@@ -77,7 +78,7 @@ export function generarFacturaHTML(
   receptor: ReceptorFactura | null,
   sello: SelloCliente | null,
 ): string {
-  const fmt = (n: number) => n.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const fmt = (n: number) => n.toLocaleString(LOCALE, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   // El sello lo decide `selloParaCliente`, nunca esta plantilla: aquí solo se
   // pinta lo que llegue. Si llega `null` la factura sale sin QR, que es lo
   // correcto mientras la AEAT no tenga el registro.
@@ -167,7 +168,7 @@ export function generarFacturaHTML(
   </tfoot>
 </table>
 ${bloqueSello}
-<div class="footer">Documento generado el ${new Date().toLocaleDateString('es-ES')} · ${esc(emisor.nombre)} · ${esc(emisor.nif)}</div>
+<div class="footer">Documento generado el ${new Date().toLocaleDateString(LOCALE)} · ${esc(emisor.nombre)} · ${esc(emisor.nif)}</div>
 <script>window.onload = function(){ window.print(); }<\/script>
 </body></html>`;
 }

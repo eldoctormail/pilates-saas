@@ -5,6 +5,7 @@
 // clase exige un motivo y deja rastro del valor anterior y el nuevo; aquí solo se
 // pinta lo que el servidor confirma.
 
+import { LOCALE } from '../../../../lib/locale.ts';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useStudio } from '@/lib/studio-context';
 import { useRol } from '@/lib/permisos';
@@ -28,8 +29,8 @@ import { formatEuro, instanteEnEstudio, TZ_ESTUDIO } from '@/lib/utils';
 
 const inputCls = 'rounded-lg border border-border bg-card px-2.5 py-1.5 text-sm text-foreground focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/15 transition-all';
 
-const fmtDia = new Intl.DateTimeFormat('es-ES', { timeZone: TZ_ESTUDIO, weekday: 'short', day: 'numeric', month: 'short' });
-const fmtHora = new Intl.DateTimeFormat('es-ES', { timeZone: TZ_ESTUDIO, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
+const fmtDia = new Intl.DateTimeFormat(LOCALE, { timeZone: TZ_ESTUDIO, weekday: 'short', day: 'numeric', month: 'short' });
+const fmtHora = new Intl.DateTimeFormat(LOCALE, { timeZone: TZ_ESTUDIO, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
 const fmtFechaISO = new Intl.DateTimeFormat('en-CA', { timeZone: TZ_ESTUDIO, year: 'numeric', month: '2-digit', day: '2-digit' });
 
 const horas = (min: number) => `${Math.floor(min / 60)} h ${String(min % 60).padStart(2, '0')} min`;

@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { conMoneda, MONEDA_SIMBOLO } from '../../lib/moneda.ts';
 import { useMemo, useState } from 'react';
 import { Ticket, Plus, Sparkles, X } from 'lucide-react';
@@ -33,7 +34,7 @@ function estadoDe(c: CodigoDescuento, hoy: string): { texto: string; clase: stri
 
 function fmtFecha(iso: string | null): string {
   if (!iso) return 'sin caducidad';
-  return new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
+  return new Date(iso).toLocaleDateString(LOCALE, { day: 'numeric', month: 'short' });
 }
 
 const inputCls = 'rounded-lg border border-border px-2.5 py-1.5 text-[13px] w-full focus:outline-none focus:ring-2 focus:ring-black/10';

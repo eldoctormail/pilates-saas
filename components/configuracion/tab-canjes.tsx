@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { useMemo, useState } from 'react';
 import { Gift, Check, X, Clock, Search } from 'lucide-react';
 import { useStudio } from '@/lib/studio-context';
@@ -35,7 +36,7 @@ const ETIQUETA: Record<EstadoCanje, string> = {
 function fechaCorta(iso: string): string {
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return '';
-  return d.toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
+  return d.toLocaleDateString(LOCALE, { day: 'numeric', month: 'short' });
 }
 
 export function TabCanjes({ showToast }: { showToast: MostrarToast }) {

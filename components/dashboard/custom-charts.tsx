@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { useEffect, useState, useMemo, useId } from 'react';
 import { BarChart3, Plus, Trash2 } from 'lucide-react';
 import { useStudio } from '@/lib/studio-context';
@@ -87,7 +88,7 @@ function ChartCard({ chart, onDelete }: { chart: DashboardChart; onDelete: () =>
       </button>
       <p className="text-[13px] font-semibold text-foreground pr-6">{chart.nombre}</p>
       <p className="text-[11px] text-muted-foreground mb-2">{metricaLabel}</p>
-      <p className="text-[20px] font-bold text-foreground mb-2">{total.toLocaleString('es-ES')}</p>
+      <p className="text-[20px] font-bold text-foreground mb-2">{total.toLocaleString(LOCALE)}</p>
       {chart.tipo === 'LINEA' ? <ChartLine points={serie} color={chart.color} /> : <ChartBars points={serie} color={chart.color} />}
       <div className="flex justify-between mt-1">
         <span className="text-[10px] text-muted-foreground">{serie[0]?.label}</span>

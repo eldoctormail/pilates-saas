@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { ZONA_HORARIA } from '../../lib/zona-horaria.ts';
 import { createContext, useContext, useEffect, useId, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
 import { AlertCircle, Check, ChevronRight, Globe, LayoutGrid, MapPin, Palette, Ruler, Send, SlidersHorizontal, type LucideIcon } from 'lucide-react';
@@ -45,7 +46,7 @@ export const useTextosPublicar = () => useContext(TextosDePublicar);
 
 /** «12 sept», en la hora del estudio. */
 export function fechaCorta(iso: string): string {
-  return new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', timeZone: ZONA_HORARIA });
+  return new Date(iso).toLocaleDateString(LOCALE, { day: 'numeric', month: 'short', timeZone: ZONA_HORARIA });
 }
 
 /**

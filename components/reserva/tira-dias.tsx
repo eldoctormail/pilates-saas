@@ -18,6 +18,7 @@
 // (`contarSlotsPorDia`) — no conoce `ReservaSlot` ni fetching.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { LOCALE } from '../../lib/locale.ts';
 import { useRef, useCallback, type CSSProperties } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { localDayKey } from '@/lib/reserva-calendario-logic';
@@ -120,7 +121,7 @@ export function TiraDias({
               type="button"
               role="tab"
               aria-selected={activo}
-              aria-label={`${d.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' })}, ${n} ${n === 1 ? 'clase' : 'clases'}`}
+              aria-label={`${d.toLocaleDateString(LOCALE, { weekday: 'long', day: 'numeric', month: 'long' })}, ${n} ${n === 1 ? 'clase' : 'clases'}`}
               onClick={() => onSeleccionar(key)}
               className="reserva-day-chip"
               style={{

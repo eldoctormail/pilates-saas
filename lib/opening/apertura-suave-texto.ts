@@ -1,9 +1,10 @@
+import { LOCALE } from '../locale.ts';
 import { inicioDelDiaEstudio } from '../utils.ts';
 
 // Textos de la apertura suave, sin nada de servidor: los usan la API (al
 // rechazar) y las pantallas públicas (para avisar antes de intentarlo).
 
-const diaDe = (fechaApertura: string) => new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'long', timeZone: 'UTC' })
+const diaDe = (fechaApertura: string) => new Intl.DateTimeFormat(LOCALE, { day: 'numeric', month: 'long', timeZone: 'UTC' })
   .format(new Date(`${fechaApertura}T00:00:00Z`));
 
 export const MENSAJE_APERTURA_SUAVE = (fechaApertura: string) =>

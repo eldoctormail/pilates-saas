@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../../lib/locale.ts';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { MessageCircle } from 'lucide-react';
@@ -26,7 +27,7 @@ import { cn } from '@/lib/utils';
 // la derecha en desktop; aquí se replica con CSS grid de dos columnas desde
 // `lg`, y en móvil se colapsa a una vista a la vez (lista → hilo → volver),
 // sin duplicar `HiloMensajes` en un modal aparte.
-const cuando = (iso: string) => new Date(iso).toLocaleString('es-ES', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+const cuando = (iso: string) => new Date(iso).toLocaleString(LOCALE, { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
 
 export default function MensajesNetworkPage() {
   const router = useRouter();

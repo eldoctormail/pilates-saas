@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../../lib/locale.ts';
 import { conMoneda } from '../../../lib/moneda.ts';
 import { ZONA_HORARIA } from '../../../lib/zona-horaria.ts';
 import { useEffect, useMemo, useRef, useState, useId, type ElementType } from 'react';
@@ -69,8 +70,8 @@ const ESTADO: Record<string, EstadoMeta> = {
 function fmtClase(inicio?: string | null): string {
   if (!inicio) return 'Clase';
   const d = new Date(inicio);
-  const fecha = d.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'short' });
-  const hora = d.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+  const fecha = d.toLocaleDateString(LOCALE, { weekday: 'long', day: 'numeric', month: 'short' });
+  const hora = d.toLocaleTimeString(LOCALE, { hour: '2-digit', minute: '2-digit' });
   return `${fecha.charAt(0).toUpperCase()}${fecha.slice(1)} · ${hora}`;
 }
 
@@ -712,7 +713,7 @@ function ReprogramarDialog({ s, avisarActivo, enProceso, onClose, onConfirm }: {
 
 function fmtHora(inicio?: string | null): string {
   if (!inicio) return '';
-  return new Date(inicio).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+  return new Date(inicio).toLocaleTimeString(LOCALE, { hour: '2-digit', minute: '2-digit' });
 }
 
 // Media de valoraciones de alumnas (si tiene alguna). Compacta, para las cards.
@@ -1404,8 +1405,8 @@ function TrazaContactos({
 // escalado puede cruzar la medianoche y "18:04 → 09:12" sin día se lee al revés.
 function fmtMomento(iso: string): string {
   const d = new Date(iso);
-  const dia = d.toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', timeZone: ZONA_HORARIA });
-  const hora = d.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', timeZone: ZONA_HORARIA });
+  const dia = d.toLocaleDateString(LOCALE, { weekday: 'short', day: 'numeric', timeZone: ZONA_HORARIA });
+  const hora = d.toLocaleTimeString(LOCALE, { hour: '2-digit', minute: '2-digit', timeZone: ZONA_HORARIA });
   return `${dia}, ${hora}`;
 }
 

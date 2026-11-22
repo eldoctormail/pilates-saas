@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { conMoneda, LOCALE_MONEDA } from '../../lib/moneda.ts';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Camera, Check, Loader2, Trash2 } from 'lucide-react';
@@ -196,7 +197,7 @@ export function TabPerfil({ showToast }: { showToast: MostrarToast }) {
           {[
             { v: clasesEsteMes, l: 'Este mes' },
             { v: clasesImpartidas.length, l: 'Impartidas' },
-            { v: proximaClase ? new Date(proximaClase.inicio).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' }) : '—', l: 'Próxima clase' },
+            { v: proximaClase ? new Date(proximaClase.inicio).toLocaleDateString(LOCALE, { day: 'numeric', month: 'short' }) : '—', l: 'Próxima clase' },
           ].map(({ v, l }) => (
             <div key={l} className={cn(cardCls, 'p-4 text-center')}>
               <p className="text-[20px] font-extrabold text-foreground leading-none">{v}</p>

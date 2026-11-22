@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../../lib/locale.ts';
 import { conMoneda, MONEDA_SIMBOLO } from '../../../lib/moneda.ts';
 import { AyudaDelPaso } from '@/components/guia/ayuda-del-paso';
 import { Suspense, useState, useId, useEffect, useRef, useMemo } from 'react';
@@ -73,7 +74,7 @@ const CAT_COLOR: Record<string, { bg: string; text: string }> = {
   PRODUCTO: { bg: 'color-mix(in srgb, var(--success) 12%, var(--card))', text: 'var(--success)' },
   OTRO: { bg: 'var(--muted)', text: 'var(--muted-foreground)' },
 };
-function fmt(n: number) { return n.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+function fmt(n: number) { return n.toLocaleString(LOCALE, { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
 
 // ── Formulario de tarifa ──────────────────────────────────────────────────────
 

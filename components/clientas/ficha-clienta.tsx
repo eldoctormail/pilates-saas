@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { conMoneda } from '../../lib/moneda.ts';
 import { ZONA_HORARIA } from '../../lib/zona-horaria.ts';
 import { useState, useEffect, useRef, useMemo } from 'react';
@@ -138,9 +139,9 @@ function localDate(d: Date | string): string {
 // Construidos una vez: un `toLocale…String` con opciones construye uno en cada
 // llamada, y la ficha los usa por cada reserva y cada recibo en cada render.
 // Mismas opciones y misma zona (la del navegador) que antes.
-const FORMATO_FECHA = new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'short', year: 'numeric' });
-const FORMATO_HORA = new Intl.DateTimeFormat('es-ES', { hour: '2-digit', minute: '2-digit' });
-const FORMATO_FECHA_RESERVA = new Intl.DateTimeFormat('es-ES', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+const FORMATO_FECHA = new Intl.DateTimeFormat(LOCALE, { day: 'numeric', month: 'short', year: 'numeric' });
+const FORMATO_HORA = new Intl.DateTimeFormat(LOCALE, { hour: '2-digit', minute: '2-digit' });
+const FORMATO_FECHA_RESERVA = new Intl.DateTimeFormat(LOCALE, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
 
 function fecha(iso: string) {
   return FORMATO_FECHA.format(new Date(iso));
@@ -2930,7 +2931,7 @@ export function FichaClienta({ id, modo = 'pagina' }: {
           {cambioDiferencia && plan && (
             <div className="space-y-3 mt-2">
               <p className="text-sm text-muted-foreground">
-                Ahora tiene «{plan.nombre}» ({formatEuro(plan.precio)}) y su ciclo acaba el {suscripcion?.fechaFin ? new Date(`${suscripcion.fechaFin}T12:00:00Z`).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', timeZone: 'UTC' }) : '—'}.
+                Ahora tiene «{plan.nombre}» ({formatEuro(plan.precio)}) y su ciclo acaba el {suscripcion?.fechaFin ? new Date(`${suscripcion.fechaFin}T12:00:00Z`).toLocaleDateString(LOCALE, { day: 'numeric', month: 'long', timeZone: 'UTC' }) : '—'}.
                 El plan nuevo cuesta {formatEuro(cambioDiferencia.precioNuevo)}.
               </p>
               <button
@@ -2980,7 +2981,7 @@ export function FichaClienta({ id, modo = 'pagina' }: {
                   <li key={v.id} className="rounded-xl border border-border px-3 py-2.5">
                     <p className="text-sm font-semibold text-foreground">Venta nº {v.numero} · {formatEuro(v.total)}</p>
                     <p className="text-xs text-muted-foreground">
-                      {new Date(v.realizadaEn).toLocaleString('es-ES', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: ZONA_HORARIA })}
+                      {new Date(v.realizadaEn).toLocaleString(LOCALE, { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: ZONA_HORARIA })}
                     </p>
                     {puedeCobrar && (
                       <button

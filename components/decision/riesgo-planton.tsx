@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { useEffect, useMemo, useState } from 'react';
 import { UserX, Clock } from 'lucide-react';
 import { useStudio } from '@/lib/studio-context';
@@ -40,10 +41,10 @@ function fmtCuando(iso: string): string {
   const esHoy = d.toDateString() === hoy.toDateString();
   const manana = new Date(hoy.getTime() + 86400000);
   const esManana = d.toDateString() === manana.toDateString();
-  const hora = d.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+  const hora = d.toLocaleTimeString(LOCALE, { hour: '2-digit', minute: '2-digit' });
   if (esHoy) return `Hoy ${hora}`;
   if (esManana) return `Mañana ${hora}`;
-  return `${d.toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric' })} ${hora}`;
+  return `${d.toLocaleDateString(LOCALE, { weekday: 'short', day: 'numeric' })} ${hora}`;
 }
 
 export function RiesgoPlanton() {

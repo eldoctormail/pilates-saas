@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../../lib/locale.ts';
 import { conMoneda, LOCALE_MONEDA } from '../../../lib/moneda.ts';
 import { useCallback, useMemo, useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
@@ -380,7 +381,7 @@ export default function Dashboard() {
     () => new Set(sesiones.filter(s => localDate(s.inicio) === hoyStr).map(s => s.id)),
     [sesiones, hoyStr],
   );
-  const mesFecha = now.toLocaleDateString('es-ES', {
+  const mesFecha = now.toLocaleDateString(LOCALE, {
     weekday: 'long',
     day: 'numeric',
     month: 'long',
@@ -1154,7 +1155,7 @@ export default function Dashboard() {
           <KpiCard
             label="Renovaciones 30d"
             value={renovacionesProximas.length}
-            sub={renovacionesProximas.length > 0 ? `Próxima ${new Date(renovacionesProximas[0].fechaFin!).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })}` : 'Sin vencimientos'}
+            sub={renovacionesProximas.length > 0 ? `Próxima ${new Date(renovacionesProximas[0].fechaFin!).toLocaleDateString(LOCALE, { day: 'numeric', month: 'short' })}` : 'Sin vencimientos'}
             Icon={RefreshCw}
             tint="text-success"
             tintBg="bg-success/10"

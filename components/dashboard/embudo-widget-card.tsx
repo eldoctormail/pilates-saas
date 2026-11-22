@@ -11,6 +11,7 @@
 // Mismo gate que la pantalla completa: `puedeGestionarPortalHome`
 // (PROPIETARIO/MANAGER), NO `puedeVerFinanzas` — es un canal de
 // marketing/captación, no de finanzas, y RECEPCION no debe verlo.
+import { LOCALE } from '../../lib/locale.ts';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { TrendingUp, ArrowUpRight } from 'lucide-react';
@@ -58,8 +59,8 @@ export function EmbudoWidgetCard() {
             <div>
               <p className="text-[13px] font-semibold text-foreground">Crecimiento web este mes</p>
               <p className="text-[11px] text-muted-foreground">
-                {visitas.toLocaleString('es-ES')} visitas · {completados.toLocaleString('es-ES')} reservas completadas · {conversion}% conversión
-                {abandonoBruto > 0 && ` · ${abandonoBruto.toLocaleString('es-ES')} abandonos`}
+                {visitas.toLocaleString(LOCALE)} visitas · {completados.toLocaleString(LOCALE)} reservas completadas · {conversion}% conversión
+                {abandonoBruto > 0 && ` · ${abandonoBruto.toLocaleString(LOCALE)} abandonos`}
               </p>
             </div>
           </div>

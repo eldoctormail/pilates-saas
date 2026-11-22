@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { MONEDA_SIMBOLO } from '../../lib/moneda.ts';
 import { useState, useEffect, useCallback } from 'react';
 import { X, Loader2, PackagePlus, PackageMinus, ClipboardCheck } from 'lucide-react';
@@ -195,7 +196,7 @@ export function HojaStock({ productoId, onCerrar, onCambio }: {
                         {m.detalle && <span className="font-normal text-muted-foreground"> · {m.detalle}</span>}
                       </p>
                       <p className="text-[11.5px] text-muted-foreground">
-                        {new Date(m.fecha).toLocaleString('es-ES', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })}
+                        {new Date(m.fecha).toLocaleString(LOCALE, { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })}
                         {m.quien && ` · ${m.quien}`}
                       </p>
                     </div>

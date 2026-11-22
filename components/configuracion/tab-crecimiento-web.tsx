@@ -14,6 +14,7 @@
 // marketing/captación, no de finanzas, y RECEPCION no debe verlo. `/configuracion`
 // ya filtra por rol antes de llegar aquí — este gate en cliente es defensa en
 // profundidad, no el único candado (mismo criterio que TabCuestionarioSalud).
+import { LOCALE } from '../../lib/locale.ts';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { TrendingUp } from 'lucide-react';
 import { useStudio } from '@/lib/studio-context';
@@ -143,7 +144,7 @@ export function TabCrecimientoWeb({ showToast: _showToast, enfoque = null }: {
         {filas.map(f => (
           <div key={f.label} className="flex items-center justify-between px-5 py-3">
             <p className="text-[13px] text-foreground">{f.label}</p>
-            <p className="text-[14px] font-semibold text-foreground">{f.valor.toLocaleString('es-ES')}{f.sub ?? ''}</p>
+            <p className="text-[14px] font-semibold text-foreground">{f.valor.toLocaleString(LOCALE)}{f.sub ?? ''}</p>
           </div>
         ))}
       </div>
@@ -246,10 +247,10 @@ function TablaPorWidget({ filas, enfoque }: { filas: EmbudoWidget[] | null; enfo
                       {f.etiqueta && f.widgetId && <span className="ml-1.5 font-mono text-[11px] font-normal text-muted-foreground">{f.etiqueta}</span>}
                     </th>
                     {cols.map(c => (
-                      <td key={c.clave} className="px-3 py-2.5 text-right tabular-nums text-foreground">{(f[c.clave] as number).toLocaleString('es-ES')}</td>
+                      <td key={c.clave} className="px-3 py-2.5 text-right tabular-nums text-foreground">{(f[c.clave] as number).toLocaleString(LOCALE)}</td>
                     ))}
                     <td className="px-5 py-2.5 text-right font-semibold tabular-nums text-foreground">
-                      {f.conversion === null ? '—' : `${f.conversion.toLocaleString('es-ES')} %`}
+                      {f.conversion === null ? '—' : `${f.conversion.toLocaleString(LOCALE)} %`}
                     </td>
                   </tr>
                 );

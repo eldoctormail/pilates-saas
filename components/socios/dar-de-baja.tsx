@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { ZONA_HORARIA } from '../../lib/zona-horaria.ts';
 import type { MostrarToast } from '@/components/ui/toast';
 import { useEffect, useMemo, useState } from 'react';
@@ -27,13 +28,13 @@ const RESERVA_FUTURA = new Set(['CONFIRMADA', 'LISTA_ESPERA', 'PENDIENTE_APROBAC
 
 /** «jue 1 oct 18:00», en hora del estudio: sin comas dentro, porque van en una lista separada por comas. */
 function diaCorto(iso: string): string {
-  const p = Object.fromEntries(new Intl.DateTimeFormat('es-ES', {
+  const p = Object.fromEntries(new Intl.DateTimeFormat(LOCALE, {
     weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23', timeZone: ZONA_HORARIA,
   }).formatToParts(new Date(iso)).map(x => [x.type, x.value]));
   return `${p.weekday} ${p.day} ${p.month} ${p.hour}:${p.minute}`.replace(/\./g, '');
 }
 function diaLargo(ymd: string): string {
-  return new Date(`${ymd.slice(0, 10)}T12:00:00`).toLocaleDateString('es-ES', { day: 'numeric', month: 'long' });
+  return new Date(`${ymd.slice(0, 10)}T12:00:00`).toLocaleDateString(LOCALE, { day: 'numeric', month: 'long' });
 }
 const nombreCompleto = (s: Pick<Socio, 'nombre' | 'apellidos'>) => `${s.nombre} ${s.apellidos ?? ''}`.trim();
 

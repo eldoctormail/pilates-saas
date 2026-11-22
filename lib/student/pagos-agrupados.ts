@@ -8,6 +8,7 @@
 //
 // Dos cosas, las dos derivadas de lo que ya hay: nada pide datos nuevos.
 
+import { LOCALE } from '../locale.ts';
 import type { EstadoPago, Pago } from './tipos.ts';
 
 /**
@@ -82,6 +83,6 @@ export function agruparPorMes(pagos: readonly Pago[]): GrupoPagos[] {
 function tituloDeMes(clave: string): string {
   if (!/^\d{4}-\d{2}$/.test(clave)) return '';
   const [a, m] = clave.split('-').map(Number);
-  const crudo = new Date(a, m - 1, 1).toLocaleDateString('es-ES', { month: 'long', year: 'numeric' });
+  const crudo = new Date(a, m - 1, 1).toLocaleDateString(LOCALE, { month: 'long', year: 'numeric' });
   return crudo.charAt(0).toUpperCase() + crudo.slice(1);
 }

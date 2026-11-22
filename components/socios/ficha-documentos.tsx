@@ -10,6 +10,7 @@
 // el archivo sube DIRECTO a Storage con la sesión del staff
 // (subirDocumentoSocioArchivo), y solo entonces se crea la fila de metadatos.
 
+import { LOCALE } from '../../lib/locale.ts';
 import type { MostrarToast } from '@/components/ui/toast';
 import { useCallback, useEffect, useId, useState } from 'react';
 import { useStudio } from '@/lib/studio-context';
@@ -35,7 +36,7 @@ const CATEGORIA_ESTILO: Record<RowDocumentosSocio['categoria'], { bg: string; te
 };
 
 function fechaCorta(iso: string): string {
-  return new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' });
+  return new Date(iso).toLocaleDateString(LOCALE, { day: 'numeric', month: 'short', year: 'numeric' });
 }
 
 const inputCls = 'w-full text-sm rounded-lg border border-border bg-background px-3 py-2 focus:outline-none focus:ring-2 focus:ring-ring';

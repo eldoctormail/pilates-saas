@@ -14,6 +14,7 @@
 // Puro (sin `@/`): se prueba con `node --test`.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { LOCALE } from '../locale.ts';
 import { conMoneda } from '../moneda.ts';
 import { nombrePeriodo, precioMensualDeCuota } from '../bono-logic.ts';
 import { mesAnterior } from '../billing/situacion-recibo.ts';
@@ -180,8 +181,8 @@ export function datosDeTarjeta(plan: PlanParaTarjeta): DatosDeTarjeta {
   };
 }
 
-const ENTERO = new Intl.NumberFormat('es-ES', { maximumFractionDigits: 0 });
-const CON_CENTIMOS = new Intl.NumberFormat('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const ENTERO = new Intl.NumberFormat(LOCALE, { maximumFractionDigits: 0 });
+const CON_CENTIMOS = new Intl.NumberFormat(LOCALE, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
 /** «55 €» si es redondo; «55,50 €» si lleva céntimos: en un precio, los céntimos no se redondean. */
 export function precioCorto(n: number): string {

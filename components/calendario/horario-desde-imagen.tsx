@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { useId, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import { AlertTriangle, ArrowLeft, ArrowRight, CalendarDays, Check, ImageUp, PartyPopper, Plus, Trash2 } from 'lucide-react';
@@ -31,7 +32,7 @@ const NOMBRE_DIA: Record<DiaLeido, string> = {
 };
 
 const fechaLarga = (dia: string) =>
-  new Date(`${dia}T12:00:00Z`).toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'UTC' });
+  new Date(`${dia}T12:00:00Z`).toLocaleDateString(LOCALE, { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'UTC' });
 
 const normSala = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, ' ').trim();
 
@@ -157,8 +158,8 @@ export function HorarioDesdeImagen({ onVolver }: { onVolver: () => void }) {
               />
               <p id={`${uid}-cuenta`} className={`text-[11.5px] ${textoLargo ? 'font-medium text-destructive' : 'text-muted-foreground'}`}>
                 {textoLargo
-                  ? `Son ${texto.length.toLocaleString('es-ES')} caracteres y se leen ${MAX_CARACTERES_TEXTO.toLocaleString('es-ES')} como mucho: pégalo en dos partes.`
-                  : `${texto.length.toLocaleString('es-ES')} de ${MAX_CARACTERES_TEXTO.toLocaleString('es-ES')} caracteres`}
+                  ? `Son ${texto.length.toLocaleString(LOCALE)} caracteres y se leen ${MAX_CARACTERES_TEXTO.toLocaleString(LOCALE)} como mucho: pégalo en dos partes.`
+                  : `${texto.length.toLocaleString(LOCALE)} de ${MAX_CARACTERES_TEXTO.toLocaleString(LOCALE)} caracteres`}
               </p>
               <button
                 type="button" disabled={leyendo || !texto.trim() || textoLargo}

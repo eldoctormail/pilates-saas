@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { conMoneda, LOCALE_MONEDA } from '../../lib/moneda.ts';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
@@ -18,7 +19,7 @@ import type { VistaPrevia } from '@/lib/billing/alineacion-dia1';
 type Respuesta = VistaPrevia & { dia1Activo: boolean; modo: 'ENTERA' | 'PROPORCIONAL' };
 
 const eur = (n: number) => `${conMoneda(n.toLocaleString(LOCALE_MONEDA, { minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2 }))}`;
-const fechaCorta = (iso: string) => new Date(`${iso}T00:00:00Z`).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', timeZone: 'UTC' });
+const fechaCorta = (iso: string) => new Date(`${iso}T00:00:00Z`).toLocaleDateString(LOCALE, { day: 'numeric', month: 'short', timeZone: 'UTC' });
 
 export function AlineacionAlumnasActuales() {
   const { studio, reflejarStudioGuardado } = useStudio();
@@ -104,8 +105,8 @@ export function AlineacionAlumnasActuales() {
   const textoRecibo = (() => {
     if (!filaRecibo) return '«Parte proporcional del mes: N de M días (desde el día 1 del mes siguiente, cuota entera)»';
     const d = new Date(`${filaRecibo.fechaRenovacion}T00:00:00Z`);
-    const mes = d.toLocaleDateString('es-ES', { month: 'long', timeZone: 'UTC' });
-    const dia1 = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 1)).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', timeZone: 'UTC' });
+    const mes = d.toLocaleDateString(LOCALE, { month: 'long', timeZone: 'UTC' });
+    const dia1 = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 1)).toLocaleDateString(LOCALE, { day: 'numeric', month: 'long', timeZone: 'UTC' });
     return `«Parte proporcional de ${mes}: ${filaRecibo.diasRestantes} de ${filaRecibo.diasDelMes} días (desde el ${dia1}, ${eur(filaRecibo.cuota)}/mes)»`;
   })();
   const cambiaAB = elegido === 'PROPORCIONAL' && modoActivo !== 'PROPORCIONAL';

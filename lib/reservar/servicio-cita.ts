@@ -5,6 +5,7 @@
 // el panel significa «se acuerda en cada caso» (tab-servicios-cita.tsx), así
 // que ahí solo se dice la duración.
 
+import { LOCALE } from '../locale.ts';
 import type { ServicioCita } from '../types.ts';
 import { precioEnEuros } from './tarjeta-plan.ts';
 
@@ -40,7 +41,7 @@ export function monogramaServicio(nombre: string): string {
     .filter(Boolean);
   const utiles = palabras.filter(p => !ENLACES.has(p.toLowerCase()));
   const base = utiles.length > 0 ? utiles : palabras;
-  return base.slice(0, 2).map(p => p[0].toLocaleUpperCase('es-ES')).join('');
+  return base.slice(0, 2).map(p => p[0].toLocaleUpperCase(LOCALE)).join('');
 }
 
 /**

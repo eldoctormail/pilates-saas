@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { useEffect, useState } from 'react';
 import { Loader2, MessageCircle } from 'lucide-react';
 import { fetchHilosMensajesNetwork, type HiloNetwork } from '@/lib/api-client';
@@ -9,7 +10,7 @@ import { EmptyState } from '@/components/ui/empty-state';
 import { HiloMensajes } from '@/components/network/hilo-mensajes';
 import { cardCls } from '@/components/network/campo-estilos';
 
-const cuando = (iso: string) => new Date(iso).toLocaleString('es-ES', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+const cuando = (iso: string) => new Date(iso).toLocaleString(LOCALE, { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
 
 // Bandeja de hilos (brief §9/§19) — mismo componente para el lado estudio
 // (app/(dashboard)/network/mensajes) y el lado instructora (app/network/

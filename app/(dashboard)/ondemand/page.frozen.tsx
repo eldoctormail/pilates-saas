@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../../lib/locale.ts';
 import { useState, useRef, useEffect, useId } from 'react';
 import { useRouter } from 'next/navigation';
 import { Play, Eye, Heart, Upload, X, Search, Loader2 } from 'lucide-react';
@@ -333,7 +334,7 @@ function VideoCard({
           <div className="flex items-center gap-3 text-[12px] text-muted-foreground">
             <span className="flex items-center gap-1">
               <Eye size={13} />
-              {video.vistas.toLocaleString('es-ES')}
+              {video.vistas.toLocaleString(LOCALE)}
             </span>
             <span className="flex items-center gap-1">
               <Heart size={13} />
@@ -430,7 +431,7 @@ export default function OnDemandPage() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-6">
           <div className="bg-card border border-border rounded-xl px-4 py-3">
             <p className="text-[12px] text-muted-foreground mb-0.5">Total reproducciones</p>
-            <p className="text-[22px] font-semibold text-foreground truncate">{totalVistas.toLocaleString('es-ES')}</p>
+            <p className="text-[22px] font-semibold text-foreground truncate">{totalVistas.toLocaleString(LOCALE)}</p>
           </div>
           <div className="bg-card border border-border rounded-xl px-4 py-3">
             <p className="text-[12px] text-muted-foreground mb-0.5">Vídeos publicados</p>

@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../../lib/locale.ts';
 import { ZONA_HORARIA } from '../../../lib/zona-horaria.ts';
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
@@ -185,7 +186,7 @@ function Contenido({ socio, lo, onCerrar, onHecho }: { socio: Socio; lo: string;
 }
 
 function hora(iso: string): string {
-  return new Intl.DateTimeFormat('es-ES', { timeZone: ZONA_HORARIA, hour: '2-digit', minute: '2-digit' }).format(new Date(iso));
+  return new Intl.DateTimeFormat(LOCALE, { timeZone: ZONA_HORARIA, hour: '2-digit', minute: '2-digit' }).format(new Date(iso));
 }
 
 function etiquetaDia(dia: string, hoy: string): string {
@@ -194,5 +195,5 @@ function etiquetaDia(dia: string, hoy: string): string {
   manana.setUTCDate(manana.getUTCDate() + 1);
   if (dia === hoy) return 'Hoy';
   if (dia === manana.toISOString().slice(0, 10)) return 'Mañana';
-  return new Intl.DateTimeFormat('es-ES', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'UTC' }).format(d).replace(/^./, c => c.toUpperCase());
+  return new Intl.DateTimeFormat(LOCALE, { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'UTC' }).format(d).replace(/^./, c => c.toUpperCase());
 }

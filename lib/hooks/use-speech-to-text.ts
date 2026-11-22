@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../locale.ts';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 // Tipos mínimos de la Web Speech API — no forma parte de lib.dom.d.ts.
@@ -51,7 +52,7 @@ interface UseSpeechToTextResult {
 // socia) en cada fragmento parcial que dispara `onresult`.
 const THROTTLE_MS = 200;
 
-export function useSpeechToText(idioma = 'es-ES'): UseSpeechToTextResult {
+export function useSpeechToText(idioma = LOCALE): UseSpeechToTextResult {
   const [grabando, setGrabando] = useState(false);
   const [transcripcion, setTranscripcion] = useState('');
   const [error, setError] = useState<string | null>(null);

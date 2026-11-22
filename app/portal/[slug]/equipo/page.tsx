@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../../../lib/locale.ts';
 import { ZONA_HORARIA } from '../../../../lib/zona-horaria.ts';
 import { useCallback, useState } from 'react';
 import Link from 'next/link';
@@ -128,7 +129,7 @@ export default function HoyInstructoraPage() {
   const [clasesPropio, setClasesPropio] = useState<EstadoClases | null>(null);
   const [enviandoClase, setEnviandoClase] = useState(false);
   const estadoClases = clasesPropio ?? clasesServidor;
-  const horaDe = (iso: string) => new Date(iso).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', timeZone: ZONA_HORARIA });
+  const horaDe = (iso: string) => new Date(iso).toLocaleTimeString(LOCALE, { hour: '2-digit', minute: '2-digit', timeZone: ZONA_HORARIA });
 
   const conEnvio = async (f: () => Promise<{ ok: boolean; error?: string; estado?: EstadoClases; aviso?: string }>, exito: string): Promise<boolean> => {
     if (enviandoClase) return false;
@@ -360,7 +361,7 @@ export default function HoyInstructoraPage() {
                 <span className="t-label" style={{ display: 'block' }}>Fichaje</span>
                 <span style={{ display: 'block', marginTop: 3, fontSize: 'var(--t-body)', fontWeight: 700 }}>
                   {fichaje?.abierta
-                    ? `Jornada abierta desde las ${new Date(fichaje.abierta.checkInAt).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', timeZone: ZONA_HORARIA })}`
+                    ? `Jornada abierta desde las ${new Date(fichaje.abierta.checkInAt).toLocaleTimeString(LOCALE, { hour: '2-digit', minute: '2-digit', timeZone: ZONA_HORARIA })}`
                     : fichaje && fichaje.hoy.jornadasCerradas > 0
                       ? `Hoy has fichado ${Math.floor(fichaje.hoy.minutosCerrados / 60)} h ${String(fichaje.hoy.minutosCerrados % 60).padStart(2, '0')} min`
                       : fichaje ? 'No has fichado la entrada hoy' : 'Tu entrada y salida'}

@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { conMoneda, LOCALE_MONEDA } from '../../lib/moneda.ts';
 import { useId, useMemo, useState } from 'react';
 import { calcularPlazasVacias, type EntradaPlazasVacias } from '@/lib/recursos/calculadora-plazas-vacias';
@@ -22,7 +23,7 @@ const CAMPOS: { clave: keyof EntradaPlazasVacias; etiqueta: string; ayuda: strin
 ];
 
 const euros = (n: number) => `${conMoneda(Math.round(n).toLocaleString(LOCALE_MONEDA))}`;
-const entero = (n: number) => Math.round(n).toLocaleString('es-ES');
+const entero = (n: number) => Math.round(n).toLocaleString(LOCALE);
 
 export function CalculadoraPlazasVacias() {
   const id = useId();

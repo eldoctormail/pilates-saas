@@ -10,6 +10,7 @@
 // Import relativo con extensión `.ts`: lo prueba `node --test`.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { LOCALE } from '../locale.ts';
 import type { EstadoSesion } from '../calendario-estado.ts';
 import { faltaTexto } from '../calendario-metricas.ts';
 import type { MarcaClase } from './marca-clase.ts';
@@ -74,7 +75,7 @@ export function estadoDeFicha(d: DatosEstadoFicha, ahora: Date): { pastilla: Pas
   }
 }
 
-const fmtDiaMes = new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'long', timeZone: 'UTC' });
+const fmtDiaMes = new Intl.DateTimeFormat(LOCALE, { day: 'numeric', month: 'long', timeZone: 'UTC' });
 
 /** «del 2 al 9 de octubre» de dos fechas 'YYYY-MM-DD'. */
 export function rangoDeFechas(desde: string, hasta: string): string {

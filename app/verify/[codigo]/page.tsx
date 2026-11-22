@@ -1,3 +1,4 @@
+import { LOCALE } from '../../../lib/locale.ts';
 import { CheckCircle2, ShieldX, Building2 } from 'lucide-react';
 import { buscarCertificadoPorCodigo, nombreDeEstudio } from '@/lib/certificados/certificados';
 import { IconoDesenlace } from '@/components/publico/icono-desenlace';
@@ -28,7 +29,7 @@ export default async function VerificarCertificadoPage({ params }: { params: Pro
   }
 
   const nombre = (await nombreDeEstudio(certificado.studioId)) ?? 'Estudio Tentare';
-  const fecha = new Date(certificado.emitidoEn).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+  const fecha = new Date(certificado.emitidoEn).toLocaleDateString(LOCALE, { day: 'numeric', month: 'long', year: 'numeric' });
 
   return (
     <main className="min-h-dvh flex items-center justify-center bg-slate-50 p-6">

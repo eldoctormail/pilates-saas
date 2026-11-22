@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { ZONA_HORARIA } from '../../lib/zona-horaria.ts';
 import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -117,7 +118,7 @@ export function MiAppDeTienda({ studioId }: { studioId: string }) {
         {datos.retiradaEl && (
           <p role="alert" className="rounded-xl bg-warning/15 px-3 py-2 text-[13px] leading-relaxed text-foreground" data-testid="mi-app-margen">
             Tu plan ya no incluye la app. Si vuelves a {planesConApp().join(' o ')} antes del{' '}
-            {new Date(datos.retiradaEl).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', timeZone: ZONA_HORARIA })}, todo sigue igual;
+            {new Date(datos.retiradaEl).toLocaleDateString(LOCALE, { day: 'numeric', month: 'long', timeZone: ZONA_HORARIA })}, todo sigue igual;
             si no, {app.estado === 'PUBLICADA' ? 'la retiramos de la App Store (quien ya la tenga podrá seguir usándola)' : 'dejamos de prepararla'}.{' '}
             <Link href="/suscripcion" className="font-medium underline underline-offset-2">Ver los planes</Link>
           </p>

@@ -1,4 +1,6 @@
 import { conMoneda } from './moneda.ts';
+import { LOCALE } from './locale.ts';
+import { pasarelaEsMercadoPago } from './mercadopago/config.ts';
 import { EDAD_MINIMA_CONSENTIMIENTO_SALUD } from './datos-salud/edad.ts';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -41,17 +43,22 @@ export interface DatosEstudioLegal {
 
 const vacio = (s?: string | null) => !s || s.trim() === '';
 
+// Autoalojado en Argentina (`NEXT_PUBLIC_LOCALE` es-AR): los textos por defecto citan la ley argentina
+// (Ley 25.326 de datos personales, Ley 24.240 de defensa del consumidor) en vez de la española. Los de
+// España no cambian. ⚠️ BORRADOR: revisión legal necesaria antes de usarlo con clientas reales.
+const esArgentina = (locale: string) => /^es-AR\b/i.test(locale);
+
 /**
  * Identifica al responsable del tratamiento. Usa la razón social si existe (es
  * la que factura) y cae al nombre comercial. Si no hay NINGÚN dato fiscal
  * devuelve null: entonces el texto lo dice abiertamente en vez de fingir.
  */
-export function identificacionResponsable(e: DatosEstudioLegal): string | null {
+export function identificacionResponsable(e: DatosEstudioLegal, locale: string = LOCALE): string | null {
   const titular = !vacio(e.razonSocial) ? e.razonSocial!.trim() : (!vacio(e.nombre) ? e.nombre!.trim() : '');
   if (!titular) return null;
 
   const lineas = [titular];
-  if (!vacio(e.nif)) lineas.push(`NIF/CIF: ${e.nif!.trim()}`);
+  if (!vacio(e.nif)) lineas.push(`${esArgentina(locale) ? 'CUIT' : 'NIF/CIF'}: ${e.nif!.trim()}`);
 
   const domicilio = [
     !vacio(e.direccion) ? e.direccion!.trim() : '',
@@ -71,8 +78,55 @@ const SIN_DATOS_FISCALES =
   'Complétalos en Configuración → Mi estudio: sin ellos este documento no identifica al responsable\n' +
   'del tratamiento y no cumple el artículo 13 del RGPD.';
 
-export function politicaPrivacidadPorDefecto(e: DatosEstudioLegal = {}): string {
-  const responsable = identificacionResponsable(e);
+const SIN_DATOS_FISCALES_AR =
+  '⚠️ El estudio todavía no completó sus datos fiscales (razón social, CUIT y domicilio).\n' +
+  'Complételos en Configuración → Mi estudio: sin ellos este documento no identifica al responsable\n' +
+  'de la base de datos, como exige el artículo 6 de la Ley 25.326.';
+
+/**
+ * Lo que la AGENCIA DE ACCESO A LA INFORMACIÓN PÚBLICA pide que figure, tal cual, donde se recogen datos
+ * (Resolución AAIP 14/2018, que sustituyó a la Disposición DNPDP 10/2008).
+ */
+export const LEYENDA_AAIP =
+  'El titular de los datos personales tiene la facultad de ejercer el derecho de acceso a los mismos en forma gratuita a intervalos no inferiores a seis meses, salvo que se acredite un interés legítimo al efecto conforme lo establecido en el artículo 14, inciso 3 de la Ley N° 25.326. ' +
+  'LA AGENCIA DE ACCESO A LA INFORMACIÓN PÚBLICA, en su carácter de Órgano de Control de la Ley N° 25.326, tiene la atribución de atender las denuncias y reclamos que interpongan quienes resulten afectados en sus derechos por incumplimiento de las normas vigentes en materia de protección de datos personales.';
+
+function politicaPrivacidadArgentina(e: DatosEstudioLegal): string {
+  const responsable = identificacionResponsable(e, 'es-AR');
+  const nombreEstudio = !vacio(e.nombre) ? e.nombre!.trim() : 'el Estudio';
+  const paraEjercer = !vacio(e.email)
+    ? `escribiendo a ${e.email!.trim()} o en el propio estudio`
+    : 'en el propio estudio';
+
+  return `POLÍTICA DE PRIVACIDAD
+
+En cumplimiento de la Ley N° 25.326 de Protección de los Datos Personales y su Decreto Reglamentario N° 1558/2001, le informamos cómo trata ${nombreEstudio} sus datos personales.
+
+RESPONSABLE DE LA BASE DE DATOS
+${responsable ?? SIN_DATOS_FISCALES_AR}
+
+QUÉ DATOS Y PARA QUÉ
+Sus datos se usan para gestionar su inscripción, sus reservas y planes, los cobros y los avisos relacionados con los servicios que contrató (recordatorios de clases, cambios de horario, vencimientos). Son obligatorios el nombre, el email y el teléfono, sin los cuales no podemos darle de alta ni avisarle; el resto es facultativo. Los datos que nos dé deben ser verdaderos y estar actualizados.
+
+DATOS DE SALUD
+Los datos sobre su salud (lesiones, embarazo u otras condiciones que influyan en el ejercicio) son datos sensibles: nadie puede obligarle a darlos. Solo se registran si usted los aporta y da su consentimiento expreso, con la única finalidad de adaptar sus clases con seguridad.
+
+QUIÉN MÁS INTERVIENE
+Los datos se guardan en el sistema de gestión del estudio. Para prestar el servicio intervienen proveedores que los tratan por cuenta del estudio, como el procesador de pagos${pasarelaEsMercadoPago() ? ' (Mercado Pago)' : ''} y el servicio de envío de correos, algunos de los cuales pueden estar fuera de la Argentina. No vendemos ni cedemos sus datos a terceros para otros fines.
+
+CONSERVACIÓN
+Sus datos se conservan mientras dure la relación con el estudio y, después, durante los plazos que exijan las normas vigentes (por ejemplo, las fiscales). Cuando dejen de ser necesarios, se eliminan.
+
+SUS DERECHOS
+Puede pedir acceso a sus datos, su rectificación, actualización o supresión ${paraEjercer}. ${LEYENDA_AAIP}
+
+COMUNICACIONES COMERCIALES
+Las novedades y promociones solo se envían si usted lo acepta aparte, y puede darse de baja en cualquier momento desde el enlace de cada correo o pidiéndolo en el estudio.`;
+}
+
+export function politicaPrivacidadPorDefecto(e: DatosEstudioLegal = {}, locale: string = LOCALE): string {
+  if (esArgentina(locale)) return politicaPrivacidadArgentina(e);
+  const responsable = identificacionResponsable(e, locale);
   const nombreEstudio = !vacio(e.nombre) ? e.nombre!.trim() : 'el Estudio';
   const paraEjercer = !vacio(e.email)
     ? `enviando un escrito a ${e.email!.trim()}`
@@ -127,8 +181,9 @@ export function clausulaCobrosConMetodoGuardado(e: Pick<DatosEstudioLegal, 'stri
   return ' Si el socio tiene guardada una tarjeta u otro método de pago, autoriza al Estudio a cobrar en él sus cuotas y renovaciones y los importes que tenga pendientes, sin necesidad de pagarlos a mano. Puede quitar la tarjeta en cualquier momento desde la app o pedírselo al Estudio. Si ha elegido para sus cuotas la domiciliación bancaria a través de la pasarela de pago, se cobrarán por domiciliación.';
 }
 
-export function terminosServicioPorDefecto(e: DatosEstudioLegal = {}): string {
-  const responsable = identificacionResponsable(e);
+export function terminosServicioPorDefecto(e: DatosEstudioLegal = {}, locale: string = LOCALE): string {
+  if (esArgentina(locale)) return terminosServicioArgentina(e);
+  const responsable = identificacionResponsable(e, locale);
   const nombreEstudio = !vacio(e.nombre) ? e.nombre!.trim() : 'el Estudio';
   const horas = horasCancelacionContrato(e);
   // Fase 3: solo aparece si el estudio tiene la regla activa (importe > 0) —
@@ -170,6 +225,51 @@ El contrato estará vigente mientras se mantenga la suscripción activa. Cualqui
 
 6. ACEPTACIÓN
 La firma de este documento supone la aceptación íntegra de las presentes condiciones.`;
+}
+
+/**
+ * Términos para Argentina. Lo distinto de los de España: precios finales (sin «IVA incluido»), y el
+ * derecho de revocación y la baja que da la ley de defensa del consumidor a lo que se contrata a
+ * distancia (Ley 24.240, arts. 10 ter y 34; Código Civil y Comercial, art. 1110).
+ */
+function terminosServicioArgentina(e: DatosEstudioLegal): string {
+  const responsable = identificacionResponsable(e, 'es-AR');
+  const nombreEstudio = !vacio(e.nombre) ? e.nombre!.trim() : 'el Estudio';
+  const horas = horasCancelacionContrato(e);
+  const clausulaPenalizacion = typeof e.penalizacionImporteEur === 'number' && e.penalizacionImporteEur > 0
+    ? ` Además, las cancelaciones dentro de ese plazo y las inasistencias sin aviso podrán generar un cargo de ${conMoneda(e.penalizacionImporteEur.toFixed(2))} al medio de pago guardado, si existe uno asociado a la cuenta. El cargo se avisa por correo electrónico en el momento en que se produce.`
+    : '';
+  const clausulaMetodoGuardado = clausulaCobrosConMetodoGuardado(e);
+  const contacto = !vacio(e.email) ? `escribiendo a ${e.email!.trim()}, ` : '';
+
+  return `TÉRMINOS Y CONDICIONES DEL SERVICIO
+
+PRESTADOR DEL SERVICIO
+${responsable ?? SIN_DATOS_FISCALES_AR}
+
+1. OBJETO
+Estas condiciones regulan el acceso y el uso de los servicios que ofrece ${nombreEstudio} (en adelante, "el Estudio").
+
+2. PLANES Y PRECIOS
+El socio abona el precio del plan elegido. Los precios informados son finales. El Estudio puede modificar sus precios avisándolo con al menos 30 días de anticipación; el cambio no afecta a los planes ya pagados.${clausulaMetodoGuardado}
+
+3. RESERVAS Y CANCELACIONES
+Las reservas se hacen con anticipación por los canales habilitados. Las cancelaciones hechas con menos de ${horas} ${horas === 1 ? 'hora' : 'horas'} de anticipación se descuentan del plan.${clausulaPenalizacion}
+
+4. REVOCACIÓN DE LA COMPRA
+Si contrató a distancia (por la app, la web o por teléfono), puede revocar la compra dentro de los 10 días corridos desde que la contrató, sin costo ni responsabilidad, conforme al artículo 34 de la Ley 24.240 y al artículo 1110 del Código Civil y Comercial de la Nación. Puede pedirlo ${contacto}o en el propio estudio.
+
+5. BAJA DEL SERVICIO
+Puede dar de baja su plan o suscripción en cualquier momento, sin más trámites, ${contacto}o en el estudio. La baja rige para los períodos siguientes.
+
+6. RESPONSABILIDAD
+El socio declara estar en condiciones físicas adecuadas para la actividad y se compromete a informar cualquier condición de salud que pueda afectarla. El Estudio no se responsabiliza por lesiones derivadas de no seguir las indicaciones del instructor.
+
+7. VIGENCIA
+El contrato está vigente mientras se mantenga un plan activo.
+
+8. ACEPTACIÓN
+La aceptación de este documento implica la aceptación de estas condiciones.`;
 }
 
 /** ¿Se puede firmar un documento que identifique al responsable? Se usa para
@@ -232,8 +332,13 @@ export function textoConsentimientoMarketing(e: DatosEstudioLegal = {}): string 
 export function textoConsentimientoSaludPanel(
   e: DatosEstudioLegal = {},
   firmante: 'SOCIA' | 'TUTOR_LEGAL' = 'SOCIA',
+  locale: string = LOCALE,
 ): string {
   const nombreEstudio = !vacio(e.nombre) ? e.nombre!.trim() : 'el Estudio';
+  // Argentina: son datos sensibles (Ley 25.326, art. 7): nadie está obligado a darlos, y el texto lo dice.
+  const voluntario = esArgentina(locale)
+    ? ['Darlos es voluntario: nadie está obligado a proporcionar datos sobre su salud (artículo 7 de la Ley 25.326), y no darlos no impide tomar clases.']
+    : [];
   // Menor de 14 (o persona con tutela): firma su padre, madre o tutor legal, y
   // el texto guardado como prueba lo dice. ⚠️ REVISIÓN LEGAL NECESARIA.
   if (firmante === 'TUTOR_LEGAL') {
@@ -241,12 +346,14 @@ export function textoConsentimientoSaludPanel(
       `Como padre, madre o tutor legal de la alumna (menor de ${EDAD_MINIMA_CONSENTIMIENTO_SALUD} años o bajo mi tutela), autorizo expresamente a ${nombreEstudio} a tratar los datos sobre su salud que le comunique (lesiones u otras condiciones que influyan en el ejercicio) con la única finalidad de adaptar sus clases con seguridad.`,
       `Los verán la dirección del estudio y las instructoras que le den clase. El estudio los gestiona con su programa de gestión, cuyos proveedores tecnológicos los tratan por cuenta del estudio.`,
       `Puedo retirar esta autorización cuando quiera, pidiéndolo en el propio estudio. Desde ese momento dejarán de estar visibles para el personal, y puedo pedir además que se eliminen.`,
+      ...voluntario,
     ].join('\n\n');
   }
   return [
     `Autorizo expresamente a ${nombreEstudio} a tratar los datos sobre mi salud que le comunique (lesiones, embarazo u otras condiciones que influyan en el ejercicio) con la única finalidad de adaptar mis clases con seguridad.`,
     `Los verán la dirección del estudio y las instructoras que me den clase. El estudio los gestiona con su programa de gestión, cuyos proveedores tecnológicos los tratan por cuenta del estudio.`,
     `Puedo retirar esta autorización cuando quiera, desde la app del estudio o pidiéndolo en el propio estudio. Desde ese momento dejarán de estar visibles para el personal, y puedo pedir además que se eliminen.`,
+    ...voluntario,
   ].join('\n\n');
 }
 

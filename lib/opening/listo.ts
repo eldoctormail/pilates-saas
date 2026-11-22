@@ -1,6 +1,6 @@
 import { LOCALE } from '../locale.ts';
 import { ZONA_HORARIA } from '../zona-horaria.ts';
-import { nifValido } from '../nif.ts';
+import { NOMBRE_ID_FISCAL, nifValido } from '../nif.ts';
 import { inicioDelDiaEstudio } from '../utils.ts';
 import { instanteDeApertura } from '../booking-logic.ts';
 import type { EstadoCobroCuenta } from '../billing/cuenta-puede-cobrar.ts';
@@ -154,7 +154,7 @@ export function evaluarListo(d: DatosListo, now: Date, puedeAbrir: (href: string
   // 5 · Datos fiscales como los pide la factura (NIF con dígito de control).
   const f = d.fiscal;
   const faltan = [
-    !nifValido(f.nif) && 'NIF válido',
+    !nifValido(f.nif) && `${NOMBRE_ID_FISCAL} válido`,
     relleno(f.razonSocial) && 'razón social',
     relleno(f.direccion) && 'dirección',
     relleno(f.codigoPostal) && 'código postal',

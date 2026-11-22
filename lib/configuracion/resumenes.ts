@@ -23,7 +23,7 @@ import type { DiaHorario, Studio, TipoIntegracion } from '../types.ts';
 import { avisoVentaOnline } from '../onboarding.ts';
 import { cuando, saludIntegracion, type FilaSalud, type SaludIntegracion } from '../integraciones/salud.ts';
 import { fraseCaducidadRecuperacion, fraseSeAbre, type ReglasReserva, type TarjetaReglasId } from './reglas-reserva.ts';
-import { nifEmisorValido, nifValido } from '../nif.ts';
+import { NOMBRE_ID_FISCAL, nifEmisorValido, nifValido } from '../nif.ts';
 import { PLAN_INFO, tieneFeature, type Plan } from '../billing/entitlements.ts';
 import { urlAppInstructora } from '../avisos/app-instructora.ts';
 import type { FaseTrial } from '../billing/trial.ts';
@@ -219,11 +219,12 @@ const en = (ancla: TarjetaId) => ({ ancla, seccion: seccionDeTarjeta(ancla) });
 /** Qué le pasa al NIF guardado, o `null` si está bien. El mismo aviso en «Revisa esto» y en su fila. */
 export function avisoNif(guardado: string | null): Pick<AvisoConfiguracion, 'texto' | 'etiqueta' | 'tono'> | null {
   const nif = (guardado ?? '').trim();
-  if (!nif) return { texto: 'Falta tu NIF: tus cobros se quedan sin factura', etiqueta: 'Falta el NIF', tono: 'problema' };
-  if (!nifEmisorValido(nif)) return { texto: 'Tu NIF no es válido: tus cobros se quedan sin factura', etiqueta: 'NIF no válido', tono: 'problema' };
+  const id = NOMBRE_ID_FISCAL;
+  if (!nif) return { texto: `Falta tu ${id}: tus cobros se quedan sin factura`, etiqueta: `Falta el ${id}`, tono: 'problema' };
+  if (!nifEmisorValido(nif)) return { texto: `Tu ${id} no es válido: tus cobros se quedan sin factura`, etiqueta: `${id} no válido`, tono: 'problema' };
   // Con formato de NIF pero la letra o el dígito de control no cuadran: la
   // factura sale, con un NIF que Hacienda no reconoce.
-  if (!nifValido(nif)) return { texto: 'Revisa tu NIF: la letra o el dígito de control no cuadran', etiqueta: 'Revisa el NIF', tono: 'pendiente' };
+  if (!nifValido(nif)) return { texto: `Revisa tu ${id}: la letra o el dígito de control no cuadran`, etiqueta: `Revisa el ${id}`, tono: 'pendiente' };
   return null;
 }
 

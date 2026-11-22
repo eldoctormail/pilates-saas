@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { nifValido } from '@/lib/nif';
+import { NOMBRE_ID_FISCAL, nifValido } from '@/lib/nif';
 import type { Studio } from '@/lib/types';
 import { inputCls } from '@/components/configuracion/estilos';
 import { BarraGuardar } from '@/components/configuracion/shell/barra-guardar';
@@ -62,7 +62,7 @@ export function FormDatosFiscales({ showToast, onGuardado }: PropsFormularioCajo
               onChange={e => { const v = e.target.value; setForm(f => ({ ...f, razonSocial: v })); }} />
           )}
         </Campo>
-        <Campo label="NIF / CIF" error={nifInvalido ? 'La letra o el dígito de control no cuadran.' : null}>
+        <Campo label={NOMBRE_ID_FISCAL === 'CUIT' ? 'CUIT' : 'NIF / CIF'} error={nifInvalido ? (NOMBRE_ID_FISCAL === 'CUIT' ? 'Revisá el CUIT: son 11 cifras y el dígito verificador no cuadra.' : 'La letra o el dígito de control no cuadran.') : null}>
           {id => (
             <input
               id={id}

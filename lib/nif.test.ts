@@ -62,3 +62,16 @@ test('nifValido: rechaza formato inválido, vacío o nulo', () => {
   assert.equal(nifValido('HOLA'), false);
   assert.equal(nifValido('1234567Z'), false); // solo 7 dígitos
 });
+
+// ── CUIT (autoalojado en Argentina) ──────────────────────────────────────────
+import { cuitValido } from './nif.ts';
+
+test('cuitValido: 11 cifras, tipo conocido y dígito verificador', () => {
+  for (const c of ['20-12345678-6', '20123456786', '30-71234567-1', '27-28033514-8']) assert.equal(cuitValido(c), true, c);
+  for (const c of ['20-12345678-0', '11111111111', '99-12345678-6', '2012345678', '', null]) assert.equal(cuitValido(c), false, String(c));
+});
+
+test('nifValido con es-AR valida el CUIT; con es-ES, el NIF de siempre', () => {
+  assert.equal(nifValido('20-12345678-6', 'es-AR-u-hc-h23'), true);
+  assert.equal(nifValido('20-12345678-6', 'es-ES'), false);
+});

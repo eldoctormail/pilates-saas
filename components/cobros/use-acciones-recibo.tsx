@@ -33,6 +33,8 @@ import { anfitrionPortal } from '@/lib/panel-portal';
 import { DialogoMetodoCobro } from '@/components/cobros/dialogo-metodo-cobro';
 import { ConfirmDialog } from '@/components/ui/confirm-dialog';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { DialogoEmitirArca, imprimirFacturaArca } from '@/components/arca/dialogo-emitir-arca';
+import { useArca } from '@/components/arca/use-arca';
 
 export interface AvisosCobros {
   ok: (mensaje: string) => void;
@@ -93,6 +95,8 @@ export function useAccionesRecibo(avisos: AvisosCobros): AccionesRecibo {
   const [pedirTarjetaA, setPedirTarjetaA] = useState<{ socioId: string; nombre: string } | null>(null);
   const [enlaceTarjeta, setEnlaceTarjeta] = useState<{ url: string; copiado: boolean } | null>(null);
   const [generandoEnlace, setGenerandoEnlace] = useState(false);
+  const [facturandoArca, setFacturandoArca] = useState<string | null>(null);
+  const arca = useArca();
 
   async function cobrarYEmail(reciboId: string, metodo?: MetodoCobro) {
     const marcado = await marcarCobrado(reciboId, metodo);
@@ -243,6 +247,14 @@ export function useAccionesRecibo(avisos: AvisosCobros): AccionesRecibo {
         if (f) router.push(`/facturas?ver=${f.id}`);
         return;
       }
+      case 'FACTURA_ARCA':
+        setFacturandoArca(r.id);
+        return;
+      case 'VER_FACTURA_ARCA': {
+        const c = arca.porRecibo.get(r.id);
+        if (c && arca.emisor) imprimirFacturaArca(c, arca.emisor);
+        return;
+      }
       case 'HACERLE_FACTURA':
         void enUnaVez(r.id, async () => {
           const res = await reintentarSelladoFactura(r.id);
@@ -289,8 +301,20 @@ export function useAccionesRecibo(avisos: AvisosCobros): AccionesRecibo {
   const enCobro = reciboDe(cobrando);
   const enReembolso = reciboDe(reembolsando);
 
+  const enArca = reciboDe(facturandoArca);
+  const socioArca = enArca?.socioId ? socios.find(x => x.id === enArca.socioId) : null;
+
   const dialogos = (
     <>
+      {enArca && (
+        <DialogoEmitirArca
+          recibo={{ id: enArca.id, concepto: enArca.concepto, importe: enArca.importe }}
+          alumna={socioArca ? { nombre: `${socioArca.nombre} ${socioArca.apellidos ?? ''}`.trim(), documento: socioArca.nif ?? null } : null}
+          ivaEstudio={studio?.ivaPorDefecto ?? 21}
+          onCerrar={() => setFacturandoArca(null)}
+          onEmitida={texto => avisos.ok(texto)}
+        />
+      )}
       <ConfirmDialog
         open={!!confirmacion}
         onOpenChange={v => { if (!v) setConfirmacion(null); }}

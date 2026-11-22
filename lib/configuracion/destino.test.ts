@@ -9,6 +9,7 @@ import {
 import {
   HERRAMIENTAS, SECCIONES, esHerramientaId, herramientaDeTarjeta, seccionDeTarjeta, seccionPorId,
   type SeccionId, type TarjetaId,
+  tarjetaDeOtroPais,
 } from './secciones.ts';
 import { TARJETA_DE_INTEGRACION } from './resumenes.ts';
 
@@ -280,9 +281,9 @@ test('la propietaria ve las catorce secciones; la gerencia, dos y solo con sus t
   assert.deepEqual(gerencia.map(s => s.id), ['estudio', 'clases']);
   assert.deepEqual(gerencia[0].tarjetas.map(t => t.id), ['horario', 'cerrar-el-centro', 'salas']);
   assert.deepEqual(gerencia[1].tarjetas.map(t => t.id), ['tipos-de-clase', 'horario-de-citas']);
-  // Y a la propietaria no se le recorta ninguna.
+  // Y a la propietaria no se le recorta ninguna, salvo las de otro país (lib/locale.ts).
   for (const s of seccionesVisibles('PROPIETARIO')) {
-    assert.equal(s.tarjetas.length, seccionPorId(s.id).tarjetas.length, s.id);
+    assert.equal(s.tarjetas.length, seccionPorId(s.id).tarjetas.filter(t => !tarjetaDeOtroPais(t.id)).length, s.id);
   }
 });
 

@@ -166,6 +166,29 @@ Cada compra de plan queda en `compras_mercadopago` con lo que se decidió cobrar
 
 Sin Turnstile configurado (lo normal en un servidor propio), la compra de regalos queda protegida por el límite de peticiones y el campo trampa contra bots, sin captcha. Si un pago llega a un recibo que ya estaba cobrado, no se aplica dos veces; queda anotado como `no_aplicable` y hay que devolverlo desde Mercado Pago.
 
+## Factura electrónica de ARCA
+
+Con `NEXT_PUBLIC_LOCALE=es-AR`, Configuración › Cobros y facturas tiene la fila **Factura electrónica de ARCA**. Con ella configurada, cada recibo cobrado ofrece **Emitir factura de ARCA**: la factura sale con su CAE y su QR, y queda registrada en ARCA. Por ahora se emite a mano, recibo por recibo.
+
+- **Qué comprobante sale:** monotributo emite **C**. Responsable inscripto emite **A** a otro responsable inscripto o a un monotributista, y **B** al resto. Siempre se informa la condición frente al IVA de quien la recibe (RG 5616, obligatoria). Al consumidor final se lo puede dejar sin identificar por debajo de $ 10.000.000 (RG 5700).
+- **Antes de empezar:**
+  - `INTEGRACIONES_CLAVE_CIFRADO` en `deploy/.env`. `generar-secretos.sh` la crea. Cifra la clave del certificado: si se pierde, hay que generar el certificado de nuevo.
+  - En ARCA, un **punto de venta** «RECE para aplicativo y web services» (Administración de puntos de venta y domicilios).
+- **Los pasos**, todos en el cajón:
+  1. Cargá tus datos.
+  2. Generá el pedido de certificado.
+  3. Subilo a ARCA:
+     - **Prueba:** WSASS. Después, «Crear autorización a servicio» para `wsfe`.
+     - **Producción:** Administración de Certificados Digitales. Después, la relación con «Facturación Electrónica» en el Administrador de Relaciones.
+  4. Pegá el certificado que te devuelve.
+  5. Probá la conexión.
+- **Empezá en prueba (homologación).** Esas facturas salen marcadas «SIN VALIDEZ FISCAL». Para pasar a producción hace falta otro certificado.
+- **Nunca se duplica una factura.** El comprobante se anota con su número **antes** de pedir el CAE. Si ARCA no contesta, queda pendiente, y el siguiente intento consulta ese número o reenvía la misma solicitud. Las facturas quedan en la tabla `comprobantes_arca`: las emitidas no cambian ni se borran.
+- **Todavía no hace:**
+  - **Notas de crédito.** Por ahora, una factura se anula desde ARCA.
+  - **Factura en el momento del cobro.**
+  - **Listado de facturas de ARCA.** Cada una se ve desde su recibo.
+
 ## Actualizar
 
 ```sh

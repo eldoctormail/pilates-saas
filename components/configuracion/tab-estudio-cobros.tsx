@@ -849,7 +849,7 @@ export function FormFacturacion({ onGuardado }: PropsFormularioCajon) {
       {!FUNCIONES_DE_ESPANA && (
         <div className="mb-6 rounded-xl border border-border bg-muted/40 px-4 py-3 text-sm">
           <p className="text-foreground text-pretty">
-            En Argentina, la factura legal es la electrónica de ARCA, con su CAE. Tentare todavía no la emite: hacela desde ARCA o con tu sistema de facturación.
+            En Argentina, la factura legal es la electrónica de ARCA, con su CAE. Tentare la emite desde cada recibo cobrado cuando configurás «Factura electrónica de ARCA», más abajo en esta misma pantalla.
           </p>
           <p className="mt-2 text-muted-foreground text-pretty">
             Lo que sale de acá es un comprobante interno numerado, rotulado «Documento no válido como factura», para que la clienta tenga constancia de lo que pagó.

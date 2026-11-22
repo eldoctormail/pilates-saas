@@ -70,6 +70,10 @@ const opcionesComunes = {
     'process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY': JSON.stringify(SUPABASE_ANON_KEY),
     'process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY': '""',
     'process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY': JSON.stringify(STRIPE_PUBLISHABLE_KEY),
+    // Autoalojado: origen (lib/legal-info.ts) y zona horaria (lib/zona-horaria.ts).
+    // Vacías = los valores por defecto.
+    'process.env.NEXT_PUBLIC_APP_URL': JSON.stringify(process.env.NEXT_PUBLIC_APP_URL ?? ''),
+    'process.env.NEXT_PUBLIC_ZONA_HORARIA': JSON.stringify(process.env.NEXT_PUBLIC_ZONA_HORARIA ?? ''),
   },
   logLevel: 'info',
 };

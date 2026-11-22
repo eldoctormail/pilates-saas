@@ -1,5 +1,6 @@
 'use client';
 
+import { ZONA_HORARIA } from '../../lib/zona-horaria.ts';
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { useCampoAsociado } from '@/components/ui/use-campo-asociado';
@@ -2978,7 +2979,7 @@ export function FichaClienta({ id, modo = 'pagina' }: {
                   <li key={v.id} className="rounded-xl border border-border px-3 py-2.5">
                     <p className="text-sm font-semibold text-foreground">Venta nº {v.numero} · {formatEuro(v.total)}</p>
                     <p className="text-xs text-muted-foreground">
-                      {new Date(v.realizadaEn).toLocaleString('es-ES', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Madrid' })}
+                      {new Date(v.realizadaEn).toLocaleString('es-ES', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: ZONA_HORARIA })}
                     </p>
                     {puedeCobrar && (
                       <button

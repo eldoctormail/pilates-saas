@@ -6,6 +6,7 @@
 // mirarlo. «No es el mismo negocio» lo deshace: pide un segundo clic, porque
 // reabre el estudio de esta ficha.
 
+import { ZONA_HORARIA } from '../../../../lib/zona-horaria.ts';
 import Link from 'next/link';
 import { useState } from 'react';
 import { accionEstudio } from '@/lib/interno/client';
@@ -14,7 +15,7 @@ import { useSesionInterna } from '../../layout';
 import { tienePermiso } from '@/lib/interno/permisos';
 
 const fecha = (iso: string) =>
-  new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', timeZone: 'Europe/Madrid' });
+  new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', timeZone: ZONA_HORARIA });
 
 export function CuentasVinculadas({ id, vinculos, alTerminar }: { id: string; vinculos: VinculoFicha[]; alTerminar: () => void }) {
   const sesion = useSesionInterna();

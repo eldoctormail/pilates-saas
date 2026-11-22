@@ -5,13 +5,14 @@
 // (`altas_estudio`), no de PostHog: está aunque el navegador bloqueara la
 // analítica. Sección con su propio permiso (growth.read): si falta, no se pinta.
 
+import { ZONA_HORARIA } from '../../../lib/zona-horaria.ts';
 import { useEffect, useState } from 'react';
 import { fetchAltasSinTerminar, type AltasSinTerminar } from '@/lib/interno/client';
 import { ETIQUETA_PASO, type FilaAltaInterno, type PasoAbandono } from '@/lib/alta/abandono';
 
 const fechaHora = (iso: string | null) =>
   iso
-    ? new Date(iso).toLocaleString('es-ES', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Madrid' })
+    ? new Date(iso).toLocaleString('es-ES', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: ZONA_HORARIA })
     : '—';
 
 const TONO_PASO: Record<PasoAbandono, string> = {

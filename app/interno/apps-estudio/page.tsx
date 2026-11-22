@@ -13,6 +13,7 @@
 // las pone el servidor (`leerCambio`), aquí solo se piden confirmaciones.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { ZONA_HORARIA } from '../../../lib/zona-horaria.ts';
 import { useCallback, useEffect, useState } from 'react';
 import { validarNombreApp } from '@/lib/app-nativa/pedir-app';
 import { cambiarAppEstudio, fetchAppsEstudio, type AppDeEstudioInterna } from '@/lib/interno/client';
@@ -21,7 +22,7 @@ import { ESTADOS_APP, textoDeEstado, type EstadoApp } from '@/lib/app-nativa/ped
 import { useSesionInterna } from '../layout';
 
 const fecha = (iso: string | null) =>
-  iso ? new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'Europe/Madrid' }) : '—';
+  iso ? new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric', timeZone: ZONA_HORARIA }) : '—';
 
 export default function AppsEstudioInterno() {
   const sesion = useSesionInterna();

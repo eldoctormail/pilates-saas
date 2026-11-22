@@ -9,6 +9,7 @@
 //   · Movimientos de MRR  el «puente» entre dos MRR (nuevo, ampliación, reducción, baja): no son ingresos.
 // Ninguna cifra sin procedencia: si Stripe no contesta, el MRR sale «—», nunca un 0.
 
+import { ZONA_HORARIA } from '../../../lib/zona-horaria.ts';
 import { useCallback, useEffect, useState } from 'react';
 import { AlertTriangle, RefreshCw } from 'lucide-react';
 import { fetchRevenue, type RevenueInterno } from '@/lib/interno/client';
@@ -16,7 +17,7 @@ import { fetchRevenue, type RevenueInterno } from '@/lib/interno/client';
 const eur = (cents: number) =>
   new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: cents % 100 === 0 ? 0 : 2 }).format(cents / 100);
 const pct = (x: number | null) => (x === null ? '—' : `${(x * 100).toLocaleString('es-ES', { maximumFractionDigits: 1 })} %`);
-const fecha = (iso: string) => new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'Europe/Madrid' });
+const fecha = (iso: string) => new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric', timeZone: ZONA_HORARIA });
 
 const PERIODOS = [
   { id: 'este_mes', texto: 'Este mes' }, { id: 'mes_pasado', texto: 'Mes pasado' }, { id: 'ultimos_3', texto: 'Últimos 3 meses' },

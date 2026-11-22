@@ -1,5 +1,6 @@
 'use client';
 
+import { ZONA_HORARIA } from '../../lib/zona-horaria.ts';
 import type { MostrarToast } from '@/components/ui/toast';
 import { useEffect, useMemo, useState } from 'react';
 import { AlertTriangle, Check, UserX } from 'lucide-react';
@@ -27,7 +28,7 @@ const RESERVA_FUTURA = new Set(['CONFIRMADA', 'LISTA_ESPERA', 'PENDIENTE_APROBAC
 /** «jue 1 oct 18:00», en hora del estudio: sin comas dentro, porque van en una lista separada por comas. */
 function diaCorto(iso: string): string {
   const p = Object.fromEntries(new Intl.DateTimeFormat('es-ES', {
-    weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23', timeZone: 'Europe/Madrid',
+    weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23', timeZone: ZONA_HORARIA,
   }).formatToParts(new Date(iso)).map(x => [x.type, x.value]));
   return `${p.weekday} ${p.day} ${p.month} ${p.hour}:${p.minute}`.replace(/\./g, '');
 }

@@ -21,6 +21,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 /** Días sin ningún movimiento relevante a partir de los cuales hay alerta. */
+import { ZONA_HORARIA } from '../zona-horaria.ts';
 export const UMBRAL_DIAS_ATASCO = 3;
 /** Pasado este plazo desde un contacto sin que la persona haya avanzado, vuelve a la lista. */
 export const REVISAR_TRAS_CONTACTO_DIAS = 7;
@@ -91,7 +92,7 @@ export function ultimoPasoCompletado(f: FilaAtascada): string {
 
 /** Un día de Madrid (`YYYY-MM-DD`) a partir de un instante ISO. */
 function diaDeMadrid(iso: string): string {
-  return new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Madrid' }).format(new Date(iso));
+  return new Intl.DateTimeFormat('en-CA', { timeZone: ZONA_HORARIA }).format(new Date(iso));
 }
 
 /** Días enteros entre dos días `YYYY-MM-DD` (b − a). */

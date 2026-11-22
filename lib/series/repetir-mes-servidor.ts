@@ -12,6 +12,7 @@
 // del estudio o las clases del mes, la propuesta falla (500) en vez de proponer
 // sin festivos o con una serie mal marcada.
 // ─────────────────────────────────────────────────────────────────────────────
+import { ZONA_HORARIA } from '../zona-horaria.ts';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { mapLimit } from '../concurrency.ts';
 import { finDelDiaEstudio, hoyEnEstudio, inicioDelDiaEstudio } from '../utils.ts';
@@ -26,7 +27,7 @@ import {
   type PropuestaRepetir, type ResultadoRepetir, type SerieParaRepetir,
 } from './repetir-mes.ts';
 
-const TZ = 'Europe/Madrid';
+const TZ = ZONA_HORARIA;
 export const MAX_SERIES = 60;
 export const MAX_FECHAS = 600;
 

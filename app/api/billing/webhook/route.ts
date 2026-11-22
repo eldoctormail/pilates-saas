@@ -1,3 +1,4 @@
+import { ZONA_HORARIA } from '../../../../lib/zona-horaria.ts';
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { getSupabaseAdmin } from '@/lib/db/supabase-admin';
@@ -537,7 +538,7 @@ async function avisarFalloPagoSaas(admin: SupabaseClient, invoice: Stripe.Invoic
   const customerId = typeof invoice.customer === 'string' ? invoice.customer : invoice.customer?.id;
   if (!customerId) return;
   const proximoIntento = invoice.next_payment_attempt
-    ? new Date(invoice.next_payment_attempt * 1000).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', timeZone: 'Europe/Madrid' })
+    ? new Date(invoice.next_payment_attempt * 1000).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', timeZone: ZONA_HORARIA })
     : undefined;
 
   // Igual que actualizarSuscripcion: el mismo stripe_customer_id puede ser un

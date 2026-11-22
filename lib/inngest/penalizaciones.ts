@@ -11,6 +11,7 @@
 // pero tampoco tan relajada como Fase 2b, porque aquí hay dinero de por
 // medio y cuanto antes se sepa si hace falta aprobación manual, mejor.
 // ─────────────────────────────────────────────────────────────────────────────
+import { ZONA_HORARIA } from '../zona-horaria.ts';
 import * as Sentry from '@sentry/nextjs';
 import { inngest } from './client';
 import { getSupabaseAdmin } from '@/lib/db/supabase-admin';
@@ -76,7 +77,7 @@ async function procesarUna(admin: SupabaseClient, pen: { id: string; studio_id: 
   if (sesion && esReservaPlazaFija(pen.reserva_id)
     && (studio.plaza_fija_sin_cuota === 'LIBERAR' || studio.plaza_fija_sin_cuota === 'MANTENER_SIN_PENALIZAR'
       || studio.plaza_fija_sin_cuota === 'AVISAR_Y_LIBERAR')) {
-    const fecha = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Madrid' }).format(new Date(sesion.inicio as string));
+    const fecha = new Intl.DateTimeFormat('en-CA', { timeZone: ZONA_HORARIA }).format(new Date(sesion.inicio as string));
     const { data: cubre, error: errCuota } = await admin.rpc('cuota_cubre_plaza_fija', {
       p_studio_id: pen.studio_id, p_socio_id: pen.socio_id, p_tipo_clase_id: sesion.tipo_clase_id, p_fecha: fecha, p_exigir_vigente: false,
     });

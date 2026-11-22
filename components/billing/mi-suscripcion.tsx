@@ -8,6 +8,7 @@
 // Es dinero: ningún cambio se anuncia hasta que el servidor lo confirma, y antes de pagar se
 // enseña lo que Stripe dice que se cobrará (vista previa) y cuándo.
 
+import { ZONA_HORARIA } from '../../lib/zona-horaria.ts';
 import { useCallback, useEffect, useState } from 'react';
 import { CreditCard, Download, Loader2 } from 'lucide-react';
 import {
@@ -23,7 +24,7 @@ import { cn } from '@/lib/utils';
 const dinero = (cents: number, moneda = 'eur') =>
   new Intl.NumberFormat('es-ES', { style: 'currency', currency: moneda.toUpperCase() }).format(cents / 100);
 const dia = (iso: string | null) =>
-  iso ? new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Madrid' }) : null;
+  iso ? new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric', timeZone: ZONA_HORARIA }) : null;
 
 const TONO_ESTADO: Record<MiSuscripcionApi['estado'], string> = {
   al_dia: 'bg-success/10 text-success',

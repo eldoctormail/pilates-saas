@@ -1,5 +1,6 @@
 'use client';
 
+import { ZONA_HORARIA } from '../../../lib/zona-horaria.ts';
 import { useEffect, useMemo, useRef, useState, useId, type ElementType } from 'react';
 import Link from 'next/link';
 import { useStudio } from '@/lib/studio-context';
@@ -1402,8 +1403,8 @@ function TrazaContactos({
 // escalado puede cruzar la medianoche y "18:04 → 09:12" sin día se lee al revés.
 function fmtMomento(iso: string): string {
   const d = new Date(iso);
-  const dia = d.toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', timeZone: 'Europe/Madrid' });
-  const hora = d.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Madrid' });
+  const dia = d.toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', timeZone: ZONA_HORARIA });
+  const hora = d.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', timeZone: ZONA_HORARIA });
   return `${dia}, ${hora}`;
 }
 

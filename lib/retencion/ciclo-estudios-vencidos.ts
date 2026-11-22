@@ -35,6 +35,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 /** ⚠️ LEGAL. Días desde `trial_ends_at` hasta el primer aviso (y fin de copias). */
+import { ZONA_HORARIA } from '../zona-horaria.ts';
 export const DIAS_AVISO_CONSERVACION = 30;
 /** ⚠️ LEGAL. Días desde `trial_ends_at` hasta el último aviso. */
 export const DIAS_AVISO_FINAL = 83;
@@ -236,7 +237,7 @@ export function mismaAncla(a: string | Date | null, b: string | Date | null): bo
 
 /** «24 de noviembre de 2026», en hora de España. */
 export function formatearFechaAviso(d: Date): string {
-  return new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Madrid' }).format(d);
+  return new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'long', year: 'numeric', timeZone: ZONA_HORARIA }).format(d);
 }
 
 export type FaseAviso = 'aviso_30' | 'aviso_baja' | 'aviso_final';

@@ -1,5 +1,6 @@
 // Cómo se cuenta en pantalla el «desde cuándo» de cada estado y las fechas
 // relativas de la lista. Puro: se prueba con `node --test`.
+import { ZONA_HORARIA } from '../zona-horaria.ts';
 import type { EstadoClienta, ResultadoEstado } from './estado.ts';
 import { diasEntre } from './estado.ts';
 import { ETIQUETA_MOTIVO_BAJA, esMotivoBaja } from '../socios/baja.ts';
@@ -98,7 +99,7 @@ function formatoClase(tz: string): Intl.DateTimeFormat {
  * Cuándo es una clase, en corto y en hora del estudio: «hoy 18:00», «mañana
  * 9:30», «jue 18:00» (esta semana), «14 oct 18:00».
  */
-export function cuandoClase(inicioIso: string, hoyISO: string, tz = 'Europe/Madrid'): string {
+export function cuandoClase(inicioIso: string, hoyISO: string, tz = ZONA_HORARIA): string {
   const p = Object.fromEntries(formatoClase(tz).formatToParts(new Date(inicioIso)).map(x => [x.type, x.value]));
   const ymd = `${p.year}-${p.month}-${p.day}`;
   const hora = `${Number(p.hour)}:${p.minute}`;

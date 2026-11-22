@@ -1,3 +1,4 @@
+import { ZONA_HORARIA } from '../zona-horaria.ts';
 import { nifValido } from '../nif.ts';
 import { inicioDelDiaEstudio } from '../utils.ts';
 import { instanteDeApertura } from '../booking-logic.ts';
@@ -97,7 +98,7 @@ const n = (x: number, uno: string, varios: string) => `${x} ${x === 1 ? uno : va
  * las dos cuentan la misma fecha y no pueden escribirla distinto.
  */
 export const diaDeApertura = (abre: Date) =>
-  abre.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', timeZone: 'Europe/Madrid' });
+  abre.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', timeZone: ZONA_HORARIA });
 const relleno = (s: string | null) => !s || s.trim() === '';
 
 export function evaluarListo(d: DatosListo, now: Date, puedeAbrir: (href: string) => boolean): Comprobacion[] {

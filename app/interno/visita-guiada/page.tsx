@@ -14,6 +14,7 @@
 // «activar en todos» sin red es la clase de clic que se lamenta.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { ZONA_HORARIA } from '../../../lib/zona-horaria.ts';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Search } from 'lucide-react';
 import { accionVisitaGuiada, fetchVisitaGuiada, type EstudioVisita } from '@/lib/interno/client';
@@ -23,7 +24,7 @@ import { useSesionInterna } from '../layout';
 type Respuesta = { nuevos: boolean; estudios: EstudioVisita[] };
 
 const fecha = (iso: string) =>
-  new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'Europe/Madrid' });
+  new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric', timeZone: ZONA_HORARIA });
 
 const TONO: Record<EstudioVisita['resumen']['estado'], string> = {
   desactivada: 'bg-muted text-muted-foreground',

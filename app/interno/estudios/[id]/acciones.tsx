@@ -10,6 +10,7 @@
 //    producto deja hacer; lo que se le cobra se cambia en Stripe. Fingir que
 //    una sola acción hace ambas cosas es como se acaba regalando un plan caro.
 
+import { ZONA_HORARIA } from '../../../../lib/zona-horaria.ts';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { accionEstudio, type FichaEstudio } from '@/lib/interno/client';
@@ -19,7 +20,7 @@ import { useSesionInterna } from '../../layout';
 import { tienePermiso } from '@/lib/interno/permisos';
 
 const dia = (iso: string) =>
-  new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', timeZone: 'Europe/Madrid' });
+  new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', timeZone: ZONA_HORARIA });
 
 export function AccionesEstudio({ id, plan, suspendido, motivo, reviewBoost, apiPublica, wellhub, prueba, alTerminar }: {
   id: string; plan: string; suspendido: boolean; motivo: string | null;

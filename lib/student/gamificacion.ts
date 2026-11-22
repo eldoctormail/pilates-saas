@@ -7,6 +7,7 @@
 // canje lo valida `/api/public/canje`. Esto solo ORDENA y presenta lo que el
 // payload ya trae: si el estudio no ha configurado nada, no hay nada que pintar.
 
+import { ZONA_HORARIA } from '../zona-horaria.ts';
 import { vistaDeNivel } from '../gamificacion/ritmo-niveles.ts';
 
 export interface NivelDef { id: string; nombre: string; orden: number; umbralCreditos: number; color: string; icono: string; beneficios: string | null; activo?: boolean }
@@ -72,7 +73,7 @@ export interface RetoVista extends RetoDef {
   conInscripcion: boolean;
 }
 
-const FORMATO_DIA_MADRID = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Madrid' });
+const FORMATO_DIA_MADRID = new Intl.DateTimeFormat('en-CA', { timeZone: ZONA_HORARIA });
 
 /**
  * El día de calendario de Madrid de una fecha de reto. El panel guarda el inicio

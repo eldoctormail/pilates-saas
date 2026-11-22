@@ -4,6 +4,7 @@
 // `hoyEnEstudio` vive en lib/utils.ts y la comparte con `bono-logic.ts`, que
 // es quien fija la regla de vigencia en servidor. Import relativo por el
 // mismo motivo que el resto del fichero.
+import { ZONA_HORARIA } from '../zona-horaria.ts';
 import { horaEstudio, hoyEnEstudio } from '../utils.ts';
 import { importeIngresado, situacionRecibo } from '../billing/situacion-recibo.ts';
 import { horasDeCobroTardio, penalizacionTardiaQueSeCobraria } from '../billing/penalizacion-importe.ts';
@@ -276,13 +277,13 @@ export function bonoDeSuscripcion(
 /** Fecha ISO local (YYYY-MM-DD) del instante dado, en la zona del estudio. */
 export function fechaLocal(iso: string): string {
   // `sv-SE` da exactamente `YYYY-MM-DD`, que es el formato del diseño.
-  return new Date(iso).toLocaleDateString('sv-SE', { timeZone: 'Europe/Madrid' });
+  return new Date(iso).toLocaleDateString('sv-SE', { timeZone: ZONA_HORARIA });
 }
 
 /** Hora local HH:mm. */
 export function horaLocal(iso: string): string {
   return new Date(iso).toLocaleTimeString('es-ES', {
-    timeZone: 'Europe/Madrid', hour: '2-digit', minute: '2-digit', hour12: false,
+    timeZone: ZONA_HORARIA, hour: '2-digit', minute: '2-digit', hour12: false,
   });
 }
 

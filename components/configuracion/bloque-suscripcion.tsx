@@ -4,6 +4,7 @@
 // Solo la propietaria (el `esPropietaria` de /api/billing/status). Todo el cambio de plan
 // vive en /suscripcion: aquí solo se ve y se enlaza, nunca se cobra.
 
+import { ZONA_HORARIA } from '../../lib/zona-horaria.ts';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { estadoBilling, type EstadoBilling } from '@/lib/api-client';
@@ -13,7 +14,7 @@ import { cardCls } from '@/components/configuracion/estilos';
 const ORDEN: Plan[] = ['BASE', 'ESTUDIO', 'CADENA'];
 
 const fechaLarga = (iso?: string | null) =>
-  iso ? new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Madrid' }) : null;
+  iso ? new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric', timeZone: ZONA_HORARIA }) : null;
 
 export function BloqueSuscripcion() {
   const [b, setB] = useState<EstadoBilling | null | undefined>(undefined);

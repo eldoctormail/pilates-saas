@@ -13,6 +13,7 @@
 // una tabla sin policies de RLS para anon/authenticated — solo accesible con
 // la service role key, nunca desde el navegador del estudio.
 
+import { ZONA_HORARIA } from './zona-horaria.ts';
 import {
   dbGetZoomCredenciales,
   dbSaveZoomCredenciales,
@@ -144,7 +145,7 @@ export async function crearReunionZoom(
   const res = await fetchExterno(`${API_BASE}/users/me/meetings`, {
     method: 'POST',
     headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ topic: tema.slice(0, 200), type: 2, start_time: inicioISO, duration: duracionMin, timezone: 'Europe/Madrid' }),
+    body: JSON.stringify({ topic: tema.slice(0, 200), type: 2, start_time: inicioISO, duration: duracionMin, timezone: ZONA_HORARIA }),
   });
   const data = (await res.json().catch(() => null)) as { id?: number; join_url?: string; message?: string } | null;
   // `!data.id` va en la MISMA guarda a propósito: sin id no hay reunión
@@ -169,7 +170,7 @@ export async function actualizarReunionZoom(
   const res = await fetchExterno(`${API_BASE}/meetings/${meetingId}`, {
     method: 'PATCH',
     headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ start_time: inicioISO, duration: duracionMin, timezone: 'Europe/Madrid' }),
+    body: JSON.stringify({ start_time: inicioISO, duration: duracionMin, timezone: ZONA_HORARIA }),
   });
   // PATCH de Zoom responde 204 sin cuerpo si va bien.
   if (res.ok) return { ok: true };

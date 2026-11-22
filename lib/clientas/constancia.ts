@@ -2,6 +2,7 @@
 // domingo, hora del estudio) en las últimas N semanas, la actual incluida.
 //
 // Puro: se prueba con `node --test`.
+import { ZONA_HORARIA } from '../zona-horaria.ts';
 import { hoyEnEstudio } from '../utils.ts';
 
 const MS_DIA = 86_400_000;
@@ -27,7 +28,7 @@ export interface Constancia {
   semanasSinVenir: number;
 }
 
-export function constancia(asistencias: readonly string[], ahora: Date, n = 12, tz = 'Europe/Madrid'): Constancia {
+export function constancia(asistencias: readonly string[], ahora: Date, n = 12, tz = ZONA_HORARIA): Constancia {
   const lunesHoy = lunesDe(diaEstudio(ahora.toISOString(), tz));
   const lunes = Array.from({ length: n }, (_, i) =>
     new Date(new Date(`${lunesHoy}T12:00:00Z`).getTime() - (n - 1 - i) * 7 * MS_DIA).toISOString().slice(0, 10));
@@ -51,7 +52,7 @@ export function constancia(asistencias: readonly string[], ahora: Date, n = 12, 
  * Cuántas clases tiene ESTA semana (lunes a domingo, hora del estudio), vengan
  * ya hechas o reservadas: lo que cuenta contra un plan de «N por semana».
  */
-export function clasesEstaSemana(inicios: readonly string[], ahora: Date, tz = 'Europe/Madrid'): number {
+export function clasesEstaSemana(inicios: readonly string[], ahora: Date, tz = ZONA_HORARIA): number {
   const lunesHoy = lunesDe(diaEstudio(ahora.toISOString(), tz));
   return inicios.filter(iso => lunesDe(diaEstudio(iso, tz)) === lunesHoy).length;
 }
@@ -65,7 +66,7 @@ export function asistenciaPorMes(
   asistencias: readonly string[],
   ahora: Date,
   n = 6,
-  tz = 'Europe/Madrid',
+  tz = ZONA_HORARIA,
 ): { clave: string; valor: number }[] {
   const hoy = diaEstudio(ahora.toISOString(), tz);
   let anio = Number(hoy.slice(0, 4));

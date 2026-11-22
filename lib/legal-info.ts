@@ -12,7 +12,11 @@
 // El origen canónico, suelto (ver `dominio` en LEGAL para el porqué del www).
 // `canonicalizarOrigen` lo lee de aquí y no de LEGAL: la usan los scripts que
 // se sirven en las webs de los estudios, y así no arrastran el resto del objeto.
-const URL_CANONICA = 'https://www.tentare.app';
+// Autoalojado: el origen sale de NEXT_PUBLIC_APP_URL (sin barra final). Sin ella,
+// el de Tentare de siempre.
+const URL_CANONICA = (
+  (typeof process !== 'undefined' ? process.env.NEXT_PUBLIC_APP_URL : undefined) || 'https://www.tentare.app'
+).replace(/\/+$/, '');
 
 export const LEGAL = {
   marca: 'Tentare',
@@ -30,7 +34,7 @@ export const LEGAL = {
   // Si algún día se quita el redirect y el ápice pasa a servir directamente,
   // esto vuelve a `https://tentare.app` — y con ese cambio se mueve el sitio
   // entero, porque de aquí salen canonicals, sitemap, robots y JSON-LD.
-  dominio: 'www.tentare.app',
+  dominio: new URL(URL_CANONICA).host,
   url: URL_CANONICA,
   // Fecha de última revisión del contenido legal (no la de render).
   // ⚠️ Si cambia, cambia también `VERSION_TEXTOS_LEGALES` (abajo): es lo que se

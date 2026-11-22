@@ -6,6 +6,7 @@
 //     haría una persona; quien decide y escribe es el equipo.
 //   · Nada de upgrades ni cobros automáticos: una oportunidad es una propuesta con su dato.
 //   · Ninguna alerta sin dato que la sostenga. Si la fuente no se pudo leer, no se inventa nada.
+import { ZONA_HORARIA } from '../../zona-horaria.ts';
 import { PLAN_INFO, type Plan } from '../../billing/entitlements.ts';
 
 export type FamiliaAlerta = 'billing' | 'retencion' | 'oportunidad';
@@ -83,7 +84,7 @@ export interface EntradaExito {
 }
 
 const diasEntre = (iso: string, ahora: Date) => Math.floor((ahora.getTime() - new Date(iso).getTime()) / 86_400_000);
-const dia = (iso: string) => new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', timeZone: 'Europe/Madrid' });
+const dia = (iso: string) => new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', timeZone: ZONA_HORARIA });
 
 export function construirAlertas(e: EntradaExito, ahora: Date): Alerta[] {
   const out: Alerta[] = [];

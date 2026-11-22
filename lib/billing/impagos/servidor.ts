@@ -1,3 +1,4 @@
+import { ZONA_HORARIA } from '../../zona-horaria.ts';
 import 'server-only';
 import * as Sentry from '@sentry/nextjs';
 import type Stripe from 'stripe';
@@ -29,7 +30,7 @@ export const COLUMNAS_INCIDENTE =
 
 const eur = (cents: number) => new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(cents / 100);
 const fechaLarga = (iso: string | null) =>
-  iso ? new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', timeZone: 'Europe/Madrid' }) : null;
+  iso ? new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', timeZone: ZONA_HORARIA }) : null;
 
 export async function leerPoliticaGuardada(admin: SupabaseClient): Promise<PoliticaImpagos> {
   const { data } = await admin.from('ajustes_plataforma').select('valor').eq('clave', CLAVE_POLITICA).maybeSingle();

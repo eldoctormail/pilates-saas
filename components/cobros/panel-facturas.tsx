@@ -9,6 +9,7 @@ import { Search, Download, ChevronDown, ChevronRight, X, ShieldCheck, AlertTrian
 import { nifEmisorValido } from '@/lib/nif';
 import { cn, hoyEnEstudio } from '@/lib/utils';
 import { importeIngresado } from '@/lib/billing/situacion-recibo';
+import { FUNCIONES_DE_ESPANA } from '@/lib/locale';
 import { AVISO_VERIFACTU_APAGADO, cobrosSinFactura, fraseVerifactu, resumenFacturado } from '@/lib/cobros/gestoria';
 import { emiteFacturas } from '@/lib/factura-automatica';
 import { cobradoEnTramo } from '@/lib/cobros/lo-cobrado';
@@ -280,13 +281,18 @@ function EstadoAeat({ estado, csv }: { estado?: string | null; csv?: string | nu
       )}
 
       {/* Veri*Factu en una frase que diga la verdad (sin el NIF lo dice el aviso de arriba) */}
-      {emite && !faltaNif && (
+      {emite && !faltaNif && FUNCIONES_DE_ESPANA && (
         <p className="flex items-start gap-1.5 text-[13px] text-foreground">
           <ShieldCheck size={14} className="mt-0.5 shrink-0 text-success" aria-hidden />
           {fraseVerifactu({ nifEstudioValido: true, pendientesDeSellar: mes.sinFactura.pendientesDeSellar.n, conVerifactu })}
         </p>
       )}
-      {studio && emite && !conVerifactu && (
+      {emite && !FUNCIONES_DE_ESPANA && (
+        <p className="max-w-[760px] text-[12.5px] text-muted-foreground text-pretty">
+          Son comprobantes internos, rotulados «Documento no válido como factura». La factura legal la hacés en ARCA.
+        </p>
+      )}
+      {studio && emite && !conVerifactu && FUNCIONES_DE_ESPANA && (
         <p data-testid="aviso-verifactu-apagado" className="max-w-[760px] text-[12.5px] text-muted-foreground text-pretty">
           {AVISO_VERIFACTU_APAGADO}
         </p>

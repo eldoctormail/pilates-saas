@@ -2,6 +2,7 @@
 
 import type { MostrarToast } from '@/components/ui/toast';
 import { useId, useState } from 'react';
+import { FUNCIONES_DE_ESPANA } from '@/lib/locale';
 import { FileWarning } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { rectificarFactura } from '@/lib/api-client';
@@ -92,12 +93,13 @@ export function BotonRectificarFactura({
         <DialogContent className="max-w-md">
           <DialogHeader><DialogTitle>Emitir factura rectificativa de {factura.numeroCompleto}</DialogTitle></DialogHeader>
           <div className="space-y-4 text-sm">
-            {!conVerifactu && (
+            {!conVerifactu && FUNCIONES_DE_ESPANA && (
               <p className="text-xs text-muted-foreground rounded-lg border border-warning/30 bg-warning/10 px-3 py-2">
                 Quedará numerada. Veri*Factu no está activado en tu estudio, así que no se envía a la AEAT.
               </p>
             )}
-            <div>
+            {/* El tipo es del catálogo de la AEAT: en Argentina se queda el de siempre, sin preguntarlo. */}
+            {FUNCIONES_DE_ESPANA && <div>
               <span id={`${uid}-tipo`} className="text-xs font-semibold text-muted-foreground mb-1.5 block">Tipo (catálogo AEAT)</span>
               <div role="group" aria-labelledby={`${uid}-tipo`} className="flex flex-wrap gap-1.5">
                 {(['R1', 'R2', 'R3', 'R4', 'R5'] as const).map(t => (
@@ -107,7 +109,7 @@ export function BotonRectificarFactura({
                   </button>
                 ))}
               </div>
-            </div>
+            </div>}
             <div>
               <span id={`${uid}-metodo`} className="text-xs font-semibold text-muted-foreground mb-1.5 block">Método</span>
               <div role="group" aria-labelledby={`${uid}-metodo`} className="flex gap-1.5">

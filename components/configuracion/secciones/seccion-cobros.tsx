@@ -2,6 +2,7 @@
 
 import { Ban, CalendarClock, Snowflake, CreditCard, FileText, Landmark, Package, Receipt, RotateCcw, Wallet } from 'lucide-react';
 import { useStudio } from '@/lib/studio-context';
+import { FUNCIONES_DE_ESPANA } from '@/lib/locale';
 import {
   resumenAlCancelarCuota, resumenCobroDia1, resumenCongelacion, resumenDatosFiscales, resumenDevoluciones, resumenDomiciliaciones, resumenFacturacion, resumenHerramienta,
   resumenPlanesActivos,
@@ -68,7 +69,10 @@ export function SeccionCobros({ showToast }: { showToast: (m: string) => void })
           ancla="integracion-stripe"
         />
         <FilaAjuste id="cuando-se-cobra-la-cuota" icono={CalendarClock} valor={cargado ? resumenCobroDia1(cargado) : null} onAbrir={abrir} />
-        <FilaAjuste id="domiciliaciones" icono={Landmark} valor={cargado ? resumenDomiciliaciones(cargado) : null} onAbrir={abrir} />
+        {/* Remesas SEPA: solo España (lib/locale.ts). */}
+        {FUNCIONES_DE_ESPANA && (
+          <FilaAjuste id="domiciliaciones" icono={Landmark} valor={cargado ? resumenDomiciliaciones(cargado) : null} onAbrir={abrir} />
+        )}
         <FilaAjuste id="devoluciones" icono={RotateCcw} valor={cargado ? resumenDevoluciones(cargado) : null} onAbrir={abrir} />
         <FilaAjuste id="si-se-cancela-una-cuota" icono={Ban} valor={cargado ? resumenAlCancelarCuota(cargado) : null} onAbrir={abrir} />
         <FilaAjuste id="congelar-una-cuota" icono={Snowflake} valor={cargado ? resumenCongelacion(cargado) : null} onAbrir={abrir} />

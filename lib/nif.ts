@@ -7,6 +7,9 @@ const esArgentina = (locale: string) => /^es-AR\b/i.test(locale);
 /** El nombre del identificador fiscal para las pantallas: «CUIT» en Argentina, «NIF» en España. */
 export const NOMBRE_ID_FISCAL: string = esArgentina(LOCALE) ? 'CUIT' : 'NIF';
 
+/** El documento de una clienta para las pantallas: «DNI o CUIT» en Argentina, «NIF» en España. */
+export const NOMBRE_ID_CLIENTA: string = esArgentina(LOCALE) ? 'DNI o CUIT' : 'NIF';
+
 /**
  * CUIT/CUIL: 11 cifras (con o sin guiones), tipo conocido y dígito verificador (módulo 11 con los
  * pesos 5-4-3-2-7-6-5-4-3-2). Rechaza los de relleno (todas las cifras iguales).

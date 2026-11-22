@@ -1,5 +1,8 @@
 'use client';
 
+import { FUNCIONES_DE_ESPANA } from '@/lib/locale';
+import { SoloEspana } from '@/components/configuracion/solo-espana';
+
 // Envío de tus registros de facturación a la AEAT (Veri*Factu): el alta.
 //
 // Solo la propietaria. Es un trámite legal, así que tiene que ser corto: tres
@@ -79,7 +82,12 @@ const masAnos = (iso: string, n: number) => {
   return d.toISOString().slice(0, 10);
 };
 
-export default function VerifactuAltaPage() {
+// Solo España (lib/locale.ts): con el formato de Argentina, un aviso en su lugar.
+export default function Pagina() {
+  return FUNCIONES_DE_ESPANA ? <VerifactuAltaPage /> : <SoloEspana que="Veri*Factu" />;
+}
+
+function VerifactuAltaPage() {
   const [e, setE] = useState<Estado | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [errores, setErrores] = useState<string[]>([]);

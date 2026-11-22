@@ -32,6 +32,7 @@ import { nombreCreditos } from '../creditos-nombre.ts';
 import { porQueSinVentaExterna, type MotivoSinVentaExterna } from '../plataformas/venta-externa.ts';
 import { tarjetasEnLaApp, type BannerDelEstudio } from '../student/descubre.ts';
 import { hoyEnEstudio } from '../utils.ts';
+import { FUNCIONES_DE_ESPANA } from '../locale.ts';
 
 export const MAX_RESUMEN = 44;
 /** Las filas de «Cómo reservan mis alumnas»: a dos líneas (ver `resumenRegla`). */
@@ -776,6 +777,7 @@ export function resumenFacturacion(s: Partial<Pick<Studio, 'modoFacturacion' | '
   if (s.modoFacturacion === undefined) return null;
   // «Facturar automáticamente» apagado: se dice primero, es lo que cambia lo que pasa al cobrar.
   const manual = s.facturarAutomatico === false ? ' · a mano' : '';
+  if (!FUNCIONES_DE_ESPANA && s.modoFacturacion !== 'sin_facturas') return `Comprobantes internos (no válidos como factura)${manual}`;
   if (s.modoFacturacion === 'verifactu') return `Facturas con Veri*Factu${manual}`;
   if (s.modoFacturacion === 'facturas') return `Facturas sin envío a la AEAT (Veri*Factu desactivado)${manual}`;
   return 'Hoy no emite facturas';

@@ -15,3 +15,14 @@ export const LOCALE: string =
 
 /** Un teléfono de ejemplo para los `placeholder`, con el formato del país. */
 export const TELEFONO_EJEMPLO: string = /^es-AR\b/i.test(LOCALE) ? '+54 9 299 412 3456' : '+34 600 000 000';
+
+/** ¿El formato regional es el de Argentina? */
+export function esArgentina(locale: string = LOCALE): boolean {
+  return /^es-AR\b/i.test(locale);
+}
+
+// Lo que solo tiene sentido en España —Veri*Factu y la AEAT, las remesas y los
+// mandatos SEPA, Bizum, los tipos de IVA españoles— se oculta en el panel con
+// el formato de Argentina. Solo se oculta: el código, las tablas y las rutas
+// siguen ahí, y con NEXT_PUBLIC_LOCALE=es-ES vuelve todo.
+export const FUNCIONES_DE_ESPANA: boolean = !esArgentina();

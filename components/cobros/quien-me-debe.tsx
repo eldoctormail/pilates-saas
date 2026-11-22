@@ -7,6 +7,7 @@
 //
 // Lo que está en el banco va aparte («En el banco»): todavía no es deuda.
 
+import { METODO_MOVIL } from '@/lib/cobros/metodo-movil';
 import { useCallback, useMemo, useState } from 'react';
 import { Banknote, CalendarClock, CheckCheck, CheckSquare, ChevronDown, Clock, CreditCard, Landmark, RefreshCw, Smartphone, Square, X } from 'lucide-react';
 import { useStudio } from '@/lib/studio-context';
@@ -38,7 +39,7 @@ import type { DatosCobros } from './use-datos-cobros';
 const POR_PAGINA = 50;
 const METODOS: { metodo: MetodoCobro; texto: string; icono: typeof Banknote }[] = [
   { metodo: 'EFECTIVO', texto: 'Efectivo', icono: Banknote }, { metodo: 'TARJETA', texto: 'Tarjeta', icono: CreditCard },
-  { metodo: 'BIZUM', texto: 'Bizum', icono: Smartphone }, { metodo: 'TRANSFERENCIA', texto: 'Transferencia', icono: Landmark },
+  { metodo: METODO_MOVIL.metodo, texto: METODO_MOVIL.etiqueta, icono: Smartphone }, { metodo: 'TRANSFERENCIA', texto: 'Transferencia', icono: Landmark },
 ];
 
 /** Lo que la pantalla puede pedir al abrir la lista (la cifra «Devueltos y fallidos» del panel nuevo). */

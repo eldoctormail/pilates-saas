@@ -51,7 +51,7 @@ import { registrarAuditoriaServidor, type RegistrarAuditoria } from '../auditori
 import { hoyEnEstudio } from '../utils.ts';
 
 /** Cómo le devuelve el estudio el dinero. SEPA no: un adeudo no se «devuelve» a mano. */
-export const METODOS_REEMBOLSO_MANUAL = ['EFECTIVO', 'TARJETA', 'BIZUM', 'TRANSFERENCIA'] as const;
+export const METODOS_REEMBOLSO_MANUAL = ['EFECTIVO', 'TARJETA', 'BIZUM', 'TRANSFERENCIA', 'MERCADOPAGO'] as const;
 export type MetodoReembolsoManual = (typeof METODOS_REEMBOLSO_MANUAL)[number];
 
 export function esMetodoReembolsoManual(m: unknown): m is MetodoReembolsoManual {
@@ -116,7 +116,8 @@ export const referenciaReembolsoManual = (reciboId: string) => `manual:${reciboI
 export const idMovimientoReembolso = (reciboId: string) => `mov-dev-${reciboId}`;
 
 /** Lo que sale del mostrador se apunta en la caja; una transferencia no pasa por el cajón. */
-export const metodoPasaPorCaja = (m: MetodoReembolsoManual) => m !== 'TRANSFERENCIA';
+// Mercado Pago, como la transferencia, no pasa por el cajón: el dinero está en la cuenta.
+export const metodoPasaPorCaja = (m: MetodoReembolsoManual) => m !== 'TRANSFERENCIA' && m !== 'MERCADOPAGO';
 
 export async function reembolsarReciboAMano(
   admin: SupabaseClient,

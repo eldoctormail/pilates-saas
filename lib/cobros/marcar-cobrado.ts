@@ -31,7 +31,7 @@ import { facturaIdManual } from '../billing/cobro-confirmado-reglas.ts';
  * SEPA queda fuera a propósito: un adeudo lo confirma el banco, y marcarlo a mano
  * escribiría `sepa_estado = 'succeeded'` sin que nadie lo haya liquidado.
  */
-export const METODOS_COBRO_MANUAL = ['EFECTIVO', 'TARJETA', 'BIZUM', 'TRANSFERENCIA'] as const satisfies readonly MetodoCobro[];
+export const METODOS_COBRO_MANUAL = ['EFECTIVO', 'TARJETA', 'BIZUM', 'TRANSFERENCIA', 'MERCADOPAGO'] as const satisfies readonly MetodoCobro[];
 export type MetodoCobroManual = (typeof METODOS_COBRO_MANUAL)[number];
 
 /** Tope por petición: se procesan en serie y cada uno puede sellar una factura. */

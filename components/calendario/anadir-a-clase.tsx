@@ -1,5 +1,6 @@
 'use client';
 
+import { METODO_MOVIL } from '@/lib/cobros/metodo-movil';
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { Banknote, CreditCard, Gift, QrCode, Repeat, Search, Smartphone, Ticket, UserPlus } from 'lucide-react';
@@ -39,11 +40,11 @@ const QUE_HACER_CON_SU_CUOTA: Record<MotivoCuotaQueNoCubre, (nombre: string) => 
 // Cobrar lo hace la página (reserva primero y cobro por el servidor después);
 // aquí solo se elige a quién y cómo paga.
 
-export type MetodoSuelta = 'EFECTIVO' | 'TARJETA' | 'BIZUM';
+export type MetodoSuelta = 'EFECTIVO' | 'TARJETA' | 'BIZUM' | 'MERCADOPAGO';
 const METODOS: { metodo: MetodoSuelta; texto: string; Icono: typeof Banknote }[] = [
   { metodo: 'EFECTIVO', texto: 'Efectivo', Icono: Banknote },
   { metodo: 'TARJETA', texto: 'Tarjeta', Icono: CreditCard },
-  { metodo: 'BIZUM', texto: 'Bizum', Icono: Smartphone },
+  { metodo: METODO_MOVIL.metodo, texto: METODO_MOVIL.etiqueta, Icono: Smartphone },
 ];
 
 export interface ClientaElegible {

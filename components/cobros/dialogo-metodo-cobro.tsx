@@ -13,6 +13,7 @@
 // sitios preguntan lo mismo y no pueden volver a divergir.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { METODO_MOVIL } from '@/lib/cobros/metodo-movil';
 import { useState, type CSSProperties, type ReactNode } from 'react';
 import { Banknote, CreditCard, Landmark, Smartphone } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -21,7 +22,7 @@ import type { MetodoCobro } from '@/lib/types';
 const METODOS: { metodo: MetodoCobro; etiqueta: string; Icono: typeof Banknote }[] = [
   { metodo: 'EFECTIVO', etiqueta: 'Efectivo', Icono: Banknote },
   { metodo: 'TARJETA', etiqueta: 'Tarjeta', Icono: CreditCard },
-  { metodo: 'BIZUM', etiqueta: 'Bizum', Icono: Smartphone },
+  { metodo: METODO_MOVIL.metodo, etiqueta: METODO_MOVIL.etiqueta, Icono: Smartphone },
   { metodo: 'TRANSFERENCIA', etiqueta: 'Transferencia', Icono: Landmark },
 ];
 

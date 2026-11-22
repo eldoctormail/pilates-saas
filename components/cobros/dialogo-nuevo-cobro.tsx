@@ -14,6 +14,7 @@
 // El dinero no se cobra dos veces: cerrojo síncrono además del estado, y un cobro
 // que el servidor no confirmó cierra el diálogo —reenviarlo crearía otro recibo—.
 
+import { METODO_MOVIL } from '@/lib/cobros/metodo-movil';
 import { MONEDA_SIMBOLO } from '../../lib/moneda.ts';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Loader2 } from 'lucide-react';
@@ -32,7 +33,7 @@ import type { AvisosCobros } from './use-acciones-recibo';
 const METODOS: { id: MetodoCobro; texto: string }[] = [
   { id: 'EFECTIVO', texto: 'Efectivo' },
   { id: 'TARJETA', texto: 'Tarjeta' },
-  { id: 'BIZUM', texto: 'Bizum' },
+  { id: METODO_MOVIL.metodo, texto: METODO_MOVIL.etiqueta },
   { id: 'TRANSFERENCIA', texto: 'Transferencia' },
 ];
 

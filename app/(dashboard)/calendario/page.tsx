@@ -1985,7 +1985,7 @@ export default function Calendario() {
       return true;
     }
     const res = await marcarCobrado(reserva.venta.reciboId, metodo);
-    const como = metodo === 'EFECTIVO' ? 'en efectivo' : metodo === 'TARJETA' ? 'con tarjeta' : 'por Bizum';
+    const como = metodo === 'EFECTIVO' ? 'en efectivo' : metodo === 'TARJETA' ? 'con tarjeta' : metodo === 'MERCADOPAGO' ? 'por Mercado Pago' : 'por Bizum';
     // `yaEstaba`: un intento anterior la apuntó y su respuesta no llegó; lo
     // que se cobra es la clase suelta de aquel intento.
     const dondeEsta = reserva.yaEstaba ? `${nombre} ya estaba en la clase` : `${nombre} añadida a la clase`;

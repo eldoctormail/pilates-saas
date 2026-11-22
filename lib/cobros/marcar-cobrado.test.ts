@@ -64,7 +64,13 @@ test('el panel: solo «Cobrar varias» y «Cobrar todos» mandan el lote; el cob
 
 test('la lista blanca es la del diálogo «¿Cómo lo has cobrado?», ni más ni menos', () => {
   const dialogo = leer('components/cobros/dialogo-metodo-cobro.tsx');
-  const delDialogo = [...dialogo.matchAll(/metodo: '([A-Z_]+)'/g)].map(m => m[1]).sort();
+  const delDialogo = [...dialogo.matchAll(/metodo: '([A-Z_]+)'/g)].map(m => m[1]);
+  // El hueco del «pago con el móvil» lo pone la región (lib/cobros/metodo-movil.ts):
+  // Bizum en España, Mercado Pago en Argentina. Los dos los ofrece el diálogo según dónde corra.
+  if (dialogo.includes('METODO_MOVIL')) {
+    delDialogo.push(...[...leer('lib/cobros/metodo-movil.ts').matchAll(/metodo: '([A-Z_]+)'/g)].map(m => m[1]));
+  }
+  delDialogo.sort();
   assert.deepEqual([...METODOS_COBRO_MANUAL].sort(), delDialogo,
     'si el diálogo ofrece un método que la ruta rechaza, el botón dice que sí y el servidor que no');
 });

@@ -119,6 +119,8 @@ Para comprobar que funciona: cargá un recibo pendiente a una alumna de prueba y
 
 Cada compra de plan queda en `compras_mercadopago` con lo que se decidió cobrar; el webhook entrega exactamente eso. Una compra que no se paga caduca a las 24 h (y si se llevó una plaza de matrícula gratis, la devuelve).
 
+**Conciliador:** cada 30 minutos el contenedor `cron` repasa los pagos de tu cuenta de las últimas 72 h y aplica los que el webhook no haya aplicado (servidor caído, clave mal puesta, dominio sin resolver). Si eso pasa, queda un aviso en Sentry para revisar el webhook. Para forzarlo a mano: `docker compose exec cron llamar mercadopago-conciliar`.
+
 Lo que todavía no hace (próximas etapas): pagar y reservar una clase suelta en un paso, comprar sin cuenta, el widget de tu web, las tarjetas regalo y las devoluciones desde el panel. Si un pago llega a un recibo que ya estaba cobrado, no se aplica dos veces; queda anotado como `no_aplicable` y hay que devolverlo desde Mercado Pago.
 
 ## Actualizar

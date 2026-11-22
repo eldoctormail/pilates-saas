@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { pasarelaEsMercadoPago } from '@/lib/mercadopago/config';
 import { cargarDatosPublicos } from '@/lib/api-client';
 import { postPublicoWidget } from '@/lib/reservar/api-publica';
 import { apartadasPorSesion, type AforoApartado } from '@/lib/booking-logic';
@@ -306,6 +307,13 @@ export function useDatosWidget(slug: string, baseUrl: string, filtros?: FiltrosS
   // <ListaPlanes> se gatea con `socia` antes de llegar aquí.
   const crearCheckoutEmbebido = useCallback(async (plan: PlanTarifa) => {
     if (!socia?.socioId) return { ok: false as const, error: 'Inicia sesión para comprar.' };
+    // Autoalojado con Mercado Pago: su checkout devuelve la URL de Checkout Pro (`datos.url`), y
+    // `<ListaPlanes>` lleva allí la ventana entera. Con la sesión del portal, como siempre.
+    if (pasarelaEsMercadoPago()) {
+      return postPublicoWidget(`${baseUrl}/api/mercadopago/checkout`, {
+        studioId: datos.studioId, planId: plan.id,
+      }, { studioId: datos.studioId });
+    }
     return postPublicoWidget(`${baseUrl}/api/public/checkout-embebido`, {
       studioId: datos.studioId, planId: plan.id, socioId: socia.socioId, socioEmail: socia.email,
     }, { studioId: datos.studioId });

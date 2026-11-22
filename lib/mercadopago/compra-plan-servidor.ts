@@ -18,8 +18,11 @@
 // plan, apertura suave, ventana de reserva, sin precio especial, con plaza) y
 // el pago caduca cuando se cierra la reserva de la clase.
 //
-// ⚠️ Lo que NO hace todavía: comprar sin ficha (invitada), el widget de la web
-// del estudio.
+// Sin cabecera Authorization y con `invitada` es la compra SIN cuenta (desde
+// /reservar o el widget de la web): la ficha la crea la entrega con el email y el
+// nombre del formulario, con las mismas reglas que Stripe (`compra_publica_modo`
+// sin clase; con clase, siempre). Con cabecera, la identidad sale SIEMPRE del
+// token: quien entra con su sesión nunca compra como invitada.
 
 import 'server-only';
 import type { NextRequest } from 'next/server';
@@ -40,6 +43,7 @@ import { codigosYaUsadosPorSocia } from '../billing/codigos-ya-usados.ts';
 import { primeraVezConPlan, reservarMatricula, liberarCupoMatriculaUnaVez } from '../billing/matricula-online.ts';
 import { mapCodigoDescuento } from '../supabase-data.ts';
 import type { RowCodigosDescuento, RowPlanesTarifa } from '../db-types.ts';
+import { leerDatosInvitada, type DatosInvitada } from './invitada.ts';
 import { IMPORTE_MINIMO_EUR, tienePrecioEspecial } from '../reservar/opciones-de-clase.ts';
 
 import { caducidadDeCompra } from './caducidad.ts';
@@ -48,8 +52,11 @@ export { caducidadDeCompra } from './caducidad.ts';
 export type Rechazo = { status: number; error: string; codigo?: string; necesitaRegistro?: boolean; posicionEspera?: number };
 
 export interface CompraDecidida {
-  socioId: string;
+  /** null = invitada: la ficha la crea la entrega (`esInvitada`). */
+  socioId: string | null;
   email: string | null;
+  /** Compra sin cuenta: lo que escribió en el formulario. */
+  invitada: DatosInvitada | null;
   planId: string;
   planNombre: string;
   /** Lo que se cobra por el plan (con código y prorrateo), sin la matrícula. */
@@ -80,6 +87,8 @@ export interface PeticionCompra {
   /** «Pagar y reservar»: la clase y, si la sala tiene mapa, el sitio. */
   sesionId?: string | null;
   spotId?: string | null;
+  /** Compra sin cuenta: el cuerpo de la petición, para `leerDatosInvitada`. Solo cuenta sin cabecera Authorization. */
+  invitada?: Record<string, unknown> | null;
 }
 
 /** Decide la compra o la rechaza. NO reserva la plaza de matrícula (ver `reservarMatriculaDeCompra`). */
@@ -93,15 +102,37 @@ export async function decidirCompraDePlan(
   }
 
   // La identidad sale del JWT, nunca del cuerpo (mismo criterio que Stripe).
-  const usuario = await verificarUsuarioSupabase(req);
-  if (!usuario) return { ok: false, rechazo: { status: 401, error: 'Tu sesión ha caducado. Vuelve a entrar: no se te ha cobrado nada.' } };
-  const socioId = await socioAutenticado(usuario.userId, p.studioId);
-  if (!socioId) return { ok: false, rechazo: { status: 403, error: 'No autorizado' } };
+  let socioId: string | null = null;
+  let emailSesion: string | null = null;
+  let invitada: DatosInvitada | null = null;
+  // Sin sesión y sin datos con los que crear la ficha (comprar un plan en /reservar sin haber entrado):
+  // Stripe pide el email en su página; aquí se pide entrar antes.
+  if (!req.headers.get('authorization') && !p.invitada) {
+    return { ok: false, rechazo: { status: 409, error: 'Entra con tu email para comprar. No te hemos cobrado nada.', necesitaRegistro: true } };
+  }
+  if (req.headers.get('authorization')) {
+    const usuario = await verificarUsuarioSupabase(req);
+    if (!usuario) return { ok: false, rechazo: { status: 401, error: 'Tu sesión ha caducado. Vuelve a entrar: no se te ha cobrado nada.' } };
+    socioId = await socioAutenticado(usuario.userId, p.studioId);
+    if (!socioId) return { ok: false, rechazo: { status: 403, error: 'No autorizado' } };
+    emailSesion = usuario.email ?? null;
 
-  const sinPreguntas = await bloqueoPorPreguntasAlta(p.studioId, socioId, 'comprar');
-  if (sinPreguntas) {
-    const cuerpo = await sinPreguntas.json().catch(() => ({})) as { error?: string; codigo?: string };
-    return { ok: false, rechazo: { status: sinPreguntas.status, error: cuerpo.error ?? 'Antes de comprar, contesta las preguntas del estudio.', codigo: cuerpo.codigo } };
+    const sinPreguntas = await bloqueoPorPreguntasAlta(p.studioId, socioId, 'comprar');
+    if (sinPreguntas) {
+      const cuerpo = await sinPreguntas.json().catch(() => ({})) as { error?: string; codigo?: string };
+      return { ok: false, rechazo: { status: sinPreguntas.status, error: cuerpo.error ?? 'Antes de comprar, contesta las preguntas del estudio.', codigo: cuerpo.codigo } };
+    }
+  } else {
+    const leida = leerDatosInvitada(p.invitada ?? {});
+    if (!leida.ok) return { ok: false, rechazo: { status: 400, error: leida.error } };
+    invitada = leida.datos;
+    // Comprar un plan sin ficha lo decide el estudio; pagar y reservar UNA clase, siempre (como Stripe).
+    if (!p.sesionId) {
+      const { data: cfg } = await admin.from('studios').select('compra_publica_modo').eq('id', p.studioId).maybeSingle();
+      if ((cfg?.compra_publica_modo ?? 'EXIGIR_REGISTRO') === 'EXIGIR_REGISTRO') {
+        return { ok: false, rechazo: { status: 409, error: 'Regístrate antes de comprar: te pedimos el email y aceptar las condiciones.', necesitaRegistro: true } };
+      }
+    }
   }
 
   const { data: plan, error } = await admin
@@ -114,8 +145,11 @@ export async function decidirCompraDePlan(
   if (plan.studio_id !== p.studioId) return { ok: false, rechazo: { status: 403, error: 'Ese plan no pertenece a este estudio' } };
   if (!plan.activo) return { ok: false, rechazo: { status: 409, error: 'Ese plan ya no está disponible' } };
 
-  const { data: socio } = await admin.from('socios').select('email').eq('id', socioId).eq('studio_id', p.studioId).maybeSingle();
-  const email = ((socio?.email as string | null) ?? usuario.email ?? '').trim().toLowerCase() || null;
+  let email: string | null = invitada?.email ?? null;
+  if (socioId) {
+    const { data: socio } = await admin.from('socios').select('email').eq('id', socioId).eq('studio_id', p.studioId).maybeSingle();
+    email = ((socio?.email as string | null) ?? emailSesion ?? '').trim().toLowerCase() || null;
+  }
 
   const sesionId = p.sesionId || null;
   const spotId = sesionId ? (p.spotId || null) : null;
@@ -188,7 +222,7 @@ export async function decidirCompraDePlan(
     ok: true,
     matriculaCatalogo: Number(plan.matricula) || 0,
     compra: {
-      socioId, email, planId: p.planId, planNombre: plan.nombre as string,
+      socioId, email, invitada, planId: p.planId, planNombre: plan.nombre as string,
       importePlan: importe, codigoDescuentoId, codigoAplicado: codigoDescuentoId !== null, descuento,
       terminosHash: sello?.hash ?? null, cicloFin, cuotaTexto, cuotaFrase,
       sesionId, spotId, cierreClase,
@@ -203,7 +237,7 @@ export async function decidirCompraDePlan(
  */
 async function comprobarClase(
   admin: SupabaseClient,
-  p: { studioId: string; planId: string; socioId: string; email: string | null; sesionId: string; spotId: string | null },
+  p: { studioId: string; planId: string; socioId: string | null; email: string | null; sesionId: string; spotId: string | null },
 ): Promise<{ ok: true; cierre: Date } | { ok: false; rechazo: Rechazo }> {
   const no = (status: number, error: string, codigo?: string) => ({ ok: false as const, rechazo: { status, error, ...(codigo ? { codigo } : {}) } });
   const { data: sesion, error } = await admin
@@ -261,7 +295,7 @@ async function comprobarClase(
  * plaza reservada antes de una validación que falla se perdería.
  */
 export async function reservarMatriculaDeCompra(
-  admin: SupabaseClient, p: { studioId: string; planId: string; socioId: string; email: string | null; matriculaCatalogo: number },
+  admin: SupabaseClient, p: { studioId: string; planId: string; socioId: string | null; email: string | null; matriculaCatalogo: number },
 ): Promise<{ matricula: number; cupoReservado: boolean }> {
   if (!(p.matriculaCatalogo > 0)) return { matricula: 0, cupoReservado: false };
   if (!(await primeraVezConPlan(admin, p.studioId, p.socioId, p.email))) return { matricula: 0, cupoReservado: false };

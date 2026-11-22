@@ -5,6 +5,7 @@
 // igual, y como es idempotente da igual cuál llegue primero o si llegan los dos.
 //
 //   · Recibo (`tentare:rec:…`): lo da por cobrado `confirmarCobroRecibo`.
+//   · Tarjeta regalo (`tentare:regalo:…`): la crea (o la anula) `procesarRegalo`.
 //   · Compra de plan (`tentare:compra:…`): la entrega `entregarPlanComprado`
 //     y, si la compra lleva una clase, la reserva `reservarClasePagada`.
 //   Los mismos dueños que usa Stripe.
@@ -24,6 +25,8 @@ import type { PagoMercadoPago } from './api.ts';
 import { importeCoincide, leerReferencia } from './referencia.ts';
 import { procesarChargeRefunded, type Fuente } from '../billing/procesar-reembolso.ts';
 import { idsDe } from '../billing/ids-compra.ts';
+
+type DatosAdicionalesCompra = { genero?: string | null; comoConociste?: string | null; codigoPostal?: string | null; fechaNacimiento?: string | null };
 
 export type Desenlace = 'aplicado' | 'ya_estaba' | 'no_aplicable' | 'rechazado' | 'pendiente';
 export interface ResultadoProceso { status: number; cuerpo: Record<string, unknown> }
@@ -79,6 +82,11 @@ export async function procesarPago(admin: SupabaseClient, pago: PagoMercadoPago,
     return resp({ recibido: true, ignorado: 'sin-referencia-de-tentare' });
   }
   const { studioId } = ref;
+  // Tarjeta regalo: su propio libro (`regalos_mercadopago`), sus altas y sus anulaciones.
+  if (ref.tipo === 'regalo') {
+    const { procesarRegalo } = await import('./regalo.ts');
+    return procesarRegalo(admin, pago, studioId, ref.regaloId);
+  }
   const reciboId = ref.tipo === 'recibo' ? ref.reciboId : null;
   const compraId = ref.tipo === 'compra' ? ref.compraId : null;
 
@@ -165,7 +173,7 @@ export async function procesarPago(admin: SupabaseClient, pago: PagoMercadoPago,
 // ─────────────────────────────────────────────────────────────────────────────
 async function entregarCompra(admin: SupabaseClient, pago: PagoMercadoPago, studioId: string, compraId: string): Promise<ResultadoProceso> {
   const { data: compra, error } = await admin.from('compras_mercadopago')
-    .select('id, studio_id, plan_id, socio_id, email, importe_plan, matricula, moneda, codigo_descuento_id, terminos_hash, ciclo_fin, cuota_texto, estado, payment_id, creado_en, sesion_id, spot_id')
+    .select('id, studio_id, plan_id, socio_id, email, importe_plan, matricula, moneda, codigo_descuento_id, terminos_hash, ciclo_fin, cuota_texto, estado, payment_id, creado_en, sesion_id, spot_id, es_invitada, nombre, telefono, origen_lead, widget_sesion, datos_adicionales')
     .eq('id', compraId).maybeSingle();
   if (error) return resp({ error: 'Base de datos no disponible' }, { status: 503 });
   if (!compra || compra.studio_id !== studioId) {
@@ -217,17 +225,21 @@ async function entregarCompra(admin: SupabaseClient, pago: PagoMercadoPago, stud
     sessionId: compraId,
     studioId,
     planId: compra.plan_id as string,
-    socioId: compra.socio_id as string,
+    // Invitada (compra sin cuenta): sin socia, y la entrega crea su ficha con lo del formulario.
+    socioId: (compra.socio_id as string | null) ?? null,
     terminosHash: (compra.terminos_hash as string | null) ?? null,
     terminosAceptadosEn: (compra.creado_en as string | null) ?? null,
     email: (compra.email as string | null) ?? null,
-    nombre: null,
+    nombre: (compra.nombre as string | null) ?? null,
+    telefono: (compra.telefono as string | null) ?? null,
+    datosAdicionales: (compra.datos_adicionales as DatosAdicionalesCompra | null) ?? null,
+    widgetSesion: (compra.widget_sesion as string | null) ?? null,
     importeCobradoCentimos: Math.round(total * 100),
     matriculaCobradaCentimos: Math.round(matricula * 100),
     paymentIntentId: null,
-    origenLead: null,
+    origenLead: (compra.origen_lead as string | null) ?? null,
     metodoCobro: 'MERCADOPAGO',
-    esInvitada: false,
+    esInvitada: compra.es_invitada === true,
     fuente: 'webhook',
     cicloFinISO: (compra.ciclo_fin as string | null) ?? null,
     cuotaTexto: (compra.cuota_texto as string | null) ?? null,

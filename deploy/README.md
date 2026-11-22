@@ -125,7 +125,13 @@ Cada compra de plan queda en `compras_mercadopago` con lo que se decidió cobrar
 
 **Pagar y reservar una clase en un paso:** en la ficha de una clase, si la alumna no tiene bono que la cubra, «Ver opciones» le ofrece la clase suelta (y los bonos que la incluyen). Antes de mandarla a Mercado Pago se comprueba que haya plaza para ella, y el pago caduca cuando se cierra la reserva de la clase (si quedan menos de 15 minutos, no se abre). Al volver, la ficha espera lo que diga el servidor: «Reservada» solo cuando la plaza está confirmada. Si la clase se llenó mientras pagaba, el bono queda entregado, entra en la lista de espera o lo tiene a su favor, y te llega el aviso de «pagó y no hubo plaza».
 
-Lo que todavía no hace (próximas etapas): comprar sin cuenta, el widget de tu web y las tarjetas regalo. Si un pago llega a un recibo que ya estaba cobrado, no se aplica dos veces; queda anotado como `no_aplicable` y hay que devolverlo desde Mercado Pago.
+**Sin cuenta (invitada):** en `/reservar/<tu-slug>` (y desde el widget de tu web, que manda ahí a quien no ha entrado) se puede pagar y reservar una clase solo con nombre, email y teléfono. Al confirmarse el pago, Tentare crea su ficha con esos datos, le entrega la clase o el bono y le reserva la plaza. Comprar un bono suelto sin cuenta sigue el ajuste «Compra pública» del estudio, igual que con Stripe. A la vuelta, la página avisa de que el pago se está confirmando.
+
+**Widget de tu web:** con sesión iniciada, «Planes» lleva a la alumna a Mercado Pago para pagar y, a la vuelta, llega a `/reservar/<tu-slug>`. Para que el widget pueda llamar al cobro desde tu dominio, ese dominio tiene que estar en los dominios autorizados del widget (Configuración › Mi web). Si cambiaste las condiciones del estudio, el widget no tiene la casilla para aceptarlas: la alumna las acepta comprando desde la app o desde `/reservar`.
+
+**Tarjetas regalo:** se activan en Configuración, como siempre, y se compran en `/reservar/<tu-slug>/regalo`. Los importes van en pesos y sin centavos (por defecto 25.000, 50.000 y 100.000, o uno libre entre 10.000 y 300.000; se cambian en los ajustes). La tarjeta se crea y los correos salen solo cuando Mercado Pago confirma el pago. Si el pago se devuelve entero o hay un contracargo, la tarjeta se anula y se retira el saldo que le quedara (lo ya gastado no vuelve). Una devolución parcial no anula la tarjeta: queda anotada para que la revises.
+
+Sin Turnstile configurado (lo normal en un servidor propio), la compra de regalos queda protegida por el límite de peticiones y el campo trampa contra bots, sin captcha. Si un pago llega a un recibo que ya estaba cobrado, no se aplica dos veces; queda anotado como `no_aplicable` y hay que devolverlo desde Mercado Pago.
 
 ## Actualizar
 

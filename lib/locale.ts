@@ -12,3 +12,6 @@
 export const LOCALE: string =
   (typeof process !== 'undefined' ? process.env.NEXT_PUBLIC_LOCALE?.trim() : undefined) ||
   'es-AR-u-hc-h23';
+
+/** Un teléfono de ejemplo para los `placeholder`, con el formato del país. */
+export const TELEFONO_EJEMPLO: string = /^es-AR\b/i.test(LOCALE) ? '+54 9 299 412 3456' : '+34 600 000 000';

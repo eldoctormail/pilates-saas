@@ -1,5 +1,6 @@
 'use client';
 
+import { TELEFONO_EJEMPLO } from '@/lib/locale';
 import { LOCALE } from '../../../lib/locale.ts';
 import { MONEDA_SIMBOLO, MONEDA, LOCALE_MONEDA } from '../../../lib/moneda.ts';
 import { AyudaDelPaso } from '@/components/guia/ayuda-del-paso';
@@ -861,7 +862,7 @@ export default function EquipoPage() {
               </div>
               <div>
                 <label htmlFor={`${uid}-3`} className={labelCls}>Teléfono</label>
-                <input id={`${uid}-3`} className={inputCls} value={form.telefono} placeholder="+34 600 000 000" onChange={e => setForm(f => ({ ...f, telefono: e.target.value }))} />
+                <input id={`${uid}-3`} className={inputCls} value={form.telefono} placeholder={TELEFONO_EJEMPLO} onChange={e => setForm(f => ({ ...f, telefono: e.target.value }))} />
               </div>
             </div>
             <div>

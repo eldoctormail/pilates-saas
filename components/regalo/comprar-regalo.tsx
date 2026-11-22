@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { AlertCircle, ArrowLeft, Check, Clock, Gift, Loader2, Lock, MailCheck } from 'lucide-react';
 import { useCaptcha, ERROR_CAPTCHA } from '@/components/auth/turnstile-widget';
 import { CAMPO_TRAMPA } from '@/lib/auth/trampa-bots';
+import { pasarelaEsMercadoPago } from '@/lib/mercadopago/config';
 import { EMAIL_VALIDO, MAX_MENSAJE, formatearEuros } from '@/lib/regalo/reglas';
 import { ESCRITURA_EN_VISTA_PREVIA, enVistaPreviaDelPanel } from '@/lib/reservar/vista-previa-sin-escrituras';
 
@@ -140,14 +141,17 @@ export function ComprarRegalo({ slug }: { slug: string }) {
   useEffect(() => {
     const p = new URLSearchParams(window.location.search);
     const sesion = p.get('session_id');
-    if (p.get('gracias') !== '1' || !sesion) return;
+    // Mercado Pago (autoalojado) vuelve con `mp=<regalo>` en vez de la sesión de Stripe.
+    const mp = p.get('mp');
+    if (p.get('gracias') !== '1' || (!sesion && !mp)) return;
+    const pago = mp ? `mp=${encodeURIComponent(mp)}` : `session_id=${encodeURIComponent(sesion ?? '')}`;
     let vivo = true;
     // eslint-disable-next-line react-hooks/set-state-in-effect -- arranca la comprobación de la vuelta de Stripe
     setVuelta({ estado: 'comprobando' });
     (async () => {
       for (let i = 0; i < 6 && vivo; i++) {
         try {
-          const r = await fetch(`/api/public/regalo/estado?slug=${encodeURIComponent(slug)}&session_id=${encodeURIComponent(sesion)}`);
+          const r = await fetch(`/api/public/regalo/estado?slug=${encodeURIComponent(slug)}&${pago}`);
           const j = (await r.json().catch(() => ({}))) as { estado?: 'pagado' | 'pendiente' | 'revisar'; destinatarioNombre?: string | null };
           if (r.ok && j.estado === 'pagado') { if (vivo) setVuelta({ estado: 'pagado', para: j.destinatarioNombre }); return; }
           if (r.ok && j.estado === 'revisar') { if (vivo) setVuelta({ estado: 'revisar' }); return; }
@@ -389,7 +393,7 @@ export function ComprarRegalo({ slug }: { slug: string }) {
               ? <><Loader2 size={18} className="rg-giro" aria-hidden />Un momento…</>
               : <><Lock size={17} aria-hidden />{`Pagar ${montoValido ? formatearEuros(importeFinal!) : ''}`}</>}
           </button>
-          <p className="rg-seguro"><MailCheck size={14} aria-hidden />Pagas en la página segura de Stripe. No necesitas cuenta.</p>
+          <p className="rg-seguro"><MailCheck size={14} aria-hidden />Pagas en la página segura de {pasarelaEsMercadoPago() ? 'Mercado Pago' : 'Stripe'}. No necesitas cuenta.</p>
         </div>
         <p className="rg-legal">
           {info.terminos ?? 'El saldo no se canjea por dinero. Tras la fecha de caducidad la tarjeta deja de poder usarse.'}

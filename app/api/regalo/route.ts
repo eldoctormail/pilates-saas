@@ -7,7 +7,7 @@ import { errorInterno } from '@/lib/errores-servidor';
 import { enforceRateLimit } from '@/lib/rate-limit';
 import {
   AJUSTES_POR_DEFECTO, MENSAJE_MOTIVO_REGALO, pareceCodigo, validarDatosRegalo, validarImporte,
-  type AjustesRegalo,
+  type AjustesRegalo, TOPE_IMPORTE_REGALO,
 } from '@/lib/regalo/reglas';
 import { huellaCodigo } from '@/lib/regalo/huella';
 import { crearTarjeta, guardarAjustes, leerAjustes, listarTarjetas, pasivoVivo } from '@/lib/regalo/servidor';
@@ -46,10 +46,10 @@ export async function PUT(req: NextRequest) {
   if (sesion.rol !== 'PROPIETARIO') return NextResponse.json({ error: 'Solo la propietaria cambia la tarjeta regalo' }, { status: 403 });
   const b = (await req.json().catch(() => null)) as Record<string, unknown> | null;
   if (!b) return NextResponse.json({ error: 'Petición no válida' }, { status: 400 });
-  const importes = enteros(b.importesEur, 6, 2000);
+  const importes = enteros(b.importesEur, 6, TOPE_IMPORTE_REGALO);
   const min = Number(b.importeMinEur); const max = Number(b.importeMaxEur); const meses = Number(b.caducidadMeses);
-  if (!importes || !Number.isInteger(min) || !Number.isInteger(max) || min < 1 || max > 2000 || min > max) {
-    return NextResponse.json({ error: 'Revisa los importes: enteros en euros y el mínimo no puede superar al máximo.' }, { status: 400 });
+  if (!importes || !Number.isInteger(min) || !Number.isInteger(max) || min < 1 || max > TOPE_IMPORTE_REGALO || min > max) {
+    return NextResponse.json({ error: 'Revisa los importes: enteros y el mínimo no puede superar al máximo.' }, { status: 400 });
   }
   if (!Number.isInteger(meses) || meses < 1 || meses > 60) return NextResponse.json({ error: 'La caducidad va de 1 a 60 meses.' }, { status: 400 });
   const terminos = typeof b.terminos === 'string' && b.terminos.trim() ? b.terminos.trim().slice(0, 4000) : null;

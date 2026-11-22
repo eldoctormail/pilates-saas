@@ -31,6 +31,7 @@ import { urlsDeRetorno } from '@/lib/billing/origen-pago';
 import { verificarUsuarioSupabase } from '@/lib/auth-server';
 import { socioAutenticado } from '@/lib/db/supabase-data-admin';
 import { appUrl } from '@/lib/app-url';
+import { conCorsWidget, respuestaPreflightWidget } from '@/lib/cors-widget';
 import { MONEDA } from '@/lib/moneda';
 import { configMercadoPago } from '@/lib/mercadopago/config';
 import { crearPreferencia } from '@/lib/mercadopago/api';
@@ -39,10 +40,19 @@ import { barrerComprasCaducadas, caducidadDeCompra, decidirCompraDePlan, reserva
 import { liberarCupoMatriculaUnaVez } from '@/lib/billing/matricula-online';
 import type { SupabaseClient } from '@supabase/supabase-js';
 
+// El widget de la web del estudio llama desde OTRO origen: mismas cabeceras CORS que
+// `/api/stripe/checkout` (solo para los dominios que el estudio autorizó).
+export async function OPTIONS(req: NextRequest) {
+  return respuestaPreflightWidget(req);
+}
+
 export async function POST(req: NextRequest) {
   const limitado = await enforceRateLimit(req, 'mercadopago-checkout', { max: 10, windowSeconds: 60 });
   if (limitado) return limitado;
+  return conCorsWidget(req, await iniciarPago(req));
+}
 
+async function iniciarPago(req: NextRequest): Promise<NextResponse> {
   const config = configMercadoPago();
   if (!config.ok) {
     console.error('[mercadopago/checkout]', config.motivo);
@@ -54,7 +64,7 @@ export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => null) as {
     studioId?: unknown; reciboId?: unknown; planId?: unknown; origen?: unknown; codigoDescuento?: unknown; aceptaCondiciones?: unknown;
     sesionId?: unknown; spotId?: unknown;
-  } | null;
+  } & Record<string, unknown> | null;
   const studioId = typeof body?.studioId === 'string' ? body.studioId : '';
   const reciboId = typeof body?.reciboId === 'string' ? body.reciboId : '';
   const planId = typeof body?.planId === 'string' ? body.planId : '';
@@ -71,6 +81,9 @@ export async function POST(req: NextRequest) {
       aceptaCondiciones: body?.aceptaCondiciones === true,
       sesionId: typeof body?.sesionId === 'string' && body.sesionId ? body.sesionId.slice(0, 128) : null,
       spotId: typeof body?.spotId === 'string' && body.spotId ? body.spotId.slice(0, 128) : null,
+      origen,
+      // Sin sesión y con email: compra sin cuenta (invitada). Lo valida `decidirCompraDePlan`.
+      invitada: !req.headers.get('authorization') && typeof body?.socioEmail === 'string' ? body : null,
     });
   }
 
@@ -165,7 +178,10 @@ async function checkoutPlan(
   req: NextRequest,
   admin: SupabaseClient,
   accessToken: string,
-  p: { studioId: string; planId: string; codigoDescuento: string | null; aceptaCondiciones: boolean; sesionId: string | null; spotId: string | null },
+  p: {
+    studioId: string; planId: string; codigoDescuento: string | null; aceptaCondiciones: boolean; sesionId: string | null; spotId: string | null;
+    origen: 'portal' | undefined; invitada: Record<string, unknown> | null;
+  },
 ) {
   await barrerComprasCaducadas(admin, p.studioId);
 
@@ -178,9 +194,11 @@ async function checkoutPlan(
 
   // ¿Ya hay una compra abierta igual, con margen de tiempo? Se reutiliza.
   const margen = new Date(Date.now() + 30 * 60 * 1000).toISOString();
-  const { data: abierta } = await admin.from('compras_mercadopago')
+  // De quién: la socia, o (invitada) el email con el que compra, sin ficha.
+  const deQuien = admin.from('compras_mercadopago')
     .select('id, importe_plan, matricula, url_pago, codigo_descuento_id, sesion_id, spot_id, expira_en')
-    .eq('studio_id', p.studioId).eq('socio_id', c.socioId).eq('plan_id', p.planId).eq('estado', 'abierta')
+    .eq('studio_id', p.studioId).eq('plan_id', p.planId).eq('estado', 'abierta');
+  const { data: abierta } = await (c.socioId ? deQuien.eq('socio_id', c.socioId) : deQuien.is('socio_id', null).eq('email', c.email ?? ''))
     .gt('expira_en', margen).order('creado_en', { ascending: false }).limit(1).maybeSingle();
   // Misma clase y mismo sitio también: un pago abierto para OTRA clase no reserva esta.
   if (abierta?.url_pago && Number(abierta.importe_plan) === c.importePlan
@@ -210,6 +228,10 @@ async function checkoutPlan(
     terminos_hash: c.terminosHash, ciclo_fin: c.cicloFin, cuota_texto: c.cuotaTexto,
     cupo_matricula_reservado: cupoReservado, expira_en: expira.toISOString(),
     sesion_id: c.sesionId, spot_id: c.spotId,
+    ...(c.invitada ? {
+      es_invitada: true, nombre: c.invitada.nombre, telefono: c.invitada.telefono, origen_lead: c.invitada.origenLead,
+      widget_sesion: c.invitada.widgetSesion, datos_adicionales: c.invitada.datosAdicionales,
+    } : {}),
   });
   if (errAlta) {
     if (cupoReservado) await devolverPlaza(admin, compraId, p.planId, p.studioId);
@@ -219,9 +241,11 @@ async function checkoutPlan(
   const { data: studio } = await admin.from('studios').select('slug, nombre').eq('id', p.studioId).maybeSingle();
   const base = appUrl().replace(/\/+$/, '');
   const slug = (studio?.slug as string | null) ?? null;
-  const urls = c.sesionId && slug
+  // Desde la app con una clase: a la ficha de la clase. Desde la app sin clase: a sus bonos.
+  // Desde /reservar o el widget (con o sin cuenta): a /reservar, que avisa «en unos segundos».
+  const urls = p.origen === 'portal' && c.sesionId && slug
     ? urlsDeClase(base, slug, c.sesionId, compraId)
-    : urlsDeRetorno({ origen: 'portal', appUrl: base, slug, esCompraDePlan: true, planId: p.planId });
+    : urlsDeRetorno({ origen: p.origen, appUrl: base, slug, esCompraDePlan: true, planId: p.planId });
   const items = [{ id: p.planId, title: c.planNombre.slice(0, 250), quantity: 1, unit_price: c.importePlan, currency_id: MONEDA }];
   if (matricula > 0) items.push({ id: `${p.planId}-matricula`, title: 'Matrícula', quantity: 1, unit_price: matricula, currency_id: MONEDA });
 

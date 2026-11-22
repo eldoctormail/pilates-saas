@@ -6,6 +6,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { hoyEnEstudio } from './utils.ts';
+import { LOCALE } from './locale.ts';
 
 export interface ParsedCsv {
   headers: string[];
@@ -292,7 +293,13 @@ export function emailValido(email: string): boolean {
  * obligatorio: un valor que no encaja aquí NO invalida la fila (ver
  * `validarFilas`), solo genera un aviso no bloqueante para que se revise.
  */
-export function telefonoValido(telefono: string): boolean {
+export function telefonoValido(telefono: string, locale: string = LOCALE): boolean {
+  // Argentina (autoalojado): 10 cifras con el código de área, y se aceptan las
+  // formas de siempre: +54 9 299 412-3456, 0299 15 412-3456, 2994123456.
+  if (/^es-AR\b/i.test(locale)) {
+    const d = telefono.trim().replace(/[\s\-().]/g, '').replace(/^\+/, '');
+    return /^\d{10,13}$/.test(d);
+  }
   let s = telefono.trim().replace(/[\s\-().]/g, '').replace(/^\+/, '');
   if (s.startsWith('0034')) s = s.slice(4);
   else if (s.startsWith('34') && s.length === 11) s = s.slice(2);

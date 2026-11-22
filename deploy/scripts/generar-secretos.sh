@@ -12,6 +12,10 @@ poner() {
   if grep -qE "^${clave}=$" .env; then
     sed -i "s|^${clave}=$|${clave}=${valor}|" .env
     echo "  ${clave}: generado"
+  elif ! grep -qE "^${clave}=" .env; then
+    # Una variable nueva de una versión posterior: se agrega al final.
+    printf '%s=%s\n' "$clave" "$valor" >> .env
+    echo "  ${clave}: agregado"
   fi
 }
 
@@ -25,6 +29,7 @@ poner HOME_PREVIEW_TOKEN_SECRET "$(hex)"
 poner SUSTITUCION_TOKEN_SECRET "$(hex)"
 poner INNGEST_EVENT_KEY "$(hex 16)"
 poner INNGEST_SIGNING_KEY "$(hex)"
+poner INTEGRACIONES_CLAVE_CIFRADO "$(openssl rand -base64 32)"
 
 if grep -qE "^NEXT_PUBLIC_VAPID_PUBLIC_KEY=$" .env; then
   echo "Claves VAPID (push):"

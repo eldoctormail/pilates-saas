@@ -22,6 +22,8 @@ const ICONO: Record<IdAccionRecibo, LucideIcon> = {
   LO_CIERRA_STRIPE: Landmark,
   VER_FACTURA: FileText,
   HACERLE_FACTURA: FileText,
+  FACTURA_ARCA: FileText,
+  VER_FACTURA_ARCA: FileText,
   LE_HE_DEVUELTO_EL_DINERO: RotateCcw,
   DEVOLVER_DESDE_SU_FICHA: UserRound,
   ELIMINAR: Trash2,

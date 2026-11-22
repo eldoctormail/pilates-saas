@@ -17,6 +17,8 @@ import { cuandoSera } from '@/lib/clientas/textos';
 import { hoyEnEstudio } from '@/lib/utils';
 import { emiteFacturas } from '@/lib/factura-automatica';
 import { FUNCIONES_DE_ESPANA } from '@/lib/locale';
+import { useArca } from '@/components/arca/use-arca';
+import { letraDeTipo, numeroCompleto } from '@/lib/arca/reglas';
 
 const DIAS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
 
@@ -51,6 +53,7 @@ export function cuandoEnPalabras(instante: Date, hoy: string): string {
 
 export function useDatosCobros(): DatosCobros {
   const { studio, socios, facturas, suscripciones, mandatosSepa, estadoMandatosSepa, datosIncompletos } = useStudio();
+  const arca = useArca();
 
   return useMemo(() => {
     const ahora = new Date();
@@ -97,6 +100,15 @@ export function useDatosCobros(): DatosCobros {
       const x = reintentoDe(r);
       return x?.tipo === 'SE_COBRA_SOLO' ? cuandoEnPalabras(x.cuando, hoy) : null;
     };
+    // Factura de ARCA (Argentina): solo si el estudio la tiene lista.
+    const arcaDe = (reciboId: string) => {
+      if (!arca.activa) return null;
+      const c = arca.porRecibo.get(reciboId);
+      if (!c) return { factura: null, pendiente: false };
+      return c.estado === 'EMITIDO'
+        ? { factura: `${letraDeTipo(c.tipoCbte) ?? ''} ${numeroCompleto(c.puntoVenta, c.numero)}`, pendiente: false }
+        : { factura: null, pendiente: true };
+    };
     const accionesDe = (r: Recibo) => {
       const medio = r.socioId ? medioDe(r.socioId) : null;
       const f = facturaPorRecibo.get(r.id);
@@ -108,6 +120,7 @@ export function useDatosCobros(): DatosCobros {
         cobroSinElla: medio?.estado === 'LISTO' && medio.online ? { boton: medio.online.boton } : null,
         cuota: r.suscripcionId ? (cuotaPorId.get(r.suscripcionId) ?? null) : null,
         seCobraSoloEl: seCobraSoloEl(r),
+        arca: arcaDe(r.id),
       });
     };
     return {
@@ -124,5 +137,5 @@ export function useDatosCobros(): DatosCobros {
       algunMandato: (id: string | null) => !!id && alguno.has(id),
       medioDe, reintentoDe, seCobraSoloEl, accionesDe,
     };
-  }, [studio, socios, facturas, suscripciones, mandatosSepa, estadoMandatosSepa, datosIncompletos]);
+  }, [studio, socios, facturas, suscripciones, mandatosSepa, estadoMandatosSepa, datosIncompletos, arca]);
 }

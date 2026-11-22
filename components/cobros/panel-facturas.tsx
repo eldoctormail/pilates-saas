@@ -289,7 +289,7 @@ function EstadoAeat({ estado, csv }: { estado?: string | null; csv?: string | nu
       )}
       {emite && !FUNCIONES_DE_ESPANA && (
         <p className="max-w-[760px] text-[12.5px] text-muted-foreground text-pretty">
-          Son comprobantes internos, rotulados «Documento no válido como factura». La factura legal la hacés en ARCA.
+          Son comprobantes internos, rotulados «Documento no válido como factura». La factura legal de ARCA se emite desde cada recibo cobrado («Emitir factura de ARCA»).
         </p>
       )}
       {studio && emite && !conVerifactu && FUNCIONES_DE_ESPANA && (

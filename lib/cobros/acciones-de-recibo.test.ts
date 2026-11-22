@@ -95,3 +95,20 @@ test('«Cambiar el importe»: solo en un recibo PENDIENTE sin pago abierto ni in
   // Lo cobrado no se edita: se devuelve y se vuelve a cobrar.
   assert.ok(!ids(accionesDeRecibo(r({ estado: 'COBRADO', metodoCobro: 'EFECTIVO', fechaCobro: '2026-11-13' }), CTX)).includes('CAMBIAR_IMPORTE'));
 });
+
+test('ARCA: emitir de lo cobrado del todo, completar si quedó pendiente, ver la emitida; el interno ya no se ofrece', () => {
+  const cobrado = r({ estado: 'COBRADO', metodoCobro: 'EFECTIVO', fechaCobro: '2026-11-20' });
+  const conArca = { ...CTX, estudioFactura: true, arca: { factura: null, pendiente: false } };
+  const a = accionesDeRecibo(cobrado, conArca);
+  assert.ok(ids(a).includes('FACTURA_ARCA'));
+  assert.ok(!ids(a).includes('HACERLE_FACTURA'));
+  assert.equal(accionesDeRecibo(cobrado, { ...conArca, arca: { factura: null, pendiente: true } }).find(x => x.id === 'FACTURA_ARCA')?.texto, 'Completar la factura de ARCA');
+  const vista = accionesDeRecibo(cobrado, { ...conArca, arca: { factura: 'C 00003-00000042', pendiente: false } });
+  assert.deepEqual(vista.filter(x => x.id.includes('ARCA')).map(x => [x.id, x.texto]), [['VER_FACTURA_ARCA', 'Ver factura C 00003-00000042']]);
+  // Con una devolución no se factura (pide nota de crédito).
+  assert.ok(!ids(accionesDeRecibo(r({ estado: 'COBRADO', importeDevuelto: 10 }), conArca)).includes('FACTURA_ARCA'));
+  // Lo que no está cobrado, tampoco.
+  assert.ok(!ids(accionesDeRecibo(r(), conArca)).includes('FACTURA_ARCA'));
+  // Sin ARCA, todo como antes.
+  assert.ok(ids(accionesDeRecibo(cobrado, { ...CTX, estudioFactura: true })).includes('HACERLE_FACTURA'));
+});

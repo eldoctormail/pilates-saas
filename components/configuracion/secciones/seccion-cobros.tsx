@@ -9,6 +9,7 @@ import {
 } from '@/lib/configuracion/resumenes';
 import { FILAS_A_OTRA_PANTALLA, seccionPorId, tarjetaPorId, type TarjetaId } from '@/lib/configuracion/secciones';
 import { FormDatosFiscales } from '@/components/configuracion/tab-datos-fiscales';
+import { FormFacturaElectronica } from '@/components/configuracion/tab-arca';
 import { FormAlCancelarCuota, FormCobroDia1, FormCongelacion, FormDevoluciones, FormDomiciliaciones, FormFacturacion } from '@/components/configuracion/tab-estudio-cobros';
 import { CajonAjuste, useCajonAbierto } from '@/components/configuracion/shell/cajon-ajuste';
 import { FilaAjuste, FilaExterna, FilaOtraSeccion, GrupoFilas } from '@/components/configuracion/shell/fila-ajuste';
@@ -27,8 +28,8 @@ import { FilaHerramienta } from '@/components/configuracion/shell/fila-herramien
 // datáfono se conectan en Integraciones (16-oct-2026): aquí queda una fila que
 // lleva allí, y sus enlaces de siempre (`#integracion-stripe`) también.
 
-type CajonId = Extract<TarjetaId, 'facturacion' | 'datos-fiscales' | 'cuando-se-cobra-la-cuota' | 'domiciliaciones' | 'devoluciones' | 'si-se-cancela-una-cuota' | 'congelar-una-cuota'>;
-const CAJONES = ['facturacion', 'datos-fiscales', 'cuando-se-cobra-la-cuota', 'domiciliaciones', 'devoluciones', 'si-se-cancela-una-cuota', 'congelar-una-cuota'] as const satisfies readonly CajonId[];
+type CajonId = Extract<TarjetaId, 'facturacion' | 'factura-electronica' | 'datos-fiscales' | 'cuando-se-cobra-la-cuota' | 'domiciliaciones' | 'devoluciones' | 'si-se-cancela-una-cuota' | 'congelar-una-cuota'>;
+const CAJONES = ['facturacion', 'factura-electronica', 'datos-fiscales', 'cuando-se-cobra-la-cuota', 'domiciliaciones', 'devoluciones', 'si-se-cancela-una-cuota', 'congelar-una-cuota'] as const satisfies readonly CajonId[];
 
 type FilaDeCobros = Extract<(typeof FILAS_A_OTRA_PANTALLA)[number], { seccion: 'cobros' }>;
 const esDeCobros = (f: (typeof FILAS_A_OTRA_PANTALLA)[number]): f is FilaDeCobros => f.seccion === 'cobros';
@@ -55,6 +56,10 @@ export function SeccionCobros({ showToast }: { showToast: (m: string) => void })
     <>
       <GrupoFilas titulo="Tus facturas">
         <FilaAjuste id="facturacion" icono={FileText} valor={cargado ? resumenFacturacion(cargado) : null} onAbrir={abrir} />
+        {/* Factura electrónica de ARCA: solo Argentina (lib/locale.ts). */}
+        {!FUNCIONES_DE_ESPANA && (
+          <FilaAjuste id="factura-electronica" icono={FileText} valor={null} onAbrir={abrir} />
+        )}
         <FilaAjuste id="datos-fiscales" icono={Receipt} valor={fiscales?.valor ?? null} estado={fiscales?.estado} onAbrir={abrir} />
       </GrupoFilas>
 
@@ -100,6 +105,9 @@ export function SeccionCobros({ showToast }: { showToast: (m: string) => void })
 
       <CajonAjuste id="facturacion" abierto={cajon === 'facturacion'} onCerrar={cerrar}>
         <FormFacturacion {...props} />
+      </CajonAjuste>
+      <CajonAjuste id="factura-electronica" abierto={cajon === 'factura-electronica'} onCerrar={cerrar}>
+        <FormFacturaElectronica {...props} />
       </CajonAjuste>
       <CajonAjuste id="datos-fiscales" abierto={cajon === 'datos-fiscales'} onCerrar={cerrar}>
         <FormDatosFiscales {...props} />

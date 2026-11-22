@@ -28,7 +28,8 @@ import { puedeCambiarImporte } from './cambiar-importe-reglas.ts';
 export type IdAccionRecibo =
   | 'COBRAR' | 'COBRAR_SIN_ELLA' | 'EL_BANCO_LO_DEVOLVIO' | 'REINTENTAR_POR_EL_BANCO'
   | 'EL_BANCO_LO_HA_COBRADO' | 'NO_LLEGO_AL_BANCO' | 'LO_CIERRA_STRIPE'
-  | 'VER_FACTURA' | 'HACERLE_FACTURA' | 'LE_HE_DEVUELTO_EL_DINERO' | 'DEVOLVER_DESDE_SU_FICHA' | 'ELIMINAR' | 'CAMBIAR_IMPORTE';
+  | 'VER_FACTURA' | 'HACERLE_FACTURA' | 'LE_HE_DEVUELTO_EL_DINERO' | 'DEVOLVER_DESDE_SU_FICHA' | 'ELIMINAR' | 'CAMBIAR_IMPORTE'
+  | 'FACTURA_ARCA' | 'VER_FACTURA_ARCA';
 
 export interface AccionDeRecibo {
   id: IdAccionRecibo;
@@ -70,6 +71,12 @@ export interface ContextoDeAcciones {
   cuota: { estado: string } | null;
   /** Si el cobro automático ya lo va a cobrar: cuándo («el martes 6 oct»). */
   seCobraSoloEl: string | null;
+  /**
+   * Factura electrónica de ARCA (Argentina), si el estudio la tiene configurada.
+   * `factura`: la que ya tiene el recibo («C 00003-00000042»), o null.
+   * `pendiente`: se pidió y ARCA no contestó; emitir de nuevo la completa.
+   */
+  arca?: { factura: string | null; pendiente: boolean } | null;
 }
 
 export function accionesDeRecibo(r: ReciboParaAcciones, ctx: ContextoDeAcciones): AccionDeRecibo[] {
@@ -131,7 +138,16 @@ export function accionesDeRecibo(r: ReciboParaAcciones, ctx: ContextoDeAcciones)
   }
 
   if (s === 'COBRADO' || s === 'REEMBOLSADO') {
-    if (ctx.factura) acciones.push({ id: 'VER_FACTURA', texto: `Ver factura ${ctx.factura.numero}` });
+    if (ctx.arca) {
+      // ARCA: la factura legal. Solo de lo cobrado del todo (una devolución pide nota de crédito).
+      if (ctx.arca.factura) acciones.push({ id: 'VER_FACTURA_ARCA', texto: `Ver factura ${ctx.arca.factura}` });
+      else if (s === 'COBRADO' && !(Number(r.importeDevuelto ?? 0) > 0)) {
+        acciones.push(ctx.arca.pendiente
+          ? { id: 'FACTURA_ARCA', texto: 'Completar la factura de ARCA', nota: 'Se pidió y ARCA no contestó: se completa sin duplicarla' }
+          : { id: 'FACTURA_ARCA', texto: 'Emitir factura de ARCA', nota: 'Con CAE' });
+      }
+      if (ctx.factura) acciones.push({ id: 'VER_FACTURA', texto: `Ver comprobante interno ${ctx.factura.numero}` });
+    } else if (ctx.factura) acciones.push({ id: 'VER_FACTURA', texto: `Ver factura ${ctx.factura.numero}` });
     else if (ctx.estudioFactura && s === 'COBRADO') acciones.push({ id: 'HACERLE_FACTURA', texto: 'Hacerle factura', nota: 'Con número fiscal' });
     if (dev.reembolsoAMano) acciones.push({ id: 'LE_HE_DEVUELTO_EL_DINERO', texto: 'Le he devuelto el dinero', nota: 'Ya no lo debe' });
     if (dev.bancoLoDevolvio) acciones.push({ id: 'EL_BANCO_LO_DEVOLVIO', texto: 'El banco lo devolvió', peligro: true, nota: 'Vuelve a deberlo' });

@@ -163,7 +163,8 @@ export const SECCIONES = [
     frase: 'Cómo te pagan tus clientes y qué sale en tus facturas.',
     roles: SOLO_PROPIETARIA,
     tarjetas: [
-      { id: 'facturacion', titulo: 'Facturación', frase: FUNCIONES_DE_ESPANA ? 'Si Tentare emite una factura en cada cobro, con su registro para Veri*Factu, o si tus facturas las haces fuera.' : 'Si Tentare genera un comprobante interno en cada cobro. La factura legal se hace en ARCA.', guardado: 'barra', palabras: ['verifactu', 'aeat', 'justificante', 'gestoría', 'factura'] },
+      { id: 'facturacion', titulo: 'Facturación', frase: FUNCIONES_DE_ESPANA ? 'Si Tentare emite una factura en cada cobro, con su registro para Veri*Factu, o si tus facturas las haces fuera.' : 'Si Tentare genera un comprobante interno en cada cobro. La factura legal de ARCA va en su propia fila.', guardado: 'barra', palabras: ['verifactu', 'aeat', 'justificante', 'gestoría', 'factura'] },
+      { id: 'factura-electronica', titulo: 'Factura electrónica de ARCA', frase: 'Tu CUIT, punto de venta y certificado para emitir facturas con CAE desde cada recibo cobrado.', guardado: 'accion', palabras: ['arca', 'afip', 'cae', 'factura c', 'factura b', 'monotributo', 'certificado'] },
       { id: 'datos-fiscales', titulo: 'Datos fiscales e IVA', frase: FUNCIONES_DE_ESPANA ? 'Razón social, NIF e IVA de tus facturas. Cambiar el IVA solo afecta a las facturas nuevas.' : 'Razón social, CUIT e IVA de tus comprobantes. Cambiar el IVA solo afecta a los nuevos.', guardado: 'barra', palabras: ['nif', 'cif', 'cuit', 'razón social', 'facturas', 'impuestos'] },
       { id: 'cuando-se-cobra-la-cuota', titulo: 'Cuándo se cobra la cuota mensual', frase: 'Cada cliente en su aniversario, o todas el día 1 de cada mes.', guardado: 'barra', palabras: ['día 1', 'fecha de cobro', 'aniversario', 'mensual'] },
       { id: 'domiciliaciones', titulo: 'Domiciliaciones bancarias', frase: 'Los datos que pide tu banco para cobrar recibos domiciliados. Con ellos generas la remesa en Cobros.', guardado: 'barra', palabras: ['sepa', 'banco', 'remesa', 'recibos'] },
@@ -512,6 +513,13 @@ export function esTarjetaId(v: string): v is TarjetaId {
 
 /** Tarjetas que solo sirven en España: con el formato de Argentina no se ven ni se buscan. */
 const TARJETAS_SOLO_ESPANA: ReadonlySet<string> = new Set(['domiciliaciones']);
+/** Y al revés: lo que solo sirve en Argentina. */
+const TARJETAS_SOLO_ARGENTINA: ReadonlySet<string> = new Set(['factura-electronica']);
+
+/** ¿La tarjeta es de otro país que el del formato regional? (no la ve nadie acá) */
+export function tarjetaDeOtroPais(id: string): boolean {
+  return FUNCIONES_DE_ESPANA ? TARJETAS_SOLO_ARGENTINA.has(id) : TARJETAS_SOLO_ESPANA.has(id);
+}
 
 /** Quién ve la tarjeta: la propietaria siempre; el resto, si la tarjeta lo dice. */
 export function rolesDeTarjeta(t: TarjetaConfiguracion): readonly RolConfiguracion[] {
@@ -520,7 +528,7 @@ export function rolesDeTarjeta(t: TarjetaConfiguracion): readonly RolConfiguraci
 
 /** ¿Este rol ve (y puede tocar) esa tarjeta? */
 export function tarjetaVisible(id: TarjetaId, rol: RolConfiguracion | string): boolean {
-  if (!FUNCIONES_DE_ESPANA && TARJETAS_SOLO_ESPANA.has(id)) return false;
+  if (tarjetaDeOtroPais(id)) return false;
   return (rolesDeTarjeta(TARJETA_POR_ID.get(id)!.tarjeta) as readonly string[]).includes(rol);
 }
 

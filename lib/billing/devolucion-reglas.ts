@@ -32,7 +32,7 @@ export const PREFIJO_RECIBO_DE_VENTA_DE_CAJA = 'rec-pos-';
  */
 export function cobroEntroPorStripe(r: { stripe_payment_intent_id?: unknown; metodo_cobro?: unknown; sepa_estado?: unknown }): boolean {
   if (!r.stripe_payment_intent_id) return false;
-  if (r.metodo_cobro === 'EFECTIVO' || r.metodo_cobro === 'TRANSFERENCIA') return false;
+  if (r.metodo_cobro === 'EFECTIVO' || r.metodo_cobro === 'TRANSFERENCIA' || r.metodo_cobro === 'MERCADOPAGO') return false;
   return r.sepa_estado !== 'failed';
 }
 

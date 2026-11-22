@@ -88,6 +88,11 @@ export interface ConteosEstudio {
   /** Clases que una instructora dijo no dar y nadie ha revisado todavía. */
   clasesNoDadasPorRevisar?: number | null;
   /**
+   * Argentina (Disp. 954/2025): pedidos del Botón de arrepentimiento o de baja sin atender. Tienen
+   * plazo de ley: el de arrepentimiento, 10 días corridos desde la compra.
+   */
+  pedidosConsumidor?: number | null;
+  /**
    * Falta el NIF del estudio: sin él no sale ninguna factura (factura siempre,
    * 2-oct-2026). Cobros que se quedaron sin la suya por eso; 1 si aún no hay
    * ninguno (el NIF falta igual). Solo la propietaria, que es quien lo pone.
@@ -199,6 +204,8 @@ const LINEAS: DefLinea[] = [
     uno: 'Tu apertura tiene un aviso', varios: n => `Tu apertura tiene ${n} avisos` },
   // Una alumna espera que alguien mire lo que denunció, y el plazo es de horas:
   // si nadie lo revisa en 24 h, lo revisa Tentare. Se decide en su tarjeta.
+  { id: 'pedidosConsumidor', bandeja: 'decidir', href: '/clientas/pedidos',
+    uno: 'Un pedido de arrepentimiento o de baja por atender', varios: n => `${n} pedidos de arrepentimiento o de baja por atender` },
   { id: 'denunciasPorRevisar', bandeja: 'decidir', href: null,
     uno: 'Una denuncia de la app por revisar', varios: n => `${n} denuncias de la app por revisar` },
   // Lo primero que tiene que poner: sin NIF, ningún cobro saca su factura.

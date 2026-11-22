@@ -1,6 +1,7 @@
 'use client';
 import { TELEFONO_EJEMPLO } from '@/lib/locale';
 import { pasarelaEsMercadoPago } from '@/lib/mercadopago/config';
+import { BotonesConsumidor } from '@/components/consumidor/botones-consumidor';
 import { conMoneda } from '../../../lib/moneda.ts';
 import { referidorDeAlta } from '@/lib/student/referido';
 import { guardarReferidor, leerReferidor, olvidarReferidor } from '@/lib/student/referido-sesion';
@@ -4297,6 +4298,12 @@ export default function ReservarPage() {
           </div>
         </div>
       </footer>
+      )}
+
+      {/* Argentina (Disp. 954/2025): los dos botones van SIEMPRE en la página suelta, aunque el estudio
+          haya ocultado la sección de contacto. Incrustada en su web, los tiene que poner su web. */}
+      {!enVistaReserva && !vistaUnica && !apariencia.ocultarPie && (
+        <BotonesConsumidor slug={slug} style={{ order: 9999 }} />
       )}
 
       {/* ── MODAL ───────────────────────────────────────────────────────────── */}

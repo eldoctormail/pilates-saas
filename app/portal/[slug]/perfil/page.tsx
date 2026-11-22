@@ -1,5 +1,6 @@
 'use client';
 
+import { botonesConsumidorActivos, NOMBRE_BOTON, rutaPedido } from '@/lib/consumidor/pedidos';
 import { useCallback, useState } from 'react';
 import Link from 'next/link';
 import { TRANSICION_ADELANTE } from '@/lib/student/transiciones';
@@ -234,6 +235,17 @@ export default function PerfilPage() {
             { label: 'Privacidad y datos', href: href('/perfil/privacidad'), icono: 'escudo' },
           ]}
         />
+
+        {/* Argentina (Disp. 954/2025): revocar una compra o dar de baja, sin trámites. */}
+        {botonesConsumidorActivos() && (
+          <ProfileSection
+            titulo="Tus derechos como consumidor"
+            items={[
+              { label: NOMBRE_BOTON.ARREPENTIMIENTO, href: rutaPedido(estudio.slug, 'ARREPENTIMIENTO'), icono: 'escudo' },
+              { label: NOMBRE_BOTON.BAJA, href: rutaPedido(estudio.slug, 'BAJA'), icono: 'escudo' },
+            ]}
+          />
+        )}
 
         <ProfileSection
           titulo="Sesión"

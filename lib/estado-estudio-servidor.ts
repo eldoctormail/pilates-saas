@@ -1,4 +1,5 @@
 import 'server-only';
+import { botonesConsumidorActivos } from './consumidor/pedidos.ts';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import {
   puedeGestionarApertura, puedeGestionarAutomatizaciones, puedeGestionarCalendario, puedeGestionarClientas,
@@ -153,7 +154,7 @@ export async function contarConteosEstudio(
   const visibles = fuentesVisibles(rol);
   const args = argumentosConteos({ studioId, rol, userId, ahora });
 
-  const [rpc, festivosPorDecidir, margenGratisDias] = await Promise.all([
+  const [rpc, festivosPorDecidir, margenGratisDias, pedidosConsumidor] = await Promise.all([
     args.p_fuentes.length === 0
       ? Promise.resolve({ data: {} as Record<string, unknown>, error: null })
       : admin.rpc('estado_estudio_conteos', args),
@@ -165,6 +166,11 @@ export async function contarConteosEstudio(
         .then((r): number | null | undefined => (r === null ? null : r.disponible ? r.festivos.length : undefined))
       : Promise.resolve(undefined),
     leerMargenGratisDias(admin, studioId, rol, ahora),
+    // Argentina (Disp. 954/2025): mismo gate que la pantalla y la RLS de `pedidos_consumidor`.
+    botonesConsumidorActivos() && puedeGestionarClientas(rol)
+      ? admin.from('pedidos_consumidor').select('id', { count: 'exact', head: true }).eq('studio_id', studioId).eq('estado', 'PENDIENTE')
+        .then(({ count, error }): number | null => (error ? null : count ?? 0))
+      : Promise.resolve(undefined),
   ]);
 
   if (rpc.error) console.error('[estado-estudio:conteos]', rpc.error);
@@ -188,7 +194,7 @@ export async function contarConteosEstudio(
     return Math.max(1, f.sinSellar);
   })();
 
-  const conteos: ConteosEstudio = { festivosPorDecidir, facturasSinNif, margenGratisDias };
+  const conteos: ConteosEstudio = { festivosPorDecidir, facturasSinNif, margenGratisDias, pedidosConsumidor };
   for (const clave of CLAVES_NUMERICAS) conteos[clave] = num(clave);
   return conteos;
 }

@@ -169,6 +169,8 @@ export const EVENTOS = {
   // Widget «Formulario de contacto»: alguien que aún no es clienta ha escrito
   // desde la web del estudio (tabla `consultas_contacto`, nunca `socios`).
   CONSULTA_CONTACTO: 'contacto.consulta_nueva',
+  // Botón de arrepentimiento / baja de servicio (Argentina, Disp. 954/2025).
+  PEDIDO_CONSUMIDOR: 'consumidor.pedido_nuevo',
   RIESGO_DEPENDENCIA: 'riesgo.dependencia',
   // Equipo: la instructora avisa de que no puede dar una clase.
   INSTRUCTORA_BAJA: 'instructora.baja',

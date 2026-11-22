@@ -46,6 +46,8 @@ test('los términos: precios finales, revocación de 10 días y baja, con la ven
   assert.match(t, /10 días corridos/);
   assert.match(t, /artículo 34 de la Ley 24\.240/);
   assert.match(t, /BAJA DEL SERVICIO/);
+  assert.match(t, /«Botón de arrepentimiento»/);
+  assert.match(t, /«Botón de baja de servicio»/);
   assert.match(t, /menos de 24 horas/);
   assert.doesNotMatch(t, /cargo de/, 'sin penalización activa, sin cláusula de cargo');
   assert.match(terminosServicioPorDefecto({ ...ESTUDIO, penalizacionImporteEur: 5000 }, AR), /cargo de/);

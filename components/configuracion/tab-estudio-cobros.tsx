@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils';
 import { useStudio } from '@/lib/studio-context';
 import type { ModoFacturacion, Studio } from '@/lib/types';
 import { nifEmisorValido } from '@/lib/nif';
+import { FUNCIONES_DE_ESPANA } from '@/lib/locale';
 import { authHeader } from '@/lib/api-client';
 import type { DatosSepa } from '@/lib/billing/cuenta-cobro';
 import { leerPlazoReembolso, PLAZO_REEMBOLSO_MAX_DIAS } from '@/lib/billing/politica-reembolso';
@@ -659,11 +660,30 @@ const MODOS_FACTURACION: { valor: ModoFacturacion; titulo: string; descripcion: 
   },
 ];
 
+// Argentina: la factura legal es la electrónica de ARCA (con CAE) y Tentare no la
+// emite. Lo único que se ofrece es el comprobante interno numerado, que el PDF
+// rotula «Documento no válido como factura» (lib/factura-pdf.ts).
+const MODOS_FACTURACION_AR: typeof MODOS_FACTURACION = [
+  {
+    valor: 'facturas',
+    titulo: 'Comprobantes internos',
+    descripcion: 'Cada cobro genera un comprobante numerado que dice «Documento no válido como factura». Lo ves en Cobros → Facturas.',
+  },
+];
+const MODOS_OFRECIDOS = FUNCIONES_DE_ESPANA ? MODOS_FACTURACION : MODOS_FACTURACION_AR;
+
 function studioToFacturacion(s: Partial<Pick<Studio, 'modoFacturacion'>> | null): FacturacionForm {
   return { modo: s?.modoFacturacion ?? 'facturas' };
 }
 
 function confirmacionFacturacion(ahora: ModoFacturacion, antes: ModoFacturacion, envioActivo: boolean) {
+  if (!FUNCIONES_DE_ESPANA && ahora === 'facturas' && antes === 'sin_facturas') {
+    return {
+      titulo: '¿Empezar a emitir comprobantes?',
+      descripcion: 'Desde ahora, cada cobro —salvo en efectivo— genera un comprobante interno numerado, no válido como factura. La factura legal la seguís haciendo en ARCA.',
+      textoConfirmar: 'Sí, emitir comprobantes',
+    };
+  }
   if (ahora === 'facturas' && antes === 'sin_facturas') {
     return {
       titulo: '¿Empezar a emitir facturas?',
@@ -690,9 +710,10 @@ function confirmacionFacturacion(ahora: ModoFacturacion, antes: ModoFacturacion,
 // solo de la propietaria, igual que la ruta.
 type AltaEnvio = { estado: EstadoEstudioVerifactu; activadoEn: string | null } | 'cargando' | 'error';
 
-function useAltaEnvio(): AltaEnvio {
-  const [alta, setAlta] = useState<AltaEnvio>('cargando');
+function useAltaEnvio(consultar: boolean): AltaEnvio {
+  const [alta, setAlta] = useState<AltaEnvio>(consultar ? 'cargando' : 'error');
   useEffect(() => {
+    if (!consultar) return;
     let vivo = true;
     (async () => {
       try {
@@ -707,7 +728,7 @@ function useAltaEnvio(): AltaEnvio {
       }
     })();
     return () => { vivo = false; };
-  }, []);
+  }, [consultar]);
   return alta;
 }
 
@@ -750,15 +771,21 @@ function AjusteFacturaAutomatica({ onGuardado }: { onGuardado: (texto: string) =
         <div className="min-w-0">
           <p className="text-sm font-medium text-foreground">Facturar automáticamente</p>
           <p className="mt-0.5 text-sm text-muted-foreground text-pretty">
-            {activo
-              ? 'Cada cobro, salvo en efectivo, genera su factura al cobrarlo. En efectivo solo si marcas «Hacerle factura».'
-              : 'No sale ninguna factura sola. Cuando te la pidan, la haces desde el recibo cobrado. Lo ya emitido no cambia.'}
+            {!FUNCIONES_DE_ESPANA
+              ? (activo
+                ? 'Cada cobro, salvo en efectivo, genera su comprobante al cobrarlo. En efectivo, solo si marcás «Hacerle factura».'
+                : 'No sale ningún comprobante solo. Cuando te lo pidan, lo hacés desde el recibo cobrado. Lo ya emitido no cambia.')
+              : activo
+                ? 'Cada cobro, salvo en efectivo, genera su factura al cobrarlo. En efectivo solo si marcas «Hacerle factura».'
+                : 'No sale ninguna factura sola. Cuando te la pidan, la haces desde el recibo cobrado. Lo ya emitido no cambia.'}
           </p>
         </div>
         <Toggle on={activo} onChange={v => void cambiar(v)} ariaLabel="Facturar automáticamente" />
       </div>
       {error && <p role="alert" className="mt-2 text-sm text-destructive">{error}</p>}
-      <p className="mt-2 text-xs text-muted-foreground text-pretty">Es independiente de Veri*Factu: con él desactivado la factura sale igual, sin huella ni QR.</p>
+      {FUNCIONES_DE_ESPANA && (
+        <p className="mt-2 text-xs text-muted-foreground text-pretty">Es independiente de Veri*Factu: con él desactivado la factura sale igual, sin huella ni QR.</p>
+      )}
     </div>
   );
 }
@@ -780,7 +807,7 @@ export function FormFacturacion({ onGuardado }: PropsFormularioCajon) {
   // encenderlo así dejaría cada cobro con su factura pendiente. Se dice aquí.
   const sinNif = form.modo === 'verifactu' && !nifEmisorValido(studio?.nif?.trim() ?? '');
 
-  const alta = useAltaEnvio();
+  const alta = useAltaEnvio(FUNCIONES_DE_ESPANA);
   // Emitir exige el envío activado Y el poder vigente; avisar de la permanencia
   // (art. 17.2) basta con haberlo activado alguna vez.
   const activo = typeof alta === 'object' && puedeEmitir(alta.activadoEn, alta.estado);
@@ -810,7 +837,7 @@ export function FormFacturacion({ onGuardado }: PropsFormularioCajon) {
     }
     setForm(f => sincronizarFormulario(f, enviado, enviado));
     setBase(enviado);
-    onGuardado(enviado.modo === 'verifactu' ? 'Veri*Factu activado' : 'Veri*Factu desactivado');
+    onGuardado(!FUNCIONES_DE_ESPANA ? 'Comprobantes activados' : enviado.modo === 'verifactu' ? 'Veri*Factu activado' : 'Veri*Factu desactivado');
     return null;
   }
 
@@ -819,9 +846,19 @@ export function FormFacturacion({ onGuardado }: PropsFormularioCajon) {
       {studio?.modoFacturacion === 'sin_facturas' && (
         <p className="pb-4 text-sm text-muted-foreground text-pretty">Hoy este estudio no emite facturas. Elige una opción y guarda para empezar.</p>
       )}
+      {!FUNCIONES_DE_ESPANA && (
+        <div className="mb-6 rounded-xl border border-border bg-muted/40 px-4 py-3 text-sm">
+          <p className="text-foreground text-pretty">
+            En Argentina, la factura legal es la electrónica de ARCA, con su CAE. Tentare todavía no la emite: hacela desde ARCA o con tu sistema de facturación.
+          </p>
+          <p className="mt-2 text-muted-foreground text-pretty">
+            Lo que sale de acá es un comprobante interno numerado, rotulado «Documento no válido como factura», para que la clienta tenga constancia de lo que pagó.
+          </p>
+        </div>
+      )}
       <AjusteFacturaAutomatica onGuardado={onGuardado} />
       <div role="radiogroup" aria-label="Facturación" className="space-y-3 pb-6">
-        {MODOS_FACTURACION.map(m => {
+        {MODOS_OFRECIDOS.map(m => {
           const elegido = form.modo === m.valor;
           return (
             <button
@@ -871,7 +908,7 @@ export function FormFacturacion({ onGuardado }: PropsFormularioCajon) {
           {' '}— para verla o descargarla en PDF.
         </p>
       )}
-      <ExportarRegistrosVerifactu />
+      {FUNCIONES_DE_ESPANA && <ExportarRegistrosVerifactu />}
       <BarraGuardar
         seccion="cobros"
         cambios={hayCambios(form, base) ? ['Facturación'] : []}

@@ -3,6 +3,7 @@
 import { cn } from '@/lib/utils';
 import { NOMBRE_ID_FISCAL, nifValido } from '@/lib/nif';
 import type { Studio } from '@/lib/types';
+import { FUNCIONES_DE_ESPANA } from '@/lib/locale';
 import { inputCls } from '@/components/configuracion/estilos';
 import { BarraGuardar } from '@/components/configuracion/shell/barra-guardar';
 import type { PropsFormularioCajon } from '@/components/configuracion/shell/cajon-ajuste';
@@ -32,7 +33,11 @@ function aFormulario(s: Studio | null): DatosFiscalesForm {
   };
 }
 
-const TIPOS_IVA = [['21', '21 % — General'], ['10', '10 % — Reducido'], ['4', '4 % — Superreducido'], ['0', '0 % — Exento']] as const;
+const TIPOS_IVA_ES = [['21', '21 % — General'], ['10', '10 % — Reducido'], ['4', '4 % — Superreducido'], ['0', '0 % — Exento']] as const;
+// Argentina: las alícuotas de IVA de allí. 0 % es también el de quien no
+// discrimina IVA (monotributo): el comprobante sale con el total, sin desglose.
+const TIPOS_IVA_AR = [['21', '21 % — General'], ['10.5', '10,5 % — Reducida'], ['27', '27 % — Diferencial'], ['0', '0 % — Exento o monotributo']] as const;
+const TIPOS_IVA: readonly (readonly [string, string])[] = FUNCIONES_DE_ESPANA ? TIPOS_IVA_ES : TIPOS_IVA_AR;
 
 export function FormDatosFiscales({ showToast, onGuardado }: PropsFormularioCajon) {
   const { form, setForm, base, hayCambios, guardar, descartar } = useFormularioEstudio(aFormulario, showToast);
@@ -74,7 +79,7 @@ export function FormDatosFiscales({ showToast, onGuardado }: PropsFormularioCajo
             />
           )}
         </Campo>
-        <Campo label="IVA general" ayuda="Tus precios llevan el IVA incluido: cambia el desglose, no el total.">
+        <Campo label="IVA general" ayuda={FUNCIONES_DE_ESPANA ? 'Tus precios llevan el IVA incluido: cambia el desglose, no el total.' : 'Tus precios llevan el IVA incluido: cambia el desglose interno, no el total. Si sos monotributista, elegí 0 %.'}>
           {id => (
             <select
               id={id}
@@ -82,7 +87,9 @@ export function FormDatosFiscales({ showToast, onGuardado }: PropsFormularioCajo
               value={form.ivaPorDefecto}
               onChange={e => { const v = e.target.value; setForm(f => ({ ...f, ivaPorDefecto: v })); }}
             >
-              {TIPOS_IVA.map(([valor, texto]) => <option key={valor} value={valor}>{texto}</option>)}
+              {/* Un tipo guardado que no está en la lista se ofrece tal cual, para no cambiarlo sin querer. */}
+              {(TIPOS_IVA.some(([v]) => v === base.ivaPorDefecto) ? TIPOS_IVA : [...TIPOS_IVA, [base.ivaPorDefecto, `${base.ivaPorDefecto.replace('.', ',')} %`] as const])
+                .map(([valor, texto]) => <option key={valor} value={valor}>{texto}</option>)}
             </select>
           )}
         </Campo>
@@ -90,10 +97,12 @@ export function FormDatosFiscales({ showToast, onGuardado }: PropsFormularioCajo
       <BarraGuardar
         seccion="cobros"
         cambios={hayCambios ? ['Datos fiscales e IVA'] : []}
-        bloqueo={nifInvalido ? 'Revisa el NIF antes de guardar.' : null}
+        bloqueo={nifInvalido ? `Revisa el ${NOMBRE_ID_FISCAL === 'CUIT' ? 'CUIT' : 'NIF'} antes de guardar.` : null}
         confirmar={cambiaIva ? {
-          titulo: `¿Cambiar el IVA al ${form.ivaPorDefecto} %?`,
-          descripcion: `Tus facturas nuevas llevarán un ${form.ivaPorDefecto} % de IVA. Lo que cobras no cambia, y las facturas ya emitidas tampoco.`,
+          titulo: `¿Cambiar el IVA al ${form.ivaPorDefecto.replace('.', ',')} %?`,
+          descripcion: FUNCIONES_DE_ESPANA
+            ? `Tus facturas nuevas llevarán un ${form.ivaPorDefecto} % de IVA. Lo que cobras no cambia, y las facturas ya emitidas tampoco.`
+            : `Tus comprobantes nuevos llevarán un ${form.ivaPorDefecto.replace('.', ',')} % de IVA en el desglose interno. Lo que cobrás no cambia, y lo ya emitido tampoco.`,
           textoConfirmar: 'Sí, cambiar el IVA',
         } : null}
         onGuardar={alGuardar}

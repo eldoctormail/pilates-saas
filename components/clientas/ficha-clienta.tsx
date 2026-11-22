@@ -1,6 +1,7 @@
 'use client';
 
-import { LOCALE } from '../../lib/locale.ts';
+import { LOCALE, FUNCIONES_DE_ESPANA } from '../../lib/locale.ts';
+import { NOMBRE_ID_CLIENTA } from '../../lib/nif.ts';
 import { conMoneda } from '../../lib/moneda.ts';
 import { ZONA_HORARIA } from '../../lib/zona-horaria.ts';
 import { useState, useEffect, useRef, useMemo } from 'react';
@@ -1794,7 +1795,7 @@ export function FichaClienta({ id, modo = 'pagina' }: {
                   <dl className="space-y-2.5">
                     <DatoSobreElla icono={Mail} etiqueta="Email" valor={socio.email || 'Sin email'} />
                     <DatoSobreElla icono={Phone} etiqueta="Teléfono" valor={socio.telefono ? telefonoLegible(socio.telefono) : 'Sin teléfono'} />
-                    {veDatosPrivados && socio.nif && <DatoSobreElla icono={CreditCard} etiqueta="NIF" valor={socio.nif} />}
+                    {veDatosPrivados && socio.nif && <DatoSobreElla icono={CreditCard} etiqueta={NOMBRE_ID_CLIENTA} valor={socio.nif} />}
                     <DatoSobreElla icono={Calendar} etiqueta="Alta" valor={socio.fechaAlta ? fecha(socio.fechaAlta) : '—'} />
                     {comoLlego && <DatoSobreElla icono={Users} etiqueta="Cómo llegó" valor={comoLlego} />}
                     {pruebaSuya && (
@@ -2373,7 +2374,7 @@ export function FichaClienta({ id, modo = 'pagina' }: {
                 </div>
                   {/* Domiciliación SEPA (F2 · B2.10). Es el medio de COBRO de la
                       clienta: quien no mueve dinero no lo da de alta ni lo quita. */}
-                  {puedeCobrar && <FichaMandatoSepa socioId={id} />}
+                  {puedeCobrar && FUNCIONES_DE_ESPANA && <FichaMandatoSepa socioId={id} />}
                 </div>
               )}
 
@@ -2715,7 +2716,7 @@ export function FichaClienta({ id, modo = 'pagina' }: {
                 <input className={inputCls} value={editForm.telefono} onChange={e => setEditForm(f => ({ ...f, telefono: e.target.value }))} />
               </FF>
               {veDatosPrivados && (
-                <FF label="NIF (opcional)">
+                <FF label={`${NOMBRE_ID_CLIENTA} (opcional)`}>
                   <input className={inputCls} value={editForm.nif} onChange={e => setEditForm(f => ({ ...f, nif: e.target.value }))} />
                 </FF>
               )}

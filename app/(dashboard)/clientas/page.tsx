@@ -1,6 +1,7 @@
 'use client';
 
 import { TELEFONO_EJEMPLO } from '@/lib/locale';
+import { NOMBRE_ID_CLIENTA } from '@/lib/nif';
 import { LOCALE } from '../../../lib/locale.ts';
 import { conMoneda } from '../../../lib/moneda.ts';
 import { VistaDeLaUrl, useUrlSigueALaVista } from '@/components/layout/vista-de-la-url';
@@ -2219,7 +2220,7 @@ export default function Socios() {
                   />
                 </FF>
                 {veDatosPrivados && (
-                  <FF label="NIF (opcional)" description="Solo hace falta si vas a facturarle. Se puede añadir más adelante.">
+                  <FF label={`${NOMBRE_ID_CLIENTA} (opcional)`} description="Solo hace falta si vas a facturarle. Se puede añadir más adelante.">
                     <input
                       className={inputCls}
                       placeholder="12345678A"

@@ -1,5 +1,8 @@
 'use client';
 
+import { FUNCIONES_DE_ESPANA } from '@/lib/locale';
+import { SoloEspana } from '@/components/configuracion/solo-espana';
+
 // La declaración responsable del sistema de facturación (Tentare), dentro del
 // propio sistema, como exige la Orden HAC/1177/2024 (art. 15.3): «disponible de
 // manera legible e individualizada dentro del propio sistema informático» y
@@ -24,7 +27,12 @@ interface Estado {
   falta: string[];
 }
 
-export default function DeclaracionResponsablePage() {
+// Solo España (lib/locale.ts): con el formato de Argentina, un aviso en su lugar.
+export default function Pagina() {
+  return FUNCIONES_DE_ESPANA ? <DeclaracionResponsablePage /> : <SoloEspana que="La declaración responsable de Veri*Factu" />;
+}
+
+function DeclaracionResponsablePage() {
   const [estado, setEstado] = useState<Estado | null>(null);
   const [error, setError] = useState<string | null>(null);
 

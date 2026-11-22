@@ -19,7 +19,7 @@
 // «Entorno de PRUEBAS» en la factura que descargaba la alumna. Si vuelves a
 // añadir aquí un campo de la cadena, lo estás poniendo en el papel de la
 // clienta — que es exactamente lo que este comentario intenta evitar.
-import { LOCALE } from './locale.ts';
+import { LOCALE, esArgentina } from './locale.ts';
 import { conMoneda } from './moneda.ts';
 import { qrSvgMarkup } from './qr-svg.ts';
 import { conceptoDeFactura } from './facturas/concepto.ts';
@@ -77,7 +77,14 @@ export function generarFacturaHTML(
   emisor: EmisorFactura,
   receptor: ReceptorFactura | null,
   sello: SelloCliente | null,
+  locale: string = LOCALE,
 ): string {
+  // Argentina: la factura legal es la de ARCA (con CAE) y esto no lo es. Sale
+  // como comprobante interno con la leyenda «Documento no válido como factura»,
+  // sin desglose de IVA (un monotributista no lo discrimina) y con el CUIT.
+  const ar = esArgentina(locale);
+  const titulo = ar ? 'Comprobante' : 'Factura';
+  const idEmisor = ar && emisor.nif ? `CUIT ${emisor.nif}` : emisor.nif;
   const fmt = (n: number) => n.toLocaleString(LOCALE, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   // El sello lo decide `selloParaCliente`, nunca esta plantilla: aquí solo se
   // pinta lo que llegue. Si llega `null` la factura sale sin QR, que es lo
@@ -94,7 +101,7 @@ export function generarFacturaHTML(
 <html lang="es">
 <head>
 <meta charset="utf-8"/>
-<title>Factura ${f.numeroCompleto}</title>
+<title>${titulo} ${f.numeroCompleto}</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: -apple-system, Arial, sans-serif; font-size: 13px; color: #1A1A1A; padding: 40px; max-width: 680px; margin: 0 auto; }
@@ -126,12 +133,13 @@ export function generarFacturaHTML(
 <body>
 <div class="header">
   <div>
-    <div class="title">FACTURA</div>
+    <div class="title">${titulo.toUpperCase()}</div>
     <div class="numero">${f.numeroCompleto}</div>
+    ${ar ? '<div style="margin-top:6px;font-size:12px;font-weight:700;letter-spacing:0.04em">DOCUMENTO NO VÁLIDO COMO FACTURA</div>' : ''}
   </div>
   <div style="text-align:right">
     <div style="font-weight:700">${esc(emisor.nombre)}</div>
-    <div style="color:#8E8E86">${esc(emisor.nif)}</div>
+    <div style="color:#8E8E86">${esc(idEmisor)}</div>
     <div style="color:#8E8E86">${esc(emisor.direccion)}</div>
   </div>
 </div>
@@ -139,7 +147,7 @@ export function generarFacturaHTML(
   <div>
     <div class="party-label">Emisor</div>
     <div class="party-name">${esc(emisor.nombre)}</div>
-    <div class="party-detail">${esc(emisor.nif)}</div>
+    <div class="party-detail">${esc(idEmisor)}</div>
     <div class="party-detail">${esc(emisor.direccion)}</div>
   </div>
   <div>
@@ -158,17 +166,17 @@ export function generarFacturaHTML(
       <td>
         <div style="font-weight:600">${esc(conceptoDeFactura(f))}</div>
       </td>
-      <td>${conMoneda(fmt(f.baseImponible))}</td>
+      <td>${conMoneda(fmt(ar ? f.total : f.baseImponible))}</td>
     </tr>
   </tbody>
   <tfoot>
-    <tr class="sub-row"><td>Base imponible</td><td>${conMoneda(fmt(f.baseImponible))}</td></tr>
-    <tr class="sub-row"><td>IVA (${f.tipoIVA}%)</td><td>${conMoneda(fmt(f.cuotaIVA))}</td></tr>
+    ${ar ? '' : `<tr class="sub-row"><td>Base imponible</td><td>${conMoneda(fmt(f.baseImponible))}</td></tr>
+    <tr class="sub-row"><td>IVA (${f.tipoIVA}%)</td><td>${conMoneda(fmt(f.cuotaIVA))}</td></tr>`}
     <tr class="total-row"><td>TOTAL</td><td>${conMoneda(fmt(f.total))}</td></tr>
   </tfoot>
 </table>
 ${bloqueSello}
-<div class="footer">Documento generado el ${new Date().toLocaleDateString(LOCALE)} · ${esc(emisor.nombre)} · ${esc(emisor.nif)}</div>
+<div class="footer">Documento generado el ${new Date().toLocaleDateString(locale)} · ${esc(emisor.nombre)} · ${esc(idEmisor)}${ar ? ' · Documento no válido como factura' : ''}</div>
 <script>window.onload = function(){ window.print(); }<\/script>
 </body></html>`;
 }
@@ -184,7 +192,7 @@ export function abrirFacturaPDF(
   // En la app de iOS no hay pestañas: la factura va a la hoja de compartir, y
   // desde ahí se imprime, se guarda en Archivos como PDF o se manda por correo.
   if (esAppNativa()) {
-    void compartirFichero({ nombre: `Factura ${f.numeroCompleto}.html`, tipo: 'text/html', contenido: html });
+    void compartirFichero({ nombre: `${esArgentina() ? 'Comprobante' : 'Factura'} ${f.numeroCompleto}.html`, tipo: 'text/html', contenido: html });
     return;
   }
   const w = window.open('', '_blank');

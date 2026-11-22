@@ -16,7 +16,10 @@
 // herramienta, basta con moverla aquí: su ancla la sigue sola, y los enlaces
 // guardados no se rompen.
 //
-// Pura y sin imports: la ejecuta `node --test` directamente.
+// Pura, con un solo import (el formato regional, también puro): la ejecuta
+// `node --test` directamente.
+
+import { FUNCIONES_DE_ESPANA } from '../locale.ts';
 
 export type SeccionId =
   | 'estudio' | 'clases' | 'reservas' | 'cobros' | 'altas' | 'comunicacion'
@@ -156,12 +159,12 @@ export const SECCIONES = [
   {
     id: 'cobros',
     titulo: 'Cobros y facturas',
-    resumen: 'Datos fiscales, facturas, domiciliaciones y devoluciones',
+    resumen: FUNCIONES_DE_ESPANA ? 'Datos fiscales, facturas, domiciliaciones y devoluciones' : 'Datos fiscales, comprobantes y devoluciones',
     frase: 'Cómo te pagan tus clientes y qué sale en tus facturas.',
     roles: SOLO_PROPIETARIA,
     tarjetas: [
-      { id: 'facturacion', titulo: 'Facturación', frase: 'Si Tentare emite una factura en cada cobro, con su registro para Veri*Factu, o si tus facturas las haces fuera.', guardado: 'barra', palabras: ['verifactu', 'aeat', 'justificante', 'gestoría', 'factura'] },
-      { id: 'datos-fiscales', titulo: 'Datos fiscales e IVA', frase: 'Razón social, NIF e IVA de tus facturas. Cambiar el IVA solo afecta a las facturas nuevas.', guardado: 'barra', palabras: ['nif', 'cif', 'razón social', 'facturas', 'impuestos'] },
+      { id: 'facturacion', titulo: 'Facturación', frase: FUNCIONES_DE_ESPANA ? 'Si Tentare emite una factura en cada cobro, con su registro para Veri*Factu, o si tus facturas las haces fuera.' : 'Si Tentare genera un comprobante interno en cada cobro. La factura legal se hace en ARCA.', guardado: 'barra', palabras: ['verifactu', 'aeat', 'justificante', 'gestoría', 'factura'] },
+      { id: 'datos-fiscales', titulo: 'Datos fiscales e IVA', frase: FUNCIONES_DE_ESPANA ? 'Razón social, NIF e IVA de tus facturas. Cambiar el IVA solo afecta a las facturas nuevas.' : 'Razón social, CUIT e IVA de tus comprobantes. Cambiar el IVA solo afecta a los nuevos.', guardado: 'barra', palabras: ['nif', 'cif', 'cuit', 'razón social', 'facturas', 'impuestos'] },
       { id: 'cuando-se-cobra-la-cuota', titulo: 'Cuándo se cobra la cuota mensual', frase: 'Cada cliente en su aniversario, o todas el día 1 de cada mes.', guardado: 'barra', palabras: ['día 1', 'fecha de cobro', 'aniversario', 'mensual'] },
       { id: 'domiciliaciones', titulo: 'Domiciliaciones bancarias', frase: 'Los datos que pide tu banco para cobrar recibos domiciliados. Con ellos generas la remesa en Cobros.', guardado: 'barra', palabras: ['sepa', 'banco', 'remesa', 'recibos'] },
       { id: 'devoluciones', titulo: 'Devoluciones', frase: 'Permite devolver un cobro desde la ficha del cliente; el dinero vuelve a su tarjeta.', guardado: 'barra', palabras: ['reembolso', 'devolver'] },
@@ -507,6 +510,9 @@ export function esTarjetaId(v: string): v is TarjetaId {
   return TARJETA_POR_ID.has(v);
 }
 
+/** Tarjetas que solo sirven en España: con el formato de Argentina no se ven ni se buscan. */
+const TARJETAS_SOLO_ESPANA: ReadonlySet<string> = new Set(['domiciliaciones']);
+
 /** Quién ve la tarjeta: la propietaria siempre; el resto, si la tarjeta lo dice. */
 export function rolesDeTarjeta(t: TarjetaConfiguracion): readonly RolConfiguracion[] {
   return t.roles ?? SOLO_PROPIETARIA;
@@ -514,6 +520,7 @@ export function rolesDeTarjeta(t: TarjetaConfiguracion): readonly RolConfiguraci
 
 /** ¿Este rol ve (y puede tocar) esa tarjeta? */
 export function tarjetaVisible(id: TarjetaId, rol: RolConfiguracion | string): boolean {
+  if (!FUNCIONES_DE_ESPANA && TARJETAS_SOLO_ESPANA.has(id)) return false;
   return (rolesDeTarjeta(TARJETA_POR_ID.get(id)!.tarjeta) as readonly string[]).includes(rol);
 }
 

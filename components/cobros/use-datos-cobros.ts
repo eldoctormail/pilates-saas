@@ -16,6 +16,7 @@ import { reintentoAutomatico, type ReintentoAutomatico } from '@/lib/cobros/rein
 import { cuandoSera } from '@/lib/clientas/textos';
 import { hoyEnEstudio } from '@/lib/utils';
 import { emiteFacturas } from '@/lib/factura-automatica';
+import { FUNCIONES_DE_ESPANA } from '@/lib/locale';
 
 const DIAS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
 
@@ -64,7 +65,8 @@ export function useDatosCobros(): DatosCobros {
       if (m.estado === 'VIGENTE') vigentes.add(m.socioId);
     }
     const estudioConStripe = !!studio?.stripeAccountId;
-    const estudioHaceRemesas = !!(studio?.sepaAcreedorId && studio?.sepaIban && studio?.sepaTitular);
+    // Las remesas SEPA son de España: con el formato de Argentina no se ofrecen (lib/locale.ts).
+    const estudioHaceRemesas = FUNCIONES_DE_ESPANA && !!(studio?.sepaAcreedorId && studio?.sepaIban && studio?.sepaTitular);
     const estudioFactura = emiteFacturas(studio?.modoFacturacion);
     const datosDePagoLeidos = !datosIncompletos.includes('socios');
     const mandatosCargados = estadoMandatosSepa === 'listo';

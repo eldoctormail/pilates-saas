@@ -1,6 +1,6 @@
 'use client';
 
-import { LOCALE } from '../../lib/locale.ts';
+import { LOCALE, FUNCIONES_DE_ESPANA } from '../../lib/locale.ts';
 import { conMoneda, MONEDA_SIMBOLO } from '../../lib/moneda.ts';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
@@ -549,12 +549,15 @@ function BuscarCodigo({ onCerrar, onElegida }: { onCerrar: () => void; onElegida
 
 // ── Vender en el mostrador ───────────────────────────────────────────────────
 
-const METODOS = [
+const TODOS_LOS_METODOS = [
   { v: 'EFECTIVO', n: 'Efectivo', Icono: Banknote },
-  { v: 'TARJETA', n: 'Datáfono', Icono: CircleDollarSign },
+  { v: 'TARJETA', n: FUNCIONES_DE_ESPANA ? 'Datáfono' : 'Tarjeta (posnet)', Icono: CircleDollarSign },
   { v: 'BIZUM', n: 'Bizum', Icono: Smartphone },
-  { v: 'TRANSFERENCIA', n: 'Transferencia', Icono: Landmark },
+  { v: 'TRANSFERENCIA', n: FUNCIONES_DE_ESPANA ? 'Transferencia' : 'Transferencia o Mercado Pago', Icono: Landmark },
 ] as const;
+// Bizum es de España: con el formato de Argentina no se ofrece (lib/locale.ts).
+// Un pago por QR o link de Mercado Pago entra como transferencia.
+const METODOS = TODOS_LOS_METODOS.filter(m => FUNCIONES_DE_ESPANA || m.v !== 'BIZUM');
 
 function FormVender({ ajustes, onCerrar, onVendida }: { ajustes: AjustesRegalo; onCerrar: () => void; onVendida: (m: string) => Promise<void> }) {
   const [f, setF] = useState({ importeEur: '', metodo: 'EFECTIVO', compradorNombre: '', compradorEmail: '', destinatarioNombre: '', destinatarioEmail: '', mensaje: '' });

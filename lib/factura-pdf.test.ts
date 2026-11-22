@@ -126,3 +126,20 @@ test('una factura ANTIGUA sigue saliendo entera: el cambio no rompe lo ya emitid
   assert.ok(html.includes('600111222'));
   assert.ok(html.includes('marta@example.com'));
 });
+
+test('generarFacturaHTML en Argentina: comprobante «no válido como factura», con CUIT y sin desglose de IVA', () => {
+  const html = generarFacturaHTML(factura, { nombre: 'Estudio', nif: '20-12345678-6', direccion: 'Av. Argentina 1' }, null, null, 'es-AR-u-hc-h23');
+  assert.ok(html.includes('<div class="title">COMPROBANTE</div>'));
+  assert.ok(html.includes('DOCUMENTO NO VÁLIDO COMO FACTURA'));
+  assert.ok(html.includes('CUIT 20-12345678-6'));
+  assert.ok(!html.includes('<div class="title">FACTURA</div>'));
+  assert.ok(!html.includes('Base imponible'));
+  assert.ok(!/IVA \(/.test(html));
+});
+
+test('generarFacturaHTML en España sigue siendo una factura con su desglose', () => {
+  const html = generarFacturaHTML(factura, { nombre: 'Estudio', nif: 'B12345678', direccion: 'C/ Mayor 1' }, null, null, 'es-ES');
+  assert.ok(html.includes('<div class="title">FACTURA</div>'));
+  assert.ok(html.includes('Base imponible'));
+  assert.ok(!html.includes('NO VÁLIDO COMO FACTURA'));
+});

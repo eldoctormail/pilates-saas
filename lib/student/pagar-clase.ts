@@ -12,8 +12,8 @@ import { portalAuthHeader } from '@/lib/student/api-publica';
 import type { OfertaPrueba } from '@/lib/billing/clase-prueba';
 import { avisarFaltanPreguntas } from '@/lib/student/preguntas-alta';
 import {
-  esperaAntesDeConsultar, leerInicioPagoClase, leerOpcionesClase, leerReservaPagada, leerReservaPrueba,
-  type InicioPagoClase, type LecturaOpcionesClase, type LecturaReservaPagada, type LecturaReservaPrueba,
+  esperaAntesDeConsultar, leerInicioPagoClase, leerInicioPagoMercadoPago, leerOpcionesClase, leerReservaPagada, leerReservaPrueba,
+  type InicioPagoClase, type InicioPagoMercadoPago, type LecturaOpcionesClase, type LecturaReservaPagada, type LecturaReservaPrueba,
 } from '@/lib/student/pagar-clase-reglas';
 
 export async function pedirOpcionesClase(studioId: string, sesionId: string, spotId: string | null): Promise<LecturaOpcionesClase> {
@@ -53,6 +53,42 @@ export async function iniciarPagoDeClase(p: {
   }
 }
 
+/**
+ * Pagar y reservar con Mercado Pago (autoalojado): pide la URL de Checkout Pro para ESTA clase. No redirige:
+ * eso lo hace la hoja (así el estado de carga y el texto siguen siendo suyos). Nunca lanza.
+ */
+export async function iniciarPagoDeClaseMercadoPago(p: {
+  studioId: string; planId: string; sesionId: string; spotId: string | null; aceptaCondiciones: boolean;
+}): Promise<InicioPagoMercadoPago> {
+  try {
+    const res = await fetch('/api/mercadopago/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...(await portalAuthHeader()) },
+      body: JSON.stringify({
+        studioId: p.studioId, planId: p.planId, sesionId: p.sesionId, spotId: p.spotId,
+        aceptaCondiciones: p.aceptaCondiciones, origen: 'portal',
+      }),
+    });
+    const l = leerInicioPagoMercadoPago(res.status, await res.json().catch(() => null));
+    if (l.tipo === 'faltan-preguntas') avisarFaltanPreguntas();
+    return l;
+  } catch {
+    return { tipo: 'error', mensaje: 'No hemos podido iniciar el pago. Comprueba tu conexión — no se te ha cobrado nada.' };
+  }
+}
+
+async function consultarCompraMercadoPago(studioId: string, compraId: string): Promise<LecturaReservaPagada> {
+  try {
+    const res = await fetch(
+      `/api/mercadopago/estado-compra?compra=${encodeURIComponent(compraId)}&studioId=${encodeURIComponent(studioId)}`,
+      { headers: await portalAuthHeader(), cache: 'no-store' },
+    );
+    return leerReservaPagada(res.status, res.headers.get('retry-after'), await res.json().catch(() => null));
+  } catch {
+    return { tipo: 'en_proceso' };
+  }
+}
+
 async function consultarReservaPagada(studioId: string, pi: string): Promise<LecturaReservaPagada> {
   try {
     const res = await fetch(
@@ -74,13 +110,22 @@ export type DesenlacePagoClase =
 
 /** Pregunta hasta que el servidor diga en qué acabó el pago, o se agote la espera razonable (~35 s). */
 export async function esperarReservaDePago(studioId: string, pi: string, sigueVivo: () => boolean): Promise<DesenlacePagoClase> {
+  return esperarDesenlace(() => consultarReservaPagada(studioId, pi), sigueVivo);
+}
+
+/** Lo mismo al volver de Mercado Pago (`?mp=<compra>`): pregunta por la compra hasta que el servidor diga en qué acabó. */
+export async function esperarCompraMercadoPago(studioId: string, compraId: string, sigueVivo: () => boolean): Promise<DesenlacePagoClase> {
+  return esperarDesenlace(() => consultarCompraMercadoPago(studioId, compraId), sigueVivo);
+}
+
+async function esperarDesenlace(consultar: () => Promise<LecturaReservaPagada>, sigueVivo: () => boolean): Promise<DesenlacePagoClase> {
   let espera: number | undefined;
   for (let intento = 0; ; intento++) {
     const ms = esperaAntesDeConsultar(intento, espera);
     if (ms == null) return { tipo: 'tarda' };
     await new Promise((r) => setTimeout(r, ms));
     if (!sigueVivo()) return { tipo: 'cancelado' };
-    const l = await consultarReservaPagada(studioId, pi);
+    const l = await consultar();
     if (!sigueVivo()) return { tipo: 'cancelado' };
     if (l.tipo !== 'en_proceso') return l;
     espera = l.esperaMinMs;

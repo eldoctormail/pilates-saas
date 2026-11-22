@@ -13,15 +13,23 @@
 // Lo que sale de aquí se guarda en `compras_mercadopago` y es lo que el webhook
 // entrega: nada de lo que decide el importe viaja por Mercado Pago.
 //
-// ⚠️ Lo que NO hace todavía (etapas siguientes): comprar sin ficha (invitada),
-// pagar y reservar una clase concreta, el widget de la web del estudio.
+// Con `sesionId` es «pagar y reservar»: además se comprueba la clase con las
+// MISMAS validaciones que la rama de clase de Stripe (viva, cubierta por el
+// plan, apertura suave, ventana de reserva, sin precio especial, con plaza) y
+// el pago caduca cuando se cierra la reserva de la clase.
+//
+// ⚠️ Lo que NO hace todavía: comprar sin ficha (invitada), el widget de la web
+// del estudio.
 
 import 'server-only';
 import type { NextRequest } from 'next/server';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import * as Sentry from '@sentry/nextjs';
 import { verificarUsuarioSupabase } from '../auth-server.ts';
-import { socioAutenticado } from '../db/supabase-data-admin.ts';
+import { cierreDeReserva, comprobarPlazaAntesDeCobrar, comprobarVentanaReserva, socioAutenticado } from '../db/supabase-data-admin.ts';
+import { cierreAperturaSuave, MENSAJE_APERTURA_SUAVE } from '../opening/apertura-suave.ts';
+import { planDeClaseSuelta } from '../reservas/clase-suelta.ts';
+import { hidratarTiposDePlanes, mapPlanTarifa } from '../supabase-data.ts';
 import { bloqueoPorPreguntasAlta } from '../db/preguntas-alta-admin.ts';
 import { paginaCerradaParaPeticion } from '../publico/pagina-cerrada-peticion.ts';
 import { rechazoCompraPrueba } from '../billing/clase-prueba.ts';
@@ -31,10 +39,13 @@ import { esSociaNueva } from '../billing/socia-nueva.ts';
 import { codigosYaUsadosPorSocia } from '../billing/codigos-ya-usados.ts';
 import { primeraVezConPlan, reservarMatricula, liberarCupoMatriculaUnaVez } from '../billing/matricula-online.ts';
 import { mapCodigoDescuento } from '../supabase-data.ts';
-import type { RowCodigosDescuento } from '../db-types.ts';
-import { IMPORTE_MINIMO_EUR } from '../reservar/opciones-de-clase.ts';
+import type { RowCodigosDescuento, RowPlanesTarifa } from '../db-types.ts';
+import { IMPORTE_MINIMO_EUR, tienePrecioEspecial } from '../reservar/opciones-de-clase.ts';
 
-export type Rechazo = { status: number; error: string; codigo?: string; necesitaRegistro?: boolean };
+import { caducidadDeCompra } from './caducidad.ts';
+export { caducidadDeCompra } from './caducidad.ts';
+
+export type Rechazo = { status: number; error: string; codigo?: string; necesitaRegistro?: boolean; posicionEspera?: number };
 
 export interface CompraDecidida {
   socioId: string;
@@ -54,6 +65,11 @@ export interface CompraDecidida {
   cicloFin: string | null;
   cuotaTexto: string | null;
   cuotaFrase: string | null;
+  /** La clase que se paga y reserva con la compra (null = solo el plan). */
+  sesionId: string | null;
+  spotId: string | null;
+  /** Cuándo se cierra la reserva de esa clase (null sin clase). */
+  cierreClase: Date | null;
 }
 
 export interface PeticionCompra {
@@ -61,6 +77,9 @@ export interface PeticionCompra {
   planId: string;
   codigoDescuento?: string | null;
   aceptaCondiciones?: boolean;
+  /** «Pagar y reservar»: la clase y, si la sala tiene mapa, el sitio. */
+  sesionId?: string | null;
+  spotId?: string | null;
 }
 
 /** Decide la compra o la rechaza. NO reserva la plaza de matrícula (ver `reservarMatriculaDeCompra`). */
@@ -98,9 +117,18 @@ export async function decidirCompraDePlan(
   const { data: socio } = await admin.from('socios').select('email').eq('id', socioId).eq('studio_id', p.studioId).maybeSingle();
   const email = ((socio?.email as string | null) ?? usuario.email ?? '').trim().toLowerCase() || null;
 
+  const sesionId = p.sesionId || null;
+  const spotId = sesionId ? (p.spotId || null) : null;
+  let cierreClase: Date | null = null;
+  if (sesionId) {
+    const clase = await comprobarClase(admin, { studioId: p.studioId, planId: p.planId, socioId, email, sesionId, spotId });
+    if (!clase.ok) return { ok: false, rechazo: clase.rechazo };
+    cierreClase = clase.cierre;
+  }
+
   // Clase de prueba: sin clase concreta no se vende (es la regla de los dos checkouts).
   const rechazoPrueba = await rechazoCompraPrueba(admin, {
-    studioId: p.studioId, plan: { es_prueba: plan.es_prueba, precio: plan.precio }, socioId, email, sesionId: null,
+    studioId: p.studioId, plan: { es_prueba: plan.es_prueba, precio: plan.precio }, socioId, email, sesionId,
   });
   if (rechazoPrueba) return { ok: false, rechazo: { status: rechazoPrueba.status, error: rechazoPrueba.error, codigo: rechazoPrueba.codigo } };
 
@@ -112,7 +140,7 @@ export async function decidirCompraDePlan(
   const cobroCuota = await cobroCuotaOnline(admin, {
     studioId: p.studioId, planId: p.planId,
     plan: { tipo: plan.tipo as string, precio: Number(plan.precio), periodicidad_meses: plan.periodicidad_meses as number | null },
-    socioId, conSesion: false, conRecibo: false,
+    socioId, conSesion: sesionId !== null, conRecibo: false,
   });
   if (cobroCuota.tipo === 'rechazo') return { ok: false, rechazo: { status: cobroCuota.status, error: cobroCuota.error, codigo: cobroCuota.codigo } };
   if (cobroCuota.tipo === 'prorrateo') {
@@ -163,8 +191,68 @@ export async function decidirCompraDePlan(
       socioId, email, planId: p.planId, planNombre: plan.nombre as string,
       importePlan: importe, codigoDescuentoId, codigoAplicado: codigoDescuentoId !== null, descuento,
       terminosHash: sello?.hash ?? null, cicloFin, cuotaTexto, cuotaFrase,
+      sesionId, spotId, cierreClase,
     },
   };
+}
+
+/**
+ * La clase de «pagar y reservar», con las mismas comprobaciones y en el mismo
+ * orden que la rama de clase de `/api/stripe/checkout`: cobrar por una clase
+ * que ya no se puede reservar sería cobrar sin poder entregar nada.
+ */
+async function comprobarClase(
+  admin: SupabaseClient,
+  p: { studioId: string; planId: string; socioId: string; email: string | null; sesionId: string; spotId: string | null },
+): Promise<{ ok: true; cierre: Date } | { ok: false; rechazo: Rechazo }> {
+  const no = (status: number, error: string, codigo?: string) => ({ ok: false as const, rechazo: { status, error, ...(codigo ? { codigo } : {}) } });
+  const { data: sesion, error } = await admin
+    .from('sesiones').select('inicio, cancelada, tipo_clase_id, precio_puntual')
+    .eq('id', p.sesionId).eq('studio_id', p.studioId).maybeSingle();
+  if (error) return no(503, 'No hemos podido leer la clase. Inténtalo en un momento.');
+  if (!sesion) return no(404, 'Clase no encontrada');
+  if (sesion.cancelada) return no(409, 'Esta clase está cancelada');
+  const inicio = sesion.inicio as string;
+  if (new Date(inicio).getTime() <= Date.now()) return no(409, 'Esta clase ya ha empezado');
+  const tipoClaseId = (sesion.tipo_clase_id as string | null) ?? null;
+
+  const { data: tiposDelPlan } = await admin.from('plan_tipos_clase').select('tipo_clase_id').eq('plan_id', p.planId);
+  if (tiposDelPlan && tiposDelPlan.length > 0 && !tiposDelPlan.some(t => t.tipo_clase_id === tipoClaseId)) {
+    return no(400, 'Este plan no cubre el tipo de esta clase');
+  }
+
+  const cierreSuave = await cierreAperturaSuave(admin, p.studioId, p.socioId, inicio, { planQueCompra: p.planId });
+  if (cierreSuave) return no(409, MENSAJE_APERTURA_SUAVE(cierreSuave), 'apertura-suave');
+
+  const ventana = await comprobarVentanaReserva(admin, { studioId: p.studioId, tipoClaseId, inicioISO: inicio });
+  if (ventana) return no(409, ventana.error, ventana.codigo);
+
+  const precioPuntual = sesion.precio_puntual as number | null;
+  if (typeof precioPuntual === 'number' && precioPuntual > 0) {
+    const { data: planRows } = await admin.from('planes_tarifa').select('*').eq('studio_id', p.studioId);
+    const planesEstudio = await hidratarTiposDePlanes(admin as never, p.studioId, ((planRows ?? []) as RowPlanesTarifa[]).map(mapPlanTarifa));
+    if (tienePrecioEspecial(precioPuntual, planDeClaseSuelta(planesEstudio, tipoClaseId))) {
+      return no(409, 'Esta clase tiene un precio especial: resérvala en el estudio. No te hemos cobrado nada.', 'precio-especial');
+    }
+  }
+
+  const plaza = await comprobarPlazaAntesDeCobrar(admin, {
+    studioId: p.studioId, sesionId: p.sesionId, socioId: p.socioId, email: p.email, spotId: p.spotId,
+  });
+  if (!plaza.ok) {
+    return {
+      ok: false,
+      rechazo: {
+        status: plaza.codigo === 'error' ? 503 : 409, error: plaza.error, codigo: plaza.codigo,
+        ...(plaza.posicionEspera != null ? { posicionEspera: plaza.posicionEspera } : {}),
+      },
+    };
+  }
+
+  const cierre = await cierreDeReserva(admin, { studioId: p.studioId, tipoClaseId, inicioISO: inicio });
+  const caducidad = caducidadDeCompra(cierre, Date.now());
+  if (!caducidad.ok) return no(409, caducidad.error, caducidad.codigo);
+  return { ok: true, cierre };
 }
 
 /**

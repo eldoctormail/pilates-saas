@@ -40,7 +40,14 @@ trap 'rm -rf "$TMP"' EXIT
 
 echo "→ Migraciones"
 cd "$TMP"
-npx --yes supabase@2 db push --db-url "$DB_URL" --include-all
+# Sin Node en el servidor (lo normal en una Raspberry o un servidor limpio), la
+# CLI corre en un contenedor de Node con la red del servidor.
+if command -v npx >/dev/null 2>&1; then
+  npx --yes supabase@2 db push --db-url "$DB_URL" --include-all
+else
+  docker run --rm --network host -v "$TMP":/w -w /w node:24-bookworm-slim \
+    npx --yes supabase@2 db push --db-url "$DB_URL" --include-all
+fi
 
 # Lo que las migraciones nuevas del repo original vuelvan a traer de Tentare
 # (su dominio, la zona de Madrid, horarios de Madrid, la prueba de 7 días), se

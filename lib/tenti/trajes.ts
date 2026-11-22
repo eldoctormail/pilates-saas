@@ -22,6 +22,7 @@
 // solo su nombre como tipo. El dibujo viaja en el chunk del motor.
 
 /** Los trajes del original de Coucou (mochi-outfits.js), con sus nombres de allí. */
+import { ZONA_HORARIA } from '../zona-horaria.ts';
 export type NombreTrajeCoucou =
   | 'beanie' | 'santaHat' | 'partyHat' | 'crown' | 'witchHat'
   | 'sunglasses' | 'roundGlasses' | 'scarf' | 'pumpkin' | 'bow';
@@ -63,7 +64,7 @@ export function esTraje(v: unknown): v is Traje {
 
 // Una vez por módulo: crear un Intl.DateTimeFormat cuesta (en Clientas era el
 // 80 % del coste: memoria «Intl por llamada es caro»).
-const MES_DIA_MADRID = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Madrid', month: '2-digit', day: '2-digit' });
+const MES_DIA_MADRID = new Intl.DateTimeFormat('en-CA', { timeZone: ZONA_HORARIA, month: '2-digit', day: '2-digit' });
 
 /** 'MM-DD' de `ahora` en Madrid. */
 export function mesDiaEnMadrid(ahora: Date): string {

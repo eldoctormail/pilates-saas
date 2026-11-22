@@ -12,6 +12,7 @@
 //   · fechas: 'YYYY-MM-DD' para las columnas `date`, ISO 8601 para instantes;
 //   · `null` cuando el dato no existe; nunca un 0 o un '' inventados.
 
+import { ZONA_HORARIA } from '../zona-horaria.ts';
 import { importeIngresado, situacionRecibo, type SituacionRecibo } from '../billing/situacion-recibo.ts';
 
 export const MONEDA = 'EUR';
@@ -51,7 +52,7 @@ const n = (f: Fila, k: string) => num(f[k] as number | string | null);
 export function estudioPublico(f: Fila) {
   return {
     id: s(f, 'id'), nombre: s(f, 'nombre'), razonSocial: s(f, 'razon_social'), nif: s(f, 'nif'),
-    direccion: s(f, 'direccion'), zonaHoraria: s(f, 'zona_horaria') ?? 'Europe/Madrid', moneda: MONEDA,
+    direccion: s(f, 'direccion'), zonaHoraria: s(f, 'zona_horaria') ?? ZONA_HORARIA, moneda: MONEDA,
     ivaPorDefecto: n(f, 'iva_por_defecto'),
     // `sin_facturas`: Tentare no emite facturas para este estudio y las hace el
     // software contable a partir de los recibos.

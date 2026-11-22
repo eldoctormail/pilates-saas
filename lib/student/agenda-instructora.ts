@@ -7,10 +7,11 @@
 // estudio (decisión del fundador, 14-sep-2026: la instructora nunca cancela,
 // pide la baja). Aquí solo se traduce lo que ya ha pasado a lo que ve ella.
 
+import { ZONA_HORARIA } from '../zona-horaria.ts';
 import { revisionReciente, type RevisionVista } from './baja-instructora.ts';
 
 /** La zona del negocio. Mismo criterio que `lib/student/formato.ts` (`ZONA`). */
-export const ZONA_ESTUDIO = 'Europe/Madrid';
+export const ZONA_ESTUDIO = ZONA_HORARIA;
 
 const fmtFecha = new Intl.DateTimeFormat('en-CA', { timeZone: ZONA_ESTUDIO });
 const fmtHora = new Intl.DateTimeFormat('es-ES', {

@@ -1,5 +1,6 @@
 'use client';
 
+import { ZONA_HORARIA } from '../../../lib/zona-horaria.ts';
 import { useState } from 'react';
 import Link from 'next/link';
 import { ConfirmationDialog } from '@/components/student/ui/ConfirmationDialog';
@@ -23,7 +24,7 @@ function fechaLarga(iso: string | null): string | null {
   if (!iso) return null;
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return null;
-  return d.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Madrid' });
+  return d.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric', timeZone: ZONA_HORARIA });
 }
 
 export function ConsentimientoSaludPerfil({ inicial, studioId, nombreEstudio, hrefMensajes }: {

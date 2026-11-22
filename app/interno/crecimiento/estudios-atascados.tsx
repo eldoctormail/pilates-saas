@@ -6,6 +6,7 @@
 // constancia (solo inserción, con fecha). Sección con su propio permiso
 // (growth.read): si falta, no se pinta. Anotar exige crm.update.
 
+import { ZONA_HORARIA } from '../../../lib/zona-horaria.ts';
 import { useCallback, useEffect, useState } from 'react';
 import {
   anotarSeguimientoAtascado, fetchEstudiosAtascados, type EstudiosAtascados,
@@ -15,7 +16,7 @@ import {
 } from '@/lib/alta/atascados';
 
 const fecha = (iso: string | null) =>
-  iso ? new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', timeZone: 'Europe/Madrid' }) : '—';
+  iso ? new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', timeZone: ZONA_HORARIA }) : '—';
 
 const ETIQUETA_SITUACION: Record<SituacionAlerta, string> = {
   pendiente: 'Pendiente',

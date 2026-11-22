@@ -1,5 +1,6 @@
 'use client';
 
+import { ZONA_HORARIA } from '../../../lib/zona-horaria.ts';
 import { useState } from 'react';
 import Link from 'next/link';
 import { textoBaja, type ClaseQueDa } from '@/lib/student/agenda-instructora';
@@ -46,7 +47,7 @@ export function ProximaClaseQueDaCard({ clase, foto, cuando, enCurso: enCursoPor
   const abrirTerminar = () => {
     // Nunca antes del minuto en que empezó: «14:18» con un inicio de 14:18:10 se
     // leía como terminar antes de empezar.
-    const ahora = new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', hourCycle: 'h23', timeZone: 'Europe/Madrid' });
+    const ahora = new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', hourCycle: 'h23', timeZone: ZONA_HORARIA });
     const inicio = control?.horaInicioReal;
     setHoraFin(inicio && ahora < inicio ? inicio : ahora);
     setTerminando(true);

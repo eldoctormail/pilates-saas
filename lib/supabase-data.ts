@@ -1,3 +1,4 @@
+import { ZONA_HORARIA } from './zona-horaria.ts';
 import { capturarExcepcion, capturarMensaje } from '@/lib/sentry-cliente';
 import { esPlataforma, origenDe, type Plataforma } from '@/lib/plataformas/catalogo';
 import type { FilaCobrada } from '@/lib/billing/export-cobrado';
@@ -5473,7 +5474,7 @@ function mapStudio(r: RowStudios, horario?: RowStudioHorario[]): Studio {
     direccion: r.direccion,
     ciudad: r.ciudad,
     descripcion: r.descripcion ?? null,
-    zonaHoraria: r.zona_horaria ?? 'Europe/Madrid',
+    zonaHoraria: r.zona_horaria ?? ZONA_HORARIA,
     anioFundacion: r.anio_fundacion ?? null,
     lema: r.lema ?? null,
     fraseHeroe: r.frase_heroe ?? null,

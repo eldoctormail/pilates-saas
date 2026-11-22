@@ -1,3 +1,4 @@
+import { ZONA_HORARIA } from '../zona-horaria.ts';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import * as Sentry from '@sentry/nextjs';
 
@@ -39,7 +40,7 @@ export type ResultadoAusencia<T extends object = object> =
 // instante de un cambio de hora.
 function limiteDiaMadrid(fecha: string, finDelDia: boolean): string {
   const partes = new Intl.DateTimeFormat('en-US', {
-    timeZone: 'Europe/Madrid', timeZoneName: 'shortOffset',
+    timeZone: ZONA_HORARIA, timeZoneName: 'shortOffset',
   }).formatToParts(new Date(`${fecha}T12:00:00Z`));
   const offset = partes.find(p => p.type === 'timeZoneName')?.value ?? 'GMT+1';
   const horas = parseInt(offset.replace('GMT', '') || '+1', 10);

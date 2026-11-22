@@ -7,6 +7,7 @@
 // permisos, solo no incluye lo que no se le pide.
 //
 // Puro: se prueba con `node --test`.
+import { ZONA_HORARIA } from '../zona-horaria.ts';
 import { hoyEnEstudio } from '../utils.ts';
 
 import { euros } from './euros.ts';
@@ -254,7 +255,7 @@ export function compactarHistoria(
   eventos: readonly EventoHistoria[],
   opciones: { agruparClases: boolean; meses: boolean; hoyISO: string; tz?: string },
 ): ItemHistoria[] {
-  const tz = opciones.tz ?? 'Europe/Madrid';
+  const tz = opciones.tz ?? ZONA_HORARIA;
   const juntos: EventoHistoria[] = [];
   for (let i = 0; i < eventos.length; i++) {
     const e = eventos[i];

@@ -14,12 +14,13 @@
 //
 // Puro: se prueba con `node --test`.
 
+import { ZONA_HORARIA } from '../zona-horaria.ts';
 import { heredaOverride, instanteDeApertura } from '../booking-logic.ts';
 import { exigePlanAlReservar } from '../bono-logic.ts';
 import { frasesPoliticaEstudio } from '../politica-estudio-textos.ts';
 import type { ReglasReserva, TipoConReglas } from './reglas-reserva.ts';
 
-const ZONA = 'Europe/Madrid';
+const ZONA = ZONA_HORARIA;
 
 /**
  * Las reglas que se le aplican a una clase de ese tipo (sin tipo: las del estudio).
@@ -187,7 +188,7 @@ export function claseDeEjemplo(
   return { inicio: juevesALas18(ahora), nombre: null, tipoId: null, deEjemplo: true };
 }
 
-/** El próximo jueves a las 18:00 en Madrid (si hoy es jueves, el de la semana que viene). */
+/** El próximo jueves a las 18:00 en la zona del estudio (si hoy es jueves, el de la semana que viene). */
 function juevesALas18(ahora: Date): Date {
   const hoy = new Intl.DateTimeFormat('en-CA', { timeZone: ZONA }).format(ahora); // AAAA-MM-DD
   const [y, m, d] = hoy.split('-').map(Number);
@@ -195,9 +196,9 @@ function juevesALas18(ahora: Date): Date {
   const dia = base.getUTCDay(); // 4 = jueves
   const faltan = ((4 - dia + 7) % 7) || 7;
   const jueves = new Date(base.getTime() + faltan * 86_400_000);
-  // 18:00 en Madrid: se prueba con +02:00 y se corrige si ese día es horario de invierno.
+  // 18:00 en la zona del estudio: se prueba Madrid (verano e invierno) y Argentina (−03:00).
   const iso = jueves.toISOString().slice(0, 10);
-  for (const desfase of ['+02:00', '+01:00']) {
+  for (const desfase of ['+02:00', '+01:00', '-03:00']) {
     const t = new Date(`${iso}T18:00:00${desfase}`);
     if (new Intl.DateTimeFormat('es-ES', { timeZone: ZONA, hour: '2-digit', hour12: false }).format(t) === '18') return t;
   }

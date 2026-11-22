@@ -19,12 +19,13 @@
  * número en `consentimiento_salud_cambiar` como defensa en profundidad (lo
  * vigila `lib/rgpd-menores-aceptacion-contrato.test.ts`).
  */
+import { ZONA_HORARIA } from '../zona-horaria.ts';
 export const EDAD_MINIMA_CONSENTIMIENTO_SALUD = 14;
 
 /** Por encima de esto, la fecha se trata como un error de tecleo. */
 export const EDAD_MAXIMA_PLAUSIBLE = 120;
 
-const TZ_ESTUDIO = 'Europe/Madrid';
+const TZ_ESTUDIO = ZONA_HORARIA;
 
 interface Dia { y: number; m: number; d: number }
 

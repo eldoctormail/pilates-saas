@@ -1,3 +1,4 @@
+import { ZONA_HORARIA } from './zona-horaria.ts';
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 
@@ -126,7 +127,7 @@ export function finDeSemana(fecha: Date | string): Date {
 // de las copias llevaba `timeZone`, así que editar una serie mandaba la hora
 // buena y editar esa misma clase suelta mandaba la del navegador: mismo aviso,
 // dos horas distintas. Un único sitio, y que no vuelva a pasar.
-export const TZ_ESTUDIO = 'Europe/Madrid';
+export const TZ_ESTUDIO = ZONA_HORARIA;
 
 /**
  * Un formateador por zona horaria, construido la primera vez y reutilizado.

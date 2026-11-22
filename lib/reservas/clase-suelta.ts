@@ -15,6 +15,7 @@
 // servidor (qué cobra): una sola regla. Sin `@/`: lo prueba `node --test`.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { ZONA_HORARIA } from '../zona-horaria.ts';
 import type { PlanTarifa, Suscripcion } from '../types.ts';
 import { planCubreTipoClase } from '../bono-logic.ts';
 import { idReciboDeClaseSuelta, PREFIJO_RECIBO_DE_CLASE_SUELTA } from '../cobros/recibo-de-cita.ts';
@@ -298,7 +299,7 @@ export function avisoClaseSueltaAlQuitar(p: {
 /** Estados de una reserva que sí ocupan (o han ocupado) la clase: la que se canceló no se cobra dos veces. */
 const RESERVA_VIVA = new Set(['CONFIRMADA', 'ASISTIDA', 'NO_ASISTIO']);
 
-/** El lunes (YYYY-MM-DD) de la semana de Madrid de un instante, como `date_trunc('week', … at time zone 'Europe/Madrid')`. */
+/** El lunes (YYYY-MM-DD) de la semana de Madrid de un instante, como `date_trunc('week', … at time zone ZONA_HORARIA)`. */
 export function semanaEnEstudio(inicioISO: string): string {
   const [a, m, d] = hoyEnEstudio(new Date(inicioISO)).split('-').map(Number);
   const dia = new Date(Date.UTC(a, m - 1, d));

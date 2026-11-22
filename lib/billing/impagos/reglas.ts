@@ -8,6 +8,7 @@
 //     ninguno: llegar al último hito solo ESCALA el incidente (lo ve /interno) y el aviso
 //     habla de «posible restricción». Suspender es un acto humano (`studios.suspendido_*`).
 //   · Los plazos son una propuesta y se pueden cambiar (`ajustes_plataforma`).
+import { ZONA_HORARIA } from '../../zona-horaria.ts';
 import { hoyEnEstudio, masDias } from '../../utils.ts';
 
 export interface PoliticaImpagos {
@@ -63,7 +64,7 @@ export function diasDesde(abiertoEn: Date | string, ahora: Date): number {
 
 /** Hora de Madrid (0–23) de un instante. */
 export function horaEnMadrid(ahora: Date): number {
-  return Number(new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Madrid', hour: '2-digit', hourCycle: 'h23' }).format(ahora));
+  return Number(new Intl.DateTimeFormat('en-GB', { timeZone: ZONA_HORARIA, hour: '2-digit', hourCycle: 'h23' }).format(ahora));
 }
 
 export interface AvisoHecho { dia: number }

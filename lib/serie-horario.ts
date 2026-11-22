@@ -2,7 +2,7 @@
 // estudio (Europe/Madrid).
 //
 // Es el ESPEJO en TypeScript de lo que hace la RPC `editar_serie_desde` en SQL
-// (`... AT TIME ZONE 'Europe/Madrid'`, migración 0114). La RPC es la autoridad —lo
+// (`... AT TIME ZONE ZONA_HORARIA`, migración 0114). La RPC es la autoridad —lo
 // escribe todo-o-nada en una transacción—; esto calcula lo mismo para el pintado
 // optimista, de modo que lo que se ve en el calendario coincide con lo que la base
 // de datos acaba guardando, incluido el cambio de horario de verano. El test
@@ -13,6 +13,7 @@
 // pintada no era la del estudio. Igual que ya se hizo con los avisos (TZ_ESTUDIO
 // en utils), aquí se ancla Madrid.
 
+import { ZONA_HORARIA } from './zona-horaria.ts';
 import { fechaLocalDe, horaParedAInstante } from './citas/slots.ts';
 import { TZ_ESTUDIO } from './utils.ts';
 

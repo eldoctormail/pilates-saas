@@ -5,6 +5,7 @@
 // Lo comparten el endpoint (que devuelve el estado ya resuelto) y los tests.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { ZONA_HORARIA } from '../zona-horaria.ts';
 import { CAPITULOS } from '../tour/capitulos.ts';
 import { parseProgreso } from '../tour/progreso.ts';
 
@@ -21,7 +22,7 @@ export interface ResumenVisita {
 const TOTAL_PASOS = CAPITULOS.reduce((n, c) => n + c.pasos.length, 0);
 
 const fecha = (iso: string) =>
-  new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', timeZone: 'Europe/Madrid' });
+  new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', timeZone: ZONA_HORARIA });
 
 export function resumenVisita(
   e: { obligatorio: boolean; completadaEn: string | null; progreso: unknown },

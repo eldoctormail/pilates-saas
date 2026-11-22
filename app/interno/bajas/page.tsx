@@ -15,6 +15,7 @@
 //     grupo de la dueña cambia con la regla propuesta. Nada de esto cierra un panel.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { ZONA_HORARIA } from '../../../lib/zona-horaria.ts';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { fetchBajas } from '@/lib/interno/client';
 import {
@@ -24,10 +25,10 @@ import type { EstadoEstudio } from '@/lib/retencion/situacion-estudio';
 import type { FaseGratis } from '@/lib/billing/plan-gratis';
 
 const fecha = (ymd: string | null) => (ymd
-  ? new Date(`${ymd}T12:00:00Z`).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'Europe/Madrid' })
+  ? new Date(`${ymd}T12:00:00Z`).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric', timeZone: ZONA_HORARIA })
   : '—');
 const fechaHora = (iso: string | null) => (iso
-  ? new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', timeZone: 'Europe/Madrid' })
+  ? new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', timeZone: ZONA_HORARIA })
   : 'nunca');
 
 const TONO: Record<EstadoEstudio | 'ERROR', string> = {

@@ -12,6 +12,7 @@
 //     de lo que se ha podido mirar.
 // La lógica (qué es tarea, en qué orden, qué texto) vive en lib/interno/hoy.ts.
 
+import { ZONA_HORARIA } from '../../lib/zona-horaria.ts';
 import { useEffect } from 'react';
 import Link from 'next/link';
 import {
@@ -43,7 +44,7 @@ const TONO_ESTUDIO: Record<EstudioAMirar['tono'], string> = {
 const FRESCO_MS = 60_000;
 
 const fechaDeHoy = () => {
-  const t = new Date().toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Madrid' });
+  const t = new Date().toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', timeZone: ZONA_HORARIA });
   return t.charAt(0).toUpperCase() + t.slice(1);
 };
 

@@ -1,5 +1,6 @@
 'use client';
 
+import { ZONA_HORARIA } from '../../../lib/zona-horaria.ts';
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { AlertTriangle, CalendarPlus } from 'lucide-react';
@@ -184,7 +185,7 @@ function Contenido({ socio, lo, onCerrar, onHecho }: { socio: Socio; lo: string;
 }
 
 function hora(iso: string): string {
-  return new Intl.DateTimeFormat('es-ES', { timeZone: 'Europe/Madrid', hour: '2-digit', minute: '2-digit' }).format(new Date(iso));
+  return new Intl.DateTimeFormat('es-ES', { timeZone: ZONA_HORARIA, hour: '2-digit', minute: '2-digit' }).format(new Date(iso));
 }
 
 function etiquetaDia(dia: string, hoy: string): string {

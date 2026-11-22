@@ -6,6 +6,7 @@
 // Reutiliza el layout y la guardia de /interno. Al marcar una como hecha, el
 // teléfono se borra: una vez atendida no se conserva.
 
+import { ZONA_HORARIA } from '../../../lib/zona-horaria.ts';
 import { useCallback, useEffect, useState } from 'react';
 import { CheckCircle2, Loader2, Phone } from 'lucide-react';
 import { fetchLlamadas, marcarLlamadaHecha, SinAcceso, type LlamadaInterna } from '@/lib/interno/client';
@@ -13,7 +14,7 @@ import { ETIQUETA_HORA } from '@/lib/llamada/solicitud';
 import { mostrarE164 } from '@/lib/llamada/telefono';
 
 const fechaHora = (iso: string) =>
-  new Date(iso).toLocaleString('es-ES', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Madrid' });
+  new Date(iso).toLocaleString('es-ES', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: ZONA_HORARIA });
 
 export default function LlamadasPage() {
   const [llamadas, setLlamadas] = useState<LlamadaInterna[] | null>(null);

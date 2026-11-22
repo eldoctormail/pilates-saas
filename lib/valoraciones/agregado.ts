@@ -18,6 +18,7 @@
 // Puro: se prueba con `node --test`.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { ZONA_HORARIA } from '../zona-horaria.ts';
 import { MINIMO_VALORACIONES } from '../portal-tema/valoracion.ts';
 
 export interface VotoValoracion {
@@ -37,7 +38,7 @@ export interface AgregadoValoracion {
   hasta: string;
 }
 
-const fmtMes = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Madrid', year: 'numeric', month: '2-digit' });
+const fmtMes = new Intl.DateTimeFormat('en-CA', { timeZone: ZONA_HORARIA, year: 'numeric', month: '2-digit' });
 
 /** «2026-08» para un instante, en hora del estudio. */
 export function mesEnMadrid(iso: string | Date): string {

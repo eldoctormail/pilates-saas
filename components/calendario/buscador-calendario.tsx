@@ -1,5 +1,6 @@
 'use client';
 
+import { ZONA_HORARIA } from '../../lib/zona-horaria.ts';
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Search, X } from 'lucide-react';
@@ -16,7 +17,7 @@ import { buscarSesiones, type SesionBuscable } from '@/lib/calendario-busqueda';
 // fecha, para ir a una. Cerrado con algo escrito, el botón lo dice y se borra
 // con la ×.
 
-const fmtDia = new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'short', timeZone: 'Europe/Madrid' });
+const fmtDia = new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'short', timeZone: ZONA_HORARIA });
 
 export function BuscadorCalendario({ candidatas, texto, onTexto, onSeleccionar, compacto }: {
   candidatas: SesionBuscable[];

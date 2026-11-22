@@ -5,6 +5,7 @@ import { leerCabeceraFirma, manifiestoDe, verificarFirma } from './firma.ts';
 import { importeCoincide, leerReferencia, nuevoIdCompra, referenciaDeCompra, referenciaDeRecibo } from './referencia.ts';
 import { idsDe } from '../billing/ids-compra.ts';
 import { configMercadoPago } from './config.ts';
+import { hayQueProcesar } from './conciliar-reglas.ts';
 
 const SECRETO = 'secreto-de-prueba';
 const firmar = (manifiesto: string) => createHmac('sha256', SECRETO).update(manifiesto).digest('hex');
@@ -87,4 +88,14 @@ test('referencia de compra: ida y vuelta; el id de compra da ids de entrega úni
   assert.deepEqual(idsDe(id), idsDe(id));
   assert.notEqual(idsDe(id).reciboId, idsDe(nuevoIdCompra()).reciboId);
   assert.match(idsDe(id).reciboId, /^rec-web-mpc_[0-9a-f]{20}$/);
+});
+
+test('conciliador: qué pagos se (re)procesan', () => {
+  assert.equal(hayQueProcesar({ status: 'approved' }, undefined), true, 'nuevo');
+  assert.equal(hayQueProcesar({ status: 'approved' }, { estado: 'approved', desenlace: 'aplicado' }), false, 'ya aplicado');
+  assert.equal(hayQueProcesar({ status: 'approved' }, { estado: 'in_process', desenlace: 'pendiente' }), true, 'pendiente que se aprobó');
+  assert.equal(hayQueProcesar({ status: 'in_process' }, { estado: 'in_process', desenlace: 'pendiente' }), false, 'sigue pendiente');
+  assert.equal(hayQueProcesar({ status: 'approved' }, { estado: 'approved', desenlace: 'rechazado' }), false, 'rechazado: no re-alertar en cada pasada');
+  assert.equal(hayQueProcesar({ status: 'refunded' }, { estado: 'approved', desenlace: 'aplicado' }), true, 'aplicado y luego devuelto: avisar');
+  assert.equal(hayQueProcesar({ status: 'refunded' }, { estado: 'refunded', desenlace: 'aplicado' }), false, 'devolución ya avisada');
 });

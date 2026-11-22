@@ -155,6 +155,32 @@ begin
   end if;
 end $$;
 
+-- Las funciones que llaman al servidor por su cuenta (no desde un trabajo de
+-- pg_cron, p. ej. vigilar_jobs_http y vigilar_dobles_cobros), igual: la base de
+-- la URL sale del secreto 'app_url'. El cuerpo de pg_get_functiondef va entre
+-- $function$, así que el reemplazo es el mismo que en los comandos de pg_cron.
+do $$
+declare
+  v_vieja constant text := '''https://www.tentare.app';
+  v_nueva constant text :=
+    '(select decrypted_secret from vault.decrypted_secrets where name = ''app_url'') || ''';
+  r record;
+begin
+  for r in
+    select p.oid, p.oid::regprocedure as firma
+    from pg_proc p
+    join pg_namespace n on n.oid = p.pronamespace
+    where n.nspname not in ('pg_catalog', 'information_schema')
+      and p.prokind in ('f', 'p')
+      and not exists (select 1 from pg_depend d
+                      where d.classid = 'pg_proc'::regclass and d.objid = p.oid and d.deptype = 'e')
+      and p.prosrc like '%' || v_vieja || '%'
+  loop
+    execute replace(pg_get_functiondef(r.oid), v_vieja, v_nueva);
+    raise notice 'url: función %', r.firma;
+  end loop;
+end $$;
+
 -- Ninguna función de la base puede seguir llamando al servidor de Tentare.
 do $$
 declare v_lista text;

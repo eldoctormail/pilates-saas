@@ -5,9 +5,10 @@
 #
 # Uso:  deploy/scripts/migrar.sh /ruta/a/supabase-project
 #
-# Se puede volver a correr: solo aplica las migraciones nuevas y actualiza los
-# secretos. NO carga supabase/seed.sql (son datos de demostración y empieza con
-# un TRUNCATE de todo).
+# Se puede volver a correr: solo aplica las migraciones nuevas, vuelve a adaptar
+# la base (deploy/sql/adaptar-autoalojado.sql) y actualiza los secretos. NO
+# carga supabase/seed.sql (son datos de demostración y empieza con un TRUNCATE
+# de todo).
 set -eu
 DEPLOY="$(cd "$(dirname "$0")/.." && pwd)"
 REPO="$(cd "$DEPLOY/.." && pwd)"
@@ -30,9 +31,22 @@ CRON_SECRETO=$(leer "$DEPLOY/.env" SUPABASE_CRON_SECRET)
 # compose oficial de Supabase.
 DB_URL="postgresql://postgres.${TENANT}:${PGPASS}@127.0.0.1:${PGPORT}/postgres"
 
-echo "→ Migraciones ($(ls "$REPO/supabase/migrations" | wc -l) archivos)"
-cd "$REPO"
+# Una copia de las migraciones con los cinco arreglos que hacen falta para
+# recorrerlas desde una base vacía (los mismos que el job de CI). La de
+# supabase/migrations/ no se toca.
+TMP="$(mktemp -d)"
+trap 'rm -rf "$TMP"' EXIT
+"$DEPLOY/scripts/preparar-migraciones.sh" "$TMP"
+
+echo "→ Migraciones"
+cd "$TMP"
 npx --yes supabase@2 db push --db-url "$DB_URL" --include-all
+
+# Lo que las migraciones nuevas del repo original vuelvan a traer de Tentare
+# (su dominio, la zona de Madrid, horarios de Madrid, la prueba de 7 días), se
+# adapta otra vez. Falla si algo sigue llamando a tentare.app.
+echo "→ Adaptación del servidor propio"
+docker exec -i supabase-db psql -U postgres -d postgres -v ON_ERROR_STOP=1 -q < "$DEPLOY/sql/adaptar-autoalojado.sql"
 
 echo "→ Secretos de Vault"
 docker exec -i supabase-db psql -U postgres -d postgres -v ON_ERROR_STOP=1 \

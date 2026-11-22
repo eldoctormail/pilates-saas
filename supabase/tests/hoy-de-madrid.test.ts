@@ -9,6 +9,17 @@ import { sqlLocal } from '../../lib/db/rls-test-helpers.ts';
 
 const sql = sqlLocal();
 
+// La zona del estudio es la que tenga la base: 'Europe/Madrid' en Tentare, la del país en un servidor propio
+// (migr 20261122000000_autoalojado_zona_y_url y deploy/sql/adaptar-autoalojado.sql). Sale del default de
+// studios.zona_horaria, que esas migraciones cambian a la vez que el resto.
+async function zonaDeLaBase(): Promise<string> {
+  const [fila] = await sql<{ def: string | null }[]>`
+    select column_default as def from information_schema.columns
+     where table_schema = 'public' and table_name = 'studios' and column_name = 'zona_horaria'`;
+  return /'([^']+)'/.exec(fila?.def ?? '')?.[1] ?? 'Europe/Madrid';
+}
+const escaparRegex = (s: string) => s.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&');
+
 // Las únicas que pueden seguir con `current_date`, y por qué. Añadir una aquí es una decisión: lleva su motivo.
 const CON_CURRENT_DATE_A_PROPOSITO: Record<string, string> = {
   // El tope diario del piloto automático (un límite de IA, no de dinero ni de derechos): su «día» es el de UTC y así lo
@@ -17,8 +28,9 @@ const CON_CURRENT_DATE_A_PROPOSITO: Record<string, string> = {
 };
 
 test('hoy_estudio() es el día de Madrid', async () => {
+  const zona = await zonaDeLaBase();
   const [fila] = await sql<{ igual: boolean }[]>`
-    select public.hoy_estudio() = (now() at time zone 'Europe/Madrid')::date as igual
+    select public.hoy_estudio() = (now() at time zone ${zona})::date as igual
   `;
   assert.equal(fila?.igual, true);
 });
@@ -53,8 +65,9 @@ test('las fronteras de semana y de mes de los créditos de fidelidad son las 00:
   const [{ def }] = await sql<{ def: string }[]>`
     select pg_get_functiondef('public.otorgar_credito_disparador(text,text,text,text,text)'::regprocedure) as def
   `;
-  assert.match(def, /v_lunes::timestamp at time zone 'Europe\/Madrid'/);
-  assert.match(def, /date_trunc\('month', public\.hoy_estudio\(\)::timestamp\) at time zone 'Europe\/Madrid'/);
+  const zona = escaparRegex(await zonaDeLaBase());
+  assert.match(def, new RegExp(`v_lunes::timestamp at time zone '${zona}'`));
+  assert.match(def, new RegExp(`date_trunc\\('month', public\\.hoy_estudio\\(\\)::timestamp\\) at time zone '${zona}'`));
   assert.doesNotMatch(def, /::timestamptz/, 'una conversión de día a instante sin zona cae en UTC');
 });
 

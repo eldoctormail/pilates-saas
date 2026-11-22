@@ -85,13 +85,16 @@ Crea `deploy/.env` con los secretos internos, las claves de Inngest y las de pus
 deploy/scripts/migrar.sh ~/supabase-project
 ```
 
-El script hace tres cosas:
+El script hace cuatro cosas:
 
-1. Aplica las migraciones con la CLI de Supabase (`npx supabase db push`).
-2. Carga en Vault `app_url` y `supabase_cron_secret`, que usan los trabajos de `pg_cron`.
-3. Al final verifica que ningún trabajo siga apuntando a `tentare.app`; el resultado tiene que ser 0.
+1. Prepara una copia de las migraciones con los cinco arreglos que hacen falta para recorrerlas desde una base vacía (`deploy/scripts/preparar-migraciones.sh`; son los mismos que usa el CI del repo original) y la aplica con la CLI de Supabase (`npx supabase db push`). Las de `supabase/migrations/` no se tocan.
+2. Vuelve a adaptar la base al servidor propio (`deploy/sql/adaptar-autoalojado.sql`): zona de Argentina, la URL de tu servidor en lugar de `tentare.app`, los horarios fijos de `pg_cron` corridos a la hora de Argentina y el estudio sin prueba de 7 días. Hace falta en **cada** actualización: las migraciones nuevas del repo original vuelven a traer lo de Tentare. Si algo sigue llamando a `tentare.app`, el script falla y lo dice. Si avisa de un horario que no puede correr solo (`WARNING: horario: …`), ajustalo a mano: `pg_cron` va en UTC y Argentina es UTC−3.
+3. Carga en Vault `app_url` y `supabase_cron_secret`, que usan los trabajos de `pg_cron`.
+4. Al final verifica que ningún trabajo siga apuntando a `tentare.app`; el resultado tiene que ser 0.
 
 Se puede volver a correr: solo aplica las migraciones nuevas. **No** carga `supabase/seed.sql`, que son datos de demostración y empiezan con un `TRUNCATE`.
+
+La instalación desde cero está probada: las 905 migraciones, la adaptación (dos veces, para comprobar que no cambia nada la segunda) y Vault, sobre una base vacía.
 
 ## 4. La app
 

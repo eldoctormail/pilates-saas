@@ -2,8 +2,10 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHmac } from 'node:crypto';
 import { leerCabeceraFirma, manifiestoDe, verificarFirma } from './firma.ts';
-import { importeCoincide, leerReferencia, referenciaDeRecibo } from './referencia.ts';
+import { importeCoincide, leerReferencia, nuevoIdCompra, referenciaDeCompra, referenciaDeRecibo } from './referencia.ts';
+import { idsDe } from '../billing/ids-compra.ts';
 import { configMercadoPago } from './config.ts';
+import { hayQueProcesar } from './conciliar-reglas.ts';
 
 const SECRETO = 'secreto-de-prueba';
 const firmar = (manifiesto: string) => createHmac('sha256', SECRETO).update(manifiesto).digest('hex');
@@ -75,4 +77,29 @@ test('config: exige token con forma y la clave del webhook', () => {
   assert.equal(configMercadoPago({ MERCADOPAGO_ACCESS_TOKEN: 'sk_live_x', MERCADOPAGO_WEBHOOK_SECRET: 's' }).ok, false);
   assert.equal(configMercadoPago({ MERCADOPAGO_ACCESS_TOKEN: 'APP_USR-123' }).ok, false);
   assert.equal(configMercadoPago({ MERCADOPAGO_ACCESS_TOKEN: 'TEST-123', MERCADOPAGO_WEBHOOK_SECRET: 's' }).ok, true);
+});
+
+test('referencia de compra: ida y vuelta; el id de compra da ids de entrega únicos y estables', () => {
+  const id = nuevoIdCompra();
+  assert.match(id, /^mpc_[0-9a-f]{32}$/);
+  const ref = referenciaDeCompra('studio-1', id);
+  assert.deepEqual(leerReferencia(ref), { tipo: 'compra', studioId: 'studio-1', compraId: id });
+  // La entrega deriva sus ids de la compra: mismo id → mismos ids (idempotencia); otro id → otros.
+  assert.deepEqual(idsDe(id), idsDe(id));
+  assert.notEqual(idsDe(id).reciboId, idsDe(nuevoIdCompra()).reciboId);
+  assert.match(idsDe(id).reciboId, /^rec-web-mpc_[0-9a-f]{20}$/);
+});
+
+test('conciliador: qué pagos se (re)procesan', () => {
+  const ap = { status: 'approved', transaction_amount: 100 };
+  assert.equal(hayQueProcesar(ap, undefined), true, 'nuevo');
+  assert.equal(hayQueProcesar(ap, { estado: 'approved', desenlace: 'aplicado', importe_devuelto: 0 }), false, 'ya aplicado');
+  assert.equal(hayQueProcesar(ap, { estado: 'in_process', desenlace: 'pendiente' }), true, 'pendiente que se aprobó');
+  assert.equal(hayQueProcesar({ status: 'in_process', transaction_amount: 100 }, { estado: 'in_process', desenlace: 'pendiente' }), false, 'sigue pendiente');
+  assert.equal(hayQueProcesar(ap, { estado: 'approved', desenlace: 'rechazado' }), false, 'rechazado: no re-alertar en cada pasada');
+  assert.equal(hayQueProcesar({ status: 'refunded', transaction_amount: 100, transaction_amount_refunded: 100 }, { estado: 'approved', desenlace: 'aplicado', importe_devuelto: 0 }), true, 'devuelto entero: anotar');
+  assert.equal(hayQueProcesar({ status: 'refunded', transaction_amount: 100, transaction_amount_refunded: 100 }, { estado: 'refunded', desenlace: 'aplicado', importe_devuelto: '100.00' }), false, 'devolución ya anotada');
+  assert.equal(hayQueProcesar({ status: 'approved', transaction_amount: 100, transaction_amount_refunded: 30 }, { estado: 'approved', desenlace: 'aplicado', importe_devuelto: 0 }), true, 'parcial nuevo');
+  assert.equal(hayQueProcesar({ status: 'approved', transaction_amount: 100, transaction_amount_refunded: 30 }, { estado: 'approved', desenlace: 'aplicado', importe_devuelto: 30 }), false, 'parcial ya anotado');
+  assert.equal(hayQueProcesar({ status: 'charged_back', transaction_amount: 100 }, { estado: 'approved', desenlace: 'aplicado', importe_devuelto: 0 }), true, 'contracargo');
 });

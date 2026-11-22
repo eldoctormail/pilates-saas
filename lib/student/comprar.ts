@@ -218,6 +218,42 @@ export async function comprarConBizum(
 }
 
 /**
+ * Mercado Pago (autoalojado, NEXT_PUBLIC_PASARELA=mercadopago): comprar el plan
+ * en Checkout Pro. El servidor (`/api/mercadopago/checkout`) decide el importe
+ * con las mismas reglas que Stripe y lo guarda; aquí solo se redirige. Se vuelve
+ * a «Mis bonos» (`?compra=ok&plan=…`), que comprueba que el bono llegó.
+ *
+ * Nunca lanza: un fallo es un mensaje para la hoja.
+ */
+export async function comprarConMercadoPago(
+  studioId: string,
+  planId: string,
+  codigoDescuento?: string | null,
+  aceptaCondiciones?: boolean,
+): Promise<{ ok: true } | { ok: false; error: string; sesionCaducada?: boolean }> {
+  try {
+    const auth = await portalAuthHeader();
+    const res = await fetch('/api/mercadopago/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...auth },
+      body: JSON.stringify({ studioId, planId, codigoDescuento: codigoDescuento || undefined, aceptaCondiciones, origen: 'portal' }),
+    });
+    if (res.status === 401) {
+      return { ok: false, sesionCaducada: true, error: 'Tu sesión ha caducado. Vuelve a entrar: no se te ha cobrado nada.' };
+    }
+    const cuerpo = (await res.json().catch(() => null)) as { url?: string; error?: string; codigo?: string } | null;
+    if (cuerpo?.codigo === 'faltan-preguntas') avisarFaltanPreguntas();
+    if (!res.ok || !cuerpo?.url) {
+      return { ok: false, error: cuerpo?.error ?? 'No hemos podido iniciar el pago. No se te ha cobrado nada.' };
+    }
+    (window.top ?? window).location.href = cuerpo.url;
+    return { ok: true };
+  } catch {
+    return { ok: false, error: 'No hemos podido iniciar el pago. Comprueba tu conexión — no se te ha cobrado nada.' };
+  }
+}
+
+/**
  * La clave publicable de Stripe, validada.
  *
  * Se valida la FORMA (`pk_`) y no solo que exista: una variable mal puesta —una

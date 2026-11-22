@@ -9,6 +9,7 @@ import { comprobarModoStripe } from '@/lib/billing/modo-stripe';
 import { evaluarReembolso, type PoliticaReembolso } from '@/lib/billing/politica-reembolso';
 import { paramsReembolso } from '@/lib/billing/reembolso-params';
 import { registrarAuditoriaServidor } from '@/lib/auditoria/registrar-servidor';
+import { pedirReembolsoMercadoPago } from '@/lib/mercadopago/reembolso-servidor';
 
 export const dynamic = 'force-dynamic';
 
@@ -50,16 +51,14 @@ export async function POST(req: NextRequest) {
     .from('studios')
     .select('stripe_account_id, reembolsos_activos, reembolso_plazo_dias, reembolso_solo_sin_usar')
     .eq('id', sesion.studioId).maybeSingle();
-  if (!studio?.stripe_account_id) {
-    return NextResponse.json({ error: 'Este estudio no tiene Stripe conectado.' }, { status: 409 });
-  }
+  if (!studio) return NextResponse.json({ error: 'Estudio no encontrado' }, { status: 404 });
 
   // `.eq('studio_id')` además del id: sin él, un id de recibo de OTRO estudio
   // se devolvería con la cuenta de Stripe de este. Mismo criterio que el resto
   // de endpoints de dinero del repo.
   const { data: recibo } = await admin
     .from('recibos')
-    .select('id, estado, importe, fecha_cobro, suscripcion_id, entrega_sesiones_despues, stripe_payment_intent_id, reembolso_fallido_en, reembolso_stripe_id, reembolso_solicitado_en, socio_id, concepto')
+    .select('id, estado, importe, fecha_cobro, suscripcion_id, entrega_sesiones_despues, stripe_payment_intent_id, reembolso_fallido_en, reembolso_stripe_id, reembolso_solicitado_en, socio_id, concepto, metodo_cobro')
     .eq('id', body.reciboId).eq('studio_id', sesion.studioId).maybeSingle();
   if (!recibo) return NextResponse.json({ error: 'Recibo no encontrado' }, { status: 404 });
 
@@ -98,6 +97,24 @@ export async function POST(req: NextRequest) {
     if (!veredicto.permitido) {
       return NextResponse.json({ error: veredicto.mensaje, motivo: veredicto.motivo }, { status: 409 });
     }
+  }
+
+  // Autoalojado: un recibo cobrado con Mercado Pago se devuelve por Mercado Pago.
+  // Misma política y mismo permiso de arriba; lo que viene después lo anota el
+  // webhook de Mercado Pago (o el conciliador), igual que aquí lo hace el de Stripe.
+  if (recibo.metodo_cobro === 'MERCADOPAGO') {
+    const mp = await pedirReembolsoMercadoPago(admin, sesion, {
+      id: recibo.id as string, importe: recibo.importe as number | string | null, concepto: (recibo.concepto as string | null) ?? null,
+      socio_id: (recibo.socio_id as string | null) ?? null, reembolso_solicitado_en: (recibo.reembolso_solicitado_en as string | null) ?? null,
+      reembolso_stripe_id: (recibo.reembolso_stripe_id as string | null) ?? null, reembolso_fallido_en: (recibo.reembolso_fallido_en as string | null) ?? null,
+    });
+    return mp.ok
+      ? NextResponse.json({ ok: true, refundId: mp.refundId, estado: mp.estado })
+      : NextResponse.json({ error: mp.error, ...(mp.motivo ? { motivo: mp.motivo } : {}) }, { status: mp.status });
+  }
+
+  if (!studio.stripe_account_id) {
+    return NextResponse.json({ error: 'Este estudio no tiene Stripe conectado.' }, { status: 409 });
   }
 
   const key = process.env.STRIPE_SECRET_KEY;

@@ -7,3 +7,5 @@
 0 0 * * *    /usr/local/bin/llamar no-shows
 0 3 * * *    /usr/local/bin/llamar materializar-plazas
 0 5 * * 1    /usr/local/bin/llamar dependency-risk
+# Mercado Pago: repasa los pagos de las últimas 72 h por si un aviso no llegó.
+*/30 * * * * /usr/local/bin/llamar mercadopago-conciliar

@@ -14,6 +14,7 @@
 //
 // Puro: se prueba con `node --test`.
 
+import { conMoneda } from '../moneda.ts';
 import { ZONA_HORARIA } from '../zona-horaria.ts';
 import { heredaOverride, instanteDeApertura } from '../booking-logic.ts';
 import { exigePlanAlReservar } from '../bono-logic.ts';
@@ -85,7 +86,7 @@ function duracion(minutos: number): string {
   return `${minutos} min`;
 }
 const cifra = (v: number | null | undefined) => (typeof v === 'number' && v > 0 ? v : 0);
-const euros = (n: number) => `${Number.isInteger(n) ? n : n.toFixed(2).replace('.', ',')} €`;
+const euros = (n: number) => `${conMoneda(Number.isInteger(n) ? n : n.toFixed(2).replace('.', ','))}`;
 const menos = (d: Date, minutos: number) => new Date(d.getTime() - minutos * 60_000);
 
 /**

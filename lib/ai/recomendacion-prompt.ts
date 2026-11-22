@@ -3,6 +3,7 @@
 // servidor) — para que la redacción de la IA nunca diverja entre las dos vías
 // de ejecución, igual que lib/engines/automation-engine.ts hace con la detección.
 
+import { conMoneda } from '../moneda.ts';
 export const RECOMENDACION_SYSTEM_PROMPT = `Eres el asistente de marketing y retención de un estudio de Pilates.
 Recibes datos de una situación real detectada automáticamente a partir de los datos del negocio y debes redactar el texto adecuado. Tono cercano y profesional — nunca infantil, como Apple Fitness o Strava, no como un chiringuito.
 
@@ -28,7 +29,7 @@ export function buildRecomendacionUserPrompt(input: RecomendacionInput): string 
     return `Tipo: REACTIVACION\nNombre: ${input.nombre}\nDías sin venir: ${input.diasSinVenir}\nDescuento a ofrecer: ${input.descuentoPct}%`;
   }
   if (input.tipo === 'CROSS_SELL') {
-    return `Tipo: CROSS_SELL\nNombre: ${input.nombre}\nPlan actual (bono): ${input.planActual}\nPlan sugerido: ${input.planSugerido}\nPrecio del plan sugerido: ${input.precioSugerido}€/mes`;
+    return `Tipo: CROSS_SELL\nNombre: ${input.nombre}\nPlan actual (bono): ${input.planActual}\nPlan sugerido: ${input.planSugerido}\nPrecio del plan sugerido: ${conMoneda(input.precioSugerido, '')}/mes`;
   }
   return `Tipo: CLASE_LLENA\nClase: ${input.tipoClase}\nDía de la semana: ${input.diaSemana}\nHora: ${input.hora}\nSemanas consecutivas casi llena: ${input.semanas}`;
 }

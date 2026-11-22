@@ -1,5 +1,6 @@
 'use client';
 
+import { conMoneda } from '../../../lib/moneda.ts';
 import { VistaDeLaUrl, useUrlSigueALaVista } from '@/components/layout/vista-de-la-url';
 import { Suspense, useState, useMemo, useEffect, useRef, useId, isValidElement, cloneElement, type ReactElement, type ReactNode, type ElementType, type MouseEvent } from 'react';
 import { useSemaforoServidor } from '@/lib/hooks/use-semaforo-servidor';
@@ -2257,7 +2258,7 @@ export default function Socios() {
                   <option value="">Sin plan</option>
                   {planesTarifa.filter((p) => p.activo).map((p) => (
                     <option key={p.id} value={p.id}>
-                      {p.nombre} — {p.precio} €
+                      {p.nombre} — {conMoneda(p.precio)}
                     </option>
                   ))}
                 </select>
@@ -2612,7 +2613,7 @@ export default function Socios() {
               >
                 <option value="">Selecciona un plan…</option>
                 {planesTarifa.filter((p) => p.activo).map((p) => (
-                  <option key={p.id} value={p.id}>{p.nombre} — {p.precio} €</option>
+                  <option key={p.id} value={p.id}>{p.nombre} — {conMoneda(p.precio)}</option>
                 ))}
               </select>
             </FF>
@@ -2623,7 +2624,7 @@ export default function Socios() {
               const p = planesTarifa.find(x => x.id === asignarPlanId);
               if (!p) return null;
               const n = selected.size;
-              const euros = (v: number) => `${Number.isInteger(v) ? v : v.toFixed(2).replace('.', ',')} €`;
+              const euros = (v: number) => `${conMoneda(Number.isInteger(v) ? v : v.toFixed(2).replace('.', ','))}`;
               return (
                 <div className="rounded-xl bg-muted px-3.5 py-3 text-[12.5px] text-foreground space-y-1">
                   {p.precio > 0 ? (

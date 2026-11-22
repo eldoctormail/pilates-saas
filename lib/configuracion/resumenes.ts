@@ -18,6 +18,7 @@
 //
 // Pura: la ejecuta `node --test` directamente.
 
+import { conMoneda } from '../moneda.ts';
 import type { DiaHorario, Studio, TipoIntegracion } from '../types.ts';
 import { avisoVentaOnline } from '../onboarding.ts';
 import { cuando, saludIntegracion, type FilaSalud, type SaludIntegracion } from '../integraciones/salud.ts';
@@ -881,7 +882,7 @@ export function resumenPlanesActivos(planes: readonly { activo: boolean }[] | nu
 // lo que no cabe y eso es lo que no se puede perder.
 
 const tiposQueLaCambian = (n: number) => (n > 0 ? contar(n, 'tipo lo cambia', 'tipos lo cambian') : null);
-const euros = (n: number) => `${Number.isInteger(n) ? n : n.toFixed(2).replace('.', ',')} €`;
+const euros = (n: number) => `${conMoneda(Number.isInteger(n) ? n : n.toFixed(2).replace('.', ','))}`;
 
 /**
  * `r`: las reglas GUARDADAS (reglas-reserva.ts). `excepciones`: cuántos tipos de

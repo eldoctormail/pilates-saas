@@ -3,6 +3,7 @@
 // TPV, el cliente de API y las rutas.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { conMoneda } from '../moneda.ts';
 import type { MetodoPago } from '@/lib/types';
 import { MENSAJE_CUOTA_SIN_CLIENTA } from '@/lib/pos/cuota-exige-clienta';
 
@@ -170,9 +171,9 @@ export function mensajeErrorVenta(codigo: string): string {
     case 'PLAN_CANTIDAD_UNICA':      return 'Cada bono va en su propia línea. Añádelo otra vez para vender dos.';
     case 'CODIGO_NO_CANJEABLE':      return 'Ese código ya no se puede usar (caducado, agotado o desactivado).';
     case 'CODIGO_YA_USADO_POR_SOCIA': return MENSAJE_CODIGO_YA_USADO;
-    case 'CODIGO_MINIMO_NO_ALCANZADO': return `Ese código necesita una compra mínima de ${a} €.`;
+    case 'CODIGO_MINIMO_NO_ALCANZADO': return `Ese código necesita una compra mínima de ${conMoneda(a)}.`;
     case 'DESCUENTO_INVALIDO':       return 'Ese descuento no es válido.';
-    case 'EFECTIVO_INSUFICIENTE':    return `Con ${a} € no llega: el total es ${b} €.`;
+    case 'EFECTIVO_INSUFICIENTE':    return `Con ${conMoneda(a)} no llega: el total es ${conMoneda(b)}.`;
     case 'CONCEPTO_LIBRE_SIN_NOMBRE': return 'Pon un concepto al importe libre.';
     case 'PRECIO_LIBRE_INVALIDO':    return 'Ese importe no es válido.';
     case 'CANTIDAD_INVALIDA':        return 'Esa cantidad no es válida.';
@@ -181,7 +182,7 @@ export function mensajeErrorVenta(codigo: string): string {
     case 'NADA_QUE_DEVOLVER':        return 'Ya se ha devuelto todo de esta venta.';
     case 'DEVOLUCION_EXCEDE':        return `De «${a}» solo quedan ${b} sin devolver.`;
     case 'BONO_YA_EMPEZADO':         return `«${a}» ya tiene ${b} sesión${b === '1' ? '' : 'es'} usada${b === '1' ? '' : 's'}: no se puede devolver desde aquí.`;
-    case 'IMPORTE_NO_COINCIDE':      return `Se cobraron ${a} € pero el ticket son ${b} €. No damos la venta por buena; revísalo.`;
+    case 'IMPORTE_NO_COINCIDE':      return `Se cobraron ${conMoneda(a)} pero el ticket son ${conMoneda(b)}. No damos la venta por buena; revísalo.`;
     case 'CAJA_NO_ABIERTA':          return 'No hay ninguna caja abierta.';
     case 'CAJA_CERRADA':             return 'Esa caja ya está cerrada. Los movimientos de hoy van en la caja de hoy.';
     case 'FONDO_INVALIDO':           return 'Ese fondo inicial no es válido.';

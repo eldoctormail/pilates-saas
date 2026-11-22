@@ -1,5 +1,6 @@
 'use client';
 
+import { MONEDA_SIMBOLO } from '../../lib/moneda.ts';
 import { useState, useEffect, useMemo, useCallback, useRef, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { anfitrionPortal } from '@/lib/panel-portal';
@@ -971,7 +972,7 @@ export function PosTerminal() {
                         descuentoTipo === t ? 'bg-foreground text-background' : 'text-muted-foreground',
                       )}
                     >
-                      {t === 'EUROS' ? '€' : '%'}
+                      {t === 'EUROS' ? MONEDA_SIMBOLO : '%'}
                     </button>
                   ))}
                 </div>

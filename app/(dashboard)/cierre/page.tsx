@@ -1,5 +1,6 @@
 'use client';
 
+import { conMoneda, LOCALE_MONEDA } from '../../../lib/moneda.ts';
 import Link from 'next/link';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Download, Printer, Plus, Pencil, Trash2, Info, ShieldCheck, Mail, Send, Check, AlertTriangle, BookOpen, CalendarRange, FileText, Percent, Wallet } from 'lucide-react';
@@ -25,7 +26,7 @@ import { BotonVivo, CabeceraTarjeta, Pildoras, TONOS, TarjetaGrafica, Baldosa } 
 import { BOTON_BORDE } from '@/components/dashboard/vivo-seccion';
 import { BarrasMensualesNuevas, CifrasCierre } from '@/components/cierre/cierre-nuevo';
 
-const eur = (n: number) => `${n.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €`;
+const eur = (n: number) => `${conMoneda(n.toLocaleString(LOCALE_MONEDA, { minimumFractionDigits: 2, maximumFractionDigits: 2 }))}`;
 const MESES = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
 
 // Igual que lib/factura-pdf.ts (#544): esto se inyecta con document.write en

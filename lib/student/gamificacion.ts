@@ -7,6 +7,7 @@
 // canje lo valida `/api/public/canje`. Esto solo ORDENA y presenta lo que el
 // payload ya trae: si el estudio no ha configurado nada, no hay nada que pintar.
 
+import { conMoneda } from '../moneda.ts';
 import { ZONA_HORARIA } from '../zona-horaria.ts';
 import { vistaDeNivel } from '../gamificacion/ritmo-niveles.ts';
 
@@ -238,7 +239,7 @@ const FORMAS: ReadonlyArray<{ trigger: string; titulo: string; detalle: (r: Regl
     trigger: 'COMPRA', titulo: 'Comprar en el estudio',
     detalle: (r) => {
       const u = r.unidadEuros && r.unidadEuros > 0 ? r.unidadEuros : 1;
-      return u === 1 ? 'Por cada euro que gastes en el estudio' : `Por cada ${euros(u)} € que gastes en el estudio`;
+      return u === 1 ? 'Por cada euro que gastes en el estudio' : `Por cada ${conMoneda(euros(u))} que gastes en el estudio`;
     },
   },
 ];

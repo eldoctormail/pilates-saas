@@ -5,6 +5,7 @@
 // cuánto sale cada clase y hasta cuándo vale. Nada de esto se inventa: si el
 // plan no tiene sesiones no hay «por clase», y si no caduca se dice.
 
+import { conMoneda, LOCALE_MONEDA } from '../moneda.ts';
 import type { PlanTarifa } from '../types.ts';
 import { nombrePeriodo } from '../bono-logic.ts';
 
@@ -21,7 +22,7 @@ export interface ResumenPlan {
 }
 
 const euros = (n: number) =>
-  `${n.toLocaleString('es-ES', { minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2 })} €`;
+  `${conMoneda(n.toLocaleString(LOCALE_MONEDA, { minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2 }))}`;
 
 export function precioEnEuros(n: number): string {
   return euros(n);

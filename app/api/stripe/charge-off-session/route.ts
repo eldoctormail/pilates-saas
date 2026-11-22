@@ -1,3 +1,4 @@
+import { conMoneda } from '../../../../lib/moneda.ts';
 import { NextRequest, NextResponse } from 'next/server';
 import { dbUpdateAutomationLog } from '@/lib/db/supabase-data-admin';
 import { verificarSesionStaff } from '@/lib/auth-server';
@@ -112,7 +113,7 @@ export async function POST(req: NextRequest) {
     }
     await dbUpdateAutomationLog(body.logId, sesion.studioId, {
       resultado: 'EJECUTADO',
-      detalle: `Cobro de ${resultado.importe}€ aprobado y cobrado con la tarjeta guardada.`,
+      detalle: `Cobro de ${conMoneda(resultado.importe, '')} aprobado y cobrado con la tarjeta guardada.`,
     });
     // R4: señal de GMV (cobro con tarjeta guardada).
     capturar(body.studioId, { nombre: 'pago_completado', props: { importe_centimos: Math.round((resultado.importe ?? 0) * 100), via: 'off_session' } });

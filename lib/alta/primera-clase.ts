@@ -28,6 +28,7 @@
 // Puro, con rutas relativas: lo prueba `node --test` (primera-clase.test.ts).
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { conMoneda, LOCALE_MONEDA } from '../moneda.ts';
 import { POR_DEFECTO } from '../onboarding/asistente-rapido.ts';
 import { colorPorIndice } from '../onboarding/plan-configuracion.ts';
 import { fechaCorta, fechasDeRepeticion, finConDuracion, instantesDe, planDeFechas } from '../calendario/nueva-clase.ts';
@@ -199,7 +200,7 @@ const QUE_ES: Readonly<Record<Venta, string>> = { suelta: 'una clase suelta', bo
  * hay nada, `NaN` si no es un precio (letras, más de dos decimales).
  */
 export function leerPrecio(texto: string): number | null {
-  let t = texto.replace(/€/g, '').replace(/\s/g, '');
+  let t = texto.replace(/[€$]/g, '').replace(/\s/g, '');
   if (!t) return null;
   if (t.includes(',')) t = t.replace(/\./g, '').replace(',', '.');
   if (!/^-?\d+(\.\d{1,2})?$/.test(t)) return Number.NaN;
@@ -208,7 +209,7 @@ export function leerPrecio(texto: string): number | null {
 
 /** «900,00 €». */
 export function euros(n: number): string {
-  return `${n.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €`;
+  return `${conMoneda(n.toLocaleString(LOCALE_MONEDA, { minimumFractionDigits: 2, maximumFractionDigits: 2 }))}`;
 }
 
 export type EstadoPrecio = 'gratis' | 'falta' | 'error' | 'cero' | 'raro' | 'ok';
@@ -218,7 +219,7 @@ export const TEXTO_PRECIO = {
   falta: 'Falta el precio: es lo único que no podemos poner por ti.',
   formato: 'Escribe solo el número, por ejemplo 20 o 18,50.',
   negativo: 'El precio no puede ser negativo.',
-  cero: 'Con 0 € la clase sería gratis. Si es lo que quieres, marca «Esta clase es gratis»; si no, escribe su precio.',
+  cero: 'Con ' + conMoneda(0) + ' la clase sería gratis. Si es lo que quieres, marca «Esta clase es gratis»; si no, escribe su precio.',
   ok: 'Se pondrá a la venta en cuanto publiques.',
   gratis: 'Gratis: tus clientes la reservan sin pagar nada, y no se pone ninguna tarifa a la venta.',
 } as const;
@@ -459,7 +460,7 @@ export function resumenPrimeraClase(f: FormPrimeraClase, nombrePropio: string, y
 export function lineaDeVenta(f: FormPrimeraClase): { tarifa: string; pago: string } {
   if (f.gratis) return { tarifa: 'Gratis', pago: 'Se reserva sin pagar nada' };
   const n = leerPrecio(f.precio);
-  const p = n !== null && !Number.isNaN(n) && n > 0 ? euros(n) : '— €';
+  const p = n !== null && !Number.isNaN(n) && n > 0 ? euros(n) : conMoneda('—');
   const tarifa = f.venta === 'bono'
     ? `Bono de ${clasesDelBono(f.bonoClases) ?? '—'} clases · ${p}`
     : f.venta === 'cuota' ? `Cuota mensual · ${p}/mes` : `${p} la clase`;

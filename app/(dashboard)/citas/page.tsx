@@ -1,5 +1,6 @@
 'use client';
 
+import { MONEDA_SIMBOLO } from '../../../lib/moneda.ts';
 import { useEffect, useMemo, useRef, useState, useId, isValidElement, cloneElement, type ReactElement, type ReactNode } from 'react';
 import { useCampoAsociado } from '@/components/ui/use-campo-asociado';
 import { Plus, CheckCircle2, XCircle, Clock, User, Calendar, Filter, AlertTriangle, CircleDashed, Upload, Loader2 } from 'lucide-react';
@@ -870,7 +871,7 @@ export default function CitasPage() {
                 </select>
               </FF>
               {verPrecio && (
-                <FF label="Precio (€)" description="Cuenta para tus ingresos del mes. El cobro se marca a mano después, desde la lista de citas.">
+                <FF label={`Precio (${MONEDA_SIMBOLO})`} description="Cuenta para tus ingresos del mes. El cobro se marca a mano después, desde la lista de citas.">
                   <input
                     type="number"
                     min="0"

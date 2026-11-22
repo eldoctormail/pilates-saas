@@ -1,3 +1,4 @@
+import { conMoneda, LOCALE_MONEDA } from './moneda.ts';
 import { ZONA_HORARIA } from './zona-horaria.ts';
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
@@ -50,10 +51,10 @@ export function compararVersiones(a: string, b: string): number {
 // de protocolo/QR (Verifactu, PayPal), que exigen punto decimal a propósito.
 // Uno reutilizado: `toLocaleString` con opciones construye un formateador en cada
 // llamada (ver `porZona`, más abajo), y esto se pinta una vez por fila.
-const FORMATO_EURO = new Intl.NumberFormat('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const FORMATO_EURO = new Intl.NumberFormat(LOCALE_MONEDA, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
 export function formatEuro(n: number): string {
-  return `${FORMATO_EURO.format(n)} €`;
+  return `${conMoneda(FORMATO_EURO.format(n))}`;
 }
 
 /**

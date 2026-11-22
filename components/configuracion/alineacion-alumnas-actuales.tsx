@@ -1,5 +1,6 @@
 'use client';
 
+import { conMoneda, LOCALE_MONEDA } from '../../lib/moneda.ts';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { useStudio } from '@/lib/studio-context';
@@ -16,7 +17,7 @@ import type { VistaPrevia } from '@/lib/billing/alineacion-dia1';
 
 type Respuesta = VistaPrevia & { dia1Activo: boolean; modo: 'ENTERA' | 'PROPORCIONAL' };
 
-const eur = (n: number) => `${n.toLocaleString('es-ES', { minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2 })} €`;
+const eur = (n: number) => `${conMoneda(n.toLocaleString(LOCALE_MONEDA, { minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2 }))}`;
 const fechaCorta = (iso: string) => new Date(`${iso}T00:00:00Z`).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', timeZone: 'UTC' });
 
 export function AlineacionAlumnasActuales() {
@@ -195,7 +196,7 @@ export function AlineacionAlumnasActuales() {
                           </span>
                         </td>
                         <td className="hidden px-3 py-2 text-right tabular-nums sm:table-cell">{eur(f.cuota)}</td>
-                        <td className="px-2 py-2 text-right tabular-nums sm:px-3">{f.cortesia ? <span>0 €<span className="block text-xs text-muted-foreground">{f.diasRestantes} {f.diasRestantes === 1 ? 'día' : 'días'}, sin cobrar</span></span> : <span>{eur(f.pagaAhora)}<span className="block text-xs text-muted-foreground">{f.diasRestantes} de {f.diasDelMes} días</span></span>}</td>
+                        <td className="px-2 py-2 text-right tabular-nums sm:px-3">{f.cortesia ? <span>{conMoneda(0)}<span className="block text-xs text-muted-foreground">{f.diasRestantes} {f.diasRestantes === 1 ? 'día' : 'días'}, sin cobrar</span></span> : <span>{eur(f.pagaAhora)}<span className="block text-xs text-muted-foreground">{f.diasRestantes} de {f.diasDelMes} días</span></span>}</td>
                         <td className="px-2 py-2 text-right tabular-nums sm:px-3">{eur(f.regalaA)}</td>
                       </tr>
                     ))}

@@ -10,9 +10,10 @@
  * «1.500,00 €» — y «1.5k» se lee como mil quinientos mil, no como mil
  * quinientos. Va en es-ES, igual que el resto de cifras de la pantalla.
  */
+import { conMoneda, LOCALE_MONEDA } from '../moneda.ts';
 export function etiquetaEuros(v: number): string {
-  if (v >= 1000) return `${(v / 1000).toLocaleString('es-ES', { maximumFractionDigits: 1 })}k €`;
-  return `${v.toLocaleString('es-ES', { maximumFractionDigits: 0 })} €`;
+  if (v >= 1000) return conMoneda(`${(v / 1000).toLocaleString(LOCALE_MONEDA, { maximumFractionDigits: 1 })}k`);
+  return `${conMoneda(v.toLocaleString(LOCALE_MONEDA, { maximumFractionDigits: 0 }))}`;
 }
 
 /**

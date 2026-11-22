@@ -48,6 +48,7 @@
 // ya resuelta de esa hoja para el iframe embebido (franja visible, safe-area).
 // Este fichero NO lo compila el bundle del widget nativo: sí puede usar las
 // clases `pantalla-reserva-*` de app/globals.css.
+import { conMoneda } from '../../lib/moneda.ts';
 import { useState, useEffect, useId, useMemo, useRef, type CSSProperties, type KeyboardEvent } from 'react';
 import { ChevronLeft, Tag, Lock, ShieldCheck, RotateCcw, Check, X, Loader2 } from 'lucide-react';
 import type { PlanTarifa } from '@/lib/types';
@@ -583,7 +584,7 @@ export function PantallaReserva({
                               )}
                             </span>
                             <span style={{ fontFamily: serif, fontWeight: pesoTitular(800), fontSize: 16, color: 'var(--portal-ink)', whiteSpace: 'nowrap' }}>
-                              {p.precio} €
+                              {conMoneda(p.precio)}
                             </span>
                           </button>
                         );

@@ -5,6 +5,7 @@
 // (y, si la audiencia es nueva, un resolver en recipients.ts). Nada más: el
 // motor y las superficies no cambian. Nada hardcodeado fuera de aquí.
 // ─────────────────────────────────────────────────────────────────────────────
+import { conMoneda } from '../moneda.ts';
 import type {
   NotificationCategory, NotificationChannel, NotificationPriority, NotificationRole,
 } from './types.ts';
@@ -1206,8 +1207,11 @@ export const PLANTILLAS: Record<string, Plantilla> = {
 };
 
 // Interpola {clave} desde los datos del evento.
+// «{importe} €» en una plantilla pone el símbolo de la moneda del estudio en su
+// lado (lib/moneda.ts): las plantillas siguen escritas con «€».
 export function render(plantilla: string, data: Datos): string {
-  return plantilla.replace(/\{(\w+)\}/g, (_, k) => s(data[k]));
+  return plantilla.replace(/\{(\w+)\}( ?)€|\{(\w+)\}/g, (_, kM: string | undefined, sep: string, k: string) =>
+    kM ? conMoneda(s(data[kM]), sep) : s(data[k]));
 }
 
 // Resuelve la plantilla para un rol (con fallback al evento sin rol).

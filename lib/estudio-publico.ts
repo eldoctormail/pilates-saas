@@ -7,6 +7,7 @@
 // una clase o cambiara de tarifa — en la página por la que entra una clienta
 // nueva, que es el peor sitio para tener un dato viejo.
 
+import { conMoneda, LOCALE_MONEDA } from './moneda.ts';
 import type { PlanTarifa, Sesion, Suscripcion } from './types';
 
 // ── Horario ──────────────────────────────────────────────────────────────────
@@ -146,5 +147,5 @@ export function planMasElegido(planes: PlanTarifa[], suscripciones: Suscripcion[
 export function precioPorClase(plan: Pick<PlanTarifa, 'precio' | 'sesiones'>): string | null {
   if (!plan.sesiones || plan.sesiones <= 0 || plan.precio <= 0) return null;
   const porClase = plan.precio / plan.sesiones;
-  return `${porClase.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} € por clase`;
+  return `${conMoneda(porClase.toLocaleString(LOCALE_MONEDA, { minimumFractionDigits: 2, maximumFractionDigits: 2 }))} por clase`;
 }

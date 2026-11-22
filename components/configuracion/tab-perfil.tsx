@@ -1,5 +1,6 @@
 'use client';
 
+import { conMoneda, LOCALE_MONEDA } from '../../lib/moneda.ts';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Camera, Check, Loader2, Trash2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -213,7 +214,7 @@ export function TabPerfil({ showToast }: { showToast: MostrarToast }) {
           <h3 className="text-[14px] font-semibold text-foreground mb-1">Tu tarifa por hora</h3>
           <p className="text-[13px] text-muted-foreground">
             {tarifaHora != null
-              ? `${tarifaHora.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €/h`
+              ? `${conMoneda(tarifaHora.toLocaleString(LOCALE_MONEDA, { minimumFractionDigits: 2, maximumFractionDigits: 2 }))}/h`
               : 'Tu estudio todavía no te ha asignado una tarifa.'}
           </p>
         </div>

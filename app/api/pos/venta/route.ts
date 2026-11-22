@@ -1,3 +1,4 @@
+import { conMoneda } from '../../../../lib/moneda.ts';
 import { NextRequest, NextResponse } from 'next/server';
 import * as Sentry from '@sentry/nextjs';
 import { verificarSesionStaff } from '@/lib/auth-server';
@@ -365,7 +366,7 @@ export async function POST(req: NextRequest) {
       p_venta_id: base.ventaId, p_studio_id: sesion.studioId,
       p_pago_estado: 'ERROR', p_motivo: 'Importe por encima del máximo del TPV',
     });
-    return NextResponse.json({ error: 'El importe supera el máximo permitido en el TPV (10.000 €).' }, { status: 400 });
+    return NextResponse.json({ error: `El importe supera el máximo permitido en el TPV (${conMoneda('10.000')}).` }, { status: 400 });
   }
 
   // Quién cobra (Stripe o el datáfono de SumUp de la sede): lib/pos/cobro-del-estudio.ts.

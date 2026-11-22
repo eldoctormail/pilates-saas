@@ -1,5 +1,6 @@
 'use client';
 
+import { conMoneda, LOCALE_MONEDA } from '../../lib/moneda.ts';
 import { useId, useMemo, useState } from 'react';
 import { calcularPlazasVacias, type EntradaPlazasVacias } from '@/lib/recursos/calculadora-plazas-vacias';
 import { capturarEvento } from '@/lib/posthog-cliente';
@@ -20,7 +21,7 @@ const CAMPOS: { clave: keyof EntradaPlazasVacias; etiqueta: string; ayuda: strin
   { clave: 'ingresoPorPlaza', etiqueta: 'Precio medio por plaza', ayuda: 'Lo que paga de media un cliente por clase', paso: 0.01, sufijo: '€' },
 ];
 
-const euros = (n: number) => `${Math.round(n).toLocaleString('es-ES')} €`;
+const euros = (n: number) => `${conMoneda(Math.round(n).toLocaleString(LOCALE_MONEDA))}`;
 const entero = (n: number) => Math.round(n).toLocaleString('es-ES');
 
 export function CalculadoraPlazasVacias() {

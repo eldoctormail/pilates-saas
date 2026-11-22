@@ -12,6 +12,7 @@
 // el rol de quien mira no debería ver: no hay nada que ocultar en el cliente
 // porque el cliente nunca lo tuvo.
 
+import { conMoneda, LOCALE_MONEDA } from './moneda.ts';
 import type { Rol } from './types';
 import { claveSemanaEstudio, franjaLocalDe, hoyEnEstudio, inicioDelDiaEstudio, masDias } from './utils.ts';
 
@@ -292,7 +293,7 @@ export function cifras(m: MiembroCompleto, rolViewer: Rol, ahora: Date): CifrasT
 }
 
 export function euros(n: number): string {
-  return `${n.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €`;
+  return `${conMoneda(n.toLocaleString(LOCALE_MONEDA, { minimumFractionDigits: 2, maximumFractionDigits: 2 }))}`;
 }
 
 // Coma decimal, como `euros()`: con `toFixed` la misma tarjeta decía «407,00 €»

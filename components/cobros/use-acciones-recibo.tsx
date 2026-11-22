@@ -15,6 +15,7 @@
 //   · el justificante solo sale si el cobro se registró AHORA.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { MONEDA_SIMBOLO } from '../../lib/moneda.ts';
 import { useRef, useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { useRouter } from 'next/navigation';
@@ -357,7 +358,7 @@ export function useAccionesRecibo(avisos: AvisosCobros): AccionesRecibo {
               </p>
             </div>
             <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground">
-              Importe (€)
+              Importe ({MONEDA_SIMBOLO})
               <input
                 data-testid="importe-nuevo" type="text" inputMode="decimal" autoFocus autoComplete="off"
                 value={cambiarImporte?.valor ?? ''} disabled={cambiarImporte?.enCurso}

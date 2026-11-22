@@ -28,6 +28,7 @@
 // ambas funciones nunca se contradicen. Si divergen, se cae el test.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { conMoneda } from '../moneda.ts';
 import type { PlanTarifa, Suscripcion } from '@/lib/types';
 // Extensión `.ts` explícita: sin ella pasa en local y rompe en CI (ver
 // allowImportingTsExtensions en tsconfig).
@@ -158,12 +159,12 @@ export function textoCobertura(c: Cobertura): string | null {
         ? 'Tu bono no cubre esta clase · se cobra como clase suelta'
         : 'Tu bono no cubre este tipo de clase';
     case 'SIN_PLAN':
-      return c.precio != null ? `Clase suelta · ${c.precio} €` : null;
+      return c.precio != null ? `Clase suelta · ${conMoneda(c.precio)}` : null;
     case 'ANONIMA':
       // Sin sesión no se afirma nada sobre su saldo: solo el precio público, si
       // lo hay. Prometer "incluida en tu bono" a quien no ha entrado sería
       // inventarse un saldo que no conocemos.
-      return c.precio != null ? `Clase suelta · ${c.precio} €` : null;
+      return c.precio != null ? `Clase suelta · ${conMoneda(c.precio)}` : null;
   }
 }
 
@@ -186,7 +187,7 @@ export function textoCoberturaCorto(c: Cobertura): string | null {
     case 'NO_CUBRE_ESTA_CLASE':
     case 'SIN_PLAN':
     case 'ANONIMA':
-      return c.precio != null ? `${c.precio} € clase suelta` : null;
+      return c.precio != null ? `${conMoneda(c.precio)} clase suelta` : null;
   }
 }
 
@@ -226,9 +227,9 @@ export function textoCoberturaListaEspera(c: Cobertura): string | null {
         ? 'Tu bono no cubre esta clase · si se libera un hueco, se cobra como clase suelta'
         : null;
     case 'SIN_PLAN':
-      return c.precio != null ? `Si se libera un hueco, se cobra · ${c.precio} €` : null;
+      return c.precio != null ? `Si se libera un hueco, se cobra · ${conMoneda(c.precio)}` : null;
     case 'ANONIMA':
-      return c.precio != null ? `Si se libera un hueco, se cobra · ${c.precio} €` : null;
+      return c.precio != null ? `Si se libera un hueco, se cobra · ${conMoneda(c.precio)}` : null;
   }
 }
 

@@ -5,6 +5,7 @@
 // P2-5: E2 · una sustitución sigue sin resolverse pasado un margen razonable
 // — punto ciego original del feedback: este especialista nunca miraba
 // `sustituciones`, solo `sesiones`/`instructores`.
+import { conMoneda } from '../../moneda.ts';
 import type { Candidata, Especialista, Impacto, MemoriaEstudio, SnapshotEstudio } from '../tipos.ts';
 import { confianzaCargaEquipo, confianzaSustitucionSinResolver } from '../confianza.ts';
 import { construirIndices, precioMedioSesion, type IndicesSenal } from '../senales.ts';
@@ -51,7 +52,7 @@ function reglaE2(s: SnapshotEstudio, idx: IndicesSenal, now: Date): Candidata[] 
     const reservasConfirmadas = s.reservas.filter(r => r.sesionId === sus.sesionId && r.estado === 'CONFIRMADA').length;
     const valor = redondear2(reservasConfirmadas * precioMedio);
     const impacto: Impacto | undefined = valor > 0
-      ? { valor, unidad: 'EUR', formula: `${reservasConfirmadas} reserva${reservasConfirmadas === 1 ? '' : 's'} confirmada${reservasConfirmadas === 1 ? '' : 's'} × ${redondear2(precioMedio)}€/sesión` }
+      ? { valor, unidad: 'EUR', formula: `${reservasConfirmadas} reserva${reservasConfirmadas === 1 ? '' : 's'} confirmada${reservasConfirmadas === 1 ? '' : 's'} × ${conMoneda(redondear2(precioMedio), '')}/sesión` }
       : undefined;
 
     candidatas.push({

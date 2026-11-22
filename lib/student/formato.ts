@@ -12,6 +12,7 @@
 // hay estudios en otro huso, esto pasa a salir del estudio y no de una
 // constante — pero inventar esa configuración hoy sería adivinar.
 
+import { conMoneda, LOCALE_MONEDA } from '../moneda.ts';
 import { ZONA_HORARIA } from '../zona-horaria.ts';
 const DIAS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
 const DIAS_C = ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'];
@@ -145,7 +146,7 @@ export function saludo(nombre: string, ahora: Date = new Date()): string {
 
 /** Importe en euros con el formato español. */
 export function euros(n: number): string {
-  return n.toLocaleString('es-ES', { minimumFractionDigits: 0, maximumFractionDigits: 2 }) + ' €';
+  return conMoneda(n.toLocaleString(LOCALE_MONEDA, { minimumFractionDigits: 0, maximumFractionDigits: 2 }));
 }
 
 /** «hace 20 min», «hace 3 h», «ayer». Para notificaciones y pagos. */

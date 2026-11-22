@@ -1,5 +1,6 @@
 'use client';
 
+import { conMoneda } from '../../../lib/moneda.ts';
 import { useState, type ReactNode } from 'react';
 import { useStudio } from '@/lib/studio-context';
 import { REWARD_TRIGGERS } from '@/lib/engines/reward-engine';
@@ -75,7 +76,7 @@ export function VistaPreviaAlumna() {
                         <MiniaturaInsignia icono={INSIGNIA_DE_FORMA[d.trigger]} tamano={22} />
                         <span className="min-w-0 flex-1 truncate text-foreground">{d.nombre}</span>
                         <span className="shrink-0 font-semibold tabular-nums text-foreground">
-                          +{regla!.creditos}{regla!.unidadEuros ? ` / ${regla!.unidadEuros} €` : ''}
+                          +{regla!.creditos}{regla!.unidadEuros ? ` / ${conMoneda(regla!.unidadEuros)}` : ''}
                         </span>
                       </li>
                     ))}

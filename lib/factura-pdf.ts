@@ -19,6 +19,7 @@
 // «Entorno de PRUEBAS» en la factura que descargaba la alumna. Si vuelves a
 // añadir aquí un campo de la cadena, lo estás poniendo en el papel de la
 // clienta — que es exactamente lo que este comentario intenta evitar.
+import { conMoneda } from './moneda.ts';
 import { qrSvgMarkup } from './qr-svg.ts';
 import { conceptoDeFactura } from './facturas/concepto.ts';
 import type { SelloCliente } from './factura-sello-cliente.ts';
@@ -156,13 +157,13 @@ export function generarFacturaHTML(
       <td>
         <div style="font-weight:600">${esc(conceptoDeFactura(f))}</div>
       </td>
-      <td>${fmt(f.baseImponible)} €</td>
+      <td>${conMoneda(fmt(f.baseImponible))}</td>
     </tr>
   </tbody>
   <tfoot>
-    <tr class="sub-row"><td>Base imponible</td><td>${fmt(f.baseImponible)} €</td></tr>
-    <tr class="sub-row"><td>IVA (${f.tipoIVA}%)</td><td>${fmt(f.cuotaIVA)} €</td></tr>
-    <tr class="total-row"><td>TOTAL</td><td>${fmt(f.total)} €</td></tr>
+    <tr class="sub-row"><td>Base imponible</td><td>${conMoneda(fmt(f.baseImponible))}</td></tr>
+    <tr class="sub-row"><td>IVA (${f.tipoIVA}%)</td><td>${conMoneda(fmt(f.cuotaIVA))}</td></tr>
+    <tr class="total-row"><td>TOTAL</td><td>${conMoneda(fmt(f.total))}</td></tr>
   </tfoot>
 </table>
 ${bloqueSello}

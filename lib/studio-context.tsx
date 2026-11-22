@@ -1,5 +1,6 @@
 'use client';
 
+import { conMoneda } from './moneda.ts';
 import { createContext, useContext, useState, useEffect, useMemo, useCallback, useRef, type ReactNode } from 'react';
 import { usePathname } from 'next/navigation';
 import { fijarEtiqueta, capturarExcepcion, capturarMensaje } from '@/lib/sentry-cliente';
@@ -1766,12 +1767,12 @@ export function StudioProvider({ children, studioIdOverride, publicSlug }: { chi
       // salía en la lista y un segundo «Crear» hacía otra igual.
       const quedo: PlanTarifa = { ...nuevo, tiposClaseIds: undefined, limitePorTipo: undefined, activo: res.desactivada ? false : nuevo.activo };
       setPlanesTarifa(prev => [...prev, quedo]);
-      addActividadReciente('PLAN_CREADO', `${actorNombre ?? 'Alguien'} creó el plan "${fields.nombre}" — ${fields.precio} €`);
+      addActividadReciente('PLAN_CREADO', `${actorNombre ?? 'Alguien'} creó el plan "${fields.nombre}" — ${conMoneda(fields.precio)}`);
       return res;
     }
     if (!res.ok) return res;
     setPlanesTarifa(prev => [...prev, nuevo]);
-    addActividadReciente('PLAN_CREADO', `${actorNombre ?? 'Alguien'} creó el plan "${fields.nombre}" — ${fields.precio} €`);
+    addActividadReciente('PLAN_CREADO', `${actorNombre ?? 'Alguien'} creó el plan "${fields.nombre}" — ${conMoneda(fields.precio)}`);
     return res;
   }
   async function updatePlan(id: string, changes: Partial<Omit<PlanTarifa, 'id' | 'studioId'>>): Promise<ResultadoTarifa> {
@@ -1796,7 +1797,7 @@ export function StudioProvider({ children, studioIdOverride, publicSlug }: { chi
     setPlanesTarifa(prev => prev.map(p => p.id === id ? { ...p, ...changes } : p));
     if (anterior) {
       const detalle = 'precio' in changes && changes.precio !== anterior.precio
-        ? `precio ${anterior.precio}€ → ${changes.precio}€`
+        ? `precio ${conMoneda(anterior.precio, '')} → ${conMoneda(changes.precio, '')}`
         : 'datos actualizados';
       addActividadReciente('PLAN_EDITADO', `${actorNombre ?? 'Alguien'} editó el plan "${anterior.nombre}" (${detalle})`);
     }
@@ -2751,7 +2752,7 @@ export function StudioProvider({ children, studioIdOverride, publicSlug }: { chi
             // única para este aviso, y el compilador de React da la llamada
             // impura por error aquí dentro (el resto del fichero la usa desde
             // sitios que sí analiza).
-            avisos.push(`La matrícula de ${matricula} € no ha quedado anotada: añádela a mano en Cobros.`);
+            avisos.push(`La matrícula de ${conMoneda(matricula)} no ha quedado anotada: añádela a mano en Cobros.`);
           }
         }
 
@@ -3267,7 +3268,7 @@ export function StudioProvider({ children, studioIdOverride, publicSlug }: { chi
       };
       const res = await dbInsertRecibo(rec);
       if (res.ok) reciboPlan = rec;
-      else fallos.push(`El plan se ha asignado, pero el cobro de ${importeCuota} € no ha quedado anotado en "Quién me debe": añádelo a mano.`);
+      else fallos.push(`El plan se ha asignado, pero el cobro de ${conMoneda(importeCuota)} no ha quedado anotado en "Quién me debe": añádelo a mano.`);
     }
 
     // 2b) La matrícula, si es su primer plan aquí. Recibo APARTE del de la
@@ -3295,7 +3296,7 @@ export function StudioProvider({ children, studioIdOverride, publicSlug }: { chi
       };
       const res = await dbInsertRecibo(rec);
       if (res.ok) reciboMatricula = rec;
-      else fallos.push(`La matrícula de ${plan.matricula} € no ha quedado anotada en "Quién me debe": añádela a mano.`);
+      else fallos.push(`La matrícula de ${conMoneda(plan.matricula)} no ha quedado anotada en "Quién me debe": añádela a mano.`);
     }
 
     // 3) Y por último, retirar lo viejo. Lo que no se consiga dar de baja sigue
@@ -3374,7 +3375,7 @@ export function StudioProvider({ children, studioIdOverride, publicSlug }: { chi
     const planNuevo = planesTarifa.find(p => p.id === planId);
     addActividadReciente(
       'PLAN_ASIGNADO',
-      `${actorNombre ?? 'Alguien'} cambió a "${planNuevo?.nombre ?? 'otro plan'}" a ${socio?.nombre ?? 'una socia'} cobrando la diferencia proporcional (${r.importe} €)`,
+      `${actorNombre ?? 'Alguien'} cambió a "${planNuevo?.nombre ?? 'otro plan'}" a ${socio?.nombre ?? 'una socia'} cobrando la diferencia proporcional (${conMoneda(r.importe)})`,
       socioId,
       `/socios/${socioId}`,
     );
@@ -4722,8 +4723,8 @@ export function StudioProvider({ children, studioIdOverride, publicSlug }: { chi
       addActividadReciente(
         'COBRO_MANUAL',
         sacaFactura
-          ? `${actorNombre ?? 'Alguien'} generó una factura de "${fields.concepto}" (${fields.importe} €) para ${socio?.nombre ?? 'una socia'}`
-          : `${actorNombre ?? 'Alguien'} registró un cobro de "${fields.concepto}" (${fields.importe} €) de ${socio?.nombre ?? 'una socia'}`,
+          ? `${actorNombre ?? 'Alguien'} generó una factura de "${fields.concepto}" (${conMoneda(fields.importe)}) para ${socio?.nombre ?? 'una socia'}`
+          : `${actorNombre ?? 'Alguien'} registró un cobro de "${fields.concepto}" (${conMoneda(fields.importe)}) de ${socio?.nombre ?? 'una socia'}`,
         fields.socioId,
         `/socios/${fields.socioId}`
       );
@@ -4844,7 +4845,7 @@ export function StudioProvider({ children, studioIdOverride, publicSlug }: { chi
       const socio = socios.find(x => x.id === recibo.socioId);
       addActividadReciente(
         'COBRO_MANUAL',
-        `${actorNombre ?? 'Alguien'} marcó como cobrado "${recibo.concepto}" (${recibo.importe} €) de ${socio?.nombre ?? 'una socia'}`,
+        `${actorNombre ?? 'Alguien'} marcó como cobrado "${recibo.concepto}" (${conMoneda(recibo.importe)}) de ${socio?.nombre ?? 'una socia'}`,
         recibo.socioId ?? undefined,
         recibo.socioId ? `/socios/${recibo.socioId}` : undefined,
       );

@@ -19,6 +19,7 @@
 // La regla de qué se guarda y cómo vive en lib/alta/tu-estudio.ts.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { conMoneda } from '../../lib/moneda.ts';
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { FileText, MapPin, Store } from 'lucide-react';
 import { useAuth } from '@/lib/auth-context';
@@ -255,7 +256,7 @@ function PreguntaSedes({ sedes, onSedes }: { sedes: Sedes; onSedes: (s: Sedes) =
             <li><b className="font-semibold text-foreground">Ahora montamos la primera</b>, entera y gratis, como cualquier estudio.</li>
             <li>
               <b className="font-semibold text-foreground">Las otras {otrasSedes(sedes.total)}</b> se abren desde este mismo panel con el plan
-              Cadena: {PRECIO_CADENA_MES}{'\u00a0'}€/mes, una sola suscripción para toda la cadena. No hace falta decidirlo hoy.
+              Cadena: {PRECIO_CADENA_MES}{conMoneda('\u00a0', '')}/mes, una sola suscripción para toda la cadena. No hace falta decidirlo hoy.
             </li>
             <li>
               <b className="font-semibold text-foreground">El menú es el de toda la cadena</b>; el horario y las reglas de reserva, los de

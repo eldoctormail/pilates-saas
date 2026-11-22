@@ -2,6 +2,7 @@
 // Cubre el punto ciego de Ingresos, que solo detecta clases que se LLENAN (I1):
 // aquí detectamos las que van medio vacías semana tras semana — el propietario
 // paga sala e instructora para dos personas y nadie se lo estaba diciendo.
+import { conMoneda } from '../../moneda.ts';
 import type { Candidata, Especialista, MemoriaEstudio, SnapshotEstudio } from '../tipos.ts';
 import type { Sesion } from '@/lib/types';
 import {
@@ -126,7 +127,7 @@ function reglaA3(clave: string, franja: FranjaRecurrente, franjas: Map<string, F
     },
     riesgo: 'OPORTUNIDAD',
     impacto: valor > 0
-      ? { valor, unidad: 'EUR_MES', formula: `${plazasVacias} plazas vacías × ${redondear2(precioMedio)}€/sesión × 4.33 semanas` }
+      ? { valor, unidad: 'EUR_MES', formula: `${plazasVacias} plazas vacías × ${conMoneda(redondear2(precioMedio), '')}/sesión × 4.33 semanas` }
       : undefined,
     confianza,
     accion: { tipo: 'MARCAR_GESTIONADO' },
@@ -190,7 +191,7 @@ function reglaA1(clave: string, franja: FranjaRecurrente, s: SnapshotEstudio, id
     },
     riesgo: 'OPORTUNIDAD',
     impacto: valor > 0
-      ? { valor, unidad: 'EUR_MES', formula: `${plazasVacias} plazas vacías × ${redondear2(precioMedio)}€/sesión × 4.33 semanas` }
+      ? { valor, unidad: 'EUR_MES', formula: `${plazasVacias} plazas vacías × ${conMoneda(redondear2(precioMedio), '')}/sesión × 4.33 semanas` }
       : undefined,
     confianza,
     accion: { tipo: 'MARCAR_GESTIONADO' },
@@ -254,7 +255,7 @@ function reglaA2(s: SnapshotEstudio, idx: IndicesSenal, now: Date): Candidata | 
     datosUsados: { clasesEvaluadas: pasadas.length, clasesVacias: nVacias, ocupacionMediaPct: ocupMediaPct, semanas: A2_DIAS / 7 },
     riesgo: 'PERDIDA',
     impacto: valor > 0
-      ? { valor, unidad: 'EUR_MES', formula: `${redondear1(plazasVaciasPorSemana)} plazas vacías/semana en ${nVacias} clases casi vacías × ${redondear2(precioMedio)}€ × 4.33` }
+      ? { valor, unidad: 'EUR_MES', formula: `${redondear1(plazasVaciasPorSemana)} plazas vacías/semana en ${nVacias} clases casi vacías × ${conMoneda(redondear2(precioMedio), '')} × 4.33` }
       : undefined,
     confianza,
     accion: { tipo: 'MARCAR_GESTIONADO' },
@@ -357,7 +358,7 @@ function reglaA4(
     },
     riesgo: 'OPORTUNIDAD',
     impacto: valor > 0
-      ? { valor, unidad: 'EUR', formula: `${plazasLibresPrevistas} plazas previstas sin vender × ${redondear2(precioMedio)}€/sesión` }
+      ? { valor, unidad: 'EUR', formula: `${plazasLibresPrevistas} plazas previstas sin vender × ${conMoneda(redondear2(precioMedio), '')}/sesión` }
       : undefined,
     confianza,
     ...(prediccion ? { prediccion } : {}),

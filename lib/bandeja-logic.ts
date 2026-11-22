@@ -18,6 +18,7 @@
 // `ahoraMs` inyectado (sin Date.now() aquí) para que los tests sean deterministas.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { conMoneda, LOCALE_MONEDA } from './moneda.ts';
 import type {
   BloqueoMaquina, PlazaFija, Recuperacion, Recibo, SocioExcepcion,
   Sesion, Reserva, Socio, Sala,
@@ -31,7 +32,7 @@ import { esReservaPlazaFija } from './reservas/plaza-fija-id.ts';
 // Euro en formato ES, idéntico a formatEuro de utils; inline para no arrastrar
 // clsx/tailwind-merge a un módulo de lógica pura (y su test con node --test).
 function euro(n: number): string {
-  return `${n.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €`;
+  return `${conMoneda(n.toLocaleString(LOCALE_MONEDA, { minimumFractionDigits: 2, maximumFractionDigits: 2 }))}`;
 }
 
 export type CategoriaBandeja = 'AVERIA' | 'COBRO' | 'RECUPERACION' | 'PLAZA';

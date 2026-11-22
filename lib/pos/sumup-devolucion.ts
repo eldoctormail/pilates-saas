@@ -1,3 +1,4 @@
+import { conMoneda } from '../moneda.ts';
 import 'server-only';
 import * as Sentry from '@sentry/nextjs';
 import type { SupabaseClient } from '@supabase/supabase-js';
@@ -40,7 +41,7 @@ export type DevolucionSumup =
   | { ok: true; transaccionId: string; yaEstaba: boolean; candado: string }
   | { ok: false; status: number; error: string; codigo?: string };
 
-const euros = (c: number) => `${(c / 100).toFixed(2).replace('.', ',')} €`;
+const euros = (c: number) => `${conMoneda((c / 100).toFixed(2).replace('.', ','))}`;
 
 export async function devolverEnSumup(admin: SupabaseClient, p: {
   studioId: string;

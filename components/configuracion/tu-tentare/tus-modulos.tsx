@@ -1,5 +1,6 @@
 'use client';
 
+import { conMoneda } from '../../../lib/moneda.ts';
 import { useId } from 'react';
 import Link from 'next/link';
 import type { LucideIcon } from 'lucide-react';
@@ -98,7 +99,7 @@ export function TusModulos({ onCambio, bloqueado = false, onGuardando }: {
             const falta = planQueFalta(m, studio);
             const complemento = complementoQueFalta(m, studio);
             const estadoPlan = complemento
-              ? { tono: 'neutro' as const, etiqueta: `Complemento · +${ADDONS[complemento].precioMes}€/mes` }
+              ? { tono: 'neutro' as const, etiqueta: `Complemento · +${conMoneda(ADDONS[complemento].precioMes, '')}/mes` }
               : falta ? estadoDelPlan({ enTuPlan: false, activo: true, planMinimo: falta }) : undefined;
             // Sin el menú leído no se sabe si está puesto: ni interruptor ni nota
             // (un «en el menú, activado» de un módulo escondido sería mentira).

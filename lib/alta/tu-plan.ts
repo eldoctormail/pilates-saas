@@ -24,6 +24,7 @@
 // Puro, sin `@/`.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { conMoneda } from '../moneda.ts';
 import { PLAN_INFO } from '../billing/entitlements.ts';
 import type { EstadoGratisApi } from '../billing/plan-gratis.ts';
 import { COMPLEMENTOS_CORTO, GRATIS_MARGEN_DIAS, PRECIO_FOUNDING_PAGO } from '../landing/founding-gratis.ts';
@@ -49,8 +50,8 @@ export function tarjetaDelPlan(p: { gratis: EstadoGratisApi | null | undefined; 
   const varias = p.sedes?.tipo === 'varias' ? p.sedes : null;
   const cadena = PLAN_INFO.CADENA;
   const texto = varias
-    ? `Mientras no pases de ahí, no pagas nada. Para abrir ${varias.total === 2 ? 'tu otra sede' : `tus otras ${otrasSedes(varias.total)} sedes`} en este panel: plan ${cadena.nombre}, ${cadena.precioMes} €/mes, una sola suscripción para toda la cadena.`
-    : `Mientras no pases de ahí, no pagas nada. Si un día pasas, tienes ${GRATIS_MARGEN_DIAS} días para pasar a ${founding} de pago: ${PRECIO_FOUNDING_PAGO} €/mes, sin tope y sin permanencia, con ${COMPLEMENTOS_CORTO} aparte.`;
+    ? `Mientras no pases de ahí, no pagas nada. Para abrir ${varias.total === 2 ? 'tu otra sede' : `tus otras ${otrasSedes(varias.total)} sedes`} en este panel: plan ${cadena.nombre}, ${conMoneda(cadena.precioMes)}/mes, una sola suscripción para toda la cadena.`
+    : `Mientras no pases de ahí, no pagas nada. Si un día pasas, tienes ${GRATIS_MARGEN_DIAS} días para pasar a ${founding} de pago: ${conMoneda(PRECIO_FOUNDING_PAGO)}/mes, sin tope y sin permanencia, con ${COMPLEMENTOS_CORTO} aparte.`;
   return {
     subtitulo: varias ? `${founding} · gratis · 1 sede` : `${founding} · gratis`,
     cifras: [

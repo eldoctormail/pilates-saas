@@ -16,6 +16,7 @@
 // que le pasa la página (la BD sigue siendo autoritativa).
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { conMoneda } from '../../lib/moneda.ts';
 import { useMemo, useState, useEffect, useId, useRef, memo, type CSSProperties, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import {
@@ -1566,7 +1567,7 @@ function TarjetaClaseImpl({ t, slot, onOpen, ocultarPrecio, origenTentare = '' }
         )}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto', paddingTop: 10 }}>
           {mostrarPrecio ? (
-            <span style={{ fontSize: 13.5, fontWeight: 800, color: t.ink }}>{slot.precio} €</span>
+            <span style={{ fontSize: 13.5, fontWeight: 800, color: t.ink }}>{conMoneda(slot.precio)}</span>
           ) : <span />}
           <span aria-hidden="true" className="reserva-cta-btn" style={{
             display: 'inline-flex', alignItems: 'center', gap: 6, border: 'none', borderRadius: 'var(--reservar-radio-boton, ' + radius.pill + 'px)',
@@ -1710,7 +1711,7 @@ function BookingSheet({
       // ⚠️ Auditoría de conversión (2026-08-31): `!= null` trataba un
       // `precio: 0` explícito como un importe real — "Reservar por 0 €" en
       // vez de "Reservar" (o "Gratis", más honesto con lo que va a pasar).
-      : (slot.precio && !ocultarPrecio ? `Reservar por ${slot.precio} €` : 'Reservar');
+      : (slot.precio && !ocultarPrecio ? `Reservar por ${conMoneda(slot.precio)}` : 'Reservar');
 
   const esCancelar = tieneReserva;
   // Aún no se abre: el botón espera, y se enciende SOLO a la hora exacta (un

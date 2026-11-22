@@ -1,3 +1,4 @@
+import { conMoneda } from '../../../../lib/moneda.ts';
 import { sesionWidgetValida } from '@/lib/reservar/compra-en-embudo';
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
@@ -468,7 +469,7 @@ export async function POST(req: NextRequest) {
   // para esta compra.
   if (!(importe > 0)) {
     return conCorsWidget(req, NextResponse.json(
-      { error: 'Ese código deja la compra en 0 €. Pide a tu estudio que te dé el bono directamente.' },
+      { error: `Ese código deja la compra en ${conMoneda(0)}. Pide a tu estudio que te dé el bono directamente.` },
       { status: 409 },
     ));
   }

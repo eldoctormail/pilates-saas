@@ -1,5 +1,6 @@
 'use client';
 
+import { MONEDA_SIMBOLO } from '../../lib/moneda.ts';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { useStudio } from '@/lib/studio-context';
@@ -211,7 +212,7 @@ export function FormCreditosPorAccion({ onGuardado }: Pick<PropsFormularioCajon,
             value={form[def.trigger].unidadEuros}
             onChange={e => cambiar(def.trigger, { unidadEuros: e.target.value })}
           />
-          €
+          {MONEDA_SIMBOLO}
         </label>
       )}
       {def.trigger === 'REFERIDO_AMIGO' && (
@@ -348,7 +349,7 @@ export function FormCreditosPorAccion({ onGuardado }: Pick<PropsFormularioCajon,
                         value={f.unidadEuros}
                         onChange={e => cambiar(def.trigger, { unidadEuros: e.target.value })}
                       />
-                      €
+                      {MONEDA_SIMBOLO}
                     </label>
                   )}
                   {def.trigger === 'REFERIDO_AMIGO' && (

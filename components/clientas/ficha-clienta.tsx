@@ -1,5 +1,6 @@
 'use client';
 
+import { conMoneda } from '../../lib/moneda.ts';
 import { ZONA_HORARIA } from '../../lib/zona-horaria.ts';
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
@@ -2837,14 +2838,14 @@ export function FichaClienta({ id, modo = 'pagina' }: {
                 <div>
                   <p className="font-bold text-foreground">{p.nombre}</p>
                   <p className="text-xs font-medium text-muted-foreground">
-                    {p.precio} € {p.tipo === 'MENSUAL' ? `/ ${nombrePeriodo(p)}` : p.sesiones ? `· ${p.sesiones} sesiones` : ''}
+                    {conMoneda(p.precio)} {p.tipo === 'MENSUAL' ? `/ ${nombrePeriodo(p)}` : p.sesiones ? `· ${p.sesiones} sesiones` : ''}
                   </p>
                   {/* Se cobra al asignar el plan si es el primero que contrata
                       aquí, así que se dice ANTES de pulsar, no después en el
                       recibo. */}
                   {(p.matricula ?? 0) > 0 && (
                     <p className="text-xs font-medium text-muted-foreground">
-                      + {p.matricula} € de matrícula si es su primer plan
+                      + {conMoneda(p.matricula)} de matrícula si es su primer plan
                     </p>
                   )}
                   {/* Cobro proporcional al alta: la alumna paga hoy SOLO los días que

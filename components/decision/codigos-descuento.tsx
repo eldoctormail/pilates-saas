@@ -1,5 +1,6 @@
 'use client';
 
+import { conMoneda, MONEDA_SIMBOLO } from '../../lib/moneda.ts';
 import { useMemo, useState } from 'react';
 import { Ticket, Plus, Sparkles, X } from 'lucide-react';
 import { useStudio } from '@/lib/studio-context';
@@ -114,7 +115,7 @@ export function CodigosDescuento({ onToast }: { onToast: MostrarToast }) {
                 onChange={e => setForm(f => ({ ...f, tipo: e.target.value as CodigoDescuento['tipo'] }))}
               >
                 <option value="PORCENTAJE">%</option>
-                <option value="IMPORTE_FIJO">€</option>
+                <option value="IMPORTE_FIJO">{MONEDA_SIMBOLO}</option>
               </select>
               <input
                 className={`${inputCls} w-24`} type="number" min={0} step="0.01" placeholder="Valor"
@@ -178,7 +179,7 @@ export function CodigosDescuento({ onToast }: { onToast: MostrarToast }) {
                     {auto && <span className="rounded-full bg-brand/10 px-1.5 py-0.5 text-[10px] font-semibold text-brand-medio">Automático</span>}
                   </div>
                   <p className="truncate text-[12px] text-muted-foreground">
-                    {c.tipo === 'PORCENTAJE' ? `${c.valor}%` : `${c.valor}€`} · {c.descripcion} · caduca {fmtFecha(c.expira)} · {usados} usos
+                    {c.tipo === 'PORCENTAJE' ? `${c.valor}%` : `${conMoneda(c.valor, '')}`} · {c.descripcion} · caduca {fmtFecha(c.expira)} · {usados} usos
                   </p>
                 </div>
               </div>

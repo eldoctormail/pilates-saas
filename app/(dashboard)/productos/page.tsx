@@ -1,5 +1,6 @@
 'use client';
 
+import { conMoneda, MONEDA_SIMBOLO } from '../../../lib/moneda.ts';
 import { AyudaDelPaso } from '@/components/guia/ayuda-del-paso';
 import { Suspense, useState, useId, useEffect, useRef, useMemo } from 'react';
 import { Toast, type ToastVariante } from '@/components/ui/toast';
@@ -201,7 +202,7 @@ function ResumenPlan({ form, tiposClase }: { form: FormularioPlan; tiposClase: {
           {form.nombre.trim() || <span className="text-muted-foreground font-normal">Sin nombre todavía</span>}
         </p>
         <p className="mt-1 text-2xl font-bold text-foreground tabular-nums">
-          {Number.isFinite(precio) && form.precio.trim() ? fmt(precio) : '—'} €
+          {conMoneda(Number.isFinite(precio) && form.precio.trim() ? fmt(precio) : '—')}
           {form.tipo === 'MENSUAL' && (
             <span className="text-sm font-medium text-muted-foreground"> / {periodoDe(form)}</span>
           )}
@@ -438,7 +439,7 @@ function PlanModal({ initial, tiposClase, tipoInicial, otrasTarifas, onSave, onC
                     className="flex items-start gap-1.5 rounded-xl border border-warning/40 bg-card px-3 py-2.5 text-[13px] text-foreground">
                     <AlertTriangle size={14} className="mt-0.5 shrink-0 text-warning" aria-hidden />
                     <span>
-                      Ya tienes «{repetida.nombre}» ({fmt(repetida.precio)} €{repetida.activo ? '' : ', sin poner a la venta'}).
+                      Ya tienes «{repetida.nombre}» ({conMoneda(fmt(repetida.precio))}{repetida.activo ? '' : ', sin poner a la venta'}).
                       Si quieres cambiarla, edítala en vez de crear otra igual.
                     </span>
                   </p>
@@ -484,7 +485,7 @@ function PlanModal({ initial, tiposClase, tipoInicial, otrasTarifas, onSave, onC
                     : 'Se le cobra una sola vez, al comprarlo.'}>
                   {p => (
                     <div className="relative max-w-[240px]">
-                      <span aria-hidden className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">€</span>
+                      <span aria-hidden className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">{MONEDA_SIMBOLO}</span>
                       {/* `type="text"` con `inputMode="decimal"`, no `type="number"`:
                           en español el separador es la coma, y un input numérico
                           la rechaza dejando el campo vacío sin decir por qué.
@@ -504,7 +505,7 @@ function PlanModal({ initial, tiposClase, tipoInicial, otrasTarifas, onSave, onC
                     className="flex items-start gap-1.5 rounded-xl border border-warning/40 bg-card px-3 py-2.5 text-[13px] text-foreground">
                     <AlertTriangle size={14} className="mt-0.5 shrink-0 text-warning" aria-hidden />
                     <span>
-                      ¿Seguro que son {fmt(precioANumero(form.precio))} €? Tu tarifa más cara de este tipo cuesta {fmt(precioRaro.maxOtras)} €.
+                      ¿Seguro que son {conMoneda(fmt(precioANumero(form.precio)))}? Tu tarifa más cara de este tipo cuesta {conMoneda(fmt(precioRaro.maxOtras))}.
                       Si es correcto, sigue; si es una errata, corrígela antes de ponerla a la venta.
                     </span>
                   </p>
@@ -656,7 +657,7 @@ function PlanModal({ initial, tiposClase, tipoInicial, otrasTarifas, onSave, onC
                         ayuda="Se cobra UNA vez, en el primer plan que contrata, y en un recibo aparte: las renovaciones no la vuelven a incluir. Se aplica al dar de alta o asignar el plan desde el panel; una compra por internet desde el portal todavía no la cobra.">
                         {p => (
                           <div className="relative max-w-[240px]">
-                            <span aria-hidden className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">€</span>
+                            <span aria-hidden className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">{MONEDA_SIMBOLO}</span>
                             <input {...p} value={form.matricula} onChange={e => set('matricula', e.target.value)}
                               onBlur={() => tocar('matricula')} type="text" inputMode="decimal"
                               className={cn(cajaCls(visible('matricula')), 'pl-7 tabular-nums')} placeholder="0,00" />
@@ -963,7 +964,7 @@ function PosModal({ initial, onSave, onClose, onDelete, onMoverStock }: {
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label htmlFor={`${uid}-2`} className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1.5 block">Precio (€) *</label>
+              <label htmlFor={`${uid}-2`} className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1.5 block">Precio ({MONEDA_SIMBOLO}) *</label>
               <input id={`${uid}-2`} value={form.precio} onChange={e => set('precio', e.target.value)} type="number" min="0" step="0.01"
                 className="w-full border border-border rounded-xl px-3 py-2.5 text-sm text-foreground outline-none focus:border-brand"
                 placeholder="0.00" />
@@ -1513,7 +1514,7 @@ export default function Productos() {
 
                 <div className="flex items-end justify-between">
                   <div>
-                    <p className="text-2xl font-extrabold text-foreground">{fmt(plan.precio)} €</p>
+                    <p className="text-2xl font-extrabold text-foreground">{conMoneda(fmt(plan.precio))}</p>
                     <p className="text-xs text-muted-foreground mt-0.5">
                       {plan.tipo === 'MENSUAL' ? `al ${nombrePeriodo(plan)}` : plan.sesiones ? `${plan.sesiones} ${plan.sesiones > 1 ? 'sesiones' : 'sesión'}` : 'por sesión'}
                     </p>
@@ -1526,7 +1527,7 @@ export default function Productos() {
                     )}
                     {(plan.matricula ?? 0) > 0 && (
                       <p className="text-xs text-muted-foreground mt-0.5">
-                        + {fmt(plan.matricula ?? 0)} € de matrícula la primera vez
+                        + {conMoneda(fmt(plan.matricula ?? 0))} de matrícula la primera vez
                       </p>
                     )}
                     {/* La caducidad no se veía en ningún sitio: había que abrir el
@@ -1665,7 +1666,7 @@ export default function Productos() {
                             {CAT_LABEL[p.categoria]}
                           </span>
                         </td>
-                        <td className="px-5 py-3.5 font-bold text-foreground">{fmt(p.precio)} €</td>
+                        <td className="px-5 py-3.5 font-bold text-foreground">{conMoneda(fmt(p.precio))}</td>
                         <td className="px-5 py-3.5">
                           <div className="flex items-center gap-1.5">
                             <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: p.activo ? 'var(--success)' : 'var(--muted-foreground)' }} />
@@ -1709,7 +1710,7 @@ export default function Productos() {
                           <EtiquetaStock stock={p.stock} minimo={p.stockMinimo} />
                         </div>
                       </div>
-                      <span className="font-bold text-foreground text-[14px] shrink-0">{fmt(p.precio)} €</span>
+                      <span className="font-bold text-foreground text-[14px] shrink-0">{conMoneda(fmt(p.precio))}</span>
                     </button>
                   );
                 })}

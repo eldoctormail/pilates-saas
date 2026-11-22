@@ -14,6 +14,7 @@
 // Vive en Configuración y no en Marketing: ese módulo está desactivado
 // (MARKETING_MODULE_ENABLED = false) y el estudio no podría llegar a él.
 
+import { conMoneda, MONEDA_SIMBOLO } from '../../lib/moneda.ts';
 import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { useStudio } from '@/lib/studio-context';
@@ -189,13 +190,13 @@ function Cuerpo({ respuesta, resenas, onGuardado }: { respuesta: RespuestaResena
                     inputMode="decimal" className={cn(inputCls, 'w-24')} value={form.valor}
                     aria-invalid={premioMal} onChange={e => cambiar({ valor: e.target.value })}
                   />
-                  <span className="text-sm text-muted-foreground">{form.tipo === 'PORCENTAJE' ? '%' : '€'}</span>
+                  <span className="text-sm text-muted-foreground">{form.tipo === 'PORCENTAJE' ? '%' : MONEDA_SIMBOLO}</span>
                 </div>
               </div>
               <p className="mt-2 text-xs text-muted-foreground text-pretty">
                 {form.tipo === 'PORCENTAJE'
                   ? `De ${LIMITES_PREMIO.PORCENTAJE.min} % a ${LIMITES_PREMIO.PORCENTAJE.max} %, sobre lo que compre.`
-                  : `De ${LIMITES_PREMIO.IMPORTE_FIJO.min} € a ${LIMITES_PREMIO.IMPORTE_FIJO.max} €. Para regalar una clase, pon lo que cuesta tu clase suelta.`}
+                  : `De ${conMoneda(LIMITES_PREMIO.IMPORTE_FIJO.min)} a ${conMoneda(LIMITES_PREMIO.IMPORTE_FIJO.max)}. Para regalar una clase, pon lo que cuesta tu clase suelta.`}
               </p>
             </fieldset>
             <Campo label="Cuántos días vale el código" error={premioMal ? errorPremio : null}>

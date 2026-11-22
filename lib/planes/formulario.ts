@@ -14,6 +14,7 @@
 // campo nuevo a la tarifa se hace en este fichero, y entonces no puede
 // quedarse a medias en una de las dos.
 // ─────────────────────────────────────────────────────────────────────────────
+import { conMoneda } from '../moneda.ts';
 import type { PlanTarifa, TipoPlan } from '@/lib/types';
 // Relativo y con `.ts` explícita: el alias `@/` no lo resuelve el runner de
 // `node --test`, y este módulo tiene tests propios. El `import type` de arriba
@@ -265,7 +266,7 @@ export function planAFormulario(p: PlanTarifa): FormularioPlan {
  * hasta el recibo.
  */
 export function precioANumero(v: string): number {
-  const limpio = v.replace(/[€\s]/g, '').replace(',', '.');
+  const limpio = v.replace(/[€$\s]/g, '').replace(',', '.');
   if (!limpio || !/^-?\d*\.?\d*$/.test(limpio)) return NaN;
   return parseFloat(limpio);
 }
@@ -446,7 +447,7 @@ export function resumenCondicionesPlan(f: FormularioPlan): string[] {
   // palabras.
   const matricula = importeNoNegativo(f.matricula);
   const conMatricula = (lineas: string[]) =>
-    matricula > 0 ? [...lineas, `Matrícula de ${matricula} € solo la primera vez`] : lineas;
+    matricula > 0 ? [...lineas, `Matrícula de ${conMoneda(matricula)} solo la primera vez`] : lineas;
 
   if (f.tipo === 'MENSUAL') {
     const periodo = nombrePeriodo({ periodicidadMeses: parseInt(f.periodicidadMeses, 10) });

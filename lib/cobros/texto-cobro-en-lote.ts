@@ -1,9 +1,10 @@
+import { MONEDA, LOCALE_MONEDA } from '../moneda.ts';
 // El aviso de «Cobrar todos» / «Cobrar pendientes». Cuenta lo que se cobró DE
 // VERDAD, no lo que había en la lista: una penalización anulada se salta del lote
 // (`/api/cobros/marcar-cobrado`, `recibosDePenalizacionAnulada`) y quien cobra en el mostrador
 // tiene que saber que ese importe no va, o se lo cobra a la alumna igual.
 
-const euros = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' });
+const euros = new Intl.NumberFormat(LOCALE_MONEDA, { style: 'currency', currency: MONEDA });
 
 /** La frase de lo que se dejó fuera del lote: «1 no (12,00 €): es una penalización anulada…». */
 export function fraseSaltados(saltados: readonly { importe: number }[]): string {

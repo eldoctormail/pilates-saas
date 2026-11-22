@@ -6,6 +6,7 @@
 // Módulo PURO (sin red ni imports de servidor): lo usan el ejecutor (Inngest) y
 // la tarjeta del Centro de Control (navegador).
 
+import { conMoneda } from '../moneda.ts';
 export interface MensajeSocia {
   asunto: string; // para el email
   cuerpo: string; // texto del mensaje (email y WhatsApp comparten cuerpo)
@@ -126,7 +127,7 @@ export function mensajeParaSocia(tipo: string, datos: Datos, estudioNombre: stri
       return {
         comercial: false,
         asunto: `Un recordatorio de ${estudio}`,
-        cuerpo: `¡Hola ${nombre}! Un recordatorio suave: te quedó un pago pendiente${total ? ` de ${total}€` : ''} en ${estudio}. ¿Lo dejamos resuelto? Si necesitas cualquier cosa, aquí estoy.`,
+        cuerpo: `¡Hola ${nombre}! Un recordatorio suave: te quedó un pago pendiente${total ? ` de ${conMoneda(total, '')}` : ''} en ${estudio}. ¿Lo dejamos resuelto? Si necesitas cualquier cosa, aquí estoy.`,
       };
     }
     default:

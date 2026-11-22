@@ -1,5 +1,6 @@
 'use client';
 
+import { conMoneda } from '../../lib/moneda.ts';
 import { useEffect, useId } from 'react';
 import { Check, Minus, ChevronDown } from 'lucide-react';
 import { PLANES, PLAN_INFO, type Plan } from '@/lib/billing/entitlements';
@@ -99,7 +100,7 @@ export function ComparativaPlanes({
               >
                 <NombrePlan plan={p} />
                 <span className="block text-[10px] font-medium tabular-nums opacity-70">
-                  {foundingGratis && p === 'BASE' ? 'Gratis' : `${PLAN_INFO[p].precioMes}€`}
+                  {foundingGratis && p === 'BASE' ? 'Gratis' : `${conMoneda(PLAN_INFO[p].precioMes, '')}`}
                 </span>
               </span>
             ))}

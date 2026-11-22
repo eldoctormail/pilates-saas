@@ -14,6 +14,7 @@
 // Puro (sin `@/`): se prueba con `node --test`.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { conMoneda } from '../moneda.ts';
 import { nombrePeriodo, precioMensualDeCuota } from '../bono-logic.ts';
 import { mesAnterior } from '../billing/situacion-recibo.ts';
 import { MESES_LARGOS } from '../inicio/cifras.ts';
@@ -184,5 +185,5 @@ const CON_CENTIMOS = new Intl.NumberFormat('es-ES', { minimumFractionDigits: 2, 
 
 /** «55 €» si es redondo; «55,50 €» si lleva céntimos: en un precio, los céntimos no se redondean. */
 export function precioCorto(n: number): string {
-  return `${Number.isInteger(n) ? ENTERO.format(n) : CON_CENTIMOS.format(n)} €`;
+  return `${conMoneda(Number.isInteger(n) ? ENTERO.format(n) : CON_CENTIMOS.format(n))}`;
 }

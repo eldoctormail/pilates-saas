@@ -1,3 +1,4 @@
+import { conMoneda } from '../moneda.ts';
 import * as Sentry from '@sentry/nextjs';
 import { mensajeDe } from './mensajes-automatizacion.ts';
 import type {
@@ -332,7 +333,7 @@ export function computeAutomationCandidatos(
           candidatos.push({
             rule, socio,
             titulo: '¿Cobramos el pago pendiente?',
-            notaInterna: `${socio.nombre} tiene ${recibo.importe}€ pendientes (${recibo.concepto}) desde hace ${dias} días. Hay tarjeta guardada — ¿lo cobramos ahora?`,
+            notaInterna: `${socio.nombre} tiene ${conMoneda(recibo.importe, '')} pendientes (${recibo.concepto}) desde hace ${dias} días. Hay tarjeta guardada — ¿lo cobramos ahora?`,
             proximaAccionEn: null,
             accion: 'COBRAR_RECIBO',
             reciboId: recibo.id,
@@ -351,7 +352,7 @@ export function computeAutomationCandidatos(
           candidatos.push({
             rule, socio,
             titulo: 'Pago pendiente sin resolver',
-            notaInterna: `${socio.nombre} lleva ${dias} días sin pagar ${recibo.importe}€ (${recibo.concepto}) y no tiene tarjeta guardada. Ya se han mandado los avisos automáticos — conviene contactarla a mano.`,
+            notaInterna: `${socio.nombre} lleva ${dias} días sin pagar ${conMoneda(recibo.importe, '')} (${recibo.concepto}) y no tiene tarjeta guardada. Ya se han mandado los avisos automáticos — conviene contactarla a mano.`,
             proximaAccionEn: null,
             accion: 'NOTIFICAR_ADMIN',
             reciboId: recibo.id,
@@ -520,7 +521,7 @@ export function computeAutomationCandidatos(
         candidatos.push({
           rule, socio,
           titulo: '¿Le proponemos pasarse a un plan ilimitado?',
-          notaInterna: `${socio.nombre} ha comprado el bono "${plan.nombre}" ${ultimasN.length} veces seguidas. Con su ritmo, el plan ${planSugerido.nombre} (${planSugerido.precio}€/mes) puede salirle mejor que seguir comprando bonos sueltos. ¿Se lo proponemos?`,
+          notaInterna: `${socio.nombre} ha comprado el bono "${plan.nombre}" ${ultimasN.length} veces seguidas. Con su ritmo, el plan ${planSugerido.nombre} (${conMoneda(planSugerido.precio, '')}/mes) puede salirle mejor que seguir comprando bonos sueltos. ¿Se lo proponemos?`,
           proximaAccionEn: null,
           accion: 'PROPONER_PLAN',
           contextoIA: { nombre: socio.nombre, planActual: plan.nombre, planSugerido: planSugerido.nombre, precioSugerido: planSugerido.precio },

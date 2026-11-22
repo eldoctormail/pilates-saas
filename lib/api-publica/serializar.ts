@@ -15,7 +15,9 @@
 import { ZONA_HORARIA } from '../zona-horaria.ts';
 import { importeIngresado, situacionRecibo, type SituacionRecibo } from '../billing/situacion-recibo.ts';
 
-export const MONEDA = 'EUR';
+// La moneda del estudio (lib/moneda.ts).
+import { MONEDA } from '../moneda.ts';
+export { MONEDA };
 
 /** Euros (numeric de Postgres, puede llegar como texto) → céntimos enteros. */
 export function aCentimos(x: number | string | null | undefined): number | null {

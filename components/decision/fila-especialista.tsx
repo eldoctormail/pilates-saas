@@ -1,5 +1,6 @@
 'use client';
 
+import { conMoneda } from '../../lib/moneda.ts';
 import { Badge } from '@/components/ui/badge';
 import { ESPECIALISTA_INFO } from './especialista-info';
 import { ESTADO_ESPECIALISTA_INFO } from '@/lib/decision/severidad';
@@ -37,7 +38,7 @@ export function FilaEspecialista({ data }: { data: PorEspecialistaAPI }) {
       </span>
       {data.impactoTotal && (
         <span className="text-[12px] font-semibold text-foreground">
-          {data.impactoTotal.valor >= 0 ? '+' : ''}{data.impactoTotal.valor}€/mes
+          {data.impactoTotal.valor >= 0 ? '+' : ''}{conMoneda(data.impactoTotal.valor, '')}/mes
         </span>
       )}
       {data.pendientes > 0 && (

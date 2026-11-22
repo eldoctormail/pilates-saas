@@ -1,4 +1,5 @@
 // Especialista en Ingresos — ¿dónde estamos dejando dinero? (MVP: I1-I3).
+import { conMoneda } from '../../moneda.ts';
 import type { Candidata, Especialista, MemoriaEstudio, SnapshotEstudio } from '../tipos.ts';
 import type { Recibo, PlanTarifa } from '@/lib/types';
 import {
@@ -79,7 +80,7 @@ function reglaI1(clave: string, franja: FranjaRecurrente, s: SnapshotEstudio, id
   });
   if (!confianza) return null;
 
-  const motivoMotor = `Llevas ${semanasConsecutivas} semanas con gente en lista de espera. Si abrimos una segunda sesión, creo que también se llenaría. Serían unos +${valor}€/mes.`;
+  const motivoMotor = `Llevas ${semanasConsecutivas} semanas con gente en lista de espera. Si abrimos una segunda sesión, creo que también se llenaría. Serían unos +${conMoneda(valor, '')}/mes.`;
 
   return {
     especialista: 'INGRESOS',
@@ -93,7 +94,7 @@ function reglaI1(clave: string, franja: FranjaRecurrente, s: SnapshotEstudio, id
     },
     riesgo: 'OPORTUNIDAD',
     impacto: valor > 0
-      ? { valor, unidad: 'EUR_MES', formula: `${plazasEstimadas} plazas × ${redondear2(precioMedio)}€/sesión × 4.33 semanas (lista de espera de ${redondear1(demanda)} las últimas ${OCURRENCIAS_MINIMAS} semanas)` }
+      ? { valor, unidad: 'EUR_MES', formula: `${plazasEstimadas} plazas × ${conMoneda(redondear2(precioMedio), '')}/sesión × 4.33 semanas (lista de espera de ${redondear1(demanda)} las últimas ${OCURRENCIAS_MINIMAS} semanas)` }
       : undefined,
     confianza,
     accion: { tipo: 'MARCAR_GESTIONADO' },
@@ -119,7 +120,7 @@ function reglaI2(s: SnapshotEstudio, idx: IndicesSenal, now: Date): Candidata | 
   const confianza = confianzaRecuperarPagos({ tarjetaValida: true, vencidoMenos30d: true, socioActivo: true });
   if (!confianza) return null;
 
-  const motivoMotor = `Nada raro, cosas de tarjetas. Los tengo listos para reintentar — son ${total}€ que deberían estar en tu cuenta.`;
+  const motivoMotor = `Nada raro, cosas de tarjetas. Los tengo listos para reintentar — son ${conMoneda(total, '')} que deberían estar en tu cuenta.`;
 
   return {
     especialista: 'INGRESOS',
@@ -129,7 +130,7 @@ function reglaI2(s: SnapshotEstudio, idx: IndicesSenal, now: Date): Candidata | 
     motivoMotor,
     datosUsados: { n: conTarjeta.length, total, diasMedioVencido: redondear1(diasMedioVencido) },
     riesgo: 'PERDIDA',
-    impacto: { valor: total, unidad: 'EUR', formula: `${conTarjeta.length} recibos pendientes: ${total}€` },
+    impacto: { valor: total, unidad: 'EUR', formula: `${conTarjeta.length} recibos pendientes: ${conMoneda(total, '')}` },
     confianza,
     accion: { tipo: 'COBRAR_RECIBOS', reciboIds: conTarjeta.map(r => r.id) },
     tiempoEstimadoMin: 1,
@@ -167,18 +168,18 @@ function reglaI3(socioId: string, recibos: Recibo[], idx: IndicesSenal, now: Dat
   if (!confianza) return null;
 
   const motivoMotor = recibos.length === 1
-    ? `Tiene un recibo de ${total}€ sin pagar desde hace ${diasMaxVencido} días y no hay tarjeta para reintentarlo. Habría que reclamárselo directamente.`
-    : `Acumula ${recibos.length} recibos sin pagar (${total}€ en total) y no hay tarjeta guardada para cobrarlos solos. Toca reclamarle a mano.`;
+    ? `Tiene un recibo de ${conMoneda(total, '')} sin pagar desde hace ${diasMaxVencido} días y no hay tarjeta para reintentarlo. Habría que reclamárselo directamente.`
+    : `Acumula ${recibos.length} recibos sin pagar (${conMoneda(total, '')} en total) y no hay tarjeta guardada para cobrarlos solos. Toca reclamarle a mano.`;
 
   return {
     especialista: 'INGRESOS',
     tipo: 'COBRAR_PENDIENTE',
     dedupeKey: `INGRESOS:COBRAR_PENDIENTE:${socioId}`,
-    tituloMotor: `${socio.nombre} tiene ${total}€ pendientes de pago`,
+    tituloMotor: `${socio.nombre} tiene ${conMoneda(total, '')} pendientes de pago`,
     motivoMotor,
     datosUsados: { nombre: socio.nombre, nRecibos: recibos.length, total, diasMaxVencido },
     riesgo: 'PERDIDA',
-    impacto: { valor: total, unidad: 'EUR', formula: `${recibos.length} recibo(s) sin cobro automático: ${total}€` },
+    impacto: { valor: total, unidad: 'EUR', formula: `${recibos.length} recibo(s) sin cobro automático: ${conMoneda(total, '')}` },
     confianza,
     accion: { tipo: 'CONTACTO_MANUAL', canal: 'WHATSAPP', textoSugerido: motivoMotor },
     socioId,
@@ -236,7 +237,7 @@ function reglaI4(s: SnapshotEstudio, idx: IndicesSenal): Candidata | null {
 
   const porSesionR = redondear2(mejor.porSesion);
   const mediaR = redondear2(mediaEstudio);
-  const motivoMotor = `Tus ${mejor.holders} socias del plan "${mejor.plan.nombre}" vienen tanto que les sale a ${porSesionR}€ la clase, cuando tu media son ${mediaR}€. No es una alarma, pero quizá ese plan esté por debajo de lo que vale — puede ser buen momento para revisarlo.`;
+  const motivoMotor = `Tus ${mejor.holders} socias del plan "${mejor.plan.nombre}" vienen tanto que les sale a ${conMoneda(porSesionR, '')} la clase, cuando tu media son ${conMoneda(mediaR, '')}. No es una alarma, pero quizá ese plan esté por debajo de lo que vale — puede ser buen momento para revisarlo.`;
 
   return {
     especialista: 'INGRESOS',

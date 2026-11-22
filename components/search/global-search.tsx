@@ -1,5 +1,6 @@
 'use client';
 
+import { conMoneda } from '../../lib/moneda.ts';
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { TRANSICION_SECCION } from '@/lib/panel/transiciones';
@@ -517,7 +518,7 @@ export function GlobalSearch({
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-semibold text-foreground truncate">{r.concepto}</p>
                           <p className="text-xs truncate" style={{ color: 'var(--muted-foreground)' }}>
-                            {s ? `${s.nombre} ${s.apellidos}` : '—'} · {r.importe} €
+                            {s ? `${s.nombre} ${s.apellidos}` : '—'} · {conMoneda(r.importe)}
                           </p>
                         </div>
                         <ArrowRight size={14} className="shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: 'var(--muted-foreground)' }} />

@@ -1,5 +1,6 @@
 'use client';
 
+import { conMoneda, LOCALE_MONEDA } from '../../lib/moneda.ts';
 import { useMemo, useState } from 'react';
 import { useStudio } from '@/lib/studio-context';
 import { Card, CardContent } from '@/components/ui/card';
@@ -13,7 +14,7 @@ import type { InstructorDependencySnapshot } from '@/lib/types';
 // Misma fuente que FilaEspecialista (Mi Equipo) — lib/decision/severidad.ts.
 const ESTADO = ESTADO_ESPECIALISTA_INFO;
 
-const eur = (n: number) => `${Math.round(n).toLocaleString('es-ES')} €`;
+const eur = (n: number) => `${conMoneda(Math.round(n).toLocaleString(LOCALE_MONEDA))}`;
 
 function porque(s: InstructorDependencySnapshot, nombre: string, ventana: number): string {
   const n = nombre.split(' ')[0];

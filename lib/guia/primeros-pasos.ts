@@ -15,6 +15,7 @@
 // ver su lista «a medias» para siempre.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { conMoneda } from '../moneda.ts';
 import { ENTRADA_PRIMERA_CLASE } from '../alta/bienvenida-nueva.ts';
 import { otrasSedes, PRECIO_CADENA_MES, type TotalSedes } from '../alta/tu-estudio.ts';
 
@@ -284,7 +285,7 @@ export function primerosPasosAltaNueva(d: DatosAltaNueva): PrimerosPasosAltaNuev
     opcionales.push({
       id: 'sedes',
       titulo: tituloOtrasSedes(d.sedes.total),
-      nota: `plan Cadena, ${PRECIO_CADENA_MES} €/mes`,
+      nota: `plan Cadena, ${conMoneda(PRECIO_CADENA_MES)}/mes`,
       href: '/suscripcion',
       hecha: d.sedes.abiertas >= d.sedes.total,
     });

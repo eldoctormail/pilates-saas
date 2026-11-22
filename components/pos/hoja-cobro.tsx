@@ -1,5 +1,6 @@
 'use client';
 
+import { conMoneda } from '../../lib/moneda.ts';
 import { useState, useEffect, useCallback, useRef } from 'react';
 import {
   Banknote, CreditCard, Smartphone, ArrowRightLeft, Loader2, CheckCircle2,
@@ -564,7 +565,7 @@ export function HojaCobro({
                     onClick={() => setEntregado(s.toFixed(2))}
                     className="h-14 rounded-xl border border-border bg-background text-[15px] font-semibold text-foreground tabular-nums hover:border-foreground/40 active:scale-[0.97] transition-all"
                   >
-                    {s % 1 === 0 ? `${s} €` : formatEuro(s)}
+                    {s % 1 === 0 ? `${conMoneda(s)}` : formatEuro(s)}
                   </button>
                 ))}
               </div>

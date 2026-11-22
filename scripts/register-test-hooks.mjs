@@ -3,6 +3,9 @@ import { registerHooks } from 'node:module';
 // Las fechas esperadas de los tests están escritas en hora de Madrid: se fija
 // esa zona para ellos (lib/zona-horaria.ts) salvo que se pida otra a mano.
 process.env.NEXT_PUBLIC_ZONA_HORARIA ||= 'Europe/Madrid';
+// Igual con la moneda (lib/moneda.ts): los textos esperados están en euros.
+process.env.NEXT_PUBLIC_MONEDA ||= 'EUR';
+process.env.NEXT_PUBLIC_LOCALE_MONEDA ||= 'es-ES';
 
 // Hook de resolución solo para `node --test`: sustituye 'server-only' por un
 // módulo vacío — nunca toca la resolución de `react` ni de nada más.

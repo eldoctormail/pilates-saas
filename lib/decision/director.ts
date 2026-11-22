@@ -3,6 +3,7 @@
 // ejecutivo, redacta "Mientras Dormías" con hechos verificables, y genera el
 // saludo desde plantillas deterministas (Especialistas §7.1 — la IA solo
 // puede re-redactar el tono, nunca inventar el contenido).
+import { conMoneda } from '../moneda.ts';
 import type { Candidata, EstadoEspecialista, Impacto, ItemMientrasDormias, Prioridad, Recomendacion, Riesgo, ResumenDiario } from './tipos.ts';
 import type { AutomationLog, Reserva } from '@/lib/types';
 import { calcularScore, type CandidataPriorizada } from './prioridad.ts';
@@ -112,8 +113,8 @@ export function construirMientrasDormias(entrada: EntradaMientrasDormias): ItemM
     items.push({
       icono: '✓',
       texto: cobrados === intentados
-        ? `Reintenté ${intentados} pagos que se habían quedado a medias — cosas de tarjetas. Cobrados: ${total}€.`
-        : `Reintenté ${intentados} pagos que se habían quedado a medias y cobré ${cobrados}: ${total}€.`,
+        ? `Reintenté ${intentados} pagos que se habían quedado a medias — cosas de tarjetas. Cobrados: ${conMoneda(total, '')}.`
+        : `Reintenté ${intentados} pagos que se habían quedado a medias y cobré ${cobrados}: ${conMoneda(total, '')}.`,
       verificadoPor: `recomendaciones EJECUTADA por AUTONOMIA tipo RECUPERAR_PAGOS, con su resultado (${cobros.length})`,
     });
   }

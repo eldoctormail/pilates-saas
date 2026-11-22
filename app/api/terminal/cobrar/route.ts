@@ -1,3 +1,4 @@
+import { conMoneda } from '../../../../lib/moneda.ts';
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { verificarSesionStaff } from '@/lib/auth-server';
@@ -58,7 +59,7 @@ export async function POST(req: NextRequest) {
   const amount = Math.round(body.amount ?? 0); // céntimos
   if (!Number.isFinite(amount) || amount <= 0) return NextResponse.json({ error: 'Importe inválido' }, { status: 400 });
   if (amount > MAX_CENTIMOS) {
-    return NextResponse.json({ error: 'El importe supera el máximo permitido en el datáfono (10.000 €)' }, { status: 400 });
+    return NextResponse.json({ error: `El importe supera el máximo permitido en el datáfono (${conMoneda('10.000')})` }, { status: 400 });
   }
 
   const { data: studio } = await admin.from('studios')

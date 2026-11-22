@@ -1,5 +1,6 @@
 'use client';
 
+import { conMoneda } from '../../lib/moneda.ts';
 import { useId } from 'react';
 import { Check } from 'lucide-react';
 import { PLANES, PLAN_INFO, type Plan } from '@/lib/billing/entitlements';
@@ -113,7 +114,7 @@ export function SelectorPlan({
                 dicen lo mismo, en vez de dos que lo dicen y una que se calla. */}
             <div className="mt-3 flex items-baseline gap-1">
               <span className="text-[28px] font-extrabold leading-none tracking-tight text-foreground tabular-nums">
-                {euros(importeDe(info.precioMes, intervalo))}€
+                {conMoneda(euros(importeDe(info.precioMes, intervalo)), '')}
               </span>
               <span className="text-[12px] font-medium text-muted-foreground">{intervalo === 'anual' ? '/año, IVA incluido' : '/mes, IVA incluido'}</span>
             </div>

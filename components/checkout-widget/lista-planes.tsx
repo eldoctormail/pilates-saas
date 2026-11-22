@@ -5,6 +5,7 @@
 // ninguna superficie para esto en Modo B — el checkout embebido (mecanismo
 // de pago) necesitaba un sitio desde el que invocarse, así que esta lista es
 // la pieza mínima que lo hace alcanzable, no una decisión de diseño aparte.
+import { conMoneda } from '../../lib/moneda.ts';
 import { useState } from 'react';
 import type { ModoTokens } from '@/lib/portal-modo';
 import type { PlanTarifa } from '@/lib/types';
@@ -130,7 +131,7 @@ export function ListaPlanes({
             <div key={plan.id} style={{ border: `1px solid ${t.line}`, borderRadius: radius.card, padding: 14, background: t.surface }}>
               <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 10 }}>
                 <p style={{ fontSize: 14, fontWeight: 800, color: t.ink }}>{plan.nombre}</p>
-                <p style={{ fontSize: 14, fontWeight: 800, color: t.ink }}>{plan.precio} €</p>
+                <p style={{ fontSize: 14, fontWeight: 800, color: t.ink }}>{conMoneda(plan.precio)}</p>
               </div>
               {plan.descripcion && <p style={{ fontSize: 12, color: t.muted, marginTop: 4 }}>{plan.descripcion}</p>}
               <button

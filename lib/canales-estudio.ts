@@ -25,6 +25,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { telefonoE164 } from './decision/mensajes-socia.ts';
+import { LOCALE } from './locale.ts';
 
 /**
  * Redes sociales del estudio. Fuente de verdad del catálogo: `theme-schema.ts`
@@ -43,7 +44,7 @@ export const CANALES: Record<CanalId, { label: string; placeholder: string }> = 
   instagram: { label: 'Instagram', placeholder: 'https://instagram.com/tu-estudio' },
   facebook: { label: 'Facebook', placeholder: 'https://facebook.com/tu-estudio' },
   tiktok: { label: 'TikTok', placeholder: 'https://tiktok.com/@tu-estudio' },
-  whatsapp: { label: 'WhatsApp', placeholder: 'https://wa.me/34600000000' },
+  whatsapp: { label: 'WhatsApp', placeholder: /^es-AR\b/i.test(LOCALE) ? 'https://wa.me/5492994123456' : 'https://wa.me/34600000000' },
 };
 
 /** Un usuario/handle de red social. Deliberadamente estrecho: lo que salga de

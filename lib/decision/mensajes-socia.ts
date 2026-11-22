@@ -7,6 +7,7 @@
 // la tarjeta del Centro de Control (navegador).
 
 import { conMoneda } from '../moneda.ts';
+import { LOCALE } from '../locale.ts';
 export interface MensajeSocia {
   asunto: string; // para el email
   cuerpo: string; // texto del mensaje (email y WhatsApp comparten cuerpo)
@@ -136,19 +137,48 @@ export function mensajeParaSocia(tipo: string, datos: Datos, estudioNombre: stri
 }
 
 /**
- * Normaliza un teléfono a formato E.164 (`+34612345678`). `telefono` puede venir
+ * Normaliza un teléfono a formato E.164 (`+34612345678`, `+5492994123456`). `telefono` puede venir
  * con +, espacios, guiones, etc. Devuelve null si no hay dígitos. Es PURO — lo
  * usan tanto el enlace wa.me (navegador) como el envío por Twilio (servidor).
+ *
+ * El número sin prefijo de país se lee con el país del estudio (`LOCALE`): en España, un móvil de 9
+ * cifras lleva el +34; en Argentina, ver `argentinoE164`.
  */
-export function telefonoE164(telefono: string | null | undefined): string | null {
+export function telefonoE164(telefono: string | null | undefined, locale: string = LOCALE): string | null {
   if (!telefono) return null;
   const teniaPrefijoIntl = telefono.trim().startsWith('+') || telefono.trim().startsWith('00');
   let digitos = telefono.replace(/\D/g, '');
   if (!digitos) return null;
   if (digitos.startsWith('00')) digitos = digitos.slice(2); // 00 internacional → sin él
+  if (/^es-AR\b/i.test(locale)) return argentinoE164(digitos, teniaPrefijoIntl);
   // Móvil español sin prefijo internacional (9 dígitos, empieza por 6/7) → +34.
   if (!teniaPrefijoIntl && digitos.length === 9 && /^[67]/.test(digitos)) digitos = `34${digitos}`;
   return `+${digitos}`;
+}
+
+/**
+ * Argentina. WhatsApp quiere los celulares como `549` + código de área (sin el 0) + número (sin el
+ * 15): «0299 15 412-3456», «299 412-3456» y «+54 299 4123456» son todos `+5492994123456`. Un número
+ * con otro prefijo de país se deja como venía; uno nacional que no da 10 cifras (sin código de área),
+ * null.
+ */
+function argentinoE164(digitos: string, teniaPrefijoIntl: boolean): string | null {
+  let d = digitos;
+  if (teniaPrefijoIntl || (d.startsWith('54') && d.length >= 12)) {
+    if (!d.startsWith('54')) return `+${d}`;
+    d = d.slice(2);
+    if (d.startsWith('9')) d = d.slice(1);
+  }
+  if (d.startsWith('0')) d = d.slice(1);
+  // El 15 del celular va después del código de área (de 2, 3 o 4 cifras): sin él quedan 10.
+  if (d.length === 12) {
+    for (const area of [2, 3, 4]) {
+      if (d.slice(area, area + 2) === '15') { d = d.slice(0, area) + d.slice(area + 2); break; }
+    }
+  }
+  // Sin código de área (o con cifras de más) no se adivina: mejor sin enlace que a un número que no es.
+  if (d.length === 10) return `+549${d}`;
+  return teniaPrefijoIntl ? `+${digitos}` : null;
 }
 
 /**

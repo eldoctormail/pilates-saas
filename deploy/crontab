@@ -1,0 +1,9 @@
+# Trabajos que en Vercel salían de vercel.json. Horario de Argentina (el
+# contenedor corre con TZ=America/Argentina/Buenos_Aires).
+# En Vercel corrían en UTC pensados para Madrid; acá van a la hora local
+# equivalente. El de VeriFactu (facturación española) no se usa.
+#
+# min hora dia mes dow  ruta
+0 0 * * *    /usr/local/bin/llamar no-shows
+0 3 * * *    /usr/local/bin/llamar materializar-plazas
+0 5 * * 1    /usr/local/bin/llamar dependency-risk

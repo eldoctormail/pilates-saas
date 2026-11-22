@@ -1,0 +1,10 @@
+# Ajustes de Tentare sobre el docker-compose oficial de Supabase.
+# Se copia a la carpeta del proyecto de Supabase y se suma en su .env:
+#
+#   COMPOSE_FILE=docker-compose.yml:docker-compose.tentare.yml
+#
+# Edge Functions queda apagado: el repo no tiene ninguna función
+# (supabase/functions no existe). Ahorra unos cientos de MB de RAM.
+services:
+  functions:
+    profiles: ["desactivado"]

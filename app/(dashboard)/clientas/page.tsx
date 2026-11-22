@@ -1,5 +1,6 @@
 'use client';
 
+import { TELEFONO_EJEMPLO } from '@/lib/locale';
 import { LOCALE } from '../../../lib/locale.ts';
 import { conMoneda } from '../../../lib/moneda.ts';
 import { VistaDeLaUrl, useUrlSigueALaVista } from '@/components/layout/vista-de-la-url';
@@ -2212,7 +2213,7 @@ export default function Socios() {
                 <FF label="Teléfono" description="Para avisos por WhatsApp, si el estudio los tiene activados.">
                   <input
                     className={inputCls}
-                    placeholder="+34 600 000 000"
+                    placeholder={TELEFONO_EJEMPLO}
                     value={form.telefono}
                     onChange={(e) => setForm((f) => ({ ...f, telefono: e.target.value }))}
                   />

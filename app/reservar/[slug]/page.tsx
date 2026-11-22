@@ -1,4 +1,6 @@
 'use client';
+import { TELEFONO_EJEMPLO } from '@/lib/locale';
+import { pasarelaEsMercadoPago } from '@/lib/mercadopago/config';
 import { conMoneda } from '../../../lib/moneda.ts';
 import { referidorDeAlta } from '@/lib/student/referido';
 import { guardarReferidor, leerReferidor, olvidarReferidor } from '@/lib/student/referido-sesion';
@@ -101,6 +103,12 @@ import { tiposActivos, tiposConVida } from '@/lib/tipos-clase/orden-y-archivo';
 const STRIPE_PUBLISHABLE_KEY = esClavePublicable(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
   ? process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
   : undefined;
+// ¿Se puede pagar aquí? Con Stripe, la cuenta del estudio y la clave publicable; autoalojado con
+// Mercado Pago, siempre (cobra el servidor: si no está configurado, el checkout lo dice sin cobrar).
+const PAGA_CON_MERCADOPAGO = pasarelaEsMercadoPago();
+function cobraOnlineAqui(stripeAccountId: string | null | undefined): boolean {
+  return PAGA_CON_MERCADOPAGO || (!!stripeAccountId && !!STRIPE_PUBLISHABLE_KEY);
+}
 
 // Code-splitting (audit de rendimiento de los widgets embebibles): cada tab
 // de este widget (clases / citas 1:1 / mis reservas / planes) es
@@ -1892,7 +1900,7 @@ export default function ReservarPage() {
       // concede el servidor al confirmar.
       if (modoPrueba && sesionId) {
         const oferta = ofertaPruebaPara(sesionDelGate?.tipoClaseId);
-        if (oferta && oferta.precio > 0 && studio?.stripeAccountId && STRIPE_PUBLISHABLE_KEY) {
+        if (oferta && oferta.precio > 0 && cobraOnlineAqui(studio?.stripeAccountId)) {
           setDatosPlan(oferta);
           setLoginStep('datos');
         } else {
@@ -1903,7 +1911,7 @@ export default function ReservarPage() {
       const tipoDelGate = sesionDelGate?.tipoClaseId ? tiposClase.find(t => t.id === sesionDelGate.tipoClaseId) : undefined;
       const exigePlan = studio && tipoDelGate ? heredaOverride(tipoDelGate.reservaExigirPlan, studio.reservaExigirPlan) : false;
       const planDisponible = sesionId && exigePlan ? planClaseSueltaPara(sesionDelGate?.tipoClaseId, planesTarifa) : null;
-      if (sesionId && exigePlan && planDisponible && studio?.stripeAccountId && STRIPE_PUBLISHABLE_KEY) {
+      if (sesionId && exigePlan && planDisponible && cobraOnlineAqui(studio?.stripeAccountId)) {
         setDatosPlan(planDisponible);
         setLoginStep('datos');
       } else {
@@ -1915,7 +1923,7 @@ export default function ReservarPage() {
       if (needsContract) {
         setLoginStep('contrato');
       } else if (sesionId && modoPrueba && (ofertaPruebaPara(sesiones.find(s => s.id === sesionId)?.tipoClaseId)?.precio ?? 0) > 0
-        && studio?.stripeAccountId && STRIPE_PUBLISHABLE_KEY) {
+        && cobraOnlineAqui(studio?.stripeAccountId)) {
         // Prueba DE PAGO con cuenta: el mismo paso de pago, ya rellenado. El
         // servidor mira su ficha (por email) y decide si puede estrenarla.
         setLoginForm(f => ({ ...f, nombre: found?.nombre ?? f.nombre, email: found?.email ?? usuarioEmail ?? f.email, telefono: found?.telefono ?? f.telefono }));
@@ -2054,6 +2062,35 @@ export default function ReservarPage() {
     // La vista previa del panel no cobra (lib/reservar/vista-previa-sin-escrituras.ts).
     if (enVistaPreviaDelPanel()) { setDatosError(ESCRITURA_EN_VISTA_PREVIA); return; }
     setDatosCargando(true);
+    // Autoalojado con Mercado Pago: el mismo cuerpo a su checkout, que devuelve la URL de Checkout Pro.
+    // La reserva la hace el servidor cuando Mercado Pago confirma el pago; a la vuelta, «?compra=ok».
+    if (PAGA_CON_MERCADOPAGO) {
+      try {
+        const res = await fetch('/api/mercadopago/checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            studioId: studio.id, planId: datosPlan.id, sesionId: bookingSesionId,
+            socioEmail: loginForm.email.trim(), socioNombre: loginForm.nombre.trim(), socioTelefono: loginForm.telefono.trim(),
+            origenLead: searchParams.get('ref') ?? null, widgetSesion: sessionIdWidget(),
+            codigoDescuento: codigoDescuento.trim() || undefined, spotId: selectedSpot || undefined,
+            genero: datosInfoAdicional.genero || undefined, comoConociste: datosInfoAdicional.comoConociste || undefined,
+            codigoPostal: datosInfoAdicional.codigoPostal.trim() || undefined,
+            fechaNacimiento: fechaNacimientoISO(datosInfoAdicional.fechaNacimiento) ?? undefined,
+            aceptaCondiciones: privacidadAceptada,
+          }),
+        });
+        const data = await res.json().catch(() => null) as { url?: string; error?: string } | null;
+        if (!res.ok || !data?.url) { setDatosError(data?.error ?? 'No se ha podido iniciar el pago. No te hemos cobrado nada.'); return; }
+        trackEventoWidget(studio.id, 'checkout_started', { origen: searchParams.get('ref'), socioId: null });
+        (window.top ?? window).location.href = data.url;
+      } catch {
+        setDatosError('Error de conexión. Inténtalo de nuevo.');
+      } finally {
+        setDatosCargando(false);
+      }
+      return;
+    }
     try {
       const res = await fetch('/api/public/checkout-embebido', {
         method: 'POST',
@@ -2481,7 +2518,8 @@ export default function ReservarPage() {
       // validó su token, así que la sesión existe. Sin esta cabecera, toda
       // socia logueada comprando un plan desde este widget recibía 401.
       const authHeader = await portalAuthHeader();
-      const res = await fetch('/api/stripe/checkout', {
+      // Autoalojado con Mercado Pago: el mismo cuerpo y la misma respuesta (`url`) en su checkout.
+      const res = await fetch(PAGA_CON_MERCADOPAGO ? '/api/mercadopago/checkout' : '/api/stripe/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', ...authHeader },
         // El importe/concepto NO se envían: los deriva el servidor del plan en
@@ -2905,7 +2943,7 @@ export default function ReservarPage() {
         onContratar={handleContratarPlan}
         fotoCabecera={embedMode && heroFoto ? heroFoto : null}
       />
-      <p style={{ fontSize: 12, color: 'var(--portal-muted)', marginTop: 16, textAlign: 'center' }}>Pago seguro con Stripe · IVA incluido</p>
+      <p style={{ fontSize: 12, color: 'var(--portal-muted)', marginTop: 16, textAlign: 'center' }}>{PAGA_CON_MERCADOPAGO ? 'Pago seguro con Mercado Pago' : 'Pago seguro con Stripe · IVA incluido'}</p>
     </div>
   );
 
@@ -4863,7 +4901,7 @@ export default function ReservarPage() {
                   style={{ backgroundColor: 'var(--portal-surface-2)' }} />
                 <input type="tel"
                   aria-label="Tu teléfono"
-                  placeholder="Tu teléfono (+34 600 000 000)"
+                  placeholder={`Tu teléfono (${TELEFONO_EJEMPLO})`}
                   value={loginForm.telefono}
                   onChange={e => setLoginForm(f => ({ ...f, telefono: e.target.value }))}
                   onKeyDown={e => e.key === 'Enter' && handleRegistroNombre()}

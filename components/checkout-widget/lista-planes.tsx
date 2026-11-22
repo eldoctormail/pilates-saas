@@ -5,6 +5,7 @@
 // ninguna superficie para esto en Modo B — el checkout embebido (mecanismo
 // de pago) necesitaba un sitio desde el que invocarse, así que esta lista es
 // la pieza mínima que lo hace alcanzable, no una decisión de diseño aparte.
+import { pasarelaEsMercadoPago } from '@/lib/mercadopago/config';
 import { conMoneda } from '../../lib/moneda.ts';
 import { useState } from 'react';
 import type { ModoTokens } from '@/lib/portal-modo';
@@ -47,7 +48,9 @@ export function ListaPlanes({
   // (lib/billing/clase-prueba.ts). Listarla prometería algo que el servidor rechaza.
   const activos = planes.filter(p => p.activo && p.esPrueba !== true);
 
-  const configuracionIncompleta = !publishableKey || !stripeAccountId;
+  // Con Mercado Pago (autoalojado) se paga en su página: no hace falta nada de Stripe aquí.
+  const conMercadoPago = pasarelaEsMercadoPago();
+  const configuracionIncompleta = !conMercadoPago && (!publishableKey || !stripeAccountId);
 
   async function comprar(plan: PlanTarifa) {
     if (!socioId) return; // el caller gatea esto con el login; defensa en profundidad
@@ -64,6 +67,14 @@ export function ListaPlanes({
     const r = await onCrearIntento(plan);
     if (!r || !r.ok) {
       setError((r && !r.ok && r.error) || 'No se ha podido iniciar la compra.');
+      setEstado({ fase: 'lista' });
+      return;
+    }
+    const urlMercadoPago = (r.datos as { url?: string } | null)?.url;
+    if (conMercadoPago) {
+      // Se queda en «creando» (el botón cargando) hasta que la ventana se vaya a Mercado Pago.
+      if (typeof urlMercadoPago === 'string' && /^https:\/\//.test(urlMercadoPago)) { (window.top ?? window).location.href = urlMercadoPago; return; }
+      setError('No se ha podido iniciar la compra.');
       setEstado({ fase: 'lista' });
       return;
     }

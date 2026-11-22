@@ -9,6 +9,7 @@
 //
 // Sin `@/`: lo prueba `node --test` con un cliente falso.
 
+import { cobraOnline } from '../mercadopago/config.ts';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import {
   cobroDeReciboAlumna, type CobroDeReciboAlumna, type ContextoCobroAlumna, type FilaReciboAlumna,
@@ -63,7 +64,7 @@ export async function contextoCobroAlumna(
     ]);
   if (mandatoRes.error || cuotasRes.error || penalizacionesRes.error) return null;
   return {
-    pagableOnline: Boolean(p.estudio.stripe_account_id),
+    pagableOnline: cobraOnline(p.estudio.stripe_account_id as string | null | undefined),
     socio: p.socio,
     domiciliadaEnRemesa: ((mandatoRes.data ?? []) as unknown[]).length > 0,
     cuotas: new Map(((cuotasRes.data ?? []) as Record<string, unknown>[]).map((c) => [c.id as string, {

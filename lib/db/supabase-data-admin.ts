@@ -1,4 +1,5 @@
 import { conMoneda } from '../moneda.ts';
+import { cobraOnline } from '../mercadopago/config.ts';
 import 'server-only';
 import { trocear } from '@/lib/trocear';
 import { renovacionPorPagar, type FilaReciboRenovacion } from '@/lib/billing/renovacion-sin-tarjeta';
@@ -1281,7 +1282,7 @@ export async function fetchPublicStudioData(
       // estudio». Sin poder comprobarlo (`lecturaCobroOk`), nada.
       renovacionPorPagar: (() => {
         if (!lecturaCobroOk) return null;
-        const ren = renovacionPorPagar((recRes.data ?? []) as unknown as FilaReciboRenovacion[], Boolean(studioRow.stripe_account_id));
+        const ren = renovacionPorPagar((recRes.data ?? []) as unknown as FilaReciboRenovacion[], cobraOnline(studioRow.stripe_account_id as string | null | undefined));
         return ren && leTocaPagarlaAElla(cobrosDeSusRecibos[ren.reciboId]) ? ren : null;
       })(),
       // Quién cobra cada recibo que debe y si puede pagarlo ella (`lib/billing/cobro-recibo-alumna.ts`). Sin el método

@@ -93,10 +93,10 @@ export function mismoTramoAnterior(periodo: Periodo, visible: Tramo): Tramo | nu
 
 /** Cómo se cobró, para cuadrar la caja y el banco. */
 export type ComoSeCobro =
-  | 'DOMICILIACION' | 'TARJETA_ONLINE' | 'TARJETA_MOSTRADOR' | 'EFECTIVO' | 'BIZUM' | 'TRANSFERENCIA' | 'SIN_ESPECIFICAR';
+  | 'DOMICILIACION' | 'TARJETA_ONLINE' | 'TARJETA_MOSTRADOR' | 'EFECTIVO' | 'BIZUM' | 'TRANSFERENCIA' | 'MERCADOPAGO' | 'SIN_ESPECIFICAR';
 
 export const ORDEN_COMO_SE_COBRO: readonly ComoSeCobro[] = [
-  'DOMICILIACION', 'TARJETA_ONLINE', 'TARJETA_MOSTRADOR', 'EFECTIVO', 'BIZUM', 'TRANSFERENCIA', 'SIN_ESPECIFICAR',
+  'DOMICILIACION', 'TARJETA_ONLINE', 'TARJETA_MOSTRADOR', 'MERCADOPAGO', 'EFECTIVO', 'BIZUM', 'TRANSFERENCIA', 'SIN_ESPECIFICAR',
 ];
 
 export const TEXTO_COMO_SE_COBRO: Record<ComoSeCobro, string> = {
@@ -106,6 +106,7 @@ export const TEXTO_COMO_SE_COBRO: Record<ComoSeCobro, string> = {
   EFECTIVO: 'Efectivo',
   BIZUM: 'Bizum',
   TRANSFERENCIA: 'Transferencia',
+  MERCADOPAGO: 'Mercado Pago',
   SIN_ESPECIFICAR: 'Sin especificar',
 };
 
@@ -127,6 +128,7 @@ export function comoSeCobro(r: ReciboCobrado): ComoSeCobro {
     case 'EFECTIVO': return 'EFECTIVO';
     case 'BIZUM': return 'BIZUM';
     case 'TRANSFERENCIA': return 'TRANSFERENCIA';
+    case 'MERCADOPAGO': return 'MERCADOPAGO';
     case 'TARJETA':
       if (r.conciliadoPor === 'tpv' || r.conciliadoPor === 'manual') return 'TARJETA_MOSTRADOR';
       return r.stripePaymentIntentId ? 'TARJETA_ONLINE' : 'TARJETA_MOSTRADOR';

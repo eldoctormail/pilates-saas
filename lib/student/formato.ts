@@ -222,6 +222,7 @@ const METODO_COBRO: Record<string, string> = {
   BIZUM: 'Bizum',
   EFECTIVO: 'Efectivo',
   TRANSFERENCIA: 'Transferencia',
+  MERCADOPAGO: 'Mercado Pago',
   DATAFONO: 'Datáfono',
 };
 

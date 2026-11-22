@@ -15,6 +15,31 @@
 // off-session (`checkout_session_id` queda marcado en cuanto se llega aquí).
 
 import { portalAuthHeader, prepararRenovacionPlan } from '@/lib/student/api-publica';
+import { pasarelaEsMercadoPago } from '@/lib/mercadopago/config';
+
+/**
+ * Autoalojado con Mercado Pago (NEXT_PUBLIC_PASARELA=mercadopago): el recibo se
+ * paga en Checkout Pro, fuera de la app, y se vuelve a «Pagos», que comprueba
+ * que llegó. El servidor (`/api/mercadopago/checkout`) aplica las mismas reglas
+ * que el de Stripe; el webhook es quien lo da por cobrado.
+ */
+async function urlMercadoPago(studioId: string, reciboId: string): Promise<ResultadoRenovar & { sesionCaducada?: boolean }> {
+  try {
+    const auth = await portalAuthHeader();
+    const res = await fetch('/api/mercadopago/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...auth },
+      body: JSON.stringify({ studioId, reciboId, origen: 'portal' }),
+    });
+    const cuerpo = (await res.json().catch(() => null)) as { url?: string; error?: string; codigo?: string } | null;
+    if (!res.ok || !cuerpo?.url) {
+      return { ok: false, error: mensajeDe(cuerpo?.codigo, cuerpo?.error ?? 'No se ha podido iniciar el pago. No se te ha cobrado nada.'), codigo: cuerpo?.codigo };
+    }
+    return { ok: true, url: cuerpo.url };
+  } catch {
+    return { ok: false, error: 'No hemos podido conectar. Comprueba tu conexión: no se te ha cobrado nada.' };
+  }
+}
 
 export type ResultadoRenovar =
   | { ok: true; url: string }
@@ -35,6 +60,7 @@ function mensajeDe(codigo: string | undefined, error: string): string {
 export async function renovarPlan(studioId: string): Promise<ResultadoRenovar> {
   const prep = await prepararRenovacionPlan(studioId);
   if ('error' in prep) return { ok: false, error: mensajeDe(prep.codigo, prep.error), codigo: prep.codigo };
+  if (pasarelaEsMercadoPago()) return urlMercadoPago(studioId, prep.reciboId);
 
   try {
     const auth = await portalAuthHeader();
@@ -70,6 +96,7 @@ export async function renovarPlan(studioId: string): Promise<ResultadoRenovar> {
  * la tarjeta (`pagadorVerificado`): las próximas renovaciones ya se cobran solas.
  */
 export async function pagarRenovacion(studioId: string, reciboId: string): Promise<ResultadoRenovar> {
+  if (pasarelaEsMercadoPago()) return urlMercadoPago(studioId, reciboId);
   try {
     const auth = await portalAuthHeader();
     const res = await fetch('/api/stripe/checkout', {
@@ -96,10 +123,16 @@ export async function pagarRenovacion(studioId: string, reciboId: string): Promi
 
 export type InicioPagoRecibo =
   | { ok: true; clientSecret: string }
+  /** Mercado Pago: se paga fuera de la app, en esta URL. */
+  | { ok: true; url: string }
   | { ok: false; error: string; codigo?: string; sesionCaducada?: boolean };
 
 /** Nunca lanza: cualquier fallo es un estado que la hoja sabe pintar. */
 export async function abrirPagoDeRecibo(studioId: string, reciboId: string): Promise<InicioPagoRecibo> {
+  if (pasarelaEsMercadoPago()) {
+    const r = await urlMercadoPago(studioId, reciboId);
+    return r.ok ? { ok: true, url: r.url } : { ok: false, error: r.error, codigo: r.codigo };
+  }
   try {
     const auth = await portalAuthHeader();
     const res = await fetch('/api/stripe/checkout', {

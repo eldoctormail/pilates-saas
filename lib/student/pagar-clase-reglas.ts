@@ -125,6 +125,28 @@ export function leerInicioPagoClase(status: number, cuerpo: unknown): InicioPago
   return { tipo: 'error', mensaje: SIN_COBRO };
 }
 
+/**
+ * Pagar y reservar con Mercado Pago (autoalojado): el servidor no da un `clientSecret` para pagar aquí, sino la
+ * URL de Checkout Pro a la que ir. Lo demás se lee igual que `leerInicioPagoClase`.
+ */
+export type InicioPagoMercadoPago =
+  | { tipo: 'redirigir'; url: string }
+  | Extract<InicioPagoClase, { tipo: 'rechazo' | 'faltan-preguntas' | 'sesion' | 'dos-pasos' | 'error' }>;
+
+export function leerInicioPagoMercadoPago(status: number, cuerpo: unknown): InicioPagoMercadoPago {
+  const c = (cuerpo && typeof cuerpo === 'object' ? cuerpo : {}) as { url?: unknown; error?: unknown; codigo?: unknown };
+  const s = deSesion(status, c);
+  if (s) return s;
+  const codigo = typeof c.codigo === 'string' ? c.codigo : null;
+  if (status >= 200 && status < 300) {
+    // Solo una URL https: lo único a lo que se manda a la alumna es a Mercado Pago.
+    return typeof c.url === 'string' && /^https:\/\//.test(c.url) ? { tipo: 'redirigir', url: c.url } : { tipo: 'error', mensaje: SIN_COBRO };
+  }
+  if (codigo === 'faltan-preguntas') return { tipo: 'faltan-preguntas' };
+  if (status >= 400 && status < 500 && typeof c.error === 'string' && c.error) return { tipo: 'rechazo', codigo, mensaje: c.error };
+  return { tipo: 'error', mensaje: SIN_COBRO };
+}
+
 /** Cuántas veces se reintenta un `pago-preparandose` (a 1 s) antes de decirlo. */
 export const REINTENTOS_PREPARANDOSE = 2;
 

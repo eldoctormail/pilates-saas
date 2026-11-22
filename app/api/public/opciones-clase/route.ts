@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { configMercadoPago, pasarelaEsMercadoPago } from '@/lib/mercadopago/config';
 import { getSupabaseAdmin } from '@/lib/db/supabase-admin';
 import { enforceRateLimit, rateLimit } from '@/lib/rate-limit';
 import { retryAfterSeconds, tooManyRequestsResponse } from '@/lib/rate-limit-core';
@@ -67,8 +68,10 @@ export async function POST(req: NextRequest) {
       admin.from('studios').select('stripe_account_id').eq('id', studioId).maybeSingle(),
       bloqueoPorSuscripcion(studioId),
     ]);
-    const pagosOnline = !!key && !key.startsWith('sk_test_XXXX') && comprobarModoStripe().puedeCobrar && comprobarParDeClaves().ok
-      && !!studio?.stripe_account_id && !bloqueoSuscripcion;
+    // Autoalojado con Mercado Pago: cobra el servidor con su Access Token, sin cuenta de Stripe del estudio.
+    const pagosOnline = !bloqueoSuscripcion && (pasarelaEsMercadoPago()
+      ? configMercadoPago().ok
+      : !!key && !key.startsWith('sk_test_XXXX') && comprobarModoStripe().puedeCobrar && comprobarParDeClaves().ok && !!studio?.stripe_account_id);
 
     if (await bloqueoPorPreguntasAlta(studioId, socioId, 'comprar')) {
       return json({ pagosOnline, bloqueo: 'faltan-preguntas', opciones: [] });

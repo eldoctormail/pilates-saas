@@ -141,7 +141,8 @@ test('lo que tiene ahora en la clase: plaza antes que pendiente, y pendiente ant
 });
 
 test('la ruta elige el aviso por pago y, si ya tenía reserva, contesta lo que TIENE', () => {
-  const s = leerFuente(unir(import.meta.dirname, '..', '..', 'app/api/public/estado-pago/route.ts'), 'utf8');
+  // La lectura vive en `estado-reserva-pagada.ts`: la comparten estado-pago (Stripe) y estado-compra (Mercado Pago).
+  const s = leerFuente(unir(import.meta.dirname, 'estado-reserva-pagada.ts'), 'utf8');
   assert.match(s, /aviso = elegirAvisoDelPago\(avisos as AvisoSinPlaza\[\] \| null, pi\);/);
   assert.match(s, /\.select\('data, resource_id'\)/);
   const ya = s.indexOf('avisoDeYaTenia(aviso)');

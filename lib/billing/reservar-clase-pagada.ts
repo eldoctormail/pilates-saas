@@ -34,7 +34,7 @@ import {
   type ReservaTrasPago,
 } from './resultado-pago-clase.ts';
 
-export type ViaReservaPagada = 'checkout' | 'embebido' | 'conciliador';
+export type ViaReservaPagada = 'checkout' | 'embebido' | 'conciliador' | 'mercadopago';
 
 const TEXTOS: Record<ViaReservaPagada, { sinPlaza: string; sinPago: string; contexto: string; tags?: Record<string, string> }> = {
   checkout: {
@@ -53,6 +53,12 @@ const TEXTOS: Record<ViaReservaPagada, { sinPlaza: string; sinPago: string; cont
     contexto: 'conciliador reservarPlazaTrasPagoPublico',
     tags: { area: 'cobros', tipo: 'conciliado-sin-plaza' },
   },
+  mercadopago: {
+    sinPlaza: '[mercadopago] plan entregado pero NO se pudo reservar la clase pagada',
+    sinPago: '[mercadopago] sin compra para reservar la clase pagada',
+    contexto: 'mercadopago reservarPlazaTrasPagoPublico',
+    tags: { area: 'cobros', pasarela: 'mercadopago' },
+  },
 };
 
 export async function reservarClasePagada(
@@ -66,7 +72,7 @@ export async function reservarClasePagada(
     /** Si la socia pagó por una camilla/plaza concreta, se le da ESA. */
     spotId: string | null;
     via: ViaReservaPagada;
-    /** Ids de Stripe para localizar el caso en Sentry (`sessionId` o `paymentIntentId`). */
+    /** Ids del cobro para localizar el caso en Sentry (Stripe: `sessionId`/`paymentIntentId`; Mercado Pago: `compraId`/`paymentId`). */
     referencia: Record<string, string>;
     /** La fila de `pagos_clase` del pago (metadata `pagoClaseId`). Sin ella, como siempre. */
     pagoClaseId?: string | null;

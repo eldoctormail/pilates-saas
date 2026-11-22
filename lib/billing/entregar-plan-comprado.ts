@@ -91,7 +91,7 @@ export interface CompraPlan {
    * arqueo daba TARJETA a cobros que no lo eran. El conciliador no lo sabe —
    * reconstruye desde Stripe sin el cargo— y por eso sigue cayendo al defecto.
    */
-  metodoCobro?: 'TARJETA' | 'BIZUM';
+  metodoCobro?: 'TARJETA' | 'BIZUM' | 'MERCADOPAGO';
   /**
    * `session.payment_intent`: el cargo real en Stripe.
    *

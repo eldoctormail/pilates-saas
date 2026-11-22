@@ -9,9 +9,9 @@
 //      referencia de qué se pagó.
 //   3. El recibo se vuelve a leer de la base de datos: tiene que ser del
 //      estudio de la referencia y el importe tiene que cuadrar al centavo.
-//   4. Lo da por cobrado `confirmarCobroRecibo` (el dueño único de «recibo
-//      cobrado», el mismo que usa el webhook de Stripe): factura, renovación,
-//      créditos y avisos salen de ahí.
+//   4. Un recibo lo da por cobrado `confirmarCobroRecibo`, y una compra de plan
+//      la entrega `entregarPlanComprado`: los mismos dueños que usa el webhook
+//      de Stripe (factura, renovación, créditos y avisos salen de ahí).
 //   5. Idempotente: Mercado Pago reintenta (cada 15 min) hasta recibir 200, y el
 //      mismo pago puede avisarse varias veces (created, updated). El libro
 //      `pagos_mercadopago` dice si ya se aplicó.
@@ -22,7 +22,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import * as Sentry from '@sentry/nextjs';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { getSupabaseAdmin } from '@/lib/db/supabase-admin';
-import { confirmarCobroRecibo } from '@/lib/billing/confirmar-cobro';
+import { confirmarCobroRecibo, consumirCodigoDescuentoSiAplica } from '@/lib/billing/confirmar-cobro';
 import { MONEDA } from '@/lib/moneda';
 import { configMercadoPago } from '@/lib/mercadopago/config';
 import { verificarFirma } from '@/lib/mercadopago/firma';
@@ -40,11 +40,13 @@ async function anotar(
   reciboId: string | null,
   desenlace: Desenlace,
   detalle: string | null,
+  compraId: string | null = null,
 ): Promise<boolean> {
   const { error } = await admin.from('pagos_mercadopago').upsert({
     payment_id: String(pago.id),
     studio_id: studioId,
     recibo_id: reciboId,
+    compra_id: compraId,
     estado: pago.status,
     estado_detalle: pago.status_detail ?? null,
     importe: pago.transaction_amount,
@@ -109,21 +111,26 @@ export async function POST(req: NextRequest) {
     // Un pago de la cuenta que no salió de Tentare (un cobro con QR, un link manual): no es nuestro.
     return NextResponse.json({ recibido: true, ignorado: 'sin-referencia-de-tentare' });
   }
-  const { studioId, reciboId } = ref;
+  const { studioId } = ref;
+  const reciboId = ref.tipo === 'recibo' ? ref.reciboId : null;
+  const compraId = ref.tipo === 'compra' ? ref.compraId : null;
 
   // ¿Ya aplicado? (reentrega del mismo pago)
   const { data: previo, error: errPrevio } = await admin.from('pagos_mercadopago')
-    .select('desenlace').eq('payment_id', String(pago.id)).maybeSingle();
+    .select('desenlace, recibo_id').eq('payment_id', String(pago.id)).maybeSingle();
   if (errPrevio) return NextResponse.json({ error: 'Base de datos no disponible' }, { status: 503 });
   if (previo?.desenlace === 'aplicado' || previo?.desenlace === 'ya_estaba') {
     if (pago.status === 'refunded' || pago.status === 'charged_back') {
       Sentry.captureMessage('[mercadopago/webhook] un pago ya aplicado se devolvió en Mercado Pago: revisar el recibo a mano', {
         level: 'error', tags: etiquetas, extra: { paymentId: pago.id, studioId, reciboId, estado: pago.status },
       });
-      await anotar(admin, pago, studioId, reciboId, previo.desenlace as Desenlace, `devuelto en Mercado Pago (${pago.status}): revisar a mano`);
+      await anotar(admin, pago, studioId, (previo.recibo_id as string | null) ?? reciboId, previo.desenlace as Desenlace, `devuelto en Mercado Pago (${pago.status}): revisar a mano`, compraId);
     }
     return NextResponse.json({ recibido: true, yaAplicado: true });
   }
+
+  if (ref.tipo === 'compra') return entregarCompra(admin, pago, ref.studioId, ref.compraId);
+  if (!reciboId) return NextResponse.json({ recibido: true, ignorado: 'referencia-rara' });
 
   const { data: recibo, error: errRecibo } = await admin.from('recibos')
     .select('importe, studio_id, estado').eq('id', reciboId).maybeSingle();
@@ -176,4 +183,103 @@ export async function POST(req: NextRequest) {
   });
   await anotar(admin, pago, studioId, reciboId, 'no_aplicable', `recibo en estado ${String(recibo.estado)}: devolver en Mercado Pago`);
   return NextResponse.json({ recibido: true, aplicado: false });
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Etapa 2: compra de un plan. Se entrega EXACTAMENTE lo que se decidió al abrir
+// el pago (fila de `compras_mercadopago`), con `entregarPlanComprado`, el mismo
+// dueño que usa Stripe: crea (o reutiliza) la suscripción y el recibo COBRADO,
+// la matrícula si la hubo, la factura y los avisos. Idempotente: los ids salen
+// de la compra (`idsDe(compraId)`), y una reentrega choca por clave primaria.
+// ─────────────────────────────────────────────────────────────────────────────
+async function entregarCompra(admin: SupabaseClient, pago: PagoMercadoPago, studioId: string, compraId: string) {
+  const { data: compra, error } = await admin.from('compras_mercadopago')
+    .select('id, studio_id, plan_id, socio_id, email, importe_plan, matricula, moneda, codigo_descuento_id, terminos_hash, ciclo_fin, cuota_texto, estado, payment_id, creado_en')
+    .eq('id', compraId).maybeSingle();
+  if (error) return NextResponse.json({ error: 'Base de datos no disponible' }, { status: 503 });
+  if (!compra || compra.studio_id !== studioId) {
+    Sentry.captureMessage('[mercadopago/webhook] pago de una compra que no existe en este estudio', {
+      level: 'error', tags: etiquetas, extra: { paymentId: pago.id, studioId, compraId, estado: pago.status },
+    });
+    const { data: estudio } = await admin.from('studios').select('id').eq('id', studioId).maybeSingle();
+    if (estudio) await anotar(admin, pago, studioId, null, 'rechazado', 'la compra no existe o es de otro estudio', null);
+    return NextResponse.json({ recibido: true, ignorado: 'compra-desconocida' });
+  }
+
+  if (pago.status !== 'approved') {
+    const ok = await anotar(admin, pago, studioId, null, 'pendiente', null, compraId);
+    return ok ? NextResponse.json({ recibido: true, estado: pago.status }) : NextResponse.json({ error: 'No anotado' }, { status: 503 });
+  }
+
+  // La compra ya la pagó OTRO pago: este es un segundo cobro.
+  if (compra.estado === 'pagada' && compra.payment_id && compra.payment_id !== String(pago.id)) {
+    Sentry.captureMessage('[mercadopago/webhook] segundo pago de una compra ya pagada: devolver en Mercado Pago', {
+      level: 'error', tags: etiquetas, extra: { paymentId: pago.id, studioId, compraId, primerPago: compra.payment_id },
+    });
+    await anotar(admin, pago, studioId, null, 'no_aplicable', `la compra ya se pagó con el pago ${String(compra.payment_id)}: devolver en Mercado Pago`, compraId);
+    return NextResponse.json({ recibido: true, aplicado: false });
+  }
+
+  const importePlan = Number(compra.importe_plan);
+  const matricula = Number(compra.matricula) || 0;
+  const total = Math.round((importePlan + matricula) * 100) / 100;
+  if (pago.currency_id !== compra.moneda || pago.currency_id !== MONEDA || !importeCoincide(pago.transaction_amount, total)) {
+    Sentry.captureMessage('[mercadopago/webhook] pago aprobado de una compra que no cuadra: NO se entrega, revisar y devolver', {
+      level: 'error', tags: etiquetas,
+      extra: { paymentId: pago.id, studioId, compraId, cobrado: pago.transaction_amount, moneda: pago.currency_id, esperado: total, monedaEsperada: compra.moneda },
+    });
+    await anotar(admin, pago, studioId, null, 'rechazado', `cobrado ${pago.transaction_amount} ${pago.currency_id}, esperado ${total} ${String(compra.moneda)}`, compraId);
+    return NextResponse.json({ recibido: true, ignorado: 'importe-no-coincide' });
+  }
+
+  // Una compra que caducó (y quizá devolvió su plaza de matrícula) pero se pagó
+  // igual: el dinero entró, se entrega. Solo se avisa para que conste.
+  if (compra.estado === 'caducada' || compra.estado === 'fallida') {
+    Sentry.captureMessage('[mercadopago/webhook] se pagó una compra que figuraba caducada: se entrega igual', {
+      level: 'warning', tags: etiquetas, extra: { paymentId: pago.id, studioId, compraId, estado: compra.estado },
+    });
+  }
+
+  const { entregarPlanComprado } = await import('@/lib/billing/entregar-plan-comprado');
+  const entrega = await entregarPlanComprado(admin, {
+    sessionId: compraId,
+    studioId,
+    planId: compra.plan_id as string,
+    socioId: compra.socio_id as string,
+    terminosHash: (compra.terminos_hash as string | null) ?? null,
+    terminosAceptadosEn: (compra.creado_en as string | null) ?? null,
+    email: (compra.email as string | null) ?? null,
+    nombre: null,
+    importeCobradoCentimos: Math.round(total * 100),
+    matriculaCobradaCentimos: Math.round(matricula * 100),
+    paymentIntentId: null,
+    origenLead: null,
+    metodoCobro: 'MERCADOPAGO',
+    esInvitada: false,
+    fuente: 'webhook',
+    cicloFinISO: (compra.ciclo_fin as string | null) ?? null,
+    cuotaTexto: (compra.cuota_texto as string | null) ?? null,
+  });
+  if (!entrega.ok) {
+    Sentry.captureMessage('[mercadopago/webhook] cobrado pero NO entregado', {
+      level: 'error', tags: etiquetas, extra: { paymentId: pago.id, studioId, compraId, motivo: entrega.motivo, detalle: entrega.detalle },
+    });
+    // Sin socia o sin plan no se arregla reintentando: se anota y se resuelve a mano.
+    if (entrega.motivo === 'sin-socia' || entrega.motivo === 'plan-no-encontrado') {
+      await anotar(admin, pago, studioId, null, 'no_aplicable', `no se pudo entregar: ${entrega.motivo}. Entregar a mano o devolver.`, compraId);
+      return NextResponse.json({ recibido: true, entregado: false, motivo: entrega.motivo });
+    }
+    return NextResponse.json({ error: 'Fallo al entregar el plan comprado' }, { status: 500 });
+  }
+
+  await consumirCodigoDescuentoSiAplica(admin, {
+    codigoDescuentoId: (compra.codigo_descuento_id as string | null) ?? null,
+    reciboId: entrega.reciboId, studioId, socioId: entrega.socioId, fuente: 'mercadopago webhook',
+  });
+
+  await admin.from('compras_mercadopago')
+    .update({ estado: 'pagada', payment_id: String(pago.id), actualizado_en: new Date().toISOString() })
+    .eq('id', compraId).neq('estado', 'pagada');
+  const anotado = await anotar(admin, pago, studioId, entrega.reciboId, 'aplicado', null, compraId);
+  return NextResponse.json({ recibido: true, entregado: true, anotado });
 }

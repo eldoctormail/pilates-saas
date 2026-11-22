@@ -19,6 +19,7 @@ import { etiquetaDia, horaFin, hoyISO } from '@/lib/student/formato';
 import { textoPagoCorto } from '@/lib/student/como-se-paga';
 import { sinBonoDeClase } from '@/lib/student/como-viene-sin-bono';
 import { clavePublicableStripe } from '@/lib/student/comprar';
+import { pasarelaEsMercadoPago } from '@/lib/mercadopago/config';
 import { comoVienes, pagoCortoSobra } from '@/lib/student/como-vienes';
 import {
   antetituloClase, consultaMapa, textoCancelacion, textoCreditosAlAsistir, textoCuando, textoDonde, textoPlazas,
@@ -197,7 +198,7 @@ export default function FichaClasePage() {
   const recuperacionesVivas = (data?.recuperaciones ?? []).filter((r) => r.estado === 'DISPONIBLE' && r.caducaEl >= hoy).length;
   const pagaRecuperacion = !bono && recuperacionesVivas > 0 && (disp === 'disponible' || disp === 'pocas') && !yaNoSeReserva;
   const sinBono = !bono && !pagaRecuperacion
-    ? sinBonoDeClase(clase, data?.planesTarifa, !!data?.stripeAccountId && !!clavePublicableStripe())
+    ? sinBonoDeClase(clase, data?.planesTarifa, (!!data?.stripeAccountId && !!clavePublicableStripe()) || pasarelaEsMercadoPago())
     : null;
   const vienes = comoVienes({
     clase, bonos: data?.bonos ?? [], disp, reservas: data?.reservas ?? [], yaNoSeReserva,

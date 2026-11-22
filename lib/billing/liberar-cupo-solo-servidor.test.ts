@@ -72,7 +72,10 @@ test('⚠️ quien la usa lo hace desde una ruta de servidor, no desde una panta
     .filter(ruta => ruta !== 'lib/billing/pago-de-clase-servidor.ts')
     // El barrido de los pagos de clase (P06): corre DENTRO del conciliador (Inngest, service_role) y devuelve el
     // cupo de un cobro abandonado solo cuando Stripe confirma que está cancelado.
-    .filter(ruta => ruta !== 'lib/billing/barrido-pagos-clase.ts');
+    .filter(ruta => ruta !== 'lib/billing/barrido-pagos-clase.ts')
+    // Compras de plan con Mercado Pago (autoalojado): `server-only`, lo llama solo la ruta
+    // /api/mercadopago/checkout con service_role para devolver la plaza de una compra caducada.
+    .filter(ruta => ruta !== 'lib/mercadopago/compra-plan-servidor.ts');
 
   assert.deepEqual(culpables, [],
     'devolver un cupo es una compensación de servidor. Si una pantalla necesita '

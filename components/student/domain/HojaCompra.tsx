@@ -6,7 +6,8 @@ import { Sheet } from '@/components/student/ui/Sheet';
 import { Button } from '@/components/student/ui/Button';
 import { CheckoutEmbebido } from '@/components/checkout-widget/checkout-embebido';
 import { MODO_TOKENS } from '@/lib/portal-paleta';
-import { comprobarCodigo, iniciarCompra, comprarConBizum, clavePublicableStripe } from '@/lib/student/comprar';
+import { comprobarCodigo, iniciarCompra, comprarConBizum, comprarConMercadoPago, clavePublicableStripe } from '@/lib/student/comprar';
+import { pasarelaEsMercadoPago } from '@/lib/mercadopago/config';
 import { euros, fechaLarga } from '@/lib/student/formato';
 import { piDeClientSecret } from '@/lib/billing/estado-pago-publico';
 import { esperarCompraEntregada } from '@/lib/student/estado-compra';
@@ -143,9 +144,21 @@ export function HojaCompra({ textosLegales,
       : { ok: false, texto: r.motivo });
   }, [plan, codigo, comprobando, studioId, socioId]);
 
+  // Mercado Pago: se paga en su página. La casilla de condiciones va aquí (en
+  // Stripe la pinta el propio checkout incrustado).
+  const mercadoPago = pasarelaEsMercadoPago();
+  const [aceptaMp, setAceptaMp] = useState(false);
+  const [legalMp, setLegalMp] = useState<{ titulo: string; texto: string } | null>(null);
+
   const arrancar = useCallback(async () => {
     if (!plan) return;
     setEstado({ fase: 'preparando' });
+    if (mercadoPago) {
+      const r = await comprarConMercadoPago(studioId, plan.id, codigo.trim() || null, aceptaMp);
+      // Con ok, la página ya se va a Mercado Pago: se queda en «preparando».
+      if (!r.ok) setEstado({ fase: 'error', mensaje: r.error, sesionCaducada: r.sesionCaducada });
+      return;
+    }
     const r = await iniciarCompra(studioId, plan.id, socioId, codigo.trim() || null);
     if (r.ok) {
       // El importe con el que el servidor creó el cobro. Si un código dejó de
@@ -171,7 +184,7 @@ export function HojaCompra({ textosLegales,
     }
     if (r.segundoPaso && onSegundoPaso) { onSegundoPaso(); return; }
     setEstado({ fase: 'error', mensaje: r.error, sesionCaducada: r.sesionCaducada });
-  }, [plan, studioId, socioId, codigo, onSegundoPaso]);
+  }, [plan, studioId, socioId, codigo, onSegundoPaso, mercadoPago, aceptaMp]);
 
   // Fallback de Bizum (`onBizum` de <CheckoutEmbebido>): mismo criterio que
   // `handleContratarPlan`/el widget — redirige fuera a la página hospedada de
@@ -186,7 +199,7 @@ export function HojaCompra({ textosLegales,
 
   // El estudio todavía no puede cobrar. Se dice ANTES de que pulse, no después
   // de un error de Stripe que no significa nada para ella.
-  const sinCobro = !stripeAccountId || !publishableKey;
+  const sinCobro = mercadoPago ? false : (!stripeAccountId || !publishableKey);
 
   return (
     // No se puede cerrar —ni por velo, ni con Esc, ni arrastrando— en los dos
@@ -263,7 +276,7 @@ export function HojaCompra({ textosLegales,
                 desaparece el `setState` dentro de un efecto que el compilador
                 de React rechaza, con razón. */}
             <p className="t-small t-dim" style={{ marginTop: 'var(--s-3)' }}>
-              El cobro lo hace el estudio a través de Stripe.
+              {mercadoPago ? 'Vas a pagar en Mercado Pago y después vuelves aquí.' : 'El cobro lo hace el estudio a través de Stripe.'}
             </p>
 
             {/* ── Código de descuento ─────────────────────────────────────
@@ -306,8 +319,33 @@ export function HojaCompra({ textosLegales,
               )}
             </div>
 
-            <Button full onClick={() => void arrancar()} style={{ marginTop: 'var(--s-4)' }}>
-              Continuar al pago
+            {mercadoPago && (
+              <>
+                <label data-testid="condiciones-mp" style={{ display: 'flex', alignItems: 'flex-start', gap: 8, marginTop: 'var(--s-4)', fontSize: 'var(--t-small)', lineHeight: 1.5, cursor: 'pointer' }}>
+                  <input type="checkbox" checked={aceptaMp} onChange={(e) => setAceptaMp(e.target.checked)} style={{ marginTop: 3, flexShrink: 0, width: 16, height: 16 }} />
+                  <span>
+                    He leído y acepto las{' '}
+                    {textosLegales ? (
+                      <button type="button" className="t-link" onClick={() => setLegalMp({ titulo: 'Condiciones del servicio', texto: textosLegales.terminosServicio })} style={{ background: 'none', border: 'none', padding: 0, font: 'inherit', color: 'inherit', textDecoration: 'underline', cursor: 'pointer' }}>condiciones del servicio</button>
+                    ) : 'condiciones del servicio'}
+                    {' '}y la{' '}
+                    {textosLegales ? (
+                      <button type="button" className="t-link" onClick={() => setLegalMp({ titulo: 'Política de privacidad', texto: textosLegales.politicaPrivacidad })} style={{ background: 'none', border: 'none', padding: 0, font: 'inherit', color: 'inherit', textDecoration: 'underline', cursor: 'pointer' }}>política de privacidad</button>
+                    ) : 'política de privacidad'}
+                    {' '}del estudio.
+                  </span>
+                </label>
+                {legalMp && (
+                  <div role="dialog" aria-label={legalMp.titulo} style={{ maxHeight: 220, overflowY: 'auto', marginTop: 'var(--s-2)', padding: '10px 12px', borderRadius: 12, border: '1px solid var(--border)', fontSize: 'var(--t-small)', lineHeight: 1.6, whiteSpace: 'pre-wrap' }}>
+                    <strong>{legalMp.titulo}</strong>
+                    <div style={{ marginTop: 6 }}>{legalMp.texto}</div>
+                    <Button variant="secondary" onClick={() => setLegalMp(null)} style={{ marginTop: 8 }}>Cerrar</Button>
+                  </div>
+                )}
+              </>
+            )}
+            <Button full onClick={() => void arrancar()} disabled={mercadoPago && !aceptaMp} style={{ marginTop: 'var(--s-4)' }}>
+              {mercadoPago ? 'Ir a pagar con Mercado Pago' : 'Continuar al pago'}
             </Button>
           </>
         ) : estado.fase === 'preparando' ? (
@@ -428,8 +466,10 @@ export function HojaCompra({ textosLegales,
             t={MODO_TOKENS.dia}
             plan={plan}
             clientSecret={estado.clientSecret}
-            publishableKey={publishableKey}
-            stripeAccountId={stripeAccountId}
+            // La fase «pagando» solo existe con Stripe (con Mercado Pago se redirige), y
+            // sin cuenta o sin clave la hoja ya se quedó en «sin cobro».
+            publishableKey={publishableKey ?? ''}
+            stripeAccountId={stripeAccountId ?? ''}
             importeTotal={estado.total}
             cuotaFrase={estado.cuotaFrase}
             customerSessionClientSecret={estado.customerSessionClientSecret}

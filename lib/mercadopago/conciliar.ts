@@ -59,14 +59,14 @@ export async function conciliarMercadoPago(
 
     if (nuestros.length) {
       const { data: anotados, error } = await admin.from('pagos_mercadopago')
-        .select('payment_id, estado, desenlace').in('payment_id', nuestros.map(p => String(p.id)));
+        .select('payment_id, estado, desenlace, importe_devuelto').in('payment_id', nuestros.map(p => String(p.id)));
       if (error) { r.errores++; break; }
-      const porId = new Map((anotados ?? []).map(a => [a.payment_id as string, a as { estado: string; desenlace: string }]));
+      const porId = new Map((anotados ?? []).map(a => [a.payment_id as string, a as { estado: string; desenlace: string; importe_devuelto: number | string | null }]));
       for (const pago of nuestros) {
         if (!hayQueProcesar(pago, porId.get(String(pago.id)))) continue;
         r.procesados++;
         try {
-          const out = await procesarPago(admin, pago);
+          const out = await procesarPago(admin, pago, 'conciliador');
           if (out.status >= 500) r.errores++;
           if (out.cuerpo.aplicado === true || out.cuerpo.entregado === true) r.aplicados++;
         } catch (e) {

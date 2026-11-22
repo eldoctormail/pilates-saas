@@ -91,11 +91,15 @@ test('referencia de compra: ida y vuelta; el id de compra da ids de entrega úni
 });
 
 test('conciliador: qué pagos se (re)procesan', () => {
-  assert.equal(hayQueProcesar({ status: 'approved' }, undefined), true, 'nuevo');
-  assert.equal(hayQueProcesar({ status: 'approved' }, { estado: 'approved', desenlace: 'aplicado' }), false, 'ya aplicado');
-  assert.equal(hayQueProcesar({ status: 'approved' }, { estado: 'in_process', desenlace: 'pendiente' }), true, 'pendiente que se aprobó');
-  assert.equal(hayQueProcesar({ status: 'in_process' }, { estado: 'in_process', desenlace: 'pendiente' }), false, 'sigue pendiente');
-  assert.equal(hayQueProcesar({ status: 'approved' }, { estado: 'approved', desenlace: 'rechazado' }), false, 'rechazado: no re-alertar en cada pasada');
-  assert.equal(hayQueProcesar({ status: 'refunded' }, { estado: 'approved', desenlace: 'aplicado' }), true, 'aplicado y luego devuelto: avisar');
-  assert.equal(hayQueProcesar({ status: 'refunded' }, { estado: 'refunded', desenlace: 'aplicado' }), false, 'devolución ya avisada');
+  const ap = { status: 'approved', transaction_amount: 100 };
+  assert.equal(hayQueProcesar(ap, undefined), true, 'nuevo');
+  assert.equal(hayQueProcesar(ap, { estado: 'approved', desenlace: 'aplicado', importe_devuelto: 0 }), false, 'ya aplicado');
+  assert.equal(hayQueProcesar(ap, { estado: 'in_process', desenlace: 'pendiente' }), true, 'pendiente que se aprobó');
+  assert.equal(hayQueProcesar({ status: 'in_process', transaction_amount: 100 }, { estado: 'in_process', desenlace: 'pendiente' }), false, 'sigue pendiente');
+  assert.equal(hayQueProcesar(ap, { estado: 'approved', desenlace: 'rechazado' }), false, 'rechazado: no re-alertar en cada pasada');
+  assert.equal(hayQueProcesar({ status: 'refunded', transaction_amount: 100, transaction_amount_refunded: 100 }, { estado: 'approved', desenlace: 'aplicado', importe_devuelto: 0 }), true, 'devuelto entero: anotar');
+  assert.equal(hayQueProcesar({ status: 'refunded', transaction_amount: 100, transaction_amount_refunded: 100 }, { estado: 'refunded', desenlace: 'aplicado', importe_devuelto: '100.00' }), false, 'devolución ya anotada');
+  assert.equal(hayQueProcesar({ status: 'approved', transaction_amount: 100, transaction_amount_refunded: 30 }, { estado: 'approved', desenlace: 'aplicado', importe_devuelto: 0 }), true, 'parcial nuevo');
+  assert.equal(hayQueProcesar({ status: 'approved', transaction_amount: 100, transaction_amount_refunded: 30 }, { estado: 'approved', desenlace: 'aplicado', importe_devuelto: 30 }), false, 'parcial ya anotado');
+  assert.equal(hayQueProcesar({ status: 'charged_back', transaction_amount: 100 }, { estado: 'approved', desenlace: 'aplicado', importe_devuelto: 0 }), true, 'contracargo');
 });

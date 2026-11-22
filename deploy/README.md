@@ -121,7 +121,9 @@ Cada compra de plan queda en `compras_mercadopago` con lo que se decidió cobrar
 
 **Conciliador:** cada 30 minutos el contenedor `cron` repasa los pagos de tu cuenta de las últimas 72 h y aplica los que el webhook no haya aplicado (servidor caído, clave mal puesta, dominio sin resolver). Si eso pasa, queda un aviso en Sentry para revisar el webhook. Para forzarlo a mano: `docker compose exec cron llamar mercadopago-conciliar`.
 
-Lo que todavía no hace (próximas etapas): pagar y reservar una clase suelta en un paso, comprar sin cuenta, el widget de tu web, las tarjetas regalo y las devoluciones desde el panel. Si un pago llega a un recibo que ya estaba cobrado, no se aplica dos veces; queda anotado como `no_aplicable` y hay que devolverlo desde Mercado Pago.
+**Devoluciones:** en la ficha de la alumna, el botón «Devolver» de un recibo pagado con Mercado Pago le pide la devolución a Mercado Pago (con la política de devoluciones que tengas configurada: plazo y «solo sin usar»). Cuando Mercado Pago la confirma, Tentare marca el recibo como devuelto, anota la devolución, avisa a la alumna y te ofrece quitarle el bono, igual que con Stripe. Una devolución o un contracargo hechos desde tu cuenta de Mercado Pago siguen el mismo camino. Si la compra incluía matrícula, se devuelve el pago entero desde el recibo del plan.
+
+Lo que todavía no hace (próximas etapas): pagar y reservar una clase suelta en un paso, comprar sin cuenta, el widget de tu web y las tarjetas regalo. Si un pago llega a un recibo que ya estaba cobrado, no se aplica dos veces; queda anotado como `no_aplicable` y hay que devolverlo desde Mercado Pago.
 
 ## Actualizar
 

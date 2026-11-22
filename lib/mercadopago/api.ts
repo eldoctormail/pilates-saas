@@ -35,6 +35,8 @@ export interface PagoMercadoPago {
   status: string; // approved | pending | in_process | rejected | cancelled | refunded | charged_back | authorized
   status_detail?: string;
   transaction_amount: number;
+  /** Lo devuelto hasta ahora (acumulado), en la unidad de la moneda. */
+  transaction_amount_refunded?: number;
   currency_id: string;
   external_reference: string | null;
   date_approved?: string | null;
@@ -106,4 +108,24 @@ export function buscarPagos(token: string, p: { desde: Date; hasta: Date; offset
     offset: String(Math.max(0, p.offset)),
   });
   return pedir<PaginaPagos>(token, `/v1/payments/search?${q.toString()}`, { method: 'GET' }, 15_000);
+}
+
+export interface ReembolsoMercadoPago {
+  id: number;
+  payment_id: number;
+  amount: number;
+  status: string; // approved | in_process | rejected | cancelled
+}
+
+/**
+ * Devuelve un pago: total sin `importe`, parcial con él. `idempotencia` hace que
+ * un doble clic no devuelva dos veces (Mercado Pago contesta lo mismo).
+ */
+export function devolverPago(token: string, paymentId: string, idempotencia: string, importe?: number) {
+  if (!/^\d{1,20}$/.test(paymentId)) {
+    return Promise.resolve({ ok: false, status: 400, error: 'id de pago no válido' } as const);
+  }
+  return pedir<ReembolsoMercadoPago>(token, `/v1/payments/${paymentId}/refunds`, {
+    method: 'POST', body: JSON.stringify(importe ? { amount: importe } : {}), idempotencia,
+  }, 20_000);
 }

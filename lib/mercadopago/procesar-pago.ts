@@ -21,6 +21,8 @@ import { confirmarCobroRecibo, consumirCodigoDescuentoSiAplica } from '../billin
 import { MONEDA } from '../moneda.ts';
 import type { PagoMercadoPago } from './api.ts';
 import { importeCoincide, leerReferencia } from './referencia.ts';
+import { procesarChargeRefunded, type Fuente } from '../billing/procesar-reembolso.ts';
+import { idsDe } from '../billing/ids-compra.ts';
 
 export type Desenlace = 'aplicado' | 'ya_estaba' | 'no_aplicable' | 'rechazado' | 'pendiente';
 export interface ResultadoProceso { status: number; cuerpo: Record<string, unknown> }
@@ -45,6 +47,7 @@ async function anotar(
     estado: pago.status,
     estado_detalle: pago.status_detail ?? null,
     importe: pago.transaction_amount,
+    importe_devuelto: devueltoDe(pago),
     moneda: pago.currency_id,
     medio: pago.payment_method_id ?? pago.payment_type_id ?? null,
     desenlace,
@@ -60,7 +63,14 @@ async function anotar(
   return true;
 }
 
-export async function procesarPago(admin: SupabaseClient, pago: PagoMercadoPago): Promise<ResultadoProceso> {
+/** Lo devuelto del pago, en la unidad de la moneda. Un contracargo cuenta como devuelto entero. */
+export function devueltoDe(pago: Pick<PagoMercadoPago, 'status' | 'transaction_amount' | 'transaction_amount_refunded'>): number {
+  if (pago.status === 'charged_back') return pago.transaction_amount;
+  if (pago.status === 'refunded') return Number(pago.transaction_amount_refunded ?? 0) || pago.transaction_amount;
+  return Number(pago.transaction_amount_refunded ?? 0);
+}
+
+export async function procesarPago(admin: SupabaseClient, pago: PagoMercadoPago, fuente: Fuente = 'webhook'): Promise<ResultadoProceso> {
 
   const ref = leerReferencia(pago.external_reference);
   if (!ref) {
@@ -73,14 +83,18 @@ export async function procesarPago(admin: SupabaseClient, pago: PagoMercadoPago)
 
   // ¿Ya aplicado? (reentrega del mismo pago)
   const { data: previo, error: errPrevio } = await admin.from('pagos_mercadopago')
-    .select('desenlace, recibo_id').eq('payment_id', String(pago.id)).maybeSingle();
+    .select('desenlace, recibo_id, compra_id, importe_devuelto').eq('payment_id', String(pago.id)).maybeSingle();
   if (errPrevio) return resp({ error: 'Base de datos no disponible' }, { status: 503 });
   if (previo?.desenlace === 'aplicado' || previo?.desenlace === 'ya_estaba') {
-    if (pago.status === 'refunded' || pago.status === 'charged_back') {
-      Sentry.captureMessage('[mercadopago/webhook] un pago ya aplicado se devolvió en Mercado Pago: revisar el recibo a mano', {
-        level: 'error', tags: etiquetas, extra: { paymentId: pago.id, studioId, reciboId, estado: pago.status },
+    // Ya aplicado. Si desde entonces se devolvió (todo o parte, desde el panel o
+    // desde Mercado Pago) o hubo contracargo, se anota en Tentare.
+    if (devueltoDe(pago) > 0) {
+      return aplicarDevolucion(admin, pago, studioId, {
+        reciboId: (previo.recibo_id as string | null) ?? reciboId,
+        compraId: (previo.compra_id as string | null) ?? compraId,
+        desenlace: previo.desenlace as Desenlace,
+        fuente,
       });
-      await anotar(admin, pago, studioId, (previo.recibo_id as string | null) ?? reciboId, previo.desenlace as Desenlace, `devuelto en Mercado Pago (${pago.status}): revisar a mano`, compraId);
     }
     return resp({ recibido: true, yaAplicado: true });
   }
@@ -238,4 +252,64 @@ async function entregarCompra(admin: SupabaseClient, pago: PagoMercadoPago, stud
     .eq('id', compraId).neq('estado', 'pagada');
   const anotado = await anotar(admin, pago, studioId, entrega.reciboId, 'aplicado', null, compraId);
   return resp({ recibido: true, entregado: true, anotado });
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Devoluciones. Las anota `procesarChargeRefunded`, el mismo dueño que usa
+// Stripe con `charge.refunded`: recibo DEVUELTO (total) o con lo devuelto
+// (parcial), fila en `devoluciones`, créditos, aviso a la socia y, si la compra
+// era de una clase, revertirla. El «cargo» de Mercado Pago es `mp_<pago>`;
+// el acumulado devuelto sale de la API (`transaction_amount_refunded`), nunca de
+// un delta, así que repetir no duplica nada.
+//
+// Un pago de compra con matrícula tiene DOS recibos (plan y matrícula): se
+// pasa el de la matrícula para que el acumulado se reparta entre los dos, igual
+// que con un cargo combinado de Stripe.
+// ─────────────────────────────────────────────────────────────────────────────
+async function aplicarDevolucion(
+  admin: SupabaseClient,
+  pago: PagoMercadoPago,
+  studioId: string,
+  p: { reciboId: string | null; compraId: string | null; desenlace: Desenlace; fuente: Fuente },
+): Promise<ResultadoProceso> {
+  if (!p.reciboId) {
+    Sentry.captureMessage('[mercadopago] devolución de un pago aplicado sin recibo anotado: revisar a mano', {
+      level: 'error', tags: etiquetas, extra: { paymentId: pago.id, studioId, compraId: p.compraId },
+    });
+    return resp({ recibido: true, ignorado: 'devolucion-sin-recibo' });
+  }
+
+  let reciboMatriculaId: string | null = null;
+  if (p.compraId) {
+    const { data: compra } = await admin.from('compras_mercadopago').select('matricula').eq('id', p.compraId).maybeSingle();
+    if (Number(compra?.matricula) > 0) reciboMatriculaId = idsDe(p.compraId).reciboMatriculaId;
+  }
+
+  const total = Math.round(pago.transaction_amount * 100);
+  const devuelto = Math.min(total, Math.round(devueltoDe(pago) * 100));
+  const r = await procesarChargeRefunded(admin, {
+    studioId,
+    reciboId: p.reciboId,
+    reciboMatriculaId,
+    origenPi: undefined,
+    charge: { id: `mp_${pago.id}`, refunded: devuelto >= total, amount: total, amountRefunded: devuelto },
+    fuente: p.fuente,
+    paymentIntentId: null,
+    // La API ya da el acumulado de lo devuelto aprobado: no hay reembolsos «pending» que esperar.
+    reembolsosConfirmados: true,
+  });
+  if (!r.ok) {
+    Sentry.captureMessage('[mercadopago] no se pudo anotar la devolución; se reintentará', {
+      level: 'error', tags: etiquetas, extra: { paymentId: pago.id, studioId, reciboId: p.reciboId, error: r.error },
+    });
+    return resp({ error: 'No se pudo anotar la devolución' }, { status: 500 });
+  }
+  if (pago.status === 'charged_back') {
+    Sentry.captureMessage('[mercadopago] contracargo de un pago aplicado: el recibo queda devuelto', {
+      level: 'warning', tags: etiquetas, extra: { paymentId: pago.id, studioId, reciboId: p.reciboId },
+    });
+  }
+  const motivo = pago.status === 'charged_back' ? 'contracargo' : devuelto >= total ? 'devuelto entero' : 'devuelto en parte';
+  await anotar(admin, pago, studioId, p.reciboId, p.desenlace, `${motivo} en Mercado Pago`, p.compraId);
+  return resp({ recibido: true, devolucion: true, huboEfecto: r.huboEfecto });
 }

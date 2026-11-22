@@ -12,6 +12,7 @@
 // del COBRO, leído con `situacion-recibo.ts`.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { conMoneda, LOCALE_MONEDA } from '../../lib/moneda.ts';
 import { useMemo, useState, type ReactNode } from 'react';
 import { CifraPrivada } from '@/components/ui/cifra-privada';
 import { GraficaArea } from '@/components/dashboard/grafica-area';
@@ -21,11 +22,11 @@ import { Pildoras, TarjetaGrafica, VerMas } from '@/components/dashboard/vivo';
 
 /** «1.235 €»: la cifra grande va sin céntimos; el detalle (las listas) los lleva. */
 export function formatoEuros(n: number): string {
-  return `${n.toLocaleString('es-ES', { maximumFractionDigits: 0 })} €`;
+  return `${conMoneda(n.toLocaleString(LOCALE_MONEDA, { maximumFractionDigits: 0 }))}`;
 }
 
 export function formatoEjeEuros(n: number): string {
-  return n >= 1000 ? `${(n / 1000).toLocaleString('es-ES', { maximumFractionDigits: 1 })} k€` : `${n.toLocaleString('es-ES')} €`;
+  return n >= 1000 ? conMoneda(`${(n / 1000).toLocaleString(LOCALE_MONEDA, { maximumFractionDigits: 1 })} k`) : `${conMoneda(n.toLocaleString(LOCALE_MONEDA))}`;
 }
 
 /** «octubre de 2026» de una clave 'YYYY-MM'. */

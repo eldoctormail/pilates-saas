@@ -1,3 +1,4 @@
+import { conMoneda } from '../../../../../lib/moneda.ts';
 import { NextRequest, NextResponse } from 'next/server';
 import * as Sentry from '@sentry/nextjs';
 import { verificarSesionStaff } from '@/lib/auth-server';
@@ -144,7 +145,7 @@ export async function POST(req: NextRequest) {
           extra: { reciboId, esperado, cobrado: est.importeCentimos },
         });
         return responder('ERROR', {
-          motivo: `Se han cobrado ${(est.importeCentimos / 100).toFixed(2)} € pero el recibo son ${Number(recibo.importe).toFixed(2)} €. No lo damos por bueno; revísalo.`,
+          motivo: `Se han cobrado ${conMoneda((est.importeCentimos / 100).toFixed(2))} pero el recibo son ${conMoneda(Number(recibo.importe).toFixed(2))}. No lo damos por bueno; revísalo.`,
         });
       }
 

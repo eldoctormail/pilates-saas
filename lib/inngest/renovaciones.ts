@@ -13,6 +13,7 @@
 //
 // A las 08:00 UTC: antes del dunning (08:30) y fuera de las horas del resto de
 // crons (07:00 automatizaciones, 14:30 Decision OS).
+import { MONEDA, LOCALE_MONEDA } from '../moneda.ts';
 import { inngest, EVENTS, enviarFanOutEnLotes } from '@/lib/inngest/client';
 import { getSupabaseAdmin } from '@/lib/db/supabase-admin';
 import { fetchAllRows } from '@/lib/supabase-data';
@@ -441,7 +442,7 @@ async function avisarSubidaPrecioRenovacion(studioId: string, nowISO: string): P
   const candidatas = (susRows ?? []).filter(s => planById.has(s.plan_id as string));
   if (candidatas.length === 0) return 0;
 
-  const euros = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' });
+  const euros = new Intl.NumberFormat(LOCALE_MONEDA, { style: 'currency', currency: MONEDA });
   let avisados = 0;
   for (const sus of candidatas) {
     const plan = planById.get(sus.plan_id as string)!;

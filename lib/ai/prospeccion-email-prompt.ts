@@ -20,6 +20,7 @@
 // `revisarBorrador` (lib/interno/prospeccion.ts) comprueba después que se haya
 // cumplido. Las dos capas son a propósito: el prompt pide, el revisor verifica.
 // ─────────────────────────────────────────────────────────────────────────────
+import { conMoneda } from '../moneda.ts';
 import { PLAN_INFO } from '../billing/entitlements.ts';
 import { GRATIS_CON_LIMITES, SI_PASAS_CON_COMPLEMENTOS } from '../landing/founding-gratis.ts';
 
@@ -37,8 +38,8 @@ export interface ContextoProspecto {
 // salen de las mismas constantes que la web (lib/landing/founding-gratis.ts).
 const precios = () => [
   `${PLAN_INFO.BASE.nombre}: ${GRATIS_CON_LIMITES.toLowerCase()}; ${SI_PASAS_CON_COMPLEMENTOS}`,
-  `${PLAN_INFO.ESTUDIO.nombre} ${PLAN_INFO.ESTUDIO.precioMes} €/mes, que los incluye`,
-  `${PLAN_INFO.CADENA.nombre} ${PLAN_INFO.CADENA.precioMes} €/mes, para varias sedes`,
+  `${PLAN_INFO.ESTUDIO.nombre} ${conMoneda(PLAN_INFO.ESTUDIO.precioMes)}/mes, que los incluye`,
+  `${PLAN_INFO.CADENA.nombre} ${conMoneda(PLAN_INFO.CADENA.precioMes)}/mes, para varias sedes`,
 ].join(' · ');
 
 export const PROSPECCION_EMAIL_SYSTEM_PROMPT = `Escribes correos de venta en frío para Tentare, un software español de gestión para estudios de Pilates. Los firma Marcos, el fundador.

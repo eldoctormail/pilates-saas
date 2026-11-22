@@ -1,5 +1,6 @@
 'use client';
 
+import { conMoneda } from '../../lib/moneda.ts';
 import { useId, useRef, useState } from 'react';
 import { ChevronDown, Sparkles, X } from 'lucide-react';
 import { Collapsible, CollapsibleTrigger, CollapsiblePanel } from '@/components/ui/collapsible';
@@ -1094,7 +1095,7 @@ export function PanelTipoClase({
               // De antes: un importe propio que nunca se ha cobrado. Se dice y se ofrece dejarlo claro.
               <div className="space-y-1.5">
                 <p className="text-[12.5px] text-foreground text-pretty">
-                  Tiene un importe propio ({form.penalizacionImporteEur} €) que no se cobra: tus clientes solo aceptaron el del estudio.
+                  Tiene un importe propio ({conMoneda(form.penalizacionImporteEur)}) que no se cobra: tus clientes solo aceptaron el del estudio.
                 </p>
                 <button
                   type="button"

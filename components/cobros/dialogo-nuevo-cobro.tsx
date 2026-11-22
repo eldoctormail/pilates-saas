@@ -14,6 +14,7 @@
 // El dinero no se cobra dos veces: cerrojo síncrono además del estado, y un cobro
 // que el servidor no confirmó cierra el diálogo —reenviarlo crearía otro recibo—.
 
+import { MONEDA_SIMBOLO } from '../../lib/moneda.ts';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import { useStudio } from '@/lib/studio-context';
@@ -180,7 +181,7 @@ function Formulario({ onCerrar, onOcupado, avisos, socioFijo }: {
             className={cn(inputCls, 'pr-8')} inputMode="decimal" placeholder="85,00" aria-label="Importe"
             value={importeTexto} onChange={e => setImporteTexto(e.target.value)}
           />
-          <span className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">€</span>
+          <span className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">{MONEDA_SIMBOLO}</span>
         </div>
         {importeTexto.trim() !== '' && importe == null && (
           <p className="mt-1 text-[12px] text-destructive">Escribe un importe mayor que 0, con dos decimales como mucho.</p>

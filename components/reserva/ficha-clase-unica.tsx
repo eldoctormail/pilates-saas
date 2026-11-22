@@ -11,6 +11,7 @@
 // `page.tsx` ya resolvió (mismo criterio que ReservaCalendario/CitasPublica).
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { conMoneda } from '../../lib/moneda.ts';
 import { serif, sans, cq, radius, shadow, pesoTitular } from '@/lib/reservar-publico-tokens';
 import { fechaLargaEstudio, horaEstudio } from '@/lib/utils';
 import { alFallarImagenServida } from '@/lib/imagenes-por-defecto';
@@ -102,7 +103,7 @@ export function FichaClaseUnica({
         ) : (
           <div style={{ borderTop: '1px dashed var(--portal-line)', background: 'color-mix(in oklab, var(--portal-surface) 55%, var(--portal-velo))', padding: '18px 22px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap', borderRadius: `0 0 ${radius.card}px ${radius.card}px` }}>
             <div>
-              {precio != null && <div style={{ fontFamily: serif, fontSize: 22, color: 'var(--portal-ink)' }}>{precio.toFixed(2)} €</div>}
+              {precio != null && <div style={{ fontFamily: serif, fontSize: 22, color: 'var(--portal-ink)' }}>{conMoneda(precio.toFixed(2))}</div>}
               <p style={{ fontSize: 11, color: 'var(--portal-muted)', marginTop: 2 }}>1 clase · pago online</p>
             </div>
             <button type="button" disabled={completa} onClick={onReservar} style={{

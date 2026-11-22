@@ -1,5 +1,6 @@
 'use client'
 
+import { conMoneda, MONEDA_SIMBOLO, LOCALE_MONEDA } from '../../../lib/moneda.ts';
 import { useState, useEffect, useId } from 'react'
 import Link from 'next/link'
 import { useCampoAsociado } from '@/components/ui/use-campo-asociado';
@@ -319,7 +320,7 @@ function RevenueDonutCard({ recibos, suscripciones, planesTarifa }: {
               })}
             </svg>
             <div className="absolute flex flex-col items-center">
-              <p className="text-[24px] font-extrabold text-foreground leading-none">{total.toLocaleString('es-ES', { maximumFractionDigits: 0 })} €</p>
+              <p className="text-[24px] font-extrabold text-foreground leading-none">{conMoneda(total.toLocaleString(LOCALE_MONEDA, { maximumFractionDigits: 0 }))}</p>
               <p className="text-[11px] text-muted-foreground mt-1">Ingresos cobrados</p>
             </div>
           </div>
@@ -328,7 +329,7 @@ function RevenueDonutCard({ recibos, suscripciones, planesTarifa }: {
               <div key={tipo} className="flex items-center gap-1.5">
                 <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: PLAN_TIPO_COLOR[tipo] }} />
                 <div>
-                  <p className="text-[12px] font-bold text-foreground leading-tight">{v.toLocaleString('es-ES', { maximumFractionDigits: 0 })} €</p>
+                  <p className="text-[12px] font-bold text-foreground leading-tight">{conMoneda(v.toLocaleString(LOCALE_MONEDA, { maximumFractionDigits: 0 }))}</p>
                   <p className="text-[10px] text-muted-foreground leading-tight">{PLAN_TIPO_LABEL[tipo]}</p>
                 </div>
               </div>
@@ -727,7 +728,7 @@ export default function MarketingPage() {
         <div className="space-y-4">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
           {[
-            { label: 'Ingresos (30 días)', value: `${ingresos30d.toLocaleString('es-ES', { maximumFractionDigits: 0 })} €`, sub: 'recibos cobrados' },
+            { label: 'Ingresos (30 días)', value: `${conMoneda(ingresos30d.toLocaleString(LOCALE_MONEDA, { maximumFractionDigits: 0 }))}`, sub: 'recibos cobrados' },
             { label: 'Campañas activas', value: String(campanasActivas), sub: `${enviadas.length} enviadas` },
             { label: 'Altas este mes', value: String(altasEsteMes), sub: `${altasMesPasado} el mes pasado` },
             { label: 'Automatizaciones activas', value: String(autoActivas), sub: `${totalEjecuciones} ejecuciones` },
@@ -817,7 +818,7 @@ export default function MarketingPage() {
                           )}
                           {c.presupuesto != null && c.presupuesto > 0 && (
                             <span className="inline-flex items-center gap-1 text-[11px] font-medium bg-muted text-muted-foreground rounded-md px-2 py-0.5">
-                              Presupuesto: {c.presupuesto.toLocaleString('es-ES')} €
+                              Presupuesto: {conMoneda(c.presupuesto.toLocaleString(LOCALE_MONEDA))}
                             </span>
                           )}
                           {c.publicaciones && c.publicaciones.length > 0 && (
@@ -1239,7 +1240,7 @@ export default function MarketingPage() {
                           {(cod.soloNuevas || (cod.minImporte != null && cod.minImporte > 0)) && (
                             <div className="flex items-center gap-1 flex-wrap mt-1">
                               {cod.minImporte != null && cod.minImporte > 0 && (
-                                <span className="text-[10px] font-medium bg-muted text-muted-foreground rounded px-1.5 py-0.5">mín. {cod.minImporte.toLocaleString('es-ES')} €</span>
+                                <span className="text-[10px] font-medium bg-muted text-muted-foreground rounded px-1.5 py-0.5">mín. {conMoneda(cod.minImporte.toLocaleString(LOCALE_MONEDA))}</span>
                               )}
                               {cod.soloNuevas && (
                                 <span className="text-[10px] font-medium bg-muted text-muted-foreground rounded px-1.5 py-0.5">solo nuevas</span>
@@ -1248,7 +1249,7 @@ export default function MarketingPage() {
                           )}
                         </td>
                         <td className="px-4 py-3 text-foreground font-medium">
-                          {cod.tipo === 'PORCENTAJE' ? `${cod.valor}%` : `${cod.valor} €`}
+                          {cod.tipo === 'PORCENTAJE' ? `${cod.valor}%` : `${conMoneda(cod.valor)}`}
                         </td>
                         <td className="px-4 py-3">
                           <UsageBar usos={cod.usos} usosMax={cod.usosMax} />
@@ -1304,14 +1305,14 @@ export default function MarketingPage() {
                     {cod.descripcion && <p className="text-[12px] text-muted-foreground">{cod.descripcion}</p>}
                     <div className="flex items-center gap-1.5 flex-wrap">
                       <span className="text-[12px] font-semibold text-foreground bg-muted px-2 py-0.5 rounded-md">
-                        {cod.tipo === 'PORCENTAJE' ? `${cod.valor}%` : `${cod.valor} €`}
+                        {cod.tipo === 'PORCENTAJE' ? `${cod.valor}%` : `${conMoneda(cod.valor)}`}
                       </span>
                       <span className={cn('px-2 py-0.5 rounded-md text-xs font-medium', cod.activo ? 'bg-success/10 text-success' : 'bg-muted text-muted-foreground')}>
                         {cod.activo ? 'Activo' : 'Inactivo'}
                       </span>
                       <span className="text-[11px] text-muted-foreground">Expira {formatDateEs(cod.expira)}</span>
                       {cod.minImporte != null && cod.minImporte > 0 && (
-                        <span className="text-[10px] font-medium bg-muted text-muted-foreground rounded px-1.5 py-0.5">mín. {cod.minImporte.toLocaleString('es-ES')} €</span>
+                        <span className="text-[10px] font-medium bg-muted text-muted-foreground rounded px-1.5 py-0.5">mín. {conMoneda(cod.minImporte.toLocaleString(LOCALE_MONEDA))}</span>
                       )}
                       {cod.soloNuevas && (
                         <span className="text-[10px] font-medium bg-muted text-muted-foreground rounded px-1.5 py-0.5">solo nuevas</span>
@@ -1479,7 +1480,7 @@ export default function MarketingPage() {
                     value={newCampana.presupuesto}
                     onChange={e => setNewCampana(p => ({ ...p, presupuesto: e.target.value }))}
                   />
-                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">€</span>
+                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">{MONEDA_SIMBOLO}</span>
                 </div>
               </FF>
             </div>
@@ -1622,7 +1623,7 @@ export default function MarketingPage() {
                   onChange={e => setNewCodigo(p => ({ ...p, tipo: e.target.value as 'PORCENTAJE' | 'IMPORTE_FIJO' }))}
                 >
                   <option value="PORCENTAJE">Porcentaje (%)</option>
-                  <option value="IMPORTE_FIJO">Importe fijo (€)</option>
+                  <option value="IMPORTE_FIJO">Importe fijo ({MONEDA_SIMBOLO})</option>
                 </select>
               </FF>
               <FF label="Valor">
@@ -1667,7 +1668,7 @@ export default function MarketingPage() {
                     value={newCodigo.minImporte}
                     onChange={e => setNewCodigo(p => ({ ...p, minImporte: e.target.value }))}
                   />
-                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">€</span>
+                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">{MONEDA_SIMBOLO}</span>
                 </div>
               </FF>
               <label className="flex items-center gap-2 h-[38px] cursor-pointer select-none">

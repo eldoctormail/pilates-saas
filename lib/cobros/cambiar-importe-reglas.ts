@@ -16,6 +16,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 /** El importe más alto que se acepta a mano: un tope contra un cero de más, no una regla de negocio. */
+import { conMoneda } from '../moneda.ts';
 export const IMPORTE_MAXIMO = 10000;
 /** El más bajo: por debajo de esto un recibo no es un cobro (y Stripe no acepta menos de 0,50 €). */
 export const IMPORTE_MINIMO = 0.5;
@@ -36,7 +37,7 @@ export function validarNuevoImporte(valor: unknown): ResultadoImporte {
   const centimos = Math.round(n * 100);
   if (Math.abs(n * 100 - centimos) > 1e-6) return { ok: false, error: 'Usa como mucho dos decimales.' };
   const importe = centimos / 100;
-  if (importe < IMPORTE_MINIMO) return { ok: false, error: `El importe mínimo es ${IMPORTE_MINIMO.toFixed(2).replace('.', ',')} €.` };
+  if (importe < IMPORTE_MINIMO) return { ok: false, error: `El importe mínimo es ${conMoneda(IMPORTE_MINIMO.toFixed(2).replace('.', ','))}.` };
   if (importe > IMPORTE_MAXIMO) return { ok: false, error: 'Ese importe es demasiado alto. Revisa que no sobre ningún cero.' };
   return { ok: true, importe };
 }

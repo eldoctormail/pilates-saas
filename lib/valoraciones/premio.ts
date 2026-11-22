@@ -12,6 +12,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 /** Prefijo de los códigos de premio: los distingue del catálogo que crea una persona. */
+import { conMoneda } from '../moneda.ts';
 export const PREFIJO_CODIGO_PREMIO_RESENA = 'GRACIAS-';
 
 export type TipoPremio = 'PORCENTAJE' | 'IMPORTE_FIJO';
@@ -99,7 +100,7 @@ export function validarAjustesResenas(entrada: unknown): ResultadoAjustes {
       ok: false,
       error: tipo === 'PORCENTAJE'
         ? `El descuento va del ${lim.min} % al ${lim.max} %.`
-        : `El importe va de ${lim.min} € a ${lim.max} €.`,
+        : `El importe va de ${conMoneda(lim.min)} a ${conMoneda(lim.max)}.`,
     };
   }
   // Céntimos como mucho: un 12,345 € no se puede cobrar ni enseñar.
@@ -136,7 +137,7 @@ const num = (n: number) => String(n).replace('.', ',');
 
 /** «10 % de descuento» / «15 € de descuento». */
 export function textoDelPremio(p: Pick<PremioResena, 'tipo' | 'valor'>): string {
-  return p.tipo === 'PORCENTAJE' ? `${num(p.valor)} % de descuento` : `${num(p.valor)} € de descuento`;
+  return p.tipo === 'PORCENTAJE' ? `${num(p.valor)} % de descuento` : `${conMoneda(num(p.valor))} de descuento`;
 }
 
 /** 'YYYY-MM-DD' → «19 de diciembre de 2026». Sin pasar por `Date` local: el día es el del estudio. */

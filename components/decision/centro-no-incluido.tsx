@@ -1,5 +1,6 @@
 'use client';
 
+import { conMoneda } from '../../lib/moneda.ts';
 import Link from 'next/link';
 import { Lock } from 'lucide-react';
 import { Button, buttonVariants } from '@/components/ui/button';
@@ -39,7 +40,7 @@ export function CentroNoIncluido({ pruebaVencida, complemento = false }: { prueb
       </div>
       <div className="flex flex-wrap items-center justify-center gap-2">
         {complemento && !pruebaVencida ? (
-          <Link href="/suscripcion#complementos" className={buttonVariants()}>Activarlo por {ADDONS.decisiones.precioMes}€/mes</Link>
+          <Link href="/suscripcion#complementos" className={buttonVariants()}>Activarlo por {conMoneda(ADDONS.decisiones.precioMes, '')}/mes</Link>
         ) : (
           <Link href="/suscripcion" className={buttonVariants()}>{pruebaVencida ? 'Elegir mi plan' : 'Ver planes y precios'}</Link>
         )}

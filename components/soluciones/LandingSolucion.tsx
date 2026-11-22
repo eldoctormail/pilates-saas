@@ -1,3 +1,4 @@
+import { conMoneda } from '../../lib/moneda.ts';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Check } from 'lucide-react';
@@ -310,7 +311,7 @@ export function PlanesSolucion({ titulo, nota }: { titulo: string; nota?: string
           {PLANES.map((p) => (
             <div key={p} className={p === 'BASE' ? 'sol-plan sol-plan-destacado' : 'sol-plan'}>
               <p className="sol-plan-nombre">{PLAN_INFO[p].nombre}</p>
-              <p className="sol-plan-precio">{p === 'BASE' ? 'Gratis' : <>{PLAN_INFO[p].precioMes} €<span>/mes con IVA</span></>}</p>
+              <p className="sol-plan-precio">{p === 'BASE' ? 'Gratis' : <>{conMoneda(PLAN_INFO[p].precioMes)}<span>/mes con IVA</span></>}</p>
               <p className="sol-plan-resumen">{RESUMEN_WEB[p] ?? PLAN_INFO[p].resumen}</p>
             </div>
           ))}

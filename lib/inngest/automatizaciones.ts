@@ -1,3 +1,4 @@
+import { conMoneda } from '../moneda.ts';
 import { inngest, EVENTS, enviarFanOutEnLotes } from './client';
 import { Resend } from 'resend';
 import { requireSupabaseAdmin } from '@/lib/db/supabase-admin';
@@ -78,7 +79,7 @@ function fallbackReactivacion(nombre: string, descuentoPct: number, studioNombre
 
 // Fallback fijo para CROSS_SELL (PROPONER_PLAN) — mismo contrato que arriba.
 function fallbackCrossSell(nombre: string, planSugerido: string, precioSugerido: number, studioNombre: string): string {
-  return `Hola ${nombre}, hemos visto que sueles agotar tu bono cada mes — ¡nos encanta verte tan constante! Con tu ritmo actual, el plan ${planSugerido} (${precioSugerido}€/mes) puede salirte más a cuenta que seguir comprando bonos sueltos. ¿Te lo explicamos sin compromiso? Un abrazo, el equipo de ${studioNombre}.`;
+  return `Hola ${nombre}, hemos visto que sueles agotar tu bono cada mes — ¡nos encanta verte tan constante! Con tu ritmo actual, el plan ${planSugerido} (${conMoneda(precioSugerido, '')}/mes) puede salirte más a cuenta que seguir comprando bonos sueltos. ¿Te lo explicamos sin compromiso? Un abrazo, el equipo de ${studioNombre}.`;
 }
 
 // Id DETERMINISTA de log por candidato: mismo (estudio, regla, socia, recibo,

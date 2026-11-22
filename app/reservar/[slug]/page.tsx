@@ -1,4 +1,5 @@
 'use client';
+import { conMoneda } from '../../../lib/moneda.ts';
 import { referidorDeAlta } from '@/lib/student/referido';
 import { guardarReferidor, leerReferidor, olvidarReferidor } from '@/lib/student/referido-sesion';
 import { etiquetaAperturaSuave } from '@/lib/opening/apertura-suave-texto';
@@ -3640,7 +3641,7 @@ export default function ReservarPage() {
                 <p style={{ fontFamily: serif, fontSize: cq(20, 2.4, 26), lineHeight: 1.15, marginTop: 8, color: 'var(--portal-ink)' }}>
                   {ofertasPrueba[0].nombre}
                   <span style={{ fontFamily: sans, fontSize: 14, fontWeight: 600, marginLeft: 10, whiteSpace: 'nowrap' }}>
-                    {ofertasPrueba[0].precio > 0 ? `${ofertasPrueba[0].precio} €` : 'Gratis'}
+                    {ofertasPrueba[0].precio > 0 ? `${conMoneda(ofertasPrueba[0].precio)}` : 'Gratis'}
                   </span>
                 </p>
                 {ofertasPrueba[0].descripcion && (
@@ -4436,7 +4437,7 @@ export default function ReservarPage() {
                     <div className="flex items-baseline justify-between gap-3 px-3.5 py-2.5">
                       <dt className="text-[var(--portal-muted-2)] text-xs font-semibold shrink-0">Pago</dt>
                       <dd className="text-[var(--portal-ink)] text-[13px] font-semibold text-right">
-                        Recibido{datosPlan ? ` · ${datosPlan.precio} €` : ''}
+                        Recibido{datosPlan ? ` · ${conMoneda(datosPlan.precio)}` : ''}
                       </dd>
                     </div>
                     {/* La referencia sirve para una sola cosa, y es la que

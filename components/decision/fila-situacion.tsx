@@ -1,5 +1,6 @@
 'use client';
 
+import { conMoneda } from '../../lib/moneda.ts';
 import { useState } from 'react';
 import { Clock, ChevronDown, AlertTriangle } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
@@ -26,8 +27,8 @@ import type { ImpactoAPI, RecomendacionAPI } from './use-decisiones';
 function formatearImpacto(imp: ImpactoAPI | null, riesgo: 'PERDIDA' | 'OPORTUNIDAD', tipo: string): { etiqueta: string; cifra: string } | null {
   if (!imp || imp.valor === 0) return null;
   const signo = imp.valor >= 0 ? '+' : '';
-  const cifra = imp.unidad === 'EUR_MES' ? `${signo}${imp.valor}€/mes`
-    : imp.unidad === 'EUR' ? `${signo}${imp.valor}€`
+  const cifra = imp.unidad === 'EUR_MES' ? `${signo}${conMoneda(imp.valor, '')}/mes`
+    : imp.unidad === 'EUR' ? `${signo}${conMoneda(imp.valor, '')}`
     : `${signo}${imp.valor}%`;
   return { etiqueta: etiquetaImpacto(riesgo, tipo as Parameters<typeof etiquetaImpacto>[1]), cifra };
 }

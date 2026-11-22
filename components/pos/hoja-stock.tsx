@@ -1,5 +1,6 @@
 'use client';
 
+import { MONEDA_SIMBOLO } from '../../lib/moneda.ts';
 import { useState, useEffect, useCallback } from 'react';
 import { X, Loader2, PackagePlus, PackageMinus, ClipboardCheck } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -145,7 +146,7 @@ export function HojaStock({ productoId, onCerrar, onCambio }: {
                   </label>
                   <input id="stk-coste" value={coste} inputMode="decimal"
                     onChange={(e) => setCoste(e.target.value.replace(/[^0-9.,]/g, '').replace(',', '.'))}
-                    placeholder="€"
+                    placeholder={MONEDA_SIMBOLO}
                     className="w-full h-12 border border-border rounded-xl px-3 text-[16px] text-foreground outline-none focus:border-brand" />
                 </div>
               )}

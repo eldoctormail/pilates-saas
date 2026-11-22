@@ -15,6 +15,7 @@
 // botonera del Centro de Control, y corre con `node --test`.
 
 /** Lo que dice `cobrarReciboOffSession` de UN recibo, o por qué no se llegó a intentar. */
+import { conMoneda, LOCALE_MONEDA } from '../moneda.ts';
 export interface IntentoCobro {
   ok: boolean;
   /** Estado del PaymentIntent. Con `ok`, 'processing' es un adeudo SEPA en curso: aún no es dinero. */
@@ -177,7 +178,7 @@ export function pudoMoverDinero(r: ResumenCobro): boolean {
 
 /** «89 €», «89,50 €». */
 export function euros(n: number): string {
-  return `${n.toLocaleString('es-ES', { minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2 })} €`;
+  return `${conMoneda(n.toLocaleString(LOCALE_MONEDA, { minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2 }))}`;
 }
 
 /** Los motivos tal cual los escribe el módulo de cobros, cada uno con su punto. */

@@ -1,5 +1,6 @@
 'use client';
 
+import { conMoneda } from '../../../lib/moneda.ts';
 import { useEffect, useMemo, useState, type ElementType, type ReactNode } from 'react';
 import { RefreshCw, ChevronRight } from 'lucide-react';
 import { cn, hoyEnEstudio, TZ_ESTUDIO } from '@/lib/utils';
@@ -420,7 +421,7 @@ export default function CentroDeControlPage() {
             <p className="mt-1 text-[12px] text-muted-foreground">
               Tiempo estimado · <strong className="font-semibold text-foreground">{tiempoEstimadoVivoMin} min</strong>
               {impactoEurMesVivo > 0 && (
-                <> · Impacto potencial estimado · <strong className="font-semibold text-foreground">+{impactoEurMesVivo}€/mes</strong></>
+                <> · Impacto potencial estimado · <strong className="font-semibold text-foreground">+{conMoneda(impactoEurMesVivo, '')}/mes</strong></>
               )}
             </p>
           )}

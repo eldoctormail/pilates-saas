@@ -1,5 +1,6 @@
 'use client';
 
+import { MONEDA_SIMBOLO } from '../../lib/moneda.ts';
 import { useEffect, useState, type ChangeEvent, type ReactNode } from 'react';
 import Link from 'next/link';
 import { CalendarClock, Info } from 'lucide-react';
@@ -738,7 +739,7 @@ export function FormPenalizacion({ excepciones, ...props }: PropsCajonRegla) {
   return (
     <>
       <div className={CUERPO}>
-        <Campo label="Cargo por cancelar tarde o no venir sin avisar (€)" ayuda="A su tarjeta guardada, si tiene y aceptó tus condiciones. Vacío = sin cargo.">
+        <Campo label={`Cargo por cancelar tarde o no venir sin avisar (${MONEDA_SIMBOLO})`} ayuda="A su tarjeta guardada, si tiene y aceptó tus condiciones. Vacío = sin cargo.">
           {id => (
             <input
               id={id} type="number" min={0} step="0.01" inputMode="decimal" className={inputCls} placeholder="Sin cargo"

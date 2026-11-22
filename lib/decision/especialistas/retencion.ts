@@ -1,6 +1,7 @@
 // Especialista en Retención — ¿quién corre riesgo de abandonar? (MVP: R1-R4;
 // R5 estacional diferida a Fase E, requiere ventana de 13 meses que el
 // snapshot no tiene — DECISION-OS-ESPECIALISTAS.md R5, DECISION-OS-NUCLEO.md §1).
+import { conMoneda } from '../../moneda.ts';
 import type { Candidata, Especialista, MemoriaEstudio, SnapshotEstudio } from '../tipos.ts';
 import type { Socio } from '@/lib/types';
 import {
@@ -70,7 +71,7 @@ function reglaR1(socio: Socio, idx: IndicesSenal, now: Date): Candidata | null {
     motivoMotor,
     datosUsados: { nombre: socio.nombre, diasSinVenir: dias, frecuenciaHabitual: freq ?? 0, valorMensual: valor },
     riesgo: 'PERDIDA',
-    impacto: valor > 0 ? { valor, unidad: 'EUR_MES', formula: `cuota mensual de ${socio.nombre} (${valor}€/mes) en riesgo` } : undefined,
+    impacto: valor > 0 ? { valor, unidad: 'EUR_MES', formula: `cuota mensual de ${socio.nombre} (${conMoneda(valor, '')}/mes) en riesgo` } : undefined,
     confianza,
     accion: { tipo: 'CONTACTO_MANUAL', canal: 'WHATSAPP', textoSugerido: motivoMotor },
     socioId: socio.id,
@@ -119,7 +120,7 @@ function reglaR2(socio: Socio, idx: IndicesSenal, memoria: MemoriaEstudio, now: 
     motivoMotor,
     datosUsados: { nombre: socio.nombre, diasSinVenir: dias, renovacionEnDias: renovProx, descuentoPct, valorMensual: valor },
     riesgo: 'PERDIDA',
-    impacto: valor > 0 ? { valor, unidad: 'EUR_MES', formula: `renovación de ${socio.nombre} (${valor}€/mes) vence en ${renovProx} días` } : undefined,
+    impacto: valor > 0 ? { valor, unidad: 'EUR_MES', formula: `renovación de ${socio.nombre} (${conMoneda(valor, '')}/mes) vence en ${renovProx} días` } : undefined,
     confianza,
     accion: { tipo: 'ENVIAR_EMAIL', plantilla: 'REACTIVACION', descuentoPct },
     socioId: socio.id,
@@ -259,7 +260,7 @@ function reglaR5(socio: Socio, idx: IndicesSenal, now: Date): Candidata | null {
     motivoMotor,
     datosUsados: { nombre: socio.nombre, diasDesdeVencimiento: diasVencida, asistenciasPrevias: asistencias, valorMensual: valor },
     riesgo: 'PERDIDA',
-    impacto: valor > 0 ? { valor, unidad: 'EUR_MES', formula: `cuota de ${socio.nombre} (${valor}€/mes) perdida al no renovar` } : undefined,
+    impacto: valor > 0 ? { valor, unidad: 'EUR_MES', formula: `cuota de ${socio.nombre} (${conMoneda(valor, '')}/mes) perdida al no renovar` } : undefined,
     confianza,
     accion: { tipo: 'CONTACTO_MANUAL', canal: 'WHATSAPP', textoSugerido: motivoMotor },
     socioId: socio.id,
@@ -309,7 +310,7 @@ function reglaR6(socio: Socio, idx: IndicesSenal, now: Date): Candidata | null {
     motivoMotor,
     datosUsados: { nombre: socio.nombre, diasSinVenir: dias, plan: plan.nombre, valorMensual: valor },
     riesgo: 'PERDIDA',
-    impacto: valor > 0 ? { valor, unidad: 'EUR_MES', formula: `cuota de ${socio.nombre} (${valor}€/mes) en riesgo de cancelación` } : undefined,
+    impacto: valor > 0 ? { valor, unidad: 'EUR_MES', formula: `cuota de ${socio.nombre} (${conMoneda(valor, '')}/mes) en riesgo de cancelación` } : undefined,
     confianza,
     accion: { tipo: 'CONTACTO_MANUAL', canal: 'WHATSAPP', textoSugerido: motivoMotor },
     socioId: socio.id,

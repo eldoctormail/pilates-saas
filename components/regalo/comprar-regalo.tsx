@@ -1,5 +1,6 @@
 'use client';
 
+import { conMoneda, MONEDA_SIMBOLO } from '../../lib/moneda.ts';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { AlertCircle, ArrowLeft, Check, Clock, Gift, Loader2, Lock, MailCheck } from 'lucide-react';
@@ -166,7 +167,7 @@ export function ComprarRegalo({ slug }: { slug: string }) {
   if (info) {
     if (libreActivo && info.permiteImporteLibre && !info.importesEur.includes(Number(libre))
       && (Number(libre) < info.importeMinEur || Number(libre) > info.importeMaxEur)) {
-      errores.libre = `Elige un importe entre ${info.importeMinEur} € y ${info.importeMaxEur} €.`;
+      errores.libre = `Elige un importe entre ${conMoneda(info.importeMinEur)} y ${conMoneda(info.importeMaxEur)}.`;
     }
     if (!f.destinatarioNombre.trim()) errores.destinatarioNombre = 'Escribe el nombre de quien recibe el regalo.';
     if (!EMAIL_VALIDO.test(f.destinatarioEmail.trim())) errores.destinatarioEmail = 'Escribe un email válido para enviarle el regalo.';
@@ -301,7 +302,7 @@ export function ComprarRegalo({ slug }: { slug: string }) {
             <div className="rg-card-top"><span>{info.nombreEstudio}</span><Gift size={20} /></div>
             <div style={{ position: 'relative', zIndex: 1 }}>
               <span className="rg-eti">Tarjeta regalo</span>
-              <span className="rg-monto" key={montoValido ? importeFinal : 'x'}>{montoValido ? formatearEuros(importeFinal!) : '— €'}</span>
+              <span className="rg-monto" key={montoValido ? importeFinal : 'x'}>{montoValido ? formatearEuros(importeFinal!) : conMoneda('—')}</span>
             </div>
             <div className="rg-card-pie">
               <div style={{ minWidth: 0 }}>
@@ -339,8 +340,8 @@ export function ComprarRegalo({ slug }: { slug: string }) {
           </div>
           {info.permiteImporteLibre && (libreActivo || verLibre) && (
             <div className="rg-libre">
-              <label className="rg-eti-f" htmlFor="rg-libre">Otro importe ({info.importeMinEur}–{info.importeMaxEur} €)</label>
-              <span className="rg-libre-eur" aria-hidden>€</span>
+              <label className="rg-eti-f" htmlFor="rg-libre">Otro importe ({info.importeMinEur}–{conMoneda(info.importeMaxEur)})</label>
+              <span className="rg-libre-eur" aria-hidden>{MONEDA_SIMBOLO}</span>
               <input {...props('libre')} ref={libreRef} inputMode="numeric" pattern="[0-9]*" value={libre}
                 onChange={e => setLibre(e.target.value.replace(/\D/g, '').slice(0, 4))} placeholder="75" />
               {campoErr('libre')}

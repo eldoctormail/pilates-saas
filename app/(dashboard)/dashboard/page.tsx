@@ -1,5 +1,6 @@
 'use client';
 
+import { conMoneda, LOCALE_MONEDA } from '../../../lib/moneda.ts';
 import { useCallback, useMemo, useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
@@ -740,12 +741,12 @@ export default function Dashboard() {
             </div>
             <div className="flex items-center gap-2 shrink-0">
               <CifraPrivada inline className="text-[13px] font-bold text-foreground">
-                {r.importe} €
+                {conMoneda(r.importe)}
               </CifraPrivada>
               <BotonCobrarConMetodo
-                detalle={<>{r.socio!.nombre} {r.socio!.apellidos} — <span className="font-semibold text-foreground">{r.importe} €</span></>}
+                detalle={<>{r.socio!.nombre} {r.socio!.apellidos} — <span className="font-semibold text-foreground">{conMoneda(r.importe)}</span></>}
                 onCobrar={metodo => marcarCobrado(r.id, metodo).then(res => {
-                  if (res.ok) showToast(res.yaEstaba ? MENSAJE_YA_ESTABA : `Cobro registrado: ${r.importe} €`);
+                  if (res.ok) showToast(res.yaEstaba ? MENSAJE_YA_ESTABA : `Cobro registrado: ${conMoneda(r.importe)}`);
                   else showToast(res.error, { variant: 'error' });
                 })}
                 className={panelNuevo
@@ -1058,7 +1059,7 @@ export default function Dashboard() {
               <p className="text-[11px] text-muted-foreground">Con IVA, ya restado lo devuelto, antes de comisiones</p>
               <div className="mt-1.5 flex items-end gap-2.5">
                 <CifraPrivada className="text-4xl font-semibold leading-none tracking-tight text-foreground">
-                  {ingresosMes.toLocaleString('es-ES', { minimumFractionDigits: 0 })} €
+                  {conMoneda(ingresosMes.toLocaleString(LOCALE_MONEDA, { minimumFractionDigits: 0 }))}
                 </CifraPrivada>
                 <Badge
                   variant="secondary"
@@ -1081,7 +1082,7 @@ export default function Dashboard() {
                 ) : (
                   <>
                     {pctChange > 0 ? 'Vas por delante' : pctChange < 0 ? 'Vas por detrás' : 'Vas igual'} del mismo día del mes pasado
-                    {' · '}<CifraPrivada inline className="font-semibold text-foreground">{ingresosMTDPrev.toLocaleString('es-ES', { minimumFractionDigits: 0 })} €</CifraPrivada> a estas alturas de {MESES_LARGOS[idxMesAnterior]}
+                    {' · '}<CifraPrivada inline className="font-semibold text-foreground">{conMoneda(ingresosMTDPrev.toLocaleString(LOCALE_MONEDA, { minimumFractionDigits: 0 }))}</CifraPrivada> a estas alturas de {MESES_LARGOS[idxMesAnterior]}
                   </>
                 )}
               </p>
@@ -1268,7 +1269,7 @@ export default function Dashboard() {
                         </div>
                         <div className="text-right shrink-0">
                           <CifraPrivada className="text-[11px] font-bold text-foreground">
-                            {r.plan!.precio} €
+                            {conMoneda(r.plan!.precio)}
                           </CifraPrivada>
                           <p
                             className="text-[10px] font-semibold"

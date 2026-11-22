@@ -19,6 +19,7 @@
 // editable haría que el mismo mensaje se reenviara cada día. Se enseña en la
 // pantalla, en gris, para que se sepa qué llega — pero no se edita.
 
+import { conMoneda } from '../moneda.ts';
 import type { AutomationRule } from '../types.ts';
 
 export interface VariableMensaje {
@@ -152,9 +153,11 @@ export function plantillaDe(rule: Pick<AutomationRule, 'condicion'> | undefined,
  * desaparecer sin dejar rastro en un email ya enviado.
  */
 export function renderMensaje(plantilla: string, valores: Record<string, string | number>): string {
-  return plantilla.replace(/\{(\w+)\}/g, (original, clave: string) =>
-    clave in valores ? String(valores[clave]) : original,
-  );
+  // «{importe} €» pone el símbolo de la moneda del estudio en su lado (lib/moneda.ts).
+  return plantilla.replace(/\{(\w+)\}( ?)€|\{(\w+)\}/g, (original, claveM: string | undefined, sep: string, clave: string) => {
+    if (claveM) return claveM in valores ? conMoneda(String(valores[claveM]), sep) : original;
+    return clave in valores ? String(valores[clave]) : original;
+  });
 }
 
 /** El texto final de un mensaje de esta regla, listo para enviar. */

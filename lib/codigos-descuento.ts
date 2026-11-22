@@ -8,6 +8,7 @@
 // miraba la tabla). Aquí vive la lógica que cierra ese circuito.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { conMoneda } from './moneda.ts';
 import type { CodigoDescuento } from './types.ts';
 import { hoyEnEstudio, masDias, redondearCentimos } from './utils.ts';
 
@@ -122,7 +123,7 @@ export function validarCodigoCanjeable(
     return { ok: false, motivo: 'Ese código ya se ha usado' };
   }
   if (codigo.minImporte != null && opts.subtotal < codigo.minImporte) {
-    return { ok: false, motivo: `Requiere un mínimo de ${codigo.minImporte}€` };
+    return { ok: false, motivo: `Requiere un mínimo de ${conMoneda(codigo.minImporte, '')}` };
   }
   const descuento = calcularDescuento(codigo, opts.subtotal);
   if (descuento <= 0) return { ok: false, motivo: 'Ese código no aplica descuento aquí' };

@@ -6,6 +6,7 @@
 // le debe a cada instructora y por qué. El pago sigue haciéndose fuera de
 // Tentare; aquí solo se anota que se pagó.
 
+import { conMoneda, MONEDA_SIMBOLO } from '../../../../lib/moneda.ts';
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useStudio } from '@/lib/studio-context';
@@ -290,8 +291,8 @@ function TarjetaInstructora({ instructora: i, tarifa, liq, mes, minutosFichados,
   // confirmada o pagada, plegado: ya no hay nada que decidir ahí.
   const [verDesglose, setVerDesglose] = useState(() => !liq || liq.estado === 'BORRADOR');
   const condiciones = [
-    tarifa?.tarifaHora != null ? `${euros(tarifa.tarifaHora)} €/h` : null,
-    tarifa?.baseMensualEur ? `base ${euros(tarifa.baseMensualEur)} €` : null,
+    tarifa?.tarifaHora != null ? `${conMoneda(euros(tarifa.tarifaHora))}/h` : null,
+    tarifa?.baseMensualEur ? `base ${conMoneda(euros(tarifa.baseMensualEur))}` : null,
     tarifa?.recargoSustitucionPct ? `+${euros(tarifa.recargoSustitucionPct)} % en sustituciones` : null,
   ].filter(Boolean).join(' · ');
   const bloqueada = !!liq && ((liq.modo === 'HORAS_FICHADAS' && liq.jornadasSinCerrar > 0) || (liq.clasesSinConfirmar ?? 0) > 0);
@@ -366,8 +367,8 @@ function TarjetaInstructora({ instructora: i, tarifa, liq, mes, minutosFichados,
                 <option value="AUTONOMA">Autónoma</option>
               </select>
             </label>
-            <CampoNumero etiqueta="Tarifa por hora" sufijo="€/h" valor={tarifa?.tarifaHora} onGuardar={v => onTarifa('tarifaHora', v)} />
-            <CampoNumero etiqueta="Base mensual" sufijo="€" valor={tarifa?.baseMensualEur} onGuardar={v => onTarifa('baseMensualEur', v)} />
+            <CampoNumero etiqueta="Tarifa por hora" sufijo={`${MONEDA_SIMBOLO}/h`} valor={tarifa?.tarifaHora} onGuardar={v => onTarifa('tarifaHora', v)} />
+            <CampoNumero etiqueta="Base mensual" sufijo={MONEDA_SIMBOLO} valor={tarifa?.baseMensualEur} onGuardar={v => onTarifa('baseMensualEur', v)} />
             <CampoNumero etiqueta="Recargo en sustituciones" sufijo="%" valor={tarifa?.recargoSustitucionPct} onGuardar={v => onTarifa('recargoSustitucionPct', v)} />
           </div>
           <p className="mt-3 text-[12px] text-muted-foreground" data-testid="relacion-explicacion">

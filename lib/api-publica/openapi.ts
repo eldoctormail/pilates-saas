@@ -6,6 +6,7 @@
 // que devuelve su serializador (lib/api-publica/serializar.ts), y cada ruta de
 // app/api/v1 tiene que estar aquí (y al revés).
 
+import { MONEDA } from '../moneda.ts';
 import { DESCRIPCION_SCOPE, SCOPES_VALIDOS } from './catalogo-scopes.ts';
 import { SCOPE_DE_RECURSO, TIPOS_EVENTO } from './webhooks/catalogo.ts';
 
@@ -17,7 +18,7 @@ const cent = (description: string): Esquema => ({ type: ['integer', 'null'], des
 const bool = (description?: string): Esquema => ({ type: 'boolean', ...(description ? { description } : {}) });
 const fecha = (description: string): Esquema => str(description, { format: 'date' });
 const instante = (description: string): Esquema => str(description, { format: 'date-time' });
-const moneda: Esquema = { type: 'string', enum: ['EUR'], description: 'Hoy siempre EUR.' };
+const moneda: Esquema = { type: 'string', enum: [MONEDA], description: `La moneda del estudio (${MONEDA}).` };
 const obj = (properties: Record<string, Esquema>, description?: string): Esquema => ({
   type: 'object', ...(description ? { description } : {}), properties, required: Object.keys(properties),
 });

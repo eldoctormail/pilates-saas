@@ -1,3 +1,4 @@
+import { conMoneda } from './moneda.ts';
 import { EDAD_MINIMA_CONSENTIMIENTO_SALUD } from './datos-salud/edad.ts';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -136,7 +137,7 @@ export function terminosServicioPorDefecto(e: DatosEstudioLegal = {}): string {
   // consentimiento (comparar versionTexto contra el actual) se dispare solo
   // para quien de verdad necesita re-aceptar.
   const clausulaPenalizacion = typeof e.penalizacionImporteEur === 'number' && e.penalizacionImporteEur > 0
-    ? ` Adicionalmente, las cancelaciones dentro de dicha ventana y las inasistencias sin cancelación previa ("no-show") podrán conllevar un cargo de ${e.penalizacionImporteEur.toFixed(2)} € a la tarjeta u otro método de pago guardado, siempre que exista uno asociado a la cuenta. Este cargo se notificará por correo electrónico en el momento en que se produzca.`
+    ? ` Adicionalmente, las cancelaciones dentro de dicha ventana y las inasistencias sin cancelación previa ("no-show") podrán conllevar un cargo de ${conMoneda(e.penalizacionImporteEur.toFixed(2))} a la tarjeta u otro método de pago guardado, siempre que exista uno asociado a la cuenta. Este cargo se notificará por correo electrónico en el momento en que se produzca.`
     : '';
   // Cobros con el método de pago guardado (6-oct-2026, decisión del fundador: esto
   // va en los términos, no a la vista en la app). Solo en los estudios que cobran

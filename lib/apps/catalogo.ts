@@ -13,6 +13,7 @@
 //
 // Puro y sin `@/`: lo prueba `node --test` (catalogo.test.ts).
 
+import { conMoneda } from '../moneda.ts';
 import { ADDONS, LISTA_ADDONS, type Addon } from '../billing/entitlements.ts';
 
 export type CategoriaApp = 'agenda' | 'cobros' | 'comunicacion' | 'marketing' | 'plataformas' | 'automatizar' | 'equipo';
@@ -117,7 +118,7 @@ export const APPS_DE_TIENDA: readonly AppDeTienda[] = [
 export function textoPrecio(p: PrecioApp): string {
   if (p.tipo === 'incluida') return 'Incluida';
   if (p.tipo === 'proximamente') return 'Próximamente';
-  return `${p.eur} €/mes`;
+  return `${conMoneda(p.eur)}/mes`;
 }
 
 /**

@@ -12,6 +12,7 @@
 //
 // Puro y sin I/O (ver action-center.test.ts).
 // ─────────────────────────────────────────────────────────────────────────────
+import { conMoneda, LOCALE_MONEDA } from '../moneda.ts';
 import { severidad, type NivelSeveridad } from './severidad.ts';
 import { efectoDe } from './efecto-aprobar.ts';
 
@@ -137,8 +138,8 @@ export function tituloOportunidades(n: number): string {
  */
 export function fraseEuros(eurMes: number, eurPuntual: number): string | null {
   const partes: string[] = [];
-  if (eurMes > 0) partes.push(`${eurMes.toLocaleString('es-ES')} €/mes`);
-  if (eurPuntual > 0) partes.push(`${eurPuntual.toLocaleString('es-ES')} €`);
+  if (eurMes > 0) partes.push(`${conMoneda(eurMes.toLocaleString(LOCALE_MONEDA))}/mes`);
+  if (eurPuntual > 0) partes.push(`${conMoneda(eurPuntual.toLocaleString(LOCALE_MONEDA))}`);
   if (partes.length === 0) return null;
   return partes.join(' y ');
 }

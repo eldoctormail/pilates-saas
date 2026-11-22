@@ -5,6 +5,7 @@
 // (muestras, cuarentena, avisos) → ejecutar → acta con botón de deshacer.
 // Nada se importa sin revisión, y todo lo importado se puede deshacer.
 
+import { conMoneda, LOCALE_MONEDA } from '../../../lib/moneda.ts';
 import { useEffect, useRef, useState } from 'react';
 import { useId } from 'react';
 import {
@@ -799,7 +800,7 @@ export default function MigracionPage() {
                         {/* Sin los borradores a 0 € (el onboarding los deja) y con el precio al lado: con
                             dos «Clase suelta» el servidor casa por nombre y el id elegido no desambigua. */}
                         {planesTarifa.filter(t => t.precio > 0).map(t => (
-                          <option key={t.id} value={t.id}>{t.nombre} · {t.precio.toLocaleString('es-ES')} €{t.activo ? '' : ' (no a la venta)'}</option>
+                          <option key={t.id} value={t.id}>{t.nombre} · {conMoneda(t.precio.toLocaleString(LOCALE_MONEDA))}{t.activo ? '' : ' (no a la venta)'}</option>
                         ))}
                         <option value="NO_IMPORTAR">— No importar estas filas —</option>
                       </select>

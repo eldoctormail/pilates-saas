@@ -19,6 +19,7 @@
 //
 // Puro: se prueba con `node --test`. El `import type` desaparece al ejecutarlo.
 
+import { conMoneda } from '../moneda.ts';
 import type { PoliticaFinPausa, PoliticaPlazaFijaSinCuota, Studio, TipoClase } from '../types.ts';
 import { DIAS_PARA_RENOVAR_PLAZA_FIJA } from '../plazas-fijas-sin-cuota.ts';
 import { heredaOverride } from '../booking-logic.ts';
@@ -424,7 +425,7 @@ export function excepcionesPorRegla(
 // del mínimo (`debeCancelarPorMinimoNoAlcanzado`, a 2 h fijas del inicio), el
 // barrido de asistidas (marcar-asistidas-automatico.ts) y la detección del cargo.
 
-const euros = (n: number) => `${Number.isInteger(n) ? n : n.toFixed(2).replace('.', ',')} €`;
+const euros = (n: number) => `${conMoneda(Number.isInteger(n) ? n : n.toFixed(2).replace('.', ','))}`;
 
 export function consecuenciaRegla(tarjeta: TarjetaReglasId, r: ReglasReserva): string {
   const politica = frasesPoliticaEstudio({ ...r, avisarAlumnas: null });

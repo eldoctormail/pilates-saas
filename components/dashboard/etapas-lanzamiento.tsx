@@ -1,5 +1,6 @@
 'use client';
 
+import { conMoneda } from '../../lib/moneda.ts';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Plus, Trash2 } from 'lucide-react';
@@ -189,7 +190,7 @@ export function EtapasLanzamiento({ onCambio }: { onCambio?: () => void }) {
           <label className="text-[11.5px] text-muted-foreground">Plan que se vende
             <select required value={form.planId} onChange={ev => setForm({ ...form, planId: ev.target.value })} className={campo}>
               <option value="">Elige un plan</option>
-              {planes.map(p => <option key={p.id} value={p.id}>{p.nombre} · {p.precio} €</option>)}
+              {planes.map(p => <option key={p.id} value={p.id}>{p.nombre} · {conMoneda(p.precio)}</option>)}
             </select>
           </label>
           <label className="text-[11.5px] text-muted-foreground">Desde

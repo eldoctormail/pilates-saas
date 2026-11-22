@@ -4,6 +4,7 @@
 // que existía en el catálogo pero ningún especialista generaba.
 // F2 (informe fila 16): bono repetido cuyo coste real por sesión supera el
 // plan mensual equivalente → PROPONER_SUSCRIPCION_MENSUAL.
+import { conMoneda } from '../../moneda.ts';
 import type { Candidata, Especialista, MemoriaEstudio, SnapshotEstudio } from '../tipos.ts';
 import type { Suscripcion } from '@/lib/types';
 import { construirIndices, frecuenciaHabitual, frecuenciaHabitualPorTipoClase, historialCobroDeSocio, historialCobroDelEstudio, type IndicesSenal } from '../senales.ts';
@@ -83,7 +84,7 @@ function reglaF1(sus: Suscripcion, idx: IndicesSenal, now: Date): Candidata | nu
     motivoMotor,
     datosUsados: { nombre: socio.nombre, sesionesRestantes: restantes, plan: plan.nombre, precio: plan.precio },
     riesgo: 'PERDIDA',
-    impacto: plan.precio > 0 ? { valor: redondear2(plan.precio), unidad: 'EUR', formula: `renovación del bono ${plan.nombre}: ${plan.precio}€` } : undefined,
+    impacto: plan.precio > 0 ? { valor: redondear2(plan.precio), unidad: 'EUR', formula: `renovación del bono ${plan.nombre}: ${conMoneda(plan.precio, '')}` } : undefined,
     confianza,
     accion: { tipo: 'CONTACTO_MANUAL', canal: 'WHATSAPP', textoSugerido: motivoMotor },
     socioId: socio.id,
@@ -145,7 +146,7 @@ function reglaF2(sus: Suscripcion, idx: IndicesSenal, s: SnapshotEstudio, now: D
   if (!confianza) return null;
 
   const ahorroMensualEur = redondear2((costeEfectivoPorSesion - costeMensualPorSesion) * freq * 4.33);
-  const motivoMotor = `${socio.nombre} lleva varios bonos de ${plan.nombre} seguidos y viene ${redondear2(freq)}×/semana de media. Con el plan ${planMensual.nombre} pagaría menos por lo mismo — le ahorraría unos ${ahorroMensualEur}€/mes.`;
+  const motivoMotor = `${socio.nombre} lleva varios bonos de ${plan.nombre} seguidos y viene ${redondear2(freq)}×/semana de media. Con el plan ${planMensual.nombre} pagaría menos por lo mismo — le ahorraría unos ${conMoneda(ahorroMensualEur, '')}/mes.`;
 
   return {
     especialista: 'FINANZAS',
@@ -253,7 +254,7 @@ function reglaF3(sus: Suscripcion, idx: IndicesSenal, now: Date): Candidata | nu
     },
     riesgo: 'PERDIDA',
     impacto: plan.precio > 0
-      ? { valor: redondear2(plan.precio), unidad: 'EUR', formula: `renovación del bono ${plan.nombre}: ${plan.precio}€` }
+      ? { valor: redondear2(plan.precio), unidad: 'EUR', formula: `renovación del bono ${plan.nombre}: ${conMoneda(plan.precio, '')}` }
       : undefined,
     confianza,
     accion: { tipo: 'CONTACTO_MANUAL', canal: 'WHATSAPP', textoSugerido: motivoMotor },

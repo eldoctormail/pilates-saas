@@ -1,5 +1,6 @@
 'use server';
 
+import { conMoneda } from '../../moneda.ts';
 import { requireAuthInServerAction } from '@/lib/auth-server-action';
 import { getSupabaseAdmin } from '@/lib/db/supabase-admin';
 import { filtrarRetribucionVisible, puedeGestionarEquipo, puedeGestionarFichaDe } from '@/lib/permisos-reglas';
@@ -94,7 +95,7 @@ async function patchTarifa(
     } else {
       const n = Number(body.tarifaHora);
       if (!Number.isFinite(n) || n < 0 || n > TARIFA_MAX) {
-        throw new ErrorAccion(`La tarifa debe estar entre 0 y ${TARIFA_MAX} €/h`, 400);
+        throw new ErrorAccion(`La tarifa debe estar entre 0 y ${conMoneda(TARIFA_MAX)}/h`, 400);
       }
       tarifaHora = Math.round(n * 100) / 100;
     }
@@ -107,7 +108,7 @@ async function patchTarifa(
     } else {
       const n = Number(body.baseMensualEur);
       if (!Number.isFinite(n) || n < 0 || n > 99999.99) {
-        throw new ErrorAccion('La base mensual debe estar entre 0 y 99999,99 €', 400);
+        throw new ErrorAccion(`La base mensual debe estar entre 0 y ${conMoneda('99999,99')}`, 400);
       }
       baseMensualEur = Math.round(n * 100) / 100;
     }

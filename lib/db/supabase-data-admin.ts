@@ -1,3 +1,4 @@
+import { conMoneda } from '../moneda.ts';
 import 'server-only';
 import { trocear } from '@/lib/trocear';
 import { renovacionPorPagar, type FilaReciboRenovacion } from '@/lib/billing/renovacion-sin-tarjeta';
@@ -3811,7 +3812,7 @@ export async function crearReservaMostrador(params: {
       return { ok: false, status: 409, error: 'Esta clase no tiene una tarifa de clase suelta que le valga. Créala, o añádele este tipo de clase, en Paquetes.' };
     }
     if (Math.round(importe * 100) !== Math.round(params.claseSuelta.importeEsperado * 100)) {
-      return { ok: false, status: 409, error: `El precio de esta clase ha cambiado: ahora son ${importe.toFixed(2).replace('.', ',')} €. Vuelve a abrirla para cobrar el de ahora.` };
+      return { ok: false, status: 409, error: `El precio de esta clase ha cambiado: ahora son ${conMoneda(importe.toFixed(2).replace('.', ','))}. Vuelve a abrirla para cobrar el de ahora.` };
     }
     const { data: tipo } = cartera.tipoClaseId
       ? await admin.from('tipos_clase').select('nombre').eq('id', cartera.tipoClaseId).maybeSingle()

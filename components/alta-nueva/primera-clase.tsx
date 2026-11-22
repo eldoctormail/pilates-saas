@@ -28,6 +28,7 @@
 //     (`ListoParaReservar`), como siempre.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { MONEDA_SIMBOLO } from '../../lib/moneda.ts';
 import { useContext, useEffect, useId, useMemo, useRef, useState } from 'react';
 import { AlertTriangle, ArrowLeft, ArrowRight, Check, Eye, Loader2, Minus, Plus } from 'lucide-react';
 import { useAuth } from '@/lib/auth-context';
@@ -564,7 +565,7 @@ export function PrimeraClase({ studio, onAtras, onPublicada, saliendo = false, e
                         aria-invalid={precio.bloquea && (intentado || tocados.has('precio'))}
                         aria-describedby={`${id}-precio-m`}
                       />
-                      <span aria-hidden className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[15px] text-muted-foreground">€</span>
+                      <span aria-hidden className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[15px] text-muted-foreground">{MONEDA_SIMBOLO}</span>
                     </div>
                   </div>
                   {form.venta === 'bono' && (

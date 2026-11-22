@@ -1,5 +1,6 @@
 'use client';
 
+import { MONEDA, LOCALE_MONEDA } from '../../lib/moneda.ts';
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { authHeader } from '@/lib/api-client';
@@ -13,7 +14,7 @@ interface RespuestaEconomia {
   resultado: ResultadoEconomia;
 }
 
-const euros = (n: number) => new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n);
+const euros = (n: number) => new Intl.NumberFormat(LOCALE_MONEDA, { style: 'currency', currency: MONEDA, maximumFractionDigits: 0 }).format(n);
 const pct = (x: number) => `${Math.round(x * 100)} %`;
 const entero = (n: number) => Math.round(n).toLocaleString('es-ES');
 

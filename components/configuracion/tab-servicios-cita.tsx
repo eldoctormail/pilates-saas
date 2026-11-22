@@ -1,5 +1,6 @@
 'use client';
 
+import { conMoneda, MONEDA_SIMBOLO } from '../../lib/moneda.ts';
 import { useCallback, useEffect, useState } from 'react';
 import {
   ColorInput, ColorSwatch, Field, Toggle,
@@ -158,7 +159,7 @@ export function TabServiciosCita({ showToast }: { showToast: MostrarToast }) {
                     </td>
                     <td className="px-5 py-3 text-muted-foreground">{TIPOS.find(t => t.id === s.tipo)?.label ?? s.tipo}</td>
                     <td className="px-5 py-3 text-muted-foreground">{s.duracionMin} min</td>
-                    <td className="px-5 py-3 text-muted-foreground">{s.precio != null ? `${s.precio} €` : '—'}</td>
+                    <td className="px-5 py-3 text-muted-foreground">{s.precio != null ? `${conMoneda(s.precio)}` : '—'}</td>
                     <td className="px-5 py-3">
                       {s.autoReservable
                         ? <span className="inline-flex items-center gap-1 text-[12px] font-medium text-success"><Check size={14} />Sí</span>
@@ -188,7 +189,7 @@ export function TabServiciosCita({ showToast }: { showToast: MostrarToast }) {
                     <div className="min-w-0">
                       <p className="font-medium text-foreground text-[14px] truncate">{s.nombre}</p>
                       <p className="text-[12px] text-muted-foreground">
-                        {s.duracionMin} min · {s.precio != null ? `${s.precio} €` : 'sin precio'} · {s.autoReservable ? 'la reservan solas' : 'solo desde el panel'}
+                        {s.duracionMin} min · {s.precio != null ? `${conMoneda(s.precio)}` : 'sin precio'} · {s.autoReservable ? 'la reservan solas' : 'solo desde el panel'}
                       </p>
                     </div>
                   </div>
@@ -243,7 +244,7 @@ export function TabServiciosCita({ showToast }: { showToast: MostrarToast }) {
                   onChange={e => setForm(f => ({ ...f, duracionMin: e.target.value }))} />
               </Field>
               <Field
-              label="Precio (€, opcional)"
+              label={`Precio (${MONEDA_SIMBOLO}, opcional)`}
               description="IVA incluido. Déjalo vacío si el precio se acuerda en cada caso."
             >
                 <input className={inputCls} type="number" min={0} step="0.01"

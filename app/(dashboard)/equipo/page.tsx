@@ -1,5 +1,6 @@
 'use client';
 
+import { MONEDA_SIMBOLO, MONEDA, LOCALE_MONEDA } from '../../../lib/moneda.ts';
 import { AyudaDelPaso } from '@/components/guia/ayuda-del-paso';
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, useId, useSyncExternalStore } from 'react';
 import { useRouter } from 'next/navigation';
@@ -682,7 +683,7 @@ export default function EquipoPage() {
           { label: 'Miembros', value: tarjetas.length, sub: `${activos} activos`, color: 'var(--brand)', bg: 'color-mix(in srgb, var(--brand) 10%, var(--card))', Icon: Users },
           { label: 'Clases esta semana', value: clasesEstaSemana, sub: 'programadas', color: 'var(--success)', bg: 'color-mix(in srgb, var(--success) 12%, var(--card))', Icon: Calendar },
           miRol === 'PROPIETARIO'
-            ? { label: 'Coste del mes', value: costeDelEquipo.toLocaleString('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }), sub: 'nóminas del equipo', color: 'var(--warning)', bg: 'color-mix(in srgb, var(--warning) 12%, var(--card))', Icon: Euro }
+            ? { label: 'Coste del mes', value: costeDelEquipo.toLocaleString(LOCALE_MONEDA, { style: 'currency', currency: MONEDA, maximumFractionDigits: 0 }), sub: 'nóminas del equipo', color: 'var(--warning)', bg: 'color-mix(in srgb, var(--warning) 12%, var(--card))', Icon: Euro }
             : { label: 'Con acceso', value: conAcceso, sub: `de ${tarjetas.length} miembros`, color: 'var(--warning)', bg: 'color-mix(in srgb, var(--warning) 12%, var(--card))', Icon: ShieldCheck },
         ].map(({ label, value, sub, color, bg, Icon }) => (
           <div key={label} className="bg-card border border-border rounded-2xl p-4 flex flex-col gap-2.5">
@@ -935,11 +936,11 @@ export default function EquipoPage() {
                     className={inputCls + ' pr-8'} value={tarifaHoraInput} placeholder="Sin asignar"
                     onChange={e => setTarifaHoraInput(e.target.value)}
                   />
-                  <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[13px] text-muted-foreground">€/h</span>
+                  <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[13px] text-muted-foreground">{MONEDA_SIMBOLO}/h</span>
                 </div>
                 {!tarifaValida && (
                   <p role="alert" className="text-[11px] text-destructive mt-1">
-                    Tiene que ser un número entre 0 y 999,99 €/h.
+                    Tiene que ser un número entre 0 y 999,99 {MONEDA_SIMBOLO}/h.
                   </p>
                 )}
                 <label htmlFor={`${uid}-horas-contrato`} className={labelCls + ' mt-4'}>Horas semanales de contrato (opcional)</label>

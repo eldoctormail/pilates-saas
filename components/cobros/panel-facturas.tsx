@@ -1,5 +1,6 @@
 'use client';
 
+import { conMoneda } from '../../lib/moneda.ts';
 import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { useStudio } from '@/lib/studio-context';
@@ -238,17 +239,17 @@ function EstadoAeat({ estado, csv }: { estado?: string | null; csv?: string | nu
       {emite && (
         <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1 text-[14px] text-foreground" data-testid="facturado-mes">
           <span>Facturado en {MESES[Number(hoy.slice(5, 7)) - 1]}:</span>
-          <span>base <b className="font-semibold tabular-nums"><CifraPrivada inline>{kpi(mes.facturado.base)} €</CifraPrivada></b></span>
+          <span>base <b className="font-semibold tabular-nums"><CifraPrivada inline>{conMoneda(kpi(mes.facturado.base))}</CifraPrivada></b></span>
           {mes.facturado.porIva.map(l => (
             <span key={l.tipoIva}>
-              <span className="text-muted-foreground">· </span>IVA {l.tipoIva} % <b className="font-semibold tabular-nums"><CifraPrivada inline>{kpi(l.cuota)} €</CifraPrivada></b>
+              <span className="text-muted-foreground">· </span>IVA {l.tipoIva} % <b className="font-semibold tabular-nums"><CifraPrivada inline>{conMoneda(kpi(l.cuota))}</CifraPrivada></b>
             </span>
           ))}
-          <span><span className="text-muted-foreground">· </span>total <b className="font-semibold tabular-nums"><CifraPrivada inline>{kpi(mes.facturado.total)} €</CifraPrivada></b></span>
+          <span><span className="text-muted-foreground">· </span>total <b className="font-semibold tabular-nums"><CifraPrivada inline>{conMoneda(kpi(mes.facturado.total))}</CifraPrivada></b></span>
           <span className="text-muted-foreground">
             · {mes.facturado.nFacturas} {mes.facturado.nFacturas === 1 ? 'factura' : 'facturas'}
             {mes.facturado.nAnuladas > 0 && ` (y ${mes.facturado.nAnuladas} anulada${mes.facturado.nAnuladas === 1 ? '' : 's'}, que no suman)`}
-            {mes.sinFactura.enEfectivo.n > 0 && <> · {mes.sinFactura.enEfectivo.n} {mes.sinFactura.enEfectivo.n === 1 ? 'cobro' : 'cobros'} en efectivo sin factura (<CifraPrivada inline>{kpi(mes.sinFactura.enEfectivo.importe)} €</CifraPrivada>)</>}
+            {mes.sinFactura.enEfectivo.n > 0 && <> · {mes.sinFactura.enEfectivo.n} {mes.sinFactura.enEfectivo.n === 1 ? 'cobro' : 'cobros'} en efectivo sin factura (<CifraPrivada inline>{conMoneda(kpi(mes.sinFactura.enEfectivo.importe))}</CifraPrivada>)</>}
           </span>
         </div>
       )}
@@ -344,7 +345,7 @@ function EstadoAeat({ estado, csv }: { estado?: string | null; csv?: string | nu
                     <Download size={11} />
                     CSV
                   </button>
-                  <CifraPrivada inline className="text-sm font-extrabold text-foreground">{kpi(grupo.total)} €</CifraPrivada>
+                  <CifraPrivada inline className="text-sm font-extrabold text-foreground">{conMoneda(kpi(grupo.total))}</CifraPrivada>
                 </div>
               </div>
 
@@ -369,15 +370,15 @@ function EstadoAeat({ estado, csv }: { estado?: string | null; csv?: string | nu
                           </div>
                         </div>
                         <div className="text-right shrink-0">
-                          <CifraPrivada className="text-[15px] font-extrabold text-foreground whitespace-nowrap">{kpi(f.total)} €</CifraPrivada>
-                          <p className="text-[11px] text-muted-foreground whitespace-nowrap">base <CifraPrivada inline>{kpi(f.baseImponible)} €</CifraPrivada></p>
+                          <CifraPrivada className="text-[15px] font-extrabold text-foreground whitespace-nowrap">{conMoneda(kpi(f.total))}</CifraPrivada>
+                          <p className="text-[11px] text-muted-foreground whitespace-nowrap">base <CifraPrivada inline>{conMoneda(kpi(f.baseImponible))}</CifraPrivada></p>
                         </div>
                       </div>
                     );
                   })}
                   <div className="px-4 py-3 flex items-center justify-between bg-muted">
                     <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Subtotal ({grupo.items.length})</span>
-                    <CifraPrivada inline className="text-[15px] font-extrabold text-foreground">{kpi(grupo.items.reduce((s, f) => s + f.total, 0))} €</CifraPrivada>
+                    <CifraPrivada inline className="text-[15px] font-extrabold text-foreground">{conMoneda(kpi(grupo.items.reduce((s, f) => s + f.total, 0)))}</CifraPrivada>
                   </div>
                 </div>
 
@@ -407,9 +408,9 @@ function EstadoAeat({ estado, csv }: { estado?: string | null; csv?: string | nu
                               }
                             </td>
                             <td className="px-4 py-3 font-mono text-xs text-muted-foreground">{f.receptorNIF ?? '—'}</td>
-                            <td className="px-4 py-3 text-right font-medium text-foreground"><CifraPrivada inline>{kpi(f.baseImponible)} €</CifraPrivada></td>
+                            <td className="px-4 py-3 text-right font-medium text-foreground"><CifraPrivada inline>{conMoneda(kpi(f.baseImponible))}</CifraPrivada></td>
                             <td className="px-4 py-3 text-right text-muted-foreground">{f.tipoIVA}%</td>
-                            <td className="px-4 py-3 font-extrabold text-right text-foreground"><CifraPrivada inline>{kpi(f.total)} €</CifraPrivada></td>
+                            <td className="px-4 py-3 font-extrabold text-right text-foreground"><CifraPrivada inline>{conMoneda(kpi(f.total))}</CifraPrivada></td>
                             <td className="px-4 py-3">
                               <div className="flex items-center gap-3">
                                 <button
@@ -435,11 +436,11 @@ function EstadoAeat({ estado, csv }: { estado?: string | null; csv?: string | nu
                       <tr className="border-t-2 border-border bg-muted">
                         <td colSpan={4} className="px-4 py-3 text-xs font-bold uppercase tracking-wider text-muted-foreground">Subtotal ({grupo.items.length})</td>
                         <td className="px-4 py-3 text-right font-semibold text-foreground">
-                          <CifraPrivada inline>{kpi(grupo.items.reduce((s, f) => s + f.baseImponible, 0))} €</CifraPrivada>
+                          <CifraPrivada inline>{conMoneda(kpi(grupo.items.reduce((s, f) => s + f.baseImponible, 0)))}</CifraPrivada>
                         </td>
                         <td />
                         <td className="px-4 py-3 text-right font-extrabold text-foreground">
-                          <CifraPrivada inline>{kpi(grupo.items.reduce((s, f) => s + f.total, 0))} €</CifraPrivada>
+                          <CifraPrivada inline>{conMoneda(kpi(grupo.items.reduce((s, f) => s + f.total, 0)))}</CifraPrivada>
                         </td>
                         <td />
                       </tr>
@@ -457,9 +458,9 @@ function EstadoAeat({ estado, csv }: { estado?: string | null; csv?: string | nu
           <div className="border-t-2 border-border bg-muted flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 px-5 py-3.5">
             <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">TOTAL ({filtradas.length} factura{filtradas.length === 1 ? '' : 's'})</span>
             <div className="flex items-center gap-4 sm:gap-8 text-sm flex-wrap">
-              <span className="text-muted-foreground font-medium">Base: <CifraPrivada inline className="font-bold text-foreground">{kpi(baseTotal)} €</CifraPrivada></span>
-              <span className="text-muted-foreground font-medium">IVA: <CifraPrivada inline className="font-bold text-foreground">{kpi(ivaTotal)} €</CifraPrivada></span>
-              <span className="text-muted-foreground font-bold">Total: <CifraPrivada inline className="font-bold text-foreground text-base">{kpi(totalGeneral)} €</CifraPrivada></span>
+              <span className="text-muted-foreground font-medium">Base: <CifraPrivada inline className="font-bold text-foreground">{conMoneda(kpi(baseTotal))}</CifraPrivada></span>
+              <span className="text-muted-foreground font-medium">IVA: <CifraPrivada inline className="font-bold text-foreground">{conMoneda(kpi(ivaTotal))}</CifraPrivada></span>
+              <span className="text-muted-foreground font-bold">Total: <CifraPrivada inline className="font-bold text-foreground text-base">{conMoneda(kpi(totalGeneral))}</CifraPrivada></span>
             </div>
           </div>
         )}
@@ -532,21 +533,21 @@ function EstadoAeat({ estado, csv }: { estado?: string | null; csv?: string | nu
                             «Bono 10 clases» decía lo mismo que una cuota. */}
                         <p className="font-semibold text-foreground">{conceptoDeFactura(previewFactura)}</p>
                       </td>
-                      <td className="px-4 py-4 text-right font-semibold text-foreground">{kpi(previewFactura.baseImponible)} €</td>
+                      <td className="px-4 py-4 text-right font-semibold text-foreground">{conMoneda(kpi(previewFactura.baseImponible))}</td>
                     </tr>
                   </tbody>
                   <tfoot className="bg-muted">
                     <tr className="border-t border-border">
                       <td className="px-4 py-2.5 text-muted-foreground text-sm">Base imponible</td>
-                      <td className="px-4 py-2.5 text-right text-sm text-foreground">{kpi(previewFactura.baseImponible)} €</td>
+                      <td className="px-4 py-2.5 text-right text-sm text-foreground">{conMoneda(kpi(previewFactura.baseImponible))}</td>
                     </tr>
                     <tr>
                       <td className="px-4 py-2.5 text-muted-foreground text-sm">IVA ({previewFactura.tipoIVA}%)</td>
-                      <td className="px-4 py-2.5 text-right text-sm text-foreground">{kpi(previewFactura.cuotaIVA)} €</td>
+                      <td className="px-4 py-2.5 text-right text-sm text-foreground">{conMoneda(kpi(previewFactura.cuotaIVA))}</td>
                     </tr>
                     <tr className="border-t-2 border-border">
                       <td className="px-4 py-3 font-extrabold text-foreground">TOTAL</td>
-                      <td className="px-4 py-3 text-right font-extrabold text-foreground text-base">{kpi(previewFactura.total)} €</td>
+                      <td className="px-4 py-3 text-right font-extrabold text-foreground text-base">{conMoneda(kpi(previewFactura.total))}</td>
                     </tr>
                   </tfoot>
                 </table>

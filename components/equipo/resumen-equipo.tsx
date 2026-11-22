@@ -17,6 +17,7 @@
 // viven en `lib/equipo/cifras-equipo.ts`.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { MONEDA, LOCALE_MONEDA } from '../../lib/moneda.ts';
 import { useMemo, useState } from 'react';
 import { BarChart3, CalendarDays, Euro, Plane, ShieldCheck, Star, Users } from 'lucide-react';
 import { ProfileAvatar } from '@/components/ui/profile-avatar';
@@ -31,7 +32,7 @@ import { cn, hoyEnEstudio } from '@/lib/utils';
 /** Cuántas filas del reparto se ven; el resto se cuenta debajo. */
 const FILAS_REPARTO = 6;
 
-const eurosSinDecimales = (n: number) => n.toLocaleString('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+const eurosSinDecimales = (n: number) => n.toLocaleString(LOCALE_MONEDA, { style: 'currency', currency: MONEDA, maximumFractionDigits: 0 });
 const nombreCorto = (nombre: string) => nombre.trim().split(/\s+/)[0] ?? nombre;
 
 export function CifrasEquipo({ tarjetas, cargando, esPropietaria, irACalendario, irARendimiento, irALiquidaciones }: {

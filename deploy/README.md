@@ -43,8 +43,8 @@ Después, en `~/supabase-project/.env`:
 ADDITIONAL_REDIRECT_URLS=http://IP:3000/**
 
 # Correo de Auth (confirmaciones, recuperar contraseña). Cualquier SMTP sirve.
-SMTP_ADMIN_EMAIL=admin@ejemplo.com.ar
-SMTP_HOST=smtp.ejemplo.com.ar
+SMTP_ADMIN_EMAIL=admin@example.com
+SMTP_HOST=smtp.example.com
 SMTP_PORT=587
 SMTP_USER=...
 SMTP_PASS=...

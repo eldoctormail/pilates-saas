@@ -1,5 +1,6 @@
 'use client';
 
+import { conMoneda, MONEDA_SIMBOLO } from '../../lib/moneda.ts';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   AlertTriangle, Banknote, Check, CircleDollarSign, Clock, Copy, Gift, Landmark, Mail, Plus, ScanLine, Search, Settings2, Smartphone, X,
@@ -398,7 +399,7 @@ function FormGastar({ t, onCerrar, onHecho }: { t: Vista; onCerrar: () => void; 
       <div className={CUERPO}>
         <ResumenTarjeta t={t} />
         <div>
-          <label htmlFor="rg-gastar-importe" className={etiqueta}>¿Cuánto se gasta? (€)</label>
+          <label htmlFor="rg-gastar-importe" className={etiqueta}>¿Cuánto se gasta? ({MONEDA_SIMBOLO})</label>
           <input id="rg-gastar-importe" className={`${campo} text-lg font-bold tabular-nums`} inputMode="decimal" autoComplete="off" autoFocus
             value={texto} onChange={e => { setTexto(e.target.value); setError(null); }} placeholder="0"
             aria-invalid={invalido || excede || undefined} aria-describedby={invalido || excede ? 'rg-gastar-e' : undefined} />
@@ -566,7 +567,7 @@ function FormVender({ ajustes, onCerrar, onVendida }: { ajustes: AjustesRegalo; 
   const e = {
     importe: !f.importeEur || !Number.isInteger(importe) || importe < 1 ? 'Indica el importe en euros.'
       : importe < ajustes.importeMinEur || importe > ajustes.importeMaxEur
-        ? `Tiene que estar entre ${ajustes.importeMinEur} € y ${ajustes.importeMaxEur} €.` : null,
+        ? `Tiene que estar entre ${conMoneda(ajustes.importeMinEur)} y ${conMoneda(ajustes.importeMaxEur)}.` : null,
     de: f.compradorNombre.trim() ? null : 'Escribe quién la compra.',
     para: f.destinatarioNombre.trim() ? null : 'Escribe para quién es.',
     emailC: f.compradorEmail && !EMAIL_VALIDO.test(f.compradorEmail.trim()) ? 'Ese email no parece válido.' : null,
@@ -633,7 +634,7 @@ function FormVender({ ajustes, onCerrar, onVendida }: { ajustes: AjustesRegalo; 
         <section aria-labelledby="rg-v-1" className="space-y-3">
           <h3 id="rg-v-1" className="text-xs font-bold uppercase tracking-wide text-muted-foreground">Importe y cobro</h3>
           <div>
-            <label htmlFor="rg-v-importe" className={etiqueta}>Importe (€)</label>
+            <label htmlFor="rg-v-importe" className={etiqueta}>Importe ({MONEDA_SIMBOLO})</label>
             <input id="rg-v-importe" className={`${campo} text-lg font-bold tabular-nums`} inputMode="numeric" autoComplete="off" autoFocus
               value={f.importeEur} onChange={ev => setF({ ...f, importeEur: ev.target.value.replace(/\D/g, '').slice(0, 4) })}
               aria-invalid={!!ver('importe') || undefined} aria-describedby={ver('importe') ? 'rg-v-importe-e' : undefined} />
@@ -749,7 +750,7 @@ function FormAjustes({ datos, onCerrar, onGuardado }: { datos: Datos; onCerrar: 
         </div>
 
         <div>
-          <label htmlFor="rg-a-importes" className={etiqueta}>Importes sugeridos (€, separados por comas)</label>
+          <label htmlFor="rg-a-importes" className={etiqueta}>Importes sugeridos ({MONEDA_SIMBOLO}, separados por comas)</label>
           <input id="rg-a-importes" className={campo} value={importes} disabled={!editable} onChange={ev => setImportes(ev.target.value)} placeholder="25, 50, 100" />
           <div className="flex flex-wrap gap-1.5 mt-2" aria-label="Así los verá quien compra">
             {lista.length === 0 ? <span className="text-[12px] text-muted-foreground">Escribe al menos un importe.</span>
@@ -762,8 +763,8 @@ function FormAjustes({ datos, onCerrar, onGuardado }: { datos: Datos; onCerrar: 
           <Interruptor on={libre} onChange={setLibre} ariaLabel="Permitir otro importe" disabled={!editable} />
         </div>
         <div className="grid grid-cols-2 gap-3">
-          <div><label htmlFor="rg-a-min" className={etiqueta}>Mínimo (€)</label><input id="rg-a-min" className={campo} inputMode="numeric" value={min} disabled={!editable || !libre} onChange={ev => setMin(ev.target.value)} /></div>
-          <div><label htmlFor="rg-a-max" className={etiqueta}>Máximo (€)</label><input id="rg-a-max" className={campo} inputMode="numeric" value={max} disabled={!editable || !libre} onChange={ev => setMax(ev.target.value)} /></div>
+          <div><label htmlFor="rg-a-min" className={etiqueta}>Mínimo ({MONEDA_SIMBOLO})</label><input id="rg-a-min" className={campo} inputMode="numeric" value={min} disabled={!editable || !libre} onChange={ev => setMin(ev.target.value)} /></div>
+          <div><label htmlFor="rg-a-max" className={etiqueta}>Máximo ({MONEDA_SIMBOLO})</label><input id="rg-a-max" className={campo} inputMode="numeric" value={max} disabled={!editable || !libre} onChange={ev => setMax(ev.target.value)} /></div>
         </div>
         <div>
           <label htmlFor="rg-a-meses" className={etiqueta}>Caduca a los (meses)</label>

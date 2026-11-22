@@ -24,6 +24,7 @@
 // identidad distinta de la real.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { conMoneda } from '../../lib/moneda.ts';
 import { ArrowDown, Check, X } from 'lucide-react';
 
 export type PropsEscena = { activa: boolean };
@@ -186,9 +187,9 @@ export function EscenaCobros({ activa }: PropsEscena) {
         <Suelto texto="Ana · Cuota mensual" meta="Sin pagar" />
       </>}
       despues={<>
-        <Resuelto texto="Marta · Bono 10 sesiones" meta="90,00 €" />
-        <Resuelto texto="Lucía · Cuota mensual" meta="65,00 €" />
-        <Resuelto texto="Ana · Cuota mensual" meta="65,00 €" />
+        <Resuelto texto="Marta · Bono 10 sesiones" meta={conMoneda('90,00')} />
+        <Resuelto texto="Lucía · Cuota mensual" meta={conMoneda('65,00')} />
+        <Resuelto texto="Ana · Cuota mensual" meta={conMoneda('65,00')} />
       </>}
     />
   );

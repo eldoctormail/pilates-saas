@@ -1,0 +1,67 @@
+# Tentare en servidor propio: la app, Inngest (trabajos de fondo) y los crons.
+# Supabase va aparte, con su docker-compose oficial (ver deploy/README.md).
+#
+#   cd deploy && docker compose up -d --build
+
+name: tentare
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+      args:
+        NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+        NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL}
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+        NEXT_PUBLIC_ZONA_HORARIA: ${NEXT_PUBLIC_ZONA_HORARIA:-}
+        NEXT_PUBLIC_VAPID_PUBLIC_KEY: ${NEXT_PUBLIC_VAPID_PUBLIC_KEY:-}
+    image: tentare-app:local
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      INNGEST_BASE_URL: http://inngest:8288
+      INNGEST_DEV: "0"
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    depends_on:
+      - inngest
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/').then(r=>process.exit(r.status<500?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  inngest:
+    image: inngest/inngest:latest
+    restart: unless-stopped
+    command:
+      - inngest
+      - start
+      - --event-key=${INNGEST_EVENT_KEY}
+      - --signing-key=${INNGEST_SIGNING_KEY}
+      - --sdk-url=http://app:3000/api/inngest
+      # Vuelve a leer las funciones de la app cada minuto (tras un redeploy).
+      - --poll-interval=60
+      - --sqlite-dir=/var/lib/inngest
+    volumes:
+      - inngest-data:/var/lib/inngest
+    ports:
+      # Panel de Inngest: solo desde el propio servidor.
+      - "127.0.0.1:${INNGEST_PORT:-8288}:8288"
+
+  cron:
+    build:
+      context: ..
+      dockerfile: deploy/cron/Dockerfile
+    restart: unless-stopped
+    environment:
+      TZ: ${NEXT_PUBLIC_ZONA_HORARIA:-America/Argentina/Buenos_Aires}
+      CRON_SECRET: ${CRON_SECRET}
+      APP_INTERNAL_URL: http://app:3000
+    depends_on:
+      - app
+
+volumes:
+  inngest-data:

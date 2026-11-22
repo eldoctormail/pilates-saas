@@ -17,6 +17,10 @@
 const URL_CANONICA = (
   (typeof process !== 'undefined' ? process.env.NEXT_PUBLIC_APP_URL : undefined) || 'https://www.tentare.app'
 ).replace(/\/+$/, '');
+// `@__PURE__`: si un paquete (el widget) no usa LEGAL, el compilador puede
+// descartarlo entero; con una llamada «con efectos» dentro, lo arrastraría.
+const hostDe = (url: string): string => new URL(url).host;
+const DOMINIO_CANONICO = /* @__PURE__ */ hostDe(URL_CANONICA);
 
 export const LEGAL = {
   marca: 'Tentare',
@@ -34,7 +38,7 @@ export const LEGAL = {
   // Si algún día se quita el redirect y el ápice pasa a servir directamente,
   // esto vuelve a `https://tentare.app` — y con ese cambio se mueve el sitio
   // entero, porque de aquí salen canonicals, sitemap, robots y JSON-LD.
-  dominio: new URL(URL_CANONICA).host,
+  dominio: DOMINIO_CANONICO,
   url: URL_CANONICA,
   // Fecha de última revisión del contenido legal (no la de render).
   // ⚠️ Si cambia, cambia también `VERSION_TEXTOS_LEGALES` (abajo): es lo que se

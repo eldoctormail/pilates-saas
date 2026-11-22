@@ -1,0 +1,136 @@
+# Tentare en servidor propio
+
+La instalación tiene dos partes que corren en el mismo servidor:
+
+| Parte | Qué es | Dónde |
+| --- | --- | --- |
+| Supabase | Postgres, Auth, API, Storage y Realtime. Se usa el `docker-compose` oficial | `~/supabase-project` (fuera del repo) |
+| Tentare | La app Next.js, Inngest (trabajos de fondo) y los crons | `deploy/` de este repo |
+
+Sin dominio todavía, todo funciona con la IP del servidor:
+
+- App: `http://IP:3000`
+- Supabase (API y panel Studio): `http://IP:8000`
+
+Cuando haya dominio, ver [Pasar a dominio](#pasar-a-dominio).
+
+> Con `http://IP`, sin TLS, algunas cookies marcadas `secure` (por ejemplo, el estado de la suscripción) no se guardan. Sirve para probar, pero para usarlo de verdad conviene tener HTTPS.
+
+**Requisitos:** Linux con Docker y el plugin Compose, al menos 4 GB de RAM (8 GB para compilar la app con holgura), `git` y `openssl`.
+
+---
+
+## 1. Supabase
+
+```sh
+cd ~
+curl -fsSL https://raw.githubusercontent.com/supabase/supabase/master/docker/setup.sh -o setup.sh
+sh setup.sh -p supabase-project
+```
+
+El script instala lo que falte, copia el `docker-compose` oficial y genera las claves. Pide tres URL:
+
+| Pregunta | Valor |
+| --- | --- |
+| `SUPABASE_PUBLIC_URL` | `http://IP:8000` |
+| `API_EXTERNAL_URL` | `http://IP:8000/auth/v1` (el que propone) |
+| `SITE_URL` | `http://IP:3000` |
+
+Después, en `~/supabase-project/.env`:
+
+```sh
+# Redirecciones permitidas después del login
+ADDITIONAL_REDIRECT_URLS=http://IP:3000/**
+
+# Correo de Auth (confirmaciones, recuperar contraseña). Cualquier SMTP sirve.
+SMTP_ADMIN_EMAIL=admin@ejemplo.com.ar
+SMTP_HOST=smtp.ejemplo.com.ar
+SMTP_PORT=587
+SMTP_USER=...
+SMTP_PASS=...
+SMTP_SENDER_NAME=Pilates
+
+# Sumar los ajustes de Tentare
+COMPOSE_FILE=docker-compose.yml:docker-compose.tentare.yml
+```
+
+Para probar sin SMTP, se puede poner `ENABLE_EMAIL_AUTOCONFIRM=true` (las cuentas quedan confirmadas sin correo). Hay que volver a `false` antes de usarlo en serio.
+
+```sh
+cp /ruta/al/repo/deploy/supabase/docker-compose.tentare.yml ~/supabase-project/
+cd ~/supabase-project && docker compose up -d
+docker compose ps        # todos "healthy" antes de seguir
+```
+
+El panel Studio queda en `http://IP:8000`, con el usuario y la contraseña de `DASHBOARD_USERNAME` y `DASHBOARD_PASSWORD` del `.env`.
+
+## 2. Configuración de la app
+
+```sh
+cd /ruta/al/repo
+deploy/scripts/generar-secretos.sh
+```
+
+Crea `deploy/.env` con los secretos internos, las claves de Inngest y las de push. Después hay que completar a mano:
+
+- `NEXT_PUBLIC_APP_URL=http://IP:3000`
+- `NEXT_PUBLIC_SUPABASE_URL=http://IP:8000`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`: el `ANON_KEY` de `~/supabase-project/.env`
+- `SUPABASE_SERVICE_ROLE_KEY`: el `SERVICE_ROLE_KEY` de ese mismo archivo
+- `RESEND_API_KEY` y `RESEND_FROM`, para los correos de la app (reservas, avisos). Se puede dejar para después.
+
+## 3. Base de datos
+
+```sh
+deploy/scripts/migrar.sh ~/supabase-project
+```
+
+El script hace tres cosas:
+
+1. Aplica las migraciones con la CLI de Supabase (`npx supabase db push`).
+2. Carga en Vault `app_url` y `supabase_cron_secret`, que usan los trabajos de `pg_cron`.
+3. Al final verifica que ningún trabajo siga apuntando a `tentare.app`; el resultado tiene que ser 0.
+
+Se puede volver a correr: solo aplica las migraciones nuevas. **No** carga `supabase/seed.sql`, que son datos de demostración y empiezan con un `TRUNCATE`.
+
+## 4. La app
+
+```sh
+cd deploy
+docker compose up -d --build
+```
+
+La primera compilación tarda varios minutos. Después:
+
+- Abrir `http://IP:3000/crear-estudio` y crear el estudio.
+- Inngest: el panel queda en `http://127.0.0.1:8288`, solo desde el servidor. Ahí se ve si la app quedó registrada y si corren los trabajos.
+- Crons: `docker compose logs -f cron`.
+
+## Actualizar
+
+```sh
+git pull
+deploy/scripts/migrar.sh ~/supabase-project
+cd deploy && docker compose up -d --build
+```
+
+## Pasar a dominio
+
+Con dos nombres, por ejemplo `pilates.ejemplo.com.ar` (app) y `api.pilates.ejemplo.com.ar` (Supabase), detrás del proxy inverso con TLS:
+
+1. `~/supabase-project/.env`: cambiar `SUPABASE_PUBLIC_URL`, `API_EXTERNAL_URL`, `SITE_URL` y `ADDITIONAL_REDIRECT_URLS`. Luego `docker compose up -d`.
+2. `deploy/.env`: cambiar `NEXT_PUBLIC_APP_URL` y `NEXT_PUBLIC_SUPABASE_URL`.
+3. `deploy/scripts/migrar.sh ~/supabase-project`, que actualiza `app_url` en Vault.
+4. `cd deploy && docker compose up -d --build`. Las URL públicas se graban al compilar, así que hay que reconstruir.
+
+## Backup rápido
+
+```sh
+docker exec supabase-db pg_dump -U postgres -Fc postgres > tentare-$(date +%F).dump
+```
+
+Los archivos subidos (fotos, adjuntos) están en `~/supabase-project/volumes/storage`. Hay que copiar esa carpeta también.
+
+## Qué queda apagado
+
+Stripe (cobros online), VeriFactu, WhatsApp, Zoom, Google, Klaviyo, Cloudflare (Turnstile, R2, Stream), Sentry, PostHog e IA. Las variables quedan vacías y las pantallas que dependen de esos servicios no funcionan hasta configurarlos.

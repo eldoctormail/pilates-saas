@@ -6,7 +6,7 @@ import type { SupabaseClient } from '@supabase/supabase-js';
 import type Stripe from 'stripe';
 import { leerSesionDeRegalo } from './sesion';
 import { crearTarjeta, anularTarjeta } from './servidor';
-import { enviarCorreosRegalo } from './enviar';
+import { enviarCorreosUnaVez } from './enviar';
 
 export type ResultadoActivacion =
   | { ok: true; tarjetaId: string; creada: boolean; anuladaAlNacer?: boolean }
@@ -64,17 +64,7 @@ export async function activarRegaloDesdeSesion(
     }
   }
 
-  // El correo sale una vez: se RECLAMA con un UPDATE atómico sobre `correo_enviado_en` y, si el envío falla,
-  // se suelta para que el siguiente intento (webhook repetido, página de vuelta o conciliador) lo repita.
-  const { data: reclamada } = await admin.from('tarjetas_regalo')
-    .update({ correo_enviado_en: new Date().toISOString() })
-    .eq('id', r.tarjetaId).eq('studio_id', d.studioId).eq('estado', 'ACTIVA').is('correo_enviado_en', null).select('id');
-  if (reclamada && reclamada.length > 0) {
-    const enviado = await enviarCorreosRegalo(admin, d.studioId, r.tarjetaId);
-    if (!enviado.ok) {
-      await admin.from('tarjetas_regalo').update({ correo_enviado_en: null }).eq('id', r.tarjetaId).eq('studio_id', d.studioId);
-    }
-  }
+  await enviarCorreosUnaVez(admin, d.studioId, r.tarjetaId);
   return { ok: true, tarjetaId: r.tarjetaId, creada: r.creada };
 }
 

@@ -188,7 +188,7 @@ export function PanelRegalo() {
           titulo="Aún no se ha vendido ninguna tarjeta regalo"
           descripcion={a.activo
             ? 'Tus clientes ya pueden regalarlas desde tu página de reservas. También puedes vender una en el mostrador cuando alguien pague en persona.'
-            : 'Actívalas para vender saldo en euros que se regala por correo y se gasta en varias veces. Mientras tanto, puedes venderlas en el mostrador.'}
+            : 'Actívalas para vender saldo que se regala por correo y se gasta en varias veces. Mientras tanto, puedes venderlas en el mostrador.'}
           cta={!a.activo && datos.puedeEditarAjustes
             ? { label: 'Activar tarjetas regalo', onClick: () => abrir({ t: 'ajustes' }), icono: Gift }
             : mueveDinero ? { label: 'Vender la primera', onClick: () => abrir({ t: 'vender' }), icono: Plus } : undefined}
@@ -412,7 +412,7 @@ function FormGastar({ t, onCerrar, onHecho }: { t: Vista; onCerrar: () => void; 
               <button key={v} type="button" className={`${chip} bg-background border-border hover:bg-muted tabular-nums`} onClick={() => setTexto(String(v))}>{formatearEuros(v)}</button>
             ))}
           </div>
-          {invalido && <ErrorLinea id="rg-gastar-e">Escribe un importe en euros, por ejemplo 12 o 12,50.</ErrorLinea>}
+          {invalido && <ErrorLinea id="rg-gastar-e">Escribe un importe, por ejemplo 12 o 12,50.</ErrorLinea>}
           {excede && <ErrorLinea id="rg-gastar-e">Supera el saldo de la tarjeta ({formatearEuros(t.saldo)}).</ErrorLinea>}
         </div>
 
@@ -566,7 +566,7 @@ function FormVender({ ajustes, onCerrar, onVendida }: { ajustes: AjustesRegalo; 
 
   const importe = Number(f.importeEur);
   const e = {
-    importe: !f.importeEur || !Number.isInteger(importe) || importe < 1 ? 'Indica el importe en euros.'
+    importe: !f.importeEur || !Number.isInteger(importe) || importe < 1 ? 'Indica el importe.'
       : importe < ajustes.importeMinEur || importe > ajustes.importeMaxEur
         ? `Tiene que estar entre ${conMoneda(ajustes.importeMinEur)} y ${conMoneda(ajustes.importeMaxEur)}.` : null,
     de: f.compradorNombre.trim() ? null : 'Escribe quién la compra.',

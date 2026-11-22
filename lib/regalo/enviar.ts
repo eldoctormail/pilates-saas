@@ -62,3 +62,19 @@ export async function enviarCorreosRegalo(
     return { ok: false };
   }
 }
+
+/**
+ * El correo de una tarjeta recién creada sale UNA vez: se RECLAMA con un UPDATE atómico sobre
+ * `correo_enviado_en` y, si el envío falla, se suelta para que el siguiente intento (aviso
+ * repetido, página de vuelta o conciliador) lo repita. Lo comparten Stripe y Mercado Pago.
+ */
+export async function enviarCorreosUnaVez(admin: SupabaseClient, studioId: string, tarjetaId: string): Promise<void> {
+  const { data: reclamada } = await admin.from('tarjetas_regalo')
+    .update({ correo_enviado_en: new Date().toISOString() })
+    .eq('id', tarjetaId).eq('studio_id', studioId).eq('estado', 'ACTIVA').is('correo_enviado_en', null).select('id');
+  if (!reclamada || reclamada.length === 0) return;
+  const enviado = await enviarCorreosRegalo(admin, studioId, tarjetaId);
+  if (!enviado.ok) {
+    await admin.from('tarjetas_regalo').update({ correo_enviado_en: null }).eq('id', tarjetaId).eq('studio_id', studioId);
+  }
+}

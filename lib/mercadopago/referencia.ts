@@ -9,13 +9,16 @@
 //   `tentare:rec:<studioId>:<reciboId>`      pagar un recibo (Etapa 1)
 //   `tentare:compra:<studioId>:<compraId>`   comprar un plan (Etapa 2,
 //                                            fila de `compras_mercadopago`)
+//   `tentare:regalo:<studioId>:<regaloId>`   comprar una tarjeta regalo (fila
+//                                            de `regalos_mercadopago`)
 
 const PREFIJO = 'tentare';
 const ID = /^[A-Za-z0-9_-]{1,120}$/;
 
 export type Referencia =
   | { tipo: 'recibo'; studioId: string; reciboId: string }
-  | { tipo: 'compra'; studioId: string; compraId: string };
+  | { tipo: 'compra'; studioId: string; compraId: string }
+  | { tipo: 'regalo'; studioId: string; regaloId: string };
 
 function comprobarIds(...ids: string[]): void {
   if (!ids.every(id => ID.test(id))) throw new Error('Id con caracteres no admitidos en la referencia de Mercado Pago');
@@ -31,6 +34,11 @@ export function referenciaDeCompra(studioId: string, compraId: string): string {
   return `${PREFIJO}:compra:${studioId}:${compraId}`;
 }
 
+export function referenciaDeRegalo(studioId: string, regaloId: string): string {
+  comprobarIds(studioId, regaloId);
+  return `${PREFIJO}:regalo:${studioId}:${regaloId}`;
+}
+
 export function leerReferencia(ref: string | null | undefined): Referencia | null {
   if (!ref) return null;
   const partes = ref.split(':');
@@ -39,12 +47,23 @@ export function leerReferencia(ref: string | null | undefined): Referencia | nul
   if (!ID.test(studioId) || !ID.test(id)) return null;
   if (tipo === 'rec') return { tipo: 'recibo', studioId, reciboId: id };
   if (tipo === 'compra') return { tipo: 'compra', studioId, compraId: id };
+  if (tipo === 'regalo') return { tipo: 'regalo', studioId, regaloId: id };
   return null;
 }
 
 /** Id de una compra nueva: `mpc_` + 32 hex. Base de los ids de la entrega (`idsDe`). */
 export function nuevoIdCompra(): string {
   return `mpc_${globalThis.crypto.randomUUID().replace(/-/g, '')}`;
+}
+
+/** Id de una tarjeta regalo pagada con Mercado Pago: `mpr_` + 32 hex. */
+export function nuevoIdRegalo(): string {
+  return `mpr_${globalThis.crypto.randomUUID().replace(/-/g, '')}`;
+}
+
+/** ¿Es un id de regalo de Tentare? (lo que se acepta en `?mp=` de la página del regalo). */
+export function esIdRegalo(s: string): boolean {
+  return /^mpr_[0-9a-f]{32}$/.test(s);
 }
 
 /** Importes en la unidad de la moneda (pesos), comparados al centavo. */

@@ -48,6 +48,7 @@
 // ya resuelta de esa hoja para el iframe embebido (franja visible, safe-area).
 // Este fichero NO lo compila el bundle del widget nativo: sí puede usar las
 // clases `pantalla-reserva-*` de app/globals.css.
+import { pasarelaEsMercadoPago } from '@/lib/mercadopago/config';
 import { conMoneda } from '../../lib/moneda.ts';
 import { useState, useEffect, useId, useMemo, useRef, type CSSProperties, type KeyboardEvent } from 'react';
 import { ChevronLeft, Tag, Lock, ShieldCheck, RotateCcw, Check, X, Loader2 } from 'lucide-react';
@@ -906,7 +907,7 @@ function FilaConfianza() {
   };
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 18px', justifyContent: 'center', paddingTop: 2 }}>
-      <span style={item}><Lock size={12} strokeWidth={2.2} aria-hidden />Pago seguro por Stripe</span>
+      <span style={item}><Lock size={12} strokeWidth={2.2} aria-hidden />Pago seguro por {pasarelaEsMercadoPago() ? 'Mercado Pago' : 'Stripe'}</span>
       <span style={item}><RotateCcw size={12} strokeWidth={2.2} aria-hidden />Cancela cuando quieras</span>
       <span style={item}><ShieldCheck size={12} strokeWidth={2.2} aria-hidden />Confirmación al instante</span>
     </div>

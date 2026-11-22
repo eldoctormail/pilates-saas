@@ -4,7 +4,7 @@
 // del código, que `regalo_huella_codigo` (SQL) calcula igual — lo ata el test de BD.
 // ⚠️ Sin `node:crypto`: lo importan componentes de cliente. La huella vive en `huella.ts` (solo servidor).
 
-import { conMoneda, LOCALE_MONEDA } from '../moneda.ts';
+import { conMoneda, LOCALE_MONEDA, MONEDA } from '../moneda.ts';
 export const ALFABETO_CODIGO = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 /** `RG-XXXX-XXXX-XXXX-XXXX`: 16 símbolos de un alfabeto de 32 = 80 bits. */
 export const FORMATO_CODIGO = /^RG-[A-HJ-NP-Z2-9]{4}(-[A-HJ-NP-Z2-9]{4}){3}$/;
@@ -35,10 +35,16 @@ export interface AjustesRegalo {
   terminos: string | null;
 }
 
-export const AJUSTES_POR_DEFECTO: AjustesRegalo = {
-  activo: false, importesEur: [25, 50, 100], permiteImporteLibre: true,
-  importeMinEur: 10, importeMaxEur: 300, caducidadMeses: 12, terminos: null,
-};
+/**
+ * Tope de un importe de regalo, en la unidad de la moneda. En euros, 2000 (lo de
+ * siempre); en otra moneda (autoalojado en pesos), el que permite la base de datos
+ * (migr 20261122020400). Los importes siguen siendo enteros.
+ */
+export const TOPE_IMPORTE_REGALO = MONEDA === 'EUR' ? 2000 : 10_000_000;
+
+export const AJUSTES_POR_DEFECTO: AjustesRegalo = MONEDA === 'EUR'
+  ? { activo: false, importesEur: [25, 50, 100], permiteImporteLibre: true, importeMinEur: 10, importeMaxEur: 300, caducidadMeses: 12, terminos: null }
+  : { activo: false, importesEur: [25000, 50000, 100000], permiteImporteLibre: true, importeMinEur: 10000, importeMaxEur: 300000, caducidadMeses: 12, terminos: null };
 
 /**
  * Importe aceptado, en CÉNTIMOS enteros, o el motivo del rechazo. Euros enteros
@@ -46,7 +52,7 @@ export const AJUSTES_POR_DEFECTO: AjustesRegalo = {
  */
 export function validarImporte(a: AjustesRegalo, importeEur: unknown): { ok: true; centimos: number } | { ok: false; motivo: string } {
   if (typeof importeEur !== 'number' || !Number.isInteger(importeEur) || importeEur <= 0) {
-    return { ok: false, motivo: 'Elige un importe en euros enteros.' };
+    return { ok: false, motivo: MONEDA === 'EUR' ? 'Elige un importe en euros enteros.' : 'Elige un importe sin centavos.' };
   }
   const fijo = a.importesEur.includes(importeEur);
   const libre = a.permiteImporteLibre && importeEur >= a.importeMinEur && importeEur <= a.importeMaxEur;

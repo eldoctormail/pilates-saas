@@ -75,6 +75,7 @@ test('los dos checkouts gemelos ponen la sesión validada en la metadata', () =>
 test('las tres entregas (webhook ×2 y conciliador) pasan la sesión; la anota entregarPlanComprado', () => {
   assert.equal(fuente('app/api/stripe/webhook/route.ts').split('widgetSesion:').length - 1, 2);
   assert.ok(fuente('lib/inngest/conciliar-cobros.ts').includes('widgetSesion:'));
+  assert.ok(fuente('lib/mercadopago/procesar-pago.ts').includes('widgetSesion:'), 'la entrega de Mercado Pago también');
   assert.ok(fuente('lib/billing/entregar-plan-comprado.ts').includes('await registrarCompraEnEmbudo(admin, {'));
 });
 
@@ -82,5 +83,6 @@ test('⚠️ el navegador ya no anota la compra (contaría dos veces): solo las 
   const f = fuente('app/reservar/[slug]/page.tsx');
   const pago = f.slice(f.indexOf('async function handlePagoExitoso()'));
   assert.ok(!pago.slice(0, pago.indexOf('\n  }\n')).includes("'booking_completed'"));
-  assert.equal(f.split('widgetSesion: sessionIdWidget()').length - 1, 3, 'los tres fetch de pago mandan la sesión');
+  // Tres de Stripe y el de Mercado Pago (autoalojado, «pagar y reservar sin cuenta»).
+  assert.equal(f.split('widgetSesion: sessionIdWidget()').length - 1, 4, 'los cuatro fetch de pago mandan la sesión');
 });

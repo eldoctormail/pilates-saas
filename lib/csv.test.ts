@@ -320,3 +320,11 @@ test('validarFilasPago exige email, fecha e importe; rechaza importe negativo', 
   assert.equal(filas[3].estado, 'error');
   assert.match(filas[3].motivo!, /negativo/i);
 });
+
+test('telefonoValido en Argentina: 10 cifras con código de área, con o sin +54 9, 0 y 15', () => {
+  const ar = 'es-AR-u-hc-h23';
+  for (const t of ['2994123456', '+54 9 299 412-3456', '0299 15 412-3456', '(011) 4123-4567', '5491141234567']) {
+    assert.equal(telefonoValido(t, ar), true, t);
+  }
+  for (const t of ['412-3456', '600111222', 'hola', '']) assert.equal(telefonoValido(t, ar), false, t);
+});

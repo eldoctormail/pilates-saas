@@ -14,6 +14,12 @@ import { errorInterno } from '@/lib/errores-servidor';
 import { estudioDeSlug } from '@/lib/regalo/estudio-publico';
 import { validarDatosRegalo, validarImporte } from '@/lib/regalo/reglas';
 import { metadataDeRegalo, ORIGEN_REGALO } from '@/lib/regalo/sesion';
+import { configMercadoPago, pasarelaEsMercadoPago } from '@/lib/mercadopago/config';
+import { crearPreferencia } from '@/lib/mercadopago/api';
+import { nuevoIdRegalo, referenciaDeRegalo } from '@/lib/mercadopago/referencia';
+import { MONEDA } from '@/lib/moneda';
+import { appUrl } from '@/lib/app-url';
+import type { SupabaseClient } from '@supabase/supabase-js';
 
 export const dynamic = 'force-dynamic';
 
@@ -37,6 +43,8 @@ export async function POST(req: NextRequest) {
 
   const admin = getSupabaseAdmin();
   if (!admin) return NextResponse.json({ error: 'Servidor no configurado' }, { status: 503 });
+  // Autoalojado con Mercado Pago: mismas validaciones, otro cobro (ver `comprarConMercadoPago`).
+  if (pasarelaEsMercadoPago()) return comprarConMercadoPago(req, admin, body);
   const key = process.env.STRIPE_SECRET_KEY;
   if (!key || key.startsWith('sk_test_XXXX')) return NextResponse.json({ error: 'Los pagos no están disponibles ahora mismo.' }, { status: 503 });
   const modo = comprobarModoStripe();
@@ -101,4 +109,75 @@ export async function POST(req: NextRequest) {
     Sentry.captureException(err, { tags: { area: 'cobros', tipo: 'regalo-checkout' } });
     return errorInterno('public/regalo/comprar:POST', err, 'No hemos podido abrir el pago. Inténtalo de nuevo en un rato.');
   }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Mercado Pago (autoalojado). El mismo orden: estudio y ajustes → importe y datos
+// → captcha de servidor → cobro. Lo decidido se guarda en `regalos_mercadopago`
+// y el webhook crea la tarjeta con eso: nada de lo que decide el importe viaja
+// por Mercado Pago. Crear el pago no acuña nada.
+// ─────────────────────────────────────────────────────────────────────────────
+const MINUTOS_VALIDEZ_REGALO = 60;
+
+async function comprarConMercadoPago(req: NextRequest, admin: SupabaseClient, body: Record<string, unknown>) {
+  const config = configMercadoPago();
+  if (!config.ok) return NextResponse.json({ error: 'Los pagos no están disponibles ahora mismo.' }, { status: 503 });
+
+  const estudio = await estudioDeSlug(admin, body.slug);
+  if (!estudio) return NextResponse.json({ error: 'Estudio no encontrado' }, { status: 404 });
+  if (!estudio.ajustes.activo) return NextResponse.json({ error: 'Este estudio no vende tarjetas regalo por ahora.' }, { status: 409 });
+  const cerrada = await paginaCerradaParaPeticion(req, estudio.id);
+  if (cerrada) return cerrada;
+  const bloqueo = await bloqueoPorSuscripcion(estudio.id);
+  if (bloqueo) return bloqueo;
+
+  const importe = validarImporte(estudio.ajustes, body.importeEur);
+  if (!importe.ok) return NextResponse.json({ error: importe.motivo }, { status: 400 });
+  const datos = validarDatosRegalo(body);
+  if (!datos.ok) return NextResponse.json({ error: datos.motivo }, { status: 400 });
+
+  if (!captchaDeServidorListo()) return NextResponse.json({ error: 'La compra no está disponible ahora mismo.' }, { status: 503 });
+  const token = typeof body.captchaToken === 'string' ? body.captchaToken : undefined;
+  const captcha = await verificarCaptcha(token, { ip: clientIp(req) });
+  if (captcha !== 'ok') {
+    return NextResponse.json({ error: 'No hemos podido comprobar que no eres un robot. Vuelve a intentarlo.' }, { status: 400 });
+  }
+
+  const base = appUrl().replace(/\/+$/, '');
+  const ruta = `${base}/reservar/${estudio.slug}/regalo`;
+  const regaloId = nuevoIdRegalo();
+  const importeUnidad = importe.centimos / 100;
+  const expira = new Date(Date.now() + MINUTOS_VALIDEZ_REGALO * 60_000);
+  const d = datos.datos;
+  const { error: errAlta } = await admin.from('regalos_mercadopago').insert({
+    id: regaloId, studio_id: estudio.id, importe: importeUnidad, moneda: MONEDA, caducidad_meses: estudio.ajustes.caducidadMeses,
+    comprador_nombre: d.compradorNombre, comprador_email: d.compradorEmail,
+    destinatario_nombre: d.destinatarioNombre, destinatario_email: d.destinatarioEmail, mensaje: d.mensaje || null,
+    expira_en: expira.toISOString(),
+  });
+  if (errAlta) return NextResponse.json({ error: 'No hemos podido abrir el pago. Inténtalo de nuevo en un rato.' }, { status: 503 });
+
+  const pref = await crearPreferencia(config.accessToken, {
+    items: [{ id: 'tarjeta-regalo', title: `Tarjeta regalo — ${estudio.nombre}`.slice(0, 250), quantity: 1, unit_price: importeUnidad, currency_id: MONEDA }],
+    external_reference: referenciaDeRegalo(estudio.id, regaloId),
+    back_urls: { success: `${ruta}?gracias=1&mp=${regaloId}`, failure: ruta, pending: `${ruta}?gracias=1&mp=${regaloId}` },
+    auto_return: 'approved',
+    notification_url: `${base}/api/mercadopago/webhook`,
+    statement_descriptor: estudio.nombre.replace(/[^A-Za-z0-9 ]/g, '').slice(0, 22) || undefined,
+    payer: { email: d.compradorEmail },
+    metadata: { studio_id: estudio.id, regalo_id: regaloId },
+    payment_methods: { excluded_payment_types: [{ id: 'ticket' }] },
+    expires: true,
+    expiration_date_to: expira.toISOString(),
+  }, regaloId);
+  if (!pref.ok) {
+    Sentry.captureMessage('[regalo/comprar] no se pudo crear la preferencia de Mercado Pago', {
+      level: 'error', tags: { area: 'cobros', pasarela: 'mercadopago', tipo: 'regalo' }, extra: { studioId: estudio.id, regaloId, status: pref.status, error: pref.error },
+    });
+    await admin.from('regalos_mercadopago').update({ estado: 'fallida', actualizado_en: new Date().toISOString() }).eq('id', regaloId).eq('estado', 'abierta');
+    return NextResponse.json({ error: 'No hemos podido abrir el pago. Inténtalo de nuevo en un rato.' }, { status: 502 });
+  }
+  const url = config.accessToken.startsWith('TEST-') && pref.datos.sandbox_init_point ? pref.datos.sandbox_init_point : pref.datos.init_point;
+  await admin.from('regalos_mercadopago').update({ preference_id: pref.datos.id, url_pago: url, actualizado_en: new Date().toISOString() }).eq('id', regaloId);
+  return NextResponse.json({ url });
 }

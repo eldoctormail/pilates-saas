@@ -51,3 +51,21 @@ export function nuevoIdCompra(): string {
 export function importeCoincide(cobrado: number, esperado: number): boolean {
   return Number.isFinite(cobrado) && Number.isFinite(esperado) && Math.round(cobrado * 100) === Math.round(esperado * 100);
 }
+
+/** El `?mp=` con que vuelve «pagar y reservar»: el id de una compra, o `cancelado`. */
+export const RETORNO_CANCELADO = 'cancelado';
+
+/**
+ * Vuelta de «pagar y reservar»: a la ficha de la clase, con la compra para que
+ * la pantalla pregunte al servidor en qué quedó (volver de Mercado Pago no
+ * significa nada por sí solo).
+ */
+export function urlsDeClase(base: string, slug: string, sesionId: string, compraId: string) {
+  const ficha = `${base.replace(/\/+$/, '')}/portal/${encodeURIComponent(slug)}/reservar/${encodeURIComponent(sesionId)}`;
+  return { successUrl: `${ficha}?mp=${encodeURIComponent(compraId)}`, cancelUrl: `${ficha}?mp=${RETORNO_CANCELADO}` };
+}
+
+/** ¿Es un id de compra de Tentare? (lo que se acepta en `?mp=` y en el estado de una compra). */
+export function esIdCompra(s: string): boolean {
+  return /^mpc_[0-9a-f]{32}$/.test(s);
+}

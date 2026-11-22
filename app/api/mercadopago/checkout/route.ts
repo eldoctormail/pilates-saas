@@ -2,6 +2,7 @@
 // URL de Mercado Pago a la que ir. Dos casos:
 //   · `reciboId`: pagar un RECIBO pendiente (Etapa 1, abajo).
 //   · `planId`:   comprar un plan desde la app (Etapa 2, `checkoutPlan`).
+//     Con `sesionId` (y `spotId`): pagar y reservar esa clase en un paso.
 //
 // Rama de recibo:
 // Mismas reglas de dinero que `/api/stripe/checkout` en su rama de recibo:
@@ -33,12 +34,10 @@ import { appUrl } from '@/lib/app-url';
 import { MONEDA } from '@/lib/moneda';
 import { configMercadoPago } from '@/lib/mercadopago/config';
 import { crearPreferencia } from '@/lib/mercadopago/api';
-import { nuevoIdCompra, referenciaDeCompra, referenciaDeRecibo } from '@/lib/mercadopago/referencia';
-import { barrerComprasCaducadas, decidirCompraDePlan, reservarMatriculaDeCompra } from '@/lib/mercadopago/compra-plan-servidor';
+import { nuevoIdCompra, referenciaDeCompra, referenciaDeRecibo, urlsDeClase } from '@/lib/mercadopago/referencia';
+import { barrerComprasCaducadas, caducidadDeCompra, decidirCompraDePlan, reservarMatriculaDeCompra } from '@/lib/mercadopago/compra-plan-servidor';
 import { liberarCupoMatriculaUnaVez } from '@/lib/billing/matricula-online';
 import type { SupabaseClient } from '@supabase/supabase-js';
-
-const HORAS_VALIDEZ = 24;
 
 export async function POST(req: NextRequest) {
   const limitado = await enforceRateLimit(req, 'mercadopago-checkout', { max: 10, windowSeconds: 60 });
@@ -54,6 +53,7 @@ export async function POST(req: NextRequest) {
 
   const body = await req.json().catch(() => null) as {
     studioId?: unknown; reciboId?: unknown; planId?: unknown; origen?: unknown; codigoDescuento?: unknown; aceptaCondiciones?: unknown;
+    sesionId?: unknown; spotId?: unknown;
   } | null;
   const studioId = typeof body?.studioId === 'string' ? body.studioId : '';
   const reciboId = typeof body?.reciboId === 'string' ? body.reciboId : '';
@@ -69,6 +69,8 @@ export async function POST(req: NextRequest) {
       studioId, planId,
       codigoDescuento: typeof body?.codigoDescuento === 'string' ? body.codigoDescuento.trim().slice(0, 64) || null : null,
       aceptaCondiciones: body?.aceptaCondiciones === true,
+      sesionId: typeof body?.sesionId === 'string' && body.sesionId ? body.sesionId.slice(0, 128) : null,
+      spotId: typeof body?.spotId === 'string' && body.spotId ? body.spotId.slice(0, 128) : null,
     });
   }
 
@@ -163,7 +165,7 @@ async function checkoutPlan(
   req: NextRequest,
   admin: SupabaseClient,
   accessToken: string,
-  p: { studioId: string; planId: string; codigoDescuento: string | null; aceptaCondiciones: boolean },
+  p: { studioId: string; planId: string; codigoDescuento: string | null; aceptaCondiciones: boolean; sesionId: string | null; spotId: string | null },
 ) {
   await barrerComprasCaducadas(admin, p.studioId);
 
@@ -177,11 +179,14 @@ async function checkoutPlan(
   // ¿Ya hay una compra abierta igual, con margen de tiempo? Se reutiliza.
   const margen = new Date(Date.now() + 30 * 60 * 1000).toISOString();
   const { data: abierta } = await admin.from('compras_mercadopago')
-    .select('id, importe_plan, matricula, url_pago, codigo_descuento_id')
+    .select('id, importe_plan, matricula, url_pago, codigo_descuento_id, sesion_id, spot_id, expira_en')
     .eq('studio_id', p.studioId).eq('socio_id', c.socioId).eq('plan_id', p.planId).eq('estado', 'abierta')
     .gt('expira_en', margen).order('creado_en', { ascending: false }).limit(1).maybeSingle();
+  // Misma clase y mismo sitio también: un pago abierto para OTRA clase no reserva esta.
   if (abierta?.url_pago && Number(abierta.importe_plan) === c.importePlan
-      && ((abierta.codigo_descuento_id as string | null) ?? null) === c.codigoDescuentoId) {
+      && ((abierta.codigo_descuento_id as string | null) ?? null) === c.codigoDescuentoId
+      && ((abierta.sesion_id as string | null) ?? null) === c.sesionId
+      && ((abierta.spot_id as string | null) ?? null) === c.spotId) {
     const matricula = Number(abierta.matricula) || 0;
     return NextResponse.json(respuestaCompra(abierta.url_pago as string, c, matricula));
   }
@@ -191,13 +196,20 @@ async function checkoutPlan(
     studioId: p.studioId, planId: p.planId, socioId: c.socioId, email: c.email, matriculaCatalogo: decision.matriculaCatalogo,
   });
 
+  // 24 h, o hasta que se cierre la reserva de la clase (ya comprobado que da tiempo).
   const compraId = nuevoIdCompra();
-  const expira = new Date(Date.now() + HORAS_VALIDEZ * 60 * 60 * 1000);
+  const caducidad = caducidadDeCompra(c.cierreClase, Date.now());
+  if (!caducidad.ok) {
+    if (cupoReservado) await devolverPlaza(admin, compraId, p.planId, p.studioId);
+    return NextResponse.json({ error: caducidad.error, codigo: caducidad.codigo }, { status: 409 });
+  }
+  const expira = caducidad.expira;
   const { error: errAlta } = await admin.from('compras_mercadopago').insert({
     id: compraId, studio_id: p.studioId, plan_id: p.planId, socio_id: c.socioId, email: c.email,
     importe_plan: c.importePlan, matricula, moneda: MONEDA, codigo_descuento_id: c.codigoDescuentoId,
     terminos_hash: c.terminosHash, ciclo_fin: c.cicloFin, cuota_texto: c.cuotaTexto,
     cupo_matricula_reservado: cupoReservado, expira_en: expira.toISOString(),
+    sesion_id: c.sesionId, spot_id: c.spotId,
   });
   if (errAlta) {
     if (cupoReservado) await devolverPlaza(admin, compraId, p.planId, p.studioId);
@@ -206,9 +218,10 @@ async function checkoutPlan(
 
   const { data: studio } = await admin.from('studios').select('slug, nombre').eq('id', p.studioId).maybeSingle();
   const base = appUrl().replace(/\/+$/, '');
-  const urls = urlsDeRetorno({
-    origen: 'portal', appUrl: base, slug: (studio?.slug as string | null) ?? null, esCompraDePlan: true, planId: p.planId,
-  });
+  const slug = (studio?.slug as string | null) ?? null;
+  const urls = c.sesionId && slug
+    ? urlsDeClase(base, slug, c.sesionId, compraId)
+    : urlsDeRetorno({ origen: 'portal', appUrl: base, slug, esCompraDePlan: true, planId: p.planId });
   const items = [{ id: p.planId, title: c.planNombre.slice(0, 250), quantity: 1, unit_price: c.importePlan, currency_id: MONEDA }];
   if (matricula > 0) items.push({ id: `${p.planId}-matricula`, title: 'Matrícula', quantity: 1, unit_price: matricula, currency_id: MONEDA });
 

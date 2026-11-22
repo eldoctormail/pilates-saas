@@ -8,7 +8,11 @@ import { Sello } from '@/components/student/ui/Sello';
 import { CheckoutEmbebido } from '@/components/checkout-widget/checkout-embebido';
 import { MODO_TOKENS } from '@/lib/portal-paleta';
 import { clavePublicableStripe } from '@/lib/student/comprar';
-import { esperarReservaDePago, iniciarPagoDeClase, pedirOpcionesClase, reservarPruebaGratis, type DesenlacePagoClase } from '@/lib/student/pagar-clase';
+import {
+  esperarCompraMercadoPago, esperarReservaDePago, iniciarPagoDeClase, iniciarPagoDeClaseMercadoPago, pedirOpcionesClase,
+  reservarPruebaGratis, type DesenlacePagoClase,
+} from '@/lib/student/pagar-clase';
+import { pasarelaEsMercadoPago } from '@/lib/mercadopago/config';
 import { REINTENTOS_PREPARANDOSE, textoCompensacion } from '@/lib/student/pagar-clase-reglas';
 import { piDeClientSecret } from '@/lib/billing/estado-pago-publico';
 import { euros, fechaLarga } from '@/lib/student/formato';
@@ -27,6 +31,11 @@ import type { PlanTarifa } from '@/lib/types';
 //   4. «Pago hecho. Confirmando tu plaza…»: /api/public/estado-pago con su pago. Solo
 //      «Reservada ✓» si el servidor la confirma; si no hubo plaza, lo que tiene a su
 //      favor (nunca un ✓); si tarda, «no vuelvas a pagar».
+//
+// Autoalojado con Mercado Pago (`NEXT_PUBLIC_PASARELA=mercadopago`): el paso 2 pide a
+// /api/mercadopago/checkout la URL de Checkout Pro y la alumna paga en Mercado Pago. A la
+// vuelta (`?mp=<compra>` en la ficha) la hoja se abre directamente en el paso 4, preguntando
+// a /api/mercadopago/estado-compra: el mismo «Confirmando tu plaza…» y los mismos desenlaces.
 //
 // ⚠️ La hoja no se puede cerrar mientras se crea el cobro, mientras Stripe confirma ni
 // mientras se espera la plaza: cerrar ahí deja a la alumna sin saber si le han cobrado.
@@ -57,7 +66,7 @@ const planDeOpcion = (planes: readonly PlanTarifa[], o: OpcionDeClase, studioId:
 
 export function HojaPagarYReservar({
   studioId, socioId, clase, spotId, planes, stripeAccountId, textosLegales, onCerrar, onReservada,
-  onSesionCaducada, onSegundoPaso, hrefPagos, hrefMisReservas, hrefMensajes,
+  onSesionCaducada, onSegundoPaso, hrefPagos, hrefMisReservas, hrefMensajes, compraMercadoPago = null,
 }: {
   studioId: string;
   socioId: string | null;
@@ -77,12 +86,15 @@ export function HojaPagarYReservar({
   hrefPagos: string;
   hrefMisReservas: string;
   hrefMensajes: string;
+  /** Vuelve de pagar en Mercado Pago: la compra cuyo desenlace hay que esperar (en vez de comprobar la plaza). */
+  compraMercadoPago?: string | null;
 }) {
   const [estado, setEstado] = useState<Fase>({ fase: 'comprobando' });
   const [elegida, setElegida] = useState<string | null>(null);
   const [acepta, setAcepta] = useState(false);
   const [confirmandoStripe, setConfirmandoStripe] = useState(false);
   const publishableKey = clavePublicableStripe();
+  const conMercadoPago = pasarelaEsMercadoPago();
   const viva = useRef(true);
   useEffect(() => {
     viva.current = true;
@@ -90,9 +102,11 @@ export function HojaPagarYReservar({
   }, []);
 
   // Tras pagar (o con un pago suyo ya en marcha): desde aquí manda el servidor.
-  const confirmar = useCallback(async (pi: string) => {
+  const confirmar = useCallback(async (pi: string, mercadoPago = false) => {
     setEstado({ fase: 'confirmando', pi });
-    const d = await esperarReservaDePago(studioId, pi, () => viva.current);
+    const d = mercadoPago
+      ? await esperarCompraMercadoPago(studioId, pi, () => viva.current)
+      : await esperarReservaDePago(studioId, pi, () => viva.current);
     if (d.tipo === 'cancelado') return;
     if (d.tipo === 'dos-pasos') { onSegundoPaso(); return; }
     if (d.tipo === 'sesion') {
@@ -148,8 +162,10 @@ export function HojaPagarYReservar({
   useEffect(() => {
     if (arrancada.current) return;
     arrancada.current = true;
+    // De vuelta de Mercado Pago: ya pagó (o lo intentó). Nada de volver a ofrecerle pagar: lo que diga el servidor.
+    if (compraMercadoPago) { void confirmar(compraMercadoPago, true); return; }
     void comprobar();
-  }, [comprobar]);
+  }, [comprobar, confirmar, compraMercadoPago]);
 
   // 2. «Continuar»: el cobro. El estado de carga se enciende ANTES de la petición.
   const continuar = useCallback(async (opciones: OpcionDeClase[]) => {
@@ -185,6 +201,38 @@ export function HojaPagarYReservar({
           return;
         default:
           setEstado({ fase: 'error', mensaje: g.mensaje, opciones });
+      }
+      return;
+    }
+    if (conMercadoPago) {
+      const m = await iniciarPagoDeClaseMercadoPago({
+        studioId, planId: op.planId, sesionId: clase.id, spotId, aceptaCondiciones: textosLegales ? acepta : true,
+      });
+      if (!viva.current) return;
+      switch (m.tipo) {
+        case 'redirigir':
+          // Se queda en «preparando» (sin poder cerrar) hasta que el navegador se vaya a Mercado Pago.
+          (window.top ?? window).location.href = m.url;
+          return;
+        case 'rechazo': {
+          const resto = opciones.filter((o) => o.tipo !== 'prueba');
+          if (m.codigo?.startsWith('prueba-') && resto.length > 0) {
+            setElegida(resto[0].planId);
+            setEstado({ fase: 'elegir', opciones: resto, aviso: m.mensaje });
+            return;
+          }
+          setEstado({ fase: 'no-se-puede', titulo: 'No hemos podido cobrarte', mensaje: m.mensaje, impago: m.codigo === 'impago' });
+          return;
+        }
+        case 'faltan-preguntas':
+          setEstado({ fase: 'no-se-puede', titulo: 'Antes, unas preguntas del estudio', mensaje: 'Contéstalas y vuelve a intentarlo. No te hemos cobrado nada.' });
+          return;
+        case 'dos-pasos': onSegundoPaso(); return;
+        case 'sesion':
+          setEstado({ fase: 'error', mensaje: 'Tu sesión ha caducado. Vuelve a entrar: no se te ha cobrado nada.', sesionCaducada: true });
+          return;
+        default:
+          setEstado({ fase: 'error', mensaje: m.mensaje, opciones });
       }
       return;
     }
@@ -244,9 +292,10 @@ export function HojaPagarYReservar({
       default:
         setEstado({ fase: 'error', mensaje: r.mensaje, opciones });
     }
-  }, [elegida, planes, studioId, socioId, clase.id, spotId, textosLegales, acepta, confirmar, onSegundoPaso, onReservada]);
+  }, [elegida, planes, studioId, socioId, clase.id, spotId, textosLegales, acepta, confirmar, onSegundoPaso, onReservada, conMercadoPago]);
 
-  const sinCobro = !stripeAccountId || !publishableKey;
+  // Con Mercado Pago cobra el servidor (sin cuenta de Stripe): si no puede, las opciones ya vienen sin pago.
+  const sinCobro = conMercadoPago ? false : !stripeAccountId || !publishableKey;
   const bloqueada = estado.fase === 'preparando' || estado.fase === 'confirmando' || confirmandoStripe;
 
   return (
@@ -316,7 +365,9 @@ export function HojaPagarYReservar({
                   </label>
                 )}
                 <p className="t-small t-dim" style={{ marginTop: 'var(--s-3)' }}>
-                  Comprobamos tu plaza antes de cobrar. El cobro lo hace el estudio a través de Stripe.
+                  {conMercadoPago
+                    ? 'Comprobamos tu plaza antes de cobrar. Pagas en Mercado Pago y vuelves aquí.'
+                    : 'Comprobamos tu plaza antes de cobrar. El cobro lo hace el estudio a través de Stripe.'}
                 </p>
                 {(() => {
                   const op = estado.opciones.find((o) => o.planId === elegida);

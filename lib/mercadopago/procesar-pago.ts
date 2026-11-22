@@ -5,7 +5,8 @@
 // igual, y como es idempotente da igual cuál llegue primero o si llegan los dos.
 //
 //   · Recibo (`tentare:rec:…`): lo da por cobrado `confirmarCobroRecibo`.
-//   · Compra de plan (`tentare:compra:…`): la entrega `entregarPlanComprado`.
+//   · Compra de plan (`tentare:compra:…`): la entrega `entregarPlanComprado`
+//     y, si la compra lleva una clase, la reserva `reservarClasePagada`.
 //   Los mismos dueños que usa Stripe.
 //
 // El pago que recibe esta función tiene que venir de la API de Mercado Pago
@@ -164,7 +165,7 @@ export async function procesarPago(admin: SupabaseClient, pago: PagoMercadoPago,
 // ─────────────────────────────────────────────────────────────────────────────
 async function entregarCompra(admin: SupabaseClient, pago: PagoMercadoPago, studioId: string, compraId: string): Promise<ResultadoProceso> {
   const { data: compra, error } = await admin.from('compras_mercadopago')
-    .select('id, studio_id, plan_id, socio_id, email, importe_plan, matricula, moneda, codigo_descuento_id, terminos_hash, ciclo_fin, cuota_texto, estado, payment_id, creado_en')
+    .select('id, studio_id, plan_id, socio_id, email, importe_plan, matricula, moneda, codigo_descuento_id, terminos_hash, ciclo_fin, cuota_texto, estado, payment_id, creado_en, sesion_id, spot_id')
     .eq('id', compraId).maybeSingle();
   if (error) return resp({ error: 'Base de datos no disponible' }, { status: 503 });
   if (!compra || compra.studio_id !== studioId) {
@@ -210,6 +211,7 @@ async function entregarCompra(admin: SupabaseClient, pago: PagoMercadoPago, stud
     });
   }
 
+  const sesionId = (compra.sesion_id as string | null) ?? null;
   const { entregarPlanComprado } = await import('../billing/entregar-plan-comprado.ts');
   const entrega = await entregarPlanComprado(admin, {
     sessionId: compraId,
@@ -229,6 +231,7 @@ async function entregarCompra(admin: SupabaseClient, pago: PagoMercadoPago, stud
     fuente: 'webhook',
     cicloFinISO: (compra.ciclo_fin as string | null) ?? null,
     cuotaTexto: (compra.cuota_texto as string | null) ?? null,
+    sesionClaseId: sesionId,
   });
   if (!entrega.ok) {
     Sentry.captureMessage('[mercadopago/webhook] cobrado pero NO entregado', {
@@ -246,6 +249,22 @@ async function entregarCompra(admin: SupabaseClient, pago: PagoMercadoPago, stud
     codigoDescuentoId: (compra.codigo_descuento_id as string | null) ?? null,
     reciboId: entrega.reciboId, studioId, socioId: entrega.socioId, fuente: 'mercadopago webhook',
   });
+
+  // «Pagar y reservar»: con el plan ya entregado, la clase. Best-effort (el
+  // dinero y el plan ya están): si no hay plaza, `reservarClasePagada` avisa al
+  // mostrador. Idempotente por el id de la compra (`res-web-…`), así que el
+  // webhook y el conciliador pueden llegar los dos.
+  if (sesionId) {
+    const { reservarClasePagada } = await import('../billing/reservar-clase-pagada.ts');
+    await reservarClasePagada(admin, {
+      studioId, sesionId, socioId: entrega.socioId,
+      paymentIntentId: compraId,
+      spotId: (compra.spot_id as string | null) ?? null,
+      via: 'mercadopago', referencia: { compraId, paymentId: String(pago.id) },
+      suscripcionEntregadaId: entrega.suscripcionId,
+      pagadoEn: pago.date_approved ?? null,
+    });
+  }
 
   await admin.from('compras_mercadopago')
     .update({ estado: 'pagada', payment_id: String(pago.id), actualizado_en: new Date().toISOString() })

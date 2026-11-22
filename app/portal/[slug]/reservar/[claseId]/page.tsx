@@ -2,7 +2,7 @@
 
 import { nombreCreditos } from '@/lib/creditos-nombre';
 
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { StudentShell } from '@/components/student/shell/StudentShell';
@@ -46,6 +46,7 @@ import { AutoReservable } from '@/components/student/domain/AutoReservable';
 import { InstructoraSheet } from '@/components/student/domain/InstructoraSheet';
 import { ComoVienes } from '@/components/student/domain/ComoVienes';
 import { OpcionesDeClaseLista } from '@/components/student/domain/OpcionesDeClaseLista';
+import { esIdCompra } from '@/lib/mercadopago/referencia';
 import { HojaPagarYReservar } from '@/components/student/domain/HojaPagarYReservar';
 import { configLegalDe } from '@/lib/legal-textos';
 import { CompartirClase, InvitarAClaseFila } from '@/components/student/domain/CompartirClase';
@@ -83,10 +84,20 @@ export default function FichaClasePage() {
   const [favoritaLocal, setFavoritaLocal] = useState<boolean | null>(null);
   const [verInstructora, setVerInstructora] = useState(false);
   // P06 · Fase A: la hoja de pagar y reservar ESTA clase (con el sitio que eligió en la hoja de reserva).
-  const [pagar, setPagar] = useState<{ spotId: string | null } | null>(null);
+  const [pagar, setPagar] = useState<{ spotId: string | null; compraMercadoPago?: string | null } | null>(null);
   // `?reservar=1`: la vuelta desde la tienda tras comprar el bono PARA esta clase (solo cuando el servidor ya confirmó
   // la compra, HojaCompra). Abre la hoja; reservar sigue siendo un toque suyo.
-  const reservarAlVolver = useSearchParams().get('reservar') === '1';
+  const params = useSearchParams();
+  const reservarAlVolver = params.get('reservar') === '1';
+  // `?mp=<compra>`: vuelve de pagar ESTA clase en Mercado Pago. Se abre la hoja esperando lo que diga el
+  // servidor (nunca «reservada» por volver). `?mp=cancelado`: no pagó, nada que enseñar.
+  const compraAlVolver = params.get('mp');
+  useEffect(() => {
+    if (!compraAlVolver || !esIdCompra(compraAlVolver)) return;
+    setPagar({ spotId: null, compraMercadoPago: compraAlVolver });
+    // Fuera de la URL: recargar o compartir la ficha no vuelve a abrir la espera de un pago viejo.
+    try { window.history.replaceState(null, '', window.location.pathname); } catch { /* sin historial: da igual */ }
+  }, [compraAlVolver]);
 
   const cargar = useCallback(async () => {
     // `getClases` sale del MISMO payload que `getClase`: la ficha de la
@@ -436,6 +447,7 @@ export default function FichaClasePage() {
           socioId={data?.socioId ?? null}
           clase={{ id: clase.id, nombre: clase.nombre, fecha: clase.fecha, hora: clase.hora }}
           spotId={pagar.spotId}
+          compraMercadoPago={pagar.compraMercadoPago ?? null}
           planes={data?.planesTarifa ?? []}
           stripeAccountId={data?.stripeAccountId ?? null}
           textosLegales={data?.textosLegales ?? null}

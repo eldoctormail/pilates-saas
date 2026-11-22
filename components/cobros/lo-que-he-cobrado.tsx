@@ -42,7 +42,7 @@ const POR_PAGINA = 100;
 /** El color de cada forma de pago en «Cómo te han pagado» (panel nuevo). */
 const TONO_COMO: Record<ComoSeCobro, Tono | null> = {
   DOMICILIACION: 'indigo', TARJETA_ONLINE: 'azul', TARJETA_MOSTRADOR: 'azul', EFECTIVO: 'verde',
-  BIZUM: 'magenta', TRANSFERENCIA: 'indigo', SIN_ESPECIFICAR: null,
+  BIZUM: 'magenta', TRANSFERENCIA: 'indigo', MERCADOPAGO: 'azul', SIN_ESPECIFICAR: null,
 };
 
 const colorDeComo = (c: ComoSeCobro) => {

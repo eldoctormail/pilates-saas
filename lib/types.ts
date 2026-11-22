@@ -14,7 +14,7 @@ export type TipoPlan = 'MENSUAL' | 'BONO' | 'PUNTUAL';
 export type EstadoRecibo = 'PENDIENTE' | 'COBRADO' | 'DEVUELTO' | 'EN_CURSO' | 'FALLIDO' | 'ANULADO';
 // Pagos España (0036): método recurrente preferido de la socia y método real de cada cobro.
 export type MetodoPagoPreferido = 'TARJETA' | 'SEPA';
-export type MetodoCobro = 'TARJETA' | 'SEPA' | 'BIZUM' | 'EFECTIVO' | 'TRANSFERENCIA';
+export type MetodoCobro = 'TARJETA' | 'SEPA' | 'BIZUM' | 'EFECTIVO' | 'TRANSFERENCIA' | 'MERCADOPAGO';
 /**
  * Qué pasó con el dinero al dar de alta a una socia con plan.
  *

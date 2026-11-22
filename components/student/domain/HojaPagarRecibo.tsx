@@ -76,6 +76,12 @@ export function HojaPagarRecibo({
     const r = await abrirPagoDeRecibo(studioId, reciboId);
     if (!viva.current) return;
     if (!r.ok) { setF({ fase: 'error', mensaje: r.error, sesionCaducada: r.sesionCaducada }); return; }
+    if ('url' in r) {
+      // Mercado Pago: se paga en su página y se vuelve a «Pagos», que comprueba el recibo.
+      setF({ fase: 'preparando' });
+      (window.top ?? window).location.href = r.url;
+      return;
+    }
     setF({ fase: 'pagando', clientSecret: r.clientSecret, reciboId });
   }, [que, studioId]);
 

@@ -1,6 +1,9 @@
-// Inicia el pago de un RECIBO pendiente con Checkout Pro de Mercado Pago
-// (autoalojado, Etapa 1). Devuelve la URL de Mercado Pago a la que ir.
+// Inicia un pago con Checkout Pro de Mercado Pago (autoalojado) y devuelve la
+// URL de Mercado Pago a la que ir. Dos casos:
+//   · `reciboId`: pagar un RECIBO pendiente (Etapa 1, abajo).
+//   · `planId`:   comprar un plan desde la app (Etapa 2, `checkoutPlan`).
 //
+// Rama de recibo:
 // Mismas reglas de dinero que `/api/stripe/checkout` en su rama de recibo:
 // el importe y el concepto salen SIEMPRE de la base de datos, nunca del cuerpo;
 // el recibo tiene que ser de ese estudio y estar cobrable; no se abre un pago
@@ -30,7 +33,12 @@ import { appUrl } from '@/lib/app-url';
 import { MONEDA } from '@/lib/moneda';
 import { configMercadoPago } from '@/lib/mercadopago/config';
 import { crearPreferencia } from '@/lib/mercadopago/api';
-import { referenciaDeRecibo } from '@/lib/mercadopago/referencia';
+import { nuevoIdCompra, referenciaDeCompra, referenciaDeRecibo } from '@/lib/mercadopago/referencia';
+import { barrerComprasCaducadas, decidirCompraDePlan, reservarMatriculaDeCompra } from '@/lib/mercadopago/compra-plan-servidor';
+import { liberarCupoMatriculaUnaVez } from '@/lib/billing/matricula-online';
+import type { SupabaseClient } from '@supabase/supabase-js';
+
+const HORAS_VALIDEZ = 24;
 
 export async function POST(req: NextRequest) {
   const limitado = await enforceRateLimit(req, 'mercadopago-checkout', { max: 10, windowSeconds: 60 });
@@ -44,14 +52,25 @@ export async function POST(req: NextRequest) {
   const admin = getSupabaseAdmin();
   if (!admin) return NextResponse.json({ error: 'Servicio no disponible' }, { status: 503 });
 
-  const body = await req.json().catch(() => null) as { studioId?: unknown; reciboId?: unknown; origen?: unknown } | null;
+  const body = await req.json().catch(() => null) as {
+    studioId?: unknown; reciboId?: unknown; planId?: unknown; origen?: unknown; codigoDescuento?: unknown; aceptaCondiciones?: unknown;
+  } | null;
   const studioId = typeof body?.studioId === 'string' ? body.studioId : '';
   const reciboId = typeof body?.reciboId === 'string' ? body.reciboId : '';
-  if (!studioId || !reciboId) return NextResponse.json({ error: 'Falta el estudio o el recibo' }, { status: 400 });
+  const planId = typeof body?.planId === 'string' ? body.planId : '';
+  if (!studioId || (!reciboId && !planId)) return NextResponse.json({ error: 'Falta el estudio, el recibo o el plan' }, { status: 400 });
   const origen = body?.origen === 'portal' ? 'portal' : undefined;
 
   const bloqueo = await bloqueoPorSuscripcion(studioId);
   if (bloqueo) return bloqueo;
+
+  if (!reciboId) {
+    return checkoutPlan(req, admin, config.accessToken, {
+      studioId, planId,
+      codigoDescuento: typeof body?.codigoDescuento === 'string' ? body.codigoDescuento.trim().slice(0, 64) || null : null,
+      aceptaCondiciones: body?.aceptaCondiciones === true,
+    });
+  }
 
   const { data: recibo, error } = await admin
     .from('recibos')
@@ -130,4 +149,115 @@ export async function POST(req: NextRequest) {
 
   const url = config.accessToken.startsWith('TEST-') && pref.datos.sandbox_init_point ? pref.datos.sandbox_init_point : pref.datos.init_point;
   return NextResponse.json({ url });
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Etapa 2: comprar un plan desde la app de la alumna.
+//
+// El importe lo decide `decidirCompraDePlan` con las mismas piezas que Stripe;
+// la decisión se guarda en `compras_mercadopago` y el webhook entrega eso.
+// Un segundo toque con la misma compra abierta (mismo plan, código e importe)
+// reutiliza el pago ya creado: dos pestañas no pagan dos bonos.
+// ─────────────────────────────────────────────────────────────────────────────
+async function checkoutPlan(
+  req: NextRequest,
+  admin: SupabaseClient,
+  accessToken: string,
+  p: { studioId: string; planId: string; codigoDescuento: string | null; aceptaCondiciones: boolean },
+) {
+  await barrerComprasCaducadas(admin, p.studioId);
+
+  const decision = await decidirCompraDePlan(admin, req, p);
+  if (!decision.ok) {
+    const { status, ...resto } = decision.rechazo;
+    return NextResponse.json(resto, { status });
+  }
+  const c = decision.compra;
+
+  // ¿Ya hay una compra abierta igual, con margen de tiempo? Se reutiliza.
+  const margen = new Date(Date.now() + 30 * 60 * 1000).toISOString();
+  const { data: abierta } = await admin.from('compras_mercadopago')
+    .select('id, importe_plan, matricula, url_pago, codigo_descuento_id')
+    .eq('studio_id', p.studioId).eq('socio_id', c.socioId).eq('plan_id', p.planId).eq('estado', 'abierta')
+    .gt('expira_en', margen).order('creado_en', { ascending: false }).limit(1).maybeSingle();
+  if (abierta?.url_pago && Number(abierta.importe_plan) === c.importePlan
+      && ((abierta.codigo_descuento_id as string | null) ?? null) === c.codigoDescuentoId) {
+    const matricula = Number(abierta.matricula) || 0;
+    return NextResponse.json(respuestaCompra(abierta.url_pago as string, c, matricula));
+  }
+
+  // Último momento antes de crear el pago: la matrícula (y su plaza gratis, si la hay).
+  const { matricula, cupoReservado } = await reservarMatriculaDeCompra(admin, {
+    studioId: p.studioId, planId: p.planId, socioId: c.socioId, email: c.email, matriculaCatalogo: decision.matriculaCatalogo,
+  });
+
+  const compraId = nuevoIdCompra();
+  const expira = new Date(Date.now() + HORAS_VALIDEZ * 60 * 60 * 1000);
+  const { error: errAlta } = await admin.from('compras_mercadopago').insert({
+    id: compraId, studio_id: p.studioId, plan_id: p.planId, socio_id: c.socioId, email: c.email,
+    importe_plan: c.importePlan, matricula, moneda: MONEDA, codigo_descuento_id: c.codigoDescuentoId,
+    terminos_hash: c.terminosHash, ciclo_fin: c.cicloFin, cuota_texto: c.cuotaTexto,
+    cupo_matricula_reservado: cupoReservado, expira_en: expira.toISOString(),
+  });
+  if (errAlta) {
+    if (cupoReservado) await devolverPlaza(admin, compraId, p.planId, p.studioId);
+    return NextResponse.json({ error: 'No hemos podido iniciar el pago. No se te ha cobrado nada: inténtalo en un momento.' }, { status: 503 });
+  }
+
+  const { data: studio } = await admin.from('studios').select('slug, nombre').eq('id', p.studioId).maybeSingle();
+  const base = appUrl().replace(/\/+$/, '');
+  const urls = urlsDeRetorno({
+    origen: 'portal', appUrl: base, slug: (studio?.slug as string | null) ?? null, esCompraDePlan: true, planId: p.planId,
+  });
+  const items = [{ id: p.planId, title: c.planNombre.slice(0, 250), quantity: 1, unit_price: c.importePlan, currency_id: MONEDA }];
+  if (matricula > 0) items.push({ id: `${p.planId}-matricula`, title: 'Matrícula', quantity: 1, unit_price: matricula, currency_id: MONEDA });
+
+  const pref = await crearPreferencia(accessToken, {
+    items,
+    external_reference: referenciaDeCompra(p.studioId, compraId),
+    back_urls: { success: urls.successUrl, failure: urls.cancelUrl, pending: urls.successUrl },
+    auto_return: 'approved',
+    notification_url: `${base}/api/mercadopago/webhook`,
+    statement_descriptor: String(studio?.nombre ?? '').replace(/[^A-Za-z0-9 ]/g, '').slice(0, 22) || undefined,
+    payer: c.email ? { email: c.email } : undefined,
+    metadata: { studio_id: p.studioId, compra_id: compraId },
+    payment_methods: { excluded_payment_types: [{ id: 'ticket' }] },
+    expires: true,
+    expiration_date_to: expira.toISOString(),
+  }, compraId);
+
+  if (!pref.ok) {
+    Sentry.captureMessage('[mercadopago/checkout] no se pudo crear la preferencia de una compra', {
+      level: 'error', tags: { area: 'cobros', pasarela: 'mercadopago' }, extra: { studioId: p.studioId, compraId, status: pref.status, error: pref.error },
+    });
+    await admin.from('compras_mercadopago').update({ estado: 'fallida', actualizado_en: new Date().toISOString() }).eq('id', compraId).eq('estado', 'abierta');
+    if (cupoReservado) await devolverPlaza(admin, compraId, p.planId, p.studioId);
+    return NextResponse.json({ error: 'No hemos podido iniciar el pago. No se te ha cobrado nada: inténtalo en un momento.' }, { status: 502 });
+  }
+
+  const url = accessToken.startsWith('TEST-') && pref.datos.sandbox_init_point ? pref.datos.sandbox_init_point : pref.datos.init_point;
+  await admin.from('compras_mercadopago').update({ preference_id: pref.datos.id, url_pago: url, actualizado_en: new Date().toISOString() }).eq('id', compraId);
+  return NextResponse.json(respuestaCompra(url, c, matricula));
+}
+
+function respuestaCompra(url: string, c: { importePlan: number; descuento: number; codigoAplicado: boolean; cuotaFrase: string | null }, matricula: number) {
+  return {
+    url,
+    importe: c.importePlan,
+    descuento: c.descuento,
+    codigoAplicado: c.codigoAplicado,
+    matricula,
+    total: Math.round((c.importePlan + matricula) * 100) / 100,
+    cuotaFrase: c.cuotaFrase,
+  };
+}
+
+async function devolverPlaza(admin: SupabaseClient, compraId: string, planId: string, studioId: string) {
+  try {
+    await liberarCupoMatriculaUnaVez(admin, compraId, planId, studioId);
+  } catch (e) {
+    Sentry.captureMessage('[mercadopago/checkout] no se pudo devolver la plaza de matrícula', {
+      level: 'warning', tags: { area: 'cobros', pasarela: 'mercadopago' }, extra: { compraId, studioId, error: String(e) },
+    });
+  }
 }

@@ -2,7 +2,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHmac } from 'node:crypto';
 import { leerCabeceraFirma, manifiestoDe, verificarFirma } from './firma.ts';
-import { importeCoincide, leerReferencia, referenciaDeRecibo } from './referencia.ts';
+import { importeCoincide, leerReferencia, nuevoIdCompra, referenciaDeCompra, referenciaDeRecibo } from './referencia.ts';
+import { idsDe } from '../billing/ids-compra.ts';
 import { configMercadoPago } from './config.ts';
 
 const SECRETO = 'secreto-de-prueba';
@@ -75,4 +76,15 @@ test('config: exige token con forma y la clave del webhook', () => {
   assert.equal(configMercadoPago({ MERCADOPAGO_ACCESS_TOKEN: 'sk_live_x', MERCADOPAGO_WEBHOOK_SECRET: 's' }).ok, false);
   assert.equal(configMercadoPago({ MERCADOPAGO_ACCESS_TOKEN: 'APP_USR-123' }).ok, false);
   assert.equal(configMercadoPago({ MERCADOPAGO_ACCESS_TOKEN: 'TEST-123', MERCADOPAGO_WEBHOOK_SECRET: 's' }).ok, true);
+});
+
+test('referencia de compra: ida y vuelta; el id de compra da ids de entrega únicos y estables', () => {
+  const id = nuevoIdCompra();
+  assert.match(id, /^mpc_[0-9a-f]{32}$/);
+  const ref = referenciaDeCompra('studio-1', id);
+  assert.deepEqual(leerReferencia(ref), { tipo: 'compra', studioId: 'studio-1', compraId: id });
+  // La entrega deriva sus ids de la compra: mismo id → mismos ids (idempotencia); otro id → otros.
+  assert.deepEqual(idsDe(id), idsDe(id));
+  assert.notEqual(idsDe(id).reciboId, idsDe(nuevoIdCompra()).reciboId);
+  assert.match(idsDe(id).reciboId, /^rec-web-mpc_[0-9a-f]{20}$/);
 });

@@ -1670,6 +1670,20 @@ export async function emitirConsultaContacto(p: { studioId: string; consultaId: 
   }
 }
 
+// Botón de arrepentimiento / baja de servicio (app/api/public/pedidos-consumidor). Uno por pedido.
+export async function emitirPedidoConsumidor(p: { studioId: string; pedidoId: string; codigo: string; tipo: 'ARREPENTIMIENTO' | 'BAJA' }): Promise<void> {
+  try {
+    await publish({
+      type: EVENTOS.PEDIDO_CONSUMIDOR, studioId: p.studioId,
+      data: { codigo: p.codigo, titulo: p.tipo === 'ARREPENTIMIENTO' ? 'Pedido de arrepentimiento de una compra' : 'Pedido de baja de servicio' },
+      resource: { type: 'pedido_consumidor', id: p.pedidoId },
+      dedupKey: `pedido-consumidor:${p.pedidoId}`,
+    });
+  } catch (e) {
+    console.error('[notifications] emitirPedidoConsumidor:', e instanceof Error ? e.message : e);
+  }
+}
+
 // Series de clases que se acaban (lib/series/avisos-cron.ts). Un aviso por
 // estudio y día con todas las clases juntas: el dedupKey lleva la fecha, y el
 // barrido guarda en `series` qué tramo se avisó de cada una. Devuelve si se ha

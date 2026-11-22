@@ -257,10 +257,10 @@ El socio abona el precio del plan elegido. Los precios informados son finales. E
 Las reservas se hacen con anticipación por los canales habilitados. Las cancelaciones hechas con menos de ${horas} ${horas === 1 ? 'hora' : 'horas'} de anticipación se descuentan del plan.${clausulaPenalizacion}
 
 4. REVOCACIÓN DE LA COMPRA
-Si contrató a distancia (por la app, la web o por teléfono), puede revocar la compra dentro de los 10 días corridos desde que la contrató, sin costo ni responsabilidad, conforme al artículo 34 de la Ley 24.240 y al artículo 1110 del Código Civil y Comercial de la Nación. Puede pedirlo ${contacto}o en el propio estudio.
+Si contrató a distancia (por la app, la web o por teléfono), puede revocar la compra dentro de los 10 días corridos desde que la contrató, sin costo ni responsabilidad, conforme al artículo 34 de la Ley 24.240 y al artículo 1110 del Código Civil y Comercial de la Nación. Puede pedirlo con el «Botón de arrepentimiento» de la página del estudio, sin registrarse, ${contacto}o en el propio estudio; al pedirlo recibe un código de constancia.
 
 5. BAJA DEL SERVICIO
-Puede dar de baja su plan o suscripción en cualquier momento, sin más trámites, ${contacto}o en el estudio. La baja rige para los períodos siguientes.
+Puede dar de baja su plan o suscripción en cualquier momento, sin más trámites, con el «Botón de baja de servicio» de la página del estudio, ${contacto}o en el estudio; al pedirlo recibe un código de constancia. La baja rige para los períodos siguientes.
 
 6. RESPONSABILIDAD
 El socio declara estar en condiciones físicas adecuadas para la actividad y se compromete a informar cualquier condición de salud que pueda afectarla. El Estudio no se responsabiliza por lesiones derivadas de no seguir las indicaciones del instructor.

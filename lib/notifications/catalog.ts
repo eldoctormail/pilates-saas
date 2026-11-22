@@ -254,6 +254,8 @@ export const REGLAS: Record<string, ReglaEvento> = {
   // legal; el EMAIL sale solo si lo activa en sus preferencias. No cuenta en la
   // bandeja única (lib/estado-estudio.ts): el spam no puede mover el «por decidir».
   [EVENTOS.CONSULTA_CONTACTO]: { category: 'mensajeria', priority: 'ALTA', canales: ['PUSH', 'EMAIL'], audiencia: 'mostrador' },
+  // Un pedido de arrepentimiento o de baja tiene plazo de ley: ALTA, push y email.
+  [EVENTOS.PEDIDO_CONSUMIDOR]: { category: 'mensajeria', priority: 'ALTA', canales: ['PUSH', 'EMAIL'], audiencia: 'mostrador' },
   // Stripe desconectado = se deja de cobrar. CRÍTICA: ignora preferencias y usa
   // todos los canales que declara (los no configurados → SKIPPED).
   [EVENTOS.SISTEMA_STRIPE_DESCONECTADO]: { category: 'sistema', priority: 'CRITICA', canales: ['PUSH', 'EMAIL'], audiencia: 'propietaria' },
@@ -1007,6 +1009,12 @@ export const PLANTILLAS: Record<string, Plantilla> = {
   // ⚠️ Sin nombre, email ni mensaje: el aviso se guarda más tiempo que la
   // consulta, sobrevive a «Eliminar» y el push se ve en la pantalla bloqueada
   // del iPad de recepción.
+  // Mismo criterio que la consulta: sin nombre ni email en el aviso; el código sí, para encontrarlo.
+  ...paraRoles(EVENTOS.PEDIDO_CONSUMIDOR, ROLES_POR_AUDIENCIA.mostrador, {
+    title: '{titulo}',
+    body: 'Alguien lo pidió desde tu web con el código {codigo}. Respondele desde Clientes › Pedidos de arrepentimiento y baja.',
+    deepLink: () => `/clientas/pedidos`,
+  }),
   ...paraRoles(EVENTOS.CONSULTA_CONTACTO, ROLES_POR_AUDIENCIA.mostrador, {
     title: 'Consulta nueva desde tu web',
     body: 'Alguien te ha escrito desde tu formulario de contacto. Respóndele desde Clientes.',

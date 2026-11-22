@@ -97,6 +97,8 @@ export const COBERTURA_TABLAS: Record<string, { seccion: Seccion } | { excluida:
   bajas_clienta: { seccion: 'otros' },
   // Lo que preguntó antes de ser clienta, enlazado a su ficha (migr 20261001105825).
   consultas_contacto: { seccion: 'otros' },
+  // Argentina: sus pedidos de arrepentimiento o de baja (Disp. 954/2025), con su código de constancia.
+  pedidos_consumidor: { seccion: 'otros' },
   plaza_fija_sin_cuota_avisos: { excluida: 'Un apunte interno de cuándo se le avisó de que sus clases fijas se liberaban sin cuota y desde qué día; el aviso en sí ya lo recibió ella.' },
   rastro_gratis: { excluida: 'Solo un HMAC de su correo y de su móvil para que un estudio no salte de cuenta en el plan gratis; no se puede leer sin la clave, que solo tiene la base de datos, y se borra al suprimir su ficha.' },
   socios_qr_acceso: { excluida: 'Solo la huella del código de su QR de acceso, que no se puede leer ni contiene nada suyo; su QR lo ve siempre en su app.' },
@@ -272,7 +274,7 @@ export async function exportarDatosSocia(db: LectorBd, o: OpcionesExportacion): 
     saldo, movimientos, canjes, recompensas, logros, progresoLogros, retos, progresoRetos, participacionesRetos,
     participaciones, valoraciones, preferenciasClase, favoritos, documentos,
     comunicaciones, excepciones, autorizadas, eventos, solicitudes, consentimientosSalud, aceptacionesContrato, consentimientosMarketing, memoria, recomendaciones,
-    accesos, bajas, consultasSuyas, avisos, camposPersonalizados, comentariosTablon, denuncias,
+    accesos, bajas, consultasSuyas, pedidosConsumidor, avisos, camposPersonalizados, comentariosTablon, denuncias,
     meGusta, bloqueosTablon, normasAceptadas,
     valoracionesIniciales, valoracionesInicialesSalud, condiciones, respuestasCuestionario, respuestasSesion, notasProgreso,
   ] = await Promise.all([
@@ -329,6 +331,7 @@ export async function exportarDatosSocia(db: LectorBd, o: OpcionesExportacion): 
     // Sin quién la dio de baja ni quién la apuntó: son cuentas del personal.
     tabla('bajas_clienta', 'id, motivo, baja_en, alta_en', 'baja_en'),
     tabla('consultas_contacto', 'id, canal, mensaje, estado, creada_en', 'creada_en'),
+    tabla('pedidos_consumidor', 'codigo, tipo, detalle, estado, creado_en, atendido_en', 'creado_en'),
     authUserId
       ? leer(db, 'notification_preference', 'category, inapp, push, email, push_eventos', [['eq', 'studio_id', studioId], ['eq', 'user_id', authUserId]], 'category')
       : sinFilas,
@@ -579,6 +582,11 @@ export async function exportarDatosSocia(db: LectorBd, o: OpcionesExportacion): 
         bajas: bajas.map(b => ({ motivo: str(b.motivo), fecha: str(b.baja_en), volvio: str(b.alta_en) })),
         // Lo que preguntó al estudio antes de ser clienta.
         consultas: consultasSuyas.map(c => ({ canal: str(c.canal), mensaje: str(c.mensaje), estado: str(c.estado), fecha: str(c.creada_en) })),
+        // Argentina: sus pedidos de arrepentimiento o de baja, con el código de constancia.
+        pedidosConsumidor: pedidosConsumidor.map(p => ({
+          codigo: str(p.codigo), tipo: str(p.tipo), detalle: str(p.detalle), estado: str(p.estado),
+          fecha: str(p.creado_en), atendido: str(p.atendido_en),
+        })),
         // Su historial de accesos: cada lectura de su QR y lo que decidió el estudio.
         accesos: porFecha(accesos, 'ocurrido_en').map(a => ({
           fecha: str(a.ocurrido_en), clase: clase(a.sesion_id)?.clase ?? null,

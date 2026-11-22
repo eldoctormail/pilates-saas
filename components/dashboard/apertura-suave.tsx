@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { useMemo, useState } from 'react';
 import { X } from 'lucide-react';
 import Link from 'next/link';
@@ -14,7 +15,7 @@ export interface EstadoAperturaSuave {
   grupo: { fundadoras: number; invitadas: { id: string; nombre: string }[] } | null;
 }
 
-const fechaLarga = (f: string) => new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'long', timeZone: 'UTC' })
+const fechaLarga = (f: string) => new Intl.DateTimeFormat(LOCALE, { day: 'numeric', month: 'long', timeZone: 'UTC' })
   .format(new Date(`${f}T00:00:00Z`));
 
 // Apertura suave en la tarjeta de apertura: el interruptor, quién forma el grupo

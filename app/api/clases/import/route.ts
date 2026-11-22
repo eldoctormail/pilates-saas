@@ -1,3 +1,4 @@
+import { LOCALE } from '../../../../lib/locale.ts';
 import { NextRequest, NextResponse } from 'next/server';
 import { verificarSesionStaff } from '@/lib/auth-server';
 import { errorInterno, errorPeticion } from '@/lib/errores-servidor';
@@ -341,7 +342,7 @@ export async function POST(req: NextRequest) {
   })));
   const nombreSala = (id: string) => salas?.find(x => x.id === id)?.nombre;
   const nombreInstructora = (id: string) => instructores?.find(x => x.id === id)?.nombre;
-  const fmtCuando = (iso: string) => new Intl.DateTimeFormat('es-ES', {
+  const fmtCuando = (iso: string) => new Intl.DateTimeFormat(LOCALE, {
     weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: TZ,
   }).format(new Date(iso));
   // Una fila semanal que se pisa lo hace en cada semana: un aviso por fila y

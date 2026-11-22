@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { useMemo, useRef, useState } from 'react';
 import { UserX } from 'lucide-react';
 import { useStudio } from '@/lib/studio-context';
@@ -18,7 +19,7 @@ import type { MostrarToast } from '@/components/ui/toast';
 //
 // Solo se monta con `puedeGestionarCalendario`. Se oculta sola si no hay nada.
 
-const fmt = new Intl.DateTimeFormat('es-ES', {
+const fmt = new Intl.DateTimeFormat(LOCALE, {
   weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: TZ_ESTUDIO,
 });
 const cuando = (iso: string) => { const d = new Date(iso); return Number.isNaN(d.getTime()) ? '' : fmt.format(d); };

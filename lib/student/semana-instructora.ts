@@ -6,6 +6,7 @@
 // UTC, así que un cambio de hora no mueve ningún día.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { LOCALE } from '../locale.ts';
 const DIA_MS = 24 * 60 * 60 * 1000;
 
 function sumarDias(iso: string, n: number): string {
@@ -64,7 +65,7 @@ export function cifraDuracion(minutos: number): { valor: string; texto: string }
   if (m < 60) return { valor: String(m), texto: 'min de clase' };
   const horas = Math.round((m / 60) * 10) / 10;
   return {
-    valor: horas.toLocaleString('es-ES', { maximumFractionDigits: 1 }),
+    valor: horas.toLocaleString(LOCALE, { maximumFractionDigits: 1 }),
     texto: horas === 1 ? 'hora de clase' : 'horas de clase',
   };
 }

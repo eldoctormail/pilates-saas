@@ -6,6 +6,7 @@ process.env.NEXT_PUBLIC_ZONA_HORARIA ||= 'Europe/Madrid';
 // Igual con la moneda (lib/moneda.ts): los textos esperados están en euros.
 process.env.NEXT_PUBLIC_MONEDA ||= 'EUR';
 process.env.NEXT_PUBLIC_LOCALE_MONEDA ||= 'es-ES';
+process.env.NEXT_PUBLIC_LOCALE ||= 'es-ES';
 
 // Hook de resolución solo para `node --test`: sustituye 'server-only' por un
 // módulo vacío — nunca toca la resolución de `react` ni de nada más.

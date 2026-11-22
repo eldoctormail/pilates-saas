@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../../lib/locale.ts';
 import { ZONA_HORARIA } from '../../../lib/zona-horaria.ts';
 import { useState } from 'react';
 import { Button } from '@/components/student/ui/Button';
@@ -12,8 +13,8 @@ import type { ClasePendiente } from '@/lib/fichaje/clases-impartidas';
  * quién vino.
  */
 
-const fmtDia = new Intl.DateTimeFormat('es-ES', { timeZone: ZONA_HORARIA, weekday: 'short', day: 'numeric', month: 'short' });
-const fmtHora = new Intl.DateTimeFormat('es-ES', { timeZone: ZONA_HORARIA, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
+const fmtDia = new Intl.DateTimeFormat(LOCALE, { timeZone: ZONA_HORARIA, weekday: 'short', day: 'numeric', month: 'short' });
+const fmtHora = new Intl.DateTimeFormat(LOCALE, { timeZone: ZONA_HORARIA, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
 const fmtFecha = new Intl.DateTimeFormat('en-CA', { timeZone: ZONA_HORARIA, year: 'numeric', month: '2-digit', day: '2-digit' });
 
 export type RespuestaClase =

@@ -12,6 +12,7 @@
 // `authenticated` con TODAS las de `socios` MENOS estas; si se añade una aquí,
 // hay que quitarla también de ese grant (lo vigila
 // lib/rgpd-socios-datos-privados-contrato.test.ts).
+import { LOCALE } from '../locale.ts';
 export const COLUMNAS_PRIVADAS_SOCIA = [
   'nif', 'direccion', 'fecha_nacimiento',
   'tarjeta_marca', 'tarjeta_ultimos4', 'tarjeta_exp_mes', 'tarjeta_exp_anio',
@@ -152,7 +153,7 @@ export function formatearCumple(mmdd: string | null): string | null {
   const mes = Number(m[1]);
   const dia = Number(m[2]);
   if (mes < 1 || mes > 12 || dia < 1 || dia > 31) return null;
-  return new Date(2000, mes - 1, dia).toLocaleDateString('es-ES', { day: 'numeric', month: 'long' });
+  return new Date(2000, mes - 1, dia).toLocaleDateString(LOCALE, { day: 'numeric', month: 'long' });
 }
 
 /** Días hasta el próximo cumpleaños (0 = hoy), en la hora local de `now`. */

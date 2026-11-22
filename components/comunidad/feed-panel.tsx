@@ -11,6 +11,7 @@
 // `bg-brand`…): ni un hex suelto. La paleta de avatares (`AVATAR_COLORS`) es
 // CATEGÓRICA —distingue personas, no marca— y por eso no se toca.
 
+import { LOCALE } from '../../lib/locale.ts';
 import { useEffect, useId, useRef, useState } from 'react';
 import {
   Cake, CalendarDays, Check, Clock, CreditCard, Globe, Heart, Image as ImageIcon,
@@ -49,7 +50,7 @@ export function timeAgo(iso: string): string {
   if (hours < 24) return `hace ${hours} h`;
   const days = Math.floor(hours / 24);
   if (days < 7) return `hace ${days} día${days !== 1 ? 's' : ''}`;
-  return d.toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
+  return d.toLocaleDateString(LOCALE, { day: 'numeric', month: 'short' });
 }
 
 export function getInitials(nombre: string): string {
@@ -64,10 +65,10 @@ function partesFecha(iso: string | null | undefined) {
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return null;
   return {
-    dia: d.toLocaleDateString('es-ES', { day: 'numeric' }),
-    mes: sinPunto(d.toLocaleDateString('es-ES', { month: 'short' })),
-    diaSemana: sinPunto(d.toLocaleDateString('es-ES', { weekday: 'short' })),
-    hora: d.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' }),
+    dia: d.toLocaleDateString(LOCALE, { day: 'numeric' }),
+    mes: sinPunto(d.toLocaleDateString(LOCALE, { month: 'short' })),
+    diaSemana: sinPunto(d.toLocaleDateString(LOCALE, { weekday: 'short' })),
+    hora: d.toLocaleTimeString(LOCALE, { hour: '2-digit', minute: '2-digit' }),
   };
 }
 

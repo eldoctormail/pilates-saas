@@ -1,3 +1,4 @@
+import { LOCALE } from '../locale.ts';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { TZ_ESTUDIO, uid } from '../utils.ts';
 import { nombresPorCuenta } from './jornadas-equipo.ts';
@@ -253,7 +254,7 @@ export async function marcarRevisada(
   return { ok: true, corregidas: 1 };
 }
 
-const fmtHora = new Intl.DateTimeFormat('es-ES', { timeZone: TZ_ESTUDIO, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
+const fmtHora = new Intl.DateTimeFormat(LOCALE, { timeZone: TZ_ESTUDIO, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
 
 /** Para el historial, en palabras: «dada 18:05–19:00», «dada desde 18:10», «no dada». */
 function describir(estado: string, inicio: string | null, fin: string | null): string {

@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../../../lib/locale.ts';
 import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { StudentShell } from '@/components/student/shell/StudentShell';
@@ -552,7 +553,7 @@ function Resumen({ v, conSalud, irA, yaCompletada, fechaPrevia }: {
       {yaCompletada && (
         <p className="note note--ok" style={{ marginBottom: 'var(--s-2)' }}>
           Esto es lo que nos contaste
-          {fechaPrevia ? ` el ${new Date(fechaPrevia).toLocaleDateString('es-ES', { day: 'numeric', month: 'long' })}` : ''}.
+          {fechaPrevia ? ` el ${new Date(fechaPrevia).toLocaleDateString(LOCALE, { day: 'numeric', month: 'long' })}` : ''}.
           Cambia lo que quieras; si está todo bien, no tienes que hacer nada.
         </p>
       )}

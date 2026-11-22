@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../../../lib/locale.ts';
 import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { TRANSICION_ADELANTE } from '@/lib/student/transiciones';
@@ -527,7 +528,7 @@ function TarjetaOferta({ r, c, instructora, online, aceptando, onAceptar, onSali
         <Badge tone="few">¡Plaza libre!</Badge>
       </div>
       <p style={{ margin: '6px 0 0', fontSize: 'var(--t-small)', fontWeight: 700, color: 'var(--warning-foreground)' }}>
-        Tienes hasta las {new Date(r.ofertaExpiraEn as string).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })} para aceptarla — si no, pasa a la siguiente de la lista.
+        Tienes hasta las {new Date(r.ofertaExpiraEn as string).toLocaleTimeString(LOCALE, { hour: '2-digit', minute: '2-digit' })} para aceptarla — si no, pasa a la siguiente de la lista.
       </p>
       <p style={{ margin: '6px 0 0', fontSize: 'var(--t-body)', fontWeight: 700 }}>{c.nombre}</p>
       <p className="t-meta" style={{ marginTop: 2 }}>{unirMeta(instructora, c.sala)}</p>

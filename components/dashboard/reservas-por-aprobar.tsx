@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { CalendarCheck } from 'lucide-react';
@@ -20,7 +21,7 @@ import { Button } from '@/components/ui/button';
 // Qué se dice con cada respuesta lo decide `resultadoDecisionReserva`, que
 // comparte con el calendario: aprobar no siempre es «plaza confirmada».
 
-const fmtClase = new Intl.DateTimeFormat('es-ES', {
+const fmtClase = new Intl.DateTimeFormat(LOCALE, {
   weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: TZ_ESTUDIO,
 });
 

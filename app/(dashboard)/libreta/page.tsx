@@ -5,6 +5,7 @@
 // promesa anti-lock-in del informe: "si cerráis, me quedo con mi libreta, en mejor".
 // Sin dependencia de PDF: vista imprimible (Imprimir → Guardar como PDF).
 
+import { LOCALE } from '../../../lib/locale.ts';
 import { useMemo } from 'react';
 import { useStudio } from '@/lib/studio-context';
 import { Printer, Notebook, UserPlus } from 'lucide-react';
@@ -29,7 +30,7 @@ export default function Libreta() {
   // Con UTC, una libreta sacada a las 00:20 de Madrid salía fechada el día
   // anterior y descontaba las recuperaciones que caducaban hoy.
   const hoyISO = hoyEnEstudio();
-  const mes = new Date().toLocaleDateString('es-ES', { month: 'long', year: 'numeric' });
+  const mes = new Date().toLocaleDateString(LOCALE, { month: 'long', year: 'numeric' });
 
   const filas = useMemo(() => {
     return socios

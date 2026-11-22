@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../../lib/locale.ts';
 import { ETIQUETA_INSTRUCTORA_NO_DISPONIBLE, nombreInstructoraDeClase } from '@/lib/equipo/clases-sin-instructora';
 import * as Sentry from '@sentry/nextjs';
 import { useState, useMemo, useEffect, useRef, useCallback, useId, useSyncExternalStore } from 'react';
@@ -294,16 +295,16 @@ type RecurringFormData = {
 const BOTON_VENTANA = 'flex size-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground';
 
 /** «jueves 1 oct»: de un instante, en hora del estudio; de un día del calendario (`Date` local), tal cual. */
-const FORMATO_DIA_CORTO = new Intl.DateTimeFormat('es-ES', { weekday: 'long', day: 'numeric', month: 'short', timeZone: TZ_ESTUDIO });
-const FORMATO_DIA_CORTO_LOCAL = new Intl.DateTimeFormat('es-ES', { weekday: 'long', day: 'numeric', month: 'short' });
+const FORMATO_DIA_CORTO = new Intl.DateTimeFormat(LOCALE, { weekday: 'long', day: 'numeric', month: 'short', timeZone: TZ_ESTUDIO });
+const FORMATO_DIA_CORTO_LOCAL = new Intl.DateTimeFormat(LOCALE, { weekday: 'long', day: 'numeric', month: 'short' });
 function diaCorto(fecha: Date | string): string {
   const p = (typeof fecha === 'string' ? FORMATO_DIA_CORTO : FORMATO_DIA_CORTO_LOCAL).formatToParts(new Date(fecha));
   const de = (t: string) => p.find(x => x.type === t)?.value ?? '';
   return `${de('weekday')} ${de('day')} ${de('month').replace('.', '')}`;
 }
 /** «1 – 7 oct», o «28 sep – 4 oct» si la semana cambia de mes. */
-const FORMATO_MES_CORTO = new Intl.DateTimeFormat('es-ES', { month: 'short' });
-const FORMATO_MES_LARGO = new Intl.DateTimeFormat('es-ES', { month: 'long' });
+const FORMATO_MES_CORTO = new Intl.DateTimeFormat(LOCALE, { month: 'short' });
+const FORMATO_MES_LARGO = new Intl.DateTimeFormat(LOCALE, { month: 'long' });
 function rangoCorto(desde: Date, hasta: Date): string {
   const mes = (d: Date) => FORMATO_MES_CORTO.format(d).replace('.', '');
   return desde.getMonth() === hasta.getMonth()

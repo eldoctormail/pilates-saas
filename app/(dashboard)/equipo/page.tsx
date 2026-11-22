@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../../lib/locale.ts';
 import { MONEDA_SIMBOLO, MONEDA, LOCALE_MONEDA } from '../../../lib/moneda.ts';
 import { AyudaDelPaso } from '@/components/guia/ayuda-del-paso';
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, useId, useSyncExternalStore } from 'react';
@@ -1708,7 +1709,7 @@ function HorasDialog({ instructor, sesiones, tiposClase, horasSemanalesContrato,
     horasSemanalesContrato,
   );
   const totalHoras = resumen.asignadas;
-  const fmtMes = mes.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' });
+  const fmtMes = mes.toLocaleDateString(LOCALE, { month: 'long', year: 'numeric' });
   const fmtDif = (h: number) => `${h > 0 ? '+' : h < 0 ? '−' : ''}${textoHoras(Math.abs(h))}`;
 
   function exportar() {
@@ -1717,8 +1718,8 @@ function HorasDialog({ instructor, sesiones, tiposClase, horasSemanalesContrato,
     const rows: (string | number)[][] = [['Fecha', 'Hora', 'Clase', 'Horas']];
     for (const f of filas) {
       rows.push([
-        f.inicio.toLocaleDateString('es-ES'),
-        f.inicio.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' }),
+        f.inicio.toLocaleDateString(LOCALE),
+        f.inicio.toLocaleTimeString(LOCALE, { hour: '2-digit', minute: '2-digit' }),
         f.clase,
         horasCsv(f.horas),
       ]);
@@ -1807,7 +1808,7 @@ function HorasDialog({ instructor, sesiones, tiposClase, horasSemanalesContrato,
                 <div className="min-w-0">
                   <p className="text-[13px] font-semibold text-foreground truncate">{f.clase}</p>
                   <p className="text-[11.5px] text-muted-foreground capitalize">
-                    {f.inicio.toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', month: 'short' })} · {f.inicio.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}
+                    {f.inicio.toLocaleDateString(LOCALE, { weekday: 'short', day: 'numeric', month: 'short' })} · {f.inicio.toLocaleTimeString(LOCALE, { hour: '2-digit', minute: '2-digit' })}
                   </p>
                 </div>
                 <span className="text-[13px] font-bold text-foreground tabular-nums shrink-0">{textoHoras(f.horas)}</span>
@@ -1876,7 +1877,7 @@ function AusenciasDialog({ instructor, onClose }: { instructor: Instructor | nul
   }
 
   const fmt = (iso: string) =>
-    new Date(`${iso}T12:00:00Z`).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' });
+    new Date(`${iso}T12:00:00Z`).toLocaleDateString(LOCALE, { day: 'numeric', month: 'short', year: 'numeric' });
 
   return (
     <Dialog open={instructor !== null} onOpenChange={open => !open && onClose()}>
@@ -1986,7 +1987,7 @@ function ValoracionesDialog({ instructor, tiposClase, onClose }: {
   const media = total ? items.reduce((a, v) => a + v.puntuacion, 0) / total : 0;
   const dist = [5, 4, 3, 2, 1].map(n => ({ n, c: items.filter(v => v.puntuacion === n).length }));
   const tipoNombre = (id: string | null) => tiposClase.find(t => t.id === id)?.nombre ?? 'Clase';
-  const fechaCorta = (iso: string | null) => (iso ? new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' }) : '');
+  const fechaCorta = (iso: string | null) => (iso ? new Date(iso).toLocaleDateString(LOCALE, { day: 'numeric', month: 'short' }) : '');
 
   return (
     <Dialog open={!!instructor} onOpenChange={o => !o && onClose()}>

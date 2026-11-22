@@ -5,6 +5,7 @@
 // (muestras, cuarentena, avisos) → ejecutar → acta con botón de deshacer.
 // Nada se importa sin revisión, y todo lo importado se puede deshacer.
 
+import { LOCALE } from '../../../lib/locale.ts';
 import { conMoneda, LOCALE_MONEDA } from '../../../lib/moneda.ts';
 import { useEffect, useRef, useState } from 'react';
 import { useId } from 'react';
@@ -116,7 +117,7 @@ function resumenBatch(conteos: Record<string, number>): string {
 function fechaLote(iso: string): string {
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return '';
-  return d.toLocaleString('es-ES', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+  return d.toLocaleString(LOCALE, { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
 }
 
 // Convierte un XLSX/XLS en uno o varios "archivos" CSV (una por hoja con datos)

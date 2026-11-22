@@ -7,6 +7,7 @@
 // canje lo valida `/api/public/canje`. Esto solo ORDENA y presenta lo que el
 // payload ya trae: si el estudio no ha configurado nada, no hay nada que pintar.
 
+import { LOCALE } from '../locale.ts';
 import { conMoneda } from '../moneda.ts';
 import { ZONA_HORARIA } from '../zona-horaria.ts';
 import { vistaDeNivel } from '../gamificacion/ritmo-niveles.ts';
@@ -211,7 +212,7 @@ export interface FormaDeGanar {
   topeMensual: number | null;
 }
 
-const euros = (n: number) => n.toLocaleString('es-ES', { maximumFractionDigits: 2 });
+const euros = (n: number) => n.toLocaleString(LOCALE, { maximumFractionDigits: 2 });
 
 // ⚠️ Cada texto describe lo que el CÓDIGO premia de verdad, no el nombre
 // interno de la regla:

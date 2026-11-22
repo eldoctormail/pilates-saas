@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { cn } from '@/lib/utils';
 
 // Los siete días de la semana en una tira, para el Día en el móvil: se toca
@@ -26,7 +27,7 @@ export function TiraDias({ dias, elegido, hoy, conClase, onElegir }: {
             type="button"
             onClick={() => onElegir(dia)}
             aria-pressed={sel}
-            aria-label={`${fecha.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric' })}${dia === hoy ? ', hoy' : ''}`}
+            aria-label={`${fecha.toLocaleDateString(LOCALE, { weekday: 'long', day: 'numeric' })}${dia === hoy ? ', hoy' : ''}`}
             className={cn(
               'flex min-h-14 flex-col items-center justify-center rounded-xl transition-colors',
               sel ? 'bg-brand text-brand-foreground' : dia === hoy ? 'bg-muted text-foreground' : 'text-foreground hover:bg-muted',

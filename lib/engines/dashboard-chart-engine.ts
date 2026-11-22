@@ -1,3 +1,4 @@
+import { LOCALE } from '../locale.ts';
 import type {
   DashboardChart, MetricaGraficoDashboard, AgrupacionGraficoDashboard,
   Recibo, Socio, Reserva, Sesion, CreditTransaction,
@@ -49,8 +50,8 @@ function siguientePeriodo(d: Date, agrupacion: AgrupacionGraficoDashboard): Date
 }
 
 function etiquetaPeriodo(d: Date, agrupacion: AgrupacionGraficoDashboard): string {
-  if (agrupacion === 'MES') return d.toLocaleDateString('es-ES', { month: 'short', year: '2-digit' });
-  return d.toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
+  if (agrupacion === 'MES') return d.toLocaleDateString(LOCALE, { month: 'short', year: '2-digit' });
+  return d.toLocaleDateString(LOCALE, { day: 'numeric', month: 'short' });
 }
 
 interface ChartData {

@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../../lib/locale.ts';
 import { conMoneda } from '../../../lib/moneda.ts';
 import { VistaDeLaUrl, useUrlSigueALaVista } from '@/components/layout/vista-de-la-url';
 import { Suspense, useState, useMemo, useEffect, useRef, useId, isValidElement, cloneElement, type ReactElement, type ReactNode, type ElementType, type MouseEvent } from 'react';
@@ -2400,7 +2401,7 @@ export default function Socios() {
                       <p className="text-[11px] text-muted-foreground mt-0.5">
                         Se guardará como firmado por <span className="font-medium text-foreground">{firma.trim()}</span>,
                         recogido presencialmente por el estudio el{' '}
-                        {new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}.
+                        {new Date().toLocaleDateString(LOCALE, { day: 'numeric', month: 'long', year: 'numeric' })}.
                       </p>
                     </div>
                   </div>

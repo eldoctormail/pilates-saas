@@ -11,6 +11,7 @@
 // lib/mensajeria/resumen.ts). El transporte —Realtime Broadcast, canal
 // `conversacion:{id}`— y las rutas de escritura no se tocan.
 
+import { LOCALE } from '../../lib/locale.ts';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Eye, MessageSquarePlus, RefreshCw, Search } from 'lucide-react';
 import { useStudio } from '@/lib/studio-context';
@@ -243,7 +244,7 @@ function Hilo({
   const ancla: ContextoAncla | null = sesionAncla
     ? {
       titulo: tipoAncla?.nombre ?? 'reservada',
-      detalle: new Date(sesionAncla.inicio).toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', month: 'short' }),
+      detalle: new Date(sesionAncla.inicio).toLocaleDateString(LOCALE, { weekday: 'short', day: 'numeric', month: 'short' }),
     }
     : null;
 

@@ -10,6 +10,7 @@
 // es el mismo de siempre (lo recibe de la página).
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { LOCALE } from '../../lib/locale.ts';
 import { useMemo, useState, type ElementType } from 'react';
 import { Bell, BellOff, Mail, MessageSquare, RotateCcw, Search, Send, Smartphone, TriangleAlert } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -76,7 +77,7 @@ const COLOR_ESTADO: Record<string, string> = {
 };
 
 function fecha(iso: string) {
-  return new Date(iso).toLocaleString('es-ES', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+  return new Date(iso).toLocaleString(LOCALE, { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
 }
 
 export function RegistroNuevo({ items, cargando, reintentando, errorReintento, onReintentar }: {

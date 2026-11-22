@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import type { Historial } from '@/lib/valoracion-inicial';
 import { queHaCambiado } from '@/lib/valoracion-inicial';
 import {
@@ -41,7 +42,7 @@ function Dato({ titulo, children }: { titulo: string; children: React.ReactNode 
 }
 
 function fecha(iso: string): string {
-  return new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+  return new Date(iso).toLocaleDateString(LOCALE, { day: 'numeric', month: 'long', year: 'numeric' });
 }
 
 /** La mitad NO clínica. Recepción incluida. */

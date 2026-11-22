@@ -17,6 +17,7 @@
 // y la imagen se sube al bucket `comunidad-media` que ya existía —
 // `/api/comunidad/posts` descarta cualquier `imagenUrl` de otro origen.
 
+import { LOCALE } from '../../lib/locale.ts';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useStudio } from '@/lib/studio-context';
 import { useAuth } from '@/lib/auth-context';
@@ -149,7 +150,7 @@ export function ComunidadFeed() {
     .map(s => ({
       id: s.id,
       titulo: tiposClase.find(t => t.id === s.tipoClaseId)?.nombre ?? 'Clase',
-      cuando: new Date(s.inicio).toLocaleDateString('es-ES', { weekday: 'short', hour: '2-digit', minute: '2-digit' }),
+      cuando: new Date(s.inicio).toLocaleDateString(LOCALE, { weekday: 'short', hour: '2-digit', minute: '2-digit' }),
     })), [sesiones, tiposClase, ahora]);
 
   // ── Logros del mes (derivados de datos reales; se ocultan si no hay dato) ──

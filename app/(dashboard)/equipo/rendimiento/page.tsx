@@ -5,6 +5,7 @@
 // Informe de solo lectura, calculado al vuelo — no cambia nada de la
 // liquidación ni del pago, solo mide.
 
+import { LOCALE } from '../../../../lib/locale.ts';
 import { useEffect, useState } from 'react';
 import { TrendingUp } from 'lucide-react';
 import { useRol } from '@/lib/permisos';
@@ -15,7 +16,7 @@ import { fetchRendimientoInstructoras, type RendimientoInstructoraApi } from '@/
 
 // Coma decimal («66,7%», no «66.7%»): los porcentajes llegan con un decimal. Uno
 // reutilizado, no un formateador por cifra (ver `porZona` en lib/utils.ts).
-const PORCENTAJE = new Intl.NumberFormat('es-ES', { maximumFractionDigits: 1 });
+const PORCENTAJE = new Intl.NumberFormat(LOCALE, { maximumFractionDigits: 1 });
 
 function Metrica({ etiqueta, pct, n }: { etiqueta: string; pct: number | null; n: number }) {
   return (

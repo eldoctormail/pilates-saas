@@ -12,6 +12,7 @@
 // el rol de quien mira no debería ver: no hay nada que ocultar en el cliente
 // porque el cliente nunca lo tuvo.
 
+import { LOCALE } from './locale.ts';
 import { conMoneda, LOCALE_MONEDA } from './moneda.ts';
 import type { Rol } from './types';
 import { claveSemanaEstudio, franjaLocalDe, hoyEnEstudio, inicioDelDiaEstudio, masDias } from './utils.ts';
@@ -230,7 +231,7 @@ export function clases(m: Pick<MiembroCompleto, 'semana'>): number {
 }
 
 function fechaCorta(iso: string): string {
-  return new Date(iso).toLocaleDateString('es-ES', { weekday: 'long', hour: '2-digit', minute: '2-digit' });
+  return new Date(iso).toLocaleDateString(LOCALE, { weekday: 'long', hour: '2-digit', minute: '2-digit' });
 }
 
 /** El día libre de la semana, para la pista bajo las barras — o null si trabaja todos. */
@@ -299,8 +300,8 @@ export function euros(n: number): string {
 // Coma decimal, como `euros()`: con `toFixed` la misma tarjeta decía «407,00 €»
 // en una y «14.2 h» en otra. Construidos una vez: un formateador nuevo por
 // llamada es caro (ver `porZona` en lib/utils.ts).
-const HASTA_UN_DECIMAL = new Intl.NumberFormat('es-ES', { maximumFractionDigits: 1 });
-const UN_DECIMAL = new Intl.NumberFormat('es-ES', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const HASTA_UN_DECIMAL = new Intl.NumberFormat(LOCALE, { maximumFractionDigits: 1 });
+const UN_DECIMAL = new Intl.NumberFormat(LOCALE, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 
 /** «14 h», «14,2 h»: un decimal como mucho, y ninguno si sale entero. */
 export function horas(n: number): string {

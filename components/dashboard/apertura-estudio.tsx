@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight, CalendarClock, CheckCircle2, RefreshCw } from 'lucide-react';
@@ -50,7 +51,7 @@ function titular(d: RespuestaApertura): string {
   if (!d.fechaApertura || dias === null || dias === undefined) return d.onboarding ? 'Preparando tu apertura' : 'Preparemos tu apertura';
   // Aproximada: «hacia noviembre», nunca una cuenta atrás de días que no es real.
   if (d.onboarding?.fechaAproximada && dias > 0) {
-    const mes = new Intl.DateTimeFormat('es-ES', { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${d.fechaApertura}T00:00:00Z`));
+    const mes = new Intl.DateTimeFormat(LOCALE, { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${d.fechaApertura}T00:00:00Z`));
     return `Abres hacia ${mes}`;
   }
   if (dias > 1) return `Abres en ${dias} días`;

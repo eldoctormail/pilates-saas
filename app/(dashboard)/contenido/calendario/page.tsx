@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../../../lib/locale.ts';
 import { useMemo, useState } from 'react';
 import {
   DndContext, useDraggable, useDroppable, PointerSensor,
@@ -91,7 +92,7 @@ export default function CalendarioContenidoPage() {
     ? `${MESES[cursor.getMonth()]} ${cursor.getFullYear()}`
     : vista === 'semana'
       ? (() => { const s = startOfWeek(cursor); const e = new Date(s.getTime() + 6 * DIA_MS); return `${s.getDate()} ${MESES[s.getMonth()].slice(0, 3)} – ${e.getDate()} ${MESES[e.getMonth()].slice(0, 3)}`; })()
-      : cursor.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
+      : cursor.toLocaleDateString(LOCALE, { weekday: 'long', day: 'numeric', month: 'long' });
 
   return (
     <div className="space-y-4">

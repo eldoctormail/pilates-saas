@@ -10,6 +10,7 @@
 // retirarla de la venta y retomarla son trabajo de una persona en App Store Connect, y la nota
 // interna sola no la lee nadie (la propietaria recibe «la retiramos» / «la retomamos»).
 
+import { LOCALE } from '../locale.ts';
 import { ZONA_HORARIA } from '../zona-horaria.ts';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { accionSinPlan } from './apps-sin-plan.ts';
@@ -22,7 +23,7 @@ type Fila = {
   studios: { nombre: string | null; plan: string | null; subscription_status: string | null } | null;
 };
 
-const fechaMadrid = (d: Date) => d.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', timeZone: ZONA_HORARIA });
+const fechaMadrid = (d: Date) => d.toLocaleDateString(LOCALE, { day: 'numeric', month: 'long', timeZone: ZONA_HORARIA });
 const conNota = (nota: string | null, linea: string) => (nota ? `${nota}\n${linea}` : linea).slice(-2000);
 
 export async function revisarAppsSinPlan(admin: SupabaseClient, ahora = new Date()) {

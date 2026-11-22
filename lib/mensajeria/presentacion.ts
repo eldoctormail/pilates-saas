@@ -12,6 +12,7 @@
 // `node --test --experimental-strip-types` y sin ella pasa en local y rompe en
 // CI (convención del repo).
 
+import { LOCALE } from '../locale.ts';
 import type { RowConversaciones } from '../db-types.ts';
 
 // ── Lo que la lista necesita y la tabla `conversaciones` no trae ─────────────
@@ -85,7 +86,7 @@ export function mismoDia(a: Date, b: Date): boolean {
 }
 
 export function horaCorta(iso: string): string {
-  return new Date(iso).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+  return new Date(iso).toLocaleTimeString(LOCALE, { hour: '2-digit', minute: '2-digit' });
 }
 
 /**

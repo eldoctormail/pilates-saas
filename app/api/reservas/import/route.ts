@@ -1,3 +1,4 @@
+import { LOCALE } from '../../../../lib/locale.ts';
 import { NextRequest, NextResponse } from 'next/server';
 import { verificarSesionStaff } from '@/lib/auth-server';
 import { errorInterno } from '@/lib/errores-servidor';
@@ -195,7 +196,7 @@ export async function POST(req: NextRequest) {
   }
 
   // ── Aforo: se avisa ANTES de escribir, y solo con el OK se amplía ──────────
-  const fmtCuando = (ms: number) => new Intl.DateTimeFormat('es-ES', {
+  const fmtCuando = (ms: number) => new Intl.DateTimeFormat(LOCALE, {
     weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: TZ,
   }).format(new Date(ms));
   const tocadas = new Set(pendientes.map(p => p.sesionId));

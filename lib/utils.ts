@@ -1,3 +1,4 @@
+import { LOCALE } from './locale.ts';
 import { conMoneda, LOCALE_MONEDA } from './moneda.ts';
 import { ZONA_HORARIA } from './zona-horaria.ts';
 import { clsx, type ClassValue } from "clsx"
@@ -77,19 +78,19 @@ export function redondearCentimos(n: number): number {
 // Formateadores de fecha/hora en español — estaban reimplementados (copy-paste
 // idéntico o casi) en 6+ páginas. Un único sitio para no divergir por accidente.
 export function formatFechaLarga(iso: string): string {
-  return new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' });
+  return new Date(iso).toLocaleDateString(LOCALE, { day: 'numeric', month: 'short', year: 'numeric' });
 }
 
 export function formatFechaCorta(iso: string): string {
-  return new Date(iso).toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', month: 'short' });
+  return new Date(iso).toLocaleDateString(LOCALE, { weekday: 'short', day: 'numeric', month: 'short' });
 }
 
 export function formatHoraCorta(iso: string): string {
-  return new Date(iso).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', hour12: false });
+  return new Date(iso).toLocaleTimeString(LOCALE, { hour: '2-digit', minute: '2-digit', hour12: false });
 }
 
 export function formatFechaHora(iso: string): string {
-  return new Date(iso).toLocaleString('es-ES', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+  return new Date(iso).toLocaleString(LOCALE, { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
 }
 
 // ─── Semanas ─────────────────────────────────────────────────────────────────
@@ -372,10 +373,10 @@ export function horaEstudio(fecha: Date | string, tz: string = TZ_ESTUDIO): stri
 // Los mismos que daban `toLocaleDateString`/`toLocaleTimeString` con esas
 // opciones (con campos de fecha o de hora explícitos, el resultado es idéntico),
 // pero construidos una vez por zona.
-const formatoFechaLarga = porZona(tz => new Intl.DateTimeFormat('es-ES', { weekday: 'long', day: 'numeric', month: 'long', timeZone: tz }));
-const formatoFechaCorta = porZona(tz => new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'long', timeZone: tz }));
-const formatoHora = porZona(tz => new Intl.DateTimeFormat('es-ES', { hour: '2-digit', minute: '2-digit', timeZone: tz }));
-const formatoDiaSemana = porZona(tz => new Intl.DateTimeFormat('es-ES', { weekday: 'long', timeZone: tz }));
+const formatoFechaLarga = porZona(tz => new Intl.DateTimeFormat(LOCALE, { weekday: 'long', day: 'numeric', month: 'long', timeZone: tz }));
+const formatoFechaCorta = porZona(tz => new Intl.DateTimeFormat(LOCALE, { day: 'numeric', month: 'long', timeZone: tz }));
+const formatoHora = porZona(tz => new Intl.DateTimeFormat(LOCALE, { hour: '2-digit', minute: '2-digit', timeZone: tz }));
+const formatoDiaSemana = porZona(tz => new Intl.DateTimeFormat(LOCALE, { weekday: 'long', timeZone: tz }));
 
 /** "sábado, 25 de julio a las 09:00" en hora del estudio. */
 export function cuandoEstudio(fecha: Date | string, tz: string = TZ_ESTUDIO): string {

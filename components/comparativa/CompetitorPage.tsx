@@ -1,3 +1,4 @@
+import { LOCALE } from '../../lib/locale.ts';
 import Link from 'next/link';
 import { G2_NOTA, G2_RESENAS, G2_URL } from '@/lib/seo/g2';
 import { Reveal } from '@/components/landing/Reveal';
@@ -122,14 +123,14 @@ export function CompetitorPage({
   // en pantalla Y se declara en el JSON-LD. Un comparativa sin fecha es una
   // afirmación sin caducidad, y es lo primero que un buscador con IA desconfía.
   const revisada = pagina?.actualizado;
-  const revisadaTexto = revisada ? new Date(`${revisada}T12:00:00Z`).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }) : null;
+  const revisadaTexto = revisada ? new Date(`${revisada}T12:00:00Z`).toLocaleDateString(LOCALE, { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }) : null;
   const webPageLd = pagina ? {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     name: pagina.titulo,
     description: pagina.descripcion,
     url: `${LEGAL.url}/comparativa/${slug}`,
-    inLanguage: 'es-ES',
+    inLanguage: LOCALE,
     ...(revisada ? { dateModified: revisada } : {}),
     isPartOf: { '@id': `${LEGAL.url}/#web` },
     publisher: { '@id': ID_ORGANIZACION },

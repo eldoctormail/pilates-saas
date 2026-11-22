@@ -7,6 +7,7 @@
 // Testeable en aislamiento (ver reserva-calendario-logic.test.ts).
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { LOCALE } from './locale.ts';
 import { inicioDeSemana } from './utils.ts';
 import { diaEnEstudio } from './calendario-hora-estudio.ts';
 
@@ -97,7 +98,7 @@ export function etiquetaDia(d: Date, ref: Date = new Date()): string {
   const key = localDayKey(d);
   if (key === localDayKey(ref)) return 'Hoy';
   if (key === localDayKey(addDays(ref, 1))) return 'Mañana';
-  const s = d.toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', month: 'short' });
+  const s = d.toLocaleDateString(LOCALE, { weekday: 'short', day: 'numeric', month: 'short' });
   return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
@@ -115,6 +116,6 @@ export function fechaDeClave(clave: string): Date {
 export function etiquetaDiaClave(dayKey: string, hoyKey: string): string {
   if (dayKey === hoyKey) return 'Hoy';
   if (dayKey === localDayKey(addDays(fechaDeClave(hoyKey), 1))) return 'Mañana';
-  const s = fechaDeClave(dayKey).toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', month: 'short' });
+  const s = fechaDeClave(dayKey).toLocaleDateString(LOCALE, { weekday: 'short', day: 'numeric', month: 'short' });
   return s.charAt(0).toUpperCase() + s.slice(1);
 }

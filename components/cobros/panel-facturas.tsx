@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { conMoneda } from '../../lib/moneda.ts';
 import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
@@ -20,15 +21,15 @@ import { abrirFacturaPDF } from '@/lib/factura-pdf';
 import { selloParaCliente } from '@/lib/factura-sello-cliente';
 
 function fecha(iso: string) {
-  return new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' });
+  return new Date(iso).toLocaleDateString(LOCALE, { day: 'numeric', month: 'short', year: 'numeric' });
 }
 
 function mesAnio(iso: string) {
-  return new Date(iso).toLocaleDateString('es-ES', { month: 'long', year: 'numeric' });
+  return new Date(iso).toLocaleDateString(LOCALE, { month: 'long', year: 'numeric' });
 }
 
 function kpi(val: number) {
-  return val.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  return val.toLocaleString(LOCALE, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];

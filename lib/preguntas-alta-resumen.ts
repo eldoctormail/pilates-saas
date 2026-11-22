@@ -10,6 +10,7 @@
 // (`preguntasPendientes`): así «Le falta» aquí es exactamente lo que la app le
 // pedirá al entrar.
 
+import { LOCALE } from './locale.ts';
 import { preguntasPendientes, tieneRespuesta, type PreguntaAlta } from './preguntas-alta.ts';
 
 export interface SociaConRespuestas {
@@ -96,7 +97,7 @@ export function textoRespuesta(p: PreguntaAlta, v: unknown): string {
   if (p.tipo === 'booleano') return v === true ? 'Sí' : v === false ? 'No' : String(v);
   if (p.tipo === 'numero') {
     const n = aNumero(v);
-    return n === null ? String(v) : n.toLocaleString('es-ES');
+    return n === null ? String(v) : n.toLocaleString(LOCALE);
   }
   if (p.tipo === 'fecha' && typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v)) {
     const [a, m, d] = v.split('-');

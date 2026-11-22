@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { MONEDA, LOCALE_MONEDA } from '../../lib/moneda.ts';
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
@@ -16,7 +17,7 @@ interface RespuestaEconomia {
 
 const euros = (n: number) => new Intl.NumberFormat(LOCALE_MONEDA, { style: 'currency', currency: MONEDA, maximumFractionDigits: 0 }).format(n);
 const pct = (x: number) => `${Math.round(x * 100)} %`;
-const entero = (n: number) => Math.round(n).toLocaleString('es-ES');
+const entero = (n: number) => Math.round(n).toLocaleString(LOCALE);
 
 async function pedir(): Promise<RespuestaEconomia | null> {
   try {

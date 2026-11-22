@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { conMoneda } from '../../lib/moneda.ts';
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
@@ -493,7 +494,7 @@ export function GlobalSearch({
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-semibold text-foreground truncate">{tipo?.nombre ?? 'Clase'}</p>
                           <p className="text-xs truncate" style={{ color: 'var(--muted-foreground)' }}>
-                            {d.toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', month: 'short' })} · {d.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}
+                            {d.toLocaleDateString(LOCALE, { weekday: 'short', day: 'numeric', month: 'short' })} · {d.toLocaleTimeString(LOCALE, { hour: '2-digit', minute: '2-digit' })}
                           </p>
                         </div>
                         <ArrowRight size={14} className="shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: 'var(--muted-foreground)' }} />

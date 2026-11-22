@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../../../lib/locale.ts';
 import { useCallback, useEffect, useState } from 'react';
 import { StudentShell } from '@/components/student/shell/StudentShell';
 import { PageHeader } from '@/components/student/shell/PageHeader';
@@ -18,7 +19,7 @@ import { NOMBRE_ESTADO_REGALO, diasParaCaducar, type EstadoRegalo } from '@/lib/
 interface Tarjeta { id: string; importeInicial: number; saldo: number; caducaEn: string; estado: EstadoRegalo }
 
 const AVISO_DIAS = 30;
-const fecha = (iso: string) => new Date(`${iso}T12:00:00Z`).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+const fecha = (iso: string) => new Date(`${iso}T12:00:00Z`).toLocaleDateString(LOCALE, { day: 'numeric', month: 'long', year: 'numeric' });
 const TONO: Record<EstadoRegalo, 'ok' | 'neutral' | 'few' | 'full'> = { ACTIVA: 'ok', AGOTADA: 'neutral', CADUCADA: 'few', ANULADA: 'full' };
 
 // Tarjeta regalo (alumna): canjear el código y ver el saldo. Canjear la vincula a su cuenta,

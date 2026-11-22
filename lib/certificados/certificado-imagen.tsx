@@ -1,3 +1,4 @@
+import { LOCALE } from '../locale.ts';
 import { qrPathData } from '@/lib/qr-svg.ts';
 import { tamanoNombreCertificado } from '@/lib/certificados/tamano-nombre.ts';
 import { TRAZADOS } from '@/components/marca/trazados.ts';
@@ -31,7 +32,7 @@ const MARCA_A = '#4C9CB0';
 const MARCA_B = '#B4537E';
 
 function fechaLarga(iso: string): string {
-  return new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+  return new Date(iso).toLocaleDateString(LOCALE, { day: 'numeric', month: 'long', year: 'numeric' });
 }
 
 /** Un blob de color muy suave para una esquina — el «morado-rosa sutil» del kit, sin depender de `filter: blur()`. */

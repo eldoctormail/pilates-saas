@@ -4,6 +4,7 @@
 // `hoyEnEstudio` vive en lib/utils.ts y la comparte con `bono-logic.ts`, que
 // es quien fija la regla de vigencia en servidor. Import relativo por el
 // mismo motivo que el resto del fichero.
+import { LOCALE } from '../locale.ts';
 import { ZONA_HORARIA } from '../zona-horaria.ts';
 import { horaEstudio, hoyEnEstudio } from '../utils.ts';
 import { importeIngresado, situacionRecibo } from '../billing/situacion-recibo.ts';
@@ -282,7 +283,7 @@ export function fechaLocal(iso: string): string {
 
 /** Hora local HH:mm. */
 export function horaLocal(iso: string): string {
-  return new Date(iso).toLocaleTimeString('es-ES', {
+  return new Date(iso).toLocaleTimeString(LOCALE, {
     timeZone: ZONA_HORARIA, hour: '2-digit', minute: '2-digit', hour12: false,
   });
 }

@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../../lib/locale.ts';
 import { VistaDeLaUrl, useUrlSigueALaVista } from '@/components/layout/vista-de-la-url';
 import { Suspense, useEffect, useMemo, useState } from 'react';
 import { CreditCard, Landmark, Plus } from 'lucide-react';
@@ -251,7 +252,7 @@ function LineaResumen({ datos }: { datos: DatosCobros }) {
       cobrado,
       diferencia: anterior ? Math.round((cobrado - cobradoEnTramo(recibos, anterior).neto) * 100) / 100 : null,
       comparacion: textoDeLaComparacion('MES', mes, datos.hoy),
-      nombreMes: new Date(`${datos.hoy}T12:00:00Z`).toLocaleDateString('es-ES', { month: 'long', timeZone: 'UTC' }),
+      nombreMes: new Date(`${datos.hoy}T12:00:00Z`).toLocaleDateString(LOCALE, { month: 'long', timeZone: 'UTC' }),
     };
   }, [recibos, datos]);
 

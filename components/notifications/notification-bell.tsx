@@ -4,6 +4,7 @@
 // propietaria e instructora (ambas entran al dashboard). Lee de la tabla
 // `notification` vía /api/notifications, acotada por el JWT del usuario.
 
+import { LOCALE } from '../../lib/locale.ts';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ArrowRight, Bell, Check, X, Inbox, PartyPopper, Volume2, VolumeX } from 'lucide-react';
@@ -36,8 +37,8 @@ const ACENTO: Record<string, string> = {
 
 // La fecha exacta como Bonsai («11 octubre · 03:39») y el «hace…» (panel
 // nuevo), con un formateador de cada para todos los avisos.
-const DIA_MES = new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'long', timeZone: TZ_ESTUDIO });
-const HORA = new Intl.DateTimeFormat('es-ES', { hour: '2-digit', minute: '2-digit', timeZone: TZ_ESTUDIO });
+const DIA_MES = new Intl.DateTimeFormat(LOCALE, { day: 'numeric', month: 'long', timeZone: TZ_ESTUDIO });
+const HORA = new Intl.DateTimeFormat(LOCALE, { hour: '2-digit', minute: '2-digit', timeZone: TZ_ESTUDIO });
 const fechaExacta = (iso: string) => { const d = new Date(iso); return `${DIA_MES.format(d)} · ${HORA.format(d)}`; };
 
 /** Los avisos por día del estudio: Hoy, Ayer, Esta semana y Antes (panel nuevo). */

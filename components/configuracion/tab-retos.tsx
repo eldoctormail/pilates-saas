@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { useState } from 'react';
 import { Plus, Pencil, Trash2 } from 'lucide-react';
 import { TarjetaAjuste } from '@/components/configuracion/shell/tarjeta-ajuste';
@@ -116,7 +117,7 @@ export function TabRetos({ showToast }: { showToast: MostrarToast }) {
                   </div>
                   <p className="text-[12px] text-muted-foreground">{c.alcance === 'ESTUDIO' ? 'Para todo el estudio' : 'Con inscripción'} · {metricLabel(c.metric)} · objetivo {c.objetivo}{c.creditosRecompensa > 0 ? ` · +${c.creditosRecompensa} créditos` : ''}</p>
                   <p className="text-xs text-muted-foreground mt-0.5">
-                    {new Date(c.fechaInicio).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })} — {new Date(c.fechaFin).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })}
+                    {new Date(c.fechaInicio).toLocaleDateString(LOCALE, { day: 'numeric', month: 'short' })} — {new Date(c.fechaFin).toLocaleDateString(LOCALE, { day: 'numeric', month: 'short' })}
                   </p>
                   {!c.activo && <span className="text-xs font-bold uppercase text-muted-foreground">Inactivo</span>}
                 </div>

@@ -1,3 +1,4 @@
+import { LOCALE } from '../locale.ts';
 import { conMoneda } from '../moneda.ts';
 import * as Sentry from '@sentry/nextjs';
 import { mensajeDe } from './mensajes-automatizacion.ts';
@@ -395,7 +396,7 @@ export function computeAutomationCandidatos(
         .filter(s => hoyEnEstudio(new Date(s.inicio)) === mananaStr && !s.cancelada)
         .forEach(sesion => {
           const tipo = tipoById.get(sesion.tipoClaseId);
-          const hora = new Date(sesion.inicio).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', timeZone: TZ_ESTUDIO });
+          const hora = new Date(sesion.inicio).toLocaleTimeString(LOCALE, { hour: '2-digit', minute: '2-digit', timeZone: TZ_ESTUDIO });
           const hoyStr = hoyEnEstudio(now);
           reservas
             .filter(r => r.sesionId === sesion.id && r.estado === 'CONFIRMADA')
@@ -467,8 +468,8 @@ export function computeAutomationCandidatos(
         const referencia = ordenadas[0];
         const tipo = tipoById.get(referencia.tipoClaseId);
         const inicioRef = new Date(referencia.inicio);
-        const diaSemana = inicioRef.toLocaleDateString('es-ES', { weekday: 'long' });
-        const hora = inicioRef.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+        const diaSemana = inicioRef.toLocaleDateString(LOCALE, { weekday: 'long' });
+        const hora = inicioRef.toLocaleTimeString(LOCALE, { hour: '2-digit', minute: '2-digit' });
 
         candidatos.push({
           rule,

@@ -1,3 +1,4 @@
+import { LOCALE } from '../../../lib/locale.ts';
 import type { Metadata } from 'next';
 import { Rocket, Sparkles, Gauge, Wrench } from 'lucide-react';
 import { getSupabaseAdmin } from '@/lib/db/supabase-admin';
@@ -23,7 +24,7 @@ const ETIQUETA: Record<string, { label: string; icon: typeof Sparkles }> = {
   ARREGLO: { label: 'Arreglo', icon: Wrench },
 };
 
-const fecha = (iso: string) => new Date(`${iso}T00:00:00Z`).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+const fecha = (iso: string) => new Date(`${iso}T00:00:00Z`).toLocaleDateString(LOCALE, { day: 'numeric', month: 'long', year: 'numeric' });
 
 interface Cambio { id: string; etiqueta: string; texto: string; orden: number }
 interface Version { id: string; version: string; titulo: string; fecha_publicacion: string; changelog_cambios: Cambio[] }

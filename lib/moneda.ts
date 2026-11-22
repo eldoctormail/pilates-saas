@@ -2,12 +2,14 @@
 // escrito a mano.
 //
 // Por defecto, pesos argentinos con formato es-AR («$ 1.234,50»). Se cambia con
-// NEXT_PUBLIC_MONEDA (código ISO 4217) y NEXT_PUBLIC_LOCALE_MONEDA. Los tests la
+// NEXT_PUBLIC_MONEDA (código ISO 4217) y NEXT_PUBLIC_LOCALE_MONEDA (por defecto, el de lib/locale.ts). Los tests la
 // fijan en EUR / es-ES (scripts/register-test-hooks.mjs) porque sus textos
 // esperados están escritos en euros.
 //
 // Lo que queda en euros a propósito: Stripe (cobros online, apagado en esta
 // instalación), VeriFactu y las páginas comerciales de Tentare.
+
+import { LOCALE } from './locale.ts';
 
 const leer = (v: string | undefined): string | undefined => (v && v.trim()) || undefined;
 
@@ -15,7 +17,7 @@ export const MONEDA: string =
   (typeof process !== 'undefined' ? leer(process.env.NEXT_PUBLIC_MONEDA) : undefined) ?? 'ARS';
 
 export const LOCALE_MONEDA: string =
-  (typeof process !== 'undefined' ? leer(process.env.NEXT_PUBLIC_LOCALE_MONEDA) : undefined) ?? 'es-AR';
+  (typeof process !== 'undefined' ? leer(process.env.NEXT_PUBLIC_LOCALE_MONEDA) : undefined) ?? LOCALE;
 
 const partes = /* @__PURE__ */ new Intl.NumberFormat(LOCALE_MONEDA, {
   style: 'currency', currency: MONEDA, currencyDisplay: 'narrowSymbol',

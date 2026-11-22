@@ -2,6 +2,7 @@
 // entró y la tarjeta existe): si el correo falla, `correo_enviado_en` queda a null, el
 // panel lo enseña y «Reenviar» lo repite. Nunca un error de envío deshace una venta.
 // El código viaja en el correo y en ningún log.
+import { LOCALE } from '../locale.ts';
 import { Resend } from 'resend';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { correoRegaloDestinataria, correoRegaloJustificante } from '@/lib/emails/estudio/regalo';
@@ -10,7 +11,7 @@ import { resolverMarcaEstudio } from '@/lib/emails/plantillas-server';
 import { remitentePorMarca } from '@/lib/emails/remitente';
 import { formatearEuros } from './reglas';
 
-const fechaEs = (iso: string) => new Date(`${iso}T12:00:00Z`).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+const fechaEs = (iso: string) => new Date(`${iso}T12:00:00Z`).toLocaleDateString(LOCALE, { day: 'numeric', month: 'long', year: 'numeric' });
 
 export async function enviarCorreosRegalo(
   admin: SupabaseClient, studioId: string, tarjetaId: string,

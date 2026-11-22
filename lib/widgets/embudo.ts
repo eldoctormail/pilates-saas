@@ -12,6 +12,7 @@
 // reservas completadas = `booking_completed` (la compra de un plan se confirma
 // por webhook y NO entra aquí).
 
+import { LOCALE } from '../locale.ts';
 import { WIDGETS } from './catalogo.ts';
 
 export interface FilaEmbudoOrigen {
@@ -51,7 +52,7 @@ export function nombreDeEtiqueta(etiqueta: string | null): { widgetId: string | 
   return { widgetId: null, nombre: `Etiqueta «${etiqueta}»` };
 }
 
-const cifra = (n: number, uno: string, varios: string) => `${n.toLocaleString('es-ES')} ${n === 1 ? uno : varios}`;
+const cifra = (n: number, uno: string, varios: string) => `${n.toLocaleString(LOCALE)} ${n === 1 ? uno : varios}`;
 
 /**
  * El mes de un widget en una línea: la cabecera del constructor y cada fila de
@@ -65,7 +66,7 @@ export function textoMes(r: EmbudoWidget | null): string {
   const partes = [cifra(r.visitas, 'visita', 'visitas')];
   // `conversion` es null con visitas solo si el widget no tiene reserva que medir.
   if (r.conversion !== null) partes.push(cifra(r.reservasCompletadas, 'reserva', 'reservas'));
-  if (r.conversion) partes.push(`${r.conversion.toLocaleString('es-ES')} %`);
+  if (r.conversion) partes.push(`${r.conversion.toLocaleString(LOCALE)} %`);
   return `Este mes: ${partes.join(' · ')}`;
 }
 

@@ -12,6 +12,7 @@
 // aunque tenga más clases que ninguno.
 
 /** Lo mínimo que hace falta de una clase. Es un subconjunto de `ReservaSlot`. */
+import { LOCALE } from '../locale.ts';
 import { diaEnEstudio } from '../calendario-hora-estudio.ts';
 export interface ClaseDelMes {
   inicio: string;
@@ -137,11 +138,11 @@ export function resumenDia(d: DiaMes): string {
  */
 export function etiquetaDia(d: DiaMes): string {
   const fecha = new Date(`${d.fecha}T12:00:00`)
-    .toLocaleDateString('es-ES', { day: 'numeric', month: 'long' });
+    .toLocaleDateString(LOCALE, { day: 'numeric', month: 'long' });
   return `${fecha} — ${resumenDia(d)}`;
 }
 
 /** «agosto de 2026», para la cabecera del navegador de mes. */
 export function etiquetaMes(ancla: Date): string {
-  return ancla.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' });
+  return ancla.toLocaleDateString(LOCALE, { month: 'long', year: 'numeric' });
 }

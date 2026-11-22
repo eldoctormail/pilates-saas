@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { useState } from 'react';
 import { Check } from 'lucide-react';
 import { OBJETIVOS, PUNTOS, type Objetivo, type Punto, type TipoFecha } from '@/lib/opening/onboarding';
@@ -37,7 +38,7 @@ const MESES = (() => {
     const d = new Date(Date.UTC(hoy.getUTCFullYear(), hoy.getUTCMonth() + i, 1));
     return {
       valor: d.toISOString().slice(0, 7),
-      texto: new Intl.DateTimeFormat('es-ES', { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(d),
+      texto: new Intl.DateTimeFormat(LOCALE, { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(d),
     };
   });
 })();

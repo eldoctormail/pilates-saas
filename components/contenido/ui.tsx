@@ -4,6 +4,7 @@
 // tokens de tema del panel (bg-card, border-border, text-foreground…) para
 // mantener el look premium del SaaS.
 
+import { LOCALE } from '../../lib/locale.ts';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
@@ -125,18 +126,18 @@ export function StatCard({
 // ── Formateadores ──────────────────────────────────────────────────────────
 
 export function fmtNum(n: number): string {
-  return n.toLocaleString('es-ES', { maximumFractionDigits: 0 });
+  return n.toLocaleString(LOCALE, { maximumFractionDigits: 0 });
 }
 export function fmtCompact(n: number): string {
-  if (n >= 1000) return n.toLocaleString('es-ES', { notation: 'compact', maximumFractionDigits: 1 });
+  if (n >= 1000) return n.toLocaleString(LOCALE, { notation: 'compact', maximumFractionDigits: 1 });
   return String(n);
 }
 export function fmtFecha(iso: string): string {
-  return new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
+  return new Date(iso).toLocaleDateString(LOCALE, { day: 'numeric', month: 'short' });
 }
 export function fmtFechaHora(iso: string): string {
-  return new Date(iso).toLocaleString('es-ES', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+  return new Date(iso).toLocaleString(LOCALE, { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
 }
 export function fmtHora(iso: string): string {
-  return new Date(iso).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+  return new Date(iso).toLocaleTimeString(LOCALE, { hour: '2-digit', minute: '2-digit' });
 }

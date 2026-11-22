@@ -16,6 +16,7 @@
 // salud.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { LOCALE } from '../locale.ts';
 import { constancia } from './constancia.ts';
 
 /**
@@ -172,7 +173,7 @@ export function variosPlanes(planesVivos: ReadonlySet<string> | undefined): bool
 }
 
 // Una vez por módulo: construir un Intl por llamada es caro (una por fila).
-const UN_DECIMAL = new Intl.NumberFormat('es-ES', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const UN_DECIMAL = new Intl.NumberFormat(LOCALE, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 /**
  * «1,4» para la columna «Clases por semana»: siempre con un decimal, para que
  * la columna se lea alineada. Con menos de `SEMANAS_MINIMAS` contadas lleva sus

@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../../lib/locale.ts';
 import { useMemo } from 'react';
 import Link from 'next/link';
 import { useContenido } from '@/lib/contenido/store';
@@ -105,7 +106,7 @@ export default function PanelContenidoPage() {
                 <li key={p.id} className="flex items-center gap-3 py-3 first:pt-0 last:pb-0">
                   <div className="flex flex-col items-center justify-center w-11 shrink-0">
                     <span className="text-[10px] font-semibold text-muted-foreground uppercase">
-                      {new Date(p.fechaProgramada).toLocaleDateString('es-ES', { weekday: 'short' })}
+                      {new Date(p.fechaProgramada).toLocaleDateString(LOCALE, { weekday: 'short' })}
                     </span>
                     <span className="text-lg font-bold text-foreground leading-none">
                       {new Date(p.fechaProgramada).getDate()}
@@ -205,7 +206,7 @@ function FilaRendimiento({ p }: { p: Publicacion }) {
       <PlataformasStack plataformas={p.plataformas} size={22} />
       <div className="min-w-0 flex-1">
         <p className="text-sm font-semibold text-foreground truncate">{p.titulo}</p>
-        <p className="text-[11px] text-muted-foreground">{new Date(p.fechaPublicada!).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' })}</p>
+        <p className="text-[11px] text-muted-foreground">{new Date(p.fechaPublicada!).toLocaleDateString(LOCALE, { day: 'numeric', month: 'short' })}</p>
       </div>
       <div className="hidden sm:flex items-center gap-3 text-[12px] text-muted-foreground tabular-nums">
         <Metricilla icon={Eye} v={m.visualizaciones} />

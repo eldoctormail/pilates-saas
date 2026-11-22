@@ -12,6 +12,7 @@
 // el libro sin etiqueta aquí, se enseña con su nombre en claro en vez de
 // esconderla: un cambio de dinero que no se lee no es una auditoría.
 
+import { LOCALE } from './locale.ts';
 import { capitalizarPrimera, formatEuro, fechaCortaEstudio, horaEstudio, TZ_ESTUDIO } from './utils.ts';
 import { etiquetaMotivo } from './recibos-eliminar.ts';
 
@@ -177,7 +178,7 @@ export function quienDe(e: Pick<EntradaAuditoria, 'actorRol'>, nombre?: string |
 // ── Cuándo ───────────────────────────────────────────────────────────────────
 
 function anioEstudio(d: Date): string {
-  return d.toLocaleDateString('es-ES', { year: 'numeric', timeZone: TZ_ESTUDIO });
+  return d.toLocaleDateString(LOCALE, { year: 'numeric', timeZone: TZ_ESTUDIO });
 }
 
 /** «25 de septiembre · 14:32» en hora del estudio; con el año si no es el actual. */
@@ -197,7 +198,7 @@ const MAX_TEXTO = 80;
 function fechaSola(v: string): string {
   const d = new Date(`${v.slice(0, 10)}T12:00:00Z`);
   if (Number.isNaN(d.getTime())) return v;
-  return d.toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
+  return d.toLocaleDateString(LOCALE, { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
 }
 
 export function formatearValor(campo: string, valor: unknown, ahora: Date = new Date()): string {

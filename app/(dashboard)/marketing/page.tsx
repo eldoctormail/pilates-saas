@@ -1,5 +1,6 @@
 'use client'
 
+import { LOCALE } from '../../../lib/locale.ts';
 import { conMoneda, MONEDA_SIMBOLO, LOCALE_MONEDA } from '../../../lib/moneda.ts';
 import { useState, useEffect, useId } from 'react'
 import Link from 'next/link'
@@ -111,7 +112,7 @@ type TemplateKey = keyof typeof TEMPLATES
 function formatDateEs(dateStr: string | null | undefined) {
   if (!dateStr) return 'Sin fecha'
   try {
-    return new Intl.DateTimeFormat('es-ES', { day: '2-digit', month: 'short', year: 'numeric' }).format(new Date(dateStr))
+    return new Intl.DateTimeFormat(LOCALE, { day: '2-digit', month: 'short', year: 'numeric' }).format(new Date(dateStr))
   } catch {
     return 'Sin fecha'
   }

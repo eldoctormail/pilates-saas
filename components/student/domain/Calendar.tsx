@@ -1,4 +1,5 @@
 'use client';
+import { LOCALE } from '../../../lib/locale.ts';
 import { useState } from 'react';
 import { hoyISO } from '@/lib/student/formato';
 import { Icono } from '@/components/student/ui/Icono';
@@ -11,7 +12,7 @@ export function Calendar({ value, onChange, marcados }: { value: string; onChang
   // ⚠️ El paquete usa `textTransform: 'capitalize'`, que en CSS pone en
   // mayúscula CADA palabra: «Septiembre De 2026». En castellano el «de» va en
   // minúscula. Se capitaliza solo la primera letra, en JS.
-  const mesCrudo = primero.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' });
+  const mesCrudo = primero.toLocaleDateString(LOCALE, { month: 'long', year: 'numeric' });
   const mes = mesCrudo.charAt(0).toUpperCase() + mesCrudo.slice(1);
   const mover = (n: number) => { const d = new Date(y, m - 1 + n, 1); setCursor(d.toISOString().slice(0, 7)); };
   const hoy = hoyISO();

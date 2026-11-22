@@ -1,3 +1,4 @@
+import { LOCALE } from '../locale.ts';
 import type { DestinatariosCampana } from '../types.ts';
 import { SEGMENTOS_AUDIENCIA } from '../marketing/segmentos.ts';
 import { NOMBRE_ETAPA, type EtapaVista } from './etapas.ts';
@@ -71,7 +72,7 @@ export function tocaRecordarFinEtapa(e: Pick<EtapaVista, 'desde' | 'hasta' | 'ce
   return e.limitePlazas === null || e.ventas < e.limitePlazas;
 }
 
-const fechaLarga = (f: string) => new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'long', timeZone: 'UTC' })
+const fechaLarga = (f: string) => new Intl.DateTimeFormat(LOCALE, { day: 'numeric', month: 'long', timeZone: 'UTC' })
   .format(new Date(`${f}T00:00:00Z`));
 
 /** A las interesadas: la venta de esta etapa está abierta. */

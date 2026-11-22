@@ -5,6 +5,7 @@
 // las activas HOY (que no dependen del periodo, y se dice) y las cohortes, que
 // tampoco dependen de él.
 
+import { LOCALE } from '../../lib/locale.ts';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { DIAS_VINO_HACE_POCO, type ConteosEstado } from '@/lib/clientas/estado';
@@ -16,7 +17,7 @@ import { CabeceraBloque, conSigno, frenteA, tonoDiferencia } from './piezas';
 import { useClaseBloque } from './piezas';
 
 // «may 26»: el mes de una cohorte ('YYYY-MM'), sin depender de la zona del navegador.
-const FORMATO_MES_COHORTE = new Intl.DateTimeFormat('es-ES', { month: 'short', year: '2-digit', timeZone: 'UTC' });
+const FORMATO_MES_COHORTE = new Intl.DateTimeFormat(LOCALE, { month: 'short', year: '2-digit', timeZone: 'UTC' });
 function etiquetaMes(ym: string): string {
   return FORMATO_MES_COHORTE.format(new Date(Date.UTC(Number(ym.slice(0, 4)), Number(ym.slice(5, 7)) - 1, 15)));
 }

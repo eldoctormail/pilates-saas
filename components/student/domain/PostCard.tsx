@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../../lib/locale.ts';
 import { useState } from 'react';
 import type { ComentarioTablon, Post } from '@/lib/student/tipos';
 import { relativo } from '@/lib/student/formato';
@@ -36,8 +37,8 @@ import { useNormasComunidad } from '@/components/student/domain/NormasComunidad'
 
 function fechaEvento(iso: string): string {
   const d = new Date(iso);
-  const f = new Intl.DateTimeFormat('es-ES', { weekday: 'short', day: 'numeric', month: 'short' }).format(d);
-  const h = new Intl.DateTimeFormat('es-ES', { hour: '2-digit', minute: '2-digit' }).format(d);
+  const f = new Intl.DateTimeFormat(LOCALE, { weekday: 'short', day: 'numeric', month: 'short' }).format(d);
+  const h = new Intl.DateTimeFormat(LOCALE, { hour: '2-digit', minute: '2-digit' }).format(d);
   return `${f.charAt(0).toUpperCase()}${f.slice(1)} · ${h}`;
 }
 

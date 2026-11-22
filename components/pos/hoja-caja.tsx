@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { useState, useEffect } from 'react';
 import { X, ArrowDownLeft, ArrowUpRight, Loader2 } from 'lucide-react';
 import { cn, formatEuro } from '@/lib/utils';
@@ -153,7 +154,7 @@ export function HojaCaja({ onCerrar, onCambio }: { onCerrar: () => void; onCambi
                       <div className="min-w-0">
                         <p className="text-[13.5px] font-medium text-foreground truncate">{m.concepto}</p>
                         <p className="text-[11.5px] text-muted-foreground">
-                          {new Date(m.creadoEn).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}
+                          {new Date(m.creadoEn).toLocaleTimeString(LOCALE, { hour: '2-digit', minute: '2-digit' })}
                           {m.metodoPago !== 'EFECTIVO' && ` · ${m.metodoPago.toLowerCase()}`}
                           {m.creadoPor && ` · ${m.creadoPor}`}
                         </p>

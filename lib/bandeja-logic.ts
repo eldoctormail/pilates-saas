@@ -18,6 +18,7 @@
 // `ahoraMs` inyectado (sin Date.now() aquí) para que los tests sean deterministas.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { LOCALE } from './locale.ts';
 import { conMoneda, LOCALE_MONEDA } from './moneda.ts';
 import type {
   BloqueoMaquina, PlazaFija, Recuperacion, Recibo, SocioExcepcion,
@@ -85,7 +86,7 @@ function plural(n: number, sing: string, plur: string): string {
 function fechaHoraCorta(iso: string): string {
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return '';
-  return d.toLocaleString('es-ES', { weekday: 'short', hour: '2-digit', minute: '2-digit' });
+  return d.toLocaleString(LOCALE, { weekday: 'short', hour: '2-digit', minute: '2-digit' });
 }
 
 // Construye la bandeja: junta candidatos de las 4 fuentes, ordena por urgencia y

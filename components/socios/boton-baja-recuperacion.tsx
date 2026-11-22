@@ -4,6 +4,7 @@
 // concede recuperación + ofrece avisar por WhatsApp (wa.me). El aviso es un enlace
 // real (gesto del usuario) para que no lo bloquee el navegador como popup.
 
+import { LOCALE } from '../../lib/locale.ts';
 import { useState } from 'react';
 import { useStudio } from '@/lib/studio-context';
 import { ConfirmDialog } from '@/components/ui/confirm-dialog';
@@ -14,7 +15,7 @@ import { enlaceWhatsApp } from '@/lib/decision/mensajes-socia';
 // Mensaje-plantilla del aviso de recuperación (dueña-first).
 function mensajeRecuperacion(nombre: string, caducaEl: string | null): string {
   const hasta = caducaEl
-    ? ` La puedes recuperar hasta el ${new Date(caducaEl.slice(0, 10) + 'T00:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long' })}.`
+    ? ` La puedes recuperar hasta el ${new Date(caducaEl.slice(0, 10) + 'T00:00:00').toLocaleDateString(LOCALE, { day: 'numeric', month: 'long' })}.`
     : '';
   return `¡Hola ${nombre}! Te he guardado una recuperación por la clase que no vas a poder usar.${hasta} ¡Un abrazo!`;
 }

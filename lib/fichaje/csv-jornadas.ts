@@ -1,3 +1,4 @@
+import { LOCALE } from '../locale.ts';
 import { ZONA_HORARIA } from '../zona-horaria.ts';
 import type { JornadaEquipo } from './jornadas-equipo.ts';
 import type { ClaseEquipo } from './clases-equipo.ts';
@@ -11,7 +12,7 @@ import type { ClaseEquipo } from './clases-equipo.ts';
 
 const TZ = ZONA_HORARIA;
 const fmtFecha = new Intl.DateTimeFormat('en-CA', { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit' });
-const fmtHora = new Intl.DateTimeFormat('es-ES', { timeZone: TZ, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
+const fmtHora = new Intl.DateTimeFormat(LOCALE, { timeZone: TZ, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
 
 const ESTADO: Record<JornadaEquipo['status'], string> = { OPEN: 'Abierta', CLOSED: 'Cerrada', PENDING_REVIEW: 'Por revisar' };
 

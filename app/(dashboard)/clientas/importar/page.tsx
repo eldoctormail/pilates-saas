@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../../../lib/locale.ts';
 import { useEffect, useMemo, useRef, useState, useId } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -161,7 +162,7 @@ export default function ImportarSociasPage() {
       return;
     }
     if (p.demasiadas) {
-      setErrorCarga(`Son más de ${MAX_FILAS_LEIDAS.toLocaleString('es-ES')} filas. Pégalas en tandas de ${MAX_FILAS_PEGADAS.toLocaleString('es-ES')} como mucho.`);
+      setErrorCarga(`Son más de ${MAX_FILAS_LEIDAS.toLocaleString(LOCALE)} filas. Pégalas en tandas de ${MAX_FILAS_PEGADAS.toLocaleString(LOCALE)} como mucho.`);
       return;
     }
     const cabecera = p.cabeceraAdivinada && p.filas.length > 1;
@@ -386,7 +387,7 @@ export default function ImportarSociasPage() {
           {demasiadasPegadas && (
             <div role="alert" className="flex items-start gap-2 text-[13px] rounded-xl px-4 py-3 border" style={{ backgroundColor: 'color-mix(in srgb, var(--destructive, #d33) 8%, transparent)', borderColor: 'color-mix(in srgb, var(--destructive, #d33) 30%, transparent)', color: 'var(--destructive, #8E3722)' }}>
               <AlertTriangle size={15} className="shrink-0 mt-0.5" />
-              <span>Hay {conteo.ok.toLocaleString('es-ES')} clientes listas y se importan como mucho {MAX_FILAS_PEGADAS.toLocaleString('es-ES')} de una vez. Pégalas en tandas de {MAX_FILAS_PEGADAS.toLocaleString('es-ES')}.</span>
+              <span>Hay {conteo.ok.toLocaleString(LOCALE)} clientes listas y se importan como mucho {MAX_FILAS_PEGADAS.toLocaleString(LOCALE)} de una vez. Pégalas en tandas de {MAX_FILAS_PEGADAS.toLocaleString(LOCALE)}.</span>
             </div>
           )}
           {avisosPegado && avisosPegado.saludRelacionada.length > 0 && (

@@ -14,6 +14,7 @@
 //
 // Puro: se prueba con `node --test`.
 
+import { LOCALE } from '../locale.ts';
 import { conMoneda } from '../moneda.ts';
 import { ZONA_HORARIA } from '../zona-horaria.ts';
 import { heredaOverride, instanteDeApertura } from '../booking-logic.ts';
@@ -71,7 +72,7 @@ export interface PasoReserva {
   tono?: 'bien' | 'aviso';
 }
 
-const partes = (d: Date) => Object.fromEntries(new Intl.DateTimeFormat('es-ES', {
+const partes = (d: Date) => Object.fromEntries(new Intl.DateTimeFormat(LOCALE, {
   timeZone: ZONA, weekday: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false,
 }).formatToParts(d).map(p => [p.type, p.value]));
 
@@ -201,7 +202,7 @@ function juevesALas18(ahora: Date): Date {
   const iso = jueves.toISOString().slice(0, 10);
   for (const desfase of ['+02:00', '+01:00', '-03:00']) {
     const t = new Date(`${iso}T18:00:00${desfase}`);
-    if (new Intl.DateTimeFormat('es-ES', { timeZone: ZONA, hour: '2-digit', hour12: false }).format(t) === '18') return t;
+    if (new Intl.DateTimeFormat(LOCALE, { timeZone: ZONA, hour: '2-digit', hour12: false }).format(t) === '18') return t;
   }
   return new Date(`${iso}T16:00:00Z`);
 }

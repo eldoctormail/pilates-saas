@@ -12,6 +12,7 @@
 // Accesible: una tabla con los mismos datos para lectores de pantalla.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { LOCALE } from '../../lib/locale.ts';
 import { useEffect, useId, useRef, useState } from 'react';
 import { marcasEje } from '@/lib/inicio/cifras';
 
@@ -74,7 +75,7 @@ export function GraficaArea({
   const cada = Math.max(1, Math.ceil(n / Math.max(2, Math.floor(anchoUtil / 48))));
   const conEtiqueta = (i: number) => i === n - 1 || (i % cada === 0 && n - 1 - i >= cada);
   // El eje lleva números solos («5», no «5 reservas»): con la unidad no cabe.
-  const fmtEje = formatoEje ?? ((v: number) => v.toLocaleString('es-ES'));
+  const fmtEje = formatoEje ?? ((v: number) => v.toLocaleString(LOCALE));
 
   function alMover(ev: React.PointerEvent<SVGSVGElement>) {
     if (n === 0) return;

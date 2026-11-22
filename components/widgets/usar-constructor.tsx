@@ -1,5 +1,6 @@
 'use client';
 
+import { LOCALE } from '../../lib/locale.ts';
 import { ZONA_HORARIA } from '../../lib/zona-horaria.ts';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
@@ -337,8 +338,8 @@ export function useConstructorWidgets({ slug, showToast, ...opciones }: {
         const inicio = new Date(s.inicio);
         return {
           id: s.id,
-          etiqueta: `${tiposPorId.get(s.tipoClaseId) ?? 'Clase'} — ${inicio.toLocaleString('es-ES', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: ZONA_HORARIA })}`,
-          cuando: inicio.toLocaleString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: ZONA_HORARIA }),
+          etiqueta: `${tiposPorId.get(s.tipoClaseId) ?? 'Clase'} — ${inicio.toLocaleString(LOCALE, { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: ZONA_HORARIA })}`,
+          cuando: inicio.toLocaleString(LOCALE, { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: ZONA_HORARIA }),
         };
       });
   }, [sesiones, ahora, tiposPorId]);

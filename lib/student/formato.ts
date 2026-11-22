@@ -12,6 +12,7 @@
 // hay estudios en otro huso, esto pasa a salir del estudio y no de una
 // constante — pero inventar esa configuración hoy sería adivinar.
 
+import { LOCALE } from '../locale.ts';
 import { conMoneda, LOCALE_MONEDA } from '../moneda.ts';
 import { ZONA_HORARIA } from '../zona-horaria.ts';
 const DIAS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
@@ -46,7 +47,7 @@ export function hoyISO(ahora: Date = new Date()): string {
  * (`hora-del-estudio.test.ts`) fija una zona de proceso distinta a propósito.
  */
 export function horaAhora(ahora: Date = new Date()): string {
-  return new Intl.DateTimeFormat('es-ES', {
+  return new Intl.DateTimeFormat(LOCALE, {
     timeZone: ZONA, hour: '2-digit', minute: '2-digit', hour12: false,
   }).format(ahora);
 }
@@ -139,7 +140,7 @@ export function fechaLarga(iso: string): string {
 
 /** «Buenos días, Carmen». La hora también es la de Madrid. */
 export function saludo(nombre: string, ahora: Date = new Date()): string {
-  const h = Number(new Intl.DateTimeFormat('es-ES', { timeZone: ZONA, hour: 'numeric', hour12: false }).format(ahora));
+  const h = Number(new Intl.DateTimeFormat(LOCALE, { timeZone: ZONA, hour: 'numeric', hour12: false }).format(ahora));
   const parte = h < 13 ? 'Buenos días' : h < 20 ? 'Buenas tardes' : 'Buenas noches';
   return nombre ? `${parte}, ${nombre}` : parte;
 }

@@ -1,0 +1,17 @@
+# Solo para el ensayo (deploy/ensayo/ensayo.sh lo copia a la carpeta de Supabase
+# y lo suma a COMPOSE_FILE; «terminar» lo saca).
+#
+# Mailpit: un buzón de prueba. Los correos de Auth (el código de 6 cifras de la
+# alumna, confirmar la cuenta, recuperar la contraseña) llegan acá en vez de
+# salir a internet, y se leen en http://IP-DEL-SERVIDOR:8025.
+services:
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: supabase-mailpit
+    restart: unless-stopped
+    environment:
+      MP_SMTP_AUTH_ACCEPT_ANY: "1"
+      MP_SMTP_AUTH_ALLOW_INSECURE: "1"
+      MP_MAX_MESSAGES: "500"
+    ports:
+      - "8025:8025"

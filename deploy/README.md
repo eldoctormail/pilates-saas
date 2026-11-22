@@ -17,6 +17,34 @@ Cuando haya dominio, ver [Pasar a dominio](#pasar-a-dominio).
 > Con `http://IP`, sin TLS, algunas cookies marcadas `secure` (por ejemplo, el estado de la suscripción) no se guardan. Sirve para probar, pero para usarlo de verdad conviene tener HTTPS.
 
 **Requisitos:** Linux con Docker y el plugin Compose, al menos 4 GB de RAM (8 GB para compilar la app con holgura), `git` y `openssl`.
+No hace falta Node en el servidor: si no está, `migrar.sh` corre la CLI de Supabase en un contenedor.
+
+**Antes de abrir:** hay un ensayo general con Mercado Pago de prueba y sin dominio, en [`deploy/ensayo/`](ensayo/PRUEBAS.md).
+
+### Raspberry Pi
+
+Pensado para una Raspberry Pi 5 de 8 GB, todavía sin probar en una. Las imágenes que se usan publican versión ARM de 64 bits; si alguna no la tuviera, `docker compose pull` lo dice en el acto. Lo que importa:
+
+- **Raspberry Pi OS de 64 bits** (`uname -m` tiene que decir `aarch64`).
+- **La base en un SSD**, no en la tarjeta SD. Postgres escribe todo el tiempo y una SD se gasta y va lenta. Sirve un NVMe con su placa, o un SSD por USB 3. Lo más simple es arrancar el sistema entero desde el SSD.
+- **Swap de 4 GB o más**, porque compilar la app pide hasta 6 GB de memoria. En Raspberry Pi OS, en `/etc/dphys-swapfile`:
+
+  ```sh
+  CONF_SWAPSIZE=4096
+  CONF_MAXSWAP=4096
+  ```
+
+  Después, `sudo systemctl restart dphys-swapfile`.
+- **Compilar con Supabase parado.** La compilación y Supabase no entran juntos en 8 GB. El ensayo ya lo hace solo. A mano:
+
+  ```sh
+  cd ~/supabase-project && docker compose stop
+  cd /ruta/al/repo/deploy && docker compose build app
+  cd ~/supabase-project && docker compose up -d
+  ```
+
+  La primera compilación tarda bastante: media hora o más.
+- **Refrigeración activa** (el ventilador oficial): con la compilación al 100 % de CPU, sin ventilador se frena.
 
 ---
 

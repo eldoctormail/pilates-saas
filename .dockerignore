@@ -5,7 +5,10 @@ node_modules
 .env.*
 !.env.example
 deploy/.env
-e2e
+# Los tests e2e no van a la imagen, salvo el sembrado del panel de demostración:
+# lo importa lib/demo/panel/entrada.ts y sin él falla la comprobación de tipos.
+e2e/*
+!e2e/panel-sembrado.ts
 ios
 movil
 demo

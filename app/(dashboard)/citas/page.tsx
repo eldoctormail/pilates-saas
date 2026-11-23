@@ -15,7 +15,8 @@ import { PageHeader } from '@/components/ui/page-header';
 import { EmptyState } from '@/components/ui/empty-state';
 import { usePanelNuevo } from '@/lib/estudio/panel-nuevo-cliente';
 import { BotonVivo, PantallaVacia, TarjetaCifra, type Tono } from '@/components/dashboard/vivo';
-import { CalendarCheck, Euro, UserX } from 'lucide-react';
+import { CalendarCheck, UserX } from 'lucide-react';
+import { IconoMoneda } from '@/components/ui/icono-moneda';
 import { emiteFacturas as emiteFacturasDelEstudio } from '@/lib/factura-automatica';
 import {
   Dialog,
@@ -644,7 +645,7 @@ export default function CitasPage() {
         <div className="grid grid-cols-2 gap-3 xl:grid-cols-4 xl:gap-4">
           {metricas.map((m, i) => {
             const estilo: { tono: Tono; Icono: React.ElementType; abajo: string } =
-              m.label === 'Ingresos este mes' ? { tono: 'verde', Icono: Euro, abajo: 'cobrado en citas' }
+              m.label === 'Ingresos este mes' ? { tono: 'verde', Icono: IconoMoneda, abajo: 'cobrado en citas' }
               : m.label === 'Citas este mes' ? { tono: 'indigo', Icono: Clock, abajo: `${upcoming.length} próximas` }
               : m.label === 'Asistencia' ? { tono: 'azul', Icono: CalendarCheck, abajo: m.title ?? 'de las citas resueltas' }
               : { tono: 'magenta', Icono: UserX, abajo: 'este mes' };

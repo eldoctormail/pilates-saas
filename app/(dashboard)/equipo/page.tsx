@@ -2,7 +2,8 @@
 
 import { TELEFONO_EJEMPLO } from '@/lib/locale';
 import { LOCALE } from '../../../lib/locale.ts';
-import { MONEDA_SIMBOLO, MONEDA, LOCALE_MONEDA } from '../../../lib/moneda.ts';
+import { MONEDA_SIMBOLO, MONEDA, LOCALE_MONEDA, formatoMoneda } from '../../../lib/moneda.ts';
+import { TARIFA_HORA_MAX } from '@/lib/equipo/tarifa-limites';
 import { AyudaDelPaso } from '@/components/guia/ayuda-del-paso';
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, useId, useSyncExternalStore } from 'react';
 import { useRouter } from 'next/navigation';
@@ -10,13 +11,8 @@ import Link from 'next/link';
 import { useStudio } from '@/lib/studio-context';
 import type { Instructor, Rol, Sesion, TipoClase } from '@/lib/types';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import {
-  Plus, Pencil, Trash2, Users, Mail, Phone, Calendar, Check, X, ShieldCheck, KeyRound, History,
-  CalendarClock, CalendarOff, Copy, Star, Search, MoreVertical, Camera, Loader2, Clock, Download,
-  ChevronLeft, ChevronRight, Plane, Stethoscope, AlertTriangle, MessageCircle, Bell, Euro, TrendingUp,
-  Network, ArrowLeftRight,
-  ChevronDown,
-} from 'lucide-react';
+import { Plus, Pencil, Trash2, Users, Mail, Phone, Calendar, Check, X, ShieldCheck, KeyRound, History, CalendarClock, CalendarOff, Copy, Star, Search, MoreVertical, Camera, Loader2, Clock, Download, ChevronLeft, ChevronRight, Plane, Stethoscope, AlertTriangle, MessageCircle, Bell, TrendingUp, Network, ArrowLeftRight, ChevronDown } from 'lucide-react';
+import { IconoMoneda } from '@/components/ui/icono-moneda';
 import { ProfileAvatar, AvatarPicker } from '@/components/ui/profile-avatar';
 import { formatFechaHora, formatFechaLarga, uid as generarId, cn, hoyEnEstudio, masDias, cuandoEstudio, fechaLargaEstudio, horaEstudio } from '@/lib/utils';
 import { mapLimit } from '@/lib/concurrency';
@@ -250,7 +246,7 @@ export default function EquipoPage() {
   // Bloquear el guardado aquí, antes del round-trip, lo hace imposible de
   // pasar por alto.
   const tarifaValida = tarifaHoraInput.trim() === ''
-    || (Number.isFinite(Number(tarifaHoraInput)) && Number(tarifaHoraInput) >= 0 && Number(tarifaHoraInput) <= 999.99);
+    || (Number.isFinite(Number(tarifaHoraInput)) && Number(tarifaHoraInput) >= 0 && Number(tarifaHoraInput) <= TARIFA_HORA_MAX);
 
   useEffect(() => {
     let vivo = true;
@@ -559,7 +555,7 @@ export default function EquipoPage() {
   const pantallasEquipo: (AccionMenu & { href: string })[] = puedeGestionarEquipo(miRol) ? [
     { href: '/equipo/rendimiento', texto: 'Rendimiento', icono: TrendingUp, nota: 'Retención y conversión de cada una, últimos 90 días', onClick: () => router.push('/equipo/rendimiento') },
     { href: '/equipo/tiempo-trabajado', texto: 'Tiempo trabajado', icono: Clock, nota: 'Las jornadas que fichan y las clases que dan', onClick: () => router.push('/equipo/tiempo-trabajado') },
-    { href: '/equipo/liquidaciones', texto: 'Liquidaciones', icono: Euro, nota: 'Lo que le corresponde a cada una este mes', onClick: () => router.push('/equipo/liquidaciones') },
+    { href: '/equipo/liquidaciones', texto: 'Liquidaciones', icono: IconoMoneda, nota: 'Lo que le corresponde a cada una este mes', onClick: () => router.push('/equipo/liquidaciones') },
     // Tentare Network está congelado (lib/frozen-features.ts): vuelve solo al descongelarlo.
     ...(!esRutaCongelada('/network/buscar')
       ? [{ href: '/network/buscar', texto: 'Buscar en Tentare Network', icono: Network, onClick: () => router.push('/network/buscar') }]
@@ -612,7 +608,7 @@ export default function EquipoPage() {
                   <Clock size={16} /> Tiempo trabajado
                 </Link>
                 <Link href="/equipo/liquidaciones" className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-border text-sm font-bold text-foreground hover:bg-muted transition-colors">
-                  <Euro size={16} /> Liquidaciones
+                  <IconoMoneda size={16} /> Liquidaciones
                 </Link>
               </>
             )}
@@ -685,7 +681,7 @@ export default function EquipoPage() {
           { label: 'Miembros', value: tarjetas.length, sub: `${activos} activos`, color: 'var(--brand)', bg: 'color-mix(in srgb, var(--brand) 10%, var(--card))', Icon: Users },
           { label: 'Clases esta semana', value: clasesEstaSemana, sub: 'programadas', color: 'var(--success)', bg: 'color-mix(in srgb, var(--success) 12%, var(--card))', Icon: Calendar },
           miRol === 'PROPIETARIO'
-            ? { label: 'Coste del mes', value: costeDelEquipo.toLocaleString(LOCALE_MONEDA, { style: 'currency', currency: MONEDA, maximumFractionDigits: 0 }), sub: 'nóminas del equipo', color: 'var(--warning)', bg: 'color-mix(in srgb, var(--warning) 12%, var(--card))', Icon: Euro }
+            ? { label: 'Coste del mes', value: costeDelEquipo.toLocaleString(LOCALE_MONEDA, { style: 'currency', currency: MONEDA, maximumFractionDigits: 0 }), sub: 'nóminas del equipo', color: 'var(--warning)', bg: 'color-mix(in srgb, var(--warning) 12%, var(--card))', Icon: IconoMoneda }
             : { label: 'Con acceso', value: conAcceso, sub: `de ${tarjetas.length} miembros`, color: 'var(--warning)', bg: 'color-mix(in srgb, var(--warning) 12%, var(--card))', Icon: ShieldCheck },
         ].map(({ label, value, sub, color, bg, Icon }) => (
           <div key={label} className="bg-card border border-border rounded-2xl p-4 flex flex-col gap-2.5">
@@ -934,7 +930,7 @@ export default function EquipoPage() {
                 <label htmlFor={`${uid}-tarifa`} className={labelCls}>Tarifa por hora (opcional)</label>
                 <div className="relative">
                   <input
-                    id={`${uid}-tarifa`} type="number" min={0} max={999.99} step={0.01}
+                    id={`${uid}-tarifa`} type="number" min={0} max={TARIFA_HORA_MAX} step={0.01}
                     className={inputCls + ' pr-8'} value={tarifaHoraInput} placeholder="Sin asignar"
                     onChange={e => setTarifaHoraInput(e.target.value)}
                   />
@@ -942,7 +938,7 @@ export default function EquipoPage() {
                 </div>
                 {!tarifaValida && (
                   <p role="alert" className="text-[11px] text-destructive mt-1">
-                    Tiene que ser un número entre 0 y 999,99 {MONEDA_SIMBOLO}/h.
+                    Tiene que ser un número entre 0 y {formatoMoneda(TARIFA_HORA_MAX)} por hora.
                   </p>
                 )}
                 <label htmlFor={`${uid}-horas-contrato`} className={labelCls + ' mt-4'}>Horas semanales de contrato (opcional)</label>

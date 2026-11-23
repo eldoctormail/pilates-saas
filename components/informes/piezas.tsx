@@ -9,13 +9,14 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn, formatEuro } from '@/lib/utils';
 import { textoDelPeriodo, type Periodo } from '@/lib/cobros/lo-cobrado';
 import { CifraPrivada } from '@/components/ui/cifra-privada';
-import { BarChart3, CalendarCheck, Euro, Ticket, UserX, Users } from 'lucide-react';
+import { BarChart3, CalendarCheck, Ticket, UserX, Users } from 'lucide-react';
+import { IconoMoneda } from '@/components/ui/icono-moneda';
 import { usePanelNuevo } from '@/lib/estudio/panel-nuevo-cliente';
 import { Baldosa, type Tono } from '@/components/dashboard/vivo';
 
 /** Panel nuevo: el color y el icono de cada bloque de Informes. */
 const ICONO_DE_BLOQUE: Record<string, { tono: Tono; Icono: React.ElementType }> = {
-  'informe-dinero': { tono: 'verde', Icono: Euro },
+  'informe-dinero': { tono: 'verde', Icono: IconoMoneda },
   'informe-clases': { tono: 'azul', Icono: CalendarCheck },
   'informe-clientas': { tono: 'magenta', Icono: Users },
   'informe-euro-plaza': { tono: 'indigo', Icono: BarChart3 },

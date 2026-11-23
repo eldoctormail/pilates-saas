@@ -1,6 +1,7 @@
 'use server';
 
-import { conMoneda } from '../../moneda.ts';
+import { formatoMoneda } from '../../moneda.ts';
+import { BASE_MENSUAL_MAX, TARIFA_HORA_MAX } from '../../equipo/tarifa-limites.ts';
 import { requireAuthInServerAction } from '@/lib/auth-server-action';
 import { getSupabaseAdmin } from '@/lib/db/supabase-admin';
 import { filtrarRetribucionVisible, puedeGestionarEquipo, puedeGestionarFichaDe } from '@/lib/permisos-reglas';
@@ -15,7 +16,7 @@ import * as Sentry from '@sentry/nextjs';
  * Tarifa por hora de instructoras (tabla aparte de instructores)
  */
 
-const TARIFA_MAX = 999.99;
+const TARIFA_MAX = TARIFA_HORA_MAX;
 
 async function resolverPropioInstructorId(
   admin: NonNullable<ReturnType<typeof getSupabaseAdmin>>,
@@ -95,7 +96,7 @@ async function patchTarifa(
     } else {
       const n = Number(body.tarifaHora);
       if (!Number.isFinite(n) || n < 0 || n > TARIFA_MAX) {
-        throw new ErrorAccion(`La tarifa debe estar entre 0 y ${conMoneda(TARIFA_MAX)}/h`, 400);
+        throw new ErrorAccion(`La tarifa debe estar entre 0 y ${formatoMoneda(TARIFA_MAX)}/h`, 400);
       }
       tarifaHora = Math.round(n * 100) / 100;
     }
@@ -107,8 +108,8 @@ async function patchTarifa(
       baseMensualEur = null;
     } else {
       const n = Number(body.baseMensualEur);
-      if (!Number.isFinite(n) || n < 0 || n > 99999.99) {
-        throw new ErrorAccion(`La base mensual debe estar entre 0 y ${conMoneda('99999,99')}`, 400);
+      if (!Number.isFinite(n) || n < 0 || n > BASE_MENSUAL_MAX) {
+        throw new ErrorAccion(`La base mensual debe estar entre 0 y ${formatoMoneda(BASE_MENSUAL_MAX)}`, 400);
       }
       baseMensualEur = Math.round(n * 100) / 100;
     }

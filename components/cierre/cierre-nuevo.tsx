@@ -11,7 +11,8 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { LOCALE } from '../../lib/locale.ts';
-import { Euro, FileText, Landmark, Percent, ShieldCheck } from 'lucide-react';
+import { FileText, Landmark, Percent, ShieldCheck } from 'lucide-react';
+import { IconoMoneda } from '@/components/ui/icono-moneda';
 import { TarjetaCifra } from '@/components/dashboard/vivo';
 import type { CierreSellado, CierreTotales } from '@/lib/fiscal/cierre-engine';
 
@@ -50,7 +51,7 @@ export function CifrasCierre({ totales, sellado, conVerifactu, anio, eur }: {
     <div className="grid grid-cols-2 gap-3 xl:grid-cols-4 xl:gap-4">
       <div className="@container grid min-w-0 grid-cols-1">
         <TarjetaCifra
-          etiqueta="Total facturado" tono="verde" Icono={Euro} href={null}
+          etiqueta="Total facturado" tono="verde" Icono={IconoMoneda} href={null}
           valor={<Importe texto={eur(totales.total)} />}
           abajo={`IVA incluido · ${ingresos} ${ingresos === 1 ? 'ingreso' : 'ingresos'}`}
         />

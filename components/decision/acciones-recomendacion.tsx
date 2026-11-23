@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { Check, Clock3, Euro, Mail, MessageCircle, Send, UserCheck, X } from 'lucide-react';
+import { Check, Clock3, Mail, MessageCircle, Send, UserCheck, X } from 'lucide-react';
+import { IconoMoneda } from '@/components/ui/icono-moneda';
 import { Button } from '@/components/ui/button';
 import { usePanelNuevo } from '@/lib/estudio/panel-nuevo-cliente';
 import { BOTON_VIVO } from '@/components/dashboard/vivo';
@@ -10,7 +11,7 @@ import { admiteYaContactada, efectoDe, ROTULO_EFECTO, TONO_TRAS_DECIDIR, trasDec
 import type { RecomendacionAPI } from './use-decisiones';
 
 const ICONO: Record<EfectoAprobar, typeof Check> = {
-  COBRAR: Euro,
+  COBRAR: IconoMoneda,
   ENVIAR_EMAIL: Mail,
   ENVIAR_MENSAJE: Send,
   MARCAR: Check,

@@ -17,7 +17,8 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { useMemo } from 'react';
-import { AlertTriangle, ArrowRight, CalendarClock, Clock, Euro } from 'lucide-react';
+import { AlertTriangle, ArrowRight, CalendarClock, Clock } from 'lucide-react';
+import { IconoMoneda } from '@/components/ui/icono-moneda';
 import { useStudio } from '@/lib/studio-context';
 import { ingresosAlDia } from '@/lib/inicio/cifras';
 import { agruparDeudas } from '@/lib/cobros/deudas';
@@ -49,7 +50,7 @@ export function CifrasCobros({ datos, onIr }: { datos: DatosCobros; onIr: (d: De
       <TarjetaCifra
         etiqueta="Cobrado este mes"
         tono="verde"
-        Icono={Euro}
+        Icono={IconoMoneda}
         href="/cobros?tab=cobrado"
         onNavigate={ir('cobrado')}
         valor={<CifraPrivada inline>{formatoEuros(alDia.actual)}</CifraPrivada>}

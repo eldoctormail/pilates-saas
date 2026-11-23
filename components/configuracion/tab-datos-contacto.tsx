@@ -9,6 +9,8 @@ import { BarraGuardar } from '@/components/configuracion/shell/barra-guardar';
 import type { PropsFormularioCajon } from '@/components/configuracion/shell/cajon-ajuste';
 import { Campo, useFormularioEstudio } from '@/components/configuracion/formulario-estudio';
 import { ZonaHorariaFija } from '@/components/alta-nueva/zona-horaria-fija';
+import { FUNCIONES_DE_ESPANA } from '@/lib/locale';
+import { EJEMPLO_CP } from '@/lib/alta/tu-estudio';
 
 // Los dos cajones de datos de «Mi estudio»: «Nombre y dirección» y «Contacto».
 //
@@ -68,7 +70,7 @@ export function FormNombreYDireccion({ showToast, onGuardado }: PropsFormularioC
           {id => <input id={id} className={inputCls} value={form.ciudad} onChange={campo('ciudad')} />}
         </Campo>
         <Campo label="Código postal">
-          {id => <input id={id} className={inputCls} inputMode="numeric" value={form.codigoPostal} onChange={campo('codigoPostal')} />}
+          {id => <input id={id} className={inputCls} inputMode={FUNCIONES_DE_ESPANA ? 'numeric' : 'text'} placeholder={EJEMPLO_CP} value={form.codigoPostal} onChange={campo('codigoPostal')} />}
         </Campo>
         <ZonaHorariaFija codigoPostal={form.codigoPostal} className="@sm/config:col-span-2" />
       </div>

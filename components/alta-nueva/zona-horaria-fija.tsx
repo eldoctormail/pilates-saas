@@ -11,6 +11,14 @@
 import { AlertTriangle, Clock } from 'lucide-react';
 import { esCanarias } from '@/lib/geo/provincias';
 import { cn } from '@/lib/utils';
+import { ZONA_HORARIA } from '@/lib/zona-horaria';
+
+/** La zona en la que se calcula todo (lib/zona-horaria.ts), dicha para una persona. */
+export function nombreZonaHoraria(zona: string = ZONA_HORARIA): string {
+  if (zona === 'Europe/Madrid') return 'Madrid (peninsular)';
+  if (zona.startsWith('America/Argentina/')) return 'Argentina (UTC−3)';
+  return zona.replace(/_/g, ' ');
+}
 
 export const AVISO_CANARIAS =
   'Tentare trabaja hoy en hora peninsular: en Canarias, los recordatorios y los cierres de reserva irían una hora antes. Escríbenos antes de abrir reservas.';
@@ -37,7 +45,7 @@ export function ZonaHorariaFija({ codigoPostal, className, conAviso = true }: {
       <div className="flex items-start gap-3 rounded-xl border border-border bg-card px-3.5 py-3" data-testid="zona-horaria-fija">
         <Clock size={16} className="mt-0.5 shrink-0 text-muted-foreground" aria-hidden />
         <div className="min-w-0 flex-1">
-          <p className="text-[14px] font-semibold leading-5 text-foreground">Zona horaria: Madrid (peninsular)</p>
+          <p className="text-[14px] font-semibold leading-5 text-foreground">Zona horaria: {nombreZonaHoraria()}</p>
           <p className="text-[13px] leading-[18px] text-muted-foreground">La usan tu calendario, los recordatorios y los cierres de reserva.</p>
         </div>
         <span className="shrink-0 rounded-full bg-muted px-2 py-0.5 text-[11px] font-medium text-muted-foreground">De serie</span>

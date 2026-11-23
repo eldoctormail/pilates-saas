@@ -23,7 +23,8 @@
 import type { DiaHorario } from '../types.ts';
 import { OPCIONES_HORARIO } from '../onboarding/plan-configuracion.ts';
 import { PLAN_INFO } from '../billing/entitlements.ts';
-import { esCanarias, provinciaDeCp } from '../geo/provincias.ts';
+import { cpArgentino, esCanarias, normalizarCpArgentino, provinciaDeCp } from '../geo/provincias.ts';
+import { esArgentina } from '../locale.ts';
 
 export { esCanarias };
 
@@ -105,7 +106,7 @@ export function erroresDonde(d: DatosDonde): ErroresDonde {
   const e: ErroresDonde = {};
   if (!d.nombre.trim()) e.nombre = 'Escribe tu nombre: así te saludamos.';
   if (!d.direccion.trim()) e.direccion = 'Escribe la calle y el número: es lo que verán tus clientes.';
-  if (!provinciaDeCp(d.codigoPostal)) e.codigoPostal = 'Escribe los cinco números de tu código postal.';
+  if (!codigoPostalValido(d.codigoPostal)) e.codigoPostal = esArgentina() ? 'Escribí tu código postal: 8300 o el CPA, Q8300ABC.' : 'Escribe los cinco números de tu código postal.';
   if (!d.ciudad.trim()) e.ciudad = 'Escribe la ciudad.';
   return e;
 }
@@ -116,13 +117,30 @@ export function limpiarDonde(d: DatosDonde): DatosDonde {
   return {
     nombre: una(d.nombre, 80),
     direccion: una(d.direccion, 200),
-    codigoPostal: d.codigoPostal.replace(/\s/g, '').slice(0, 5),
+    codigoPostal: esArgentina() ? normalizarCpArgentino(d.codigoPostal).slice(0, 8) : d.codigoPostal.replace(/\s/g, '').slice(0, 5),
     ciudad: una(d.ciudad, 100),
   };
 }
 
+/**
+ * ¿Es un código postal del país del formato regional (lib/locale.ts)? España:
+ * cinco cifras con su provincia. Argentina: cuatro cifras o el CPA.
+ */
+export function codigoPostalValido(codigoPostal: string | null | undefined, locale?: string): boolean {
+  return esArgentina(locale) ? cpArgentino(codigoPostal).valido : !!provinciaDeCp(codigoPostal);
+}
+
+/** Ejemplos para los campos del alta y de Configuración, del país del formato regional. */
+export const EJEMPLO_CP: string = esArgentina() ? '8300' : '28003';
+export const EJEMPLO_CIUDAD: string = esArgentina() ? 'Córdoba' : 'Madrid';
+
 /** La línea de debajo del código postal: la provincia, sin servicio externo. */
-export function textoProvincia(codigoPostal: string): string {
+export function textoProvincia(codigoPostal: string, locale?: string): string {
+  if (esArgentina(locale)) {
+    const ar = cpArgentino(codigoPostal);
+    if (ar.valido && ar.provincia) return `Provincia: ${ar.provincia}. Sale sola de tu código postal.`;
+    return 'Con el CPA (por ejemplo, Q8300ABC) la provincia sale sola.';
+  }
   const p = provinciaDeCp(codigoPostal);
   return p ? `Provincia: ${p.nombre}. Sale sola de tu código postal.` : 'La provincia sale sola de tu código postal.';
 }
@@ -299,5 +317,5 @@ export function tuEstudioGuardado(f: {
   ciudad: string | null | undefined;
   filasHorario: number;
 }): boolean {
-  return !!f.direccion?.trim() && !!provinciaDeCp(f.codigoPostal) && !!f.ciudad?.trim() && f.filasHorario >= 7;
+  return !!f.direccion?.trim() && codigoPostalValido(f.codigoPostal) && !!f.ciudad?.trim() && f.filasHorario >= 7;
 }

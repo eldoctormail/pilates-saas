@@ -7,6 +7,7 @@ import { useRol, puedeGestionarAppsOAuth, puedeGestionarClavesApi } from '@/lib/
 import { resumenAppsConAcceso } from '@/lib/configuracion/resumenes';
 import { seccionDeTarjeta, seccionPorId, tarjetaPorId, type TarjetaId } from '@/lib/configuracion/secciones';
 import { hrefDeSeccion } from '@/lib/configuracion/destino';
+import { FUNCIONES_DE_ESPANA } from '@/lib/locale';
 import { textoFalloConexionSumup } from '@/lib/pos/sumup';
 import { GoogleCalendarIcon, KisiIcon, KlaviyoIcon, MailchimpIcon, ZapierIcon, ZoomIcon } from '@/components/icons/brand-icons';
 import { CajonAjuste, useCajonAbierto } from '@/components/configuracion/shell/cajon-ajuste';
@@ -113,10 +114,13 @@ export function SeccionConexiones({ showToast }: { showToast: (m: string) => voi
 
   return (
     <>
-      <GrupoFilas titulo="Cobrar a tus clientes">
-        <FilaCobroConTarjeta c={stripe} onAbrir={() => abrir('integracion-stripe')} />
-        <FilaDatafono d={datafono} stripeConectado={stripe.conectado} onAbrir={() => abrir('datafono')} onConectar={() => setConectandoDatafono('inicio')} />
-      </GrupoFilas>
+      {/* Stripe y el datáfono (Stripe Terminal o SumUp) no operan en Argentina: allí se cobra con Mercado Pago, configurado en el servidor. */}
+      {FUNCIONES_DE_ESPANA && (
+        <GrupoFilas titulo="Cobrar a tus clientes">
+          <FilaCobroConTarjeta c={stripe} onAbrir={() => abrir('integracion-stripe')} />
+          <FilaDatafono d={datafono} stripeConectado={stripe.conectado} onAbrir={() => abrir('datafono')} onConectar={() => setConectandoDatafono('inicio')} />
+        </GrupoFilas>
+      )}
 
       <GrupoFilas titulo="Escribir a tus clientes">
         <FilaWhatsapp w={whatsapp} onAbrir={() => abrir('integracion-whatsapp')} />

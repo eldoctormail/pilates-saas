@@ -10,6 +10,15 @@ export const PLATAFORMAS = ['CLASSPASS', 'URBAN_SPORTS_CLUB', 'WELLHUB'] as cons
 export type Plataforma = (typeof PLATAFORMAS)[number];
 export type OrigenReserva = 'TENTARE' | Plataforma;
 
+/**
+ * Las que se pueden activar en el país de la instancia. Urban Sports Club solo
+ * opera en Europa: en Argentina no se ofrece (sus reservas antiguas, si las
+ * hubiera, se siguen leyendo con `esPlataforma`).
+ */
+export function plataformasDelPais(argentina: boolean): readonly Plataforma[] {
+  return argentina ? PLATAFORMAS.filter(p => p !== 'URBAN_SPORTS_CLUB') : PLATAFORMAS;
+}
+
 /** Cómo se escribe cada plataforma en pantalla. */
 export const NOMBRE_PLATAFORMA: Record<Plataforma, string> = {
   CLASSPASS: 'ClassPass',

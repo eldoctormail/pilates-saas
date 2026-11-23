@@ -58,3 +58,18 @@ test('el texto del precio', () => {
   assert.equal(textoPrecio({ tipo: 'mensual', eur: 9 }), '9 €/mes');
   assert.equal(textoPrecio({ tipo: 'proximamente' }), 'Próximamente');
 });
+
+test('en Argentina no salen Stripe, el datáfono ni Urban Sports Club', async () => {
+  const { appsDeTienda, pestanasIntegracion, noDisponibleEnElPais } = await import('./catalogo.ts');
+  const ar = appsDeTienda('es-AR').map(a => a.id);
+  for (const id of ['stripe', 'datafono', 'urban-sports-club', 'proximamente-datafono-banco', 'proximamente-tarjeta-regalo']) {
+    assert.ok(!ar.includes(id), `${id} sigue en la tienda de AR`);
+    assert.ok(noDisponibleEnElPais(id, 'es-AR'));
+    assert.ok(!noDisponibleEnElPais(id, 'es-ES'));
+  }
+  for (const id of ['classpass', 'wellhub', 'kisi', 'whatsapp', 'zapier']) assert.ok(ar.includes(id), `${id} falta en AR`);
+  const pestanas = pestanasIntegracion('es-AR').map(p => p.id);
+  assert.ok(!pestanas.includes('stripe') && !pestanas.includes('datafono') && !pestanas.includes('urban-sports-club'));
+  assert.equal(pestanasIntegracion('es-ES').length, 12);
+  assert.equal(appsDeTienda('es-ES').length, appsDeTienda('es-AR').length + 5);
+});

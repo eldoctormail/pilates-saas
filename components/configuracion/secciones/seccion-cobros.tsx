@@ -64,15 +64,18 @@ export function SeccionCobros({ showToast }: { showToast: (m: string) => void })
       </GrupoFilas>
 
       <GrupoFilas titulo="Cobrar a tus clientes">
-        <FilaOtraSeccion
-          id="fila-a-integraciones"
-          icono={CreditCard}
-          titulo="Cobro con tarjeta y datáfono"
-          valor={`En «${seccionPorId('conexiones').titulo}»`}
-          descripcion={`${tarjetaPorId('integracion-stripe').titulo} y ${tarjetaPorId('datafono').titulo}: se conectan en ${seccionPorId('conexiones').titulo}.`}
-          seccion="conexiones"
-          ancla="integracion-stripe"
-        />
+        {/* Stripe y el datáfono: solo España (en Argentina se cobra con Mercado Pago). */}
+        {FUNCIONES_DE_ESPANA && (
+          <FilaOtraSeccion
+            id="fila-a-integraciones"
+            icono={CreditCard}
+            titulo="Cobro con tarjeta y datáfono"
+            valor={`En «${seccionPorId('conexiones').titulo}»`}
+            descripcion={`${tarjetaPorId('integracion-stripe').titulo} y ${tarjetaPorId('datafono').titulo}: se conectan en ${seccionPorId('conexiones').titulo}.`}
+            seccion="conexiones"
+            ancla="integracion-stripe"
+          />
+        )}
         <FilaAjuste id="cuando-se-cobra-la-cuota" icono={CalendarClock} valor={cargado ? resumenCobroDia1(cargado) : null} onAbrir={abrir} />
         {/* Remesas SEPA: solo España (lib/locale.ts). */}
         {FUNCIONES_DE_ESPANA && (

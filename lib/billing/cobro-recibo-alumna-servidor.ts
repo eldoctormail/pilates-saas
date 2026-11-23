@@ -9,7 +9,7 @@
 //
 // Sin `@/`: lo prueba `node --test` con un cliente falso.
 
-import { cobraOnline } from '../mercadopago/config.ts';
+import { estudioCobraConMercadoPago } from '../mercadopago/cuenta.ts';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import {
   cobroDeReciboAlumna, type CobroDeReciboAlumna, type ContextoCobroAlumna, type FilaReciboAlumna,
@@ -63,8 +63,10 @@ export async function contextoCobroAlumna(
         : Promise.resolve(vacio),
     ]);
   if (mandatoRes.error || cuotasRes.error || penalizacionesRes.error) return null;
+  // Cobra online con su cuenta de Stripe o, autoalojado, con su cuenta de Mercado Pago (panel o servidor).
+  const pagableOnline = Boolean(p.estudio.stripe_account_id) || await estudioCobraConMercadoPago(admin, p.studioId);
   return {
-    pagableOnline: cobraOnline(p.estudio.stripe_account_id as string | null | undefined),
+    pagableOnline,
     socio: p.socio,
     domiciliadaEnRemesa: ((mandatoRes.data ?? []) as unknown[]).length > 0,
     cuotas: new Map(((cuotasRes.data ?? []) as Record<string, unknown>[]).map((c) => [c.id as string, {

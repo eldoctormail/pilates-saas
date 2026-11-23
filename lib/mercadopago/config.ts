@@ -6,9 +6,17 @@
 //                              aplicación. Sin ella NO se acepta ningún aviso:
 //                              un aviso sin firma comprobada no mueve dinero.
 //   NEXT_PUBLIC_PASARELA       'mercadopago' para que la app de la alumna pague
-//                              con Mercado Pago en vez de Stripe.
+//                              con Mercado Pago en vez de Stripe; 'stripe' para
+//                              lo contrario. Sin poner, Mercado Pago con el
+//                              formato de Argentina (allí Stripe no opera).
+//
+// Desde el 23-nov-2026 el token y la clave también se cargan desde el panel,
+// por estudio (lib/mercadopago/cuenta.ts); estas dos variables quedan para un
+// estudio que no cargó la suya.
 //
 // Lo que sí se puede leer en el navegador es solo NEXT_PUBLIC_PASARELA.
+
+import { esArgentina } from '../locale.ts';
 
 export const API_MERCADOPAGO = 'https://api.mercadopago.com';
 
@@ -29,14 +37,7 @@ export function configMercadoPago(env: Record<string, string | undefined> = proc
 
 /** ¿La app de la alumna paga con Mercado Pago? (se lee también en el navegador) */
 export function pasarelaEsMercadoPago(): boolean {
-  return (typeof process !== 'undefined' ? process.env.NEXT_PUBLIC_PASARELA : undefined) === 'mercadopago';
-}
-
-/**
- * ¿El estudio cobra online? Con su cuenta de Stripe conectada (Tentare SaaS) o,
- * autoalojado, con Mercado Pago configurado en el servidor. Solo servidor: lee
- * el Access Token.
- */
-export function cobraOnline(stripeAccountId: string | null | undefined, env: Record<string, string | undefined> = process.env): boolean {
-  return Boolean(stripeAccountId) || configMercadoPago(env).ok;
+  const pasarela = (typeof process !== 'undefined' ? process.env.NEXT_PUBLIC_PASARELA : undefined)?.trim();
+  if (pasarela) return pasarela === 'mercadopago';
+  return esArgentina();
 }

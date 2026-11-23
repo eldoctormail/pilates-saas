@@ -14,7 +14,8 @@ import { errorInterno } from '@/lib/errores-servidor';
 import { estudioDeSlug } from '@/lib/regalo/estudio-publico';
 import { validarDatosRegalo, validarImporte } from '@/lib/regalo/reglas';
 import { metadataDeRegalo, ORIGEN_REGALO } from '@/lib/regalo/sesion';
-import { configMercadoPago, pasarelaEsMercadoPago } from '@/lib/mercadopago/config';
+import { pasarelaEsMercadoPago } from '@/lib/mercadopago/config';
+import { configDelEstudio } from '@/lib/mercadopago/cuenta';
 import { crearPreferencia } from '@/lib/mercadopago/api';
 import { nuevoIdRegalo, referenciaDeRegalo } from '@/lib/mercadopago/referencia';
 import { MONEDA } from '@/lib/moneda';
@@ -120,11 +121,10 @@ export async function POST(req: NextRequest) {
 const MINUTOS_VALIDEZ_REGALO = 60;
 
 async function comprarConMercadoPago(req: NextRequest, admin: SupabaseClient, body: Record<string, unknown>) {
-  const config = configMercadoPago();
-  if (!config.ok) return NextResponse.json({ error: 'Los pagos no están disponibles ahora mismo.' }, { status: 503 });
-
   const estudio = await estudioDeSlug(admin, body.slug);
   if (!estudio) return NextResponse.json({ error: 'Estudio no encontrado' }, { status: 404 });
+  const config = await configDelEstudio(admin, estudio.id);
+  if (!config.ok) return NextResponse.json({ error: 'Los pagos no están disponibles ahora mismo.' }, { status: 503 });
   if (!estudio.ajustes.activo) return NextResponse.json({ error: 'Este estudio no vende tarjetas regalo por ahora.' }, { status: 409 });
   const cerrada = await paginaCerradaParaPeticion(req, estudio.id);
   if (cerrada) return cerrada;

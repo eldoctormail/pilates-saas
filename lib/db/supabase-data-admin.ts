@@ -1,5 +1,5 @@
 import { conMoneda } from '../moneda.ts';
-import { cobraOnline } from '../mercadopago/config.ts';
+import { estudioCobraConMercadoPago } from '../mercadopago/cuenta.ts';
 import 'server-only';
 import { trocear } from '@/lib/trocear';
 import { renovacionPorPagar, type FilaReciboRenovacion } from '@/lib/billing/renovacion-sin-tarjeta';
@@ -1249,6 +1249,8 @@ export async function fetchPublicStudioData(
   const lecturaCobroOk = ctxCobro !== null;
   const cobrosDeSusRecibos = ctxCobro ? cobrosDeRecibosAlumna(recibosAlumna, ctxCobro) : {};
 
+  // ¿Cobra online? Su cuenta de Stripe o, autoalojado, su cuenta de Mercado Pago (panel o servidor).
+  const cobraEnLinea = Boolean(studioRow.stripe_account_id) || await estudioCobraConMercadoPago(admin, studioId);
   const misRecibos = (recRes.data ?? []).map(mapRecibo);
   const misReciboIds = misRecibos.map(r => r.id);
   // Facturas no tiene socio_id directo, pero SÍ recibo_id: antes se traía la
@@ -1282,7 +1284,7 @@ export async function fetchPublicStudioData(
       // estudio». Sin poder comprobarlo (`lecturaCobroOk`), nada.
       renovacionPorPagar: (() => {
         if (!lecturaCobroOk) return null;
-        const ren = renovacionPorPagar((recRes.data ?? []) as unknown as FilaReciboRenovacion[], cobraOnline(studioRow.stripe_account_id as string | null | undefined));
+        const ren = renovacionPorPagar((recRes.data ?? []) as unknown as FilaReciboRenovacion[], cobraEnLinea);
         return ren && leTocaPagarlaAElla(cobrosDeSusRecibos[ren.reciboId]) ? ren : null;
       })(),
       // Quién cobra cada recibo que debe y si puede pagarlo ella (`lib/billing/cobro-recibo-alumna.ts`). Sin el método

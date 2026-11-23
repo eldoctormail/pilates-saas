@@ -13,9 +13,7 @@ cd deploy && docker compose logs --since 30m app > app.log
 1. **Raspberry Pi 5.** Usá Raspberry Pi OS de 64 bits, con la base en un SSD (NVMe o USB 3) y no en la tarjeta SD, y 4 GB de swap como mínimo. Detalles en `deploy/README.md` › Raspberry Pi.
 2. **Instalación base.** Hacé una vez los pasos 1 a 4 de `deploy/README.md`, con la IP de la Pi.
 3. **Cuentas de prueba de Mercado Pago.** En el panel de desarrolladores, creá dos: una **vendedora** (el estudio) y una **compradora** (la alumna). Seguí la guía «Cuentas de prueba» de Mercado Pago.
-4. **Credenciales.** Con la vendedora de prueba, creá una aplicación de Checkout Pro y copiá en `deploy/.env`:
-   - `MERCADOPAGO_ACCESS_TOKEN`: el Access Token de esa aplicación.
-   - `MERCADOPAGO_WEBHOOK_SECRET`: la clave secreta que muestra la sección Webhooks.
+4. **Aplicación de prueba.** Con la vendedora de prueba, creá una aplicación de Checkout Pro. El Access Token y la clave secreta del webhook se cargan en el panel en el paso 6, no en el `.env`.
 5. **Arrancar el ensayo:**
 
    ```sh
@@ -23,7 +21,7 @@ cd deploy && docker compose logs --since 30m app > app.log
    ```
 
    Al terminar, el script muestra la dirección del webhook.
-6. **Cargar el webhook.** En la aplicación de Mercado Pago › Webhooks › modo de prueba, cargá esa dirección con el evento **Pagos**.
+6. **Conectar Mercado Pago.** Creá el estudio (prueba 1.1) y, como propietaria, abrí Apps e integraciones › Mercado Pago. Copiá la dirección del webhook y cargala en la aplicación de Mercado Pago › Webhooks › modo de prueba, con el evento **Pagos**. Copiá la clave secreta, y pegá en Tentare esa clave y el Access Token de la vendedora de prueba. Tocá **Guardar y comprobar**: tiene que mostrar el nombre de la cuenta vendedora.
 
 > ⚠️ Las direcciones `trycloudflare.com` cambian cada vez que corrés `empezar`. Si lo volvés a correr, hay que cargar el webhook de nuevo.
 

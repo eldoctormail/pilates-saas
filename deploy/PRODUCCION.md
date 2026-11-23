@@ -19,7 +19,7 @@ Usa dos direcciones, por ejemplo `app.tudominio.com.ar` para la app y `supabase.
   Se carga en el `.env` de Supabase (`SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_ADMIN_EMAIL`, `SMTP_SENDER_NAME`), con `ENABLE_EMAIL_AUTOCONFIRM=false`.
 
   Los correos de la propia app (invitaciones, avisos, constancias) van aparte, en `deploy/.env`: con Resend (`RESEND_API_KEY=re_…`) o por el mismo SMTP (`RESEND_API_KEY=local_…`, `RESEND_BASE_URL` y los `SMTP_*`; ver `deploy/.env.example`).
-- [ ] **Mercado Pago de producción.** En la aplicación de Mercado Pago, las credenciales de **producción**: el token empieza con `APP_USR-`. Cargalas en `deploy/.env` (`MERCADOPAGO_ACCESS_TOKEN`), junto con la clave secreta de Webhooks del modo producción (`MERCADOPAGO_WEBHOOK_SECRET`).
+- [ ] **Mercado Pago de producción.** Después de pasar a producción, en el panel: Apps e integraciones › Mercado Pago › **Cambiar los datos**, con el Access Token de **producción** de tu cuenta real (`APP_USR-…`) y la clave secreta de su webhook, cargado con la dirección `https://app.TU-DOMINIO/api/mercadopago/webhook`. El de prueba del ensayo deja de valer.
 - [ ] **`INTEGRACIONES_CLAVE_CIFRADO` en `deploy/.env`** (la crea `deploy/scripts/generar-secretos.sh`). Guardá una copia fuera de la Pi: cifra la clave del certificado de ARCA.
 
 ## 2. El túnel de Cloudflare

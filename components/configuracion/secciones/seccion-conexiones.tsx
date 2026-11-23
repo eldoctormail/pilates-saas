@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Code2, KeyRound, Mail } from 'lucide-react';
+import { Code2, KeyRound, Mail, Wallet } from 'lucide-react';
 import { useRol, puedeGestionarAppsOAuth, puedeGestionarClavesApi } from '@/lib/permisos';
 import { resumenAppsConAcceso } from '@/lib/configuracion/resumenes';
 import { seccionDeTarjeta, seccionPorId, tarjetaPorId, type TarjetaId } from '@/lib/configuracion/secciones';
@@ -11,7 +11,7 @@ import { FUNCIONES_DE_ESPANA } from '@/lib/locale';
 import { textoFalloConexionSumup } from '@/lib/pos/sumup';
 import { GoogleCalendarIcon, KisiIcon, KlaviyoIcon, MailchimpIcon, ZapierIcon, ZoomIcon } from '@/components/icons/brand-icons';
 import { CajonAjuste, useCajonAbierto } from '@/components/configuracion/shell/cajon-ajuste';
-import { FilaAjuste, FilaOtraSeccion, GrupoFilas } from '@/components/configuracion/shell/fila-ajuste';
+import { FilaAjuste, FilaExterna, FilaOtraSeccion, GrupoFilas } from '@/components/configuracion/shell/fila-ajuste';
 import {
   AccionesZoom, DetalleAppsConAcceso, DetalleConexionConClave, DetalleConexionOAuth, DetalleZapier,
   FilaConexionConClave, FilaConexionOAuth, FilaZapier, SincronizarGoogleCalendar, SincronizarKlaviyo,
@@ -114,7 +114,19 @@ export function SeccionConexiones({ showToast }: { showToast: (m: string) => voi
 
   return (
     <>
-      {/* Stripe y el datáfono (Stripe Terminal o SumUp) no operan en Argentina: allí se cobra con Mercado Pago, configurado en el servidor. */}
+      {/* Stripe y el datáfono (Stripe Terminal o SumUp) no operan en Argentina: allí se cobra con Mercado Pago, que se conecta en su pestaña. */}
+      {!FUNCIONES_DE_ESPANA && (
+        <GrupoFilas titulo="Cobrar a tus clientes">
+          <FilaExterna
+            id="fila-mercadopago"
+            icono={Wallet}
+            titulo="Mercado Pago"
+            valor={null}
+            descripcion="Tus alumnas pagan online y el dinero entra en tu cuenta. Se conecta en Apps e integraciones."
+            href="/apps/integraciones?pestana=mercadopago"
+          />
+        </GrupoFilas>
+      )}
       {FUNCIONES_DE_ESPANA && (
         <GrupoFilas titulo="Cobrar a tus clientes">
           <FilaCobroConTarjeta c={stripe} onAbrir={() => abrir('integracion-stripe')} />

@@ -17,7 +17,8 @@
 
 /** El importe más alto que se acepta a mano: un tope contra un cero de más, no una regla de negocio. */
 import { conMoneda } from '../moneda.ts';
-export const IMPORTE_MAXIMO = 10000;
+import { IMPORTE_RECIBO_MAX } from '../topes-importe.ts';
+export const IMPORTE_MAXIMO = IMPORTE_RECIBO_MAX;
 /** El más bajo: por debajo de esto un recibo no es un cobro (y Stripe no acepta menos de 0,50 €). */
 export const IMPORTE_MINIMO = 0.5;
 

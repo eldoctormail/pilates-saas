@@ -19,7 +19,8 @@
 
 import { MONEDA, LOCALE_MONEDA } from '../../lib/moneda.ts';
 import { useMemo, useState } from 'react';
-import { BarChart3, CalendarDays, Euro, Plane, ShieldCheck, Star, Users } from 'lucide-react';
+import { BarChart3, CalendarDays, Plane, ShieldCheck, Star, Users } from 'lucide-react';
+import { IconoMoneda } from '@/components/ui/icono-moneda';
 import { ProfileAvatar } from '@/components/ui/profile-avatar';
 import { CifraPrivada } from '@/components/ui/cifra-privada';
 import { CabeceraTarjeta, DEGRADADO_LOGO, TarjetaCifra } from '@/components/dashboard/vivo';
@@ -87,7 +88,7 @@ export function CifrasEquipo({ tarjetas, cargando, esPropietaria, irACalendario,
         <TarjetaCifra
           etiqueta="Coste del mes"
           tono="indigo"
-          Icono={Euro}
+          Icono={IconoMoneda}
           href={irALiquidaciones ? '/equipo/liquidaciones' : null}
           valor={cargando ? '—' : <CifraPrivada inline>{eurosSinDecimales(coste)}</CifraPrivada>}
           arriba={!cargando && sinTarifa > 0

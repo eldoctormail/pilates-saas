@@ -51,7 +51,8 @@ import { PageHeader } from '@/components/ui/page-header';
 import { usePanelNuevo, useShellNuevo } from '@/lib/estudio/panel-nuevo-cliente';
 import { ResumenCobrado } from '@/components/informes/resumen-cobrado';
 import { TarjetaCifra, TarjetaOcupacion } from '@/components/dashboard/vivo';
-import { CalendarCheck, CalendarX, Euro, Ticket, UserPlus, UserX, Users } from 'lucide-react';
+import { CalendarCheck, CalendarX, Ticket, UserPlus, UserX, Users } from 'lucide-react';
+import { IconoMoneda } from '@/components/ui/icono-moneda';
 import { MenuAcciones } from '@/components/ui/menu-acciones';
 import { CifraPrivada } from '@/components/ui/cifra-privada';
 import { Toast, useToast } from '@/components/ui/toast';
@@ -340,7 +341,7 @@ export default function Informes() {
       <TarjetaCifra
         etiqueta="Cobrado"
         tono="verde"
-        Icono={Euro}
+        Icono={IconoMoneda}
         href={null}
         valor={<CifraPrivada inline>{formatEuro(dinero.actual.neto)}</CifraPrivada>}
         arriba={difCobrado == null ? undefined : <CifraPrivada inline><span className={tonoDiferencia(difCobrado)}>{conSignoEuros(difCobrado)}</span></CifraPrivada>}

@@ -21,6 +21,7 @@ import { CifraPrivada } from '@/components/ui/cifra-privada';
 import { PanelFacturas } from './panel-facturas';
 import type { AvisosCobros } from './use-acciones-recibo';
 import { useDescargaCobrado } from './use-descarga-cobrado';
+import { FUNCIONES_DE_ESPANA } from '@/lib/locale';
 
 export function ParaTuGestoria({ hoy, avisos }: { hoy: string; avisos: AvisosCobros }) {
   const { recibos, facturas } = useStudio();
@@ -44,7 +45,9 @@ export function ParaTuGestoria({ hoy, avisos }: { hoy: string; avisos: AvisosCob
   return (
     <div className="space-y-4">
       <p className="max-w-[760px] text-[13.5px] text-muted-foreground text-pretty">
-        Tus facturas las hace tu gestoría (no facturas con Tentare). Aquí tienes lo que necesita, por trimestre natural (el del IVA).
+        {FUNCIONES_DE_ESPANA
+          ? 'Tus facturas las hace tu gestoría (no facturas con Tentare). Aquí tienes lo que necesita, por trimestre natural (el del IVA).'
+          : 'Lo cobrado por trimestre, para tu contador. Las facturas de ARCA las ve en «Mis Comprobantes» de ARCA.'}
         {esPropietaria && (
           <>
             {' '}
@@ -68,13 +71,15 @@ export function ParaTuGestoria({ hoy, avisos }: { hoy: string; avisos: AvisosCob
         />
         <Bloque
           titulo={bloques.anioAnterior.etiqueta} cifra={cifras.anio.neto}
-          detalle="Lo que tu gestoría necesita para cerrar el año"
+          detalle={FUNCIONES_DE_ESPANA ? 'Lo que tu gestoría necesita para cerrar el año' : 'Lo que tu contador necesita para cerrar el año'}
           acciones={(
             <>
               {boton(bloques.anioAnterior, 'Descargar')}
-              <Link href="/cierre" className="zona-tactil inline-flex min-h-9 items-center gap-1.5 rounded-lg border border-border bg-card px-3 text-[13px] font-medium text-foreground transition-colors hover:bg-muted">
-                <FileText size={15} aria-hidden />Abrir el cierre
-              </Link>
+              {FUNCIONES_DE_ESPANA && (
+                <Link href="/cierre" className="zona-tactil inline-flex min-h-9 items-center gap-1.5 rounded-lg border border-border bg-card px-3 text-[13px] font-medium text-foreground transition-colors hover:bg-muted">
+                  <FileText size={15} aria-hidden />Abrir el cierre
+                </Link>
+              )}
             </>
           )}
         />

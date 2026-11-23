@@ -44,6 +44,8 @@
  * candado falso le dice a un estudio que cobra en mostrador que le falta algo
  * que no le falta.
  */
+import { FUNCIONES_DE_ESPANA } from '../locale.ts';
+
 export type NivelGuia = 'esencial' | 'recomendado' | 'avanzado';
 
 export const ETIQUETA_NIVEL: Record<NivelGuia, string> = {
@@ -598,7 +600,8 @@ export const CAPITULOS: CapituloGuia[] = [
   },
 
   // ── 12 ─────────────────────────────────────────────────────────────────────
-  {
+  // Argentina (lib/locale.ts): la factura de ARCA en lugar de Veri*Factu y la gestoría.
+  FUNCIONES_DE_ESPANA ? {
     id: 'facturar',
     numero: '12',
     titulo: 'Facturas y contabilidad',
@@ -642,7 +645,51 @@ export const CAPITULOS: CapituloGuia[] = [
     ],
     consejo: 'Pon tu NIF antes de tu primera venta. Las facturas se numeran en orden y con fecha: rellenar hacia atrás lo que se cobró sin facturar es mucho más incómodo que dedicarle dos minutos hoy.',
     pasos: ['estudio'],
+  } : {
+    id: 'facturar',
+    numero: '12',
+    titulo: 'Facturas y contabilidad',
+    resumen: 'La factura electrónica de ARCA desde cada recibo, tus datos fiscales y lo que le pasás a tu contador.',
+    nivel: 'recomendado',
+    minutos: 6,
+    queAprendes: [
+      'Cómo se conecta Tentare con ARCA',
+      'Qué factura sale: C, B o A',
+      'Cómo se emite desde un recibo cobrado',
+      'Qué le pasás a tu contador',
+    ],
+    porQue: 'Tentare emite la factura electrónica de ARCA, con CAE y QR, desde cada recibo cobrado. Se configura una vez, con tu CUIT, un punto de venta y un certificado.',
+    apartados: [
+      {
+        titulo: 'Conectar con ARCA',
+        texto: 'En Configuración → Cobros y facturas → «Factura electrónica de ARCA» cargás tu CUIT, tu condición (monotributo o responsable inscripto) y un punto de venta «RECE para aplicativo y web services». Tentare genera el pedido de certificado: lo subís a ARCA y pegás el certificado que te devuelve. Empezá en el entorno de prueba.',
+      },
+      {
+        titulo: 'Qué factura sale',
+        texto: 'Monotributo: factura C. Responsable inscripto: A a otro responsable inscripto o a un monotributista, y B al resto. Siempre va la condición frente al IVA de quien la recibe; a un consumidor final se lo puede dejar sin identificar por debajo de $ 10.000.000.',
+      },
+      {
+        titulo: 'Desde cada recibo',
+        texto: 'En un recibo cobrado, «Emitir factura de ARCA». Ves la letra y los importes antes de emitir, y sale con su CAE y su QR. Si ARCA no contesta, queda pendiente y el siguiente intento la completa sin duplicarla.',
+      },
+      {
+        titulo: 'Anular',
+        texto: 'Una factura emitida no se edita ni se borra. Por ahora, si hay que anularla, la nota de crédito se hace desde ARCA.',
+      },
+      {
+        titulo: 'Tu contador',
+        texto: 'Las facturas quedan en ARCA: tu contador las ve en «Mis Comprobantes». En Cobros → Facturas descargás lo cobrado por trimestre.',
+      },
+    ],
+    acciones: [
+      { label: 'Configurar la factura de ARCA', href: '/configuracion?tab=cobros#factura-electronica' },
+      { label: 'Poner mis datos fiscales', href: '/configuracion?tab=cobros#datos-fiscales' },
+      { label: 'Ver mis cobros', href: '/cobros' },
+    ],
+    consejo: 'Probá primero en el entorno de prueba: emití dos o tres facturas y recién después pasá a producción, con su propio certificado.',
+    pasos: ['estudio'],
   },
+
 
   // ── 13 ─────────────────────────────────────────────────────────────────────
   {

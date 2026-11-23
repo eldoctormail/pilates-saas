@@ -6,6 +6,7 @@ import {
   Banknote, CreditCard, Smartphone, ArrowRightLeft, Loader2, CheckCircle2,
   XCircle, AlertTriangle, ArrowLeft, Delete, X,
 } from 'lucide-react';
+import { FUNCIONES_DE_ESPANA } from '@/lib/locale';
 import { cn, formatEuro } from '@/lib/utils';
 import { DashboardSheet } from '@/components/ui/dashboard-sheet';
 import { qrSvgMarkup } from '@/lib/qr-svg';
@@ -35,13 +36,22 @@ import type { CatalogoPOS } from '@/lib/pos/cliente';
 // servidor y esta hoja no la confirma, solo enseña la vuelta.
 // ─────────────────────────────────────────────────────────────────────────────
 
-const METODOS: { valor: MetodoPago; label: string; Icono: React.ElementType; ayuda: string }[] = [
+const METODOS_ES: { valor: MetodoPago; label: string; Icono: React.ElementType; ayuda: string }[] = [
   { valor: 'EFECTIVO',      label: 'Efectivo',      Icono: Banknote,       ayuda: 'Cobras en el mostrador' },
   { valor: 'DATAFONO',      label: 'Datáfono',      Icono: CreditCard,     ayuda: 'Se envía al lector' },
   { valor: 'BIZUM',         label: 'Bizum',         Icono: Smartphone,     ayuda: 'Paga desde su móvil' },
   { valor: 'TARJETA',       label: 'Tarjeta',       Icono: CreditCard,     ayuda: 'TPV de tu banco' },
   { valor: 'TRANSFERENCIA', label: 'Transferencia', Icono: ArrowRightLeft, ayuda: 'Ya te la han hecho' },
 ];
+// Argentina (lib/locale.ts): el datáfono es el lector de Stripe y Bizum va por
+// Stripe; ninguno de los dos existe allí. Una tarjeta pasa por tu posnet o tu
+// Point, y un pago por QR o link de Mercado Pago entra como transferencia.
+const METODOS_AR: typeof METODOS_ES = [
+  { valor: 'EFECTIVO',      label: 'Efectivo',      Icono: Banknote,       ayuda: 'Cobrás en el mostrador' },
+  { valor: 'TARJETA',       label: 'Tarjeta',       Icono: CreditCard,     ayuda: 'Posnet o Point' },
+  { valor: 'TRANSFERENCIA', label: 'Transferencia', Icono: ArrowRightLeft, ayuda: 'O QR de Mercado Pago, ya acreditado' },
+];
+const METODOS = FUNCIONES_DE_ESPANA ? METODOS_ES : METODOS_AR;
 
 type Fase =
   | { f: 'metodo' }

@@ -12,7 +12,7 @@
 // hay estudios en otro huso, esto pasa a salir del estudio y no de una
 // constante — pero inventar esa configuración hoy sería adivinar.
 
-import { LOCALE } from '../locale.ts';
+import { LOCALE, FUNCIONES_DE_ESPANA } from '../locale.ts';
 import { conMoneda, LOCALE_MONEDA } from '../moneda.ts';
 import { ZONA_HORARIA } from '../zona-horaria.ts';
 const DIAS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
@@ -218,12 +218,12 @@ export function precioClaseTexto(c: { precioSuelto: number; sinPrecioSuelto?: bo
  */
 const METODO_COBRO: Record<string, string> = {
   TARJETA: 'Tarjeta',
-  SEPA: 'Domiciliación bancaria',
+  SEPA: FUNCIONES_DE_ESPANA ? 'Domiciliación bancaria' : 'Débito automático',
   BIZUM: 'Bizum',
   EFECTIVO: 'Efectivo',
   TRANSFERENCIA: 'Transferencia',
   MERCADOPAGO: 'Mercado Pago',
-  DATAFONO: 'Datáfono',
+  DATAFONO: FUNCIONES_DE_ESPANA ? 'Datáfono' : 'Tarjeta (posnet)',
 };
 
 export function metodoPagoTexto(metodo: string | null | undefined): string {

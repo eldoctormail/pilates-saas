@@ -6,7 +6,8 @@ import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useStudio } from '@/lib/studio-context';
-import { NOMBRE_PLATAFORMA, PLATAFORMAS, type Plataforma } from '@/lib/plataformas/catalogo';
+import { NOMBRE_PLATAFORMA, PLATAFORMAS, plataformasDelPais, type Plataforma } from '@/lib/plataformas/catalogo';
+import { esArgentina } from '@/lib/locale';
 import { uscPublicaPorApi } from '@/lib/plataformas/usc/horario';
 import { porQueSinVentaExterna, type MotivoSinVentaExterna } from '@/lib/plataformas/venta-externa';
 import { PLATAFORMAS_QUE_APARTAN } from '@/lib/plataformas/apartadas';
@@ -39,6 +40,8 @@ export function usePlataformasActivas(): Plataforma[] {
 }
 
 const USC: Plataforma = 'URBAN_SPORTS_CLUB';
+// Las que se ofrecen para activar en este país (sin Urban Sports Club en Argentina).
+const DEL_PAIS = plataformasDelPais(esArgentina());
 
 /** El logo de cada plataforma, en la misma placa que el resto de conexiones. */
 const LOGO_PLATAFORMA: Record<Plataforma, ComponentType<{ size?: number }>> = {
@@ -131,7 +134,7 @@ export function FilasPlataformas({ onAbrir, enlace, solo }: {
   const { usc } = useEstadoUsc();
   return (
     <>
-      {PLATAFORMAS.filter(p => !solo || p === solo).map(p => {
+      {DEL_PAIS.filter(p => !solo || p === solo).map(p => {
         const c = conexionDe(p, usc);
         const resumen = resumenPlataformaVenta({
           activa: activas.includes(p), conexionDisponible: c.disponible, conectada: c.conectada,
@@ -196,7 +199,7 @@ export function DetallePlataformasExternas({ showToast, solo }: { showToast: Mos
         no gasta bonos ni pasa por tus cobros, y sale en la lista con la etiqueta de la plataforma.
       </p>
       <ul className="divide-y divide-border rounded-2xl border border-border">
-        {PLATAFORMAS.filter(p => !solo || p === solo).map(p => {
+        {DEL_PAIS.filter(p => !solo || p === solo).map(p => {
           const activa = activas.includes(p);
           const { conectada: porApi } = conexionDe(p, usc);
           const esperandoUsc = p === USC && !usc && !errorUsc;

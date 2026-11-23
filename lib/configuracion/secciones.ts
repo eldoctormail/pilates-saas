@@ -533,8 +533,11 @@ export function esTarjetaId(v: string): v is TarjetaId {
   return TARJETA_POR_ID.has(v);
 }
 
-/** Tarjetas que solo sirven en España: con el formato de Argentina no se ven ni se buscan. */
-const TARJETAS_SOLO_ESPANA: ReadonlySet<string> = new Set(['domiciliaciones']);
+/**
+ * Tarjetas que solo sirven en España: con el formato de Argentina no se ven ni se buscan.
+ * Stripe no admite cuentas argentinas, y el datáfono va con Stripe o SumUp.
+ */
+const TARJETAS_SOLO_ESPANA: ReadonlySet<string> = new Set(['domiciliaciones', 'integracion-stripe', 'datafono']);
 /** Y al revés: lo que solo sirve en Argentina. */
 const TARJETAS_SOLO_ARGENTINA: ReadonlySet<string> = new Set(['factura-electronica']);
 

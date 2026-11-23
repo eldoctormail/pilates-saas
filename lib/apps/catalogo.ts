@@ -15,6 +15,7 @@
 
 import { conMoneda } from '../moneda.ts';
 import { ADDONS, LISTA_ADDONS, type Addon } from '../billing/entitlements.ts';
+import { esArgentina } from '../locale.ts';
 
 export type CategoriaApp = 'agenda' | 'cobros' | 'comunicacion' | 'marketing' | 'plataformas' | 'automatizar' | 'equipo';
 
@@ -109,10 +110,37 @@ const PROXIMAMENTE: AppDeTienda[] = [
   },
 ].map((p): AppDeTienda => ({ ...p, origen: 'proximamente', precio: { tipo: 'proximamente' }, href: '/apps' } as AppDeTienda));
 
-/** Todas las apps que no son módulos del menú, en el orden en que se enseñan. */
-export const APPS_DE_TIENDA: readonly AppDeTienda[] = [
+/**
+ * Lo que no se puede usar en Argentina (instancia autoalojada): se oculta, no
+ * se borra, para que las sincronizaciones con el repo original sigan limpias.
+ *   · Stripe no admite cuentas argentinas (allí se cobra con Mercado Pago, que
+ *     se configura en el servidor);
+ *   · el datáfono va con Stripe Terminal o SumUp, ninguno disponible allí;
+ *   · Urban Sports Club solo opera en siete países europeos;
+ *   · el «próximamente» del datáfono del banco sigue a Stripe, y el de la
+ *     tarjeta regalo habla del IVA español (en AR la tarjeta regalo ya funciona).
+ * ClassPass, Wellhub y Kisi sí operan en Argentina y se quedan.
+ */
+const NO_DISPONIBLES_EN_ARGENTINA: ReadonlySet<string> = new Set([
+  'stripe', 'datafono', 'urban-sports-club', 'proximamente-datafono-banco', 'proximamente-tarjeta-regalo',
+]);
+
+/** ¿Esta app o pestaña queda fuera en el país de la instancia? */
+export function noDisponibleEnElPais(id: string, locale?: string): boolean {
+  return esArgentina(locale) && NO_DISPONIBLES_EN_ARGENTINA.has(id);
+}
+
+const TODAS_LAS_APPS: readonly AppDeTienda[] = [
   ...COMPLEMENTOS, ...INTEGRACIONES, ...PLATAFORMAS, ...PROXIMAMENTE,
 ];
+
+/** Las apps de la tienda para el país de la instancia (todas, en España). */
+export function appsDeTienda(locale?: string): readonly AppDeTienda[] {
+  return TODAS_LAS_APPS.filter(a => !noDisponibleEnElPais(a.id, locale));
+}
+
+/** Todas las apps que no son módulos del menú, en el orden en que se enseñan. */
+export const APPS_DE_TIENDA: readonly AppDeTienda[] = appsDeTienda();
 
 /** El texto del precio, sin símbolos sueltos. */
 export function textoPrecio(p: PrecioApp): string {
@@ -131,7 +159,7 @@ export function disponible(a: AppDeTienda): boolean {
 }
 
 /** Las pestañas de «Integraciones de terceros», en orden, con su nombre y el grupo de la lista. */
-export const PESTANAS_INTEGRACION = [
+const TODAS_LAS_PESTANAS = [
   { id: 'stripe', label: 'Stripe', grupo: 'Cobros' },
   { id: 'datafono', label: 'Datáfono', grupo: 'Cobros' },
   { id: 'whatsapp', label: 'WhatsApp', grupo: 'Comunicación' },
@@ -146,8 +174,17 @@ export const PESTANAS_INTEGRACION = [
   { id: 'zapier', label: 'Zapier', grupo: 'Automatizar' },
 ] as const;
 
-export type PestanaIntegracion = (typeof PESTANAS_INTEGRACION)[number]['id'];
+export type PestanaIntegracion = (typeof TODAS_LAS_PESTANAS)[number]['id'];
+type Pestana = (typeof TODAS_LAS_PESTANAS)[number];
 
+/** Las pestañas para el país de la instancia (todas, en España). */
+export function pestanasIntegracion(locale?: string): readonly Pestana[] {
+  return TODAS_LAS_PESTANAS.filter(p => !noDisponibleEnElPais(p.id, locale));
+}
+
+export const PESTANAS_INTEGRACION: readonly Pestana[] = pestanasIntegracion();
+
+/** Solo las pestañas que existen en este país: `?pestana=stripe` en AR cae en la primera. */
 export function esPestanaIntegracion(v: unknown): v is PestanaIntegracion {
   return PESTANAS_INTEGRACION.some(p => p.id === v);
 }

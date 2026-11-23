@@ -74,7 +74,7 @@ export function IntegracionesDeTerceros() {
   const params = useSearchParams();
   const { integracionActiva } = useStudio();
   const pedida = params.get('pestana');
-  const pestana: PestanaIntegracion = esPestanaIntegracion(pedida) ? pedida : 'stripe';
+  const pestana: PestanaIntegracion = esPestanaIntegracion(pedida) ? pedida : PESTANAS_INTEGRACION[0].id;
   const toast = useToast();
   const actual = PESTANAS_INTEGRACION.find(p => p.id === pestana)!;
   const v = VISUAL[pestana] ?? VISUAL_POR_DEFECTO;

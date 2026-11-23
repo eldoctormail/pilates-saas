@@ -12,8 +12,8 @@
 #   deploy/ensayo/ensayo.sh terminar ~/supabase-project
 #
 # Antes: los pasos 1 a 4 de deploy/README.md hechos una vez (Supabase andando,
-# deploy/.env con los secretos, la base migrada), y en deploy/.env el token de
-# PRUEBA de Mercado Pago (MERCADOPAGO_ACCESS_TOKEN=TEST-…) y la clave del webhook.
+# deploy/.env con los secretos, la base migrada). La cuenta de PRUEBA de Mercado
+# Pago se conecta después desde el panel (Apps e integraciones › Mercado Pago).
 #
 # «empezar» guarda una copia de los dos .env (*.antes-del-ensayo) y «terminar»
 # los devuelve, cierra los túneles y vuelve a compilar la app como estaba.
@@ -45,11 +45,8 @@ tunel() {
 case "$ACCION" in
 empezar)
   [ -f "$ENV_APP" ] || { echo "Falta $ENV_APP (deploy/scripts/generar-secretos.sh)"; exit 1; }
-  case "$(leer "$ENV_APP" MERCADOPAGO_ACCESS_TOKEN)" in
-    TEST-*|APP_USR-*) ;;
-    *) echo "Falta MERCADOPAGO_ACCESS_TOKEN en $ENV_APP (el de prueba, del vendedor de prueba)"; exit 1 ;;
-  esac
-  [ -n "$(leer "$ENV_APP" MERCADOPAGO_WEBHOOK_SECRET)" ] || { echo "Falta MERCADOPAGO_WEBHOOK_SECRET en $ENV_APP"; exit 1; }
+  # Mercado Pago se conecta desde el panel; sin clave de cifrado no se puede guardar.
+  [ -n "$(leer "$ENV_APP" INTEGRACIONES_CLAVE_CIFRADO)" ] || { echo "Falta INTEGRACIONES_CLAVE_CIFRADO en $ENV_APP (deploy/scripts/generar-secretos.sh): sin ella no se guarda la cuenta de Mercado Pago"; exit 1; }
 
   [ -f "$ENV_SB.antes-del-ensayo" ] || cp "$ENV_SB" "$ENV_SB.antes-del-ensayo"
   [ -f "$ENV_APP.antes-del-ensayo" ] || cp "$ENV_APP" "$ENV_APP.antes-del-ensayo"
@@ -115,8 +112,9 @@ empezar)
   Correos:    http://IP-DE-ESTA-MAQUINA:8025
   Webhook:    $URL_APP/api/mercadopago/webhook
 
-Cargá esa dirección de webhook en tu aplicación de Mercado Pago (Webhooks →
-modo de prueba, evento «Pagos») y seguí deploy/ensayo/PRUEBAS.md.
+Creá el estudio y conectá la cuenta vendedora de prueba en Apps e integraciones
+› Mercado Pago: ahí está la dirección del webhook para cargar en Mercado Pago
+(Webhooks → modo de prueba, evento «Pagos»). Después, deploy/ensayo/PRUEBAS.md.
 Al terminar:  deploy/ensayo/ensayo.sh terminar $SB
 EOF
   ;;

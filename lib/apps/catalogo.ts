@@ -67,6 +67,7 @@ const COMPLEMENTOS: AppDeTienda[] = LISTA_ADDONS.map((a): AppDeTienda => ({
 }));
 
 const INTEGRACIONES: AppDeTienda[] = ([
+  { id: 'mercadopago', nombre: 'Mercado Pago', frase: 'Cobrá bonos, cuotas y clases online en tu propia cuenta de Mercado Pago.', categoria: 'cobros', pestana: 'mercadopago' },
   { id: 'stripe', nombre: 'Stripe', frase: 'Cobra bonos y cuotas con tarjeta en tu propia cuenta: el dinero entra directo en ella.', categoria: 'cobros', pestana: 'stripe' },
   { id: 'datafono', nombre: 'Datáfono', frase: 'Mandas el importe desde la Caja y la venta queda cobrada sola.', categoria: 'cobros', pestana: 'datafono' },
   { id: 'whatsapp', nombre: 'WhatsApp', frase: 'Recordatorios y avisos desde tu número de WhatsApp Business.', categoria: 'comunicacion', pestana: 'whatsapp' },
@@ -125,9 +126,12 @@ const NO_DISPONIBLES_EN_ARGENTINA: ReadonlySet<string> = new Set([
   'stripe', 'datafono', 'urban-sports-club', 'proximamente-datafono-banco', 'proximamente-tarjeta-regalo',
 ]);
 
+/** Y al revés: Mercado Pago solo se ofrece con el formato de Argentina (lib/mercadopago/cuenta.ts). */
+const SOLO_EN_ARGENTINA: ReadonlySet<string> = new Set(['mercadopago']);
+
 /** ¿Esta app o pestaña queda fuera en el país de la instancia? */
 export function noDisponibleEnElPais(id: string, locale?: string): boolean {
-  return esArgentina(locale) && NO_DISPONIBLES_EN_ARGENTINA.has(id);
+  return esArgentina(locale) ? NO_DISPONIBLES_EN_ARGENTINA.has(id) : SOLO_EN_ARGENTINA.has(id);
 }
 
 const TODAS_LAS_APPS: readonly AppDeTienda[] = [
@@ -160,6 +164,7 @@ export function disponible(a: AppDeTienda): boolean {
 
 /** Las pestañas de «Integraciones de terceros», en orden, con su nombre y el grupo de la lista. */
 const TODAS_LAS_PESTANAS = [
+  { id: 'mercadopago', label: 'Mercado Pago', grupo: 'Cobros' },
   { id: 'stripe', label: 'Stripe', grupo: 'Cobros' },
   { id: 'datafono', label: 'Datáfono', grupo: 'Cobros' },
   { id: 'whatsapp', label: 'WhatsApp', grupo: 'Comunicación' },

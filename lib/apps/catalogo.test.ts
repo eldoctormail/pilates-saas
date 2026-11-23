@@ -67,9 +67,11 @@ test('en Argentina no salen Stripe, el datáfono ni Urban Sports Club', async ()
     assert.ok(noDisponibleEnElPais(id, 'es-AR'));
     assert.ok(!noDisponibleEnElPais(id, 'es-ES'));
   }
-  for (const id of ['classpass', 'wellhub', 'kisi', 'whatsapp', 'zapier']) assert.ok(ar.includes(id), `${id} falta en AR`);
+  for (const id of ['mercadopago', 'classpass', 'wellhub', 'kisi', 'whatsapp', 'zapier']) assert.ok(ar.includes(id), `${id} falta en AR`);
+  assert.ok(!appsDeTienda('es-ES').some(a => a.id === 'mercadopago'), 'Mercado Pago solo en AR');
+  assert.equal(pestanasIntegracion('es-AR')[0].id, 'mercadopago');
   const pestanas = pestanasIntegracion('es-AR').map(p => p.id);
   assert.ok(!pestanas.includes('stripe') && !pestanas.includes('datafono') && !pestanas.includes('urban-sports-club'));
   assert.equal(pestanasIntegracion('es-ES').length, 12);
-  assert.equal(appsDeTienda('es-ES').length, appsDeTienda('es-AR').length + 5);
+  assert.equal(appsDeTienda('es-ES').length, appsDeTienda('es-AR').length + 5 - 1);
 });

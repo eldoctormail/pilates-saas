@@ -156,9 +156,11 @@ La primera compilación tarda varios minutos. Después:
 Las alumnas pueden, desde la app y con Checkout Pro: **pagar sus recibos pendientes** (cuotas, renovaciones, lo que les cargues) y **comprar un bono o plan** de tu tienda (con código de descuento, matrícula y cobro proporcional, igual que con Stripe). **Hace falta un dominio con HTTPS**, porque Mercado Pago tiene que poder llamar al webhook.
 
 1. En [Tus integraciones](https://www.mercadopago.com.ar/developers/panel/app), creá una aplicación de **Checkout Pro**.
-2. En **Credenciales de producción**, copiá el Access Token a `MERCADOPAGO_ACCESS_TOKEN`. Para probar, usá primero el de prueba (`TEST-…`) con usuarios de prueba.
-3. En **Webhooks**, cargá `https://TU-DOMINIO/api/mercadopago/webhook` con el evento **Pagos**, y copiá la clave secreta a `MERCADOPAGO_WEBHOOK_SECRET`.
-4. Poné `NEXT_PUBLIC_PASARELA=mercadopago` y reconstruí la app: `cd deploy && docker compose up -d --build`.
+2. En el panel de Tentare, como propietaria: **Apps e integraciones › Mercado Pago**. Ahí está la dirección del webhook para copiar.
+3. En la aplicación de Mercado Pago › **Webhooks**, cargá esa dirección con el evento **Pagos** y copiá la clave secreta.
+4. De vuelta en Tentare, pegá el **Access Token** (Credenciales de producción; para probar, el de una cuenta vendedora de prueba) y la clave secreta, y tocá **Guardar y comprobar**. Tentare lo comprueba con Mercado Pago y lo guarda cifrado (hace falta `INTEGRACIONES_CLAVE_CIFRADO`, que crea `generar-secretos.sh`).
+
+No hace falta tocar el `.env` ni compilar de nuevo: con el formato de Argentina la app ya cobra con Mercado Pago. Cada estudio de la instalación conecta su propia cuenta, y un pago solo se aplica en el estudio de esa cuenta. Si preferís una cuenta para toda la instalación, sigue valiendo `MERCADOPAGO_ACCESS_TOKEN` y `MERCADOPAGO_WEBHOOK_SECRET` en `deploy/.env`, para los estudios que no carguen la suya.
 
 Para comprobar que funciona: cargá un recibo pendiente a una alumna de prueba y pagalo desde su app; al volver, «Pagos» lo tiene que mostrar como pagado en unos segundos. Después comprá un bono desde «Comprar»: al volver, tiene que aparecer en «Mis bonos». Cada pago que llega queda anotado en la tabla `pagos_mercadopago`, con lo que se hizo con él.
 

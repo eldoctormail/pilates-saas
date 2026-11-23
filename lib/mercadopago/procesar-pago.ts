@@ -74,7 +74,15 @@ export function devueltoDe(pago: Pick<PagoMercadoPago, 'status' | 'transaction_a
   return Number(pago.transaction_amount_refunded ?? 0);
 }
 
-export async function procesarPago(admin: SupabaseClient, pago: PagoMercadoPago, fuente: Fuente = 'webhook'): Promise<ResultadoProceso> {
+/**
+ * `puedeAplicar` (cuenta del panel): ¿la cuenta que cobró este pago es la del
+ * estudio de la referencia? Si no, no se toca nada: el dinero entró en otra
+ * cuenta y no puede dar por cobrado lo de otro estudio (lib/mercadopago/cuenta.ts).
+ */
+export async function procesarPago(
+  admin: SupabaseClient, pago: PagoMercadoPago, fuente: Fuente = 'webhook',
+  puedeAplicar: (studioId: string) => boolean = () => true,
+): Promise<ResultadoProceso> {
 
   const ref = leerReferencia(pago.external_reference);
   if (!ref) {
@@ -82,6 +90,12 @@ export async function procesarPago(admin: SupabaseClient, pago: PagoMercadoPago,
     return resp({ recibido: true, ignorado: 'sin-referencia-de-tentare' });
   }
   const { studioId } = ref;
+  if (!puedeAplicar(studioId)) {
+    Sentry.captureMessage('[mercadopago] pago de una cuenta que no es la del estudio de la referencia', {
+      level: 'error', tags: etiquetas, extra: { paymentId: pago.id, studioId, fuente },
+    });
+    return resp({ recibido: true, ignorado: 'cuenta-de-otro-estudio' });
+  }
   // Tarjeta regalo: su propio libro (`regalos_mercadopago`), sus altas y sus anulaciones.
   if (ref.tipo === 'regalo') {
     const { procesarRegalo } = await import('./regalo.ts');

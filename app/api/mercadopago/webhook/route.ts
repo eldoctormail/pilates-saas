@@ -17,11 +17,15 @@
 //      `pagos_mercadopago` dice si ya se aplicó.
 //   6. Un error que se puede reintentar (la API de Mercado Pago o la base de
 //      datos no contestan) devuelve 500 para que Mercado Pago lo vuelva a mandar.
+//   7. Cada estudio puede tener SU cuenta (cargada en el panel). El aviso no dice
+//      de qué cuenta viene: lo dice la firma, que solo cuadra con la clave de su
+//      cuenta. Con esa cuenta se relee el pago, y una cuenta del panel solo
+//      aplica pagos de su estudio (lib/mercadopago/cuenta.ts).
 
 import { NextRequest, NextResponse } from 'next/server';
 import * as Sentry from '@sentry/nextjs';
 import { getSupabaseAdmin } from '@/lib/db/supabase-admin';
-import { configMercadoPago } from '@/lib/mercadopago/config';
+import { cuentaPuedeAplicar, todasLasCuentas } from '@/lib/mercadopago/cuenta';
 import { verificarFirma } from '@/lib/mercadopago/firma';
 import { leerPago } from '@/lib/mercadopago/api';
 import { procesarPago } from '@/lib/mercadopago/procesar-pago';
@@ -29,9 +33,17 @@ import { procesarPago } from '@/lib/mercadopago/procesar-pago';
 const etiquetas = { area: 'cobros', pasarela: 'mercadopago' } as const;
 
 export async function POST(req: NextRequest) {
-  const config = configMercadoPago();
-  if (!config.ok) {
-    console.error('[mercadopago/webhook]', config.motivo);
+  const admin = getSupabaseAdmin();
+  if (!admin) return NextResponse.json({ error: 'Persistencia no disponible' }, { status: 503 });
+  let cuentas;
+  try {
+    cuentas = await todasLasCuentas(admin);
+  } catch (err) {
+    Sentry.captureException(err, { tags: etiquetas });
+    return NextResponse.json({ error: 'No se pudieron leer las cuentas' }, { status: 503 });
+  }
+  if (cuentas.length === 0) {
+    console.error('[mercadopago/webhook] ningún estudio tiene Mercado Pago configurado');
     return NextResponse.json({ error: 'No configurado' }, { status: 503 });
   }
 
@@ -41,13 +53,13 @@ export async function POST(req: NextRequest) {
   // La firma se calcula con el data.id del QUERY STRING (documentación de Mercado Pago).
   const dataId = url.searchParams.get('data.id') ?? url.searchParams.get('id');
 
-  const firma = verificarFirma(
-    { xSignature: req.headers.get('x-signature'), xRequestId: req.headers.get('x-request-id'), dataId },
-    config.webhookSecret,
-  );
-  if (!firma.ok) {
+  const datosFirma = { xSignature: req.headers.get('x-signature'), xRequestId: req.headers.get('x-request-id'), dataId };
+  // La firma dice de qué cuenta viene: solo cuadra con la clave de esa cuenta.
+  const cuenta = cuentas.find(c => verificarFirma(datosFirma, c.webhookSecret).ok);
+  if (!cuenta) {
+    const firma = verificarFirma(datosFirma, cuentas[0].webhookSecret);
     Sentry.captureMessage('[mercadopago/webhook] aviso con firma no válida', {
-      level: 'warning', tags: etiquetas, extra: { motivo: firma.motivo, tipo, dataId },
+      level: 'warning', tags: etiquetas, extra: { motivo: firma.ok ? 'otra-cuenta' : firma.motivo, tipo, dataId, cuentas: cuentas.length },
     });
     return NextResponse.json({ error: 'Firma no válida' }, { status: 401 });
   }
@@ -55,10 +67,7 @@ export async function POST(req: NextRequest) {
   // Solo pagos. El resto de avisos (merchant_order, etc.) se contesta 200 para que no se reintenten.
   if (tipo !== 'payment' || !dataId) return NextResponse.json({ recibido: true, ignorado: tipo ?? 'sin-tipo' });
 
-  const admin = getSupabaseAdmin();
-  if (!admin) return NextResponse.json({ error: 'Persistencia no disponible' }, { status: 503 });
-
-  const leido = await leerPago(config.accessToken, dataId);
+  const leido = await leerPago(cuenta.accessToken, dataId);
   if (!leido.ok) {
     // 404 = ese pago no es de esta cuenta (o no existe): reintentar no lo arregla.
     if (leido.status === 404) return NextResponse.json({ recibido: true, ignorado: 'pago-desconocido' });
@@ -68,6 +77,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'No se pudo leer el pago' }, { status: 502 });
   }
   const pago = leido.datos;
-  const r = await procesarPago(admin, pago);
+  const conCuentaPropia = new Set(cuentas.flatMap(c => (c.studioId ? [c.studioId] : [])));
+  const r = await procesarPago(admin, pago, 'webhook', s => cuentaPuedeAplicar(cuenta, s, conCuentaPropia));
   return NextResponse.json(r.cuerpo, { status: r.status });
 }

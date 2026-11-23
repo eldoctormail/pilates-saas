@@ -64,7 +64,17 @@ export function SeccionCobros({ showToast }: { showToast: (m: string) => void })
       </GrupoFilas>
 
       <GrupoFilas titulo="Cobrar a tus clientes">
-        {/* Stripe y el datáfono: solo España (en Argentina se cobra con Mercado Pago). */}
+        {/* Stripe y el datáfono: solo España. En Argentina se cobra con Mercado Pago. */}
+        {!FUNCIONES_DE_ESPANA && (
+          <FilaExterna
+            id="fila-a-mercadopago"
+            icono={Wallet}
+            titulo="Mercado Pago"
+            valor={null}
+            descripcion="Para cobrar online: se conecta en Apps e integraciones › Mercado Pago."
+            href="/apps/integraciones?pestana=mercadopago"
+          />
+        )}
         {FUNCIONES_DE_ESPANA && (
           <FilaOtraSeccion
             id="fila-a-integraciones"

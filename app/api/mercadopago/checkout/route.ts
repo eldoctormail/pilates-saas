@@ -33,7 +33,7 @@ import { socioAutenticado } from '@/lib/db/supabase-data-admin';
 import { appUrl } from '@/lib/app-url';
 import { conCorsWidget, respuestaPreflightWidget } from '@/lib/cors-widget';
 import { MONEDA } from '@/lib/moneda';
-import { configMercadoPago } from '@/lib/mercadopago/config';
+import { configDelEstudio } from '@/lib/mercadopago/cuenta';
 import { crearPreferencia } from '@/lib/mercadopago/api';
 import { nuevoIdCompra, referenciaDeCompra, referenciaDeRecibo, urlsDeClase } from '@/lib/mercadopago/referencia';
 import { barrerComprasCaducadas, caducidadDeCompra, decidirCompraDePlan, reservarMatriculaDeCompra } from '@/lib/mercadopago/compra-plan-servidor';
@@ -53,11 +53,6 @@ export async function POST(req: NextRequest) {
 }
 
 async function iniciarPago(req: NextRequest): Promise<NextResponse> {
-  const config = configMercadoPago();
-  if (!config.ok) {
-    console.error('[mercadopago/checkout]', config.motivo);
-    return NextResponse.json({ error: 'El pago online no está disponible ahora. No se te ha cobrado nada.' }, { status: 503 });
-  }
   const admin = getSupabaseAdmin();
   if (!admin) return NextResponse.json({ error: 'Servicio no disponible' }, { status: 503 });
 
@@ -69,6 +64,12 @@ async function iniciarPago(req: NextRequest): Promise<NextResponse> {
   const reciboId = typeof body?.reciboId === 'string' ? body.reciboId : '';
   const planId = typeof body?.planId === 'string' ? body.planId : '';
   if (!studioId || (!reciboId && !planId)) return NextResponse.json({ error: 'Falta el estudio, el recibo o el plan' }, { status: 400 });
+  // La cuenta de Mercado Pago de ESTE estudio (la del panel o, si no cargó ninguna, la del servidor).
+  const config = await configDelEstudio(admin, studioId);
+  if (!config.ok) {
+    console.error('[mercadopago/checkout]', config.motivo);
+    return NextResponse.json({ error: 'El pago online no está disponible ahora. No se te ha cobrado nada.' }, { status: 503 });
+  }
   const origen = body?.origen === 'portal' ? 'portal' : undefined;
 
   const bloqueo = await bloqueoPorSuscripcion(studioId);

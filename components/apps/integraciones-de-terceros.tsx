@@ -32,6 +32,7 @@ import {
   FilaConexionOAuth, FilaZapier, SincronizarGoogleCalendar, SincronizarKlaviyo,
 } from '@/components/configuracion/conexiones';
 import { DetalleCobroConTarjeta, FilaCobroConTarjeta } from '@/components/configuracion/cobro-con-tarjeta';
+import { CuentaMercadoPago } from '@/components/configuracion/cuenta-mercadopago';
 import { DetalleDatafono, FilaDatafono } from '@/components/configuracion/datafono';
 import { ConectarDatafono } from '@/components/pos/conectar-datafono';
 import { DetalleWhatsapp, FilaWhatsapp } from '@/components/configuracion/canales-comunicacion';
@@ -53,6 +54,7 @@ const PLATAFORMA_DE = {
 } as const;
 
 const QUE_HACE: Record<PestanaIntegracion, string> = {
+  mercadopago: 'Tus alumnas pagan bonos, cuotas, recibos, clases y tarjetas regalo con Mercado Pago, y el dinero entra en tu cuenta.',
   stripe: 'Cobra bonos y cuotas con tarjeta en tu propia cuenta de Stripe: el dinero entra directo en ella.',
   datafono: 'Mandas el importe desde la Caja y la venta queda cobrada sola. Hoy, el lector de Stripe; el de tu banco, más adelante.',
   whatsapp: 'Recordatorios y avisos desde tu número de WhatsApp Business.',
@@ -189,6 +191,8 @@ function ContenidoDePropietaria({ pestana, showToast }: { pestana: PestanaIntegr
   const sinAccion = () => {};
 
   switch (pestana) {
+    case 'mercadopago':
+      return <CuentaMercadoPago showToast={showToast} />;
     case 'stripe':
       return (
         <>

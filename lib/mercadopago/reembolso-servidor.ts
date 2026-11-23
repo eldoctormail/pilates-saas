@@ -16,7 +16,7 @@ import * as Sentry from '@sentry/nextjs';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { registrarAuditoriaServidor } from '../auditoria/registrar-servidor.ts';
 import type { SesionStaff } from '../auth-server.ts';
-import { configMercadoPago } from './config.ts';
+import { configDelEstudio } from './cuenta.ts';
 import { devolverPago } from './api.ts';
 
 export interface ReciboADevolver {
@@ -36,8 +36,8 @@ export type ResultadoPedido =
 export async function pedirReembolsoMercadoPago(
   admin: SupabaseClient, sesion: SesionStaff, recibo: ReciboADevolver,
 ): Promise<ResultadoPedido> {
-  const config = configMercadoPago();
-  if (!config.ok) return { ok: false, status: 503, error: 'Mercado Pago no está configurado en este servidor.' };
+  const config = await configDelEstudio(admin, sesion.studioId);
+  if (!config.ok) return { ok: false, status: 503, error: 'Mercado Pago no está configurado: cargá tu cuenta en Apps e integraciones › Mercado Pago.' };
 
   // El pago que cobró este recibo. Un recibo de matrícula de una compra no tiene
   // fila propia: el pago es el del plan (se devuelven los dos juntos).

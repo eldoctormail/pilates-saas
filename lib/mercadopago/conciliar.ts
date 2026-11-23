@@ -37,7 +37,7 @@ const MAX_PAGINAS = 20; // 2.000 pagos por pasada: de sobra para un estudio
 export async function conciliarMercadoPago(
   admin: SupabaseClient,
   accessToken: string,
-  opciones: { horas?: number; ahora?: Date } = {},
+  opciones: { horas?: number; ahora?: Date; puedeAplicar?: (studioId: string) => boolean; barrerCaducadas?: boolean } = {},
 ): Promise<ResumenConciliacion> {
   const ahora = opciones.ahora ?? new Date();
   const desde = new Date(ahora.getTime() - (opciones.horas ?? 72) * 60 * 60 * 1000);
@@ -54,7 +54,11 @@ export async function conciliarMercadoPago(
     }
     const pagos = res.datos.results ?? [];
     r.revisados += pagos.length;
-    const nuestros = pagos.filter(p => leerReferencia(p.external_reference) !== null);
+    // De Tentare y, con una cuenta del panel, solo de su estudio (procesarPago lo vuelve a mirar).
+    const nuestros = pagos.filter(p => {
+      const ref = leerReferencia(p.external_reference);
+      return ref !== null && (opciones.puedeAplicar?.(ref.studioId) ?? true);
+    });
     r.deTentare += nuestros.length;
 
     if (nuestros.length) {
@@ -66,7 +70,7 @@ export async function conciliarMercadoPago(
         if (!hayQueProcesar(pago, porId.get(String(pago.id)))) continue;
         r.procesados++;
         try {
-          const out = await procesarPago(admin, pago, 'conciliador');
+          const out = await procesarPago(admin, pago, 'conciliador', opciones.puedeAplicar);
           if (out.status >= 500) r.errores++;
           if (out.cuerpo.aplicado === true || out.cuerpo.entregado === true) r.aplicados++;
         } catch (e) {
@@ -88,7 +92,8 @@ export async function conciliarMercadoPago(
     });
   }
 
-  // Compras caducadas de todos los estudios.
+  // Compras caducadas de todos los estudios (una vez por pasada, aunque haya varias cuentas).
+  if (opciones.barrerCaducadas === false) return r;
   const { data: conCaducadas } = await admin.from('compras_mercadopago')
     .select('studio_id').eq('estado', 'abierta').lt('expira_en', ahora.toISOString()).limit(500);
   const estudios = [...new Set((conCaducadas ?? []).map(c => c.studio_id as string))];

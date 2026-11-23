@@ -129,3 +129,15 @@ export function devolverPago(token: string, paymentId: string, idempotencia: str
     method: 'POST', body: JSON.stringify(importe ? { amount: importe } : {}), idempotencia,
   }, 20_000);
 }
+
+/** La cuenta dueña del Access Token (`GET /users/me`): para comprobarlo al guardarlo. */
+export interface UsuarioMercadoPago {
+  id: number;
+  nickname?: string;
+  site_id?: string;
+  email?: string;
+}
+
+export function leerUsuario(token: string) {
+  return pedir<UsuarioMercadoPago>(token, '/users/me', { method: 'GET' });
+}

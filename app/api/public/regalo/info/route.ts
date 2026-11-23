@@ -5,7 +5,8 @@ import { estudioDeSlug } from '@/lib/regalo/estudio-publico';
 import { comprobarModoStripe } from '@/lib/billing/modo-stripe';
 import { captchaDeServidorListo } from '@/lib/auth/captcha-servidor';
 import { paginaCerradaParaPeticion } from '@/lib/publico/pagina-cerrada-peticion';
-import { configMercadoPago, pasarelaEsMercadoPago } from '@/lib/mercadopago/config';
+import { pasarelaEsMercadoPago } from '@/lib/mercadopago/config';
+import { estudioCobraConMercadoPago } from '@/lib/mercadopago/cuenta';
 
 export const dynamic = 'force-dynamic';
 
@@ -25,7 +26,7 @@ export async function GET(req: NextRequest) {
   const { ajustes: a } = estudio;
   // Autoalojado con Mercado Pago: cobra el servidor con su Access Token, sin cuenta de Stripe.
   const cobra = pasarelaEsMercadoPago()
-    ? configMercadoPago().ok
+    ? await estudioCobraConMercadoPago(admin, estudio.id)
     : !!estudio.stripeAccountId && comprobarModoStripe().puedeCobrar;
   const aLaVenta = a.activo && cobra && captchaDeServidorListo();
   return NextResponse.json({

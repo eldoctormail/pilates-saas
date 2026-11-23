@@ -20,6 +20,8 @@ export interface VisualApp {
 }
 
 export const VISUAL: Record<string, VisualApp> = {
+  // Sin logo propio en brand-icons: un glifo, no un dibujo de la marca.
+  mercadopago: { tono: 'azul', glifo: Wallet },
   stripe: { tono: 'indigo', logo: (px) => <StripeIcon size={px} /> },
   datafono: { tono: 'teal', glifo: ScanLine },
   whatsapp: { tono: 'verde', logo: (px) => <WhatsAppIcon size={px} /> },

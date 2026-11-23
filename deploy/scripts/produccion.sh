@@ -33,8 +33,8 @@ case "$(leer "$ENV_SB" SMTP_HOST)" in
 esac
 case "$(leer "$ENV_APP" MERCADOPAGO_ACCESS_TOKEN)" in
   APP_USR-*) ;;
-  TEST-*) aviso "MERCADOPAGO_ACCESS_TOKEN es de PRUEBA: los cobros no serán reales." ;;
-  '') aviso "Sin MERCADOPAGO_ACCESS_TOKEN: no se cobra online." ;;
+  TEST-*) aviso "MERCADOPAGO_ACCESS_TOKEN es de PRUEBA: los cobros no serán reales (salvo en los estudios que conecten su cuenta en el panel)." ;;
+  '') aviso "Sin MERCADOPAGO_ACCESS_TOKEN en el servidor: cada estudio cobra con la cuenta que conecte en Apps e integraciones › Mercado Pago. Después de pasar a producción, cambiá ahí la de prueba por la real." ;;
 esac
 case "$(leer "$ENV_APP" RESEND_API_KEY)" in
   '') aviso "Sin RESEND_API_KEY: la app no manda sus correos (invitaciones, avisos, constancias). Los de acceso sí salen, por el SMTP." ;;

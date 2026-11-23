@@ -79,7 +79,11 @@ empezar)
   cp "$DEPLOY/ensayo/docker-compose.ensayo.yml" "$SB/"
   COMPOSE_ACTUAL="$(leer "$ENV_SB.antes-del-ensayo" COMPOSE_FILE)"
   COMPOSE_ACTUAL="${COMPOSE_ACTUAL:-docker-compose.yml}"
-  poner "$ENV_SB" COMPOSE_FILE "$COMPOSE_ACTUAL:docker-compose.ensayo.yml"
+  # Si el buzón ya estaba sumado (instalación a mano en un Mac), no se repite.
+  case ":$COMPOSE_ACTUAL:" in
+    *:docker-compose.ensayo.yml:*) poner "$ENV_SB" COMPOSE_FILE "$COMPOSE_ACTUAL" ;;
+    *) poner "$ENV_SB" COMPOSE_FILE "$COMPOSE_ACTUAL:docker-compose.ensayo.yml" ;;
+  esac
   poner "$ENV_SB" SMTP_HOST mailpit
   poner "$ENV_SB" SMTP_PORT 1025
   poner "$ENV_SB" SMTP_USER ensayo
@@ -119,7 +123,11 @@ terminar)
   if [ -f "$ENV_SB.antes-del-ensayo" ]; then
     mv "$ENV_SB.antes-del-ensayo" "$ENV_SB"
     (cd "$SB" && docker compose up -d --remove-orphans)
-    rm -f "$SB/docker-compose.ensayo.yml"
+    # Se saca solo si lo sumó el ensayo (si estaba en la configuración de antes, se queda).
+    case ":$(leer "$ENV_SB" COMPOSE_FILE):" in
+      *:docker-compose.ensayo.yml:*) ;;
+      *) rm -f "$SB/docker-compose.ensayo.yml" ;;
+    esac
     esperar_supabase
   fi
   if [ -f "$ENV_APP.antes-del-ensayo" ]; then

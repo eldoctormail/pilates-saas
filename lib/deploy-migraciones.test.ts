@@ -33,11 +33,15 @@ test('los ficheros que se arreglan existen', () => {
   }
 });
 
-test('migrar.sh prepara la copia, empuja desde ella y adapta después', () => {
+test('migrar.sh prepara la copia, aplica desde ella (cada una en su transacción) y adapta después', () => {
   const m = readFileSync(join(RAIZ, 'deploy/scripts/migrar.sh'), 'utf8');
-  const prep = m.indexOf('preparar-migraciones.sh');
-  const push = m.indexOf('db push', prep);
-  const adapta = m.indexOf('adaptar-autoalojado.sql', push);
-  assert.ok(prep > 0 && push > prep && adapta > push, 'preparar → push → adaptar');
-  assert.ok(m.slice(prep, push).includes('cd "$TMP"'), 'el push corre desde la copia');
+  const prep = m.indexOf('"$DEPLOY/scripts/preparar-migraciones.sh" "$TMP"');
+  const aplica = m.indexOf('$PSQL < "$LOTE"', prep);
+  const adapta = m.indexOf('adaptar-autoalojado.sql', aplica);
+  assert.ok(prep > 0 && aplica > prep && adapta > aplica, 'preparar → aplicar → adaptar');
+  const tramo = m.slice(prep, aplica);
+  assert.ok(tramo.includes('M="$TMP/supabase/migrations"'), 'se aplica la copia arreglada, no supabase/migrations');
+  assert.ok(tramo.includes("printf 'begin;") && tramo.includes('commit;'), 'cada migración en su transacción (LOCK TABLE lo exige)');
+  assert.ok(tramo.includes('supabase_migrations.schema_migrations'), 'se anota en la tabla de la CLI');
+  assert.ok(!m.includes('db push'), 'sin la CLI: corre las sentencias fuera de una transacción');
 });

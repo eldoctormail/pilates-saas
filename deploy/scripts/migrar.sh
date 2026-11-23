@@ -29,7 +29,10 @@ CRON_SECRETO=$(leer "$DEPLOY/.env" SUPABASE_CRON_SECRET)
 
 # Conexión por el pooler (supavisor, modo sesión), que es lo que publica el
 # compose oficial de Supabase.
-DB_URL="postgresql://postgres.${TENANT}:${PGPASS}@127.0.0.1:${PGPORT}/postgres"
+# Sin TLS: el pooler local no lo ofrece, y la CLI actual de Supabase lo intenta
+# por defecto («The server does not support SSL connections»). La conexión no
+# sale de la máquina.
+DB_URL="postgresql://postgres.${TENANT}:${PGPASS}@127.0.0.1:${PGPORT}/postgres?sslmode=disable"
 
 # Una copia de las migraciones con los cinco arreglos que hacen falta para
 # recorrerlas desde una base vacía (los mismos que el job de CI). La de

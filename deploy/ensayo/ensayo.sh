@@ -86,8 +86,10 @@ empezar)
   esac
   poner "$ENV_SB" SMTP_HOST mailpit
   poner "$ENV_SB" SMTP_PORT 1025
-  poner "$ENV_SB" SMTP_USER ensayo
-  poner "$ENV_SB" SMTP_PASS ensayo
+  # Sin usuario ni contraseña: el buzón no tiene TLS, y con usuario Auth se niega
+  # a mandar la contraseña en claro («unencrypted connection») y el alta da 500.
+  poner "$ENV_SB" SMTP_USER ""
+  poner "$ENV_SB" SMTP_PASS ""
   poner "$ENV_SB" SMTP_ADMIN_EMAIL ensayo@example.com
 
   echo "→ Configuración de la app con $URL_APP"

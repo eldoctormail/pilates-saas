@@ -4,6 +4,8 @@
 # Mailpit: un buzón de prueba. Los correos de Auth (el código de 6 cifras de la
 # alumna, confirmar la cuenta, recuperar la contraseña) llegan acá en vez de
 # salir a internet, y se leen en http://IP-DEL-SERVIDOR:8025.
+# En Supabase va con SMTP_HOST=mailpit, SMTP_PORT=1025 y SMTP_USER/SMTP_PASS
+# VACÍOS: no hay TLS, y con usuario Auth no manda nada («unencrypted connection»).
 services:
   mailpit:
     image: axllent/mailpit:latest

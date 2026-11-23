@@ -124,7 +124,7 @@ export async function proponerRepetir(
   // el módulo Festivos (los locales, por ejemplo): sin ellos, una serie que solo
   // se saltó una fiesta local a final de mes saldría como «terminada».
   const guardados = await festivosGuardadosEntre(admin, studioId, primerDia(mes) < hoy ? primerDia(mes) : hoy, hasta);
-  if (guardados === 'error') return { ok: false, error: 'No se han podido leer los festivos.', status: 500 };
+  if (guardados === 'error') return { ok: false, error: 'No se han podido leer los feriados.', status: 500 };
   const festivosOrigen = new Set([
     ...(zona ? festivosEntre(zona, primerDia(mes), finMes).map((f) => f.fecha) : []),
     ...guardados.filter((g) => g.fecha >= primerDia(mes) && g.fecha <= finMes).map((g) => g.fecha),
@@ -183,7 +183,7 @@ export async function proponerRepetir(
   if (festivos.length > 0) {
     const { data, error } = await admin.from('festivos_abiertos').select('fecha')
       .eq('studio_id', studioId).gte('fecha', festivos[0].fecha).lte('fecha', hasta);
-    if (error && !esTablaQueFalta(error)) return { ok: false, error: 'No se han podido leer los festivos.', status: 500 };
+    if (error && !esTablaQueFalta(error)) return { ok: false, error: 'No se han podido leer los feriados.', status: 500 };
     abiertos = (data ?? []).map((f) => String(f.fecha).slice(0, 10));
   }
 

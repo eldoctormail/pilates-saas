@@ -35,7 +35,7 @@ test('clases: los campos que el diseño pinta llegan todos', () => {
     assert.ok(c.duracionMin > 0, 'duración a cero: inicio/fin no llegaron');
     assert.ok(c.nombre && c.nombre !== 'Clase', `nombre sin resolver en ${c.id}`);
     assert.ok(c.capacidad > 0, 'aforo a cero');
-    assert.ok(c.plazasLibres >= 0 && c.plazasLibres <= c.capacidad, 'plazas fuera de rango');
+    assert.ok(c.plazasLibres >= 0 && c.plazasLibres <= c.capacidad, 'lugares fuera de rango');
     assert.ok(['Todos', 'Iniciación', 'Medio', 'Avanzado'].includes(c.nivel), `nivel sin traducir: ${c.nivel}`);
     assert.ok(c.instructoraId, 'sin instructora');
   }
@@ -96,7 +96,7 @@ test('clases: una sesión cancelada no aparece en el horario', () => {
   assert.equal(ids.has(payload.sesiones![0].id), false);
 });
 
-test('aforo: una reserva en lista de espera NO resta plaza', () => {
+test('aforo: una reserva en lista de espera NO resta lugar', () => {
   const sesionId = payload.sesiones![0].id;
   const base = proyectarClases(payload).find((c) => c.id === sesionId)!;
 
@@ -111,7 +111,7 @@ test('aforo: una reserva en lista de espera NO resta plaza', () => {
   assert.equal(despues.plazasLibres, base.plazasLibres);
 });
 
-test('aforo: una CONFIRMADA sí resta plaza', () => {
+test('aforo: una CONFIRMADA sí resta lugar', () => {
   const sesionId = payload.sesiones![0].id;
   const base = proyectarClases(payload).find((c) => c.id === sesionId)!;
   const conUna: PayloadMin = {

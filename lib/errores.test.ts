@@ -207,6 +207,6 @@ test('congelar con la política apagada dice de quién es la decisión y dónde 
 
 test('una etapa de lanzamiento llena se explica en cristiano, con qué hacer', () => {
   const m = mensajeDeFalloAlGuardar({ code: 'P0001', message: 'ETAPA_AGOTADA' });
-  assert.match(m, /plazas de esa oferta se han agotado/);
+  assert.match(m, /lugares de esa oferta se han agotado/);
   assert.match(m, /amplía el cupo/);
 });

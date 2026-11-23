@@ -375,7 +375,7 @@ export function AsistenteRapido({
                   {Array.from({ length: nSalas }, (_, n) => (
                     <Chips
                       key={n}
-                      legend={nSalas === 1 ? '¿Cuántas plazas tiene tu sala?' : `¿Cuántas plazas hay en la sala ${n + 1}?`}
+                      legend={nSalas === 1 ? '¿Cuántos lugares tiene tu sala?' : `¿Cuántos lugares hay en la sala ${n + 1}?`}
                       nota={n === 0 ? 'Es el límite real de reservas por clase.' : undefined}
                       opciones={OPCIONES_AFORO} valor={(ans.aforos ?? [])[n]}
                       onCambio={(v) => {

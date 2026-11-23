@@ -628,7 +628,7 @@ export function PanelTipoClase({
 
           <Campo
             label="¿Cuántos clientes caben?"
-            ayuda="Las plazas con las que sale cada sesión. Si lo dejas vacío se usan las de la sala donde la programes."
+            ayuda="Los lugares con las que sale cada sesión. Si lo dejas vacío se usan las de la sala donde la programes."
           >
             <div className="flex items-center gap-2">
               <input
@@ -639,7 +639,7 @@ export function PanelTipoClase({
                 placeholder="Las de la sala"
                 value={form.aforoPorDefecto}
                 onChange={e => setForm(f => ({ ...f, aforoPorDefecto: e.target.value }))}
-                aria-label="Plazas por defecto"
+                aria-label="Lugares por defecto"
               />
               <span className="text-[12.5px] text-muted-foreground">{resumenAforo(form.aforoPorDefecto)}</span>
             </div>
@@ -930,7 +930,7 @@ export function PanelTipoClase({
               enseña: el estudio puede tenerla encendida. */}
           {form.permiteListaEspera !== 'no' && (
             <CampoHeredado
-              label="¿Cuánto tiempo le das para aceptar una plaza libre?"
+              label="¿Cuánto tiempo le das para aceptar un lugar libre?"
               ayuda="Cuando se libera un sitio, la primera de la cola tiene ese rato para confirmar antes de que pase a la siguiente."
               heredado={form.listaEsperaPlazoAceptacionMinutos.trim() === ''}
               onHeredar={() => setForm(f => ({ ...f, listaEsperaPlazoAceptacionMinutos: '' }))}
@@ -950,7 +950,7 @@ export function PanelTipoClase({
                   placeholder="Ajuste del estudio"
                   value={form.listaEsperaPlazoAceptacionMinutos}
                   onChange={e => setForm(f => ({ ...f, listaEsperaPlazoAceptacionMinutos: e.target.value }))}
-                  aria-label="Tiempo para aceptar una plaza que se libera, en minutos"
+                  aria-label="Tiempo para aceptar un lugar que se libera, en minutos"
                 />
                 <span className="text-[12.5px] text-muted-foreground">minutos · 0 = se le asigna al instante</span>
               </div>
@@ -1123,7 +1123,7 @@ export function PanelTipoClase({
         {plataformasActivas.length > 0 && (
           <Seccion
             titulo="Plataformas que venden esta clase"
-            ayuda="Cuántas plazas de cada clase de este tipo pones a la venta en ClassPass, Urban Sports Club o Wellhub."
+            ayuda="Cuántos lugares de cada clase de este tipo pones a la venta en ClassPass, Urban Sports Club o Wellhub."
           >
             <PlazasPlataformasTipo
               tipoClaseId={editando?.id ?? null}

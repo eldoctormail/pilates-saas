@@ -25,6 +25,7 @@ import { HojaCobro } from './hoja-cobro';
 import { AyudaDePantalla } from '@/components/ayuda/AyudaDePantalla';
 import { HojaCaja } from './hoja-caja';
 import { HojaVentas } from './hoja-ventas';
+import { MONEDA_NOMBRE_PLURAL } from '@/lib/moneda';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // El terminal de venta.
@@ -966,7 +967,7 @@ export function PosTerminal() {
                       key={t}
                       onClick={() => setDescuentoTipo(t)}
                       aria-pressed={descuentoTipo === t}
-                      aria-label={t === 'EUROS' ? 'Descuento en euros' : 'Descuento en porcentaje'}
+                      aria-label={t === 'EUROS' ? `Descuento en ${MONEDA_NOMBRE_PLURAL}` : 'Descuento en porcentaje'}
                       className={cn(
                         'w-11 text-[15px] font-bold transition-colors',
                         descuentoTipo === t ? 'bg-foreground text-background' : 'text-muted-foreground',

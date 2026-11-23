@@ -76,7 +76,7 @@ test('la vigencia y el tipo: ni antes de «desde», ni después de «hasta», ni
   assert.deepEqual(h.map(x => x.fijasPorVenir), [0, 1, 1, 0]);
 });
 
-test('solo las clases que aún no han empezado, en orden; una cancelada no tiene plazas libres', () => {
+test('solo las clases que aún no han empezado, en orden; una cancelada no tiene lugares libres', () => {
   const sesiones = [sesion('b', MARTES[1]), sesion('pasada', '2026-10-06'), sesion('a', MARTES[0], { cancelada: true })];
   const h = huecosDeSesiones({ sesiones, reservas: [], plazas: [], apartadas: sinApartadas, ahoraMs: AHORA });
   assert.deepEqual(h.map(x => x.id), ['a', 'b']);
@@ -158,7 +158,7 @@ test('el rango: fechas reales, en orden, como mucho 31 días, y recortado a hoy'
   assert.equal(rangoDePlazasLibres(undefined, '2026-11-01', hoy).ok, false);
 });
 
-test('una plaza ofrecida a la lista de espera: ocupa solo si el estudio lo eligió y mientras corre su plazo', () => {
+test('un lugar ofrecido a la lista de espera: ocupa solo si el estudio lo eligió y mientras corre su plazo', () => {
   const s = sesion('a', MARTES[0]);
   const reservas = [
     res('a', 'x'),

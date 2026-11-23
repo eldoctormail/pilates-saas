@@ -115,7 +115,7 @@ test('LLENAR_PLAZAS: la clase se llenó del todo → POSITIVO', () => {
   assert.equal(r.senalObservada, 'RESERVO');
 });
 
-test('LLENAR_PLAZAS: entró gente pero sobraron plazas → NEUTRO', () => {
+test('LLENAR_PLAZAS: entró gente pero sobraron lugares → NEUTRO', () => {
   const r = medirOutcome('LLENAR_PLAZAS', senal({ plazasLibresFinales: 2, plazasVendidasTrasLaAccion: 3 }));
   assert.equal(r.outcome, 'NEUTRO');
   assert.equal(r.senalObservada, 'RESERVO');
@@ -133,7 +133,7 @@ test('LLENAR_PLAZAS: sesión borrada o aún sin dar → NEUTRO sin señal, no NE
   assert.equal(r.senalObservada, null);
 });
 
-test('LLENAR_PLAZAS: el impacto en € queda NO_MEDIBLE (multiplicar plazas por precio medio sería una proyección)', () => {
+test('LLENAR_PLAZAS: el impacto en € queda NO_MEDIBLE (multiplicar lugares por precio medio sería una proyección)', () => {
   const r = medirOutcome('LLENAR_PLAZAS', senal({ plazasLibresFinales: 0, plazasVendidasTrasLaAccion: 4 }));
   assert.equal(r.impactoReal, null);
   assert.equal(r.confianzaMedicion, 'NO_MEDIBLE');

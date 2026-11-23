@@ -143,13 +143,13 @@ const pf = (o: Partial<PlazaFija> = {}): PlazaFija => ({
   vigenciaHasta: null, estado: 'ACTIVA', creadaEn: '', ...o,
 } as PlazaFija);
 
-test('la plaza fija se lee en día y hora, no en números', () => {
+test('el lugar fijo se lee en día y hora, no en números', () => {
   const r = plazaFijaTexto([pf()], 'soc-1', SALAS, TIPOS);
   assert.equal(r?.cuando, 'Miércoles · 18:30');
   assert.equal(r?.donde, 'Reformer · Sala Norte');
 });
 
-test('una plaza pausada o de baja no se enseña como si la tuviera', () => {
+test('un lugar pausado o de baja no se enseña como si la tuviera', () => {
   assert.equal(plazaFijaTexto([pf({ estado: 'PAUSADA' })], 'soc-1', SALAS, TIPOS), null);
   assert.equal(plazaFijaTexto([pf({ estado: 'BAJA' })], 'soc-1', SALAS, TIPOS), null);
 });

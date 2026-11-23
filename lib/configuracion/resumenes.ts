@@ -319,7 +319,7 @@ function valorDe(id: SeccionId, d: DatosConfiguracion): string | null {
       if (s.permiteListaEspera === false) espera = 'sin lista de espera';
       else if (s.permiteListaEspera === true && s.listaEsperaPlazoAceptacionMinutos !== undefined) {
         const plazo = s.listaEsperaPlazoAceptacionMinutos;
-        espera = plazo > 0 ? `${duracion(plazo)} para aceptar la plaza` : 'lista de espera al momento';
+        espera = plazo > 0 ? `${duracion(plazo)} para aceptar el lugar` : 'lista de espera al momento';
       }
       return unir([cancelar, espera]);
     }
@@ -952,7 +952,7 @@ export function resumenRegla(
     case 'lista-de-espera': {
       const plazo = r.listaEsperaPlazoAceptacionMinutos;
       return u([
-        !r.permiteListaEspera ? 'sin lista de espera' : plazo > 0 ? `oferta de ${duracion(plazo)}` : 'plaza al momento',
+        !r.permiteListaEspera ? 'sin lista de espera' : plazo > 0 ? `oferta de ${duracion(plazo)}` : 'lugar al momento',
         excepciones,
       ]);
     }
@@ -991,7 +991,7 @@ export function resumenRegla(
     case 'plaza-fija-desde-la-app':
       return u([
         r.plazaFijaSolicitarDesdeApp && r.plazaFijaAprobacion === 'AUTOMATICA' ? 'se dan solas'
-          : r.plazaFijaSolicitarDesdeApp && r.plazaFijaPausaDesdeApp ? 'piden plaza y pausa'
+          : r.plazaFijaSolicitarDesdeApp && r.plazaFijaPausaDesdeApp ? 'piden lugar y pausa'
           : r.plazaFijaSolicitarDesdeApp ? 'piden clase fija'
           : r.plazaFijaPausaDesdeApp ? 'piden pausas'
           : 'solo en recepción',

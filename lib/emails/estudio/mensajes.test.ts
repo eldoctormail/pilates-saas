@@ -20,7 +20,7 @@ test('la valoración pregunta por la clase y por quién la dio', () => {
   assert.match(sinQuien, /¿qué tal tu clase\? Tu opinión/);
 });
 
-test('la lista de espera sin plaza distingue el bono de la clase suelta', () => {
+test('la lista de espera sin lugar distingue el bono de la clase suelta', () => {
   const base = { socioNombre: 'Ana', ...CLASE, marca: MARCA, emailEstudio: 'hola@example.com' };
   const suelta = correoEsperaSinPlaza({ ...base, sesionesRestantes: 1 });
   const bono = correoEsperaSinPlaza({ ...base, sesionesRestantes: 7 });

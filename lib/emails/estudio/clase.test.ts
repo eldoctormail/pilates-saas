@@ -26,7 +26,7 @@ test('la reserva dice lo que hay que decir y lleva los datos de la clase', () =>
   for (const dato of ['Reformer Iniciación', 'Lunes 4 de agosto', '09:00', 'Sala 1', 'Marta']) {
     assert.ok(html.includes(dato), `falta «${dato}» en el correo de reserva`);
   }
-  assert.match(html, /Tu plaza está reservada/);
+  assert.match(html, /Tu lugar está reservado/);
   assert.match(html, /Casa Pilates/);
 });
 
@@ -110,7 +110,7 @@ test('con cuerpo propio manda su texto, pero el correo sigue siendo suyo de marc
     personalizacion: { cuerpo: '# Nos vemos, Ana\n\nTrae **calcetines**.\n\n{datos}\n\n{boton}' },
   });
   assert.match(html, /Nos vemos, Ana/);
-  assert.ok(!html.includes('Tu plaza está reservada'), 'no puede haber dos titulares');
+  assert.ok(!html.includes('Tu lugar está reservado'), 'no puede haber dos titulares');
   assert.ok(html.includes('Lunes 4 de agosto'));
   assert.ok(html.includes('#7C9A82'), 'el cuerpo libre perdió el color del estudio');
   assert.ok(html.includes('https://cdn.example.com/portada.jpg'), 'el cuerpo libre perdió la portada');
@@ -142,11 +142,11 @@ test('la devolución del bono se dice, no se supone', () => {
   assert.match(correoCancelacionClase({ ...BASE, bonoDevuelto: true }), /devuelto la sesión a tu bono/);
 });
 
-test('la plaza liberada es buena noticia: portada y filete verde', () => {
+test('el lugar liberado es buena noticia: portada y filete verde', () => {
   const html = correoPlazaLiberada(BASE);
   assert.ok(html.includes('cdn.example.com/portada.jpg'));
   assert.ok(html.includes(ACENTO.bien));
-  assert.match(html, /Se ha liberado tu plaza/);
+  assert.match(html, /Se ha liberado tu lugar/);
   assert.match(html, /Ver mis clases/);
 });
 

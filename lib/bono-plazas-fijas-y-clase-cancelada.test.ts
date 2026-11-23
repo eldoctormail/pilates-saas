@@ -43,7 +43,7 @@ function cuerpoDe(nombre: string): string {
   throw new Error(`no se pudo delimitar el cuerpo de ${nombre}`);
 }
 
-test('⚠️ I-1 · «Eliminar clase» no devuelve bono a las plazas fijas, ni a ciegas', () => {
+test('⚠️ I-1 · «Eliminar clase» no devuelve bono a los lugares fijos, ni a ciegas', () => {
   // Fase 2 del motor de derechos: ya no hay una selección de «confirmadas» ni un `+1` en el
   // navegador. «Eliminar» cancela las reservas y las libera POR EL SERVIDOR antes de borrar la
   // clase (el borrado se lleva las reservas por cascada), y quien decide qué se devuelve es

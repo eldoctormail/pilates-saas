@@ -124,12 +124,12 @@ export function RellenarHuecoPanel({
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        setResultado({ mal: true, texto: data?.error ?? 'No se ha podido ofrecer la plaza' });
+        setResultado({ mal: true, texto: data?.error ?? 'No se ha podido ofrecer el lugar' });
         return;
       }
       onAviso(data.resultado === 'confirmada'
-        ? 'Plaza confirmada a la siguiente en la lista'
-        : 'Oferta de plaza enviada');
+        ? 'Lugar confirmado a la siguiente en la lista'
+        : 'Oferta de lugar enviado');
       onCambio();
       cerrar();
     } catch {
@@ -195,7 +195,7 @@ export function RellenarHuecoPanel({
         <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Rellenar hueco</p>
         <h2 className="mt-1 text-[17px] font-bold text-foreground">{nombreClase}</h2>
         <p className="text-[12px] text-muted-foreground">
-          {horaEstudio(sesion.inicio)}–{horaEstudio(sesion.fin)} · {clase.huecos} plaza{clase.huecos === 1 ? '' : 's'} disponible{clase.huecos === 1 ? '' : 's'}
+          {horaEstudio(sesion.inicio)}–{horaEstudio(sesion.fin)} · {clase.huecos} lugar{clase.huecos === 1 ? '' : 's'} disponible{clase.huecos === 1 ? '' : 's'}
         </p>
       </div>
 
@@ -257,7 +257,7 @@ export function RellenarHuecoPanel({
                 >
                   {enviando === 'ofrecer'
                     ? <><Loader2 size={13} className="animate-spin" /> Ofreciendo…</>
-                    : <>Ofrecer la plaza a la primera</>}
+                    : <>Ofrecer el lugar a la primera</>}
                 </Button>
               </section>
             )}
@@ -345,7 +345,7 @@ export function RellenarHuecoPanel({
                 Se envía por WhatsApp a quien tenga teléfono, si tienes WhatsApp Business
                 conectado; al resto, por email. No se avisa a quien no ha dado consentimiento
                 de marketing ni a quien ya recibió un aviso de esta clase en las últimas 24 h.
-                Salen como mucho {AVISOS_HUECO_POR_PLAZA} avisos por plaza libre.
+                Salen como mucho {AVISOS_HUECO_POR_PLAZA} avisos por lugar libre.
               </p>
             </>
           ) : (

@@ -250,9 +250,9 @@ export function FormularioNuevaClase({
   const alLlenarse = fraseAlLlenarse(studio, tipo);
   const hrefTipos = puedeAbrirEnConfiguracion(rol, HREF_TIPOS_DE_CLASE) ? HREF_TIPOS_DE_CLASE : null;
 
-  const origenPlazas = form.aforoTocado ? 'plazas elegidas por ti'
-    : tipo?.aforoPorDefecto != null ? 'plazas por defecto de este tipo de clase'
-    : 'plazas de la sala';
+  const origenPlazas = form.aforoTocado ? 'lugares elegidos por ti'
+    : tipo?.aforoPorDefecto != null ? 'lugares por defecto de este tipo de clase'
+    : 'lugares de la sala';
 
   // Un campo de número vacío da 0: una clase sin plazas no se puede reservar.
   const plazasInvalidas = !(aforoMaximo >= 1);
@@ -286,7 +286,7 @@ export function FormularioNuevaClase({
     `${horaInicio}–${horaFin}`,
     sala.nombre,
     instructorId ? nombreInstructora(instructorId) : 'sin instructora',
-    `${aforoMaximo} plazas`,
+    `${aforoMaximo} lugares`,
   ].join(' · ');
 
   const textoBoton = guardando ? 'Guardando…'
@@ -316,7 +316,7 @@ export function FormularioNuevaClase({
             )}
             {opcionesTipo.map(t => (
               <option key={t.id} value={t.id} disabled={estaArchivado(t)}>
-                {[t.nombre, t.duracionMinutos ? `${t.duracionMinutos} min` : null, t.aforoPorDefecto != null ? `${t.aforoPorDefecto} plazas` : null, estaArchivado(t) ? 'archivado' : null]
+                {[t.nombre, t.duracionMinutos ? `${t.duracionMinutos} min` : null, t.aforoPorDefecto != null ? `${t.aforoPorDefecto} lugares` : null, estaArchivado(t) ? 'archivado' : null]
                   .filter(Boolean).join(' · ')}
               </option>
             ))}
@@ -408,7 +408,7 @@ export function FormularioNuevaClase({
         )}
 
         <div className="space-y-1.5">
-          <label htmlFor={ids.plazas} className="text-xs font-bold text-foreground uppercase tracking-wider">Plazas</label>
+          <label htmlFor={ids.plazas} className="text-xs font-bold text-foreground uppercase tracking-wider">Lugares</label>
           <div className="flex items-center gap-3">
             <input
               id={ids.plazas}
@@ -425,7 +425,7 @@ export function FormularioNuevaClase({
               {sala ? `La sala tiene ${sala.capacidad} sitios` : 'Elige una sala'} · {origenPlazas}
             </span>
           </div>
-          {plazasInvalidas && <p role="alert" className="text-xs text-destructive">Pon al menos 1 plaza.</p>}
+          {plazasInvalidas && <p role="alert" className="text-xs text-destructive">Pon al menos 1 lugar.</p>}
           <p id={ids.alLlenarse} data-testid="al-llenarse" className="text-xs leading-relaxed text-muted-foreground text-pretty">
             {alLlenarse}
           </p>

@@ -153,7 +153,7 @@ export async function registrarFalloCobro(params: {
         await soltarReservasPlazaFijaSinCuota(admin, { studioId, socioId: rec.socio_id });
       }
     } catch (e) {
-      Sentry.captureException(e instanceof Error ? e : new Error('Fallo al soltar plazas fijas tras impago definitivo'), {
+      Sentry.captureException(e instanceof Error ? e : new Error('Fallo al soltar lugares fijos tras impago definitivo'), {
         level: 'warning', tags: { area: 'plazas-fijas', tipo: 'dunning' }, extra: { reciboId, suscripcionId: rec.suscripcion_id },
       });
     }

@@ -306,7 +306,7 @@ export function HojaPagarYReservar({
 
         <div key={estado.fase} data-testid={'pagar-clase-' + estado.fase} className="a-fade" style={{ marginTop: 'var(--s-3)' }}>
           {estado.fase === 'comprobando' ? (
-            <p role="status" className="t-meta">Comprobando la plaza…</p>
+            <p role="status" className="t-meta">Comprobando el lugar…</p>
           ) : estado.fase === 'no-se-puede' ? (
             <>
               <h3 className="t-card-title">{estado.titulo}</h3>
@@ -366,8 +366,8 @@ export function HojaPagarYReservar({
                 )}
                 <p className="t-small t-dim" style={{ marginTop: 'var(--s-3)' }}>
                   {conMercadoPago
-                    ? 'Comprobamos tu plaza antes de cobrar. Pagas en Mercado Pago y vuelves aquí.'
-                    : 'Comprobamos tu plaza antes de cobrar. El cobro lo hace el estudio a través de Stripe.'}
+                    ? 'Comprobamos tu lugar antes de cobrar. Pagas en Mercado Pago y vuelves aquí.'
+                    : 'Comprobamos tu lugar antes de cobrar. El cobro lo hace el estudio a través de Stripe.'}
                 </p>
                 {(() => {
                   const op = estado.opciones.find((o) => o.planId === elegida);
@@ -380,7 +380,7 @@ export function HojaPagarYReservar({
                       style={{ marginTop: 'var(--s-3)' }}
                     >
                       {estado.fase === 'preparando'
-                        ? (op?.gratis ? 'Reservando…' : 'Comprobando tu plaza…')
+                        ? (op?.gratis ? 'Reservando…' : 'Comprobando tu lugar…')
                         : op?.gratis ? 'Reservar gratis' : `Continuar · ${op ? euros(op.importe) : ''}`}
                     </Button>
                   );
@@ -424,7 +424,7 @@ export function HojaPagarYReservar({
           ) : estado.fase === 'confirmando' ? (
             <div role="status" aria-live="polite" style={{ textAlign: 'center', padding: '12px 0 4px' }}>
               <span aria-hidden style={{ display: 'inline-block', width: 22, height: 22, borderRadius: 'var(--radius-round)', border: '2px solid var(--border-strong)', borderTopColor: 'var(--accent)', animation: 'apSpin .7s linear infinite' }} />
-              <h3 className="t-title" style={{ marginTop: 12 }}>Pago hecho. Confirmando tu plaza…</h3>
+              <h3 className="t-title" style={{ marginTop: 12 }}>Pago hecho. Confirmando tu lugar…</h3>
               <p className="t-meta" style={{ marginTop: 6 }}>Tarda unos segundos; no tienes que hacer nada.</p>
             </div>
           ) : (
@@ -455,19 +455,19 @@ function Desenlace({ d, clase, onCerrar, hrefMisReservas, hrefMensajes }: {
   let cuerpo: string;
   switch (d.tipo) {
     case 'compensada': ({ titulo, cuerpo } = textoCompensacion(d.compensacion, fechaLarga)); break;
-    case 'lista_espera': titulo = 'Estás en la lista de espera'; cuerpo = 'La clase se llenó mientras pagabas. Te avisamos si se libera una plaza; lo que has pagado queda a tu favor.'; break;
+    case 'lista_espera': titulo = 'Estás en la lista de espera'; cuerpo = 'La clase se llenó mientras pagabas. Te avisamos si se libera un lugar; lo que has pagado queda a tu favor.'; break;
     case 'pendiente_aprobacion': titulo = 'Tu reserva espera al estudio'; cuerpo = 'En esta clase el estudio aprueba cada reserva. Te avisamos en cuanto conteste.'; break;
-    case 'ya_tenia_plaza': titulo = 'Ya tenías esta clase'; cuerpo = 'No te hemos reservado otra plaza. Lo que has pagado queda a tu favor.'; break;
+    case 'ya_tenia_plaza': titulo = 'Ya tenías esta clase'; cuerpo = 'No te hemos reservado otro lugar. Lo que has pagado queda a tu favor.'; break;
     case 'reembolsada': titulo = 'El estudio te ha devuelto el dinero'; cuerpo = 'Este pago ya no cuenta para esta clase.'; break;
     case 'prueba-en-espera':
       titulo = d.posicion ? `Estás la ${d.posicion}.ª en la lista de espera` : 'Estás en la lista de espera';
-      cuerpo = 'La clase está llena. Si se libera una plaza te avisamos, y tu clase de prueba sigue disponible para otra clase.';
+      cuerpo = 'La clase está llena. Si se libera un lugar te avisamos, y tu clase de prueba sigue disponible para otra clase.';
       break;
-    case 'fallida': titulo = 'Pago hecho, pero sin plaza'; cuerpo = 'No hemos podido darte la plaza. El estudio ya lo sabe y te lo resuelve.'; break;
+    case 'fallida': titulo = 'Pago hecho, pero sin lugar'; cuerpo = 'No hemos podido darte el lugar. El estudio ya lo sabe y te lo resuelve.'; break;
     default:
       // Se agotó la espera: el pago está, la plaza se está confirmando. Nunca un ✓ ni «vuelve a pagar».
       titulo = 'Tu pago está hecho';
-      cuerpo = 'Tu plaza se está confirmando. Te avisamos en cuanto esté; no vuelvas a pagar. Si en un rato no la ves en tus reservas, escribe al estudio.';
+      cuerpo = 'Tu lugar se está confirmando. Te avisamos en cuanto esté; no vuelvas a pagar. Si en un rato no la ves en tus reservas, escribe al estudio.';
   }
   return (
     <div role="status" data-testid={'pago-clase-' + d.tipo} style={{ padding: '8px 0 4px' }}>

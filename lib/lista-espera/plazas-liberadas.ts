@@ -20,7 +20,7 @@ export async function barrerColasConPlazaLiberada(): Promise<{ promovidas: numbe
   const admin = getSupabaseAdmin();
   if (!admin) return { promovidas: 0, fallos: 0 };
   const { data, error } = await admin.rpc('sesiones_con_plazas_liberadas', { p_ventana: VENTANA_PLAZAS_LIBERADAS });
-  exigirLectura(error, 'leyendo las clases con plazas apartadas recién liberadas');
+  exigirLectura(error, 'leyendo las clases con lugares apartados recién liberados');
   let promovidas = 0;
   let fallos = 0;
   for (const s of (data ?? []) as { studio_id: string; sesion_id: string; huecos: number }[]) {
@@ -36,7 +36,7 @@ export async function barrerColasConPlazaLiberada(): Promise<{ promovidas: numbe
     }
   }
   if (fallos > 0) {
-    capturarMensaje('[lista-espera] plazas liberadas de ClassPass que no se pudieron dar a la cola', 'error', { extra: { fallos } });
+    capturarMensaje('[lista-espera] lugares liberados de ClassPass que no se pudieron dar a la cola', 'error', { extra: { fallos } });
   }
   return { promovidas, fallos };
 }

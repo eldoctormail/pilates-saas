@@ -157,14 +157,14 @@ export function PlazasFijasPorDecidir({ onToast }: { onToast: MostrarToast }) {
                     size="sm" variant="outline" disabled={ocupado}
                     onClick={() => (vuelta ? setConfirmandoQuitar(p.id) : void decidir(p, false))}
                   >
-                    {vuelta ? 'Quitar la plaza' : 'No aprobar'}
+                    {vuelta ? 'Quitar el lugar' : 'No aprobar'}
                   </Button>
                   <Button size="sm" disabled={ocupado} onClick={() => void decidir(p, true)}>
                     {enviando === p.id
                       ? 'Guardando…'
                       : p.tipo === 'CREAR_CLASE_FIJA' ? (p.superaLimite ? 'Dar la clase fija igualmente' : 'Dar la clase fija')
                       : p.tipo === 'AMPLIAR_CLASE_FIJA' ? (p.superaLimite ? 'Ampliarla igualmente' : 'Ampliarla')
-                      : p.tipo === 'CREAR' ? (p.superaLimite ? 'Dar la plaza igualmente' : 'Dar la plaza')
+                      : p.tipo === 'CREAR' ? (p.superaLimite ? 'Dar el lugar igualmente' : 'Dar el lugar')
                         : p.tipo === 'PAUSAR' ? 'Aprobar la pausa' : 'Que vuelva'}
                   </Button>
                 </div>

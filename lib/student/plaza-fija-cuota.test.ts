@@ -38,7 +38,7 @@ const CASOS: { nombre: string; subs: CuotaMin[]; planes: PlanCuotaMin[]; tipo: s
 ];
 
 for (const c of CASOS) {
-  test(`cuota para plaza fija: ${c.nombre} — la app y el servidor dicen lo mismo`, () => {
+  test(`cuota para lugar fijo: ${c.nombre} — la app y el servidor dicen lo mismo`, () => {
     const enLaApp = tieneCuotaQueCubre(c.subs, c.planes, HOY, c.tipo);
     assert.equal(enLaApp, delServidor(c.subs, c.planes, c.tipo));
   });

@@ -320,7 +320,7 @@ export function resumenPenalizacion(importe: number | null): string {
 /** Lo que se enseña AL LADO DEL CAMPO de plazas, donde el hueco vacío necesita
  *  explicarse. */
 export function resumenAforo(aforo: string): string {
-  return plazasSiPropias(aforo) ?? 'las plazas de la sala';
+  return plazasSiPropias(aforo) ?? 'los lugares de la sala';
 }
 
 /**
@@ -333,5 +333,5 @@ export function resumenAforo(aforo: string): string {
  */
 export function plazasSiPropias(aforo: string): string | null {
   const n = parseInt(aforo, 10);
-  return Number.isFinite(n) && n >= 1 ? `${n} ${n === 1 ? 'plaza' : 'plazas'}` : null;
+  return Number.isFinite(n) && n >= 1 ? `${n} ${n === 1 ? 'lugar' : 'lugares'}` : null;
 }

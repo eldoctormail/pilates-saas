@@ -88,7 +88,7 @@ export function HojaReserva({
     <Sheet open={abierta} onClose={hoja.cerrar} label="Reservar clase">
       {(bk === 'reviewing' || bk === 'submitting') && (
         <>
-          <h3 className="t-h2">{enEspera ? 'Clase llena — lista de espera' : 'Confirma tu plaza'}</h3>
+          <h3 className="t-h2">{enEspera ? 'Clase llena — lista de espera' : 'Confirma tu lugar'}</h3>
           <div style={{ marginTop: 12 }}>
             <BookingSummary
               clase={clase}
@@ -109,7 +109,7 @@ export function HojaReserva({
             // Era «Sin coste — solo reservas si se libera y tú confirmas»: la plaza se da SOLA al liberarse
             // (`trasPromocionDeEspera`) y consume como cualquier reserva; ella no confirma nada.
             <p className="t-meta" style={{ marginTop: 8, textAlign: 'center' }}>
-              Sin coste al apuntarte. Si se libera una plaza, te avisamos; al entrar cuenta como una reserva normal.
+              Sin coste al apuntarte. Si se libera un lugar, te avisamos; al entrar cuenta como una reserva normal.
             </p>
           )}
           {enEspera && exigePlanSinBono && (

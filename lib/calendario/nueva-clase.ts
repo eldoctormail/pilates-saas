@@ -238,8 +238,8 @@ export function fraseAlLlenarse(studio: Partial<Studio> | null | undefined, tipo
   }
   const plazo = r.listaEsperaPlazoAceptacionMinutos > 0 ? r.listaEsperaPlazoAceptacionMinutos : 0;
   return plazo > 0
-    ? `Al llenarse, las siguientes entran en lista de espera; si se libera una plaza, la primera tiene ${duracionCorta(plazo)} para aceptarla.`
-    : 'Al llenarse, las siguientes entran en lista de espera y la plaza que se libere pasa al momento a la primera.';
+    ? `Al llenarse, las siguientes entran en lista de espera; si se libera un lugar, la primera tiene ${duracionCorta(plazo)} para aceptarlo.`
+    : 'Al llenarse, las siguientes entran en lista de espera y el lugar que se libere pasa al momento a la primera.';
 }
 
 /** Los planes a la venta que incluyen ese tipo de clase (`planCubreTipoClase`), por nombre. */

@@ -34,5 +34,5 @@ export function fraseFestivo(f: FestivoConClases, hoy: string): string {
 
 /** El motivo que se guarda en el cierre, para que en «Cierres» se lea qué era. */
 export function motivoDelCierre(f: { nombre: string }): string {
-  return `Festivo: ${f.nombre}`;
+  return `Feriado: ${f.nombre}`;
 }

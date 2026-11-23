@@ -147,7 +147,7 @@ test('las filas dicen lo que el estudio tiene guardado, y cada cajón lo que va 
   await page.goto('/configuracion?tab=reservas#ajuste-lista-espera');
   await expect(page.getByRole('heading', { level: 2, name: 'Lista de espera', exact: true })).toBeFocused({ timeout: 30_000 });
   await expect(page.getByRole('radio', { name: /Se le ofrece durante 15 minutos/ })).toBeChecked();
-  await expect(consecuencia(page)).toHaveText('Si se libera una plaza, la primera de la lista tiene 15 min para aceptarla; si no, pasa a la siguiente.');
+  await expect(consecuencia(page)).toHaveText('Si se libera un lugar, la primera de la lista tiene 15 min para aceptarla; si no, pasa a la siguiente.');
 });
 
 test('con otros valores guardados, otras filas', async ({ page }) => {

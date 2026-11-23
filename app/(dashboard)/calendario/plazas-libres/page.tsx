@@ -149,8 +149,8 @@ export default function PlazasLibresPage() {
   return (
     <div className="space-y-4 pb-24" data-testid="plazas-libres">
       <PageHeader
-        title="Plazas libres"
-        description="Cuántas plazas quedan en cada clase y dónde cabe otro cliente con clase fija."
+        title="Lugares libres"
+        description="Cuántos lugares quedan en cada clase y dónde cabe otro cliente con clase fija."
         back={{ href: '/calendario', label: 'Volver al calendario' }}
       />
 
@@ -159,8 +159,8 @@ export default function PlazasLibresPage() {
         <div className="mt-2 space-y-1 text-pretty">
           <p>
             <span className="font-semibold text-foreground">Libres: </span>lo que se puede reservar ahora en esa clase. Ya resta las reservas confirmadas y lo
-            apartado para ClassPass; la lista de espera y las reservas por aprobar no ocupan plaza
-            {datosAlDia?.ofertaOcupa ? ', salvo una plaza ya ofrecida a la lista de espera mientras corre su plazo, como tiene elegido tu estudio' : ''}.
+            apartado para ClassPass; la lista de espera y las reservas por aprobar no ocupan lugar
+            {datosAlDia?.ofertaOcupa ? ', salvo un lugar ya ofrecida a la lista de espera mientras corre su plazo, como tiene elegido tu estudio' : ''}.
             Si hay una máquina averiada, ya está descontada.
           </p>
           <p>
@@ -207,7 +207,7 @@ export default function PlazasLibresPage() {
 
       {estado === 'error' ? (
         <div role="alert" className="max-w-3xl rounded-xl border border-border bg-card px-4 py-6 text-center" data-testid="plazas-libres-error">
-          <p className="text-[13.5px] font-medium text-foreground">{mensajeError ?? 'No se han podido calcular las plazas libres'}</p>
+          <p className="text-[13.5px] font-medium text-foreground">{mensajeError ?? 'No se han podido calcular los lugares libres'}</p>
           {!mensajeError && <p className="mt-1 text-[12.5px] text-muted-foreground">Sin todos los datos la cifra podría estar mal, así que no la enseñamos.</p>}
           <Button variant="outline" className="mt-3" onClick={() => (mensajeError ? setReferencia(null) : setIntento(i => i + 1))}>
             {mensajeError ? 'Ir a hoy' : 'Reintentar'}

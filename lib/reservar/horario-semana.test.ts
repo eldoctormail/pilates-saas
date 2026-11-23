@@ -129,7 +129,7 @@ test('horas: la fila en punto, el chip con sus minutos, todo en hora del estudio
   assert.equal(empiezaEnPunto('2026-09-23T08:30:00Z'), false);
 });
 
-test('plazas: las mismas reglas que la tarjeta de la lista', () => {
+test('lugares: las mismas reglas que la tarjeta de la lista', () => {
   assert.deepEqual(plazasDeClase({ aforoMaximo: 10, ocupadas: 4 }), { texto: '6 libres', tono: 'libre' });
   assert.deepEqual(plazasDeClase({ aforoMaximo: 10, ocupadas: 8 }), { texto: 'Quedan 2', tono: 'ultimas' });
   assert.deepEqual(plazasDeClase({ aforoMaximo: 10, ocupadas: 9 }), { texto: 'Quedan 1', tono: 'ultimas' });
@@ -138,11 +138,11 @@ test('plazas: las mismas reglas que la tarjeta de la lista', () => {
   assert.deepEqual(plazasDeClase({ aforoMaximo: 10, ocupadas: 12 }), { texto: 'Completa', tono: 'completa' });
   assert.deepEqual(plazasDeClase({ aforoMaximo: 0, ocupadas: 0 }), { texto: 'Completa', tono: 'completa' });
   // Lo suyo va antes que el aforo: a quien ya tiene plaza no le sirve el recuento.
-  assert.deepEqual(plazasDeClase({ aforoMaximo: 10, ocupadas: 10, miEstado: 'CONFIRMADA' }), { texto: 'Tu plaza', tono: 'mia' });
+  assert.deepEqual(plazasDeClase({ aforoMaximo: 10, ocupadas: 10, miEstado: 'CONFIRMADA' }), { texto: 'Tu lugar', tono: 'mia' });
   assert.deepEqual(plazasDeClase({ aforoMaximo: 10, ocupadas: 10, miEstado: 'LISTA_ESPERA' }), { texto: 'En espera', tono: 'mia' });
 });
 
-test('nombre accesible: clase, día y hora del estudio, y lo que dice de sus plazas', () => {
+test('nombre accesible: clase, día y hora del estudio, y lo que dice de sus lugares', () => {
   assert.equal(
     nombreAccesibleClase('Reformer', '2026-09-23T08:00:00Z'),
     'Reformer, miércoles 23 a las 10:00',

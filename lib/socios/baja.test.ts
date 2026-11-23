@@ -57,7 +57,7 @@ test('un plan borrado del catálogo no se renueva solo: se deja como está', () 
   assert.deepEqual(p.intactas, [{ id: 'x', plan: 'su plan', fechaFin: '2026-10-12' }]);
 });
 
-test('las plazas fijas activas y pausadas pasan a baja; las que ya lo están, no', () => {
+test('los lugares fijos activas y pausadas pasan a baja; las que ya lo están, no', () => {
   const p = planDeBaja([], PLANES, [{ id: 'a', estado: 'ACTIVA' }, { id: 'p', estado: 'PAUSADA' }, { id: 'b', estado: 'BAJA' }], HOY);
   assert.deepEqual(p.plazas, ['a', 'p']);
   assert.equal(bajaSinConsecuencias(p), false);

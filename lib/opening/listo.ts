@@ -113,7 +113,7 @@ export function evaluarListo(d: DatosListo, now: Date, puedeAbrir: (href: string
     id: 'clases', titulo: 'Clases para tu apertura', bloquea: true,
     estado: reservables.length > 0 ? 'OK' : 'FALTA',
     detalle: reservables.length > 0 ? ''
-      : incompletas > 0 ? `${n(incompletas, 'clase', 'clases')} sin instructora, tipo o plazas: así no se pueden reservar.`
+      : incompletas > 0 ? `${n(incompletas, 'clase', 'clases')} sin instructora, tipo o lugares: así no se pueden reservar.`
       : 'No hay clases en la semana de apertura: nadie puede reservar.',
   });
 

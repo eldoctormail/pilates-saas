@@ -54,7 +54,7 @@ export function PlazasPlataformasTipo({
     );
   }
   if (!tipoClaseId) {
-    return <p className="text-[11.5px] text-muted-foreground">Guarda el tipo de clase y después podrás decidir cuántas plazas cedes a cada plataforma.</p>;
+    return <p className="text-[11.5px] text-muted-foreground">Guarda el tipo de clase y después podrás decidir cuántos lugares cedes a cada plataforma.</p>;
   }
 
   async function guardar(p: Plataforma) {
@@ -94,7 +94,7 @@ export function PlazasPlataformasTipo({
               inputMode="numeric"
               min={0}
               disabled={!cargado}
-              aria-label={`Plazas que cedes a ${NOMBRE_PLATAFORMA[p]} por clase`}
+              aria-label={`Lugares que cedes a ${NOMBRE_PLATAFORMA[p]} por clase`}
               placeholder="Sin límite"
               value={texto[p] ?? ''}
               onChange={e => setTexto(t => ({ ...t, [p]: e.target.value }))}

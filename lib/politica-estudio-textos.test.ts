@@ -20,7 +20,7 @@ test('de fábrica: lo que hace hoy un estudio que no ha tocado nada', () => {
     'Si cancela con más de 12 h de antelación, recupera la sesión.',
     'Si cancela con menos de 12 h, no recupera la sesión.',
     'Si se cancela una clase entera —la cancelas tú, por el mínimo o por un cierre—, devuelve la sesión.',
-    'Si se libera una plaza, se la da al momento a la primera de la lista de espera.',
+    'Si se libera un lugar, se la da al momento a la primera de la lista de espera.',
     'Si una clase cambia de instructora, se mueve o se cancela en Sustituciones, avisa a sus clientes por email y en su app.',
   ]);
 });
@@ -77,11 +77,11 @@ test('lista de espera: permitida × plazo de aceptación', () => {
         assert.equal(f.texto, 'Con la clase llena, nadie más puede apuntarse a la lista de espera.');
         assert.deepEqual(f.respaldo, ['permiteListaEspera']);
       } else if (plazo <= 0) {
-        assert.equal(f.texto, 'Si se libera una plaza, se la da al momento a la primera de la lista de espera.');
+        assert.equal(f.texto, 'Si se libera un lugar, se la da al momento a la primera de la lista de espera.');
       } else {
         const esperado = plazo === 60 ? '1 h' : `${plazo} min`;
         assert.equal(f.texto,
-          `Si se libera una plaza, la primera de la lista tiene ${esperado} para aceptarla; si no, pasa a la siguiente.`);
+          `Si se libera un lugar, la primera de la lista tiene ${esperado} para aceptarla; si no, pasa a la siguiente.`);
       }
     }
   }

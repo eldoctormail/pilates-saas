@@ -23,16 +23,16 @@ export function fraseComoLlegan(x: {
 }): string {
   // Un enlace o un botón a la página abren la página entera, que se ve como su app.
   if (x.metodo === 'enlace' || x.metodo === 'boton') {
-    return 'Lo pegas una vez: tus clases, precios y plazas se actualizan solos, y tu página de reservas se ve siempre como tu app.';
+    return 'Lo pegas una vez: tus clases, precios y lugares se actualizan solos, y tu página de reservas se ve siempre como tu app.';
   }
   const conPublicar: string[] = [];
   if (x.sigueElEstilo) conPublicar.push('el estilo');
   if (x.porId) conPublicar.push(x.sigueElEstilo ? 'lo que enseña' : 'lo que enseña y su diseño propio');
   const pegar = x.porId ? null : x.sigueElEstilo ? 'lo que enseña' : 'lo que enseña o su diseño propio';
   if (conPublicar.length === 0) {
-    return `Lo pegas una vez: tus clases, precios y plazas se actualizan solos. Si cambias ${pegar}, tendrás que pegarlo otra vez.`;
+    return `Lo pegas una vez: tus clases, precios y lugares se actualizan solos. Si cambias ${pegar}, tendrás que pegarlo otra vez.`;
   }
   const verbo = conPublicar.length > 1 || (x.porId && !x.sigueElEstilo) ? 'llegan' : 'llega';
   const publicar = `${conPublicar.join(' y ')} ${verbo} cuando pulsas «${x.boton}»`;
-  return `Lo pegas una vez. Tus clases, precios y plazas se actualizan solos; ${publicar}.${pegar ? ` Si cambias ${pegar}, tendrás que pegarlo otra vez.` : ''}`;
+  return `Lo pegas una vez. Tus clases, precios y lugares se actualizan solos; ${publicar}.${pegar ? ` Si cambias ${pegar}, tendrás que pegarlo otra vez.` : ''}`;
 }

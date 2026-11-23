@@ -14,7 +14,7 @@ import { readFileSync } from 'node:fs';
 
 const fuente = (ruta: string) => readFileSync(new URL(ruta, import.meta.url), 'utf8');
 
-test('⚠️ checkout embebido: si Stripe repite el PaymentIntent del mismo intento, la plaza de esta petición vuelve', () => {
+test('⚠️ checkout embebido: si Stripe repite el PaymentIntent del mismo intento, el lugar de esta petición vuelve', () => {
   const src = fuente('../../app/api/public/checkout-embebido/route.ts');
   // `creadoAqui` = no es la repetición de otra petición (o lo es de un cobro
   // cancelado y esta petición creó otro, que se queda con la plaza).
@@ -50,7 +50,7 @@ test('⚠️ un cobro que ya existe con la marca y se cancela aquí devuelve la 
   assert.doesNotMatch(sinDatosA, /liberarCupoMatricula\(admin/);
 });
 
-test('⚠️ Checkout Session: si Stripe repite la sesión del mismo intento, la plaza de esta petición vuelve', () => {
+test('⚠️ Checkout Session: si Stripe repite la sesión del mismo intento, el lugar de esta petición vuelve', () => {
   const src = fuente('../../app/api/stripe/checkout/route.ts');
   // `creadaAqui` = no es la repetición de otra petición (o lo es de una caducada y
   // esta petición creó otra, que se queda con la plaza).

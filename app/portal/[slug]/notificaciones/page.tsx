@@ -104,7 +104,7 @@ export default function NotificacionesPage() {
   async function aceptar(oferta: Reserva) {
     if (aceptando) return;
     // Caducada en el último segundo: no se pide nada que el servidor vaya a rechazar.
-    if (!oferta.ofertaExpiraEn || yaCaducada(oferta.ofertaExpiraEn)) { toast('Se acabó el plazo para aceptar esta plaza.'); return; }
+    if (!oferta.ofertaExpiraEn || yaCaducada(oferta.ofertaExpiraEn)) { toast('Se acabó el plazo para aceptar este lugar.'); return; }
     const reservaId = oferta.id;
     setAceptando(reservaId);
     const res = await aceptarOfertaEspera(estudio.slug, estudio.id, reservaId, { online });
@@ -120,7 +120,7 @@ export default function NotificacionesPage() {
     if (res.confirmada) void vibrar('exito');
     setResueltas((p) => ({ ...p, [reservaId]: {
       sesionId: oferta.claseId,
-      texto: res.confirmada ? 'Plaza confirmada.' : 'Alguien se te adelantó por segundos: te hemos dado una clase de recuperación.',
+      texto: res.confirmada ? 'Lugar confirmado.' : 'Alguien se te adelantó por segundos: te hemos dado una clase de recuperación.',
     } }));
     void contexto.refrescar();
   }
@@ -190,10 +190,10 @@ export default function NotificacionesPage() {
     // directo sobre la tarjeta no llega a AA con el estilo «Carbón».
     return (
       <div data-testid="aviso-oferta" data-vencida={plazo ? undefined : '1'} style={{ marginTop: 10 }}>
-        <p className="note note--warn" style={{ display: 'inline-block' }}>{plazo ?? 'Se acabó el plazo para aceptar esta plaza.'}</p>
+        <p className="note note--warn" style={{ display: 'inline-block' }}>{plazo ?? 'Se acabó el plazo para aceptar este lugar.'}</p>
         <div style={{ display: 'flex', gap: 8, marginTop: 8, flexWrap: 'wrap' }}>
           <Button size="sm" loading={aceptando === oferta.id} disabled={!plazo || !online || !!aceptando} onClick={() => void aceptar(oferta)}>
-            Aceptar la plaza
+            Aceptar el lugar
           </Button>
           {plazo && (
             <Button variant="secondary" size="sm" disabled={!online || !!aceptando} onClick={() => setSaliendo(oferta)}>
@@ -244,7 +244,7 @@ export default function NotificacionesPage() {
           <EmptyState
             ilustracion="campana"
             titulo="Todo al día"
-            cuerpo="Te avisaremos de plazas liberadas, recordatorios y novedades del estudio."
+            cuerpo="Te avisaremos de lugares liberados, recordatorios y novedades del estudio."
           />
         )}
         {estado === 'ready' && ahoraMs !== null && grupos.length === 0 && (
@@ -273,7 +273,7 @@ export default function NotificacionesPage() {
         open={saliendo !== null}
         onClose={() => { if (!cancelando) setSaliendo(null); }}
         titulo="¿Salir de la lista de espera?"
-        cuerpo="Si sales, la plaza pasa a la siguiente persona de la lista."
+        cuerpo="Si sales, el lugar pasa a la siguiente persona de la lista."
         confirmar="Sí, salir"
         cancelar="Seguir en la lista"
         tono="danger"

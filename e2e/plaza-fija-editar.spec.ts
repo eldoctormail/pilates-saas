@@ -321,7 +321,7 @@ test.describe('Clase fija: asignar y cambiar eligiendo la clase', () => {
     expect(guardados).toHaveLength(2);
   });
 
-  test('cambiar de clase conserva la plaza (PATCH) y dice cuántas del horario anterior se han cancelado', async ({ page }) => {
+  test('cambiar de clase conserva el lugar (PATCH) y dice cuántas del horario anterior se han cancelado', async ({ page }) => {
     const { guardados, escriturasRest } = await montar(page, {
       sesiones: [...MARTES_10, ...JUEVES_18],
       guardar: [{ body: guardadaOk({ id: 'pf-1', vigenciaDesde: '2026-01-01' }, { canceladas: ['r-1', 'r-2'] }) }],
@@ -374,7 +374,7 @@ test.describe('Clase fija: quitarla suelta las clases que ya tenía reservadas',
     expect(escriturasRest).toEqual([]);
   });
 
-  test('si el servidor dice que no, se enseña el motivo y la plaza sigue en la lista', async ({ page }) => {
+  test('si el servidor dice que no, se enseña el motivo y el lugar sigue en la lista', async ({ page }) => {
     const { cambiosEstado } = await montar(page, {
       sesiones: MARTES_10,
       estadoStatus: 403,
@@ -417,7 +417,7 @@ test.describe('Clase fija: pausarla unas fechas sin perderla', () => {
     expect(escriturasRest).toEqual([]);
   });
 
-  test('si el servidor dice que no, el diálogo enseña el motivo y la plaza no queda en pausa', async ({ page }) => {
+  test('si el servidor dice que no, el diálogo enseña el motivo y el lugar no queda en pausa', async ({ page }) => {
     const { cambiosEstado } = await montar(page, {
       sesiones: MARTES_10,
       estadoStatus: 400,
@@ -437,7 +437,7 @@ test.describe('Clase fija: pausarla unas fechas sin perderla', () => {
     await expect(page.getByText(/Pausa programada|En pausa hasta/)).toHaveCount(0);
   });
 
-  test('una plaza en pausa lo dice, y quitar la pausa le vuelve a reservar las clases', async ({ page }) => {
+  test('un lugar en pausa lo dice, y quitar la pausa le vuelve a reservar las clases', async ({ page }) => {
     const { cambiosEstado } = await montar(page, {
       sesiones: MARTES_10,
       plaza: { pausa_desde: '2026-08-03', pausa_hasta: '2026-08-20' },

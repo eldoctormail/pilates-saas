@@ -358,7 +358,7 @@ test('vaciar las dos casillas APAGA la promoción (null explícito, no ausencia)
   assert.equal(d.matriculaGratisCupos, null);
 });
 
-test('«0 plazas gratis» es NO HAY promoción, no una promoción que nunca aplica', () => {
+test('«0 lugares gratis» es NO HAY promoción, no una promoción que nunca aplica', () => {
   // Un 0 guardado haría que `reservar_matricula` viera `v_hay_promo` cierto y
   // `v_usados < v_cupos` falso para siempre: una promoción permanentemente
   // agotada. Lo mismo con un texto ilegible.
@@ -368,7 +368,7 @@ test('«0 plazas gratis» es NO HAY promoción, no una promoción que nunca apli
   }
 });
 
-test('el formulario NUNCA escribe el contador de plazas gastadas', () => {
+test('el formulario NUNCA escribe el contador de lugares gastados', () => {
   // `matriculaGratisUsados` lo lleva la base dentro de `reservar_matricula`.
   // Guardar el plan con el editor abierto desde hace rato pisaría las plazas
   // que se hayan gastado mientras tanto — por eso no está en el formulario ni

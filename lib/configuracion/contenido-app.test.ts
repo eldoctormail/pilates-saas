@@ -102,7 +102,7 @@ test('mover renumera la lista entera, también con órdenes repetidos', () => {
 });
 
 test('un aviso pasa a mensaje con su título y su texto, y nunca más largo de lo que cabe', () => {
-  assert.equal(avisoComoMensaje({ titulo: 'Cerramos el 1 de noviembre', texto: 'Festivo: no hay clases.' }), 'Cerramos el 1 de noviembre. Festivo: no hay clases.');
+  assert.equal(avisoComoMensaje({ titulo: 'Cerramos el 1 de noviembre', texto: 'Feriado: no hay clases.' }), 'Cerramos el 1 de noviembre. Feriado: no hay clases.');
   assert.equal(avisoComoMensaje({ titulo: '¡Bienvenida, Ana!', texto: null }), '¡Bienvenida, Ana!');
   assert.equal(avisoComoMensaje({ titulo: 'Horario:', texto: 'de 9 a 21' }), 'Horario: de 9 a 21');
   const largo = avisoComoMensaje({ titulo: 'Aviso', texto: 'x'.repeat(400) });

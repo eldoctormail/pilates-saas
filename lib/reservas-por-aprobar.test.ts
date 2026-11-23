@@ -45,9 +45,9 @@ test('tolera el embed como array, sin tipo de clase, fechas rotas y cuerpos raro
   assert.deepEqual(reservasPorAprobarDe({} as never, AHORA), []);
 });
 
-test('200 aprobar: dice cómo ha quedado de verdad (plaza o lista de espera)', () => {
+test('200 aprobar: dice cómo ha quedado de verdad (lugar o lista de espera)', () => {
   assert.deepEqual(resultadoDecisionReserva(true, { status: 200, body: { ok: true, estado: 'CONFIRMADA' } }),
-    { quitar: true, mensaje: 'Reserva aprobada: tiene su plaza confirmada' });
+    { quitar: true, mensaje: 'Reserva aprobada: tiene su lugar confirmado' });
   const espera = resultadoDecisionReserva(true, { status: 200, body: { ok: true, estado: 'LISTA_ESPERA' } });
   assert.equal(espera.quitar, true);
   assert.match(espera.mensaje, /lista de espera/);

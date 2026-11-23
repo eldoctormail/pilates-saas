@@ -7,7 +7,7 @@ const boton = 'Publicar en mi web';
 test('dentro de una página, por id y con el estilo: lo de la maqueta aprobada', () => {
   assert.equal(
     fraseComoLlegan({ metodo: 'iframe', porId: true, sigueElEstilo: true, boton }),
-    'Lo pegas una vez. Tus clases, precios y plazas se actualizan solos; el estilo y lo que enseña llegan cuando pulsas «Publicar en mi web».',
+    'Lo pegas una vez. Tus clases, precios y lugares se actualizan solos; el estilo y lo que enseña llegan cuando pulsas «Publicar en mi web».',
   );
 });
 

@@ -31,6 +31,7 @@ import { useOrigen } from '@/components/configuracion/tab-estudio-enlaces';
 import { Campo } from '@/components/configuracion/formulario-estudio';
 import { BarraGuardar } from '@/components/configuracion/shell/barra-guardar';
 import type { PropsFormularioCajon } from '@/components/configuracion/shell/cajon-ajuste';
+import { MONEDA_NOMBRE_PLURAL } from '@/lib/moneda';
 
 export interface Resenas {
   carga: 'cargando' | 'error' | RespuestaResenas;
@@ -186,7 +187,7 @@ function Cuerpo({ respuesta, resenas, onGuardado }: { respuesta: RespuestaResena
                 ))}
                 <div className="flex items-center gap-1.5">
                   <input
-                    aria-label={form.tipo === 'PORCENTAJE' ? 'Porcentaje de descuento' : 'Importe del descuento en euros'}
+                    aria-label={form.tipo === 'PORCENTAJE' ? 'Porcentaje de descuento' : `Importe del descuento en ${MONEDA_NOMBRE_PLURAL}`}
                     inputMode="decimal" className={cn(inputCls, 'w-24')} value={form.valor}
                     aria-invalid={premioMal} onChange={e => cambiar({ valor: e.target.value })}
                   />

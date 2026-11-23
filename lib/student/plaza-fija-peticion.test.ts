@@ -17,7 +17,7 @@ const pide = (over: Partial<PeticionPlazaFijaMin>): PeticionPlazaFijaMin => ({
   id: 'spf-1', tipo: 'CREAR', plazaId: null, diaSemana: 4, horaInicio: '18:00:00', salaId: 'sala-1', desde: null, hasta: null, ...over,
 });
 
-test('se ofrece pedir plaza fija solo en una clase que se repite', () => {
+test('se ofrece pedir lugar fijo solo en una clase que se repite', () => {
   assert.deepEqual(plazaFijaEnClase(CLASE, [OTRA_SEMANA], [], []), { estado: 'PUEDE_PEDIR' });
   assert.deepEqual(plazaFijaEnClase(CLASE, [], [], []), { estado: 'NO_SE_REPITE' });
   assert.deepEqual(plazaFijaEnClase(CLASE, [{ ...OTRA_SEMANA, cancelada: true }], [], []), { estado: 'NO_SE_REPITE' });
@@ -51,12 +51,12 @@ test('ya la tiene (también en pausa) o ya la ha pedido: no se ofrece', () => {
   assert.deepEqual(plazaFijaEnFranja(FRANJA, [], [pide({})]), { estado: 'PEDIDA', peticionId: 'spf-1' });
 });
 
-test('una plaza o petición de OTRO hueco no la tapa', () => {
+test('un lugar o petición de OTRO hueco no la tapa', () => {
   assert.deepEqual(plazaFijaEnFranja(FRANJA, [{ ...PLAZA, salaId: 'sala-2' }], []), { estado: 'PUEDE_PEDIR' });
   assert.deepEqual(plazaFijaEnFranja(FRANJA, [], [pide({ horaInicio: '19:00' })]), { estado: 'PUEDE_PEDIR' });
 });
 
-test('la pausa que ha pedido se pega a SU plaza, no a otra', () => {
+test('la pausa que ha pedido se pega a SU lugar, no a otra', () => {
   const pausa = pide({ tipo: 'PAUSAR', plazaId: 'pf-1', diaSemana: null, horaInicio: null, salaId: null, desde: '2026-10-01', hasta: '2026-10-15' });
   const [conPausa] = proyectarPlazasFijas([PLAZA], '2026-09-16', '10:00', undefined, [pausa]);
   assert.equal(conPausa.id, 'pf-1');
@@ -77,7 +77,7 @@ test('plazaFijaViva: baja no; vencida no (si se sabe «hoy»); vale hasta el fin
   assert.equal(plazaFijaViva({ estado: 'ACTIVA', vigenciaHasta: '2026-09-30' }), true, 'sin «hoy» no se mira la fecha: nada cambia para quien aún no la pasa');
 });
 
-test('⚠️ la ficha de la clase: una plaza vencida deja volver a pedirla, una vigente sigue siendo suya', () => {
+test('⚠️ la ficha de la clase: un lugar vencido deja volver a pedirla, una vigente sigue siendo suya', () => {
   const vencida: PlazaFijaMin = { ...PLAZA, vigenciaHasta: '2026-09-30' };
   assert.deepEqual(plazaFijaEnClase(CLASE, [OTRA_SEMANA], [vencida], [], true, HOY), { estado: 'PUEDE_PEDIR' });
   assert.deepEqual(plazaFijaEnClase(CLASE, [OTRA_SEMANA], [{ ...PLAZA, vigenciaHasta: '2026-10-02' }], [], true, HOY), { estado: 'TIENE_PLAZA' });
@@ -95,7 +95,7 @@ test('⚠️ la franja del horario: igual que la ficha', () => {
   assert.deepEqual(plazaFijaEnFranja(FRANJA, [vencida], [], true), { estado: 'TIENE_PLAZA' }, 'sin «hoy», como antes');
 });
 
-test('la ficha y la lista «Mis clases» dicen lo mismo de una plaza vencida', () => {
+test('la ficha y la lista «Mis clases» dicen lo mismo de un lugar vencido', () => {
   // `proyectarPlazasFijas` ya la descartaba; ahora la ficha de la clase también.
   const vencida: PlazaFijaMin = { ...PLAZA, vigenciaHasta: '2026-09-30' };
   assert.deepEqual(proyectarPlazasFijas([vencida], HOY), []);
@@ -104,7 +104,7 @@ test('la ficha y la lista «Mis clases» dicen lo mismo de una plaza vencida', (
 
 // ─── Dejar su clase fija: lo que se le dice y qué plazas se dejan enteras ────────────────────────────────────────────
 
-test('proyectarPlazasFijas: dice si la plaza viene de una clase fija con nombre (se deja entera)', () => {
+test('proyectarPlazasFijas: dice si el lugar viene de una clase fija con nombre (se deja entera)', () => {
   const [suelta] = proyectarPlazasFijas([PLAZA], HOY);
   assert.equal(suelta.deClaseFija, false);
   const [deOferta] = proyectarPlazasFijas([{ ...PLAZA, claseFijaId: 'cf-1' }], HOY);

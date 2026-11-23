@@ -22,7 +22,7 @@ test('la llamada a evaluar_reserva lleva las claves de su firma viva', () => {
   for (const c of claves) assert.ok(envoltorio.includes(`${c}:`), `el envoltorio no manda ${c}`);
 });
 
-test('⚠️ el lote NO toca el saldo ni usa el prefijo de las plazas fijas: el bono lo descuenta reservar_plaza', () => {
+test('⚠️ el lote NO toca el saldo ni usa el prefijo de los lugares fijos: el bono lo descuenta reservar_plaza', () => {
   assert.ok(LOTE.length > 3000, 'no se aisló la función');
   assert.ok(!/\.update\(|\.insert\(|\.delete\(|\.rpc\('(consumir|devolver|liberar)/.test(LOTE), 'el lote no escribe: reserva por crearReservaPublica');
   assert.ok(!LOTE.includes('res-pf-'), 'nunca res-pf-');

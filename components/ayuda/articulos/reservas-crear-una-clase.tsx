@@ -23,7 +23,7 @@ export default function Contenido() {
 
       <AyudaPaso numero={2} titulo="Elige tipo de clase, sala e instructora">
         <p style={{ margin: 0 }}>
-          Las plazas son las del tipo de clase o, si no tiene, las de la sala; puedes bajarlas para una clase concreta
+          Los lugares son los del tipo de clase o, si no tiene, los de la sala; puedes bajarlos para una clase concreta
           (por ejemplo, si una máquina está averiada ese día). Debajo se lee qué pasa cuando se llena, con las reglas
           de ese tipo de clase: si tiene lista de espera, las siguientes entran en ella; si no, nadie más puede
           reservarla. La hora de fin sale de la duración del tipo de clase hasta que la cambias a mano, y si la clase

@@ -145,7 +145,7 @@ test.describe('Bajar la capacidad de una sala', () => {
 
     await editarCapacidad(page, '10');
 
-    await expect(page.getByText('Tienes clases con más plazas que la sala')).toBeVisible();
+    await expect(page.getByText('Tienes clases con más lugares que la sala')).toBeVisible();
     await expect(page.getByText(/2 clases futuras/)).toBeVisible();
   });
 
@@ -215,7 +215,7 @@ test.describe('Bajar la capacidad de una sala', () => {
     await editarCapacidad(page, '14');
 
     await expect(page.getByText('Sala actualizada')).toBeVisible();
-    await expect(page.getByText('Tienes clases con más plazas que la sala')).toBeHidden();
+    await expect(page.getByText('Tienes clases con más lugares que la sala')).toBeHidden();
     expect(salasPatch.at(-1)?.capacidad).toBe(14);
   });
 
@@ -230,6 +230,6 @@ test.describe('Bajar la capacidad de una sala', () => {
     await editarCapacidad(page, '10');
 
     await expect(page.getByText('Sala actualizada')).toBeVisible();
-    await expect(page.getByText('Tienes clases con más plazas que la sala')).toBeHidden();
+    await expect(page.getByText('Tienes clases con más lugares que la sala')).toBeHidden();
   });
 });

@@ -1258,7 +1258,7 @@ test('seguirAlRecibo pasa el estado del recibo leído, y el motivo de revisión 
 
   const motivos = ['PENDIENTE', 'DEVUELTO', 'FALLIDO'].map(e => motivoRevisionPorRecibo(e, 12.5));
   assert.equal(new Set(motivos).size, 3);
-  for (const t of motivos) assert.ok(t.includes('12.50€'), t);
+  for (const t of motivos) assert.ok(t.includes('12,50 €'), t);
   assert.match(motivos[0], /pendiente de cobro/);
   assert.match(motivos[1], /devuelta/);
 });

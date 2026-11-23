@@ -45,7 +45,7 @@ test('crear: suma lo creado, ignora «ya_renovada», cuenta lo que falla y la pr
   assert.ok(rpcs.some((x) => x.nombre === 'materializar_plazas_fijas' && x.args.p_plaza_id === 'pf-1'));
 });
 
-test('proponer: un error leyendo el estudio o las clases es un 500, nunca una propuesta sin festivos', async () => {
+test('proponer: un error leyendo el estudio o las clases es un 500, nunca una propuesta sin feriados', async () => {
   const sinEstudio = supabaseFalso({ tablas: { studios: { error: { message: 'boom' } } } });
   assert.deepEqual(await proponerRepetir(sinEstudio.admin, 'studio-x', MES), { ok: false, error: 'No se ha podido leer tu estudio.', status: 500 });
   const sinClases = supabaseFalso({ tablas: { studios: { data: ESTUDIO }, sesiones: { error: { message: 'boom' } } } });
@@ -91,7 +91,7 @@ test('la sonda: disponible solo si la RPC nueva contesta SERIE_NO_ENCONTRADA', a
   olvidarSonda();
 });
 
-test('proponer: los festivos que el estudio guardó (módulo Festivos) vienen como suyos, sin repetir un oficial', async () => {
+test('proponer: los feriados que el estudio guardó (módulo Feriados) vienen como suyos, sin repetir un oficial', async () => {
   const { admin } = supabaseFalso({
     tablas: {
       studios: { data: ESTUDIO },
@@ -109,7 +109,7 @@ test('proponer: los festivos que el estudio guardó (módulo Festivos) vienen co
   assert.ok(r.propuesta.festivos.every((f, i, t) => i === 0 || t[i - 1].fecha <= f.fecha), 'en orden');
 });
 
-test('proponer: sin la tabla del módulo Festivos, todo sigue como antes', async () => {
+test('proponer: sin la tabla del módulo Feriados, todo sigue como antes', async () => {
   const { admin } = supabaseFalso({
     tablas: {
       studios: { data: ESTUDIO },

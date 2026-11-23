@@ -127,7 +127,7 @@ export const LO_PROPIO: Record<string, (d: DatosAlOcultar) => Propio> = {
   }),
   '/festivos': () => ({
     enLaApp: NO_CAMBIA,
-    sigue: ['Lo que ya decidiste para tus festivos se queda como está.'],
+    sigue: ['Lo que ya decidiste para tus feriados se queda como está.'],
   }),
   '/migracion': () => ({
     enLaApp: NO_CAMBIA,

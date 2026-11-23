@@ -51,7 +51,7 @@ test('de serie: marcadas las que siguen; fuera «no renovar», terminadas, con e
   assert.deepEqual(creables(propuesta.series[0]), ['2026-12-07', '2026-12-08', '2026-12-14']);
 });
 
-test('días: el festivo viene desmarcado; el «abrimos igualmente», marcado', () => {
+test('días: el feriado viene desmarcado; el «abrimos igualmente», marcado', () => {
   const marcados = diasMarcadosDeSerie(propuesta);
   assert.ok(!marcados.has('2026-12-08'), 'Inmaculada, desmarcado');
   assert.ok(marcados.has('2026-12-07'), 'abierto, marcado');
@@ -113,7 +113,7 @@ test('el texto final avisa de las clases que quedan sin instructora', () => {
   assert.match(textoTrasRepetir(res({ creadas: 4, pedidas: 4, sinInstructora: 1 }), '2026-12'), /1 queda sin instructora: asígnala/);
 });
 
-test('«terminó antes de acabar el mes» no confunde un festivo o un día cerrado con un final', () => {
+test('«terminó antes de acabar el mes» no confunde un feriado o un día cerrado con un final', () => {
   const festivos = new Set(['2026-12-25']);
   // Solo viernes; la última clase el 18 y el 25 es Navidad: no terminó.
   assert.equal(porQueNoSigue({ fechas: ['2026-12-25', '2027-01-01'], bloqueadas: [] }, '2026-12-31', festivos), null);

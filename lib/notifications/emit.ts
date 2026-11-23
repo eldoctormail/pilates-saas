@@ -91,7 +91,7 @@ export async function emitirReservaAbandonada(
     let claseTexto = '';
     if (p.sesionId) {
       const ctx = await ctxSesion(admin, p.studioId, p.sesionId);
-      claseTexto = ` una plaza en ${ctx.clase} (${ctx.cuando})`;
+      claseTexto = ` un lugar en ${ctx.clase} (${ctx.cuando})`;
     }
     // Fecha LOCAL del estudio, no UTC (auditoría de esta sesión): con
     // `toISOString()` el "día" cambiaba a medianoche UTC en vez de a
@@ -135,14 +135,14 @@ export async function emitirReservaCancelada(
       : p.motivo === 'expirada'
         ? ' No se aprobó a tiempo: la clase ya ha empezado.'
         : p.motivo === 'oferta_caducada'
-          ? ' No aceptaste la plaza a tiempo y se ha ofrecido a la siguiente en la lista.'
+          ? ' No aceptaste el lugar a tiempo y se ha ofrecido a la siguiente en la lista.'
           // Aceptó dentro de plazo, pero la plaza ya no estaba: mientras su
           // oferta seguía viva, otra persona reservó el hueco por la vía normal
           // (una reserva en LISTA_ESPERA no ocupa aforo). No es culpa suya, así
           // que el texto no puede sonar a que llegó tarde — y se le compensa con
           // una recuperación, que es lo que menciona el final de la frase.
           : p.motivo === 'plaza_ya_ocupada'
-            ? ' La plaza se ocupó justo antes de que aceptaras. Te hemos guardado una recuperación para otra clase.'
+            ? ' El lugar se ocupó justo antes de que aceptaras. Te hemos guardado una recuperación para otra clase.'
             : p.motivo === 'clase_ya_empezada'
               ? ' La clase ya había empezado cuando aceptaste. Te hemos guardado una recuperación para otra clase.'
               // El estudio canceló la clase mientras su oferta seguía viva
@@ -157,14 +157,14 @@ export async function emitirReservaCancelada(
                 // se menciona ninguna recuperación (no se le compensa: ver
                 // supabase-data-admin.ts, aceptarOfertaListaEspera).
                 : p.motivo === 'limite_semanal_propio'
-                  ? ' Ya habías alcanzado el máximo de clases de tu plan para esta semana, así que no hemos podido confirmarte esta plaza. El resto de tu cuota sigue disponible.'
+                  ? ' Ya habías alcanzado el máximo de clases de tu plan para esta semana, así que no hemos podido confirmarte este lugar. El resto de tu cuota sigue disponible.'
                   : p.motivo === 'conflicto_horario_propio'
-                    ? ' Tenías otra clase o cita a la misma hora, así que no hemos podido confirmarte esta plaza.'
+                    ? ' Tenías otra clase o cita a la misma hora, así que no hemos podido confirmarte este lugar.'
                     // D-2 (auditoría 22-sep): mismo bucket que los dos de
                     // arriba — su plan o bono dejó de cubrir la clase
                     // mientras la oferta seguía abierta, no un fallo ajeno.
                     : p.motivo === 'sin_entitlement_propio'
-                      ? ' Tu plan o bono ya no cubría esta clase, así que no hemos podido confirmarte esta plaza.'
+                      ? ' Tu plan o bono ya no cubría esta clase, así que no hemos podido confirmarte este lugar.'
                       : '';
     await publish({
       type: EVENTOS.RESERVA_CANCELADA, studioId: p.studioId,

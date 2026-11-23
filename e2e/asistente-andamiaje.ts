@@ -130,20 +130,20 @@ const EN_15_MIN = () => new Date(Date.now() + 15 * 60_000).toISOString();
 
 export const PROPUESTAS = {
   CREAR_CLASE: {
-    texto: 'Propongo un Reformer el miércoles 7 de octubre, de 18:00 a 18:55, en Sala Grande con [EQUIPO_1], con 8 plazas. Pulsa Confirmar para crearlo.',
+    texto: 'Propongo un Reformer el miércoles 7 de octubre, de 18:00 a 18:55, en Sala Grande con [EQUIPO_1], con 8 lugares. Pulsa Confirmar para crearlo.',
     titulo: 'Crear una clase', href: '/calendario', ver: 'Ver en Calendario',
-    lineas: [['Clase', 'Reformer'], ['Día', 'miércoles 7 de octubre'], ['Hora', '18:00–18:55'], ['Sala', 'Sala Grande'], ['Instructora', '[EQUIPO_1]'], ['Plazas', '8']],
+    lineas: [['Clase', 'Reformer'], ['Día', 'miércoles 7 de octubre'], ['Hora', '18:00–18:55'], ['Sala', 'Sala Grande'], ['Instructora', '[EQUIPO_1]'], ['Lugares', '8']],
     avisos: [], efecto: null,
   },
   CREAR_SALA: {
-    texto: 'Propongo una sala nueva, Terraza, con 6 plazas. Pulsa Confirmar para crearla.',
+    texto: 'Propongo una sala nueva, Terraza, con 6 lugares. Pulsa Confirmar para crearla.',
     titulo: 'Crear una sala', href: '/configuracion?tab=estudio&abrir=salas', ver: 'Ver en Configuración',
-    lineas: [['Sala', 'Terraza'], ['Aforo', '6 plazas']], avisos: [], efecto: null,
+    lineas: [['Sala', 'Terraza'], ['Aforo', '6 lugares']], avisos: [], efecto: null,
   },
   CREAR_EVENTO: {
-    texto: 'Propongo publicar el taller de respiración el sábado 10 de octubre a las 11:00, con 12 plazas. Pulsa Confirmar para publicarlo.',
+    texto: 'Propongo publicar el taller de respiración el sábado 10 de octubre a las 11:00, con 12 lugares. Pulsa Confirmar para publicarlo.',
     titulo: 'Publicar un evento', href: '/comunidad', ver: 'Ver en Comunidad',
-    lineas: [['Anuncio', 'Taller de respiración con Marta'], ['Día', 'sábado 10 de octubre'], ['Hora', '11:00'], ['Lugar', 'Terraza'], ['Plazas', '12']],
+    lineas: [['Anuncio', 'Taller de respiración con Marta'], ['Día', 'sábado 10 de octubre'], ['Hora', '11:00'], ['Lugar', 'Terraza'], ['Lugares', '12']],
     avisos: [], efecto: 'Se publica en la Comunidad de la app y se avisa a todos los clientes con una notificación.',
   },
   CREAR_CITA: {

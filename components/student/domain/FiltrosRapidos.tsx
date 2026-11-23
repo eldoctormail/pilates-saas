@@ -31,7 +31,7 @@ export function FiltrosRapidos({ tipos, conFavoritas, hrefReservar }: {
 
   const opciones = [
     ...(conFavoritas ? [{ valor: 'Favoritas', etiqueta: 'Mis favoritas' }] : []),
-    { valor: 'Con hueco', etiqueta: 'Con plaza libre' },
+    { valor: 'Con hueco', etiqueta: 'Con lugar libre' },
     ...tipos.map((t) => ({ valor: t, etiqueta: t })),
   ];
 

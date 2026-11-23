@@ -42,7 +42,7 @@ function enCuanto(iso: string, ahora: Date): string {
 }
 
 export function estadoDeFicha(d: DatosEstadoFicha, ahora: Date): { pastilla: PastillaEstado | null; cifra: string | null } {
-  const plazas = `${d.apuntadas} de ${d.aforo} plazas${d.enEspera > 0 ? ` · ${d.enEspera} en espera` : ''}`;
+  const plazas = `${d.apuntadas} de ${d.aforo} lugares${d.enEspera > 0 ? ` · ${d.enEspera} en espera` : ''}`;
   switch (d.estado) {
     case 'CANCELADA':
       return { pastilla: { texto: 'Cancelada', tono: 'neutro' }, cifra: null };

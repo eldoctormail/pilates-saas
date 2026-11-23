@@ -193,9 +193,9 @@ export function DetallePlataformasExternas({ showToast, solo }: { showToast: Mos
   return (
     <div className="space-y-4">
       <p className="text-sm text-muted-foreground">
-        {solo ? `Actívala si vendes plazas en ${NOMBRE_PLATAFORMA[solo]}.` : 'Marca las plataformas en las que vendes plazas.'}{' '}
+        {solo ? `Actívala si vendes lugares en ${NOMBRE_PLATAFORMA[solo]}.` : 'Marca las plataformas en las que vendes lugares.'}{' '}
         Cuando alguien reserve allí, apúntalo en la clase
-        (<span className="font-semibold text-foreground">Añadir → {NOMBRE_PLATAFORMA[solo ?? 'CLASSPASS']}</span>): ocupa su plaza,
+        (<span className="font-semibold text-foreground">Añadir → {NOMBRE_PLATAFORMA[solo ?? 'CLASSPASS']}</span>): ocupa su lugar,
         no gasta bonos ni pasa por tus cobros, y sale en la lista con la etiqueta de la plataforma.
       </p>
       <ul className="divide-y divide-border rounded-2xl border border-border">
@@ -297,8 +297,8 @@ function LiberarApartadas({ plataforma, preguntar, showToast }: {
     setHoras(valor);
     setEditando(false);
     showToast(valor === 0
-      ? `Las plazas de ${nombre} se quedan apartadas hasta que empieza la clase`
-      : `Las plazas que ${nombre} no venda se liberarán ${valor} ${valor === 1 ? 'hora' : 'horas'} antes de la clase`);
+      ? `Los lugares de ${nombre} se quedan apartados hasta que empieza la clase`
+      : `Los lugares que ${nombre} no venda se liberarán ${valor} ${valor === 1 ? 'hora' : 'horas'} antes de la clase`);
   }
 
   if (!cargado) return null;
@@ -307,7 +307,7 @@ function LiberarApartadas({ plataforma, preguntar, showToast }: {
   return (
     <div className="mt-3 space-y-2 rounded-xl bg-muted/60 px-3 py-3" data-testid={`liberar-apartadas-${plataforma.toLowerCase()}`}>
       <p className="text-xs text-muted-foreground">
-        Las plazas que cedes a {nombre} quedan apartadas: tus clientes no pueden reservarlas mientras {nombre} no las venda.
+        Los lugares que cedes a {nombre} quedan apartados: tus clientes no pueden reservarlos mientras {nombre} no los venda.
       </p>
       {horas === undefined ? (
         <p className="text-xs text-warning">No hemos podido leer cuándo se liberan. Vuelve a abrir esta pantalla en un momento.</p>
@@ -348,8 +348,8 @@ function LiberarApartadas({ plataforma, preguntar, showToast }: {
             </button>
           </div>
           <p id={`liberar-horas-ayuda-${plataforma}`} className="text-xs text-muted-foreground">
-            Pon las mismas que tengas en {nombre}: a esa hora, las plazas que no haya vendido pasan a tus clientes (entre 0 y 72).
-            {sinConfigurar && ' Mientras no lo pongas, se quedan apartadas hasta que empieza la clase.'}
+            Pon las mismas que tengas en {nombre}: a esa hora, los lugares que no haya vendido pasan a tus clientes (entre 0 y 72).
+            {sinConfigurar && ' Mientras no lo pongas, se quedan apartados hasta que empieza la clase.'}
           </p>
         </form>
       )}
@@ -405,8 +405,8 @@ function ConexionUsc({ config, ventaCortada, onGuardada, showToast }: {
           : conectada && ventaCortada
           ? `En pausa: ${porQueSinVentaExterna(ventaCortada)}. Mientras tanto no se publica nada en Urban Sports Club ni entran sus reservas, y lo que estaba publicado se retira.`
           : conectada
-          ? 'Conectada. Las clases cuyo tipo tiene plazas cedidas a Urban Sports Club se publican solas en su app (dos semanas vista), y sus reservas entran solas en la clase.'
-          : 'Para activarlo: 1) pídele a Urban Sports Club que active Tentare como tu software de reservas (lo hace su equipo de soporte, no es automático); 2) te enviarán dos IDs, el de proveedor y el de ubicación; 3) pégalos aquí. Después, en cada tipo de clase, elige cuántas plazas cedes a Urban Sports Club: solo esas clases se publican en su app.'}
+          ? 'Conectada. Las clases cuyo tipo tiene lugares cedidos a Urban Sports Club se publican solas en su app (dos semanas vista), y sus reservas entran solas en la clase.'
+          : 'Para activarlo: 1) pídele a Urban Sports Club que active Tentare como tu software de reservas (lo hace su equipo de soporte, no es automático); 2) te enviarán dos IDs, el de proveedor y el de ubicación; 3) pégalos aquí. Después, en cada tipo de clase, elige cuántos lugares cedes a Urban Sports Club: solo esas clases se publican en su app.'}
       </p>
       <div className="grid gap-2 sm:grid-cols-2">
         <label className="block text-xs font-medium text-foreground">

@@ -112,10 +112,10 @@ test('sin marco: cancelar pide confirmación y dice que se pierde la sesión; «
   await expect.poll(() => cancelaciones).toBe(1);
 });
 
-test('sin marco: una plaza ofrecida dice «Plaza para ti» y hasta cuándo', async ({ page }) => {
+test('sin marco: un lugar ofrecido dice «Lugar para ti» y hasta cuándo', async ({ page }) => {
   await enSuWeb(page);
   const tarjeta = page.getByRole('article').filter({ hasText: 'Hoy · 18:00' });
-  await expect(tarjeta.getByText('Plaza para ti', { exact: true })).toBeVisible();
-  await expect(tarjeta).toContainText('¡Se ha liberado una plaza! Tienes hasta las 08:30 para aceptarla.');
-  await expect(tarjeta.getByRole('button', { name: 'Aceptar plaza' })).toBeVisible();
+  await expect(tarjeta.getByText('Lugar para ti', { exact: true })).toBeVisible();
+  await expect(tarjeta).toContainText('¡Se ha liberado un lugar! Tienes hasta las 08:30 para aceptarla.');
+  await expect(tarjeta.getByRole('button', { name: 'Aceptar lugar' })).toBeVisible();
 });

@@ -665,7 +665,7 @@ function FilaClase({
         <div className="col-start-2 max-w-[220px] sm:col-start-3 sm:max-w-none">
           <p className="leading-none">
             <span className="text-[15px] font-bold tabular-nums text-foreground">{clase.ocupadas}</span>
-            <span className="text-[11px] text-muted-foreground"> / {clase.aforo} plazas</span>
+            <span className="text-[11px] text-muted-foreground"> / {clase.aforo} lugares</span>
           </p>
           <BarraPlazas ocupadas={clase.ocupadas} aforo={clase.aforo} />
         </div>

@@ -175,7 +175,7 @@ test('extraerContenidoDeMarca: studioName y colores nunca se cuelan como texto',
 });
 
 test('extraerContenidoDeMarca: trunca un texto que se pasa del límite de su campo', () => {
-  const ctaLargo = 'Reserva tu clase de pilates reformer ahora mismo, plazas limitadas';
+  const ctaLargo = 'Reserva tu clase de pilates reformer ahora mismo, lugares limitados';
   const html = bloqueProps({ boton: { editor: 'text', default: ctaLargo } });
   const r = extraerContenidoDeMarca(html);
   assert.equal(r.reservarCta.length, 28); // RESERVAR_CTA_MAX

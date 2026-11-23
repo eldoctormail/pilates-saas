@@ -54,7 +54,7 @@ test('⚠️ liberar cupo de matrícula desde el webhook resuelve el estudio por
     'falta la comprobación de que la cuenta que firma corresponde al estudio de la metadata');
 });
 
-test('⚠️ la plaza se devuelve al estudio de la cuenta firmante, no al que diga la metadata', () => {
+test('⚠️ el lugar se devuelve al estudio de la cuenta firmante, no al que diga la metadata', () => {
   const cuerpo = cuerpoDe(readFileSync(RUTA, 'utf8'), 'liberarCupoMatriculaDelWebhook');
 
   const llamada = cuerpo.match(/liberarCupoMatriculaUnaVez\([^)]*\)/s);
@@ -96,13 +96,13 @@ function bloqueDeEvento(fuente: string, tipo: string): string {
 // MISMO PI (probado en Stripe test, 21-sep-2026). Devolver la plaza aquí
 // regalaba la matrícula a quien pagaba en el segundo intento, sin contar en el
 // cupo. Ver lib/billing/cupo-matricula-abandonado.ts.
-test('⚠️ un pago RECHAZADO no devuelve la plaza de matrícula gratis', () => {
+test('⚠️ un pago RECHAZADO no devuelve el lugar de matrícula gratis', () => {
   const bloque = bloqueDeEvento(readFileSync(RUTA, 'utf8'), 'payment_intent.payment_failed');
   assert.doesNotMatch(bloque, /liberarCupoMatricula/,
-    '`payment_intent.payment_failed` no es el final del cobro: la plaza vuelve en `payment_intent.canceled`');
+    '`payment_intent.payment_failed` no es el final del cobro: el lugar vuelve en `payment_intent.canceled`');
 });
 
-test('la plaza vuelve cuando el cobro ya no puede ocurrir: PI cancelado y sesión caducada', () => {
+test('el lugar vuelve cuando el cobro ya no puede ocurrir: PI cancelado y sesión caducada', () => {
   const fuente = readFileSync(RUTA, 'utf8');
   assert.match(bloqueDeEvento(fuente, 'payment_intent.canceled'), /plazaDePICancelado\(/);
   // La clave de la sesión es la sesión: caduca con `payment_intent: null` si

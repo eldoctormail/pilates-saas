@@ -21,7 +21,10 @@
  * Zona con calendario propio. `ARAN` es Cataluña con las sustituciones que la
  * propia norma catalana fija para el Valle de Arán (17-jun, Festa d'Aran).
  */
-export type ZonaFestivos = 'CATALUNA' | 'ARAN' | 'MADRID' | 'ANDALUCIA';
+export type ZonaFestivos = 'CATALUNA' | 'ARAN' | 'MADRID' | 'ANDALUCIA' | 'ARGENTINA';
+
+/** Zonas de España (las que comparten el BOE). Argentina va aparte: un solo calendario nacional. */
+export const ZONAS_ESPANA: readonly ZonaFestivos[] = ['CATALUNA', 'ARAN', 'MADRID', 'ANDALUCIA'];
 
 export interface FestivoOficial {
   /** YYYY-MM-DD, día civil en España (sin hora). */
@@ -44,6 +47,7 @@ export const NOMBRE_ZONA: Record<ZonaFestivos, string> = {
   ARAN: 'el Valle de Arán',
   MADRID: 'la Comunidad de Madrid',
   ANDALUCIA: 'Andalucía',
+  ARGENTINA: 'Argentina',
 };
 
 const BOE_2026 =
@@ -87,7 +91,7 @@ function conFestaDAran(base: readonly FestivoOficial[], sustituida: string, anio
   );
 }
 
-const CALENDARIOS: readonly CalendarioOficial[] = [
+const CALENDARIOS: CalendarioOficial[] = [
   // ── 2026 ──────────────────────────────────────────────────────────────────
   {
     anio: 2026,
@@ -205,6 +209,74 @@ const CALENDARIOS: readonly CalendarioOficial[] = [
   },
 ];
 
+// ── Argentina: feriados nacionales ──────────────────────────────────────────
+// Inamovibles y trasladables de la Ley 27.399 (arts. 1 y 6), los días no
+// laborables (Jueves Santo) y los «no laborables con fines turísticos» que fija
+// el Poder Ejecutivo cada año. Fuera: los feriados provinciales y municipales
+// (cambian de una provincia a otra; se buscan en «Buscar los de tu localidad»)
+// y los días no laborables por religión (solo para quien la profesa).
+// En un día no laborable cada empresa decide si trabaja: se avisa igual.
+
+const AR_2026_FUENTE =
+  'Ley 27.399 de feriados nacionales (B.O. 18/10/2017) y Resolución 164/2025 de la Jefatura de Gabinete de Ministros, días no laborables con fines turísticos 2026 (B.O. núm. 35.818, de 26/12/2025); calendario oficial en argentina.gob.ar';
+const AR_2026_URL = 'https://www.argentina.gob.ar/jefatura/feriados-nacionales-2026';
+
+const ARGENTINA_2026: readonly FestivoOficial[] = [
+  { fecha: '2026-01-01', nombre: 'Año Nuevo' },
+  { fecha: '2026-02-16', nombre: 'Carnaval' },
+  { fecha: '2026-02-17', nombre: 'Carnaval' },
+  { fecha: '2026-03-23', nombre: 'Día no laborable con fines turísticos' },
+  { fecha: '2026-03-24', nombre: 'Día Nacional de la Memoria por la Verdad y la Justicia' },
+  { fecha: '2026-04-02', nombre: 'Día del Veterano y de los Caídos en la Guerra de Malvinas · Jueves Santo (no laborable)' },
+  { fecha: '2026-04-03', nombre: 'Viernes Santo' },
+  { fecha: '2026-05-01', nombre: 'Día del Trabajador' },
+  { fecha: '2026-05-25', nombre: 'Día de la Revolución de Mayo' },
+  { fecha: '2026-06-15', nombre: 'Paso a la Inmortalidad del Gral. Martín Miguel de Güemes, trasladado' },
+  { fecha: '2026-06-20', nombre: 'Paso a la Inmortalidad del Gral. Manuel Belgrano' },
+  { fecha: '2026-07-09', nombre: 'Día de la Independencia' },
+  { fecha: '2026-07-10', nombre: 'Día no laborable con fines turísticos' },
+  { fecha: '2026-08-17', nombre: 'Paso a la Inmortalidad del Gral. José de San Martín' },
+  { fecha: '2026-10-12', nombre: 'Día del Respeto a la Diversidad Cultural' },
+  { fecha: '2026-11-23', nombre: 'Día de la Soberanía Nacional, trasladado' },
+  { fecha: '2026-12-07', nombre: 'Día no laborable con fines turísticos' },
+  { fecha: '2026-12-08', nombre: 'Día de la Inmaculada Concepción de María' },
+  { fecha: '2026-12-25', nombre: 'Navidad' },
+];
+
+// 2027: lo que fija la propia ley. Los inamovibles van en su fecha; Carnaval y
+// Semana Santa salen de la Pascua (28-mar-2027); los trasladables siguen el
+// art. 6 (martes y miércoles al lunes anterior, jueves y viernes al siguiente).
+// FALTAN a propósito hasta que se publiquen: los tres días turísticos de 2027 y
+// el Día de la Soberanía (sábado 20-nov), que el Decreto 614/2025 permite mover
+// a viernes o lunes. Cuando salga la resolución, se completa con su cita.
+const AR_2027_FUENTE =
+  'Ley 27.399 de feriados nacionales (B.O. 18/10/2017), arts. 1 y 6; sin los días no laborables con fines turísticos 2027, todavía no publicados';
+const AR_2027_URL = 'https://www.argentina.gob.ar/normativa/nacional/ley-27399-281835/texto';
+
+const ARGENTINA_2027: readonly FestivoOficial[] = [
+  { fecha: '2027-01-01', nombre: 'Año Nuevo' },
+  { fecha: '2027-02-08', nombre: 'Carnaval' },
+  { fecha: '2027-02-09', nombre: 'Carnaval' },
+  { fecha: '2027-03-24', nombre: 'Día Nacional de la Memoria por la Verdad y la Justicia' },
+  { fecha: '2027-03-25', nombre: 'Jueves Santo' },
+  { fecha: '2027-03-26', nombre: 'Viernes Santo' },
+  { fecha: '2027-04-02', nombre: 'Día del Veterano y de los Caídos en la Guerra de Malvinas' },
+  { fecha: '2027-05-01', nombre: 'Día del Trabajador' },
+  { fecha: '2027-05-25', nombre: 'Día de la Revolución de Mayo' },
+  { fecha: '2027-06-20', nombre: 'Paso a la Inmortalidad del Gral. Manuel Belgrano' },
+  { fecha: '2027-06-21', nombre: 'Paso a la Inmortalidad del Gral. Martín Miguel de Güemes, trasladado' },
+  { fecha: '2027-07-09', nombre: 'Día de la Independencia' },
+  { fecha: '2027-08-16', nombre: 'Paso a la Inmortalidad del Gral. José de San Martín, trasladado' },
+  { fecha: '2027-10-11', nombre: 'Día del Respeto a la Diversidad Cultural, trasladado' },
+  { fecha: '2027-12-08', nombre: 'Día de la Inmaculada Concepción de María' },
+  { fecha: '2027-12-25', nombre: 'Navidad' },
+];
+
+CALENDARIOS.push(
+  { anio: 2026, zona: 'ARGENTINA', fuente: AR_2026_FUENTE, url: AR_2026_URL, festivos: ARGENTINA_2026 },
+  { anio: 2027, zona: 'ARGENTINA', fuente: AR_2027_FUENTE, url: AR_2027_URL, festivos: ARGENTINA_2027 },
+);
+
 /** Solo para los tests y la guardia: los calendarios tal cual. */
 export const CALENDARIOS_OFICIALES = CALENDARIOS;
 
@@ -250,8 +322,10 @@ export function fuenteDe(zona: ZonaFestivos, anio: number): { fuente: string; ur
  * la chapa de la lista; no decide nada.
  */
 export function ambitoOficial(zona: ZonaFestivos, fecha: string): 'nacional' | 'autonomico' {
+  // Argentina: solo se cargan los nacionales.
+  if (zona === 'ARGENTINA') return 'nacional';
   const anio = Number(fecha.slice(0, 4));
-  const delAnio = CALENDARIOS.filter((c) => c.anio === anio && c.zona !== 'ARAN');
+  const delAnio = CALENDARIOS.filter((c) => c.anio === anio && ZONAS_ESPANA.includes(c.zona) && c.zona !== 'ARAN');
   const enTodas = delAnio.length > 1 && delAnio.every((c) => c.festivos.some((f) => f.fecha === fecha));
   return enTodas && festivoDe(zona, fecha) ? 'nacional' : 'autonomico';
 }

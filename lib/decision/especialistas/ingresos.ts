@@ -94,7 +94,7 @@ function reglaI1(clave: string, franja: FranjaRecurrente, s: SnapshotEstudio, id
     },
     riesgo: 'OPORTUNIDAD',
     impacto: valor > 0
-      ? { valor, unidad: 'EUR_MES', formula: `${plazasEstimadas} plazas × ${conMoneda(redondear2(precioMedio), '')}/sesión × 4.33 semanas (lista de espera de ${redondear1(demanda)} las últimas ${OCURRENCIAS_MINIMAS} semanas)` }
+      ? { valor, unidad: 'EUR_MES', formula: `${plazasEstimadas} lugares × ${conMoneda(redondear2(precioMedio), '')}/sesión × 4.33 semanas (lista de espera de ${redondear1(demanda)} las últimas ${OCURRENCIAS_MINIMAS} semanas)` }
       : undefined,
     confianza,
     accion: { tipo: 'MARCAR_GESTIONADO' },

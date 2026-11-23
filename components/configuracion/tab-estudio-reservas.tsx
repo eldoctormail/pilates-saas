@@ -430,7 +430,7 @@ export function FormCancelarYRecuperar({ excepciones, ...props }: PropsCajonRegl
         </Campo>
         <InterruptorCampo
           titulo="Devolver la sesión del bono en cancelaciones tardías"
-          detalle="Desactivado: pierde la sesión, y la plaza se libera igual (recomendado)."
+          detalle="Desactivado: pierde la sesión, y el lugar se libera igual (recomendado)."
           on={form.cancelacionDevolverBonoTardia}
           onChange={v => cambiar('cancelacionDevolverBonoTardia', v)}
         />
@@ -550,7 +550,7 @@ export function FormClaseCancelada({ excepciones, ...props }: PropsCajonRegla) {
           )}
         </Campo>
         <Consecuencia texto={consecuenciaRegla('si-se-cancela-una-clase', r.enPantalla)} />
-        <NotaDeSerie>con un mínimo, la clase que no lo alcanza se cancela sola 2 h antes y avisa a quien tenía plaza. Sin mínimo, nunca se cancela sola.</NotaDeSerie>
+        <NotaDeSerie>con un mínimo, la clase que no lo alcanza se cancela sola 2 h antes y avisa a quien tenía lugar. Sin mínimo, nunca se cancela sola.</NotaDeSerie>
         <TiposDeClaseQueLaCambian tipos={excepciones} />
       </div>
       <Barra tarjeta="si-se-cancela-una-clase" r={r} />
@@ -607,7 +607,7 @@ export function FormListaEspera({ excepciones, ...props }: PropsCajonRegla) {
           })}
         </fieldset>
         {form.listaEspera.modo === 'con-plazo' && (
-          <Campo label="Minutos para aceptar la plaza" error={lista.ok ? null : lista.error}>
+          <Campo label="Minutos para aceptar el lugar" error={lista.ok ? null : lista.error}>
             {id => (
               <input
                 id={id} type="number" min={1} inputMode="numeric" className={cn(inputCls, 'max-w-40')}
@@ -620,14 +620,14 @@ export function FormListaEspera({ excepciones, ...props }: PropsCajonRegla) {
         )}
         {form.listaEspera.modo === 'con-plazo' && (
           <InterruptorCampo
-            titulo="Guardar la plaza ofrecida mientras corre el plazo"
+            titulo="Guardar el lugar ofrecido mientras corre el plazo"
             detalle="Activado: quien reserva en ese momento no se la quita a quien la tiene ofrecida, y pasa a la lista de espera. Desactivado: la toma la primera persona que reserve (como hasta ahora)."
             on={form.listaEsperaReservaPlazaOfrecida}
             onChange={v => cambiar('listaEsperaReservaPlazaOfrecida', v)}
           />
         )}
         {lista.ok && <Consecuencia texto={consecuenciaRegla('lista-de-espera', r.enPantalla)} />}
-        <NotaDeSerie>la plaza que se libera va a la primera de la lista, por orden de llegada.</NotaDeSerie>
+        <NotaDeSerie>el lugar que se libera va a la primera de la lista, por orden de llegada.</NotaDeSerie>
         <TiposDeClaseQueLaCambian tipos={excepciones} />
       </div>
       <Barra tarjeta="lista-de-espera" r={r} />
@@ -696,7 +696,7 @@ export function FormAsistencia({ excepciones, confirmacion, showToast, onGuardad
           onChange={v => cambiar('controlAccesoQr', v)}
         >
           <span className="block text-sm text-muted-foreground text-pretty">
-            Cada cliente tiene su QR en la app. Al escanearlo, Tentare comprueba en el momento si tiene plaza en la clase.
+            Cada cliente tiene su QR en la app. Al escanearlo, Tentare comprueba en el momento si tiene lugar en la clase.
             {form.requiereCheckinQr ? ' Si puede entrar, su asistencia queda marcada.' : ''}
           </span>
         </InterruptorCampo>
@@ -938,7 +938,7 @@ export function FormPlazaFijaDesdeApp(props: PropsCajonRegla) {
             })}
             {form.plazaFijaAprobacion === 'AUTOMATICA' && (
               <div className="rounded-lg border border-border p-3" data-testid="tope-plaza-fija">
-                <p className="text-sm font-medium text-foreground">Cuántas plazas de una clase pueden ser fijas</p>
+                <p className="text-sm font-medium text-foreground">Cuántos lugares de una clase pueden ser fijas</p>
                 <p className="mb-2 text-sm text-muted-foreground text-pretty">
                   Hasta este porcentaje del aforo se dan solas; a partir de ahí las apruebas tú. Así queda siempre sitio para reservas sueltas.
                 </p>
@@ -991,7 +991,7 @@ export function FormPausaPlazaFija(props: PropsCajonRegla) {
         <p className="text-sm text-muted-foreground text-pretty">{EXPLICACION_PAUSA_PLAZA_FIJA}</p>
         <InterruptorCampo
           titulo="Su sitio queda libre para otro cliente"
-          detalle="Mientras dura la pausa, si dura más de una semana. Apagado: conserva su plaza y su sitio."
+          detalle="Mientras dura la pausa, si dura más de una semana. Apagado: conserva su lugar y su sitio."
           on={form.plazaFijaPausaLiberaSitio}
           onChange={v => cambiar('plazaFijaPausaLiberaSitio', v)}
         />

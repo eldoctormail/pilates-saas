@@ -170,7 +170,7 @@ test.describe('En el portátil', () => {
 
     // Lo que sí es suyo sigue estando: el nombre y las plazas.
     await expect(panel.getByLabel('Nombre de la clase')).toBeVisible();
-    await expect(panel.getByLabel('Plazas por defecto')).toBeVisible();
+    await expect(panel.getByLabel('Lugares por defecto')).toBeVisible();
   });
 
   test('guardar el horario llega a la base de datos', async ({ page }) => {

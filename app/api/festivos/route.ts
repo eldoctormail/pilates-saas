@@ -40,7 +40,7 @@ export async function GET(req: NextRequest) {
   }
   const encendido = alcance === 'todos' || avisoFestivosEncendido(sesion.studioId);
   const r = await festivosPorDecidir(admin, { studioId: sesion.studioId, ahora: new Date(), alcance, conReservas: true, encendido });
-  if (!r) return NextResponse.json({ error: 'No se han podido leer los festivos' }, { status: 500 });
+  if (!r) return NextResponse.json({ error: 'No se han podido leer los feriados' }, { status: 500 });
   if (!r.disponible) return NextResponse.json({ disponible: false });
   return NextResponse.json({
     disponible: true,
@@ -68,16 +68,16 @@ export async function POST(req: NextRequest) {
   // La zona se recalcula aquí, y el nombre que se guarda sale de la tabla
   // oficial o de la fila que el estudio guardó: el cliente solo dice qué día.
   const zona = await zonaDeEstudio(admin, sesion.studioId);
-  if (zona === 'error') return NextResponse.json({ error: 'No se ha podido comprobar el festivo' }, { status: 500 });
+  if (zona === 'error') return NextResponse.json({ error: 'No se ha podido comprobar el feriado' }, { status: 500 });
   const guardados = /^\d{4}-\d{2}-\d{2}$/.test(body.fecha) ? await festivosGuardadosEntre(admin, sesion.studioId, body.fecha, body.fecha) : [];
-  if (guardados === 'error') return NextResponse.json({ error: 'No se ha podido comprobar el festivo' }, { status: 500 });
+  if (guardados === 'error') return NextResponse.json({ error: 'No se ha podido comprobar el feriado' }, { status: 500 });
   const festivo = festivoAbrible(zona, body.fecha, hoyEnEstudio(), guardados);
-  if (!festivo) return NextResponse.json({ error: 'Ese día no es un festivo próximo de tu zona ni de tu lista' }, { status: 400 });
+  if (!festivo) return NextResponse.json({ error: 'Ese día no es un feriado próximo de tu zona ni de tu lista' }, { status: 400 });
 
   // Si alguien lo cerró mientras tanto, gana el cierre: no se apunta «abrimos».
   const { data: cierre, error: errCierre } = await admin.from('cierres_estudio').select('id')
     .eq('studio_id', sesion.studioId).lte('desde', festivo.fecha).gte('hasta', festivo.fecha).limit(1);
-  if (errCierre) return NextResponse.json({ error: 'No se ha podido comprobar el festivo' }, { status: 500 });
+  if (errCierre) return NextResponse.json({ error: 'No se ha podido comprobar el feriado' }, { status: 500 });
   if ((cierre ?? []).length > 0) {
     return NextResponse.json({ error: 'Ese día ya está cerrado. Si quieres abrirlo, quita el cierre en Configuración › Mi estudio.' }, { status: 409 });
   }

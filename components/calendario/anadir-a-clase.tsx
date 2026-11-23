@@ -205,7 +205,7 @@ export function AnadirAClase({
         <>
           {llena && (
             <p className="text-[12.5px] font-medium text-warning">
-              Clase llena ({confirmadas}/{aforo}): no queda plaza para {NOMBRE_PLATAFORMA[de]}. Si ya la han vendido, cancélala allí.
+              Clase llena ({confirmadas}/{aforo}): no queda lugar para {NOMBRE_PLATAFORMA[de]}. Si ya la han vendido, cancélala allí.
             </p>
           )}
           <AnadirReservaPlataforma
@@ -221,8 +221,8 @@ export function AnadirAClase({
             <div className="flex flex-wrap items-center justify-between gap-2 rounded-lg bg-muted px-3 py-2" data-testid="apartadas-classpass">
               <p className="min-w-0 flex-1 text-[12.5px] text-foreground">
                 {llenaPorApartadas
-                  ? `${aforo - confirmadas === 1 ? 'Queda 1 plaza, apartada' : `Quedan ${aforo - confirmadas}, apartadas`} para ClassPass ${hastaCuandoApartadas(apartadas.hasta)}: quien añadas entrará en lista de espera, y te lo preguntamos antes.`
-                  : `${enApartadas === 1 ? '1 plaza apartada' : `${enApartadas} plazas apartadas`} para ClassPass ${hastaCuandoApartadas(apartadas.hasta)}.`}
+                  ? `${aforo - confirmadas === 1 ? 'Queda 1 lugar, apartado' : `Quedan ${aforo - confirmadas}, apartados`} para ClassPass ${hastaCuandoApartadas(apartadas.hasta)}: quien añadas entrará en lista de espera, y te lo preguntamos antes.`
+                  : `${enApartadas === 1 ? '1 lugar apartado' : `${enApartadas} lugares apartados`} para ClassPass ${hastaCuandoApartadas(apartadas.hasta)}.`}
               </p>
               {onLiberarApartada && (
                 <button

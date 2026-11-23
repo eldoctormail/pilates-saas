@@ -682,7 +682,7 @@ function ReprogramarDialog({ s, avisarActivo, enProceso, onClose, onConfirm }: {
         <p className="text-[13px] text-muted-foreground -mt-1">
           La clase se mueve al hueco nuevo con la misma duración y su instructora original.{' '}
           {avisarActivo
-            ? 'Los clientes apuntados recibirán el cambio por email y en su app, y mantienen su plaza.'
+            ? 'Los clientes apuntados recibirán el cambio por email y en su app, y mantienen su lugar.'
             : 'El aviso a los clientes está desactivado: no les llegará ni email ni aviso en su app.'}
         </p>
         <div className="grid grid-cols-2 gap-3">

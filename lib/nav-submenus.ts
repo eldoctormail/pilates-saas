@@ -33,7 +33,7 @@ export const SUBMENUS: Readonly<Record<string, readonly SubItem[]>> = {
   ],
   '/calendario': [
     { href: '/calendario', label: 'Calendario', porDefecto: true },
-    { href: '/calendario/plazas-libres', label: 'Plazas libres' },
+    { href: '/calendario/plazas-libres', label: 'Lugares libres' },
     { href: '/calendario/importar', label: 'Importar horario' },
   ],
   '/mensajeria': [

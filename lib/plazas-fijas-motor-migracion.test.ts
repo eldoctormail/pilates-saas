@@ -40,7 +40,7 @@ test('B3: el motor y el barrido de avisos usan la misma regla de solape que rese
   assert.match(SQL, /'conflicto_horario'::text as motivo/);
 });
 
-test('B1: crear una clase reserva sus plazas fijas al momento, y nunca puede impedir crearla', () => {
+test('B1: crear una clase reserva sus lugares fijos al momento, y nunca puede impedir crearla', () => {
   assert.match(SQL, /after insert on public\.sesiones\s+referencing new table as nuevas\s+for each statement/);
   assert.match(SQL, /exception when others then\s+raise warning/);
   // El horizonte del disparador y el de TS son el mismo número: si uno cambia, el otro también.

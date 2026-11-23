@@ -59,7 +59,7 @@ export const ETIQUETA_PESO_WEB: Record<PesoPasoWeb, string> = {
 
 /** Cuándo llega a su web cada clase de cambio en un widget (lib/widgets/como-llegan.ts, en corto). */
 export const CUANDO_LLEGA_A_TU_WEB: readonly LineaCuando[] = [
-  { que: 'Clases, precios y plazas', cuando: 'Solos, siempre. No tienes que hacer nada.' },
+  { que: 'Clases, precios y lugares', cuando: 'Solos, siempre. No tienes que hacer nada.' },
   { que: 'El estilo y lo que enseña', cuando: 'Cuando pulsas «Publicar en mi web». No hay que volver a pegar nada.' },
   { que: 'Un código de antes', cuando: 'Hay que pegarlo otra vez, una sola vez. Te lo decimos en su fila, con su botón.' },
 ];

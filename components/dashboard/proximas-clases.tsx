@@ -346,7 +346,7 @@ function TarjetaEnVivo({
       <div className="mt-3 max-w-[220px]">
         <p className="leading-none">
           <span className="text-[15px] font-bold tabular-nums text-foreground">{clase.ocupadas}</span>
-          <span className="text-[11px] text-muted-foreground"> / {clase.aforo} plazas</span>
+          <span className="text-[11px] text-muted-foreground"> / {clase.aforo} lugares</span>
         </p>
         <BarraPlazas ocupadas={clase.ocupadas} aforo={clase.aforo} />
       </div>

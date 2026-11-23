@@ -88,7 +88,7 @@ test('sin el panel nuevo también está: en el menú y su pantalla funciona (par
   await expect(page.locator('a[href="/calendario"]:visible').first()).toBeVisible({ timeout: 30_000 });
   await expect(enlaceMenu(page).first()).toBeAttached();
   await ir(page, 'festivos');
-  await expect(page.getByRole('heading', { name: 'Festivos', level: 1 })).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByRole('heading', { name: 'Feriados', level: 1 })).toBeVisible({ timeout: 30_000 });
   await expect(page.getByTestId('festivo-fila')).toHaveCount(2);
 });
 
@@ -97,25 +97,25 @@ test('si la API dice que no está (tabla sin migrar), la pantalla lo dice', asyn
   await page.route((u) => u.pathname === '/api/festivos/estudio', (r) => json(r, { error: 'No disponible' }, 404));
   await ir(page, 'festivos');
   await expect(page.getByTestId('festivos-no-disponible')).toBeVisible({ timeout: 30_000 });
-  await expect(page.getByRole('button', { name: 'Añadir festivos' })).toHaveCount(0);
+  await expect(page.getByRole('button', { name: 'Añadir feriados' })).toHaveCount(0);
 });
 
-test('la búsqueda enseña todos los festivos, marca los nuevos y solo guarda lo marcado; fuegos al guardar', async ({ page }) => {
+test('la búsqueda enseña todos los feriados, marca los nuevos y solo guarda lo marcado; fuegos al guardar', async ({ page }) => {
   await preparar(page, { nuevo: true });
   const enviados = await conLista(page, (c) => ({ status: 200, body: { ok: true, creados: (c as { festivos: { fecha: string }[] }).festivos.map(f => f.fecha), yaEstaban: 0 } }));
   let busquedas = 0;
   await page.route((u) => u.pathname === '/api/festivos/buscar', (r) => { busquedas++; return json(r, BUSQUEDA); });
 
   await ir(page, 'festivos');
-  await expect(page.getByRole('heading', { name: 'Festivos', level: 1 })).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByRole('heading', { name: 'Feriados', level: 1 })).toBeVisible({ timeout: 30_000 });
   await expect(enlaceMenu(page).first()).toBeVisible();
   await expect(page.getByTestId('festivo-fila')).toHaveCount(2);
   await expect(page.getByTestId('festivos-faltan-locales')).toBeVisible();
 
-  await page.getByRole('button', { name: 'Añadir festivos' }).click();
-  const panel = page.getByRole('dialog', { name: 'Añadir festivos' });
+  await page.getByRole('button', { name: 'Añadir feriados' }).click();
+  const panel = page.getByRole('dialog', { name: 'Añadir feriados' });
   await expect(panel.getByRole('textbox')).toHaveValue('Almería');
-  await panel.getByRole('button', { name: /Buscar los festivos de mi localidad/ }).click();
+  await panel.getByRole('button', { name: /Buscar los feriados de mi localidad/ }).click();
 
   // Todos, en una lista: los del boletín y los locales.
   await expect(panel.getByTestId('festivo-encontrado')).toHaveCount(5);
@@ -131,7 +131,7 @@ test('la búsqueda enseña todos los festivos, marca los nuevos y solo guarda lo
   await expect(panel.getByRole('checkbox', { name: /San Indalecio/ })).not.toBeChecked();
   await expect(panel.getByText('2 de 3 marcados')).toBeVisible();
 
-  await panel.getByRole('button', { name: 'Añadir 2 festivos' }).click();
+  await panel.getByRole('button', { name: 'Añadir 2 feriados' }).click();
   await expect.poll(() => enviados.length).toBeGreaterThan(0);
   expect(enviados[0]).toEqual({
     localidad: 'Almería',
@@ -141,7 +141,7 @@ test('la búsqueda enseña todos los festivos, marca los nuevos y solo guarda lo
     ],
   });
   await expect(page.getByTestId('fuegos-artificiales')).toBeAttached();
-  await expect(page.getByText('2 festivos añadidos a tu lista')).toBeVisible();
+  await expect(page.getByText('2 feriados añadidos a tu lista')).toBeVisible();
   // Se cierra solo y la lista ya lo trae.
   await expect(panel).toHaveCount(0, { timeout: 5_000 });
   await expect(page.getByTestId('festivo-fila')).toHaveCount(3);
@@ -156,9 +156,9 @@ test('si todo está ya en la lista, lo dice y no hay nada que añadir', async ({
   }));
 
   await ir(page, 'festivos');
-  await page.getByRole('button', { name: 'Añadir festivos' }).click({ timeout: 30_000 });
-  const panel = page.getByRole('dialog', { name: 'Añadir festivos' });
-  await panel.getByRole('button', { name: /Buscar los festivos de mi localidad/ }).click();
+  await page.getByRole('button', { name: 'Añadir feriados' }).click({ timeout: 30_000 });
+  const panel = page.getByRole('dialog', { name: 'Añadir feriados' });
+  await panel.getByRole('button', { name: /Buscar los feriados de mi localidad/ }).click();
   await expect(panel.getByTestId('festivo-encontrado')).toHaveCount(5);
   await expect(panel.getByRole('checkbox')).toHaveCount(0);
   await expect(panel.getByText('Ya tienes todos en tu lista')).toBeVisible();
@@ -171,15 +171,15 @@ test('si guardar falla, lo dice y no hay fuegos', async ({ page }) => {
   await page.route((u) => u.pathname === '/api/festivos/buscar', (r) => json(r, BUSQUEDA));
 
   await ir(page, 'festivos');
-  await page.getByRole('button', { name: 'Añadir festivos' }).click({ timeout: 30_000 });
-  const panel = page.getByRole('dialog', { name: 'Añadir festivos' });
-  await panel.getByRole('button', { name: /Buscar los festivos de mi localidad/ }).click();
-  await panel.getByRole('button', { name: 'Añadir 2 festivos' }).click();
+  await page.getByRole('button', { name: 'Añadir feriados' }).click({ timeout: 30_000 });
+  const panel = page.getByRole('dialog', { name: 'Añadir feriados' });
+  await panel.getByRole('button', { name: /Buscar los feriados de mi localidad/ }).click();
+  await panel.getByRole('button', { name: 'Añadir 2 feriados' }).click();
 
   await expect.poll(() => enviados.length).toBeGreaterThan(0);
   await expect(panel.getByRole('alert')).toContainText('No se han podido guardar');
   await expect(page.getByTestId('fuegos-artificiales')).toHaveCount(0);
-  await expect(panel.getByRole('button', { name: 'Añadir 2 festivos' })).toBeEnabled();
+  await expect(panel.getByRole('button', { name: 'Añadir 2 feriados' })).toBeEnabled();
 });
 
 test('con la IA caída se dice, salen igual los del boletín y se puede añadir a mano', async ({ page }) => {
@@ -191,15 +191,15 @@ test('con la IA caída se dice, salen igual los del boletín y se puede añadir 
   }));
 
   await ir(page, 'festivos');
-  await page.getByRole('button', { name: 'Añadir festivos' }).click({ timeout: 30_000 });
-  const panel = page.getByRole('dialog', { name: 'Añadir festivos' });
-  await panel.getByRole('button', { name: /Buscar los festivos de mi localidad/ }).click();
+  await page.getByRole('button', { name: 'Añadir feriados' }).click({ timeout: 30_000 });
+  const panel = page.getByRole('dialog', { name: 'Añadir feriados' });
+  await panel.getByRole('button', { name: /Buscar los feriados de mi localidad/ }).click();
   await expect(panel.getByText('No hemos podido buscar las fiestas locales ahora')).toBeVisible();
   await expect(panel.getByTestId('festivo-encontrado')).toHaveCount(3);
   await expect(panel.locator('[data-testid="festivo-encontrado"][data-origen="ia"]')).toHaveCount(0);
   await expect(panel.getByRole('checkbox', { name: /Año Nuevo/ })).toBeChecked();
   await panel.getByRole('button', { name: 'Uno a mano' }).click();
-  await expect(page.getByRole('dialog', { name: 'Añadir festivos' }).getByText('Añadir un festivo a mano')).toBeVisible();
+  await expect(page.getByRole('dialog', { name: 'Añadir feriados' }).getByText('Añadir un feriado a mano')).toBeVisible();
 });
 
 test('con «reducir movimiento», sin fuegos (pero añadido igual)', async ({ page }) => {
@@ -209,11 +209,11 @@ test('con «reducir movimiento», sin fuegos (pero añadido igual)', async ({ pa
   await page.route((u) => u.pathname === '/api/festivos/buscar', (r) => json(r, BUSQUEDA));
 
   await ir(page, 'festivos');
-  await page.getByRole('button', { name: 'Añadir festivos' }).click({ timeout: 30_000 });
-  const panel = page.getByRole('dialog', { name: 'Añadir festivos' });
-  await panel.getByRole('button', { name: /Buscar los festivos de mi localidad/ }).click();
-  await panel.getByRole('button', { name: 'Añadir 2 festivos' }).click();
-  await expect(page.getByText('2 festivos añadidos a tu lista')).toBeVisible();
+  await page.getByRole('button', { name: 'Añadir feriados' }).click({ timeout: 30_000 });
+  const panel = page.getByRole('dialog', { name: 'Añadir feriados' });
+  await panel.getByRole('button', { name: /Buscar los feriados de mi localidad/ }).click();
+  await panel.getByRole('button', { name: 'Añadir 2 feriados' }).click();
+  await expect(page.getByText('2 feriados añadidos a tu lista')).toBeVisible();
   await expect(page.getByTestId('fuegos-artificiales')).toHaveCount(0);
 });
 
@@ -232,7 +232,7 @@ test('«Comprobar clases» cuenta, y cerrar pide confirmación y va por /api/cie
 
   await ir(page, 'festivos');
   await page.getByRole('button', { name: 'Comprobar clases' }).click({ timeout: 30_000 });
-  const panel = page.getByRole('dialog', { name: 'Clases en tus festivos' });
+  const panel = page.getByRole('dialog', { name: 'Clases en tus feriados' });
   await expect(panel.getByText('tienes 3 clases y 12 reservas confirmadas')).toBeVisible();
 
   await panel.getByRole('button', { name: /^Cerrar el / }).click();
@@ -240,11 +240,11 @@ test('«Comprobar clases» cuenta, y cerrar pide confirmación y va por /api/cie
   expect(cierres).toHaveLength(0);
   await page.getByRole('button', { name: 'Sí, cerrar ese día' }).click();
   await expect.poll(() => cierres.length).toBeGreaterThan(0);
-  expect(cierres[0]).toEqual({ desde: dia(20), hasta: dia(20), motivo: 'Festivo: Fiesta de prueba' });
-  await expect(panel.getByText('Ningún festivo tiene clases sin decidir')).toBeVisible();
+  expect(cierres[0]).toEqual({ desde: dia(20), hasta: dia(20), motivo: 'Feriado: Fiesta de prueba' });
+  await expect(panel.getByText('Ningún feriado tiene clases sin decidir')).toBeVisible();
 });
 
-test('recepción: sin Festivos en el menú ni su pantalla', async ({ page }) => {
+test('recepción: sin Feriados en el menú ni su pantalla', async ({ page }) => {
   await preparar(page, { nuevo: true });
   await conLista(page, () => ({ status: 200, body: { ok: true, creados: [], yaEstaban: 0 } }));
   // La sesión es de una recepcionista: el estudio es de otra persona y su ficha dice RECEPCION.

@@ -131,7 +131,7 @@ test.describe('Student PWA · la hoja de reserva, sacada de la ficha', () => {
     await page.goto(`${base}/reservar/${SESION_ID}`, { waitUntil: 'domcontentloaded' });
     await page.getByRole('button', { name: /lista de espera/i }).first().click({ timeout: 45_000 });
     const hoja = page.locator('[role="dialog"]').last();
-    await expect(hoja).toContainText('Sin coste al apuntarte. Si se libera una plaza, te avisamos; al entrar cuenta como una reserva normal.');
+    await expect(hoja).toContainText('Sin coste al apuntarte. Si se libera un lugar, te avisamos; al entrar cuenta como una reserva normal.');
     expect(await hoja.innerText()).not.toContain('tú confirmas');
   });
 

@@ -133,7 +133,7 @@ const AVISOS_BASE = [
   { id: 'n-3', title: 'Te quedan 8 sesiones', body: 'Tu Bono 10 caduca el 30 de septiembre.',
     deepLink: null, category: 'pagos', priority: 'NORMAL', eventType: 'bono.por_agotarse',
     resourceType: null, resourceId: null, readAt: haceHoras(40), createdAt: haceHoras(50) },
-  { id: 'n-4', title: 'Nuevo taller el 12 de agosto', body: 'El descanso también es entrenamiento. 8 plazas.',
+  { id: 'n-4', title: 'Nuevo taller el 12 de agosto', body: 'El descanso también es entrenamiento. 8 lugares.',
     deepLink: null, category: 'general', priority: 'BAJA', eventType: 'estudio.aviso',
     resourceType: null, resourceId: null, readAt: haceHoras(60), createdAt: haceHoras(122) },
 ];

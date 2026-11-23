@@ -71,7 +71,7 @@ export async function contarPlazasLibres(
   const retiradas = new Set<string>();
   for (const lote of trozos(ids, IDS_POR_CONSULTA)) {
     const [a, r] = await Promise.all([l.apartadas(lote), l.retiradas(lote)]);
-    if (!a) throw new Error('No se han podido leer las plazas apartadas');
+    if (!a) throw new Error('No se han podido leer los lugares apartados');
     if (!r) throw new Error('No se han podido leer las reservas retiradas');
     filasApartadas.push(...a);
     for (const id of r) retiradas.add(id);

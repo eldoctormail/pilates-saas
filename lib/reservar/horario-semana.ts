@@ -234,7 +234,7 @@ export type TonoPlazas = 'libre' | 'ultimas' | 'completa' | 'mia';
  * nada — a quien ya tiene plaza no le sirve saber cuántas quedan.
  */
 export function plazasDeClase(c: PlazasDeClase): { texto: string; tono: TonoPlazas } {
-  if (c.miEstado === 'CONFIRMADA') return { texto: 'Tu plaza', tono: 'mia' };
+  if (c.miEstado === 'CONFIRMADA') return { texto: 'Tu lugar', tono: 'mia' };
   if (c.miEstado === 'LISTA_ESPERA') return { texto: 'En espera', tono: 'mia' };
   const estado = estadoPlazas({ ocupadas: c.ocupadas, aforoMaximo: c.aforoMaximo });
   const libres = Math.max(0, c.aforoMaximo - c.ocupadas);

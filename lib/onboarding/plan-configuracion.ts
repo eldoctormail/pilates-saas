@@ -306,7 +306,7 @@ export function montadoTrasConfigurar(
 // el mismo dato y no pueden divergir al editar una de las dos.
 
 export const OPCIONES_SALAS = ['1 sala', '2 salas', '3 salas', '4 o más'] as const;
-export const OPCIONES_AFORO = ['4 plazas', '6 plazas', '8 plazas', '10 plazas', '12 o más'] as const;
+export const OPCIONES_AFORO = ['4 lugares', '6 lugares', '8 lugares', '10 lugares', '12 o más'] as const;
 export const OPCIONES_DURACION = ['45 minutos', '50 minutos', '55 minutos', '60 minutos'] as const;
 export const OPCIONES_COBRO = ['Bonos de sesiones', 'Cuota mensual', 'Clase suelta'] as const;
 export const OPCIONES_IMPARTE = ['Sí, yo doy clases', 'No, solo gestiono'] as const;

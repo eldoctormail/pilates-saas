@@ -417,7 +417,7 @@ export function confianzaLlenarPlazas(c: {
 }): Confianza | null {
   const criterios: Criterio[] = [
     { valor: c.porDetrasDeLoHabitual, etiqueta: 'va por detrás de lo que esta franja suele llevar a estos días vista' },
-    { valor: c.hayCandidatasCompatibles, etiqueta: 'hay socias compatibles con plan en vigor a las que ofrecer la plaza' },
+    { valor: c.hayCandidatasCompatibles, etiqueta: 'hay socias compatibles con plan en vigor a las que ofrecer el lugar' },
     { valor: c.curvaFiable, etiqueta: 'la franja tiene bastantes ocurrencias pasadas con las que comparar' },
   ];
   const { porDetrasDeLoHabitual: a, hayCandidatasCompatibles: b, curvaFiable: cc } = c;

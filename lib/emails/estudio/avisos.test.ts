@@ -93,10 +93,10 @@ test('los dos avisos de confirmación no repiten el mismo texto', () => {
   assert.match(segundo, /te escribimos ayer y todavía no hemos sabido de ti/);
   assert.notEqual(primero, segundo);
   // Los dos dicen qué pasa si no contesta.
-  for (const html of [primero, segundo]) assert.match(html, /liberaremos tu plaza/);
+  for (const html of [primero, segundo]) assert.match(html, /liberaremos tu lugar/);
 });
 
-test('el aviso de plaza liberada informa, no castiga', () => {
+test('el aviso de lugar liberado informa, no castiga', () => {
   const html = correoPlazaLiberadaSinConfirmar({ toName: 'Ana', claseNombre: 'Reformer Iniciación', cuando: CUANDO, marca: MARCA, url: 'https://app.example.com/horario' });
   assert.ok(!html.includes(ACENTO.alerta), 'un filete rojo aquí diría que ha hecho algo mal');
   assert.match(html, /¿Te apetece reservar otra clase\?/);

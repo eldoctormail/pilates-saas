@@ -42,13 +42,13 @@ test('no se marca por su cuenta ni el horario ni «das clases tú»', () => {
 });
 
 test('un aforo por sala: sube heredando el primero y baja recortando', () => {
-  const dos = alinearAforos({ salas: '2 salas', aforos: ['10 plazas'] });
-  assert.deepEqual(dos.aforos, ['10 plazas', '10 plazas']);
-  const tresCambiado = alinearAforos({ salas: '4 o más', aforos: ['10 plazas', '6 plazas'] });
-  assert.deepEqual(tresCambiado.aforos, ['10 plazas', '6 plazas', '10 plazas']);
+  const dos = alinearAforos({ salas: '2 salas', aforos: ['10 lugares'] });
+  assert.deepEqual(dos.aforos, ['10 lugares', '10 lugares']);
+  const tresCambiado = alinearAforos({ salas: '4 o más', aforos: ['10 lugares', '6 lugares'] });
+  assert.deepEqual(tresCambiado.aforos, ['10 lugares', '6 lugares', '10 lugares']);
   assert.equal(numSalasDe({ salas: '4 o más' }), 3);
-  const una = alinearAforos({ salas: '1 sala', aforos: ['10 plazas', '6 plazas'] });
-  assert.deepEqual(una.aforos, ['10 plazas']);
+  const una = alinearAforos({ salas: '1 sala', aforos: ['10 lugares', '6 lugares'] });
+  assert.deepEqual(una.aforos, ['10 lugares']);
 });
 
 test('un borrador a medias conserva lo contestado y rellena lo que falta', () => {

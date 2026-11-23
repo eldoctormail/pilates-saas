@@ -5,7 +5,7 @@ import { estadoEvento, plazasTexto, puedeApuntarse } from './comunidad-reglas.ts
 const ahora = new Date('2026-09-04T12:00:00Z');
 const evento = (p: Partial<Parameters<typeof estadoEvento>[0]> = {}) => ({ tipo: 'EVENTO' as const, eventoFecha: '2026-09-10T18:00:00Z', eventoAforo: 10, totalAsistentes: 3, ...p });
 
-test('evento futuro con plazas → próximo', () => {
+test('evento futuro con lugares → próximo', () => {
   assert.equal(estadoEvento(evento(), ahora), 'proximo');
 });
 
@@ -27,8 +27,8 @@ test('apuntarse: solo a eventos futuros con hueco; bajarse, siempre que no haya 
   assert.equal(puedeApuntarse({ tipo: 'TEXTO', eventoFecha: null, eventoAforo: null }, false, ahora), false);
 });
 
-test('texto de plazas', () => {
-  assert.equal(plazasTexto(evento()), '3 de 10 plazas');
+test('texto de lugares', () => {
+  assert.equal(plazasTexto(evento()), '3 de 10 lugares');
   assert.equal(plazasTexto(evento({ eventoAforo: null, totalAsistentes: 1 })), '1 apuntada');
   assert.equal(plazasTexto(evento({ eventoAforo: null, totalAsistentes: 0 })), '0 apuntadas');
 });

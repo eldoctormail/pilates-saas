@@ -604,7 +604,7 @@ async function aforoApartadasDe(admin: SupabaseClient, studioId: string, sesionI
   if (sesionIds.length === 0) return [];
   const { data, error } = await admin.rpc('plazas_apartadas_de', { p_studio_id: studioId, p_sesion_ids: sesionIds });
   if (error) {
-    Sentry.captureMessage('[aforo] no se pudieron leer las plazas apartadas', {
+    Sentry.captureMessage('[aforo] no se pudieron leer los lugares apartados', {
       level: 'warning', tags: { area: 'plataformas' }, extra: { studioId, error: error.message }, fingerprint: ['aforo-apartadas'],
     });
     return [];
@@ -4198,7 +4198,7 @@ export async function ofrecerPlazaLibre(params: {
     admin.rpc('plazas_apartadas', { p_sesion_id: params.sesionId }),
   ]);
   if (apartadasRes.error) {
-    reportDbError('[ofrecerPlazaLibre] no se pudieron leer las plazas apartadas', apartadasRes.error);
+    reportDbError('[ofrecerPlazaLibre] no se pudieron leer los lugares apartados', apartadasRes.error);
     return { error: 'No se ha podido comprobar el aforo de esta clase' };
   }
   const apartadas = typeof apartadasRes.data === 'number' ? apartadasRes.data : 0;
@@ -4209,7 +4209,7 @@ export async function ofrecerPlazaLibre(params: {
     return { error: 'No hay ningún hueco libre en esta clase ahora mismo' };
   }
   if (limite != null && (confirmadas ?? 0) + apartadas >= limite) {
-    return { error: 'Las plazas que quedan están apartadas para ClassPass: se liberan si no las vende a tiempo.' };
+    return { error: 'Los lugares que quedan están apartados para ClassPass: se liberan si no los vende a tiempo.' };
   }
 
   // Mismo patrón "hereda" que el resto de reglas de reserva (heredaOverride):
@@ -4334,10 +4334,10 @@ export async function aceptarOfertaListaEspera(params: {
     }
     return {
       error: resultado === 'CONFLICTO_HORARIO'
-        ? 'Ya tienes otra clase o cita a esa misma hora: no hemos podido confirmarte esta plaza.'
+        ? 'Ya tienes otra clase o cita a esa misma hora: no hemos podido confirmarte este lugar.'
         : resultado === 'SIN_ENTITLEMENT'
-          ? 'Ya no tienes un plan o bono activo que cubra esta clase: no hemos podido confirmarte esta plaza.'
-          : 'Ya has alcanzado el máximo de clases de tu plan esta semana: no hemos podido confirmarte esta plaza.',
+          ? 'Ya no tienes un plan o bono activo que cubra esta clase: no hemos podido confirmarte este lugar.'
+          : 'Ya has alcanzado el máximo de clases de tu plan esta semana: no hemos podido confirmarte este lugar.',
     };
   }
 
@@ -4354,7 +4354,7 @@ export async function aceptarOfertaListaEspera(params: {
       p_socio_id: params.socioId,
       p_origen_reserva_id: params.reservaId,
       p_motivo: resultado === 'AFORO_LLENO'
-        ? 'La plaza se ocupó antes de aceptar la oferta'
+        ? 'El lugar se ocupó antes de aceptar la oferta'
         : resultado === 'CLASE_CANCELADA'
           ? 'El estudio canceló la clase antes de aceptar la oferta'
           : 'La clase ya había empezado al aceptar la oferta',
@@ -4372,7 +4372,7 @@ export async function aceptarOfertaListaEspera(params: {
     // recuperación no se creó (tope alcanzado), no se le promete.
     const compensada = creada === 'CREADA';
     const base = resultado === 'AFORO_LLENO'
-      ? 'La plaza se ocupó justo antes de que aceptaras.'
+      ? 'El lugar se ocupó justo antes de que aceptaras.'
       : resultado === 'CLASE_CANCELADA'
         ? 'El estudio canceló esta clase.'
         : 'La clase ya había empezado cuando aceptaste.';
@@ -4411,7 +4411,7 @@ async function promocionarEsperaTrasRechazoPropio(admin: SupabaseClient, p: { st
       ofertaExpiraEn: fila?.oferta_expira_en ?? null,
     });
   } catch (e) {
-    Sentry.captureException(e instanceof Error ? e : new Error('No se pudo ofrecer la plaza libre tras un rechazo propio'), {
+    Sentry.captureException(e instanceof Error ? e : new Error('No se pudo ofrecer el lugar libre tras un rechazo propio'), {
       level: 'error', tags: { area: 'reservas', tipo: 'lista-espera' }, extra: { sesionId: p.sesionId, studioId: p.studioId },
     });
   }
@@ -6100,7 +6100,7 @@ export async function listarPeticionesPlazaFija(admin: SupabaseClient, studioId:
       const [, m, d] = (f.vigencia_hasta_propuesta ?? '').split('-');
       // Ampliar no compite por plaza (no crea franjas nuevas): «completa» solo avisa al crear.
       const aviso = f.tipo === 'CREAR_CLASE_FIJA' && o.estado === 'COMPLETA'
-        ? 'La clase fija está completa: si la aprueba, pasa del tope de plazas.'
+        ? 'La clase fija está completa: si la aprueba, pasa del tope de lugares.'
         : o.estado === 'SIN_CLASES' ? 'Alguna de sus clases ya no está programada: no se le podrá dar.' : null;
       return [{
         id: f.id, tipo: f.tipo, socioId: f.socio_id, socia: nombreSocia.get(f.socio_id) ?? 'Un cliente',
@@ -6313,7 +6313,7 @@ export async function resolverPeticionPlazaFija(
     const franjaActual = ses?.inicio ? franjaLocalDe(ses.inicio as string) : null;
     const horaActual = franjaActual ? `${String(franjaActual.hora).padStart(2, '0')}:${String(franjaActual.minuto).padStart(2, '0')}:00` : null;
     if (!franjaActual || franjaActual.dow !== sol.dia_semana || horaActual !== normalizarHoraInicio(sol.hora_inicio ?? '')) {
-      return { error: 'La clase que pidió ya no está en ese horario: dale la plaza desde su ficha o recházala.', status: 409 };
+      return { error: 'La clase que pidió ya no está en ese horario: dale el lugar desde su ficha o recházala.', status: 409 };
     }
     // Si pidió una duración, la plaza llega hasta la fecha que se fijó AL PEDIR (la misma que se le dijo). Si ya pasó (la
     // petición esperó más que la duración), no hay nada que dar: se rechaza desde la bandeja.
@@ -6380,7 +6380,7 @@ export async function resolverPeticionPlazaFija(
     }
     if (v.accion !== 'VOLVER') {
       await reabrir('APROBADA');
-      return { error: 'Su sitio lo tiene ahora otro cliente: cámbiale el sitio desde su ficha o quítale la plaza.', status: 409 };
+      return { error: 'Su sitio lo tiene ahora otro cliente: cámbiale el sitio desde su ficha o quítale el lugar.', status: 409 };
     }
     await anotar({ resultado_plaza_id: v.plaza.id });
     await responder(`Tu clase fija de ${franja} vuelve después de tu pausa.`);

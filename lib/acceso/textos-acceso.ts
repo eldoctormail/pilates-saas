@@ -79,7 +79,7 @@ export function explicacionAcceso(motivo: MotivoVisible, d: DatosTexto): string 
     case 'SIN_RESERVA':
       return d.clase ? 'No tiene una reserva para esta clase.' : 'No tiene reserva en ninguna de las clases de ahora.';
     case 'RESERVA_CANCELADA': return 'Esta reserva fue cancelada.';
-    case 'LISTA_ESPERA': return 'Está en lista de espera: no tiene plaza en esta clase.';
+    case 'LISTA_ESPERA': return 'Está en lista de espera: no tiene lugar en esta clase.';
     case 'NO_ASISTIO': return 'Su reserva está marcada como que no vino. Si ha venido, corrígelo en la lista de la clase.';
     case 'RESERVA_OTRA_CLASE':
       return d.otraClase ? `Su reserva es para otra clase: ${donde(d.otraClase)}.` : 'Su reserva es para otra clase.';
@@ -133,7 +133,7 @@ export const MOTIVO_CORTO: Record<MotivoAcceso, string> = {
   QR_NO_RECONOCIDO: 'QR no reconocido',
   QR_SUSTITUIDO: 'QR ya sustituido',
   QR_OTRO_ESTUDIO: 'QR de otro estudio',
-  APROBADA_SIN_PLAZA: 'Aprobada, sin plaza libre',
+  APROBADA_SIN_PLAZA: 'Aprobada, sin lugar libre',
   CLASE_YA_EMPEZADA: 'No se pudo aprobar: clase empezada',
   NO_PERMITIDO: 'No se le dejó pasar',
 };

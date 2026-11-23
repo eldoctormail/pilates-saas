@@ -1396,7 +1396,7 @@ function SlotRowImpl({ t, slot, onOpen }: { t: ModoTokens; slot: ReservaSlot; on
       aria-label={`${slot.claseNombre} a las ${fmtHora(slot.inicio)}${slot.instructorNombre ? `, con ${slot.instructorNombre}` : ''}, ${
         slot.miEstado === 'CONFIRMADA' ? 'ya la tienes reservada'
         : slot.miEstado === 'LISTA_ESPERA' ? 'estás en lista de espera'
-        : lleno ? 'completa' : `${libres} plazas`}`}
+        : lleno ? 'completa' : `${libres} lugares`}`}
       style={{
         display: 'flex', width: '100%', textAlign: 'left', cursor: 'pointer', border: 'none', background: 'transparent',
         alignItems: 'center', flexWrap: 'wrap', gap: 14, borderTop: `1px solid ${t.line}`, padding: '18px 4px',
@@ -1432,7 +1432,7 @@ function SlotRowImpl({ t, slot, onOpen }: { t: ModoTokens; slot: ReservaSlot; on
           <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginTop: 8 }}>
             <span style={{ width: 6, height: 6, borderRadius: 999, background: lleno ? t.muted : capColor, flexShrink: 0 }} />
             <span style={{ fontSize: 12, fontWeight: ratio >= 0.85 && !lleno ? 700 : 500, color: lleno ? t.muted : capColor, letterSpacing: '.01em' }}>
-              {lleno ? 'Completa' : ratio >= 0.85 ? `¡${etiquetaOcupacion(ratio).toLowerCase()}!` : `${libres} ${libres === 1 ? 'plaza libre' : 'plazas libres'}`}
+              {lleno ? 'Completa' : ratio >= 0.85 ? `¡${etiquetaOcupacion(ratio).toLowerCase()}!` : `${libres} ${libres === 1 ? 'lugar libre' : 'lugares libres'}`}
             </span>
           </div>
         )}
@@ -1503,12 +1503,12 @@ function TarjetaClaseImpl({ t, slot, onOpen, ocultarPrecio, origenTentare = '' }
   // clase donde ya estás en lista de espera dice «Completa» — NO repite «En
   // espera», que ya lo dice el CTA de al lado. Antes decía «En espera» aquí
   // también, redundante.
-  const plazasTxt = slot.miEstado === 'CONFIRMADA' ? 'Tu plaza'
+  const plazasTxt = slot.miEstado === 'CONFIRMADA' ? 'Tu lugar'
     : slot.miEstado === 'LISTA_ESPERA' ? 'Completa'
     : slot.abreEl ? etiquetaSeAbre(slot.abreEl)
     : lleno ? 'Completa'
     : libres <= 2 ? `Quedan ${libres}`
-    : `${libres} plazas libres`;
+    : `${libres} lugares libres`;
   // Solo cambia el COLOR (hereda la paleta que se ve), nunca la tarjeta:
   // `semantic.warning.text` está fijado para fondo claro y sobre la tarjeta de
   // Carbón daba 3,1:1 en un texto de 11,5 px.
@@ -1535,7 +1535,7 @@ function TarjetaClaseImpl({ t, slot, onOpen, ocultarPrecio, origenTentare = '' }
       aria-label={`${slot.claseNombre} a las ${fmtHora(slot.inicio)}${slot.instructorNombre ? `, con ${slot.instructorNombre}` : ''}, ${
         slot.miEstado === 'CONFIRMADA' ? 'ya la tienes reservada'
         : slot.miEstado === 'LISTA_ESPERA' ? 'estás en lista de espera'
-        : lleno ? 'completa' : `${libres} plazas`}`}
+        : lleno ? 'completa' : `${libres} lugares`}`}
       style={{
         display: 'flex', textAlign: 'left', cursor: 'pointer', minHeight: 116,
         background: t.surface, border: yaMia ? `1.5px solid var(--portal-brand)` : `1px solid ${t.line}`,
@@ -1838,7 +1838,7 @@ function BookingSheet({
     <>
       {errorReserva && <Banner t={t} tipo="warn" texto={errorReserva} />}
       {resultado === 'CONFIRMADA' && <Banner t={t} tipo="ok" texto="¡Reserva confirmada! Te esperamos en clase." />}
-      {resultado === 'LISTA_ESPERA' && <Banner t={t} tipo="warn" texto="Estás en lista de espera. Te avisaremos si se libera una plaza." />}
+      {resultado === 'LISTA_ESPERA' && <Banner t={t} tipo="warn" texto="Estás en lista de espera. Te avisaremos si se libera un lugar." />}
       {resultado === 'CANCELADA' && <Banner t={t} tipo="warn" texto="Reserva cancelada." />}
       {!resultado && yaReservada && <Banner t={t} tipo="ok" texto="Ya tienes esta clase reservada." />}
       {!resultado && enEspera && !hayOferta && <Banner t={t} tipo="warn" texto="Estás en lista de espera para esta clase." />}
@@ -2013,7 +2013,7 @@ function BookingSheet({
         {!resultado && hayOferta && (
           <div style={{ padding: '13px 15px', borderRadius: radioBloque, background: semantic.warning.soft }}>
             <p style={{ margin: '0 0 10px', fontSize: 13, fontWeight: 700, color: t.ink, lineHeight: 1.4 }}>
-              ¡Se ha liberado una plaza! Tienes hasta {fmtHoraOferta(slot.miOfertaExpiraEn!)} para aceptarla.
+              ¡Se ha liberado un lugar! Tienes hasta {fmtHoraOferta(slot.miOfertaExpiraEn!)} para aceptarlo.
             </p>
             <button
               type="button"
@@ -2026,7 +2026,7 @@ function BookingSheet({
                 cursor: enviando ? 'default' : 'pointer', opacity: enviando ? 0.6 : 1,
               }}
             >
-              {enviando ? 'Aceptando…' : 'Aceptar plaza'}
+              {enviando ? 'Aceptando…' : 'Aceptar lugar'}
             </button>
           </div>
         )}

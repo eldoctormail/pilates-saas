@@ -75,7 +75,7 @@ export const PASOS: readonly PasoMigracion[] = [
   { id: 'validar', numero: '09', titulo: 'Valida reservas y cobros', modo: 'manual', href: '/cobros', etiquetaHref: 'Ver cobros',
     descripcion: 'Que las reservas ya hechas están y que sabes cómo vas a cobrar a partir de ahora.' },
   { id: 'prueba', numero: '10', titulo: 'Haz una prueba de principio a fin', modo: 'manual',
-    descripcion: 'Entra como una alumna, reserva una clase y comprueba el aviso, la plaza y el bono. Antes de decirle nada a nadie.' },
+    descripcion: 'Entra como una alumna, reserva una clase y comprueba el aviso, el lugar y el bono. Antes de decirle nada a nadie.' },
   { id: 'activar', numero: '11', titulo: 'Activa Tentare como tu software principal', modo: 'manual',
     descripcion: 'Avisa a tus alumnas, cambia el enlace de reservas de tu web y deja el programa anterior en solo lectura unos días.' },
 ];

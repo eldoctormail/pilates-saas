@@ -111,7 +111,7 @@ test('⚠️ liberar_derecho solo libera una reserva CANCELADA de una clase canc
   assert.match(cuerpo, /cancelacion_clase_devuelve_bono/);
 });
 
-test('⚠️ solo se devuelve lo que ESA reserva consumió: la plaza fija y la cuota no recuperan nada', () => {
+test('⚠️ solo se devuelve lo que ESA reserva consumió: el lugar fijo y la cuota no recuperan nada', () => {
   const cuerpo = MIGRACION.slice(MIGRACION.indexOf('create or replace function public.liberar_derecho'));
   // El bono se devuelve por la RPC que sella la devolución POR RESERVA, no con un +1 suelto.
   assert.match(cuerpo, /public\.devolver_sesion_bono_por_reserva\(p_studio_id, p_reserva_id\)/);

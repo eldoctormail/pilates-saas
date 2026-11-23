@@ -51,7 +51,7 @@ export default function Contenido() {
       </p>
 
       <AyudaResultado>
-        Es la operación pensada para vacaciones y festivos. Para el caso de una sola cliente que se va de viaje,
+        Es la operación pensada para vacaciones y feriados. Para el caso de una sola cliente que se va de viaje,
         tienes algo mejor: <Link href="/ayuda/bonos/caducidad-de-un-bono" style={enlace}>pausar su plan</Link>,
         que empuja su fecha exactamente los días que estuvo parada.
       </AyudaResultado>

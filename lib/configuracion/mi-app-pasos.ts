@@ -120,7 +120,7 @@ export function pasosMiApp(d: DatosMiApp): PasoMiApp[] {
     },
     {
       id: 'inicio', orden: 5, titulo: 'Lo que enseña el inicio', peso: 'opcional',
-      porque: 'Un mensaje para todas (un cierre por festivo, un taller) y tarjetas con foto. Si no pones nada, el inicio enseña solo sus clases.',
+      porque: 'Un mensaje para todas (un cierre por feriado, un taller) y tarjetas con foto. Si no pones nada, el inicio enseña solo sus clases.',
       donde: 'El inicio, bajo su próxima clase', cuando: 'Al momento, al marcar «Que la vean»',
       estado: d.tarjetasVisibles === null ? 'Leyendo…' : conContenido ? `Se ven ${contenido.join(' y ')}` : 'Nada (el inicio enseña solo sus clases)',
       tono: conContenido ? 'hecho' : 'nada', hecho: conContenido,

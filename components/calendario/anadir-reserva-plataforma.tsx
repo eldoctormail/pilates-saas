@@ -100,7 +100,7 @@ export function AnadirReservaPlataforma({
         {enviando ? 'Apuntando…' : `Apuntar reserva de ${nombrePlataforma}`}
       </button>
       <p className="text-[10px] text-muted-foreground">
-        Ocupa una plaza de la clase. No gasta bonos ni pasa por tus cobros.
+        Ocupa un lugar de la clase. No gasta bonos ni pasa por tus cobros.
       </p>
     </form>
   );

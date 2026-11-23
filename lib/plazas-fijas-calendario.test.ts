@@ -67,7 +67,7 @@ test('en pausa sin fechas (su sitio quedó libre): de hoy en adelante, en pausa'
   assert.deepEqual(marcas(m), { '2026-06-15': 'PAUSA', '2026-06-22': 'PAUSA', '2026-06-29': 'PAUSA' });
 });
 
-test('sin clase ese día no se marca nada: festivo, clase cancelada o de otro tipo', () => {
+test('sin clase ese día no se marca nada: feriado, clase cancelada o de otro tipo', () => {
   const sesiones = [
     sesion('2026-06-01'),
     sesion('2026-06-08', { cancelada: true }),
@@ -91,7 +91,7 @@ test('dos clases fijas el mismo día: las dos, por hora', () => {
   assert.deepEqual(m.get('2026-06-01'), [{ hora: '10:00', marca: 'RESERVADA', sesionId: 'ses-2026-06-01' }, { hora: '18:30', marca: 'NO_VA', sesionId: 'ses-tarde' }]);
 });
 
-test('una plaza de baja no pinta nada', () => {
+test('un lugar de baja no pinta nada', () => {
   assert.equal(marcasDelMes('2026-06', [{ ...LUNES, estado: 'BAJA' }], SESIONES, [], HOY).size, 0);
 });
 

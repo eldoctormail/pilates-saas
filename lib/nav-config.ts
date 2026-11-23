@@ -169,7 +169,7 @@ const allSections: NavSection[] = [
       // mismo día): los oficiales de su comunidad, las fiestas locales que busca
       // la IA y qué hacer con las clases de ese día. Sin «vacaciones» en los
       // alias: varios días seguidos son «Cerrar el centro», no un festivo.
-      { href: '/festivos', label: 'Festivos', icon: PartyPopper, alias: ['dias festivos', 'fiestas locales', 'puentes', 'calendario laboral'] },
+      { href: '/festivos', label: 'Feriados', icon: PartyPopper, alias: ['festivos', 'dias feriados', 'fiestas locales', 'puentes', 'calendario laboral'] },
       // La pantalla existía pero no había forma de llegar a ella: había que
       // saberse la URL. Se llama "Traer mis datos" y no "Migración" porque nadie
       // que viene de otra app piensa en migrar, piensa en traerse lo suyo.

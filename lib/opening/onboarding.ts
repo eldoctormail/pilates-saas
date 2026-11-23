@@ -12,7 +12,7 @@ export type Punto = keyof typeof PUNTOS;
 
 export const OBJETIVOS = {
   PRIMERAS_CLIENTAS: 'Conseguir mis primeras clientes',
-  FUNDADORAS: 'Vender plazas fundadoras',
+  FUNDADORAS: 'Vender lugares fundadoras',
   LISTA_ESPERA: 'Crear una lista de espera',
   LLENAR_HORARIOS: 'Llenar mis primeros horarios',
   CONTRATAR: 'Contratar instructoras',
@@ -109,7 +109,7 @@ export function recomendar(c: ContextoRecomendaciones): Recomendacion[] {
   // (lib/opening/listo.ts): aquí solo lo que depende de lo que quiere hacer.
   if (objetivos.has('FUNDADORAS') && !c.hayEtapaFundadora) {
     out.push(c.hayPlanes
-      ? { id: 'fundadora', titulo: 'Crea tu etapa Fundadora', motivo: 'Elige el plan, las fechas y cuántas plazas vendes a ese precio.', href: '#etapas-lanzamiento' }
+      ? { id: 'fundadora', titulo: 'Crea tu etapa Fundadora', motivo: 'Elige el plan, las fechas y cuántos lugares vendes a ese precio.', href: '#etapas-lanzamiento' }
       : { id: 'plan-fundadora', titulo: 'Crea la cuota Fundadora', motivo: 'Primero el plan con su precio especial; después, su etapa aquí.', href: '/productos' });
   }
   if (objetivos.has('CONTRATAR')) {

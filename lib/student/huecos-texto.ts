@@ -10,6 +10,6 @@ import { addDias } from './formato.ts';
 export function cuerpoSinHuecosHoy(clases: ReadonlyArray<{ fecha: string; plazasLibres: number }>, hoy: string): string {
   const manana = addDias(hoy, 1);
   const n = clases.filter((c) => c.fecha === manana && c.plazasLibres > 0).length;
-  if (n > 0) return `Mañana hay ${n} ${n === 1 ? 'clase' : 'clases'} con plaza libre.`;
+  if (n > 0) return `Mañana hay ${n} ${n === 1 ? 'clase' : 'clases'} con lugar libre.`;
   return 'Mira el horario de los próximos días.';
 }

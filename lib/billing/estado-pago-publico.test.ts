@@ -130,7 +130,7 @@ test('las tres situaciones de «ya tenía una reserva» se reconocen; las demás
   assert.equal(avisoDeYaTenia(null), false);
 });
 
-test('lo que tiene ahora en la clase: plaza antes que pendiente, y pendiente antes que cola', () => {
+test('lo que tiene ahora en la clase: lugar antes que pendiente, y pendiente antes que cola', () => {
   assert.equal(reservaPreviaDe(['LISTA_ESPERA', 'CONFIRMADA']), 'confirmada');
   assert.equal(reservaPreviaDe(['ASISTIDA']), 'confirmada');
   assert.equal(reservaPreviaDe(['LISTA_ESPERA', 'PENDIENTE_APROBACION']), 'pendiente_aprobacion');
@@ -230,8 +230,8 @@ test('estado-pago: `compra` solo sale con sesión', () => {
 });
 
 // ── P06 · Fase A: el pago de una clase con su fila en pagos_clase ────────────
-test('pago de clase: manda la reserva; si no hay plaza, la fila dice compensada o reembolsada', () => {
-  assert.equal(estadoConPagoDeClase('CONFIRMADA', { estado: 'COMPENSADA', motivo: 'EN_ESPERA' }), 'confirmada', 'la promoción ya le dio plaza');
+test('pago de clase: manda la reserva; si no hay lugar, la fila dice compensada o reembolsada', () => {
+  assert.equal(estadoConPagoDeClase('CONFIRMADA', { estado: 'COMPENSADA', motivo: 'EN_ESPERA' }), 'confirmada', 'la promoción ya le dio lugar');
   assert.equal(estadoConPagoDeClase('ASISTIDA', null), 'confirmada');
   assert.equal(estadoConPagoDeClase('LISTA_ESPERA', { estado: 'COMPENSADA', motivo: 'EN_ESPERA' }), 'compensada');
   assert.equal(estadoConPagoDeClase(null, { estado: 'REEMBOLSADA', motivo: 'LLENA' }), 'reembolsada');

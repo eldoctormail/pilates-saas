@@ -163,7 +163,7 @@ function Contenido({ socio, lo, onCerrar, onHecho }: { socio: Socio; lo: string;
             </p>
           )}
           {seleccion && decision?.estado === 'LISTA_ESPERA' && (
-            <p className="text-[12.5px] text-foreground">Está llena: entra en la lista de espera, en el puesto {decision.posicionEspera}. Si se libera una plaza, se le avisa.</p>
+            <p className="text-[12.5px] text-foreground">Está llena: entra en la lista de espera, en el puesto {decision.posicionEspera}. Si se libera un lugar, se le avisa.</p>
           )}
           <div className="flex justify-end gap-2">
             <button type="button" onClick={onCerrar} disabled={enviando} className="min-h-10 rounded-xl border border-border px-4 text-sm font-semibold text-foreground hover:bg-muted disabled:opacity-50">

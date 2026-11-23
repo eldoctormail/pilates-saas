@@ -26,7 +26,7 @@ export function ocupacion(clase: { confirmadas: number; aforo: number }): Ocupac
 /** «Quedan 3 plazas», «Queda 1 plaza», «Completa». */
 export function textoPlazasLibres(o: Ocupacion): string {
   if (o.aforo > 0 && o.libres === 0) return 'Completa';
-  return o.libres === 1 ? 'Queda 1 plaza' : `Quedan ${o.libres} plazas`;
+  return o.libres === 1 ? 'Queda 1 lugar' : `Quedan ${o.libres} lugares`;
 }
 
 function horaMenos(hhmm: string, minutos: number): string {

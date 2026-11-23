@@ -26,7 +26,7 @@ test('cuenta las tardías y los plantones, con su base, y solo desde el umbral',
   assert.equal(UMBRAL_PLAZAS_VACIAS, 3);
 });
 
-test('una espera cerrada, una oferta caducada o una pendiente rechazada NO cuentan: nunca tuvo plaza', () => {
+test('una espera cerrada, una oferta caducada o una pendiente rechazada NO cuentan: nunca tuvo lugar', () => {
   // Rastreadas y sin `bono_decidido_en`: no llegaron a confirmarse, aunque el trigger les pusiera `cancelada_tardia`.
   const sinPlaza = (s: string) => tarde('ana', s, { bono_decidido_en: null });
   const filas = plazasQueDejaronVacias([sinPlaza('s1'), sinPlaza('s2'), sinPlaza('s3'), noVino('ana', 's4')]);
@@ -43,7 +43,7 @@ test('cancelar a tiempo no cuenta; la clase fija retirada y las plataformas tamp
   assert.deepEqual(filas, []);
 });
 
-test('cancelar tarde y volver a reservar la MISMA clase no es una plaza vacía; y una clase cuenta una vez', () => {
+test('cancelar tarde y volver a reservar la MISMA clase no es un lugar vacío; y una clase cuenta una vez', () => {
   const filas = plazasQueDejaronVacias([
     tarde('ana', 's1'), r({ socio_id: 'ana', sesion_id: 's1', estado: 'CONFIRMADA' }), // volvió a esa clase
     tarde('ana', 's2'), tarde('ana', 's2'), // la misma clase dos veces: una
@@ -52,12 +52,12 @@ test('cancelar tarde y volver a reservar la MISMA clase no es una plaza vacía; 
   assert.deepEqual(filas.map(f => [f.socioId, f.tarde, f.sinVenir]), [['ana', 1, 2]]);
 });
 
-test('una reserva sin rastro (importada o legada) se trata como con plaza, como en el barrido de recuperaciones', () => {
+test('una reserva sin rastro (importada o legada) se trata como con lugar, como en el barrido de recuperaciones', () => {
   const legada = (s: string) => tarde('ana', s, { bono_consumo_rastreado: null, bono_decidido_en: null });
   assert.equal(plazasQueDejaronVacias([legada('s1'), legada('s2'), legada('s3')])[0]?.tarde, 3);
 });
 
-test('orden: más plazas vacías primero, a igualdad más plantones; como mucho cinco', () => {
+test('orden: más lugares vacíos primero, a igualdad más plantones; como mucho cinco', () => {
   const muchas = ['a', 'b', 'c', 'd', 'e', 'f'].flatMap((s, i) =>
     Array.from({ length: 3 + i }, (_, k) => noVino(s, `s-${s}-${k}`)));
   const filas = plazasQueDejaronVacias([

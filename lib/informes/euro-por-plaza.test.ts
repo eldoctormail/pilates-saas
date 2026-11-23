@@ -36,7 +36,7 @@ function ejemploDelExplicador() {
   return { sesiones, reservas, recibos };
 }
 
-test('el ejemplo del explicador sale igual de la función real: 15 + 20 + 10 = 45 € entre 6 plazas = 7,50 €', () => {
+test('el ejemplo del explicador sale igual de la función real: 15 + 20 + 10 = 45 € entre 6 lugares = 7,50 €', () => {
   const { sesiones, reservas, recibos } = ejemploDelExplicador();
   const m = mapaEuroPorPlaza(sesiones, reservas, recibos, T, AHORA, tipoDePlanDe);
   assert.equal(m.celdas.length, 1);
@@ -44,15 +44,15 @@ test('el ejemplo del explicador sale igual de la función real: 15 + 20 + 10 = 4
   assert.deepEqual([c.dow, c.inicio, c.nClases, c.plazas, c.ocupadas], [2, '18:00', 4, 24, 12]);
   assert.equal(c.euroPorPlaza, 7.5);
   assert.equal(c.sesiones[0].repartido, 45);
-  assert.deepEqual(c.ejemplo, { socioId: 'ana', pagado: 60, plazasEnElPeriodo: 4, valorPlaza: 15, plazasAqui: 4 }, 'empatadas en plazas, la de id menor');
+  assert.deepEqual(c.ejemplo, { socioId: 'ana', pagado: 60, plazasEnElPeriodo: 4, valorPlaza: 15, plazasAqui: 4 }, 'empatadas en lugares, la de id menor');
 });
 
-test('cada cliente reparte lo que pagó entre TODAS sus plazas del periodo (180 € y 12 clases = 15 € cada una)', () => {
+test('cada cliente reparte lo que pagó entre TODAS sus lugares del periodo (180 € y 12 clases = 15 € cada una)', () => {
   const sesiones = [...[0, 1, 2, 3, 4, 5].map(i => sesion(`m${i}`, martes18(i))), ...[0, 1, 2, 3, 4, 5].map(i => sesion(`j${i}`, jueves10(i)))];
   const reservas = sesiones.map(s => reserva(s.id, 'ana'));
   const m = mapaEuroPorPlaza(sesiones, reservas, [recibo('ana', 180, 'sus-cuota')], T, AHORA, tipoDePlanDe);
   for (const c of m.celdas) {
-    assert.equal(c.repartido, 90, '6 plazas de 15 € en cada franja');
+    assert.equal(c.repartido, 90, '6 lugares de 15 € en cada franja');
     assert.equal(c.euroPorPlaza, 90 / 36);
   }
 });
@@ -67,7 +67,7 @@ test(`con menos de ${MIN_CLASES_CELDA} clases, sin cifra pero con su base`, () =
   assert.equal(m.total.euroPorPlaza, 30 / 18, 'el total del periodo sí lleva cifra');
 });
 
-test('ClassPass y clientes sin cobro en el periodo ocupan plaza y valen 0 €, contadas aparte', () => {
+test('ClassPass y clientes sin cobro en el periodo ocupan lugar y valen 0 €, contadas aparte', () => {
   const { sesiones, reservas, recibos } = ejemploDelExplicador();
   const mas = [...reservas, reserva('m0', null), reserva('m1', 'sin-cobro'), reserva('m2', 'sin-cobro', 'NO_ASISTIO')];
   const c = mapaEuroPorPlaza(sesiones, mas, recibos, T, AHORA, tipoDePlanDe).celdas[0];
@@ -99,7 +99,7 @@ test('la Caja, las sesiones privadas, «otros» y lo sin cliente no se reparten,
   assert.ok(Math.abs(suma - titular) < 0.01, `${suma} ≠ ${titular}`);
 });
 
-test('el cuadre cierra al céntimo con repartos que no dan exacto (100 € entre 3 plazas)', () => {
+test('el cuadre cierra al céntimo con repartos que no dan exacto (100 € entre 3 lugares)', () => {
   const sesiones = [0, 1, 2, 3, 4, 5].map(i => sesion(`m${i}`, martes18(i), 7));
   const reservas = [reserva('m0', 'ana'), reserva('m1', 'ana'), reserva('m2', 'ana'), reserva('m3', 'bea'), reserva('m4', 'bea'), reserva('m5', 'bea')];
   const recibos = [recibo('ana', 100, 'sus-cuota'), recibo('bea', 33.33, 'sus-bono'), recibo('carla', 70, 'sus-cuota')];
@@ -118,7 +118,7 @@ test('un reembolso parcial cuenta neto; un recibo devuelto por el banco, 0; fuer
   ];
   const c = mapaEuroPorPlaza(sesiones, reservas, recibos, T, AHORA, tipoDePlanDe).celdas[0];
   assert.equal(c.repartido, 40, 'solo los 40 € netos de Ana');
-  assert.equal(c.sinCobro, 8, 'Marta y Lucía: 4 + 4 plazas a 0 €');
+  assert.equal(c.sinCobro, 8, 'Marta y Lucía: 4 + 4 lugares a 0 €');
 });
 
 test('las canceladas, las que aún no han empezado y un aforo 0 sin reservas no rompen nada', () => {
@@ -130,19 +130,19 @@ test('las canceladas, las que aún no han empezado y un aforo 0 sin reservas no 
   const m = mapaEuroPorPlaza(sesiones, [reserva('c', 'ana')], [recibo('ana', 10, 'sus-bono')], T, AHORA, tipoDePlanDe);
   assert.equal(m.celdas.length, 1);
   assert.equal(m.celdas[0].nClases, 4);
-  assert.equal(m.celdas[0].euroPorPlaza, null, 'sin plazas no se divide');
+  assert.equal(m.celdas[0].euroPorPlaza, null, 'sin lugares no se divide');
   assert.equal(m.total.euroPorPlaza, null);
-  assert.equal(m.cuadre.deNoVinieron, 10, 'la cancelada no le cuenta plaza: pagó y no ocupó ninguna');
+  assert.equal(m.cuadre.deNoVinieron, 10, 'la cancelada no le cuenta lugar: pagó y no ocupó ninguna');
 });
 
-test('más reservas que aforo (o aforo 0 con reservas): cuentan las ocupadas, ni plazas libres negativas ni total inflado', () => {
+test('más reservas que aforo (o aforo 0 con reservas): cuentan las ocupadas, ni lugares libres negativas ni total inflado', () => {
   // Martes con 6 plazas y jueves con aforo 0 pero 1 reserva cada uno; Ana paga 80 € y viene a los 8.
   const sesiones = [...[0, 1, 2, 3].map(i => sesion(`m${i}`, martes18(i))), ...[0, 1, 2, 3].map(i => sesion(`j${i}`, jueves10(i), 0))];
   const m = mapaEuroPorPlaza(sesiones, sesiones.map(s => reserva(s.id, 'ana')), [recibo('ana', 80, 'sus-cuota')], T, AHORA, tipoDePlanDe);
   const jueves = m.celdas.find(c => c.dow === 4)!;
   assert.equal(jueves.plazas, 4);
   assert.equal(m.total.plazas, 28);
-  assert.equal(m.total.euroPorPlaza, 80 / 28, 'el dinero de los jueves se divide también entre sus plazas');
+  assert.equal(m.total.euroPorPlaza, 80 / 28, 'el dinero de los jueves se divide también entre sus lugares');
   // Aforo 2 con 3 reservas: 3 plazas, ocupadas al 100 %.
   const lleno = mapaEuroPorPlaza([sesion('x', martes18(0), 2)], ['a', 'b', 'c'].map(x => reserva('x', x)), [], T, AHORA, tipoDePlanDe).celdas[0];
   assert.deepEqual([lleno.plazas, lleno.ocupadas, lleno.pct], [3, 3, 100]);
@@ -198,7 +198,7 @@ test('propiedad: con cobros y reservas al azar, el cuadre cierra siempre con el 
     const c = m.cuadre;
     const suma = c.caja + c.sesionesPrivadas + c.otros + c.sinClienta + c.deNoVinieron + c.repartido;
     assert.ok(Math.abs(suma - titular) < 0.01, `caso ${caso}: ${suma} ≠ ${titular}`);
-    assert.ok(m.celdas.every(x => x.plazas >= x.ocupadas), `caso ${caso}: plazas libres negativas`);
+    assert.ok(m.celdas.every(x => x.plazas >= x.ocupadas), `caso ${caso}: lugares libres negativas`);
   }
 });
 

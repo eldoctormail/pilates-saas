@@ -85,7 +85,7 @@ test.describe('A — ?sesion= no tapa la ficha con la página genérica alrededo
 
     await page.goto(`/reservar/${SLUG}?tab=clases&sesion=ses-r`);
 
-    await expect(page.getByRole('button', { name: 'Reservar mi plaza' })).toBeVisible({ timeout: 30_000 });
+    await expect(page.getByRole('button', { name: 'Reservar mi lugar' })).toBeVisible({ timeout: 30_000 });
 
     // Antes del fix, la barra de tabs (Clases/Mis reservas/El estudio/Mi
     // cuenta) se pintaba a la vez que la ficha — `enVistaReserva` no incluía
@@ -111,7 +111,7 @@ test.describe('A — ?sesion= no tapa la ficha con la página genérica alrededo
     await page.goto(`/reservar/${SLUG}?tab=clases&sesion=ses-r&directo=1`);
 
     // Nunca se ve la ficha de invitación...
-    await expect(page.getByRole('button', { name: 'Reservar mi plaza' })).not.toBeVisible();
+    await expect(page.getByRole('button', { name: 'Reservar mi lugar' })).not.toBeVisible();
     // ...cae derecho en el flujo de acceso (esta fixture no tiene ningún plan
     // que exigir, así que el paso siguiente es 'login', no 'datos' — mismo
     // criterio que el resto de fixtures de invitada de este repo).

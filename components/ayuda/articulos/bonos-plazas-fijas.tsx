@@ -37,10 +37,10 @@ export default function Contenido() {
       <h2 style={h2}>Qué ve tu cliente</h2>
       <p>
         En su app se llama <strong>«clase fija»</strong>. Las suyas las ve en <strong>Mis clases → «Fijas»</strong>
-        (y un resumen en la primera pantalla de su app): con su día y su hora, lee que <strong>su plaza está reservada automáticamente cada semana y que no necesita reservar esa clase</strong>.
+        (y un resumen en la primera pantalla de su app): con su día y su hora, lee que <strong>su lugar está reservado automáticamente cada semana y que no necesita reservar esa clase</strong>.
         Debajo tiene sus <strong>próximas clases</strong> ya reservadas —las que el sistema le tiene apartadas—, cada una con
         un botón <strong>«No puedo asistir»</strong> que cancela solo esa semana: su clase fija sigue activa y la semana
-        siguiente vuelve a tener su plaza. Si cancela a tiempo y su cuota le limita las clases por semana, se le guarda una{' '}
+        siguiente vuelve a tener su lugar. Si cancela a tiempo y su cuota le limita las clases por semana, se le guarda una{' '}
         <Link href="/ayuda/bonos/recuperaciones" style={enlace}>recuperación</Link>.
       </p>
       <p>
@@ -98,7 +98,7 @@ export default function Contenido() {
         Las clases que ya pasaron no se tocan nunca, y cuando vuelva a tener cuota se le reservan otra vez.
       </p>
       <p>
-        La plaza se guarda como un <strong>hueco semanal</strong>, no como una lista de reservas. Al guardarla ya
+        El lugar se guarda como un <strong>hueco semanal</strong>, no como una lista de reservas. Al guardarlo ya
         se le reservan todas las clases que tienes programadas en ese horario, hasta unos seis meses por delante
         (menos las que ya empiezan dentro del plazo de cancelación: esas no se le apuntan solas, porque no podría
         cancelarlas sin coste). Después Tentare sigue reservándolas cada noche y, además, <strong>en el momento en
@@ -136,14 +136,14 @@ export default function Contenido() {
         Que pulse <strong>«No puedo asistir»</strong> en esa semana, en su tarjeta «Tu clase fija» o en «Mis clases». Solo se
         cancela esa clase; al ser clase fija no se le devuelve sesión de bono —no se le había descontado ninguna—. Si
         cancela a tiempo y su plan le limita las clases por semana, se le guarda una{' '}
-        <Link href="/ayuda/bonos/recuperaciones" style={enlace}>recuperación</Link>. La semana siguiente su plaza
+        <Link href="/ayuda/bonos/recuperaciones" style={enlace}>recuperación</Link>. La semana siguiente su lugar
         sigue ahí, y el sistema no vuelve a reservarle la que canceló.
       </p>
 
       <h2 style={h2}>Si se va de vacaciones</h2>
       <p>
-        En su ficha, pulsa <strong>pausar</strong> en la plaza y elige desde y hasta cuándo. Esas semanas no se le
-        reserva la clase, pero <strong>no pierde la plaza ni su sitio</strong>, y al acabar la pausa vuelve sola, sin
+        En su ficha, pulsa <strong>pausar</strong> en el lugar y elige desde y hasta cuándo. Esas semanas no se le
+        reserva la clase, pero <strong>no pierde el lugar ni su sitio</strong>, y al acabar la pausa vuelve sola, sin
         que tengas que acordarte de reanudarla.
       </p>
       <p>
@@ -155,7 +155,7 @@ export default function Contenido() {
         Si prefieres que durante una pausa larga <strong>su sitio quede libre</strong> para otro cliente, actívalo en
         Configuración → «Cómo reservan mis clientes» → «Si pausa su clase fija». Vale para las pausas nuevas —las que ya
         tengas puestas siguen igual— y solo suelta el sitio en pausas de más de una semana. Una semana antes de que
-        acabe, Tentare le devuelve la plaza si su sitio sigue libre y tiene cuota, o te lo pregunta en Resumen, según lo
+        acabe, Tentare le devuelve el lugar si su sitio sigue libre y tiene cuota, o te lo pregunta en Resumen, según lo
         que elijas ahí. Si le dices que no vuelva, se le quita la clase fija.
       </p>
 
@@ -173,7 +173,7 @@ export default function Contenido() {
       </p>
       <p>
         Te llega un aviso y las decides en Resumen, en «{'Una petición de clase fija espera tu respuesta'}». Si con esa
-        plaza pasaría del límite de clases por semana de su cuota, te lo decimos ahí y decides tú. Ella ve tu respuesta
+        lugar pasaría del límite de clases por semana de su cuota, te lo decimos ahí y decides tú. Ella ve tu respuesta
         en su app, con el motivo que escribas si no la apruebas.
       </p>
       <p>
@@ -187,7 +187,7 @@ export default function Contenido() {
 
       <h2 style={h2}>Quitar una clase fija</h2>
       <p>
-        Con la papelera de la plaza, en su ficha. Deja de reservarle esa clase y <strong>cancela las que ya
+        Con la papelera del lugar, en su ficha. Deja de reservarle esa clase y <strong>cancela las que ya
         tenía apuntadas</strong> en ese horario, sin penalización; si hay alguien en lista de espera, entra en su
         lugar. Las que empiezan dentro del plazo de cancelación se mantienen: esas se cancelan desde el
         calendario, con las reglas de siempre.

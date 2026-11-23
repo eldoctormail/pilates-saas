@@ -159,11 +159,11 @@ export const AYUDA_POR_PANTALLA = {
 
   // La guía es la de los cierres: «Cerrar ese día» es un cierre de un día.
   '/festivos': {
-    titulo: 'Festivos',
-    valor: 'Los festivos de tu localidad, con los locales buscados con IA, y qué hacer con las clases que caen ese día.',
+    titulo: 'Feriados',
+    valor: 'Los feriados de tu localidad, con los locales buscados con IA, y qué hacer con las clases que caen ese día.',
     resumen:
-      'Los festivos oficiales de tu comunidad ya están, sacados del boletín por la dirección de tu estudio; las fiestas locales las buscas con IA y eliges cuáles añadir. Para cada festivo con clases decides si abres o cierras.',
-    ahorra: 'Buscar cada año el calendario laboral y descubrir el día antes que tenías clases un festivo.',
+      'Los feriados oficiales de tu comunidad ya están, sacados del boletín por la dirección de tu estudio; las fiestas locales las buscas con IA y eliges cuáles añadir. Para cada feriado con clases decides si abres o cierras.',
+    ahorra: 'Buscar cada año el calendario laboral y descubrir el día antes que tenías clases un feriado.',
     destino: { categoria: 'configuracion', slug: 'cierres-del-centro' },
   },
 
@@ -233,8 +233,8 @@ export const AYUDA_POR_PANTALLA = {
   '/configuracion?tab=clases&abrir=tipos-de-clase': {
     titulo: 'Tipos de clase',
     resumen:
-      'Lo que ofreces: Reformer, Suelo, Embarazadas… con su duración y sus plazas. De aquí sale tu horario, y cada tipo puede tener sus propias reglas de reserva.',
-    ahorra: 'Repetir la duración y las plazas cada vez que programas una clase.',
+      'Lo que ofreces: Reformer, Suelo, Embarazadas… con su duración y sus lugares. De aquí sale tu horario, y cada tipo puede tener sus propias reglas de reserva.',
+    ahorra: 'Repetir la duración y los lugares cada vez que programas una clase.',
     destino: { categoria: 'reservas', slug: 'reglas-de-reserva-por-clase' },
     tutorial: { version: 1 },
   },

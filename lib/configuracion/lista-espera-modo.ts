@@ -66,7 +66,7 @@ export function valoresDeListaEspera(elegida: ListaEsperaElegida, guardado: Valo
       const texto = elegida.minutos.trim();
       const minutos = /^\d+$/.test(texto) ? Number(texto) : NaN;
       if (!Number.isSafeInteger(minutos) || minutos < 1) {
-        return { ok: false, error: 'Pon cuántos minutos tiene para aceptar la plaza: 1 o más.' };
+        return { ok: false, error: 'Pon cuántos minutos tiene para aceptar el lugar: 1 o más.' };
       }
       return { ok: true, valores: { permiteListaEspera: true, listaEsperaPlazoAceptacionMinutos: minutos } };
     }

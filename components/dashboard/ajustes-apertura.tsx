@@ -16,13 +16,13 @@ type Campo = { clave: keyof AjustesApertura; etiqueta: string; ayuda: string; su
 // Cada supuesto con la pregunta que contesta: la propietaria no piensa en
 // «umbral amarillo», piensa en «cuándo quiero que me avise».
 const CAMPOS: Campo[] = [
-  { clave: 'objetivoPreventaPct', etiqueta: 'Objetivo de preventa', ayuda: 'Qué parte de las plazas quieres tener vendida antes de abrir.', sufijo: '%', min: 1, max: 100 },
+  { clave: 'objetivoPreventaPct', etiqueta: 'Objetivo de preventa', ayuda: 'Qué parte de los lugares quieres tener vendidos antes de abrir.', sufijo: '%', min: 1, max: 100 },
   { clave: 'ventanaSemanas', etiqueta: 'Previsión', ayuda: 'Cuántas semanas hacia delante se calculan.', sufijo: 'semanas', min: 1, max: 17 },
   { clave: 'sesionesSemanaSinTope', etiqueta: 'Clases por semana de una cuota ilimitada', ayuda: 'Para las que aún no han venido nunca.', sufijo: 'por semana', min: 0.5, max: 7, paso: 0.5 },
   { clave: 'semanasBonoSinCaducidad', etiqueta: 'Un bono sin caducidad se gasta en', ayuda: 'Para repartir sus sesiones en el tiempo.', sufijo: 'semanas', min: 1, max: 52 },
   { clave: 'conversionLeadsPct', etiqueta: 'Interesadas que acaban apuntándose', ayuda: 'Solo para la línea de interesadas; no cuenta en la ocupación.', sufijo: '%', min: 0, max: 100 },
   { clave: 'umbralAmarilloPct', etiqueta: 'Avisar de que se va llenando a partir de', ayuda: 'Ocupación prevista.', sufijo: '%', min: 1, max: 99 },
-  { clave: 'umbralRojoPct', etiqueta: 'Avisar de que te quedas sin plazas a partir de', ayuda: 'Ocupación prevista.', sufijo: '%', min: 1, max: 150 },
+  { clave: 'umbralRojoPct', etiqueta: 'Avisar de que te quedas sin lugares a partir de', ayuda: 'Ocupación prevista.', sufijo: '%', min: 1, max: 150 },
 ];
 
 export function AjustesAperturaForm({ fechaApertura, ajustes, onGuardar, onCancelar }: Props) {

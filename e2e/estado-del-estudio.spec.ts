@@ -383,7 +383,7 @@ test.describe('Reservas por aprobar, dentro de la bandeja', () => {
     await tarjeta.getByRole('button', { name: /^Aprobar la reserva de María Soler/ }).click();
 
     await expect(page.getByTestId('reservas-por-aprobar')).toHaveCount(0, { timeout: 15_000 });
-    await expect(page.getByText('Reserva aprobada: tiene su plaza confirmada')).toBeVisible();
+    await expect(page.getByText('Reserva aprobada: tiene su lugar confirmado')).toBeVisible();
     expect(intentos.post).toBe(1);
     expect(intentos.cuerpos[0]).toEqual({ reservaId: 'res-pend-1', aprobar: true });
   });

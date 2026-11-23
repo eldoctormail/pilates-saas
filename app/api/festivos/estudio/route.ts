@@ -42,12 +42,12 @@ export async function GET(req: NextRequest) {
   const p = await puerta(req);
   if ('error' in p) return p.error;
   const ubicacion = await ubicacionDelEstudio(p.admin, p.sesion.studioId);
-  if (ubicacion === 'error') return NextResponse.json({ error: 'No se han podido leer tus festivos' }, { status: 500 });
+  if (ubicacion === 'error') return NextResponse.json({ error: 'No se han podido leer tus feriados' }, { status: 500 });
   const zona = zonaDeUbicacion(ubicacion);
   const hoy = hoyEnEstudio();
   const lista = await listaDelEstudio(p.admin, p.sesion.studioId, zona, hoy);
   if (lista === 'no_disponible') return NO_DISPONIBLE();
-  if (lista === 'error') return NextResponse.json({ error: 'No se han podido leer tus festivos' }, { status: 500 });
+  if (lista === 'error') return NextResponse.json({ error: 'No se han podido leer tus feriados' }, { status: 500 });
   return NextResponse.json({
     hoy,
     // Para rellenar «Tu localidad»: la ciudad de la dirección del estudio.
@@ -90,7 +90,7 @@ export async function DELETE(req: NextRequest) {
   const crudos = Array.isArray(body?.ids) ? body.ids : [];
   const ids = crudos.filter((x): x is string => typeof x === 'string' && UUID.test(x));
   if (ids.length === 0 || ids.length !== crudos.length || ids.length > MAX_POR_GUARDADO) {
-    return NextResponse.json({ error: 'Elige qué festivos quitar' }, { status: 400 });
+    return NextResponse.json({ error: 'Elige qué feriados quitar' }, { status: 400 });
   }
   const r = await quitarFestivos(p.admin, p.sesion.studioId, ids);
   if (r === 'no_disponible') return NO_DISPONIBLE();

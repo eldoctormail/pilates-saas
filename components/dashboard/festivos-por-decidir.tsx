@@ -52,7 +52,7 @@ export function FestivosPorDecidir({ onToast }: { onToast: (m: string) => void }
     const r = await listarFestivos(si ? 'todos' : 'aviso');
     setCargandoTodos(false);
     if (r) { setLista(r); setTodos(si); }
-    else setErrorTodos('No se han podido leer los festivos. Inténtalo de nuevo.');
+    else setErrorTodos('No se han podido leer los feriados. Inténtalo de nuevo.');
   }
 
   async function decidir(f: FestivoConClases, accion: 'abrir' | 'cerrar') {
@@ -90,11 +90,11 @@ export function FestivosPorDecidir({ onToast }: { onToast: (m: string) => void }
         <CalendarOff className="size-4 text-muted-foreground" aria-hidden />
         <p className="text-[13px] font-medium text-foreground">
           {/* La línea de la bandeja ya dice «decide si abres o cierras» justo encima. */}
-          {todos ? 'Todos los festivos con clases' : festivos.length === 1 ? 'Festivo con clases' : 'Festivos con clases'}
+          {todos ? 'Todos los feriados con clases' : festivos.length === 1 ? 'Feriado con clases' : 'Feriados con clases'}
         </p>
       </div>
       {festivos.length === 0 ? (
-        <p className="text-[13px] text-muted-foreground">No hay más festivos con clases en lo que queda de calendario.</p>
+        <p className="text-[13px] text-muted-foreground">No hay más feriados con clases en lo que queda de calendario.</p>
       ) : (
         <ul className="mt-2 flex flex-col gap-2">
           {festivos.map(f => (
@@ -129,15 +129,15 @@ export function FestivosPorDecidir({ onToast }: { onToast: (m: string) => void }
 
       <Button size="sm" variant="ghost" className="-ml-2 mt-1 min-h-11 px-2 text-[12px] font-medium md:min-h-7"
         disabled={cargandoTodos} aria-expanded={todos} onClick={() => void verTodos(!todos)}>
-        {cargandoTodos ? 'Cargando…' : todos ? 'Ver solo los próximos 21 días' : 'Ver todos los festivos con clases'}
+        {cargandoTodos ? 'Cargando…' : todos ? 'Ver solo los próximos 21 días' : 'Ver todos los feriados con clases'}
         <ChevronDown aria-hidden className={todos ? 'size-3.5 rotate-180' : 'size-3.5'} />
       </Button>
       {errorTodos && <p role="alert" className="text-[11px] font-medium text-destructive">{errorTodos}</p>}
 
       <p className="mt-2 text-[11px] text-muted-foreground text-pretty">
-        {zona ? `Festivos oficiales de ${zona}, según la dirección de tu estudio. ` : ''}
+        {zona ? `Feriados oficiales de ${zona}, según la dirección de tu estudio. ` : ''}
         {/* Con festivos propios guardados (módulo Festivos), los locales que añadió también cuentan. */}
-        {lista.propios ? 'Y los que has añadido en Festivos.' : 'No incluye las fiestas locales de tu municipio.'}
+        {lista.propios ? 'Y los que has añadido en Feriados.' : 'No incluye las fiestas locales de tu municipio.'}
         {corrigeDireccion
           ? <> Si la dirección no es la de tu sala, <Link href="/configuracion?tab=estudio#datos-y-contacto" className="underline underline-offset-2">corrígela</Link>.</>
           : ' Si la dirección no es la de tu sala, puede corregirla la propietaria en Configuración.'}

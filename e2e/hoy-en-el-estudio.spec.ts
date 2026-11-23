@@ -44,7 +44,7 @@ test('el día se lee de arriba abajo: hora, instructora, ocupación y estado', a
   }
 
   // Ocupación de la clase de las 14:00: 7 de 10.
-  await expect(agenda.getByText('/ 10 plazas')).toBeVisible();
+  await expect(agenda.getByText('/ 10 lugares')).toBeVisible();
   // Y el resumen ligero de la cabecera cuadra con la suma del día.
   await expect(agenda.getByText(/4 clases · 25 clientes · 3 huecos/)).toBeVisible();
 });
@@ -79,7 +79,7 @@ test('«Rellenar hueco» enseña a quién ofrecérselo antes de mandar nada', as
 
   const panel = page.getByRole('dialog', { name: /Rellenar hueco en Pilates Máquina/ });
   await expect(panel).toBeVisible();
-  await expect(panel.getByText('3 plazas disponibles')).toBeVisible();
+  await expect(panel.getByText('3 lugares disponibles')).toBeVisible();
 
   // Y enseña a QUIÉN, con la razón de cada una: las dos que tienen bono en
   // vigor y ya vinieron a esta misma clase. Nadie más.
@@ -127,11 +127,11 @@ test('avisar dice cuántas se quedaron fuera del tope, no solo cuántas salieron
   await agenda.getByRole('button', { name: 'Rellenar hueco', exact: true }).click();
 
   const panel = page.getByRole('dialog', { name: /Rellenar hueco en Pilates Máquina/ });
-  await expect(panel.getByText('1 plaza disponible')).toBeVisible();
+  await expect(panel.getByText('1 lugar disponible')).toBeVisible();
   // El tope se dice ANTES de pulsar, no solo al recibir la respuesta. La cifra
   // sale de la constante (`AVISOS_HUECO_POR_PLAZA`), no escrita a mano: es el
   // mismo número que aplica el servidor.
-  await expect(panel.getByText(/Salen como mucho 4 avisos por plaza libre/)).toBeVisible();
+  await expect(panel.getByText(/Salen como mucho 4 avisos por lugar libre/)).toBeVisible();
 
   // Doce candidatas, las que caben en el panel (MAX_CANDIDATAS) — más que el
   // tope del servidor, que es de lo que va esta prueba.

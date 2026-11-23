@@ -39,6 +39,6 @@ export async function POST(req: NextRequest) {
     if ('error' in r) return conCorsWidget(req, NextResponse.json({ error: r.error }, { status: 400 }));
     return conCorsWidget(req, NextResponse.json(r));
   } catch (err) {
-    return conCorsWidget(req, errorInterno('public/aceptar-oferta-espera:POST', err, 'No se ha podido aceptar la plaza.'));
+    return conCorsWidget(req, errorInterno('public/aceptar-oferta-espera:POST', err, 'No se ha podido aceptar el lugar.'));
   }
 }

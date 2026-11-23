@@ -32,7 +32,7 @@ test('reescribir un mensaje no pisa los umbrales de la regla', () => {
 test('las variables se sustituyen por el dato de cada cliente', () => {
   assert.equal(
     mensajeDe(regla(), 'pago_primer_aviso', { nombre: 'Pilar', importe: 75, concepto: 'Cuota mensual', dias: 3 }),
-    'Pilar, tienes un pago pendiente de 75€ (Cuota mensual) desde hace 3 días. Puedes regularizarlo fácilmente desde tu área de socia o pasando por el estudio — si ya lo has hecho, ignora este aviso. ¡Gracias!',
+    'Pilar, tienes un pago pendiente de 75 € (Cuota mensual) desde hace 3 días. Puedes regularizarlo fácilmente desde tu área de socia o pasando por el estudio — si ya lo has hecho, ignora este aviso. ¡Gracias!',
   );
 });
 

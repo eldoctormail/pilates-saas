@@ -72,14 +72,14 @@ test('el año solo cuando no es el de hoy', () => {
   assert.equal(fechaDelFestivo('2026-12-25', '2026-12-20'), 'viernes 25 de diciembre');
 });
 
-test('el cierre se guarda con el nombre del festivo', () => {
-  assert.equal(motivoDelCierre({ nombre: 'Inmaculada' }), 'Festivo: Inmaculada');
+test('el cierre se guarda con el nombre del feriado', () => {
+  assert.equal(motivoDelCierre({ nombre: 'Inmaculada' }), 'Feriado: Inmaculada');
 });
 
-test('«Abrimos igualmente» solo para un festivo de SU zona, futuro y bien escrito', () => {
+test('«Abrimos igualmente» solo para un feriado de SU zona, futuro y bien escrito', () => {
   assert.equal(festivoAbrible('MADRID', '2026-12-08', '2026-11-20')?.nombre, 'Inmaculada');
-  assert.equal(festivoAbrible('MADRID', '2026-12-09', '2026-11-20'), null, 'no es festivo');
-  assert.equal(festivoAbrible('CATALUNA', '2026-05-02', '2026-04-20'), null, 'festivo de Madrid, no de Cataluña');
+  assert.equal(festivoAbrible('MADRID', '2026-12-09', '2026-11-20'), null, 'no es feriado');
+  assert.equal(festivoAbrible('CATALUNA', '2026-05-02', '2026-04-20'), null, 'feriado de Madrid, no de Cataluña');
   assert.equal(festivoAbrible('MADRID', '2026-12-08', '2026-12-08'), null, 'hoy no');
   assert.equal(festivoAbrible('MADRID', '2026-12-08', '2026-12-09'), null, 'ya pasó');
   assert.equal(festivoAbrible(null, '2026-12-08', '2026-11-20'), null, 'sin zona');
@@ -107,7 +107,7 @@ test('sin zona, los guardados solos; «Ver todos» llega hasta el último guarda
   assert.deepEqual(festivosSinDecidir(null, v, nada, [{ fecha: '2028-05-02', nombre: 'San X' }]).map((f) => f.fecha), ['2028-05-02']);
 });
 
-test('«Abrimos igualmente» también para un festivo guardado, con SU nombre', () => {
+test('«Abrimos igualmente» también para un feriado guardado, con SU nombre', () => {
   const guardados = [{ fecha: '2026-12-09', nombre: 'Fiesta del barrio' }];
   assert.equal(festivoAbrible('MADRID', '2026-12-09', '2026-11-20', guardados)?.nombre, 'Fiesta del barrio');
   assert.equal(festivoAbrible(null, '2026-12-09', '2026-11-20', guardados)?.nombre, 'Fiesta del barrio');

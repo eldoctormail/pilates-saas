@@ -119,7 +119,7 @@ test('con avisos y nadie apuntada, lo dice en vez de callar', () => {
   assert.deepEqual(lineasDeImpacto(i), [{ tono: 'calma', texto: 'Ningún cliente está apuntada a estas clases: no se avisa a nadie.' }]);
 });
 
-test('plazas fijas: cuenta clientes (no plazas), y dice que se mueven solo si cambia hora o sala', () => {
+test('lugares fijos: cuenta clientes (no lugares), y dice que se mueven solo si cambia hora o sala', () => {
   const plazasFijas = [
     plaza('ana'), plaza('ana', { id: 'pf-ana-2' }), // dos plazas de la misma alumna = una alumna
     plaza('bea', { estado: 'PAUSADA' }),
@@ -128,13 +128,13 @@ test('plazas fijas: cuenta clientes (no plazas), y dice que se mueven solo si ca
   ];
   const hora = calcular({ edicion: { horaInicio: '13:00', horaFin: '14:00' }, plazasFijas });
   assert.equal(hora.alumnasConPlazaFija, 2);
-  assert.ok(lineasDeImpacto(hora).some(x => x.texto === '2 clientes tienen clase fija en estas clases: su plaza se mueve con la serie.'));
+  assert.ok(lineasDeImpacto(hora).some(x => x.texto === '2 clientes tienen clase fija en estas clases: su lugar se mueve con la serie.'));
 
   const aforo = calcular({ edicion: { aforoMaximo: 10 }, plazasFijas });
   assert.ok(lineasDeImpacto(aforo).some(x => x.texto === '2 clientes tienen clase fija en estas clases.'), 'sin cambio de hora ni sala no se dice que se mueva');
 });
 
-test('plaza fija con vigencia terminada antes de la serie: no cuenta', () => {
+test('lugar fijo con vigencia terminada antes de la serie: no cuenta', () => {
   const i = calcular({ plazasFijas: [plaza('ana', { vigenciaHasta: '2026-08-01' })] });
   assert.equal(i.alumnasConPlazaFija, 0);
 });
@@ -156,7 +156,7 @@ test('bajar el aforo: avisa de las clases que quedan por encima del cupo', () =>
   const reservas = ['a', 'b', 'c', 'd', 'e'].map((s, k) => res(`r${k}`, 's0', s)); // 5 confirmadas en la 1.ª
   const i = calcular({ edicion: { aforoMaximo: 4 }, reservas });
   assert.equal(i.clasesSobreAforo, 1);
-  assert.ok(lineasDeImpacto(i).some(x => x.tono === 'aviso' && x.texto === 'Con el aforo en 4, en 1 clase hay más confirmadas que plazas. No se mueven a lista de espera solas.'));
+  assert.ok(lineasDeImpacto(i).some(x => x.tono === 'aviso' && x.texto === 'Con el aforo en 4, en 1 clase hay más confirmadas que lugares. No se mueven a lista de espera solas.'));
   // Subirlo, o dejarlo igual, no avisa de nada.
   assert.equal(calcular({ edicion: { aforoMaximo: 10 }, reservas }).clasesSobreAforo, 0);
   assert.equal(calcular({ reservas }).clasesSobreAforo, 0);
@@ -202,7 +202,7 @@ test('el ejemplo del informe: 14 clases, con todo lo que conlleva', () => {
   assert.deepEqual(lineasDeImpacto(i).map(x => x.texto), [
     '57 reservas confirmadas cambian de hora.',
     'Se avisará a 5 clientes, una sola vez a cada una aunque cambien varias de sus clases.',
-    '2 clientes tienen clase fija en estas clases: su plaza se mueve con la serie.',
+    '2 clientes tienen clase fija en estas clases: su lugar se mueve con la serie.',
     '1 persona en lista de espera de estas clases (no reciben aviso).',
     '1 reserva se hizo gastando una recuperación.',
   ]);

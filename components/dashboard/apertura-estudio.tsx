@@ -43,7 +43,7 @@ const COLOR_ALERTA = {
 const RIESGO: Record<Exclude<NivelRiesgo, 'SIN_OFERTA'>, { clase: string; texto: string }> = {
   VERDE: { clase: 'text-success', texto: 'Hay sitio de sobra: buen momento para captar.' },
   AMARILLO: { clase: 'text-warning', texto: 'Se va llenando: vigila los horarios con más demanda.' },
-  ROJO: { clase: 'text-destructive', texto: 'Vas a quedarte sin plazas: publica más horarios.' },
+  ROJO: { clase: 'text-destructive', texto: 'Vas a quedarte sin lugares: publica más horarios.' },
 };
 
 function titular(d: RespuestaApertura): string {
@@ -337,11 +337,11 @@ export function AperturaEstudio({ onVisible, verEconomia = false }: { onVisible?
           <p className={`mt-0.5 text-[12px] ${RIESGO[analisis.riesgo].clase}`}>{RIESGO[analisis.riesgo].texto}</p>
           <dl className="mt-2 space-y-1 text-[12px]">
             <div className="flex justify-between gap-3">
-              <dt className="text-muted-foreground">Plazas publicadas</dt>
+              <dt className="text-muted-foreground">Lugares publicados</dt>
               <dd className="tabular-nums text-foreground">{analisis.capacidadPublicada} en {analisis.sesionesEnVentana} clases</dd>
             </div>
             <div className="flex justify-between gap-3">
-              <dt className="text-muted-foreground">Plazas que usarán tus cuotas activas</dt>
+              <dt className="text-muted-foreground">Lugares que usarán tus cuotas activas</dt>
               <dd className="tabular-nums text-foreground">{analisis.demandaComprometida}</dd>
             </div>
             {analisis.leads > 0 && (

@@ -34,7 +34,7 @@ export function resumirSobreAforo(
     if (!s || s.aforo <= 0 || n <= s.aforo) continue;
     if (s.inicioMs > ahoraMs) {
       futuras++;
-      peores.push({ exceso: n - s.aforo, frase: `${s.nombre} · ${formatoFecha(s.inicioMs)}: ${n} reservas para ${s.aforo} plazas` });
+      peores.push({ exceso: n - s.aforo, frase: `${s.nombre} · ${formatoFecha(s.inicioMs)}: ${n} reservas para ${s.aforo} lugares` });
     } else {
       pasadas++;
     }

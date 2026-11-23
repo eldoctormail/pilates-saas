@@ -24,10 +24,10 @@ test('terminada: si falta pasar lista se dice cuántas quedan por marcar', () =>
 
 test('una clase de más tarde no lleva pastilla; la que empieza pronto, sí', () => {
   assert.equal(estadoDeFicha(base(), AHORA).pastilla, null);
-  assert.equal(estadoDeFicha(base(), AHORA).cifra, '5 de 6 plazas');
+  assert.equal(estadoDeFicha(base(), AHORA).cifra, '5 de 6 lugares');
   const pronto = base({ inicio: '2026-10-01T09:00:00.000Z', fin: '2026-10-01T09:50:00.000Z', enEspera: 2 });
   assert.equal(estadoDeFicha(pronto, AHORA).pastilla?.texto, 'Empieza en 20 min');
-  assert.equal(estadoDeFicha(pronto, AHORA).cifra, '5 de 6 plazas · 2 en espera');
+  assert.equal(estadoDeFicha(pronto, AHORA).cifra, '5 de 6 lugares · 2 en espera');
 });
 
 test('sin cubrir dice en qué punto está, con el texto de su marca', () => {

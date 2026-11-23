@@ -131,7 +131,7 @@ test('la clase suelta del Calendario la vende el servidor al reservar, y se cobr
   const cobrar = cuerpoDe(cal, 'async function cobrarSueltaYAnadir(');
   const reserva = cobrar.indexOf('claseSuelta: { importeEsperado: precio }');
   const cobro = cobrar.indexOf('marcarCobrado(reserva.venta.reciboId, metodo)');
-  assert.ok(reserva > 0 && cobro > reserva, 'primero la plaza (con la venta) y después el cobro, con el método');
+  assert.ok(reserva > 0 && cobro > reserva, 'primero el lugar (con la venta) y después el cobro, con el método');
 });
 
 test('el alta ya no ofrece «Domiciliación» como método de un cobro ya hecho (un adeudo lo confirma el banco)', () => {

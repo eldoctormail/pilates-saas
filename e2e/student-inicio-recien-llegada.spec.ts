@@ -60,13 +60,13 @@ test('recién llegada en un estudio que NO exige plan: no se le dice que hace fa
   const { a, pedidas } = await montar(page, { payload: (f) => { (f.studio as Record<string, unknown>).reservaExigirPlan = false; } });
   await abrir(page);
   const tarjeta = page.getByTestId('primera-clase');
-  await expect(page.getByTestId('primera-clase-cifra')).toHaveText('En los próximos 7 días hay 2 clases con plaza.', { timeout: 45_000 });
+  await expect(page.getByTestId('primera-clase-cifra')).toHaveText('En los próximos 7 días hay 2 clases con lugar.', { timeout: 45_000 });
   await expect(tarjeta).not.toContainText('hace falta un bono');
   expect(pedidas()).toBeGreaterThan(0);
   expect(a.sinMockear()).toEqual([]);
 });
 
-test('recién llegada: bienvenida, la cifra real de clases con plaza y su primera clase', async ({ page }) => {
+test('recién llegada: bienvenida, la cifra real de clases con lugar y su primera clase', async ({ page }) => {
   const { a, pedidas } = await montar(page, { valoracionActiva: true });
   await abrir(page);
 
@@ -74,7 +74,7 @@ test('recién llegada: bienvenida, la cifra real de clases con plaza y su primer
   await expect(tarjeta).toBeVisible({ timeout: 45_000 });
   // El nombre del estudio lo siembra el servidor en E2E_TEST (no el payload del andamiaje).
   await expect(tarjeta).toContainText('Bienvenida a Tentare');
-  await expect(page.getByTestId('primera-clase-cifra')).toHaveText('En los próximos 7 días hay 2 clases con plaza.');
+  await expect(page.getByTestId('primera-clase-cifra')).toHaveText('En los próximos 7 días hay 2 clases con lugar.');
   // El andamiaje no vende clase suelta: las dos solo se reservan con bono o cuota, y la tarjeta lo dice.
   await expect(tarjeta).toContainText('Para reservarlas hace falta un bono o una cuota.');
 

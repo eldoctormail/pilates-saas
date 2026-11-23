@@ -11,7 +11,7 @@ const sinPlan: EvaluacionReserva = { puede: false, codigo: 'sin-plan' };
 const confirmada: EvaluacionReserva = { puede: true, codigo: null, estado: 'CONFIRMADA', pagador: { origen: 'ninguno' } };
 const base = { requiereAprobacion: false, conDerecho: sinPlan, paraReservar: confirmada, topes: null };
 
-test('sin derecho y con plaza: se puede cobrar', () => {
+test('sin derecho y con lugar: se puede cobrar', () => {
   assert.deepEqual(decidirPlazaAntesDeCobrar(base), { ok: true });
 });
 
@@ -92,7 +92,7 @@ test('todos los mensajes dicen que no se ha cobrado nada', () => {
   for (const [codigo, texto] of Object.entries(MENSAJES_PLAZA)) assert.match(texto, /no te hemos cobrado nada/i, codigo);
 });
 
-test('⚠️ invitada sin ficha: las plazas apartadas para ClassPass también llenan la clase (no se le cobra una plaza que no puede tener)', () => {
+test('⚠️ invitada sin ficha: los lugares apartados para ClassPass también llenan la clase (no se le cobra un lugar que no puede tener)', () => {
   const b = { requiereAprobacion: false, aforo: 4, ocupadas: 2, permiteListaEspera: true };
   assert.deepEqual(decidirPlazaInvitadaSinFicha({ ...b, apartadas: 1 }), { ok: true });
   const llena = decidirPlazaInvitadaSinFicha({ ...b, apartadas: 2, enEspera: 0 });

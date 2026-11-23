@@ -32,7 +32,7 @@ export function PrimeraClaseCard({ estudio, genero, clasesConPlaza, soloConBono,
       <h2 className="t-title" style={{ margin: 0 }}>Bienvenid{trato(genero).fin} a {estudio}</h2>
       <p className="t-body t-dim" style={{ margin: 0 }} data-testid="primera-clase-cifra">
         {clasesConPlaza > 0
-          ? `En los próximos 7 días hay ${clasesConPlaza} ${clasesConPlaza === 1 ? 'clase' : 'clases'} con plaza.`
+          ? `En los próximos 7 días hay ${clasesConPlaza} ${clasesConPlaza === 1 ? 'clase' : 'clases'} con lugar.`
           : 'Mira el horario y elige tu primera clase.'}
       </p>
       {soloConBono && (

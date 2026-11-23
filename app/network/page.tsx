@@ -259,7 +259,7 @@ export default function NetworkLandingPage() {
                   <div className="flex gap-1.5 sm:gap-2.5 items-center rounded-lg sm:rounded-2xl px-2 sm:px-3.5 py-2 sm:py-3.5" style={{ background: '#fff', border: `1px solid ${BORDE}` }}>
                     <span className="text-[8px] xs:text-[10px] sm:text-[14px]" style={{ fontFamily: MONO }}>9:00</span>
                     <span className="flex-1 text-[8px] xs:text-[10px] sm:text-[14px] font-extrabold truncate">Reformer Despertar</span>
-                    <span className="text-[7px] xs:text-[8px] sm:text-[11px] font-extrabold whitespace-nowrap" style={{ color: NW_PRODUCTO_OSCURO }}>5 plazas</span>
+                    <span className="text-[7px] xs:text-[8px] sm:text-[11px] font-extrabold whitespace-nowrap" style={{ color: NW_PRODUCTO_OSCURO }}>5 lugares</span>
                   </div>
                   <div className="flex gap-1.5 sm:gap-2.5 items-center rounded-lg sm:rounded-2xl px-2 sm:px-3.5 py-2 sm:py-3.5" style={{ background: INK, color: '#fff' }}>
                     <span className="text-[8px] xs:text-[10px] sm:text-[14px]" style={{ fontFamily: MONO }}>19:30</span>
@@ -316,7 +316,7 @@ export default function NetworkLandingPage() {
           </Reveal>
           <div className="grid gap-3 mt-[clamp(28px,4vh,44px)]" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))' }}>
             {[
-              { pie: 'Una alumna cancela', h: 'La plaza se ofrece sola a la lista de espera.' },
+              { pie: 'Una alumna cancela', h: 'El lugar se ofrece sola a la lista de espera.' },
               { pie: 'Un pago se queda pendiente', h: 'Recordatorio automático, sin conversaciones incómodas.' },
               { pie: 'Una alumna deja de venir', h: 'Te avisamos a tiempo, antes de perderla.' },
               { pie: 'Una instructora se cae', h: 'Network te propone sustituta disponible.' },
@@ -335,7 +335,7 @@ export default function NetworkLandingPage() {
         <div className="max-w-[1340px] mx-auto flex flex-wrap gap-[clamp(26px,4vw,70px)] items-center">
           <Reveal className="flex-1 min-w-[280px]">
             <h2 className="m-0 font-extrabold leading-[1.04] tracking-[-.035em] text-[clamp(30px,4.4vw,62px)]">Tu web también reserva.</h2>
-            <p className="mt-[18px] text-[clamp(15px,1.4vw,18px)] leading-[1.65] max-w-[52ch]" style={{ color: MUTED }}>El portal de reservas se incrusta en tu página: mismo horario, mismos bonos, pago incluido. Un fragmento de código y tu web vende plazas mientras das clase.</p>
+            <p className="mt-[18px] text-[clamp(15px,1.4vw,18px)] leading-[1.65] max-w-[52ch]" style={{ color: MUTED }}>El portal de reservas se incrusta en tu página: mismo horario, mismos bonos, pago incluido. Un fragmento de código y tu web vende lugares mientras das clase.</p>
           </Reveal>
           <Reveal delayMs={140} className="flex-1 min-w-[280px] max-w-[520px] rounded-[20px] overflow-hidden" style={{ background: '#fff', border: `1px solid ${BORDE}`, boxShadow: '0 30px 70px -30px rgba(20,20,15,.25)' }}>
             <div className="flex items-center gap-1.5 px-3.5 py-2.5" style={{ background: SAGE }}>
@@ -354,9 +354,9 @@ export default function NetworkLandingPage() {
               <div className="flex gap-2.5 items-center rounded-2xl px-3.5 py-2.5 mt-2" style={{ border: '1px solid #ECEAE0' }}>
                 <span className="text-[12px]" style={{ fontFamily: MONO }}>19:30</span>
                 <span className="flex-1 text-[12.5px] font-extrabold">Yoga Flow</span>
-                <span className="text-[10px] font-extrabold" style={{ color: NW_PRODUCTO_OSCURO }}>7 plazas</span>
+                <span className="text-[10px] font-extrabold" style={{ color: NW_PRODUCTO_OSCURO }}>7 lugares</span>
               </div>
-              <span className="block text-center rounded-full py-3 text-[13px] font-extrabold mt-3" style={{ background: INK, color: PAPEL }}>Reservar plaza</span>
+              <span className="block text-center rounded-full py-3 text-[13px] font-extrabold mt-3" style={{ background: INK, color: PAPEL }}>Reservar lugar</span>
             </div>
           </Reveal>
         </div>
@@ -370,7 +370,7 @@ export default function NetworkLandingPage() {
           </Reveal>
           <div className="flex justify-start sm:justify-end mt-[clamp(30px,5vh,56px)]">
             <Reveal className="max-w-[560px]">
-              <p className="m-0 text-[clamp(15px,1.4vw,18px)] leading-[1.7]" style={{ color: 'rgba(250,249,245,.85)' }}>Horario en el bolsillo, plaza y cama elegidas en tres toques, bono siempre a la vista y lista de espera que avisa sola. Y si una clase se llena, la app ofrece la siguiente.</p>
+              <p className="m-0 text-[clamp(15px,1.4vw,18px)] leading-[1.7]" style={{ color: 'rgba(250,249,245,.85)' }}>Horario en el bolsillo, lugar y cama elegidas en tres toques, bono siempre a la vista y lista de espera que avisa sola. Y si una clase se llena, la app ofrece la siguiente.</p>
             </Reveal>
           </div>
         </div>

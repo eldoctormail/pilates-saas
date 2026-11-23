@@ -69,12 +69,12 @@ test.describe('Calendario · Repetir este mes', () => {
     }
   });
 
-  test('propone el mes siguiente: festivo y «no renovar» sin marcar; desmarcar días baja el recuento y se manda solo lo marcado', async ({ page }) => {
+  test('propone el mes siguiente: feriado y «no renovar» sin marcar; desmarcar días baja el recuento y se manda solo lo marcado', async ({ page }) => {
     const cuenta = await abrirCalendario(page);
     await boton(page).click();
     const dialogo = page.getByTestId('confirmar-fechas');
     await expect(dialogo.getByText(/Las clases sueltas no se copian \(en \p{L}+ hay 4\)/u)).toBeVisible({ timeout: 60_000 });
-    await expect(dialogo.getByText('Los festivos de la Comunidad de Madrid vienen sin marcar; los locales de tu ciudad, no: revisa esos días.')).toBeVisible();
+    await expect(dialogo.getByText('Los feriados de la Comunidad de Madrid vienen sin marcar; los locales de tu ciudad, no: revisa esos días.')).toBeVisible();
 
     // La serie en «no renovar» viene sin marcar, con su motivo.
     const filas = dialogo.getByTestId('repetir-serie');
@@ -84,7 +84,7 @@ test.describe('Calendario · Repetir este mes', () => {
 
     // El festivo, sin marcar y con su etiqueta. 4 + 3 creables, menos el festivo = 6.
     const festivo = dialogo.locator(`[data-fecha="${d(8)}"]`);
-    await expect(festivo.getByText('Festivo en la Comunidad de Madrid: Fiesta de prueba')).toBeVisible();
+    await expect(festivo.getByText('Feriado en la Comunidad de Madrid: Fiesta de prueba')).toBeVisible();
     await expect(festivo.getByRole('checkbox')).not.toBeChecked();
     const crear = dialogo.getByTestId('confirmar-fechas-crear');
     await expect(crear).toHaveText('Crear 6 clases');

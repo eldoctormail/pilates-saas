@@ -23,7 +23,7 @@ test('frecuencia: alta, media y baja', () => {
   assert.equal(frecuenciaDe(undefined), null);
 });
 
-test('los planes que más se venden caen donde toca: clase fija semanal con un festivo y bono de 8 al mes', () => {
+test('los planes que más se venden caen donde toca: clase fija semanal con un feriado y bono de 8 al mes', () => {
   // 1 por semana durante 12 semanas completas, faltando una (festivo): 11/12 = 0,92.
   const fija = Array.from({ length: 12 }, (_, i) => i + 1).filter(s => s !== 5).map(s => clase(dia(s)));
   const uFija = usoDe(fija, AHORA);

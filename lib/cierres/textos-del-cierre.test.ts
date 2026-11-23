@@ -11,7 +11,7 @@ test('«Cerrar el centro» dice lo mismo que antes, letra a letra', () => {
   assert.match(consecuenciasDelCierre({ cuando: 'Del 3', dias: 1, devuelveSesion: false }), /, sin devolverle la sesión, .* duran 1 día más\.$/);
 });
 
-test('un festivo: con sus clases contadas y sin la nota de solapes', () => {
+test('un feriado: con sus clases contadas y sin la nota de solapes', () => {
   assert.equal(
     consecuenciasDelCierre({ cuando: 'El martes 8 de diciembre', dias: 1, devuelveSesion: true, clases: 6 }),
     'El martes 8 de diciembre nadie podrá reservar. Se cancelan sus 6 clases avisando a quien tenía reserva, que recupera la sesión del bono, '

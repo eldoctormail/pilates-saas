@@ -180,7 +180,7 @@ test('anular reintenta el recibo una vez; si sigue sin poder, lo avisa y no dice
   }, { update: { recibos: 2 } });
   assert.equal(await anularVentaClaseSuelta(dos.admin, ANULAR, m => avisos.push(m)), 'fallo');
   assert.equal(dos.tablas.recibos[0].estado, 'PENDIENTE');
-  assert.equal(avisos.length, 1, 'un recibo pendiente sin plaza tiene que verse');
+  assert.equal(avisos.length, 1, 'un recibo pendiente sin lugar tiene que verse');
 });
 
 test('anular nunca toca un recibo cobrado, y lo avisa', async () => {

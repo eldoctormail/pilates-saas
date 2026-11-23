@@ -351,7 +351,7 @@ export default function HoyInstructoraPage() {
                 <Cifra valor={String(semana.clases)} texto={semana.clases === 1 ? 'clase' : 'clases'}
                   detalle={semana.clases > 0 && semana.quedan < semana.clases ? `quedan ${semana.quedan}` : undefined} />
                 <Cifra {...cifraDuracion(semana.minutos)} separador />
-                <Cifra valor={String(semana.plazasOcupadas)} texto={semana.plazasOcupadas === 1 ? 'plaza ocupada' : 'plazas ocupadas'} separador />
+                <Cifra valor={String(semana.plazasOcupadas)} texto={semana.plazasOcupadas === 1 ? 'lugar ocupado' : 'lugares ocupados'} separador />
               </div>
             </section>
 

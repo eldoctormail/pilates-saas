@@ -2,8 +2,8 @@ import type { Disponibilidad } from '@/lib/student/tipos';
 const MAP: Record<Disponibilidad, { cls: string; txt: (n: number) => string; pulse?: boolean }> = {
   // «N plazas» y «1 plaza», como en la maqueta de oct-2026 (copia exacta, fundador 19-oct): el tono avisa de que quedan
   // pocas, sin frase más larga que parta la fila.
-  disponible: { cls: 'badge--ok', txt: (n) => (n === 1 ? '1 plaza' : n + ' plazas') },
-  pocas: { cls: 'badge--few', txt: (n) => (n === 1 ? '1 plaza' : n + ' plazas') },
+  disponible: { cls: 'badge--ok', txt: (n) => (n === 1 ? '1 lugar' : n + ' lugares') },
+  pocas: { cls: 'badge--few', txt: (n) => (n === 1 ? '1 lugar' : n + ' lugares') },
   completa: { cls: 'badge--full', txt: () => 'Completa · lista' },
   'no-disponible': { cls: 'badge--neutral', txt: () => 'Completa' },
   'lista-espera': { cls: 'badge--wait', txt: () => 'En lista de espera' },

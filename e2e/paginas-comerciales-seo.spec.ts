@@ -56,7 +56,7 @@ test('la comparativa no se sale de la pantalla en el móvil', async ({ page }) =
   expect(ancho).toBeLessThanOrEqual(390);
 });
 
-test('la calculadora de plazas vacías responde a los números', async ({ page }) => {
+test('la calculadora de lugares vacíos responde a los números', async ({ page }) => {
   await page.goto('/soluciones/estudio-de-pilates-reformer', { waitUntil: 'domcontentloaded' });
   const calc = page.getByRole('group', { name: /los números de partida son un ejemplo/i });
   // Ejemplo de partida: 8 reformers, 30 clases, 80 % y 18,75 € → 3.900 € al mes.

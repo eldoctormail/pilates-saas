@@ -12,7 +12,7 @@ test('permite ajustar en el límite exacto (confirmadas === capacidad)', () => {
   assert.equal(puedeAjustarAforoASalaCapacidad(8, 8), true);
 });
 
-test('bloquea si dejaría a algún cliente confirmado sin plaza', () => {
+test('bloquea si dejaría a algún cliente confirmado sin lugar', () => {
   assert.equal(puedeAjustarAforoASalaCapacidad(10, 8), false);
 });
 

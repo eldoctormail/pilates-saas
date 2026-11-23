@@ -6,11 +6,11 @@ const AHORA = Date.parse('2026-10-09T10:00:00Z');
 const fmt = (ms: number) => new Date(ms).toISOString().slice(0, 16);
 const ses = (aforo: number, inicio: string, nombre = 'Mat'): SesionAforo => ({ aforo, inicioMs: Date.parse(inicio), nombre });
 
-test('una clase futura con 16 reservas para 12 plazas se cuenta y se describe', () => {
+test('una clase futura con 16 reservas para 12 lugares se cuenta y se describe', () => {
   const r = resumirSobreAforo(new Map([['a', 16]]), new Map([['a', ses(12, '2026-10-12T06:00:00Z', 'Mat Suave')]]), new Set(['a']), AHORA, fmt);
   assert.equal(r.futuras, 1);
   assert.equal(r.pasadas, 0);
-  assert.deepEqual(r.detalle, ['Mat Suave · 2026-10-12T06:00: 16 reservas para 12 plazas']);
+  assert.deepEqual(r.detalle, ['Mat Suave · 2026-10-12T06:00: 16 reservas para 12 lugares']);
 });
 
 test('una clase pasada por encima del aforo es historial: se cuenta aparte y no sale en el detalle', () => {

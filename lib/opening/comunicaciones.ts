@@ -78,10 +78,10 @@ const fechaLarga = (f: string) => new Intl.DateTimeFormat(LOCALE, { day: 'numeri
 /** A las interesadas: la venta de esta etapa está abierta. */
 export function borradorVentaEtapa(e: Pick<EtapaVista, 'etapa' | 'planNombre' | 'hasta' | 'limitePlazas'>, nombreEstudio: string, enlaceApp: string): BorradorMensajeria {
   const nombre = NOMBRE_ETAPA[e.etapa];
-  const plazas = e.limitePlazas !== null ? ` Hay ${e.limitePlazas} plazas.` : '';
+  const plazas = e.limitePlazas !== null ? ` Hay ${e.limitePlazas} lugares.` : '';
   return {
     segmento: 'ETAPA:INTERESADA',
-    asunto: `${nombreEstudio}: ya puedes conseguir tu plaza ${nombre.toLowerCase()}`,
+    asunto: `${nombreEstudio}: ya puedes conseguir tu lugar ${nombre.toLowerCase()}`,
     mensaje: `Hola:\n\nYa está abierta la etapa ${nombre}${e.planNombre ? ` con «${e.planNombre}»` : ''}, hasta el ${fechaLarga(e.hasta)}.${plazas}\n\nPuedes hacerte con la tuya aquí: ${enlaceApp}\n\nTe esperamos.`,
   };
 }
@@ -89,7 +89,7 @@ export function borradorVentaEtapa(e: Pick<EtapaVista, 'etapa' | 'planNombre' | 
 /** A las interesadas: la etapa se acaba y quedan plazas. */
 export function borradorFinEtapa(e: Pick<EtapaVista, 'etapa' | 'planNombre' | 'hasta' | 'limitePlazas' | 'ventas'>, nombreEstudio: string, enlaceApp: string): BorradorMensajeria {
   const nombre = NOMBRE_ETAPA[e.etapa];
-  const quedan = e.limitePlazas !== null ? ` Quedan ${Math.max(0, e.limitePlazas - e.ventas)} plazas.` : '';
+  const quedan = e.limitePlazas !== null ? ` Quedan ${Math.max(0, e.limitePlazas - e.ventas)} lugares.` : '';
   return {
     segmento: 'ETAPA:INTERESADA',
     asunto: `${nombreEstudio}: la etapa ${nombre} termina el ${fechaLarga(e.hasta)}`,

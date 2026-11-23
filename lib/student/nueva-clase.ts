@@ -60,7 +60,7 @@ export function horaFinNuevaClase(hora: string, duracionMin: number): string | n
 
 export function resumenNuevaClase(p: { duracionMin: number; horaFin: string | null; aforo: number }): string {
   if (!p.horaFin) return 'Terminaría pasada la medianoche: elige una hora antes.';
-  return `${p.duracionMin} min · termina a las ${p.horaFin} · ${p.aforo} ${p.aforo === 1 ? 'plaza' : 'plazas'}`;
+  return `${p.duracionMin} min · termina a las ${p.horaFin} · ${p.aforo} ${p.aforo === 1 ? 'lugar' : 'lugares'}`;
 }
 
 /**

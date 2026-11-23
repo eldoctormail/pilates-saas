@@ -34,7 +34,7 @@ test('la localidad escrita da su comunidad (para avisar si no es la de la direcc
   assert.equal(zonaDeLocalidad(''), null);
 });
 
-test('nacional si es festivo en todas las comunidades ese año; si no, de la comunidad', () => {
+test('nacional si es feriado en todas las comunidades ese año; si no, de la comunidad', () => {
   assert.equal(ambitoOficial('MADRID', '2026-12-25'), 'nacional');
   assert.equal(ambitoOficial('CATALUNA', '2026-04-03'), 'nacional'); // Viernes Santo
   assert.equal(ambitoOficial('MADRID', '2026-04-02'), 'autonomico'); // Jueves Santo: Cataluña no lo tiene
@@ -111,7 +111,7 @@ test('la IA no puede colar más de lo razonable', () => {
 // La comunidad de la dirección (lo que la lista ya trae) y la de lo buscado.
 const EN = (zonaLista: 'MADRID' | 'CATALUNA' | null, zonaBusqueda: 'MADRID' | 'CATALUNA' | null = zonaLista) => ({ zonaLista, zonaBusqueda, hoy: HOY });
 
-test('la búsqueda enseña TODOS los festivos: Año Nuevo, Reyes y Navidad, también sin comunidad conocida', () => {
+test('la búsqueda enseña TODOS los feriados: Año Nuevo, Reyes y Navidad, también sin comunidad conocida', () => {
   const madrid = oficialesDeBusqueda('MADRID', HOY, '2027-12-31');
   for (const f of ['2026-12-25', '2027-01-01', '2027-01-06', '2027-12-25']) assert.ok(madrid.some((x) => x.fecha === f), f);
   // Sin comunidad: los nacionales comunes, del código, nunca de la IA.
@@ -143,7 +143,7 @@ test('guardar: lo que ya está en la lista se salta (a mano, se dice)', () => {
   const ya = prepararParaGuardar([{ fecha: '2026-12-08', nombre: 'Inmaculada', origen: 'oficial' }], EN('MADRID'));
   assert.deepEqual(ya, { ok: true, filas: [], omitidos: 1 });
   const pisa = prepararParaGuardar([{ fecha: '2026-12-08', nombre: 'Mi puente', origen: 'manual' }], EN('MADRID'));
-  assert.deepEqual(pisa, { ok: false, error: 'Ese día ya es festivo oficial: ya está en tu lista.' });
+  assert.deepEqual(pisa, { ok: false, error: 'Ese día ya es feriado oficial: ya está en tu lista.' });
 });
 
 test('guardar un oficial: comprobado contra el calendario del código y con el nombre del boletín', () => {
@@ -226,8 +226,8 @@ test('la vista: por año, en orden, con buscador sin tildes y ocultando lo pasad
 test('la hoja de calendario y los textos', () => {
   assert.deepEqual(hojaDeCalendario('2026-11-01'), { mes: 'NOV', dia: '01', semana: 'Domingo' });
   assert.equal(textoAnadir(0), 'Marca los que quieras añadir');
-  assert.equal(textoAnadir(1), 'Añadir 1 festivo');
-  assert.equal(textoAnadir(14), 'Añadir 14 festivos');
+  assert.equal(textoAnadir(1), 'Añadir 1 feriado');
+  assert.equal(textoAnadir(14), 'Añadir 14 feriados');
   assert.equal(dominioDe('https://www.barcelona.cat/a?b=c'), 'barcelona.cat');
   assert.equal(urlSegura('http://inseguro.es'), null);
   assert.equal(urlSegura('https://user:pass@x.es'), null);

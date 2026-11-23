@@ -125,7 +125,7 @@ export function EtapasLanzamiento({ onCambio }: { onCambio?: () => void }) {
         <p className="mt-1 text-[12px] leading-snug text-muted-foreground">
           {planes.length === 0
             ? <>Crea primero el plan que quieres vender (por ejemplo, una cuota Fundadora a precio especial) en <Link href="/productos" className="text-brand-secondary hover:underline">Paquetes</Link>.</>
-            : 'Vende las primeras plazas a un precio especial y con fecha límite, por ejemplo una cuota Fundadora.'}
+            : 'Vende los primeros lugares a un precio especial y con fecha límite, por ejemplo una cuota Fundadora.'}
         </p>
       )}
 
@@ -199,7 +199,7 @@ export function EtapasLanzamiento({ onCambio }: { onCambio?: () => void }) {
           <label className="text-[11.5px] text-muted-foreground">Hasta (incluido)
             <input required type="date" value={form.hasta} min={form.desde || undefined} onChange={ev => setForm({ ...form, hasta: ev.target.value })} className={campo} />
           </label>
-          <label className="text-[11.5px] text-muted-foreground">Plazas (vacío = sin límite)
+          <label className="text-[11.5px] text-muted-foreground">Lugares (vacío = sin límite)
             <input type="number" min={1} inputMode="numeric" value={form.limitePlazas} onChange={ev => setForm({ ...form, limitePlazas: ev.target.value })} className={campo} />
           </label>
           <fieldset className="text-[11.5px] text-muted-foreground">
@@ -219,7 +219,7 @@ export function EtapasLanzamiento({ onCambio }: { onCambio?: () => void }) {
           </fieldset>
           {form.alCompletar === 'CERRAR' && (
             <p className="text-[11px] leading-snug text-muted-foreground sm:col-span-2">
-              Nunca se venden más plazas de las que pongas: mientras alguien paga, su plaza queda apartada. Al llenarse, el plan deja de venderse en tu web, en la app y en el mostrador; las cuotas ya vendidas siguen igual.
+              Nunca se venden más lugares de las que pongas: mientras alguien paga, su lugar queda apartado. Al llenarse, el plan deja de venderse en tu web, en la app y en el mostrador; las cuotas ya vendidas siguen igual.
             </p>
           )}
           <div className="flex items-center gap-2 sm:col-span-2">

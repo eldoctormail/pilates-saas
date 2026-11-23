@@ -37,7 +37,7 @@ test.describe('Próximas clases', () => {
     await expect(s.getByText('de 60 min · faltan 28')).toBeVisible();
 
     // 5 de 6, del mismo endpoint y el mismo resumen que la agenda de arriba.
-    await expect(s.getByText('/ 6 plazas')).toBeVisible();
+    await expect(s.getByText('/ 6 lugares')).toBeVisible();
 
     await page.clock.fastForward('00:07');
     await expect(crono).toHaveText('32:08');

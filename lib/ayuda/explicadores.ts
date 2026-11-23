@@ -14,6 +14,7 @@
 // las sedes de una cadena), con el mismo almacén que los tutoriales.
 // Puro, sin `@/`.
 // ─────────────────────────────────────────────────────────────────────────────
+import { conMoneda, MONEDA_SIMBOLO } from '../moneda.ts';
 
 export type IdExplicador = 'euroPorPlaza';
 export type IdDibujo = 'repartoAlumna' | 'sumaHora' | 'sillas' | 'dosSalas' | 'leerMapa';
@@ -38,40 +39,40 @@ export interface Explicador {
 export const EXPLICADORES: Record<IdExplicador, Explicador> = {
   euroPorPlaza: {
     version: 1,
-    titulo: '¿Qué es el € por plaza?',
+    titulo: `¿Qué es el ${MONEDA_SIMBOLO} por lugar?`,
     pasos: [
       {
         titulo: 'Cada cliente reparte lo que pagó entre sus clases',
         dibujo: 'repartoAlumna',
         lineas: [
-          'Ana pagó 60 € en el periodo y vino 4 veces: cada clase suya aporta 15 €.',
-          'Marta compró en el periodo un bono de 80 € y vino 4 veces: 20 € cada una.',
-          'Quien viene con un bono comprado antes ocupa su plaza, pero aquí aporta 0 €.',
+          `Ana pagó ${conMoneda('60')} en el periodo y vino 4 veces: cada clase suya aporta ${conMoneda('15')}.`,
+          `Marta compró en el periodo un bono de ${conMoneda('80')} y vino 4 veces: ${conMoneda('20')} cada una.`,
+          `Quien viene con un bono comprado antes ocupa su lugar, pero aquí aporta ${conMoneda('0')}.`,
         ],
       },
       {
         titulo: 'Se suma lo que aporta cada hora',
         dibujo: 'sumaHora',
         lineas: [
-          'El martes a las 18:00 vinieron Ana (15 €), Marta (20 €) y Lucía (10 €): 45 €.',
+          `El martes a las 18:00 vinieron Ana (${conMoneda('15')}), Marta (${conMoneda('20')}) y Lucía (${conMoneda('10')}): ${conMoneda('45')}.`,
           'Y así con todas las clases de esa hora en el periodo: se suma lo de cada una.',
         ],
       },
       {
-        titulo: 'Se divide entre todas las plazas, también las vacías',
+        titulo: 'Se divide entre todos los lugares, también los vacíos',
         dibujo: 'sillas',
         lineas: [
-          'Si en el periodo solo hubo esa clase, con 6 plazas: 45 € ÷ 6 = 7,50 € por plaza. Con más clases, se suman sus plazas.',
-          'Una plaza vacía cuenta igual: la pusiste a la venta. Llenarla sube el € por plaza; tener menos a la venta, también.',
+          `Si en el periodo solo hubo esa clase, con 6 lugares: ${conMoneda('45')} ÷ 6 = ${conMoneda('7,50')} por lugar. Con más clases, se suman sus lugares.`,
+          `Un lugar vacío cuenta igual: la pusiste a la venta. Llenarla sube el ${MONEDA_SIMBOLO} por lugar; tener menos a la venta, también.`,
         ],
       },
       {
         titulo: 'Por qué no basta con la ocupación',
         dibujo: 'dosSalas',
         lineas: [
-          'Un Reformer de 4 plazas lleno (100 %), con clientes de cuota que vienen mucho: 4 × 5 € = 20 €, 5 € por plaza.',
-          'Un Mat de 10 plazas con 7 clientes (70 %) de bono: 7 × 10 € = 70 €, 7 € por plaza.',
-          'Mirando solo el porcentaje, parecería mejor la que menos trae por plaza.',
+          `Un Reformer de 4 lugares lleno (100 %), con clientes de cuota que vienen mucho: 4 × ${conMoneda('5')} = ${conMoneda('20')}, ${conMoneda('5')} por lugar.`,
+          `Un Mat de 10 lugares con 7 clientes (70 %) de bono: 7 × ${conMoneda('10')} = ${conMoneda('70')}, ${conMoneda('7')} por lugar.`,
+          'Mirando solo el porcentaje, parecería mejor la que menos trae por lugar.',
         ],
       },
       {
@@ -79,16 +80,16 @@ export const EXPLICADORES: Record<IdExplicador, Explicador> = {
         dibujo: 'leerMapa',
         lineas: [
           'Cada casilla es un día y una hora. No resta lo que te cuesta dar cada clase.',
-          'Cuanto más marcada la casilla, más € por plaza que tus otras horas: no hay un número bueno en general.',
+          `Cuanto más marcada la casilla, más ${MONEDA_SIMBOLO} por lugar que tus otras horas: no hay un número bueno en general.`,
           '«—» son menos de 4 clases: muy pocas para fiarse. Cada casilla abre su cálculo.',
-          'Se lee mejor con un trimestre ya cerrado: un bono pagado antes cuenta 0 €, uno comprado al final carga su precio entero en sus pocas clases, y un festivo pesa menos.',
+          `Se lee mejor con un trimestre ya cerrado: un bono pagado antes cuenta ${conMoneda('0')}, uno comprado al final carga su precio entero en sus pocas clases, y un feriado pesa menos.`,
         ],
       },
     ],
     recetas: [
       'Cuota, bono o clase suelta = lo que pagó en el periodo ÷ sus clases.',
-      'ClassPass, Wellhub o USC = 0 €, pero ocupa plaza.',
-      'Faltó sin avisar = cuenta: ocupó la plaza.',
+      `ClassPass, Wellhub o USC = ${conMoneda('0')}, pero ocupa lugar.`,
+      'Faltó sin avisar = cuenta: ocupó el lugar.',
       'Caja, sesiones privadas, matrículas y pagos importados = no se reparten.',
     ],
     dondeVive: 'Informes, con un mes, un trimestre o un año ya cerrados.',

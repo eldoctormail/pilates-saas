@@ -102,7 +102,7 @@ test.describe('Apertura del estudio en la home', () => {
       trasGuardar: {
         visible: true, fechaApertura: '2026-10-15', diasHastaApertura: 14, fase: null, analisis: ANALISIS, supuestos: SUPUESTOS,
         onboarding: { completado: true, puntos: ['LOCAL'], objetivos: ['FUNDADORAS'], fechaAproximada: false },
-        recomendaciones: [{ id: 'fundadora', titulo: 'Crea tu etapa Fundadora', motivo: 'Elige el plan, las fechas y cuántas plazas vendes a ese precio.', href: '#etapas-lanzamiento' }],
+        recomendaciones: [{ id: 'fundadora', titulo: 'Crea tu etapa Fundadora', motivo: 'Elige el plan, las fechas y cuántos lugares vendes a ese precio.', href: '#etapas-lanzamiento' }],
       },
     });
 
@@ -114,7 +114,7 @@ test.describe('Apertura del estudio en la home', () => {
     await expect(page.locator('#decidir-apertura').getByRole('button', { name: 'Siguiente', exact: true })).toBeDisabled();
     await page.getByRole('checkbox', { name: 'Ya tengo el local' }).click();
     await page.locator('#decidir-apertura').getByRole('button', { name: 'Siguiente', exact: true }).click();
-    await page.getByRole('checkbox', { name: 'Vender plazas fundadoras' }).click();
+    await page.getByRole('checkbox', { name: 'Vender lugares fundadoras' }).click();
     await page.locator('#decidir-apertura').getByRole('button', { name: 'Siguiente', exact: true }).click();
     await page.getByRole('radio', { name: 'Tengo una fecha exacta' }).click();
     await page.getByLabel('Fecha de apertura').fill('2026-10-15');
@@ -222,9 +222,9 @@ test.describe('Etapas de lanzamiento', () => {
     await page.getByLabel('Plan que se vende').selectOption('p1');
     await page.getByLabel('Desde').fill('2026-10-01');
     await page.getByLabel('Hasta (incluido)').fill('2026-10-15');
-    await page.getByLabel('Plazas (vacío = sin límite)').fill('20');
+    await page.getByLabel('Lugares (vacío = sin límite)').fill('20');
     await page.getByLabel('Cerrar la venta del plan').check();
-    await expect(page.getByText(/Nunca se venden más plazas de las que pongas/)).toBeVisible();
+    await expect(page.getByText(/Nunca se venden más lugares de las que pongas/)).toBeVisible();
     const getsAntes = peticiones.get;
     await page.getByRole('button', { name: 'Guardar etapa' }).click();
     // La tarjeta vuelve a pedir sus recomendaciones: si no, seguiría sugiriendo
@@ -285,7 +285,7 @@ test.describe('Alertas de apertura en la tarjeta', () => {
       inicial: {
         ...CON_FECHA,
         alertas: [{ tipo: 'CAPACIDAD_LLENA', severidad: 'ALTA', titulo: 'Tus clases se van a llenar',
-          descripcion: 'Ocupación prevista 92 %: 220 plazas para 240 publicadas.', href: '/calendario' }],
+          descripcion: 'Ocupación prevista 92 %: 220 lugares para 240 publicadas.', href: '/calendario' }],
       },
     });
     const alerta = page.getByRole('link', { name: /Tus clases se van a llenar/ });
@@ -460,7 +460,7 @@ test.describe('¿Cuánto necesito aguantar?', () => {
     const filas = page.getByRole('list', { name: 'Cuotas para cubrir gastos' }).getByRole('listitem');
     await expect(filas).toHaveCount(2);
     await expect(filas.nth(0)).toContainText('Con este horario y estos precios no llegas');
-    await expect(filas.nth(1)).toContainText('Llenarías el 67 % de tu horario (269 de 400 plazas al mes)');
+    await expect(filas.nth(1)).toContainText('Llenarías el 67 % de tu horario (269 de 400 lugares al mes)');
     await expect(filas.nth(1)).toContainText('suma al menos 4 cuotas nuevas al mes');
     await expect(page.getByText('No incluye el coste de empresa (Seguridad Social)', { exact: false })).toBeVisible();
     await expect(page.getByText('Una instructora con clases no tiene tarifa', { exact: false })).toBeVisible();
@@ -498,7 +498,7 @@ test.describe('Comunicaciones de la apertura', () => {
     // La que termina mañana cambia el atajo: recordatorio con las plazas que quedan.
     const recordar = page.getByRole('link', { name: 'Recordarles que termina' });
     await expect(recordar).toBeVisible();
-    expect(decodeURIComponent((await recordar.getAttribute('href'))!.replace(/\+/g, ' '))).toContain('Quedan 17 plazas');
+    expect(decodeURIComponent((await recordar.getAttribute('href'))!.replace(/\+/g, ' '))).toContain('Quedan 17 lugares');
   });
 
   test('Mensajería llega rellena desde un atajo, y enviar sigue siendo cosa de la propietaria', async ({ page }) => {

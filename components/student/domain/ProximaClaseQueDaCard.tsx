@@ -63,7 +63,7 @@ export function ProximaClaseQueDaCard({ clase, foto, cuando, enCurso: enCursoPor
   const detalle = [
     `${clase.hora}–${clase.horaFin}`,
     clase.sala,
-    `${clase.confirmadas} de ${clase.aforo} plazas`,
+    `${clase.confirmadas} de ${clase.aforo} lugares`,
     clase.enEspera > 0 ? `${clase.enEspera} en espera` : null,
   ].filter(Boolean).join(' · ');
 

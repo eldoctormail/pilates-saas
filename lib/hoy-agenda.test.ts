@@ -80,11 +80,11 @@ test('a quien se le pidió confirmar y no ha contestado, sí', () => {
   ], AHORA);
   assert.equal(c.pendientes, 1);
   assert.equal(c.confirmadas, 1);
-  assert.equal(c.ocupadas, 2, 'las dos siguen ocupando plaza');
+  assert.equal(c.ocupadas, 2, 'las dos siguen ocupando lugar');
   assert.equal(c.motivos[0].clave, 'pendientes');
 });
 
-test('PENDIENTE_APROBACION no ocupa plaza pero sí pide una decisión', () => {
+test('PENDIENTE_APROBACION no ocupa lugar pero sí pide una decisión', () => {
   const c = resumirClaseDelDia(A_LAS_10, [
     res({ sesionId: 's10', socioId: 'a', estado: 'PENDIENTE_APROBACION' }),
   ], AHORA);
@@ -119,7 +119,7 @@ test('clase llena con lista de espera no pide nada', () => {
   assert.equal(c.accion, null);
 });
 
-test('una oferta de plaza viva no se cuenta como si nadie hubiera contestado', () => {
+test('una oferta de lugar viva no se cuenta como si nadie hubiera contestado', () => {
   const reservas = [
     ...Array.from({ length: 9 }, (_, i) => res({ sesionId: 's10', socioId: `soc-${i}`, estado: 'CONFIRMADA' as const })),
     res({ sesionId: 's10', socioId: 'e1', estado: 'LISTA_ESPERA', posicionEspera: 1, ofertaExpiraEn: '2026-09-08T09:55:00.000Z' }),
@@ -380,7 +380,7 @@ test('no se propone a quien no puede reservar esta clase', () => {
   assert.deepEqual(out, []);
 });
 
-test('quien ya tiene plaza en esta clase no se propone otra vez', () => {
+test('quien ya tiene lugar en esta clase no se propone otra vez', () => {
   const hoy = sesionCompleta({ id: 'hoy', inicio: '2026-09-08T16:00:00.000Z', fin: '2026-09-08T17:00:00.000Z' });
   const antes = sesionCompleta({ id: 'ant', inicio: '2026-09-01T16:00:00.000Z', fin: '2026-09-01T17:00:00.000Z' });
   const out = candidatasParaRellenar({

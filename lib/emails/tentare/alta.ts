@@ -199,7 +199,7 @@ export function correoPrimeraClase(p: {
   const cuerpo = p.variante.tipo === 'sin_clase'
     ? [
       parrafo(`A <b>${escaparHtml(estudio)}</b> le falta una cosa para recibir reservas: tu primera clase.`),
-      parrafo(`Está preparada con valores de ejemplo: ${escaparHtml(p.variante.ejemplo.clase)}, ${p.variante.ejemplo.minutos} minutos y ${p.variante.ejemplo.plazas} plazas. Tú eliges el día y la hora, pones el precio y la publicas.`),
+      parrafo(`Está preparada con valores de ejemplo: ${escaparHtml(p.variante.ejemplo.clase)}, ${p.variante.ejemplo.minutos} minutos y ${p.variante.ejemplo.plazas} lugares. Tú eliges el día y la hora, pones el precio y la publicas.`),
     ].join('')
     : [
       parrafo(`A <b>${escaparHtml(estudio)}</b> le falta una cosa para recibir reservas: que un cliente nuevo pueda reservar tu clase.`),

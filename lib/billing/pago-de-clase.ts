@@ -131,4 +131,4 @@ export function decidirPagoDeClase(
 export const MENSAJE_PAGO_PREPARANDOSE = 'Estamos preparando tu pago. Un momento…';
 export const CODIGO_PAGO_A_MEDIAS = 'pago-a-medias';
 export const MENSAJE_PAGO_DE_CLASE_A_MEDIAS = 'Tienes un pago de esta clase a medias (la verificación de tu banco). Termínalo, o espera unos minutos para empezar otro. No te hemos cobrado nada.';
-export const MENSAJE_PAGO_DE_CLASE_EN_CURSO = 'Ya has pagado esta clase (o se está pagando). Estamos confirmando tu plaza: no vuelvas a pagar.';
+export const MENSAJE_PAGO_DE_CLASE_EN_CURSO = 'Ya has pagado esta clase (o se está pagando). Estamos confirmando tu lugar: no vuelvas a pagar.';

@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
   const sesion = await verificarSesionStaff(req);
   if (!sesion) return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
   if (!puedeGestionarCalendario(sesion.rol)) {
-    return NextResponse.json({ error: 'No tienes permiso para cambiar las plazas de esta clase.' }, { status: 403 });
+    return NextResponse.json({ error: 'No tienes permiso para cambiar los lugares de esta clase.' }, { status: 403 });
   }
 
   const cuerpo = await req.json().catch(() => null) as { sesionId?: unknown } | null;
@@ -36,16 +36,16 @@ export async function POST(req: NextRequest) {
   });
   if (error) {
     if (error.message.includes('NADA_APARTADO')) {
-      return NextResponse.json({ error: 'Ya no queda ninguna plaza apartada para ClassPass en esta clase.' }, { status: 409 });
+      return NextResponse.json({ error: 'Ya no queda ningún lugar apartado para ClassPass en esta clase.' }, { status: 409 });
     }
     if (error.message.includes('SESION_NO_ENCONTRADA')) return NextResponse.json({ error: 'No encontramos esta clase.' }, { status: 404 });
     console.error('[plataformas:liberar-apartada]', error.message);
-    return NextResponse.json({ error: 'No se ha podido liberar la plaza. Inténtalo de nuevo.' }, { status: 500 });
+    return NextResponse.json({ error: 'No se ha podido liberar el lugar. Inténtalo de nuevo.' }, { status: 500 });
   }
 
   const { error: errLog } = await admin.from('actividad_reciente').insert({
     id: uid(), studio_id: sesion.studioId, tipo: 'PLAZA_PLATAFORMA_LIBERADA',
-    texto: 'Liberó una plaza apartada para ClassPass (cerrada allí)',
+    texto: 'Liberó un lugar apartado para ClassPass (cerrada allí)',
     socio_id: null, enlace: '/calendario', creado_en: new Date().toISOString(), actor_nombre: sesion.nombre,
   });
   if (errLog) console.error('[plataformas:liberar-apartada] no se pudo registrar la actividad', errLog.message);

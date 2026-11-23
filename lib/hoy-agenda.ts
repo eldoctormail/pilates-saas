@@ -215,7 +215,7 @@ export function resumirClaseDelDia(
       });
     }
     if (ofertasVivas > 0) {
-      motivos.push({ clave: 'oferta-viva', texto: `${plural(ofertasVivas, 'plaza ofrecida', 'plazas ofrecidas')}`, tono: 'ATENCION' });
+      motivos.push({ clave: 'oferta-viva', texto: `${plural(ofertasVivas, 'lugar ofrecido', 'lugares ofrecidos')}`, tono: 'ATENCION' });
     }
     if (!finalizada && huecos > 0) {
       motivos.push(

@@ -56,3 +56,13 @@ export function formatoMoneda(n: number, decimales: 2 | 0 | 'auto' = 2): string 
   }
   return conMoneda(f.format(n));
 }
+
+const NOMBRES: Record<string, readonly [string, string]> = {
+  ARS: ['peso', 'pesos'], EUR: ['euro', 'euros'], USD: ['dólar', 'dólares'], UYU: ['peso', 'pesos'],
+  CLP: ['peso', 'pesos'], MXN: ['peso', 'pesos'], COP: ['peso', 'pesos'],
+};
+
+/** «peso» / «euro»: para los textos que nombran la moneda («Por cada peso que gastes»). */
+export const MONEDA_NOMBRE: string = NOMBRES[MONEDA]?.[0] ?? MONEDA;
+/** «pesos» / «euros» («Escribí las cifras en pesos»). */
+export const MONEDA_NOMBRE_PLURAL: string = NOMBRES[MONEDA]?.[1] ?? MONEDA;

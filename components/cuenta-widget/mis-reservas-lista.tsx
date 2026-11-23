@@ -196,7 +196,7 @@ export function MisReservasLista({
                   {hayOferta && !abierta && (
                     <div style={{ marginTop: 10, padding: '12px 14px', borderRadius: 14, background: semantic.warning.soft }}>
                       <p style={{ margin: '0 0 10px', fontSize: 12.5, fontWeight: 700, lineHeight: 1.45, color: t.ink }}>
-                        ¡Se ha liberado una plaza! Tienes {limiteOferta(r.ofertaExpiraEn!, hoy)} para aceptarla.
+                        ¡Se ha liberado un lugar! Tienes {limiteOferta(r.ofertaExpiraEn!, hoy)} para aceptarlo.
                       </p>
                       <button type="button" disabled={enviando === r.id} onClick={() => { void aceptarOferta(r.id); }} style={{
                         width: '100%', minHeight: 44, borderRadius: 'var(--reservar-radio-boton, 999px)', border: 'none',
@@ -204,7 +204,7 @@ export function MisReservasLista({
                         background: 'var(--portal-brand)', color: 'var(--portal-brand-foreground)',
                         cursor: enviando === r.id ? 'default' : 'pointer', opacity: enviando === r.id ? 0.6 : 1,
                       }}>
-                        {enviando === r.id ? 'Aceptando…' : 'Aceptar plaza'}
+                        {enviando === r.id ? 'Aceptando…' : 'Aceptar lugar'}
                       </button>
                     </div>
                   )}

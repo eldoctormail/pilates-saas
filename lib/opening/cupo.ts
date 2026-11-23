@@ -10,7 +10,7 @@ export class EtapaAgotadaError extends Error {
   constructor() { super('ETAPA_AGOTADA'); this.name = 'EtapaAgotadaError'; }
 }
 
-export const MENSAJE_ETAPA_AGOTADA = 'Las plazas de esta oferta se han agotado.';
+export const MENSAJE_ETAPA_AGOTADA = 'Los lugares de esta oferta se han agotado.';
 
 export function esEtapaAgotada(e: unknown): boolean {
   if (e instanceof EtapaAgotadaError) return true;
@@ -185,7 +185,7 @@ export async function recuperarPlazasCaducadas(
     } catch (e) {
       // Si Stripe no contesta, la plaza se queda reservada: mejor no vender
       // que vender una de más.
-      console.error('[opening:cupo] recuperar plaza', p.id, e instanceof Error ? e.message : e);
+      console.error('[opening:cupo] recuperar lugar', p.id, e instanceof Error ? e.message : e);
     }
   }
   return liberadas;
@@ -248,7 +248,7 @@ export async function reservarPlazasPOS(
       const plaza = await reservarPlazaEtapa(admin, planId, studioId, ref);
       if (!plaza) continue;
       reservadas.push(plaza.id);
-      if (!(await asignarRefPlaza(admin, plaza.id, ref))) throw new Error('No se pudo ligar la plaza a la venta');
+      if (!(await asignarRefPlaza(admin, plaza.id, ref))) throw new Error('No se pudo ligar el lugar a la venta');
     }
     return reservadas;
   } catch (e) {
@@ -267,9 +267,9 @@ export async function confirmarPlazaPOS(
     const refs = Array.from({ length: 20 }, (_, n) => refPlazaPOS(clave, planId, n));
     const { data, error } = await admin.from('launch_stage_plazas').select('stripe_ref')
       .in('stripe_ref', refs).eq('estado', 'RESERVADA').order('stripe_ref').limit(1);
-    if (error) { console.error('[opening:cupo] plaza POS', error); return; }
+    if (error) { console.error('[opening:cupo] lugar POS', error); return; }
     if (data?.[0]) await confirmarPlazaPorRef(admin, data[0].stripe_ref as string, suscripcionId);
   } catch (e) {
-    console.error('[opening:cupo] plaza POS', e instanceof Error ? e.message : e);
+    console.error('[opening:cupo] lugar POS', e instanceof Error ? e.message : e);
   }
 }

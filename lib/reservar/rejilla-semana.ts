@@ -39,7 +39,7 @@ export function estadoPlazas({ ocupadas, aforoMaximo, permiteListaEspera }: Plaz
 /** Lo que la leyenda de la rejilla enseña, en el orden en que se lee. */
 export const LEYENDA: readonly { estado: EstadoPlazas; etiqueta: string }[] = [
   { estado: 'disponible', etiqueta: 'Disponible' },
-  { estado: 'ultimas', etiqueta: 'Últimas plazas' },
+  { estado: 'ultimas', etiqueta: 'Últimos lugares' },
   { estado: 'lista-espera', etiqueta: 'Lista de espera' },
   { estado: 'completa', etiqueta: 'Completa' },
 ];

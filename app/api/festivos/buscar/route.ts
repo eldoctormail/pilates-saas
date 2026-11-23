@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
   const hoy = hoyEnEstudio();
   const { desde, hasta, anios } = rangoDeBusqueda(hoy);
   const ubicacion = await ubicacionDelEstudio(admin, studioId);
-  if (ubicacion === 'error') return NextResponse.json({ error: 'No se han podido buscar los festivos. Inténtalo de nuevo.' }, { status: 500 });
+  if (ubicacion === 'error') return NextResponse.json({ error: 'No se han podido buscar los feriados. Inténtalo de nuevo.' }, { status: 500 });
   // La lista del estudio trae sola los oficiales de su DIRECCIÓN; la búsqueda,
   // los de lo escrito (o, si es su misma ciudad, los de la dirección).
   const zonaLista = zonaDeUbicacion(ubicacion);
@@ -78,7 +78,7 @@ export async function POST(req: NextRequest) {
   const oficiales = oficialesDeBusqueda(zona, desde, hasta);
 
   const guardados = await festivosGuardadosEntre(admin, studioId, desde, hasta);
-  if (guardados === 'error') return NextResponse.json({ error: 'No se han podido buscar los festivos. Inténtalo de nuevo.' }, { status: 500 });
+  if (guardados === 'error') return NextResponse.json({ error: 'No se han podido buscar los feriados. Inténtalo de nuevo.' }, { status: 500 });
   const enLista = new Set([
     ...(zonaLista ? festivosEntre(zonaLista, desde, hasta).map((f) => f.fecha) : []),
     ...guardados.map((g) => g.fecha),

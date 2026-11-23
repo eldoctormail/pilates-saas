@@ -28,7 +28,7 @@ test('con más de 24 h, la de siempre: ya acaba antes del cierre', () => {
   assert.deepEqual(caducidadCheckoutDeClase(en(25 * 60), AHORA), { ok: true, expiresAt: null });
 });
 
-test('con plaza de etapa, su caducidad (que manda sobre la del cierre) nunca deja pagar después de cerrar la reserva', async () => {
+test('con lugar de etapa, su caducidad (que manda sobre la del cierre) nunca deja pagar después de cerrar la reserva', async () => {
   // Con plaza, la sesión caduca con la plaza (MINUTOS_RESERVA), no con el cierre de la clase. Solo
   // se ofrece Bizum si el cierre queda a ≥ MINIMO + MARGEN: la plaza tiene que caducar antes.
   const { MINUTOS_RESERVA } = await import('../opening/cupo.ts');

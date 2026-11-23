@@ -419,7 +419,7 @@ export function PantallaReserva({
               chips={chipsFoto}
               arribaDerecha={clase.plazasLibres !== null ? (
                 <span style={estiloChipSobreFoto}>
-                  {clase.plazasLibres} {clase.plazasLibres === 1 ? 'plaza' : 'plazas'}
+                  {clase.plazasLibres} {clase.plazasLibres === 1 ? 'lugar' : 'lugares'}
                 </span>
               ) : undefined}
             />
@@ -526,7 +526,7 @@ export function PantallaReserva({
                 {spotPicker && (
                   <div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 10, marginBottom: 8 }}>
-                      <p style={etiqueta}>Elige tu plaza</p>
+                      <p style={etiqueta}>Elige tu lugar</p>
                       <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--portal-muted)' }}>
                         {spotPicker.spots.length - spotPicker.takenIds.size === 0
                           ? 'clase completa'

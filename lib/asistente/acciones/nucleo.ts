@@ -164,7 +164,7 @@ export function prepararClase(input: EntradaClase, c: CatalogoClase, ahoraMs: nu
 
   let aforo = tipo.aforo ?? sala.capacidad;
   if (input.aforo !== undefined && input.aforo > 0) {
-    if (input.aforo > sala.capacidad) return no(`${sala.nombre} tiene ${sala.capacidad} plazas: no puedo poner ${input.aforo}. Pregunta si quiere otro aforo u otra sala.`);
+    if (input.aforo > sala.capacidad) return no(`${sala.nombre} tiene ${sala.capacidad} lugares: no puedo poner ${input.aforo}. Pregunta si quiere otro aforo u otra sala.`);
     aforo = input.aforo;
   }
 
@@ -192,10 +192,10 @@ export function prepararClase(input: EntradaClase, c: CatalogoClase, ahoraMs: nu
     lineas: [
       { etiqueta: 'Clase', valor: tipo.nombre }, { etiqueta: 'Día', valor: dia(input.fecha) },
       { etiqueta: 'Hora', valor: textoHora(inicio, fin) }, { etiqueta: 'Sala', valor: sala.nombre },
-      { etiqueta: 'Instructora', valor: quien }, { etiqueta: 'Plazas', valor: String(aforo) },
+      { etiqueta: 'Instructora', valor: quien }, { etiqueta: 'Lugares', valor: String(aforo) },
     ],
     avisos, efecto: null,
-    resumen: `${tipo.nombre}, ${dia(input.fecha)}, ${textoHora(inicio, fin)}, ${sala.nombre}, ${instructorId ? quien : 'sin instructora'}, ${aforo} plazas`,
+    resumen: `${tipo.nombre}, ${dia(input.fecha)}, ${textoHora(inicio, fin)}, ${sala.nombre}, ${instructorId ? quien : 'sin instructora'}, ${aforo} lugares`,
     destino: { href: '/calendario', texto: 'Ver en Calendario' },
   };
 }
@@ -236,7 +236,7 @@ export function prepararClases(input: EntradaClases, c: CatalogoClases, ahoraMs:
     for (const a of r.avisos) avisos.add(a);
   }
   if (!primera) return no('Faltan los días y las horas. Pregunta cuáles.');
-  const base = primera.lineas.filter(l => l.etiqueta === 'Clase' || l.etiqueta === 'Sala' || l.etiqueta === 'Instructora' || l.etiqueta === 'Plazas');
+  const base = primera.lineas.filter(l => l.etiqueta === 'Clase' || l.etiqueta === 'Sala' || l.etiqueta === 'Instructora' || l.etiqueta === 'Lugares');
   const cuando = clases.map(p => `${diaCorto(p.inicio)} ${textoHora(p.inicio, p.fin)}`);
   return {
     ok: true, tipo: 'CREAR_CLASE', titulo: `Crear ${clases.length} clases`,
@@ -261,9 +261,9 @@ export function prepararSala(input: EntradaSala, salas: readonly { nombre: strin
   return {
     ok: true, tipo: 'CREAR_SALA', titulo: 'Crear una sala',
     payload: { nombre, capacidad: input.capacidad, color },
-    lineas: [{ etiqueta: 'Sala', valor: nombre }, { etiqueta: 'Aforo', valor: `${input.capacidad} plazas` }],
+    lineas: [{ etiqueta: 'Sala', valor: nombre }, { etiqueta: 'Aforo', valor: `${input.capacidad} lugares` }],
     avisos: [], efecto: null,
-    resumen: `Sala ${nombre} con ${input.capacidad} plazas`,
+    resumen: `Sala ${nombre} con ${input.capacidad} lugares`,
     destino: { href: '/configuracion?tab=estudio&abrir=salas', texto: 'Ver en Configuración' },
   };
 }
@@ -289,14 +289,14 @@ export function prepararEvento(
     { etiqueta: 'Anuncio', valor: input.texto.replace(/\s+/g, ' ').trim() }, { etiqueta: 'Día', valor: dia(input.fecha) },
     { etiqueta: 'Hora', valor: textoHora(t0.inicio) },
     ...(lugar ? [{ etiqueta: 'Lugar', valor: lugar }] : []),
-    { etiqueta: 'Plazas', valor: aforo ? String(aforo) : 'Sin límite' },
+    { etiqueta: 'Lugares', valor: aforo ? String(aforo) : 'Sin límite' },
   ];
   return {
     ok: true, tipo: 'CREAR_EVENTO', titulo: 'Publicar un evento',
     payload: { texto: limpio, inicio: t0.inicio, aforo, lugar },
     lineas, avisos: ['Se publicará exactamente este texto, visible para todos los clientes: revisa que no lleve nombres.'],
     efecto: 'Se publica en la Comunidad de la app y se avisa a todos los clientes con una notificación.',
-    resumen: `Evento «${input.texto.replace(/\s+/g, ' ').trim().slice(0, 60)}», ${dia(input.fecha)}, ${textoHora(t0.inicio)}${aforo ? `, ${aforo} plazas` : ', sin límite de plazas'}`,
+    resumen: `Evento «${input.texto.replace(/\s+/g, ' ').trim().slice(0, 60)}», ${dia(input.fecha)}, ${textoHora(t0.inicio)}${aforo ? `, ${aforo} lugares` : ', sin límite de lugares'}`,
     destino: { href: '/comunidad', texto: 'Ver en Comunidad' },
   };
 }

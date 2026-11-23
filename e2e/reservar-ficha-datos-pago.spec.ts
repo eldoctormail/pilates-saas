@@ -246,7 +246,7 @@ for (const slug of ['tentare', 'tentare-carbon']) {
     // plazas y coste, la instructora y las cuatro filas.
     await expect(page.getByText('Iniciación', { exact: true })).toBeVisible();
     await expect(page.getByText('Hoy · 12:30', { exact: true })).toBeVisible();
-    await expect(page.getByText('9 plazas libres', { exact: true })).toBeVisible();
+    await expect(page.getByText('9 lugares libres', { exact: true })).toBeVisible();
     await expect(page.getByText('Con tu bono · 1 sesión', { exact: true })).toBeVisible();
     await expect(page.getByText('Lucía Ortega', { exact: true })).toBeVisible();
     for (const clave of ['Cuándo', 'Dónde', 'Capacidad', 'Cancelación']) {

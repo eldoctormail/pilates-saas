@@ -21,7 +21,7 @@ export interface DesenlaceHoja {
 }
 
 /** Cuando el servidor dice «aforo-lleno», la clase NO admite lista de espera: solo entonces lo devuelve. */
-export const LLENA_SIN_ESPERA = 'Otro cliente ha cogido la última plaza y esta clase no tiene lista de espera. Elige otra hora.';
+export const LLENA_SIN_ESPERA = 'Otro cliente ha cogido el último lugar y esta clase no tiene lista de espera. Elige otra hora.';
 
 /**
  * De la respuesta del servidor a lo que pinta la hoja.
@@ -40,7 +40,7 @@ export function desenlaceDeLaHoja(r: DesenlaceReserva, spotPedido: string | null
     // Ni «lista de espera» ni «te avisamos si se libera una plaza»: la plaza está, falta que el estudio diga que sí.
     return {
       state: r.state, titulo: 'Tu reserva está pendiente de aprobación',
-      mensaje: 'Tienes la plaza guardada mientras el estudio la revisa. Te avisamos en cuanto la confirmen.',
+      mensaje: 'Tienes el lugar guardado mientras el estudio la revisa. Te avisamos en cuanto la confirmen.',
       acciones: r.acciones, ofreceEspera: false,
     };
   }

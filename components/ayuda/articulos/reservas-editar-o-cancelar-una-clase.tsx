@@ -48,7 +48,7 @@ export default function Contenido() {
       <p>
         Editar la hora de una clase no reordena su lista de espera ni fuerza nuevas reglas de antelación sobre
         reservas que ya existían — esas reglas se comprueban al reservar, no otra vez después. Tampoco avisa a la
-        gente en lista de espera: solo se avisa a quien tiene la plaza confirmada.
+        gente en lista de espera: solo se avisa a quien tiene el lugar confirmado.
       </p>
 
       <AyudaResultado>

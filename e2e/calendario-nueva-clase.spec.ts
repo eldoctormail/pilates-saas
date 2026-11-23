@@ -164,15 +164,15 @@ test.describe('Nueva clase: se repite', () => {
 });
 
 test.describe('Nueva clase: lo que se lee es lo que pasa', () => {
-  test('sin lista de espera, el texto de las plazas no la promete', async ({ page }) => {
+  test('sin lista de espera, el texto de los lugares no la promete', async ({ page }) => {
     const { cajon } = await montar(page, { studio: { permite_lista_espera: false } });
 
     const alLlenarse = cajon.getByTestId('al-llenarse');
     await expect(alLlenarse).toHaveText('Al llenarse, tus clientes ya no pueden reservarla: tu estudio no tiene lista de espera.');
     await expect(alLlenarse).not.toContainText('entran en lista de espera');
     // Las plazas, las del tipo de clase y con la sala al lado.
-    await expect(cajon.getByRole('spinbutton', { name: 'Plazas' })).toHaveValue('8');
-    await expect(cajon.getByText('La sala tiene 10 sitios · plazas por defecto de este tipo de clase')).toBeVisible();
+    await expect(cajon.getByRole('spinbutton', { name: 'Lugares' })).toHaveValue('8');
+    await expect(cajon.getByText('La sala tiene 10 sitios · lugares por defecto de este tipo de clase')).toBeVisible();
   });
 
   test('un tipo sin lista de espera lo dice él, y sus reglas propias se ven en el plegable', async ({ page }) => {
@@ -241,7 +241,7 @@ test.describe('Nueva clase: tipos archivados', () => {
     const { cajon } = await montar(page, { tipos: [ARCHIVADO, ...TIPOS] });
     const tipo = cajon.getByRole('combobox', { name: 'Tipo de clase' });
     await expect(tipo).toHaveValue('tc-1');
-    await expect(tipo.locator('option')).toHaveText(['Reformer · 45 min · 8 plazas', 'Mat · 60 min']);
+    await expect(tipo.locator('option')).toHaveText(['Reformer · 45 min · 8 lugares', 'Mat · 60 min']);
   });
 
   test('si lo archivaron mientras tanto, el aviso lo dice y no se anuncia nada', async ({ page }) => {

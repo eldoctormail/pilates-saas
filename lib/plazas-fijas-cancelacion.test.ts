@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { avisoQuitarReserva, marcaReserva, textoTrasQuitar } from './plazas-fijas-cancelacion.ts';
 
-test('marcaReserva: la que gastó una recuperación, la del motor de plaza fija, y el resto sin marca', () => {
+test('marcaReserva: la que gastó una recuperación, la del motor de lugar fijo, y el resto sin marca', () => {
   const recuperaciones = [
     { estado: 'USADA' as const, usadaEnReservaId: 'res-1' },
     { estado: 'DISPONIBLE' as const, usadaEnReservaId: null },
@@ -16,14 +16,14 @@ test('marcaReserva: una recuperación devuelta (DISPONIBLE) no marca la reserva 
   assert.equal(marcaReserva({ id: 'res-1' }, [{ estado: 'DISPONIBLE', usadaEnReservaId: 'res-1' }]), null);
 });
 
-test('marcaReserva: una recuperación gastada en una clase de plaza fija manda la recuperación', () => {
+test('marcaReserva: una recuperación gastada en una clase de lugar fijo manda la recuperación', () => {
   assert.equal(marcaReserva({ id: 'res-pf-1' }, [{ estado: 'USADA', usadaEnReservaId: 'res-pf-1' }]), 'recuperacion');
 });
 
-test('avisoQuitarReserva: a una fija no se le dice que pierde su plaza', () => {
+test('avisoQuitarReserva: a una fija no se le dice que pierde su lugar', () => {
   assert.match(avisoQuitarReserva('CONFIRMADA', 'fija'), /^Sigue con su clase fija/);
   assert.match(avisoQuitarReserva('CONFIRMADA', 'recuperacion'), /Vuelve a tener su clase para recuperar/);
-  assert.match(avisoQuitarReserva('CONFIRMADA', null), /^Se libera su plaza/);
+  assert.match(avisoQuitarReserva('CONFIRMADA', null), /^Se libera su lugar/);
   assert.equal(avisoQuitarReserva('LISTA_ESPERA', 'fija'), 'Perderá su sitio en la lista de espera.');
   assert.equal(avisoQuitarReserva('PENDIENTE_APROBACION', null), 'Perderá su sitio en la lista de espera.');
 });

@@ -8,11 +8,11 @@ const base = { sinSitio: false, pagadaConLoEntregado: true };
 const ok = (estado: string) => ({ ok: true as const, estado, reservaId: 'res-web-x' });
 const no = (motivo: string, detalle?: string) => ({ ok: false as const, motivo, detalle });
 
-test('con plaza y pagada con lo que compró: RESERVADA', () => {
+test('con lugar y pagada con lo que compró: RESERVADA', () => {
   assert.deepEqual(destinoDelPago(ok('CONFIRMADA'), base), { tipo: 'reservada' });
 });
 
-test('con plaza pero pagada con OTRA cosa: lo comprado queda intacto a su favor', () => {
+test('con lugar pero pagada con OTRA cosa: lo comprado queda intacto a su favor', () => {
   assert.deepEqual(destinoDelPago(ok('CONFIRMADA'), { ...base, pagadaConLoEntregado: false }), { tipo: 'compensada', motivo: 'PAGADO_SIN_USAR' });
 });
 
@@ -22,7 +22,7 @@ test('se llenó mientras pagaba: en espera; si el estudio aprueba cada reserva, 
   assert.deepEqual(destinoDelPago(ok('RARO'), base), { tipo: 'compensada', motivo: 'ERROR' }, 'un estado inesperado no se da por reservado');
 });
 
-test('el sitio que pagó se lo llevó otra: una vez sin sitio; si tampoco, sin plaza', () => {
+test('el sitio que pagó se lo llevó otra: una vez sin sitio; si tampoco, sin lugar', () => {
   assert.deepEqual(destinoDelPago(no('spot-ocupado'), base), { tipo: 'reintentar-sin-sitio' });
   assert.deepEqual(destinoDelPago(no('spot-ocupado'), { ...base, sinSitio: true }), { tipo: 'compensada', motivo: 'SIN_PLAZA' });
 });
@@ -41,7 +41,7 @@ test('un fallo que no es una regla (la base no contestó): sigue pagado y se rei
   assert.deepEqual(destinoDelPago(no('error', 'timeout'), base), { tipo: 'reintentar' });
 });
 
-test('prioridad en la cola: solo en espera y pagando como mucho 20 min después de comprobar la plaza', () => {
+test('prioridad en la cola: solo en espera y pagando como mucho 20 min después de comprobar el lugar', () => {
   const comprobada = '2026-10-06T10:00:00Z';
   const en = (min: number) => new Date(Date.parse(comprobada) + min * 60_000).toISOString();
   assert.equal(conPrioridadEnLaCola('EN_ESPERA', comprobada, en(5)), true);

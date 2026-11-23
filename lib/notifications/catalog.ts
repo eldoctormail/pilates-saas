@@ -418,7 +418,7 @@ const enlacePeticionPlazaFija = (d: Datos): string =>
 // divergir entre roles al editarlo (ya pasó con otros avisos del mostrador).
 function plantillasPagadaSinPlaza(): Record<string, Plantilla> {
   const plantilla: Plantilla = {
-    title: 'Cobrado pero sin plaza',
+    title: 'Cobrado pero sin lugar',
     body: '{socia} pagó {clase} el {cuando}{situacion} Contacta con ella para resolverlo.',
     // `cerrada` lo pone el barrido de esperas que ya no pueden entrar
     // (lib/lista-espera/esperas-sin-plaza.ts); `aLaFicha`, un pago que no se
@@ -619,25 +619,25 @@ export const PLANTILLAS: Record<string, Plantilla> = {
   },
   [`${EVENTOS.RESERVA_CONFIRMADA}#SOCIA`]: {
     title: 'Reserva confirmada',
-    body: 'Tu plaza en {clase} del {cuando} está confirmada. ¡Te esperamos!',
+    body: 'Tu lugar en {clase} del {cuando} está confirmado. ¡Te esperamos!',
     deepLink: (d: Datos) => `/portal/${s(d.slug)}/reservar/${s(d.sesionId)}`,
   },
   [`${EVENTOS.RESERVA_LISTA_ESPERA}#SOCIA`]: {
     title: 'Estás en lista de espera',
-    body: '{clase} del {cuando} está completa. Te avisaremos si se libera una plaza.',
+    body: '{clase} del {cuando} está completa. Te avisaremos si se libera un lugar.',
     deepLink: (d: Datos) => `/portal/${s(d.slug)}/reservar/${s(d.sesionId)}`,
   },
   [`${EVENTOS.RESERVA_PLAZA_LIBERADA}#SOCIA`]: {
-    title: '¡Se ha liberado tu plaza!',
-    body: 'Ha quedado sitio en {clase} del {cuando} y ya tienes plaza confirmada.',
+    title: '¡Se ha liberado tu lugar!',
+    body: 'Ha quedado sitio en {clase} del {cuando} y ya tienes lugar confirmado.',
     deepLink: (d: Datos) => `/portal/${s(d.slug)}/reservar/${s(d.sesionId)}`,
   },
   // Fase 2b: a diferencia de RESERVA_PLAZA_LIBERADA (ya confirmada), esta se
   // dispara cuando el estudio exige plazo de aceptación — la socia tiene que
   // ACTUAR antes de {hora} o pierde el sitio.
   [`${EVENTOS.RESERVA_OFERTA_LISTA_ESPERA}#SOCIA`]: {
-    title: 'Se ha liberado una plaza',
-    body: 'Tienes hasta las {hora} para aceptar tu plaza en {clase} ({cuando}).',
+    title: 'Se ha liberado un lugar',
+    body: 'Tienes hasta las {hora} para aceptar tu lugar en {clase} ({cuando}).',
     // P-5 (auditoría 23ª pasada): apuntaba a `/reservas?tab=ESPERA`, una ruta
     // que no existe en la PWA nueva (ni siquiera `/reservas` a secas). La
     // pantalla real es «Mis clases» — ahora con el CTA "Aceptar plaza" que
@@ -804,19 +804,19 @@ export const PLANTILLAS: Record<string, Plantilla> = {
   // Pago fallido → dueña, mostrador y socia (mismo evento, textos por rol)
   ...paraRoles(EVENTOS.PAGO_FALLIDO, ROLES_POR_AUDIENCIA.mostrador, {
     title: 'Pago fallido',
-    body: 'No se ha podido cobrar {concepto} ({importe} €) a {socia}.',
+    body: `No se ha podido cobrar {concepto} (${conMoneda('{importe}')}) a {socia}.`,
     deepLink: () => `/cobros?tab=pendientes`,
   }),
   [`${EVENTOS.PAGO_FALLIDO}#SOCIA`]: {
     title: 'Problema con tu pago',
-    body: 'No hemos podido cobrar {concepto} ({importe} €). Revisa tu método de pago.',
+    body: `No hemos podido cobrar {concepto} (${conMoneda('{importe}')}). Revisa tu método de pago.`,
     // Donde puede ARREGLARLO, no donde puede verlo: el aviso le pide revisar su
     // método de pago, y una lista de recibos no tiene ningún botón que sirva.
     deepLink: (d: Datos) => `/portal/${s(d.slug)}/perfil/pago`,
   },
   [`${EVENTOS.PAGO_REALIZADO}#SOCIA`]: {
     title: 'Pago recibido',
-    body: 'Hemos recibido tu pago de {concepto} ({importe} €). ¡Gracias!',
+    body: `Hemos recibido tu pago de {concepto} (${conMoneda('{importe}')}). ¡Gracias!`,
   },
   // Nueva venta → mostrador (dueña/manager/recepción). Mismo texto para las
   // tres, mismo criterio que el resto de plantillas `mostrador`.
@@ -840,29 +840,29 @@ export const PLANTILLAS: Record<string, Plantilla> = {
   },
   [`${EVENTOS.VENTA_REGISTRADA}#PROPIETARIO`]: {
     title: 'Nueva venta',
-    body: '{socia} ha comprado {concepto} — {importe} €.',
+    body: `{socia} ha comprado {concepto} — ${conMoneda('{importe}')}.`,
     deepLink: () => `/cobros?tab=cobrado`,
   },
   [`${EVENTOS.VENTA_REGISTRADA}#MANAGER`]: {
     title: 'Nueva venta',
-    body: '{socia} ha comprado {concepto} — {importe} €.',
+    body: `{socia} ha comprado {concepto} — ${conMoneda('{importe}')}.`,
     deepLink: () => `/cobros?tab=cobrado`,
   },
   [`${EVENTOS.VENTA_REGISTRADA}#RECEPCION`]: {
     title: 'Nueva venta',
-    body: '{socia} ha comprado {concepto} — {importe} €.',
+    body: `{socia} ha comprado {concepto} — ${conMoneda('{importe}')}.`,
     deepLink: () => `/cobros?tab=cobrado`,
   },
   [`${EVENTOS.RENOVACION_SIN_TARJETA}#SOCIA`]: {
     title: 'Tu renovación está pendiente',
-    body: 'No hemos podido cobrar {concepto} ({importe} €) porque no tienes una tarjeta guardada. Toca para ver cómo pagarla.',
+    body: `No hemos podido cobrar {concepto} (${conMoneda('{importe}')}) porque no tienes una tarjeta guardada. Toca para ver cómo pagarla.`,
     // Bonos le enseña la renovación con «Pagar ahora» (o «págala en el estudio»
     // si el estudio no cobra online). Pagarla desde ahí guarda la tarjeta.
     deepLink: (d: Datos) => `/portal/${s(d.slug)}/bonos`,
   },
   [`${EVENTOS.PAGO_PENALIZACION}#SOCIA`]: {
     title: 'Cargo por cancelación tardía',
-    body: 'Se te ha cobrado {importe} € por cancelar fuera del plazo de cancelación o no presentarte a la clase.',
+    body: `Se te ha cobrado ${conMoneda('{importe}')} por cancelar fuera del plazo de cancelación o no presentarte a la clase.`,
     // Un cargo que ya ocurrió: lo que quiere es verlo, con su recibo.
     deepLink: (d: Datos) => `/portal/${s(d.slug)}/pagos`,
   },
@@ -870,7 +870,7 @@ export const PLANTILLAS: Record<string, Plantilla> = {
   // una única plantilla basta.
   [`${EVENTOS.PAGO_PENALIZACION_BLOQUEADA}#PROPIETARIO`]: {
     title: 'Penalización sin cobrar',
-    body: 'Una penalización de {importe} € no se ha podido cobrar porque la socia no ha aceptado el contrato con la cláusula actualizada.',
+    body: `Una penalización de ${conMoneda('{importe}')} no se ha podido cobrar porque la socia no ha aceptado el contrato con la cláusula actualizada.`,
     // A su ficha: es a ella a quien hay que contactar para que acepte el
     // contrato. Sin enlace, el clic solo marcaba el aviso como leído — y este es
     // un aviso de dinero. `emitirPenalizacionBloqueada` ya manda `socioId`.
@@ -898,7 +898,7 @@ export const PLANTILLAS: Record<string, Plantilla> = {
   // una variable es la prioridad, y por eso el chargeback es un evento aparte.
   ...paraRoles(EVENTOS.PAGO_DEVUELTO, ROLES_POR_AUDIENCIA.mostrador, {
     title: 'Has devuelto un cobro',
-    body: 'Se han devuelto {importe} € a {socia}{tipoTexto}. Revisa si hay que retirarle lo que pagó.',
+    body: `Se han devuelto ${conMoneda('{importe}')} a {socia}{tipoTexto}. Revisa si hay que retirarle lo que pagó.`,
     deepLink: () => `/dashboard`,
   }),
   // {deQuien} viene ya formado (" a {nombre}" o "" si la venta era anónima de
@@ -906,24 +906,24 @@ export const PLANTILLAS: Record<string, Plantilla> = {
   // el caso sin socia.
   ...paraRoles(EVENTOS.VENTA_POS_DEVUELTA, ROLES_POR_AUDIENCIA.mostrador, {
     title: 'Se ha devuelto una venta de mostrador',
-    body: 'Se han devuelto {importe} € de una venta de mostrador{deQuien}. Ya está reflejado en el cierre de caja.',
+    body: `Se han devuelto ${conMoneda('{importe}')} de una venta de mostrador{deQuien}. Ya está reflejado en el cierre de caja.`,
     deepLink: () => `/productos`,
   }),
   // {sesionesTexto} solo se rellena si la entrega ya se había REVERTIDO: ahí la
   // clienta pagó Y perdió lo entregado, y hay que devolvérselo a mano.
   ...paraRoles(EVENTOS.PAGO_DEVOLUCION_FALLIDA, ROLES_POR_AUDIENCIA.mostrador, {
     title: 'Una devolución ha fallado',
-    body: 'La devolución de {importe} € a {socia} ha fallado: el cliente NO ha recibido el dinero.{sesionesTexto} Puedes reintentarla desde su ficha.',
+    body: `La devolución de ${conMoneda('{importe}')} a {socia} ha fallado: el cliente NO ha recibido el dinero.{sesionesTexto} Puedes reintentarla desde su ficha.`,
     deepLink: (d: Datos) => (d.socioId ? `/clientas/${s(d.socioId)}` : '/cobros'),
   }),
   ...paraRoles(EVENTOS.PAGO_CHARGEBACK_PERDIDO, ROLES_POR_AUDIENCIA.mostrador, {
     title: 'Has perdido una disputa',
-    body: 'El banco ha dado la razón a {socia}: {importe} € se han perdido definitivamente. Sigue teniendo lo que pagó — revísalo.',
+    body: `El banco ha dado la razón a {socia}: ${conMoneda('{importe}')} se han perdido definitivamente. Sigue teniendo lo que pagó — revísalo.`,
     deepLink: () => `/dashboard`,
   }),
   ...paraRoles(EVENTOS.PAGO_DISPUTADO, ROLES_POR_AUDIENCIA.mostrador, {
     title: 'Un cargo ha sido disputado',
-    body: '{socia} ha impugnado el cargo de {concepto} ({importe} €) ante su banco. Tienes hasta el {plazo} para responder con evidencia en Stripe.',
+    body: `{socia} ha impugnado el cargo de {concepto} (${conMoneda('{importe}')}) ante su banco. Tienes hasta el {plazo} para responder con evidencia en Stripe.`,
     deepLink: () => `/cobros?tab=pendientes`,
   }),
   [`${EVENTOS.SISTEMA_ERROR}#PROPIETARIO`]: {
@@ -981,7 +981,7 @@ export const PLANTILLAS: Record<string, Plantilla> = {
   },
   [`${EVENTOS.CLASE_CASI_LLENA}#PROPIETARIO`]: {
     title: 'Clase casi llena',
-    body: '{clase} del {cuando} va al {porcentaje}% ({ocupadas}/{aforo} plazas).',
+    body: '{clase} del {cuando} va al {porcentaje}% ({ocupadas}/{aforo} lugares).',
     deepLink: (d: Datos) => `/calendario?sesion=${s(d.sesionId)}`,
   },
   [`${EVENTOS.SOCIA_INACTIVA}#PROPIETARIO`]: {

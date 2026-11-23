@@ -131,7 +131,7 @@ export async function POST(req: NextRequest) {
       return;
     }
     if (planesConCupo.has(plan.id)) {
-      errores.push({ fila: numFila, email: emailRaw, motivo: `«${planNombre}» tiene una etapa de lanzamiento con plazas limitadas en curso: véndelo desde el mostrador` });
+      errores.push({ fila: numFila, email: emailRaw, motivo: `«${planNombre}» tiene una etapa de lanzamiento con lugares limitados en curso: véndelo desde el mostrador` });
       return;
     }
 

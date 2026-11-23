@@ -122,10 +122,10 @@ export function BloqueEuroPlaza({ datos, periodo, visible, textoPeriodo, hoy, da
   return (
     <section aria-labelledby="informe-euro-plaza" className={`space-y-4 ${claseBloque}`} data-testid="bloque-euro-plaza">
       <CabeceraBloque
-        id="informe-euro-plaza" titulo={`${MONEDA_SIMBOLO} por plaza a la venta`}
-        acciones={<EnlaceExplicador ref={enlaceRef} texto={`¿Qué es el ${MONEDA_SIMBOLO} por plaza?`} onAbrir={abrir} />}
+        id="informe-euro-plaza" titulo={`${MONEDA_SIMBOLO} por lugar a la venta`}
+        acciones={<EnlaceExplicador ref={enlaceRef} texto={`¿Qué es el ${MONEDA_SIMBOLO} por lugar?`} onAbrir={abrir} />}
       >
-        Cuánto entra por cada plaza que pones a la venta, hora a hora, contando también las vacías. Para comparar tus horas entre sí.
+        Cuánto entra por cada lugar que pones a la venta, hora a hora, contando también las vacías. Para comparar tus horas entre sí.
       </CabeceraBloque>
 
       {aviso ? (
@@ -192,7 +192,7 @@ function Mapa({ mapa, textoPeriodo, importado, nombres }: {
     { signo: '−', etiqueta: 'Sesiones privadas', valor: euros(cuadre.sesionesPrivadas) },
     { signo: '−', etiqueta: 'Otros', detalle: 'Matrículas, penalizaciones y cobros sin plan.', valor: euros(cuadre.otros) },
     { signo: '−', etiqueta: 'Cobros sin cliente', valor: euros(cuadre.sinClienta) },
-    { signo: '−', etiqueta: 'De clientes que no ocuparon ninguna plaza', detalle: 'Pagaron en el periodo y no tenían clase en él.', valor: euros(cuadre.deNoVinieron) },
+    { signo: '−', etiqueta: 'De clientes que no ocuparon ningún lugar', detalle: 'Pagaron en el periodo y no tenían clase en él.', valor: euros(cuadre.deNoVinieron) },
   ];
   const cifras = [cuadre.caja, cuadre.sesionesPrivadas, cuadre.otros, cuadre.sinClienta, cuadre.deNoVinieron];
 
@@ -201,10 +201,10 @@ function Mapa({ mapa, textoPeriodo, importado, nombres }: {
       <div>
         <p className="text-[12.5px] text-muted-foreground">Todas tus horas, en {textoPeriodo}</p>
         <p className="text-[24px] font-semibold tabular-nums text-foreground" data-testid="euro-plaza-total">
-          {total.euroPorPlaza === null ? '—' : <>{euros(total.euroPorPlaza)} <span className="text-[14px] font-medium text-muted-foreground">por plaza</span></>}
+          {total.euroPorPlaza === null ? '—' : <>{euros(total.euroPorPlaza)} <span className="text-[14px] font-medium text-muted-foreground">por lugar</span></>}
         </p>
         <p className="text-[12.5px] text-muted-foreground">
-          {plural(total.plazas - total.ocupadas, 'plaza sin ocupar', 'plazas sin ocupar')} de {total.plazas} a la venta en {plural(total.nClases, 'clase', 'clases')}.
+          {plural(total.plazas - total.ocupadas, 'lugar sin ocupar', 'lugares sin ocupar')} de {total.plazas} a la venta en {plural(total.nClases, 'clase', 'clases')}.
         </p>
         <details className="mt-2">
           <summary className="cursor-pointer text-[13px] font-medium text-foreground underline-offset-2 hover:underline">Ver cálculo</summary>
@@ -215,9 +215,9 @@ function Mapa({ mapa, textoPeriodo, importado, nombres }: {
                 { etiqueta: `Cobrado en ${textoPeriodo}`, detalle: 'El «Cobrado» del principio de Informes.', valor: euros(cuadre.cobrado) },
                 // Las líneas a 0 no dicen nada: fuera.
                 ...fuera.filter((_, k) => cifras[k] > 0),
-                { signo: '=', etiqueta: 'Se reparte entre las plazas', valor: euros(cuadre.repartido), resultado: true },
-                { signo: '÷', etiqueta: 'Plazas a la venta', valor: total.plazas },
-                { signo: '=', etiqueta: `${MONEDA_SIMBOLO} por plaza`, valor: total.euroPorPlaza === null ? '—' : euros(total.euroPorPlaza), resultado: true },
+                { signo: '=', etiqueta: 'Se reparte entre los lugares', valor: euros(cuadre.repartido), resultado: true },
+                { signo: '÷', etiqueta: 'Lugares a la venta', valor: total.plazas },
+                { signo: '=', etiqueta: `${MONEDA_SIMBOLO} por lugar`, valor: total.euroPorPlaza === null ? '—' : euros(total.euroPorPlaza), resultado: true },
               ]}
               nota={(
                 <>
@@ -237,7 +237,7 @@ function Mapa({ mapa, textoPeriodo, importado, nombres }: {
 
       <RejillaConScroll>
         <table className="w-full min-w-[540px] table-fixed border-separate border-spacing-0 text-[12.5px]" data-testid="euro-plaza-mapa">
-          <caption className="sr-only">{MONEDA_SIMBOLO} por plaza a la venta por día de la semana y hora, en {textoPeriodo}</caption>
+          <caption className="sr-only">{MONEDA_SIMBOLO} por lugar a la venta por día de la semana y hora, en {textoPeriodo}</caption>
           <thead>
             <tr>
               <th scope="col" className="sticky left-0 z-[1] w-11 bg-card sm:w-14"><span className="sr-only">Hora</span></th>
@@ -312,9 +312,9 @@ function CeldaBoton({ celda: c, nivel, activa, onPulsar }: { celda: CeldaEuroPla
   const { oculto } = usePanelPrivacy();
   const etiqueta = c.euroPorPlaza === null
     ? c.plazas === 0
-      ? `${DIA_LARGO[c.dow]} a las ${c.inicio}: ${plural(c.nClases, 'clase', 'clases')} sin plazas a la venta. Ver cálculo`
+      ? `${DIA_LARGO[c.dow]} a las ${c.inicio}: ${plural(c.nClases, 'clase', 'clases')} sin lugares a la venta. Ver cálculo`
       : `${DIA_LARGO[c.dow]} a las ${c.inicio}: solo ${plural(c.nClases, 'clase', 'clases')}, muy pocas para fiarse. Ver cálculo`
-    : `${DIA_LARGO[c.dow]} a las ${c.inicio}: ${oculto ? 'cifra oculta' : `${formatEuro(c.euroPorPlaza)} por plaza`}, ${c.pct ?? 0} % de las plazas ocupadas, ${plural(c.nClases, 'clase', 'clases')}. Ver cálculo`;
+    : `${DIA_LARGO[c.dow]} a las ${c.inicio}: ${oculto ? 'cifra oculta' : `${formatEuro(c.euroPorPlaza)} por lugar`}, ${c.pct ?? 0} % de los lugares ocupados, ${plural(c.nClases, 'clase', 'clases')}. Ver cálculo`;
   return (
     <button
       type="button" onClick={onPulsar}
@@ -350,7 +350,7 @@ function Leyenda({ ejemplo, hayColor }: { ejemplo: CeldaEuroPlaza | null; hayCol
       {ejemplo && ejemplo.euroPorPlaza !== null && (
         <p className="text-pretty">
           <span className="font-medium text-foreground">Cómo se lee:</span> {losDias(ejemplo.dow)} a las {ejemplo.inicio}
-          {' '}hubo {plural(ejemplo.nClases, 'clase', 'clases')}; se ocuparon {ejemplo.pct ?? 0} de cada 100 plazas y cada plaza a la venta trajo {euros(ejemplo.euroPorPlaza)}.
+          {' '}hubo {plural(ejemplo.nClases, 'clase', 'clases')}; se ocuparon {ejemplo.pct ?? 0} de cada 100 lugares y cada lugar a la venta trajo {euros(ejemplo.euroPorPlaza)}.
           {' '}Cada casilla abre su cálculo.
         </p>
       )}
@@ -358,12 +358,12 @@ function Leyenda({ ejemplo, hayColor }: { ejemplo: CeldaEuroPlaza | null; hayCol
         <div className="flex flex-wrap items-center gap-2" aria-hidden>
           <span>menos</span>
           {TINTA_POR_NIVEL.map((_, n) => <span key={n} className="h-3 w-6 rounded-sm border border-border" style={{ backgroundColor: fondoNivel(n) }} />)}
-          <span>más {MONEDA_SIMBOLO} por plaza, comparado con tus otras horas</span>
+          <span>más {MONEDA_SIMBOLO} por lugar, comparado con tus otras horas</span>
         </div>
       )}
       <p className="text-pretty">
         «—»: menos de {MIN_CLASES_CELDA} clases, muy pocas para fiarse. En gris: no hubo clases. No resta lo que te cuesta
-        dar cada clase. Se lee mejor con un trimestre que con un mes: un bono pagado antes del periodo cuenta 0 € en sus clases.
+        dar cada clase. Se lee mejor con un trimestre que con un mes: un bono pagado antes del periodo cuenta {conMoneda('0')} en sus clases.
       </p>
     </div>
   );
@@ -396,9 +396,9 @@ function Detalle({ ref, celda: c, textoPeriodo, nombres, onCerrar }: {
           testId="euro-plaza-calculo-celda"
           lineas={[
             { etiqueta: 'Clases', detalle: tipos, valor: c.nClases },
-            { etiqueta: 'Plazas a la venta', valor: c.plazas },
+            { etiqueta: 'Lugares a la venta', valor: c.plazas },
             {
-              etiqueta: `Plazas ocupadas (${c.pct ?? 0} %)`,
+              etiqueta: `Lugares ocupados (${c.pct ?? 0} %)`,
               detalle: c.externas > 0 ? `${alumnas} de clientes y ${c.externas} de ClassPass, Wellhub o USC, que cuentan ${conMoneda(0)}.` : undefined,
               valor: c.ocupadas,
             },
@@ -409,16 +409,16 @@ function Detalle({ ref, celda: c, textoPeriodo, nombres, onCerrar }: {
             }] : []),
             // Sin `resultado`: no es la suma de las líneas de arriba (clases, plazas, ocupadas).
             { etiqueta: 'Repartido a estas clases', detalle: 'Lo que pagaron sus clientes en el periodo, repartido entre todas las clases a las que vinieron en él.', valor: euros(c.repartido) },
-            { signo: '÷', etiqueta: 'Plazas a la venta', valor: c.plazas },
+            { signo: '÷', etiqueta: 'Lugares a la venta', valor: c.plazas },
             {
-              signo: '=', etiqueta: `${MONEDA_SIMBOLO} por plaza`, resultado: true,
+              signo: '=', etiqueta: `${MONEDA_SIMBOLO} por lugar`, resultado: true,
               valor: c.euroPorPlaza !== null ? euros(c.euroPorPlaza)
-                : c.plazas === 0 ? 'Sin plazas a la venta' : `Solo ${plural(c.nClases, 'clase', 'clases')}: muy pocas para fiarse`,
+                : c.plazas === 0 ? 'Sin lugares a la venta' : `Solo ${plural(c.nClases, 'clase', 'clases')}: muy pocas para fiarse`,
             },
           ]}
           nota={c.ejemplo && (
             <>
-              Por ejemplo, {nombres.socia(c.ejemplo.socioId)}: pagó {euros(c.ejemplo.pagado)} en el periodo y ocupó {plural(c.ejemplo.plazasEnElPeriodo, 'plaza', 'plazas')},
+              Por ejemplo, {nombres.socia(c.ejemplo.socioId)}: pagó {euros(c.ejemplo.pagado)} en el periodo y ocupó {plural(c.ejemplo.plazasEnElPeriodo, 'lugar', 'lugares')},
               {' '}así que cada una vale {euros(c.ejemplo.valorPlaza)}. Aquí ocupó {c.ejemplo.plazasAqui}: {euros(c.ejemplo.valorPlaza * c.ejemplo.plazasAqui)} de los {euros(c.repartido)}.
             </>
           )}

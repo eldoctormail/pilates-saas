@@ -298,7 +298,7 @@ const REC_ABRIR = rec({
   id: 'rec-1', especialista: 'INGRESOS', tipo: 'ABRIR_CLASE', score: 0.91,
   titulo: 'Abrir una segunda clase de Reformer los martes a las 11:00',
   motivo: 'Las últimas 5 semanas se llenó en menos de 24 h y quedaron 7 personas en lista de espera.',
-  impacto: { valor: 320, unidad: 'EUR_MES', formula: '7 plazas × 4 semanas × 11,4 €' },
+  impacto: { valor: 320, unidad: 'EUR_MES', formula: '7 lugares × 4 semanas × 11,4 €' },
   confianza: { nivel: 'ALTA', evidencia: ['5 semanas llenas', '7 en lista de espera'], autonomiaMaxima: 'SUGERIR' },
   prioridad: 'ALTA',
 });

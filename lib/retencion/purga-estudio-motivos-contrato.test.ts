@@ -76,12 +76,12 @@ const DESTINO: Record<string, { destino: Destino; motivo: string }> = {
 // Puede nombrar tablas que existen en producción antes de que su migración
 // llegue al repo (las de Wellhub): no se exige que estén en las migraciones.
 const DESTINO_PLATAFORMA: Record<string, { destino: 'borrar' | 'fuera'; motivo: string }> = {
-  plataforma_cupos: { destino: 'borrar', motivo: 'plazas cedidas: sin ellas, el cron de USC cancela allí lo que siga publicado' },
+  plataforma_cupos: { destino: 'borrar', motivo: 'lugares cedidos: sin ellas, el cron de USC cancela allí lo que siga publicado' },
   plataforma_conexiones: { destino: 'borrar', motivo: 'el gym de Wellhub: sin él deja de publicar, y el webhook de check-in ya no lleva a este estudio' },
   plataforma_checkins: { destino: 'borrar', motivo: 'guarda el Wellhub ID mientras está pendiente; un estudio purgado ya no valida visitas' },
   plataforma_eventos: { destino: 'fuera', motivo: 'ids de lo publicado: sin ellos no se puede cancelar en USC/Wellhub y quedan clases reservables de un estudio que no existe' },
   plataforma_clases: { destino: 'fuera', motivo: 'ids de las clases de Wellhub: sin ellos no se pueden ocultar allí' },
-  plataforma_ajustes: { destino: 'fuera', motivo: 'solo las horas antes de la clase en que se liberan plazas apartadas: sin nombres, ids ni nada que cancelar fuera' },
+  plataforma_ajustes: { destino: 'fuera', motivo: 'solo las horas antes de la clase en que se liberan lugares apartados: sin nombres, ids ni nada que cancelar fuera' },
   plataforma_lead: { destino: 'fuera', motivo: 'CRM de Tentare (quien abrió el estudio), no datos del estudio' },
 };
 

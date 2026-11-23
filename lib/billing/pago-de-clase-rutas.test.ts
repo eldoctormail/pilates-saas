@@ -24,7 +24,7 @@ function antes(f: string, primero: string, despues: string[], ruta: string) {
   }
 }
 
-test('checkout-embebido: plaza y pago vivo antes de matrícula, Customer y cobro', () => {
+test('checkout-embebido: lugar y pago vivo antes de matrícula, Customer y cobro', () => {
   const ruta = 'app/api/public/checkout-embebido/route.ts';
   const f = leer(ruta);
   antes(f, 'comprobarPlazaAntesDeCobrar(admin', ['reservarMatricula(', 'stripe.customers.create(', 'stripe.paymentIntents.create(', 'prepararPagoDeClase('], ruta);
@@ -50,7 +50,7 @@ test('checkout-embebido: con clase, la casilla de condiciones; y nunca por debaj
   antes(f, "codigo: 'precio-especial'", ['stripe.paymentIntents.create('], ruta);
 });
 
-test('/api/stripe/checkout (Bizum con clase): plaza antes de matrícula y sesión, y caduca con la clase', () => {
+test('/api/stripe/checkout (Bizum con clase): lugar antes de matrícula y sesión, y caduca con la clase', () => {
   const ruta = 'app/api/stripe/checkout/route.ts';
   const f = leer(ruta);
   antes(f, 'comprobarPlazaAntesDeCobrar(admin', ['reservarMatricula(', 'stripe.checkout.sessions.create('], ruta);

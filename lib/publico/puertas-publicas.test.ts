@@ -124,7 +124,7 @@ test('reservar las próximas N clases: RESERVAR pasa por el gate antes de recorr
   assert.ok(f.includes('if (cerrada) return cerrada'));
 });
 
-test('lista de espera: aceptar la plaza (widget y app del cliente) pasa por el gate', () => {
+test('lista de espera: aceptar el lugar (widget y app del cliente) pasa por el gate', () => {
   gateAntesDe('app/api/public/aceptar-oferta-espera/route.ts', ['aceptarOfertaListaEspera(']);
   gateAntesDe('app/api/reservas/aceptar-oferta-espera/route.ts', ['aceptarOfertaListaEspera(']);
 });
@@ -141,7 +141,7 @@ test('cita 1:1: los huecos (GET) y crear pasan por el gate, cancelar no', () => 
   assert.ok(gatePost < posicion(f, "body.accion === 'cancelar'", ruta), 'cancelar queda fuera del gate');
 });
 
-test('plaza fija: pedir una plaza pasa por el gate antes de escribir la petición', () => {
+test('lugar fijo: pedir un lugar pasa por el gate antes de escribir la petición', () => {
   const f = gateAntesDe('app/api/public/plaza-fija/route.ts', ['solicitarPlazaFijaAlumna(']);
   assert.ok(f.includes("if (body.accion === 'solicitar_plaza')"));
   // Las clases fijas con nombre ya no se piden ni se amplían (4-oct-2026): esa rama contesta 410 sin escribir nada.

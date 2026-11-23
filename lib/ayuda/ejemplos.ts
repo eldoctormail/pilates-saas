@@ -11,6 +11,7 @@
 //     vacío significa «las de la sala».
 // Los textos son de Pilates (lo vigila `lib/ayuda/ejemplos.test.ts`).
 // ─────────────────────────────────────────────────────────────────────────────
+import { conMoneda } from '../moneda.ts';
 
 export type IdEjemplo = 'tipo-clase' | 'bono';
 
@@ -28,7 +29,7 @@ export const EJEMPLOS: Readonly<Record<IdEjemplo, Ejemplo>> = {
   },
   bono: {
     // Sin «de Reformer»: obligaría a elegir en «Clases incluidas» un tipo que quizá no existe.
-    banda: 'Ejemplo · el texto en gris es solo una guía: escribe «Bono 10 clases», 120 €, 10 sesiones y 90 en «Caducidad». Nada se guarda hasta que pulses «Crear bono de sesiones».',
+    banda: `Ejemplo · el texto en gris es solo una guía: escribe «Bono 10 clases», ${conMoneda('120')}, 10 sesiones y 90 en «Caducidad». Nada se guarda hasta que pulses «Crear bono de sesiones».`,
     placeholders: { nombre: 'Bono 10 clases', precio: '120,00', sesiones: '10' },
   },
 };

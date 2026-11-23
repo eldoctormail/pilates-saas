@@ -42,7 +42,7 @@ const caja = async (l: ReturnType<Page['locator']>) => {
 
 test('«Contenido de tu app»: la vista previa es un iPhone 17 con su isla, y las tarjetas son fotos anchas que dejan asomar la siguiente', async ({ page }) => {
   await abrirContenido(page, [
-    banner('b1', 0, { titulo: 'Taller de Reformer', texto: 'Plazas limitadas' }),
+    banner('b1', 0, { titulo: 'Taller de Reformer', texto: 'Lugares limitados' }),
     banner('b2', 1, { titulo: 'Solo informa', link_tipo: 'ninguno', link_valor: '' }),
     banner('b3', 2),
   ]);

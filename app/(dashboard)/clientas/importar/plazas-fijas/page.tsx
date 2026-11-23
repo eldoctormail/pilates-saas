@@ -119,7 +119,7 @@ export default function ImportarPlazasFijasPage() {
 
       <div className="flex items-start gap-2 text-[12.5px] rounded-xl px-4 py-3 border max-w-2xl" style={{ backgroundColor: 'color-mix(in srgb, var(--primary) 6%, transparent)', borderColor: 'var(--border)', color: 'var(--muted-foreground)' }}>
         <Info size={15} className="shrink-0 mt-0.5 text-primary" />
-        <span>Antes de importar, las <strong className="text-foreground">clientes</strong> (por email) y las <strong className="text-foreground">salas</strong> (por nombre) deben existir ya. Cada plaza generará reservas automáticamente en el cron nocturno.</span>
+        <span>Antes de importar, las <strong className="text-foreground">clientes</strong> (por email) y las <strong className="text-foreground">salas</strong> (por nombre) deben existir ya. Cada lugar generará reservas automáticamente en el cron nocturno.</span>
       </div>
 
       <div className="flex items-center gap-2 text-[12px] font-medium">

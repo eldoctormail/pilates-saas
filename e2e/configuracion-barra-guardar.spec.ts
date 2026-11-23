@@ -220,9 +220,9 @@ test.describe('La barra de guardar de los cajones de «Cómo reservan mis client
     expect(patches[0]).toEqual({ ...deFila(RESERVAR), reserva_pendiente_cuenta_para_tope: true });
   });
 
-  test('lista de espera: guardar la plaza ofrecida solo se ofrece cuando hay plazo para aceptarla', async ({ page }) => {
+  test('lista de espera: guardar el lugar ofrecido solo se ofrece cuando hay plazo para aceptarla', async ({ page }) => {
     const { patches } = await cajonDe(page, 'lista-de-espera', 'Lista de espera');
-    const sw = page.getByRole('switch', { name: /Guardar la plaza ofrecida mientras corre el plazo/ });
+    const sw = page.getByRole('switch', { name: /Guardar el lugar ofrecido mientras corre el plazo/ });
     // La fila de prueba trae 15 minutos de plazo: hay ofertas.
     await expect(sw).toHaveAttribute('aria-checked', 'false');
     await page.getByRole('radio', { name: /Se da a la primera al momento/ }).check();
@@ -317,7 +317,7 @@ test.describe('La barra de guardar de los cajones de «Cómo reservan mis client
     },
     {
       nombre: 'se le ofrece durante 30 minutos',
-      elegir: page => page.getByLabel('Minutos para aceptar la plaza').fill('30'),
+      elegir: page => page.getByLabel('Minutos para aceptar el lugar').fill('30'),
       columnas: { permite_lista_espera: true, lista_espera_plazo_aceptacion_minutos: 30, lista_espera_reserva_plaza_ofrecida: false },
     },
   ];
@@ -353,8 +353,8 @@ test.describe('La barra de guardar de los cajones de «Cómo reservan mis client
     await page.keyboard.press('Escape');
     await expect(titulo(page, 'Reservar')).toHaveCount(0);
     await page.locator('#lista-de-espera').click();
-    await page.getByLabel('Minutos para aceptar la plaza').fill('');
-    await expect(barra(page).getByRole('alert')).toContainText('Pon cuántos minutos tiene para aceptar la plaza');
+    await page.getByLabel('Minutos para aceptar el lugar').fill('');
+    await expect(barra(page).getByRole('alert')).toContainText('Pon cuántos minutos tiene para aceptar el lugar');
     await expect(guardar(page)).toBeDisabled();
     // El cajón entra deslizándose (#2138) y `force` se salta la espera de
     // estabilidad: el clic caía a media animación, con «Guardar» aún fuera de

@@ -98,7 +98,7 @@ test('solo escucha el staff del estudio o una socia activa suya', () => {
 });
 
 // ── Que nadie se olvide de engancharlo ───────────────────────────────────────
-test('las pantallas del cliente que enseñan plazas o su reserva están enganchadas', () => {
+test('las pantallas del cliente que enseñan lugares o su reserva están enganchadas', () => {
   const pantallas = [
     'app/portal/[slug]/page.tsx',
     'app/portal/[slug]/mis-reservas/page.tsx',

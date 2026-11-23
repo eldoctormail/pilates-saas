@@ -125,7 +125,7 @@ export function resumenDia(d: DiaMes): string {
   if (d.clases === 0) return 'Sin clases';
   const clases = `${d.clases} ${d.clases === 1 ? 'clase' : 'clases'}`;
   if (d.plazasLibres === 0) return `${clases} · completo`;
-  return `${clases} · ${d.plazasLibres} ${d.plazasLibres === 1 ? 'plaza libre' : 'plazas libres'}`;
+  return `${clases} · ${d.plazasLibres} ${d.plazasLibres === 1 ? 'lugar libre' : 'lugares libres'}`;
 }
 
 /**

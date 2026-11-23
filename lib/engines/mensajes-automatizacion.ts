@@ -75,7 +75,7 @@ export const MENSAJES_AUTOMATIZACION: MensajeAutomatizacion[] = [
     trigger: 'PAGO_PENDIENTE_DIAS',
     cuando: 'Primer aviso de un pago vencido',
     asunto: 'Tienes un pago pendiente',
-    plantilla: '{nombre}, tienes un pago pendiente de {importe}€ ({concepto}) desde hace {dias} días. Puedes regularizarlo fácilmente desde tu área de socia o pasando por el estudio — si ya lo has hecho, ignora este aviso. ¡Gracias!',
+    plantilla: `{nombre}, tienes un pago pendiente de ${conMoneda('{importe}')} ({concepto}) desde hace {dias} días. Puedes regularizarlo fácilmente desde tu área de socia o pasando por el estudio — si ya lo has hecho, ignora este aviso. ¡Gracias!`,
     variables: [V.nombre, V.importe, V.concepto, V.dias],
   },
   {
@@ -83,7 +83,7 @@ export const MENSAJES_AUTOMATIZACION: MensajeAutomatizacion[] = [
     trigger: 'PAGO_PENDIENTE_DIAS',
     cuando: 'Segundo aviso, si sigue sin resolverse',
     asunto: 'Segundo aviso: pago pendiente',
-    plantilla: '{nombre}, tu pago de {importe}€ ({concepto}) sigue pendiente desde hace {dias} días. Puedes regularizarlo desde tu área de socia o pasando por el estudio — si ya lo hiciste, ignora este aviso.',
+    plantilla: `{nombre}, tu pago de ${conMoneda('{importe}')} ({concepto}) sigue pendiente desde hace {dias} días. Puedes regularizarlo desde tu área de socia o pasando por el estudio — si ya lo hiciste, ignora este aviso.`,
     variables: [V.nombre, V.importe, V.concepto, V.dias],
   },
   {
@@ -91,7 +91,7 @@ export const MENSAJES_AUTOMATIZACION: MensajeAutomatizacion[] = [
     trigger: 'CLASE_MANANA',
     cuando: 'El día antes de la clase',
     asunto: 'Recordatorio: tu clase es mañana',
-    plantilla: '{nombre}, te recordamos tu clase de {clase} mañana a las {hora}. Si no puedes venir, cancela desde tu portal (Mis reservas) para liberar la plaza — ¡te esperamos!',
+    plantilla: '{nombre}, te recordamos tu clase de {clase} mañana a las {hora}. Si no puedes venir, cancela desde tu portal (Mis reservas) para liberar el lugar — ¡te esperamos!',
     variables: [V.nombre, V.clase, V.hora],
   },
   {
@@ -107,7 +107,7 @@ export const MENSAJES_AUTOMATIZACION: MensajeAutomatizacion[] = [
     trigger: 'RENOVACION_COBRADA',
     cuando: 'Al cobrarse una renovación',
     asunto: 'Renovación confirmada',
-    plantilla: '{nombre}, hemos cobrado tu renovación de {concepto} por {importe}€. Aquí tienes tu recibo desde tu área de socia.{cierre}',
+    plantilla: `{nombre}, hemos cobrado tu renovación de {concepto} por ${conMoneda('{importe}')}. Aquí tienes tu recibo desde tu área de socia.{cierre}`,
     variables: [V.nombre, V.concepto, V.importe, V.cierre],
   },
   {

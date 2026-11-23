@@ -48,7 +48,7 @@ test('pedida → pendiente con su petición (para anularla); sin cuota → apaga
   assert.deepEqual(b?.accion, { tipo: 'SOLO_CON_CUOTA' });
 });
 
-test('⚠️ su plaza manda: encendido con la plaza que se deja, también la que salió de una clase fija con nombre', () => {
+test('⚠️ su lugar manda: encendido con el lugar que se deja, también la que salió de una clase fija con nombre', () => {
   const s = autoReservableDe(datos({ sueltas: [suelta({ estado: 'TIENE_PLAZA' })], plazas: [plaza()] }), CLASE, HOY);
   assert.equal(s?.visual, 'encendido');
   assert.deepEqual(s?.plaza, { id: 'pf-1', deClaseFija: false });
@@ -57,7 +57,7 @@ test('⚠️ su plaza manda: encendido con la plaza que se deja, también la que
   assert.deepEqual(o?.plaza, { id: 'pf-1', deClaseFija: true });
 });
 
-test('una plaza de baja, vencida o de otra franja no la enciende', () => {
+test('un lugar de baja, vencida o de otra franja no la enciende', () => {
   for (const p of [plaza({ estado: 'BAJA' }), plaza({ vigenciaHasta: '2026-10-01' }), plaza({ horaInicio: '11:00:00' }), plaza({ salaId: 'otra' }), plaza({ diaSemana: 4 })]) {
     const e = autoReservableDe(datos({ sueltas: [suelta({ estado: 'PUEDE_PEDIR' })], plazas: [p] }), CLASE, HOY);
     assert.equal(e?.visual, 'apagado', JSON.stringify(p));

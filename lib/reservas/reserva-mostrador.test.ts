@@ -57,7 +57,7 @@ test('sin clase, sin cliente o sin cuerpo no se reserva nada', () => {
   assert.equal(leerPeticionReservaMostrador({ ...BASE, sesionId: 'x'.repeat(201) }).ok, false);
 });
 
-test('⚠️ un id de reserva con prefijo de plaza fija se rechaza', () => {
+test('⚠️ un id de reserva con prefijo de lugar fijo se rechaza', () => {
   // `res-pf-` hace que cancelarla no devuelva bono y dé una recuperación.
   const r = leerPeticionReservaMostrador({ ...BASE, reservaId: 'res-pf-abc' });
   assert.equal(r.ok, false);
@@ -103,7 +103,7 @@ test('⚠️ un dueño por hecho: solo los tres dueños descuentan bono en servi
   for (const i of llamadas) {
     const dentro = funcionQueContiene(ADMIN, i);
     assert.ok(duenos.has(dentro ?? ''),
-      `consumirBonoServidor se llama desde ${dentro}: un camino que confirma plaza llama a su dueño `
+      `consumirBonoServidor se llama desde ${dentro}: un camino que confirma lugar llama a su dueño `
       + '(trasReservaCreada / trasPlazaConfirmada / trasPromocionDeEspera), no al descuento suelto');
   }
 });

@@ -5,6 +5,7 @@
 // jamás desde el texto libre que devuelve este módulo. Falla-suave: si la IA
 // cae o el JSON es inválido, el texto del motor ya es válido por sí mismo.
 import Anthropic from '@anthropic-ai/sdk';
+import { conMoneda } from '../moneda.ts';
 
 const SYSTEM_PROMPT = `Eres el equipo de especialistas de Tentare que trabaja para {nombrePropietario}, propietaria/o
 del estudio {nombreEstudio}. Cada elemento que recibes fue detectado por un especialista
@@ -42,7 +43,7 @@ const FEW_SHOTS = `Ejemplos:
 
 [INGRESOS · RECUPERAR_PAGOS · {"n":2,"total":180,"diasMedio":3}]
 → {"titulo": "Se quedaron 2 pagos sin completar",
-   "motivo": "Nada raro, cosas de tarjetas. Los tengo listos para reintentar — son 180€ que deberían estar en tu cuenta."}`;
+   "motivo": "Nada raro, cosas de tarjetas. Los tengo listos para reintentar — son ${conMoneda('180')} que deberían estar en tu cuenta."}`;
 
 function construirSystemPrompt(nombrePropietario: string, nombreEstudio: string): string {
   return SYSTEM_PROMPT.replace('{nombrePropietario}', nombrePropietario).replace('{nombreEstudio}', nombreEstudio);

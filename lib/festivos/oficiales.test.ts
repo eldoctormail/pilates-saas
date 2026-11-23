@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {
   CALENDARIOS_OFICIALES,
   aniosConFestivos,
+  ambitoOficial,
   festivoDe,
   festivosEntre,
   hayCalendario,
@@ -10,7 +11,7 @@ import {
 } from './oficiales.ts';
 import { hoyEnEstudio } from '../utils.ts';
 
-const ZONAS: ZonaFestivos[] = ['CATALUNA', 'ARAN', 'MADRID', 'ANDALUCIA'];
+const ZONAS: ZonaFestivos[] = ['CATALUNA', 'ARAN', 'MADRID', 'ANDALUCIA', 'ARGENTINA'];
 const DIAS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
 const diaSemana = (iso: string) => DIAS[new Date(`${iso}T12:00:00Z`).getUTCDay()];
 
@@ -28,7 +29,9 @@ test('cada calendario: fechas reales, del año que dice, en orden, sin repetir y
     assert.ok(c.fuente.length > 40 && /^https:\/\//.test(c.url), `${c.zona} ${c.anio} sin fuente citada`);
     // El Estatuto permite 14 fiestas al año contando las 2 locales: los seis
     // calendarios publicados traen 12, cada uno contrastado con su boletín.
-    assert.equal(fechas.length, 12, `${c.zona} ${c.anio}: ${fechas.length} festivos`);
+    // Argentina va aparte: 19 en 2026 (ley + no laborables) y 16 en 2027 (solo la ley).
+    const esperados = c.zona === 'ARGENTINA' ? (c.anio === 2026 ? 19 : 16) : 12;
+    assert.equal(fechas.length, esperados, `${c.zona} ${c.anio}: ${fechas.length} festivos`);
   }
 });
 
@@ -115,8 +118,9 @@ test('lo que se traslada cae en lunes (y hay cuatro en Madrid y Andalucía)', ()
     }
   }
   // 2026: Todos los Santos y la Constitución en Madrid y Andalucía (4); 2027: la
-  // Asunción en las dos y el Día de Andalucía (3).
-  assert.equal(n, 7);
+  // Asunción en las dos y el Día de Andalucía (3). Argentina: Güemes y
+  // Soberanía en 2026 (2); Güemes, San Martín y Diversidad Cultural en 2027 (3).
+  assert.equal(n, 12);
 });
 
 test('Arán: cambia exactamente un festivo por el 17 de junio', () => {
@@ -152,4 +156,25 @@ test('guardia: el año siguiente está cargado antes del 1 de noviembre', () => 
       assert.ok(aniosConFestivos(zona).includes(a), `Faltan los festivos de ${a} para ${zona}`);
     }
   }
+});
+
+test('Argentina 2026: el calendario oficial (Ley 27.399 y Resolución 164/2025)', () => {
+  const f = festivosEntre('ARGENTINA', '2026-01-01', '2026-12-31');
+  assert.equal(f.length, 19);
+  const fechas = f.map((x) => x.fecha);
+  // Los tres días turísticos de la Resolución 164/2025.
+  for (const d of ['2026-03-23', '2026-07-10', '2026-12-07']) assert.ok(fechas.includes(d), d);
+  // Trasladables: Güemes (mié 17-jun) al lunes 15; Soberanía (vie 20-nov) al lunes 23.
+  assert.ok(fechas.includes('2026-06-15') && !fechas.includes('2026-06-17'));
+  assert.ok(fechas.includes('2026-11-23') && !fechas.includes('2026-11-20'));
+  // Carnaval: lunes y martes, 48 y 47 días antes de Pascua.
+  assert.deepEqual(fechas.filter((x) => x.startsWith('2026-02')), ['2026-02-16', '2026-02-17']);
+  assert.equal(ambitoOficial('ARGENTINA', '2026-05-25'), 'nacional');
+});
+
+test('Argentina 2027: lo que fija la ley, sin inventar los días turísticos ni mover el sábado 20-nov', () => {
+  const f = festivosEntre('ARGENTINA', '2027-01-01', '2027-12-31').map((x) => x.fecha);
+  assert.deepEqual(f.filter((x) => x.startsWith('2027-02')), ['2027-02-08', '2027-02-09']);
+  assert.ok(f.includes('2027-06-21') && f.includes('2027-08-16') && f.includes('2027-10-11'));
+  assert.ok(!f.includes('2027-11-20') && !f.includes('2027-11-19') && !f.includes('2027-11-22'));
 });

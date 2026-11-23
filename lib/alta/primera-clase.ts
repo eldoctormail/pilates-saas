@@ -302,7 +302,7 @@ export function validarPrimeraClase(
 
   if (f.quien === 'otra' && !f.otraPersona.trim()) e.otraPersona = 'Escribe el nombre de quien la da.';
   if (!f.sala.trim()) e.sala = 'Ponle nombre a la sala, aunque sea «Sala 1».';
-  if (!Number.isInteger(f.plazas) || f.plazas < 1 || f.plazas > MAX_PLAZAS) e.plazas = `Entre 1 y ${MAX_PLAZAS} plazas.`;
+  if (!Number.isInteger(f.plazas) || f.plazas < 1 || f.plazas > MAX_PLAZAS) e.plazas = `Entre 1 y ${MAX_PLAZAS} lugares.`;
 
   const precio = infoPrecio(f);
   if (precio.bloquea) e.precio = precio.texto;
@@ -444,8 +444,8 @@ export function resumenPrimeraClase(f: FormPrimeraClase, nombrePropio: string, y
       ? `La clase «${nombre}», que ya tienes, de ${f.duracion} minutos`
       : `El tipo de clase «${nombre}», de ${f.duracion} minutos`,
     ya?.salas.has(clave(sala))
-      ? `Tu sala «${sala}», con ${f.plazas} plazas en esta clase`
-      : `La sala «${sala}», con ${f.plazas} plazas`,
+      ? `Tu sala «${sala}», con ${f.plazas} lugares en esta clase`
+      : `La sala «${sala}», con ${f.plazas} lugares`,
     f.quien === 'yo'
       ? (ya?.fichaPropia ? `Tu ficha de instructora (${quien}), que ya tienes` : `Tu ficha de instructora (${quien})`)
       : (ya?.instructoras.has(clave(quien)) ? `La ficha de ${quien}, que ya tienes` : `La ficha de ${quien}`),
@@ -490,7 +490,7 @@ const ERRORES_RPC: Readonly<Record<string, { texto: string; campo?: CampoPrimera
   HORA_INVALIDA: { texto: 'Revisa la hora y la duración de la clase.', campo: 'hora' },
   NOMBRE_INVALIDO: { texto: 'Ponle un nombre de 1 a 60 letras: así sale en tu app.', campo: 'nombre' },
   SALA_INVALIDA: { texto: 'Ponle nombre a la sala, aunque sea «Sala 1».', campo: 'sala' },
-  AFORO_INVALIDO: { texto: `Entre 1 y ${MAX_PLAZAS} plazas.`, campo: 'plazas' },
+  AFORO_INVALIDO: { texto: `Entre 1 y ${MAX_PLAZAS} lugares.`, campo: 'plazas' },
   SIN_PRECIO: { texto: TEXTO_PRECIO.falta, campo: 'precio' },
   BONO_INVALIDO: { texto: 'Escribe cuántas clases trae el bono, por ejemplo 10.', campo: 'bonoClases' },
   INSTRUCTORA_INVALIDA: { texto: 'Falta tu nombre para tu ficha de instructora. Escríbelo en «Quién la da» y vuelve a publicar.' },

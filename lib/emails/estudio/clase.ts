@@ -88,16 +88,16 @@ export function botonConPersonalizacion(
 
 export function correoReserva(p: PropsClase): string {
   const base = comun(p, p.url ? { href: p.url, texto: 'Ver mis clases' } : null);
-  const preheader = `Tu plaza en ${p.claseNombre} está confirmada`;
+  const preheader = `Tu lugar en ${p.claseNombre} está confirmado`;
   if (p.personalizacion?.cuerpo) {
     return correoEstudioLibre({ ...base, preheader, titular: '', cuerpo: p.personalizacion.cuerpo });
   }
   return correoEstudio({
     ...base,
     preheader,
-    titular: 'Tu plaza está reservada',
+    titular: 'Tu lugar está reservado',
     parrafos: [p.intro?.trim() || `Hola ${p.socioNombre}, ya tienes sitio en ${p.claseNombre}. Aquí tienes los detalles.`],
-    nota: 'Si al final no puedes venir, cancela tu plaza con antelación para que otra persona pueda aprovecharla.',
+    nota: 'Si al final no puedes venir, cancela tu lugar con antelación para que otra persona pueda aprovecharlo.',
   });
 }
 
@@ -112,7 +112,7 @@ export function correoRecordatorio(p: PropsClase): string {
     preheader,
     titular: 'Te esperamos en clase',
     parrafos: [p.intro?.trim() || `Hola ${p.socioNombre}, un recordatorio de tu próxima clase.`],
-    nota: 'Si no puedes asistir, cancela tu plaza con antelación para que otra persona pueda aprovecharla.',
+    nota: 'Si no puedes asistir, cancela tu lugar con antelación para que otra persona pueda aprovecharlo.',
   });
 }
 
@@ -140,19 +140,19 @@ export function correoCancelacionClase(p: PropsClase & { bonoDevuelto?: boolean 
 
 export function correoPlazaLiberada(p: PropsClase & { bonoConsumido?: boolean }): string {
   const base = { ...comun(p, p.url ? { href: p.url, texto: 'Ver mis clases' } : null), acento: ACENTO.bien };
-  const preheader = `Tu plaza en ${p.claseNombre} ya está confirmada`;
+  const preheader = `Tu lugar en ${p.claseNombre} ya está confirmado`;
   if (p.personalizacion?.cuerpo) {
     return correoEstudioLibre({ ...base, preheader, titular: '', cuerpo: p.personalizacion.cuerpo });
   }
   return correoEstudio({
     ...base,
     preheader,
-    titular: 'Se ha liberado tu plaza',
+    titular: 'Se ha liberado tu lugar',
     parrafos: [
       p.intro?.trim() || `Hola ${p.socioNombre}, estabas en lista de espera y ha quedado un sitio libre. Tu reserva ya está confirmada.`,
       // Nunca se le descuenta una sesión sin decírselo.
-      p.bonoConsumido ? 'Se ha descontado una sesión de tu bono para confirmar esta plaza.' : null,
+      p.bonoConsumido ? 'Se ha descontado una sesión de tu bono para confirmar este lugar.' : null,
     ],
-    nota: 'Si ya no puedes asistir, cancela tu plaza cuanto antes para dejársela a otra persona.',
+    nota: 'Si ya no puedes asistir, cancela tu lugar cuanto antes para dejárselo a otra persona.',
   });
 }

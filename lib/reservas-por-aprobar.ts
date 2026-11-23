@@ -110,7 +110,7 @@ export function resultadoDecisionReserva(aprobar: boolean, r: RespuestaDecision)
     if (body.motivoUI === 'clase_ya_empezada') {
       return { quitar: true, error: true, mensaje: 'La clase ya ha empezado: la reserva se ha cancelado sola y ya no puede aprobarse' };
     }
-    if (aprobar && body.estado === 'CONFIRMADA') return { quitar: true, mensaje: 'Reserva aprobada: tiene su plaza confirmada' };
+    if (aprobar && body.estado === 'CONFIRMADA') return { quitar: true, mensaje: 'Reserva aprobada: tiene su lugar confirmado' };
     if (aprobar && body.estado === 'LISTA_ESPERA') {
       return { quitar: true, mensaje: 'La clase se llenó mientras esperaba: la reserva pasa a la lista de espera' };
     }

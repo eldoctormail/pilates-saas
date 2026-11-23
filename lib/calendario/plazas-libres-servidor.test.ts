@@ -60,7 +60,7 @@ test('las apartadas y las retiradas, por trozos de 100 sesiones (PostgREST corta
   assert.deepEqual(llamadas.retiradas.map(x => x.length), [IDS_POR_CONSULTA, IDS_POR_CONSULTA, 50]);
 });
 
-test('el aforo es el efectivo: una máquina averiada que solapa la clase resta una plaza; una ya arreglada, no', async () => {
+test('el aforo es el efectivo: una máquina averiada que solapa la clase resta un lugar; una ya arreglada, no', async () => {
   const conAveria = lecturas({ averias: async () => [averia()] });
   const [h] = (await contarPlazasLibres(conAveria.l, P)).sesiones;
   assert.deepEqual([h.aforo, h.libres], [7, 7]);

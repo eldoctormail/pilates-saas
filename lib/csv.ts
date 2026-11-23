@@ -883,7 +883,7 @@ export const CAMPOS_CLASE: CampoMetaClase[] = [
   { campo: 'duracion', etiqueta: 'Duración (min)', obligatorio: false },
   { campo: 'instructor', etiqueta: 'Instructora', obligatorio: false },
   { campo: 'sala', etiqueta: 'Sala', obligatorio: false },
-  { campo: 'aforo', etiqueta: 'Aforo / plazas', obligatorio: false },
+  { campo: 'aforo', etiqueta: 'Aforo / lugares', obligatorio: false },
 ];
 
 const SINONIMOS_CLASE: Record<CampoClase, string[]> = {

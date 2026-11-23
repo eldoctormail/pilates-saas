@@ -127,7 +127,7 @@ function libre(id: string, fecha: string, hora: string, extra: Partial<Clase> = 
 }
 const A_LAS_1620 = ms('2026-10-07T14:20:00Z');
 
-test('clasesConPlazaProximas: cuenta las de los próximos 7 días con plaza y descarta lo que no se puede reservar', () => {
+test('clasesConPlazaProximas: cuenta las de los próximos 7 días con lugar y descarta lo que no se puede reservar', () => {
   const clases = [
     libre('ok-hoy', HOY, '18:30'),
     libre('ok-dia7', '2026-10-13', '09:00'),

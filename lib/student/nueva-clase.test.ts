@@ -24,9 +24,9 @@ test('el aforo que se enseña es el mismo que usa el servidor: tipo, luego sala'
   }
 });
 
-test('el resumen dice duración, fin y plazas, o por qué no se puede', () => {
-  assert.equal(resumenNuevaClase({ duracionMin: 55, horaFin: '10:55', aforo: 8 }), '55 min · termina a las 10:55 · 8 plazas');
-  assert.equal(resumenNuevaClase({ duracionMin: 55, horaFin: '10:55', aforo: 1 }), '55 min · termina a las 10:55 · 1 plaza');
+test('el resumen dice duración, fin y lugares, o por qué no se puede', () => {
+  assert.equal(resumenNuevaClase({ duracionMin: 55, horaFin: '10:55', aforo: 8 }), '55 min · termina a las 10:55 · 8 lugares');
+  assert.equal(resumenNuevaClase({ duracionMin: 55, horaFin: '10:55', aforo: 1 }), '55 min · termina a las 10:55 · 1 lugar');
   assert.match(resumenNuevaClase({ duracionMin: 60, horaFin: null, aforo: 8 }), /medianoche/);
 });
 

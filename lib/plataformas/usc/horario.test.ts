@@ -65,7 +65,7 @@ test('el recuento que se manda hace que USC nunca enseñe más huecos de los que
   assert.equal(bookingCountUsc(4, 10, 10), 4);
 });
 
-test('una clase con plazas cedidas y sin evento se crea, con su trainer y en hora local', () => {
+test('una clase con lugares cedidos y sin evento se crea, con su trainer y en hora local', () => {
   const [op, ...resto] = plan([sesion()]);
   assert.equal(resto.length, 0);
   assert.equal(op.tipo, 'crear');
@@ -79,7 +79,7 @@ test('una clase con plazas cedidas y sin evento se crea, con su trainer y en hor
   assert.match(op.claveIdempotencia, /^ses-1:/);
 });
 
-test('sin plazas cedidas, cancelada, empezada o a más de dos semanas: no se crea', () => {
+test('sin lugares cedidos, cancelado, empezado o a más de dos semanas: no se crea', () => {
   assert.deepEqual(plan([sesion({ cupo: null })]), []);
   assert.deepEqual(plan([sesion({ cupo: 0 })]), []);
   assert.deepEqual(plan([sesion({ cancelada: true })]), []);
@@ -96,7 +96,7 @@ test('lo que ya está igual allí no genera ninguna llamada', () => {
   assert.deepEqual(plan([s], [guardado(s)]), []);
 });
 
-test('cambia el nombre o las plazas: se edita, sin tocar inicio ni ubicación', () => {
+test('cambia el nombre o los lugares: se edita, sin tocar inicio ni ubicación', () => {
   const s = sesion();
   const ops = plan([sesion({ cupo: 5 })], [guardado(s)]);
   assert.equal(ops.length, 1);
@@ -121,7 +121,7 @@ test('entra gente de fuera de USC: solo se manda el recuento nuevo', () => {
   assert.deepEqual(ops, [{ tipo: 'ocupacion', sesionId: 'ses-1', eventoId: 'ev-1', bookingCount: 2 }]);
 });
 
-test('se cancela la clase o se dejan de ceder plazas: se cancela allí', () => {
+test('se cancela la clase o se dejan de ceder lugares: se cancela allí', () => {
   const s = sesion();
   assert.deepEqual(plan([sesion({ cancelada: true })], [guardado(s)]), [{ tipo: 'cancelar', sesionId: 'ses-1', eventoId: 'ev-1' }]);
   assert.deepEqual(plan([sesion({ cupo: 0 })], [guardado(s)]), [{ tipo: 'cancelar', sesionId: 'ses-1', eventoId: 'ev-1' }]);

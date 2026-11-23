@@ -29,7 +29,7 @@ test('qué aviso lleva botones', () => {
 });
 
 test('el aviso a APNs lleva la categoría y la clase solo cuando tiene botones', () => {
-  const oferta = JSON.parse(payloadApns(JSON.stringify({ title: 'Se ha liberado una plaza', body: 'x', url: '/portal/alma/mis-reservas', nid: 'n1', ev: 'reserva.oferta_lista_espera', sid: 'ses-1' })));
+  const oferta = JSON.parse(payloadApns(JSON.stringify({ title: 'Se ha liberado un lugar', body: 'x', url: '/portal/alma/mis-reservas', nid: 'n1', ev: 'reserva.oferta_lista_espera', sid: 'ses-1' })));
   assert.equal(oferta.aps.category, 'OFERTA_ESPERA');
   assert.equal(oferta.ev, 'reserva.oferta_lista_espera');
   assert.equal(oferta.sid, 'ses-1');
@@ -44,7 +44,7 @@ test('el canal PUSH manda el evento y la clase (ids, nunca datos de la persona)'
   assert.match(canal, /sid: notificacion\.resourceType === 'sesion' \? notificacion\.resourceId : null,/);
 });
 
-test('«Aceptar la plaza» lleva a Mis clases de ESE estudio con la orden para la clase del aviso', () => {
+test('«Aceptar el lugar» lleva a Mis clases de ESE estudio con la orden para la clase del aviso', () => {
   const r = accionDeBotonIos('aceptar-plaza', { ev: 'reserva.oferta_lista_espera', sid: 'ses-1', url: '/portal/alma/mis-reservas' });
   assert.deepEqual(r, { ruta: '/portal/alma/mis-reservas', pendiente: { tipo: 'aceptar-oferta', sesionId: 'ses-1', slug: 'alma' } });
   assert.deepEqual(accionDeBotonIos('no-gracias', { ev: 'reserva.oferta_lista_espera', sid: 'ses-1', url: '/portal/alma/mis-reservas' }),

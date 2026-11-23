@@ -304,8 +304,8 @@ export function DialogoPlazaFija({
                 <IconoAviso size={14} className="shrink-0 mt-px" aria-hidden />
                 <span>
                   {elegidas.length > 1
-                    ? `Todas las plazas de ${enumerar(completas.map(etiquetaFranja))} ya son fijas: se guarda, pero no se le podrá reservar hasta que quede sitio.`
-                    : 'Todas las plazas de esta clase ya son fijas: se guarda, pero no se le podrá reservar hasta que quede sitio.'}
+                    ? `Todos los lugares de ${enumerar(completas.map(etiquetaFranja))} ya son fijas: se guarda, pero no se le podrá reservar hasta que quede sitio.`
+                    : 'Todos los lugares de esta clase ya son fijas: se guarda, pero no se le podrá reservar hasta que quede sitio.'}
                 </span>
               </p>
             )}

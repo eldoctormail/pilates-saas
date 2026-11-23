@@ -112,7 +112,7 @@ test('correo 3 sin clase: asunto, vista previa y cuerpo de la maqueta, y un solo
   assert.equal(c.preheader, 'Es lo único que le falta a Estudio Alba Pilates para recibir reservas.');
   assert.match(c.html, /Te falta un paso, Lucía/);
   assert.match(c.html, /A <b>Estudio Alba Pilates<\/b> le falta una cosa para recibir reservas: tu primera clase\./);
-  assert.match(c.html, /Está preparada con valores de ejemplo: Reformer, 55 minutos y 8 plazas\. Tú eliges el día y la hora, pones el precio y la publicas\./);
+  assert.match(c.html, /Está preparada con valores de ejemplo: Reformer, 55 minutos y 8 lugares\. Tú eliges el día y la hora, pones el precio y la publicas\./);
   assert.match(c.html, /href="https:\/\/www\.example\.com\/calendario\?primera=1"/);
   assert.equal((c.html.match(/Crear mi primera clase<\/a>/g) ?? []).length, 1);
   assert.match(c.html, /¿Te atascas en algo\?/);

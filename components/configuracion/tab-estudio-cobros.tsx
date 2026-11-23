@@ -19,6 +19,7 @@ import { Campo } from '@/components/configuracion/formulario-estudio';
 import { AlineacionAlumnasActuales } from '@/components/configuracion/alineacion-alumnas-actuales';
 import { ExportarRegistrosVerifactu } from '@/components/configuracion/exportar-registros-verifactu';
 import type { EstadoEstudioVerifactu } from '@/lib/verifactu/apoderamiento';
+import { formatoMoneda } from '@/lib/moneda';
 import {
   ALTA_AUN_CERRADA, SIN_PODER_VIGENTE, SOLO_CON_ENVIO_ACTIVO, avisoPermanencia, envioActivado, ofrecerAlta, pasoDelAlta, puedeEmitir,
 } from '@/lib/verifactu/facturacion-activa';
@@ -386,7 +387,7 @@ export function FormCobroDia1({ onGuardado }: PropsFormularioCajon) {
               className="mt-2 h-10 w-24 rounded-lg border border-border bg-background px-3 text-sm"
             />
             <p className="mt-2 text-xs text-muted-foreground text-pretty">
-              Si quedan {form.diasMinimos} días o menos del mes (contando el día del alta): desde el panel no se cobra nada hoy y la primera cuota es el día 1; en la compra online se cobra hoy la cuota entera, que cubre hasta el final del mes siguiente (la tarjeta no se puede guardar sin un primer pago). Con más días se cobra la parte proporcional. Con 0 se prorratea siempre (por debajo de 0,50 € no se cobra).
+              Si quedan {form.diasMinimos} días o menos del mes (contando el día del alta): desde el panel no se cobra nada hoy y la primera cuota es el día 1; en la compra online se cobra hoy la cuota entera, que cubre hasta el final del mes siguiente (la tarjeta no se puede guardar sin un primer pago). Con más días se cobra la parte proporcional. Con 0 se prorratea siempre (por debajo de {formatoMoneda(0.5)} no se cobra).
             </p>
           </div>
         )}

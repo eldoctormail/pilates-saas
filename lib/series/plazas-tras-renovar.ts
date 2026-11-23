@@ -12,6 +12,6 @@ export async function reservarPlazasFijasRenovadas(admin: SupabaseClient, respue
   for (const plazaId of ids) {
     if (typeof plazaId !== 'string') continue;
     const { error } = await admin.rpc('materializar_plazas_fijas', { p_horizonte_dias: HORIZONTE_MATERIALIZAR_DIAS, p_plaza_id: plazaId });
-    if (error) console.error('[series] materializar plaza fija tras renovar', error.message);
+    if (error) console.error('[series] materializar lugar fijo tras renovar', error.message);
   }
 }

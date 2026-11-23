@@ -206,7 +206,7 @@ test('«solo para clientes autorizados»: un cliente nuevo no puede', () => {
   assert.deepEqual(r, { estado: 'NO', motivo: 'NECESITA_AUTORIZACION' });
 });
 
-test('una clase sin plazas o dentro de la ventana mínima no es una clase que se pueda reservar', () => {
+test('una clase sin lugares o dentro de la ventana mínima no es una clase que se pueda reservar', () => {
   assert.deepEqual(evaluar(datos({ sesiones: [{ inicio: MANANA, cancelada: false, aforoMaximo: 0, tipoClaseId: 'tc-1' }] })),
     { estado: 'NO', motivo: 'SIN_CLASE_FUTURA' });
   const enMediaHora = '2026-10-05T10:30:00Z';

@@ -42,7 +42,7 @@ test('cancelar una reserva de una clase que ya empezó no crea penalización', (
   assert.match(cond, /not p_omitir_penalizacion/, 'el aviso del servidor de que no penalice sigue mandando');
 });
 
-test('la plaza que deja libre una oferta rechazada por un motivo propio se ofrece a la siguiente', () => {
+test('el lugar que deja libre una oferta rechazada por un motivo propio se ofrece a la siguiente', () => {
   const ts = leer('lib/db/supabase-data-admin.ts');
   const ini = ts.indexOf("if (resultado === 'LIMITE_SEMANAL'");
   const fin = ts.indexOf("if (resultado !== 'CONFIRMADA')", ini);
@@ -125,7 +125,7 @@ test('cancelar_reserva_plaza: la recuperación de una cancelación tardía solo 
   assert.match(c, /coalesce\(st\.cancelacion_tardia_devuelve_recuperacion, true\)/, 'sin dato, sí vuelve');
 });
 
-test('evaluar_reserva: la plaza ofrecida solo cuenta como ocupada si el estudio lo elige, y solo mientras corre su plazo', () => {
+test('evaluar_reserva: el lugar ofrecido solo cuenta como ocupada si el estudio lo elige, y solo mientras corre su plazo', () => {
   const c = cuerpoVigente('evaluar_reserva').replace(/\s+/g, ' ');
   assert.match(c, /coalesce\(st\.lista_espera_reserva_plaza_ofrecida, false\)/, 'sin dato, no');
   const i = c.indexOf('if v_ofertas_reservan then');

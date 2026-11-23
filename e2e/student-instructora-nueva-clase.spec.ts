@@ -67,7 +67,7 @@ test.describe('La instructora crea sus clases desde la app', () => {
     const fecha = diaMas(2);
     await rellenar(page, fecha);
 
-    await expect(page.getByTestId('resumen-nueva-clase')).toContainText('55 min · termina a las 10:55 · 8 plazas');
+    await expect(page.getByTestId('resumen-nueva-clase')).toContainText('55 min · termina a las 10:55 · 8 lugares');
     await page.getByRole('button', { name: 'Crear clase', exact: true }).click();
 
     await expect(page.getByText(/Clase creada/)).toBeVisible({ timeout: 15_000 });

@@ -48,16 +48,16 @@ test('mirar si hay orden NO la gasta: se recoge solo cuando ya hay datos frescos
 const AHORA = Date.parse('2026-10-05T16:00:00Z');
 const enEspera = (ofertaExpiraEn: string | null) => ({ id: 'res-1', claseId: 'ses-1', estado: 'en-espera', ofertaExpiraEn });
 
-test('«Aceptar la plaza» con la oferta viva en los datos frescos: se acepta esa reserva', () => {
+test('«Aceptar el lugar» con la oferta viva en los datos frescos: se acepta esa reserva', () => {
   assert.deepEqual(decidirOrdenAviso(accion, [enEspera('2026-10-05T16:20:00Z')], AHORA), { tipo: 'aceptar', reservaId: 'res-1' });
   assert.deepEqual(decidirOrdenAviso({ ...accion, tipo: 'salir-espera' }, [enEspera('2026-10-05T16:20:00Z')], AHORA), { tipo: 'confirmar-cancelar', reservaId: 'res-1' });
 });
 
-test('sin oferta viva: lo dice; y si ya tiene plaza en esa clase, dice eso y no «ya no está disponible»', () => {
-  assert.deepEqual(decidirOrdenAviso(accion, [enEspera('2026-10-05T15:59:00Z')], AHORA), { tipo: 'aviso', texto: 'Esa plaza ya no está disponible.' });
-  assert.deepEqual(decidirOrdenAviso(accion, [enEspera(null)], AHORA), { tipo: 'aviso', texto: 'Esa plaza ya no está disponible.' });
-  assert.deepEqual(decidirOrdenAviso(accion, [{ id: 'res-1', claseId: 'ses-1', estado: 'confirmada' }], AHORA), { tipo: 'aviso', texto: 'Ya tienes plaza en esa clase.' });
-  assert.deepEqual(decidirOrdenAviso(accion, [{ ...enEspera('2026-10-05T16:20:00Z'), claseId: 'otra' }], AHORA), { tipo: 'aviso', texto: 'Esa plaza ya no está disponible.' });
+test('sin oferta viva: lo dice; y si ya tiene lugar en esa clase, dice eso y no «ya no está disponible»', () => {
+  assert.deepEqual(decidirOrdenAviso(accion, [enEspera('2026-10-05T15:59:00Z')], AHORA), { tipo: 'aviso', texto: 'Ese lugar ya no está disponible.' });
+  assert.deepEqual(decidirOrdenAviso(accion, [enEspera(null)], AHORA), { tipo: 'aviso', texto: 'Ese lugar ya no está disponible.' });
+  assert.deepEqual(decidirOrdenAviso(accion, [{ id: 'res-1', claseId: 'ses-1', estado: 'confirmada' }], AHORA), { tipo: 'aviso', texto: 'Ya tienes lugar en esa clase.' });
+  assert.deepEqual(decidirOrdenAviso(accion, [{ ...enEspera('2026-10-05T16:20:00Z'), claseId: 'otra' }], AHORA), { tipo: 'aviso', texto: 'Ese lugar ya no está disponible.' });
 });
 
 test('«No puedo ir» abre la confirmación de su reserva confirmada; sin ella, lo dice', () => {

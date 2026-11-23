@@ -4599,7 +4599,7 @@ export function StudioProvider({ children, studioIdOverride, publicSlug }: { chi
       return {
         ok: false,
         error: enEspera
-          ? 'Ese cliente todavía no tiene la plaza confirmada. Confírmala primero y luego asígnale el sitio.'
+          ? 'Ese cliente todavía no tiene el lugar confirmado. Confírmala primero y luego asígnale el sitio.'
           : 'No hemos encontrado la reserva de ese cliente en esta clase.',
       };
     }

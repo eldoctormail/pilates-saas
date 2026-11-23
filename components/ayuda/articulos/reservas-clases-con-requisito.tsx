@@ -52,7 +52,7 @@ export default function Contenido() {
       <h2 style={h2}>Si le retiras la autorización</h2>
       <p>
         Deja de poder reservar de inmediato. Si estaba en lista de espera de una de esas clases, se queda ahí
-        pero <strong>ya no se la promociona</strong> cuando se libera una plaza: pasa a la siguiente. No se le
+        pero <strong>ya no se la promociona</strong> cuando se libera un lugar: pasa a la siguiente. No se le
         cancela nada, y si vuelves a autorizarla recupera su turno.
       </p>
 

@@ -51,7 +51,7 @@ test('la lista de espera se suelta aunque la clase sea dentro de 3 h: salir de l
   assert.deepEqual(r.retirar, ['r-espera']);
 });
 
-test('no toca nada fuera de su plaza: otra socia, otra hora, otra sala, pasadas, canceladas ni reservas ya cerradas', () => {
+test('no toca nada fuera de su lugar: otra socia, otra hora, otra sala, pasadas, canceladas ni reservas ya cerradas', () => {
   const r = reservasARetirarDePlaza(pf, sesiones, [
     res('otra-socia', 'sig', { socioId: 'soc-2' }),
     res('r-otra-hora', 'otra-hora'),
@@ -64,7 +64,7 @@ test('no toca nada fuera de su plaza: otra socia, otra hora, otra sala, pasadas,
   assert.deepEqual(r, { retirar: [], mantener: [] });
 });
 
-test('respeta la vigencia: una clase después de «hasta» no es de la plaza', () => {
+test('respeta la vigencia: una clase después de «hasta» no es del lugar', () => {
   const conFin = { ...pf, vigenciaHasta: '2026-09-10' };
   const r = reservasARetirarDePlaza(conFin, sesiones, [res('r-sig', 'sig'), res('r-sig2', 'sig2')], AHORA, ventana12h);
   assert.deepEqual(r.retirar, ['r-sig']);

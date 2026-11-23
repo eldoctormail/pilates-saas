@@ -2220,14 +2220,14 @@ export default function Calendario() {
         body: JSON.stringify({ sesionId }),
       });
       const j = await res.json().catch(() => null) as { error?: string; apartadas?: number } | null;
-      if (!res.ok) { showToastError(j?.error ?? 'No se ha podido liberar la plaza. Inténtalo de nuevo.'); return false; }
+      if (!res.ok) { showToastError(j?.error ?? 'No se ha podido liberar el lugar. Inténtalo de nuevo.'); return false; }
       showToast(j?.apartadas
-        ? `Plaza liberada. Siguen ${j.apartadas} apartadas para ClassPass.`
-        : 'Plaza liberada: ya no queda ninguna apartada para ClassPass.');
+        ? `Lugar liberado. Siguen ${j.apartadas} apartados para ClassPass.`
+        : 'Lugar liberado: ya no queda ninguno apartado para ClassPass.');
       await refrescarVista();
       return true;
     } catch {
-      showToastError('No se ha podido liberar la plaza. Inténtalo de nuevo.');
+      showToastError('No se ha podido liberar el lugar. Inténtalo de nuevo.');
       return false;
     }
   }
@@ -2762,14 +2762,14 @@ export default function Calendario() {
         body: JSON.stringify({ sesionId }),
       });
     } catch {
-      showToastError('Sin conexión: no se ha ofrecido la plaza. Revisa tu red e inténtalo de nuevo.');
+      showToastError('Sin conexión: no se ha ofrecido el lugar. Revisa tu red e inténtalo de nuevo.');
       return;
     }
     const data = await res.json().catch(() => ({}));
-    if (!res.ok) { showToastError(data?.error ?? 'No se ha podido ofrecer la plaza'); return; }
+    if (!res.ok) { showToastError(data?.error ?? 'No se ha podido ofrecer el lugar'); return; }
     setDialogoAccion(null);
     await refrescarVista();
-    showToast(data.resultado === 'confirmada' ? 'Plaza confirmada a la siguiente en la lista' : 'Oferta de plaza enviada');
+    showToast(data.resultado === 'confirmada' ? 'Lugar confirmado a la siguiente en la lista' : 'Oferta de lugar enviado');
   }
 
   async function ejecutarAjustarAforo(sesionId: string, nuevoAforo: number) {
@@ -3289,7 +3289,7 @@ export default function Calendario() {
   const menuClase: AccionMenu[] = !sesionActual || !esPropiaClase ? [] : [
     ...(!canceladaActual ? [{
       texto: 'Editar esta clase', icono: Pencil, onClick: openEdit,
-      desactivada: empezadaActual, nota: empezadaActual ? MENSAJE_CLASE_YA_EMPEZADA : 'Hora, sala, instructora, plazas o notas',
+      desactivada: empezadaActual, nota: empezadaActual ? MENSAJE_CLASE_YA_EMPEZADA : 'Hora, sala, instructora, lugares o notas',
     }] : []),
     { texto: 'Duplicar', icono: Copy, onClick: () => openDuplicar(sesionActual), nota: 'La misma clase, la semana que viene' },
     ...(!canceladaActual ? [
@@ -3520,12 +3520,12 @@ export default function Calendario() {
       )}
       {vivaActual && enEsperaActual > 0 && apuntadasActual < sesionActual.aforoMaximo && (
         <button type="button" className={BOTON_SECUNDARIO} onClick={() => setDialogoAccion({ tipo: 'OFRECER', sesionId: sesionActual.id })}>
-          Ofrecer la plaza libre a la lista de espera
+          Ofrecer el lugar libre a la lista de espera
         </button>
       )}
       {vivaActual && sobreaforoActual && salaActual && (
         <button type="button" className={BOTON_SECUNDARIO} onClick={() => setDialogoAccion({ tipo: 'AJUSTAR_AFORO', sesionId: sesionActual.id })}>
-          Ajustar las plazas a {salaActual.capacidad} (las de la sala)
+          Ajustar los lugares a {salaActual.capacidad} (las de la sala)
         </button>
       )}
       {vivaActual && floja && (
@@ -3856,7 +3856,7 @@ export default function Calendario() {
             resumen={resumen}
             activo={filtroResumenVivo}
             onFiltro={setFiltroResumen}
-            enlace={plazasLibresOk ? { href: '/calendario/plazas-libres', texto: 'Plazas libres', titulo: 'Cuántas plazas quedan en cada clase y dónde cabe otro cliente con clase fija' } : null}
+            enlace={plazasLibresOk ? { href: '/calendario/plazas-libres', texto: 'Lugares libres', titulo: 'Cuántos lugares quedan en cada clase y dónde cabe otro cliente con clase fija' } : null}
             extra={esHoyEnDia && siguienteHoyId ? (() => {
               const t = tarjetasPorId.get(siguienteHoyId);
               if (!t) return null;
@@ -4133,7 +4133,7 @@ export default function Calendario() {
         onOpenChange={setConfirmCancelar}
         titulo="¿Cancelar esta clase?"
         descripcion={apuntadasSesionActual > 0
-          ? `${apuntadasSesionActual} cliente${apuntadasSesionActual !== 1 ? 's' : ''} apuntada${apuntadasSesionActual !== 1 ? 's' : ''} se quedará${apuntadasSesionActual !== 1 ? 'n' : ''} sin plaza y recibirá${apuntadasSesionActual !== 1 ? 'n' : ''} un aviso.`
+          ? `${apuntadasSesionActual} cliente${apuntadasSesionActual !== 1 ? 's' : ''} apuntada${apuntadasSesionActual !== 1 ? 's' : ''} se quedará${apuntadasSesionActual !== 1 ? 'n' : ''} sin lugar y recibirá${apuntadasSesionActual !== 1 ? 'n' : ''} un aviso.`
           : 'La clase no tiene clientes apuntados.'}
         textoConfirmar="Cancelar clase"
         destructivo
@@ -4157,7 +4157,7 @@ export default function Calendario() {
         onOpenChange={setConfirmEliminar}
         titulo="¿Eliminar esta clase?"
         descripcion={apuntadasSesionActual > 0
-          ? `${apuntadasSesionActual} cliente${apuntadasSesionActual !== 1 ? 's' : ''} apuntada${apuntadasSesionActual !== 1 ? 's' : ''} se quedará${apuntadasSesionActual !== 1 ? 'n' : ''} sin plaza${apuntadasSesionActual !== 1 ? 's' : ''}${(studio?.cancelacionClaseDevuelveBono ?? true) ? ' — su bono se devuelve' : ''} y recibirá${apuntadasSesionActual !== 1 ? 'n' : ''} un aviso.`
+          ? `${apuntadasSesionActual} cliente${apuntadasSesionActual !== 1 ? 's' : ''} apuntada${apuntadasSesionActual !== 1 ? 's' : ''} se quedará${apuntadasSesionActual !== 1 ? 'n' : ''} sin lugar${apuntadasSesionActual !== 1 ? 's' : ''}${(studio?.cancelacionClaseDevuelveBono ?? true) ? ' — su bono se devuelve' : ''} y recibirá${apuntadasSesionActual !== 1 ? 'n' : ''} un aviso.`
           : 'La clase no tiene clientes apuntados.'}
         textoConfirmar="Eliminar clase"
         destructivo
@@ -4561,7 +4561,7 @@ export default function Calendario() {
                     ? 'No cierres esta ventana: cada clase avisa a sus clientes antes de borrarse.'
                     : alumnas === 0
                       ? 'Ninguna tiene clientes apuntados.'
-                      : <><strong className="text-foreground">{alumnas} cliente{alumnas === 1 ? '' : 's'}</strong> apuntada{alumnas === 1 ? '' : 's'} se quedará{alumnas === 1 ? '' : 'n'} sin plaza{(studio?.cancelacionClaseDevuelveBono ?? true) ? ' — su bono se devuelve' : ''} y recibirá{alumnas === 1 ? '' : 'n'} un aviso por cada clase suya que se borre.</>}
+                      : <><strong className="text-foreground">{alumnas} cliente{alumnas === 1 ? '' : 's'}</strong> apuntada{alumnas === 1 ? '' : 's'} se quedará{alumnas === 1 ? '' : 'n'} sin lugar{(studio?.cancelacionClaseDevuelveBono ?? true) ? ' — su bono se devuelve' : ''} y recibirá{alumnas === 1 ? '' : 'n'} un aviso por cada clase suya que se borre.</>}
                   {!enCurso && descartadas > 0 && (
                     <> {descartadas} de las marcadas no se {descartadas === 1 ? 'borra' : 'borran'}: ya {descartadas === 1 ? 'empezó' : 'empezaron'}.</>
                   )}
@@ -4718,10 +4718,10 @@ export default function Calendario() {
       {dialogoAccion?.tipo === 'OFRECER' && (
         <DialogoDecision
           abierto
-          titulo="Ofrecer la plaza libre"
+          titulo="Ofrecer el lugar libre"
           cuerpo={<p>Se ofrecerá el hueco libre a la siguiente persona en lista de espera.</p>}
           onConfirmar={() => void ejecutarOfrecerPlaza(dialogoAccion.sesionId)}
-          textoConfirmar="Ofrecer plaza"
+          textoConfirmar="Ofrecer lugar"
           onCerrar={() => setDialogoAccion(null)}
         />
       )}

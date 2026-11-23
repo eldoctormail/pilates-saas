@@ -31,7 +31,7 @@ test('BAJA no cuenta; PAUSADA se enseña sin próxima fecha', () => {
   assert.equal(pausada?.estado, 'PAUSADA'); assert.equal(pausada?.proximaFecha, null);
 });
 
-test('enseña TODAS sus plazas, lunes primero (antes solo se veía una)', () => {
+test('enseña TODAS sus lugares, lunes primero (antes solo se veía una)', () => {
   const v = proyectarPlazasFijas([
     plaza({ diaSemana: 0, horaInicio: '10:00:00' }),
     plaza({ diaSemana: 3, horaInicio: '09:00:00' }),

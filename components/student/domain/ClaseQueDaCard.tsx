@@ -45,7 +45,7 @@ export function ClaseQueDaCard({ clase, conFecha, etiqueta, href }: {
           ) : (
             <>
               <span className="t-small">
-                <b>{clase.confirmadas}</b> de {clase.aforo} plazas
+                <b>{clase.confirmadas}</b> de {clase.aforo} lugares
               </span>
               {clase.enEspera > 0 && <Badge tone="wait">{clase.enEspera} en espera</Badge>}
             </>

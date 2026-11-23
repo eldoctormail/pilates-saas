@@ -226,7 +226,7 @@ export async function sincronizarReservaWellhub(
       return 'confirmada';
     case 'dudosa':
       // Un RESERVED anterior pudo llegar y su PATCH puede no admitir repetirse.
-      Sentry.captureMessage('[wellhub] Wellhub contesta que no a un RESERVED repetido: se conserva la plaza', {
+      Sentry.captureMessage('[wellhub] Wellhub contesta que no a un RESERVED repetido: se conserva el lugar', {
         level: 'warning', tags: { area: 'plataformas', plataforma: 'wellhub' }, extra: { reservaId: r.id, status: res.status, clave: res.clave },
       });
       await marcarExterno(admin, r.id, 'Booked', mia);

@@ -78,7 +78,7 @@ export function ReservasPorAprobar({ onToast }: { onToast: (m: string) => void }
         </p>
       </div>
       <p className="mb-3 text-[11px] text-muted-foreground">
-        Mientras espera no ocupa plaza ni gasta bono. Al aprobarla se vuelve a mirar el aforo: si la clase se ha llenado, pasa a la lista de espera.
+        Mientras espera no ocupa lugar ni gasta bono. Al aprobarla se vuelve a mirar el aforo: si la clase se ha llenado, pasa a la lista de espera.
         {items.length > visibles.length && ` Aquí ves las ${visibles.length} más próximas.`}
       </p>
 

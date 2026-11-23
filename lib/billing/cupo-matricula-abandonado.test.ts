@@ -12,14 +12,14 @@ const AHORA = 1_800_000_000;
 
 // ── Modo A ──────────────────────────────────────────────────────────────────
 
-test('Modo A: sesión caducada con plaza → se devuelve con la SESIÓN como clave', () => {
+test('Modo A: sesión caducada con lugar → se devuelve con la SESIÓN como clave', () => {
   assert.deepEqual(
     plazaDeSesionCaducada({ id: 'cs_1', status: 'expired', metadata: { cupoMatriculaReservado: '1', planId: 'plan-1' } }),
     { clave: 'cs_1', planId: 'plan-1' },
   );
 });
 
-test('Modo A: sesión abierta, pagada o sin plaza → nada', () => {
+test('Modo A: sesión abierta, pagada o sin lugar → nada', () => {
   const md = { cupoMatriculaReservado: '1', planId: 'plan-1' };
   assert.equal(plazaDeSesionCaducada({ id: 'cs_1', status: 'open', metadata: md }), null);
   assert.equal(plazaDeSesionCaducada({ id: 'cs_1', status: 'complete', metadata: md }), null);
@@ -30,11 +30,11 @@ test('Modo A: sesión abierta, pagada o sin plaza → nada', () => {
 
 // ── Modo B: cancelado ───────────────────────────────────────────────────────
 
-test('Modo B: PI cancelado con plaza → se devuelve con el PI como clave', () => {
+test('Modo B: PI cancelado con lugar → se devuelve con el PI como clave', () => {
   assert.deepEqual(plazaDePICancelado({ id: 'pi_1', status: 'canceled', metadata: MD_B }), { clave: 'pi_1', planId: 'plan-1' });
 });
 
-test('⚠️ Modo B: un PI RECHAZADO no devuelve la plaza — admite otro intento y puede acabar cobrado', () => {
+test('⚠️ Modo B: un PI RECHAZADO no devuelve el lugar — admite otro intento y puede acabar cobrado', () => {
   // Es el bug: tras `payment_intent.payment_failed` el PI vuelve aquí.
   assert.equal(plazaDePICancelado({ id: 'pi_1', status: 'requires_payment_method', metadata: MD_B }), null);
   assert.equal(plazaDePICancelado({ id: 'pi_1', status: 'succeeded', metadata: MD_B }), null);
@@ -48,7 +48,7 @@ test('Modo B: solo el checkout embebido — un PI cancelado de otra vía no toca
 
 // ── Modo B: abandonado ──────────────────────────────────────────────────────
 
-test('Modo B: PI cobrable con plaza y más viejo que el umbral → candidato a cancelar', () => {
+test('Modo B: PI cobrable con lugar y más viejo que el umbral → candidato a cancelar', () => {
   for (const status of ['requires_payment_method', 'requires_confirmation', 'requires_action']) {
     const pi = { id: 'pi_1', status, created: AHORA - ABANDONO_PI_SEGUNDOS, metadata: MD_B };
     assert.deepEqual(pisAbandonadosConPlaza([pi], AHORA), [pi], status);
@@ -66,7 +66,7 @@ test('Modo B: nunca se intenta cancelar lo cobrado, lo que se está cobrando o l
   assert.deepEqual(pisAbandonadosConPlaza(pis, AHORA), []);
 });
 
-test('Modo B: sin plaza, sin plan o de otra vía → no se cancela nada', () => {
+test('Modo B: sin lugar, sin plan o de otra vía → no se cancela nada', () => {
   const viejo = AHORA - 10 * ABANDONO_PI_SEGUNDOS;
   const base = { id: 'pi_1', status: 'requires_payment_method', created: viejo };
   assert.deepEqual(pisAbandonadosConPlaza([

@@ -169,11 +169,11 @@ export const CAPITULOS: CapituloGuia[] = [
       },
       {
         titulo: 'Tus salas',
-        texto: 'Cada sala tiene un nombre, un color y una capacidad. La capacidad es la que manda: si tu sala Reformer tiene 8 plazas, ninguna clase ahí podrá aceptar a la novena. El color no es decorativo — el calendario pinta las clases por sala, y con dos salas del mismo color deja de leerse de un vistazo.',
+        texto: 'Cada sala tiene un nombre, un color y una capacidad. La capacidad es la que manda: si tu sala Reformer tiene 8 lugares, ninguna clase ahí podrá aceptar a la novena. El color no es decorativo — el calendario pinta las clases por sala, y con dos salas del mismo color deja de leerse de un vistazo.',
       },
       {
         titulo: 'Cuando se avería una máquina',
-        texto: 'En la misma pantalla puedes registrar una avería con la sala, el motivo y hasta cuándo. Mientras dure, todas las clases de esa sala tienen una plaza menos automáticamente. No hay que tocar clase por clase.',
+        texto: 'En la misma pantalla puedes registrar una avería con la sala, el motivo y hasta cuándo. Mientras dure, todas las clases de esa sala tienen un lugar menos automáticamente. No hay que tocar clase por clase.',
       },
       {
         titulo: 'Cerrar por vacaciones',
@@ -185,7 +185,7 @@ export const CAPITULOS: CapituloGuia[] = [
       { label: 'Datos y textos de mi estudio', href: '/configuracion?tab=estudio' },
       { label: 'Mi horario de apertura', href: '/configuracion?tab=estudio#horario' },
     ],
-    consejo: 'Si bajas la capacidad de una sala, Tentare te avisa de las clases futuras que se quedarían sobrevendidas antes de guardar. Léelo: esas plazas ya están vendidas.',
+    consejo: 'Si bajas la capacidad de una sala, Tentare te avisa de las clases futuras que se quedarían sobrevendidas antes de guardar. Léelo: esos lugares ya están vendidos.',
     pasos: ['salas'],
   },
 
@@ -256,7 +256,7 @@ export const CAPITULOS: CapituloGuia[] = [
     minutos: 6,
     queAprendes: [
       'Qué es un tipo de clase y por qué se crea una sola vez',
-      'Qué define: duración, plazas, nivel, color e imágenes',
+      'Qué define: duración, lugares, nivel, color e imágenes',
       'Cuándo merece la pena que una clase tenga reglas propias',
     ],
     porQue: 'Un tipo de clase se define una vez y se reutiliza en las cien clases que programes después.',
@@ -382,7 +382,7 @@ export const CAPITULOS: CapituloGuia[] = [
     minutos: 9,
     queAprendes: [
       'La ventana de cancelación y qué pasa con la sesión del bono',
-      'Cómo funciona la lista de espera y el plazo para aceptar una plaza',
+      'Cómo funciona la lista de espera y el plazo para aceptar un lugar',
       'Recuperaciones: qué son y cuándo se ganan',
       'Aprobar reservas a mano y mínimo de asistentes',
     ],
@@ -398,11 +398,11 @@ export const CAPITULOS: CapituloGuia[] = [
       },
       {
         titulo: 'Lista de espera',
-        texto: 'Cuando una clase se llena, quien llega después entra en lista de espera. Si alguien cancela, la plaza pasa a la primera de la cola. De fábrica se le asigna al instante, aunque no esté mirando el móvil. Puedes darle en cambio un plazo para aceptar: si no responde a tiempo, pasa a la siguiente.',
+        texto: 'Cuando una clase se llena, quien llega después entra en lista de espera. Si alguien cancela, el lugar pasa a la primera de la cola. De fábrica se le asigna al instante, aunque no esté mirando el móvil. Puedes darle en cambio un plazo para aceptar: si no responde a tiempo, pasa a la siguiente.',
       },
       {
         titulo: 'Aprobar tú cada reserva',
-        texto: 'Si tu estudio funciona así, puedes exigir que apruebes cada reserva. Una reserva pendiente no ocupa plaza ni gasta bono: eso se decide al aprobarla, no al pedirla.',
+        texto: 'Si tu estudio funciona así, puedes exigir que apruebes cada reserva. Una reserva pendiente no ocupa lugar ni gasta bono: eso se decide al aprobarla, no al pedirla.',
       },
       {
         titulo: 'Mínimo de asistentes',
@@ -752,7 +752,7 @@ export const CAPITULOS: CapituloGuia[] = [
     apartados: [
       {
         titulo: 'Lo que ya va solo',
-        texto: 'No tienes que encender nada para lo básico: Tentare recuerda cada clase a quien ha reservado, confirma las reservas, pasa la plaza libre a la lista de espera, avisa del bono que se acaba y reintenta los cobros que fallan. Las automatizaciones son para lo que depende de cómo trabajas tú.',
+        texto: 'No tienes que encender nada para lo básico: Tentare recuerda cada clase a quien ha reservado, confirma las reservas, pasa el lugar libre a la lista de espera, avisa del bono que se acaba y reintenta los cobros que fallan. Las automatizaciones son para lo que depende de cómo trabajas tú.',
       },
       {
         titulo: 'Recuperar a quien no viene',
@@ -768,7 +768,7 @@ export const CAPITULOS: CapituloGuia[] = [
       },
       {
         titulo: 'Los correos',
-        texto: 'Bienvenida, reserva confirmada, recordatorio, clase cancelada, plaza liberada y pago fallido se pueden reescribir enteros: asunto, texto, botón y color. Y cualquiera se puede apagar si prefieres no mandarlo.',
+        texto: 'Bienvenida, reserva confirmada, recordatorio, clase cancelada, lugar liberado y pago fallido se pueden reescribir enteros: asunto, texto, botón y color. Y cualquiera se puede apagar si prefieres no mandarlo.',
       },
     ],
     acciones: [
@@ -809,7 +809,7 @@ export const CAPITULOS: CapituloGuia[] = [
       },
       {
         titulo: 'Tus datos son tuyos',
-        texto: 'En Configuración → Datos y seguridad te llevas tus datos cuando quieras: un archivo por tabla que abre Excel. Y la Libreta imprime tu estudio entero —cada cliente con su plan, sus sesiones y su plaza— en papel. Está ahí para que nunca te sientas atrapada.',
+        texto: 'En Configuración → Datos y seguridad te llevas tus datos cuando quieras: un archivo por tabla que abre Excel. Y la Libreta imprime tu estudio entero —cada cliente con su plan, sus sesiones y su lugar— en papel. Está ahí para que nunca te sientas atrapada.',
       },
     ],
     acciones: [

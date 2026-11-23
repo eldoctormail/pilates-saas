@@ -71,7 +71,7 @@ export function BotonBajaRecuperacion({ reserva, socio }: { reserva: Reserva; so
         open={open}
         onOpenChange={o => { if (!o) setOpen(false); }}
         titulo="¿No puede venir a esta clase?"
-        descripcion="Se cancela su reserva (liberando la plaza) y se le guarda una recuperación para otro día. Después podrás avisarle por WhatsApp con un clic."
+        descripcion="Se cancela su reserva (liberando el lugar) y se le guarda una recuperación para otro día. Después podrás avisarle por WhatsApp con un clic."
         textoConfirmar={procesando ? 'Procesando…' : 'Dar recuperación'}
         onConfirm={confirmar}
       />

@@ -50,7 +50,7 @@ export default async function ConfirmarReservaPage({
 
   if (reserva.estado !== 'CONFIRMADA') {
     return (
-      <Aviso icono={CalendarX} titulo="Esta plaza ya no está en pie"
+      <Aviso icono={CalendarX} titulo="Este lugar ya no está en pie"
         texto="No llegamos a tiempo con tu confirmación, o la reserva se resolvió de otra forma. Si quieres, reserva otra clase desde el portal de tu estudio." />
     );
   }

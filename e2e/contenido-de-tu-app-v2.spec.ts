@@ -186,17 +186,17 @@ test('si guardar el mensaje falla, lo dice y no dice «Guardado»', async ({ pag
 test('los avisos de antes se pasan a mensaje destacado sin guardarse solos, y no se borra ninguno', async ({ page }) => {
   const c = await abrir(page, {
     mensaje: 'Bienvenidas',
-    avisos: [{ id: 'nov-1', studio_id: STUDIO_ID, titulo: 'Cerramos el 1 de noviembre', texto: 'Festivo: no hay clases.', emoji: null, activo: true, fecha_inicio: null, fecha_fin: null, created_at: '2026-10-01T10:00:00Z' }],
+    avisos: [{ id: 'nov-1', studio_id: STUDIO_ID, titulo: 'Cerramos el 1 de noviembre', texto: 'Feriado: no hay clases.', emoji: null, activo: true, fecha_inicio: null, fecha_fin: null, created_at: '2026-10-01T10:00:00Z' }],
   });
   await page.getByRole('button', { name: 'Mensaje destacado' }).click();
   await expect(page.getByRole('heading', { name: 'Avisos que escribiste antes' })).toBeVisible({ timeout: 60_000 });
   await expect(page.getByLabel('Mensaje destacado')).toHaveValue('Bienvenidas');
   await page.getByRole('button', { name: 'Pasar a mensaje destacado' }).click();
-  await expect(page.getByLabel('Mensaje destacado')).toHaveValue('Cerramos el 1 de noviembre. Festivo: no hay clases.');
+  await expect(page.getByLabel('Mensaje destacado')).toHaveValue('Cerramos el 1 de noviembre. Feriado: no hay clases.');
   await expect(page.getByText('Lo tienes aquí: revísalo y guárdalo para que salga en su app.')).toBeVisible();
   expect(c.mensajes).toHaveLength(0);
   await page.getByRole('button', { name: 'Guardar el mensaje' }).click();
-  await expect.poll(() => c.mensajes.at(-1)).toMatchObject({ mensaje_destacado: 'Cerramos el 1 de noviembre. Festivo: no hay clases.' });
+  await expect.poll(() => c.mensajes.at(-1)).toMatchObject({ mensaje_destacado: 'Cerramos el 1 de noviembre. Feriado: no hay clases.' });
   // Nada aquí se llama «tablón» (ese es el de Comunidad) y no hay forma de añadir avisos.
   await expect(v2(page).getByText(/tablón/i)).toHaveCount(0);
   await expect(page.getByRole('button', { name: /Añadir aviso/ })).toHaveCount(0);

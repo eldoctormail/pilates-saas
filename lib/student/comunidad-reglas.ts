@@ -24,7 +24,7 @@ export function estadoEvento(e: EventoMin, ahora: Date): EstadoEvento {
 /** «3 de 10 plazas» / «3 apuntadas» (sin aforo). */
 export function plazasTexto(e: EventoMin): string {
   const n = e.totalAsistentes ?? 0;
-  if (e.eventoAforo != null && e.eventoAforo > 0) return `${n} de ${e.eventoAforo} plazas`;
+  if (e.eventoAforo != null && e.eventoAforo > 0) return `${n} de ${e.eventoAforo} lugares`;
   return n === 1 ? '1 apuntada' : `${n} apuntadas`;
 }
 

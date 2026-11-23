@@ -80,7 +80,7 @@ export function FichaClaseUnica({
                 ? <span style={{ color: 'var(--portal-muted)' }}>Completa</span>
                 : <span style={{ display: 'flex', alignItems: 'center', gap: 6, fontWeight: 700, color: plazasLibres <= 3 ? '#BC8434' : 'var(--portal-ink)' }}>
                     <span style={{ width: 6, height: 6, borderRadius: 999, background: plazasLibres <= 3 ? '#BC8434' : 'var(--portal-accent)' }} />
-                    {`Queda${plazasLibres === 1 ? '' : 'n'} ${plazasLibres} plaza${plazasLibres === 1 ? '' : 's'}`}
+                    {`Queda${plazasLibres === 1 ? '' : 'n'} ${plazasLibres} lugar${plazasLibres === 1 ? '' : 's'}`}
                   </span>
             } />
           )}
@@ -111,7 +111,7 @@ export function FichaClaseUnica({
               background: 'var(--portal-brand)', color: 'var(--portal-brand-foreground)',
               fontFamily: sans, fontWeight: 700, fontSize: 14, cursor: completa ? 'not-allowed' : 'pointer', opacity: completa ? 0.55 : 1,
             }}>
-              {completa ? 'Lista de espera' : 'Reservar mi plaza'}
+              {completa ? 'Lista de espera' : 'Reservar mi lugar'}
             </button>
           </div>
         )}

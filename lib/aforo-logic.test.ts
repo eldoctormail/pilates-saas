@@ -17,7 +17,7 @@ test('aforoEfectivo: sin averías = aforo máximo', () => {
   assert.equal(aforoEfectivo(6, 0), 6);
 });
 
-test('aforoEfectivo: cada avería resta una plaza', () => {
+test('aforoEfectivo: cada avería resta un lugar', () => {
   assert.equal(aforoEfectivo(6, 2), 4);
 });
 
@@ -55,7 +55,7 @@ test('averiasActivasEnRango: ventana que engloba la sesión → cuenta; suma var
 });
 
 // ── aforoEfectivoSesion ───────────────────────────────────────────────────────
-test('aforoEfectivoSesion: 6 plazas, 1 reformer averiado en el rango → 5', () => {
+test('aforoEfectivoSesion: 6 lugares, 1 reformer averiado en el rango → 5', () => {
   const b = [bloqueo({ salaId: 's1', desde: '2026-07-14T00:00:00Z', hasta: '2026-07-20T00:00:00Z' })];
   assert.equal(aforoEfectivoSesion(6, 's1', INI, FIN, b), 5);
 });

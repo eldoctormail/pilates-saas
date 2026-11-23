@@ -36,6 +36,6 @@ export async function POST(req: NextRequest) {
     if ('error' in r) return NextResponse.json({ error: r.error }, { status: 400 });
     return NextResponse.json(r);
   } catch (err) {
-    return errorInterno('reservas/aceptar-oferta-espera:POST', err, 'No se ha podido aceptar la plaza.');
+    return errorInterno('reservas/aceptar-oferta-espera:POST', err, 'No se ha podido aceptar el lugar.');
   }
 }

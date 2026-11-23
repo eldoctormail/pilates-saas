@@ -49,7 +49,7 @@ test('cancelación: la ventana del tipo, como mucho 24 h (Wellhub no admite más
   assert.equal(cancelableHastaWellhub(inicio, null), '2026-10-08T10:00:00+02:00');
 });
 
-test('plazas libres en Wellhub: nunca más de las que quedan de verdad ni de las cedidas', () => {
+test('lugares libres en Wellhub: nunca más de las que quedan de verdad ni de las cedidas', () => {
   // Aforo 10, cede 3: con la clase vacía, 3 libres (0 «reservadas»).
   assert.equal(totalBookedWellhub(3, 10, 0, 0), 0);
   // Una de Wellhub: 2 libres.
@@ -82,7 +82,7 @@ test('cuerpo del slot: lo que pide su API, sin sala si es demasiado corta y sin 
   assert.deepEqual(sinSala.instructors, []);
 });
 
-test('clase nueva con plazas cedidas: se crea su clase de Wellhub y después su slot', () => {
+test('clase nueva con lugares cedidos: se crea su clase de Wellhub y después su slot', () => {
   const ops = plan({ sesiones: [sesion('s1')] });
   assert.deepEqual(ops.map(o => o.tipo), ['crear-clase', 'crear-slot']);
   const clase = ops[0];
@@ -92,7 +92,7 @@ test('clase nueva con plazas cedidas: se crea su clase de Wellhub y después su 
   });
 });
 
-test('sin plazas cedidas, cancelada, empezada o más allá de dos semanas: no se publica', () => {
+test('sin lugares cedidos, cancelado, empezado o más allá de dos semanas: no se publica', () => {
   assert.deepEqual(plan({ sesiones: [sesion('s1', { cupo: null })] }), []);
   assert.deepEqual(plan({ sesiones: [sesion('s1', { cupo: 0 })] }), []);
   assert.deepEqual(plan({ sesiones: [sesion('s1', { cancelada: true })] }), []);
@@ -120,7 +120,7 @@ test('cambia la hora o la instructora: se edita el slot entero (Wellhub deja mov
   assert.equal(ops[0].huella, huellaSlotWellhub(ops[0].cuerpo));
 });
 
-test('cancelada en Tentare, sin plazas cedidas o borrada: su slot se borra allí (Wellhub cancela sus reservas)', () => {
+test('cancelada en Tentare, sin lugares cedidos o borrado: su slot se borra allí (Wellhub cancela sus reservas)', () => {
   const s = sesion('s1');
   const { clase, slot } = guardados(s);
   const borrar = { tipo: 'borrar-slot', sesionId: 's1', claseId: 'cl-1', slotId: 'sl-1' };
@@ -132,7 +132,7 @@ test('cancelada en Tentare, sin plazas cedidas o borrada: su slot se borra allí
   assert.deepEqual(ops[0], { ...borrar, sesionId: null });
 });
 
-test('el tipo deja de tener plazas cedidas: se borran sus slots y su clase se oculta (no se borra)', () => {
+test('el tipo deja de tener lugares cedidos: se borran sus slots y su clase se oculta (no se borra)', () => {
   const s = sesion('s1');
   const { clase, slot } = guardados(s);
   const ops = plan({ sesiones: [{ ...s, cupo: null }], clases: [clase], slots: [slot] });
@@ -152,7 +152,7 @@ test('la sesión cambia de tipo de clase: su slot se borra de la clase vieja y s
   assert.ok(crear && crear.tipo === 'crear-slot' && crear.tipoClaseId === 'tc-mat');
 });
 
-test('una clase de Wellhub por tipo aunque haya varias sesiones; y lo que quita plazas va antes que lo que crea', () => {
+test('una clase de Wellhub por tipo aunque haya varias sesiones; y lo que quita lugares va antes que lo que crea', () => {
   const ops = plan({
     sesiones: [sesion('s1'), sesion('s2', { inicio: '2026-10-09T08:00:00Z', fin: '2026-10-09T08:55:00Z' })],
     slots: [{ sesionId: null, slotId: 'viejo', claseId: 'cl-x', borrado: false, huella: null, ocupadasEnviadas: null }],
@@ -160,7 +160,7 @@ test('una clase de Wellhub por tipo aunque haya varias sesiones; y lo que quita 
   assert.deepEqual(ops.map(o => o.tipo), ['borrar-slot', 'crear-clase', 'crear-slot', 'crear-slot']);
 });
 
-test('⚠️ deja de ceder plazas con socias de Wellhub ya apuntadas: no se borra (cancelaría sus reservas), se deja de vender', () => {
+test('⚠️ deja de ceder lugares con socias de Wellhub ya apuntadas: no se borra (cancelaría sus reservas), se deja de vender', () => {
   const s = sesion('s1');
   const { clase, slot } = guardados(s);
   const conDos = { ...s, cupo: null, ocupadas: 4, ocupadasWellhub: 2 };

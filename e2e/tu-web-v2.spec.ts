@@ -462,7 +462,7 @@ test('sin las tres etiquetas ni «Cómo llega cada cambio»: una línea en «Dó
   // El diseño propio ya no está en «Cómo se ve»: se fue a «Ponlo en tu web».
   await expect(page.getByRole('switch', { name: /Usar un diseño propio/ }).filter({ visible: true })).toHaveCount(0);
   await irA(page, 'Ponlo en tu web');
-  await expect(page.getByText(/^Lo pegas una vez\. Tus clases, precios y plazas se actualizan solos; el estilo y lo que enseña llegan cuando pulsas «Publicar en mi web»\.$/)).toBeVisible();
+  await expect(page.getByText(/^Lo pegas una vez\. Tus clases, precios y lugares se actualizan solos; el estilo y lo que enseña llegan cuando pulsas «Publicar en mi web»\.$/)).toBeVisible();
   // Los pasos de su plataforma, cada uno con su dibujo.
   await expect(page.getByRole('heading', { name: 'En WordPress, en 3 pasos' })).toBeVisible();
   await expect(page.locator('[data-dibujo-paso]').filter({ visible: true })).toHaveCount(3);

@@ -93,7 +93,7 @@ test.describe('Student PWA · pagar y reservar una clase (P06)', () => {
   test.describe.configure({ timeout: 120_000 });
   test.use({ viewport: { width: 390, height: 844 }, serviceWorkers: 'block' });
 
-  test('camino feliz: plaza comprobada → cobro con la clase → «Reservada» solo cuando el servidor la confirma', async ({ page }) => {
+  test('camino feliz: lugar comprobado → cobro con la clase → «Reservada» solo cuando el servidor la confirma', async ({ page }) => {
     const c = await montar(page, { estado: (n) => ({ body: n < 2 ? { estado: 'en_proceso' } : { estado: 'confirmada', clase: { nombre: 'Reformer', inicio: '2026-08-12T08:00:00Z' } } }) });
     await abrirPago(page);
     await expect(page.getByTestId('pagar-clase-elegir')).toBeVisible({ timeout: 30_000 });
@@ -103,7 +103,7 @@ test.describe('Student PWA · pagar y reservar una clase (P06)', () => {
     await expect(page.getByRole('radio')).toHaveCount(2);
     await page.getByRole('button', { name: 'Continuar · 15 €' }).click();
     await page.getByRole('button', { name: 'Pagar 15 € y reservar' }).click({ timeout: 30_000 });
-    await expect(page.getByText('Pago hecho. Confirmando tu plaza…')).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByText('Pago hecho. Confirmando tu lugar…')).toBeVisible({ timeout: 15_000 });
     await adelantar(page, 2);
     await expect(page.getByTestId('reserva-pagada-confirmada')).toBeVisible({ timeout: 20_000 });
     expect(c.checkout).toHaveLength(1);
@@ -183,7 +183,7 @@ test.describe('Student PWA · pagar y reservar una clase (P06)', () => {
       estado: (n) => ({ body: n < 2 ? { estado: 'en_proceso' } : { estado: 'confirmada', clase: { nombre: 'Reformer', inicio: '2026-08-12T08:00:00Z' } } }),
     });
     await abrirPago(page);
-    await expect(page.getByText('Pago hecho. Confirmando tu plaza…')).toBeVisible({ timeout: 30_000 });
+    await expect(page.getByText('Pago hecho. Confirmando tu lugar…')).toBeVisible({ timeout: 30_000 });
     await adelantar(page, 2);
     await expect(page.getByTestId('reserva-pagada-confirmada')).toBeVisible({ timeout: 20_000 });
     expect(c.checkout, 'ni un cobro nuevo').toHaveLength(0);
@@ -206,12 +206,12 @@ test.describe('Student PWA · pagar y reservar una clase (P06)', () => {
     expect(c.estado.length).toBeGreaterThanOrEqual(1);
   });
 
-  test('si la plaza tarda: «tu pago está hecho… no vuelvas a pagar», nunca ✓', async ({ page }) => {
+  test('si el lugar tarda: «tu pago está hecho… no vuelvas a pagar», nunca ✓', async ({ page }) => {
     const c = await montar(page);
     await abrirPago(page);
     await page.getByRole('button', { name: 'Continuar · 15 €' }).click({ timeout: 30_000 });
     await page.getByRole('button', { name: 'Pagar 15 € y reservar' }).click({ timeout: 30_000 });
-    await expect(page.getByText('Pago hecho. Confirmando tu plaza…')).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByText('Pago hecho. Confirmando tu lugar…')).toBeVisible({ timeout: 15_000 });
     await adelantar(page, 8);
     await expect(page.getByText('Tu pago está hecho')).toBeVisible({ timeout: 20_000 });
     await expect(page.getByText(/no vuelvas a pagar/)).toBeVisible();
@@ -219,7 +219,7 @@ test.describe('Student PWA · pagar y reservar una clase (P06)', () => {
     expect(c.estado.length).toBeGreaterThanOrEqual(2);
   });
 
-  test('un rechazo del banco: su motivo, y ni se pregunta por la plaza', async ({ page }) => {
+  test('un rechazo del banco: su motivo, y ni se pregunta por el lugar', async ({ page }) => {
     const c = await montar(page, { confirm: 'card_error' });
     await abrirPago(page);
     await page.getByRole('button', { name: 'Continuar · 15 €' }).click({ timeout: 30_000 });

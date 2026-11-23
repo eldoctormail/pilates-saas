@@ -37,13 +37,13 @@ test('apagado: la pantalla es la de siempre y no se piden datos', async ({ page 
   expect(pedidas).toHaveLength(0);
 });
 
-test('encendido: quién dejó plazas vacías en el periodo que se ve, con su base y sin porcentajes', async ({ page }) => {
+test('encendido: quién dejó lugares vacíos en el periodo que se ve, con su base y sin porcentajes', async ({ page }) => {
   const pedidas = await montarCon(page, {
     disponible: true,
     filas: [{ socioId: 'soc-2', tarde: 2, sinVenir: 1, conPlaza: 9 }, { socioId: 'soc-3', tarde: 0, sinVenir: 3, conPlaza: 4 }],
   });
   const bloque = page.getByTestId('informe-plazas-vacias');
-  await expect(bloque.getByRole('heading', { name: 'Plazas que dejaron vacías' })).toBeVisible();
+  await expect(bloque.getByRole('heading', { name: 'Lugares que dejaron vacías' })).toBeVisible();
   await expect(bloque).toContainText('Puede haber un motivo');
   const lista = bloque.getByTestId('informe-plazas-vacias-lista');
   await expect(lista.getByRole('listitem')).toHaveCount(2);
@@ -59,7 +59,7 @@ test('encendido: quién dejó plazas vacías en el periodo que se ve, con su bas
 
 test('encendido y nadie llega: se dice, sin lista', async ({ page }) => {
   const pedidas = await montarCon(page, { disponible: true, filas: [] });
-  await expect(page.getByTestId('informe-plazas-vacias')).toContainText('Nadie ha dejado 3 o más plazas vacías en este periodo.');
+  await expect(page.getByTestId('informe-plazas-vacias')).toContainText('Nadie ha dejado 3 o más lugares vacíos en este periodo.');
   expect(pedidas.length).toBeGreaterThan(0);
 });
 

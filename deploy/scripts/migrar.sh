@@ -17,22 +17,11 @@ SB="$(cd "$SB" && pwd)"
 
 leer() { grep -E "^$2=" "$1" | tail -1 | cut -d= -f2- | sed -e 's/^"//' -e 's/"$//'; }
 
-PGPASS=$(leer "$SB/.env" POSTGRES_PASSWORD)
-TENANT=$(leer "$SB/.env" POOLER_TENANT_ID)
-PGPORT=$(leer "$SB/.env" POSTGRES_PORT); PGPORT=${PGPORT:-5432}
 APP_URL=$(leer "$DEPLOY/.env" NEXT_PUBLIC_APP_URL | sed 's:/*$::')
 CRON_SECRETO=$(leer "$DEPLOY/.env" SUPABASE_CRON_SECRET)
 
-[ -n "$PGPASS" ] || { echo "Falta POSTGRES_PASSWORD en $SB/.env"; exit 1; }
 [ -n "$APP_URL" ] || { echo "Falta NEXT_PUBLIC_APP_URL en $DEPLOY/.env"; exit 1; }
 [ -n "$CRON_SECRETO" ] || { echo "Falta SUPABASE_CRON_SECRET en $DEPLOY/.env (generar-secretos.sh)"; exit 1; }
-
-# Conexión por el pooler (supavisor, modo sesión), que es lo que publica el
-# compose oficial de Supabase.
-# Sin TLS: el pooler local no lo ofrece, y la CLI actual de Supabase lo intenta
-# por defecto («The server does not support SSL connections»). La conexión no
-# sale de la máquina.
-DB_URL="postgresql://postgres.${TENANT}:${PGPASS}@127.0.0.1:${PGPORT}/postgres?sslmode=disable"
 
 # Una copia de las migraciones con los cinco arreglos que hacen falta para
 # recorrerlas desde una base vacía (los mismos que el job de CI). La de
@@ -40,16 +29,53 @@ DB_URL="postgresql://postgres.${TENANT}:${PGPASS}@127.0.0.1:${PGPORT}/postgres?s
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 "$DEPLOY/scripts/preparar-migraciones.sh" "$TMP"
+M="$TMP/supabase/migrations"
 
+# Cada migración se aplica con psql DENTRO del contenedor de la base, en su
+# propia transacción, y se anota en supabase_migrations.schema_migrations (la
+# misma tabla y el mismo número de versión que usa la CLI de Supabase: lo que
+# ella ya aplicó se saltea). No se usa la CLI porque corre las sentencias de a
+# una, fuera de una transacción, y las migraciones con LOCK TABLE fallan
+# («LOCK TABLE can only be used in transaction blocks»).
+PSQL="docker exec -i supabase-db psql -U postgres -d postgres -v ON_ERROR_STOP=1 -q"
 echo "→ Migraciones"
-cd "$TMP"
-# Sin Node en el servidor (lo normal en una Raspberry o un servidor limpio), la
-# CLI corre en un contenedor de Node con la red del servidor.
-if command -v npx >/dev/null 2>&1; then
-  npx --yes supabase@2 db push --db-url "$DB_URL" --include-all
+$PSQL <<'SQL'
+set client_min_messages = warning;
+create schema if not exists supabase_migrations;
+create table if not exists supabase_migrations.schema_migrations (version text primary key, statements text[], name text);
+SQL
+$PSQL -At -c "select version from supabase_migrations.schema_migrations" > "$TMP/aplicadas"
+
+LOTE="$TMP/lote.sql"
+: > "$LOTE"
+PENDIENTES=0
+for f in $(ls "$M" | LC_ALL=C sort); do
+  version="${f%%_*}"
+  grep -qx "$version" "$TMP/aplicadas" && continue
+  nombre="${f#*_}"; nombre="${nombre%.sql}"
+  {
+    printf '\\echo   %s\n' "$f"
+    printf 'begin;\n'
+    cat "$M/$f"
+    # El «;» suelto cierra una última sentencia sin punto y coma.
+    printf '\n;\ninsert into supabase_migrations.schema_migrations (version, name) values (%s, %s);\ncommit;\n' "'$version'" "'$nombre'"
+  } >> "$LOTE"
+  PENDIENTES=$((PENDIENTES + 1))
+done
+
+if [ "$PENDIENTES" -eq 0 ]; then
+  echo "  Ninguna pendiente."
 else
-  docker run --rm --network host -v "$TMP":/w -w /w node:24-bookworm-slim \
-    npx --yes supabase@2 db push --db-url "$DB_URL" --include-all
+  echo "  $PENDIENTES pendientes (la que falle, si falla, es la última que aparece):"
+  # Un solo psql para todas: con ON_ERROR_STOP, la que falla se deshace entera
+  # y las siguientes no se aplican.
+  $PSQL < "$LOTE" > "$TMP/salida" 2>&1 || {
+    tail -n 25 "$TMP/salida"
+    echo "✗ Falló la última migración de la lista. Las anteriores quedaron aplicadas: corregí y volvé a correr."
+    exit 1
+  }
+  tail -n 1 "$TMP/salida"
+  echo "  $PENDIENTES aplicadas."
 fi
 
 # Lo que las migraciones nuevas del repo original vuelvan a traer de Tentare

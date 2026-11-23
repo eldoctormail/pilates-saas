@@ -66,5 +66,19 @@ services:
     depends_on:
       - app
 
+  # Producción: el túnel de Cloudflare publica la app y Supabase con tu dominio,
+  # por HTTPS y sin abrir puertos en el router. Solo con COMPOSE_PROFILES=tunel
+  # en deploy/.env (lo pone deploy/scripts/produccion.sh). Los nombres y qué
+  # rutas de Supabase se publican se configuran en el panel de Cloudflare
+  # (deploy/PRODUCCION.md).
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    profiles: ["tunel"]
+    restart: unless-stopped
+    network_mode: host
+    command: ["tunnel", "--no-autoupdate", "run"]
+    environment:
+      TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN:-}
+
 volumes:
   inngest-data:

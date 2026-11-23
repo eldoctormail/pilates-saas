@@ -38,9 +38,11 @@ rm "$M/20260819211544_respaldo_sereno_studio1_rls.sql"
 rm "$M/20260918000200_pay4_cobros_intentos.sql"
 
 # 5. Un revoke/grant prematuro (y redundante) sobre reservar_plaza(9).
-sed -i \
+# `-i.bak` vale igual con el sed de Linux y con el del Mac.
+sed -i.bak \
   -e '/^revoke execute on function public\.reservar_plaza(text, text, text, text, boolean, boolean, text, boolean, boolean) from public, anon, authenticated;$/d' \
   -e '/^grant execute on function public\.reservar_plaza(text, text, text, text, boolean, boolean, text, boolean, boolean) to service_role, postgres;$/d' \
   "$M/20260919074101_reservar_plaza_una_sola_firma_y_entitlement_sin_js.sql"
+rm -f "$M"/*.bak
 
 echo "$(ls "$M" | wc -l) migraciones preparadas en $M"

@@ -130,6 +130,8 @@ El script hace cuatro cosas:
 3. Carga en Vault `app_url` y `supabase_cron_secret`, que usan los trabajos de `pg_cron`.
 4. Al final verifica que ningún trabajo siga apuntando a `tentare.app`; el resultado tiene que ser 0.
 
+Además copia a la carpeta de Supabase las **plantillas de correo** de Tentare (`plantillas/`) y `docker-compose.tentare.yml`. Ahí un contenedor `plantillas` se las sirve a Auth, y así los correos de acceso llevan el código de 6 cifras que pide la app. Sin eso, Supabase manda sus plantillas de fábrica, con un enlace y sin código. Si cambiaron, el script avisa que hay que correr `docker compose up -d` en la carpeta de Supabase.
+
 Se puede volver a correr: solo aplica las migraciones nuevas. **No** carga `supabase/seed.sql`, que son datos de demostración y empiezan con un `TRUNCATE`.
 
 La instalación desde cero está probada: las 905 migraciones, la adaptación (dos veces, para comprobar que no cambia nada la segunda) y Vault, sobre una base vacía.

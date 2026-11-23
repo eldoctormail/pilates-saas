@@ -36,7 +36,15 @@ case "$(leer "$ENV_APP" MERCADOPAGO_ACCESS_TOKEN)" in
   TEST-*) aviso "MERCADOPAGO_ACCESS_TOKEN es de PRUEBA: los cobros no serán reales." ;;
   '') aviso "Sin MERCADOPAGO_ACCESS_TOKEN: no se cobra online." ;;
 esac
-[ -n "$(leer "$ENV_APP" RESEND_API_KEY)" ] || aviso "Sin RESEND_API_KEY: la app no manda sus correos (avisos, constancias). Los de acceso sí salen, por el SMTP."
+case "$(leer "$ENV_APP" RESEND_API_KEY)" in
+  '') aviso "Sin RESEND_API_KEY: la app no manda sus correos (invitaciones, avisos, constancias). Los de acceso sí salen, por el SMTP." ;;
+  local_*)
+    [ "$(leer "$ENV_APP" RESEND_BASE_URL)" = "http://127.0.0.1:3000/api/correo-local" ] || falta "RESEND_API_KEY=local_… sin RESEND_BASE_URL=http://127.0.0.1:3000/api/correo-local: los correos de la app irían a Resend con una clave que no existe"
+    case "$(leer "$ENV_APP" SMTP_HOST)" in
+      '') falta "RESEND_API_KEY=local_… sin SMTP_HOST en deploy/.env: los correos de la app no salen" ;;
+      mailpit) falta "SMTP_HOST=mailpit en deploy/.env: los correos de la app quedarían en el buzón de pruebas" ;;
+    esac ;;
+esac
 
 if [ -n "$problemas" ]; then
   printf "No se pasa a producción:%b\n" "$problemas"

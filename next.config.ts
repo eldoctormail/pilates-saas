@@ -25,6 +25,12 @@ const nextConfig: NextConfig = {
   // no queremos apagarla. Por eso se retira en vez de traducirse.
   typescript: {
     tsconfigPath: process.env.NODE_ENV === 'production' ? './tsconfig.json' : './tsconfig.dev.json',
+    // Autoalojado: la imagen de Docker (deploy/Dockerfile) se compila con
+    // TENTARE_SALTAR_TYPECHECK=1 para no repetir en cada despliegue la revisión
+    // de tipos, que en un Mac o una Raspberry tarda varios minutos. La revisión
+    // completa sigue en `npm run typecheck` y en el CI de cada PR. En Vercel y
+    // en `npm run build` a secas la variable no está: se revisa como siempre.
+    ...(process.env.TENTARE_SALTAR_TYPECHECK === '1' ? { ignoreBuildErrors: true } : {}),
   },
   // Transiciones de vista de React en las navegaciones: el contenido del panel se
   // anima al cambiar de sección (components/layout/panel-page-transition.tsx).

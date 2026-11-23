@@ -91,3 +91,33 @@ export function provinciaDeCp(codigoPostal: string | null | undefined): Provinci
 export function esCanarias(codigoPostal: string | null | undefined): boolean {
   return /^(35|38)\d{3}$/.test((codigoPostal ?? '').trim());
 }
+
+// ─── Argentina ───────────────────────────────────────────────────────────────
+// El CPA (código postal argentino, «Q8300ABC») empieza con la letra de la
+// provincia, que es la misma de su código ISO 3166-2:AR («AR-Q» Neuquén). El
+// código viejo de cuatro cifras («8300») sigue en uso y vale, pero no dice la
+// provincia (sus rangos se pisan entre provincias).
+
+export const PROVINCIAS_AR: Readonly<Record<string, string>> = {
+  A: 'Salta', B: 'Buenos Aires', C: 'Ciudad Autónoma de Buenos Aires', D: 'San Luis',
+  E: 'Entre Ríos', F: 'La Rioja', G: 'Santiago del Estero', H: 'Chaco', J: 'San Juan',
+  K: 'Catamarca', L: 'La Pampa', M: 'Mendoza', N: 'Misiones', P: 'Formosa', Q: 'Neuquén',
+  R: 'Río Negro', S: 'Santa Fe', T: 'Tucumán', U: 'Chubut', V: 'Tierra del Fuego',
+  W: 'Corrientes', X: 'Córdoba', Y: 'Jujuy', Z: 'Santa Cruz',
+};
+
+/** «q 8300 abc» → «Q8300ABC»; «8300» → «8300». Sin espacios ni guiones, en mayúsculas. */
+export function normalizarCpArgentino(codigoPostal: string | null | undefined): string {
+  return (codigoPostal ?? '').replace(/[\s-]/g, '').toUpperCase();
+}
+
+export type CpArgentino = { valido: true; provincia: string | null } | { valido: false };
+
+/** Un código postal argentino: el de cuatro cifras («8300») o el CPA («Q8300ABC»). */
+export function cpArgentino(codigoPostal: string | null | undefined): CpArgentino {
+  const cp = normalizarCpArgentino(codigoPostal);
+  if (/^\d{4}$/.test(cp)) return { valido: true, provincia: null };
+  const m = /^([A-Z])\d{4}[A-Z]{3}$/.exec(cp);
+  if (m && PROVINCIAS_AR[m[1]]) return { valido: true, provincia: PROVINCIAS_AR[m[1]] };
+  return { valido: false };
+}

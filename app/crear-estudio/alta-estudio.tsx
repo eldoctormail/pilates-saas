@@ -1,5 +1,7 @@
 'use client';
 
+import { EJEMPLO_CIUDAD } from '@/lib/alta/tu-estudio';
+
 import { useEffect, useId, useRef, useState } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, Check, Copy, Loader2, Mail, RotateCcw, ShieldCheck } from 'lucide-react';
@@ -645,7 +647,7 @@ export function AltaEstudio({ foundingGratis }: { foundingGratis: boolean }) {
               opcional
               valor={datos.ciudad}
               onCambio={(v) => setDatos({ ...datos, ciudad: v })}
-              placeholder="Ej. Madrid"
+              placeholder={`Ej. ${EJEMPLO_CIUDAD}`}
               autoComplete="address-level2"
             />
             {/* Un <select> y no catorce botones: son catorce opciones y esto es

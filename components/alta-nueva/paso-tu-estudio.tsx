@@ -31,7 +31,7 @@ import { apuntarTuEstudio } from '@/lib/alta/embudo-cliente';
 import {
   DIAS_ALTA, HORARIOS_ALTA, HORARIO_POR_DEFECTO, PRECIO_CADENA_MES, TOTALES_SEDES,
   aHoraCorta, diasDe, erroresCuando, erroresDonde, etiquetaCuando, etiquetaDonde, filasHorario, franjaDe, horarioGuardado,
-  horarioIdDe, horasDeLaFranja, limpiarDonde, lineaDireccion, onbCentrosDe, otrasSedes, restoDeSedes, semanaPrevista, textoProvincia,
+  EJEMPLO_CIUDAD, EJEMPLO_CP, horarioIdDe, horasDeLaFranja, limpiarDonde, lineaDireccion, onbCentrosDe, otrasSedes, restoDeSedes, semanaPrevista, textoProvincia,
   tituloDonde, aHoraBd,
   type DatosDonde, type HorarioId, type Sedes, type TotalSedes,
 } from '@/lib/alta/tu-estudio';
@@ -39,6 +39,7 @@ import { cn, hoyEnEstudio } from '@/lib/utils';
 import { SemanaFranjas } from '@/components/calendario/semana-franjas';
 import { VistaAgenda, type DiaDeAgenda } from '@/components/calendario/vista-agenda';
 import { ZonaHorariaFija } from './zona-horaria-fija';
+import { FUNCIONES_DE_ESPANA } from '@/lib/locale';
 import {
   CLASE_AYUDA, CLASE_CAMPO, CLASE_ERROR, CLASE_ETIQUETA, CabeceraPaso, ErrorGuardado, LineaDePasos, NavPaso,
 } from './piezas';
@@ -51,6 +52,9 @@ function iniciales(nombre: string): string {
 }
 
 // ── 3 · 1 de 2 · Dónde está ──────────────────────────────────────────────────
+
+// Argentina: el CPA lleva letras (Q8300ABC). España: cinco cifras.
+const CP_CON_LETRAS = !FUNCIONES_DE_ESPANA;
 
 export function PasoDonde({ studio, sedes, onSedes, onListo, saliendo }: {
   studio: Studio;
@@ -156,11 +160,11 @@ export function PasoDonde({ studio, sedes, onSedes, onListo, saliendo }: {
           <div className="grid grid-cols-[minmax(0,140px)_minmax(0,1fr)] gap-3">
             <div>
               <label htmlFor={`${id}-codigoPostal`} className={CLASE_ETIQUETA}>Código postal</label>
-              <input id={`${id}-codigoPostal`} className={cn(CLASE_CAMPO, 'mt-1.5 font-mono')} autoComplete="postal-code" inputMode="numeric" maxLength={5} placeholder="28003" {...campo('codigoPostal')} />
+              <input id={`${id}-codigoPostal`} className={cn(CLASE_CAMPO, 'mt-1.5 font-mono')} autoComplete="postal-code" inputMode={CP_CON_LETRAS ? 'text' : 'numeric'} maxLength={CP_CON_LETRAS ? 10 : 5} placeholder={EJEMPLO_CP} {...campo('codigoPostal')} />
             </div>
             <div>
               <label htmlFor={`${id}-ciudad`} className={CLASE_ETIQUETA}>Ciudad</label>
-              <input id={`${id}-ciudad`} className={cn(CLASE_CAMPO, 'mt-1.5')} autoComplete="address-level2" placeholder="Madrid" maxLength={100} {...campo('ciudad')} />
+              <input id={`${id}-ciudad`} className={cn(CLASE_CAMPO, 'mt-1.5')} autoComplete="address-level2" placeholder={EJEMPLO_CIUDAD} maxLength={100} {...campo('ciudad')} />
             </div>
           </div>
           <div className="-mt-3">

@@ -103,4 +103,4 @@ Cierra los túneles y el buzón, y devuelve las dos configuraciones como estaban
 
 Los datos de prueba quedan en la base. Para empezar limpio, borrá el estudio de prueba desde Studio (`http://IP:8000`).
 
-Los correos que manda la propia app (avisos y constancias) salen por Resend. Sin `RESEND_API_KEY` no salen, y en el ensayo eso es lo esperado.
+Los correos que manda la propia app (invitaciones, avisos y constancias) no van por el SMTP de Supabase. Sin configurar, no salen. Para verlos en el buzón del ensayo, poné en `deploy/.env` la vía SMTP de `deploy/.env.example` con `SMTP_HOST=mailpit`, `SMTP_PORT=1025` y sin usuario ni contraseña, y recreá la app.

@@ -115,7 +115,9 @@ Crea `deploy/.env` con los secretos internos, las claves de Inngest y las de pus
 - `NEXT_PUBLIC_SUPABASE_URL=http://IP:8000`
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY`: el `ANON_KEY` de `~/supabase-project/.env`
 - `SUPABASE_SERVICE_ROLE_KEY`: el `SERVICE_ROLE_KEY` de ese mismo archivo
-- `RESEND_API_KEY` y `RESEND_FROM`, para los correos de la app (reservas, avisos). Se puede dejar para después.
+- El correo de la app (invitaciones al equipo, avisos, constancias). Se puede dejar para después. Dos vías, explicadas en `deploy/.env.example`:
+  - **Resend** (`RESEND_API_KEY=re_…` y `RESEND_FROM`), con tu dominio verificado: sin dominio, Resend solo entrega a tu propia dirección.
+  - **SMTP** (Gmail con contraseña de aplicación, el correo del estudio o Mailpit): `RESEND_API_KEY=local_…`, `RESEND_BASE_URL=http://127.0.0.1:3000/api/correo-local` y `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`. No hace falta compilar de nuevo: basta con `docker compose up -d --force-recreate app`.
 
 ## 3. Base de datos
 

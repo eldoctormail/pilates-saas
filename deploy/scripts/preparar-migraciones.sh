@@ -24,6 +24,9 @@ rm -rf "$DEST/supabase"
 mkdir -p "$M"
 cp "$REPO"/supabase/migrations/*.sql "$M/"
 cp "$REPO/supabase/config.toml" "$DEST/supabase/" 2>/dev/null || true
+# config.toml apunta a las plantillas de correo (auth.email.template.*.content_path);
+# la CLI de Supabase comprueba que existan y, si no, ni empieza.
+[ -d "$REPO/supabase/templates" ] && cp -R "$REPO/supabase/templates" "$DEST/supabase/"
 
 # 1. panel_interno antes de 0135 (0135 lee la tabla que crea).
 mv "$M/20260725170000_panel_interno.sql" "$M/01340_panel_interno.sql"

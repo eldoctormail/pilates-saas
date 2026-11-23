@@ -1,5 +1,8 @@
 'use client';
 
+import { FUNCIONES_DE_ESPANA } from '@/lib/locale';
+import { SoloEspana } from '@/components/configuracion/solo-espana';
+
 import { LOCALE } from '../../../lib/locale.ts';
 import { conMoneda, LOCALE_MONEDA } from '../../../lib/moneda.ts';
 import Link from 'next/link';
@@ -52,7 +55,15 @@ const emptyForm = (anio: number, ivaDef: number): FormState => ({
   id: null, fecha: `${anio}-01-01`, concepto: '', cliente: '', nif: '', total: '', tipoIva: String(ivaDef), nota: '',
 });
 
-export default function CierreDeAnoPage() {
+// Solo España (lib/locale.ts): IVA repercutido, modelo 303 y gestoría. En
+// Argentina, un aviso en su lugar; el menú tampoco lo enseña (lib/nav-config.ts).
+export default function Pagina() {
+  return FUNCIONES_DE_ESPANA
+    ? <CierreDeAnoPage />
+    : <SoloEspana que="El cierre de año para la gestoría" explicacion="Arma el IVA repercutido y el modelo 303 de España. En Argentina, tus facturas de ARCA las ve tu contador en «Mis Comprobantes» de ARCA, y lo cobrado por trimestre lo descargás en Cobros › Facturas." />;
+}
+
+function CierreDeAnoPage() {
   const { facturas, recibos, studio, updateStudio } = useStudio();
   const conVerifactu = studio?.modoFacturacion === 'verifactu';
   const ivaDef = studio?.ivaPorDefecto ?? 21;

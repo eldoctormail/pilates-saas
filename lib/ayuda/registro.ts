@@ -17,6 +17,8 @@
 // documentación inventada de algo que no se ha escrito todavía.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { FUNCIONES_DE_ESPANA } from '../locale.ts';
+
 export type GrupoAyuda =
   | 'empezar' | 'reservas' | 'clientes' | 'instructores' | 'pagos' | 'bonos'
   | 'portal' | 'widget' | 'automatizaciones' | 'integraciones' | 'app'
@@ -63,9 +65,11 @@ export interface ArticuloAyuda {
   /** Slugs completos "categoria/articulo" de otros artículos de este registro. */
   relacionados?: string[];
   estado: 'publicado' | 'proximamente';
+  /** Solo tiene sentido en España (Veri*Factu, gestoría, datáfono de Stripe): con el formato de Argentina no se publica. */
+  soloEspana?: true;
 }
 
-export const ARTICULOS: ArticuloAyuda[] = [
+const TODOS_LOS_ARTICULOS: ArticuloAyuda[] = [
   // ─── Empezar ────────────────────────────────────────────────────────────
   {
     slug: 'crear-tu-cuenta', categoria: 'empezar', tipo: 'guia',
@@ -308,6 +312,7 @@ export const ARTICULOS: ArticuloAyuda[] = [
   },
   {
     slug: 'facturas', categoria: 'pagos', tipo: 'guia',
+    soloEspana: true,
     titulo: 'Facturas y Veri*Factu',
     descripcion: 'Si Tentare emite tus facturas o las haces fuera — cómo activarlo, dónde encontrarlas, cómo descargarlas y en qué punto está el envío a la AEAT.',
     actualizado: '2026-09-30',
@@ -325,6 +330,7 @@ export const ARTICULOS: ArticuloAyuda[] = [
   },
   {
     slug: 'cierre-de-ano', categoria: 'pagos', tipo: 'guia',
+    soloEspana: true,
     titulo: 'Cierre de año: lo que le pasas a tu gestoría',
     descripcion: 'Ingresos e IVA repercutido, por trimestre y por tipo, en CSV o PDF — y el envío automático cada trimestre.',
     terminos: ['cierre', 'gestoría', 'IVA', 'modelo 303', 'trimestre', 'impuestos', 'contabilidad', 'asesoría'],
@@ -343,6 +349,7 @@ export const ARTICULOS: ArticuloAyuda[] = [
   },
   {
     slug: 'conectar-el-datafono', categoria: 'pagos', tipo: 'guia',
+    soloEspana: true,
     titulo: 'Conectar el datáfono de Stripe',
     descripcion: 'El datáfono que cobra solo desde la Caja: dónde se consigue, el código de tres palabras y qué hacer si dice «sin conexión».',
     terminos: ['datáfono', 'TPV', 'lector', 'terminal', 'Stripe Terminal', 'S700', 'WisePOS', 'SumUp', 'Solo', 'emparejar', 'tarjeta', 'caja', 'mostrador', 'devolver'],
@@ -663,6 +670,10 @@ export const ARTICULOS: ArticuloAyuda[] = [
     estado: 'publicado',
   },
 ];
+
+// Con el formato de Argentina (lib/locale.ts) no se publican los de solo España:
+// ni en la ayuda, ni en el buscador, ni en el sitemap.
+export const ARTICULOS: ArticuloAyuda[] = TODOS_LOS_ARTICULOS.filter(a => FUNCIONES_DE_ESPANA || !a.soloEspana);
 
 const CLAVE = (categoria: string, slug: string) => `${categoria}/${slug}`;
 const PORCLAVE = new Map(ARTICULOS.map((a) => [CLAVE(a.categoria, a.slug), a]));

@@ -14,6 +14,7 @@ import {
 // extensiones. Sin esto, el menú se queda otra vez sin poder probarse.
 import { MARKETING_MODULE_ENABLED } from './feature-flags.ts';
 import { esRutaCongelada } from './frozen-features.ts';
+import { FUNCIONES_DE_ESPANA } from './locale.ts';
 
 export interface NavItemDef {
   href: string;
@@ -198,8 +199,12 @@ const conMarketing: NavSection[] = MARKETING_MODULE_ENABLED
 // de TODO lo que deriva de él —editor de menú, buscador ⌘K, MODULOS—, con
 // independencia del flag de marketing, y elimina las secciones que quedan
 // vacías. Reactivar = quitar la ruta de RUTAS_CONGELADAS en lib/frozen-features.ts.
+// «Cierre de año» arma el IVA repercutido y el modelo 303 para la gestoría:
+// solo España (lib/locale.ts). En Argentina, el contador ve las facturas de ARCA
+// en «Mis Comprobantes».
+const SOLO_ESPANA = ['/cierre'];
 export const navSections: NavSection[] = conMarketing
-  .map((s) => ({ ...s, items: s.items.filter((i) => !esRutaCongelada(i.href)) }))
+  .map((s) => ({ ...s, items: s.items.filter((i) => !esRutaCongelada(i.href) && (FUNCIONES_DE_ESPANA || !SOLO_ESPANA.includes(i.href))) }))
   .filter((s) => s.items.length > 0);
 
 // Lista plana de todos los módulos, en orden natural.

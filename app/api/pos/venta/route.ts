@@ -19,6 +19,7 @@ import { cuotaSinClienta, MENSAJE_CUOTA_SIN_CLIENTA } from '@/lib/pos/cuota-exig
 import { bizumPermitidoPara, MENSAJE_BIZUM_EN_CUOTA } from '@/lib/billing/bizum-permitido';
 import type { MetodoPago } from '@/lib/types';
 import { esEtapaAgotada, liberarPlaza, MENSAJE_ETAPA_AGOTADA, recuperarPlazasDelEstudio, reservarPlazasPOS } from '@/lib/opening/cupo';
+import { TICKET_MAX } from '@/lib/topes-importe';
 
 export const dynamic = 'force-dynamic';
 
@@ -142,7 +143,7 @@ export async function POST(req: NextRequest) {
   if (efectivoRecibido !== null && (!Number.isFinite(efectivoRecibido) || efectivoRecibido < 0)) {
     return NextResponse.json({ error: 'Ese importe en efectivo no es válido.' }, { status: 400 });
   }
-  if (totalEsperado !== null && (!Number.isFinite(totalEsperado) || totalEsperado < 0 || totalEsperado > 100000)) {
+  if (totalEsperado !== null && (!Number.isFinite(totalEsperado) || totalEsperado < 0 || totalEsperado > TICKET_MAX)) {
     return NextResponse.json({ error: 'El total de la venta no es válido.' }, { status: 400 });
   }
   // Sin él, una Caja de antes seguiría registrando la matrícula sin haberla enseñado. Solo

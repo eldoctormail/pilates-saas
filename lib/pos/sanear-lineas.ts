@@ -4,6 +4,7 @@
 // (`/api/pos/venta/presupuesto`), que tienen que leer el MISMO carrito.
 
 import type { LineaVentaPeticion } from './tipos.ts';
+import { IMPORTE_LIBRE_MAX } from '../topes-importe.ts';
 
 export function saneaLineas(bruto: unknown): { lineas: LineaVentaPeticion[] } | { error: string } {
   if (!Array.isArray(bruto) || bruto.length === 0) return { error: 'El ticket está vacío.' };
@@ -23,7 +24,7 @@ export function saneaLineas(bruto: unknown): { lineas: LineaVentaPeticion[] } | 
       const nombre = String(l.nombre ?? '').trim();
       const precio = Number(l.precio);
       if (!nombre) return { error: 'Pon un concepto al importe libre.' };
-      if (!Number.isFinite(precio) || precio < 0 || precio > 10000) return { error: 'Ese importe libre no es válido.' };
+      if (!Number.isFinite(precio) || precio < 0 || precio > IMPORTE_LIBRE_MAX) return { error: 'Ese importe libre no es válido: revisá que no sobre ningún cero.' };
       lineas.push({ tipo, cantidad, nombre: nombre.slice(0, 120), precio, referenciaId: null });
       continue;
     }

@@ -71,7 +71,7 @@ export function ActivarAvisos({ estudioId, slug }: { estudioId: string; slug: st
         {instalar ? t.titulo : 'Activa los avisos'}
       </p>
       <p className="t-small t-dim" style={{ margin: 0 }}>
-        {instalar ? t.cuerpo : 'Te avisamos cuando se libera una plaza y antes de tu clase, aunque tengas la app cerrada.'}
+        {instalar ? t.cuerpo : 'Te avisamos cuando se libera un lugar y antes de tu clase, aunque tengas la app cerrada.'}
       </p>
       {error && <p role="alert" className="t-small" style={{ margin: 0, color: 'var(--danger, #b3261e)' }}>{error}</p>}
       <div style={{ display: 'flex', gap: 'var(--s-2)', marginTop: 'var(--s-1)' }}>

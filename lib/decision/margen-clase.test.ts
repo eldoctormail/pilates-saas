@@ -161,7 +161,7 @@ test('margenSesiones: calcula el índice una sola vez y devuelve un resultado po
   assert.equal(resultados[1].ingresoImputado, 15);
 });
 
-test('la plaza cuenta por lo que gastó de verdad (`bonoSuscripcionId`), aunque haya otra que también la cubra', () => {
+test('el lugar cuenta por lo que gastó de verdad (`bonoSuscripcionId`), aunque haya otra que también la cubra', () => {
   const se = claseUnaHora('s1');
   const bono = plan({ id: 'bono10', tipo: 'BONO', precio: 100, sesiones: 10 });
   const suelta = plan({ id: 'suelta', tipo: 'PUNTUAL', precio: 15, sesiones: 1, tiposClaseIds: ['tc1'] });

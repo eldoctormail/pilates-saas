@@ -92,10 +92,10 @@ export default function Contenido() {
         la mires.
       </p>
 
-      <h2 style={h2}>Los festivos, avisados antes</h2>
+      <h2 style={h2}>Los feriados, avisados antes</h2>
       <p>
-        No hace falta acordarse de cada festivo. En <strong>Resumen</strong>, entre lo que espera tu visto bueno,
-        aparecen los <strong>festivos oficiales de tu comunidad</strong> de los próximos 21 días en los que tienes
+        No hace falta acordarse de cada feriado. En <strong>Resumen</strong>, entre lo que espera tu visto bueno,
+        aparecen los <strong>feriados oficiales de tu comunidad</strong> de los próximos 21 días en los que tienes
         clases: «El martes 8 de diciembre (Inmaculada) tienes 6 clases y 14 reservas confirmadas». Para
         cada uno, dos botones:
       </p>
@@ -104,10 +104,10 @@ export default function Contenido() {
         <li><strong>«Cerrar ese día»</strong>: es un cierre de un día, como los de arriba, con las mismas consecuencias. Te las dice antes de confirmar.</li>
       </ul>
       <p>
-        Con <strong>«Ver todos los festivos con clases»</strong> ves los que quedan más allá de esas tres semanas.
+        Con <strong>«Ver todos los feriados con clases»</strong> ves los que quedan más allá de esas tres semanas.
         La comunidad sale de la <strong>dirección de tu estudio</strong> (el código postal o la ciudad); si no se
         sabe, no se avisa de ninguno. Las <strong>fiestas locales de tu municipio</strong> no vienen solas: añádelas
-        en <strong>Estudio › Festivos</strong> (las busca la IA y tú eliges cuáles) y desde entonces cuentan aquí
+        en <strong>Estudio › Feriados</strong> (las busca la IA y tú eliges cuáles) y desde entonces cuentan aquí
         también. Lo ven la propietaria y la gerencia.
       </p>
 

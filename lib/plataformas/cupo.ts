@@ -20,11 +20,11 @@ export function leerPlazasCedidas(texto: string, aforoPorDefecto: number | null)
   | { ok: false; error: string } {
   const limpio = texto.trim();
   if (limpio === '') return { ok: true, plazas: null };
-  if (!/^\d+$/.test(limpio)) return { ok: false, error: 'Las plazas cedidas tienen que ser un número entero (o dejarlo en blanco para no poner límite).' };
+  if (!/^\d+$/.test(limpio)) return { ok: false, error: 'Los lugares cedidos tienen que ser un número entero (o dejarlo en blanco para no poner límite).' };
   const n = Number(limpio);
   if (aforoPorDefecto != null && n > aforoPorDefecto) {
-    return { ok: false, error: `No puedes ceder más plazas (${n}) de las que tiene la clase (${aforoPorDefecto}).` };
+    return { ok: false, error: `No puedes ceder más lugares (${n}) de los que tiene la clase (${aforoPorDefecto}).` };
   }
-  if (n > 1000) return { ok: false, error: 'Demasiadas plazas.' };
+  if (n > 1000) return { ok: false, error: 'Demasiados lugares.' };
   return { ok: true, plazas: n };
 }

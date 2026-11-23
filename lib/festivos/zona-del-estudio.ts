@@ -9,6 +9,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import type { ZonaFestivos } from './oficiales.ts';
+import { esArgentina } from '../locale.ts';
 
 const PROVINCIA_A_ZONA: Record<string, ZonaFestivos> = {
   // Cataluña: Barcelona, Girona, Lleida, Tarragona.
@@ -45,7 +46,7 @@ const CP_DUDOSO_ARAN = /^255(3\d|4\d|5\d|98|99)$/;
 // Capitales y municipios con más población de cada comunidad, escritos en su
 // forma normalizada (sin acentos, minúsculas, apóstrofos y guiones como
 // espacio). Solo nombres que no se repiten en otra comunidad.
-const MUNICIPIOS: Record<Exclude<ZonaFestivos, 'ARAN'>, readonly string[]> = {
+const MUNICIPIOS: Record<Exclude<ZonaFestivos, 'ARAN' | 'ARGENTINA'>, readonly string[]> = {
   CATALUNA: [
     'barcelona', 'bcn', 'girona', 'gerona', 'lleida', 'lerida', 'tarragona', 'l hospitalet de llobregat', 'hospitalet de llobregat',
     'l hospitalet', 'badalona', 'terrassa', 'sabadell', 'mataro', 'santa coloma de gramenet', 'reus',
@@ -128,6 +129,9 @@ export function zonaDelEstudio(estudio: {
    *  código postal de cinco cifras también existe en Francia o Italia. */
   zonaHoraria?: string | null;
 }): ZonaFestivos | null {
+  // Argentina: un calendario nacional para todo el país (los provinciales no se cargan).
+  if (estudio.zonaHoraria?.startsWith('America/Argentina/')) return 'ARGENTINA';
+  if (!estudio.zonaHoraria && esArgentina()) return 'ARGENTINA';
   if (estudio.zonaHoraria && estudio.zonaHoraria !== 'Europe/Madrid') return null;
 
   const ciudad = estudio.ciudad?.trim() ?? '';

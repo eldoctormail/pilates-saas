@@ -211,13 +211,13 @@ export default function FichaClaseInstructoraPage() {
             <p id="ocupacion" className="t-label" style={{ margin: 0 }}>Reservas</p>
             <p aria-hidden style={{ margin: '6px 0 0', display: 'flex', alignItems: 'baseline', gap: 6 }}>
               <span className="t-num" style={{ fontSize: 32, fontFamily: 'var(--font-heading)', fontWeight: 'var(--heading-weight)', letterSpacing: '-.03em', lineHeight: 1 }}>{plazas.confirmadas}</span>
-              <span style={{ fontSize: 'var(--t-body)', fontWeight: 600, color: 'var(--muted-foreground)' }}>de {plazas.aforo} plazas</span>
+              <span style={{ fontSize: 'var(--t-body)', fontWeight: 600, color: 'var(--muted-foreground)' }}>de {plazas.aforo} lugares</span>
             </p>
             <div aria-hidden style={{ marginTop: 9, height: 6, borderRadius: 99, background: 'var(--muted)', overflow: 'hidden' }}>
               <div style={{ width: `${plazas.porcentaje}%`, height: '100%', borderRadius: 99, background: 'var(--accent)' }} />
             </div>
             <p className="t-meta" style={{ margin: '7px 0 0' }}>
-              <span className="sr-only">{plazas.confirmadas} de {plazas.aforo} plazas reservadas. </span>
+              <span className="sr-only">{plazas.confirmadas} de {plazas.aforo} lugares reservados. </span>
               {[textoPlazasLibres(plazas), clase.enEspera > 0 ? `${clase.enEspera} en lista de espera` : null].filter(Boolean).join(' · ')}
             </p>
           </section>
@@ -226,7 +226,7 @@ export default function FichaClaseInstructoraPage() {
         <div className="card" style={{ padding: '12px 14px', display: 'flex', flexDirection: 'column', gap: 8, fontSize: 'var(--t-small)' }}>
           <Fila k="Cuándo" v={`${cuando} – ${clase.horaFin}`} />
           <Fila k="Dónde" v={[estudio.direccion, clase.sala].filter(Boolean).join(' · ') || '—'} />
-          {clase.cancelada && <Fila k="Reservas" v={`${clase.confirmadas} de ${clase.aforo} plazas`} />}
+          {clase.cancelada && <Fila k="Reservas" v={`${clase.confirmadas} de ${clase.aforo} lugares`} />}
         </div>
 
         {aperturaLista && (

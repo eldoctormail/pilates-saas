@@ -215,7 +215,7 @@ export function generar(p: Parametros, ctx: ContextoDemo = CONTEXTO_POR_DEFECTO)
     resultadoEsperado: recuperaciones > 0 ? `Gana ${recuperaciones} recuperación(es).` : 'No gana ninguna recuperación.',
     pasos,
     excepciones: [
-      'Una cancelación de una clase que nunca llegó a ocupar plaza (lista de espera, oferta rechazada) no compensa.',
+      'Una cancelación de una clase que nunca llegó a ocupar lugar (lista de espera, oferta rechazada) no compensa.',
       'Cancelar y volver a reservar la misma clase cuenta como una sola clase perdida, o ninguna.',
       'Las recuperaciones que da una persona a mano no pasan por esta regla.',
     ],

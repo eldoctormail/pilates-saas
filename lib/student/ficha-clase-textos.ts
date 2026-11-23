@@ -44,7 +44,7 @@ export function consultaMapa(direccion: string | null | undefined, ciudad: strin
  * (el servidor rechaza una clase empezada), así que anunciarlas sería ofrecer algo que no hay (RES-11).
  */
 export function textoPlazas(capacidad: number, libres: number, cerrada: boolean): string {
-  const plazas = `${capacidad} ${capacidad === 1 ? 'plaza' : 'plazas'}`;
+  const plazas = `${capacidad} ${capacidad === 1 ? 'lugar' : 'lugares'}`;
   return cerrada ? plazas : `${plazas} · ${libres} ${libres === 1 ? 'libre' : 'libres'}`;
 }
 

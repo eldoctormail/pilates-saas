@@ -8,7 +8,7 @@ test('una clase con sitio de sobra está disponible', () => {
   assert.equal(estadoPlazas({ ocupadas: 2, aforoMaximo: 8 }), 'disponible');
 });
 
-test('«últimas plazas» avisa ANTES de llenarse, no al llenarse', () => {
+test('«últimos lugares» avisa ANTES de llenarse, no al llenarse', () => {
   // El aviso solo sirve si llega a tiempo de que alguien reaccione.
   assert.equal(estadoPlazas({ ocupadas: 6, aforoMaximo: 8 }), 'ultimas');
   assert.equal(estadoPlazas({ ocupadas: 7, aforoMaximo: 8 }), 'ultimas');
@@ -24,13 +24,13 @@ test('llena es «lista de espera» o «completa» según lo que permita el estud
   assert.equal(estadoPlazas({ ocupadas: 8, aforoMaximo: 8 }), 'completa');
 });
 
-test('sobreaforo (más reservas que plazas) no se lee como que queda sitio', () => {
+test('sobreaforo (más reservas que lugares) no se lee como que queda sitio', () => {
   // Pasa de verdad: staff que añade a mano por encima del aforo.
   assert.equal(estadoPlazas({ ocupadas: 10, aforoMaximo: 8 }), 'completa');
   assert.equal(estadoPlazas({ ocupadas: 10, aforoMaximo: 8, permiteListaEspera: true }), 'lista-espera');
 });
 
-test('un aforo sin fijar es «completa», nunca plazas infinitas', () => {
+test('un aforo sin fijar es «completa», nunca lugares infinitas', () => {
   // Ofrecer reservar sobre un aforo 0 acaba en un error del servidor delante de
   // la clienta. Mejor no ofrecerlo.
   assert.equal(estadoPlazas({ ocupadas: 0, aforoMaximo: 0 }), 'completa');

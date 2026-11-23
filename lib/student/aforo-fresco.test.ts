@@ -14,7 +14,7 @@ test('reemplaza solo las sesiones de la ventana; las pasadas se quedan', () => {
   assert.deepEqual(r, [{ sesion_id: 'pasada', estado: 'ASISTIDA' }, { sesion_id: 'hoy', estado: 'CONFIRMADA' }]);
 });
 
-test('una sesión de la ventana sin filas frescas queda a cero (se liberaron plazas)', () => {
+test('una sesión de la ventana sin filas frescas queda a cero (se liberaron lugares)', () => {
   const r = aplicarAforo(previas, ['hoy', 'manana'], []);
   assert.deepEqual(r, [{ sesion_id: 'pasada', estado: 'ASISTIDA' }]);
 });

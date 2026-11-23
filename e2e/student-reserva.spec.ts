@@ -42,7 +42,7 @@ test.describe('Student PWA · reservar', () => {
     await expect(page.getByText('Reserva confirmada')).toHaveCount(0);
   });
 
-  test('la clase se llena MIENTRAS reservaba: la UI decía que había plaza', async ({ page }) => {
+  test('la clase se llena MIENTRAS reservaba: la UI decía que había lugar', async ({ page }) => {
     // El caso que justifica toda la arquitectura: el aforo del cliente es
     // orientativo (no resta máquinas averiadas), así que el servidor puede
     // rechazar una clase que la pantalla mostraba libre. Eso NO es un fallo.

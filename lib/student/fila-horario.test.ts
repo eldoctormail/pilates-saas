@@ -7,7 +7,7 @@ import { accionDeFila, topeSemanalLleno, cerradaPorAntelacion, estadoTemporalDeF
 const clase = { inicio: '2026-10-07T10:00:00+02:00', fin: '2026-10-07T10:50:00+02:00', seAbreEl: null as string | null };
 const ms = (iso: string) => Date.parse(iso);
 
-test('estado temporal: en curso, terminada, aún no se abre o las plazas', () => {
+test('estado temporal: en curso, terminada, aún no se abre o los lugares', () => {
   assert.equal(estadoTemporalDeFila(clase, 'disponible', ms('2026-10-07T10:20:00+02:00')), 'en-curso');
   assert.equal(estadoTemporalDeFila(clase, 'disponible', ms('2026-10-07T11:00:00+02:00')), 'terminada');
   assert.equal(estadoTemporalDeFila(clase, 'disponible', ms('2026-10-07T08:00:00+02:00')), 'plazas');
@@ -31,12 +31,12 @@ const verde: CondicionesFila = {
   requiereAutorizacion: false, aperturaSuave: false, online: true, relojListo: true, recienReservada: false, topeLleno: false,
 };
 
-test('«Reservar» en la fila: con plaza y sin pagar nada', () => {
+test('«Reservar» en la fila: con lugar y sin pagar nada', () => {
   assert.equal(accionDeFila(verde), 'reservar');
   assert.equal(accionDeFila({ ...verde, disp: 'pocas' }), 'reservar');
 });
 
-test('sin plaza, ya suya o en espera: sin botón (la lista de espera se pide desde la ficha)', () => {
+test('sin lugar, ya suya o en espera: sin botón (la lista de espera se pide desde la ficha)', () => {
   for (const disp of ['completa', 'no-disponible', 'reservada', 'lista-espera'] as const) {
     assert.equal(accionDeFila({ ...verde, disp }), 'ninguna', disp);
   }

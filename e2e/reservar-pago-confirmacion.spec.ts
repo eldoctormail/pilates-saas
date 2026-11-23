@@ -142,8 +142,8 @@ test('webhook retrasado: confirmando → confirmada con los datos REALES, tras �
 
   // Mientras el servidor dice 'en_proceso', el copy es el honesto de siempre —
   // jamás «confirmada» por adelantado.
-  await expect(page.getByText('Estamos confirmando tu plaza', { exact: false })).toBeVisible();
-  await expect(page.getByText('¡Plaza confirmada!')).not.toBeVisible();
+  await expect(page.getByText('Estamos confirmando tu lugar', { exact: false })).toBeVisible();
+  await expect(page.getByText('¡Lugar confirmado!')).not.toBeVisible();
 
   const req = await reqPromise;
   expect(req.url()).toContain(`studioId=${STUDIO_ID}`);
@@ -151,8 +151,8 @@ test('webhook retrasado: confirmando → confirmada con los datos REALES, tras �
   // Confirmación REAL: llega tras el 4º poll, con la clase que devolvió el
   // servidor. El backoff existe de verdad: hubo al menos 2 polls «en_proceso»
   // antes de confirmar.
-  await expect(page.getByText('¡Plaza confirmada!')).toBeVisible({ timeout: 30_000 });
-  await expect(page.getByText('Tu plaza está confirmada', { exact: false })).toBeVisible();
+  await expect(page.getByText('¡Lugar confirmado!')).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByText('Tu lugar está confirmado', { exact: false })).toBeVisible();
   expect(polls, 'la confirmación no puede llegar sin haber preguntado varias veces').toBeGreaterThanOrEqual(4);
 
   // Con plaza confirmada aparece el bloque de calendario (antes no: no se
@@ -168,7 +168,7 @@ test('el webhook nunca confirma: agotado el techo → copy de «tardando», JAM�
   });
 
   await pagarHastaDone(page);
-  await expect(page.getByText('Estamos confirmando tu plaza', { exact: false })).toBeVisible();
+  await expect(page.getByText('Estamos confirmando tu lugar', { exact: false })).toBeVisible();
 
   // Techo del polling ~35s (RETARDOS_POLL_MS): pasado, el copy honesto de
   // «tardando» — pago recibido, confirmación por email, estudio como recurso.
@@ -177,8 +177,8 @@ test('el webhook nunca confirma: agotado el techo → copy de «tardando», JAM�
   expect(polls, 'sin polls el test no prueba nada').toBeGreaterThanOrEqual(2);
 
   // Lo que NUNCA puede pasar: anunciar la plaza sin confirmación del servidor.
-  await expect(page.getByText('¡Plaza confirmada!')).not.toBeVisible();
-  await expect(page.getByText('Tu plaza está confirmada', { exact: false })).not.toBeVisible();
+  await expect(page.getByText('¡Lugar confirmado!')).not.toBeVisible();
+  await expect(page.getByText('Tu lugar está confirmado', { exact: false })).not.toBeVisible();
   await expect(page.getByText('Añadir a tu calendario')).not.toBeVisible();
 });
 
@@ -195,11 +195,11 @@ test('lista de espera: el aforo voló entre pago y reserva → se dice claro', a
   await pagarHastaDone(page);
 
   await expect(page.getByText('¡En lista de espera!')).toBeVisible({ timeout: 30_000 });
-  await expect(page.getByText('la clase se ha llenado justo antes de confirmar tu plaza', { exact: false })).toBeVisible();
+  await expect(page.getByText('la clase se ha llenado justo antes de confirmar tu lugar', { exact: false })).toBeVisible();
   await expect(page.getByText('tu bono queda en tu cuenta', { exact: false })).toBeVisible();
   expect(polls, 'sin polls el test no prueba nada').toBeGreaterThanOrEqual(2);
   // Ni confirmación ni calendario: no hay plaza que guardar.
-  await expect(page.getByText('¡Plaza confirmada!')).not.toBeVisible();
+  await expect(page.getByText('¡Lugar confirmado!')).not.toBeVisible();
   await expect(page.getByText('Añadir a tu calendario')).not.toBeVisible();
 });
 
@@ -299,7 +299,7 @@ for (const [caso, query] of [
 // pasó con SU pago (`ya_tenia_plaza`) y qué tiene (`previa`), y la pantalla lo dice.
 // ─────────────────────────────────────────────────────────────────────────────
 
-test('ya tenía plaza CONFIRMADA: se le dice que la tiene y que el pago queda a su favor, nunca «sin plaza»', async ({ page }) => {
+test('ya tenía lugar CONFIRMADO: se le dice que la tiene y que el pago queda a su favor, nunca «sin lugar»', async ({ page }) => {
   let polls = 0;
   await page.route('**/api/public/estado-pago**', (r) => {
     polls += 1;
@@ -311,13 +311,13 @@ test('ya tenía plaza CONFIRMADA: se le dice que la tiene y que el pago queda a 
 
   await pagarHastaDone(page);
 
-  await expect(page.getByText('Ya tenías plaza en esta clase', { exact: true })).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByText('Ya tenías lugar en esta clase', { exact: true })).toBeVisible({ timeout: 30_000 });
   await expect(page.getByText('queda a tu favor', { exact: false })).toBeVisible();
   await expect(page.getByText('Confirmada (ya la tenías)')).toBeVisible();
   expect(polls, 'sin polls el test no prueba nada').toBeGreaterThanOrEqual(2);
   // Lo que NO puede decirle a quien sí tiene plaza.
-  await expect(page.getByText('Sin plaza', { exact: false })).toHaveCount(0);
-  await expect(page.getByText('no hemos podido asignarte la plaza', { exact: false })).toHaveCount(0);
+  await expect(page.getByText('Sin lugar', { exact: false })).toHaveCount(0);
+  await expect(page.getByText('no hemos podido asignarte el lugar', { exact: false })).toHaveCount(0);
   // Tiene una clase a la que ir: el calendario sí.
   await expect(page.getByText('Añadir a tu calendario')).toBeVisible();
 });
@@ -335,7 +335,7 @@ test('ya estaba en la LISTA DE ESPERA: se le dice eso, sin calendario y sin «la
   await pagarHastaDone(page);
 
   await expect(page.getByText('Ya estabas en la lista de espera', { exact: true })).toBeVisible({ timeout: 30_000 });
-  await expect(page.getByText('este pago no te da plaza', { exact: false })).toBeVisible();
+  await expect(page.getByText('este pago no te da lugar', { exact: false })).toBeVisible();
   expect(polls, 'sin polls el test no prueba nada').toBeGreaterThanOrEqual(1);
   await expect(page.getByText('la clase se ha llenado justo antes', { exact: false })).toHaveCount(0);
   await expect(page.getByText('Añadir a tu calendario')).not.toBeVisible();

@@ -18,7 +18,7 @@ import { alTrimestrePasado, alTrimestrePasadoDesdeAviso, bloque, preparar } from
 // ─────────────────────────────────────────────────────────────────────────────
 
 
-test.describe('Informes: € por plaza a la venta (pieza E)', () => {
+test.describe('Informes: € por lugar a la venta (pieza E)', () => {
   test.describe.configure({ timeout: 120_000 });
 
   /** Tras contestar el interruptor, el tiempo de que el bloque llegara si estuviera encendido. */
@@ -116,9 +116,9 @@ test.describe('Informes: € por plaza a la venta (pieza E)', () => {
     await martes.click();
     await expect(martes).toHaveAttribute('aria-expanded', 'true');
     const detalle = page.getByTestId('euro-plaza-detalle');
-    await expect(detalle).toContainText('Plazas a la venta');
+    await expect(detalle).toContainText('Lugares a la venta');
     await expect(detalle).toContainText('24');
-    await expect(detalle).toContainText('Por ejemplo, Ana: pagó 60,00 € en el periodo y ocupó 4 plazas');
+    await expect(detalle).toContainText('Por ejemplo, Ana: pagó 60,00 € en el periodo y ocupó 4 lugares');
   });
 
   test('con los recibos a medias no pinta ni un euro', async ({ page }) => {
@@ -147,7 +147,7 @@ test.describe('Informes: € por plaza a la venta (pieza E)', () => {
     await alTrimestrePasado(page);
     await expect(page.getByTestId('explicador-primera-vez')).toBeVisible();
 
-    const enlace = bloque(page).getByRole('button', { name: '¿Qué es el € por plaza?' });
+    const enlace = bloque(page).getByRole('button', { name: '¿Qué es el € por lugar?' });
     await enlace.click();
     const dialogo = page.getByTestId('explicador');
     await expect(dialogo).toBeVisible();
@@ -166,7 +166,7 @@ test.describe('Informes: € por plaza a la venta (pieza E)', () => {
     await alTrimestrePasado(page);
     await expect(page.getByTestId('euro-plaza-mapa')).toBeVisible();
     await expect(page.getByTestId('explicador-primera-vez'), 'visto: no vuelve tras recargar').toHaveCount(0);
-    await expect(bloque(page).getByRole('button', { name: '¿Qué es el € por plaza?' })).toBeVisible();
+    await expect(bloque(page).getByRole('button', { name: '¿Qué es el € por lugar?' })).toBeVisible();
   });
 
   test('el explicador hasta el final: recetas y «Entendido»', async ({ page }) => {
@@ -181,7 +181,7 @@ test.describe('Informes: € por plaza a la venta (pieza E)', () => {
     await expect(dialogo).toBeHidden();
     await expect(page.getByTestId('explicador-primera-vez')).toHaveCount(0);
     // La tarjeta ya no está: el foco vuelve al enlace, no se pierde.
-    await expect(bloque(page).getByRole('button', { name: '¿Qué es el € por plaza?' })).toBeFocused();
+    await expect(bloque(page).getByRole('button', { name: '¿Qué es el € por lugar?' })).toBeFocused();
   });
 
   for (const oscuro of [false, true]) {

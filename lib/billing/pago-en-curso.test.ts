@@ -28,7 +28,7 @@ const raiz = join(import.meta.dirname, '..', '..');
 const sinComentarios = (s: string) => s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:])\/\/.*$/gm, '$1');
 
 for (const ruta of ['app/api/public/checkout-embebido/route.ts', 'app/api/stripe/checkout/route.ts']) {
-  test(`${ruta}: ante idempotency_error, 409 «pago en curso» y la plaza de cupo solo si no es de ningún cobro`, () => {
+  test(`${ruta}: ante idempotency_error, 409 «pago en curso» y el lugar de cupo solo si no es de ningún cobro`, () => {
     const s = sinComentarios(readFileSync(join(raiz, ruta), 'utf8'));
     const catchFinal = s.slice(s.lastIndexOf('} catch (err) {'));
     const rama = catchFinal.indexOf('if (esErrorDeIdempotencia(err)) {');
@@ -38,7 +38,7 @@ for (const ruta of ['app/api/public/checkout-embebido/route.ts', 'app/api/stripe
     // La plaza puede ser la del cobro de antes (misma clave), que sigue pagable: nunca
     // a ciegas. Solo si ningún cobro la tiene ligada (revisión del 5-oct, #4: si la
     // etapa empezó entre las dos peticiones, el cobro de antes no la lleva).
-    assert.doesNotMatch(cuerpo, /liberarPlaza\(/, 'la plaza de cupo puede ser la del cobro de antes');
+    assert.doesNotMatch(cuerpo, /liberarPlaza\(/, 'el lugar de cupo puede ser la del cobro de antes');
     assert.match(cuerpo, /if \(plaza\) await liberarPlazaSinCobro\(admin, plaza\.id\);/);
     assert.match(cuerpo, /status: 409/);
     assert.match(cuerpo, /codigo: CODIGO_PAGO_EN_CURSO/);

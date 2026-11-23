@@ -2282,13 +2282,13 @@ export default function ReservarPage() {
   // Título de la pantalla 'done' del pago sin login, según lo que el servidor
   // haya dicho de verdad — «plaza confirmada» solo cuando LO ESTÁ.
   const tituloPagoWeb =
-    confirmacionPago === 'confirmada' ? '¡Plaza confirmada!'
+    confirmacionPago === 'confirmada' ? '¡Lugar confirmado!'
     : confirmacionPago === 'lista_espera' ? '¡En lista de espera!'
     : confirmacionPago === 'pendiente_aprobacion' ? 'Pendiente de aprobación'
     : confirmacionPago === 'ya_tenia_plaza'
       ? (reservaPrevia === 'lista_espera' ? 'Ya estabas en la lista de espera'
         : reservaPrevia === 'pendiente_aprobacion' ? 'Ya tenías esta clase pendiente'
-        : 'Ya tenías plaza en esta clase')
+        : 'Ya tenías lugar en esta clase')
     : '¡Pago recibido!';
   // Ya tenía plaza CONFIRMADA en la clase: sí tiene a qué ir (calendario incluido).
   const yaTeniaPlazaConfirmada = confirmacionPago === 'ya_tenia_plaza' && reservaPrevia === 'confirmada';
@@ -2305,7 +2305,7 @@ export default function ReservarPage() {
       ? (reservaPrevia === 'lista_espera' ? 'En lista de espera (ya lo estabas)'
         : reservaPrevia === 'pendiente_aprobacion' ? 'Pendiente de aprobación (ya lo estaba)'
         : 'Confirmada (ya la tenías)')
-    : confirmacionPago === 'fallida' ? 'Sin plaza — el estudio te contactará'
+    : confirmacionPago === 'fallida' ? 'Sin lugar — el estudio te contactará'
     : confirmacionPago === 'tardando' ? 'Confirmando'
     : 'Confirmando…';
 
@@ -3163,7 +3163,7 @@ export default function ReservarPage() {
                         background: `color-mix(in oklab, ${ambarCuenta} 12%, var(--portal-surface))`,
                       }}>
                         <p style={{ margin: 0, fontSize: 13, fontWeight: 700, lineHeight: 1.5, color: 'var(--portal-ink)' }}>
-                          ¡Se ha liberado una plaza! Tienes {limiteOferta(r.ofertaExpiraEn!, hoyCuenta)} para aceptarla.
+                          ¡Se ha liberado un lugar! Tienes {limiteOferta(r.ofertaExpiraEn!, hoyCuenta)} para aceptarlo.
                         </p>
                         {errorOferta?.reservaId === r.id && (
                           <p role="alert" style={{ margin: '8px 0 0', fontSize: 12.5, lineHeight: 1.45, color: 'var(--portal-ink)', display: 'flex', gap: 8, alignItems: 'flex-start' }}>
@@ -3179,7 +3179,7 @@ export default function ReservarPage() {
                             fontFamily: sans, fontWeight: 800, fontSize: 13.5,
                             cursor: aceptandoOferta === r.id ? 'default' : 'pointer', opacity: aceptandoOferta === r.id ? 0.6 : 1,
                           }}>
-                          {aceptandoOferta === r.id ? 'Aceptando…' : 'Aceptar plaza'}
+                          {aceptandoOferta === r.id ? 'Aceptando…' : 'Aceptar lugar'}
                         </button>
                       </div>
                     )}
@@ -3834,7 +3834,7 @@ export default function ReservarPage() {
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px 28px', marginTop: 16 }}>
                 {[
                   'Elige el día y la clase.',
-                  ...(antelacionMinima ? [antelacionMinima] : ['Reserva tu plaza en la sala.']),
+                  ...(antelacionMinima ? [antelacionMinima] : ['Reserva tu lugar en la sala.']),
                   plazoCancelacion,
                 ].map((paso, i) => (
                   <div key={i} style={{ display: 'flex', gap: 10, flex: '1 1 200px', minWidth: 0 }}>
@@ -4413,7 +4413,7 @@ export default function ReservarPage() {
                   </div>
                 ) : confirmacionPago === 'confirmando' ? (
                   <div className="w-16 h-16 rounded-full flex items-center justify-center bg-[var(--portal-surface-2)] border border-[var(--portal-line)]">
-                    <Loader2 size={30} className="animate-spin text-[var(--portal-muted)]" aria-label="Confirmando tu plaza" />
+                    <Loader2 size={30} className="animate-spin text-[var(--portal-muted)]" aria-label="Confirmando tu lugar" />
                   </div>
                 ) : yaTeniaPlazaConfirmada ? (
                   // Ya tenía su plaza: nada que celebrar de este pago, pero tampoco
@@ -4509,18 +4509,18 @@ export default function ReservarPage() {
                         confirmación inventada. */}
                     <p className="text-[var(--portal-ink)] text-sm">
                       {confirmacionPago === 'confirmando' && (
-                        <>Estamos confirmando tu plaza. En un momento te llegará a{' '}
+                        <>Estamos confirmando tu lugar. En un momento te llegará a{' '}
                         <span className="font-semibold">{loginForm.email}</span> el email de
                         confirmación con el acceso a tu cuenta.</>
                       )}
                       {confirmacionPago === 'confirmada' && (
-                        <>Tu plaza está confirmada. Te llegará a{' '}
+                        <>Tu lugar está confirmado. Te llegará a{' '}
                         <span className="font-semibold">{loginForm.email}</span> el email de
                         confirmación con el acceso a tu cuenta.</>
                       )}
                       {confirmacionPago === 'lista_espera' && (
                         <>El pago está recibido y tu bono queda en tu cuenta, pero la clase
-                        se ha llenado justo antes de confirmar tu plaza: estás en la lista
+                        se ha llenado justo antes de confirmar tu lugar: estás en la lista
                         de espera y te avisaremos a{' '}
                         <span className="font-semibold">{loginForm.email}</span> si se libera un sitio.</>
                       )}
@@ -4531,7 +4531,7 @@ export default function ReservarPage() {
                         confirmación en cuanto la aprueben.</>
                       )}
                       {confirmacionPago === 'tardando' && (
-                        <>El pago está recibido, pero la confirmación de tu plaza está
+                        <>El pago está recibido, pero la confirmación de tu lugar está
                         tardando más de lo normal. Te llegará por email a{' '}
                         <span className="font-semibold">{loginForm.email}</span>; si no
                         llega en unos minutos, escribe al estudio y te lo resuelven.</>
@@ -4543,7 +4543,7 @@ export default function ReservarPage() {
                       )}
                       {confirmacionPago === 'ya_tenia_plaza' && reservaPrevia === 'lista_espera' && (
                         <>Ya estabas en la lista de espera de esta clase, así que este pago no te
-                        da plaza: queda a tu favor. Si se libera un sitio, entras con tu lugar
+                        da lugar: queda a tu favor. Si se libera un sitio, entras con tu lugar
                         en la cola y te avisaremos a{' '}
                         <span className="font-semibold">{loginForm.email}</span>. El estudio ya está avisado.</>
                       )}
@@ -4554,7 +4554,7 @@ export default function ReservarPage() {
                         del estudio, que ya está avisado.</>
                       )}
                       {confirmacionPago === 'fallida' && (
-                        <>El pago está recibido, pero no hemos podido asignarte la plaza en
+                        <>El pago está recibido, pero no hemos podido asignarte el lugar en
                         esta clase. El estudio ya está avisado y se pondrá en contacto
                         contigo para darte una solución.</>
                       )}
@@ -4653,7 +4653,7 @@ export default function ReservarPage() {
                   {esperaPos && (
                     <p className="text-[var(--portal-muted-2)] text-sm mt-1">Eres la <span className="font-bold text-[var(--portal-ink)]">nº {esperaPos}</span> en la lista.</p>
                   )}
-                  <p className="text-[var(--portal-muted-2)] text-sm mt-1">{textosReservar.listaEspera || 'Si se libera una plaza, te avisaremos por email.'}</p>
+                  <p className="text-[var(--portal-muted-2)] text-sm mt-1">{textosReservar.listaEspera || 'Si se libera un lugar, te avisaremos por email.'}</p>
                 </div>
                 <button onClick={closeBooking}
                   className={BOTON_SECUNDARIO}>
@@ -4986,7 +4986,7 @@ export default function ReservarPage() {
                     la instructora, y debajo lo que hay que saber. El botón de
                     abajo sigue diciendo «Confirmar reserva». */}
                 <h2 style={{ margin: '0 0 14px', fontFamily: serif, fontWeight: pesoTitular(800), fontSize: 22, lineHeight: 1.15, letterSpacing: '-.02em', color: 'var(--portal-ink)' }}>
-                  Confirma tu plaza
+                  Confirma tu lugar
                 </h2>
                 <div className="flex items-center gap-3 mb-3" style={{ padding: '12px 14px', borderRadius: R.chipCard, background: 'var(--portal-surface)', border: '1px solid var(--portal-line)' }}>
                   <span aria-hidden="true" className="shrink-0 flex items-center justify-center rounded-full" style={{ width: 40, height: 40, background: 'var(--portal-surface-2)', border: '1px solid var(--portal-line)', color: 'var(--portal-muted)', fontSize: 13, fontWeight: 800 }}>

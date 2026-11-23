@@ -48,7 +48,7 @@ function clienteFestivos(): Anthropic {
 }
 
 // Constante: ni fechas, ni el municipio, ni nada que cambie entre peticiones.
-const PROMPT = `Buscas los días festivos de un municipio de España para que un estudio de Pilates organice sus clases. Devuelves solo lo que hayas visto publicado en una fuente, con su enlace.
+const PROMPT = `Buscas los días feriados de un municipio de España para que un estudio de Pilates organice sus clases. Devuelves solo lo que hayas visto publicado en una fuente, con su enlace.
 
 Reglas:
 - Usa la búsqueda web. Prioriza las fuentes oficiales. En la Comunidad de Madrid, Cataluña y Andalucía las fiestas locales de todos los municipios se publican cada año en una sola resolución del boletín de la comunidad (BOCM, DOGC, BOJA); en el resto, en el boletín oficial de la provincia (BOP). También vale la web del ayuntamiento. Una noticia de un periódico vale solo si cita la fuente oficial.
@@ -66,7 +66,7 @@ Reglas:
 
 const HERRAMIENTA_ENTREGAR = {
   name: 'entregar_festivos',
-  description: 'Entrega los festivos encontrados para el municipio y el rango pedidos, con su fuente. Se llama una sola vez, al terminar de buscar.',
+  description: 'Entrega los feriados encontrados para el municipio y el rango pedidos, con su fuente. Se llama una sola vez, al terminar de buscar.',
   strict: true,
   input_schema: {
     type: 'object' as const,
@@ -141,10 +141,10 @@ export async function buscarFestivosConIA(p: {
   const sinCalendario = anios.filter((a) => !p.aniosConCalendario.includes(a));
   const queBuscar = [
     conCalendario.length
-      ? `De ${conCalendario.join(' y ')}, busca solo las fiestas LOCALES de este municipio: los festivos nacionales y autonómicos ya los tenemos del boletín oficial.`
+      ? `De ${conCalendario.join(' y ')}, busca solo las fiestas LOCALES de este municipio: los feriados nacionales y autonómicos ya los tenemos del boletín oficial.`
       : '',
     sinCalendario.length
-      ? `De ${sinCalendario.join(' y ')}, no tenemos el calendario oficial: busca los festivos nacionales, los de la comunidad autónoma y las fiestas locales del municipio.`
+      ? `De ${sinCalendario.join(' y ')}, no tenemos el calendario oficial: busca los feriados nacionales, los de la comunidad autónoma y las fiestas locales del municipio.`
       : '',
   ].filter(Boolean).join('\n');
   const pedido = `Municipio: «${p.localidad}»${p.comunidad ? ` (${p.comunidad})` : ''}.

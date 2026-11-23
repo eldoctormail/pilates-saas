@@ -30,11 +30,11 @@ test('consultaMapa: dirección y ciudad, sin huecos', () => {
   assert.equal(consultaMapa(null, null), '');
 });
 
-test('plazas: libres solo mientras se puede reservar; singulares', () => {
-  assert.equal(textoPlazas(10, 3, false), '10 plazas · 3 libres');
-  assert.equal(textoPlazas(10, 1, false), '10 plazas · 1 libre');
-  assert.equal(textoPlazas(10, 3, true), '10 plazas');
-  assert.equal(textoPlazas(1, 0, true), '1 plaza');
+test('lugares: libres solo mientras se puede reservar; singulares', () => {
+  assert.equal(textoPlazas(10, 3, false), '10 lugares · 3 libres');
+  assert.equal(textoPlazas(10, 1, false), '10 lugares · 1 libre');
+  assert.equal(textoPlazas(10, 3, true), '10 lugares');
+  assert.equal(textoPlazas(1, 0, true), '1 lugar');
 });
 
 test('cancelación: «gratis hasta N h antes» dentro de plazo (lo busca student-ventana-cancelacion); fuera, que ya no se devuelve', () => {

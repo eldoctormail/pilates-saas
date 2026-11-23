@@ -129,7 +129,7 @@ export function mensajeDeFalloAlGuardar(error: unknown): string {
     return 'Tu estudio tiene apagada la congelación de cuotas y bonos. Puedes encenderla en Configuración → Cobros y facturas → Congelar una cuota o un bono.';
   }
   if (/ETAPA_AGOTADA/.test(msg)) {
-    return 'Las plazas de esa oferta se han agotado. Si quieres vender más, amplía el cupo de la etapa en Resumen.';
+    return 'Los lugares de esa oferta se han agotado. Si quieres vender más, amplía el cupo de la etapa en Resumen.';
   }
   // Una regla de dinero de un tipo de clase que solo fija la propietaria
   // (`tipos_clase_dinero_solo_propietaria`, migr 20260915224739). Es un 42501,

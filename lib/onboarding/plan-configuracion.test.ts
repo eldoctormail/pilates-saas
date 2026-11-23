@@ -126,7 +126,7 @@ test('el mismo cuestionario da siempre el mismo plan', () => {
 
 test('las etiquetas del asistente se traducen a números', () => {
   const r = interpretarRespuestasWizard({
-    salas: '2 salas', aforo: '8 plazas', duracion: '50 minutos',
+    salas: '2 salas', aforo: '8 lugares', duracion: '50 minutos',
     clases: ['Reformer'], cobro: ['Bonos de sesiones'],
   });
   assert.equal(r.numSalas, 2);
@@ -279,7 +279,7 @@ test('ninguna sala sale con capacidad nula', () => {
 });
 
 test('el asistente manda una etiqueta por sala', () => {
-  const r = interpretarRespuestasWizard({ salas: '2 salas', aforos: ['8 plazas', '12 o más'] });
+  const r = interpretarRespuestasWizard({ salas: '2 salas', aforos: ['8 lugares', '12 o más'] });
   assert.equal(r.numSalas, 2);
   assert.deepEqual(r.aforosPorSala, [8, 12]);
 });
@@ -287,7 +287,7 @@ test('el asistente manda una etiqueta por sala', () => {
 // Retrocompatibilidad: alguien puede tener un borrador a medias con el formato
 // viejo (una sola etiqueta). Su asistente debe reanudarse, no reiniciarse.
 test('un borrador antiguo con un solo aforo sigue valiendo para todas', () => {
-  const r = interpretarRespuestasWizard({ salas: '3 salas', aforo: '10 plazas' });
+  const r = interpretarRespuestasWizard({ salas: '3 salas', aforo: '10 lugares' });
   assert.deepEqual(r.aforosPorSala, [10]);
   assert.deepEqual(
     planificarConfiguracion(r).salas.map((s) => s.capacidad),

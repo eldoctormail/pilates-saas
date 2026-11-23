@@ -67,7 +67,7 @@ test('la plantilla es la última clase: si la serie se movió de hora, manda la 
   assert.equal(t.instructorId, 'ins-2');
 });
 
-test('empareja plazas fijas por hueco y marca las que están en pausa', () => {
+test('empareja lugares fijos por hueco y marca las que están en pausa', () => {
   const plazas = [
     plaza({ id: 'activa' }),
     plaza({ id: 'pausada', socioId: 'soc-2', estado: 'PAUSADA' }),
@@ -84,7 +84,7 @@ test('empareja plazas fijas por hueco y marca las que están en pausa', () => {
   ]);
 });
 
-test('una plaza fija cuyo hueco ya no tiene clase sale como huérfana', () => {
+test('un lugar fijo cuyo hueco ya no tiene clase sale como huérfana', () => {
   // Hay horario hasta finales de septiembre; los viernes 10:00 no hay ninguna clase.
   const largas = [...SESIONES, sesion('lejos', '2026-10-27T16:00:00Z')];
   const h = construirHorario(largas, SERIES, [plaza({ id: 'huerfana', diaSemana: 5, horaInicio: '10:00:00' })], AHORA);

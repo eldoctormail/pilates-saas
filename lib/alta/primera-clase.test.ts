@@ -23,7 +23,7 @@ test('todo viene puesto menos el precio: los valores de serie del asistente', ()
   // Los mismos que la bienvenida de siempre (lib/onboarding/asistente-rapido.ts), no otros.
   assert.equal(f.tipo, POR_DEFECTO.clases?.[0]);
   assert.equal(`${f.duracion} minutos`, POR_DEFECTO.duracion);
-  assert.equal(`${f.plazas} plazas`, POR_DEFECTO.aforos?.[0]);
+  assert.equal(`${f.plazas} lugares`, POR_DEFECTO.aforos?.[0]);
   assert.deepEqual({ tipo: f.tipo, nombre: f.nombre, duracion: f.duracion, plazas: f.plazas }, { tipo: 'Reformer', nombre: 'Reformer', duracion: 55, plazas: 8 });
   assert.equal(f.fecha, '2026-10-22', 'mañana: la de hoy puede haber pasado ya');
   assert.equal(f.hora, '18:30');
@@ -106,7 +106,7 @@ test('un precio raro avisa con los topes de la maqueta y NUNCA bloquea', () => {
   assert.equal(planificarPrimeraClase(form({ precio: '900' }), AHORA).ok, true);
 });
 
-test('validar: nombre, hora pasada, medianoche, otra persona, sala, plazas y bono', () => {
+test('validar: nombre, hora pasada, medianoche, otra persona, sala, lugares y bono', () => {
   assert.deepEqual(validarPrimeraClase(form(), AHORA), {});
   assert.equal(validarPrimeraClase(form({ nombre: '  ' }), AHORA).nombre, 'Ponle un nombre: así sale en tu app.');
   assert.match(validarPrimeraClase(form({ nombre: 'x'.repeat(61) }), AHORA).nombre ?? '', /Como mucho 60/);
@@ -117,8 +117,8 @@ test('validar: nombre, hora pasada, medianoche, otra persona, sala, plazas y bon
   assert.match(validarPrimeraClase(form({ hora: '23:30' }), AHORA).hora ?? '', /antes de medianoche/);
   assert.equal(validarPrimeraClase(form({ quien: 'otra', otraPersona: '' }), AHORA).otraPersona, 'Escribe el nombre de quien la da.');
   assert.ok(validarPrimeraClase(form({ sala: '' }), AHORA).sala);
-  assert.equal(validarPrimeraClase(form({ plazas: 0 }), AHORA).plazas, 'Entre 1 y 100 plazas.');
-  assert.equal(validarPrimeraClase(form({ plazas: 101 }), AHORA).plazas, 'Entre 1 y 100 plazas.');
+  assert.equal(validarPrimeraClase(form({ plazas: 0 }), AHORA).plazas, 'Entre 1 y 100 lugares.');
+  assert.equal(validarPrimeraClase(form({ plazas: 101 }), AHORA).plazas, 'Entre 1 y 100 lugares.');
   assert.ok(validarPrimeraClase(form({ venta: 'bono', bonoClases: '0' }), AHORA).bonoClases);
   assert.equal(validarPrimeraClase(form({ venta: 'bono', bonoClases: '10' }), AHORA).bonoClases, undefined);
   // El bono no se mira si es gratis.
@@ -196,7 +196,7 @@ test('el resumen y la vista previa dicen lo que se crea y cómo se paga', () => 
   const lineas = resumenPrimeraClase(form({ fecha: '2026-10-26' }), 'Lucía');
   assert.deepEqual(lineas, [
     'El tipo de clase «Reformer», de 55 minutos',
-    'La sala «Sala 1», con 8 plazas',
+    'La sala «Sala 1», con 8 lugares',
     'Tu ficha de instructora (Lucía)',
     'La clase del lunes 26 a las 18:30, cada semana',
     'La tarifa «Clase suelta» a 20,00 €, activa',

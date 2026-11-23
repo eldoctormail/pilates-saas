@@ -37,7 +37,7 @@ test('cancelar → volver a reservar → cancelar la misma clase es UNA clase pe
 
 // Salir de la lista de espera, una oferta rechazada o caducada, o una reserva que el
 // estudio no aprobó: acaban en CANCELADA a tiempo, pero nunca tuvo plaza.
-test('una cancelación que nunca tuvo plaza no se compensa; una que subió de la lista y luego canceló, sí', () => {
+test('una cancelación que nunca tuvo lugar no se compensa; una que subió de la lista y luego canceló, sí', () => {
   const espera = { id: 'res-espera', sesion_id: 'ses-mie', estado: 'CANCELADA', creado_en: '2026-10-01T09:00:00Z', bono_consumo_rastreado: true, bono_decidido_en: null };
   assert.equal(llegoAOcuparPlaza(espera), false, 'en espera (u oferta, o pendiente de aprobar) nunca se decidió su cobro');
   assert.deepEqual(canceladasCompensables([espera], [espera]), []);

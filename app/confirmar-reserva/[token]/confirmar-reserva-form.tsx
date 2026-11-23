@@ -57,7 +57,7 @@ export function ConfirmarReservaForm({
 
   if (estado === 'liberada') {
     return (
-      <Pantalla icono={CalendarX} titulo="Tu plaza ya se liberó">
+      <Pantalla icono={CalendarX} titulo="Tu lugar ya se liberó">
         <p className="mt-2 text-sm text-slate-500">
           No llegamos a tiempo con tu confirmación y ya se la ofrecimos a otra persona. Si quieres, reserva otra clase desde el portal de tu estudio.
         </p>
@@ -90,7 +90,7 @@ export function ConfirmarReservaForm({
             <p className="mt-2 text-sm text-destructive">{motivoError ?? 'No se pudo confirmar. Revisa tu conexión e inténtalo otra vez.'}</p>
           )}
           <p className="mt-3 text-xs text-slate-400">
-            Si no confirmas, liberaremos tu plaza para que otra persona pueda venir.
+            Si no confirmas, liberaremos tu lugar para que otra persona pueda venir.
           </p>
         </div>
       </div>

@@ -27,6 +27,7 @@
 //
 // Puro y sin React: se prueba con `node --test`.
 // ─────────────────────────────────────────────────────────────────────────────
+import { conMoneda } from '../moneda.ts';
 
 /** `mira`: se cierra con «Entendido». `hacer`: se cierra solo al cambiar los datos. */
 export type TipoPaso = 'mira' | 'hacer';
@@ -130,7 +131,7 @@ export const CAPITULOS: readonly CapituloVisita[] = [
       {
         id: 'c2.2', ruta: '/configuracion', href: '/configuracion?tab=estudio', selector: '#fila-herramienta-salas', tipo: 'hacer', hecho: 'salas',
         titulo: 'Tus salas',
-        texto: 'Una sala es un espacio donde das clase. Su aforo es el tope de plazas de cada clase que se dé en ella, así que ponle la cifra real: es lo que impide que se reserve de más.',
+        texto: 'Una sala es un espacio donde das clase. Su aforo es el tope de lugares de cada clase que se dé en ella, así que ponle la cifra real: es lo que impide que se reserve de más.',
         accion: 'Pulsa «Salas» y añade tu primera sala, con su aforo.',
         accionSiYaLoTienes: 'Ya tienes salas. Para cambiarlas o añadir otra, esta es la fila «Salas».',
       },
@@ -143,8 +144,8 @@ export const CAPITULOS: readonly CapituloVisita[] = [
       {
         id: 'c2.4', ruta: '/configuracion', href: '/configuracion?tab=clases', selector: '#fila-herramienta-tipos-de-clase', tipo: 'hacer', hecho: 'tiposClase',
         titulo: 'Tus tipos de clase',
-        texto: 'Reformer, Suelo, Embarazadas… Cada tipo lleva su duración y sus plazas. Son el catálogo del que sale tu horario: sin tipos de clase no se puede programar nada.',
-        accion: 'Pulsa «Tipos de clase» y crea el primero: nombre, duración y plazas.',
+        texto: 'Reformer, Suelo, Embarazadas… Cada tipo lleva su duración y sus lugares. Son el catálogo del que sale tu horario: sin tipos de clase no se puede programar nada.',
+        accion: 'Pulsa «Tipos de clase» y crea el primero: nombre, duración y lugares.',
         accionSiYaLoTienes: 'Ya tienes tipos de clase. Para cambiarlos o crear otro, esta es la fila «Tipos de clase».',
       },
     ],
@@ -233,7 +234,7 @@ export const CAPITULOS: readonly CapituloVisita[] = [
       {
         id: 'c5.2', ruta: '/productos', selector: 'paquetes-vista', tipo: 'hacer', hecho: 'tarifaActiva',
         titulo: 'Una tarifa en borrador no existe para tus clientes',
-        texto: 'Hasta que no tenga precio y esté activa, nadie puede comprarla ni tú asignársela. Si el asistente de alta te dejó tarifas a 0 €, son borradores: ábrelas y termínalas.',
+        texto: `Hasta que no tenga precio y esté activa, nadie puede comprarla ni tú asignársela. Si el asistente de alta te dejó tarifas a ${conMoneda('0')}, son borradores: ábrelas y termínalas.`,
         accion: 'Abre una tarifa (o pulsa «Crear»), ponle precio y márcala como activa.',
         accionSiYaLoTienes: 'Ya tienes tarifas activas. Para crear otra, usa «Crear».',
       },

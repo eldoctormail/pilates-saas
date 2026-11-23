@@ -72,7 +72,7 @@ async function renderPorTipo(
   };
   switch (tipo) {
     case 'promocion':
-      return { html: correoPlazaLiberada({ ...clase, bonoConsumido: d.bonoConsumido }), subject: asunto ?? `Se ha liberado tu plaza — ${d.claseNombre}` };
+      return { html: correoPlazaLiberada({ ...clase, bonoConsumido: d.bonoConsumido }), subject: asunto ?? `Se ha liberado tu lugar — ${d.claseNombre}` };
     case 'cancelacion':
       return { html: correoCancelacionClase({ ...clase, bonoDevuelto: d.bonoDevuelto }), subject: asunto ?? `Clase cancelada — ${d.claseNombre}` };
     case 'recordatorio':

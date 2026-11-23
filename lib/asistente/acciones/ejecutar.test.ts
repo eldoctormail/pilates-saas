@@ -240,7 +240,7 @@ test('una propuesta nueva cancela las pendientes anteriores de SU conversación 
 
 test('capacidad 0, aforo 0, nombre o campos vacíos: no pasan el esquema y el error dice qué falta (la puerta no llega a crear fila)', () => {
   const dice = (r: { success: boolean; error?: { issues: { path: PropertyKey[] }[] } }) => { assert.equal(r.success, false); return mensajeDeFaltantes(r.error!.issues); };
-  assert.match(dice(zSala.safeParse({ nombre: 'Reformer avanzado', capacidad: 0 })), /capacidad de la sala: pregunta cuántas plazas/);
+  assert.match(dice(zSala.safeParse({ nombre: 'Reformer avanzado', capacidad: 0 })), /capacidad de la sala: pregunta cuántos lugares/);
   assert.match(dice(zSala.safeParse({ nombre: '  ', capacidad: 8 })), /nombre/);
   assert.match(dice(zClase.safeParse({ ...entrada, aforo: 0 })), /aforo.*se omite/);
   const vacia = dice(zClase.safeParse({ ...entrada, sala: '', tipo_clase: '' }));

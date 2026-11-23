@@ -46,7 +46,7 @@ test('clase: no inventa tipos ni salas: dice cuáles hay, y un tipo archivado no
 });
 
 test('clase: aforo mayor que la sala, sala ocupada, instructora ocupada, ausente y cierre del centro', () => {
-  assert.match((prepararClase({ ...clase, sala: 'Sala Pequeña', aforo: 9 }, cat(), AHORA, HOY) as { error: string }).error, /6 plazas/);
+  assert.match((prepararClase({ ...clase, sala: 'Sala Pequeña', aforo: 9 }, cat(), AHORA, HOY) as { error: string }).error, /6 lugares/);
   const ocupa = { id: 'x', salaId: 's1', instructorId: 'i9', inicio: '2026-10-07T15:30:00.000Z', fin: '2026-10-07T16:30:00.000Z' };
   assert.match((prepararClase(clase, cat({ existentes: [ocupa] }), AHORA, HOY) as { error: string }).error, /Sala Grande ya está ocupada de 17:30–18:30/);
   const suya = { ...ocupa, salaId: 's2', instructorId: 'i1' };

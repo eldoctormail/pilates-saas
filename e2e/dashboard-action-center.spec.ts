@@ -90,7 +90,7 @@ test.describe('El dashboard trae lo que necesita atención, sin ir a buscarlo', 
       prioridades: [
         rec({ id: 'r-1', titulo: 'Laura lleva 21 días sin venir', impacto: { valor: 89, unidad: 'EUR_MES', formula: 'cuota' } }),
         rec({ id: 'r-2', titulo: '4 pagos fallidos', accion: { tipo: 'COBRAR_RECIBOS' }, impacto: { valor: 236, unidad: 'EUR', formula: 'recibos' } }),
-        rec({ id: 'r-3', titulo: 'Hay 8 plazas que llenar', riesgo: 'OPORTUNIDAD', accion: { tipo: 'MARCAR_GESTIONADO' }, impacto: { valor: 340, unidad: 'EUR', formula: 'plazas' } }),
+        rec({ id: 'r-3', titulo: 'Hay 8 lugares que llenar', riesgo: 'OPORTUNIDAD', accion: { tipo: 'MARCAR_GESTIONADO' }, impacto: { valor: 340, unidad: 'EUR', formula: 'plazas' } }),
       ],
     });
 

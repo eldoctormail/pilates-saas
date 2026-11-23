@@ -87,7 +87,7 @@ test('reservarClasePagada avisa al mostrador del pago sin usar, según lo que ya
   assert.match(s, /paymentIntentId: p\.paymentIntentId/);
 });
 
-test('lo que ya tenía: plaza antes que pendiente, y pendiente antes que cola', () => {
+test('lo que ya tenía: lugar antes que pendiente, y pendiente antes que cola', () => {
   assert.equal(estadoPrevioDeLaSocia(['LISTA_ESPERA', 'CONFIRMADA']), 'CONFIRMADA');
   assert.equal(estadoPrevioDeLaSocia(['ASISTIDA']), 'ASISTIDA');
   assert.equal(estadoPrevioDeLaSocia(['LISTA_ESPERA', 'PENDIENTE_APROBACION']), 'PENDIENTE_APROBACION');

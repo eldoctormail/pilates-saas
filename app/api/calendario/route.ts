@@ -99,7 +99,7 @@ export async function GET(req: NextRequest) {
     ? bloqueosRows.map(b => ({ instructorId: b.instructor_id, fecha: b.fecha, horaInicio: b.hora_inicio, horaFin: b.hora_fin, ausenciaId: b.ausencia_id }))
     : [];
   const ausencias = new Map(((ausenciasRes.data ?? []) as { id: string; tipo: string; desde: string; hasta: string }[]).map(a => [a.id, a]));
-  if (apartadasRes.error) console.error('[calendario] no se pudieron leer las plazas apartadas', apartadasRes.error.message);
+  if (apartadasRes.error) console.error('[calendario] no se pudieron leer los lugares apartados', apartadasRes.error.message);
   const apartadas = new Map<string, ApartadasDeClase>();
   for (const f of (apartadasRes.data ?? []) as { sesion_id: string; plazas: number; liberan_en: string | null }[]) {
     if (f.plazas > 0 && f.liberan_en) apartadas.set(f.sesion_id, { plazas: f.plazas, hasta: f.liberan_en });

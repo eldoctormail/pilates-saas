@@ -169,7 +169,7 @@ const TRIGGERS_QUE_ESCRIBEN_A_CLIENTAS = new Set<AutomationRule['trigger']>([
 const HECHO_DE_SERIE: string[] = [
   'Recuerda cada clase a quien ha reservado: 24 h antes por email y en su app (y por WhatsApp si lo tienes conectado), y 1 h antes en su app. Si reserva con menos de 24 h, el email y el WhatsApp le llegan poco después de reservar (si falta más de 1 h y cuarto).',
   'Confirma cada reserva en la app del cliente en cuanto la hace.',
-  'Cuando alguien cancela, pasa la plaza a la siguiente de la lista de espera y se lo cuenta.',
+  'Cuando alguien cancela, pasa el lugar a la siguiente de la lista de espera y se lo cuenta.',
   'Avisa al cliente cuando su bono se queda sin clases o está a punto de caducar.',
   'Reintenta los cobros con tarjeta guardada que fallan, y avisa al cliente.',
   'Pide una valoración después de clase.',

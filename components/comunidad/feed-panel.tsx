@@ -847,7 +847,7 @@ function TicketEventoPanel({ post }: { post: PostComunidad }) {
         )}
         <p className="flex items-center gap-1.5 text-[12.5px] text-muted-foreground">
           <Users size={13} className="shrink-0" aria-hidden />
-          {aforo ? `Aforo de ${aforo} plazas` : 'Sin límite de aforo'}
+          {aforo ? `Aforo de ${aforo} lugares` : 'Sin límite de aforo'}
         </p>
       </div>
     </div>

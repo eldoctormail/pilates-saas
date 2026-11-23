@@ -22,7 +22,7 @@ const base = `/portal/${SLUG}`;
  * `ICONO_POR_EVENTO` en lib/student/avisos-vista.ts): una cancelación lleva la ✕ (`cerrar`) y un recordatorio el reloj.
  */
 const AVISOS: Array<{ id: string; eventType: string; category: string; title: string; icono: string }> = [
-  { id: 'n-lib', eventType: 'reserva.plaza_liberada', category: 'reservas', title: 'Se ha liberado una plaza', icono: 'plaza' },
+  { id: 'n-lib', eventType: 'reserva.plaza_liberada', category: 'reservas', title: 'Se ha liberado un lugar', icono: 'plaza' },
   { id: 'n-can', eventType: 'reserva.cancelada', category: 'reservas', title: 'Tu reserva se ha cancelado', icono: 'cerrar' },
   { id: 'n-aba', eventType: 'reserva.abandonada', category: 'reservas', title: 'No terminaste tu reserva', icono: 'alerta' },
   { id: 'n-rec', eventType: 'reserva.recordatorio_1h', category: 'reservas', title: 'Tu clase es dentro de 1 hora', icono: 'reloj' },
@@ -84,11 +84,11 @@ test.describe('Student PWA · la cara de cada aviso', () => {
 
     for (const malo of ['Tu reserva se ha cancelado', 'No terminaste tu reserva', 'Se ha cancelado tu clase', 'No hemos podido cobrarte']) {
       const icono = await iconoDe(page, malo);
-      expect(icono, `una plaza que se abre encima de «${malo}»`).not.toBe('plaza');
+      expect(icono, `un lugar que se abre encima de «${malo}»`).not.toBe('plaza');
       expect(icono, `un recordatorio encima de «${malo}»`).not.toBe('reloj');
       expect(icono, `un «hecho» encima de «${malo}»`).not.toBe('hecho');
     }
     // Y la cara de buena noticia sigue existiendo donde sí toca.
-    expect(await iconoDe(page, 'Se ha liberado una plaza')).toBe('plaza');
+    expect(await iconoDe(page, 'Se ha liberado un lugar')).toBe('plaza');
   });
 });

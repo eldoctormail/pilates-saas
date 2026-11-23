@@ -4709,7 +4709,7 @@ export async function dbListarCuposPlataformaTipo(tipoClaseId: string): Promise<
 
 /** `plazas = null` quita el límite (borra la fila). */
 export async function dbGuardarCupoPlataformaTipo(tipoClaseId: string, plataforma: Plataforma, plazas: number | null): Promise<ResultadoEscritura> {
-  const sinPermiso = 'No tienes permiso para cambiar las plazas que se ceden. Pídeselo a la propietaria o a la responsable de sede.';
+  const sinPermiso = 'No tienes permiso para cambiar los lugares que se ceden. Pídeselo a la propietaria o a la responsable de sede.';
   if (plazas == null) {
     const { error } = await supabase.from('plataforma_cupos').delete()
       .eq('tipo_clase_id', tipoClaseId).eq('plataforma', plataforma);

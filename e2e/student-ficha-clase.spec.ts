@@ -56,7 +56,7 @@ test.describe('Student PWA · ficha de una clase', () => {
 
     await expect(page.locator('[data-fila="cuando"]')).toHaveText('Hoy · 10:00 – 10:50 · 50 min');
     await expect(page.locator('[data-fila="donde"]')).toContainText('Sala 1 · Tentare');
-    await expect(page.locator('[data-fila="plazas"]')).toHaveText('10 plazas · 10 libres');
+    await expect(page.locator('[data-fila="plazas"]')).toHaveText('10 lugares · 10 libres');
     await expect(page.locator('[data-fila="cancelacion"]')).toBeVisible();
     await expect(page.locator('[data-fila="creditos"]')).toHaveText('+10 créditos al asistir');
 
@@ -170,7 +170,7 @@ test.describe('Student PWA · ficha de una clase', () => {
     await page.reload({ waitUntil: 'domcontentloaded' });
     await expect(page.getByTestId('reserva-cerrada')).toBeVisible({ timeout: 45_000 });
     await expect(page.getByTestId('compartir-clase')).toHaveCount(0);
-    await expect(page.locator('[data-fila="plazas"]')).toHaveText('10 plazas');
+    await expect(page.locator('[data-fila="plazas"]')).toHaveText('10 lugares');
     await expect(page.getByRole('button', { name: /^Reservar/ })).toHaveCount(0);
   });
 

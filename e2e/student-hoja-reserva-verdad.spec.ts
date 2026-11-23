@@ -167,7 +167,7 @@ test.describe('Student PWA · la hoja de reserva dice la verdad sin bono (P01)',
     expect(estadoPago).toBeGreaterThanOrEqual(2);
     await expect(page).toHaveURL(new RegExp(`/reservar/${SESION_ID}\\?reservar=1$`), { timeout: 30_000 });
     // La hoja nace abierta, y confirmar sigue siendo un toque suyo: no se ha reservado nada solo.
-    await expect(page.getByRole('heading', { name: 'Confirma tu plaza' })).toBeVisible({ timeout: 45_000 });
+    await expect(page.getByRole('heading', { name: 'Confirma tu lugar' })).toBeVisible({ timeout: 45_000 });
     expect(m.reservas, 'se reservó sin que ella lo confirmara').toHaveLength(0);
   });
 });

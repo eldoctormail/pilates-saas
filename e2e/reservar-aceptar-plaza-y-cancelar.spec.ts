@@ -87,7 +87,7 @@ async function abrirMisReservas(page: Page) {
   await expect(page.getByRole('heading', { level: 2, name: 'Mis reservas' })).toBeVisible();
 }
 
-test('una plaza ofrecida se acepta desde «Mis reservas»; si el servidor dice que no, se dice y se puede reintentar', async ({ page }) => {
+test('un lugar ofrecido se acepta desde «Mis reservas»; si el servidor dice que no, se dice y se puede reintentar', async ({ page }) => {
   await montar(page, { ventana: 12 });
   // Después del andamiaje: registrada antes, la red de seguridad la taparía.
   let intentos = 0;
@@ -99,15 +99,15 @@ test('una plaza ofrecida se acepta desde «Mis reservas»; si el servidor dice q
   await abrirMisReservas(page);
 
   const tarjeta = page.getByRole('article').filter({ hasText: 'Hoy · 18:00' });
-  await expect(tarjeta.getByText('Plaza para ti', { exact: true })).toBeVisible();
-  await expect(tarjeta).toContainText('¡Se ha liberado una plaza! Tienes hasta las 08:30 para aceptarla.');
-  const aceptar = tarjeta.getByRole('button', { name: 'Aceptar plaza' });
+  await expect(tarjeta.getByText('Lugar para ti', { exact: true })).toBeVisible();
+  await expect(tarjeta).toContainText('¡Se ha liberado un lugar! Tienes hasta las 08:30 para aceptarla.');
+  const aceptar = tarjeta.getByRole('button', { name: 'Aceptar lugar' });
 
   await aceptar.click();
   await expect(tarjeta.getByRole('alert')).toBeVisible();
   expect(intentos).toBeGreaterThan(0);
   // Nada de optimismo: sigue sin ser suya, y el botón vuelve a poder pulsarse.
-  await expect(tarjeta.getByText('Plaza para ti', { exact: true })).toBeVisible();
+  await expect(tarjeta.getByText('Lugar para ti', { exact: true })).toBeVisible();
   await expect(aceptar).toBeEnabled();
 
   responder = { status: 200, cuerpo: { ok: true } };

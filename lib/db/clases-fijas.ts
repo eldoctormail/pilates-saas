@@ -319,7 +319,7 @@ export async function darPlazasDeClaseFija(
       .eq('studio_id', filas[0].studio_id).eq('socio_id', filas[0].socio_id).in('estado', ['ACTIVA', 'PAUSADA']);
     if (errSuyas) {
       capturarExcepcion(new Error(errSuyas.message), { tags: { area: 'clases-fijas' } });
-      return { error: 'No se han podido guardar las plazas de la clase fija. Inténtalo de nuevo.' };
+      return { error: 'No se han podido guardar los lugares de la clase fija. Inténtalo de nuevo.' };
     }
     const vencidas = plazasVencidasQueEstorban(
       (suyas ?? []).map(r => ({
@@ -334,7 +334,7 @@ export async function darPlazasDeClaseFija(
         .eq('studio_id', filas[0].studio_id).eq('socio_id', filas[0].socio_id).in('id', vencidas);
       if (errBaja) {
         capturarExcepcion(new Error(errBaja.message), { tags: { area: 'clases-fijas' } });
-        return { error: 'No se han podido guardar las plazas de la clase fija. Inténtalo de nuevo.' };
+        return { error: 'No se han podido guardar los lugares de la clase fija. Inténtalo de nuevo.' };
       }
     }
   }
@@ -349,7 +349,7 @@ export async function darPlazasDeClaseFija(
     // El índice único de franja sigue cubriendo, además, el caso de un sitio de mano.
     if (error.code === '23505') return { error: 'Ya tiene una clase fija en alguno de esos horarios. Recarga la página.' };
     capturarExcepcion(new Error(error.message), { tags: { area: 'clases-fijas' }, extra: { plazas: filas.length } });
-    return { error: 'No se han podido guardar las plazas de la clase fija. Inténtalo de nuevo.' };
+    return { error: 'No se han podido guardar los lugares de la clase fija. Inténtalo de nuevo.' };
   }
   if (!(data as { ok: boolean } | null)?.ok) {
     return { error: 'Esta clase fija se ha llenado justo ahora: recházala o vuelve a intentarlo.' };

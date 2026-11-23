@@ -35,6 +35,7 @@ import type { CobroErrorCode, ResultadoCobro } from './stripe-cobros.ts';
 import type { AvisoCobro } from './resultado-cobro.ts';
 import type { MotivoSinConsentimiento } from './penalizacion-consentimiento.ts';
 import { esReservaPlazaFija } from '../reservas/plaza-fija-id.ts';
+import { formatoMoneda } from '../moneda.ts';
 
 /** `penalizaciones.estado` (CHECK de las migraciones 20260730225253 y 20260909220851). */
 export type EstadoPenalizacion =
@@ -928,7 +929,7 @@ export function escrituraPorEstadoDelRecibo(estadoRecibo: string | null): Escrit
 
 /** Motivo de revisión de la liquidación cuando una COBRADA deja de serlo por su recibo. */
 export function motivoRevisionPorRecibo(estadoRecibo: string | null, importe: number): string {
-  const eur = `${importe.toFixed(2)}€`;
+  const eur = formatoMoneda(importe);
   if (estadoRecibo === 'PENDIENTE') return `Una penalización de ${eur} ya repartida aquí no ha entrado todavía: su recibo vuelve a estar pendiente de cobro.`;
   if (estadoRecibo === 'DEVUELTO') return `Una penalización de ${eur} ya repartida aquí se ha marcado como devuelta.`;
   return `Una penalización de ${eur} ya repartida aquí no se llegó a cobrar: el adeudo falló.`;

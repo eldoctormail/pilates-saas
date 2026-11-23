@@ -87,7 +87,7 @@ async function abrirClases(page: Page) {
 }
 
 test.describe('Crear un tipo de clase normal', () => {
-  test('nombre + duración + nivel + plazas: sin abrir nada avanzado, todo lo demás hereda', async ({ page }) => {
+  test('nombre + duración + nivel + lugares: sin abrir nada avanzado, todo lo demás hereda', async ({ page }) => {
     const { tipos } = await mockBackend(page);
     await seedSesionDeDuena(page);
     await abrirClases(page);
@@ -97,7 +97,7 @@ test.describe('Crear un tipo de clase normal', () => {
     await page.getByLabel('Nombre de la clase').fill('Reformer Iniciación');
     await page.getByRole('button', { name: '50 min', exact: true }).click();
     await page.getByRole('button', { name: 'Principiante', exact: true }).click();
-    await page.getByLabel('Plazas por defecto').fill('8');
+    await page.getByLabel('Lugares por defecto').fill('8');
 
     await page.getByRole('button', { name: 'Crear tipo de clase' }).click();
 

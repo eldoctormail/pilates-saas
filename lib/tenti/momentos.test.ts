@@ -178,7 +178,7 @@ test('primerasVecesHoy: sin ninguna reserva que contara antes de hoy, y sin hist
   assert.equal(n, 1);
 });
 
-test('maxAlumnasAntesDe: plazas ocupadas por día anterior, con la regla de resumirDia', () => {
+test('maxAlumnasAntesDe: lugares ocupados por día anterior, con la regla de resumirDia', () => {
   const sesiones = [
     { id: 'a', inicio: '2026-10-01T08:00:00Z' }, { id: 'b', inicio: '2026-10-01T18:00:00Z' },
     { id: 'c', inicio: '2026-10-02T08:00:00Z' }, { id: 'x', inicio: '2026-10-02T09:00:00Z', cancelada: true },

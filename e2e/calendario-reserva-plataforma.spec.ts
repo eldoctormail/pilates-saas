@@ -192,7 +192,7 @@ test.describe('Recepción apunta una reserva de ClassPass desde la clase', () =>
 
   test('clase llena (409): se enseña el motivo y NO se anuncia la reserva', async ({ page }) => {
     const peticiones = await montarCalendario(page, {
-      status: 409, body: { error: 'La clase está completa. Si ClassPass ya se la ha vendido, cancélala allí: aquí no queda plaza.' },
+      status: 409, body: { error: 'La clase está completa. Si ClassPass ya se la ha vendido, cancélala allí: aquí no queda lugar.' },
     });
     await abrirAnadir(page);
     await page.getByRole('tab', { name: 'ClassPass' }).click();

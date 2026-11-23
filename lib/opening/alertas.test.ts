@@ -35,7 +35,7 @@ test('sin horario a más de 3 semanas todavía no es alerta', () => {
 test('capacidad en rojo: avisa con las cifras que la sostienen', () => {
   const [a] = detectarAlertas(entrada({ analisis: analisis({ ocupacionPrevista: 0.9, riesgo: 'ROJO', demandaComprometida: 90 }) }));
   assert.equal(a.tipo, 'CAPACIDAD_LLENA');
-  assert.match(a.descripcion, /90 %: 90 plazas para 100 publicadas/);
+  assert.match(a.descripcion, /90 %: 90 lugares para 100 publicados/);
 });
 
 test('preventa lenta solo en las dos últimas semanas y por debajo del objetivo del estudio', () => {

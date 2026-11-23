@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { authHeader } from '@/lib/api-client';
 import type { ResultadoEconomia } from '@/lib/opening/economia';
+import { MONEDA_NOMBRE_PLURAL } from '@/lib/moneda';
 
 interface RespuestaEconomia {
   fijosMes: number | null;
@@ -67,7 +68,7 @@ export function EconomiaApertura() {
     e.preventDefault();
     const f = aNumero(fijos);
     const c = aNumero(colchon);
-    if (Number.isNaN(f) || Number.isNaN(c)) { setError('Escribe solo cifras en euros.'); return; }
+    if (Number.isNaN(f) || Number.isNaN(c)) { setError(`Escribe solo cifras en ${MONEDA_NOMBRE_PLURAL}.`); return; }
     setGuardando(true);
     setError(null);
     try {
@@ -162,8 +163,8 @@ export function EconomiaApertura() {
                       {f.ocupacion !== null && (
                         <p className={`mt-0.5 text-[11.5px] ${f.ocupacion > 1 ? 'font-medium text-destructive' : 'text-muted-foreground'}`}>
                           {f.ocupacion > 1
-                            ? `Con este horario y estos precios no llegas: harían falta ${entero(f.plazasNecesarias)} plazas al mes y publicas ${entero(f.plazasMes)}.`
-                            : `Llenarías el ${pct(f.ocupacion)} de tu horario (${entero(f.plazasNecesarias)} de ${entero(f.plazasMes)} plazas al mes).`}
+                            ? `Con este horario y estos precios no llegas: harían falta ${entero(f.plazasNecesarias)} lugares al mes y publicas ${entero(f.plazasMes)}.`
+                            : `Llenarías el ${pct(f.ocupacion)} de tu horario (${entero(f.plazasNecesarias)} de ${entero(f.plazasMes)} lugares al mes).`}
                         </p>
                       )}
                       {f.ritmoMinimoMes !== null && (

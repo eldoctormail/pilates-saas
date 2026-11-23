@@ -37,27 +37,27 @@ test('⚠️ pedir: la duración se valida contra las cerradas y la FECHA la pon
   assert.ok(!/hasta|vigencia/i.test(llamada.replace('duracionMeses', '')), 'la ruta no pasa ninguna fecha del cliente a la petición');
 });
 
-test('⚠️ pedir de nuevo una plaza que ya venció es posible: la vencida no cuenta como «ya tiene una en ese horario»', () => {
+test('⚠️ pedir de nuevo un lugar que ya venció es posible: la vencida no cuenta como «ya tiene una en ese horario»', () => {
   const pedir = cuerpo(SERVIDOR, 'export async function solicitarPlazaFijaAlumna');
   assert.match(pedir, /TEXTOS_PLAZA_FIJA_ALUMNA, \{ ignorarVencidas: true \}/);
   // Y el panel no cambia al VALIDAR: sin la opción se cuentan todas, como siempre.
   assert.match(SERVIDOR, /opciones\.ignorarVencidas \? suyas\.filter\(p => !p\.vigenciaHasta \|\| p\.vigenciaHasta >= hoyPlaza\) : suyas/);
 });
 
-test('⚠️ aprobar: la plaza llega hasta la fecha fijada AL PEDIR, y si ya pasó no se da (antes de reclamar la petición)', () => {
+test('⚠️ aprobar: el lugar llega hasta la fecha fijada AL PEDIR, y si ya pasó no se da (antes de reclamar la petición)', () => {
   const aprobar = cuerpo(SERVIDOR, 'export async function resolverPeticionPlazaFija');
   const crear = aprobar.slice(aprobar.indexOf("if (sol.tipo === 'CREAR') {"), aprobar.indexOf("if (sol.tipo === 'PAUSAR')"));
   assert.ok(crear.length > 100, 'no se aisló la rama CREAR');
   assert.match(crear, /const hastaPedida = sol\.vigencia_hasta_propuesta \?\? null/);
   assert.match(crear, /vigenciaHasta: hastaPedida/);
-  assert.ok(!/vigenciaHasta: null/.test(crear), 'la rama CREAR ya no fija la plaza sin fecha de fin');
+  assert.ok(!/vigenciaHasta: null/.test(crear), 'la rama CREAR ya no fija el lugar sin fecha de fin');
   const rechazoPasada = crear.indexOf('hastaPedida < hoyEnEstudio()');
   assert.ok(rechazoPasada > 0, 'falta el rechazo de una duración ya pasada');
-  assert.ok(rechazoPasada < crear.indexOf("cerrar('APROBADA')"), 'tiene que rechazarla ANTES de reclamar la petición, o quedaría aprobada sin plaza');
+  assert.ok(rechazoPasada < crear.indexOf("cerrar('APROBADA')"), 'tiene que rechazarla ANTES de reclamar la petición, o quedaría aprobada sin lugar');
   assert.match(crear.slice(rechazoPasada, rechazoPasada + 300), /status: 409/);
 });
 
-test('⚠️ crear una plaza aparta antes las vencidas de la franja (el índice único las rechazaría) y solo al CREAR', () => {
+test('⚠️ crear un lugar aparta antes las vencidas de la franja (el índice único las rechazaría) y solo al CREAR', () => {
   const guardar = SERVIDOR.slice(SERVIDOR.indexOf('async function guardarPlazaFijaDesdeSesion'), SERVIDOR.indexOf('export async function guardarPlazaFijaStaff'));
   assert.match(guardar, /\{ ignorarVencidas: !plazaId \}/, 'editar una plaza existente no cambia');
   const aparta = guardar.indexOf('plazasVencidasQueEstorban(');
@@ -73,7 +73,7 @@ test('la bandeja del estudio dice cuánto durará una petición suelta', () => {
   assert.match(SERVIDOR, /f\.tipo === 'CREAR' && f\.duracion_meses \? ` · \$\{etiquetaDuracion\(f\.duracion_meses\)\}` : ''/);
 });
 
-test('⚠️ la app del cliente pasa «hoy» a la ficha y al horario: una plaza vencida no la deja con «Ya es tu clase fija»', () => {
+test('⚠️ la app del cliente pasa «hoy» a la ficha y al horario: un lugar vencido no la deja con «Ya es tu clase fija»', () => {
   assert.match(leer('lib/student/mapeo.ts'), /plazaFijaEnClaseDe\(clase, sesiones, [^)]*, tieneCuota, hoyEnEstudio\(\)\)/);
   const cf = leer('lib/student/clases-fijas.ts');
   assert.match(cf.slice(cf.indexOf('plazaFijaEnFranja(\n')), /^plazaFijaEnFranja\(\n\s+f, socia\?\.plazasFijas[\s\S]*?\n\s+hoy,\n\s+\),/);

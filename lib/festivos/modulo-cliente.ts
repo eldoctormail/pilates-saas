@@ -61,10 +61,10 @@ export interface ListaDelEstudio {
 
 export async function leerFestivosDelEstudio(): Promise<Resultado<ListaDelEstudio>> {
   const r = await pedir('/api/festivos/estudio');
-  if (!r?.res.ok) return fallo(r, 'No se han podido leer tus festivos.');
+  if (!r?.res.ok) return fallo(r, 'No se han podido leer tus feriados.');
   const d = r.cuerpo;
   if (!d || typeof d.hoy !== 'string' || typeof d.localidad !== 'string' || !Array.isArray(d.festivos) || !d.festivos.every(esDeLaLista)) {
-    return { ok: false, error: 'No se han podido leer tus festivos.' };
+    return { ok: false, error: 'No se han podido leer tus feriados.' };
   }
   return { ok: true, datos: { hoy: d.hoy, localidad: d.localidad, comunidad: typeof d.comunidad === 'string' ? d.comunidad : null, festivos: d.festivos } };
 }
@@ -86,12 +86,12 @@ export interface Busqueda {
 
 export async function buscarFestivos(localidad: string): Promise<Resultado<Busqueda>> {
   const r = await pedir('/api/festivos/buscar', { method: 'POST', body: JSON.stringify({ localidad }) });
-  if (!r?.res.ok) return fallo(r, 'No se han podido buscar los festivos. Inténtalo de nuevo.');
+  if (!r?.res.ok) return fallo(r, 'No se han podido buscar los feriados. Inténtalo de nuevo.');
   const d = r.cuerpo;
   const listas = d && Array.isArray(d.propuestos) && Array.isArray(d.sinCalendario) && Array.isArray(d.avisos);
   if (!d || !listas || !(d.propuestos as unknown[]).every(esPropuesto)
     || (d.ia !== 'ok' && d.ia !== 'tope' && d.ia !== 'error') || typeof d.localidad !== 'string') {
-    return { ok: false, error: 'No se han podido buscar los festivos. Inténtalo de nuevo.' };
+    return { ok: false, error: 'No se han podido buscar los feriados. Inténtalo de nuevo.' };
   }
   return {
     ok: true,

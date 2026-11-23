@@ -225,7 +225,7 @@ function TusDatos({ viaCodigo, autenticado, online, entrarConGoogle, alTerminar 
       <Input label="Nombre" autoComplete="name" value={f.nombre} onChange={(e) => setF({ ...f, nombre: e.target.value })} error={err.nombre} />
       {/* Opcional: ningún estudio puede hoy exigir el teléfono en el alta. Si lo
           necesita, lo pide en sus preguntas, que se contestan al entrar. */}
-      <Input label="Teléfono" type="tel" autoComplete="tel" inputMode="tel" value={f.telefono} onChange={(e) => setF({ ...f, telefono: e.target.value })} hint="Para avisarte si se libera una plaza. Opcional." />
+      <Input label="Teléfono" type="tel" autoComplete="tel" inputMode="tel" value={f.telefono} onChange={(e) => setF({ ...f, telefono: e.target.value })} hint="Para avisarte si se libera un lugar. Opcional." />
 
       <label style={{ display: 'flex', gap: 10, alignItems: 'flex-start', cursor: 'pointer' }}>
         <button

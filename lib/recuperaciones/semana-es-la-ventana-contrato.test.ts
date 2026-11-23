@@ -17,7 +17,7 @@ test('la migración añade la columna apagada de serie y la deja guardar desde C
   assert.match(sql, /grant update \(recuperacion_solo_en_la_semana\) on public\.studios to authenticated/);
 });
 
-test('al cancelar una plaza fija a tiempo, el ajuste corta antes de crear la recuperación (y antes del reparto semanal)', () => {
+test('al cancelar un lugar fijo a tiempo, el ajuste corta antes de crear la recuperación (y antes del reparto semanal)', () => {
   const f = leer('lib/db/supabase-data-admin.ts');
   const i = f.indexOf('async function otorgarRecuperacionPlazaFijaSiAplica');
   const cuerpo = f.slice(i, f.indexOf('export async function ejecutarCancelacionReserva', i));

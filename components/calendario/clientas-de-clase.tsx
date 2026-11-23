@@ -150,7 +150,7 @@ export function ClientasDeClase(p: ClientasDeClaseProps) {
           const clave = fila.plataforma ? null : marca ?? (p.marcaDe && ocupaPlaza ? 'reserva' : null);
           const etiqueta = clave ? ETIQUETA_MARCA[clave] : null;
           const estadoTexto = r.estado === 'LISTA_ESPERA'
-            ? (r.ofertaExpiraEn ? `Plaza ofrecida · caduca a las ${horaEstudio(r.ofertaExpiraEn)}` : `En espera · nº ${r.posicionEspera ?? '?'}`)
+            ? (r.ofertaExpiraEn ? `Lugar ofrecido · caduca a las ${horaEstudio(r.ofertaExpiraEn)}` : `En espera · nº ${r.posicionEspera ?? '?'}`)
             : r.estado === 'PENDIENTE_APROBACION' ? 'Pendiente de aprobar' : null;
           const detalle = [
             sitio && <span key="sitio">{sitio}</span>,

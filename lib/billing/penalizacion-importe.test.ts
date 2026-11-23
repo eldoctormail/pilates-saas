@@ -9,7 +9,7 @@ const cobraria = (aplicaTardia: boolean | null, importeEstudio: number | null, i
   penalizacionTardiaQueSeCobraria({ aplicaTardia, importeEstudio, importeTipoSesion });
 
 // Los tres casos de la revisión: la app avisaba (o callaba) un cargo que no es el que se cobra.
-test('(1) plaza sin tipo en una clase de un tipo con 10 € y estudio sin importe: el SQL lo detecta, el contrato no lo recoge → no se avisa', () => {
+test('(1) lugar sin tipo en una clase de un tipo con 10 € y estudio sin importe: el SQL lo detecta, el contrato no lo recoge → no se avisa', () => {
   assert.equal(cobraria(true, null, 10), null);
   assert.deepEqual(importeDelContrato(null, 10), { ok: false, motivo: 'estudio_sin_penalizacion' });
 });

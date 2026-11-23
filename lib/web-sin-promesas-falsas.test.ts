@@ -93,7 +93,7 @@ const REGLAS: { patron: RegExp; motivo: string; salvo?: RegExp }[] = [
   { patron: /\['(gerencia|recepcion)', 'si'/,
     motivo: 'Informes es solo de la propietaria (BLOQUEADO_RECEPCION y BLOQUEADO_MANAGER)' },
   { patron: /ordenad[ao] por (el |la )?peor|ordenado de peor a mejor/,
-    motivo: 'el informe no ordena por margen: va por fecha, por franja y por plazas ocupadas' },
+    motivo: 'el informe no ordena por margen: va por fecha, por franja y por lugares ocupados' },
   // El widget (W10).
   { patron: /sin salir de tu web|sin salir (en ningun momento )?del dominio|sin redirigir a ninguna otra web|sin iframe, sin redireccion|sin codigo, sin redireccion/,
     motivo: 'sin sesión, el widget lleva la página entera a tentare.app/reservar (app/widget-bundle/main.tsx)',

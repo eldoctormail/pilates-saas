@@ -125,7 +125,7 @@ export async function aceptarOfertaEspera(
 
     const cuerpo = (await res.json().catch(() => null)) as { ok?: true; estado?: string; error?: string } | null;
     if (!res.ok || !cuerpo?.ok) {
-      return { ok: false, error: cuerpo?.error ?? 'No hemos podido aceptar la plaza. Sigue en lista de espera.' };
+      return { ok: false, error: cuerpo?.error ?? 'No hemos podido aceptar el lugar. Sigue en lista de espera.' };
     }
 
     invalidarCatalogo(slug);
@@ -133,6 +133,6 @@ export async function aceptarOfertaEspera(
   } catch {
     // Se cayó la red a mitad: no sabemos si llegó a confirmarse, así que no se
     // anuncia éxito. Al recargar se verá la verdad (mismo criterio que cancelar).
-    return { ok: false, error: 'No hemos podido aceptar la plaza. Comprueba tu conexión y vuelve a intentarlo.' };
+    return { ok: false, error: 'No hemos podido aceptar el lugar. Comprueba tu conexión y vuelve a intentarlo.' };
   }
 }

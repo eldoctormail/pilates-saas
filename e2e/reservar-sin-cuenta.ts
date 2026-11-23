@@ -72,7 +72,7 @@ export async function abrirClaseSinSesion(page: Page, fixture: object = fixtureC
   // AQUÍ, en la propia tarjeta (antes de abrir, ya que ahora no hay hoja de
   // detalle intermedia donde repetirlo) — misma protección, mismo texto.
   const tarjeta = page.getByRole('button', { name: /Reformer a las 10:00/ });
-  await expect(tarjeta.getByText('10 plazas libres')).toBeVisible({ timeout: 15_000 });
+  await expect(tarjeta.getByText('10 lugares libres')).toBeVisible({ timeout: 15_000 });
   await expect(tarjeta.getByText('0/10')).not.toBeVisible();
 
   await tarjeta.click();

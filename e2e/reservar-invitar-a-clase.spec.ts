@@ -66,7 +66,7 @@ async function altas(page: Page, status = 200) {
 /** De la ficha de invitación al alta con la clase: nombre, términos y confirmar. */
 async function darseDeAlta(page: Page, query: string) {
   await page.goto(`/reservar/${SLUG}?${query}`);
-  await page.getByRole('button', { name: 'Reservar mi plaza' }).click({ timeout: 45_000 });
+  await page.getByRole('button', { name: 'Reservar mi lugar' }).click({ timeout: 45_000 });
   await expect(page.getByRole('heading', { name: '¿Cómo te llamas?' })).toBeVisible({ timeout: 30_000 });
   await page.getByPlaceholder('Tu nombre completo').fill('Amiga');
   await page.getByPlaceholder(/Tu teléfono/).fill('+34 600 000 000');
@@ -83,7 +83,7 @@ test.describe('Reservar · invitar a una amiga a ESA clase', () => {
     await base(page);
     await page.route('**/api/public/session', (r) => json(r, {}, 401));
     await page.goto(`/reservar/${SLUG}?sesion=${SESION}&invita=${AMIGA}`);
-    await expect(page.getByRole('button', { name: 'Reservar mi plaza' })).toBeVisible({ timeout: 45_000 });
+    await expect(page.getByRole('button', { name: 'Reservar mi lugar' })).toBeVisible({ timeout: 45_000 });
     await expect(page.getByRole('button', { name: 'Mis reservas' })).not.toBeVisible();
   });
 
@@ -130,7 +130,7 @@ test.describe('Reservar · invitar a una amiga a ESA clase', () => {
       return r.fulfill({ status: 200, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: '{}' });
     });
     await page.goto(`/reservar/${SLUG}?sesion=${SESION}&invita=${AMIGA}`);
-    await page.getByRole('button', { name: 'Reservar mi plaza' }).click({ timeout: 45_000 });
+    await page.getByRole('button', { name: 'Reservar mi lugar' }).click({ timeout: 45_000 });
     await page.getByPlaceholder(/tu email/i).fill('amiga@example.com');
     await page.getByRole('button', { name: /continuar/i }).click();
     await expect.poll(() => envios.length, { timeout: 30_000 }).toBeGreaterThan(0);

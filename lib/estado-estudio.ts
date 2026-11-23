@@ -235,7 +235,7 @@ const LINEAS: DefLinea[] = [
   // cerrada o el estudio cancela con prisa la víspera. Se decide en su tarjeta.
   // «abres o cierras», no «si cierras»: abrir es tan válido como cerrar.
   { id: 'festivosPorDecidir', bandeja: 'decidir', href: null,
-    uno: 'Un festivo con clases: decide si abres o cierras', varios: n => `${n} festivos con clases: decide si abres o cierras` },
+    uno: 'Un feriado con clases: decide si abres o cierras', varios: n => `${n} feriados con clases: decide si abres o cierras` },
   // Una clase que se repite y se acaba: si nadie la renueva, ese hueco se queda
   // sin clase y sus plazas fijas sin reserva. Se revisa y renueva en su tarjeta.
   { id: 'seriesPorRenovar', bandeja: 'decidir', href: null,
@@ -272,7 +272,7 @@ const LINEAS: DefLinea[] = [
   { id: 'sustitucionesBuscando', bandeja: 'enMarcha', href: '/sustituciones',
     uno: 'Buscando sustituta para una clase', varios: n => `Buscando sustituta para ${n} clases` },
   { id: 'ofertasListaEspera', bandeja: 'enMarcha', href: '/calendario',
-    uno: 'Una plaza libre ofrecida a la lista de espera', varios: n => `${n} plazas libres ofrecidas a la lista de espera` },
+    uno: 'Un lugar libre ofrecido a la lista de espera', varios: n => `${n} lugares libres ofrecidos a la lista de espera` },
   { id: 'cobrosEnReintento', bandeja: 'enMarcha', href: '/cobros?tab=deudas',
     uno: 'Reintentando un cobro que falló', varios: n => `Reintentando ${n} cobros que fallaron` },
 

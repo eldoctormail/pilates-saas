@@ -211,20 +211,20 @@ export function textoCompensacion(
     case 'EN_ESPERA':
       return {
         titulo: c.posicion ? `Estás la ${c.posicion}.ª en la lista de espera` : 'Estás en la lista de espera',
-        cuerpo: `La clase se llenó mientras pagabas. Te avisamos si se libera una plaza.${aFavor}${avisado}`,
+        cuerpo: `La clase se llenó mientras pagabas. Te avisamos si se libera un lugar.${aFavor}${avisado}`,
       };
     case 'PENDIENTE_APROBACION':
       return { titulo: 'Tu reserva espera al estudio', cuerpo: `En esta clase el estudio aprueba cada reserva. Te avisamos en cuanto conteste.${aFavor}` };
     case 'YA_TENIA_RESERVA':
-      return { titulo: 'Ya tenías esta clase', cuerpo: `No te hemos reservado otra plaza.${aFavor}${avisado}` };
+      return { titulo: 'Ya tenías esta clase', cuerpo: `No te hemos reservado otro lugar.${aFavor}${avisado}` };
     case 'PAGADO_SIN_USAR':
-      return { titulo: 'Tienes tu plaza', cuerpo: `Tu plaza se pagó con otro bono tuyo, así que lo que acabas de comprar sigue intacto.${aFavor}` };
+      return { titulo: 'Tienes tu lugar', cuerpo: `Tu lugar se pagó con otro bono tuyo, así que lo que acabas de comprar sigue intacto.${aFavor}` };
     case 'SIN_PLAZA':
-      return { titulo: 'Pago hecho, pero sin plaza', cuerpo: `La clase se llenó mientras pagabas.${aFavor}${avisado}` };
+      return { titulo: 'Pago hecho, pero sin lugar', cuerpo: `La clase se llenó mientras pagabas.${aFavor}${avisado}` };
     case 'CLASE_CERRADA':
       return { titulo: 'Pago hecho, pero la clase ya no admite reservas', cuerpo: `${aFavor.trim()}${avisado}` };
     default:
-      return { titulo: 'Pago hecho, pero no hemos podido darte la plaza', cuerpo: `${aFavor.trim()}${avisado || ' Escribe al estudio y te lo resuelven.'}` };
+      return { titulo: 'Pago hecho, pero no hemos podido darte el lugar', cuerpo: `${aFavor.trim()}${avisado || ' Escribe al estudio y te lo resuelven.'}` };
   }
 }
 

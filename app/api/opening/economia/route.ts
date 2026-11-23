@@ -6,6 +6,7 @@ import type { Rol } from '@/lib/types';
 import { cargarEstadoApertura } from '@/lib/opening/servidor';
 import { cargarEntradaEconomia } from '@/lib/opening/economia-servidor';
 import { simularEconomia } from '@/lib/opening/economia';
+import { MONEDA_NOMBRE_PLURAL } from '@/lib/moneda';
 
 // Simulador económico de la apertura («¿Cuánto necesito aguantar?»). Se carga
 // al desplegar el bloque, no con la home.
@@ -57,7 +58,7 @@ export async function PATCH(req: NextRequest) {
   const fijos = importe(body.fijosMes);
   const colchon = importe(body.colchon);
   if (fijos === 'invalido' || colchon === 'invalido') {
-    return NextResponse.json({ error: 'Pon cantidades en euros, sin signo negativo.' }, { status: 400 });
+    return NextResponse.json({ error: `Pon cantidades en ${MONEDA_NOMBRE_PLURAL}, sin signo negativo.` }, { status: 400 });
   }
   const { error } = await requireSupabaseAdmin().from('opening_economia').upsert(
     { studio_id: sesion.studioId, fijos_mes_eur: fijos, colchon_eur: colchon, updated_at: new Date().toISOString() },

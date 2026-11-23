@@ -67,7 +67,7 @@ async function preparar(page: Page, opciones: { encendido?: boolean; datos?: 'ok
   return peticiones;
 }
 
-test.describe('Calendario: plazas libres (P3.9)', () => {
+test.describe('Calendario: lugares libres (P3.9)', () => {
   test.describe.configure({ timeout: 120_000 });
 
   test('apagada: sin enlace en el Calendario, y la URL directa vuelve al Calendario', async ({ page }) => {
@@ -75,7 +75,7 @@ test.describe('Calendario: plazas libres (P3.9)', () => {
     await ir(page, 'calendario');
     await expect.poll(() => peticiones.sonda).toBeGreaterThan(0);
     await page.evaluate(() => new Promise(r => setTimeout(r, 800)));
-    await expect(page.getByRole('link', { name: /Plazas libres/ })).toHaveCount(0);
+    await expect(page.getByRole('link', { name: /Lugares libres/ })).toHaveCount(0);
     await page.goto('/calendario/plazas-libres');
     await expect(page).toHaveURL(/\/calendario$/, { timeout: 30_000 });
     expect(peticiones.datos, 'el servidor lo dijo al pedir los datos').toBeGreaterThan(0);
@@ -91,7 +91,7 @@ test.describe('Calendario: plazas libres (P3.9)', () => {
   test('encendida: el enlace de la línea de cifras lleva a la pantalla; la semana dice sus cifras y por qué, y cada clase abre su ficha', async ({ page }) => {
     const peticiones = await preparar(page);
     await ir(page, 'calendario');
-    const enlace = page.getByTestId('resumen-calendario').getByRole('link', { name: /Plazas libres/ });
+    const enlace = page.getByTestId('resumen-calendario').getByRole('link', { name: /Lugares libres/ });
     await expect(enlace).toBeVisible({ timeout: 30_000 });
     await enlace.click();
     await expect(page.getByTestId('plazas-libres')).toBeVisible({ timeout: 30_000 });

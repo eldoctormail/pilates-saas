@@ -52,11 +52,11 @@ test.describe('Student PWA · horario: la fila de una clase', () => {
     await expect(page.getByRole('button', { name: /^Reservar clase$/ })).toBeVisible({ timeout: 30_000 });
   });
 
-  test('el chip dice las plazas libres; la última, «1 plaza» y en el tono de alerta', async ({ page }) => {
+  test('el chip dice los lugares libres; la última, «1 lugar» y en el tono de alerta', async ({ page }) => {
     await montar(page, (f) => { f.aforoReservas = Array.from({ length: 9 }, (_, i) => ({ id: `a-${i}`, sesion_id: SESION_ID, estado: 'CONFIRMADA' })); });
     await abrirHorario(page);
     const chip = fila(page).locator('.badge');
-    await expect(chip).toHaveText('1 plaza');
+    await expect(chip).toHaveText('1 lugar');
     await expect(chip).toHaveClass(/badge--ultima/);
   });
 

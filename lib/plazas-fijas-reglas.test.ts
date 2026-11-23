@@ -15,12 +15,12 @@ const sus = (p: Partial<Suscripcion> & Pick<Suscripcion, 'planId'>): Suscripcion
   fechaFin: null, sesionesRestantes: null, stripeSubscriptionId: null, ...p,
 }) as Suscripcion;
 
-test('una cuota activa y vigente que cubre la clase da derecho a plaza fija', () => {
+test('una cuota activa y vigente que cubre la clase da derecho a lugar fijo', () => {
   const cuota = plan({ id: 'mensual', limiteSemanal: 2 });
   assert.equal(cuotaParaPlazaFija('soc-1', [sus({ planId: 'mensual' })], [cuota], HOY, 'tc-ref')?.id, 'mensual');
 });
 
-test('con bono NO: sus reservas de plaza fija nunca descuentan sesiones', () => {
+test('con bono NO: sus reservas de lugar fijo nunca descuentan sesiones', () => {
   const bono = plan({ id: 'bono', tipo: 'BONO', sesiones: 10 });
   assert.equal(cuotaParaPlazaFija('soc-1', [sus({ planId: 'bono', sesionesRestantes: 8 })], [bono], HOY, 'tc-ref'), null);
 });
@@ -63,7 +63,7 @@ test('el cupo automático es un porcentaje del aforo, redondeado HACIA ABAJO: nu
   assert.equal(cupoAutomatico(9, 25), 2, '2,25 → 2');
 });
 
-test('una clase de una plaza al 50 % no admite ninguna automática: decide el estudio', () => {
+test('una clase de un lugar al 50 % no admite ninguna automática: decide el estudio', () => {
   assert.equal(cupoAutomatico(1, 50), 0);
   assert.equal(cupoAutomatico(1, 100), 1);
 });
@@ -74,7 +74,7 @@ test('⚠️ sin dato (aforo o porcentaje que no son un número) no se aprueba s
   }
 });
 
-test('un porcentaje por encima de 100 nunca da más plazas que el aforo', () => {
+test('un porcentaje por encima de 100 nunca da más lugares que el aforo', () => {
   assert.equal(cupoAutomatico(10, 250), 10);
 });
 
@@ -98,7 +98,7 @@ test('una clase que exige aprobar cada reserva no se llena de reservas sin pasar
   assert.equal(motivoNoAutomatica({ ...CUMPLE, reservaConAprobacion: true }), 'RESERVA_CON_APROBACION');
 });
 
-test('un impago que le bloquea reservar tampoco se salta con una plaza fija', () => {
+test('un impago que le bloquea reservar tampoco se salta con un lugar fijo', () => {
   assert.equal(motivoNoAutomatica({ ...CUMPLE, impagoBloqueante: true }), 'IMPAGO');
 });
 

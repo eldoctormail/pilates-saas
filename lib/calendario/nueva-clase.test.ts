@@ -199,13 +199,13 @@ const tipo = (extra: Partial<TipoConReglas> = {}): TipoConReglas => ({ id: 'tc-1
 
 test('con lista de espera al momento', () => {
   assert.equal(fraseAlLlenarse(estudio, tipo()),
-    'Al llenarse, las siguientes entran en lista de espera y la plaza que se libere pasa al momento a la primera.');
+    'Al llenarse, las siguientes entran en lista de espera y el lugar que se libere pasa al momento a la primera.');
 });
 
-test('con plazo para aceptar la plaza, el del tipo pisa al del estudio', () => {
+test('con plazo para aceptar el lugar, el del tipo pisa al del estudio', () => {
   assert.equal(fraseAlLlenarse({ ...estudio, listaEsperaPlazoAceptacionMinutos: 30 }, tipo()),
-    'Al llenarse, las siguientes entran en lista de espera; si se libera una plaza, la primera tiene 30 min para aceptarla.');
-  assert.match(fraseAlLlenarse(estudio, tipo({ listaEsperaPlazoAceptacionMinutos: 120 })), /tiene 2 h para aceptarla/);
+    'Al llenarse, las siguientes entran en lista de espera; si se libera un lugar, la primera tiene 30 min para aceptarlo.');
+  assert.match(fraseAlLlenarse(estudio, tipo({ listaEsperaPlazoAceptacionMinutos: 120 })), /tiene 2 h para aceptarlo/);
 });
 
 test('SIN lista de espera ya no promete que entran en ella, y dice quién lo decide', () => {

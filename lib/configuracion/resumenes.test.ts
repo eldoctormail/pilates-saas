@@ -94,8 +94,8 @@ test('cambiar un valor guardado cambia su resumen', () => {
   assert.equal(valor(con({ cancelacionVentanaHoras: 0 }), 'reservas'), 'Cancelar sin plazo');
   assert.equal(valor(con({ cancelacionVentanaHoras: 0, permiteListaEspera: false }), 'reservas'), 'Cancelar sin plazo · sin lista de espera');
   assert.equal(valor(con({ cancelacionVentanaHoras: 24, permiteListaEspera: false }), 'reservas'), 'Cancelar 24 h · sin lista de espera');
-  assert.equal(valor(con({ listaEsperaPlazoAceptacionMinutos: 30 }), 'reservas'), 'Cancelar 12 h · 30 min para aceptar la plaza');
-  assert.equal(valor(con({ listaEsperaPlazoAceptacionMinutos: 120 }), 'reservas'), 'Cancelar 12 h · 2 h para aceptar la plaza');
+  assert.equal(valor(con({ listaEsperaPlazoAceptacionMinutos: 30 }), 'reservas'), 'Cancelar 12 h · 30 min para aceptar el lugar');
+  assert.equal(valor(con({ listaEsperaPlazoAceptacionMinutos: 120 }), 'reservas'), 'Cancelar 12 h · 2 h para aceptar el lugar');
   // Sin lista de espera, su plazo no decide nada.
   assert.equal(valor(con({ permiteListaEspera: false, listaEsperaPlazoAceptacionMinutos: 30 }), 'reservas'), 'Cancelar 12 h · sin lista de espera');
 
@@ -624,7 +624,7 @@ test('reglas de reserva: lo principal delante, y los tipos que la cambian antes 
   assert.equal(resumenRegla('cancelar-y-recuperar', { ...r, cancelacionVentanaHoras: 0 }, sin), 'Cancela hasta el último momento');
   assert.equal(resumenRegla('si-se-cancela-una-clase', r, sin), 'Devuelve la sesión · sin mínimo');
   assert.equal(resumenRegla('si-se-cancela-una-clase', { ...r, cancelacionClaseDevuelveBono: false, minimoAsistentesPorClase: 3 }, sin), 'No devuelve la sesión · mínimo 3 clientes');
-  assert.equal(resumenRegla('lista-de-espera', r, sin), 'Plaza al momento');
+  assert.equal(resumenRegla('lista-de-espera', r, sin), 'Lugar al momento');
   assert.equal(resumenRegla('lista-de-espera', { ...r, listaEsperaPlazoAceptacionMinutos: 30 }, sin), 'Oferta de 30 min');
   assert.equal(resumenRegla('lista-de-espera', { ...r, permiteListaEspera: false, listaEsperaPlazoAceptacionMinutos: 30 }, sin), 'Sin lista de espera');
   assert.equal(resumenRegla('asistencia', r, { excepciones: 0, pideConfirmacion: true }), 'Se pasa lista · pide confirmar a quien falta');
@@ -640,7 +640,7 @@ test('reglas de reserva: lo principal delante, y los tipos que la cambian antes 
   assert.equal(resumenRegla('recuperaciones', r, dosLineas), 'Hasta 4 sin usar · caducan a final del mes siguiente');
   assert.equal(resumenRegla('recuperaciones', { ...r, recuperacionMaxVivas: 6, recuperacionCaducidadTipo: 'DIAS', recuperacionCaducidadDias: 45, recuperacionAutoSemanal: true }, dosLineas),
     'Hasta 6 sin usar · caducan a los 45 días · se dan solas los lunes');
-  assert.equal(resumenRegla('lista-de-espera', r, { excepciones: 1 }), 'Plaza al momento · 1 tipo lo cambia');
+  assert.equal(resumenRegla('lista-de-espera', r, { excepciones: 1 }), 'Lugar al momento · 1 tipo lo cambia');
   // El cargo propio de un tipo no se cobra: la fila no puede decir que «lo cambia».
   assert.equal(resumenRegla('si-cancela-tarde-o-no-viene', r, { excepciones: 2 }), 'Sin cargo · 2 tipos: su cargo no se cobra');
   const peores = { ...r, reservaAntelacionMaximaDias: 365, cancelacionVentanaHoras: 168, minimoAsistentesPorClase: 12, penalizacionImporteEur: 12.5 };

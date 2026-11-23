@@ -56,7 +56,7 @@ export function vieneDeOtraPlataforma(software: string | undefined): boolean {
  */
 export const POR_DEFECTO: Pick<RespuestasWizard, 'salas' | 'aforos' | 'duracion' | 'clases'> = {
   salas: '1 sala',
-  aforos: ['8 plazas'],
+  aforos: ['8 lugares'],
   duracion: '55 minutos',
   clases: ['Reformer', 'Mat'],
 };

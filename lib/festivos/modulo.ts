@@ -16,6 +16,7 @@
 import { ambitoOficial, aniosConFestivos, festivosEntre, fuenteDe, hayCalendario, type ZonaFestivos } from './oficiales.ts';
 import { normalizarLugar, zonaDelEstudio } from './zona-del-estudio.ts';
 import { NOMBRE_MAX, type Ambito, type FestivoDeLaLista, type FestivoPropuesto } from './lista.ts';
+import { esArgentina } from '../locale.ts';
 
 export type { Ambito, Origen, FestivoPropuesto, FestivoDeLaLista } from './lista.ts';
 export { AMBITOS, NOMBRE_MAX } from './lista.ts';
@@ -67,13 +68,16 @@ export function zonaDeLocalidad(texto: string): ZonaFestivos | null {
   if (!limpio) return null;
   const cp = limpio.match(/\b\d{5}\b/)?.[0] ?? null;
   const ciudad = limpio.replace(/\b\d{5}\b/, ' ').replace(/\s+/g, ' ').trim();
-  return zonaDelEstudio({ codigoPostal: cp, ciudad: ciudad || null, direccion: null, zonaHoraria: 'Europe/Madrid' });
+  return zonaDelEstudio({ codigoPostal: cp, ciudad: ciudad || null, direccion: null, zonaHoraria: esArgentina() ? 'America/Argentina/Buenos_Aires' : 'Europe/Madrid' });
 }
 
 /** «BOE núm. 259, de 28 de octubre de 2025» de la cita entera; si no se encuentra, la cita recortada. */
 export function normaCorta(fuente: string): string {
   const diario = fuente.match(/\((?:BOE|BOCM|BOJA|DOGC)[^)]*\)/)?.[0];
   if (diario) return diario.slice(1, -1).split(',').slice(0, 2).join(',').trim();
+  // Argentina: la ley y, si la hay, la resolución de los días turísticos.
+  const normasAr = fuente.match(/Ley \d+\.\d+|Resolución \d+\/\d{4}/g);
+  if (normasAr?.length) return [...new Set(normasAr)].join(' y ');
   return fuente.length > 90 ? `${fuente.slice(0, 87).trimEnd()}…` : fuente;
 }
 
@@ -104,6 +108,8 @@ export function oficialesDeLaLista(zona: ZonaFestivos, desde: string, hasta: str
  * se queda una búsqueda sin Navidad porque la IA falle.
  */
 export function nacionalesComunes(desde: string, hasta: string): FestivoDeLaLista[] {
+  // En Argentina el calendario cargado ya es el nacional.
+  if (esArgentina()) return oficialesDeLaLista('ARGENTINA', desde, hasta);
   return oficialesDeLaLista('MADRID', desde, hasta)
     .filter((f) => f.ambito === 'nacional')
     // La norma de Madrid no es la de un festivo nacional: solo se cita si es el BOE.
@@ -243,8 +249,8 @@ export function prepararParaGuardar(
   items: unknown,
   o: { zonaLista: ZonaFestivos | null; zonaBusqueda: ZonaFestivos | null; hoy: string },
 ): { ok: true; filas: FilaParaGuardar[]; omitidos: number } | { ok: false; error: string } {
-  if (!Array.isArray(items) || items.length === 0) return { ok: false, error: 'No has elegido ningún festivo.' };
-  if (items.length > MAX_POR_GUARDADO) return { ok: false, error: `Como mucho ${MAX_POR_GUARDADO} festivos de una vez.` };
+  if (!Array.isArray(items) || items.length === 0) return { ok: false, error: 'No has elegido ningún feriado.' };
+  if (items.length > MAX_POR_GUARDADO) return { ok: false, error: `Como mucho ${MAX_POR_GUARDADO} feriados de una vez.` };
   const { hasta, anios } = rangoDeBusqueda(o.hoy);
   const enLista = new Set(o.zonaLista ? festivosEntre(o.zonaLista, o.hoy, hasta).map((f) => f.fecha) : []);
   const oficiales = new Map(oficialesDeBusqueda(o.zonaBusqueda, o.hoy, hasta).map((f) => [f.fecha, f]));
@@ -255,10 +261,10 @@ export function prepararParaGuardar(
   for (const x of items) {
     const f = x as Record<string, unknown> | null;
     if (!f || !esFecha(f.fecha)) return { ok: false, error: 'Hay un día que no es una fecha.' };
-    if (f.fecha < o.hoy) return { ok: false, error: 'No se guardan festivos que ya han pasado.' };
-    if (f.fecha > hasta) return { ok: false, error: `Solo se guardan festivos hasta el 31 de diciembre de ${hasta.slice(0, 4)}.` };
+    if (f.fecha < o.hoy) return { ok: false, error: 'No se guardan feriados que ya han pasado.' };
+    if (f.fecha > hasta) return { ok: false, error: `Solo se guardan feriados hasta el 31 de diciembre de ${hasta.slice(0, 4)}.` };
     if (enLista.has(f.fecha)) {
-      if (f.origen === 'manual') return { ok: false, error: 'Ese día ya es festivo oficial: ya está en tu lista.' };
+      if (f.origen === 'manual') return { ok: false, error: 'Ese día ya es feriado oficial: ya está en tu lista.' };
       omitidos++;
       continue;
     }
@@ -266,21 +272,21 @@ export function prepararParaGuardar(
     const nombre = limpiarNombre(f.nombre);
     if (f.origen === 'oficial') {
       const oficial = oficiales.get(f.fecha);
-      if (!oficial) return { ok: false, error: 'Uno de los festivos oficiales no es de esa localidad. Vuelve a buscar.' };
+      if (!oficial) return { ok: false, error: 'Uno de los feriados oficiales no es de esa localidad. Vuelve a buscar.' };
       filas.push({ fecha: f.fecha, nombre: oficial.nombre, ambito: oficial.ambito, origen: 'oficial', fuente_url: oficial.fuenteUrl });
     } else if (f.origen === 'ia') {
       const ambito = f.ambito === 'nacional' || f.ambito === 'autonomico' || f.ambito === 'local' ? f.ambito : null;
-      if (!nombre || !ambito) return { ok: false, error: 'Uno de los festivos propuestos no ha llegado bien. Vuelve a buscar.' };
+      if (!nombre || !ambito) return { ok: false, error: 'Uno de los feriados propuestos no ha llegado bien. Vuelve a buscar.' };
       if (oficiales.has(f.fecha)) { omitidos++; continue; }
       if (conCalendario.has(Number(f.fecha.slice(0, 4))) && ambito !== 'local') {
-        return { ok: false, error: 'Uno de los festivos propuestos no es una fiesta local. Vuelve a buscar.' };
+        return { ok: false, error: 'Uno de los feriados propuestos no es una fiesta local. Vuelve a buscar.' };
       }
       filas.push({ fecha: f.fecha, nombre, ambito, origen: 'ia', fuente_url: urlSegura(f.fuenteUrl) });
     } else if (f.origen === 'manual') {
       if (!nombre) return { ok: false, error: `Ponle un nombre de hasta ${NOMBRE_MAX} letras.` };
       filas.push({ fecha: f.fecha, nombre, ambito: 'propio', origen: 'manual', fuente_url: null });
     } else {
-      return { ok: false, error: 'Hay un festivo sin origen.' };
+      return { ok: false, error: 'Hay un feriado sin origen.' };
     }
     vistos.add(f.fecha);
   }

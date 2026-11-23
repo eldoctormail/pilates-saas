@@ -35,7 +35,7 @@ test('las del panel nuevo viven fuera de MODULOS y de nav-config (el asistente n
   }
 });
 
-test('Festivos, para todos: en el menú (Estudio), esencial, con su ficha; recepción fuera y sin indexar', () => {
+test('Feriados, para todos: en el menú (Estudio), esencial, con su ficha; recepción fuera y sin indexar', () => {
   const estudio = navSections.find((s) => s.label === 'Estudio')!;
   assert.ok(estudio.items.some((i) => i.href === '/festivos'));
   assert.ok(!SECCIONES_PANEL_NUEVO.some((s) => s.href === '/festivos'), 'no puede estar en los dos sitios');

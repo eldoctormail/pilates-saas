@@ -394,7 +394,7 @@ export function queCambiaElTipo(tarjeta: TarjetaReglasId, t: TipoConReglas, e: R
     case 'lista-de-espera': {
       if (!heredaOverride(t.permiteListaEspera, e.permiteListaEspera)) return 'sin lista de espera';
       const plazo = cifra(heredaOverride(t.listaEsperaPlazoAceptacionMinutos, e.listaEsperaPlazoAceptacionMinutos));
-      return plazo > 0 ? `${duracion(plazo)} para aceptar la plaza` : 'plaza al momento';
+      return plazo > 0 ? `${duracion(plazo)} para aceptar el lugar` : 'lugar al momento';
     }
     case 'asistencia':
       return heredaOverride(t.requiereCheckinQr, e.requiereCheckinQr) ? 'se pasa lista' : 'sin pasar lista';
@@ -472,9 +472,9 @@ export function consecuenciaRegla(tarjeta: TarjetaReglasId, r: ReglasReserva): s
       // LIBERAR o MANTENER_SIN_PENALIZAR (`omitirPorPlazaFijaSinCuota`).
       switch (r.plazaFijaSinCuota) {
         case 'AVISAR_Y_LIBERAR':
-          return `Si un cliente con clase fija se queda sin cuota, le avisamos: si no renueva en ${DIAS_PARA_RENOVAR_PLAZA_FIJA} días, se liberan sus clases futuras sin penalización. Su plaza, la serie y las clases pasadas no cambian.`;
+          return `Si un cliente con clase fija se queda sin cuota, le avisamos: si no renueva en ${DIAS_PARA_RENOVAR_PLAZA_FIJA} días, se liberan sus clases futuras sin penalización. Su lugar, la serie y las clases pasadas no cambian.`;
         case 'LIBERAR':
-          return 'Si un cliente con clase fija se queda sin cuota, se liberan sus clases futuras sin penalización. Su plaza, la serie y las clases pasadas no cambian.';
+          return 'Si un cliente con clase fija se queda sin cuota, se liberan sus clases futuras sin penalización. Su lugar, la serie y las clases pasadas no cambian.';
         case 'MANTENER_SIN_PENALIZAR':
           return 'Si un cliente con clase fija se queda sin cuota, conserva las clases ya reservadas y no se le cobra si falta.';
         case 'MANTENER':
@@ -493,7 +493,7 @@ export function consecuenciaRegla(tarjeta: TarjetaReglasId, r: ReglasReserva): s
     }
     case 'si-pausa-su-plaza-fija':
       // Lo que hacen `tocaLiberarSitio` y `decidirVueltaDePausa` (lib/plazas-fijas-solicitudes.ts).
-      if (!r.plazaFijaPausaLiberaSitio) return 'Durante una pausa conserva su plaza y su sitio, y al acabar vuelve sola.';
+      if (!r.plazaFijaPausaLiberaSitio) return 'Durante una pausa conserva su lugar y su sitio, y al acabar vuelve sola.';
       return r.plazaFijaFinPausa === 'PENDIENTE_CONFIRMAR'
         ? 'Si la pausa dura más de una semana, su sitio queda libre. Una semana antes de acabar te pregunta en Resumen si vuelve.'
         : 'Si la pausa dura más de una semana, su sitio queda libre. Una semana antes de acabar vuelve sola si su sitio sigue libre y tiene cuota; si no, te pregunta en Resumen.';
@@ -537,10 +537,10 @@ export const OPCIONES_PLAZA_FIJA_SIN_CUOTA: readonly { valor: PoliticaPlazaFijaS
 // apagada.
 
 export const EXPLICACION_PLAZA_FIJA_DESDE_APP =
-  'Una clase fija es una plaza que tu cliente deja reservada cada semana. De serie, tus clientes pueden hacer suya una clase que se repite desde su app: en la ficha de la clase activan «Clase fija» y eligen cuánto tiempo. Solo la piden las que tienen una cuota que incluya esa clase (con bono se reserva clase a clase). Si lo apagas, las clases fijas las das tú en recepción.';
+  'Una clase fija es un lugar que tu cliente deja reservada cada semana. De serie, tus clientes pueden hacer suya una clase que se repite desde su app: en la ficha de la clase activan «Clase fija» y eligen cuánto tiempo. Solo la piden las que tienen una cuota que incluya esa clase (con bono se reserva clase a clase). Si lo apagas, las clases fijas las das tú en recepción.';
 
 export const OPCIONES_APROBACION_PLAZA_FIJA: readonly { valor: ReglasReserva['plazaFijaAprobacion']; titulo: string; detalle: string }[] = [
-  { valor: 'MANUAL', titulo: 'La apruebo yo', detalle: 'Recibes un aviso y decides tú en Resumen. Hasta entonces, su plaza no cambia. Es lo más seguro.' },
+  { valor: 'MANUAL', titulo: 'La apruebo yo', detalle: 'Recibes un aviso y decides tú en Resumen. Hasta entonces, su lugar no cambia. Es lo más seguro.' },
   { valor: 'AUTOMATICA', titulo: 'Se da sola si cumple mis reglas', detalle: 'Si tiene cuota, nivel y hueco en la clase, se le da al momento sin que hagas nada. Si algo no cuadra, te llega a ti para decidir.' },
 ];
 

@@ -209,7 +209,7 @@ function ContenidoBaja({ socio, onCerrar, onHecho }: { socio: Socio; onCerrar: (
             />
             <span className="text-[13px] text-foreground">
               Cancelar {futuras.length === 1 ? 'su reserva' : <>sus <strong className="font-semibold">{futuras.length} reservas</strong></>} ({futuras.slice(0, 3).map(r => diaCorto(r.inicio)).join(', ')}{futuras.length > 3 ? '…' : ''})
-              <span className="block text-[12px] text-muted-foreground">Sin penalización. Si hay lista de espera, la plaza pasa a la siguiente.</span>
+              <span className="block text-[12px] text-muted-foreground">Sin penalización. Si hay lista de espera, el lugar pasa a la siguiente.</span>
             </span>
           </label>
         ) : (

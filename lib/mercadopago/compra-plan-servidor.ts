@@ -322,7 +322,7 @@ export async function barrerComprasCaducadas(admin: SupabaseClient, studioId: st
     try {
       await liberarCupoMatriculaUnaVez(admin, c.id, c.plan_id, studioId);
     } catch (e) {
-      Sentry.captureMessage('[mercadopago] no se pudo devolver la plaza de matrícula de una compra caducada', {
+      Sentry.captureMessage('[mercadopago] no se pudo devolver el lugar de matrícula de una compra caducada', {
         level: 'warning', tags: { area: 'cobros', pasarela: 'mercadopago' }, extra: { compraId: c.id, studioId, error: String(e) },
       });
     }

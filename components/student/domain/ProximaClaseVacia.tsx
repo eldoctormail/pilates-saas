@@ -46,7 +46,7 @@ export function ProximaClaseVacia({ huecosHoy, hrefReservar }: {
         <p className="t-card-title" style={{ margin: 0 }}>No tienes clases próximas</p>
         <p className="t-small t-dim" style={{ margin: 0 }}>
           {huecosHoy > 0
-            ? `Hay ${huecosHoy} ${huecosHoy === 1 ? 'clase' : 'clases'} hoy con plaza libre.`
+            ? `Hay ${huecosHoy} ${huecosHoy === 1 ? 'clase' : 'clases'} hoy con lugar libre.`
             : 'Mira el horario para encontrar tu próxima clase.'}
         </p>
         <Link

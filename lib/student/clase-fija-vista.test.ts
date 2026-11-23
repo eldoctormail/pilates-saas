@@ -14,7 +14,7 @@ test('activa sin fecha de fin: «Activa», «Sin fecha de fin» y la frase de qu
   assert.deepEqual(estadoTarjetaFija(base, null, fc), { texto: 'Activa', tono: 'activa', hasta: 'Sin fecha de fin', frase: FRASE_ACTIVA });
 });
 
-test('con fecha de fin la dice, con la fecha de la plaza', () => {
+test('con fecha de fin la dice, con la fecha del lugar', () => {
   assert.equal(estadoTarjetaFija({ ...base, vigenciaHasta: '2026-12-31' }, null, fc).hasta, 'Hasta el F2026-12-31');
 });
 

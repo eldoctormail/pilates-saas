@@ -48,6 +48,7 @@ import {
   DIAS_MINIMOS_POR_DEFECTO,
 } from './prorrateo.ts';
 import type { PlanTarifa } from '../types.ts';
+import { formatoMoneda } from '../moneda.ts';
 
 export type ModoAlineacion = 'ENTERA' | 'PROPORCIONAL';
 
@@ -68,7 +69,7 @@ export function idReciboAlineacion(suscripcionId: string, fechaFinVieja: string)
 }
 
 const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
-const eurTxt = (n: number) => `${n.toLocaleString('es-ES', { minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2 })} €`;
+const eurTxt = (n: number) => formatoMoneda(n, 'auto');
 const fechaLarga = (iso: string) => `${Number(iso.slice(8, 10))} de ${MESES[Number(iso.slice(5, 7)) - 1]}`;
 
 function finDelMesDe(iso: string): string {

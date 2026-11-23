@@ -130,7 +130,7 @@ export async function POST(req: NextRequest) {
     // reservas, así que en ese momento siguen vivas.
     const { data: plaza } = await admin.from('reservas').select('id')
       .eq('sesion_id', clase.id).in('socio_id', socioIds).neq('estado', 'CANCELADA').limit(1);
-    if (!plaza || plaza.length === 0) return json('Ese cliente no tiene plaza en esa clase.', 403);
+    if (!plaza || plaza.length === 0) return json('Ese cliente no tiene lugar en esa clase.', 403);
     datos = {
       claseNombre: clase.clase, fecha: clase.fecha, hora: clase.hora,
       sala: clase.sala, instructor: clase.instructor,
@@ -220,7 +220,7 @@ export async function POST(req: NextRequest) {
   } else if (tipo === 'promocion') {
     const d = datos as DatosClase;
     html = correoPlazaLiberada({ socioNombre: toName, intro: introCustom, personalizacion, ...d, ...claseEstudio(d) });
-    subject = asuntoCustom ?? `Se ha liberado tu plaza — ${d.claseNombre}`;
+    subject = asuntoCustom ?? `Se ha liberado tu lugar — ${d.claseNombre}`;
   } else if (tipo === 'cancelacion') {
     const d = datos as DatosClase;
     html = correoCancelacionClase({ socioNombre: toName, intro: introCustom, personalizacion, ...d, ...claseEstudio(d) });

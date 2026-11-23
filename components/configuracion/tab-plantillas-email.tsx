@@ -74,7 +74,7 @@ const PLANTILLAS_META: {
   {
     tipo: 'reserva', label: 'Reserva confirmada', cuando: 'Se envía cuando un cliente reserva una clase.',
     asuntoDefault: 'Reserva confirmada — {clase}',
-    introDefault: 'Hola {nombre}, tu plaza está reservada.',
+    introDefault: 'Hola {nombre}, tu lugar está reservado.',
     variables: [{ token: '{nombre}', que: 'el nombre del cliente' }, { token: '{clase}', que: 'el nombre de la clase' }],
     datosLabel: 'Fecha, hora, sala e instructora',
     botonLabel: 'Botón para abrir su app',
@@ -104,15 +104,15 @@ const PLANTILLAS_META: {
     avisoAlApagar: 'No se enterará por correo de que has anulado su clase.',
   },
   {
-    tipo: 'promocion', label: 'Plaza liberada', cuando: 'Se envía al ascender a un cliente desde la lista de espera.',
-    asuntoDefault: 'Se ha liberado tu plaza — {clase}',
-    introDefault: 'Hola {nombre}, estabas en lista de espera y ha quedado una plaza libre.',
+    tipo: 'promocion', label: 'Lugar liberado', cuando: 'Se envía al ascender a un cliente desde la lista de espera.',
+    asuntoDefault: 'Se ha liberado tu lugar — {clase}',
+    introDefault: 'Hola {nombre}, estabas en lista de espera y ha quedado un lugar libre.',
     variables: [{ token: '{nombre}', que: 'el nombre del cliente' }, { token: '{clase}', que: 'el nombre de la clase' }],
     datosLabel: 'Fecha, hora, sala e instructora',
     botonLabel: 'Botón para abrir su app',
     pieDefault: '{estudio} · tu dirección',
     portadaDeFabrica: true,
-    avisoAlApagar: 'No sabrá que ha entrado desde la lista de espera y puede perder la plaza.',
+    avisoAlApagar: 'No sabrá que ha entrado desde la lista de espera y puede perder el lugar.',
   },
   {
     tipo: 'impago', label: 'Pago fallido', cuando: 'Se envía cuando un cobro automático no se completa.',

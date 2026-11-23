@@ -375,9 +375,9 @@ export function PasoPonlo({
 // de su web; si no, su diseño de siempre— y se dice que tomará el que aplique.
 // Mientras carga lo aplicado (`aplicado: null`) no se afirma ninguna de las dos.
 function siempreAlDia(metodo: MetodoIntegracion, x: { sigue: boolean; identidadEstudio: boolean; aplicado: boolean | null }): string {
-  if (metodo === 'boton' || metodo === 'enlace') return 'tus clases, precios y plazas, y tu página de reservas entera';
-  if (metodo === 'nativa' && x.sigue && x.aplicado === false && x.identidadEstudio) return 'tus clases, precios y plazas, y tu color (con la letra de tu web)';
-  return 'tus clases, precios y plazas';
+  if (metodo === 'boton' || metodo === 'enlace') return 'tus clases, precios y lugares, y tu página de reservas entera';
+  if (metodo === 'nativa' && x.sigue && x.aplicado === false && x.identidadEstudio) return 'tus clases, precios y lugares, y tu color (con la letra de tu web)';
+  return 'tus clases, precios y lugares';
 }
 
 function conAplicar(metodo: MetodoIntegracion, x: { sigue: boolean; aplicado: boolean | null; porId: boolean }): string | null {

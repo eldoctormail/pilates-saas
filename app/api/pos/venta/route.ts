@@ -217,7 +217,7 @@ export async function POST(req: NextRequest) {
     // Antes, lo abandonado por internet vuelve a la venta (sin esto, el
     // mostrador vería la etapa llena hasta que alguien comprara online).
     try { await recuperarPlazasDelEstudio(admin, sesion.studioId, planesConLinea); }
-    catch (err) { console.error('[pos/venta] recuperar plazas', err); }
+    catch (err) { console.error('[pos/venta] recuperar lugares', err); }
     try {
       plazasPOS = await reservarPlazasPOS(admin, sesion.studioId, idempotenciaClave, planesConLinea);
     } catch (err) {
@@ -301,7 +301,7 @@ export async function POST(req: NextRequest) {
     if (resultado === 'sin-pagar') {
       const { pagada: sePago, ...resto } = await anularVentaSinCobro(admin, {
         studioId: sesion.studioId, ventaId: base.ventaId, plazas: plazasPOS,
-        motivo: 'No se pudo confirmar el ticket a 0 €', cerrado: true,
+        motivo: `No se pudo confirmar el ticket a ${conMoneda('0')}`, cerrado: true,
       });
       pagada = sePago === true;
       cierre = resto;

@@ -10,7 +10,7 @@ import {
 // Revisión del 5-oct (#4/#8): la plaza de un intento puede ser la del cobro de OTRA
 // petición del mismo intento. Se suelta solo si es de este cobro, o de ninguno, y lo
 // decide el propio UPDATE (compare-and-set), no una lectura previa.
-test('soltar la plaza solo si es de este cobro, o de ninguno', async () => {
+test('soltar el lugar solo si es de este cobro, o de ninguno', async () => {
   const llamadas: { filtros: string[]; or?: string }[] = [];
   const admin = {
     from(tabla: string) {
@@ -107,7 +107,7 @@ function fakeStripe(estados: Record<string, string>, fallan: Set<string> = new S
   return { stripe, acciones };
 }
 
-test('solo suelta la plaza cuando Stripe confirma que el cobro ya no puede ocurrir', async () => {
+test('solo suelta el lugar cuando Stripe confirma que el cobro ya no puede ocurrir', async () => {
   const plazas = [
     { id: 'sin-ref', stripe_ref: null },
     { id: 'cs-caducada', stripe_ref: 'cs_1' },

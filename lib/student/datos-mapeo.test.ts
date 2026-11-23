@@ -33,7 +33,7 @@ test('nivel: NO se traduce comparando en caja mixta', () => {
   assert.equal(rotulos.includes('PRINCIPIANTE'), false);
 });
 
-test('ocupa plaza: el MISMO criterio que la RPC reservar_plaza', () => {
+test('ocupa lugar: el MISMO criterio que la RPC reservar_plaza', () => {
   // reservar_plaza cuenta `estado in ('CONFIRMADA','ASISTIDA')`. Cualquier otro
   // criterio en el cliente enseña plazas que el servidor va a rechazar.
   assert.equal(OCUPA_PLAZA.has('CONFIRMADA'), true);

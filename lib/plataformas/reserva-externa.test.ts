@@ -30,7 +30,7 @@ test('rechaza lo que no es una reserva de plataforma bien formada', () => {
   assert.equal(leerPeticionReservaExterna({ ...base, nombre: 'x'.repeat(121) }).ok, false);
 });
 
-test('el id de reserva sigue el formato del panel y nunca el de plaza fija', () => {
+test('el id de reserva sigue el formato del panel y nunca el de lugar fijo', () => {
   assert.equal(leerPeticionReservaExterna({ ...base, reservaId: 'res-pf-123' }).ok, false);
   // Los de las reservas que entran por API: el servidor los usa para saber qué confirmar a la plataforma.
   assert.equal(leerPeticionReservaExterna({ ...base, reservaId: 'res-wh-BK_A1B2C3' }).ok, false);
@@ -46,7 +46,7 @@ test('cada código de la RPC llega a recepción en su idioma, nunca el SQL crudo
   // Contiene AFORO_LLENO: tiene que leerse antes, o diría «completa» sin decir por qué.
   const apartadas = mensajeErrorReservaExterna('ERROR: AFORO_LLENO_APARTADAS', 'URBAN_SPORTS_CLUB');
   assert.equal(apartadas?.status, 409);
-  assert.match(apartadas?.error ?? '', /apartadas para ClassPass/);
+  assert.match(apartadas?.error ?? '', /apartados para ClassPass/);
   // Por API, su socia ve «completa», nunca un error técnico (que USC y Wellhub reintentarían).
   assert.equal(motivoDeErrorRpcUsc('ERROR: AFORO_LLENO_APARTADAS'), 'completa');
   assert.equal(rechazoWellhub('ERROR: AFORO_LLENO_APARTADAS').reason_category, 'CLASS_IS_FULL');
@@ -55,7 +55,7 @@ test('cada código de la RPC llega a recepción en su idioma, nunca el SQL crudo
   assert.equal(mensajeErrorReservaExterna('relation "x" does not exist', 'CLASSPASS'), null);
 });
 
-test('pasarse de las plazas cedidas avisa, pero no lo impide', () => {
+test('pasarse de los lugares cedidos avisa, pero no lo impide', () => {
   assert.equal(avisoCupoTrasApuntar('CLASSPASS', null, 5), null);
   assert.equal(avisoCupoTrasApuntar('CLASSPASS', 2, 2), null);
   assert.match(avisoCupoTrasApuntar('CLASSPASS', 2, 3) ?? '', /3 de ClassPass.*cedes 2/);

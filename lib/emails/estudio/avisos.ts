@@ -62,7 +62,7 @@ export function correoCambioClase(p: PropsCambioClase): string {
     detalle: { titulo: p.claseNombre, filas },
     conPortada: false,
     acento: ACENTO.aviso,
-    nota: 'No tienes que hacer nada: tu plaza sigue reservada. Si no te viene bien, puedes cancelar desde tu app.',
+    nota: 'No tienes que hacer nada: tu lugar sigue reservado. Si no te viene bien, puedes cancelar desde tu app.',
   });
 }
 
@@ -120,7 +120,7 @@ export function correoAvisoSustitucion(p: PropsAvisoSustitucion): string {
           { label: 'Antes', value: p.cuando, tachado: true },
           { label: 'Ahora', value: p.aviso.cuandoNuevo },
         ] },
-        parrafos: [`Hola ${p.toName}, tu clase cambia de horario. Tu plaza se mantiene — si el nuevo horario no te viene bien, puedes cancelarla desde tu app como siempre.`],
+        parrafos: [`Hola ${p.toName}, tu clase cambia de horario. Tu lugar se mantiene — si el nuevo horario no te viene bien, puedes cancelarla desde tu app como siempre.`],
       });
     case 'cancelada':
       return correoEstudio({
@@ -145,7 +145,7 @@ export interface PropsConfirmacion {
   url?: string;
 }
 
-const NOTA_CORTE = 'Si no confirmas, liberaremos tu plaza para que otra persona pueda venir.';
+const NOTA_CORTE = 'Si no confirmas, liberaremos tu lugar para que otra persona pueda venir.';
 
 function confirmacion(p: PropsConfirmacion, titular: string, preheader: string, parrafo: string): string {
   return correoEstudio({
@@ -179,10 +179,10 @@ export function correoPlazaLiberadaSinConfirmar(p: PropsConfirmacion): string {
   // no que se sienta castigada. Un filete rojo aquí diría lo contrario.
   return correoEstudio({
     marca: p.marca,
-    preheader: `Tu plaza en ${p.claseNombre} se ha liberado`,
-    titular: 'Hemos liberado tu plaza',
+    preheader: `Tu lugar en ${p.claseNombre} se ha liberado`,
+    titular: 'Hemos liberado tu lugar',
     parrafos: [
-      `Hola ${p.toName}, no hemos tenido confirmación para tu clase, así que hemos liberado tu plaza para que otra persona en lista de espera pueda venir.`,
+      `Hola ${p.toName}, no hemos tenido confirmación para tu clase, así que hemos liberado tu lugar para que otra persona en lista de espera pueda venir.`,
       '¿Te apetece reservar otra clase? Estaremos encantadas de tenerte.',
     ],
     detalle: { titulo: p.claseNombre, filas: [{ label: 'Cuándo', value: p.cuando, tachado: true }] },

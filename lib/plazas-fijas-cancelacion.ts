@@ -38,7 +38,7 @@ export function avisoQuitarReserva(estado: EstadoReserva, marca: MarcaReserva): 
   if (marca === 'recuperacion') {
     return 'Vuelve a tener su clase para recuperar, con la misma caducidad. Si hay lista de espera, entra la siguiente persona.';
   }
-  return 'Se libera su plaza — si hay lista de espera, se promociona automáticamente a la siguiente persona.';
+  return 'Se libera su lugar — si hay lista de espera, se promociona automáticamente a la siguiente persona.';
 }
 
 /**

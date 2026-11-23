@@ -67,6 +67,6 @@ export function decidirOrdenAviso(
   }
   const oferta = suyas.find((r) => r.estado === 'en-espera' && !!r.ofertaExpiraEn && new Date(r.ofertaExpiraEn).getTime() > ahoraMs);
   if (oferta) return orden.tipo === 'aceptar-oferta' ? { tipo: 'aceptar', reservaId: oferta.id } : { tipo: 'confirmar-cancelar', reservaId: oferta.id };
-  if (confirmada) return { tipo: 'aviso', texto: 'Ya tienes plaza en esa clase.' };
-  return { tipo: 'aviso', texto: 'Esa plaza ya no está disponible.' };
+  if (confirmada) return { tipo: 'aviso', texto: 'Ya tienes lugar en esa clase.' };
+  return { tipo: 'aviso', texto: 'Ese lugar ya no está disponible.' };
 }

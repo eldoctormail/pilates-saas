@@ -65,13 +65,13 @@ export function mensajeErrorReservaExterna(mensaje: string, plataforma: Platafor
   const nombre = NOMBRE_PLATAFORMA[plataforma];
   // Antes que AFORO_LLENO, que también está dentro de este código.
   if (mensaje.includes('AFORO_LLENO_APARTADAS')) {
-    return { status: 409, error: `Las plazas que quedan están apartadas para ClassPass hasta que se liberan: aquí no hay sitio para ${nombre}.` };
+    return { status: 409, error: `Los lugares que quedan están apartados para ClassPass hasta que se liberan: aquí no hay sitio para ${nombre}.` };
   }
   if (mensaje.includes('AFORO_LLENO')) {
-    return { status: 409, error: `La clase está completa. Si ${nombre} ya se la ha vendido, cancélala allí: aquí no queda plaza.` };
+    return { status: 409, error: `La clase está completa. Si ${nombre} ya se la ha vendido, cancélala allí: aquí no queda lugar.` };
   }
   if (mensaje.includes('CUPO_PLATAFORMA_AGOTADO')) {
-    return { status: 409, error: `Ya están cubiertas todas las plazas que cedes a ${nombre} en esta clase.` };
+    return { status: 409, error: `Ya están cubiertas todos los lugares que cedes a ${nombre} en esta clase.` };
   }
   if (mensaje.includes('SESION_NO_ENCONTRADA')) return { status: 404, error: 'No encontramos esta clase.' };
   if (mensaje.includes('SESION_CANCELADA')) return { status: 400, error: 'Esta clase está cancelada.' };
@@ -91,5 +91,5 @@ export function mensajeErrorReservaExterna(mensaje: string, plataforma: Platafor
  */
 export function avisoCupoTrasApuntar(plataforma: Plataforma, cupo: number | null, usado: number): string | null {
   if (cupo == null || usado <= cupo) return null;
-  return `Ojo: ya hay ${usado} de ${NOMBRE_PLATAFORMA[plataforma]} y solo cedes ${cupo}. Revisa cuántas plazas tienes publicadas allí.`;
+  return `Ojo: ya hay ${usado} de ${NOMBRE_PLATAFORMA[plataforma]} y solo cedes ${cupo}. Revisa cuántos lugares tienes publicados allí.`;
 }

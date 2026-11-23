@@ -64,7 +64,7 @@ export function textoPush(e: EstadoPush, nativa = false): TextoPush {
       return { titulo: 'Avisos activados en este dispositivo', cuerpo: 'Te avisaremos aunque tengas la app cerrada.', accion: 'desactivar', encendido: true };
     case 'granted-off':
     case 'default':
-      return { titulo: 'Avisos en este dispositivo', cuerpo: 'Recibe plazas liberadas y recordatorios aunque la app esté cerrada.', accion: 'activar', encendido: false };
+      return { titulo: 'Avisos en este dispositivo', cuerpo: 'Recibe lugares liberados y recordatorios aunque la app esté cerrada.', accion: 'activar', encendido: false };
     case 'denied':
       return { titulo: 'Avisos bloqueados', cuerpo: nativa
         ? 'Has bloqueado las notificaciones de la app. Actívalas en Ajustes del iPhone → Notificaciones, en esta app.'

@@ -94,8 +94,8 @@ test.describe('Inicio · petición de una clase fija', () => {
   });
 
   test('si la clase fija está completa se le avisa a la propietaria antes de aprobar', async ({ page }) => {
-    await abrirInicio(page, { ...PETICION, claseFija: { ...PETICION.claseFija, aviso: 'La clase fija está completa: si la aprueba, pasa del tope de plazas.' } }, { status: 200, body: { ok: true, mensaje: 'x' } });
-    await expect(page.getByTestId('plazas-fijas-por-decidir')).toContainText('La clase fija está completa: si la aprueba, pasa del tope de plazas.', { timeout: 30_000 });
+    await abrirInicio(page, { ...PETICION, claseFija: { ...PETICION.claseFija, aviso: 'La clase fija está completa: si la aprueba, pasa del tope de lugares.' } }, { status: 200, body: { ok: true, mensaje: 'x' } });
+    await expect(page.getByTestId('plazas-fijas-por-decidir')).toContainText('La clase fija está completa: si la aprueba, pasa del tope de lugares.', { timeout: 30_000 });
   });
 
   test('si pasaría del límite semanal de su cuota, el servidor lo dice y hay que confirmarlo', async ({ page }) => {

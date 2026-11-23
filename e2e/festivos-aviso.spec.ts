@@ -20,7 +20,7 @@ const NAVIDAD = { fecha: '2026-12-25', nombre: 'Navidad', clases: 2, reservas: 0
 const LISTA = { disponible: true, zona: 'la Comunidad de Madrid', hoy: '2026-11-20', festivos: [INMACULADA] };
 const ESTADO = {
   aplica: true, enMarcha: [], resuelto: [], nDecidir: 1, titulo: 'Una cosa espera tu visto bueno',
-  decidir: [{ id: 'festivosPorDecidir', n: 1, texto: 'Un festivo con clases: decide si abres o cierras', href: null }],
+  decidir: [{ id: 'festivosPorDecidir', n: 1, texto: 'Un feriado con clases: decide si abres o cierras', href: null }],
 };
 const FRASE = 'El martes 8 de diciembre (Inmaculada) tienes 6 clases y 41 reservas confirmadas.';
 
@@ -53,7 +53,7 @@ async function abrirInicio(page: Page, o: { lista?: unknown; cierre?: Respuesta;
   return cuenta;
 }
 
-test.describe('Inicio · festivos con clases', () => {
+test.describe('Inicio · feriados con clases', () => {
   test.describe.configure({ timeout: 180_000 });
 
   test('dice qué día, cuántas clases y reservas, de dónde sale la comunidad, y deja ver el día', async ({ page }) => {
@@ -61,7 +61,7 @@ test.describe('Inicio · festivos con clases', () => {
     const tarjeta = page.getByTestId('festivos-por-decidir');
     await expect(tarjeta).toBeVisible({ timeout: 60_000 });
     await expect(tarjeta.getByText(FRASE)).toBeVisible();
-    await expect(tarjeta.getByText(/Festivos oficiales de la Comunidad de Madrid, según la dirección de tu estudio\./)).toBeVisible();
+    await expect(tarjeta.getByText(/Feriados oficiales de la Comunidad de Madrid, según la dirección de tu estudio\./)).toBeVisible();
     await expect(tarjeta.getByText(/No incluye las fiestas locales de tu municipio\./)).toBeVisible();
     await expect(tarjeta.getByRole('link', { name: 'Ver ese día en el calendario' })).toHaveAttribute('href', '/calendario?fecha=2026-12-08');
     // La propietaria puede corregir la dirección.
@@ -93,7 +93,7 @@ test.describe('Inicio · festivos con clases', () => {
 
     await expect(page.getByText('Martes 8 de diciembre: 1 día cerrado · 6 clases canceladas · 30 bonos prorrogados')).toBeVisible();
     await expect(page.getByTestId('festivo-por-decidir')).toHaveCount(0);
-    expect(cuenta.cierres).toEqual([{ desde: '2026-12-08', hasta: '2026-12-08', motivo: 'Festivo: Inmaculada' }]);
+    expect(cuenta.cierres).toEqual([{ desde: '2026-12-08', hasta: '2026-12-08', motivo: 'Feriado: Inmaculada' }]);
   });
 
   test('si el cierre falla, lo dice en la fila, la fila sigue y no hay éxito', async ({ page }) => {
@@ -137,7 +137,7 @@ test.describe('Inicio · festivos con clases', () => {
     const cuenta = await abrirInicio(page);
     const tarjeta = page.getByTestId('festivos-por-decidir');
     await expect(tarjeta.getByText(FRASE)).toBeVisible({ timeout: 60_000 });
-    await tarjeta.getByRole('button', { name: 'Ver todos los festivos con clases' }).click();
+    await tarjeta.getByRole('button', { name: 'Ver todos los feriados con clases' }).click();
     await expect(tarjeta.getByText('El viernes 25 de diciembre (Navidad) tienes 2 clases, todavía sin reservas.')).toBeVisible();
     expect(cuenta.todos).toBeGreaterThan(0);
   });
@@ -151,7 +151,7 @@ test.describe('Inicio · festivos con clases', () => {
   });
 });
 
-test.describe('Inicio · festivos, gerencia', () => {
+test.describe('Inicio · feriados, gerencia', () => {
   test.describe.configure({ timeout: 180_000 });
 
   test('la gerencia, que también puede cerrar el centro, ve la tarjeta (sin el enlace para corregir la dirección)', async ({ page }) => {
@@ -175,7 +175,7 @@ test.describe('Inicio · festivos, gerencia', () => {
   });
 });
 
-test.describe('Inicio · festivos, recepción', () => {
+test.describe('Inicio · feriados, recepción', () => {
   test.describe.configure({ timeout: 180_000 });
 
   test('recepción no puede cerrar el centro: ni tarjeta ni una sola petición a /api/festivos', async ({ page }) => {

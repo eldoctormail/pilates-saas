@@ -62,7 +62,7 @@ test('una semana en la que el estudio no dio ninguna clase es neutra (se pregunt
   assert.equal(preguntasDeClases.length, 1, 'una sola semana sin explicación');
 });
 
-test('cierre del estudio, congelación y plaza en pausa salen de sus tablas', async () => {
+test('cierre del estudio, congelación y lugar en pausa salen de sus tablas', async () => {
   const sesiones = [0, 1, 2, 3, 4].map((i) => sesion(i));
   const reservas: Fila[] = [0, 4].map((i) => ({ studio_id: S, socio_id: YO, sesion_id: `s${i}`, estado: 'ASISTIDA', cancelada_tardia: null }));
   const admin = adminFalso({

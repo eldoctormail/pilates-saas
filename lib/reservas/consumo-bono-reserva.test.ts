@@ -33,7 +33,7 @@ test('⚠️ una respuesta inesperada es un FALLO, nunca un éxito', () => {
   }
 });
 
-test('solo se cobra una plaza que se ocupa', () => {
+test('solo se cobra un lugar que se ocupa', () => {
   for (const e of ['CONFIRMADA', 'ASISTIDA', 'NO_ASISTIO']) assert.equal(ocupaPlaza(e), true, e);
   for (const e of ['CANCELADA', 'LISTA_ESPERA', 'PENDIENTE_APROBACION', null, undefined, '']) assert.equal(ocupaPlaza(e), false, String(e));
 });
@@ -236,7 +236,7 @@ test('«sin saldo» también se registra: rellenar el bono no convierte el reint
   assert.equal(bd.saldo('sus-2'), 3);
 });
 
-test('⚠️ una reserva NO rastreada (plaza fija, importada) nunca se cobra en un reintento', async () => {
+test('⚠️ una reserva NO rastreada (lugar fijo, importado) nunca se cobra en un reintento', async () => {
   const bd = crearBD({ migracion: 'aplicada' });
   for (const id of ['res-pf-1', 'res-importada']) {
     bd.insertarReserva(id, { bono_consumo_rastreado: false });
@@ -257,7 +257,7 @@ test('una reserva LEGADA: el reintento no descuenta, la primera llamada del hech
   assert.equal(bd.saldo(), 4);
 });
 
-test('una reserva que no ocupa plaza no se cobra aunque llegue un reintento', async () => {
+test('una reserva que no ocupa lugar no se cobra aunque llegue un reintento', async () => {
   const bd = crearBD({ migracion: 'aplicada' });
   for (const estado of ['CANCELADA', 'LISTA_ESPERA', 'PENDIENTE_APROBACION']) {
     bd.insertarReserva(`res-${estado}`, { estado });
@@ -352,10 +352,10 @@ test('⚠️ los reintentos del mostrador y del pago completan el bono en vez de
   }
 });
 
-test('⚠️ completar tras un reintento nunca toca una plaza fija', () => {
+test('⚠️ completar tras un reintento nunca toca un lugar fijo', () => {
   const cuerpo = cuerpoDe(ADMIN, 'completarConfirmacionTrasReintento');
   const guardia = cuerpo.indexOf('esReservaPlazaFija(');
-  assert.ok(guardia > 0, 'falta la guardia de plaza fija');
+  assert.ok(guardia > 0, 'falta la guardia de lugar fijo');
   assert.ok(guardia < cuerpo.indexOf('trasPlazaConfirmada('), 'la guardia va antes de llamar al dueño');
 });
 
@@ -397,7 +397,7 @@ test('⚠️ migración 1 de 2: candado, decisión sin bono, estados espejo de T
   assert.doesNotMatch(MIGR_A, /set default/, 'el default va en la 2 de 2, después de confirmar que PostgREST ve la RPC');
 });
 
-test('⚠️ migración 1 de 2: la plaza fija conserva firma, SECURITY DEFINER y grants, y nace no rastreada', () => {
+test('⚠️ migración 1 de 2: el lugar fijo conserva firma, SECURITY DEFINER y grants, y nace no rastreada', () => {
   assert.match(MIGR_A, /create or replace function public\.materializar_plazas_fijas\(p_horizonte_dias integer default 42\)\s+returns integer\s+language plpgsql\s+security definer/);
   assert.match(MIGR_A, /insert into reservas \([^)]*bono_consumo_rastreado\)\s+select 'res-pf-'[^;]*now\(\), false\s/);
   // Misma firma: sus grants no cambian. Solo la decisión por escrito sobre anon

@@ -129,13 +129,13 @@ export async function liberarCupoMatricula(
 function avisarPlazaNoDevuelta(d: unknown): void {
   const { ultimo, planId, studioId } = d as { ultimo: unknown; planId: string; studioId: string };
   const detalle = ultimo instanceof Error ? ultimo.message : (ultimo as { message?: string } | null)?.message ?? String(ultimo);
-  console.error('[matricula-online] no se pudo devolver la plaza de matrícula gratis', planId, detalle);
-  Sentry.captureMessage('[matricula] una plaza de matrícula gratis no se pudo devolver', {
+  console.error('[matricula-online] no se pudo devolver el lugar de matrícula gratis', planId, detalle);
+  Sentry.captureMessage('[matricula] un lugar de matrícula gratis no se pudo devolver', {
     level: 'error', tags: { area: 'cobros', tipo: 'cupo-matricula' },
     extra: {
       planId, studioId, detalle,
       // Ninguna pantalla enseña ni edita el contador: la corrección es de Tentare.
-      queHacer: 'El cobro no llegó a crearse y la plaza sigue gastada. Restar 1 a planes_tarifa.matricula_gratis_usados de ese plan (id + studio_id); la pantalla de planes no lo edita.',
+      queHacer: 'El cobro no llegó a crearse y el lugar sigue gastado. Restar 1 a planes_tarifa.matricula_gratis_usados de ese plan (id + studio_id); la pantalla de planes no lo edita.',
     },
   });
 }

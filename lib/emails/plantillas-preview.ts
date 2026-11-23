@@ -106,7 +106,7 @@ export async function renderPlantillaMuestra(
     case 'cancelacion':
       return { html: correoCancelacionClase({ ...conClaseEstudio, bonoDevuelto: true }), subject: asuntoOverride ?? `Clase cancelada — ${CLASE_MUESTRA}` };
     case 'promocion':
-      return { html: correoPlazaLiberada(conClaseEstudio), subject: asuntoOverride ?? `Se ha liberado tu plaza — ${CLASE_MUESTRA}` };
+      return { html: correoPlazaLiberada(conClaseEstudio), subject: asuntoOverride ?? `Se ha liberado tu lugar — ${CLASE_MUESTRA}` };
     case 'impago':
       return {
         html: correoImpago({ socioNombre: SOCIA_MUESTRA, intro, personalizacion, marca: marcaCorreo, concepto: 'Cuota de agosto', importe: 45, definitivo: false }),

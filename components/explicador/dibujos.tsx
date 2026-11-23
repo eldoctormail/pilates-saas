@@ -6,6 +6,7 @@
 import { useId, type ReactNode } from 'react';
 import type { IdDibujo } from '@/lib/ayuda/explicadores';
 import { TINTA_POR_NIVEL } from '@/lib/informes/euro-por-plaza';
+import { conMoneda, MONEDA_SIMBOLO } from '@/lib/moneda';
 
 const TINTA = 'var(--foreground)';
 const SUAVE = 'var(--muted-foreground)';
@@ -37,11 +38,11 @@ export const DIBUJOS: Record<IdDibujo, () => ReactNode> = {
   // 60 € que se parten en cuatro clases de 15 €.
   repartoAlumna: () => (
     <Lienzo>
-      <Pastilla x={83} y={14} w={54} texto="60 €" lleno />
+      <Pastilla x={83} y={14} w={54} texto={`${conMoneda('60')}`} lleno />
       {[0, 1, 2, 3].map(i => (
         <g key={i}>
           <line x1={110} y1={36} x2={30 + i * 53} y2={84} stroke={BORDE} strokeWidth={1.5} />
-          <Pastilla x={10 + i * 53} y={86} w={42} texto="15 €" />
+          <Pastilla x={10 + i * 53} y={86} w={42} texto={`${conMoneda('15')}`} />
         </g>
       ))}
       <text x={110} y={136} textAnchor="middle" fontSize={12} fill={SUAVE}>4 clases</text>
@@ -51,30 +52,30 @@ export const DIBUJOS: Record<IdDibujo, () => ReactNode> = {
   sumaHora: () => (
     <Lienzo>
       <text x={110} y={22} textAnchor="middle" fontSize={12.5} fontWeight={600} fill={SUAVE}>Martes · 18:00</text>
-      <Pastilla x={18} y={46} texto="15 €" />
-      <Pastilla x={88} y={46} texto="20 €" />
-      <Pastilla x={158} y={46} texto="10 €" />
+      <Pastilla x={18} y={46} texto={`${conMoneda('15')}`} />
+      <Pastilla x={88} y={46} texto={`${conMoneda('20')}`} />
+      <Pastilla x={158} y={46} texto={`${conMoneda('10')}`} />
       <line x1={18} y1={92} x2={202} y2={92} stroke={TINTA} strokeWidth={1.2} />
-      <Pastilla x={83} y={104} w={54} texto="45 €" lleno />
+      <Pastilla x={83} y={104} w={54} texto={`${conMoneda('45')}`} lleno />
     </Lienzo>
   ),
   // Seis plazas, tres ocupadas: 45 € ÷ 6.
   sillas: () => (
     <Lienzo>
       {[0, 1, 2, 3, 4, 5].map(i => <Plaza key={i} x={40 + i * 24} y={40} ocupada={i < 3} />)}
-      <text x={110} y={86} textAnchor="middle" fontSize={12.5} fill={SUAVE}>6 plazas, también las vacías</text>
-      <Pastilla x={70} y={100} w={80} texto="7,50 € / plaza" lleno />
+      <text x={110} y={86} textAnchor="middle" fontSize={12.5} fill={SUAVE}>6 lugares, también los vacíos</text>
+      <Pastilla x={70} y={100} w={80} texto={`${conMoneda('7,50')} / lugar`} lleno />
     </Lienzo>
   ),
   // Una sala pequeña llena frente a una grande a medias.
   dosSalas: () => (
     <Lienzo>
-      <text x={52} y={18} textAnchor="middle" fontSize={12} fill={SUAVE}>4 plazas · 100 %</text>
+      <text x={52} y={18} textAnchor="middle" fontSize={12} fill={SUAVE}>4 lugares · 100 %</text>
       {[0, 1, 2, 3].map(i => <Plaza key={i} x={16 + (i % 2) * 24} y={28 + Math.floor(i / 2) * 24} ocupada />)}
-      <Pastilla x={18} y={92} w={68} texto="5 € / plaza" />
-      <text x={160} y={18} textAnchor="middle" fontSize={12} fill={SUAVE}>10 plazas · 70 %</text>
+      <Pastilla x={18} y={92} w={68} texto={`${conMoneda('5')} / lugar`} />
+      <text x={160} y={18} textAnchor="middle" fontSize={12} fill={SUAVE}>10 lugares · 70 %</text>
       {Array.from({ length: 10 }, (_, i) => <Plaza key={i} x={104 + (i % 5) * 23} y={28 + Math.floor(i / 5) * 24} ocupada={i < 7} />)}
-      <Pastilla x={124} y={92} w={72} texto="7 € / plaza" lleno />
+      <Pastilla x={124} y={92} w={72} texto={`${conMoneda('7')} / lugar`} lleno />
     </Lienzo>
   ),
   // Un trozo de mapa con los mismos tres tonos que el de verdad, una casilla
@@ -99,7 +100,7 @@ function LeerMapa() {
         </g>
       )))}
       <text x={34} y={124} fontSize={12} fill={SUAVE}>menos</text>
-      <text x={190} y={124} textAnchor="end" fontSize={12} fill={SUAVE}>más € por plaza</text>
+      <text x={190} y={124} textAnchor="end" fontSize={12} fill={SUAVE}>más {MONEDA_SIMBOLO} por lugar</text>
       <line x1={34} y1={140} x2={186} y2={140} stroke={SUAVE} strokeWidth={1} markerEnd={`url(#${idFlecha})`} />
       <defs>
         <marker id={idFlecha} viewBox="0 0 6 6" refX="5" refY="3" markerWidth="6" markerHeight="6" orient="auto">

@@ -40,10 +40,10 @@ export const PUSH_POR_TIPO: Record<RolConPushPorTipo, GrupoPush[]> = {
       tipos: [
         { evento: EVENTOS.RESERVA_CONFIRMADA, titulo: 'Reserva confirmada' },
         {
-          evento: EVENTOS.RESERVA_OFERTA_LISTA_ESPERA, titulo: 'Plaza libre en la lista de espera',
+          evento: EVENTOS.RESERVA_OFERTA_LISTA_ESPERA, titulo: 'Lugar libre en la lista de espera',
           detalle: 'Tienes un plazo para aceptarla: sin este aviso puedes perderla',
         },
-        { evento: EVENTOS.RESERVA_PLAZA_LIBERADA, titulo: 'Plaza conseguida desde la lista de espera' },
+        { evento: EVENTOS.RESERVA_PLAZA_LIBERADA, titulo: 'Lugar conseguido desde la lista de espera' },
         { evento: EVENTOS.RESERVA_PLAZA_FIJA_NO_MATERIALIZADA, titulo: 'Tu clase fija no se ha podido reservar' },
         { evento: EVENTOS.PLAZA_FIJA_RESPUESTA, titulo: 'Respuesta a tu petición de clase fija' },
         { evento: EVENTOS.CLASE_FIJA_TERMINA_PRONTO, titulo: 'Tu clase fija termina pronto', detalle: 'Para que sepas cuándo termina y puedas ampliarla o volver a pedirla' },

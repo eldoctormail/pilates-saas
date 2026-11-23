@@ -57,6 +57,7 @@
 import { masDias } from '../utils.ts';
 import { cicloInicialDe, mesesDeCiclo } from '../bono-logic.ts';
 import type { PlanTarifa } from '../types.ts';
+import { formatoMoneda } from '../moneda.ts';
 
 /** Lo mínimo que acepta Stripe en un cargo (0,50 €): por debajo no se cobra. */
 export const PRORRATEO_IMPORTE_MINIMO_CENTIMOS = 50;
@@ -190,7 +191,7 @@ const fechaLarga = (iso: string): string => {
   return `${d} de ${MESES[m - 1]}`;
 };
 const diasTxt = (n: number) => `${n} ${n === 1 ? 'día' : 'días'}`;
-const eurTxt = (n: number) => `${n.toLocaleString('es-ES', { minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2 })} €`;
+const eurTxt = (n: number) => formatoMoneda(n, 'auto');
 
 /**
  * El cobro del primer mes de una cuota nueva, o `null` si el plan no se
@@ -388,7 +389,7 @@ const sinDiferencia = (motivoNo: string, extra: Partial<DiferenciaCambioPlan> = 
   aplica: false, motivoNo, importe: 0, diferenciaCiclo: 0, diasRestantes: 0, diasCiclo: 0, texto: '', ...extra,
 });
 
-const eur = (n: number) => `${(Math.round(n * 100) / 100).toLocaleString('es-ES', { minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2 })} €`;
+const eur = (n: number) => formatoMoneda(Math.round(n * 100) / 100, Number.isInteger(n) ? 0 : 2);
 
 /**
  * La diferencia a cobrar al pasar a un plan MÁS CARO con la cuota en ciclo:
@@ -414,7 +415,7 @@ export function diferenciaCambioPlan(e: EntradaDiferencia): DiferenciaCambioPlan
   const c = repartoProporcional(diferenciaC, dias, diasCiclo);
   const texto = `(${eur(e.precioNuevo)} − ${eur(e.precioActual)}) × ${dias} de ${diasCiclo} días`;
   if (c < PRORRATEO_IMPORTE_MINIMO_CENTIMOS) {
-    return sinDiferencia('La diferencia sale por debajo de 0,50 €: no se cobra.', {
+    return sinDiferencia(`La diferencia sale por debajo de ${formatoMoneda(0.5)}: no se cobra.`, {
       diferenciaCiclo: diferenciaC / 100, diasRestantes: dias, diasCiclo, texto,
     });
   }

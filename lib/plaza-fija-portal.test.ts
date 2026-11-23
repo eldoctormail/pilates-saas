@@ -48,7 +48,7 @@ test('esSlotRecurrente: false si la otra sesión con el mismo slot ya pasó', ()
   assert.equal(esSlotRecurrente(HOY_10, [HOY_10, pasada], AHORA), false);
 });
 
-test('yaTienePlazaFijaEnSlot: false sin ninguna plaza fija', () => {
+test('yaTienePlazaFijaEnSlot: false sin ningún lugar fijo', () => {
   assert.equal(yaTienePlazaFijaEnSlot(HOY_10, 'soc-1', []), false);
 });
 
@@ -66,10 +66,10 @@ test('yaTienePlazaFijaEnSlot: false con una BAJA en el mismo slot (ya no cuenta)
   assert.equal(yaTienePlazaFijaEnSlot(HOY_10, 'soc-1', [pf({ id: 'pf-1', estado: 'BAJA' })]), false);
 });
 
-test('yaTienePlazaFijaEnSlot: false si la plaza fija es de OTRA socia', () => {
+test('yaTienePlazaFijaEnSlot: false si el lugar fijo es de OTRA socia', () => {
   assert.equal(yaTienePlazaFijaEnSlot(HOY_10, 'soc-1', [pf({ id: 'pf-1', socioId: 'soc-2' })]), false);
 });
 
-test('yaTienePlazaFijaEnSlot: false si la plaza fija es de otro día/hora/sala', () => {
+test('yaTienePlazaFijaEnSlot: false si el lugar fijo es de otro día/hora/sala', () => {
   assert.equal(yaTienePlazaFijaEnSlot(HOY_10, 'soc-1', [pf({ id: 'pf-1', diaSemana: 3 })]), false);
 });

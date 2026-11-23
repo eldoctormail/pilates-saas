@@ -69,7 +69,7 @@ export function DialogoPausaPlazaFija({ plaza, nombre, onClose, onHecho }: {
             ? `${nombre}. Está en pausa y su sitio está libre para otro cliente. Una semana antes de acabar, ${alVolver}.`
             : liberaSitio
               ? `${nombre}. Entre estas fechas no se le reserva la clase y, si la pausa dura más de una semana, su sitio queda libre para otro cliente. Una semana antes de acabar, ${alVolver}.`
-              : `${nombre}. Entre estas fechas no se le reserva la clase, pero no pierde la plaza ni su sitio, y al acabar vuelve sola.`}
+              : `${nombre}. Entre estas fechas no se le reserva la clase, pero no pierde el lugar ni su sitio, y al acabar vuelve sola.`}
         </p>
 
         <div className="space-y-4">

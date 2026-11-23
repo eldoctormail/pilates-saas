@@ -9,6 +9,7 @@
 // Bruto, devuelto y neto: la suma de «Neto» es la cifra «Ingresos período» de
 // Informes (`importeIngresado`). Puro, sin `@/`: lo prueba `node --test`.
 // ─────────────────────────────────────────────────────────────────────────────
+import { MONEDA_SIMBOLO } from '../moneda.ts';
 
 export interface FilaCobrada {
   fechaCobro: string;
@@ -21,7 +22,7 @@ export interface FilaCobrada {
   estado: string;
 }
 
-export const CABECERA_COBRADO = ['Fecha', 'Clienta', 'Concepto', 'Cobrado (€)', 'Devuelto (€)', 'Neto (€)', 'Método', 'Estado'] as const;
+export const CABECERA_COBRADO = ['Fecha', 'Clienta', 'Concepto', `Cobrado (${MONEDA_SIMBOLO})`, `Devuelto (${MONEDA_SIMBOLO})`, `Neto (${MONEDA_SIMBOLO})`, 'Método', 'Estado'] as const;
 
 const celda = (c: string | number) => `"${String(c).replace(/"/g, '""')}"`;
 

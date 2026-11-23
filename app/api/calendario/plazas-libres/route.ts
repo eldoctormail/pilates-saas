@@ -105,6 +105,6 @@ export async function GET(req: NextRequest) {
       { headers: { 'Cache-Control': 'no-store' } },
     );
   } catch (err) {
-    return errorInterno('calendario/plazas-libres:GET', err, 'No se han podido contar las plazas libres.');
+    return errorInterno('calendario/plazas-libres:GET', err, 'No se han podido contar los lugares libres.');
   }
 }

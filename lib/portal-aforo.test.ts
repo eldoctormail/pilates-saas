@@ -32,7 +32,7 @@ test('conserva el dueño y la fecha de creación, que el aforo anónimo no trae'
 
   assert.equal(out.socioId, 'soc-1', 'perder el socioId dejaría a la socia sin "mi reserva"');
   assert.equal(out.creadoEn, '2026-05-05T08:00:00Z');
-  assert.equal(out.spotId, 'sp-9', 'la plaza SÍ se actualiza: es lo que el endpoint sabe');
+  assert.equal(out.spotId, 'sp-9', 'el lugar SÍ se actualiza: es lo que el endpoint sabe');
 });
 
 test('aplica el cambio de estado que llega del servidor', () => {

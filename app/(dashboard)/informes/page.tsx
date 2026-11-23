@@ -396,7 +396,7 @@ export default function Informes() {
         titulo="Ocupación de las clases"
         valor={clases.actual.pct == null ? '—' : `${clases.actual.pct} %`}
         comparacion={puntos == null ? null : { texto: conSigno(puntos, ' puntos'), tono: tonoDiferencia(puntos), frente }}
-        nota={`${clases.actual.ocupadas} de ${clases.actual.aforo} plazas en ${clases.actual.nClases} ${clases.actual.nClases === 1 ? 'clase' : 'clases'}`}
+        nota={`${clases.actual.ocupadas} de ${clases.actual.aforo} lugares en ${clases.actual.nClases} ${clases.actual.nClases === 1 ? 'clase' : 'clases'}`}
       />
       <Hecho
         testId="informe-vinieron"

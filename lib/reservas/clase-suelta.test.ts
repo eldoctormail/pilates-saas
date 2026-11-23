@@ -64,7 +64,7 @@ test('el concepto dice qué clase y cuándo, en hora del estudio', () => {
 test('qué pasó con la venta después de reservar', () => {
   const base = { suscripcionSuelta: 'sus-suelta-r1', bonoDecidido: true, bonoSuscripcionId: 'sus-suelta-r1' };
   assert.equal(desenlaceVentaSuelta({ ...base, estado: 'CONFIRMADA' }), 'vendida');
-  assert.equal(desenlaceVentaSuelta({ ...base, estado: 'ASISTIDA' }), 'vendida', 'el walk-in con check-in también ocupa plaza');
+  assert.equal(desenlaceVentaSuelta({ ...base, estado: 'ASISTIDA' }), 'vendida', 'el walk-in con check-in también ocupa lugar');
   assert.equal(desenlaceVentaSuelta({ ...base, estado: 'CONFIRMADA', bonoSuscripcionId: 'sus-bono' }), 'otro-bono');
   assert.equal(desenlaceVentaSuelta({ ...base, estado: 'CONFIRMADA', bonoSuscripcionId: null }), 'sin-gastar');
   assert.equal(desenlaceVentaSuelta({ ...base, estado: 'CONFIRMADA', bonoDecidido: false, bonoSuscripcionId: null }), 'sin-decidir');

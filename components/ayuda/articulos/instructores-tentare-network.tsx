@@ -22,7 +22,7 @@ export default function Contenido() {
       <p>
         Al revés: publicas lo que necesitas —especialidad, horario, tipo de colaboración y remuneración— y que te
         encuentren a ti. Sirve
-        cuando no es una sustitución de un día sino una plaza que quieres cubrir.
+        cuando no es una sustitución de un día sino un lugar que quieres cubrir.
       </p>
 
       <h2 style={{ fontSize: 18, fontWeight: 700, margin: '28px 0 12px' }}>Favoritas y mensajes</h2>

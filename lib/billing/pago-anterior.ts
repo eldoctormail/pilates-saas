@@ -166,7 +166,7 @@ export function mensajeClaseYaPagada(s: SituacionClasePagada): string {
     return 'Tu pago de esta clase se está procesando: te avisaremos por email en cuanto se confirme. No hace falta que la pagues otra vez.';
   }
   if (s.reserva === 'CONFIRMADA' || s.reserva === 'ASISTIDA') {
-    return 'Ya has pagado esta clase y tienes tu plaza. No hace falta que la pagues otra vez.';
+    return 'Ya has pagado esta clase y tienes tu lugar. No hace falta que la pagues otra vez.';
   }
   if (s.reserva === 'LISTA_ESPERA') {
     return 'Ya pagaste esta clase y estás en su lista de espera: si queda un sitio, te avisaremos. No hace falta que la pagues otra vez.';
@@ -177,7 +177,7 @@ export function mensajeClaseYaPagada(s: SituacionClasePagada): string {
   if (!s.entregado) {
     return 'Tu pago de esta clase ya se ha hecho y estamos preparando tu reserva: te llegará un email. No hace falta que la pagues otra vez.';
   }
-  return 'Ya pagaste esta clase, pero ahora no tienes plaza en ella. Lo que compraste está en tu cuenta: entra con tu email para reservar con ello, o escribe al estudio.';
+  return 'Ya pagaste esta clase, pero ahora no tienes lugar en ella. Lo que compraste está en tu cuenta: entra con tu email para reservar con ello, o escribe al estudio.';
 }
 
 export const MENSAJE_PAGO_SIN_COMPROBAR =

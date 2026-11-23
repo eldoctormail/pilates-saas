@@ -76,7 +76,7 @@ function Contenido(p: FichaClaseProps) {
   const panelNuevo = usePanelNuevo();
   const pestanas: { id: PestanaFicha; texto: string }[] = [
     { id: 'clientas', texto: 'Clientes' },
-    ...(p.conPlazas ? [{ id: 'plazas' as const, texto: 'Plazas' }] : []),
+    ...(p.conPlazas ? [{ id: 'plazas' as const, texto: 'Lugares' }] : []),
     { id: 'historial', texto: 'Sustituciones' },
   ];
   const activa: PestanaFicha = !p.conPlazas && p.pestana === 'plazas' ? 'clientas' : p.pestana;

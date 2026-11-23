@@ -57,5 +57,5 @@ export async function enviarEmailPlazaLiberada(params: Marca & {
   to: string; toName: string; claseNombre: string; cuando: string; url?: string;
 }): Promise<EnvioResultado> {
   const estudio = params.marca.estudioNombre;
-  return enviar(params.to, `Hemos liberado tu plaza en ${params.claseNombre} — ${estudio}`, correoPlazaLiberadaSinConfirmar(params), estudio, params.replyTo);
+  return enviar(params.to, `Hemos liberado tu lugar en ${params.claseNombre} — ${estudio}`, correoPlazaLiberadaSinConfirmar(params), estudio, params.replyTo);
 }

@@ -87,7 +87,7 @@ export function ClasesFijasPorAlumna({ puedeGestionar, onToast }: {
         tono="azul"
         Icono={CalendarClock}
         titulo="Nadie tiene clase fija todavía"
-        texto="Una clase fija le reserva sola su plaza cada semana a un cliente, sin que tengas que apuntarla clase a clase."
+        texto="Una clase fija le reserva sola su lugar cada semana a un cliente, sin que tengas que apuntarla clase a clase."
         ejemplos={[
           { accion: 'Dásela desde su ficha', cuando: 'eligiendo la clase a la que viene cada semana' },
           { accion: 'O desde «Por clase»', cuando: 'con «+ Clase fija» en la tarjeta de la clase' },

@@ -88,7 +88,7 @@ async function abrirHoja(page: Page) {
   const reservar = page.getByRole('button', { name: /^Reservar clase$/ }).first();
   await expect(reservar).toBeVisible({ timeout: 30_000 });
   await reservar.click();
-  await expect(page.getByText('Confirma tu plaza')).toBeVisible({ timeout: 15_000 });
+  await expect(page.getByText('Confirma tu lugar')).toBeVisible({ timeout: 15_000 });
   return page.locator('[data-tono]').first();
 }
 

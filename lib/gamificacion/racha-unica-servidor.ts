@@ -101,7 +101,7 @@ export async function cargarRachaUnica(
     leer<{ id: string }>(admin.from('suscripciones').select('id').eq('studio_id', studioId).eq('socio_id', socioId), 'sus cuotas'),
     leer<{ pausa_desde: string | null; pausa_hasta: string | null }>(
       admin.from('plazas_fijas').select('pausa_desde, pausa_hasta').eq('studio_id', studioId).eq('socio_id', socioId).not('pausa_desde', 'is', null),
-      'sus plazas fijas',
+      'sus lugares fijos',
     ),
   ]);
   const congelaciones = (await Promise.all(trozos(subs.map((s) => s.id), TROZO).map((ids) => leer<{ desde: string; hasta: string | null }>(

@@ -317,7 +317,7 @@ async function generarRecibosRenovacion(studioId: string, nowISO: string, conMet
       const { soltarReservasPlazaFijaSinCuota } = await import('@/lib/db/supabase-data-admin');
       await soltarReservasPlazaFijaSinCuota(admin, { studioId });
     } catch (e) {
-      console.error('[renovaciones] soltar plazas fijas sin cuota:', e instanceof Error ? e.message : e);
+      console.error('[renovaciones] soltar lugares fijos sin cuota:', e instanceof Error ? e.message : e);
     }
   }
   if (vencidas.length === 0) return { creados: 0, extendidas: 0 };

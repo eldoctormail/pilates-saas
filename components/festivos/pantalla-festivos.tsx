@@ -102,7 +102,7 @@ export function PantallaFestivos() {
     if (r.creados > 0) setDisparo(n => n + 1);
     toast.show(r.creados === 0
       ? 'Ya los tenías todos en tu lista.'
-      : r.creados === 1 ? '1 festivo añadido a tu lista' : `${r.creados} festivos añadidos a tu lista`);
+      : r.creados === 1 ? '1 feriado añadido a tu lista' : `${r.creados} feriados añadidos a tu lista`);
     invalidarEstadoEstudio();
     void cargar();
     // Deja ver las filas en verde un momento antes de cerrar, como Bonsai.
@@ -119,7 +119,7 @@ export function PantallaFestivos() {
       const r = await quitarFestivos(ids);
       if (!r.ok) { toast.showError(r.error); return; }
       setSeleccion(new Set());
-      toast.show(r.datos.quitados === 1 ? '1 festivo quitado de tu lista' : `${r.datos.quitados} festivos quitados de tu lista`);
+      toast.show(r.datos.quitados === 1 ? '1 feriado quitado de tu lista' : `${r.datos.quitados} feriados quitados de tu lista`);
       invalidarEstadoEstudio();
       await cargar();
     } finally {
@@ -152,14 +152,14 @@ export function PantallaFestivos() {
       <button type="button" className={BOTON_BORDE} onClick={() => setComprobar(true)} disabled={estado !== 'listo'}>
         <CalendarCheck2 size={15} aria-hidden /> Comprobar clases
       </button>
-      <BotonVivo label="Añadir festivos" Icono={Plus} onClick={() => setPanel('buscar')} disabled={estado !== 'listo'} />
+      <BotonVivo label="Añadir feriados" Icono={Plus} onClick={() => setPanel('buscar')} disabled={estado !== 'listo'} />
     </>
   );
 
   return (
     <div className="space-y-5" data-testid="pantalla-festivos">
       <PageHeader
-        title="Festivos"
+        title="Feriados"
         description="Los días que tu estudio no abre: los oficiales ya están; añade los de tu localidad y decide qué pasa con sus clases."
         actions={estado === 'no_disponible' ? undefined : <div className="flex flex-wrap items-center gap-2">{acciones}</div>}
       />
@@ -173,14 +173,14 @@ export function PantallaFestivos() {
 
       {estado === 'no_disponible' && (
         <div className="mx-auto max-w-md py-16 text-center" data-testid="festivos-no-disponible">
-          <p className="text-[15px] font-medium text-foreground">Festivos aún no está disponible para tu estudio.</p>
+          <p className="text-[15px] font-medium text-foreground">Feriados aún no está disponible para tu estudio.</p>
           <Link href="/dashboard" className="mt-3 inline-block text-[13.5px] text-muted-foreground underline underline-offset-2">Volver al Resumen</Link>
         </div>
       )}
 
       {estado === 'error' && (
         <div role="alert" className="flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-destructive/10 px-4 py-3 text-[13.5px] font-medium text-destructive">
-          No se han podido leer tus festivos.
+          No se han podido leer tus feriados.
           <button type="button" className={BOTON_BORDE} onClick={() => { setEstado('cargando'); void cargar(); }}>Reintentar</button>
         </div>
       )}
@@ -190,7 +190,7 @@ export function PantallaFestivos() {
           {festivos.length > 0 && (
             <div className="grid grid-cols-2 gap-3 xl:grid-cols-3 xl:gap-4">
               <TarjetaCifra
-                etiqueta="Próximo festivo"
+                etiqueta="Próximo feriado"
                 tono="magenta"
                 Icono={PartyPopper}
                 href={null}
@@ -199,8 +199,8 @@ export function PantallaFestivos() {
                 arriba={cifras.proximo ? <span className="normal-nums">{cifras.proximo.nombre}</span> : undefined}
                 abajo={cifras.diasHastaProximo === null ? 'No queda ninguno en tu lista' : cifras.diasHastaProximo === 0 ? 'es hoy' : cifras.diasHastaProximo === 1 ? 'mañana' : `en ${cifras.diasHastaProximo} días`}
               />
-              <TarjetaCifra etiqueta={`Quedan en ${hoy.slice(0, 4)}`} tono="azul" Icono={CalendarDays} href={null} valor={String(cifras.esteAnio)} abajo={cifras.esteAnio === 1 ? 'festivo hasta fin de año' : 'festivos hasta fin de año'} />
-              <TarjetaCifra etiqueta={`En ${Number(hoy.slice(0, 4)) + 1}`} tono="indigo" Icono={CalendarCheck2} href={null} valor={String(cifras.siguiente)} abajo={cifras.siguiente === 1 ? 'festivo en tu lista' : 'festivos en tu lista'} />
+              <TarjetaCifra etiqueta={`Quedan en ${hoy.slice(0, 4)}`} tono="azul" Icono={CalendarDays} href={null} valor={String(cifras.esteAnio)} abajo={cifras.esteAnio === 1 ? 'feriado hasta fin de año' : 'feriados hasta fin de año'} />
+              <TarjetaCifra etiqueta={`En ${Number(hoy.slice(0, 4)) + 1}`} tono="indigo" Icono={CalendarCheck2} href={null} valor={String(cifras.siguiente)} abajo={cifras.siguiente === 1 ? 'feriado en tu lista' : 'feriados en tu lista'} />
             </div>
           )}
 
@@ -208,16 +208,16 @@ export function PantallaFestivos() {
             <PantallaVacia
               tono="magenta"
               Icono={PartyPopper}
-              titulo="Pon los festivos de tu estudio"
+              titulo="Pon los feriados de tu estudio"
               texto={datos.comunidad
                 ? 'Busca los de tu localidad: te enseñamos todos, los del boletín oficial y las fiestas locales, y añades los que quieras.'
                 : 'No sabemos tu comunidad por la dirección del estudio, así que aún no tienes los oficiales. Busca los de tu localidad: te enseñamos todos, los del boletín oficial y las fiestas locales, y añades los que quieras.'}
               ejemplos={[
                 { accion: 'Buscar los de tu localidad', cuando: 'y añadirlos de una vez' },
-                { accion: 'Ver qué clases caen en festivo', cuando: 'antes de que llegue el día' },
+                { accion: 'Ver qué clases caen en feriado', cuando: 'antes de que llegue el día' },
                 { accion: 'Cerrar ese día o abrir igualmente', cuando: 'sin cancelar nada sin que lo digas' },
               ]}
-              accion={{ label: 'Buscar los festivos de mi localidad', onClick: () => setPanel('buscar'), Icono: Sparkles }}
+              accion={{ label: 'Buscar los feriados de mi localidad', onClick: () => setPanel('buscar'), Icono: Sparkles }}
               secundaria={{ label: 'Añadir uno a mano', onClick: () => setPanel('manual') }}
             />
           ) : !localesGuardados && (
@@ -250,7 +250,7 @@ export function PantallaFestivos() {
               />
 
               {pestana === 'lista' ? (
-                <section aria-label="Tus festivos" className="space-y-4">
+                <section aria-label="Tus feriados" className="space-y-4">
                   <div className="flex flex-wrap items-center gap-3">
                     {anios.length > 1 && (
                       <Pildoras<number | 'todos'>
@@ -261,11 +261,11 @@ export function PantallaFestivos() {
                     )}
                     <label className="flex min-w-[200px] flex-1 items-center gap-2.5 rounded-full border border-border bg-card px-4 py-2 shadow-t-card focus-within:ring-3 focus-within:ring-ring/40">
                       <Search size={15} className="shrink-0 text-muted-foreground" aria-hidden />
-                      <span className="sr-only">Buscar un festivo</span>
+                      <span className="sr-only">Buscar un feriado</span>
                       <input
                         value={busqueda}
                         onChange={e => setBusqueda(e.target.value)}
-                        placeholder="Buscar festivo…"
+                        placeholder="Buscar feriado…"
                         className="min-w-0 flex-1 bg-transparent text-[14px] text-foreground outline-none placeholder:text-muted-foreground"
                       />
                     </label>
@@ -278,7 +278,7 @@ export function PantallaFestivos() {
                   {seleccionados.length > 0 && (
                     <div className="flex flex-wrap items-center gap-2 rounded-2xl border border-border bg-card px-4 py-2.5 shadow-t-card" role="region" aria-label="Seleccionados">
                       <span className="mr-auto text-[13px] font-semibold text-foreground">
-                        {seleccionados.length === 1 ? '1 festivo seleccionado' : `${seleccionados.length} festivos seleccionados`}
+                        {seleccionados.length === 1 ? '1 feriado seleccionado' : `${seleccionados.length} feriados seleccionados`}
                       </span>
                       <button type="button" className={cn(BOTON_BORDE, 'text-destructive')} disabled={ocupado} onClick={() => setQuitando(seleccionados)}>
                         <Trash2 size={14} aria-hidden /> Quitar de la lista
@@ -289,7 +289,7 @@ export function PantallaFestivos() {
 
                   {grupos.length === 0 ? (
                     <p className="rounded-2xl border border-border bg-card px-4 py-8 text-center text-[13.5px] text-muted-foreground">
-                      {busqueda ? 'Ningún festivo se llama así.' : 'No te quedan festivos en estas fechas.'}
+                      {busqueda ? 'Ningún feriado se llama así.' : 'No te quedan feriados en estas fechas.'}
                     </p>
                   ) : grupos.map(g => (
                     <div key={g.anio} className="space-y-2">
@@ -323,8 +323,8 @@ export function PantallaFestivos() {
                   <p className="text-[12px] text-muted-foreground text-pretty">
                     {datos.comunidad
                       ? `Los oficiales de ${datos.comunidad} salen del boletín oficial (el BOE y el de la comunidad), según la dirección de tu estudio, y no se pueden quitar: si un día abres, dilo con «Abrimos igualmente». `
-                      : 'No sabemos tu comunidad por la dirección del estudio: los festivos de la lista son los que has añadido. '}
-                    Añadir o quitar un festivo no cancela ninguna clase.
+                      : 'No sabemos tu comunidad por la dirección del estudio: los feriados de la lista son los que has añadido. '}
+                    Añadir o quitar un feriado no cancela ninguna clase.
                   </p>
                 </section>
               ) : (
@@ -359,8 +359,8 @@ export function PantallaFestivos() {
       <ConfirmDialog
         open={quitando !== null}
         onOpenChange={v => { if (!v) setQuitando(null); }}
-        titulo={quitando?.length === 1 ? `¿Quitar «${quitando[0].nombre}» de tu lista?` : `¿Quitar ${quitando?.length ?? 0} festivos de tu lista?`}
-        descripcion="Deja de contar como festivo al repetir clases y en los avisos. No toca ninguna clase: si ese día ya lo cerraste, sigue cerrado."
+        titulo={quitando?.length === 1 ? `¿Quitar «${quitando[0].nombre}» de tu lista?` : `¿Quitar ${quitando?.length ?? 0} feriados de tu lista?`}
+        descripcion="Deja de contar como feriado al repetir clases y en los avisos. No toca ninguna clase: si ese día ya lo cerraste, sigue cerrado."
         textoConfirmar="Sí, quitar"
         destructivo
         onConfirm={() => { const l = quitando; setQuitando(null); if (l) void quitar(l); }}
@@ -454,11 +454,11 @@ function Configuracion({ datos, rol, devuelveSesion }: { datos: ListaDelEstudio;
   const filas: { titulo: string; texto: string; valor: string; tono?: 'si' | 'no'; accion?: ReactNode }[] = [
     {
       titulo: 'Tu localidad',
-      texto: datos.comunidad ? `Los festivos oficiales son los de ${datos.comunidad}.` : 'No sabemos tu comunidad: añade tus festivos buscándolos o a mano.',
+      texto: datos.comunidad ? `Los feriados oficiales son los de ${datos.comunidad}.` : 'No sabemos tu comunidad: añade tus feriados buscándolos o a mano.',
       valor: datos.localidad || 'Sin ciudad en la dirección',
       accion: enlace('nombre-y-direccion'),
     },
-    { titulo: 'Las clases de ese día se cancelan', texto: 'Al cerrar un festivo nadie puede reservar ese día y las clases que hay se cancelan.', valor: 'Siempre' },
+    { titulo: 'Las clases de ese día se cancelan', texto: 'Al cerrar un feriado nadie puede reservar ese día y las clases que hay se cancelan.', valor: 'Siempre' },
     {
       titulo: 'Tus clientes recuperan la sesión del bono',
       texto: 'La de cada reserva cancelada vuelve a su bono.',
@@ -472,12 +472,12 @@ function Configuracion({ datos, rol, devuelveSesion }: { datos: ListaDelEstudio;
       accion: enlace('correos-automaticos'),
     },
     { titulo: 'Sus bonos y recuperaciones duran un día más', texto: 'A todas tus clientes, una vez por día cerrado.', valor: 'Siempre' },
-    { titulo: 'Las clases que se repiten se saltan los festivos', texto: 'Al repetir un mes en el Calendario, los días de tu lista vienen sin marcar.', valor: 'Siempre' },
+    { titulo: 'Las clases que se repiten se saltan los feriados', texto: 'Al repetir un mes en el Calendario, los días de tu lista vienen sin marcar.', valor: 'Siempre' },
   ];
   return (
-    <section aria-label="Configuración de festivos" className="space-y-4">
+    <section aria-label="Configuración de feriados" className="space-y-4">
       <div className="rounded-t-card border border-border bg-card p-4 shadow-t-card sm:p-5">
-        <CabeceraTarjeta tono="magenta" Icono={CalendarX2} titulo="Si cierras un festivo" sub="Lo que pasa con sus clases. Cerrar siempre te lo pregunta antes." />
+        <CabeceraTarjeta tono="magenta" Icono={CalendarX2} titulo="Si cierras un feriado" sub="Lo que pasa con sus clases. Cerrar siempre te lo pregunta antes." />
         <ul className="mt-4 divide-y divide-border">
           {filas.map(f => (
             <li key={f.titulo} className="flex flex-wrap items-center gap-x-4 gap-y-1 py-3">

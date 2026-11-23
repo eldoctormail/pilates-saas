@@ -189,7 +189,7 @@ test('un cajón solo se bloquea por lo suyo', () => {
   assert.equal(reglasDeTarjetaAGuardar('reservar', form, guardado).ok, false);
   assert.equal(reglasDeTarjetaAGuardar('lista-de-espera', form, guardado).ok, true);
   const lista = reglasDeTarjetaAGuardar('lista-de-espera', { ...form, listaEspera: { modo: 'con-plazo', minutos: '0' } }, guardado);
-  assert.deepEqual(lista, { ok: false, texto: 'Pon cuántos minutos tiene para aceptar la plaza: 1 o más.' });
+  assert.deepEqual(lista, { ok: false, texto: 'Pon cuántos minutos tiene para aceptar el lugar: 1 o más.' });
 });
 
 const tipo = (nombre: string, reglas: Partial<TipoConReglas> = {}): TipoConReglas => ({ id: `tc-${nombre}`, nombre, ...reglas });
@@ -229,7 +229,7 @@ test('la consecuencia de cada cajón: una línea que dice lo que va a pasar', ()
   assert.equal(consecuenciaRegla('si-se-cancela-una-clase', { ...r, minimoAsistentesPorClase: 3, cancelacionClaseDevuelveBono: false }),
     'Si a 2 h del inicio hay menos de 3 clientes, se cancela sola y no devuelve la sesión.');
   assert.equal(consecuenciaRegla('lista-de-espera', { ...r, listaEsperaPlazoAceptacionMinutos: 30 }),
-    'Si se libera una plaza, la primera de la lista tiene 30 min para aceptarla; si no, pasa a la siguiente.');
+    'Si se libera un lugar, la primera de la lista tiene 30 min para aceptarla; si no, pasa a la siguiente.');
   assert.equal(consecuenciaRegla('reservar', r), 'Se puede reservar con cualquier antelación, hasta que empieza la clase.');
   assert.equal(consecuenciaRegla('asistencia', { ...r, requiereCheckinQr: false }), 'Toda reserva confirmada cuenta como asistida al terminar la clase.');
 
@@ -368,7 +368,7 @@ test('el porcentaje va de 10 a 100 (el CHECK de la base) y solo se mira con la a
   assert.equal(con(0, 'MANUAL').ok, true);
 });
 
-test('⚠️ pasar a automática pregunta (nadie mira las plazas antes); volver a manual o cambiar el % no', () => {
+test('⚠️ pasar a automática pregunta (nadie mira los lugares antes); volver a manual o cambiar el % no', () => {
   const ahora = { plazaFijaAprobacion: 'AUTOMATICA' as const, plazaFijaAutoTopePct: 50, plazaFijaSolicitarDesdeApp: true };
   const c = confirmarAprobacionAutomatica({ plazaFijaAprobacion: 'MANUAL' }, ahora);
   assert.ok(c);

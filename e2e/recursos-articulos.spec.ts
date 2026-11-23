@@ -91,7 +91,7 @@ test('la calculadora de bonos arranca con el ejemplo del artículo y avisa de lo
     // compila al pedirlo y la página tarda en hidratarse (medido: más de 20 s).
   }).toPass({ timeout: 60_000 });
   // Con un coste de 14 € sin IVA, la cuota de 2 clases (13,43 € sin IVA) no lo cubre.
-  await calc.getByLabel(/Tu coste por plaza/).fill('14');
+  await calc.getByLabel(/Tu coste por lugar/).fill('14');
   await expect(calc).toContainText('por debajo de tu coste');
 });
 

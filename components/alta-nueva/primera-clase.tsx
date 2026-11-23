@@ -135,7 +135,7 @@ function Bloque({ num, titulo, children, plano, oculto }: { num: string; titulo:
 const PANTALLAS_FOCO = [
   { titulo: '¿Qué clase vas a dar?', sub: 'Elige el tipo y ponle nombre. Lo demás ya viene puesto.' },
   { titulo: '¿Cuándo es?', sub: 'El día y la hora de la primera. Si se repite, lo dejamos listo.' },
-  { titulo: '¿Quién la da y dónde?', sub: 'Tú, una sala y cuántas plazas tiene.' },
+  { titulo: '¿Quién la da y dónde?', sub: 'Tú, una sala y cuántos lugares tiene.' },
   { titulo: '¿Cuánto cuesta?', sub: 'Es lo único que no ponemos por ti.' },
   { titulo: '¿Cómo te pagan?', sub: 'Al llegar al estudio o por la app, con tarjeta.' },
   { titulo: 'Revisa y publica', sub: 'Esto es lo que se crea. Tus clientes ya podrán reservar.' },
@@ -495,11 +495,11 @@ export function PrimeraClase({ studio, onAtras, onPublicada, saliendo = false, e
               </div>
               <div>
                 <span className="flex items-center gap-1.5">
-                  <span className={CLASE_ETIQUETA} id={`${id}-plazas`}>Plazas</span>
-                  <InfoTip label="Qué son las plazas">Cuántos clientes caben: las máquinas o esterillas que tienes en esa sala.</InfoTip>
+                  <span className={CLASE_ETIQUETA} id={`${id}-plazas`}>Lugares</span>
+                  <InfoTip label="Qué son los lugares">Cuántos clientes caben: las máquinas o esterillas que tienes en esa sala.</InfoTip>
                 </span>
                 <div role="group" aria-labelledby={`${id}-plazas`} className="mt-1.5 inline-flex h-11 items-center gap-1 rounded-xl border border-input bg-card p-1">
-                  <button type="button" aria-label="Una plaza menos" disabled={form.plazas <= 1} onClick={() => cambiar({ plazas: Math.max(1, form.plazas - 1) })} className="grid size-9 place-items-center rounded-lg text-foreground hover:bg-muted disabled:opacity-40">
+                  <button type="button" aria-label="Un lugar menos" disabled={form.plazas <= 1} onClick={() => cambiar({ plazas: Math.max(1, form.plazas - 1) })} className="grid size-9 place-items-center rounded-lg text-foreground hover:bg-muted disabled:opacity-40">
                     <Minus size={16} aria-hidden />
                   </button>
                   <output
@@ -511,7 +511,7 @@ export function PrimeraClase({ studio, onAtras, onPublicada, saliendo = false, e
                   >
                     {form.plazas}
                   </output>
-                  <button type="button" aria-label="Una plaza más" disabled={form.plazas >= MAX_PLAZAS} onClick={() => cambiar({ plazas: Math.min(MAX_PLAZAS, form.plazas + 1) })} className="grid size-9 place-items-center rounded-lg text-foreground hover:bg-muted disabled:opacity-40">
+                  <button type="button" aria-label="Un lugar más" disabled={form.plazas >= MAX_PLAZAS} onClick={() => cambiar({ plazas: Math.min(MAX_PLAZAS, form.plazas + 1) })} className="grid size-9 place-items-center rounded-lg text-foreground hover:bg-muted disabled:opacity-40">
                     <Plus size={16} aria-hidden />
                   </button>
                 </div>
@@ -694,7 +694,7 @@ export function PrimeraClase({ studio, onAtras, onPublicada, saliendo = false, e
       <aside aria-label="Así la verá tu cliente" className="hidden min-w-0 flex-col gap-4 self-start rounded-3xl bg-muted/70 p-8 lg:sticky lg:top-6 lg:flex">
         <p className="text-center text-[12px] font-semibold uppercase tracking-[0.06em] text-muted-foreground">Así la verá tu cliente · en vivo</p>
         <VistaPreviaClase studio={studio} form={form} instructora={form.quien === 'yo' ? yo : form.otraPersona} />
-        <p className="text-center text-[12.5px] text-muted-foreground">Tu clase antes de publicarla: nombre, hora, plazas y precio como los verá tu cliente en la app.</p>
+        <p className="text-center text-[12.5px] text-muted-foreground">Tu clase antes de publicarla: nombre, hora, lugares y precio como los verá tu cliente en la app.</p>
       </aside>
 
       <DashboardSheet

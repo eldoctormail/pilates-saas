@@ -51,7 +51,7 @@ test('webhook: ⚠️ la escritura durable va ANTES de contestar; lo que habla c
   assert.equal((s.match(/if \(r\.tipo === 'error'\) return reintentar\(/g) ?? []).length, 3);
 });
 
-test('reserva pedida: la plaza la decide la RPC de siempre con el cupo como límite, y queda «Requested» hasta que Wellhub diga que sí', () => {
+test('reserva pedida: el lugar la decide la RPC de siempre con el cupo como límite, y queda «Requested» hasta que Wellhub diga que sí', () => {
   const s = leer('lib/plataformas/wellhub/servidor.ts');
   const fn = s.slice(s.indexOf('export async function registrarReservaPedidaWellhub'), s.indexOf('export async function rechazarReservaWellhub'));
   assert.ok(fn.indexOf('reservaPedidaCaducada(e.momento, ahora)') > 0, 'más de 15 min: ni se intenta');

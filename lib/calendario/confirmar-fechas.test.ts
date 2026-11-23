@@ -19,7 +19,7 @@ test('agrupa por mes y ordena', () => {
 test('el recuento cuenta clases, no días, y solo las marcadas', () => {
   const fechas = [
     { fecha: '2026-12-07', clases: 3, festivo: null },
-    { fecha: '2026-12-08', clases: 2, festivo: 'Festivo en Madrid: Inmaculada' },
+    { fecha: '2026-12-08', clases: 2, festivo: 'Feriado en Madrid: Inmaculada' },
   ];
   assert.equal(clasesMarcadas(fechas, new Set(['2026-12-07'])), 3);
   assert.equal(clasesMarcadas(fechas, new Set(['2026-12-07', '2026-12-08'])), 5);

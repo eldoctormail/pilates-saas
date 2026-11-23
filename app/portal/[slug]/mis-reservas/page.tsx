@@ -259,7 +259,7 @@ export default function MisReservasPage() {
     }
     if (res.confirmada) void vibrar('exito');
     toast(res.confirmada
-      ? '¡Plaza confirmada! ✓'
+      ? '¡Lugar confirmado! ✓'
       : 'Alguien se te adelantó por segundos — te hemos dado una clase de recuperación.');
     reintentar();
   }
@@ -342,7 +342,7 @@ export default function MisReservasPage() {
               <EmptyState
                 ilustracion="postura"
                 titulo="No tienes clases próximas"
-                cuerpo="Reserva tu siguiente sesión — puede que hoy queden plazas."
+                cuerpo="Reserva tu siguiente sesión — puede que hoy queden lugares."
                 accion="Ver horario"
                 href={href('/reservar')}
               />
@@ -525,7 +525,7 @@ function TarjetaOferta({ r, c, instructora, online, aceptando, onAceptar, onSali
     <div className="a-pop" style={{ background: 'var(--warning-soft)', border: '1px solid var(--warning)', borderRadius: 'var(--radius-card)', padding: '13px 15px' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 8 }}>
         <p style={{ margin: 0, fontSize: 'var(--t-small)', fontWeight: 800 }}>{etiquetaDia(c.fecha)} · {c.hora}</p>
-        <Badge tone="few">¡Plaza libre!</Badge>
+        <Badge tone="few">¡Lugar libre!</Badge>
       </div>
       <p style={{ margin: '6px 0 0', fontSize: 'var(--t-small)', fontWeight: 700, color: 'var(--warning-foreground)' }}>
         Tienes hasta las {new Date(r.ofertaExpiraEn as string).toLocaleTimeString(LOCALE, { hour: '2-digit', minute: '2-digit' })} para aceptarla — si no, pasa a la siguiente de la lista.
@@ -534,7 +534,7 @@ function TarjetaOferta({ r, c, instructora, online, aceptando, onAceptar, onSali
       <p className="t-meta" style={{ marginTop: 2 }}>{unirMeta(instructora, c.sala)}</p>
       <div style={{ display: 'flex', gap: 7, marginTop: 10, flexWrap: 'wrap' }}>
         <button type="button" className="btn btn--primary btn--sm tap" style={{ height: 34 }} disabled={!online || aceptando} title={!online ? 'Necesitas conexión' : undefined} onClick={onAceptar}>
-          {aceptando ? 'Aceptando…' : 'Aceptar plaza'}
+          {aceptando ? 'Aceptando…' : 'Aceptar lugar'}
         </button>
         <button type="button" className="btn btn--light btn--sm tap" style={{ height: 34 }} disabled={!online || aceptando} title={!online ? 'Necesitas conexión' : undefined} onClick={onSalir}>
           Salir de la lista

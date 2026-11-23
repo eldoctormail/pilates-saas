@@ -4,7 +4,7 @@
 
 /** Qué decirle al modelo cuando falta un dato: que lo PREGUNTE. */
 const PISTAS: Record<string, string> = {
-  capacidad: 'Falta la capacidad de la sala: pregunta cuántas plazas tiene.',
+  capacidad: 'Falta la capacidad de la sala: pregunta cuántos lugares tiene.',
   nombre: 'Falta el nombre: pregunta cómo se llama.',
   aforo: 'El aforo, si no lo dijo, se omite (no se acepta 0).',
   tipo_clase: 'Falta el tipo de clase: pregunta cuál.',

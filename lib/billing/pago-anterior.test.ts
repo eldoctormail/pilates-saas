@@ -54,18 +54,18 @@ test('un pago devuelto entero es un intento nuevo; uno cobrado, no', () => {
 });
 
 // Revisión del 5-oct (#10): «te llegará la confirmación» solo si es verdad.
-test('«ya has pagado esta clase» dice lo que tiene: plaza, cola, pendiente, preparando o sin plaza', () => {
+test('«ya has pagado esta clase» dice lo que tiene: lugar, cola, pendiente, preparando o sin lugar', () => {
   const m = (reserva: string | null, entregado = true, cobro: 'cobrado' | 'procesando' = 'cobrado') => mensajeClaseYaPagada({ cobro, entregado, reserva });
-  assert.match(m('CONFIRMADA'), /tienes tu plaza/);
-  assert.match(m('ASISTIDA'), /tienes tu plaza/);
+  assert.match(m('CONFIRMADA'), /tienes tu lugar/);
+  assert.match(m('ASISTIDA'), /tienes tu lugar/);
   assert.match(m('LISTA_ESPERA'), /lista de espera/);
   assert.match(m('PENDIENTE_APROBACION'), /pendiente de que el estudio la apruebe/);
   assert.match(m(null, false), /estamos preparando tu reserva/);
   // Pagó y no tiene plaza (llena, tope semanal, la canceló): nunca «te llegará la confirmación».
   for (const sin of [null, 'CANCELADA']) {
     const t = m(sin);
-    assert.match(t, /no tienes plaza/);
-    assert.doesNotMatch(t, /confirmación|tienes tu plaza/);
+    assert.match(t, /no tienes lugar/);
+    assert.doesNotMatch(t, /confirmación|tienes tu lugar/);
   }
   assert.match(m(null, false, 'procesando'), /se está procesando/);
 });
@@ -111,7 +111,7 @@ const raiz = join(import.meta.dirname, '..', '..');
 const sinComentarios = (s: string) => s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:])\/\/.*$/gm, '$1');
 const leer = (ruta: string) => sinComentarios(readFileSync(join(raiz, ruta), 'utf8'));
 
-test('el pago anterior se resuelve ANTES de reservar la matrícula y la plaza de cupo, y lo cancelado devuelve lo suyo una sola vez', () => {
+test('el pago anterior se resuelve ANTES de reservar la matrícula y el lugar de cupo, y lo cancelado devuelve lo suyo una sola vez', () => {
   const s = leer('app/api/public/checkout-embebido/route.ts');
   const anterior = s.indexOf('decidirPagoAnterior(anterior, secretoAnterior,');
   const matricula = s.indexOf('await reservarMatricula(');

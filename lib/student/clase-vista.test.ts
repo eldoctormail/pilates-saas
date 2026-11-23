@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { ocupacion, textoAperturaLista, textoPlazasLibres } from './clase-vista.ts';
 
-test('ocupación: plazas libres y porcentaje para la barra', () => {
+test('ocupación: lugares libres y porcentaje para la barra', () => {
   assert.deepEqual(ocupacion({ confirmadas: 5, aforo: 8 }), { confirmadas: 5, aforo: 8, libres: 3, porcentaje: 63 });
   assert.deepEqual(ocupacion({ confirmadas: 8, aforo: 8 }), { confirmadas: 8, aforo: 8, libres: 0, porcentaje: 100 });
   // Sobreventa (plaza fija + reserva): la barra no pasa del 100 % ni hay libres negativas.
@@ -10,9 +10,9 @@ test('ocupación: plazas libres y porcentaje para la barra', () => {
   assert.equal(ocupacion({ confirmadas: 0, aforo: 0 }).porcentaje, 0);
 });
 
-test('texto de plazas libres', () => {
-  assert.equal(textoPlazasLibres(ocupacion({ confirmadas: 5, aforo: 8 })), 'Quedan 3 plazas');
-  assert.equal(textoPlazasLibres(ocupacion({ confirmadas: 7, aforo: 8 })), 'Queda 1 plaza');
+test('texto de lugares libres', () => {
+  assert.equal(textoPlazasLibres(ocupacion({ confirmadas: 5, aforo: 8 })), 'Quedan 3 lugares');
+  assert.equal(textoPlazasLibres(ocupacion({ confirmadas: 7, aforo: 8 })), 'Queda 1 lugar');
   assert.equal(textoPlazasLibres(ocupacion({ confirmadas: 8, aforo: 8 })), 'Completa');
 });
 

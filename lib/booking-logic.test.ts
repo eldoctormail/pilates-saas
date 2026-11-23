@@ -573,7 +573,7 @@ test('candidatasParaHueco: un plan sin tipos marcados sigue sirviendo para todo'
 // se recortaban con un `slice` mudo y la respuesta decía «4 avisos enviados»,
 // verdad a medias que se lee como una avería.
 
-test('topeAvisosHueco: con 12 seleccionadas y 1 plaza libre, caben 4 y se dicen las 8 que no', () => {
+test('topeAvisosHueco: con 12 seleccionadas y 1 lugar libre, caben 4 y se dicen las 8 que no', () => {
   assert.deepEqual(topeAvisosHueco(12, 1), { caben: 4, saltadasPorTope: 8 });
 });
 
@@ -584,14 +584,14 @@ test('topeAvisosHueco: si caben todas, no sobra ninguna', () => {
   assert.deepEqual(topeAvisosHueco(2, 5), { caben: 2, saltadasPorTope: 0 });
 });
 
-test('topeAvisosHueco: el máximo por tanda manda aunque haya plazas de sobra', () => {
+test('topeAvisosHueco: el máximo por tanda manda aunque haya lugares de sobra', () => {
   // 40 plazas × 4 = 160, pero por tanda no salen más de AVISOS_HUECO_MAXIMO.
   const r = topeAvisosHueco(100, 40);
   assert.equal(r.caben, AVISOS_HUECO_MAXIMO);
   assert.equal(r.saltadasPorTope, 100 - AVISOS_HUECO_MAXIMO);
 });
 
-test('topeAvisosHueco: sin plazas no se avisa a nadie, y se cuenta a todas como fuera', () => {
+test('topeAvisosHueco: sin lugares no se avisa a nadie, y se cuenta a todas como fuera', () => {
   // La ruta corta antes con un 409, pero el aforo efectivo puede encogerse
   // entre que se pinta la pantalla y se pulsa. Lo que no puede salir de aquí
   // es un tope negativo: `slice(0, -4)` contaría desde el final y escribiría
@@ -693,12 +693,12 @@ test('aperturaPendiente: solo mientras falta para abrirse', () => {
 
 // ── Plazas apartadas para ClassPass (7-oct-2026) ─────────────────────────────
 
-test('plazas libres para Tentare: aforo − ocupadas − apartadas, nunca por debajo de 0', () => {
+test('lugares libres para Tentare: aforo − ocupadas − apartadas, nunca por debajo de 0', () => {
   assert.equal(plazasLibresParaReservar(10, 3), 7);
   assert.equal(plazasLibresParaReservar(10, 3, 2), 5);
   assert.equal(plazasLibresParaReservar(4, 2, 2), 0, 'las apartadas llenan la clase para la app');
   assert.equal(plazasLibresParaReservar(4, 3, 2), 0, 'ni negativo');
-  assert.equal(plazasLibresParaReservar(4, 1, -3), 3, 'un dato malo no regala plazas');
+  assert.equal(plazasLibresParaReservar(4, 1, -3), 3, 'un dato malo no regala lugares');
 });
 
 test('apartadas del aforo público, por sesión; lo que no es un número positivo no cuenta', () => {

@@ -35,7 +35,7 @@ function cuerpoVigente(fn: string): string {
   return ultimo!;
 }
 
-test('⚠️ las cinco que deciden plaza suman las apartadas a las ocupadas ANTES de comparar con el aforo', () => {
+test('⚠️ las cinco que deciden lugar suman las apartadas a las ocupadas ANTES de comparar con el aforo', () => {
   for (const [fn, comparacion] of [
     ['evaluar_reserva', 'if v_aforo is null or v_ocupadas < v_aforo then'],
     ['promocionar_siguiente_espera', 'if v_aforo is not null and v_ocupadas >= v_aforo then'],
@@ -60,7 +60,7 @@ test('reservar_plaza no decide por su cuenta (lo hace evaluar_reserva), y las cl
 
 test('la cola, cuando se liberan: el predicado del job y la ruta piden lo mismo', () => {
   const migracion = MIGRACIONES.filter(n => n.includes('classpass_aparta_plazas')).pop();
-  assert.ok(migracion, 'falta la migración de las plazas apartadas');
+  assert.ok(migracion, 'falta la migración de los lugares apartados');
   assert.match(readFileSync(join(DIR, migracion!), 'utf8'), /sesiones_con_plazas_liberadas\(interval '15 minutes'\)/);
   assert.match(leer('lib/lista-espera/plazas-liberadas.ts'), /VENTANA_PLAZAS_LIBERADAS = '15 minutes'/);
   assert.match(leer('app/api/cron/lista-espera-ofertas-expirar/route.ts'), /await barrerColasConPlazaLiberada\(\)/);
@@ -74,7 +74,7 @@ test('⚠️ dinero: a la invitada sin ficha no se le cobra si no se pueden leer
   assert.match(fn, /apartadas: typeof apartadasRes\.data === 'number'/);
 });
 
-test('lo que se enseña al público resta las apartadas en los cuatro sitios que cuentan plazas', () => {
+test('lo que se enseña al público resta las apartadas en los cuatro sitios que cuentan lugares', () => {
   assert.match(leer('lib/student/mapeo.ts'), /plazasLibresParaReservar\(s\.aforoMaximo, ocupadas\.get\(s\.id\) \?\? 0, apartadas\.get\(s\.id\) \?\? 0\)/);
   assert.match(leer('lib/reservar/construir-slots.ts'), /\(apartadas\?\.get\(s\.id\) \?\? 0\)/);
   assert.equal((leer('app/reservar/[slug]/page.tsx').match(/apartadasPorSesion\(aforoApartadas\)/g) ?? []).length, 2);
@@ -95,11 +95,11 @@ test('el mostrador no usa una apartada: la libera antes, por el servidor y con r
   assert.match(fn, /from public\.apartados_de_sesion\(p_sesion_id\) as a\s+where a\.plataforma = p_plataforma and a\.cupo is not null and a\.cupo > a\.vendidas and now\(\) < a\.liberan_en;\s+if v_cupo is null then\s+raise exception 'NADA_APARTADO'/);
 });
 
-test('«Plazas libres» del Calendario (P3.9) resta las apartadas y, si no las puede leer, no enseña números', () => {
+test('«Lugares libres» del Calendario (P3.9) resta las apartadas y, si no las puede leer, no enseña números', () => {
   assert.match(leer('lib/calendario/plazas-libres.ts'), /plazasLibresParaReservar\(aforo, ocupadas, apartadas\)/);
   const ruta = leer('app/api/calendario/plazas-libres/route.ts');
   assert.match(ruta, /admin\.rpc\('plazas_apartadas_de', \{ p_studio_id: sesion\.studioId, p_sesion_ids: ids \}\)/, 'el estudio sale de la sesión');
   // Anclado a la lectura de las apartadas: otras lecturas de la ruta también devuelven `null` al fallar.
   assert.match(ruta, /apartadas: async \(ids\) => \{\s*const \{ data, error \} = await admin\.rpc\('plazas_apartadas_de'[^\n]*\n\s*return error \? null :/, 'un fallo de las apartadas es `null`…');
-  assert.match(leer('lib/calendario/plazas-libres-servidor.ts'), /if \(!a\) throw new Error\('No se han podido leer las plazas apartadas'\)/, '…y `null` es error, nunca 0 apartadas');
+  assert.match(leer('lib/calendario/plazas-libres-servidor.ts'), /if \(!a\) throw new Error\('No se han podido leer los lugares apartados'\)/, '…y `null` es error, nunca 0 apartadas');
 });

@@ -1083,7 +1083,7 @@ export async function POST(req: NextRequest) {
         } catch (errCancelar) {
           // Si no se puede cancelar, la plaza se queda reservada: mejor no vender
           // una de más. La recuperará la siguiente compra si Stripe lo confirma.
-          console.error('[checkout-embebido] no se pudo cancelar el cobro sin plaza ligada', paymentIntent.id, errCancelar);
+          console.error('[checkout-embebido] no se pudo cancelar el cobro sin lugar ligado', paymentIntent.id, errCancelar);
         }
         if (cancelado) {
           // Solo si no es de OTRO cobro: la de otra pestaña sigue pagable.

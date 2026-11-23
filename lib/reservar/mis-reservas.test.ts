@@ -86,8 +86,8 @@ test('ofertaVigente: solo en LISTA_ESPERA, con hora y todavía no pasada', () =>
   assert.equal(ofertaVigente('CONFIRMADA', '2026-08-12T08:30:00+02:00', AHORA), false);
 });
 
-test('con una plaza ofrecida, la insignia dice «Plaza para ti» (y no su posición en la cola)', () => {
-  assert.deepEqual(estadoReservaSocia('LISTA_ESPERA', 'proxima', 2, true), { texto: 'Plaza para ti', tono: 'pendiente' });
+test('con un lugar ofrecido, la insignia dice «Lugar para ti» (y no su posición en la cola)', () => {
+  assert.deepEqual(estadoReservaSocia('LISTA_ESPERA', 'proxima', 2, true), { texto: 'Lugar para ti', tono: 'pendiente' });
   assert.deepEqual(estadoReservaSocia('LISTA_ESPERA', 'proxima', 2, false), { texto: 'Lista de espera · 2ª', tono: 'espera' });
   assert.equal(estadoReservaSocia('LISTA_ESPERA', 'pasada', 2, true).texto, 'Lista de espera');
 });

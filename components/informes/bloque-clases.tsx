@@ -67,8 +67,8 @@ export function BloqueClases({ clases, anterior, comparacion, margenes, nombres 
   return (
     <section aria-labelledby="informe-clases" className={`space-y-3 ${claseBloque}`}>
       <CabeceraBloque id="informe-clases" titulo="Clases">
-        Las clases ya empezadas del periodo. Ocupación: plazas reservadas sobre el aforo, vinieran o no (una falta también
-        ocupó la plaza). Despliega un tipo para verlo por franja, y una franja para ver cada clase con su margen.
+        Las clases ya empezadas del periodo. Ocupación: lugares reservados sobre el aforo, vinieran o no (una falta también
+        ocupó el lugar). Despliega un tipo para verlo por franja, y una franja para ver cada clase con su margen.
       </CabeceraBloque>
 
       {clases.nClases === 0 ? (
@@ -80,7 +80,7 @@ export function BloqueClases({ clases, anterior, comparacion, margenes, nombres 
               <tr className="text-left text-[12px] text-muted-foreground">
                 <th className="pb-2 font-medium">Clase</th>
                 <th className="pb-2 text-right font-medium">Clases</th>
-                <th className="pb-2 text-right font-medium">Plazas</th>
+                <th className="pb-2 text-right font-medium">Lugares</th>
                 <th className="pb-2 text-right font-medium">Ocupación</th>
                 <th className="pb-2 text-right font-medium" title={comparacion ? frenteA(comparacion) : undefined}>Antes</th>
                 <th className="pb-2 text-right font-medium" title="Sobre el coste de instructora; no incluye la sala">Margen</th>
@@ -103,7 +103,7 @@ export function BloqueClases({ clases, anterior, comparacion, margenes, nombres 
       <p className="text-[12px] text-muted-foreground text-pretty">
         «Antes»: cuántos puntos sube o baja la ocupación {frenteA(comparacion ?? 'el periodo anterior')}.
         {' '}Margen: lo que dejaron sus asistentes menos el coste de la instructora (sin la sala). Para el margen, asistentes son
-        las que vinieron y las que tenían plaza sin pasar lista; las que no se presentaron no cuentan.
+        las que vinieron y las que tenían lugar sin pasar lista; las que no se presentaron no cuentan.
         {hayMargenSinTarifa && ' Las clases de una instructora sin tarifa no tienen margen: no se inventa un coste (*).'}
       </p>
     </section>
@@ -177,7 +177,7 @@ function DetalleSesiones({ sesiones, margenes, nombres }: { sesiones: SesionDelI
         <tr className="text-left text-[11.5px] text-muted-foreground">
           <th className="py-1 font-medium">Fecha</th>
           <th className="py-1 font-medium">Instructora</th>
-          <th className="py-1 text-right font-medium" title="Vinieron y plazas sin pasar lista">Asistentes</th>
+          <th className="py-1 text-right font-medium" title="Vinieron y lugares sin pasar lista">Asistentes</th>
           <th className="py-1 text-right font-medium">Ingreso</th>
           <th className="py-1 text-right font-medium">Coste</th>
           <th className="py-1 text-right font-medium">Margen</th>

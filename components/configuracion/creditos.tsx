@@ -21,6 +21,7 @@ import type { PropsFormularioCajon } from '@/components/configuracion/shell/cajo
 import { usePanelNuevo } from '@/lib/estudio/panel-nuevo-cliente';
 import { useInterruptor } from '@/lib/estudio/interruptores-cliente';
 import type { RewardTriggerDef } from '@/lib/types';
+import { MONEDA_NOMBRE_PLURAL } from '@/lib/moneda';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Los dos cajones de los créditos, en Motivación (15-sep, v2).
@@ -206,7 +207,7 @@ export function FormCreditosPorAccion({ onGuardado }: Pick<PropsFormularioCajon,
             min={0}
             step={1}
             inputMode="numeric"
-            aria-label="Euros por cada premio de compra"
+            aria-label={`${MONEDA_NOMBRE_PLURAL[0].toUpperCase()}${MONEDA_NOMBRE_PLURAL.slice(1)} por cada premio de compra`}
             placeholder="1"
             className={cn(inputCls, 'w-20 text-center')}
             value={form[def.trigger].unidadEuros}
@@ -343,7 +344,7 @@ export function FormCreditosPorAccion({ onGuardado }: Pick<PropsFormularioCajon,
                         min={0}
                         step={1}
                         inputMode="numeric"
-                        aria-label="Euros por cada premio de compra"
+                        aria-label={`${MONEDA_NOMBRE_PLURAL[0].toUpperCase()}${MONEDA_NOMBRE_PLURAL.slice(1)} por cada premio de compra`}
                         placeholder="1"
                         className={cn(inputCls, 'w-20 text-center')}
                         value={f.unidadEuros}

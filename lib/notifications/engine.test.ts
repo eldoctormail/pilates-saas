@@ -62,7 +62,7 @@ test('automatizaciones: cada evento nuevo tiene regla + plantilla que renderiza'
     [EVENTOS.CLASE_CASI_LLENA, 'PROPIETARIO', { clase: 'Barre', cuando: 'hoy', porcentaje: 90, ocupadas: 9, aforo: 10 }, /Barre.*90%.*9\/10/],
     [EVENTOS.SOCIA_INACTIVA, 'PROPIETARIO', { socia: 'María', dias: 45 }, /María.*45 días/],
     [EVENTOS.RESERVA_OFERTA_LISTA_ESPERA, 'SOCIA', { clase: 'Reformer', cuando: 'hoy', hora: '19:30' }, /19:30.*Reformer.*hoy/],
-    [EVENTOS.RESERVA_ABANDONADA, 'SOCIA', { claseTexto: ' una plaza en Reformer (hoy)' }, /Reformer/],
+    [EVENTOS.RESERVA_ABANDONADA, 'SOCIA', { claseTexto: ' un lugar en Reformer (hoy)' }, /Reformer/],
   ];
   for (const [evento, rol, data, re] of casos) {
     assert.ok(REGLAS[evento], `falta regla para ${evento}`);
@@ -105,12 +105,12 @@ test('clase.* no declara EMAIL: el panel ya manda su propio correo a los cliente
   }
 });
 
-test('pagada sin plaza: las tres situaciones tienen copy propio y destino propio', () => {
+test('pagada sin lugar: las tres situaciones tienen copy propio y destino propio', () => {
   const pl = plantillaDe(EVENTOS.RESERVA_PAGADA_SIN_PLAZA, 'PROPIETARIO')!;
   const base = { socia: 'Marta', clase: 'Reformer', cuando: 'el martes', sesionId: 'ses-1', socioId: 'soc-1' };
   // El copy tiene que DECIR en cuál de las tres está: desde el panel, "pagó y
   // se quedó en la cola" y "pagó y no pudo reservarse" piden cosas distintas.
-  assert.match(render(pl.body, { ...base, situacion: ' pero no se pudo confirmar su plaza.' }), /no se pudo confirmar/);
+  assert.match(render(pl.body, { ...base, situacion: ' pero no se pudo confirmar su lugar.' }), /no se pudo confirmar/);
   assert.match(render(pl.body, { ...base, situacion: ' y se quedó en lista de espera: la clase se llenó justo antes de confirmarla. Su crédito está intacto.' }), /lista de espera/);
   // Con la clase ya pasada, el calendario no sirve de nada: lo que hace falta
   // es su ficha, que es donde vive el botón de devolver el recibo.

@@ -86,7 +86,7 @@ test.describe('Student PWA · la clase que se está dando ahora', () => {
     await page.goto(`${base}/reservar`);
 
     // Antes de empezar: nada de «en curso», y sí el badge de plazas.
-    await expect(page.getByText('10 plazas').first()).toBeVisible({ timeout: 30_000 });
+    await expect(page.getByText('10 lugares').first()).toBeVisible({ timeout: 30_000 });
     await expect(badgeEnCurso(page)).toHaveCount(0);
 
     // Pasan 40 minutos con la pestaña abierta. `fastForward` dispara los
@@ -96,7 +96,7 @@ test.describe('Student PWA · la clase que se está dando ahora', () => {
     await expect(badgeEnCurso(page).first()).toBeVisible();
     // Y las plazas dejan de anunciarse: ya no se puede reservar, así que seguir
     // ofreciendo «10 plazas» sería prometer algo que el servidor rechaza.
-    await expect(page.getByText('10 plazas')).toHaveCount(0);
+    await expect(page.getByText('10 lugares')).toHaveCount(0);
   });
 
   test('cuando termina, el badge se va solo', async ({ page }) => {
@@ -152,13 +152,13 @@ test.describe('Student PWA · la clase que se está dando ahora', () => {
 
   // RES-11: antes, al terminar la clase el badge de «en curso» se iba y volvía
   // «10 plazas» — sobre una clase de la mañana, a las 16:30.
-  test('una clase ya terminada dice «Terminada» y no anuncia plazas', async ({ page }) => {
+  test('una clase ya terminada dice «Terminada» y no anuncia lugares', async ({ page }) => {
     await montar(page);
     await page.clock.setFixedTime(A_LAS('16:30'));
     await page.goto(`${base}/reservar`);
 
     await expect(page.getByTestId('badge-terminada').first()).toBeVisible({ timeout: 30_000 });
-    await expect(page.getByText('10 plazas')).toHaveCount(0);
+    await expect(page.getByText('10 lugares')).toHaveCount(0);
   });
 
   test('la ficha de una clase ya empezada no ofrece reservar', async ({ page }) => {
@@ -187,7 +187,7 @@ test.describe('Student PWA · la clase que se está dando ahora', () => {
     await expect(page.getByTestId('reserva-cerrada')).toHaveCount(0);
   });
 
-  test('con su plaza ya reservada, la ficha de una clase empezada sigue dejando gestionarla', async ({ page }) => {
+  test('con su lugar ya reservada, la ficha de una clase empezada sigue dejando gestionarla', async ({ page }) => {
     await montar(page, { conReserva: true });
     await page.clock.setFixedTime(A_LAS('10:30'));
     await page.goto(`${base}/reservar/${SESION_ID}`);

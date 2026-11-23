@@ -51,7 +51,7 @@ async function servidorDeImportacion(page: Page) {
       return json(route, {
         necesitaConfirmacion: 'aforo', error: 'Hay clases que se quedarían por encima de su aforo.',
         clasesSobreAforo: 1, sobreAforoFuturas: 1, sobreAforoPasadas: 0,
-        detalleSobreAforo: ['Mat Suave · lun 1 mar 08:00: 2 reservas para 1 plazas'],
+        detalleSobreAforo: ['Mat Suave · lun 1 mar 08:00: 2 reservas para 1 lugares'],
       }, 409);
     }
     return json(route, { ok: true, importadas: 2, duplicadas: 0, sinSocia: 0, sinSesion: 0, aforoAmpliado: 1, errores: [] });

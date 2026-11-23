@@ -252,7 +252,7 @@ export function lineasDeImpacto(i: ImpactoEdicionSerie): LineaImpacto[] {
     out.push({
       tono: 'dato',
       texto: `${plural(i.alumnasConPlazaFija, 'cliente tiene', 'clientes tienen')} clase fija en estas clases${
-        i.cambian.hora > 0 || i.cambian.sala > 0 ? ': su plaza se mueve con la serie' : ''}.`,
+        i.cambian.hora > 0 || i.cambian.sala > 0 ? ': su lugar se mueve con la serie' : ''}.`,
     });
   }
   if (i.enEspera > 0) {
@@ -270,7 +270,7 @@ export function lineasDeImpacto(i: ImpactoEdicionSerie): LineaImpacto[] {
   if (i.clasesSobreAforo > 0) {
     out.push({
       tono: 'aviso',
-      texto: `Con el aforo en ${i.aforoNuevo}, en ${plural(i.clasesSobreAforo, 'clase hay', 'clases hay')} más confirmadas que plazas. No se mueven a lista de espera solas.`,
+      texto: `Con el aforo en ${i.aforoNuevo}, en ${plural(i.clasesSobreAforo, 'clase hay', 'clases hay')} más confirmadas que lugares. No se mueven a lista de espera solas.`,
     });
   }
 

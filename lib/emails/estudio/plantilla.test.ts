@@ -24,8 +24,8 @@ const MARCA: MarcaCorreo = {
 
 const BASICO = {
   marca: MARCA,
-  preheader: 'Tu plaza está confirmada',
-  titular: 'Tu plaza está reservada',
+  preheader: 'Tu lugar está confirmado',
+  titular: 'Tu lugar está reservado',
   parrafos: ['Hola Ana, ya tienes sitio.'],
   detalle: { titulo: 'Reformer Iniciación', filas: [{ label: 'Fecha', value: 'Lunes 4 de agosto' }] },
   boton: { href: 'https://app.example.com/portal/casa', texto: 'Ver mis clases' },
@@ -52,7 +52,7 @@ test('el botón lleva el padding que Outlook entiende, y solo hay uno', () => {
 
 test('el preheader está, va oculto y no deja que Gmail siga leyendo el cuerpo', () => {
   const html = correoEstudio(BASICO);
-  assert.match(html, /Tu plaza está confirmada/);
+  assert.match(html, /Tu lugar está confirmado/);
   assert.match(html, /display:none;font-size:1px[^"]*mso-hide:all/);
   assert.match(html, /(&nbsp;&zwnj;){10,}/, 'sin relleno, Gmail enseña el principio del correo detrás del asunto');
 });
@@ -226,7 +226,7 @@ test('Outlook no pinta el cuerpo en Times New Roman', () => {
   assert.match(mso, /td, div, p, a, li, span \{ font-family: Arial/);
   // El titular sigue en serif: Georgia sí está instalada en Windows.
   assert.match(mso, /\.f-serif \{ font-family: Georgia/);
-  assert.match(html, /class="f-serif"[^>]*>Tu plaza está reservada/);
+  assert.match(html, /class="f-serif"[^>]*>Tu lugar está reservado/);
 });
 
 test('si la fuente elegida existe en Windows, Outlook la respeta', () => {

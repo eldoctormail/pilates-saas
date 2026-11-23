@@ -343,9 +343,9 @@ export async function POST(req: NextRequest) {
         const html = correoAutomatizacion({
           socioNombre: socia.nombre,
           titulo: `Se ha quedado un hueco en ${nombreClase}`,
-          mensaje: `Se ha liberado una plaza en ${nombreClase} el ${fecha} a las ${hora}. Si te viene bien, es tuya.`,
+          mensaje: `Se ha liberado un lugar en ${nombreClase} el ${fecha} a las ${hora}. Si te viene bien, es tuya.`,
           marca: marcaCorreoDesde(marcaEstudio, nombreEstudio),
-          accion: { url: enlace, texto: 'Reservar mi plaza' },
+          accion: { url: enlace, texto: 'Reservar mi lugar' },
           // LSSI art. 21: toda comunicación comercial lleva enlace de baja. Y
           // aquí no es solo la ley — el consentimiento que firmó la socia
           // promete literalmente poder darse de baja «desde el enlace de baja

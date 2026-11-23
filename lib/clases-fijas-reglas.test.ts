@@ -60,7 +60,7 @@ test('cupo: el tope del estudio, y nunca más que el aforo de la clase', () => {
   assert.equal(cupoDeFranja(franja({ aforo: 4 }), 10), 4);
 });
 
-test('plazas libres: la franja más llena manda', () => {
+test('lugares libres: la franja más llena manda', () => {
   const franjas = [franja({ aforo: 8, ocupadas: 2 }), franja({ aforo: 8, ocupadas: 7, diaSemana: 4 })];
   assert.equal(plazasLibresDeClaseFija(franjas, null), 1);
   assert.equal(plazasLibresDeClaseFija(franjas, 6), -1, 'sobre-suscrita: negativo, la oferta está llena');
@@ -96,7 +96,7 @@ test('franjas que ya tiene: casa por hueco, con la hora en HH:MM:SS o HH:MM', ()
   assert.equal(franjasQueYaTiene(franjas, [plaza(), plaza({ diaSemana: 4, horaInicio: '18:30' })], '2026-09-21'), 2);
 });
 
-test('franjas que ya tiene: una plaza de baja, vencida o de otra sala no cuenta; una en pausa sí', () => {
+test('franjas que ya tiene: un lugar de baja, vencida o de otra sala no cuenta; una en pausa sí', () => {
   const franjas = [franja()];
   assert.equal(franjasQueYaTiene(franjas, [plaza({ estado: 'BAJA' })], '2026-09-21'), 0);
   assert.equal(franjasQueYaTiene(franjas, [plaza({ vigenciaHasta: '2026-09-20' })], '2026-09-21'), 0);
@@ -105,7 +105,7 @@ test('franjas que ya tiene: una plaza de baja, vencida o de otra sala no cuenta;
   assert.equal(franjasQueYaTiene(franjas, [plaza({ estado: 'PAUSADA' })], '2026-09-21'), 1);
 });
 
-test('franjas que ya tiene: una plaza de un tipo concreto solo cubre la franja de ese tipo', () => {
+test('franjas que ya tiene: un lugar de un tipo concreto solo cubre la franja de ese tipo', () => {
   assert.equal(franjasQueYaTiene([franja({ tipoClaseId: 'tc-1' })], [plaza({ tipoClaseId: 'tc-2' })], '2026-09-21'), 0);
   assert.equal(franjasQueYaTiene([franja({ tipoClaseId: 'tc-1' })], [plaza({ tipoClaseId: 'tc-1' })], '2026-09-21'), 1);
 });
@@ -124,7 +124,7 @@ const tarjeta = (cambios: Partial<TarjetaMin> = {}): TarjetaMin => ({
   proximaSesionId: 'ses-9', ultimaFecha: '2026-12-15', aforo: 8, plazasFijas: [{}, {}], ...cambios,
 });
 
-test('resolver franjas: se casa por serie y día, y las plazas que ya tiene la franja son sus ocupadas', () => {
+test('resolver franjas: se casa por serie y día, y los lugares que ya tiene la franja son sus ocupadas', () => {
   const r = resolverFranjas([{ serieId: 'ser-1', diaSemana: 2 }], [tarjeta(), tarjeta({ diaSemana: 4 })]);
   assert.equal(r.length, 1);
   assert.deepEqual([r[0].hora, r[0].salaId, r[0].proximaSesionId, r[0].ocupadas], ['10:00', 'sala-1', 'ses-9', 2]);
@@ -142,7 +142,7 @@ test('texto de una franja: día con mayúscula y hora sin segundos', () => {
   assert.equal(textoFranja(0, '09:00'), 'Domingo 09:00');
 });
 
-test('plazas vencidas que estorban: solo las de la franja que se va a dar, activas o en pausa, con la fecha ya pasada', () => {
+test('lugares vencidos que estorban: solo las de la franja que se va a dar, activas o en pausa, con la fecha ya pasada', () => {
   const p = (id: string, cambios: Record<string, unknown> = {}) => ({ id, diaSemana: 2, horaInicio: '10:00:00', salaId: 'sala-1', tipoClaseId: null, estado: 'ACTIVA', vigenciaHasta: '2026-09-01', ...cambios });
   const franjas = [{ diaSemana: 2, horaInicio: '10:00:00', salaId: 'sala-1' }];
   const HOY = '2026-09-21';
@@ -153,7 +153,7 @@ test('plazas vencidas que estorban: solo las de la franja que se va a dar, activ
   assert.deepEqual(plazasVencidasQueEstorban([p('f', { diaSemana: 4 }), p('g', { salaId: 'sala-2' }), p('h', { horaInicio: '18:30:00' })], franjas, HOY), [], 'otra franja: no se toca');
 });
 
-test('vigencia mínima de una oferta: la más próxima entre las plazas que cubren TODAS sus franjas', () => {
+test('vigencia mínima de una oferta: la más próxima entre los lugares que cubren TODAS sus franjas', () => {
   const franjas = [{ diaSemana: 2, hora: '10:00', salaId: 'sala-1', tipoClaseId: null }, { diaSemana: 4, hora: '18:30', salaId: 'sala-1', tipoClaseId: null }];
   const p = (dia: number, hora: string, hasta: string | null, cambios: Record<string, unknown> = {}) =>
     ({ diaSemana: dia, horaInicio: hora, salaId: 'sala-1', tipoClaseId: null, estado: 'ACTIVA', vigenciaHasta: hasta, ...cambios });
@@ -245,7 +245,7 @@ test('nombreDePlazaSuelta: tipo, día y hora; sin tipo, «Clase»', () => {
   assert.equal(nombreDePlazaSuelta(sueltaQueTermina({ tipo: '  ', diaSemana: 0, horaInicio: '08:30' })), 'Clase · domingo 08:30');
 });
 
-test('agruparTerminanPronto: UN aviso por cliente y fecha de fin, no uno por plaza', () => {
+test('agruparTerminanPronto: UN aviso por cliente y fecha de fin, no uno por lugar', () => {
   const avisos = agruparTerminanPronto([
     sueltaQueTermina({ id: 'pf-a', diaSemana: 5, horaInicio: '18:00:00', tipo: 'Mat' }),
     sueltaQueTermina({ id: 'pf-b', diaSemana: 3 }),

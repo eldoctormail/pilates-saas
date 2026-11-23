@@ -178,7 +178,7 @@ function textoCifra(f: FiltroResumen, n: number): string {
     case 'incidencias': return uno ? 'incidencia' : 'incidencias';
     case 'flojas': return uno ? 'floja' : 'flojas';
     case 'espera': return 'con lista de espera';
-    case 'sobreaforo': return 'con más plazas que su sala';
+    case 'sobreaforo': return 'con más lugares que su sala';
   }
 }
 

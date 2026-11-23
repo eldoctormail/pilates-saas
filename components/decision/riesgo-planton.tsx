@@ -137,7 +137,7 @@ export function RiesgoPlanton() {
         )}
       </div>
       {filas.length === 0 ? (
-        <p className="px-1 text-[12px] text-muted-foreground">Ninguna plaza en riesgo en los próximos {DIAS_VISTA} días.</p>
+        <p className="px-1 text-[12px] text-muted-foreground">Ningún lugar en riesgo en los próximos {DIAS_VISTA} días.</p>
       ) : (
       <div className="rounded-3xl border border-border bg-card p-1">
         {filas.map(f => (
@@ -170,7 +170,7 @@ export function RiesgoPlanton() {
       <p className="px-1 text-[11px] text-muted-foreground">
         Basado en su historial reciente de asistencia.{' '}
         {activo
-          ? 'Con la confirmación activada, se les pide venir y se libera su plaza si no responden a tiempo. Se cambia en Configuración → Cómo reservan mis clientes.'
+          ? 'Con la confirmación activada, se les pide venir y se libera su lugar si no responden a tiempo. Se cambia en Configuración → Cómo reservan mis clientes.'
           : 'Solo informativo — no se envía ningún aviso automático. Se activa en Configuración → Cómo reservan mis clientes.'}
       </p>
     </div>

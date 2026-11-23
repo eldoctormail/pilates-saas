@@ -32,7 +32,7 @@ test('una serie semanal es UNA franja, con su próxima clase y cuántas hay', ()
   assert.equal(f.aforo, 8);
 });
 
-test('dos salas a la misma hora son dos franjas (la plaza se ancla por sala)', () => {
+test('dos salas a la misma hora son dos franjas (el lugar se ancla por sala)', () => {
   const franjas = franjasSemanales([...semanal(2), ...semanal(2, { salaId: 'sala-2' })], [], AHORA);
   assert.equal(franjas.length, 2);
 });
@@ -46,7 +46,7 @@ test('canceladas, pasadas y fuera del horizonte no cuentan', () => {
   assert.deepEqual(franjas, []);
 });
 
-test('reparte las plazas: activas, pausadas; ni bajas, ni otro tipo, ni terminadas', () => {
+test('reparte los lugares: activas, pausadas; ni bajas, ni otro tipo, ni terminadas', () => {
   const [f] = franjasSemanales(semanal(3), [
     pf({ id: 'activa' }),
     pf({ id: 'empieza-luego', vigenciaDesde: '2026-10-01' }),

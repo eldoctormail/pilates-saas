@@ -53,7 +53,7 @@ export function DialogoRepetirMes({ mes, onCerrar, onHecho, onIncierto }: {
         fecha: d.fecha,
         clases: d.clases,
         festivo: d.festivo
-          ? propios.has(d.fecha) ? `Festivo de tu lista: ${d.festivo}` : `Festivo en ${propuesta.zona ?? 'tu comunidad'}: ${d.festivo}`
+          ? propios.has(d.fecha) ? `Feriado de tu lista: ${d.festivo}` : `Feriado en ${propuesta.zona ?? 'tu comunidad'}: ${d.festivo}`
           : null,
         nota: d.festivo && d.abierto ? 'Dijiste que ese día abres' : null,
       }))
@@ -155,13 +155,13 @@ export function DialogoRepetirMes({ mes, onCerrar, onHecho, onIncierto }: {
               : 'Las clases sueltas no se copian. '}
             {propuesta.zona
               ? propios.size > 0
-                ? `Los festivos de ${propuesta.zona} y los de tu lista de Festivos vienen sin marcar.`
-                : `Los festivos de ${propuesta.zona} vienen sin marcar; los locales de tu ciudad, no: revisa esos días.`
+                ? `Los feriados de ${propuesta.zona} y los de tu lista de Feriados vienen sin marcar.`
+                : `Los feriados de ${propuesta.zona} vienen sin marcar; los locales de tu ciudad, no: revisa esos días.`
               : propios.size > 0
-                ? 'No sabemos tu comunidad por la dirección del estudio: vienen sin marcar solo los festivos de tu lista.'
-                : 'No sabemos tu comunidad por la dirección del estudio, así que no marcamos festivos.'}
+                ? 'No sabemos tu comunidad por la dirección del estudio: vienen sin marcar solo los feriados de tu lista.'
+                : 'No sabemos tu comunidad por la dirección del estudio, así que no marcamos feriados.'}
             {propuesta.zona && (propuesta.aniosSinFestivos ?? []).length > 0 &&
-              ` Aún no tenemos los festivos de ${(propuesta.aniosSinFestivos ?? []).join(' y ')}: revisa tú esos días.`}
+              ` Aún no tenemos los feriados de ${(propuesta.aniosSinFestivos ?? []).join(' y ')}: revisa tú esos días.`}
           </p>
           {(propuesta.seriesFuera ?? 0) > 0 && (
             <p className="text-xs font-medium text-warning">

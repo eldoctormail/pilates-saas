@@ -64,7 +64,7 @@ test('sin colisión, la clave es EXACTAMENTE la de antes del arreglo', () => {
   );
 });
 
-test('la instructora con plaza en su propia clase se entera por las dos vías', () => {
+test('la instructora con lugar en su propia clase se entera por las dos vías', () => {
   // El OTRO cruce de frontera, además de `mostrador-y-socia`:
   // `socias-e-instructora-de-la-sesion` (clase.cancelada / clase.modificada).
   // Aquí la que se perdía era la de INSTRUCTOR, no la de socia — `recipients.ts`

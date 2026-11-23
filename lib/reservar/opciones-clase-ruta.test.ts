@@ -25,14 +25,14 @@ test('límite por IP primero, luego la sesión (con su segundo paso) y la socia 
   assert.doesNotMatch(f, /body\.socioId/, 'la socia sale del token, nunca del cuerpo');
 });
 
-test('lo que el cobro mira, aquí también: modo de Stripe, suscripción del estudio, preguntas, ventana y plaza', () => {
+test('lo que el cobro mira, aquí también: modo de Stripe, suscripción del estudio, preguntas, ventana y lugar', () => {
   for (const s of ['comprobarModoStripe()', 'bloqueoPorSuscripcion(studioId)', "bloqueoPorPreguntasAlta(studioId, socioId, 'comprar')",
     'comprobarVentanaReserva(admin', 'comprobarPlazaAntesDeCobrar(admin', 'opcionesDeClase(']) pos(s);
   // Un pago suyo ya cobrado de esta clase se confirma; no se le ofrece pagar otra vez.
   assert.ok(pos(".eq('estado', 'PAGADO')") < pos('comprobarPlazaAntesDeCobrar(admin'));
 });
 
-test('sin plaza, ninguna opción; sin pagos online, solo la prueba gratis', () => {
+test('sin lugar, ninguna opción; sin pagos online, solo la prueba gratis', () => {
   assert.match(f, /opciones: plaza\.ok \? \[\.\.\.opcionPrueba, \.\.\.\(pagosOnline \? opciones : \[\]\)\] : \[\]/);
   assert.match(f, /\(prueba\.gratis \|\| pagosOnline\)/);
 });

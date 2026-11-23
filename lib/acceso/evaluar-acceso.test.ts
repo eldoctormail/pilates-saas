@@ -25,7 +25,7 @@ test('A — sin reserva para esa clase: 🔴 SIN_RESERVA, con la clase de la que
   assert.equal(r.reserva, null);
 });
 
-test('B — plaza fija: 🟢 PLAZA_FIJA (la reconoce por el id que pone el motor)', () => {
+test('B — lugar fijo: 🟢 PLAZA_FIJA (la reconoce por el id que pone el motor)', () => {
   const r = evaluarAcceso(entrada({ reservas: [reserva({ id: 'res-pf-abc', sesionId: 'ses-reformer', estado: 'CONFIRMADA' })] }));
   assert.equal(r.veredicto, 'PERMITIDO');
   assert.equal(r.motivo, 'PLAZA_FIJA');
@@ -201,7 +201,7 @@ test('reservaEnClase: la viva gana; si no, no vino; si no, la última cancelada'
   assert.equal(reservaEnClase(rs, 'otra'), null);
 });
 
-test('tipoDeAcceso: la plaza fija manda sobre cualquier otra marca', () => {
+test('tipoDeAcceso: el lugar fijo manda sobre cualquier otra marca', () => {
   assert.equal(tipoDeAcceso({ id: 'res-pf-1', esRecuperacion: true, esPrueba: true }), 'PLAZA_FIJA');
   assert.equal(tipoDeAcceso({ id: 'res-1', esRecuperacion: false, esPrueba: false }), 'RESERVA');
 });

@@ -172,11 +172,11 @@ test('cero y null no dicen lo mismo, y ninguno se enseña como "0"', () => {
   assert.equal(resumenPenalizacion(12.5), '12,50 €');
 });
 
-test('el aforo vacío se lee como "las plazas de la sala", nunca como cero plazas', () => {
-  assert.equal(resumenAforo(''), 'las plazas de la sala');
-  assert.equal(resumenAforo('0'), 'las plazas de la sala');
-  assert.equal(resumenAforo('1'), '1 plaza');
-  assert.equal(resumenAforo('8'), '8 plazas');
+test('el aforo vacío se lee como "los lugares de la sala", nunca como cero lugares', () => {
+  assert.equal(resumenAforo(''), 'los lugares de la sala');
+  assert.equal(resumenAforo('0'), 'los lugares de la sala');
+  assert.equal(resumenAforo('1'), '1 lugar');
+  assert.equal(resumenAforo('8'), '8 lugares');
 });
 
 test('en la ficha de la clase, un aforo heredado no dice nada en vez de mentir', () => {
@@ -184,8 +184,8 @@ test('en la ficha de la clase, un aforo heredado no dice nada en vez de mentir',
   // sala, la cifra depende de dónde se programe: prometerla ahí sería inventar.
   assert.equal(plazasSiPropias(''), null);
   assert.equal(plazasSiPropias('0'), null);
-  assert.equal(plazasSiPropias('1'), '1 plaza');
-  assert.equal(plazasSiPropias('8'), '8 plazas');
+  assert.equal(plazasSiPropias('1'), '1 lugar');
+  assert.equal(plazasSiPropias('8'), '8 lugares');
 });
 
 // ─── Objetivos ───────────────────────────────────────────────────────────────

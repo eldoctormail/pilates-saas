@@ -280,7 +280,7 @@ function EditorTarjeta({ banner, hoy, onVolver, onAvisar }: {
         <div className="flex items-center gap-2">
           <input
             className={inputCls} value={campos.texto} maxLength={70} aria-label="Texto corto"
-            placeholder="Sábado 25 · 10:00 · quedan 6 plazas"
+            placeholder="Sábado 25 · 10:00 · quedan 6 lugares"
             onChange={e => editar({ texto: e.target.value }, { texto: e.target.value.trim() || null })}
             onBlur={guardado.vaciar}
           />

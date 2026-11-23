@@ -165,9 +165,9 @@ function PlazasVacias({ estado, sinPasarLista, nombreDe }: {
 }) {
   return (
     <div className="mt-6" data-testid="informe-plazas-vacias">
-      <h3 className="text-[13.5px] font-semibold text-foreground">Plazas que dejaron vacías</h3>
+      <h3 className="text-[13.5px] font-semibold text-foreground">Lugares que dejaron vacías</h3>
       <p className="text-[12.5px] text-muted-foreground text-pretty">
-        Quién canceló fuera de plazo o no vino a {UMBRAL_PLAZAS_VACIAS} o más clases del periodo en las que tenía plaza.
+        Quién canceló fuera de plazo o no vino a {UMBRAL_PLAZAS_VACIAS} o más clases del periodo en las que tenía lugar.
         Puede haber un motivo: mira su ficha antes de decirle nada.
       </p>
       {estado.estado === 'cargando' ? (
@@ -177,7 +177,7 @@ function PlazasVacias({ estado, sinPasarLista, nombreDe }: {
           No se ha podido calcular. Vuelve a intentarlo en un rato.
         </p>
       ) : estado.filas.length === 0 ? (
-        <p className="mt-3 text-[13px] text-muted-foreground">Nadie ha dejado {UMBRAL_PLAZAS_VACIAS} o más plazas vacías en este periodo.</p>
+        <p className="mt-3 text-[13px] text-muted-foreground">Nadie ha dejado {UMBRAL_PLAZAS_VACIAS} o más lugares vacíos en este periodo.</p>
       ) : (
         <ol className="mt-3 space-y-2" data-testid="informe-plazas-vacias-lista">
           {estado.filas.map(f => (

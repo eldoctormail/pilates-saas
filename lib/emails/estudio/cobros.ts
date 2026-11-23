@@ -40,7 +40,7 @@ export function correoImpago(p: PropsImpago): string {
     acento: p.definitivo ? ACENTO.alerta : ACENTO.aviso,
   };
   const cuerpo = p.definitivo
-    ? 'hemos intentado cobrar tu cuota varias veces y no ha sido posible. Ponte en contacto con el estudio para regularizar el pago y no perder tu plaza.'
+    ? 'hemos intentado cobrar tu cuota varias veces y no ha sido posible. Ponte en contacto con el estudio para regularizar el pago y no perder tu lugar.'
     : 'hemos intentado cobrar tu cuota y el pago no se ha completado. Lo volveremos a intentar automáticamente en los próximos días — no tienes que hacer nada, pero revisa que tu método de pago esté al día.';
   const preheader = (p.intro?.trim() || cuerpo).slice(0, 90);
   if (p.personalizacion?.cuerpo) {

@@ -40,7 +40,7 @@ test('el emisor da la misma frase y destino a todas, y la clave de siempre (no s
   assert.match(f, /`plaza-fija-termina-pronto:\$\{p\.socioId\}:\$\{p\.hasta\}:\$\{\(p\.plazaIds \?\? \[\]\)\.join\(','\)\}`/);
 });
 
-test('⚠️ el cron avisa de las plazas sueltas en su ventana, solo las vivas y solo las que SÍ tienen fecha, sin tocar las de clase fija con nombre', () => {
+test('⚠️ el cron avisa de los lugares sueltos en su ventana, solo las vivas y solo las que SÍ tienen fecha, sin tocar las de clase fija con nombre', () => {
   const cron = leer('lib/notificaciones/clase-fija-termina-cron.ts');
   const sueltas = cron.slice(cron.indexOf('async function avisarPlazasSueltas'));
   assert.match(sueltas, /\.in\('estado', \['ACTIVA', 'PAUSADA'\]\)/);

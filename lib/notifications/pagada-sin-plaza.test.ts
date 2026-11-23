@@ -47,7 +47,7 @@ test('ya-tenia-reserva: el aviso dice que el pago no se usó y lleva a la ficha 
     socia: 'Una socia', clase: 'Reformer', cuando: 'el martes',
     situacion: SITUACION_PAGADA_SIN_PLAZA['ya-tenia-reserva'].texto,
   });
-  assert.match(texto, /ya tenía plaza/);
+  assert.match(texto, /ya tenía lugar/);
   assert.match(texto, /no se ha usado/);
   assert.equal(avisoLlevaALaFicha('ya-tenia-reserva'), true);
   assert.equal(pl.deepLink!({ sesionId: 'ses-1', socioId: 'soc-1', aLaFicha: true }), '/clientas/soc-1');
@@ -64,7 +64,7 @@ test('emitirReservaPagadaSinPlaza usa la clave de este módulo, no una construid
   assert.match(cuerpo.slice(0, fin), /dedupKey: dedupKeyPagadaSinPlaza\(situacion, p\)/);
 });
 
-test('lo que ya tenía decide el aviso: plaza, cola o pendiente de aprobar', () => {
+test('lo que ya tenía decide el aviso: lugar, cola o pendiente de aprobar', () => {
   assert.equal(situacionYaTenia('CONFIRMADA'), 'ya-tenia-reserva');
   assert.equal(situacionYaTenia('ASISTIDA'), 'ya-tenia-reserva');
   assert.equal(situacionYaTenia('LISTA_ESPERA'), 'ya-en-espera');
@@ -72,15 +72,15 @@ test('lo que ya tenía decide el aviso: plaza, cola o pendiente de aprobar', () 
   assert.equal(situacionYaTenia(null), 'ya-tenia-reserva');
 });
 
-test('en la cola o pendiente de aprobar NO se dice «ya tenía plaza», y se lleva al calendario (no a devolver)', () => {
+test('en la cola o pendiente de aprobar NO se dice «ya tenía lugar», y se lleva al calendario (no a devolver)', () => {
   const pl = plantillaDe(EVENTOS.RESERVA_PAGADA_SIN_PLAZA, 'PROPIETARIO')!;
   const base = { socia: 'Una socia', clase: 'Reformer', cuando: 'el martes' };
   const cola = render(pl.body, { ...base, situacion: SITUACION_PAGADA_SIN_PLAZA['ya-en-espera'].texto });
   assert.match(cola, /lista de espera/);
-  assert.doesNotMatch(cola, /ya tenía plaza/);
+  assert.doesNotMatch(cola, /ya tenía lugar/);
   const pendiente = render(pl.body, { ...base, situacion: SITUACION_PAGADA_SIN_PLAZA['ya-pendiente-aprobacion'].texto });
   assert.match(pendiente, /pendiente de que la aprobéis/);
-  assert.doesNotMatch(pendiente, /ya tenía plaza/);
+  assert.doesNotMatch(pendiente, /ya tenía lugar/);
   assert.equal(avisoLlevaALaFicha('ya-en-espera'), false);
   assert.equal(avisoLlevaALaFicha('ya-pendiente-aprobacion'), false);
   // Por pago, como «ya tenía plaza»: nacen de que haya dos pagos de la misma clase.

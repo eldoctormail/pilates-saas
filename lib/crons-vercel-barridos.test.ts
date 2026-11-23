@@ -80,7 +80,7 @@ test('materializarPlazasFijas no manda los avisos de hueco en serie', () => {
   assert.ok(ini > 0, 'no encuentro materializarPlazasFijas: ¿se renombró?');
   const cuerpo = soloCodigo(fuente.slice(ini, fuente.indexOf('\nexport ', ini + 1)));
 
-  assert.ok(cuerpo.includes('mapLimit('), 'los avisos de plaza no materializada deben ir en paralelo acotado');
+  assert.ok(cuerpo.includes('mapLimit('), 'los avisos de lugar no materializada deben ir en paralelo acotado');
   assert.ok(!/for\s*\(const\s+f\s+of\s+filas/.test(cuerpo), 'volvió el bucle secuencial sobre filas');
 });
 

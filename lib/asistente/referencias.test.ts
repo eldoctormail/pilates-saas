@@ -55,7 +55,7 @@ test('ningún nombre de las fixtures llega a lo que va a Anthropic, ni correos n
 // socia de la recomendación dejaba ese nombre camino de Anthropic.
 test('el texto de una recomendación sale sin el nombre de ningún cliente, aunque no sea la suya', () => {
   const t = tablaReferencias();
-  const motivo = 'Quedan 3 plazas el jueves — la primera, Lucía, suele venir a esa hora';
+  const motivo = 'Quedan 3 lugares el jueves — la primera, Lucía, suele venir a esa hora';
   const { texto } = marcarPersonasEnPregunta(motivo, PERSONAS, t);
   assert.doesNotMatch(texto, /Lucía/);
   assert.match(texto, /\[ALUMNA_\d+\]/);

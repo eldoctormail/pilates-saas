@@ -112,7 +112,7 @@ test('su clase fija, dicho UNA vez: «Tu clase fija · incluida en tu cuota» so
   assert.deepEqual([sinCuota.titulo, sinCuota.detalle], ['Tu clase fija', null]);
 });
 
-test('no se pinta: reserva normal ya hecha, clase empezada sin plaza suya, o llena sin lista de espera', () => {
+test('no se pinta: reserva normal ya hecha, clase empezada sin lugar suya, o llena sin lista de espera', () => {
   assert.equal(vista({ reservas: [{ id: 'res-1', claseId: 'ses-10', estado: 'confirmada' }], disp: 'reservada' }), null);
   assert.equal(vista({ yaNoSeReserva: true }), null);
   assert.equal(vista({ disp: 'no-disponible' }), null);

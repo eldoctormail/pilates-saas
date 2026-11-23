@@ -65,7 +65,7 @@ test('⚠️ la tabla cubre TODOS los códigos de reserva: uno nuevo sin fila ro
   assert.deepEqual([...CODIGOS_CLASIFICADOS].sort(), [...new Set(declarados)].sort());
 });
 
-test('el intento: la clave es el INTENTO, y el id de reserva nunca es de plaza fija', () => {
+test('el intento: la clave es el INTENTO, y el id de reserva nunca es de lugar fijo', () => {
   const intento = 'abcdef0123456789ABCD';
   assert.equal(normalizarIntento(intento), intento);
   for (const mal of ['corto', 'a'.repeat(65), 'con espacios 1234567890', 'pf-0123456789abcdef', 'PF_0123456789abcdef', '', null, undefined, 123]) {
@@ -79,7 +79,7 @@ test('el intento: la clave es el INTENTO, y el id de reserva nunca es de plaza f
   for (let i = 0; i < MAX_PROXIMAS; i++) {
     const id = idReservaDeIntento(intento, i);
     assert.match(id, /^res-[A-Za-z0-9_-]{1,96}$/);
-    assert.ok(!id.startsWith('res-pf-'), 'nunca el prefijo de las plazas fijas');
+    assert.ok(!id.startsWith('res-pf-'), 'nunca el prefijo de los lugares fijos');
   }
 });
 

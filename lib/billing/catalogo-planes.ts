@@ -81,10 +81,10 @@ export const CATEGORIAS: CategoriaPlan[] = [
     filas: [
       { nombre: 'Reservas online para tus alumnas', detalle: 'Desde el móvil, sin llamarte ni escribirte.', valor: TODOS },
       { nombre: 'Widget de reservas en tu web', detalle: 'Se incrusta en tu página actual; no hace falta cambiarla.', valor: TODOS },
-      { nombre: 'Lista de espera automática', detalle: 'Cuando alguien cancela, la plaza se ofrece sola a la siguiente.', valor: TODOS },
+      { nombre: 'Lista de espera automática', detalle: 'Cuando alguien cancela, el lugar se ofrece solo a la siguiente.', valor: TODOS },
       { nombre: 'Reglas de reserva por tipo de clase', detalle: 'Antelación, plan obligatorio, aprobación manual y mínimo de asistentes.', valor: TODOS },
       { nombre: 'Políticas de cancelación y no-show', detalle: 'Ventana de cancelación, devolución de bono y penalización opcional.', valor: TODOS },
-      { nombre: 'Plazas fijas y recuperaciones', detalle: 'Su hueco de cada semana, reservado solo. Se pausa por vacaciones sin perder el sitio, y tú decides qué pasa con sus clases si se queda sin cuota.', valor: TODOS },
+      { nombre: 'Lugares fijos y recuperaciones', detalle: 'Su hueco de cada semana, reservado solo. Se pausa por vacaciones sin perder el sitio, y tú decides qué pasa con sus clases si se queda sin cuota.', valor: TODOS },
     ],
   },
   {

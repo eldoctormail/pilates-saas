@@ -107,11 +107,11 @@ test('el reintento nunca inventa un estado, y termina el ticket a 0 € que se q
   assert.match(reintento, /Math\.round\(total \* 100\) <= 0[\s\S]*?return cerrarTicketACero\(\);/);
 });
 
-test('anular solo suelta las plazas y cierra el intento con la venta anulada de verdad', () => {
+test('anular solo suelta los lugares y cierra el intento con la venta anulada de verdad', () => {
   const anular = tramo('async function anularVentaSinCobro(', '\n}\n');
   const error = anular.search(/if \(error\) \{/);
   const noAnulo = anular.search(/if \(anulada !== true\) \{/);
   const plazas = anular.search(/liberarPlaza\(/);
-  assert.ok(error > 0 && noAnulo > error && plazas > noAnulo, 'las plazas se sueltan después de saber que se anuló');
+  assert.ok(error > 0 && noAnulo > error && plazas > noAnulo, 'los lugares se sueltan después de saber que se anuló');
   assert.match(anular.slice(noAnulo, plazas), /if \(v\.estado === 'PAGADA'\) return \{ pagada: true \};/);
 });

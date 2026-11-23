@@ -72,7 +72,7 @@ export function detectarAlertas(e: EntradaAlertas): AlertaApertura[] {
       tipo: 'CAPACIDAD_LLENA',
       severidad: 'ALTA',
       titulo: 'Tus clases se van a llenar',
-      descripcion: `Ocupación prevista ${pct(a.ocupacionPrevista)}: ${a.demandaComprometida} plazas para ${a.capacidadPublicada} publicadas. Publica más horarios antes de que alguien se quede fuera.`,
+      descripcion: `Ocupación prevista ${pct(a.ocupacionPrevista)}: ${a.demandaComprometida} lugares para ${a.capacidadPublicada} publicados. Publica más horarios antes de que alguien se quede fuera.`,
       href: '/calendario',
     });
   }
@@ -82,7 +82,7 @@ export function detectarAlertas(e: EntradaAlertas): AlertaApertura[] {
       tipo: 'PREVENTA_LENTA',
       severidad: 'MEDIA',
       titulo: 'La preventa va lenta',
-      descripcion: `Quedan ${dias(d)} y tus cuotas cubren el ${pct(a.ocupacionPrevista)} de las plazas; tu objetivo es el ${pct(e.objetivoPreventa)}.`,
+      descripcion: `Quedan ${dias(d)} y tus cuotas cubren el ${pct(a.ocupacionPrevista)} de los lugares; tu objetivo es el ${pct(e.objetivoPreventa)}.`,
       href: '/productos',
     });
   }
@@ -91,7 +91,7 @@ export function detectarAlertas(e: EntradaAlertas): AlertaApertura[] {
   // desde la etapa (Mensajería prerrellenada). Se resuelve sola al cerrarse.
   for (const et of e.hoy ? e.etapas.filter(x => tocaRecordarFinEtapa(x, e.hoy!)) : []) {
     const d = diasParaFinEtapa(et, e.hoy!)!;
-    const quedan = et.limitePlazas !== null ? ` y quedan ${et.limitePlazas - et.ventas} plazas` : '';
+    const quedan = et.limitePlazas !== null ? ` y quedan ${et.limitePlazas - et.ventas} lugares` : '';
     out.push({
       tipo: `ETAPA_TERMINA:${et.id}`,
       severidad: 'BAJA',

@@ -264,7 +264,7 @@ test.describe('Cobrar la clase suelta al añadir a un cliente', () => {
   });
 
   for (const [caso, respuesta] of [
-    ['el servidor no da la plaza', { status: 400, body: { error: 'Este cliente ya tiene una reserva a esa hora.' } }],
+    ['el servidor no da el lugar', { status: 400, body: { error: 'Este cliente ya tiene una reserva a esa hora.' } }],
     ['el precio ha cambiado', { status: 409, body: { error: 'El precio de esta clase ha cambiado: ahora son 18,00 €. Vuelve a abrirla para cobrar el de ahora.' } }],
     ['el servidor se cae', { status: 500, body: { error: 'No se ha podido apuntar. Inténtalo otra vez.' } }],
   ] as const) {

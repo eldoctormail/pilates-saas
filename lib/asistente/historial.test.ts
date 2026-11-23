@@ -68,7 +68,7 @@ test(`ventana de ${TURNOS_MAX} turnos que se recorta de seis en seis`, () => {
 
 test('un turno con una propuesta ya hecha lleva una marca corta: el modelo no la repite ni la da por pendiente', () => {
   const m = [
-    { role: 'user', content: 'Créame una sala llamada reformer avanzado de 8 plazas' },
+    { role: 'user', content: 'Créame una sala llamada reformer avanzado de 8 lugares' },
     { role: 'assistant', content: [{ type: 'tool_use', id: 't', name: 'proponer_sala', input: { nombre: 'Reformer avanzado', capacidad: 8 } }] },
     { role: 'user', content: [{ type: 'tool_result', tool_use_id: 't', content: '{}' }] },
     { role: 'assistant', content: [{ type: 'text', text: 'Propongo la sala; confirma.' }] },

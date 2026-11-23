@@ -14,7 +14,7 @@ const reserva = (over: Partial<Reserva> = {}): Reserva => ({
   creadaEn: '2026-09-01T10:00:00Z', ...over,
 });
 
-test('disponibilidad: mi reserva gana sobre las plazas libres', () => {
+test('disponibilidad: mi reserva gana sobre los lugares libres', () => {
   // Aunque la clase esté llena, si es MÍA se pinta «reservada», no «completa».
   assert.equal(disponibilidad(clase({ plazasLibres: 0 }), [reserva()], true), 'reservada');
   assert.equal(disponibilidad(clase({ plazasLibres: 0 }), [reserva({ estado: 'en-espera' })], true), 'lista-espera');
@@ -24,7 +24,7 @@ test('disponibilidad: una reserva cancelada no cuenta como mía', () => {
   assert.equal(disponibilidad(clase(), [reserva({ estado: 'cancelada' })], true), 'disponible');
 });
 
-test('disponibilidad: sin plazas depende de si el estudio admite espera', () => {
+test('disponibilidad: sin lugares depende de si el estudio admite espera', () => {
   assert.equal(disponibilidad(clase({ plazasLibres: 0 }), [], true), 'completa');
   assert.equal(disponibilidad(clase({ plazasLibres: 0 }), [], false), 'no-disponible');
 });

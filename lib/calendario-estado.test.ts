@@ -133,7 +133,7 @@ test('pideDecision: PROGRAMADA/EN_CURSO/FINALIZADA sin espera ni sobreaforo no p
   }
 });
 
-test('pideDecision: PROGRAMADA con lista de espera Y hueco libre SÍ pide decisión (ofrecer plaza)', () => {
+test('pideDecision: PROGRAMADA con lista de espera Y hueco libre SÍ pide decisión (ofrecer lugar)', () => {
   assert.equal(pideDecision('PROGRAMADA', { enEspera: 2, sobreaforo: 0, huecosLibres: 1 }), true);
 });
 
@@ -168,7 +168,7 @@ test('pideDecision: SIN_PASAR_LISTA sigue pidiendo decisión aunque la clase est
   assert.equal(pideDecision('SIN_PASAR_LISTA', { enEspera: 0, sobreaforo: 0, huecosLibres: 0, finalizada: true }), true);
 });
 
-test('pideDecision: lista de espera/sobreaforo de una clase finalizada tampoco piden decisión — no se puede ofrecer una plaza de una clase que ya pasó', () => {
+test('pideDecision: lista de espera/sobreaforo de una clase finalizada tampoco piden decisión — no se puede ofrecer un lugar de una clase que ya pasó', () => {
   assert.equal(pideDecision('PROGRAMADA', { enEspera: 2, sobreaforo: 0, huecosLibres: 1, finalizada: true }), false);
   assert.equal(pideDecision('EN_CURSO', { enEspera: 0, sobreaforo: 1, huecosLibres: 0, finalizada: true }), false);
 });

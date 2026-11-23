@@ -99,14 +99,14 @@ async function abrirNuevaClase(page: Page) {
   await page.getByTestId('crear-clase-suelta').click();
 }
 
-test.describe('El aforo sabe cuántas plazas tiene la sala', () => {
+test.describe('El aforo sabe cuántos lugares tiene la sala', () => {
   test('al elegir sala, el aforo pasa a ser el de esa sala', async ({ page }) => {
     await mockBackend(page);
     await seedSesionDeDuena(page);
     await abrirNuevaClase(page);
 
     const sala = page.getByRole('dialog', { name: 'Nueva clase' }).getByRole('combobox', { name: 'Sala' });
-    const aforo = page.getByRole('spinbutton', { name: /Plazas/i });
+    const aforo = page.getByRole('spinbutton', { name: /Lugares/i });
     await expect(sala).toBeVisible();
 
     await sala.selectOption('sala-reformer');
@@ -126,7 +126,7 @@ test.describe('El aforo sabe cuántas plazas tiene la sala', () => {
     await abrirNuevaClase(page);
 
     const sala = page.getByRole('dialog', { name: 'Nueva clase' }).getByRole('combobox', { name: 'Sala' });
-    const aforo = page.getByRole('spinbutton', { name: /Plazas/i });
+    const aforo = page.getByRole('spinbutton', { name: /Lugares/i });
 
     await sala.selectOption('sala-mat');
     await expect(aforo).toHaveValue('25');
@@ -142,7 +142,7 @@ test.describe('El aforo sabe cuántas plazas tiene la sala', () => {
     await abrirNuevaClase(page);
 
     const sala = page.getByRole('dialog', { name: 'Nueva clase' }).getByRole('combobox', { name: 'Sala' });
-    const aforo = page.getByRole('spinbutton', { name: /Plazas/i });
+    const aforo = page.getByRole('spinbutton', { name: /Lugares/i });
 
     await sala.selectOption('sala-reformer');
     // Acotado al aviso propio: `role="alert"` lo usa también el anunciador de
@@ -152,7 +152,7 @@ test.describe('El aforo sabe cuántas plazas tiene la sala', () => {
 
     await aforo.fill('12');
     const aviso = page.getByRole('alert').filter({ hasText: 'Sala Reformer' });
-    await expect(aviso).toContainText('8 plazas');
+    await expect(aviso).toContainText('8 lugares');
     await expect(aviso, 'dice cuántas sobran, no solo que hay un problema')
       .toContainText('4 más de las que caben');
 

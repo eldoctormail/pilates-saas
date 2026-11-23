@@ -55,7 +55,7 @@ test.describe('Student PWA · clase fija y recuperaciones', () => {
     await expect(page.getByText('2 clases por recuperar')).toHaveCount(0);
   });
 
-  test('sin plaza ni recuperaciones no se pinta nada (ni en Mi plan ni en Inicio)', async ({ page }) => {
+  test('sin lugar ni recuperaciones no se pinta nada (ni en Mi plan ni en Inicio)', async ({ page }) => {
     await montar(page, { plaza: false, recuperaciones: 0 });
     await page.goto(`${base}/bonos`);
     await expect(page.getByRole('heading', { name: 'Mi plan' })).toBeVisible({ timeout: 30_000 });
@@ -476,7 +476,7 @@ test.describe('Student PWA · cómo pedir una clase fija', () => {
     await expect(interruptor).toHaveAttribute('data-estado', 'encendido');
   });
 
-  test('una plaza que salió de una clase fija con nombre (de antes de retirarlas): encendida, y al dejarla avisa de que deja todos sus días', async ({ page }) => {
+  test('un lugar que salió de una clase fija con nombre (de antes de retirarlas): encendida, y al dejarla avisa de que deja todos sus días', async ({ page }) => {
     await montarClaseQueSeRepite(page, 'cuota', { laTiene: true, deClaseFijaConNombre: true });
     await contarPeticiones(page, { status: 200, body: { ok: true, plazas: 2, canceladas: 4, mantenidas: 0, fallidas: 0, sinDejar: 0 } });
     await page.goto(`${base}/reservar/${SESION_ID}`, { waitUntil: 'domcontentloaded' });
@@ -795,7 +795,7 @@ test.describe('Student PWA · tu clase fija', () => {
   test.describe.configure({ timeout: 120_000 });
   test.use({ viewport: { width: 390, height: 844 } });
 
-  test('dice que la plaza está reservada sola y enseña las próximas clases que ya tiene', async ({ page }) => {
+  test('dice que el lugar está reservado sola y enseña las próximas clases que ya tiene', async ({ page }) => {
     await montarConClaseFija(page, { reservaAMano: true });
     await page.goto(`${base}/mis-reservas?tab=fijas`);
     const tarjeta = page.getByTestId('mi-clase-fija');

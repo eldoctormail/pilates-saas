@@ -112,8 +112,8 @@ export function frasesPoliticaEstudio(p: PoliticaEstudio): FrasePolitica[] {
     frases.push({
       id: 'plaza-liberada',
       texto: plazo > 0
-        ? `Si se libera una plaza, la primera de la lista tiene ${duracion(plazo)} para aceptarla; si no, pasa a la siguiente.`
-        : 'Si se libera una plaza, se la da al momento a la primera de la lista de espera.',
+        ? `Si se libera un lugar, la primera de la lista tiene ${duracion(plazo)} para aceptarla; si no, pasa a la siguiente.`
+        : 'Si se libera un lugar, se la da al momento a la primera de la lista de espera.',
       respaldo: ['permiteListaEspera', 'listaEsperaPlazoAceptacionMinutos'],
       tarjeta: 'lista-de-espera',
     });

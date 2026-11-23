@@ -127,7 +127,7 @@ function reglaA3(clave: string, franja: FranjaRecurrente, franjas: Map<string, F
     },
     riesgo: 'OPORTUNIDAD',
     impacto: valor > 0
-      ? { valor, unidad: 'EUR_MES', formula: `${plazasVacias} plazas vacías × ${conMoneda(redondear2(precioMedio), '')}/sesión × 4.33 semanas` }
+      ? { valor, unidad: 'EUR_MES', formula: `${plazasVacias} lugares vacíos × ${conMoneda(redondear2(precioMedio), '')}/sesión × 4.33 semanas` }
       : undefined,
     confianza,
     accion: { tipo: 'MARCAR_GESTIONADO' },
@@ -177,7 +177,7 @@ function reglaA1(clave: string, franja: FranjaRecurrente, s: SnapshotEstudio, id
   // Coste de oportunidad mensual de las plazas que quedan sin vender en la franja.
   const valor = redondear2(plazasVacias * precioMedio * 4.33);
 
-  const motivoMotor = `Lleva ${ocurrenciasVacias} semanas con una media de ${asistentesMedios} personas (de ${referencia.aforoMaximo} plazas).${fraseTendencia(franja, ocurrenciasVacias)} O la promocionamos o la fusionamos con otra — así no pagas sala e instructora para media clase.`;
+  const motivoMotor = `Lleva ${ocurrenciasVacias} semanas con una media de ${asistentesMedios} personas (de ${referencia.aforoMaximo} lugares).${fraseTendencia(franja, ocurrenciasVacias)} O la promocionamos o la fusionamos con otra — así no pagas sala e instructora para media clase.`;
 
   return {
     especialista: 'AGENDA',
@@ -191,7 +191,7 @@ function reglaA1(clave: string, franja: FranjaRecurrente, s: SnapshotEstudio, id
     },
     riesgo: 'OPORTUNIDAD',
     impacto: valor > 0
-      ? { valor, unidad: 'EUR_MES', formula: `${plazasVacias} plazas vacías × ${conMoneda(redondear2(precioMedio), '')}/sesión × 4.33 semanas` }
+      ? { valor, unidad: 'EUR_MES', formula: `${plazasVacias} lugares vacíos × ${conMoneda(redondear2(precioMedio), '')}/sesión × 4.33 semanas` }
       : undefined,
     confianza,
     accion: { tipo: 'MARCAR_GESTIONADO' },
@@ -255,7 +255,7 @@ function reglaA2(s: SnapshotEstudio, idx: IndicesSenal, now: Date): Candidata | 
     datosUsados: { clasesEvaluadas: pasadas.length, clasesVacias: nVacias, ocupacionMediaPct: ocupMediaPct, semanas: A2_DIAS / 7 },
     riesgo: 'PERDIDA',
     impacto: valor > 0
-      ? { valor, unidad: 'EUR_MES', formula: `${redondear1(plazasVaciasPorSemana)} plazas vacías/semana en ${nVacias} clases casi vacías × ${conMoneda(redondear2(precioMedio), '')} × 4.33` }
+      ? { valor, unidad: 'EUR_MES', formula: `${redondear1(plazasVaciasPorSemana)} lugares vacíos/semana en ${nVacias} clases casi vacías × ${conMoneda(redondear2(precioMedio), '')} × 4.33` }
       : undefined,
     confianza,
     accion: { tipo: 'MARCAR_GESTIONADO' },
@@ -337,7 +337,7 @@ function reglaA4(
     ? ` Tengo ${candidatas.length} ${candidatas.length === 1 ? 'cliente compatible' : 'clientes compatibles'} a las que ofrecérsela — la primera, ${candidatas[0].nombre}, ${candidatas[0].motivo}.`
     : ' No encuentro clientes compatibles con plan en vigor a las que ofrecérsela, así que aquí toca promoción, no avisos.';
 
-  const motivoMotor = `Lleva ${p.reservasAhora} de ${p.aforo} plazas a ${dias} ${dias === 1 ? 'día' : 'días'} vista, cuando a estas alturas suele llevar ${redondear1(p.referenciaHabitual)}. Al ritmo normal acabaría sobre ${redondear1(p.ocupacionPrevista)}, así que se quedarían ${plazasLibresPrevistas} plazas sin vender.${frasePronostico}${fraseCandidatas}`;
+  const motivoMotor = `Lleva ${p.reservasAhora} de ${p.aforo} lugares a ${dias} ${dias === 1 ? 'día' : 'días'} vista, cuando a estas alturas suele llevar ${redondear1(p.referenciaHabitual)}. Al ritmo normal acabaría sobre ${redondear1(p.ocupacionPrevista)}, así que se quedarían ${plazasLibresPrevistas} lugares sin vender.${frasePronostico}${fraseCandidatas}`;
 
   return {
     especialista: 'AGENDA',
@@ -358,7 +358,7 @@ function reglaA4(
     },
     riesgo: 'OPORTUNIDAD',
     impacto: valor > 0
-      ? { valor, unidad: 'EUR', formula: `${plazasLibresPrevistas} plazas previstas sin vender × ${conMoneda(redondear2(precioMedio), '')}/sesión` }
+      ? { valor, unidad: 'EUR', formula: `${plazasLibresPrevistas} lugares previstas sin vender × ${conMoneda(redondear2(precioMedio), '')}/sesión` }
       : undefined,
     confianza,
     ...(prediccion ? { prediccion } : {}),

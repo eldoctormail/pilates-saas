@@ -4,7 +4,7 @@ import { altasDelMes, altasPorMes, ingresosAlDia, ingresosPorMes, lunesDe, marca
 
 const dia = (inicio: string) => inicio.slice(0, 10);
 
-test('la ocupación es de plazas, no la media de porcentajes por clase', () => {
+test('la ocupación es de lugares, no la media de porcentajes por clase', () => {
   const sesiones = [
     { id: 'a', inicio: '2026-10-14T09:00:00Z', aforoMaximo: 4 },
     { id: 'b', inicio: '2026-10-14T18:00:00Z', aforoMaximo: 12 },

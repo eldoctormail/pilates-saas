@@ -127,7 +127,7 @@ export const DEFINICIONES: Definicion[] = [
     id: 'reservas-pendientes-sin-expirar',
     que: 'Reservas pendientes de aprobación cuya clase ya empezó hace más de 15 minutos.',
     impacto:
-      'La socia no recibe el aviso de que su plaza decayó. La corrección está a salvo (la guardia vive en la RPC), ' +
+      'La socia no recibe el aviso de que su lugar decayó. La corrección está a salvo (la guardia vive en la RPC), ' +
       'pero que esto crezca significa que el cron de reservas pendientes no está corriendo.',
     umbralAviso: 1,
     umbralFallo: 10,
@@ -139,9 +139,9 @@ export const DEFINICIONES: Definicion[] = [
   },
   {
     id: 'ofertas-lista-espera-sin-expirar',
-    que: 'Ofertas de plaza de lista de espera caducadas hace más de 15 minutos y sin resolver.',
+    que: 'Ofertas de lugar de lista de espera caducadas hace más de 15 minutos y sin resolver.',
     impacto:
-      'La plaza se queda bloqueada por alguien que ya no puede aceptarla, y la siguiente de la cola no llega a ' +
+      'El lugar se queda bloqueado por alguien que ya no puede aceptarlo, y la siguiente de la cola no llega a ' +
       'enterarse de que había hueco. Indica que el cron de ofertas no está corriendo.',
     umbralAviso: 1,
     umbralFallo: 10,

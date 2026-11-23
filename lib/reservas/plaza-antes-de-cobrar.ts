@@ -73,7 +73,7 @@ export const MENSAJES_PLAZA: Record<CodigoPlazaAntesDeCobrar, string> = {
   'estudio-cerrado': 'El estudio está cerrado ese día. No te hemos cobrado nada.',
   'sesion-no-encontrada': 'No encontramos esta clase. No te hemos cobrado nada.',
   'no-autorizado': 'No hemos podido comprobar tu cuenta: vuelve a entrar. No te hemos cobrado nada.',
-  error: 'No hemos podido comprobar la plaza. Inténtalo en un momento: no te hemos cobrado nada.',
+  error: 'No hemos podido comprobar el lugar. Inténtalo en un momento: no te hemos cobrado nada.',
 };
 
 const CONOCIDOS = new Set(Object.keys(MENSAJES_PLAZA));

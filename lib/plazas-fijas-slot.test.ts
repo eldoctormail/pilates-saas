@@ -67,7 +67,7 @@ test('vigencia: fuera del rango no encaja, en los bordes sí (ambos inclusivos)'
   assert.equal(sesionEncajaEnPlaza(pf({ id: 'p', vigenciaHasta: '2026-08-31' }), ses({ id: 'a', inicio: MARTES_10_UTC })), false);
 });
 
-test('la hora de la plaza puede venir como HH:MM (formulario) o HH:MM:SS (columna)', () => {
+test('la hora del lugar puede venir como HH:MM (formulario) o HH:MM:SS (columna)', () => {
   assert.equal(normalizarHoraInicio('10:00'), '10:00:00');
   assert.equal(normalizarHoraInicio('10:00:00'), '10:00:00');
   const corta = pf({ id: 'p', horaInicio: HORA.slice(0, 5) });
@@ -75,14 +75,14 @@ test('la hora de la plaza puede venir como HH:MM (formulario) o HH:MM:SS (column
 });
 
 // ── plazasFijasSinSesion ─────────────────────────────────────────────────────
-test('plaza con clases semanales en su slot dentro del horizonte: no es huérfana', () => {
+test('lugar con clases semanales en su slot dentro del horizonte: no es huérfana', () => {
   assert.deepEqual(plazasFijasSinSesion([pf({ id: 'p' })], serieSemanal(8), AHORA), []);
 });
 
 // El bug de origen: el estudio movió la clase (editar serie / arrastrar) y la
 // plaza sigue anclada al slot viejo. Hay horario de sobra, pero ninguna sesión
 // encaja → huérfana.
-test('la clase se movió de hora: la plaza anclada a la hora vieja es huérfana', () => {
+test('la clase se movió de hora: el lugar anclado a la hora vieja es huérfana', () => {
   const movidas = serieSemanal(8, { inicio: undefined }).map((s, i) => ({
     ...s, inicio: new Date(Date.parse('2026-09-01T11:00:00Z') + i * 7 * DIA_MS).toISOString(),
   }));
@@ -90,7 +90,7 @@ test('la clase se movió de hora: la plaza anclada a la hora vieja es huérfana'
   assert.deepEqual(huerfanas.map(p => p.id), ['p']);
 });
 
-test('la clase se movió de sala: huérfana; una plaza en la sala nueva no lo es', () => {
+test('la clase se movió de sala: huérfana; un lugar en la sala nueva no lo es', () => {
   const enSala2 = serieSemanal(8, { salaId: 'sala-2' });
   const res = plazasFijasSinSesion([pf({ id: 'vieja' }), pf({ id: 'nueva', salaId: 'sala-2' })], enSala2, AHORA);
   assert.deepEqual(res.map(p => p.id), ['vieja']);
@@ -145,7 +145,7 @@ test('las sesiones pasadas no cuentan: solo mira hacia delante', () => {
   assert.deepEqual(plazasFijasSinSesion([pf({ id: 'p' })], [...pasadas, ...futuro], AHORA).map(p => p.id), ['p']);
 });
 
-test('el horizonte recorta la búsqueda: una clase que encaja a 10 semanas no salva a la plaza', () => {
+test('el horizonte recorta la búsqueda: una clase que encaja a 10 semanas no salva al lugar', () => {
   const lejana = ses({ id: 'lejos', inicio: new Date(Date.parse(MARTES_10_UTC) + 10 * 7 * DIA_MS).toISOString() });
   const cerca = serieSemanal(4, { salaId: 'sala-2' });
   assert.deepEqual(plazasFijasSinSesion([pf({ id: 'p' })], [...cerca, lejana], AHORA).map(p => p.id), ['p']);

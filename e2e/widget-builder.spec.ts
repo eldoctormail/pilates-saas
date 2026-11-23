@@ -1456,7 +1456,7 @@ test.describe('Fase D: el botón del popup sigue el estilo, la copia a mano cuen
     await expect(snippet(page)).toContainText('border-radius:999px;border-radius:var(--tentare-boton-radio,999px);');
 
     await paso(page, 'Ponlo en tu web');
-    await expect(comoLlega(page)).toContainText('Siempre al día: Tus clases, precios y plazas.');
+    await expect(comoLlega(page)).toContainText('Siempre al día: Tus clases, precios y lugares.');
     await expect(comoLlega(page)).toContainText('Con «Aplicar en mi web»: El estilo de tus widgets, dentro de la ventana y en el botón que la abre (su color y sus esquinas).');
     await page.getByRole('button', { name: 'Copiar código' }).click();
     await expect(page.getByRole('button', { name: 'Copiado' })).toBeVisible();
@@ -1783,7 +1783,7 @@ test.describe('Fase E: sin marco sigue el estilo de sus widgets y dice qué vers
   test('E2 · sin nada elegido lo dice, igual que con un diseño propio; y «Ponlo en tu web» cuenta lo que se actualiza solo en cada caso', async ({ page }) => {
     await montar(page, { plataforma: 'otra' });
     await sinMarco(page);
-    await expect(comoLlega(page)).toContainText('Siempre al día: Tus clases, precios y plazas, y tu color (con la letra de tu web).');
+    await expect(comoLlega(page)).toContainText('Siempre al día: Tus clases, precios y lugares, y tu color (con la letra de tu web).');
     await expect(comoLlega(page)).toContainText('Con «Aplicar en mi web»: El estilo de tus widgets, en cuanto apliques uno.');
     await expect(page.getByText(/Ocupa su hueco en tu web como si fuera suyo y, sin un diseño propio, toma la letra de tu web mientras no elijas otra en «Cómo se ve»/)).toBeVisible();
 
@@ -1813,7 +1813,7 @@ test.describe('Fase E: sin marco sigue el estilo de sus widgets y dice qué vers
     await expect(tarjetaComo(page)).not.toContainText(AVISO_SIN_NADA_PROPIA);
     await expect(page.getByText(/«Como tu app» (le )?deja/)).toHaveCount(0);
     await paso(page, 'Ponlo en tu web');
-    await expect(comoLlega(page)).toContainText('Siempre al día: Tus clases, precios y plazas.');
+    await expect(comoLlega(page)).toContainText('Siempre al día: Tus clases, precios y lugares.');
     // Con su propio diseño, el estilo de sus widgets no le llega: nada que aplicar.
     await expect(comoLlega(page)).not.toContainText('Con «Aplicar en mi web»');
   });

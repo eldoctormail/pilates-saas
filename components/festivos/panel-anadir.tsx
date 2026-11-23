@@ -48,7 +48,7 @@ export function PanelAnadirFestivos({ open, onClose, modoInicial, localidadInici
     <DashboardDrawer
       open={open}
       onClose={onClose}
-      label="Añadir festivos"
+      label="Añadir feriados"
       sheetClassName="relative flex h-full w-full flex-col bg-card shadow-[-20px_0_60px_-20px_rgba(0,0,0,0.3)] lg:w-[520px]"
     >
       {/* Se vuelve a montar al abrir: cada vez empieza limpio, con la localidad del estudio. */}
@@ -75,10 +75,10 @@ function Contenido({ modoInicial, localidadInicial, hoy, puedeVerCierres, onClos
     <>
       <header className="flex items-start justify-between gap-3 border-b border-border px-5 py-4">
         <div className="min-w-0">
-          <h2 className="text-[18px] font-bold leading-tight text-foreground">{modo === 'buscar' ? 'Añadir festivos' : 'Añadir un festivo a mano'}</h2>
+          <h2 className="text-[18px] font-bold leading-tight text-foreground">{modo === 'buscar' ? 'Añadir feriados' : 'Añadir un feriado a mano'}</h2>
           <p className="mt-0.5 text-[12.5px] text-muted-foreground text-pretty">
             {modo === 'buscar'
-              ? 'Busca los de tu localidad y elige cuáles son festivo en tu estudio.'
+              ? 'Busca los de tu localidad y elige cuáles son feriado en tu estudio.'
               : 'Un día que tu estudio no abre y no está en ningún boletín: un puente, la fiesta de tu barrio…'}
           </p>
         </div>
@@ -178,7 +178,7 @@ function Buscar({ localidadInicial, hoy, onManual, onGuardados }: {
       <div className="flex-1 space-y-4 overflow-y-auto px-5 py-4">
         <form onSubmit={buscar} className="space-y-3 rounded-2xl border border-border bg-muted/40 p-4">
           <p className="text-[12.5px] leading-snug text-muted-foreground text-pretty">
-            Te enseñamos <strong className="font-semibold text-foreground">todos los festivos</strong> de tu localidad hasta final de {Number(hoy.slice(0, 4)) + 1}:
+            Te enseñamos <strong className="font-semibold text-foreground">todos los feriados</strong> de tu localidad hasta final de {Number(hoy.slice(0, 4)) + 1}:
             {' '}los nacionales y los de tu comunidad, del boletín oficial, y las <strong className="font-semibold text-foreground">fiestas locales</strong>, que busca la IA en el boletín y en la web de tu ayuntamiento.
           </p>
           <label className="block">
@@ -199,7 +199,7 @@ function Buscar({ localidadInicial, hoy, onManual, onGuardados }: {
           <BotonBordeVivo type="submit" disabled={buscando || !localidad.trim()} buscando={buscando} className="w-full">
             {buscando
               ? <><Loader2 size={16} className="animate-spin" aria-hidden /> Buscando…</>
-              : <><Sparkles size={16} style={{ color: 'var(--t-magenta-500)' }} aria-hidden /> {busqueda ? 'Buscar otra vez' : 'Buscar los festivos de mi localidad'}</>}
+              : <><Sparkles size={16} style={{ color: 'var(--t-magenta-500)' }} aria-hidden /> {busqueda ? 'Buscar otra vez' : 'Buscar los feriados de mi localidad'}</>}
           </BotonBordeVivo>
         </form>
 
@@ -208,7 +208,7 @@ function Buscar({ localidadInicial, hoy, onManual, onGuardados }: {
         {buscando && <Buscando localidad={localidad.trim()} />}
 
         {!buscando && busqueda && (
-          <section aria-label="Festivos encontrados" className="space-y-4" data-testid="festivos-encontrados">
+          <section aria-label="Feriados encontrados" className="space-y-4" data-testid="festivos-encontrados">
             <div className="space-y-1">
               <p className="text-[14px] font-semibold text-foreground text-pretty">
                 {busqueda.localidad}: {recuentoDeFestivos(busqueda.propuestos.length)} hasta final de {Number(hoy.slice(0, 4)) + 1}
@@ -223,7 +223,7 @@ function Buscar({ localidadInicial, hoy, onManual, onGuardados }: {
             </div>
             {busqueda.otraComunidad && (
               <p className="rounded-xl bg-muted/60 px-3 py-2 text-[12.5px] leading-snug text-foreground text-pretty">
-                {busqueda.localidad} es de {busqueda.comunidad}, pero la dirección de tu estudio es de {busqueda.otraComunidad}, y tu lista ya trae sus festivos.
+                {busqueda.localidad} es de {busqueda.comunidad}, pero la dirección de tu estudio es de {busqueda.otraComunidad}, y tu lista ya trae sus feriados.
                 {' '}Si tu sala está en {busqueda.localidad}, corrige la dirección en Configuración.
               </p>
             )}
@@ -290,7 +290,7 @@ function Buscar({ localidadInicial, hoy, onManual, onGuardados }: {
           {errorGuardar && <p role="alert" className="text-[12.5px] font-medium text-destructive">{errorGuardar}</p>}
           {hecho ? (
             <p role="status" className="flex items-center gap-2 text-[13.5px] font-semibold" style={{ color: 'var(--success)' }}>
-              <Check size={16} aria-hidden /> Añadidos a tus festivos
+              <Check size={16} aria-hidden /> Añadidos a tus feriados
             </p>
           ) : elegibles.length === 0 ? (
             <p role="status" className="flex items-center gap-2 text-[13.5px] font-semibold text-foreground">
@@ -322,7 +322,7 @@ function Buscando({ localidad }: { localidad: string }) {
     <div role="status" aria-live="polite" className="space-y-3 rounded-2xl border border-border p-4" data-testid="festivos-buscando">
       <p className="flex items-center gap-2 text-[13.5px] font-semibold text-foreground">
         <Loader2 size={16} className="animate-spin" style={{ color: 'var(--t-magenta-500)' }} aria-hidden />
-        Buscando los festivos de {localidad || 'tu localidad'}
+        Buscando los feriados de {localidad || 'tu localidad'}
       </p>
       <ul className="space-y-1.5 text-[12.5px] text-muted-foreground">
         <li>· Los nacionales y los de tu comunidad, del boletín oficial.</li>
@@ -437,7 +437,7 @@ function AMano({ hoy, puedeVerCierres, onBuscar, onGuardados }: {
     try {
       const r = await guardarFestivos([{ fecha, nombre: nombre.trim(), origen: 'manual' }]);
       if (!r.ok) { setError(r.error); return; }
-      if (r.datos.creados.length === 0) { setError('Ese día ya está en tus festivos.'); return; }
+      if (r.datos.creados.length === 0) { setError('Ese día ya está en tus feriados.'); return; }
       setHecho(true);
       onGuardados({ creados: r.datos.creados.length, yaEstaban: r.datos.yaEstaban });
     } finally {
@@ -485,10 +485,10 @@ function AMano({ hoy, puedeVerCierres, onBuscar, onGuardados }: {
       <footer className="border-t border-border px-5 py-4">
         {hecho ? (
           <p role="status" className="flex items-center gap-2 text-[13.5px] font-semibold" style={{ color: 'var(--success)' }}>
-            <Check size={16} aria-hidden /> Añadido a tus festivos
+            <Check size={16} aria-hidden /> Añadido a tus feriados
           </p>
         ) : (
-          <BotonVivo type="submit" label={guardando ? 'Añadiendo…' : 'Añadir festivo'} disabled={guardando} grande className="w-full" />
+          <BotonVivo type="submit" label={guardando ? 'Añadiendo…' : 'Añadir feriado'} disabled={guardando} grande className="w-full" />
         )}
       </footer>
     </form>

@@ -62,7 +62,7 @@ async function quitar(page: Page, nombre: string) {
 test.describe('Calendario · clase fija y recuperación en la lista de una clase', () => {
   test.describe.configure({ timeout: 180_000 });
 
-  test('marca a la fija y a la que recupera, y a la fija no le dice que pierde su plaza', async ({ page }) => {
+  test('marca a la fija y a la que recupera, y a la fija no le dice que pierde su lugar', async ({ page }) => {
     const { cancelaciones } = await abrirClase(page, {
       body: { ok: true, recuperacionCreada: false, recuperacionCaducaEl: null, recuperacionAlCerrarSemana: false },
     });

@@ -65,7 +65,7 @@ export const PASOS_TUTORIAL: { readonly [R in RutaConTutorial]: TutorialPasos } 
     pasos: [
       { selector: 'tipos-clase-lista', titulo: 'Tu catálogo de clases', texto: 'Reformer, Suelo, Embarazadas… De aquí sale tu horario: sin tipo de clase no se programa nada.' },
       { selector: 'tipos-clase-lista', titulo: 'Cada clase, sus reglas', texto: 'Un tipo puede tener reglas propias, distintas de las del estudio: Embarazadas, por ejemplo, con aprobación previa.' },
-      { selector: 'tipos-clase-nuevo', titulo: 'Crea tu primer tipo de clase', texto: 'Nombre y duración; sin plazas, valen las de la sala. La foto la cambias después con «Editar».' },
+      { selector: 'tipos-clase-nuevo', titulo: 'Crea tu primer tipo de clase', texto: 'Nombre y duración; sin lugares, valen los de la sala. La foto la cambias después con «Editar».' },
     ],
     hazloConmigo: { texto: 'Hazlo conmigo', ejemplo: 'tipo-clase' },
   },
@@ -100,7 +100,7 @@ export const PASOS_TUTORIAL: { readonly [R in RutaConTutorial]: TutorialPasos } 
     pasos: [
       // En el orden de la pantalla (seccion-reservas.tsx): el anillo baja, no sube y baja.
       { selector: '#reservar', titulo: 'Quién puede reservar', texto: 'Si pides bono o cuota y con cuánta antelación. Cada tipo de clase puede tener sus propias reglas.' },
-      { selector: '#lista-de-espera', titulo: 'Clase llena, lista de espera', texto: 'Si se libera una plaza, pasa a la primera de la lista sin que hagas nada, o se le ofrece con plazo si lo eliges.' },
+      { selector: '#lista-de-espera', titulo: 'Clase llena, lista de espera', texto: 'Si se libera un lugar, pasa a la primera de la lista sin que hagas nada, o se le ofrece con plazo si lo eliges.' },
       { selector: '#cancelar-y-recuperar', titulo: 'Hasta cuándo se cancela', texto: 'Con 12 h, quien cancela la clase de las 9:00 después de las 21:00 del día antes pierde la sesión.' },
     ],
   },

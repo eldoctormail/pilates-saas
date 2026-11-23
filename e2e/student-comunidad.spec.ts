@@ -54,7 +54,7 @@ test.describe('Student PWA · comunidad', () => {
     const like = post(page, 'p-txt').getByRole('button', { name: 'Me gusta' });
     await expect(like).toHaveAttribute('aria-pressed', 'false');
     await expect(like).toHaveText('3');
-    await expect(post(page, 'p-ev').getByText('3 de 10 plazas')).toBeVisible();
+    await expect(post(page, 'p-ev').getByText('3 de 10 lugares')).toBeVisible();
     await expect(post(page, 'p-ev').getByRole('button', { name: 'Me apunto' })).toBeVisible();
     // Completo: sin botón de RSVP, y se dice. (P2: like/comentar viven en
     // TODO post ahora — la ausencia que importa aquí es la de "Me
@@ -66,7 +66,7 @@ test.describe('Student PWA · comunidad', () => {
     await expect(post(page, 'p-pasado').getByRole('button', { name: /Me apunto|Ya no voy/ })).toHaveCount(0);
   });
 
-  test('«Me apunto» manda el estudio al servidor y actualiza plazas; «Ya no voy» hace DELETE', async ({ page }) => {
+  test('«Me apunto» manda el estudio al servidor y actualiza lugares; «Ya no voy» hace DELETE', async ({ page }) => {
     const peticiones = await montar(page);
     await page.goto(`${base}/comunidad`);
     const boton = post(page, 'p-ev').getByRole('button', { name: 'Me apunto' });
@@ -78,13 +78,13 @@ test.describe('Student PWA · comunidad', () => {
     expect(peticiones[0].url).toMatch(/\/api\/public\/comunidad\/posts\/p-ev\/asistentes$/);
     expect(peticiones[0].auth).toMatch(/^Bearer /);
     expect(peticiones[0].body).toEqual({ studioId: STUDIO_ID });
-    await expect(post(page, 'p-ev').getByText('4 de 10 plazas')).toBeVisible();
+    await expect(post(page, 'p-ev').getByText('4 de 10 lugares')).toBeVisible();
     await expect(page.getByText(/te esperamos/i)).toBeVisible();
 
     await post(page, 'p-ev').getByRole('button', { name: 'Ya no voy' }).click();
     await expect.poll(() => peticiones.length).toBe(2);
     expect(peticiones[1].method).toBe('DELETE');
-    await expect(post(page, 'p-ev').getByText('3 de 10 plazas')).toBeVisible();
+    await expect(post(page, 'p-ev').getByText('3 de 10 lugares')).toBeVisible();
   });
 
   test('si el servidor dice que no (409 completo), se deshace y se avisa', async ({ page }) => {
@@ -94,7 +94,7 @@ test.describe('Student PWA · comunidad', () => {
     await expect(boton).toBeVisible({ timeout: 30_000 });
     await boton.click();
     await expect(page.getByText(/ya está completo/i)).toBeVisible();
-    await expect(post(page, 'p-ev').getByText('3 de 10 plazas')).toBeVisible();
+    await expect(post(page, 'p-ev').getByText('3 de 10 lugares')).toBeVisible();
     await expect(post(page, 'p-ev').getByRole('button', { name: 'Me apunto' })).toBeVisible();
   });
 

@@ -245,7 +245,7 @@ export function TabSalas({ showToast }: { showToast: MostrarToast }) {
           <EmptyState escena="sinDatos"
             icono={DoorOpen}
             titulo="Crea tu primera sala"
-            descripcion="El aforo de cada sala es el límite de plazas de las clases que se den en ella. Sin al menos una, no puedes programar clases."
+            descripcion="El aforo de cada sala es el límite de lugares de las clases que se den en ella. Sin al menos una, no puedes programar clases."
             cta={{ label: 'Crear mi primera sala', onClick: openNueva, icono: Plus }}
           />
         ) : (
@@ -525,13 +525,13 @@ export function TabSalas({ showToast }: { showToast: MostrarToast }) {
       <Dialog open={!!avisoAforo} onOpenChange={open => !open && setAvisoAforo(null)}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle>Tienes clases con más plazas que la sala</DialogTitle>
+            <DialogTitle>Tienes clases con más lugares que la sala</DialogTitle>
           </DialogHeader>
           <div className="space-y-3 text-[13px] text-muted-foreground">
             <p>
               {avisoAforo?.total === 1
-                ? 'Hay 1 clase futura en esta sala con más plazas'
-                : `Hay ${avisoAforo?.total} clases futuras en esta sala con más plazas`}
+                ? 'Hay 1 clase futura en esta sala con más lugares'
+                : `Hay ${avisoAforo?.total} clases futuras en esta sala con más lugares`}
               {' '}que la capacidad nueva ({avisoAforo?.capacidad}).
               {(avisoAforo?.conReservas ?? 0) > 0 && (
                 <>
@@ -550,7 +550,7 @@ export function TabSalas({ showToast }: { showToast: MostrarToast }) {
             </p>
             <p className="text-[12px]">
               Ajustarlas no echa a nadie: en las que ya tengan más reservas que la
-              capacidad nueva, el aforo se deja en las plazas ya confirmadas.
+              capacidad nueva, el aforo se deja en los lugares ya confirmados.
             </p>
           </div>
           <div className="flex flex-col gap-2 mt-4">

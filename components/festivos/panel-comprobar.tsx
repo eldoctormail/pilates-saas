@@ -39,7 +39,7 @@ export function PanelComprobarClases({ open, onClose, devuelveSesion, onDecidido
     <DashboardDrawer
       open={open}
       onClose={onClose}
-      label="Clases en tus festivos"
+      label="Clases en tus feriados"
       sheetClassName="relative flex h-full w-full flex-col bg-card shadow-[-20px_0_60px_-20px_rgba(0,0,0,0.3)] lg:w-[520px]"
     >
       {open && <Contenido onClose={onClose} devuelveSesion={devuelveSesion} onDecidido={onDecidido} onError={onError} />}
@@ -88,8 +88,8 @@ function Contenido({ onClose, devuelveSesion, onDecidido, onError }: {
     <>
       <header className="flex items-start justify-between gap-3 border-b border-border px-5 py-4">
         <div className="min-w-0">
-          <h2 className="text-[18px] font-bold leading-tight text-foreground">Clases en tus festivos</h2>
-          <p className="mt-0.5 text-[12.5px] text-muted-foreground text-pretty">Los festivos que vienen y tienen clases. Nada se cancela hasta que tú lo decidas.</p>
+          <h2 className="text-[18px] font-bold leading-tight text-foreground">Clases en tus feriados</h2>
+          <p className="mt-0.5 text-[12.5px] text-muted-foreground text-pretty">Los feriados que vienen y tienen clases. Nada se cancela hasta que tú lo decidas.</p>
         </div>
         <button type="button" onClick={onClose} aria-label="Cerrar" className="flex size-9 shrink-0 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">
           <X size={18} aria-hidden />
@@ -104,7 +104,7 @@ function Contenido({ onClose, devuelveSesion, onDecidido, onError }: {
           <div className="flex items-start gap-3 rounded-2xl border border-border p-4" role="status">
             <Baldosa tono="verde" Icono={Check} />
             <div>
-              <p className="text-[14.5px] font-semibold text-foreground">Ningún festivo tiene clases sin decidir</p>
+              <p className="text-[14.5px] font-semibold text-foreground">Ningún feriado tiene clases sin decidir</p>
               <p className="mt-0.5 text-[12.5px] text-muted-foreground text-pretty">Los que vienen no tienen clases, ya los cerraste o dijiste que abres.</p>
             </div>
           </div>

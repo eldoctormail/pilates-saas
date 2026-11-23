@@ -32,15 +32,15 @@ test('un segmento que el motor de campañas no entiende no rellena nada', () => 
 test('los borradores llevan a quién, la etapa, la fecha y el enlace de la app', () => {
   const v = borradorVentaEtapa(etapa(), 'Estudio Luz', ENLACE);
   assert.equal(v.segmento, 'ETAPA:INTERESADA');
-  assert.match(v.mensaje, /Fundadora.*Cuota Fundadora.*20 de octubre.*Hay 10 plazas/s);
+  assert.match(v.mensaje, /Fundadora.*Cuota Fundadora.*20 de octubre.*Hay 10 lugares/s);
   assert.ok(v.mensaje.includes(ENLACE));
-  assert.match(borradorFinEtapa(etapa(), 'Estudio Luz', ENLACE).mensaje, /Quedan 6 plazas/);
+  assert.match(borradorFinEtapa(etapa(), 'Estudio Luz', ENLACE).mensaje, /Quedan 6 lugares/);
   const inv = borradorInvitadas('2026-11-02', 'Estudio Luz', ENLACE);
   assert.equal(inv.segmento, 'ETIQUETA:apertura-suave');
   assert.match(inv.mensaje, /2 de noviembre/);
 });
 
-test('fin de etapa: solo en los últimos 3 días, en curso y con plazas por vender', () => {
+test('fin de etapa: solo en los últimos 3 días, en curso y con lugares por vender', () => {
   assert.equal(diasParaFinEtapa(etapa(), '2026-10-17'), 3);
   assert.equal(diasParaFinEtapa(etapa(), '2026-10-20'), 0);
   assert.equal(diasParaFinEtapa(etapa(), '2026-10-21'), null);
@@ -61,7 +61,7 @@ test('alerta ETAPA_TERMINA: propone el recordatorio y lleva a la etapa; sin día
   assert.equal(a.tipo, 'ETAPA_TERMINA:e1');
   assert.equal(a.severidad, 'BAJA');
   assert.match(a.titulo, /termina mañana/);
-  assert.match(a.descripcion, /quedan 6 plazas/);
+  assert.match(a.descripcion, /quedan 6 lugares/);
   assert.equal(a.href, '/dashboard#etapas-lanzamiento');
   assert.deepEqual(alertas(undefined), []);
   assert.deepEqual(alertas('2026-10-10'), []);

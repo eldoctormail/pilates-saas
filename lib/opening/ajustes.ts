@@ -53,8 +53,8 @@ export function validarAjustes(b: unknown): { ok: true; fila: FilaConfig } | { o
   if (!(objetivo >= 1 && objetivo <= 100)) return { ok: false, error: 'El objetivo de preventa va de 1 % a 100 %' };
   if (!(conversion >= 0 && conversion <= 100)) return { ok: false, error: 'El porcentaje de interesadas que se apuntan va de 0 % a 100 %' };
   if (!(amarillo >= 1 && amarillo <= 99)) return { ok: false, error: 'El aviso «se va llenando» va de 1 % a 99 %' };
-  if (!(rojo >= 1 && rojo <= 150)) return { ok: false, error: 'El aviso «te quedas sin plazas» va de 1 % a 150 %' };
-  if (amarillo >= rojo) return { ok: false, error: '«Se va llenando» tiene que ser menor que «te quedas sin plazas»' };
+  if (!(rojo >= 1 && rojo <= 150)) return { ok: false, error: 'El aviso «te quedas sin lugares» va de 1 % a 150 %' };
+  if (amarillo >= rojo) return { ok: false, error: '«Se va llenando» tiene que ser menor que «te quedas sin lugares»' };
   if (!(semanas >= 1 && semanas <= 17)) return { ok: false, error: 'La previsión abarca de 1 a 17 semanas' };
   if (!(sinTope >= 0.5 && sinTope <= 7)) return { ok: false, error: 'Las clases por semana de una cuota sin tope van de 0,5 a 7' };
   if (Math.round(sinTope * 10) !== sinTope * 10) return { ok: false, error: 'Las clases por semana admiten un decimal como mucho' };

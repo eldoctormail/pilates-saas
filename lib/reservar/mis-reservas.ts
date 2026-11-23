@@ -75,7 +75,7 @@ export function estadoReservaSocia(
   const pasada = momento === 'pasada';
   // Una plaza esperándola pide que haga algo: «Lista de espera · 2ª» ya no es
   // verdad —la plaza es suya si la acepta— y se leería como «aún no».
-  if (estado === 'LISTA_ESPERA' && conOferta && !pasada) return { texto: 'Plaza para ti', tono: 'pendiente' };
+  if (estado === 'LISTA_ESPERA' && conOferta && !pasada) return { texto: 'Lugar para ti', tono: 'pendiente' };
   switch (estado) {
     case 'CONFIRMADA':
       if (momento === 'en-curso') return { texto: 'En curso', tono: 'curso' };

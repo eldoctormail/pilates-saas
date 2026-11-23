@@ -85,7 +85,7 @@ test('caso 4b — la clase cancelada por el estudio se mira ANTES que la «tard�
   assert.equal(r.detalle[2].faltas, 0);
 });
 
-test('caso 5 — cuota congelada / plaza en pausa (dos semanas): neutras', () => {
+test('caso 5 — cuota congelada / lugar en pausa (dos semanas): neutras', () => {
   const sem = lunes('2026-09-07', 6);
   const pausas: RangoFechas[] = [{ desde: '2026-09-22', hasta: '2026-10-03' }];
   const clases = [sem[0], sem[1], sem[4], sem[5]].map(asiste);

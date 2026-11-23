@@ -85,7 +85,7 @@ export function rolInstructora(rol: string | null | undefined): 'Directora' | 'I
   return rol === 'PROPIETARIO' ? 'Directora' : 'Instructora';
 }
 
-export type ClaveFilaFicha = 'Cuándo' | 'Dónde' | 'Capacidad' | 'Plazas' | 'Cancelación';
+export type ClaveFilaFicha = 'Cuándo' | 'Dónde' | 'Capacidad' | 'Lugares' | 'Cancelación';
 
 export interface FilaFicha {
   clave: ClaveFilaFicha;
@@ -135,7 +135,7 @@ export function filasFicha(d: DatosFilasFicha): FilaFicha[] {
     filas.push({ clave: 'Capacidad', valor: libres == null ? personas : `${personas} · ${textoLibres(libres)}` });
   } else if (libres != null) {
     const t = textoLibres(libres);
-    filas.push({ clave: 'Plazas', valor: t.charAt(0).toUpperCase() + t.slice(1) });
+    filas.push({ clave: 'Lugares', valor: t.charAt(0).toUpperCase() + t.slice(1) });
   }
 
   if (d.ventanaCancelacionHoras != null && d.ventanaCancelacionHoras > 0) {
@@ -163,7 +163,7 @@ export function disponibilidadFicha(
   if (miEstado === 'CONFIRMADA') return { texto: 'Reservada', tono: 'reservada' };
   if (miEstado === 'LISTA_ESPERA') return { texto: 'En espera', tono: 'espera' };
   if (libres <= 0) return { texto: 'Completa', tono: 'completa' };
-  if (libres === 1) return { texto: 'Última plaza', tono: 'pocas' };
+  if (libres === 1) return { texto: 'Último lugar', tono: 'pocas' };
   if (libres === 2) return { texto: 'Quedan 2', tono: 'pocas' };
-  return { texto: `${libres} plazas libres`, tono: 'libre' };
+  return { texto: `${libres} lugares libres`, tono: 'libre' };
 }

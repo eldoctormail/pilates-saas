@@ -238,7 +238,7 @@ test('⚠️ la respuesta a un RESERVED: un 4xx solo cancela si nadie había man
   for (const st of [0, 401, 403, 429, 500, 503]) assert.equal(trasConfirmarWellhub(st, true), 'reintentar', String(st));
 });
 
-test('una petición de reserva de hace más de 15 min ya la ha rechazado Wellhub: no se le da plaza', () => {
+test('una petición de reserva de hace más de 15 min ya la ha rechazado Wellhub: no se le da lugar', () => {
   const t = Date.parse('2026-10-07T10:00:00Z');
   assert.equal(reservaPedidaCaducada(t, t + 14 * 60_000), false);
   assert.equal(reservaPedidaCaducada(t, t + 15 * 60_000), false);

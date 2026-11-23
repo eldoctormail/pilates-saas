@@ -126,7 +126,7 @@ export function VistaDiaSalas({
               <div key={c.sala.id} className="min-w-0 flex-1 border-l border-border px-3 py-2">
                 <p className="truncate text-[13px] font-semibold text-foreground">{c.sala.nombre}</p>
                 <p className="truncate text-[11.5px] text-muted-foreground">
-                  {c.sesiones.length === 0 ? 'Sin clases' : `${c.sesiones.length} ${c.sesiones.length === 1 ? 'clase' : 'clases'}`} · {c.sala.capacidad} plazas
+                  {c.sesiones.length === 0 ? 'Sin clases' : `${c.sesiones.length} ${c.sesiones.length === 1 ? 'clase' : 'clases'}`} · {c.sala.capacidad} lugares
                 </p>
               </div>
             ))}

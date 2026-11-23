@@ -294,7 +294,7 @@ async function devolverPlaza(admin: SupabaseClient, compraId: string, planId: st
   try {
     await liberarCupoMatriculaUnaVez(admin, compraId, planId, studioId);
   } catch (e) {
-    Sentry.captureMessage('[mercadopago/checkout] no se pudo devolver la plaza de matrícula', {
+    Sentry.captureMessage('[mercadopago/checkout] no se pudo devolver el lugar de matrícula', {
       level: 'warning', tags: { area: 'cobros', pasarela: 'mercadopago' }, extra: { compraId, studioId, error: String(e) },
     });
   }

@@ -38,7 +38,7 @@ export type SituacionPagadaSinPlaza =
 
 export const SITUACION_PAGADA_SIN_PLAZA: Record<SituacionPagadaSinPlaza, { texto: string; dedup: string; porPago: boolean }> = {
   'sin-reserva': {
-    texto: ' pero no se pudo confirmar su plaza.',
+    texto: ' pero no se pudo confirmar su lugar.',
     dedup: 'reserva-pagada-sin-plaza',
     porPago: false,
   },
@@ -53,12 +53,12 @@ export const SITUACION_PAGADA_SIN_PLAZA: Record<SituacionPagadaSinPlaza, { texto
     porPago: false,
   },
   'ya-tenia-reserva': {
-    texto: ' pero ya tenía plaza en esa clase: este pago no se ha usado para reservar y su crédito está intacto.',
+    texto: ' pero ya tenía lugar en esa clase: este pago no se ha usado para reservar y su crédito está intacto.',
     dedup: 'reserva-pagada-ya-tenia',
     porPago: true,
   },
   'ya-en-espera': {
-    texto: ' pero ya estaba en la lista de espera de esa clase: este pago no le da plaza y su crédito está intacto. Si se libera sitio, entra con su lugar en la cola.',
+    texto: ' pero ya estaba en la lista de espera de esa clase: este pago no le da lugar y su crédito está intacto. Si se libera sitio, entra con su lugar en la cola.',
     dedup: 'reserva-pagada-ya-en-espera',
     porPago: true,
   },

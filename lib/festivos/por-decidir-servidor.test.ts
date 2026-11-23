@@ -41,12 +41,12 @@ test('un error de lectura es null, nunca un cero inventado', async () => {
   assert.equal(await festivosPorDecidir(clasesFalla.admin, args), null);
 });
 
-test('sin comunidad conocida: disponible y sin festivos', async () => {
+test('sin comunidad conocida: disponible y sin feriados', async () => {
   const { admin } = supabaseFalso({ tablas: { studios: { data: { ...ESTUDIO, codigo_postal: '46001', ciudad: 'Valencia' } }, festivos_abiertos: { data: [] } } });
   assert.deepEqual(await festivosPorDecidir(admin, args), { disponible: true, zona: null, festivos: [], propios: false });
 });
 
-test('cuenta clases y reservas confirmadas de cada festivo, y quita lo ya decidido', async () => {
+test('cuenta clases y reservas confirmadas de cada feriado, y quita lo ya decidido', async () => {
   const { admin } = supabaseFalso({ tablas: {
     studios: { data: ESTUDIO },
     festivos_abiertos: (f) => ({ data: f.some((x) => x.startsWith('gte:') && x.includes('2026-11-21')) ? [{ fecha: '2026-12-07' }] : [] }),
@@ -60,7 +60,7 @@ test('cuenta clases y reservas confirmadas de cada festivo, y quita lo ya decidi
   assert.deepEqual(r.festivos, [{ fecha: '2026-12-08', nombre: 'Inmaculada', clases: 2, reservas: 9 }]);
 });
 
-test('un festivo sin clases no se avisa', async () => {
+test('un feriado sin clases no se avisa', async () => {
   const { admin } = supabaseFalso({ tablas: {
     studios: { data: ESTUDIO }, festivos_abiertos: { data: [] }, cierres_estudio: { data: [] }, sesiones: { data: [] },
   } });
@@ -68,7 +68,7 @@ test('un festivo sin clases no se avisa', async () => {
   assert.deepEqual(r, { disponible: true, zona: 'MADRID', festivos: [], propios: false });
 });
 
-test('un cierre que cubre el festivo lo da por decidido', async () => {
+test('un cierre que cubre el feriado lo da por decidido', async () => {
   const { admin, llamadas } = supabaseFalso({ tablas: {
     studios: { data: ESTUDIO }, festivos_abiertos: { data: [] },
     cierres_estudio: { data: [{ desde: '2026-12-05', hasta: '2026-12-09' }] },
@@ -81,7 +81,7 @@ test('un cierre que cubre el festivo lo da por decidido', async () => {
 
 // ─── Módulo Festivos (panel nuevo): lo que el estudio ha guardado ───────────
 
-test('un festivo local guardado también espera decisión, aunque no tengamos su comunidad', async () => {
+test('un feriado local guardado también espera decisión, aunque no tengamos su comunidad', async () => {
   const { admin } = supabaseFalso({ tablas: {
     studios: { data: { ...ESTUDIO, codigo_postal: '46001', ciudad: 'Valencia' } },
     festivos_abiertos: { data: [] }, cierres_estudio: { data: [] },
@@ -112,7 +112,7 @@ test('sin la tabla del módulo (migración sin aplicar), el aviso de los oficial
   assert.deepEqual(await festivosPorDecidir(admin, args), { disponible: true, zona: 'MADRID', festivos: [], propios: false });
 });
 
-test('«Comprobar clases» (módulo Festivos) funciona aunque el aviso de la bandeja esté apagado', async () => {
+test('«Comprobar clases» (módulo Feriados) funciona aunque el aviso de la bandeja esté apagado', async () => {
   process.env.FESTIVOS_AVISO = 'estudios:otro';
   const { admin } = supabaseFalso({ tablas: { studios: { data: ESTUDIO }, festivos_abiertos: { data: [] }, cierres_estudio: { data: [] }, sesiones: { data: [] } } });
   assert.deepEqual(await festivosPorDecidir(admin, { ...args, alcance: 'todos', encendido: true }), { disponible: true, zona: 'MADRID', festivos: [], propios: false });

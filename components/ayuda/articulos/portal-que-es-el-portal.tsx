@@ -33,7 +33,7 @@ export default function Contenido() {
 
       <h2 style={{ fontSize: 18, fontWeight: 700, margin: '28px 0 12px' }}>La página de reservas, para tu web</h2>
       <p>
-        Es <code>tentare.app/reservar/tu-estudio</code>: tu horario con salas, instructoras y plazas libres, en una
+        Es <code>tentare.app/reservar/tu-estudio</code>: tu horario con salas, instructoras y lugares libres, en una
         página que se integra en tu propia web con un botón o con el{' '}
         <Link href="/ayuda/widget/que-es-el-widget" style={{ color: 'inherit', textDecoration: 'underline' }}>widget</Link>{' '}
         (ese mismo calendario dentro de tu web). No es el enlace que se reparte a los clientes.
@@ -41,8 +41,8 @@ export default function Contenido() {
 
       <AyudaCaptura
         src="/help/portal/portal-calendario-publico.png"
-        alt="Página de reservas de un estudio, con clases, plazas libres y lista de espera"
-        caption="La página de reservas de un estudio, la que se integra en su web — clases, plazas libres y lista de espera."
+        alt="Página de reservas de un estudio, con clases, lugares libres y lista de espera"
+        caption="La página de reservas de un estudio, la que se integra en su web — clases, lugares libres y lista de espera."
       />
 
       <h2 style={{ fontSize: 18, fontWeight: 700, margin: '28px 0 12px' }}>Cómo lo comparte tu estudio</h2>

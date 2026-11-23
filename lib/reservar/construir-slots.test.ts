@@ -35,7 +35,7 @@ test('excluye sesiones canceladas y pasadas', () => {
   assert.deepEqual(slots.map(s => s.id), ['c']);
 });
 
-test('cuenta ocupadas solo con reservas que ocupan plaza', () => {
+test('cuenta ocupadas solo con reservas que ocupan lugar', () => {
   const reservas: Reserva[] = [
     { id: 'r1', studioId: 's1', sesionId: 'c', socioId: 'x', estado: 'CONFIRMADA', spotId: null, posicionEspera: null, checkInEn: null, creadoEn: '', ofertaExpiraEn: null },
     { id: 'r2', studioId: 's1', sesionId: 'c', socioId: 'y', estado: 'CANCELADA', spotId: null, posicionEspera: null, checkInEn: null, creadoEn: '', ofertaExpiraEn: null },

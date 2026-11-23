@@ -124,11 +124,11 @@ test('la ventana que se dice es la que llega (la del tipo de clase, si tiene la 
   assert.equal(fila?.valor, 'Gratis hasta 24 h antes');
 });
 
-test('sin aforo la fila se llama «Plazas» y solo dice las libres', () => {
+test('sin aforo la fila se llama «Lugares» y solo dice las libres', () => {
   const filas = filasFicha({ ...CLASE, libres: 1 });
-  assert.deepEqual(filas.find(f => f.clave === 'Plazas'), { clave: 'Plazas', valor: '1 libre' });
+  assert.deepEqual(filas.find(f => f.clave === 'Lugares'), { clave: 'Lugares', valor: '1 libre' });
   assert.ok(!filas.some(f => f.clave === 'Capacidad'));
-  assert.equal(filasFicha({ ...CLASE, libres: 0 }).find(f => f.clave === 'Plazas')?.valor, 'Completa');
+  assert.equal(filasFicha({ ...CLASE, libres: 0 }).find(f => f.clave === 'Lugares')?.valor, 'Completa');
 });
 
 test('llena, la capacidad lo dice; y nunca libres negativas', () => {
@@ -150,14 +150,14 @@ test('los chips de la foto: el día y la hora de inicio', () => {
 // ── La insignia de disponibilidad ───────────────────────────────────────────
 
 test('la insignia usa los cortes de la app', () => {
-  assert.deepEqual(disponibilidadFicha(9, null), { texto: '9 plazas libres', tono: 'libre' });
+  assert.deepEqual(disponibilidadFicha(9, null), { texto: '9 lugares libres', tono: 'libre' });
   assert.deepEqual(disponibilidadFicha(2, null), { texto: 'Quedan 2', tono: 'pocas' });
-  assert.deepEqual(disponibilidadFicha(1, null), { texto: 'Última plaza', tono: 'pocas' });
+  assert.deepEqual(disponibilidadFicha(1, null), { texto: 'Último lugar', tono: 'pocas' });
   assert.deepEqual(disponibilidadFicha(0, null), { texto: 'Completa', tono: 'completa' });
   assert.deepEqual(disponibilidadFicha(-1, null), { texto: 'Completa', tono: 'completa' });
 });
 
-test('lo suyo gana a las plazas: reservada o en espera, aunque esté llena', () => {
+test('lo suyo gana a los lugares: reservada o en espera, aunque esté llena', () => {
   assert.equal(disponibilidadFicha(0, 'CONFIRMADA').texto, 'Reservada');
   assert.equal(disponibilidadFicha(0, 'LISTA_ESPERA').texto, 'En espera');
   // Ni «lista de espera»: esa frase la dice el aviso de la hoja al apuntarse.

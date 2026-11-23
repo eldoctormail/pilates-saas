@@ -156,7 +156,7 @@ test('la lista se abre una hora antes, se cierra 12 h después de acabar y nunca
   assert.equal(puedePasarLista({ ...clase, cancelada: true }, Date.parse('2026-09-15T10:10:00Z')), false);
 });
 
-test('en la lista solo está quien tiene plaza, y un «no vino» se enseña tal cual', () => {
+test('en la lista solo está quien tiene lugar, y un «no vino» se enseña tal cual', () => {
   assert.equal(estadoEnLista('CONFIRMADA'), 'por-marcar');
   assert.equal(estadoEnLista('ASISTIDA'), 'asistio');
   assert.equal(estadoEnLista('NO_ASISTIO'), 'no-vino');

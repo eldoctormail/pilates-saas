@@ -141,7 +141,7 @@ const MUESTRA: Record<string, string> = {
   antelacion: '24 horas', faltan: 'faltan 24 horas', sala: 'Sala Norte', instructora: 'Ana', sustituta: 'Marta',
   concepto: 'Bono 10', importe: '75', sesiones: '2', plan: 'Bono 10', precioAnterior: conMoneda(69),
   precioNuevo: conMoneda(75), clases: '1 clase', remitente: 'Ana', quienEscribe: 'Pilates Luz', autor: 'El estudio',
-  previsualizacion: ': «¿Nos vemos el jueves?»', titulo: 'Consentimiento', respuesta: 'Te hemos guardado la plaza.',
+  previsualizacion: ': «¿Nos vemos el jueves?»', titulo: 'Consentimiento', respuesta: 'Te hemos guardado el lugar.',
   motivoTexto: '', estudio: 'Pilates Luz', nombre: 'Reformer Lunes 18:00', hasta: '30 de septiembre',
   cierre: 'Amplíala desde tu app si quieres seguir teniéndola.',
 };

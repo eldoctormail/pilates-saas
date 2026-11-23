@@ -119,10 +119,10 @@ const plural = (n: number, uno: string, varios: string) => (n === 1 ? `1 ${uno}`
 
 /** «12 festivos». */
 export function recuentoDeFestivos(n: number): string {
-  return plural(n, 'festivo', 'festivos');
+  return plural(n, 'feriado', 'feriados');
 }
 
 /** Lo que dice el botón: «Añadir 2 festivos», y sin ninguno marcado, que marque alguno. */
 export function textoAnadir(n: number): string {
-  return n === 0 ? 'Marca los que quieras añadir' : `Añadir ${plural(n, 'festivo', 'festivos')}`;
+  return n === 0 ? 'Marca los que quieras añadir' : `Añadir ${plural(n, 'feriado', 'feriados')}`;
 }

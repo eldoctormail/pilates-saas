@@ -17,7 +17,7 @@ Cuando haya dominio, ver [Pasar a dominio](#pasar-a-dominio).
 > Con `http://IP`, sin TLS, algunas cookies marcadas `secure` (por ejemplo, el estado de la suscripción) no se guardan. Sirve para probar, pero para usarlo de verdad conviene tener HTTPS.
 
 **Requisitos:** Linux con Docker y el plugin Compose, al menos 4 GB de RAM (8 GB para compilar la app con holgura), `git` y `openssl`.
-No hace falta Node en el servidor: si no está, `migrar.sh` corre la CLI de Supabase en un contenedor.
+No hace falta Node en el servidor: `migrar.sh` aplica las migraciones con `psql` dentro del contenedor de la base.
 
 **Antes de abrir:** hay un ensayo general con Mercado Pago de prueba y sin dominio, en [`deploy/ensayo/`](ensayo/PRUEBAS.md).
 
@@ -52,7 +52,7 @@ Pensado para una Raspberry Pi 5 de 8 GB, todavía sin probar en una. Las imágen
 
 Sirve para el ensayo y para probar. Para producción, mejor la Pi: el Mac se suspende y se reinicia con las actualizaciones. Los scripts corren igual en macOS: no usan nada que solo tenga Linux, y no hace falta instalar Node.
 
-- **Docker Desktop 4.34 o más nuevo, con «Enable host networking».** Está en Settings › Resources › Network. Los túneles del ensayo, `migrar.sh` y el túnel de producción usan la red `host`. Sin esa opción, esa red es la de la máquina virtual de Docker y no la del Mac, y los túneles no llegan a la app.
+- **Docker Desktop 4.34 o más nuevo, con «Enable host networking».** Está en Settings › Resources › Network. Los túneles del ensayo y el de producción usan la red `host`. Sin esa opción, esa red es la de la máquina virtual de Docker y no la del Mac, y los túneles no llegan a la app.
 - **8 GB o más de memoria para Docker,** en Settings › Resources. Con menos de 12 GB, los scripts paran Supabase mientras compilan, igual que en la Pi.
 - **Con un Mac Apple Silicon (M1 o posterior),** las imágenes son las mismas ARM de la Pi, así que lo que anda en el Mac anda en la Pi.
 
@@ -125,7 +125,7 @@ deploy/scripts/migrar.sh ~/supabase-project
 
 El script hace cuatro cosas:
 
-1. Prepara una copia de las migraciones con los cinco arreglos que hacen falta para recorrerlas desde una base vacía (`deploy/scripts/preparar-migraciones.sh`; son los mismos que usa el CI del repo original) y la aplica con la CLI de Supabase (`npx supabase db push`). Las de `supabase/migrations/` no se tocan.
+1. Prepara una copia de las migraciones con los cinco arreglos que hacen falta para recorrerlas desde una base vacía (`deploy/scripts/preparar-migraciones.sh`; son los mismos que usa el CI del repo original) y las aplica una por una con `psql` dentro del contenedor de la base, cada una en su transacción. Las anota en `supabase_migrations.schema_migrations`, la misma tabla que usa la CLI de Supabase. No se usa la CLI: corre las sentencias fuera de una transacción y las migraciones con `LOCK TABLE` fallan. Las de `supabase/migrations/` no se tocan.
 2. Vuelve a adaptar la base al servidor propio (`deploy/sql/adaptar-autoalojado.sql`): zona de Argentina, la URL de tu servidor en lugar de `tentare.app`, los horarios fijos de `pg_cron` corridos a la hora de Argentina y el estudio sin prueba de 7 días. Hace falta en **cada** actualización: las migraciones nuevas del repo original vuelven a traer lo de Tentare. Si algo sigue llamando a `tentare.app`, el script falla y lo dice. Si avisa de un horario que no puede correr solo (`WARNING: horario: …`), ajustalo a mano: `pg_cron` va en UTC y Argentina es UTC−3.
 3. Carga en Vault `app_url` y `supabase_cron_secret`, que usan los trabajos de `pg_cron`.
 4. Al final verifica que ningún trabajo siga apuntando a `tentare.app`; el resultado tiene que ser 0.

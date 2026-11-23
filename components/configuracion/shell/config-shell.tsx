@@ -76,6 +76,7 @@ const COMPONENTES: Record<SeccionId, ComponentType<PropsSeccion>> = {
   motivacion: dynamic(() => import('@/components/configuracion/secciones/seccion-motivacion').then(m => m.SeccionMotivacion), { loading: cargando }),
   conexiones: dynamic(() => import('@/components/configuracion/secciones/seccion-conexiones').then(m => m.SeccionConexiones), { loading: cargando }),
   datos: dynamic(() => import('@/components/configuracion/secciones/seccion-datos').then(m => m.SeccionDatos), { loading: cargando }),
+  plan: dynamic(() => import('@/components/configuracion/secciones/seccion-plan').then(m => m.SeccionPlan), { loading: cargando }),
   avisos: dynamic(() => import('@/components/configuracion/secciones/seccion-avisos').then(m => m.SeccionAvisos), { loading: cargando }),
   panel: dynamic(() => import('@/components/configuracion/secciones/seccion-panel').then(m => m.SeccionPanel), { loading: cargando }),
 };
@@ -476,6 +477,7 @@ export function ConfigShell() {
       <div
         data-tour="configuracion-vista"
         data-config-raiz
+        data-sangre={shellNuevo ? '' : undefined}
         data-vista={herramienta ? 'herramienta' : permitida ? 'detalle' : 'inicio'}
         className="group/config config-tactil space-y-6"
       >
@@ -483,7 +485,8 @@ export function ConfigShell() {
           title="Configuración"
           description="Cómo está tu estudio y dónde se cambia cada cosa."
           data-config-cabecera
-          className="max-md:group-data-[vista=detalle]/config:sr-only max-md:group-data-[vista=herramienta]/config:sr-only"
+          // Marco a sangre: como Shopify, con una sección abierta el título es el de la sección (el <h1> se queda para lectores de pantalla).
+          className={cn('max-md:group-data-[vista=detalle]/config:sr-only max-md:group-data-[vista=herramienta]/config:sr-only', railEnMenu && 'md:group-data-[vista=detalle]/config:sr-only md:group-data-[vista=herramienta]/config:sr-only')}
         />
 
         {tab !== null && !permitida && (
@@ -494,7 +497,7 @@ export function ConfigShell() {
 
         {/* Una herramienta va a todo el ancho: sin la columna de secciones. */}
         <div className={cn(!herramienta && !railEnMenu && 'md:grid md:grid-cols-[13rem_minmax(0,1fr)] md:items-start md:gap-6')}>
-          {!herramienta && railEnMenu && hostMenu && createPortal(
+          {railEnMenu && hostMenu && createPortal(
             <ListaSecciones secciones={visibles} rol={rol} activa={mostrada} onElegir={id => irAPreguntando(id)} />,
             hostMenu,
           )}

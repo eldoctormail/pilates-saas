@@ -668,6 +668,56 @@ mirar si el Payment Element pinta el botón de Apple Pay arriba; repetir en Safa
 con la misma URL. Si sale en Safari y no en la app, es la limitación del
 WKWebView (la salida es el plugin nativo de Stripe, no la web).
 
+## Widget «Mi próxima clase» (22-nov-2026)
+
+Widget de la pantalla de inicio (pequeño y mediano) y de la de bloqueo (rectangular y en línea): la próxima clase reservada
+y la siguiente, con su hora y su estudio. Es una extensión nativa (WidgetKit + SwiftUI), no la web, y es lo que más pesa
+frente a la guía 4.3(a) (ver el plan B de la app).
+
+- **Cómo llegan los datos.** Inicio (`app/portal/[slug]/page.tsx`) llama a `useWidgetProximasClases`
+  (`components/nativo/`), que arma la lista con `lib/nativo/widget-clases.ts` (puro, con pruebas) y se la pasa a
+  `ProximaClasePlugin` (`ios/App/App/`) vía `guardarClasesParaElWidget` (`lib/nativo/puente.ts`). El plugin la guarda en el
+  **grupo de apps** (`UserDefaults(suiteName:)`) y recarga las líneas de tiempo. El widget solo lee; no llama a ninguna red.
+- **Qué se guarda: lo mínimo** para dibujarlo (título, hora, estudio, instructora y sala). Nunca ids de alumna, correo, pagos
+  ni bonos: va a una pantalla visible sin desbloquear la app. Hasta 3 clases, 14 días de caducidad.
+- **Al cerrar sesión o borrar la cuenta** se borra (`borrarClasesDelWidget`, en `lib/student/auth.ts`).
+- **Contrato web ↔ Swift:** versión 1 (`VERSION_WIDGET` ↔ `ProximasClasesAlmacen.version`); un test las cruza. Si cambia la
+  forma, sube la versión en los dos lados.
+- **Grupo de apps:** `group.$(TENTARE_BUNDLE_ID)` (la app de un estudio, con otro bundle id, usa el suyo). Va en los dos
+  `.entitlements` y en `TentareAppGroup` de los dos `Info.plist`. Bundle id del widget: `$(TENTARE_BUNDLE_ID).widget`.
+- ⚠️ **Primera vez con la cuenta de Apple:** el grupo de apps tiene que existir en developer.apple.com (Identifiers → App
+  Groups) y estar activado en el App ID de la app y en el del widget. Con la firma automática de Xcode se crea solo al
+  archivar; si no, a mano.
+- **Manifiesto de privacidad:** la app y el widget declaran el acceso a UserDefaults del grupo (razón `1C8F.1`).
+- **Probarlo en el simulador:** compilar con `CODE_SIGN_IDENTITY=- CODE_SIGN_STYLE=Manual CODE_SIGNING_REQUIRED=NO
+  CODE_SIGNING_ALLOWED=YES DEVELOPMENT_TEAM=` (la firma ad hoc embebe los permisos del grupo; sin ella, el grupo no se
+  comparte), instalar, y escribir un `proximasClases.v1` de ejemplo en el contenedor del grupo (`xcrun simctl
+  get_app_container <udid> <bundle id> groups`). Antes, `npx cap copy ios` (genera `capacitor.config.json` y `public/`).
+- **Sin probar en un iPhone real:** la firma con cuenta de Apple, que el widget aparezca tras instalar desde TestFlight y que
+  la pulsación abra la app por el enlace universal (`https://www.tentare.app/app`).
+
+## Avisos locales de clase (23-nov-2026)
+
+«Tu clase empieza en 15 minutos», **programado en el propio iPhone** con
+`UNUserNotificationCenter`: salta sin red y con la app cerrada. Algo que una web
+no puede hacer.
+
+- **Quién arma qué**: `lib/nativo/avisos-locales.ts` (puro, con tests) decide los
+  avisos; `useAvisosLocales` (Inicio) los entrega con lo que Inicio ya cargó;
+  `AvisosLocalesPlugin.swift` los programa. Un aviso por reserva confirmada que
+  empiece en más de 15 min, máximo 10.
+- **No duplica al servidor**: el estudio ya manda por push el de 24 h y el de 1 h
+  (`recordatorio-clase.ts`). Este es el último empujón. Si el servidor llega a
+  mandar uno a 15 min, se quita este.
+- **No pide permiso**: usa el que la alumna dio a los avisos. Sin permiso no
+  programa nada. Solo toca lo que empieza por `clase-local-`: los push no se ven.
+- **Apagarlo**: Preferencias › interruptor «Aviso 15 minutos antes de tu clase»
+  (solo en la app de iOS; es del dispositivo, `localStorage`). Cerrar sesión o
+  borrar la cuenta los quita.
+- Contenido (pantalla de bloqueo): nombre de la clase, estudio y sala. Nada más.
+- ⚠️ No comprobado en un iPhone real ni con permiso concedido en simulador: solo
+  compila y se prueba la parte pura.
+
 ## Qué no se ha podido comprobar
 
 Compila en el simulador (Debug) y se archiva en Release sin firmar (7-oct-2026),
@@ -677,3 +727,22 @@ sesión con Apple (el plugin propio, necesita la capacidad en el App ID), el
 registro de push y que llegue un aviso (APNs de producción), un Universal Link
 desde Notas (necesita `APPLE_TEAM_ID`), y la cuenta de revisión contra
 producción (necesita la alumna de demo y las variables).
+
+## Siri y Atajos (23-nov-2026)
+
+`ios/App/App/ProximaClaseIntents.swift` (App Intents, iOS 16+; la app sigue admitiendo iOS 15, en iOS 15 simplemente no aparecen).
+- «¿Cuándo es mi próxima clase en Tentare?» y «¿Qué clases tengo en Tentare?». Aparecen también en la app Atajos sin configurar nada.
+- **Solo consultan.** Leen lo mismo que el widget (grupo de apps, `ProximasClasesAlmacen`): sin red, al instante. Reservar o cancelar por voz NO está a propósito: mueve bonos y penalizaciones y necesita sesión.
+- Los datos los refresca la app al abrirse; si lleva días cerrada, Siri contesta con lo último guardado (caduca a los 14 días y entonces dice que no ve clases).
+- Las frases van en español; se puso `developmentRegion = es` (el Info.plist ya lo decía) para que Siri las trate como frases del idioma de origen.
+- ⚠️ **No probado en un iPhone real ni con Siri**: compila (simulador), y el texto de las respuestas se comprobó con un script aparte. Hay que probarlo en dispositivo antes del build 1.1 (las frases con `\(.applicationName)` dependen de cómo se llame la app en esa instalación).
+
+## Bloqueo con Face ID (23-nov-2026)
+
+`ios/App/App/BloqueoPlugin.swift`, interruptor en Perfil → Preferencias (solo en la app y si el iPhone tiene Face ID, Touch ID o código).
+- **Opcional y del dispositivo**: lo aplica el iPhone (`UserDefaults`), no la web ni el servidor. Apagado de serie.
+- `LAContext` con `.deviceOwnerAuthentication`: si Face ID falla, iOS ofrece el código del iPhone; nunca queda sin salida.
+- Encender y apagar piden autenticarse. Al **cerrar sesión se apaga sin pedir** (`apagarBloqueoAlSalir`): ya no hay cuenta que proteger.
+- La pantalla se tapa en cuanto la app deja de estar activa (tampoco se ve en el selector de apps); se pide desbloquear al abrirla en frío y al volver pasados 30 s.
+- Necesita `NSFaceIDUsageDescription` (ya en `Info.plist`). Un build antiguo no tiene el plugin: la web no enseña el interruptor (`estadoBloqueo()` devuelve `null`).
+- ⚠️ **No probado en un iPhone real** (el simulador compila; no se ha ejercitado la autenticación). Probar antes del build 1.1: apertura en frío, volver tras >30 s, cancelar el desbloqueo y reintentar, y cerrar sesión con el bloqueo encendido.

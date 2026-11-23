@@ -73,7 +73,7 @@ if [ -d "$STORAGE" ]; then
 fi
 cp "$ENV_SB" "$TMP/supabase.env"
 cp "$ENV_APP" "$TMP/tentare.env"
-date -Iseconds > "$TMP/HECHA"
+ahora_iso > "$TMP/HECHA"
 
 ARCHIVO="$DESTINO/$NOMBRE.tar"
 tar -C "$TMP" -cf "$ARCHIVO" .
@@ -96,5 +96,5 @@ ls -1t "$DESTINO"/tentare-*.tar "$DESTINO"/tentare-*.tar.enc 2>/dev/null | tail 
   rm -f "$viejo"
 done
 
-date -Iseconds > "$DESTINO/ULTIMA-COPIA-OK"
+ahora_iso > "$DESTINO/ULTIMA-COPIA-OK"
 echo "✔ Copia: $ARCHIVO ($(du -h "$ARCHIVO" | cut -f1))"

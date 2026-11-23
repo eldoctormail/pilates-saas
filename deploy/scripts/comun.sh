@@ -17,11 +17,19 @@ poner() {
 
 leer() { grep -E "^$2=" "$1" | tail -1 | cut -d= -f2- | sed -e 's/^"//' -e 's/"$//'; }
 
-# ¿Menos de 12 GB entre RAM y swap? (Raspberry Pi y máquinas chicas)
+# ¿La memoria que tiene Docker es menos de 12 GB? (Raspberry Pi de 8 GB, o el
+# Mac con Docker Desktop, que le da a Docker solo una parte). Se mide la RAM,
+# no la swap: compilar con Supabase andando y la swap a full tarda horas.
 calcular_memoria() {
-  MEM_KB=$(awk '/^(MemTotal|SwapTotal):/ {s += $2} END {print s}' /proc/meminfo)
-  POCA_MEMORIA=$([ "$MEM_KB" -lt 12000000 ] && echo si || echo no)
+  MEM_B="$(docker info --format '{{.MemTotal}}' 2>/dev/null || true)"
+  if [ -z "$MEM_B" ] && [ -r /proc/meminfo ]; then
+    MEM_B=$(( $(awk '/^MemTotal:/ {print $2}' /proc/meminfo) * 1024 ))
+  fi
+  POCA_MEMORIA=$([ "${MEM_B:-0}" -lt 12000000000 ] && echo si || echo no)
 }
+
+# Fecha y hora con zona, igual en Linux y en el Mac (sin `date -I`).
+ahora_iso() { date +%Y-%m-%dT%H:%M:%S%z; }
 
 # Compila la imagen de la app. Con poca memoria, con Supabase parado.
 compilar() {

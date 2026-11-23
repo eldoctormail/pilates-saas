@@ -48,6 +48,14 @@ Pensado para una Raspberry Pi 5 de 8 GB, todavía sin probar en una. Las imágen
   La primera compilación tarda bastante: media hora o más.
 - **Refrigeración activa** (el ventilador oficial): con la compilación al 100 % de CPU, sin ventilador se frena.
 
+### Mac con Docker Desktop
+
+Sirve para el ensayo y para probar. Para producción, mejor la Pi: el Mac se suspende y se reinicia con las actualizaciones. Los scripts corren igual en macOS: no usan nada que solo tenga Linux, y no hace falta instalar Node.
+
+- **Docker Desktop 4.34 o más nuevo, con «Enable host networking».** Está en Settings › Resources › Network. Los túneles del ensayo, `migrar.sh` y el túnel de producción usan la red `host`. Sin esa opción, esa red es la de la máquina virtual de Docker y no la del Mac, y los túneles no llegan a la app.
+- **8 GB o más de memoria para Docker,** en Settings › Resources. Con menos de 12 GB, los scripts paran Supabase mientras compilan, igual que en la Pi.
+- **Con un Mac Apple Silicon (M1 o posterior),** las imágenes son las mismas ARM de la Pi, así que lo que anda en el Mac anda en la Pi.
+
 ---
 
 ## 1. Supabase

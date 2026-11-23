@@ -10,7 +10,10 @@ cd "$(dirname "$0")/.."
 poner() {
   clave="$1"; valor="$2"
   if grep -qE "^${clave}=$" .env; then
-    sed -i "s|^${clave}=$|${clave}=${valor}|" .env
+    # Sin `sed -i` (distinto en Linux y en el Mac): se reescribe por un temporal.
+    tmp="$(mktemp)"
+    awk -v c="$clave" -v v="$valor" 'BEGIN{FS=OFS="="} $1==c && $2=="" && NF==2 {print c "=" v; next} {print}' .env > "$tmp"
+    cat "$tmp" > .env; rm -f "$tmp"
     echo "  ${clave}: generado"
   elif ! grep -qE "^${clave}=" .env; then
     # Una variable nueva de una versión posterior: se agrega al final.

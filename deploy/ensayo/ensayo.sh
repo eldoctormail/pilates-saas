@@ -59,7 +59,7 @@ empezar)
   # mientras compila y se vuelve a levantar después.
   calcular_memoria
   [ "$(uname -m)" = aarch64 ] && echo "→ ARM de 64 bits ($(uname -m)): la primera compilación puede tardar 30 minutos o más."
-  if [ "$(awk '/^SwapTotal:/ {print $2}' /proc/meminfo)" -lt 2000000 ] && [ "$POCA_MEMORIA" = si ]; then
+  if [ -r /proc/meminfo ] && [ "$(awk '/^SwapTotal:/ {print $2}' /proc/meminfo)" -lt 2000000 ] && [ "$POCA_MEMORIA" = si ]; then
     echo "⚠ Menos de 2 GB de swap: si la compilación se corta sola, agregá swap (ver deploy/README.md, Raspberry Pi)."
   fi
 

@@ -8,3 +8,27 @@
 services:
   functions:
     profiles: ["desactivado"]
+
+  # Los correos de acceso con la marca de Tentare y el CÓDIGO de 6 cifras (lo
+  # que la app le pide a la alumna y al alta del estudio). Sin esto, Supabase
+  # autoalojado manda sus plantillas de fábrica, con un enlace y sin código.
+  # Las plantillas son las de supabase/templates/ (las mismas del proyecto de
+  # Tentare); deploy/scripts/migrar.sh las copia a ./plantillas en cada corrida.
+  # Los asuntos salen de supabase/config.toml (lo cruza lib/deploy-migraciones.test.ts).
+  plantillas:
+    image: nginx:alpine
+    container_name: supabase-plantillas
+    restart: unless-stopped
+    volumes:
+      - ./plantillas:/usr/share/nginx/html:ro
+
+  auth:
+    environment:
+      GOTRUE_MAILER_TEMPLATES_CONFIRMATION: http://plantillas/confirmation.html
+      GOTRUE_MAILER_TEMPLATES_RECOVERY: http://plantillas/recovery.html
+      GOTRUE_MAILER_TEMPLATES_MAGIC_LINK: http://plantillas/magic_link.html
+      GOTRUE_MAILER_TEMPLATES_EMAIL_CHANGE: http://plantillas/email_change.html
+      GOTRUE_MAILER_SUBJECTS_CONFIRMATION: '{{ if .Data.alta_nueva }}{{ .Token }} es tu código · Te damos la bienvenida a Tentare{{ else }}Tu código de verificación de Tentare{{ end }}'
+      GOTRUE_MAILER_SUBJECTS_RECOVERY: 'Recupera tu contraseña en Tentare'
+      GOTRUE_MAILER_SUBJECTS_MAGIC_LINK: 'Tu código para entrar en Tentare'
+      GOTRUE_MAILER_SUBJECTS_EMAIL_CHANGE: 'Confirma tu nuevo email en Tentare'

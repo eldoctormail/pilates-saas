@@ -45,3 +45,20 @@ test('migrar.sh prepara la copia, aplica desde ella (cada una en su transacción
   assert.ok(tramo.includes('supabase_migrations.schema_migrations'), 'se anota en la tabla de la CLI');
   assert.ok(!m.includes('db push'), 'sin la CLI: corre las sentencias fuera de una transacción');
 });
+
+test('las plantillas de correo del servidor propio son las de config.toml, con sus asuntos', () => {
+  const toml = readFileSync(join(RAIZ, 'supabase/config.toml'), 'utf8');
+  const compose = readFileSync(join(RAIZ, 'deploy/supabase/docker-compose.tentare.yml'), 'utf8');
+  const plantillas = [...toml.matchAll(/^\[auth\.email\.template\.(\w+)\]\nsubject = "(.*)"\ncontent_path = "\.\/supabase\/templates\/(\w+)\.html"/gm)];
+  assert.ok(plantillas.length >= 4, 'config.toml tiene las plantillas de acceso');
+  for (const [, tipo, asunto, archivo] of plantillas) {
+    const T = tipo.toUpperCase();
+    assert.ok(existsSync(join(RAIZ, 'supabase/templates', `${archivo}.html`)), `${archivo}.html existe`);
+    assert.ok(compose.includes(`GOTRUE_MAILER_TEMPLATES_${T}: http://plantillas/${archivo}.html`), `${T}: la plantilla`);
+    assert.ok(compose.includes(`GOTRUE_MAILER_SUBJECTS_${T}: '${asunto.replace(/'/g, "''")}'`), `${T}: el mismo asunto que config.toml`);
+  }
+  // migrar.sh las copia adonde las sirve el contenedor «plantillas».
+  const migrar = readFileSync(join(RAIZ, 'deploy/scripts/migrar.sh'), 'utf8');
+  assert.ok(migrar.includes('supabase/templates/*.html') && migrar.includes('"$SB/plantillas'), 'migrar.sh copia las plantillas');
+  assert.ok(compose.includes('./plantillas:/usr/share/nginx/html:ro'));
+});

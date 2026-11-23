@@ -23,6 +23,16 @@ CRON_SECRETO=$(leer "$DEPLOY/.env" SUPABASE_CRON_SECRET)
 [ -n "$APP_URL" ] || { echo "Falta NEXT_PUBLIC_APP_URL en $DEPLOY/.env"; exit 1; }
 [ -n "$CRON_SECRETO" ] || { echo "Falta SUPABASE_CRON_SECRET en $DEPLOY/.env (generar-secretos.sh)"; exit 1; }
 
+# Las plantillas de correo (el código de 6 cifras) y los ajustes de Tentare
+# sobre el compose de Supabase, siempre al día con este repo.
+mkdir -p "$SB/plantillas"
+CAMBIO_SB=no
+for f in "$REPO"/supabase/templates/*.html; do
+  cmp -s "$f" "$SB/plantillas/$(basename "$f")" || { cp "$f" "$SB/plantillas/"; CAMBIO_SB=si; }
+done
+cmp -s "$DEPLOY/supabase/docker-compose.tentare.yml" "$SB/docker-compose.tentare.yml" \
+  || { cp "$DEPLOY/supabase/docker-compose.tentare.yml" "$SB/"; CAMBIO_SB=si; }
+
 # Una copia de las migraciones con los cinco arreglos que hacen falta para
 # recorrerlas desde una base vacía (los mismos que el job de CI). La de
 # supabase/migrations/ no se toca.
@@ -87,8 +97,10 @@ docker exec -i supabase-db psql -U postgres -d postgres -v ON_ERROR_STOP=1 -q < 
 echo "→ Secretos de Vault"
 docker exec -i supabase-db psql -U postgres -d postgres -v ON_ERROR_STOP=1 \
   -v app_url="$APP_URL" -v cron_secret="$CRON_SECRETO" <<'SQL'
+\o /dev/null
 select set_config('tentare.app_url', :'app_url', false);
 select set_config('tentare.cron_secret', :'cron_secret', false);
+\o
 do $$
 declare
   v record;
@@ -111,3 +123,7 @@ select count(*) as trabajos_que_apuntan_a_tentare_app from cron.job where comman
 SQL
 
 echo "✔ Base lista."
+if [ "$CAMBIO_SB" = si ]; then
+  echo "→ Cambiaron las plantillas de correo o los ajustes de Supabase. Para aplicarlos:"
+  echo "    cd $SB && docker compose up -d"
+fi

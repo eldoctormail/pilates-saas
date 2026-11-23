@@ -21,6 +21,8 @@ No hace falta Node en el servidor: si no está, `migrar.sh` corre la CLI de Supa
 
 **Antes de abrir:** hay un ensayo general con Mercado Pago de prueba y sin dominio, en [`deploy/ensayo/`](ensayo/PRUEBAS.md).
 
+**Para abrir:** dominio propio con túnel de Cloudflare, copias de seguridad y cortes de luz, en [`deploy/PRODUCCION.md`](PRODUCCION.md).
+
 ### Raspberry Pi
 
 Pensado para una Raspberry Pi 5 de 8 GB, todavía sin probar en una. Las imágenes que se usan publican versión ARM de 64 bits; si alguna no la tuviera, `docker compose pull` lo dice en el acto. Lo que importa:

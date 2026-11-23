@@ -74,6 +74,17 @@ docker exec -it supabase-db psql -U postgres
 | 4.3 | Al pie de `/reservar/<slug>`: Botón de arrepentimiento y mandá un pedido con el correo de la alumna. | Da un código `ARR-XXXXXX` en el acto. El panel lo muestra en la bandeja «por decidir» y en Clientes › Pedidos. |
 | 4.4 | Lo mismo con el Botón de baja. | Código `BAJ-XXXXXX`. Marcalo como atendido desde el panel. |
 
+## 4b. Factura electrónica de ARCA (homologación)
+
+Hace falta tu clave fiscal y un punto de venta «RECE para aplicativo y web services». Paso a paso en `deploy/README.md`, sección Factura electrónica de ARCA.
+
+| # | Hacé | Tiene que pasar |
+| --- | --- | --- |
+| 4b.1 | Configuración › Cobros y facturas › Factura electrónica de ARCA, en el entorno **Prueba**: datos, pedido, certificado de WSASS y «Probar la conexión». | Dice «Conectado» y el último número autorizado (puede ser «ninguno»). |
+| 4b.2 | En un recibo cobrado: «Emitir factura de ARCA», a consumidor final y sin documento. | Sale con CAE. «Ver o imprimir» muestra el PDF con QR y «SIN VALIDEZ FISCAL». |
+| 4b.3 | Otra, poniendo un CUIT con el último dígito cambiado. | No deja emitir: el dígito verificador no cuadra. |
+| 4b.4 | Cortá internet de la Pi justo después de tocar «Emitir» y volvé a intentar con internet. | La primera dice que quedó pendiente; la segunda la completa con el **mismo** número. |
+
 ## 5. Lo que corre solo
 
 | # | Hacé | Tiene que pasar |

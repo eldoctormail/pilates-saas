@@ -24,20 +24,7 @@ SB="$(cd "${2:?Falta la carpeta de Supabase}" && pwd)"
 DEPLOY="$(cd "$(dirname "$0")/.." && pwd)"
 ENV_SB="$SB/.env"
 ENV_APP="$DEPLOY/.env"
-
-# Pone CLAVE=valor en un .env: reemplaza la línea si está y la agrega si no.
-poner() {
-  archivo="$1"; clave="$2"; valor="$3"
-  if grep -qE "^$clave=" "$archivo"; then
-    tmp="$(mktemp)"
-    awk -v c="$clave" -v v="$valor" 'BEGIN{FS=OFS="="} $1==c {print c "=" v; next} {print}' "$archivo" > "$tmp"
-    cat "$tmp" > "$archivo"; rm -f "$tmp"
-  else
-    printf '%s=%s\n' "$clave" "$valor" >> "$archivo"
-  fi
-}
-
-leer() { grep -E "^$2=" "$1" | tail -1 | cut -d= -f2- | sed -e 's/^"//' -e 's/"$//'; }
+. "$DEPLOY/scripts/comun.sh"
 
 # Abre un túnel a un puerto local y devuelve su dirección https://….trycloudflare.com
 tunel() {
@@ -55,26 +42,6 @@ tunel() {
   exit 1
 }
 
-# Compila la imagen de la app. Con poca memoria, con Supabase parado.
-compilar() {
-  if [ "${POCA_MEMORIA:-no}" = si ]; then
-    echo "→ Poca memoria: Supabase se para mientras compila la app"
-    (cd "$DEPLOY" && docker compose stop app) >/dev/null 2>&1 || true
-    (cd "$SB" && docker compose stop)
-  fi
-  echo "→ Compilando la app"
-  (cd "$DEPLOY" && docker compose build app)
-}
-
-# Espera a que la base de Supabase conteste.
-esperar_supabase() {
-  i=0
-  until docker exec supabase-db pg_isready -U postgres -q 2>/dev/null; do
-    i=$((i + 1)); [ $i -gt 120 ] && { echo "Supabase no levantó. Mirá: cd $SB && docker compose ps"; exit 1; }
-    sleep 2
-  done
-}
-
 case "$ACCION" in
 empezar)
   [ -f "$ENV_APP" ] || { echo "Falta $ENV_APP (deploy/scripts/generar-secretos.sh)"; exit 1; }
@@ -90,8 +57,7 @@ empezar)
   # Raspberry Pi y máquinas chicas: compilar la app pide hasta 6 GB, y con
   # Supabase andando no entra. Con menos de 12 GB (RAM + swap), Supabase se para
   # mientras compila y se vuelve a levantar después.
-  MEM_KB=$(awk '/^(MemTotal|SwapTotal):/ {s += $2} END {print s}' /proc/meminfo)
-  POCA_MEMORIA=$([ "$MEM_KB" -lt 12000000 ] && echo si || echo no)
+  calcular_memoria
   [ "$(uname -m)" = aarch64 ] && echo "→ ARM de 64 bits ($(uname -m)): la primera compilación puede tardar 30 minutos o más."
   if [ "$(awk '/^SwapTotal:/ {print $2}' /proc/meminfo)" -lt 2000000 ] && [ "$POCA_MEMORIA" = si ]; then
     echo "⚠ Menos de 2 GB de swap: si la compilación se corta sola, agregá swap (ver deploy/README.md, Raspberry Pi)."
@@ -158,8 +124,7 @@ terminar)
   fi
   if [ -f "$ENV_APP.antes-del-ensayo" ]; then
     mv "$ENV_APP.antes-del-ensayo" "$ENV_APP"
-    MEM_KB=$(awk '/^(MemTotal|SwapTotal):/ {s += $2} END {print s}' /proc/meminfo)
-    POCA_MEMORIA=$([ "$MEM_KB" -lt 12000000 ] && echo si || echo no)
+    calcular_memoria
     compilar
     (cd "$SB" && docker compose up -d)
     esperar_supabase

@@ -9,6 +9,8 @@ import { CtaBlock } from '@/components/recursos/ArticlePrimitives';
 import { PageBreadcrumb } from '@/components/recursos/ArticleStructuredData';
 import { OrganizationStructuredData } from '@/components/OrganizationStructuredData';
 import { paginaDe, urlDe } from '@/lib/seo/paginas';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
+import { ComparativaArgentina } from './argentina';
 
 const PATH = '/comparativa';
 const pagina = paginaDe(PATH)!;
@@ -21,7 +23,7 @@ export const metadata: Metadata = {
     siteName: 'Tentare',
     type: 'website',
     title: pagina.titulo,
-    description: 'Las diferencias que se notan cada día y cada fin de mes en un estudio de Pilates en España.',
+    description: ES ? 'Las diferencias que se notan cada día y cada fin de mes en un estudio de Pilates en España.' : 'Tentare frente a los programas que se usan en Argentina: precio, comisión, Mercado Pago y factura de ARCA.',
     url: urlDe(PATH),
     images: [{ url: '/comparativa/opengraph-image' }],
   },
@@ -207,6 +209,7 @@ const ROWS: {
 ];
 
 export default function ComparativaPage() {
+  if (!ES) return <ComparativaArgentina />;
   return (
     <PageShell>
       <OrganizationStructuredData />

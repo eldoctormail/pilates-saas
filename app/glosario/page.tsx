@@ -10,6 +10,7 @@ import { CtaBlock } from '@/components/recursos/ArticlePrimitives';
 import { GlossaryStructuredData } from '@/components/glosario/GlossaryStructuredData';
 import { OrganizationStructuredData } from '@/components/OrganizationStructuredData';
 import { paginaDe, urlDe } from '@/lib/seo/paginas';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
 // Título y descripción salen del registro (lib/seo/paginas.ts), como en el resto
 // de páginas comerciales: tenerlos escritos aquí y allí fue lo que los dejó
@@ -47,7 +48,7 @@ const CATEGORIAS: { id: CategoriaId; nombre: string; icon: LucideIcon }[] = [
   { id: 'seguridad', nombre: 'Seguridad y datos de la alumna', icon: ShieldCheck },
 ];
 
-const TERMINOS: Termino[] = [
+const TERMINOS_ESPANA: Termino[] = [
   {
     slug: 'software-gestion-pilates',
     categoria: 'producto',
@@ -281,6 +282,47 @@ const TERMINOS: Termino[] = [
   },
 ];
 
+// En Argentina (es-AR), los términos que solo existen en España (SEPA,
+// Veri*factu, TicketBAI) se cambian por los de allí, en el mismo sitio de la
+// lista; la clase suelta lleva cifras argentinas (las de
+// lib/recursos/articulos/argentina/precio-clase-de-pilates.ts, con su fuente).
+const EN_ARGENTINA: Record<string, Termino> = {
+  'clase-suelta': {
+    slug: 'clase-suelta',
+    categoria: 'cobros',
+    name: 'Clase suelta',
+    description:
+      'Una sola sesión que se paga sin pack ni abono, para quien viene de forma puntual o a probar. Es la opción más cara por sesión: un estudio de reformer de Recoleta publica, en noviembre de 2026, la clase de prueba a $25.000 y la clase dentro del pack de 8 a $18.000.',
+    guia: { href: '/recursos/precio-clase-de-pilates', label: 'Precio de una clase de pilates' },
+  },
+  'cobro-recurrente-sepa': {
+    slug: 'cobro-con-mercado-pago',
+    categoria: 'cobros',
+    name: 'Cobro con Mercado Pago',
+    description:
+      'Pago online de un pack, un abono o una clase que la alumna hace desde su teléfono con Mercado Pago, y que entra en la cuenta de Mercado Pago del estudio. Con Mercado Pago cada pago lo hace la alumna: no hay un cargo automático con tarjeta guardada, así que el aviso de renovación y la lista de lo que falta cobrar son la pieza central.',
+    guia: { href: '/funcionalidades/cobros-recurrentes', label: 'Cobros con Mercado Pago y en el mostrador' },
+  },
+  verifactu: {
+    slug: 'factura-electronica-arca',
+    categoria: 'cobros',
+    name: 'Factura electrónica y CAE',
+    description:
+      'En Argentina, cada factura se emite de forma electrónica y ARCA la autoriza con un CAE (Código de Autorización Electrónico), que lleva una fecha de vencimiento. Se puede pedir desde la web de ARCA o desde un programa conectado a su servicio de factura electrónica, con el certificado y el punto de venta del estudio. El comprobante lleva además un código QR para que quien lo recibe pueda comprobarlo.',
+    guia: { href: '/funcionalidades/facturacion', label: 'La factura electrónica de ARCA desde cada cobro' },
+  },
+  ticketbai: {
+    slug: 'monotributo-factura-c',
+    categoria: 'cobros',
+    name: 'Monotributo y factura A, B o C',
+    description:
+      'El monotributo es el régimen simplificado de ARCA para pequeños contribuyentes: unifica IVA y Ganancias con los aportes en una cuota mensual. Una monotributista emite siempre factura C. Una responsable inscripta en IVA emite factura B a la consumidora final y factura A a otro responsable inscripto o a una monotributista.',
+    guia: { href: '/recursos/iva-clases-de-pilates', label: 'Las clases de pilates y el IVA en Argentina' },
+  },
+};
+
+const TERMINOS: Termino[] = ES ? TERMINOS_ESPANA : TERMINOS_ESPANA.map((t) => EN_ARGENTINA[t.slug] ?? t);
+
 export default function GlosarioPage() {
   return (
     <PageShell>
@@ -308,7 +350,7 @@ export default function GlosarioPage() {
           <h1 className="glo-titular">Los términos del software de gestión para Pilates, explicados sin venderte nada.</h1>
           <p className="glo-entrada">
             Definiciones neutrales, no un argumentario: qué significa cada término, en qué se diferencia de otro parecido y, cuando aplica, un enlace a la guía
-            larga. Pensado para una propietaria que está comparando software y se encuentra palabras como &ldquo;aforo por puesto&rdquo; o &ldquo;Veri*factu&rdquo;
+            larga. Pensado para una propietaria que está comparando software y se encuentra palabras como &ldquo;aforo por puesto&rdquo; o &ldquo;{ES ? 'Veri*factu' : 'CAE'}&rdquo;
             sin que nadie se las haya explicado antes. Agrupado en seis bloques —producto, modelo de estudio, reservas, equipo, cobros y seguridad— para no
             tener que leer los {TERMINOS.length} de un tirón.
           </p>

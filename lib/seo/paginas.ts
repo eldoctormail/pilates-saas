@@ -478,12 +478,13 @@ export const PAGINAS: PaginaSeo[] = [
     // tabla de precios de los 14. La lista editorial («el mejor software…») es de
     // /recursos/mejor-software-para-estudios-de-pilates; antes los dos títulos
     // decían «13 comparados» y competían por la misma búsqueda.
-    titulo: 'Comparativa: 13 programas de software para Pilates | Tentare',
-    descripcion:
-      'bsport, Eversports, Mindbody, TIMP, Lorari, Bonsai y 7 más frente a Tentare: precio publicado, permanencia, sustituciones y Veri*Factu, con fuente y fecha.',
+    titulo: ES ? 'Comparativa: 13 programas de software para Pilates | Tentare' : 'Comparativa de software para Pilates en Argentina | Tentare',
+    descripcion: ES
+      ? 'bsport, Eversports, Mindbody, TIMP, Lorari, Bonsai y 7 más frente a Tentare: precio publicado, permanencia, sustituciones y Veri*Factu, con fuente y fecha.'
+      : 'Reservalo, Turnito, MiduApp, CrossHero y Fitco frente a Tentare: precio, comisión, Mercado Pago y factura de ARCA, con fuente y fecha.',
     grupo: 'software',
     etiqueta: 'Comparativa',
-    resumen: 'Tentare frente a las trece plataformas con las que más se compara.',
+    resumen: ES ? 'Tentare frente a las trece plataformas con las que más se compara.' : 'Tentare frente a los programas que se usan en Argentina.',
     prioridad: 0.8,
     changeFrequency: 'monthly',
     actualizado: '2026-10-15',
@@ -764,8 +765,9 @@ export const PAGINAS: PaginaSeo[] = [
   {
     path: '/glosario',
     titulo: 'Glosario: software para Pilates y yoga | Tentare',
-    descripcion:
-      'Definiciones claras y neutrales de los términos del sector: software de gestión, pilates reformer, Veri*factu, lista de espera automática, CRM de estudio y más.',
+    descripcion: ES
+      ? 'Definiciones claras y neutrales de los términos del sector: software de gestión, pilates reformer, Veri*factu, lista de espera automática, CRM de estudio y más.'
+      : 'Definiciones claras y neutrales de los términos del sector: software de gestión, pilates reformer, factura electrónica y CAE, lista de espera, monotributo y más.',
     grupo: 'recursos',
     etiqueta: 'Glosario',
     resumen: 'Qué significa cada término del sector, sin marketing.',

@@ -1,4 +1,4 @@
-import { LOCALE } from '../lib/locale.ts';
+import { FUNCIONES_DE_ESPANA as ES, LOCALE } from '../lib/locale.ts';
 import { LEGAL } from '@/lib/legal-info';
 import { ID_AUTOR } from '@/lib/blog/autor';
 import { NAV_LINKS } from './landing/data';
@@ -48,12 +48,12 @@ export function OrganizationStructuredData() {
     url: LEGAL.url,
     founder: { '@id': ID_FUNDADOR },
     logo: { '@type': 'ImageObject', url: `${LEGAL.url}/icon-512.png`, width: 512, height: 512 },
-    description: 'Software de gestión para estudios de Pilates y Yoga en España: reservas, app para clientes, bonos y cobros, calendario y equipo.',
+    description: `Software de gestión para estudios de Pilates y Yoga en ${ES ? 'España' : 'Argentina'}: reservas, app para clientes, bonos y cobros, calendario y equipo.`,
     // «tentare» es también una palabra italiana (infinitivo de «intentar»): sin esto un buscador o un modelo puede no saber si hablamos de
     // la palabra o de la empresa. `alternateName` recoge cómo se nos nombra en la práctica (el dominio); no se inventan marcas.
     alternateName: ['tentare.app'],
     disambiguatingDescription: 'Tentare (tentare.app) es una plataforma de software para estudios de Pilates y yoga; no tiene relación con la palabra italiana «tentare».',
-    areaServed: { '@type': 'Country', name: 'España' },
+    areaServed: { '@type': 'Country', name: ES ? 'España' : 'Argentina' },
     knowsAbout: ['Software de gestión para estudios de Pilates', 'Software de gestión para estudios de yoga', 'Reservas y bonos de clases', 'Cobros recurrentes para estudios'],
     email: LEGAL.email,
     sameAs: [...REDES_SOCIALES_TENTARE, ...PERFILES_EN_DIRECTORIOS],
@@ -61,7 +61,7 @@ export function OrganizationStructuredData() {
       '@type': 'ContactPoint',
       email: LEGAL.email,
       contactType: 'customer support',
-      areaServed: 'ES',
+      areaServed: ES ? 'ES' : 'AR',
       availableLanguage: ['Spanish'],
     },
   };

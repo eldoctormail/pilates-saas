@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { LogoTentare } from '@/components/marca/logo-tentare';
 import { enlaceWhatsApp } from '@/lib/decision/mensajes-socia';
 import { LEGAL } from '@/lib/legal-info';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 import { PIE_PUBLICO, PIE_RESUMIDO } from '@/lib/seo/navegacion-publica';
 import { WHATSAPP_SOPORTE } from '@/components/landing/enlaces';
 import './tokens.css';
@@ -121,7 +122,7 @@ export function PieWeb() {
         </details>
 
         <div className="w-pie-base">
-          <p>© 2026 {LEGAL.marca} · Software de gestión para estudios de Pilates y yoga · Hecho en España</p>
+          <p>© 2026 {LEGAL.marca} · Software de gestión para estudios de Pilates y yoga{ES ? ' · Hecho en España' : ''}</p>
           <div className="w-pie-base-der">
             <p className="w-pie-legal">
               {legal.map((l, i) => (

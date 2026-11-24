@@ -455,11 +455,17 @@
    invertido sino uno más claro — decisión de contraste del kit. Sin esto, las
    hojas (#222A33) desaparecen sobre --background: #16161A. */
 .marca-auto {
-  --marca-solido: #222A33;
-  --marca-disco: var(--marca-disco-producto, #B4537E);
-  --marca-a: #4C9CB0;
-  --marca-b: #B4537E;
-  --marca-producto: #5C6779;
+  --marca-solido: #3B3020;
+  --marca-disco: var(--marca-disco-producto, #883426);
+  --marca-a: #E67C36;
+  --marca-b: #883426;
+  /* Centra: las cinco franjas de la figura (naranja, oliva, verde agua, bordó, oliva claro). */
+  --marca-c1: #E67C36;
+  --marca-c2: #58481C;
+  --marca-c3: #80B29E;
+  --marca-c4: #883426;
+  --marca-c5: #88863E;
+  --marca-producto: #6E6250;
 }
 .dark .marca-auto {
   --marca-solido: #FFFFFF;
@@ -467,9 +473,16 @@
      nombre, no por el disco (regla 4 del kit). Por eso se ignora
      --marca-disco-producto en vez de heredarlo. */
   --marca-disco: #FFFFFF;
-  --marca-a: #8FD0DF;
-  --marca-b: #E9A7C2;
-  --marca-producto: #A9B4C0;
+  --marca-a: #F2A46B;
+  --marca-b: #E0887A;
+  /* En oscuro, las mismas franjas más claras: el oliva y el bordó se perderían
+     sobre --background. */
+  --marca-c1: #F2A46B;
+  --marca-c2: #CDB57E;
+  --marca-c3: #A6D4C9;
+  --marca-c4: #E0887A;
+  --marca-c5: #C9C77E;
+  --marca-producto: #C9C0B0;
 }
 
 /* ── La marca dentro del panel (Brand System, fases 2, 4 y 5) ──────────────

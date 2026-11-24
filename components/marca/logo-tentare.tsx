@@ -41,10 +41,10 @@ const ENCUADRE: Record<FormatoMarca, { sin: string; con: string; isotipo: string
 // globals.css (.marca-auto) porque un style en línea gana siempre a una clase,
 // y entonces la regla de modo oscuro no podría pisarlo.
 const TINTA: Record<Exclude<TintaMarca, 'auto'>, React.CSSProperties> = {
-  color: { '--marca-solido': '#222A33', '--marca-disco': '#B4537E', '--marca-a': '#4C9CB0', '--marca-b': '#B4537E', '--marca-producto': '#5C6779' } as React.CSSProperties,
-  negativo: { '--marca-solido': '#FFFFFF', '--marca-disco': '#FFFFFF', '--marca-a': '#8FD0DF', '--marca-b': '#E9A7C2', '--marca-producto': '#A9B4C0' } as React.CSSProperties,
-  tinta: { '--marca-solido': '#222A33', '--marca-disco': '#222A33', '--marca-a': '#222A33', '--marca-b': '#222A33', '--marca-producto': '#5C6779' } as React.CSSProperties,
-  blanco: { '--marca-solido': '#FFFFFF', '--marca-disco': '#FFFFFF', '--marca-a': '#FFFFFF', '--marca-b': '#FFFFFF', '--marca-producto': '#FFFFFF' } as React.CSSProperties,
+  color: { '--marca-solido': '#3B3020', '--marca-disco': '#883426', '--marca-a': '#E67C36', '--marca-b': '#883426', '--marca-c1': '#E67C36', '--marca-c2': '#58481C', '--marca-c3': '#80B29E', '--marca-c4': '#883426', '--marca-c5': '#88863E', '--marca-producto': '#6E6250' } as React.CSSProperties,
+  negativo: { '--marca-solido': '#FFFFFF', '--marca-disco': '#FFFFFF', '--marca-a': '#F2A46B', '--marca-b': '#E0887A', '--marca-c1': '#F2A46B', '--marca-c2': '#CDB57E', '--marca-c3': '#A6D4C9', '--marca-c4': '#E0887A', '--marca-c5': '#C9C77E', '--marca-producto': '#C9C0B0' } as React.CSSProperties,
+  tinta: { '--marca-solido': '#3B3020', '--marca-disco': '#3B3020', '--marca-a': '#3B3020', '--marca-b': '#3B3020', '--marca-c1': '#3B3020', '--marca-c2': '#3B3020', '--marca-c3': '#3B3020', '--marca-c4': '#3B3020', '--marca-c5': '#3B3020', '--marca-producto': '#6E6250' } as React.CSSProperties,
+  blanco: { '--marca-solido': '#FFFFFF', '--marca-disco': '#FFFFFF', '--marca-a': '#FFFFFF', '--marca-b': '#FFFFFF', '--marca-c1': '#FFFFFF', '--marca-c2': '#FFFFFF', '--marca-c3': '#FFFFFF', '--marca-c4': '#FFFFFF', '--marca-c5': '#FFFFFF', '--marca-producto': '#FFFFFF' } as React.CSSProperties,
 };
 
 /** Regla 1 del kit: un producto nunca redibuja la marca, solo tiñe su disco. */
@@ -124,7 +124,11 @@ export function LogoTentare({
               <stop offset="1" stopColor="#FFFFFF" stopOpacity="0" />
             </linearGradient>
             <clipPath id={idRecorte}>
+              <path d={TRAZADOS.hojaIzquierda} transform={encuadre.isotipo} />
+              <path d={TRAZADOS.hojaDerecha} transform={encuadre.isotipo} />
+              <path d={TRAZADOS.disco} transform={encuadre.isotipo} />
               <path d={TRAZADOS.tallo} transform={encuadre.isotipo} />
+              <path d={TRAZADOS.franja5} transform={encuadre.isotipo} />
             </clipPath>
           </>
         )}
@@ -132,10 +136,14 @@ export function LogoTentare({
 
       <g className="t-marca">
         <g transform={encuadre.isotipo}>
-          <path className="t-hoja-i" fill="var(--marca-solido)" d={TRAZADOS.hojaIzquierda} />
-          <path className="t-hoja-d" fill="var(--marca-solido)" d={TRAZADOS.hojaDerecha} />
-          <path className="t-disco" fill="var(--marca-disco)" d={TRAZADOS.disco} />
-          <path className="t-tallo" fill={`url(#${idDegradado})`} d={TRAZADOS.tallo} />
+          {/* Centra: las cuatro franjas de la figura, cada una con su color
+              (--marca-c1…c5). El color de producto no las toca: solo tiñe
+              --marca-disco, que ya no pinta el isotipo. */}
+          <path className="t-hoja-i" fill="var(--marca-c1)" d={TRAZADOS.hojaIzquierda} />
+          <path className="t-hoja-d" fill="var(--marca-c2)" d={TRAZADOS.hojaDerecha} />
+          <path className="t-disco" fill="var(--marca-c3)" d={TRAZADOS.disco} />
+          <path className="t-tallo" fill="var(--marca-c4)" d={TRAZADOS.tallo} />
+          <path className="t-franja-5" fill="var(--marca-c5)" d={TRAZADOS.franja5} />
         </g>
         {animacion === 'barrido' && (
           <g clipPath={`url(#${idRecorte})`}>

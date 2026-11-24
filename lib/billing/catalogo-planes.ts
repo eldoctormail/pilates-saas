@@ -23,6 +23,7 @@
 
 import { ADDONS, PLAN_ENTITLEMENTS, addonDeFeature, type Entitlements, type Plan } from './entitlements.ts';
 import { FUNCIONES_DE_ESPANA as ES } from '../locale.ts';
+import { precio } from './intervalo-ui.ts';
 
 /** Cómo se pinta una fila para un plan concreto. */
 export type ValorPlan =
@@ -41,7 +42,7 @@ export const FILA_TOPE_ALUMNAS = 'tope-alumnas';
 const TODOS = (): ValorPlan => SI;
 
 /** El texto de una fila que en Founding va como complemento (`ADDONS`). */
-export const textoComplemento = (precioMes: number) => `Complemento, +${precioMes} €/mes`;
+export const textoComplemento = (precioMes: number) => `Complemento, +${precio(precioMes)}/mes`;
 
 /**
  * Derivado del entitlement real, nunca escrito a mano. En Founding (sus

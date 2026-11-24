@@ -10,6 +10,7 @@
 //    producto deja hacer; lo que se le cobra se cambia en Stripe. Fingir que
 //    una sola acción hace ambas cosas es como se acaba regalando un plan caro.
 
+import { precio } from '@/lib/billing/intervalo-ui';
 import { ZONA_HORARIA } from '../../../../lib/zona-horaria.ts';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -91,7 +92,7 @@ export function AccionesEstudio({ id, plan, suspendido, motivo, reviewBoost, api
                     ? 'border-brand bg-brand/10 text-brand cursor-default'
                     : 'border-border text-foreground hover:bg-muted disabled:opacity-50'}`}>
                 {PLAN_INFO[p].nombre}
-                <span className="ml-1.5 text-[11px] font-medium opacity-70">{PLAN_INFO[p].precioMes} €</span>
+                <span className="ml-1.5 text-[11px] font-medium opacity-70">{precio(PLAN_INFO[p].precioMes)}</span>
               </button>
             ))}
           </div>

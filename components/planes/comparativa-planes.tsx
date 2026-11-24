@@ -1,11 +1,11 @@
 'use client';
 
-import { conMoneda } from '../../lib/moneda.ts';
+import { precio } from '@/lib/billing/intervalo-ui';
 import { useEffect, useId } from 'react';
 import { Check, Minus, ChevronDown } from 'lucide-react';
 import { PLANES, PLAN_INFO, type Plan } from '@/lib/billing/entitlements';
 import { CATEGORIAS, FILA_TOPE_ALUMNAS, type FilaPlan, type ValorPlan } from '@/lib/billing/catalogo-planes';
-import { ENTITLEMENTS_FOUNDING_GRATIS, GRATIS_RESERVAS_MES, LIMITES_GRATIS, SI_PASAS } from '@/lib/landing/founding-gratis';
+import { ENTITLEMENTS_FOUNDING_GRATIS, GRATIS_RESERVAS_MES, LIMITES_GRATIS, siPasas } from '@/lib/landing/founding-gratis';
 import { NombrePlan } from '@/components/planes/nombre-plan';
 
 // Comparativa completa por categorías. La usan /precios (pública), la hoja
@@ -62,7 +62,7 @@ export function ComparativaPlanes({
   // Founding Studio sigue igual pero de pago (decisión del 15-oct-2026).
   const filaReservas: FilaPlan = {
     nombre: 'Reservas al mes',
-    detalle: `Founding Studio es gratis ${LIMITES_GRATIS}; ${SI_PASAS}, sin tope.`,
+    detalle: `Founding Studio es gratis ${LIMITES_GRATIS}; ${siPasas()}, sin tope.`,
     valor: (p) => ({ tipo: 'texto', texto: p === 'BASE' ? `Gratis hasta ${GRATIS_RESERVAS_MES}` : 'Sin límite' }),
   };
   return (
@@ -100,7 +100,7 @@ export function ComparativaPlanes({
               >
                 <NombrePlan plan={p} />
                 <span className="block text-[10px] font-medium tabular-nums opacity-70">
-                  {foundingGratis && p === 'BASE' ? 'Gratis' : `${conMoneda(PLAN_INFO[p].precioMes, '')}`}
+                  {foundingGratis && p === 'BASE' ? 'Gratis' : precio(PLAN_INFO[p].precioMes, '')}
                 </span>
               </span>
             ))}

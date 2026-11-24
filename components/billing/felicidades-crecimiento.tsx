@@ -16,6 +16,7 @@
 //    panel (`unaVez`): esto no añade ninguna llamada.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { precio } from '@/lib/billing/intervalo-ui';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { PartyPopper } from 'lucide-react';
@@ -91,7 +92,7 @@ export function FelicidadesCrecimiento() {
     setContratando(false);
   }
 
-  const precio = PLAN_INFO.BASE.precioMes;
+  const cuota = precio(PLAN_INFO.BASE.precioMes);
 
   return (
     <Dialog open={abierto} onOpenChange={(v) => { if (!v) cerrar(); }}>
@@ -111,7 +112,7 @@ export function FelicidadesCrecimiento() {
         <div className="mt-2 rounded-2xl border border-border bg-muted/40 p-4">
           <div className="flex items-baseline justify-between gap-3">
             <p className="text-[15px] font-bold text-foreground">Founding Studio</p>
-            <p className="text-[15px] font-bold text-foreground tabular-nums">{precio} €<span className="text-[12.5px] font-medium text-muted-foreground">/mes</span></p>
+            <p className="text-[15px] font-bold text-foreground tabular-nums">{cuota}<span className="text-[12.5px] font-medium text-muted-foreground">/mes</span></p>
           </div>
           <p className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground text-pretty">
             Todo igual que ahora, sin límite de clientes ni de reservas. Tienes hasta el {fechaLarga(cierraEl)} para dar el paso; mientras tanto, nada cambia.
@@ -124,12 +125,12 @@ export function FelicidadesCrecimiento() {
           {estado.configurado ? (
             <button type="button" onClick={() => void contratar()} disabled={contratando} data-testid="felicidades-contratar"
               className="inline-flex h-11 items-center justify-center rounded-full bg-foreground px-5 text-[14px] font-bold text-background disabled:opacity-60">
-              {contratando ? 'Abriendo el pago…' : `Seguir creciendo · ${precio} €/mes`}
+              {contratando ? 'Abriendo el pago…' : `Seguir creciendo · ${cuota}/mes`}
             </button>
           ) : (
             <Link href="/suscripcion" onClick={cerrar}
               className="inline-flex h-11 items-center justify-center rounded-full bg-foreground px-5 text-[14px] font-bold text-background">
-              Ver el plan · {precio} €/mes
+              Ver el plan · {cuota}/mes
             </Link>
           )}
           <button type="button" onClick={cerrar} className="h-10 rounded-full text-[13.5px] font-semibold text-muted-foreground hover:text-foreground">

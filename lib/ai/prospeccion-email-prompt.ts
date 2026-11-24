@@ -22,7 +22,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import { conMoneda } from '../moneda.ts';
 import { PLAN_INFO } from '../billing/entitlements.ts';
-import { GRATIS_CON_LIMITES, SI_PASAS_CON_COMPLEMENTOS } from '../landing/founding-gratis.ts';
+import { GRATIS_CON_LIMITES, siPasasConComplementos } from '../landing/founding-gratis.ts';
 
 export interface ContextoProspecto {
   estudio: string;
@@ -37,12 +37,13 @@ export interface ContextoProspecto {
 // el 19/20-oct, pasados los límites, tres cosas van como complementos. Las cifras
 // salen de las mismas constantes que la web (lib/landing/founding-gratis.ts).
 const precios = () => [
-  `${PLAN_INFO.BASE.nombre}: ${GRATIS_CON_LIMITES.toLowerCase()}; ${SI_PASAS_CON_COMPLEMENTOS}`,
+  `${PLAN_INFO.BASE.nombre}: ${GRATIS_CON_LIMITES.toLowerCase()}; ${siPasasConComplementos()}`,
   `${PLAN_INFO.ESTUDIO.nombre} ${conMoneda(PLAN_INFO.ESTUDIO.precioMes)}/mes, que los incluye`,
   `${PLAN_INFO.CADENA.nombre} ${conMoneda(PLAN_INFO.CADENA.precioMes)}/mes, para varias sedes`,
 ].join(' · ');
 
-export const PROSPECCION_EMAIL_SYSTEM_PROMPT = `Escribes correos de venta en frío para Centra, un software español de gestión para estudios de Pilates. Los firma Marcos, el fundador.
+// Función, no constante: los precios se editan desde /interno/precios.
+export const prospeccionEmailSystemPrompt = (): string => `Escribes correos de venta en frío para Centra, un software español de gestión para estudios de Pilates. Los firma Marcos, el fundador.
 
 QUÉ ES CENTRA (solo esto es cierto, no añadas nada más):
 - Software de gestión para estudios de Pilates en España: reservas online, calendario con salas, bonos y cuotas, cobros recurrentes con tarjeta (y la remesa SEPA preparada para que el estudio la presente en su banco, si cobra por domiciliación), y facturas con numeración legal. Veri*Factu (la huella, el QR y el envío a la AEAT) todavía no está activo: no lo prometas.

@@ -11,7 +11,8 @@ import { ComparativaPlanes } from '@/components/planes/comparativa-planes';
 import { PLAN_INFO } from '@/lib/billing/entitlements';
 import { anualDisponible } from '@/lib/billing/billing';
 import { TarjetasPrecios } from '@/components/precios/tarjetas-precios';
-import { COMPLEMENTOS_DE_PAGO, GRATIS_MARGEN_DIAS, GRATIS_RESERVAS_MES, LIMITES_GRATIS, PRECIO_FOUNDING_PAGO, SI_PASAS } from '@/lib/landing/founding-gratis';
+import { complementosDePago, GRATIS_MARGEN_DIAS, GRATIS_RESERVAS_MES, LIMITES_GRATIS, precioFoundingPago, siPasas } from '@/lib/landing/founding-gratis';
+import { precio } from '@/lib/billing/intervalo-ui';
 import { funcionalidades, paginaDe, urlDe } from '@/lib/seo/paginas';
 import { softwareApplicationLd } from '@/lib/seo/software-application';
 import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
@@ -57,7 +58,8 @@ const FAQ = [
   },
   {
     q: `¿Qué pasa si supero las ${GRATIS_RESERVAS_MES} reservas al mes del plan Founding Studio?`,
-    a: `Sigues en ${PLAN_INFO.BASE.nombre} por ${PRECIO_FOUNDING_PAGO} € al mes, con IVA incluido y sin tope de alumnas ni de reservas; con ese plan, ${COMPLEMENTOS_DE_PAGO} van aparte, como complementos. Tienes ${GRATIS_MARGEN_DIAS} días para pasarte; si no, se cierra el panel y la app de tus alumnas sigue funcionando. Las reservas se cuentan sobre los últimos 30 días, y si tienes varios estudios en el plan gratis, se suman. En el plan gratis, la redacción con IA tiene además un tope de 40 usos al día.`,
+    // Getter: los precios se editan desde /interno/precios.
+    get a() { return `Sigues en ${PLAN_INFO.BASE.nombre} por ${precio(precioFoundingPago())} al mes, con IVA incluido y sin tope de alumnas ni de reservas; con ese plan, ${complementosDePago()} van aparte, como complementos. Tienes ${GRATIS_MARGEN_DIAS} días para pasarte; si no, se cierra el panel y la app de tus alumnas sigue funcionando. Las reservas se cuentan sobre los últimos 30 días, y si tienes varios estudios en el plan gratis, se suman. En el plan gratis, la redacción con IA tiene además un tope de 40 usos al día.`; },
   },
   {
     q: '¿Y si un mes falla el cobro de mi suscripción?',
@@ -113,9 +115,9 @@ export default function PreciosPage() {
           <h2 style={{ fontWeight: 600, fontSize: 'clamp(24px,2.8vw,34px)', letterSpacing: 'var(--w-track-h2)', color: 'var(--w-texto)', margin: '0 0 12px' }}>¿Cuánto cuesta un software de gestión para un estudio de Pilates?</h2>
           <p style={{ fontSize: 16, lineHeight: 1.65, color: 'var(--w-texto-2)', margin: 0, maxWidth: 820 }}>
             Centra es gratis en el plan {PLAN_INFO.BASE.nombre} (todas las funcionalidades menos varias sedes,{' '}
-            {LIMITES_GRATIS}; {SI_PASAS}, y con ese plan {COMPLEMENTOS_DE_PAGO} van aparte), cuesta {PLAN_INFO.ESTUDIO.precioMes} € al mes en el plan{' '}
+            {LIMITES_GRATIS}; {siPasas()}, y con ese plan {complementosDePago()} van aparte), cuesta {precio(PLAN_INFO.ESTUDIO.precioMes)} al mes en el plan{' '}
             {PLAN_INFO.ESTUDIO.nombre}, que los incluye, y{' '}
-            {PLAN_INFO.CADENA.precioMes} € en el plan {PLAN_INFO.CADENA.nombre} (dos o más centros bajo la misma marca).
+            {precio(PLAN_INFO.CADENA.precioMes)} en el plan {PLAN_INFO.CADENA.nombre} (dos o más centros bajo la misma marca).
             Los precios son públicos, con IVA incluido y sin permanencia. Centra no añade ninguna comisión sobre lo que
             cobras a tus alumnas: solo pagas la de {ES ? 'Stripe' : 'Mercado Pago'} por procesar cada cobro online, que es de {ES ? 'Stripe' : 'Mercado Pago'}. Traer
             tus datos desde otra plataforma no se cobra aparte.
@@ -126,7 +128,7 @@ export default function PreciosPage() {
           <h2 style={{ fontWeight: 600, fontSize: 'clamp(24px,2.8vw,34px)', letterSpacing: 'var(--w-track-h2)', color: 'var(--w-texto)', margin: '0 0 8px' }}>Todo lo que incluye Centra</h2>
           <p style={{ fontSize: 16, color: 'var(--w-texto-2)', margin: '0 0 22px' }}>
             Lo esencial —reservas, cobros, facturación y fichas— está en los tres. Lo que cambia es cuánto se automatiza y se
-            controla —Centro de Control, sustituciones autónomas, IA— y las sedes; y en {PLAN_INFO.BASE.nombre} de pago, {COMPLEMENTOS_DE_PAGO} van aparte.
+            controla —Centro de Control, sustituciones autónomas, IA— y las sedes; y en {PLAN_INFO.BASE.nombre} de pago, {complementosDePago()} van aparte.
           </p>
           <ComparativaPlanes todoAbierto destacado="ESTUDIO" foundingGratis />
           <p style={{ fontSize: 14, color: 'var(--w-texto-3)', margin: '14px 0 0' }}>

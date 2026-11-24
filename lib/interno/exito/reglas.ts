@@ -8,6 +8,7 @@
 //   · Ninguna alerta sin dato que la sostenga. Si la fuente no se pudo leer, no se inventa nada.
 import { ZONA_HORARIA } from '../../zona-horaria.ts';
 import { PLAN_INFO, type Plan } from '../../billing/entitlements.ts';
+import { precio } from '../../billing/intervalo-ui.ts';
 
 export type FamiliaAlerta = 'billing' | 'retencion' | 'oportunidad';
 export type Severidad = 'alta' | 'media' | 'baja';
@@ -194,7 +195,7 @@ export function construirAlertas(e: EntradaExito, ahora: Date): Alerta[] {
         l.reservas30d !== null ? `${l.reservas30d} reservas en 30 días (el plan gratis llega a ${l.limiteReservas}).` : 'Pasó el límite de reservas del plan gratis.',
         cerrado ? 'Su panel está cerrado hasta que elija un plan de pago.' : `Le quedan ${l.diasRestantes ?? '—'} ${plural(l.diasRestantes ?? 0, 'día', 'días')} de margen antes de que se cierre el panel.`,
       ],
-      accion: `Es un estudio que usa el producto de verdad. Propónle ${PLAN_INFO.BASE.nombre} (${PLAN_INFO.BASE.precioMes} €/mes, sin límite de reservas) antes de que se cierre su panel.`,
+      accion: `Es un estudio que usa el producto de verdad. Propónle ${PLAN_INFO.BASE.nombre} (${precio(PLAN_INFO.BASE.precioMes)}/mes, sin límite de reservas) antes de que se cierre su panel.`,
       href: fichaDe(l.estudioId), eurosMes: PLAN_INFO.BASE.precioMes,
     });
   }
@@ -205,7 +206,7 @@ export function construirAlertas(e: EntradaExito, ahora: Date): Alerta[] {
       id: `varias-sedes:${s.duenaId}`, tipo: 'varias-sedes', familia: 'oportunidad', severidad: 'media',
       estudioId: s.estudios[0]!.id, nombre: s.estudios.map((x) => x.nombre).join(' + '),
       titulo: `Una misma propietaria lleva ${s.estudios.length} estudios por separado`,
-      contexto: [`Estudios: ${s.estudios.map((x) => x.nombre).join(', ')}.`, `Ninguno está en una cadena; ${PLAN_INFO.CADENA.nombre} es ${PLAN_INFO.CADENA.precioMes} €/mes para varias sedes.`],
+      contexto: [`Estudios: ${s.estudios.map((x) => x.nombre).join(', ')}.`, `Ninguno está en una cadena; ${PLAN_INFO.CADENA.nombre} es ${precio(PLAN_INFO.CADENA.precioMes)}/mes para varias sedes.`],
       accion: `Pregúntale si son sedes de un mismo negocio: ${PLAN_INFO.CADENA.nombre} las junta con un solo plan y un solo cobro. Si son negocios distintos, no hagas nada.`,
       href: fichaDe(s.estudios[0]!.id), eurosMes: null,
     });

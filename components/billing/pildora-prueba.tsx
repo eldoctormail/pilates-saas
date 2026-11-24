@@ -1,5 +1,6 @@
 'use client';
 
+import { precio } from '@/lib/billing/intervalo-ui';
 import { useEffect, useId, useRef, useState } from 'react';
 import Link from 'next/link';
 import { estadoBilling, type EstadoBilling } from '@/lib/api-client';
@@ -228,7 +229,7 @@ export function PildoraPrueba({ className = '' }: { className?: string }) {
 
           {!expirada && (
             <p className="mt-2 text-[12.5px] text-muted-foreground">
-              Después serían <strong className="text-popover-foreground">{plan.precioMes}€/mes</strong>, sin permanencia.
+              Después serían <strong className="text-popover-foreground">{precio(plan.precioMes, '')}/mes</strong>, sin permanencia.
             </p>
           )}
 

@@ -16,7 +16,7 @@ import { estadoBilling, iniciarSuscripcion, gestionarSuscripcion, intervaloSuscr
 import { AyudaDePantalla } from '@/components/ayuda/AyudaDePantalla';
 import { SelectorPlan } from '@/components/planes/selector-plan';
 import { SelectorIntervalo } from '@/components/planes/selector-intervalo';
-import { euros, importeDe, type IntervaloUi } from '@/lib/billing/intervalo-ui';
+import { importeDe, precio, type IntervaloUi } from '@/lib/billing/intervalo-ui';
 import { ComparativaPlanes } from '@/components/planes/comparativa-planes';
 import { ExportarDatosEstudio } from '@/components/billing/exportar-datos-estudio';
 import { BorrarDatosEstudio } from '@/components/billing/borrar-datos-estudio';
@@ -97,11 +97,11 @@ function fraseSueltoQueSeCancela(s: PlanSueltoQueCancelaCadena): string {
     : s.nombreSede ? `El plan ${info.nombre} de tu sede «${s.nombreSede}»` : `El plan ${info.nombre} de otra de tus sedes`;
   // Un primer pago aún en curso (un adeudo SEPA) no lo para cancelar: no se promete que deje de cobrarse.
   if (s.pagoEnCurso) {
-    return `${cual}, de ${info.precioMes} €/mes, se cancela al activar Cadena. Su primer pago todavía se está procesando `
+    return `${cual}, de ${precio(info.precioMes)}/mes, se cancela al activar Cadena. Su primer pago todavía se está procesando `
       + 'y cancelar no lo detiene: si llega a cobrarse, ese mes no se devuelve.';
   }
   const pagado = fechaLarga(s.pagadoHasta);
-  return `${cual}, de ${info.precioMes} €/mes, se cancela al activar Cadena: dejas de pagarlo desde ese momento`
+  return `${cual}, de ${precio(info.precioMes)}/mes, se cancela al activar Cadena: dejas de pagarlo desde ese momento`
     + (pagado ? `, y el mes que ya has pagado (hasta el ${pagado}) no se devuelve.` : '.');
 }
 
@@ -398,7 +398,7 @@ export function SuscripcionVista({ embebida = false }: { embebida?: boolean }) {
                   >
                     <span className="flex items-baseline justify-between gap-2">
                       <span className="text-[16px] font-bold text-foreground"><NombrePlan plan={p} /></span>
-                      <span className="text-[15px] font-bold tabular-nums text-foreground">{euros(importeDe(PLAN_INFO[p].precioMes, estado?.anual ? intervalo : 'mensual'))} €<span className="text-[12.5px] font-medium text-muted-foreground">{estado?.anual && intervalo === 'anual' ? '/año' : '/mes'}</span></span>
+                      <span className="text-[15px] font-bold tabular-nums text-foreground">{precio(importeDe(PLAN_INFO[p].precioMes, estado?.anual ? intervalo : 'mensual'))}<span className="text-[12.5px] font-medium text-muted-foreground">{estado?.anual && intervalo === 'anual' ? '/año' : '/mes'}</span></span>
                     </span>
                     <span className="mt-1 block text-[12.5px] text-muted-foreground">
                       {p === 'BASE' ? 'Sin límite de clientes ni de reservas. Centro de Control, sustituciones automáticas y redacción con IA, aparte.' : p === 'ESTUDIO' ? `Todo lo de Founding Studio con Centro de Control, sustituciones automáticas y redacción con IA incluidos, y ${PLAN_ENTITLEMENTS.ESTUDIO.consultasAsistenteMes} consultas al asistente al mes.` : 'Varias sedes, cada una con lo suyo, en una sola cuenta.'}
@@ -415,7 +415,7 @@ export function SuscripcionVista({ embebida = false }: { embebida?: boolean }) {
                     className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3.5 text-[15px] font-bold text-brand-foreground transition-all hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring motion-reduce:transition-none sm:w-auto"
                   >
                     {accion === 'suscribir' && <Loader2 size={15} className="animate-spin motion-reduce:animate-none" aria-hidden="true" />}
-                    {accion === 'suscribir' ? 'Redirigiendo a Stripe…' : `Pasarme a ${PLAN_INFO[elegido].nombre} · ${euros(importeDe(PLAN_INFO[elegido].precioMes, estado?.anual ? intervalo : 'mensual'))} €/${estado?.anual && intervalo === 'anual' ? 'año' : 'mes'}`}
+                    {accion === 'suscribir' ? 'Redirigiendo a Stripe…' : `Pasarme a ${PLAN_INFO[elegido].nombre} · ${precio(importeDe(PLAN_INFO[elegido].precioMes, estado?.anual ? intervalo : 'mensual'))}/${estado?.anual && intervalo === 'anual' ? 'año' : 'mes'}`}
                   </button>
                   <p className="mt-2 text-[12.5px] text-muted-foreground">Tus datos y tu app siguen igual. Puedes cancelar cuando quieras desde esta misma pantalla.</p>
                 </>
@@ -436,7 +436,7 @@ export function SuscripcionVista({ embebida = false }: { embebida?: boolean }) {
                     <NombrePlan plan={(estado?.plan as Plan) ?? 'BASE'} />
                   </span>
                   <span className="text-[15px] font-semibold text-muted-foreground tabular-nums">
-                    {euros(importeDe(precioMensual((estado?.plan as Plan) ?? 'BASE', estado?.complementos?.pagaAparte ? estado.complementos.contratados : []), intervaloActual))}€
+                    {precio(importeDe(precioMensual((estado?.plan as Plan) ?? 'BASE', estado?.complementos?.pagaAparte ? estado.complementos.contratados : []), intervaloActual), '')}
                   </span>
                 </div>
                 {/* «al mes, IVA incluido» literal: es la frase que pidió P2-20
@@ -526,7 +526,7 @@ export function SuscripcionVista({ embebida = false }: { embebida?: boolean }) {
                     className="flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3.5 text-[15px] font-bold text-brand-foreground transition-all hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring motion-reduce:transition-none"
                   >
                     {accion === 'suscribir' && <Loader2 size={15} className="animate-spin motion-reduce:animate-none" aria-hidden="true" />}
-                    {accion === 'suscribir' ? 'Redirigiendo a Stripe…' : `Continuar con ${PLAN_INFO[elegido].nombre} · ${euros(importeDe(PLAN_INFO[elegido].precioMes, estado?.anual ? intervalo : 'mensual'))}€/${estado?.anual && intervalo === 'anual' ? 'año' : 'mes'}`}
+                    {accion === 'suscribir' ? 'Redirigiendo a Stripe…' : `Continuar con ${PLAN_INFO[elegido].nombre} · ${precio(importeDe(PLAN_INFO[elegido].precioMes, estado?.anual ? intervalo : 'mensual'), '')}/${estado?.anual && intervalo === 'anual' ? 'año' : 'mes'}`}
                   </button>
                   <p className="mt-2.5 text-center text-[12.5px] text-muted-foreground">
                     {enPrueba

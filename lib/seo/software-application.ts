@@ -3,6 +3,7 @@ import { BASE_URL } from '@/lib/seo/paginas';
 import { TODO_MENOS_SEDES, precioMesWeb } from '@/lib/landing/founding-gratis';
 import { ID_ORGANIZACION } from '@/components/OrganizationStructuredData';
 import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
+import { MONEDA } from '@/lib/moneda';
 
 // UN solo nodo SoftwareApplication (`/#software`) para todo el sitio: lo pintan
 // la home y /precios con ESTE mismo objeto. Antes cada una tenía el suyo con el
@@ -24,7 +25,7 @@ export function ofertasPlanesLd() {
       '@type': 'Offer',
       name: plan.name,
       price,
-      priceCurrency: 'EUR',
+      priceCurrency: MONEDA,
       description: plan.id === 'BASE' ? `${plan.desc} ${TODO_MENOS_SEDES}.` : plan.desc,
       url: `${BASE_URL}/precios`,
       availability: 'https://schema.org/InStock',
@@ -32,7 +33,7 @@ export function ofertasPlanesLd() {
       priceSpecification: {
         '@type': 'UnitPriceSpecification',
         price,
-        priceCurrency: 'EUR',
+        priceCurrency: MONEDA,
         valueAddedTaxIncluded: true,
         referenceQuantity: { '@type': 'QuantitativeValue', value: 1, unitCode: 'MON' },
       },

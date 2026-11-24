@@ -4,8 +4,8 @@
 // Solo la propietaria (el `esPropietaria` de /api/billing/status). Todo el cambio de plan
 // vive en /suscripcion: aquí solo se ve y se enlaza, nunca se cobra.
 
+import { precio } from '@/lib/billing/intervalo-ui';
 import { LOCALE } from '../../lib/locale.ts';
-import { conMoneda } from '../../lib/moneda.ts';
 import { ZONA_HORARIA } from '../../lib/zona-horaria.ts';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -42,7 +42,7 @@ export function BloqueSuscripcion() {
       <div className="mt-3 flex flex-wrap items-baseline gap-x-3 gap-y-1">
         <span className="text-[22px] font-semibold">{gratis ? `${info.nombre} gratis` : info.nombre}</span>
         <span className="rounded-full bg-muted px-2.5 py-0.5 text-[12px] font-medium text-muted-foreground">{estado}</span>
-        {!gratis && <span className="text-[13px] text-muted-foreground">{conMoneda(info.precioMes)}/mes</span>}
+        {!gratis && <span className="text-[13px] text-muted-foreground">{precio(info.precioMes)}/mes</span>}
       </div>
       <p className="mt-1.5 text-[13px] text-muted-foreground">{info.resumen}</p>
       {proximo && <p className="mt-1.5 text-[12.5px] text-muted-foreground">{b.enPrueba ? 'La prueba termina el' : 'Próximo cobro el'} {proximo}.</p>}

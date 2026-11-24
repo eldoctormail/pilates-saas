@@ -36,7 +36,7 @@ export type TotalSedes = (typeof TOTALES_SEDES)[number];
 export type Sedes = { tipo: 'una' } | { tipo: 'varias'; total: TotalSedes };
 
 /** El plan de varias sedes: su precio sale SIEMPRE del catálogo, nunca escrito a mano. */
-export const PRECIO_CADENA_MES = PLAN_INFO.CADENA.precioMes;
+export const precioCadenaMes = (): number => PLAN_INFO.CADENA.precioMes;
 
 /**
  * Lo que se escribe en `studios.onb_centros`. Texto legible (como las opciones

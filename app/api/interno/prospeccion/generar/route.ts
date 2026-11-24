@@ -4,7 +4,7 @@ import { getSupabaseAdmin } from '@/lib/db/supabase-admin';
 import { exigirPermiso } from '@/lib/interno/auth';
 import { parseJsonIA } from '@/lib/ai/parse-ia';
 import {
-  PROSPECCION_EMAIL_SYSTEM_PROMPT, buildProspeccionEmailUserPrompt,
+  prospeccionEmailSystemPrompt, buildProspeccionEmailUserPrompt,
 } from '@/lib/ai/prospeccion-email-prompt';
 import { errorInterno } from '@/lib/errores-servidor';
 import { aBorrador } from '@/lib/interno/prospeccion';
@@ -62,7 +62,7 @@ export async function POST(req: NextRequest) {
     const message = await client.messages.create({
       model: 'claude-sonnet-5',
       max_tokens: 900,
-      system: PROSPECCION_EMAIL_SYSTEM_PROMPT,
+      system: prospeccionEmailSystemPrompt(),
       messages: [{
         role: 'user',
         content: buildProspeccionEmailUserPrompt({

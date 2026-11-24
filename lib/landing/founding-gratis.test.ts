@@ -5,14 +5,14 @@ import { join } from 'node:path';
 import { PLAN_ENTITLEMENTS } from '../billing/entitlements.ts';
 import { LIMITE_RESERVAS_MES } from '../billing/plan-gratis.ts';
 import {
-  SI_PASAS,
+  siPasas,
   ENTITLEMENTS_FOUNDING_GRATIS,
   FRASE_FOUNDING,
   GRATIS_RESERVAS_MES,
   GRATIS_CON_LIMITES,
   GRATIS_MARGEN_DIAS,
   LIMITES_GRATIS,
-  PRECIO_FOUNDING_PAGO,
+  precioFoundingPago,
   TOPE_GRATIS,
   precioMesWeb,
 } from './founding-gratis.ts';
@@ -28,8 +28,8 @@ test('las cifras son las de la decisión', () => {
 });
 
 test('si pasa de cualquiera de los dos límites, Founding Studio de pago a su precio de siempre (29 €)', () => {
-  assert.equal(PRECIO_FOUNDING_PAGO, 29);
-  assert.equal(SI_PASAS, 'si pasas de ahí, 29 €/mes');
+  assert.equal(precioFoundingPago(), 29);
+  assert.equal(siPasas(), 'si pasas de ahí, 29 €/mes');
 });
 
 test('la frase del fundador va literal, con la tilde de «Tú»', () => {

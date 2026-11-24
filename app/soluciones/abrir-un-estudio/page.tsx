@@ -13,7 +13,8 @@ import {
 } from '@/components/soluciones/LandingSolucion';
 import { AgendaDia, PanelCobros } from '@/components/web/home/piezas';
 import { FOTOS, rutaFoto } from '@/components/landing/fotos';
-import { GRATIS_CON_LIMITES, GRATIS_MARGEN_DIAS, GRATIS_RESERVAS_MES, PRECIO_FOUNDING_PAGO } from '@/lib/landing/founding-gratis';
+import { GRATIS_CON_LIMITES, GRATIS_MARGEN_DIAS, GRATIS_RESERVAS_MES, precioFoundingPago } from '@/lib/landing/founding-gratis';
+import { precio } from '@/lib/billing/intervalo-ui';
 import { paginaDe, urlDe } from '@/lib/seo/paginas';
 import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
@@ -67,7 +68,7 @@ const FAQ = [
   },
   {
     q: '¿Cuánto cuesta mientras empiezo?',
-    a: `Nada: Founding Studio es gratis hasta ${GRATIS_RESERVAS_MES} reservas al mes, sin tarjeta y sin permanencia. Si pasas de ahí, tienes ${GRATIS_MARGEN_DIAS} días de margen antes de pasar al plan de pago, de ${PRECIO_FOUNDING_PAGO} €/mes.`,
+    get a() { return `Nada: Founding Studio es gratis hasta ${GRATIS_RESERVAS_MES} reservas al mes, sin tarjeta y sin permanencia. Si pasas de ahí, tienes ${GRATIS_MARGEN_DIAS} días de margen antes de pasar al plan de pago, de ${precio(precioFoundingPago())}/mes.`; },
   },
   {
     q: '¿Puedo cobrar online desde el primer día?',

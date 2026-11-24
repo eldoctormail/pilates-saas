@@ -5,6 +5,8 @@ import * as Sentry from '@sentry/nextjs';
 export async function register() {
   if (process.env.NEXT_RUNTIME === 'nodejs') {
     await import('./sentry.server.config');
+    // Los precios de los planes, antes de la primera petición (lib/billing/precios-servidor.ts).
+    await import('./lib/billing/precios-servidor').then((m) => m.cargarPrecios()).catch(() => {});
   }
   if (process.env.NEXT_RUNTIME === 'edge') {
     await import('./sentry.edge.config');

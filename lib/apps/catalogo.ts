@@ -13,7 +13,7 @@
 //
 // Puro y sin `@/`: lo prueba `node --test` (catalogo.test.ts).
 
-import { conMoneda } from '../moneda.ts';
+import { precio } from '../billing/intervalo-ui.ts';
 import { ADDONS, LISTA_ADDONS, type Addon } from '../billing/entitlements.ts';
 import { esArgentina } from '../locale.ts';
 
@@ -61,7 +61,8 @@ const COMPLEMENTOS: AppDeTienda[] = LISTA_ADDONS.map((a): AppDeTienda => ({
   frase: ADDONS[a].resumen,
   categoria: a === 'sustituciones' ? 'equipo' : a === 'ia' ? 'comunicacion' : 'automatizar',
   origen: 'complemento',
-  precio: { tipo: 'mensual', eur: ADDONS[a].precioMes },
+  // Getter: los precios se editan desde /interno/precios.
+  get precio(): PrecioApp { return { tipo: 'mensual', eur: ADDONS[a].precioMes }; },
   href: '/suscripcion#complementos',
   addon: a,
 }));
@@ -150,7 +151,7 @@ export const APPS_DE_TIENDA: readonly AppDeTienda[] = appsDeTienda();
 export function textoPrecio(p: PrecioApp): string {
   if (p.tipo === 'incluida') return 'Incluida';
   if (p.tipo === 'proximamente') return 'Próximamente';
-  return `${conMoneda(p.eur)}/mes`;
+  return `${precio(p.eur)}/mes`;
 }
 
 /**

@@ -4,9 +4,9 @@ import {
   Minus, MousePointerClick, Play, Plus, ShieldCheck, Star, Users,
 } from 'lucide-react';
 import { FAQ_ITEMS } from '@/components/landing/data';
-import { FRASE_FOUNDING, GRATIS_CON_LIMITES, LIMITES_GRATIS, SI_PASAS, TOPE_GRATIS } from '@/lib/landing/founding-gratis';
+import { FRASE_FOUNDING, GRATIS_CON_LIMITES, LIMITES_GRATIS, siPasas, TOPE_GRATIS } from '@/lib/landing/founding-gratis';
 import { PLAN_INFO, precioAnual } from '@/lib/billing/entitlements';
-import { euros } from '@/lib/billing/intervalo-ui';
+import { precio } from '@/lib/billing/intervalo-ui';
 import { anualDisponible } from '@/lib/billing/billing';
 import { SelectorPreciosHome } from './selector-precios-home';
 import type { LogoCliente } from '@/lib/landing/logos-clientes';
@@ -254,15 +254,15 @@ export function LlamadaFinal() {
 
 // El precio sale de PLAN_INFO (el mismo número que cobra Stripe); el texto de ./contenido.ts es el de respaldo del diseño.
 function precioDe(nombre: string, texto: string): string {
-  if (nombre === 'Estudio') return `${PLAN_INFO.ESTUDIO.precioMes} €`;
-  if (nombre === 'Cadena') return `${PLAN_INFO.CADENA.precioMes} €`;
+  if (nombre === 'Estudio') return precio(PLAN_INFO.ESTUDIO.precioMes);
+  if (nombre === 'Cadena') return precio(PLAN_INFO.CADENA.precioMes);
   return texto;
 }
 
 /** Lo que se paga al año de un plan de pago (el mismo «2 meses gratis» que /precios), o null si no es de pago. */
 function precioAnualDe(nombre: string): string | null {
-  if (nombre === 'Estudio') return `${euros(precioAnual(PLAN_INFO.ESTUDIO.precioMes))} €`;
-  if (nombre === 'Cadena') return `${euros(precioAnual(PLAN_INFO.CADENA.precioMes))} €`;
+  if (nombre === 'Estudio') return precio(precioAnual(PLAN_INFO.ESTUDIO.precioMes));
+  if (nombre === 'Cadena') return precio(precioAnual(PLAN_INFO.CADENA.precioMes));
   return null;
 }
 
@@ -289,7 +289,7 @@ export function Precios() {
               </p>
               {p.nombre === 'Founding Studio' && (
                 // Los límites y lo que pasa al superarlos, enteros (la regla de precios de la web: el gratis no se vende sin sus topes), y la frase del fundador.
-                <p className="lf-plan-limites">{TOPE_GRATIS}; {SI_PASAS}. <span>{FRASE_FOUNDING}</span></p>
+                <p className="lf-plan-limites">{TOPE_GRATIS}; {siPasas()}. <span>{FRASE_FOUNDING}</span></p>
               )}
               <Link href={p.nombre === 'Cadena' ? 'mailto:hola@tentare.app?subject=Plan%20Cadena' : '/crear-estudio'} className={p.destacado ? 'lf-plan-boton lf-plan-boton--verde' : 'lf-plan-boton'}>{p.boton} <ArrowUpRight size={16} strokeWidth={1.8} aria-hidden="true" /></Link>
             </div>

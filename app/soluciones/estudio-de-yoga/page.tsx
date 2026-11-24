@@ -14,6 +14,7 @@ import {
 } from '@/components/soluciones/LandingSolucion';
 import { paginaDe, urlDe } from '@/lib/seo/paginas';
 import { AgendaDia, PanelCobros } from '@/components/web/home/piezas';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
 // Tentare para estudios de YOGA (rehecha el 7-oct-2026: desde el 6-oct el
 // producto se presenta para Pilates y yoga, decisión del fundador). Ya no se
@@ -139,7 +140,7 @@ export default function EstudioDeYogaPage() {
         puntos={[
           'Mensualidades con o sin límite de clases a la semana',
           'Bonos con caducidad, que puedes ampliar en lote si cierras en agosto',
-          'Cobro con tarjeta, con reintentos cuando falla, y remesa SEPA para tu banco',
+          ES ? 'Cobro con tarjeta, con reintentos cuando falla, y remesa SEPA para tu banco' : 'Cobro online con Mercado Pago, y efectivo, posnet o transferencia en el mostrador',
         ]}
         enlace={{ href: '/funcionalidades/bonos-y-membresias', texto: 'Bonos y cuotas' }}
       >

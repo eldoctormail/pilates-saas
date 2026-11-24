@@ -22,6 +22,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { ADDONS, PLAN_ENTITLEMENTS, addonDeFeature, type Entitlements, type Plan } from './entitlements.ts';
+import { FUNCIONES_DE_ESPANA as ES } from '../locale.ts';
 
 /** Cómo se pinta una fila para un plan concreto. */
 export type ValorPlan =
@@ -144,10 +145,18 @@ export const CATEGORIAS: CategoriaPlan[] = [
     id: 'pagos',
     titulo: 'Cobros y pagos',
     filas: [
-      { nombre: 'Cobro con tarjeta (Stripe)', detalle: 'El dinero va directo a tu cuenta. Tentare no se lleva comisión.', valor: TODOS },
-      { nombre: 'Remesa SEPA para domiciliaciones', detalle: 'Tentare prepara el fichero; lo presentas tú en tu banco.', valor: TODOS },
-      { nombre: 'Cobro guardado para renovaciones', valor: TODOS },
-      { nombre: 'Recobro automático de impagos', valor: TODOS },
+      // Con el formato de Argentina, Mercado Pago: sin remesas SEPA ni tarjeta guardada.
+      ...(ES
+        ? [
+            { nombre: 'Cobro con tarjeta (Stripe)', detalle: 'El dinero va directo a tu cuenta. Tentare no se lleva comisión.', valor: TODOS },
+            { nombre: 'Remesa SEPA para domiciliaciones', detalle: 'Tentare prepara el fichero; lo presentas tú en tu banco.', valor: TODOS },
+            { nombre: 'Cobro guardado para renovaciones', valor: TODOS },
+            { nombre: 'Recobro automático de impagos', valor: TODOS },
+          ]
+        : [
+            { nombre: 'Cobro online con Mercado Pago', detalle: 'El dinero va directo a tu cuenta. Tentare no se lleva comisión.', valor: TODOS },
+            { nombre: 'Efectivo, posnet, transferencia y QR en el mostrador', valor: TODOS },
+          ]),
       { nombre: 'Devoluciones desde el panel', valor: TODOS },
     ],
   },
@@ -165,7 +174,8 @@ export const CATEGORIAS: CategoriaPlan[] = [
     id: 'facturacion',
     titulo: 'Facturación',
     filas: [
-      { nombre: 'Facturas con numeración legal', valor: TODOS },
+      ...(ES ? [] : [{ nombre: 'Factura electrónica de ARCA', detalle: 'Con su CAE y el QR de ARCA, desde cada recibo cobrado.', valor: TODOS }]),
+      ...(ES ? [{ nombre: 'Facturas con numeración legal', valor: TODOS }] : []),
       // ⚠️ Esta fila decía «Firma y envío a Hacienda desde el propio panel», y el
       // envío NO está ocurriendo: 26 facturas en producción y cero transmitidas
       // (el proveedor de firma que se dio por activado en julio nunca llegó a
@@ -184,8 +194,12 @@ export const CATEGORIAS: CategoriaPlan[] = [
       // modo 'facturas' (número, sin cadena), y la huella solo se calcula con
       // Veri*Factu activado (migr 20261002191517, sellar-factura-server.ts). Esta
       // fila decía «Numeración legal y huella encadenada» para todos (21-oct-2026).
-      { nombre: 'Veri*Factu: huella, QR y envío a la AEAT', detalle: 'Va aparte y viene desactivado: se activa dando de alta el envío a la AEAT. Sin él, las facturas llevan su número, pero no huella ni QR.', valor: TODOS },
-      { nombre: 'Cierre de año para la gestoría', valor: TODOS },
+      ...(ES
+        ? [
+            { nombre: 'Veri*Factu: huella, QR y envío a la AEAT', detalle: 'Va aparte y viene desactivado: se activa dando de alta el envío a la AEAT. Sin él, las facturas llevan su número, pero no huella ni QR.', valor: TODOS },
+            { nombre: 'Cierre de año para la gestoría', valor: TODOS },
+          ]
+        : [{ nombre: 'Cobros listos para tu contador', valor: TODOS }]),
       { nombre: 'Exportación de tus datos cuando quieras', valor: TODOS },
     ],
   },

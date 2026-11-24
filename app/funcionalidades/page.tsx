@@ -8,6 +8,7 @@ import { EscenaCobros, EscenaEquipo, EscenaInformes, EscenaAlumnas, EscenaReserv
 import { GRATIS_CON_LIMITES } from '@/lib/landing/founding-gratis';
 import { funcionalidades, paginaDe, urlDe } from '@/lib/seo/paginas';
 import { FAQ_FUNCIONALIDADES } from '@/lib/seo/faq-hubs';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
 const PATH = '/funcionalidades';
 const pagina = paginaDe(PATH)!;
@@ -64,7 +65,9 @@ const BLOQUES: Bloque[] = [
     icono: <CircleDollarSign size={15} strokeWidth={1.6} />,
     etiqueta: 'Cobros y facturas',
     titulo: 'Que el dinero entre y cuadre.',
-    texto: 'Bonos, cuotas y cobros con tarjeta o remesa SEPA, y una factura numerada por cada cobro que llega a tu gestoría sin que la emitas a mano.',
+    texto: ES
+      ? 'Bonos, cuotas y cobros con tarjeta o remesa SEPA, y una factura numerada por cada cobro que llega a tu gestoría sin que la emitas a mano.'
+      : 'Bonos, cuotas y cobros con Mercado Pago o en el mostrador, y la factura electrónica de ARCA desde cada cobro.',
     paths: ['/funcionalidades/bonos-y-membresias', '/funcionalidades/cobros-recurrentes', '/funcionalidades/facturacion'],
     escena: <EscenaCobros />,
   },

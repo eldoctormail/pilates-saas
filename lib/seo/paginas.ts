@@ -22,6 +22,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { LEGAL } from '../legal-info.ts';
+import { FUNCIONES_DE_ESPANA as ES } from '../locale.ts';
 import { GUIAS, fechaModificada } from '../recursos/guias.ts';
 // meta.ts y no index.ts: este registro llega al cliente (la landing lo usa) y
 // index.ts arrastra el texto entero de los artículos.
@@ -189,12 +190,13 @@ const FUNCIONALIDADES: PaginaSeo[] = [
   },
   {
     path: '/funcionalidades/cobros-recurrentes',
-    titulo: 'Cobros automáticos y SEPA para Pilates y yoga | Tentare',
-    descripcion:
-      'Cobro automático con la tarjeta guardada, tres intentos escalonados cuando falla, reembolsos desde el panel y remesa SEPA 19.14 para tu banco de siempre.',
+    titulo: ES ? 'Cobros automáticos y SEPA para Pilates y yoga | Tentare' : 'Cobros con Mercado Pago para Pilates y yoga | Tentare',
+    descripcion: ES
+      ? 'Cobro automático con la tarjeta guardada, tres intentos escalonados cuando falla, reembolsos desde el panel y remesa SEPA 19.14 para tu banco de siempre.'
+      : 'Tus alumnas pagan bonos y cuotas desde su app con Mercado Pago; efectivo, posnet y transferencia en el mostrador, y devoluciones desde el panel.',
     grupo: 'funcionalidades',
-    etiqueta: 'Cobros recurrentes',
-    resumen: 'Cobra solo, reintenta lo que falla y avisa cuando toca.',
+    etiqueta: ES ? 'Cobros recurrentes' : 'Cobros',
+    resumen: ES ? 'Cobra solo, reintenta lo que falla y avisa cuando toca.' : 'Cobra con Mercado Pago y en el mostrador, y ve lo que falta.',
     prioridad: 0.9,
     changeFrequency: 'monthly',
     actualizado: PUBLICADO,
@@ -208,15 +210,19 @@ const FUNCIONALIDADES: PaginaSeo[] = [
     // «Dónde está el límite, dicho claro». Que el título de Google prometa una
     // cosa y la página diga otra es la peor forma de perder la confianza de
     // quien te está evaluando. Aquí solo va lo que hoy es cierto.
-    descripcion:
-      'La facturación viene encendida: con tu NIF, cada cobro salvo el efectivo genera su factura numerada, y el cierre de año sale listo para tu gestoría.',
+    descripcion: ES
+      ? 'La facturación viene encendida: con tu NIF, cada cobro salvo el efectivo genera su factura numerada, y el cierre de año sale listo para tu gestoría.'
+      : 'Factura electrónica de ARCA desde cada recibo cobrado: A, B o C, con su CAE y el QR de ARCA, con tu certificado y tu punto de venta.',
     grupo: 'funcionalidades',
     etiqueta: 'Facturación',
-    resumen: 'Del cobro a la factura, sin emitirla a mano.',
+    resumen: ES ? 'Del cobro a la factura, sin emitirla a mano.' : 'Del cobro a la factura de ARCA, sin salir del panel.',
     prioridad: 0.9,
     changeFrequency: 'monthly',
     actualizado: PUBLICADO,
-    relacionadas: ['/funcionalidades/cobros-recurrentes', '/recursos/facturacion-electronica-verifactu', '/recursos/iva-clases-de-pilates', '/seguridad'],
+    // Las dos guías son de la normativa española: con el formato de Argentina no se enlazan.
+    relacionadas: ES
+      ? ['/funcionalidades/cobros-recurrentes', '/recursos/facturacion-electronica-verifactu', '/recursos/iva-clases-de-pilates', '/seguridad']
+      : ['/funcionalidades/cobros-recurrentes', '/seguridad'],
   },
   {
     path: '/funcionalidades/ficha-de-clienta',
@@ -350,7 +356,7 @@ export const PAGINAS: PaginaSeo[] = [
     // ya decía «Software de gestión para estudios de Pilates». La marca vuelve
     // al final: unos dos de cada tres clics de la home llegan buscando «tentare».
     path: '/',
-    titulo: 'Software de gestión para Pilates y yoga en España | Tentare',
+    titulo: `Software de gestión para Pilates y yoga en ${ES ? 'España' : 'Argentina'} | Tentare`,
     descripcion:
       'Programa para centros de Pilates y yoga: llena tus clases con reservas y lista de espera, app con tu marca para tus alumnas, bonos y cobros. Empieza gratis.',
     grupo: 'home',
@@ -649,9 +655,10 @@ export const PAGINAS: PaginaSeo[] = [
     // (11-oct-2026): hasta entonces ninguna página la respondía; la home se
     // queda «software para estudios de Pilates».
     path: '/soluciones/programa-de-gestion-para-estudio-de-pilates',
-    titulo: 'Programa de gestión para estudios de Pilates en España',
-    descripcion:
-      'Reservas, calendario con salas, bonos, cobros con tarjeta o remesa SEPA, facturas y sustituciones para estudios de Pilates en España. Empieza gratis.',
+    titulo: ES ? 'Programa de gestión para estudios de Pilates en España' : 'Programa de gestión para estudios de Pilates en Argentina',
+    descripcion: ES
+      ? 'Reservas, calendario con salas, bonos, cobros con tarjeta o remesa SEPA, facturas y sustituciones para estudios de Pilates en España. Empieza gratis.'
+      : 'Reservas, calendario con salas, bonos, cobros con Mercado Pago, factura electrónica de ARCA y sustituciones para estudios de Pilates en Argentina. Empieza gratis.',
     grupo: 'soluciones',
     etiqueta: 'Programa de gestión',
     resumen: 'El programa que lleva el estudio entero: reservas, bonos, cobros, facturas y equipo.',
@@ -785,11 +792,12 @@ export const PAGINAS: PaginaSeo[] = [
   {
     path: '/seguridad',
     titulo: 'Seguridad y privacidad — Tentare',
-    descripcion:
-      'Cómo protege Tentare los datos de tu estudio y de tus alumnas: aislamiento por estudio, base de datos en la UE, RGPD, pagos con Stripe y copias de seguridad.',
+    descripcion: ES
+      ? 'Cómo protege Tentare los datos de tu estudio y de tus alumnas: aislamiento por estudio, base de datos en la UE, RGPD, pagos con Stripe y copias de seguridad.'
+      : 'Cómo protege Tentare los datos de tu estudio y de tus alumnas: aislamiento por estudio, Ley 25.326, pagos con Mercado Pago y copias de seguridad.',
     grupo: 'recursos',
     etiqueta: 'Seguridad',
-    resumen: 'Aislamiento por estudio, RGPD y base de datos en la UE.',
+    resumen: ES ? 'Aislamiento por estudio, RGPD y base de datos en la UE.' : 'Aislamiento por estudio y Ley 25.326.',
     prioridad: 0.6,
     changeFrequency: 'monthly',
     actualizado: '2026-08-13',

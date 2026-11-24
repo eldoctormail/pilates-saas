@@ -2,6 +2,7 @@ import { PLANS } from '@/components/landing/data';
 import { BASE_URL } from '@/lib/seo/paginas';
 import { TODO_MENOS_SEDES, precioMesWeb } from '@/lib/landing/founding-gratis';
 import { ID_ORGANIZACION } from '@/components/OrganizationStructuredData';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
 // UN solo nodo SoftwareApplication (`/#software`) para todo el sitio: lo pintan
 // la home y /precios con ESTE mismo objeto. Antes cada una tenía el suyo con el
@@ -52,15 +53,15 @@ export function softwareApplicationLd() {
     url: BASE_URL,
     publisher: { '@id': ID_ORGANIZACION },
     description:
-      'Software para estudios y centros de Pilates y yoga en España: reservas online y lista de espera, app con la marca del estudio para las alumnas, bonos, cuotas y cobros, calendario por salas y gestión del equipo.',
-    inLanguage: 'es-ES',
+      `Software para estudios y centros de Pilates y yoga en ${ES ? 'España' : 'Argentina'}: reservas online y lista de espera, app con la marca del estudio para las alumnas, bonos, cuotas y cobros, calendario por salas y gestión del equipo.`,
+    inLanguage: ES ? 'es-ES' : 'es-AR',
     // Lo que el producto hace hoy, en las palabras de la página (nada congelado
     // ni «próximamente»; ver lib/frozen-features.ts).
     featureList: [
       'Reservas online por clase y por reformer, con lista de espera',
       'App con el nombre, el logo y los colores del estudio',
-      'Bonos, cuotas mensuales y cobros con tarjeta con reintento, y remesa SEPA para el banco',
-      'Facturas con numeración legal',
+      ES ? 'Bonos, cuotas mensuales y cobros con tarjeta con reintento, y remesa SEPA para el banco' : 'Bonos, cuotas mensuales y cobros con Mercado Pago',
+      ES ? 'Facturas con numeración legal' : 'Factura electrónica de ARCA',
       'Calendario por salas',
       'Importación desde Excel y otros programas, con acta y botón de deshacer',
       'Asistente «Pregúntale a Tentare»: consulta datos y prepara clases, salas, eventos y citas con confirmación',

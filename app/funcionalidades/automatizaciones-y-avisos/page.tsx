@@ -5,6 +5,7 @@ import { CierreCta, Entradilla, FeatureFaq, Limite, Rejilla, Seccion, Tabla } fr
 import { CanalesPorEvento, TablaDeReglas } from '@/components/funcionalidades/visuales/automatizaciones';
 import { REGLAS as REGLAS_AVISOS } from '@/lib/notifications/catalog';
 import { paginaDe, urlDe } from '@/lib/seo/paginas';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
 const PATH = '/funcionalidades/automatizaciones-y-avisos';
 const pagina = paginaDe(PATH)!;
@@ -90,14 +91,18 @@ export default function AutomatizacionesPage() {
             ['Un pago falla', 'Mostrador y la socia', 'App + push'],
             ['Una instructora da de baja su clase', 'La propietaria', 'App + push'],
             ['Cambia quién da tu clase', 'Las socias apuntadas', 'App + push'],
-            ['Se pierde una disputa de pago', 'Mostrador', 'App + push + email'],
-            ['Stripe se desconecta', 'La propietaria', 'App + push + email'],
+            ...(ES
+              ? [
+                  ['Se pierde una disputa de pago', 'Mostrador', 'App + push + email'],
+                  ['Stripe se desconecta', 'La propietaria', 'App + push + email'],
+                ]
+              : []),
             ['Una clase se queda casi llena', 'La propietaria', 'Solo en la app'],
           ]}
         />
         <p>
           Que casi todo se quede en la app y el móvil, y el email se reserve para lo que tiene plazo o hay que poder
-          releer —una disputa de pago, una plaza con fecha límite, Stripe desconectado—, es intencionado. Si todo es
+          releer —{ES ? 'una disputa de pago, una plaza con fecha límite, Stripe desconectado' : 'una plaza con fecha límite'}—, es intencionado. Si todo es
           urgente, nada lo es — y un correo de tu software a las once de la noche tiene que significar algo.
         </p>
       </Seccion>

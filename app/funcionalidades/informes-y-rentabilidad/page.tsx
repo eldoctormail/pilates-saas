@@ -5,6 +5,7 @@ import { CierreCta, Entradilla, FeatureFaq, Limite, Rejilla, Seccion, Tabla } fr
 import { ComoSeCalculaElMargen, LoQueNoEntraEnElMargen } from '@/components/funcionalidades/visuales/informes';
 import { paginaDe, urlDe } from '@/lib/seo/paginas';
 import { PanelInformes } from '@/components/web/home/piezas';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
 const PATH = '/funcionalidades/informes-y-rentabilidad';
 const pagina = paginaDe(PATH)!;
@@ -34,8 +35,10 @@ const FAQ = [
     a: 'No. Informes es solo de la propietaria: ni recepción ni gerencia entran. La tarifa es dato salarial.',
   },
   {
-    q: '¿Puedo sacar los datos para mi gestoría?',
-    a: 'Sí. La exportación en CSV trae todos los cobros del periodo, no una muestra, y el informe se puede guardar en PDF desde el propio navegador. Para el resumen anual de ingresos e IVA hay una función aparte, el cierre de año.',
+    q: ES ? '¿Puedo sacar los datos para mi gestoría?' : '¿Puedo sacar los datos para mi contador?',
+    a: ES
+      ? 'Sí. La exportación en CSV trae todos los cobros del periodo, no una muestra, y el informe se puede guardar en PDF desde el propio navegador. Para el resumen anual de ingresos e IVA hay una función aparte, el cierre de año.'
+      : 'Sí. La exportación en CSV trae todos los cobros del periodo, no una muestra, y el informe se puede guardar en PDF desde el propio navegador. Para llevarle los cobros a tu contador, en Cobros tienes «Para tu contador».',
   },
   {
     q: '¿Cada cuánto se recalcula?',
@@ -155,10 +158,14 @@ export default function InformesPage() {
           —todos, paginando en el servidor, no los primeros mil— para trabajarlo en una hoja de cálculo o mandárselo a tu
           asesoría, y <strong>PDF</strong> guardando el informe desde el propio navegador.
         </p>
-        <p>
-          Si lo que necesitas es el resumen anual de ingresos e IVA para la gestoría, eso vive en el cierre de año, dentro
-          de <Link href="/funcionalidades/facturacion">facturación</Link>.
-        </p>
+        {ES ? (
+          <p>
+            Si lo que necesitas es el resumen anual de ingresos e IVA para la gestoría, eso vive en el cierre de año, dentro
+            de <Link href="/funcionalidades/facturacion">facturación</Link>.
+          </p>
+        ) : (
+          <p>Si lo que necesitas es llevarle los cobros a tu contador, en Cobros tienes «Para tu contador».</p>
+        )}
       </Seccion>
 
       <Seccion id="faq" titulo="Preguntas frecuentes">

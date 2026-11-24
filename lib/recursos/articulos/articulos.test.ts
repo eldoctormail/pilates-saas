@@ -5,9 +5,9 @@ import { join } from 'node:path';
 import { PAGINAS } from '../../seo/paginas.ts';
 import { ARTICULOS as AYUDA, CATEGORIAS, urlArticulo as urlAyuda } from '../../ayuda/registro.ts';
 import { GUIAS } from '../guias.ts';
-import { ARTICULOS } from './index.ts';
+import { ARTICULOS, ARTICULOS_ARGENTINA, ARTICULOS_ESPANA, articulosPara } from './index.ts';
 import { enlacesInternos, validarArticulo } from './validar.ts';
-import { ARTICULOS_META } from './meta.ts';
+import { ARTICULOS_META, ARTICULOS_META_ARGENTINA, ARTICULOS_META_ESPANA } from './meta.ts';
 import { metaDe } from './proyeccion.ts';
 import { PORTADAS_ARTICULOS } from './portadas.ts';
 
@@ -22,7 +22,7 @@ const RUTAS = new Set([
 ]);
 
 test('cada artículo pasa el validador', () => {
-  for (const a of ARTICULOS) {
+  for (const a of [...ARTICULOS, ...ARTICULOS_ARGENTINA]) {
     assert.deepEqual(validarArticulo(a, RUTAS), [], `${a.slug}`);
   }
 });
@@ -64,7 +64,7 @@ test('las plantillas enlazadas existen en public/', () => {
 
 test('meta.ts está al día con los artículos', () => {
   assert.deepEqual(
-    ARTICULOS_META, ARTICULOS.map(metaDe),
+    [ARTICULOS_META_ESPANA, ARTICULOS_META_ARGENTINA], [articulosPara(true).map(metaDe), articulosPara(false).map(metaDe)],
     'lib/recursos/articulos/meta.ts desfasado: corre `node --experimental-strip-types scripts/generar-meta-articulos.mjs`',
   );
 });
@@ -91,4 +91,15 @@ test('cada artículo tiene su portada, con alt y crédito, y no sobra ninguna', 
     assert.ok(p.credito.autor && p.credito.licencia && /^https:\/\//.test(p.credito.url), `${a.slug}: crédito incompleto`);
   }
   for (const slug of Object.keys(PORTADAS_ARTICULOS)) assert.ok(slugs.has(slug), `portada de «${slug}», que no es ningún artículo`);
+});
+
+test('cada versión argentina sustituye a un artículo de España con su mismo slug, una sola vez', () => {
+  const deEspana = new Set(ARTICULOS_ESPANA.map((a) => a.slug));
+  const vistos = new Set<string>();
+  for (const a of ARTICULOS_ARGENTINA) {
+    assert.ok(deEspana.has(a.slug), `${a.slug}: no hay artículo de España con ese slug`);
+    assert.ok(!vistos.has(a.slug), `${a.slug}: repetido`);
+    vistos.add(a.slug);
+  }
+  assert.equal(ARTICULOS_META.length, ARTICULOS.length);
 });

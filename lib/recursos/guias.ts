@@ -18,6 +18,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { PORTADAS_ARTICULOS } from './articulos/portadas.ts';
+import { FUNCIONES_DE_ESPANA } from '../locale.ts';
 
 export type CategoriaRecursos = 'abrir' | 'sustituciones' | 'rentabilidad' | 'operacion' | 'espana' | 'software';
 
@@ -27,7 +28,8 @@ export const CATEGORIAS_RECURSOS: { key: CategoriaRecursos; label: string }[] = 
   { key: 'sustituciones', label: 'Sustituciones y equipo' },
   { key: 'rentabilidad', label: 'Rentabilidad' },
   { key: 'operacion', label: 'Operación' },
-  { key: 'espana', label: 'España y fiscalidad' },
+  // La clave se queda (la usan las URLs de filtro); con el formato de Argentina cambia la etiqueta.
+  { key: 'espana', label: FUNCIONES_DE_ESPANA ? 'España y fiscalidad' : 'Argentina e impuestos' },
   { key: 'software', label: 'Elegir software' },
 ];
 

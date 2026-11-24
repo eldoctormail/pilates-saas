@@ -14,6 +14,8 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import type { Articulo } from './tipos.ts';
+import { FUNCIONES_DE_ESPANA } from '../../locale.ts';
+import { ARTICULOS_ARGENTINA } from './argentina/index.ts';
 import comoAbrir from './como-abrir-un-estudio-de-pilates.ts';
 import mejorSoftware from './mejor-software-para-estudios-de-pilates.ts';
 import cuantoCuesta from './cuanto-cuesta-abrir-un-estudio-de-pilates.ts';
@@ -39,7 +41,7 @@ import cancelaciones from './reducir-cancelaciones-ultima-hora.ts';
 import bajaInstructora from './cubrir-baja-instructora.ts';
 import clasesValle from './ocupacion-clases-valle.ts';
 
-export const ARTICULOS: Articulo[] = [
+export const ARTICULOS_ESPANA: Articulo[] = [
   comoAbrir,
   abrirYoga,
   comoGestionar,
@@ -65,6 +67,16 @@ export const ARTICULOS: Articulo[] = [
   franquicia,
   nombres,
 ];
+
+// Con el formato de Argentina (lib/locale.ts), cada artículo que tiene versión
+// argentina (./argentina, MISMO slug: los enlaces no cambian) la sustituye. El
+// orden es el de España.
+const DE_ARGENTINA = new Map(ARTICULOS_ARGENTINA.map((a) => [a.slug, a]));
+export function articulosPara(espana: boolean): Articulo[] {
+  return espana ? ARTICULOS_ESPANA : ARTICULOS_ESPANA.map((a) => DE_ARGENTINA.get(a.slug) ?? a);
+}
+export const ARTICULOS: Articulo[] = articulosPara(FUNCIONES_DE_ESPANA);
+export { ARTICULOS_ARGENTINA };
 
 export function articuloPorSlug(slug: string): Articulo | undefined {
   return ARTICULOS.find((a) => a.slug === slug);

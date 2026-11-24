@@ -5,6 +5,7 @@ import { CierreCta, Entradilla, FeatureFaq, Limite, Rejilla, Seccion } from '@/c
 import { CicloDeReserva, ReglasQueSeHeredan } from '@/components/funcionalidades/visuales/reservas';
 import { paginaDe, urlDe } from '@/lib/seo/paginas';
 import { AppAlumna } from '@/components/web/home/piezas';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
 const PATH = '/funcionalidades/reservas-online';
 const pagina = paginaDe(PATH)!;
@@ -19,11 +20,15 @@ export const metadata: Metadata = {
 const FAQ = [
   {
     q: '¿Cómo pagan mis alumnas al reservar?',
-    a: 'Con tarjeta a través de tu cuenta de Stripe. Si a una alumna le falta bono, lo compra en la propia página y reserva sin salir; Bizum también vale para bonos y pagos sueltos. Las cuotas mensuales se cobran con la tarjeta guardada o por domiciliación, con la remesa SEPA que presentas en tu banco, y el efectivo se registra como cobro de mostrador.',
+    a: ES
+      ? 'Con tarjeta a través de tu cuenta de Stripe. Si a una alumna le falta bono, lo compra en la propia página y reserva sin salir; Bizum también vale para bonos y pagos sueltos. Las cuotas mensuales se cobran con la tarjeta guardada o por domiciliación, con la remesa SEPA que presentas en tu banco, y el efectivo se registra como cobro de mostrador.'
+      : 'Online, a través de tu cuenta de Mercado Pago. Si a una alumna le falta bono, lo compra en la propia página y reserva sin salir. Las cuotas mensuales se renuevan desde la app de la alumna, y el efectivo, el posnet o la transferencia se registran como cobro de mostrador.',
   },
   {
     q: '¿Cuánto cuesta un software de reservas y pagos para un estudio de Pilates?',
-    a: 'Tentare es gratis hasta 150 reservas al mes, y sin permanencia. Las reservas y los cobros están en los tres planes, y Tentare no añade comisión sobre lo que cobras: solo pagas la de Stripe por procesar cada pago con tarjeta. Los planes y límites exactos están en la página de precios.',
+    a: ES
+      ? 'Tentare es gratis hasta 150 reservas al mes, y sin permanencia. Las reservas y los cobros están en los tres planes, y Tentare no añade comisión sobre lo que cobras: solo pagas la de Stripe por procesar cada pago con tarjeta. Los planes y límites exactos están en la página de precios.'
+      : 'Tentare es gratis hasta 150 reservas al mes, y sin permanencia. Las reservas y los cobros están en los tres planes, y Tentare no añade comisión sobre lo que cobras: solo pagas la de Mercado Pago por procesar cada pago online. Los planes y límites exactos están en la página de precios.',
   },
   {
     q: '¿Mis alumnas tienen que instalarse una app?',
@@ -115,15 +120,18 @@ export default function ReservasPage() {
           o cuota— sin pasar por WhatsApp, y que tú veas quién ha reservado, cuántas plazas quedan y qué se ha cobrado.
         </Entradilla>
         <p>
-          En Tentare la reserva comprueba el aforo y las reglas de la clase en la misma operación. El cobro con tarjeta
-          va a través de tu cuenta de Stripe, de modo que el dinero va de tu alumna a tu cuenta y Tentare no añade
-          comisión; lo único aparte es la de Stripe. Si cobras por domiciliación, Tentare te prepara la remesa SEPA para tu
-          banco. Las facturas se emiten automáticamente, con numeración legal. Gratis hasta 150 reservas al mes, y sin permanencia: los{' '}
+          En Tentare la reserva comprueba el aforo y las reglas de la clase en la misma operación.{' '}
+          {ES
+            ? 'El cobro con tarjeta va a través de tu cuenta de Stripe, de modo que el dinero va de tu alumna a tu cuenta y Tentare no añade comisión; lo único aparte es la de Stripe. Si cobras por domiciliación, Tentare te prepara la remesa SEPA para tu banco. Las facturas se emiten automáticamente, con numeración legal.'
+            : 'El cobro online va a través de tu cuenta de Mercado Pago, de modo que el dinero va de tu alumna a tu cuenta y Tentare no añade comisión; lo único aparte es la de Mercado Pago. Desde cada cobro emites la factura electrónica de ARCA.'}{' '}
+          Gratis hasta 150 reservas al mes, y sin permanencia: los{' '}
           <Link href="/precios">planes y límites</Link> están en la página de precios.
         </p>
         <p>
-          El detalle de cómo se cobra una cuota, qué pasa cuando una tarjeta falla y cómo se devuelve un pago está en{' '}
-          <Link href="/funcionalidades/cobros-recurrentes">cobros automáticos y SEPA</Link>; cómo se venden y caducan los
+          {ES
+            ? 'El detalle de cómo se cobra una cuota, qué pasa cuando una tarjeta falla y cómo se devuelve un pago está en'
+            : 'El detalle de cómo se cobra una cuota y cómo se devuelve un pago está en'}{' '}
+          <Link href="/funcionalidades/cobros-recurrentes">{ES ? 'cobros automáticos y SEPA' : 'cobros'}</Link>; cómo se venden y caducan los
           bonos, en <Link href="/funcionalidades/bonos-y-membresias">bonos y membresías</Link>.
         </p>
       </Seccion>

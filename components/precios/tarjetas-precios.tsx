@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { PLANES, PLAN_INFO, type Plan } from '@/lib/billing/entitlements';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 import { novedadesFrenteAlAnterior, resumenCorto } from '@/lib/billing/catalogo-planes';
 import { euros, importeDe, textoAhorro, type IntervaloUi } from '@/lib/billing/intervalo-ui';
 import { CTA_ALTA, FRASE_FOUNDING, SI_PASAS_CON_COMPLEMENTOS, TOPE_GRATIS } from '@/lib/landing/founding-gratis';
@@ -141,7 +142,7 @@ export function TarjetasPrecios({ anualDisponible }: { anualDisponible: boolean 
           })}
         </div>
         <p style={{ textAlign: 'center', fontSize: 13.5, color: 'var(--w-texto-3)', margin: '22px 0 0' }}>
-          Pagos seguros con Stripe · Configuración guiada · Precios con IVA incluido
+          Pagos seguros con {ES ? 'Stripe' : 'Mercado Pago'} · Configuración guiada · Precios con IVA incluido
         </p>
     </>
   );

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { LEGAL } from '@/lib/legal-info';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 import { paginaDe, urlDe } from '@/lib/seo/paginas';
 
 const PATH = '/terminos';
@@ -38,7 +39,7 @@ export default function Terminos() {
       <h2>3. Planes, precios y pagos</h2>
       <p>
         El servicio se presta mediante suscripción según el plan contratado y los precios publicados. Los pagos
-        se procesan a través de nuestro proveedor de pagos (Stripe). Salvo indicación en contrario, la
+        se procesan a través de nuestro proveedor de pagos ({ES ? 'Stripe' : 'Mercado Pago'}). Salvo indicación en contrario, la
         suscripción se renueva por periodos y puedes cancelarla en cualquier momento; la cancelación surte
         efecto al final del periodo ya abonado, sin permanencia. Los importes no incluyen impuestos cuando así
         se indique.

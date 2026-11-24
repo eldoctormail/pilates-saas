@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { LEGAL, PROVEEDORES } from '@/lib/legal-info';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 import { paginaDe, urlDe } from '@/lib/seo/paginas';
 
 const PATH = '/privacidad';
@@ -133,8 +134,7 @@ export default function Privacidad() {
       <p>
         Cuando un estudio deja Tentare, puede descargar sus datos y pedirnos que los suprimamos escribiendo a{' '}
         <a href={`mailto:${LEGAL.emailPrivacidad}`}>{LEGAL.emailPrivacidad}</a>. Aunque pida la supresión, se
-        conservan bloqueados, durante el plazo legal, las facturas, los recibos, los registros de facturación y los
-        mandatos SEPA.
+        conservan bloqueados, durante el plazo legal, las facturas, los recibos{ES ? ', los registros de facturación y los mandatos SEPA' : ' y los registros de facturación'}.
       </p>
 
       <h2>6. Destinatarios y encargados</h2>
@@ -172,7 +172,7 @@ export default function Privacidad() {
       <h2>8. Seguridad</h2>
       <p>
         Aplicamos medidas técnicas y organizativas apropiadas (cifrado en tránsito; cifrado de las copias de
-        seguridad, de los IBAN de las domiciliaciones y de las credenciales de las integraciones; verificación en
+        seguridad{ES ? ', de los IBAN de las domiciliaciones' : ''} y de las credenciales de las integraciones; verificación en
         dos pasos para el equipo de los estudios; control de acceso por roles, aislamiento por estudio y registro
         de accesos a los datos sensibles) para proteger los datos frente a accesos no autorizados, pérdida o
         alteración.

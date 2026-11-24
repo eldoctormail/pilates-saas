@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { LEGAL } from '@/lib/legal-info';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 import { PreferenciasPublicidad } from '@/components/analitica/meta-pixel';
 import { paginaDe, urlDe } from '@/lib/seo/paginas';
 
@@ -44,7 +45,7 @@ export default function Cookies() {
           </tr>
           <tr>
             <td>De terceros — pagos</td>
-            <td>Nuestro proveedor de pagos (Stripe) puede establecer cookies durante el proceso de cobro para procesarlo y prevenir el fraude.</td>
+            <td>Nuestro proveedor de pagos ({ES ? 'Stripe' : 'Mercado Pago'}) puede establecer cookies durante el proceso de cobro para procesarlo y prevenir el fraude.</td>
             <td>No cuando son necesarias para el servicio solicitado</td>
           </tr>
           <tr>

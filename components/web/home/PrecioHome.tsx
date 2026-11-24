@@ -5,6 +5,7 @@ import { FRASE_FOUNDING } from '@/lib/landing/founding-gratis';
 import { ALTA, SALIDAS, WHATSAPP_SOPORTE } from '@/components/landing/enlaces';
 import { NombrePlan } from '@/components/planes/nombre-plan';
 import { Icono } from '@/components/student/ui/Icono';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
 // Precio (fase 2.2). NINGUNA cifra ni condición se escribe aquí: todo sale de
 // PLANS (components/landing/data.ts) y de lib/landing/founding-gratis.ts, la
@@ -44,7 +45,7 @@ export function PrecioHome() {
             </div>
           ))}
         </div>
-        <p className="wh-precio-nota">IVA incluido · Sin permanencia · Pagos con Stripe, sin comisión de Tentare</p>
+        <p className="wh-precio-nota">IVA incluido · Sin permanencia · Pagos con {ES ? 'Stripe' : 'Mercado Pago'}, sin comisión de Tentare</p>
         <p className="wh-precio-salida"><Link href={SALIDAS.precio.href} className="wh-enlace-flecha">{SALIDAS.precio.label} <span aria-hidden="true">→</span></Link></p>
       </div>
     </section>

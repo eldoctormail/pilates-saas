@@ -1,6 +1,7 @@
 import { COMPLEMENTOS_CORTO, COMPLEMENTOS_DE_PAGO, CTA_ALTA, GRATIS_RESERVAS_MES, PRECIO_FOUNDING_PAGO, SI_PASAS_CON_COMPLEMENTOS, TODO_MENOS_SEDES, TOPE_GRATIS } from '@/lib/landing/founding-gratis';
 import { PLAN_ENTITLEMENTS } from '@/lib/billing/entitlements';
 import { MENU_PUBLICO } from '@/lib/seo/navegacion-publica';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
 // Los destinos de primer nivel de la isla (la navegación de toda la web
 // pública), para el `SiteNavigationElement` de
@@ -15,7 +16,7 @@ export const NAV_LINKS = MENU_PUBLICO;
 // Mailchimp/Brevo eran "próximamente" en el producto y "Google" a secas y
 // Resend no eran conexiones del estudio — se anuncian como en camino o fuera.
 export const INTEGRACIONES = [
-  { group: 'Pagos', items: ['Stripe'] },
+  { group: 'Pagos', items: [ES ? 'Stripe' : 'Mercado Pago'] },
   { group: 'Email y mensajería', items: ['Gmail', 'WhatsApp Business', '+ Mailchimp y Brevo en camino'] },
   { group: 'Calendario y acceso', items: ['Google Calendar', 'Kisi'] },
   { group: 'Clases online', items: ['Zoom'] },
@@ -112,7 +113,9 @@ export const FAQ_ITEMS: { q: string; a: string }[] = [
   },
   {
     q: '¿Cómo cobro a mis alumnas?',
-    a: 'Con tarjeta a través de tu cuenta de Stripe, y Bizum para pagos sueltos. Con la tarjeta guardada, las cuotas se cobran solas y, si un cobro falla, se reintenta automáticamente. Si cobras por domiciliación, Tentare te prepara la remesa SEPA para que la presentes en tu banco. También puedes apuntar pagos en efectivo o por transferencia; cada cobro genera su recibo y, salvo el efectivo, su factura.',
+    a: ES
+      ? 'Con tarjeta a través de tu cuenta de Stripe, y Bizum para pagos sueltos. Con la tarjeta guardada, las cuotas se cobran solas y, si un cobro falla, se reintenta automáticamente. Si cobras por domiciliación, Tentare te prepara la remesa SEPA para que la presentes en tu banco. También puedes apuntar pagos en efectivo o por transferencia; cada cobro genera su recibo y, salvo el efectivo, su factura.'
+      : 'Online, con tu cuenta de Mercado Pago: la alumna compra su bono o paga su cuota desde la app y el dinero va a tu cuenta. En el mostrador apuntas efectivo, posnet, transferencia o QR. Cada cobro genera su recibo, y desde él puedes emitir la factura electrónica de ARCA.',
   },
   {
     q: '¿Sirve para varios centros o sedes?',
@@ -120,7 +123,9 @@ export const FAQ_ITEMS: { q: string; a: string }[] = [
   },
   {
     q: '¿Están seguros los datos de mi estudio y mis alumnas?',
-    a: 'Cada estudio accede solo a sus datos, con la separación hecha en la propia base de datos, y la ficha de salud de cada alumna tiene permisos aparte. La base de datos está en la Unión Europea; algunos proveedores tratan datos fuera de ella y están listados en la política de privacidad. Tentare está diseñado con el RGPD en mente.',
+    a: 'Cada estudio accede solo a sus datos, con la separación hecha en la propia base de datos, y la ficha de salud de cada alumna tiene permisos aparte. ' + (ES
+      ? 'La base de datos está en la Unión Europea; algunos proveedores tratan datos fuera de ella y están listados en la política de privacidad. Tentare está diseñado con el RGPD en mente.'
+      : 'Los proveedores que tratan datos están listados, con su ubicación, en la política de privacidad. Tentare está diseñado con la Ley 25.326 de Protección de los Datos Personales en mente.'),
   },
   {
     q: '¿Qué es «Pregúntale a Tentare»?',

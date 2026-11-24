@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { VideoProducto } from '@/components/landing/VideoProducto';
 import { AgendaDia, Escena, Ficha, PanelCobros, PanelInformes, PasarLista } from './piezas';
 import { PestanasCliente, type Pestana } from './PestanasCliente';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // El producto por resultados (fase 2.2): la forma de Momence. Cinco pestañas
@@ -42,10 +43,14 @@ export const PESTANAS_PRODUCTO: readonly PestanaProducto[] = [
   {
     id: 'cobros',
     etiqueta: 'Cobros',
-    titulo: 'Cuotas cobradas el día que toca.',
+    titulo: ES ? 'Cuotas cobradas el día que toca.' : 'Cuotas pagadas desde la app.',
     puntos: [
-      'Con la tarjeta guardada, las cuotas se renuevan y se cobran solas; por domiciliación, te prepara la remesa SEPA para tu banco.',
-      'Si un cobro falla, se reintenta solo y a la alumna le llega un aviso.',
+      ES
+        ? 'Con la tarjeta guardada, las cuotas se renuevan y se cobran solas; por domiciliación, te prepara la remesa SEPA para tu banco.'
+        : 'Cuando toca renovar, a la alumna le llega el aviso y paga desde su app con Mercado Pago.',
+      ES
+        ? 'Si un cobro falla, se reintenta solo y a la alumna le llega un aviso.'
+        : 'Lo que falta cobrar queda a la vista en Cobros, alumna por alumna.',
       'Bonos con caducidad, clase suelta, matrícula y códigos de descuento.',
     ],
     enlace: { href: '/funcionalidades/cobros-recurrentes', texto: 'Ver los cobros recurrentes' },

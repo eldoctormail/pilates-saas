@@ -5,6 +5,8 @@ import { CasoDeUso, CierreCta, Entradilla, FeatureFaq, Limite, Rejilla, Seccion 
 import { CadenciaDeReintentos, ViasDeCobro } from '@/components/funcionalidades/visuales/cobros';
 import { paginaDe, urlDe } from '@/lib/seo/paginas';
 import { PanelCobros } from '@/components/web/home/piezas';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
+import { CobrosArgentina } from './argentina';
 
 const PATH = '/funcionalidades/cobros-recurrentes';
 const pagina = paginaDe(PATH)!;
@@ -40,6 +42,7 @@ const FAQ = [
 ];
 
 export default function CobrosPage() {
+  if (!ES) return <CobrosArgentina path={PATH} />;
   return (
     <FeatureShell
       path={PATH}

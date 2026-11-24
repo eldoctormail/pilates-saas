@@ -14,6 +14,8 @@
 // se sirven en las webs de los estudios, y así no arrastran el resto del objeto.
 // Autoalojado: el origen sale de NEXT_PUBLIC_APP_URL (sin barra final). Sin ella,
 // el de Tentare de siempre.
+import { FUNCIONES_DE_ESPANA as ES } from './locale.ts';
+
 const URL_CANONICA = (
   (typeof process !== 'undefined' ? process.env.NEXT_PUBLIC_APP_URL : undefined) || 'https://www.tentare.app'
 ).replace(/\/+$/, '');
@@ -76,7 +78,9 @@ export const VERSION_TEXTOS_LEGALES = '2026-10-06';
 export const PROVEEDORES: { nombre: string; uso: string; ubicacion: string }[] = [
   { nombre: 'Supabase', uso: 'Base de datos, autenticación y almacenamiento', ubicacion: 'UE' },
   { nombre: 'Vercel', uso: 'Alojamiento y entrega de la aplicación', ubicacion: 'UE / EE. UU.' },
-  { nombre: 'Stripe', uso: 'Procesamiento de pagos y facturación', ubicacion: 'UE / EE. UU.' },
+  ES
+    ? { nombre: 'Stripe', uso: 'Procesamiento de pagos y facturación', ubicacion: 'UE / EE. UU.' }
+    : { nombre: 'Mercado Pago', uso: 'Procesamiento de pagos', ubicacion: 'Argentina' },
   { nombre: 'Resend', uso: 'Envío de correos transaccionales', ubicacion: 'UE / EE. UU.' },
   { nombre: 'Spacemail', uso: 'Correo saliente de Tentare', ubicacion: 'UE / EE. UU.' },
   { nombre: 'Cloudflare', uso: 'Copias de seguridad cifradas (R2, en la UE), archivos, vídeo (Stream) y verificación anti-bots (Turnstile)', ubicacion: 'UE / EE. UU.' },

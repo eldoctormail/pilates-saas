@@ -55,7 +55,7 @@ test.describe('Student PWA · ficha de una clase', () => {
     await expect(page.getByTestId('pago-corto')).toHaveCount(0);
 
     await expect(page.locator('[data-fila="cuando"]')).toHaveText('Hoy · 10:00 – 10:50 · 50 min');
-    await expect(page.locator('[data-fila="donde"]')).toContainText('Sala 1 · Tentare');
+    await expect(page.locator('[data-fila="donde"]')).toContainText('Sala 1 · Centra');
     await expect(page.locator('[data-fila="plazas"]')).toHaveText('10 lugares · 10 libres');
     await expect(page.locator('[data-fila="cancelacion"]')).toBeVisible();
     await expect(page.locator('[data-fila="creditos"]')).toHaveText('+10 créditos al asistir');

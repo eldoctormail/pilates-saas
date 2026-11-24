@@ -207,7 +207,7 @@ test('ledger-no-concilia: un solo descuadre ya es fallo, y mira la vista de conc
 
 // ── Denuncias de la app (App Store 1.2) ─────────────────────────────────────
 
-test('denuncias esperando a Tentare: pendientes contra el estudio o con más de 24 h, solo el número', async () => {
+test('denuncias esperando a Centra: pendientes contra el estudio o con más de 24 h, solo el número', async () => {
   const def = DEFINICIONES.find(d => d.id === ID_DENUNCIAS_ESPERANDO_A_TENTARE)!;
   const ahora = new Date('2026-10-05T12:00:00.000Z');
   const { admin, llamadas } = adminQueGraba({ count: 2, error: null });

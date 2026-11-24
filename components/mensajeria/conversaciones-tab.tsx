@@ -292,7 +292,7 @@ export function ConversacionesTab({ conversacionPedida = null }: { conversacionP
   // Quien no lleva el mostrador (la instructora) solo puede abrir conversación
   // con las socias de SUS clases —la RPC rechaza el resto— y no ve su contacto
   // (decisión del 14-sep-2026). Solo UI: `socios_lectura` sigue abarcando el
-  // estudio hasta que se retire Tentare Core.
+  // estudio hasta que se retire Centra Core.
   const sociasParaNueva = useMemo(() => {
     if (puedeMostrador) return socios;
     const yo = instructores.find(i => i.authUserId === authUserId) ?? null;

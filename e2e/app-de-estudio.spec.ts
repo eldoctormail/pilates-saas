@@ -2,9 +2,9 @@ import { test, expect, type Page } from '@playwright/test';
 import { tokenDeSesion } from './enlace-de-correo';
 
 // La app de tienda de UN estudio (nombre, icono y color propios, publicada desde la
-// cuenta de Tentare) usa la misma entrada `/app`, fijada en su estudio. Lo decide el
+// cuenta de Centra) usa la misma entrada `/app`, fijada en su estudio. Lo decide el
 // bundle id que da la carcasa y la fila activa de `apps_estudio`; sin fila activa es la
-// app «Tentare» de siempre.
+// app «Centra» de siempre.
 //
 // ⚠️ La carcasa nativa se falsea con un `window.Capacitor` mínimo (como en
 // reservar-portada-cabecera.spec.ts). Cada «no» lleva su contador: el endpoint que
@@ -59,7 +59,7 @@ async function appDeEstudio(page: Page, responder: () => { status: number; body:
   return n;
 }
 
-test('la app de un estudio abre SU entrada: su nombre, sin buscador ni logo de Tentare', async ({ page }) => {
+test('la app de un estudio abre SU entrada: su nombre, sin buscador ni logo de Centra', async ({ page }) => {
   await comoApp(page, 'app.tentare.luz');
   const n = await appDeEstudio(page, () => ({ status: 200, body: APP_LUZ }));
 
@@ -67,7 +67,7 @@ test('la app de un estudio abre SU entrada: su nombre, sin buscador ni logo de T
   await expect(page.getByRole('heading', { name: 'Reserva en Luz Pilates' })).toBeVisible({ timeout: 60_000 });
   expect(n.pedidas).toBeGreaterThan(0);
   expect(n.bundles[0]).toBe('app.tentare.luz');
-  // No hay otro estudio que buscar, y el logo de Tentare no se pinta.
+  // No hay otro estudio que buscar, y el logo de Centra no se pinta.
   await expect(page.getByRole('button', { name: 'Buscar mi estudio' })).toHaveCount(0);
   await expect(page.getByText('¿Tu estudio te ha pasado un enlace o un QR?')).toHaveCount(0);
   await expect(page.locator('svg.t-logo')).toHaveCount(0);
@@ -109,14 +109,14 @@ test('con sesión pero sin ser cliente de ese estudio: a darse de alta en él', 
   expect(misEstudios).toBeGreaterThan(0);
 });
 
-test('un bundle de estudio SIN fila activa dice «no disponible» y NUNCA cae a la app «Tentare»', async ({ page }) => {
+test('un bundle de estudio SIN fila activa dice «no disponible» y NUNCA cae a la app «Centra»', async ({ page }) => {
   await comoApp(page, 'app.tentare.apagada');
   const n = await appDeEstudio(page, () => ({ status: 404, body: { error: 'Esa app no está activa' } }));
 
   await page.goto('/app');
   await expect(page.getByTestId('app-no-disponible')).toBeVisible({ timeout: 60_000 });
   expect(n.pedidas).toBeGreaterThan(0);
-  // Ni el buscador de estudios ni el logo de Tentare: la app lleva el nombre de un estudio.
+  // Ni el buscador de estudios ni el logo de Centra: la app lleva el nombre de un estudio.
   await expect(page.getByRole('button', { name: 'Buscar mi estudio' })).toHaveCount(0);
   await expect(page.getByRole('heading', { name: 'Reserva en tu estudio' })).toHaveCount(0);
   await expect(page.locator('svg.t-logo')).toHaveCount(0);
@@ -126,7 +126,7 @@ test('un bundle de estudio SIN fila activa dice «no disponible» y NUNCA cae a 
   await expect.poll(() => n.pedidas, { timeout: 30_000 }).toBeGreaterThan(antes);
 });
 
-test('si no se puede comprobar la app del estudio, lo dice y NO cae al selector de Tentare', async ({ page }) => {
+test('si no se puede comprobar la app del estudio, lo dice y NO cae al selector de Centra', async ({ page }) => {
   await comoApp(page, 'app.tentare.luz');
   const n = await appDeEstudio(page, () => ({ status: 500, body: { error: 'x' } }));
 
@@ -139,7 +139,7 @@ test('si no se puede comprobar la app del estudio, lo dice y NO cae al selector 
   await expect(page.getByRole('button', { name: 'Entrar con otra cuenta' })).toHaveCount(0);
 });
 
-test('la app «Tentare» y la web no preguntan por ningún estudio', async ({ page }) => {
+test('la app «Centra» y la web no preguntan por ningún estudio', async ({ page }) => {
   await comoApp(page, 'app.tentare');
   const n = await appDeEstudio(page, () => ({ status: 200, body: APP_LUZ }));
 

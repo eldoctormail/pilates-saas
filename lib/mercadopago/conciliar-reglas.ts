@@ -12,7 +12,7 @@ function devuelto(pago: Pick<PagoMercadoPago, 'status' | 'transaction_amount' | 
 }
 
 /**
- * ¿Hay que (re)procesar este pago? Nuevo para Tentare; con otro estado que el
+ * ¿Hay que (re)procesar este pago? Nuevo para Centra; con otro estado que el
  * anotado (un pendiente que se aprobó); o, si ya se aplicó, con más devuelto
  * que lo anotado (una devolución total o parcial, o un contracargo). Un
  * rechazado o no aplicable con el mismo estado no se repite: no re-alerta.

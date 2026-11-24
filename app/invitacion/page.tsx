@@ -27,7 +27,7 @@ interface Invitacion {
 
 /**
  * La invitación de una INSTRUCTORA va a la app del estudio (15-sep-2026): es
- * donde trabaja desde que se retiró Tentare Core, y allí entra con la cuenta que
+ * donde trabaja desde que se retiró Centra Core, y allí entra con la cuenta que
  * ya tenga o la crea, sin el «ya existe una cuenta con ese email» del panel.
  */
 function rutaApp(inv: Invitacion): string | null {
@@ -75,7 +75,7 @@ export default function PaginaInvitacion() {
     // acaba de guardar). Detectado en producción: una
     // propietaria invitó a alguien como PROPIETARIO, el alta y el código OTP
     // fueron perfectos, pero la cuenta acabó sin vincular a ningún estudio
-    // (recayó en el enrutado de Tentare Network) — sessionStorage se había
+    // (recayó en el enrutado de Centra Network) — sessionStorage se había
     // vaciado en el salto de esta pantalla a /login, sin dejar rastro de la
     // causa exacta (partición de almacenamiento del navegador, un cliente de
     // correo reescribiendo el enlace...). Pasarlo también por la URL (mismo

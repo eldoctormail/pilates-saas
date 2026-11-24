@@ -1,7 +1,7 @@
 // El icono de un estudio que no ha subido logo.
 //
 // Sin logo, la app instalada en el móvil de una socia y sus notificaciones
-// push llevaban el icono de Tentare — marca ajena, en la pantalla de inicio de
+// push llevaban el icono de Centra — marca ajena, en la pantalla de inicio de
 // OTRO negocio. No hace falta ninguna foto para arreglarlo: la inicial del
 // nombre sobre el color de marca que el estudio ya eligió es su propio icono,
 // no uno prestado.
@@ -55,7 +55,7 @@ export function monogramaDeEstudio(
  * App Store (solo lo pide `scripts/app-estudio.mjs`, que lo aplana a RGB sin alfa:
  * ninguna página lo enlaza).
  *
- * Ya no compite con el `favicon.ico` de Tentare: vive en `public/`, no en
+ * Ya no compite con el `favicon.ico` de Centra: vive en `public/`, no en
  * `app/` (Next inyectaba el de `app/` en TODAS las rutas y una hija no podía
  * quitarlo). En las páginas de un estudio sus iconos son los únicos.
  */
@@ -96,7 +96,7 @@ export function urlMonograma(
 // habían añadido «por si el logo no es cuadrado», y ahí está el problema: un
 // instalador de Android que exige un 192/512 exacto descarta el logo —que va
 // como `sizes: 'any'`— y se queda con el único candidato de ese tamaño, que es
-// la marca de otra empresa. La alumna acababa con el icono de Tentare en su
+// la marca de otra empresa. La alumna acababa con el icono de Centra en su
 // pantalla de inicio.
 //
 // La solución no es quitar los tamaños exactos (los hacen falta), sino que esos
@@ -129,7 +129,7 @@ export interface ImagenesMarca {
 }
 
 /**
- * La URL del icono del estudio a un tamaño exacto. Nunca el de Tentare.
+ * La URL del icono del estudio a un tamaño exacto. Nunca el de Centra.
  *
  * Una sola precedencia para la pestaña, el icono de la app instalada y el
  * manifest: **su icono › su logo › su inicial**. El icono va primero porque es

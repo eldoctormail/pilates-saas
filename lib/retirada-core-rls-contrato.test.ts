@@ -4,7 +4,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Guardia de contrato: la RLS ya no abre el panel a la instructora (Tentare Core
+// Guardia de contrato: la RLS ya no abre el panel a la instructora (Centra Core
 // retirado, 14-sep-2026). La app del estudio no lee ni escribe con su sesión:
 // todo va por servidor. Si una migración nueva vuelve a darle una rama en estas
 // políticas —copiando el texto viejo, que sigue en migraciones anteriores—, esto

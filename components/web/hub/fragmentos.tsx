@@ -29,7 +29,7 @@ const Iniciales = ({ t }: { t: string }) => <span className="hx-ini">{t}</span>;
 /** Reservas y horario: una clase llena y la plaza que se libera, ofrecida a la primera de la lista. */
 export function EscenaReservas() {
   return (
-    <Escena descripcion="Ejemplo en Tentare: una clase de Reformer a las 19:00 a la que se le libera una plaza, ofrecida a la primera alumna de la lista de espera, y una reserva confirmada.">
+    <Escena descripcion="Ejemplo en Centra: una clase de Reformer a las 19:00 a la que se le libera una plaza, ofrecida a la primera alumna de la lista de espera, y una reserva confirmada.">
       <div className="hx-c hx-c--a">
         <div className="hx-c-cab"><b>Reformer Avanzado · 19:00</b><Pastilla tono="aviso">Se liberó 1 plaza</Pastilla></div>
         <p className="hx-c-sub">Sala Norte · Con Ana</p>
@@ -51,7 +51,7 @@ export function EscenaReservas() {
 /** Dinero: cuotas cobradas, una que se reintenta sola y la factura que sale sin emitirla. */
 export function EscenaCobros() {
   return (
-    <Escena descripcion="Ejemplo de la pantalla de cobros de Tentare: dos cuotas cobradas, una que se reintenta sola y la factura que se genera sin emitirla a mano.">
+    <Escena descripcion="Ejemplo de la pantalla de cobros de Centra: dos cuotas cobradas, una que se reintenta sola y la factura que se genera sin emitirla a mano.">
       <div className="hx-c hx-c--ancha">
         <div className="hx-c-cab"><b>Cobros</b><span className="hx-c-sub hx-c-sub--r">Próximas cuotas · 30 días</span></div>
         {[
@@ -92,7 +92,7 @@ export function EscenaAlumnas() {
 /** Equipo: una baja con las candidatas ordenadas por encaje, esperando el visto bueno (el modo de serie). */
 export function EscenaEquipo() {
   return (
-    <Escena descripcion="Ejemplo de una sustitución en Tentare: una instructora no puede dar su clase de las 19:00 y se proponen candidatas ordenadas por encaje, a la espera de tu visto bueno.">
+    <Escena descripcion="Ejemplo de una sustitución en Centra: una instructora no puede dar su clase de las 19:00 y se proponen candidatas ordenadas por encaje, a la espera de tu visto bueno.">
       <div className="hx-c hx-c--ancha">
         <div className="hx-c-cab"><span className="hx-fi-cuerpo"><b>Reformer Avanzado · 19:00</b><span>Marta no puede darla</span></span><Pastilla tono="aviso">Esperando tu visto bueno</Pastilla></div>
         <p className="hx-c-etiqueta">Encaje con esta clase</p>
@@ -114,7 +114,7 @@ export function EscenaInformes() {
   const meses = [['may', 52], ['jun', 58], ['jul', 49], ['ago', 44], ['sep', 71], ['oct', 80]] as const;
   const tipos = [['Reformer Avanzado', 94], ['Reformer Fundamental', 81], ['Yoga Flow', 68]] as const;
   return (
-    <Escena descripcion="Ejemplo de los informes de Tentare: evolución de ingresos de los últimos seis meses y ocupación por tipo de clase.">
+    <Escena descripcion="Ejemplo de los informes de Centra: evolución de ingresos de los últimos seis meses y ocupación por tipo de clase.">
       <div className="hx-c hx-c--a">
         <div className="hx-c-cab"><b>Evolución de ingresos</b><span className="hx-c-sub hx-c-sub--r">Últimos 6 meses</span></div>
         <div className="hx-barras">
@@ -136,7 +136,7 @@ export function EscenaInformes() {
 /** Cambiarse de programa: lo que se revisa antes de tocar nada (para la tarjeta de /soluciones que no tiene foto). */
 export function EscenaCambio() {
   return (
-    <Escena descripcion="Ejemplo de la importación al cambiarte a Tentare: clientas, bonos, clases y reservas y pagos históricos, revisados antes de aplicar nada.">
+    <Escena descripcion="Ejemplo de la importación al cambiarte a Centra: clientas, bonos, clases y reservas y pagos históricos, revisados antes de aplicar nada.">
       <div className="hx-c hx-c--ancha">
         <div className="hx-c-cab"><b>Tu importación</b><Pastilla tono="ok">Revisada</Pastilla></div>
         {['Clientas y fichas', 'Bonos con sus sesiones', 'Clases y reservas', 'Pagos históricos'].map(t => (

@@ -62,7 +62,7 @@ export interface Studio {
    * comportamiento cambia hasta que exista un estudio real fuera de Madrid.
    */
   zonaHoraria: string;
-  /** Año en que abrió. NO es `creadoEn`, que es el alta en Tentare (migr 0134). */
+  /** Año en que abrió. NO es `creadoEn`, que es el alta en Centra (migr 0134). */
   anioFundacion: number | null;
   /**
    * Lema corto bajo el nombre del estudio en la app de la alumna, tipo
@@ -147,7 +147,7 @@ export interface Studio {
   imagenBienvenidaUrl: string | null;
   ownerAuthUserId: string | null;
   slug: string | null;
-  // Opt-in al directorio público de Tentare Network (migr
+  // Opt-in al directorio público de Centra Network (migr
   // 20260824230506). false (default) = el estudio solo lo encuentra quien
   // ya tiene su enlace directo (/reservar/[slug]); true = también aparece
   // en /network/estudios, donde puede encontrarlo alguien que no lo conocía
@@ -298,7 +298,7 @@ export interface Studio {
   congelacionPermitida: boolean;
   congelacionMaxDias: number | null;
   // Factura SIEMPRE, Veri*Factu aparte (2-oct-2026). 'facturas' (por defecto):
-  // Tentare emite la factura, sin huella, sin QR y sin envío a la AEAT.
+  // Centra emite la factura, sin huella, sin QR y sin envío a la AEAT.
   // 'verifactu': además la encadena y la envía (solo con el envío activado).
   // 'sin_facturas': estado de sistema que nadie elige; no emite. Solo el
   // servidor cambia el modo (la columna no la escribe el navegador).
@@ -1049,7 +1049,7 @@ export interface TipoClase {
   // directo dentro de cancelar_reserva_plaza (ver comentario en Studio).
   penalizacionImporteEur: number | null;
   // Fase 11 de Network↔Sustituciones (migr 20260818010000): traduce este tipo
-  // de clase al catálogo fijo de Tentare Network (lib/network/catalogo.ts).
+  // de clase al catálogo fijo de Centra Network (lib/network/catalogo.ts).
   // null = sin mapear, no genera sugerencias de sustitutas de Network para
   // este tipo de clase — nunca un matching aproximado por texto.
   especialidadNetwork: EspecialidadNetwork | null;
@@ -1318,7 +1318,7 @@ export interface Recibo {
    * Stripe y lo que está en el banco lo cierra su webhook, no el mostrador.
    */
   stripePaymentIntentId?: string | null;
-  // Cuándo Tentare PIDIÓ la devolución a Stripe (migr 20260811100957). Es un
+  // Cuándo Centra PIDIÓ la devolución a Stripe (migr 20260811100957). Es un
   // hecho distinto de `fechaDevolucion`, que la escribe el webhook cuando
   // Stripe confirma: con esta puesta y `estado` todavía COBRADO, la devolución
   // está en vuelo. Sin esto, entre pulsar y confirmar no se veía nada, y una
@@ -1427,9 +1427,9 @@ export interface Factura {
   verifactuCsv?: string | null;
 }
 
-// Ingreso cobrado FUERA de Tentare (efectivo, transferencia, otra plataforma…)
+// Ingreso cobrado FUERA de Centra (efectivo, transferencia, otra plataforma…)
 // que el estudio añade a mano al cierre de año para completar lo que entrega a
-// su gestoría. NO es una factura de Tentare: sin sello Verifactu ni numeración
+// su gestoría. NO es una factura de Centra: sin sello Verifactu ni numeración
 // correlativa. Se suma a los totales anuales, marcado como manual.
 export interface IngresoManual {
   id: string;
@@ -1524,7 +1524,7 @@ export interface ProductoPOS {
   studioId: string;
   nombre: string;
   categoria: CategoriaPOS;
-  /** CON IVA incluido, como todos los precios de Tentare. */
+  /** CON IVA incluido, como todos los precios de Centra. */
   precio: number;
   activo: boolean;
   // ── Campos del rediseño del TPV (migr 20260907150011) ──────────────────────
@@ -1903,7 +1903,7 @@ export interface MensajeEquipo {
 }
 
 // Buzón de soporte: dudas/mejoras/bugs que un estudio deja desde el widget
-// de ayuda del dashboard, dirigidos al equipo de Tentare (no visibles para
+// de ayuda del dashboard, dirigidos al equipo de Centra (no visibles para
 // otros estudios).
 export type TipoSoporte = 'DUDA' | 'MEJORA' | 'BUG';
 

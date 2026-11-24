@@ -1,8 +1,8 @@
 import { test, expect, type Page, type Route } from '@playwright/test';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// La cola de moderación de Tentare (App Store 1.2). Lo que se prueba aquí es la
-// pantalla: que enseña por qué le toca a Tentare, que decide de verdad (se
+// La cola de moderación de Centra (App Store 1.2). Lo que se prueba aquí es la
+// pantalla: que enseña por qué le toca a Centra, que decide de verdad (se
 // cuenta la petición) y que, si el servidor dice que no, no finge que se hizo.
 // Las reglas (quién, qué y cuándo) están en lib/moderacion/denuncias.test.ts y
 // en la RPC `resolver_denuncia`.
@@ -58,7 +58,7 @@ async function mockPanel(page: Page, opts: { decidir: number }) {
 }
 
 test.describe('Denuncias de la app en /interno', () => {
-  test('enseña por qué le toca a Tentare y retirar lo quita de la cola', async ({ page }) => {
+  test('enseña por qué le toca a Centra y retirar lo quita de la cola', async ({ page }) => {
     const decisiones = await mockPanel(page, { decidir: 200 });
     await seedSesion(page);
     await page.goto('/interno/denuncias');

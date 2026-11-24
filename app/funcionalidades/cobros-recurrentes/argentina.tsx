@@ -11,8 +11,8 @@ import { PanelCobros } from '@/components/web/home/piezas';
 
 const FAQ = [
   {
-    q: '¿Tentare se lleva una comisión de lo que cobro?',
-    a: 'No. El dinero va de tu alumna a tu cuenta de Mercado Pago directamente; Tentare no se interpone ni añade comisión propia. Lo único que pagas aparte es la comisión de Mercado Pago, que es suya y la ves en su panel.',
+    q: '¿Centra se lleva una comisión de lo que cobro?',
+    a: 'No. El dinero va de tu alumna a tu cuenta de Mercado Pago directamente; Centra no se interpone ni añade comisión propia. Lo único que pagas aparte es la comisión de Mercado Pago, que es suya y la ves en su panel.',
   },
   {
     q: '¿Necesito una cuenta de Mercado Pago?',
@@ -20,11 +20,11 @@ const FAQ = [
   },
   {
     q: '¿Puedo devolver un pago desde el panel?',
-    a: 'Sí. La devolución se le pide a Mercado Pago desde el panel y el recibo cambia de estado cuando Mercado Pago la confirma, no cuando se pulsa el botón. Si la haces desde el panel de Mercado Pago, Tentare también se entera.',
+    a: 'Sí. La devolución se le pide a Mercado Pago desde el panel y el recibo cambia de estado cuando Mercado Pago la confirma, no cuando se pulsa el botón. Si la haces desde el panel de Mercado Pago, Centra también se entera.',
   },
   {
     q: '¿Y si un pago se aprueba pero no aparece?',
-    a: 'Tentare se entera de cada pago por el aviso de Mercado Pago y, por si alguno no llega, repasa los pagos de los últimos tres días cada 30 minutos. El bono o la cuota aparecen solos, sin que la alumna vuelva a pagar.',
+    a: 'Centra se entera de cada pago por el aviso de Mercado Pago y, por si alguno no llega, repasa los pagos de los últimos tres días cada 30 minutos. El bono o la cuota aparecen solos, sin que la alumna vuelva a pagar.',
   },
   {
     q: '¿Y si alguien paga en efectivo o por transferencia?',
@@ -40,7 +40,7 @@ export function CobrosArgentina({ path }: { path: string }) {
       h1={<>Cobra sin perseguir a nadie.</>}
       intro={<>Tus alumnas compran el bono o pagan la cuota desde su app, con Mercado Pago. Lo que se paga en el mostrador se apunta en el momento, y lo que falta cobrar queda a la vista.</>}
       chips={['Mercado Pago desde la app', 'Efectivo, posnet y transferencia', 'Devoluciones desde el panel']}
-      pieza={{ descripcion: 'Ejemplo del resumen de cobros de Tentare: quién ha pagado y las próximas cuotas.', contenido: <PanelCobros completo /> }}
+      pieza={{ descripcion: 'Ejemplo del resumen de cobros de Centra: quién ha pagado y las próximas cuotas.', contenido: <PanelCobros completo /> }}
     >
       <Seccion id="problema" titulo="El dinero no se pierde de golpe, se pierde a goteo">
         <Entradilla>
@@ -64,7 +64,7 @@ export function CobrosArgentina({ path }: { path: string }) {
           aparece en Cobros, alumna por alumna.
         </p>
         <Limite titulo="No hay cobro automático con tarjeta guardada">
-          Con Mercado Pago, cada pago lo hace la alumna: Tentare no guarda tarjetas ni cobra solo el día 1. Por eso el aviso
+          Con Mercado Pago, cada pago lo hace la alumna: Centra no guarda tarjetas ni cobra solo el día 1. Por eso el aviso
           de renovación y la lista de lo que falta cobrar son la pieza central.
         </Limite>
       </Seccion>

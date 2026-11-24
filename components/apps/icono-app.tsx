@@ -3,7 +3,7 @@
 // detrás del glifo — igual para todas, para que la tienda se lea como un juego
 // de piezas y no como veinte iconos sueltos.
 //
-//   · `glifo`  → una app de Tentare: un disco de color con el icono dentro y
+//   · `glifo`  → una app de Centra: un disco de color con el icono dentro y
 //                el halo del mismo color detrás.
 //   · `logo`   → una integración de otra marca: su logo real, centrado en la
 //                baldosa, con el halo del color de su marca.
@@ -38,7 +38,7 @@ export type TamanoApp = keyof typeof TAMANOS;
 export function IconoApp({ tono = 'azul', tamano = 'md', glifo: Glifo, logo, apagada, className }: {
   tono?: TonoApp;
   tamano?: TamanoApp;
-  /** Un icono de lucide para las apps de Tentare. */
+  /** Un icono de lucide para las apps de Centra. */
   glifo?: ElementType;
   /** El logo de una marca externa (ya con su tamaño propio). */
   logo?: (px: number) => ReactNode;

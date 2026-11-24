@@ -4,7 +4,7 @@ import { getSupabaseAdmin } from '@/lib/db/supabase-admin';
 import { errorInterno } from '@/lib/errores-servidor';
 
 // F3 de Network — "el puente": si la persona que entra a Network como
-// alumna resulta ser YA socia de algún estudio Tentare, se lo decimos y le
+// alumna resulta ser YA socia de algún estudio Centra, se lo decimos y le
 // damos el enlace a su portal real (/portal/[slug]), donde ya tiene sus
 // reservas/bonos/datos. Aviso PASIVO (decisión confirmada con el fundador):
 // solo se muestra cuando la alumna entra a Network, sin notificación push

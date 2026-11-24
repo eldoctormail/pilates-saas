@@ -29,7 +29,7 @@ export function CompositorInicio() {
       className="hidden max-w-[620px] md:block"
     >
       <div className="rounded-[20px] bg-card p-3 shadow-[0_5px_5px_-2.5px_#00000008,0_3px_3px_-1.5px_#00000005,0_2px_2px_-1px_#00000005,0_1px_1px_-0.5px_#00000008,0_0.5px_0.5px_0_#0000000a,0_0_0_1px_#0000000f] transition-shadow focus-within:shadow-[0_0_0_1px_#0000004d,0_5px_16px_#0000000f]">
-        <label htmlFor="compositor-inicio" className="sr-only">Pregúntale a Tentare</label>
+        <label htmlFor="compositor-inicio" className="sr-only">Pregúntale a Centra</label>
         <span className="relative block">
           <TextoRotatorio visible={texto === ''} />
           <input
@@ -37,7 +37,7 @@ export function CompositorInicio() {
             value={texto}
             onChange={e => setTexto(e.target.value)}
             maxLength={500}
-            placeholder="Pregúntale a Tentare…"
+            placeholder="Pregúntale a Centra…"
             className="block h-9 w-full bg-transparent px-0.5 text-[13px] text-foreground placeholder:text-transparent focus:outline-none"
           />
         </span>

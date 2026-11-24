@@ -46,7 +46,7 @@ import { avisarProgresoAlta } from '@/lib/alta/progreso-cliente';
 // «Tu plan» informa en vez de elegir y los textos dicen eso. Apagado, nada cambia.
 //
 // Esta pantalla estuvo ~5 meses siendo un formulario de lista de espera («deja
-// tu email y te avisamos») porque Tentare no estaba abierto. Vuelve a dar de
+// tu email y te avisamos») porque Centra no estaba abierto. Vuelve a dar de
 // alta un estudio de verdad; el camino de creación (`dbCreateStudio` +
 // `pending_studio` en app/login) nunca se llegó a borrar, solo dejó de
 // dispararse desde aquí.
@@ -64,7 +64,7 @@ import { avisarProgresoAlta } from '@/lib/alta/progreso-cliente';
 //
 // ⚠️ EL CORREO LLEVA UN CÓDIGO DE 6 DÍGITOS, NO UN ENLACE. La plantilla de
 // confirmación (`supabase/templates/confirmation.html`, asunto «Tu código de
-// verificación de Tentare») pinta `{{ .Token }}` y ni siquiera incluye botón.
+// verificación de Centra») pinta `{{ .Token }}` y ni siquiera incluye botón.
 // Esta pantalla llegó a decir «te hemos enviado un enlace» y a rematar con un
 // «Ir a iniciar sesión»: quien se registraba recibía un código, no tenía dónde
 // escribirlo, y solo lo conseguía si adivinaba que /login sí tenía el campo.
@@ -636,7 +636,7 @@ export function AltaEstudio({ foundingGratis }: { foundingGratis: boolean }) {
                 }
                 setDatos({ ...datos, estudio: v });
               }}
-              placeholder="Ej. Estudio Tentare"
+              placeholder="Ej. Estudio Centra"
               autoFocus
               autoComplete="organization"
               ayuda="Es el nombre que verán tus clientes."
@@ -656,7 +656,7 @@ export function AltaEstudio({ foundingGratis }: { foundingGratis: boolean }) {
                 pantalla. Opcional: no bloquea `validarPaso`. */}
             <div>
               <label htmlFor={`${uid}-conocio`} className="mb-1.5 block text-[13px] font-semibold text-foreground">
-                ¿Cómo conociste Tentare?
+                ¿Cómo conociste Centra?
                 <span className="ml-1 font-normal text-muted-foreground"> (opcional)</span>
               </label>
               <select
@@ -814,7 +814,7 @@ function Marco({ children, ancho = false }: { children: React.ReactNode; ancho?:
   return (
     <MarcoTarjeta ancho={ancho ? 'normal' : 'estrecho'}>
       <div className="flex flex-1 flex-col px-5 py-7 sm:px-8 sm:py-9">
-        <Link href="/" className="mb-6 flex justify-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring" aria-label="Volver a la portada de Tentare">
+        <Link href="/" className="mb-6 flex justify-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring" aria-label="Volver a la portada de Centra">
           <LogoTentare alto={30} tinta="auto" />
         </Link>
         {children}

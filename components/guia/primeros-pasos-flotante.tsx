@@ -81,7 +81,7 @@ function PrimerosPasosDeSiempre() {
     return () => { document.removeEventListener('mousedown', fuera); document.removeEventListener('keydown', tecla); };
   }, [abierta]);
 
-  // La home tiene la tarjeta entera; el chat de Tentare ocupa toda la pantalla.
+  // La home tiene la tarjeta entera; el chat de Centra ocupa toda la pantalla.
   if (!panelNuevo || pathname === '/dashboard' || pathname === '/asistente' || !puedeVer('/primeros-pasos')) return null;
   // Con la carga a medias, una lista vacía no quiere decir «no lo tiene».
   if (visitaEnMarcha || !studio || !dataLoaded || datosIncompletos.length > 0 || studio.onboardingDescartadoEn) return null;

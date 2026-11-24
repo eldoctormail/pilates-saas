@@ -2,7 +2,7 @@ import { test, expect, type Page, type Route } from '@playwright/test';
 import { rellenarPaso1 } from './alta-paso1';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// El alta pública de un estudio (/crear-estudio), ahora que Tentare está
+// El alta pública de un estudio (/crear-estudio), ahora que Centra está
 // abierto: tres pasos, prueba de 7 días y sin tarjeta.
 //
 // Esta pantalla estuvo meses siendo un formulario de lista de espera, así que

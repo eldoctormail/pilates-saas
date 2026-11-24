@@ -18,7 +18,7 @@ const ESTADO_INFO: Record<ReferenciaNetwork['estado'], { texto: string; cls: str
 // Mismo patrón que SeccionExperienciaNetwork: autocontenida (carga su propia
 // lista) y avisa a la página padre la lista completa — hace falta para el
 // badge "Referencia profesional" (lib/network/badges.ts), que necesita saber
-// cuántas están `confirmada`. El referente no es usuaria de Tentare — no hay
+// cuántas están `confirmada`. El referente no es usuaria de Centra — no hay
 // picker de estudio aquí, solo nombre + email de alguien con quien ya
 // trabajó (docs/NETWORK-IMPLEMENTATION-PLAN.md §5).
 export function SeccionReferenciasNetwork({
@@ -74,7 +74,7 @@ export function SeccionReferenciasNetwork({
         <div>
           <h3 className="text-[14px] font-semibold text-foreground">Referencias profesionales</h3>
           <p className="text-[12px] text-muted-foreground mt-0.5">
-            Alguien que ya trabajó contigo — no hace falta que use Tentare.
+            Alguien que ya trabajó contigo — no hace falta que use Centra.
           </p>
         </div>
         {!formAbierto && (

@@ -269,14 +269,14 @@ export function mapIngresoManual(r: RowIngresosManuales): IngresoManual {
 export function cierreLibroCsvData(cierre: CierreAnual): { headers: string[]; rows: string[][] } {
   const headers = ['Fecha', 'Nº factura', 'Origen', 'Cliente', 'NIF', 'Base imponible', 'Tipo IVA', 'Cuota IVA', 'Total'];
   const rows = cierre.lineas.map((l) => [
-    l.fecha, l.numero ?? '', l.origen === 'FACTURA' ? 'Factura Tentare' : 'Manual', l.nombre, l.nif ?? '',
+    l.fecha, l.numero ?? '', l.origen === 'FACTURA' ? 'Factura Centra' : 'Manual', l.nombre, l.nif ?? '',
     l.base.toFixed(2), String(l.tipoIva), l.cuota.toFixed(2), l.total.toFixed(2),
   ]);
   return { headers, rows };
 }
 
 // Calcula base + cuota a partir de un total (IVA incluido) y un tipo de IVA.
-// Es como se cobra en Tentare (el precio del recibo es IVA incluido).
+// Es como se cobra en Centra (el precio del recibo es IVA incluido).
 export function desglosarIvaDesdeTotal(total: number, tipoIva: number): { base: number; cuota: number } {
   const t = N(total);
   const tipo = N(tipoIva);

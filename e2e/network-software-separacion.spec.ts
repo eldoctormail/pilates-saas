@@ -4,7 +4,7 @@ import { ACCESO_NETWORK_EN_MANTENIMIENTO } from '../lib/network/mantenimiento';
 import { entrarPorLogin } from './entrar-por-login';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Tentare Software y Tentare Network como dos productos independientes
+// Centra Software y Centra Network como dos productos independientes
 // (2026-08-19) — sin selector, sin sesión compartida, sin auto-login cruzado.
 // El contexto (la página por la que se entra) decide el producto, nunca la
 // identidad.
@@ -47,7 +47,7 @@ function sesionOk(email: string, id = 'auth-e2e-usuario') {
 // rellenar mientras esa puerta esté en mantenimiento: se saltan, no se
 // borran, y vuelven a correr solos en cuanto el interruptor pase a `false`.
 const MOTIVO_ACCESO_CERRADO =
-  'Login de Tentare Network en mantenimiento desde el 29-sep-2026 (decisión del fundador): '
+  'Login de Centra Network en mantenimiento desde el 29-sep-2026 (decisión del fundador): '
   + '/network/acceso enseña el aviso y no el formulario. Vuelve a correr cuando '
   + 'ACCESO_NETWORK_EN_MANTENIMIENTO (lib/network/mantenimiento.ts) sea false.';
 
@@ -69,8 +69,8 @@ test.describe('Bloqueo cruzado al iniciar sesión (TEST 5 / TEST 6 del encargo)'
     await page.goto('/login');
     await entrarPorLogin(page, 'instructora@example.com', 'unaClaveLarga1');
 
-    await expect(page.getByRole('heading', { name: 'Esta cuenta es de Tentare Network' })).toBeVisible({ timeout: 30_000 });
-    await expect(page.getByRole('link', { name: 'Ir a Tentare Network' })).toHaveAttribute('href', '/network/acceso');
+    await expect(page.getByRole('heading', { name: 'Esta cuenta es de Centra Network' })).toBeVisible({ timeout: 30_000 });
+    await expect(page.getByRole('link', { name: 'Ir a Centra Network' })).toHaveAttribute('href', '/network/acceso');
     // Nunca se queda en el panel de Software con esta identidad.
     await expect(page).not.toHaveURL(/\/dashboard/);
   });
@@ -88,8 +88,8 @@ test.describe('Bloqueo cruzado al iniciar sesión (TEST 5 / TEST 6 del encargo)'
     await page.locator('input[type="password"]').fill('unaClaveLarga1');
     await page.getByRole('button', { name: 'Iniciar sesión' }).click({ timeout: 30_000 });
 
-    await expect(page.getByText('Esta cuenta es de Tentare Software')).toBeVisible({ timeout: 30_000 });
-    await expect(page.getByRole('link', { name: 'Ir a Tentare Software' }).last()).toHaveAttribute('href', '/login');
+    await expect(page.getByText('Esta cuenta es de Centra Software')).toBeVisible({ timeout: 30_000 });
+    await expect(page.getByRole('link', { name: 'Ir a Centra Software' }).last()).toHaveAttribute('href', '/login');
     await expect(page).not.toHaveURL(/\/network\/(inicio|reanudar)/);
   });
 });
@@ -173,7 +173,7 @@ test.describe('Login y alta de Network en mantenimiento (29-sep-2026)', () => {
     await page.goto('/network/acceso');
 
     await expect(page.getByRole('heading', { name: 'Estamos en mantenimiento' })).toBeVisible({ timeout: 30_000 });
-    await expect(page.getByText('El acceso a Tentare Network está temporalmente cerrado.')).toBeVisible();
+    await expect(page.getByText('El acceso a Centra Network está temporalmente cerrado.')).toBeVisible();
     await expect(page.getByRole('link', { name: 'inicia sesión aquí' })).toHaveAttribute('href', '/login');
     await expect(page.locator('input[type="password"]')).toHaveCount(0);
     await expect(page.getByRole('button', { name: /Continuar con Google/ })).toHaveCount(0);
@@ -183,7 +183,7 @@ test.describe('Login y alta de Network en mantenimiento (29-sep-2026)', () => {
     await page.goto('/network/crear-perfil');
 
     await expect(page.getByRole('heading', { name: 'Estamos en mantenimiento' })).toBeVisible({ timeout: 30_000 });
-    await expect(page.getByText('La creación de perfiles nuevos en Tentare Network está temporalmente cerrada.')).toBeVisible();
+    await expect(page.getByText('La creación de perfiles nuevos en Centra Network está temporalmente cerrada.')).toBeVisible();
     await expect(page.locator('input[type="password"]')).toHaveCount(0);
     await expect(page.getByRole('button', { name: /Continuar con Google/ })).toHaveCount(0);
   });

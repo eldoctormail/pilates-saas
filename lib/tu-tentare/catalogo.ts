@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// «Tu Tentare» (P2.5): todos los módulos del menú, con lo que hacen, el plan
+// «Tu Centra» (P2.5): todos los módulos del menú, con lo que hacen, el plan
 // que los incluye y si están en tu menú. Puro, sin `@/`.
 //
 // NO es un tercer catálogo: los módulos, sus grupos, nombres e iconos salen de

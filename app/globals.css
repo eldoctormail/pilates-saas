@@ -193,18 +193,18 @@
   --sidebar-ring: rgba(107,122,60,0.5);
 
   /* Escala de acento del sistema. El nombre "lime" es histórico (plantilla
-     Midbox); hoy son alias de la marca de Tentare y no deben divergir de ella. */
+     Midbox); hoy son alias de la marca de Centra y no deben divergir de ella. */
   --lime: #343825;
   --lime-dark: #22251A;
   --lime-bg: #F1F2EA;
 
-  /* ── Identidad de Tentare ──────────────────────────────────────────────────
+  /* ── Identidad de Centra ──────────────────────────────────────────────────
      Oliva #343825 + arena #D9C29E: 7,00:1, pasa AA de sobra.
 
      Es el valor POR DEFECTO. lib/panel-theme.tsx lo sobreescribe con el tema
      que haya publicado el estudio (white-label): quien eligió su propio color
      lo conserva a propósito. Estas variables mandan en las superficies de
-     Tentare (landing, login, alta, panel interno) y en los estudios que no han
+     Centra (landing, login, alta, panel interno) y en los estudios que no han
      tocado el tema. */
   --brand: #343825;
   --brand-foreground: #D9C29E;
@@ -221,7 +221,7 @@
      El Tenti de canvas (lib/tenti/motor.ts) lee su paleta de aquí
      (lib/tenti/paleta.ts), y no trae la suya: el prototipo venía con menta,
      rosa chicle, un aro negro y chispas blancas, nada de eso del sistema de
-     Tentare — mismo motivo por el que se purgó el rosa fuera de sistema de
+     Centra — mismo motivo por el que se purgó el rosa fuera de sistema de
      /suscripcion. Su tinte de 'hecho' es --success, que se lee directo.
      El yogui SVG de #1333 (y sus --tenti-contorno/-traje/-piel/-pelo) se
      retiró: dos mascotas con el mismo nombre son peores que ninguna. */
@@ -948,7 +948,7 @@ html[data-vt-ampliar='reducir']::view-transition-new(panel-barra) {
 
 /* El PANEL con el dedo: ningún campo por debajo de 16 px. Safari de iOS amplía
    la página al enfocar un input, textarea o select de menos de 16 px, y al
-   cerrar el teclado no vuelve sola: el fundador lo vio en el chat de Tentare
+   cerrar el teclado no vuelve sola: el fundador lo vio en el chat de Centra
    («le das a escribir y se hace zoom») y pasaba igual en ⌘K (14 px), en los
    formularios del panel y en sus diálogos. Es la misma regla que ya tenía la
    app de la alumna (app/portal/[slug]/student.css), y por los mismos motivos:
@@ -973,9 +973,9 @@ html[data-vt-ampliar='reducir']::view-transition-new(panel-barra) {
    CADA elemento, no solo en la raíz: WebKit (y la especificación de Pointer
    Events) mira `touch-action` solo hasta el contenedor con scroll más cercano,
    y ahí vuelve a `auto`. Puesto solo en `.panel-app` (#2563) no llegaba dentro
-   de ningún `overflow: auto` —el chat de Tentare entero, su lista de mensajes
+   de ningún `overflow: auto` —el chat de Centra entero, su lista de mensajes
    y el propio <textarea>, que es un contenedor con scroll—, y un doble toque
-   en «Pregúntale a Tentare…» ampliaba la página. Con `:where()` (especificidad
+   en «Pregúntale a Centra…» ampliaba la página. Con `:where()` (especificidad
    0): un `touch-none` de un asa de arrastre o un `touchAction` en línea siguen
    ganando.
    Lo vigila e2e/asistente-movil.spec.ts en WebKit/iPhone. */
@@ -1303,7 +1303,7 @@ body:has(.config-tactil) .panel-wa-fab .animate-wa-fab-ring { display: none; }
 @keyframes pantalla-reserva-entra { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 .pantalla-reserva-seccion { animation: pantalla-reserva-entra .32s cubic-bezier(0.16, 1, 0.3, 1) both; }
 
-/* Icono de "Reserva confirmada" (diseño "Tentare Portal Reservas"): anillo que
+/* Icono de "Reserva confirmada" (diseño "Centra Portal Reservas"): anillo que
    se expande y se disuelve detrás de un check que aparece con un ligero
    rebote, más un confeti de 4 partículas — solo para el estado de éxito REAL
    (confirmacionPago === 'confirmada'), nunca para los estados de espera/fallo. */
@@ -1539,7 +1539,7 @@ canvas[data-tenti].tenti-entra {
   text-transform: none;
 }
 
-/* ── «Pregúntale a Tentare» (components/asistente/vista-chat.tsx) ──────────────
+/* ── «Pregúntale a Centra» (components/asistente/vista-chat.tsx) ──────────────
    El cursor del texto que llega, y el brillo de «Mirando la agenda…» mientras
    corre una consulta. Solo CSS (sin temporizadores), y quietos con «reducir
    movimiento». */
@@ -1709,7 +1709,7 @@ body.sin-primeros-pasos-flotante [data-primeros-pasos] { display: none !importan
 }
 .shell-vidrio-busqueda { background-color: rgba(255, 255, 255, 0.19); }
 
-/* El resplandor de abajo del menú, con el color de Tentare (turquesa → magenta en el haz). */
+/* El resplandor de abajo del menú, con el color de Centra (turquesa → magenta en el haz). */
 .shell-brillo { height: 400px; }
 .shell-brillo-base {
   position: absolute; inset: 0;

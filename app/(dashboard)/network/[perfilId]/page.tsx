@@ -497,7 +497,7 @@ export default function PerfilNetworkPage({ params }: { params: Promise<{ perfil
             placeholder="Cuéntanos cómo fue trabajar con ella (opcional)."
           />
           <p className="text-[11px] text-muted-foreground">
-            Se publica tras una revisión rápida del equipo de Tentare.
+            Se publica tras una revisión rápida del equipo de Centra.
           </p>
           {errorResena && <p className="text-[11px] text-destructive">{errorResena}</p>}
           <div className="flex items-center gap-2">

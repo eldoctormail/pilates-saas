@@ -4,7 +4,7 @@ import { estiloPorId } from '@/lib/student/apariencia';
 import { urlIconoEstudio } from '@/lib/monograma-estudio';
 
 // Manifest POR ESTUDIO. Es lo que convierte «añadir a pantalla de inicio» en la
-// app del estudio y no en «Tentare»: nombre, icono y `start_url` propios.
+// app del estudio y no en «Centra»: nombre, icono y `start_url` propios.
 //
 // Antes esto existía como `app/portal/[slug]/manifest.webmanifest` y se fue con
 // el borrado del portal; los tres manifests que quedaron (plataforma, panel y

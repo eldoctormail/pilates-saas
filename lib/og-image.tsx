@@ -42,7 +42,7 @@ export function generarOgImage(titulo: string, subtitulo: string) {
           >
             T
           </div>
-          Tentare
+          Centra
         </div>
         <div style={{ display: 'flex', fontSize: 52, fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.12, maxWidth: 980 }}>{titulo}</div>
         <div style={{ display: 'flex', fontSize: 24, color: '#A6A69E', marginTop: 26, maxWidth: 860 }}>{subtitulo}</div>

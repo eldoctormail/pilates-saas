@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title: pagina.titulo,
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
-  openGraph: { siteName: 'Tentare', type: 'website', locale: 'es_ES', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
+  openGraph: { siteName: 'Centra', type: 'website', locale: 'es_ES', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
 };
 
 const FAQ = [
@@ -47,7 +47,7 @@ export default function CalendarioPage() {
       h1={<>Tu semana cuadrada, puesto a puesto.</>}
       intro={<>Series recurrentes, varias salas a la vez y capacidad contada por máquina — no un número de aforo que hay que corregir a mano cada vez que algo se rompe.</>}
       chips={['Series recurrentes', 'Multi-sala', 'Capacidad por reformer']}
-      pieza={{ descripcion: 'Ejemplo del día en el calendario de Tentare: tres clases con su ocupación y una llena con dos alumnas en lista de espera.', contenido: <AgendaDia /> }}
+      pieza={{ descripcion: 'Ejemplo del día en el calendario de Centra: tres clases con su ocupación y una llena con dos alumnas en lista de espera.', contenido: <AgendaDia /> }}
     >
       <Seccion id="problema" titulo="El aforo de un estudio de Pilates no es un número">
         <Entradilla>

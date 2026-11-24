@@ -3,7 +3,7 @@
 // («Lo que he cobrado» → «Descargar para la gestoría») y en el cierre del año.
 //
 // Antes Cobros descargaba con su botón «Exportar» lo que te DEBEN (la lista de
-// «Quién me debe»), y el cierre mandaba ahí a quien no factura con Tentare: la
+// «Quién me debe»), y el cierre mandaba ahí a quien no factura con Centra: la
 // gestoría recibía las deudas como si fueran ingresos.
 //
 // Bruto, devuelto y neto: la suma de «Neto» es la cifra «Ingresos período» de

@@ -76,7 +76,7 @@ test('cada sección resume lo guardado, y las que no se pueden saber no dicen na
   // WhatsApp se gestiona en Integraciones: Cómo me comunico ya no resume nada.
   assert.equal(r.comunicacion.valor, null);
   assert.equal(r.equipo.valor, 'Las instructoras crean sus clases');
-  assert.equal(r.web.valor, 'Fuera de Tentare Network');
+  assert.equal(r.web.valor, 'Fuera de Centra Network');
   // Sin el tema cargado, del color no se dice nada.
   assert.equal(r.marca.valor, 'Sin logo');
   // Nada conectado que se sepa, la motivación y tus avisos se cargan aparte,
@@ -111,14 +111,14 @@ test('cambiar un valor guardado cambia su resumen', () => {
 
   assert.equal(valor(con({ compraPublicaModo: 'CREAR_FICHA' }), 'altas'), 'Paga sin registrarse antes');
   assert.equal(valor(con({ instructorasCreanClases: false }), 'equipo'), 'Las instructoras no crean clases');
-  assert.equal(valor(con({ logoUrl: 'https://example.com/logo.png', visibleEnNetwork: true }), 'web'), 'En Tentare Network');
+  assert.equal(valor(con({ logoUrl: 'https://example.com/logo.png', visibleEnNetwork: true }), 'web'), 'En Centra Network');
   assert.equal(valor(con({ logoUrl: 'https://example.com/logo.png' }, { colorPropio: true }), 'marca'), 'Con logo · tu color');
-  assert.equal(valor(con({}, { colorPropio: false }), 'marca'), 'Sin logo · color de Tentare');
+  assert.equal(valor(con({}, { colorPropio: false }), 'marca'), 'Sin logo · color de Centra');
   assert.equal(valor(con({}, { panel: { menuPosition: 'lateral', oscuro: false } }), 'panel'), 'Menú a la izquierda · modo claro');
   assert.equal(valor(con({}, { panel: { menuPosition: 'superior', oscuro: true } }), 'panel'), 'Menú arriba · modo oscuro');
 });
 
-test('el plan de Tentare: prueba con sus días, activo o terminado; y sin estado del servidor, nada', () => {
+test('el plan de Centra: prueba con sus días, activo o terminado; y sin estado del servidor, nada', () => {
   const trial = (fase: 'PLENA' | 'HOLGADA' | 'AVISO' | 'ULTIMO_DIA' | 'EXPIRADA' | 'SIN_PRUEBA' | 'SUSCRITO', diasRestantes = 0) =>
     ({ fase, diasRestantes });
   assert.deepEqual(resumenPlan({ plan: 'ESTUDIO', subscriptionStatus: 'trialing', trial: trial('HOLGADA', 5) }), { valor: 'Estudio en prueba · quedan 5 días', estado: null });
@@ -401,10 +401,10 @@ test('códigos de descuento: cuántos hay, y nada inventado sin cargar', () => {
 test('avisos en el móvil: la antelación que sale de verdad y cuántos textos son suyos', () => {
   const r = (largoHoras: number, cortoMinutos: number, textosPropios: number | null) =>
     resumenHerramienta('avisos-del-movil', { avisosMovil: { largoHoras, cortoMinutos, textosPropios } });
-  assert.equal(r(24, 60, 0), 'Recordatorio 24 h y 1 h · textos de Tentare');
+  assert.equal(r(24, 60, 0), 'Recordatorio 24 h y 1 h · textos de Centra');
   assert.equal(r(48, 30, 1), 'Recordatorio 48 h y 30 min · 1 texto tuyo');
   assert.equal(r(12, 120, 3), 'Recordatorio 12 h y 2 h · 3 textos tuyos');
-  // Sin leer los textos no se dice «de Tentare»: no se sabe.
+  // Sin leer los textos no se dice «de Centra»: no se sabe.
   assert.equal(r(24, 60, null), 'Recordatorio 24 h y 1 h');
   assert.equal(resumenHerramienta('avisos-del-movil', { avisosMovil: null }), null);
 });
@@ -412,9 +412,9 @@ test('avisos en el móvil: la antelación que sale de verdad y cuántos textos s
 test('avisos en el móvil: un recordatorio apagado no aparece en el resumen', () => {
   const r = (largoActivo: boolean, cortoActivo: boolean) =>
     resumenHerramienta('avisos-del-movil', { avisosMovil: { largoHoras: 24, cortoMinutos: 60, largoActivo, cortoActivo, textosPropios: 0 } });
-  assert.equal(r(false, true), 'Recordatorio 1 h · textos de Tentare');
-  assert.equal(r(true, false), 'Recordatorio 24 h · textos de Tentare');
-  assert.equal(r(false, false), 'Recordatorios apagados · textos de Tentare');
+  assert.equal(r(false, true), 'Recordatorio 1 h · textos de Centra');
+  assert.equal(r(true, false), 'Recordatorio 24 h · textos de Centra');
+  assert.equal(r(false, false), 'Recordatorios apagados · textos de Centra');
 });
 
 test('ninguna fila de herramienta pasa de una línea del móvil ni dice «cliente»', () => {
@@ -518,7 +518,7 @@ test('Stripe: un solo estado, y nunca «sin conectar» cuando no se puede conect
   });
   assert.deepEqual(resumenStripe({ ...base, disponible: true }), { valor: 'Conéctalo para cobrar con tarjeta', estado: { tono: 'neutro', etiqueta: 'Sin conectar' } });
   assert.deepEqual(resumenStripe({ ...base, conectado: true }).estado, { tono: 'activo', etiqueta: 'Conectado' });
-  // Conectado aunque Tentare haya quitado la clave: lo conectado sigue cobrando.
+  // Conectado aunque Centra haya quitado la clave: lo conectado sigue cobrando.
   assert.equal(resumenStripe({ ...base, conectado: true, bizum: 'active' }).valor, 'Tarjeta y Bizum');
   assert.equal(resumenStripe({ ...base, conectado: true, disponible: true, bizum: 'pending' }).valor, 'Tarjeta · Bizum sin activar');
   assert.deepEqual(resumenStripe({ ...base, conectado: true, fallando: true }).estado, { tono: 'problema', etiqueta: 'Con problemas' });
@@ -541,9 +541,9 @@ test('domiciliaciones y devoluciones: lo guardado, lo que falta y, sin cargar, n
 
 test('contrato: de quién son los textos, y con términos propios y penalización, que no se cobra', () => {
   const propios = (terminosServicio: boolean, politicaPrivacidad: boolean) => ({ terminosServicio, politicaPrivacidad });
-  assert.deepEqual(resumenContrato({ propios: propios(false, false), hayPenalizacion: true }), { valor: 'Los textos de Tentare', estado: null });
-  assert.equal(resumenContrato({ propios: propios(true, false), hayPenalizacion: false }).valor, 'Tus términos · privacidad de Tentare');
-  assert.equal(resumenContrato({ propios: propios(false, true), hayPenalizacion: true }).valor, 'Términos de Tentare · tu privacidad');
+  assert.deepEqual(resumenContrato({ propios: propios(false, false), hayPenalizacion: true }), { valor: 'Los textos de Centra', estado: null });
+  assert.equal(resumenContrato({ propios: propios(true, false), hayPenalizacion: false }).valor, 'Tus términos · privacidad de Centra');
+  assert.equal(resumenContrato({ propios: propios(false, true), hayPenalizacion: true }).valor, 'Términos de Centra · tu privacidad');
   assert.equal(resumenContrato({ propios: propios(true, true), hayPenalizacion: false }).valor, 'Tus términos y tu privacidad');
   // Solo los TÉRMINOS propios bloquean el cobro (`terminos_propios`); la privacidad, no.
   assert.deepEqual(resumenContrato({ propios: propios(true, true), hayPenalizacion: true }), {
@@ -698,7 +698,7 @@ test('conexiones: un solo estado, por su cuenta o por su salud, y nunca «sin co
   assert.deepEqual(resumenConexion({ cuenta: ' ', salud: apagada, disponible: false, paraQue }), {
     valor: NO_DISPONIBLE_TODAVIA, estado: { tono: 'neutro', etiqueta: 'No disponible todavía' },
   });
-  // Conectada sigue conectada aunque Tentare haya quitado la clave: lo conectado sigue funcionando.
+  // Conectada sigue conectada aunque Centra haya quitado la clave: lo conectado sigue funcionando.
   assert.equal(resumenConexion({ cuenta: 'estudio@example.com', salud: apagada, disponible: false, paraQue }).estado!.etiqueta, 'Conectado');
   // Un fallo sin cuenta conectada no es de esta fila.
   assert.equal(resumenConexion({ cuenta: null, salud: mal, disponible: true, paraQue }).estado!.etiqueta, 'Sin conectar');
@@ -924,8 +924,8 @@ test('«Facturación»: lo que hace cada modo, sin prometer el envío a la AEAT'
   }
 });
 
-test('sin facturas desde Tentare, un NIF que falta no sale en rojo ni como aviso', () => {
-  assert.deepEqual(resumenDatosFiscales({ nif: '', modoFacturacion: 'sin_facturas' }), { valor: 'Sin NIF válido · solo hace falta si Tentare emite tus facturas', estado: null });
+test('sin facturas desde Centra, un NIF que falta no sale en rojo ni como aviso', () => {
+  assert.deepEqual(resumenDatosFiscales({ nif: '', modoFacturacion: 'sin_facturas' }), { valor: 'Sin NIF válido · solo hace falta si Centra emite tus facturas', estado: null });
   assert.deepEqual(resumenDatosFiscales({ nif: '', modoFacturacion: 'verifactu' }).estado, { tono: 'problema', etiqueta: 'Falta el NIF' });
   // Factura siempre (2-oct-2026): sin Veri*Factu, el NIF que falta también sale en rojo.
   assert.deepEqual(resumenDatosFiscales({ nif: '', modoFacturacion: 'facturas' }).estado, { tono: 'problema', etiqueta: 'Falta el NIF' });
@@ -936,7 +936,7 @@ test('plataformas que venden: «Sin activar» o «Manual» mientras no haya cone
     { valor: 'No vendo aquí', estado: { tono: 'neutro', etiqueta: 'Sin activar' } });
   assert.deepEqual(resumenPlataformaVenta({ activa: true, conexionDisponible: false, conectada: false }),
     { valor: 'Vendo aquí · apunto yo las reservas', estado: { tono: 'neutro', etiqueta: 'Manual' } });
-  // USC con las credenciales de Tentare: se puede conectar, y conectada va sola.
+  // USC con las credenciales de Centra: se puede conectar, y conectada va sola.
   assert.deepEqual(resumenPlataformaVenta({ activa: true, conexionDisponible: true, conectada: false }).estado,
     { tono: 'neutro', etiqueta: 'Sin conectar' });
   assert.deepEqual(resumenPlataformaVenta({ activa: true, conexionDisponible: true, conectada: true }),

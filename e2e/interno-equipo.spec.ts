@@ -146,7 +146,7 @@ test.describe('La pantalla de equipo no ofrece lo que la API rechaza', () => {
     await mockPanel(page, ['admin.full']);
     await page.route('**/api/interno/equipo', route => {
       if (route.request().method() !== 'POST') return route.fallback();
-      return json(route, { error: 'nadie@ejemplo.com todavía no tiene cuenta en Tentare.' }, 404);
+      return json(route, { error: 'nadie@ejemplo.com todavía no tiene cuenta en Centra.' }, 404);
     });
     await seedSesion(page);
     await page.goto('/interno/equipo');
@@ -157,6 +157,6 @@ test.describe('La pantalla de equipo no ofrece lo que la API rechaza', () => {
     await page.getByRole('checkbox', { name: /Ver estudios y su ficha/ }).check();
     await page.getByRole('button', { name: 'Dar de alta' }).click();
 
-    await expect(page.getByText(/todavía no tiene cuenta en Tentare/)).toBeVisible();
+    await expect(page.getByText(/todavía no tiene cuenta en Centra/)).toBeVisible();
   });
 });

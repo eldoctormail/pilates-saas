@@ -231,7 +231,7 @@ export interface LoQueYaSabemos {
  * Del historial de la cuenta, los cobros que hay que mirar uno a uno: los que no
  * cerraron nada y nada está esperando. Un cobro en vuelo lo resuelve el barrido
  * por referencia; una venta ANULADA que aparece cobrada sí se mira (entró dinero).
- * Los cobros hechos desde la app de SumUp sin Tentare también salen aquí: al
+ * Los cobros hechos desde la app de SumUp sin Centra también salen aquí: al
  * mirarlos no traen nuestra referencia y se dejan.
  */
 export function movimientosPorMirar(

@@ -188,7 +188,7 @@ async function letras(page: Page) {
 }
 
 test('fuente= y fuente-display= cambian la letra REAL (computada), cuerpo y titulares por separado', async ({ page }) => {
-  // Las dos las sirve Tentare: salen de las de la app (`next/font`), y ninguna
+  // Las dos las sirve Centra: salen de las de la app (`next/font`), y ninguna
   // se le pide a Google (antes: un `<link>` a fonts.googleapis.com por letra).
   const google = await contarGoogleFonts(page);
   await abrir(page, '&fuente=Poppins&fuente-display=Cormorant%20Garamond');
@@ -197,7 +197,7 @@ test('fuente= y fuente-display= cambian la letra REAL (computada), cuerpo y titu
   const cormorant = await letraDeLaApp(page, '--font-cormorant');
   expect(r.cuerpo.startsWith(poppins.pila), `${r.cuerpo} ≠ ${poppins.pila}`).toBe(true);
   expect(r.titular?.startsWith(cormorant.pila), `${r.titular} ≠ ${cormorant.pila}`).toBe(true);
-  // El control: las dos se descargan de verdad (de Tentare).
+  // El control: las dos se descargan de verdad (de Centra).
   await expect.poll(async () => (await letraDeLaApp(page, '--font-poppins')).cargada).toBe(true);
   await expect.poll(async () => (await letraDeLaApp(page, '--font-cormorant')).cargada).toBe(true);
   expect(r.links).toBe(0);
@@ -218,15 +218,15 @@ test('⚠️ Modo B (bundle real): data-fuente/data-fuente-display pintan el sha
   // El bundle compilado de verdad (public/widget.js — `npm run build` lo
   // genera antes que Next), montado en una "web del estudio" servida por
   // route(): DOS widgets con la misma fuente de cuerpo. Space Grotesk y
-  // Lobster no las sirve Tentare: se nombran (se verían si su web las
+  // Lobster no las sirve Centra: se nombran (se verían si su web las
   // cargara) y no se piden a nadie. Antes iban a Google Fonts, con la IP de
-  // cada visitante; la hoja de Tentare y su dedupe los mira
+  // cada visitante; la hoja de Centra y su dedupe los mira
   // e2e/widget-nativa-estilo.spec.ts.
   await page.setViewportSize({ width: 1100, height: 760 });
   await mocks(page);
   await page.route('**/api/public/studio-data**', r => r.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(fx()) }));
   // ⚠️ Este test comprueba TIPOGRAFÍA dentro de la ficha, no el flujo de
-  // acceso — pero desde que Modo B redirige a la página real de Tentare
+  // acceso — pero desde que Modo B redirige a la página real de Centra
   // cuando NO hay sesión (petición del fundador: nunca dos toques para
   // llegar a "Reservar"), sin sesión la ficha ya no llega a abrirse aquí.
   // Se simula una socia YA autenticada (mismo patrón que

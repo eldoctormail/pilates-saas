@@ -16,7 +16,7 @@ import { CATEGORIAS_POR_ROL, CATEGORIA_ETIQUETA } from '../lib/notifications/cat
 //   · cambiar un aviso manda la MISMA petición que mandaba la pantalla de antes;
 //   · si el servidor dice que no, se dice y el interruptor vuelve atrás. Con
 //     contador: sin él, «no dijo que sí» podría ser «no llegó a intentarlo»;
-//   · «Plan de Tentare» enseña el estado que da el servidor y se abre en Configuración.
+//   · «Plan de Centra» enseña el estado que da el servidor y se abre en Configuración.
 // ─────────────────────────────────────────────────────────────────────────────
 
 const json = (r: Route, b: unknown, s = 200) =>
@@ -252,7 +252,7 @@ test.describe('Avisos, marca, tu panel y tu plan, dentro de Configuración', () 
     await expect(page.getByRole('button', { name: /Subir favicon/ })).toBeVisible();
   });
 
-  test('«Plan de Tentare» dice cómo va la prueba y se abre dentro de Configuración', async ({ page }) => {
+  test('«Plan de Centra» dice cómo va la prueba y se abre dentro de Configuración', async ({ page }) => {
     await panel(page, {
       billing: {
         plan: 'ESTUDIO', subscriptionStatus: 'trialing', activo: true, configurado: true,
@@ -269,7 +269,7 @@ test.describe('Avisos, marca, tu panel y tu plan, dentro de Configuración', () 
 
     // Y el buscador lo encuentra, con el mismo destino.
     await page.getByRole('searchbox', { name: 'Buscar un ajuste' }).fill('plan');
-    const resultado = page.getByRole('list', { name: 'Resultados de la búsqueda' }).getByRole('link', { name: /Plan de Tentare/ }).first();
+    const resultado = page.getByRole('list', { name: 'Resultados de la búsqueda' }).getByRole('link', { name: /Plan de Centra/ }).first();
     await expect(resultado).toHaveAttribute('href', /tab=plan/);
   });
 });

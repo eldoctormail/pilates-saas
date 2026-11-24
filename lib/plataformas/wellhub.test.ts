@@ -157,7 +157,7 @@ test('instantes: segundos y milisegundos al mismo epoch en ms', () => {
   assert.equal(instanteWellhub('1666629613'), null);
 });
 
-test('integración pedida: el gym que ha elegido Tentare', () => {
+test('integración pedida: el gym que ha elegido Centra', () => {
   const r = leerEventoWellhub({
     event_type: 'system-integration-requested',
     event_data: { gym_id: 4567, gym_name: 'Studio', partner_id: 'p', custom_fields: [], event_id: 'ev-9', timestamp: 1706805878490 },

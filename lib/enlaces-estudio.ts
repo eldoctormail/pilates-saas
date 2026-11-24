@@ -4,7 +4,7 @@
 //   · `/portal/<slug>`   LA APP DE SUS ALUMNAS (marca blanca, instalable; la
 //                        alumna entra con su email y un código de 6 cifras y
 //                        desde ahí reserva, compra y ve su bono). Es el enlace
-//                        y el QR que Tentare le da —y le manda— a un estudio
+//                        y el QR que Centra le da —y le manda— a un estudio
 //                        para que lo pase a sus alumnas: Instagram, WhatsApp,
 //                        la puerta, los folletos, los correos del alta.
 //   · `/reservar/<slug>` LA PÁGINA DE RESERVAS, la que el estudio INTEGRA EN SU

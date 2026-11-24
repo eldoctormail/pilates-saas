@@ -16,7 +16,7 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ cod
     return NextResponse.json({ error: 'Certificado no disponible' }, { status: 404 });
   }
 
-  const nombre = (await nombreDeEstudio(certificado.studioId)) ?? 'Estudio Tentare';
+  const nombre = (await nombreDeEstudio(certificado.studioId)) ?? 'Estudio Centra';
 
   return new ImageResponse(
     certificadoJsx({

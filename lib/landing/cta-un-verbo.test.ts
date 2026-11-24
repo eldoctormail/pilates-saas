@@ -77,7 +77,7 @@ for (const f of CUERPOS) {
 test('el botón del héroe, la isla y su menú móvil dicen CTA_ALTA', () => {
   const fuente = readFileSync(join(RAIZ, HEROE), 'utf8');
   const botones = botonesAlAlta(fuente);
-  // Ronda 2: la isla y su menú móvil dejan «Probar Tentare» (de la prueba de 7 días, que ya no existe) por CTA_ALTA.
+  // Ronda 2: la isla y su menú móvil dejan «Probar Centra» (de la prueba de 7 días, que ya no existe) por CTA_ALTA.
   assert.deepEqual(botonesFueraDeRegla(fuente), [], 'ningún botón al alta del héroe puede llevar otro texto');
   assert.ok(botones.includes('{CTA_ALTA}'), 'el botón del héroe debe decir {CTA_ALTA}');
   // La isla: el botón de la píldora y el del menú a pantalla completa, los dos.

@@ -6,7 +6,7 @@ import { nombreAppPorRol } from '@/lib/permisos-reglas';
 
 // Envío del resumen de "semana tranquila" (lib/decision/resumen-semanal-cron.ts).
 // Va siempre a la PROPIETARIA (equipo, no una socia), así que el remitente
-// usa nombreAppPorRol('PROPIETARIO') = 'Tentare Manager' — mismo criterio que
+// usa nombreAppPorRol('PROPIETARIO') = 'Centra Manager' — mismo criterio que
 // invitacion-equipo-server.ts para el resto de emails al equipo del estudio.
 // Best-effort: si Resend no está configurado, {skipped:true} sin romper el
 // cron (mismo patrón que el resto de *-server.ts).
@@ -23,7 +23,7 @@ export async function enviarEmailResumenSemanal(params: {
   if (!params.to) return { ok: false, error: 'Sin destinatario' };
 
   try {
-    // Sin `resolverMarcaEstudio`: este correo lo firma Tentare, no el estudio,
+    // Sin `resolverMarcaEstudio`: este correo lo firma Centra, no el estudio,
     // así que ahorra las tres consultas que hacía solo para el logo y el color.
     const html = correoResumenSemanal({
       propietariaNombre: params.propietariaNombre,

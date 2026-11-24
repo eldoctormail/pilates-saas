@@ -6,7 +6,7 @@ import type { Page } from '@playwright/test';
 // Pedirla a fonts.googleapis.com le daba a Google la IP de cada visitante de la
 // web del estudio por haber elegido una letra: sin marco (#2359), en /reservar
 // incrustado, en el selector del constructor y en el iframe de pago. Las
-// familias que sirve Tentare salen de la app (`next/font`) o de su hoja
+// familias que sirve Centra salen de la app (`next/font`) o de su hoja
 // (lib/widget/fuentes-nativa.ts).
 //
 // ⚠️ «Cero peticiones» solo dice algo con un CONTROL al lado: que la letra se

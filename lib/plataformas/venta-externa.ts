@@ -7,7 +7,7 @@
 // camino de apagar (Wellhub respeta lo ya vendido; USC cancela sus eventos) y
 // los webhooks rechazan la reserva nueva. Motivo: quien deja de pagar casi
 // siempre se va a otro programa que publicará en esas mismas plataformas, y
-// Tentare publica con SUS credenciales de integrador.
+// Centra publica con SUS credenciales de integrador.
 //
 // «Sin contrato» es la MISMA definición que el ciclo de baja y purga
 // (`cicloDelEstudio`), más la prueba local que ya venció y el barrido de pg_cron

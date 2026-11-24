@@ -12,7 +12,7 @@ export default function Contenido() {
       <h2 style={{ fontSize: 18, fontWeight: 700, margin: '24px 0 12px' }}>Alta automática desde la app</h2>
       <p>
         Cuando alguien entra en la app de tus clientes con un email que no reconocemos, escribe el código que le llega y
-        acepta las condiciones de tu estudio, Tentare crea su ficha de cliente solo — no hace falta que tú hagas nada
+        acepta las condiciones de tu estudio, Centra crea su ficha de cliente solo — no hace falta que tú hagas nada
         antes. Si reserva desde tu web con el widget o con la página de reservas, su ficha se crea en esa primera
         reserva.
       </p>

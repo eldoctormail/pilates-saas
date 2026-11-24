@@ -20,17 +20,17 @@ import { uuidV4 } from '@/lib/utils';
 // dominios que Cloudflare tiene autorizados: en la web de un estudio contesta
 // con el error 110200 y nadie podía entrar ni darse de alta desde la nativa en
 // NINGUNA web. Añadir cada dominio en Cloudflare no escala (el plan gratuito
-// admite un puñado). Así que el widget abre una ventana de Tentare
+// admite un puñado). Así que el widget abre una ventana de Centra
 // (app/widget-auth-retorno, el puente del enlace de siempre) y le ENCARGA el
 // acceso: allí corre el captcha, allí se llama a gotrue, y vuelve el resultado
 // por `postMessage`. Ver `lib/widget/puente-sesion.ts`.
 //
 // Lo que se comprueba en cada mensaje, las tres cosas a la vez:
-//  · origen EXACTAMENTE el de Tentare (`baseUrl`, del `<script src>`);
+//  · origen EXACTAMENTE el de Centra (`baseUrl`, del `<script src>`);
 //  · que lo manda la ventana que abrió ESTE intento (`e.source`);
 //  · el nonce del intento.
 // El encargo (con la contraseña) se manda solo a esa ventana y con
-// `targetOrigin` = Tentare: si la ventana ya no está en Tentare, el navegador
+// `targetOrigin` = Centra: si la ventana ya no está en Centra, el navegador
 // no lo entrega. Nunca `'*'`.
 
 export interface AceptacionWidget {
@@ -46,7 +46,7 @@ export type ResultadoAcceso =
   | { enviado: true }
   | { error: string }
   /**
-   * La cuenta es del equipo de algún estudio (o de Tentare): la ventana no
+   * La cuenta es del equipo de algún estudio (o de Centra): la ventana no
    * entrega su sesión a la web del estudio (decisión del fundador, 16-oct-2026).
    * El formulario lo dice y ofrece la página de reservas entera.
    */
@@ -161,7 +161,7 @@ export function useAuthWidget(slug: string, baseUrl: string, alResultadoTardio?:
   useEffect(() => () => terminar(), [terminar]);
 
   /**
-   * Encarga el acceso a la ventana de Tentare.
+   * Encarga el acceso a la ventana de Centra.
    *
    * ⚠️ Hay que llamarla de forma SÍNCRONA en el manejador del clic, sin ningún
    * `await` antes: abre la ventana aquí mismo, y una ventana abierta después de

@@ -21,11 +21,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!a) return {};
   const url = urlDe(urlArticulo(a.slug));
   return {
-    title: `${a.tituloSeo} | Tentare`,
+    title: `${a.tituloSeo} | Centra`,
     description: a.descripcion,
     alternates: { canonical: url },
     openGraph: {
-      siteName: 'Tentare',
+      siteName: 'Centra',
       type: 'article',
       title: a.titulo,
       description: a.descripcion,

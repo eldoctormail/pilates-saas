@@ -1,11 +1,11 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // «Tu cuenta está activa»: el correo n.º 2 del alta nueva (maqueta aprobada el
 // 21-oct-2026, «09 · Correos»). Sale UNA vez, al montar el estudio después de
-// validar el código (POST /api/alta/estudio-creado), con el remitente «Tentare»:
+// validar el código (POST /api/alta/estudio-creado), con el remitente «Centra»:
 // a la propietaria no se le dice Manager ni Core antes de saber su rol, igual
 // que en /login.
 //
-// Es de la familia de Tentare (`plantilla.ts`: el marco, el logo, la regla y el
+// Es de la familia de Centra (`plantilla.ts`: el marco, el logo, la regla y el
 // botón), pero con su propio orden de bloques —la dirección de su app va entre
 // dos párrafos— y su propio pie, el de la maqueta.
 //
@@ -102,7 +102,7 @@ ${parrafo('Todavía está vacía. En cuanto crees tu primera clase, tus clientes
   ].join('');
 
   return {
-    asunto: `${estudio} ya está en Tentare`,
+    asunto: `${estudio} ya está en Centra`,
     preheader,
     html: marcoTentare(preheader, bloques, pieDelAlta(estudio)),
   };
@@ -111,10 +111,10 @@ ${parrafo('Todavía está vacía. En cuanto crees tu primera clase, tus clientes
 /** El pie de la maqueta en los correos del alta: una persona por WhatsApp y quién escribe. */
 function pieDelAlta(estudio: string): string {
   const t = TENTARE;
-  const whatsapp = enlaceWhatsApp(SOPORTE_WHATSAPP, `Hola, soy de ${estudio} y estoy poniendo en marcha Tentare:`);
+  const whatsapp = enlaceWhatsApp(SOPORTE_WHATSAPP, `Hola, soy de ${estudio} y estoy poniendo en marcha Centra:`);
   return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
 <td class="px-mobile" style="padding:18px 8px 0;font-family:${PILA};font-size:12px;line-height:1.6;color:${t.tintaSuave};text-align:center;">
-¿Te atascas? ${whatsapp ? `<a href="${hrefSeguro(whatsapp)}" style="color:${t.tintaSuave};text-decoration:underline;">Escríbenos por WhatsApp</a>` : 'Escríbenos por WhatsApp'}: <b>te responde una persona</b>.<br>Tentare · Software para estudios de Pilates · Hecho en España
+¿Te atascas? ${whatsapp ? `<a href="${hrefSeguro(whatsapp)}" style="color:${t.tintaSuave};text-decoration:underline;">Escríbenos por WhatsApp</a>` : 'Escríbenos por WhatsApp'}: <b>te responde una persona</b>.<br>Centra · Software para estudios de Pilates · Hecho en Argentina
 </td></tr></table>`;
 }
 
@@ -168,7 +168,7 @@ ${parrafo('Si quieres que reserven desde tu propia web, lo preparas en Configura
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// «Tu primera clase en Tentare, en 5 minutos»: el correo n.º 3 (maqueta, «09 ·
+// «Tu primera clase en Centra, en 5 minutos»: el correo n.º 3 (maqueta, «09 ·
 // Correos»). Sale UNA vez, entre las 24 y las 72 h de crear el estudio, si una
 // alumna nueva todavía no puede reservar (cuándo y a quién, en
 // lib/alta/correo-primera-clase.ts; lo manda el cron `altas-sin-terminar`).
@@ -218,7 +218,7 @@ ${cuerpo}
 
   return {
     asunto: p.variante.tipo === 'sin_clase'
-      ? 'Tu primera clase en Tentare, en 5 minutos'
+      ? 'Tu primera clase en Centra, en 5 minutos'
       : `Tus clientes todavía no pueden reservar en ${estudio}`,
     preheader,
     html: marcoTentare(preheader, bloques, pieDelRecordatorio(estudio)),
@@ -228,10 +228,10 @@ ${cuerpo}
 /** El pie del correo 3: la persona por WhatsApp y que es el único recordatorio sobre esto. */
 function pieDelRecordatorio(estudio: string): string {
   const t = TENTARE;
-  const whatsapp = enlaceWhatsApp(SOPORTE_WHATSAPP, `Hola, soy de ${estudio} y estoy poniendo en marcha Tentare:`);
+  const whatsapp = enlaceWhatsApp(SOPORTE_WHATSAPP, `Hola, soy de ${estudio} y estoy poniendo en marcha Centra:`);
   return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
 <td class="px-mobile" style="padding:18px 8px 0;font-family:${PILA};font-size:12px;line-height:1.6;color:${t.tintaSuave};text-align:center;">
-¿Te atascas en algo? ${whatsapp ? `<a href="${hrefSeguro(whatsapp)}" style="color:${t.tintaSuave};text-decoration:underline;">Escríbenos por WhatsApp</a>` : 'Escríbenos por WhatsApp'} y te ayuda <b>una persona del equipo</b>.<br>Es el único recordatorio que te mandamos sobre esto.<br>Tentare · Software para estudios de Pilates · Hecho en España
+¿Te atascas en algo? ${whatsapp ? `<a href="${hrefSeguro(whatsapp)}" style="color:${t.tintaSuave};text-decoration:underline;">Escríbenos por WhatsApp</a>` : 'Escríbenos por WhatsApp'} y te ayuda <b>una persona del equipo</b>.<br>Es el único recordatorio que te mandamos sobre esto.<br>Centra · Software para estudios de Pilates · Hecho en Argentina
 </td></tr></table>`;
 }
 

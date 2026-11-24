@@ -51,7 +51,7 @@ export function correoBienvenida(p: PropsBienvenida): string {
 /**
  * El código del segundo paso al entrar en la app del estudio (verificación en
  * dos pasos de la alumna o de la instructora, lib/auth/codigo-correo-reglas.ts).
- * Marca del ESTUDIO, nunca la de Tentare: la app es suya. El código no va en el
+ * Marca del ESTUDIO, nunca la de Centra: la app es suya. El código no va en el
  * preheader (se leería en la pantalla bloqueada del móvil).
  */
 export function correoCodigoAccesoEstudio(p: { codigo: string; minutos: number; marca: MarcaCorreo }): string {

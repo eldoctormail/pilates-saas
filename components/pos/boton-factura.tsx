@@ -57,7 +57,7 @@ export function BotonFactura({ ventaId, compacto = false }: { ventaId: string; c
     abrirFacturaPDF(
       estado.factura,
       {
-        nombre: studio?.nombre ?? 'Tentare',
+        nombre: studio?.nombre ?? 'Centra',
         nif: studio?.nif ?? '—',
         direccion: [studio?.direccion, studio?.ciudad].filter(Boolean).join(', ') || '—',
       },

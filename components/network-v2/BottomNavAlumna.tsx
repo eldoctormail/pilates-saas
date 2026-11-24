@@ -31,7 +31,7 @@ export function BottomNavAlumna() {
     <nav
       className="fixed bottom-0 inset-x-0 z-40 bg-white"
       style={{ borderTop: `1px solid ${NW_BORDE}`, paddingBottom: 'env(safe-area-inset-bottom)' }}
-      aria-label="Navegación de Tentare Network"
+      aria-label="Navegación de Centra Network"
     >
       <div className="max-w-2xl mx-auto grid grid-cols-3">
         <Link

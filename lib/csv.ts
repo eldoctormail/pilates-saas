@@ -211,7 +211,7 @@ const normaliza = (s: string) =>
   s.toLowerCase().normalize('NFD').replace(RE_DIACRITICOS, '').trim();
 
 /**
- * Adivina qué columna del CSV corresponde a cada campo de Tentare.
+ * Adivina qué columna del CSV corresponde a cada campo de Centra.
  * Devuelve el índice de columna por campo, o -1 si no se encontró.
  */
 /** Mapea columnas del CSV a un conjunto de campos por sus sinónimos (genérico). */

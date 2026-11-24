@@ -15,7 +15,7 @@
 
 /**
  * Se abre SOLO en estudios creados desde este día; en los que ya trabajan, solo
- * con el «?». Es la opción que no cambia nada a quien ya usa Tentare. Es el día
+ * con el «?». Es la opción que no cambia nada a quien ya usa Centra. Es el día
  * en que salió a producción la guía (el despliegue de P0, 12-oct-2026): mover
  * esta fecha hacia atrás le cambiaría la pantalla a estudios que ya trabajan.
  */
@@ -93,7 +93,7 @@ export function yaVisto(progreso: ProgresoTutoriales, ruta: string, version: num
  *    estudio con la visita obligatoria: ya se lo enseña ella, y al terminarla
  *    los tutoriales le repetirían lo mismo;
  *  · ningún diálogo de la app abierto;
- *  · una sede de cadena no (la monta quien ya conoce Tentare);
+ *  · una sede de cadena no (la monta quien ya conoce Centra);
  *  · un estudio creado desde `TUTORIALES_DESDE` (nada nuevo a quien ya trabaja);
  *  · no lo ha visto ni saltado en esta versión, tampoco en esta sesión.
  */

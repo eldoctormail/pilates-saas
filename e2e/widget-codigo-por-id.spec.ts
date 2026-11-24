@@ -5,7 +5,7 @@ import { test, expect, type Page, type Route } from '@playwright/test';
 // ─────────────────────────────────────────────────────────────────────────────
 // El código del widget por ID (30-sep-2026, lib/widgets/pieza.ts): un código
 // pegado ya no lleva el contenido del widget, solo su id, y lo publicado se lee
-// de Tentare. Este PR solo LEE el id (ningún código lo emite todavía): el panel
+// de Centra. Este PR solo LEE el id (ningún código lo emite todavía): el panel
 // lo empezará a dar cuando esto ya esté en producción, porque `widget.js` se
 // queda hasta un día en la caché de las webs.
 //
@@ -13,7 +13,7 @@ import { test, expect, type Page, type Route } from '@playwright/test';
 // una web ficticia servida con `page.route`, como el resto de specs de la
 // nativa. Dentro de una página: contra el servidor de e2e, donde la base de
 // datos no existe; eso prueba el rewrite y el camino de fallo (el widget por
-// defecto, sin el id en la URL), que es lo que sufriría una web si Tentare no
+// defecto, sin el id en la URL), que es lo que sufriría una web si Centra no
 // pudiera leer el widget.
 //
 // Los caminos de fallo cuentan peticiones: «se ve el widget por defecto»
@@ -92,7 +92,7 @@ test('sin marco con su id: se pinta con lo publicado (solo Reformer), no con lo 
   expect(pedida.searchParams.get('id')).toBe(ID);
 });
 
-test('sin marco con su id y Tentare sin poder leerlo (500): el horario entero, nunca un hueco en su web', async ({ page }) => {
+test('sin marco con su id y Centra sin poder leerlo (500): el horario entero, nunca un hueco en su web', async ({ page }) => {
   let intentos = 0;
   await enSuWeb(page, r => {
     intentos++;

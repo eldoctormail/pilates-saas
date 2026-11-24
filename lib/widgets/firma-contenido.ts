@@ -8,7 +8,7 @@
 //    `<div>` (`fuenteDeDataset`), que el panel reproduce con `paresNativa`.
 // Si coinciden, lo que se ve en su web es lo que hay aquí. `firmaCodigo` no
 // sirve para esto: lleva el ancho, la carga diferida, el texto del botón y la
-// plantilla de Tentare, y nada de eso llega a la página.
+// plantilla de Centra, y nada de eso llega a la página.
 //
 // Solo importa ./huella.ts: /reservar y el bundle de la nativa lo cargan y no
 // tienen por qué arrastrar el generador de código.

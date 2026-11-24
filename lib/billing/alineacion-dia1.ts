@@ -18,7 +18,7 @@
 // redondeo, el suelo de 0,50 € y la regla de días mínimos son los de siempre.
 //
 // ── Reglas, todas deliberadas ───────────────────────────────────────────────
-//  · SOLO cuotas MENSUALES de un mes, de Tentare (sin `stripe_subscription_id`),
+//  · SOLO cuotas MENSUALES de un mes, de Centra (sin `stripe_subscription_id`),
 //    NO ya alineadas (`!terminaEnFinDeMes`). Bonos, trimestrales y anuales, no.
 //  · RENOVACIÓN = el día siguiente a `fecha_fin` (D), no el día en que corre el
 //    cron: el importe y el ciclo no dependen de si el cron se retrasó.

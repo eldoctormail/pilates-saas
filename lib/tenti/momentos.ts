@@ -39,7 +39,7 @@ export const SIGNIFICADO: {
 } = {
   estados: {
     reposo: {
-      es: 'La firma: aquí interviene Tentare y no está haciendo nada delante de ti.',
+      es: 'La firma: aquí interviene Centra y no está haciendo nada delante de ti.',
       nunca: '«Todo bien». Si hay algo que avisar, lo dice el texto.',
     },
     pensando: {
@@ -47,11 +47,11 @@ export const SIGNIFICADO: {
       nunca: 'Cargar la pantalla, guardar o importar filas.',
     },
     buscando: {
-      es: 'Tentare está consultando los datos de tu estudio para responderte.',
+      es: 'Centra está consultando los datos de tu estudio para responderte.',
       nunca: 'La búsqueda de ⌘K, que es local e instantánea.',
     },
     trabajando: {
-      es: 'Tentare está haciendo un proceso por su cuenta, que ya ha empezado y no necesita que toques nada.',
+      es: 'Centra está haciendo un proceso por su cuenta, que ya ha empezado y no necesita que toques nada.',
       nunca: 'Una petición tuya que espera respuesta (eso es «pensando»).',
     },
     hecho: {
@@ -59,7 +59,7 @@ export const SIGNIFICADO: {
       nunca: 'Un hecho pasado pintado al cargar la pantalla, ni junto a un cobro.',
     },
     error: {
-      es: 'Algo que Tentare hizo o intentó por ti no ha salido.',
+      es: 'Algo que Centra hizo o intentó por ti no ha salido.',
       nunca: 'Un error tuyo de formulario o una pantalla que no carga (eso lo dicen el texto y los avisos).',
     },
     esperaTuOk: {
@@ -67,7 +67,7 @@ export const SIGNIFICADO: {
       nunca: 'El Centro de Control: sus sugerencias no bloquean nada, y el Contrato promete no interrumpir.',
     },
     pregunta: {
-      es: 'Tentare te pregunta algo y puedes no contestar: nada se para si no lo haces (el mensaje del día, la apertura).',
+      es: 'Centra te pregunta algo y puedes no contestar: nada se para si no lo haces (el mensaje del día, la apertura).',
       nunca: 'Algo que bloquea (eso es «espera tu visto bueno»).',
     },
     agobiado: {
@@ -75,8 +75,8 @@ export const SIGNIFICADO: {
       nunca: 'Un reproche: va con el mismo texto neutro de la bandeja.',
     },
     dormido: {
-      es: 'El ESTUDIO descansa: hoy ya no quedan clases, o no hay ninguna. Siempre con «Tentare sigue atento…».',
-      nunca: '«Tentare apagado», ni donde se firma trabajo autónomo (piloto, automatizaciones, lo que está en marcha).',
+      es: 'El ESTUDIO descansa: hoy ya no quedan clases, o no hay ninguna. Siempre con «Centra sigue atento…».',
+      nunca: '«Centra apagado», ni donde se firma trabajo autónomo (piloto, automatizaciones, lo que está en marcha).',
     },
     mareado: {
       es: 'Le has tocado demasiadas veces seguidas.',
@@ -85,7 +85,7 @@ export const SIGNIFICADO: {
   },
   emociones: {
     amor: { es: 'Llega alguien nuevo al estudio.', cuando: 'Hoy viene un cliente por primera vez.' },
-    orgullo: { es: 'Un récord de verdad.', cuando: 'Hoy es el día con más clientes desde que el estudio usa Tentare.' },
+    orgullo: { es: 'Un récord de verdad.', cuando: 'Hoy es el día con más clientes desde que el estudio usa Centra.' },
     guino: { es: 'Te doy una pista.', cuando: 'La única novedad del día es un hueco que puedes llenar.' },
     bostezo: { es: 'Has estado fuera un buen rato.', cuando: 'Vuelves a la pestaña tras media hora o más fuera.' },
     sorpresa: { es: 'Algo nuevo que no estaba hace un momento.', cuando: 'La bandeja sube mientras la tienes delante.' },
@@ -208,7 +208,7 @@ export function subio(antes: number | null | undefined, ahora: number | null | u
   return antes != null && ahora != null && ahora > antes;
 }
 
-/** Hoy es el día con más alumnas desde que el estudio usa Tentare. */
+/** Hoy es el día con más alumnas desde que el estudio usa Centra. */
 export function esRecordDelDia({ alumnasHoy, maxPrevio, diasDeHistoria }: {
   alumnasHoy: number; maxPrevio: number | null; diasDeHistoria: number | null;
 }): boolean {
@@ -290,15 +290,15 @@ export function maxAlumnasAntesDe({ sesiones, reservas, hoy, diaDe }: {
 
 // ── Lo que dice la tira de Hoy ───────────────────────────────────────────────
 
-/** Lo que dice Tenti dormido: siempre que Tentare sigue, nunca «apagado». */
+/** Lo que dice Tenti dormido: siempre que Centra sigue, nunca «apagado». */
 export const FRASE_DORMIDO = {
-  terminadas: 'Hoy ya no quedan clases. Tentare sigue atento a las reservas y los avisos.',
-  sinClases: 'Hoy no hay clases. Tentare sigue atento a las reservas y los avisos.',
+  terminadas: 'Hoy ya no quedan clases. Centra sigue atento a las reservas y los avisos.',
+  sinClases: 'Hoy no hay clases. Centra sigue atento a las reservas y los avisos.',
 } as const;
 
 type ClaseParaFrase = Pick<ClaseDelDia, 'finalizada' | 'estado' | 'huecos'>;
 
-/** Las partes de «Tentare ha encontrado…»: huecos y problemas del día. */
+/** Las partes de «Centra ha encontrado…»: huecos y problemas del día. */
 function encontrado(resumen: { problemas: number }, clases: readonly ClaseParaFrase[]): { texto: string | null; soloHuecos: boolean } {
   const sinInstructora = clases.filter(c => c.estado === 'SIN_INSTRUCTORA' && !c.finalizada).length;
   const conHueco = clases.filter(c => !c.finalizada && c.estado !== 'CANCELADA' && c.huecos > 0).length;
@@ -310,23 +310,23 @@ function encontrado(resumen: { problemas: number }, clases: readonly ClaseParaFr
   if (partes.length === 0) return { texto: null, soloHuecos: false };
   const ultimo = partes.pop()!;
   return {
-    texto: `Tentare ha encontrado ${partes.length ? `${partes.join(', ')} y ${ultimo}` : ultimo}.`,
+    texto: `Centra ha encontrado ${partes.length ? `${partes.join(', ')} y ${ultimo}` : ultimo}.`,
     soloHuecos: conHueco > 0 && resumen.problemas === 0,
   };
 }
 
 /**
- * Lo que ha visto Tentare hoy, en una frase, y si es solo un hueco (para el
+ * Lo que ha visto Centra hoy, en una frase, y si es solo un hueco (para el
  * guiño). `null` si no hay nada que contar: la tira no se pinta.
  * Orden: quien viene por primera vez, lo encontrado, el récord y, si el estudio
- * descansa, que Tentare sigue.
+ * descansa, que Centra sigue.
  */
 export function fraseDeHoy({ resumen, clases, primerasVeces, record, estado }: {
   resumen: { problemas: number; alumnas: number };
   clases: readonly ClaseParaFrase[];
   primerasVeces: number;
   record: boolean;
-  /** El de `estadoDeHoy`: con 'dormido', la frase dice que Tentare sigue. */
+  /** El de `estadoDeHoy`: con 'dormido', la frase dice que Centra sigue. */
   estado: ReturnType<typeof estadoDeHoy>;
 }): { texto: string; soloHuecos: boolean } | null {
   const dormido = estado === 'dormido';
@@ -337,7 +337,7 @@ export function fraseDeHoy({ resumen, clases, primerasVeces, record, estado }: {
   }
   const { texto, soloHuecos } = encontrado(resumen, clases);
   if (texto) frases.push(texto);
-  if (record) frases.push(`Hoy es el día con más clientes desde que usas Tentare (${resumen.alumnas}).`);
+  if (record) frases.push(`Hoy es el día con más clientes desde que usas Centra (${resumen.alumnas}).`);
   if (dormido) frases.push(clases.length === 0 ? FRASE_DORMIDO.sinClases : FRASE_DORMIDO.terminadas);
   return frases.length ? { texto: frases.join(' '), soloHuecos } : null;
 }
@@ -368,7 +368,7 @@ export interface SitioDeTenti {
  */
 export const MAPA: Record<string, SitioDeTenti> = {
   'components/dashboard/estado-del-estudio.tsx': {
-    sitio: 'Resumen › la bandeja: el titular de «Decidir» y «Tentare lo está haciendo»',
+    sitio: 'Resumen › la bandeja: el titular de «Decidir» y «Centra lo está haciendo»',
     funcion: 'estadoDeLaBandeja', literales: ['trabajando'],
     estados: ['esperaTuOk', 'agobiado', 'trabajando'], emociones: ['sorpresa'],
     motivo: 'la bandeja única es la dueña de lo que espera tu visto bueno; «lo está haciendo» solo existe si hay algo en marcha',
@@ -376,10 +376,10 @@ export const MAPA: Record<string, SitioDeTenti> = {
   'app/(dashboard)/dashboard/page.tsx': {
     sitio: 'Resumen › «Sistema autónomo»',
     funcion: 'estadoDelAutonomo', literales: [], estados: ['reposo', 'esperaTuOk', 'error'], emociones: [],
-    motivo: 'lo que no avanza sin ti (la cifra de la bandeja) y lo que Tentare intentó hoy y no salió',
+    motivo: 'lo que no avanza sin ti (la cifra de la bandeja) y lo que Centra intentó hoy y no salió',
   },
   'components/dashboard/hoy-en-el-estudio.tsx': {
-    sitio: 'Resumen › «Hoy en el estudio», la tira de lo que ha visto Tentare',
+    sitio: 'Resumen › «Hoy en el estudio», la tira de lo que ha visto Centra',
     funcion: 'estadoDeHoy', literales: [], estados: ['reposo', 'dormido'], emociones: ['amor', 'orgullo', 'guino', 'bostezo'],
     motivo: 'el estudio descansa; quien viene por primera vez, el récord, la pista del hueco y la vuelta tras un rato fuera',
   },
@@ -387,7 +387,7 @@ export const MAPA: Record<string, SitioDeTenti> = {
     sitio: 'Migración › «Analizar», importando y el acta',
     funcion: 'estadoDeLaMigracion', literales: ['trabajando'],
     estados: ['reposo', 'pensando', 'trabajando', 'hecho', 'error'], emociones: [],
-    motivo: 'Tentare lee los archivos (pensando), mete las filas solo (trabajando) y el acta dice si salió',
+    motivo: 'Centra lee los archivos (pensando), mete las filas solo (trabajando) y el acta dice si salió',
   },
   'components/decision/veredicto-del-dia.tsx': {
     sitio: 'Centro de Control › el veredicto del día, en lugar del anillo',

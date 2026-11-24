@@ -9,8 +9,8 @@ import { dibujoDelIcono } from '@/lib/tenti/geometria';
 import { SvgTenti } from './tenti-icono';
 import type { PropsTenti } from './tenti';
 
-// La cara del asistente («Pregúntale a Tentare»), en su chat (/asistente) y en
-// ningún otro sitio (fundador, 5-oct-2026: Tentare SÍ responde preguntas, y
+// La cara del asistente («Pregúntale a Centra»), en su chat (/asistente) y en
+// ningún otro sitio (fundador, 5-oct-2026: Centra SÍ responde preguntas, y
 // responde Tenti, con los datos del estudio y su cara): grande en el saludo del
 // chat vacío y de avatar en la respuesta en curso.
 //

@@ -11,7 +11,7 @@ const ESTADOS = ['PENDIENTE_PAGO', 'PAGADA', 'ANULADA'];
 // usa los recibos; esto es el detalle de lo vendido. Sumar las dos cosas
 // contaría cada venta dos veces. Una venta pagada SIN `reciboId` no está en
 // ningún recibo (ventas antiguas de la caja): es dinero que entró y no tiene
-// apunte en Tentare.
+// apunte en Centra.
 export async function GET(req: NextRequest) {
   return conApiPublica(req, { scope: 'pagos:leer', ruta: '/api/v1/ventas' }, async (ctx, admin) => {
     const estado = req.nextUrl.searchParams.get('estado');

@@ -59,7 +59,7 @@ import {
 // del dominio, la dirección de su página mientras escribe el nombre, la línea
 // legal (que se guarda: `condiciones_version`) y la pantalla de éxito «… ya
 // existe». Sin nombre de persona ni ciudad (pasan al paso 3, PR-3), sin
-// «¿Cómo conociste Tentare?» (la atribución sale del enlace de llegada) y sin
+// «¿Cómo conociste Centra?» (la atribución sale del enlace de llegada) y sin
 // plan que elegir.
 //
 // Lo que NO cambia, y se reutiliza tal cual (ver la cabecera de
@@ -152,7 +152,7 @@ export function AltaNueva({ version, foundingGratis, piel = false }: { version: 
   const alternativas = alternativasDireccion(direccion);
   const slug = eleccionValida ?? direccion?.asignada ?? slugBase;
   const nombreVisible = datos.nombre.trim() || 'Tu estudio';
-  const whatsapp = enlaceWhatsApp(SOPORTE_WHATSAPP, 'Hola, estoy creando mi estudio en Tentare y tengo una duda:') ?? undefined;
+  const whatsapp = enlaceWhatsApp(SOPORTE_WHATSAPP, 'Hola, estoy creando mi estudio en Centra y tengo una duda:') ?? undefined;
   const lineaPlan = foundingGratis
     ? `${GRATIS_CON_LIMITES} · Sin tarjeta · Sin permanencia`
     : `${TRIAL_DIAS} días gratis · Sin tarjeta de crédito · Sin permanencia`;
@@ -779,7 +779,7 @@ export function AltaNueva({ version, foundingGratis, piel = false }: { version: 
         <BarrasFoco total={5} actual={1} />
         <CabeceraPaso
           etiqueta="Paso 1 de 5 · unos 2 minutos"
-          titulo="Crea tu estudio en Tentare"
+          titulo="Crea tu estudio en Centra"
           tituloRef={tituloRef}
         />
         {cuerpo}
@@ -793,7 +793,7 @@ export function AltaNueva({ version, foundingGratis, piel = false }: { version: 
         <div className="min-w-0 lg:pt-2">
           <LineaDePasos actual={1} />
           <p className="t-label mt-5 text-t-tertiary sm:mt-7">Paso 1 de 5 · unos 2 minutos</p>
-          <h1 className={TITULO}>Crea tu estudio en Tentare</h1>
+          <h1 className={TITULO}>Crea tu estudio en Centra</h1>
           <p className={SUBTITULO}>Crea tu cuenta y, en unos 10 minutos, tendrás tu primera clase abierta a reservas.</p>
 
           {cuerpo}
@@ -864,7 +864,7 @@ function Marco({ children, whatsapp, ancho = 'normal' }: { children: React.React
       ancho={ancho}
       tono="oscuro"
       encima={
-        <Link href="/" aria-label="Volver a la portada de Tentare" className="rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+        <Link href="/" aria-label="Volver a la portada de Centra" className="rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
           <LogoTentare alto={28} tinta="blanco" decorativo />
         </Link>
       }

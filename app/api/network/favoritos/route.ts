@@ -4,7 +4,7 @@ import { getSupabaseAdmin } from '@/lib/db/supabase-admin';
 import { errorInterno, errorPeticion } from '@/lib/errores-servidor';
 import { mapFilaAPerfilPublico, type FilaRedPerfilPublica } from '@/lib/network/mapeo';
 
-// Favoritos de Tentare Network — brief §19 ("Network → Buscar instructoras /
+// Favoritos de Centra Network — brief §19 ("Network → Buscar instructoras /
 // Mis favoritas / Solicitudes"). Mismo criterio de auth que el buscador
 // (verificarSesionStaff, cualquier rol del panel, no solo propietaria) y
 // mismas columnas públicas que el resto de vistas de candidatas — nunca

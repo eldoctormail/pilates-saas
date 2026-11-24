@@ -25,7 +25,7 @@ function json(route: Route, body: unknown, status = 200) {
 type FilaRecibo = Record<string, unknown>;
 interface Cobro { reciboIds: string[]; metodo: string | null; conFactura?: boolean }
 
-// El estudio del sembrado, pero que emite facturas desde Tentare.
+// El estudio del sembrado, pero que emite facturas desde Centra.
 const STUDIO_VERIFACTU = {
   id: 'studio-test', nombre: 'Pilates Centro', slug: 'pilates-centro',
   owner_auth_user_id: 'auth-e2e-duena', email: 'cloe@example.com', moneda: 'EUR',

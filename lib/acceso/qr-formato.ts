@@ -1,4 +1,4 @@
-// Cómo es un QR de acceso de Tentare por fuera: `TNT1-` y 22 caracteres. Sin
+// Cómo es un QR de acceso de Centra por fuera: `TNT1-` y 22 caracteres. Sin
 // criptografía, para que el lector del navegador lo reconozca sin mandar al
 // servidor cualquier código de barras que vea. Quién es lo decide el servidor
 // (lib/acceso/qr-token.ts). Puro: se prueba con `node --test`.
@@ -9,7 +9,7 @@ const FORMATO = /^TNT1-[A-Za-z0-9_-]{22}$/;
 
 /**
  * Lo que devuelve la cámara, limpio, o `null` si no es un QR de acceso de
- * Tentare. Se acepta con espacios alrededor (algunos lectores añaden un salto de
+ * Centra. Se acepta con espacios alrededor (algunos lectores añaden un salto de
  * línea) y nada más: ni minúsculas cambiadas ni prefijos distintos.
  */
 export function leerTokenQr(lectura: string | null | undefined): string | null {

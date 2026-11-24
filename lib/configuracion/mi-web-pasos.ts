@@ -90,7 +90,7 @@ export function pasosMiWeb(d: DatosMiWeb): PasoMiWeb[] {
   return [
     {
       id: 'direccion', orden: 1, titulo: 'Tu dirección y tus enlaces', peso: 'imprescindible',
-      porque: 'Es la dirección de tu estudio en Tentare: la app de tus clientes (lo que compartes en Instagram o en la puerta), tu página de reservas (la que se integra en tu web) y tus widgets cuelgan de ella. Aquí tienes también el enlace y el QR de tu web.',
+      porque: 'Es la dirección de tu estudio en Centra: la app de tus clientes (lo que compartes en Instagram o en la puerta), tu página de reservas (la que se integra en tu web) y tus widgets cuelgan de ella. Aquí tienes también el enlace y el QR de tu web.',
       donde: 'La barra del navegador, el QR impreso y cada enlace que compartes o pegas en tu web',
       cuando: 'Al guardar. La de antes sigue llevando aquí',
       estado: d.direccion ? d.direccion : 'Tu estudio aún no tiene dirección de reservas',
@@ -101,7 +101,7 @@ export function pasosMiWeb(d: DatosMiWeb): PasoMiWeb[] {
     {
       id: 'presentacion', orden: 2, titulo: 'Cómo te presentas', peso: 'recomendado',
       porque: 'Dos o tres frases para quien aún no te conoce: qué tipo de estudio eres y para quién. Sin ellas, «El estudio» sale sin presentación.',
-      donde: '«El estudio» en tu página de reservas y tu ficha en Tentare Network',
+      donde: '«El estudio» en tu página de reservas y tu ficha en Centra Network',
       cuando: 'Al momento, al guardar',
       estado: d.descripcion ? 'Ya te presentas' : 'Falta: aún no te has presentado',
       tono: d.descripcion ? 'hecho' : 'falta',
@@ -124,17 +124,17 @@ export function pasosMiWeb(d: DatosMiWeb): PasoMiWeb[] {
       ...pagina,
       // Visible es lo normal: no hay nada que hacer.
       hecho: d.pagina ? !d.pagina.oculta : false,
-      nota: 'Al ocultarla, Google deja de enseñarla y en Tentare Network sigues saliendo, pero tu enlace lleva al aviso. Si cambias la clave, quien ya había entrado se queda fuera.',
+      nota: 'Al ocultarla, Google deja de enseñarla y en Centra Network sigues saliendo, pero tu enlace lleva al aviso. Si cambias la clave, quien ya había entrado se queda fuera.',
     },
     {
-      id: 'network', orden: 5, titulo: 'Aparecer en Tentare Network', peso: 'opcional',
-      porque: 'Tu estudio sale en el buscador de estudios de Tentare, delante de gente que aún no te conoce. Apagado de serie.',
-      donde: 'El buscador de estudios de Tentare',
+      id: 'network', orden: 5, titulo: 'Aparecer en Centra Network', peso: 'opcional',
+      porque: 'Tu estudio sale en el buscador de estudios de Centra, delante de gente que aún no te conoce. Apagado de serie.',
+      donde: 'El buscador de estudios de Centra',
       cuando: 'Al tocar el interruptor',
       estado: d.network === null ? 'Mirando si apareces…' : d.network ? 'Apareces' : 'No apareces',
       tono: d.network ? 'hecho' : 'nada',
       hecho: d.network === true,
-      nota: 'Aunque ocultes tu página, seguirás saliendo en Tentare Network.',
+      nota: 'Aunque ocultes tu página, seguirás saliendo en Centra Network.',
     },
   ];
 }

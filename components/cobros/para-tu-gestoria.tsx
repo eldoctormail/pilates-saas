@@ -1,7 +1,7 @@
 'use client';
 
 // «Para tu gestoría» (decisión 8 de las maquetas del 2-oct-2026): la pestaña de un
-// estudio que NO factura con Tentare. Lo que su gestoría necesita, por trimestre
+// estudio que NO factura con Centra. Lo que su gestoría necesita, por trimestre
 // natural (el del IVA): el anterior, el que va y el año anterior. Las cifras son
 // las de «Lo que he cobrado» (`cobradoEnTramo`) y el fichero, el mismo.
 //
@@ -46,13 +46,13 @@ export function ParaTuGestoria({ hoy, avisos }: { hoy: string; avisos: AvisosCob
     <div className="space-y-4">
       <p className="max-w-[760px] text-[13.5px] text-muted-foreground text-pretty">
         {FUNCIONES_DE_ESPANA
-          ? 'Tus facturas las hace tu gestoría (no facturas con Tentare). Aquí tienes lo que necesita, por trimestre natural (el del IVA).'
+          ? 'Tus facturas las hace tu gestoría (no facturas con Centra). Aquí tienes lo que necesita, por trimestre natural (el del IVA).'
           : 'Lo cobrado por trimestre, para tu contador. Las facturas de ARCA las ve en «Mis Comprobantes» de ARCA.'}
         {esPropietaria && (
           <>
             {' '}
             <Link href="/configuracion?tab=cobros#facturacion" className="inline-flex items-center font-medium text-brand-medio hover:underline">
-              Facturar con Tentare <ChevronRight size={12} aria-hidden />
+              Facturar con Centra <ChevronRight size={12} aria-hidden />
             </Link>
           </>
         )}
@@ -90,7 +90,7 @@ export function ParaTuGestoria({ hoy, avisos }: { hoy: string; avisos: AvisosCob
           <button type="button" onClick={() => setVerFacturas(v => !v)} aria-expanded={verFacturas} className="flex w-full items-center gap-3 p-4 text-left">
             <FileText size={16} className="text-muted-foreground" aria-hidden />
             <span className="text-[13.5px] text-foreground">
-              {facturas.length} {facturas.length === 1 ? 'factura emitida' : 'facturas emitidas'} con Tentare antes de dejar de facturar aquí
+              {facturas.length} {facturas.length === 1 ? 'factura emitida' : 'facturas emitidas'} con Centra antes de dejar de facturar aquí
               {anioUltimaFactura ? ` (hasta ${anioUltimaFactura})` : ''}
             </span>
             <span className="ml-auto inline-flex items-center text-[13px] font-medium text-brand-medio">

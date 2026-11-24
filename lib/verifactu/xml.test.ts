@@ -8,7 +8,7 @@ import {
 
 const SISTEMA: SistemaInformatico = {
   nombreRazon: 'Productor de Ejemplo', nif: '00000000T',
-  nombreSistemaInformatico: 'Tentare', idSistemaInformatico: 'TE',
+  nombreSistemaInformatico: 'Centra', idSistemaInformatico: 'TE',
   version: '1.0', numeroInstalacion: 'inst-1',
   soloVerifactu: true, multiOT: true, indicadorMultiplesOT: false,
 };

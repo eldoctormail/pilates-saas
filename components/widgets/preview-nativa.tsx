@@ -39,8 +39,8 @@ const familia = (v: string | null) => (v && fuenteValida(v) ? v.trim() : null);
 // ya las tiene por `next/font`, y aquí no se inyecta ninguna hoja.
 //
 // Lo mismo con la letra de un diseño propio: la misma `letraNativa` que el
-// bundle, con las familias de `next/font` en vez de las «Tentare …». Una que
-// Tentare no sirve se nombra y no se pide (tampoco a Google), como en su web.
+// bundle, con las familias de `next/font` en vez de las «Centra …». Una que
+// Centra no sirve se nombra y no se pide (tampoco a Google), como en su web.
 export function PreviewNativa({ slug, config, estilo, base, colorEstudio, fuenteDelPanel }: {
   slug: string;
   config: ConfigConstructor;

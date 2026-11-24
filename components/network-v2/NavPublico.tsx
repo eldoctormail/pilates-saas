@@ -21,8 +21,8 @@ export function NavPublico() {
   return (
     <header style={{ borderBottom: `1px solid ${NW_BORDE}` }}>
       <div className="max-w-[1240px] mx-auto px-6 py-4 flex items-center justify-between gap-6">
-        <Link href="/network" className="flex items-center gap-2.5 shrink-0" aria-label="Tentare Network — inicio">
-          <LogoTentare formato="horizontal" tinta="tinta" producto="network" titulo="Tentare Network" alto={26} decorativo />
+        <Link href="/network" className="flex items-center gap-2.5 shrink-0" aria-label="Centra Network — inicio">
+          <LogoTentare formato="horizontal" tinta="tinta" producto="network" titulo="Centra Network" alto={26} decorativo />
           <InsigniaBeta alto={26} />
         </Link>
         <nav className="hidden md:flex items-center gap-6" style={{ color: NW_TINTA }}>

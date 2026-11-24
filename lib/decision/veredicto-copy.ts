@@ -26,8 +26,8 @@ const acciones = (n: number) => `${n} ${n === 1 ? 'acción' : 'acciones'}`;
 export function lineaDelPiloto(ejecutadas: number, fallidas: number): string | null {
   if (ejecutadas <= 0 && fallidas <= 0) return null;
   const hecho = ejecutadas > 0
-    ? `Tentare ha resuelto ${acciones(ejecutadas)} por su cuenta.`
-    : `Tentare ha intentado ${acciones(fallidas)} por su cuenta.`;
+    ? `Centra ha resuelto ${acciones(ejecutadas)} por su cuenta.`
+    : `Centra ha intentado ${acciones(fallidas)} por su cuenta.`;
   if (fallidas <= 0) return hecho;
   const noSalio = fallidas === 1 ? '1 no salió: lo ves en Actividad.' : `${fallidas} no salieron: las ves en Actividad.`;
   return `${hecho} ${noSalio}`;

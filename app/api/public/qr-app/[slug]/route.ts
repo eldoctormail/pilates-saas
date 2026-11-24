@@ -9,7 +9,7 @@ import { SLUG_PARA_QR, rutaApp, urlAbsoluta } from '@/lib/enlaces-estudio';
 // Es el hermano de `/api/public/qr-reservas/<slug>` (que codifica la página de
 // reservas, `/reservar/<slug>`, y se queda tal cual: hay correos ya enviados con
 // esa imagen y el CDN la tiene cacheada para siempre). Desde el 22-oct-2026 lo
-// que Tentare le da a un estudio para pasar a sus alumnas es la app
+// que Centra le da a un estudio para pasar a sus alumnas es la app
 // (`/portal/<slug>`), no la página de reservas, que es para integrar en su web
 // (lib/enlaces-estudio.ts). Por eso esta ruta nueva en vez de cambiar la otra.
 //
@@ -19,7 +19,7 @@ import { SLUG_PARA_QR, rutaApp, urlAbsoluta } from '@/lib/enlaces-estudio';
 // que no existe, que es lo mismo que teclearla.
 //
 // La dirección es la misma que el enlace del correo (`NEXT_PUBLIC_APP_URL`, o la
-// de Tentare). El mismo slug da siempre el mismo PNG: caché larga.
+// de Centra). El mismo slug da siempre el mismo PNG: caché larga.
 
 export const runtime = 'nodejs';
 

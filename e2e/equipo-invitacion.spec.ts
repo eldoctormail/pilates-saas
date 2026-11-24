@@ -413,7 +413,7 @@ test.describe('Avisar por WhatsApp a quien está sin acceso', () => {
     const href = (await enlace.getAttribute('href'))!;
     expect(href).toMatch(/^https:\/\/wa\.me\/34612345678\?text=/);
     const texto = decodeURIComponent(href.split('?text=')[1]);
-    expect(texto).toContain('te he dado acceso a Studio Carmen en Tentare');
+    expect(texto).toContain('te he dado acceso a Studio Carmen en Centra');
     expect(texto).toContain('«Como instructora»');
     expect(texto).toContain('/portal/studio-carmen/acceso/elegir');
     expect(texto).toContain('ma•••@example.com');

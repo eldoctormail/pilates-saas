@@ -37,7 +37,7 @@ const json = (r: Route, b: unknown, s = 200) =>
 /** Forma de `Recomendacion` (lib/decision/tipos.ts) más el `efecto` que añade GET /api/decisiones. */
 const rec = (o: Record<string, unknown> & { id: string; titulo: string }) => ({
   studioId: STUDIO_ID, decisionSessionId: 'ds-1', algorithmVersion: 'v1', dedupeKey: `k:${o.id}`,
-  especialista: 'RETENCION', tipo: 'RECUPERAR_SOCIA', motivo: 'Lo que ha visto Tentare.',
+  especialista: 'RETENCION', tipo: 'RECUPERAR_SOCIA', motivo: 'Lo que ha visto Centra.',
   datosUsados: {}, riesgo: 'PERDIDA', impacto: null,
   confianza: { nivel: 'ALTA', evidencia: ['Una evidencia'], autonomiaMaxima: 0 },
   score: 80, prioridad: 'ALTA', nivelAutonomia: 0,
@@ -83,7 +83,7 @@ const SIN_PERMISO = rec({
   titulo: 'Nuria lleva 4 semanas sin venir',
   accion: { tipo: 'CONTACTO_MANUAL', canal: 'WHATSAPP', textoSugerido: '' }, socioId: 'soc-6', datosUsados: { nombre: 'Nuria' },
 });
-const SIN_PERMISO_TEXTO = 'No ha aceptado recibir ofertas del estudio, así que Tentare no le envía este mensaje.';
+const SIN_PERMISO_TEXTO = 'No ha aceptado recibir ofertas del estudio, así que Centra no le envía este mensaje.';
 // La misma oferta, a una socia CON teléfono (soc-1 en el panel sembrado): su WhatsApp manual.
 const SIN_PERMISO_CON_TEL = rec({
   id: 'rec-sin-permiso-tel', tipo: 'RECUPERAR_SOCIA', efecto: 'MARCAR', sinPermisoOfertas: true,

@@ -135,7 +135,7 @@ export async function enviarRecordatoriosAltas(admin: SupabaseClient, ahoraMs = 
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// «Tu primera clase en Tentare, en 5 minutos» (correo 3 del alta nueva, PR-5):
+// «Tu primera clase en Centra, en 5 minutos» (correo 3 del alta nueva, PR-5):
 // a las 24 h de crear el estudio, si una alumna nueva todavía no puede
 // reservar. Cuándo y a quién, en lib/alta/correo-primera-clase.ts.
 //

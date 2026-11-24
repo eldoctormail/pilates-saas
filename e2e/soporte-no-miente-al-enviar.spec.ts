@@ -66,7 +66,7 @@ async function montar(page: Page, opciones: { soporte: number | 'ok'; guardaEnBd
   await page.goto('/dashboard');
   await page.getByRole('button', { name: 'Abrir menú de perfil' }).click();
   await page.getByRole('button', { name: 'Ayuda', exact: true }).click();
-  const panel = page.getByRole('dialog', { name: 'Ayuda de Tentare' });
+  const panel = page.getByRole('dialog', { name: 'Ayuda de Centra' });
   await panel.getByRole('tab', { name: 'Mensajes' }).click();
   await panel.getByLabel('Mensaje', { exact: true }).fill('No me funciona el cobro de septiembre');
 }

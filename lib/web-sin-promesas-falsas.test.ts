@@ -157,6 +157,6 @@ test('CONTROL: la guardia ve las frases con tildes y deja pasar la verdad', () =
   assert.equal(caza('El detalle clínico solo lo ve la propietaria.'), true);
   assert.equal(caza('Asistidas y autónomas en todos los planes'), true);
   assert.equal(caza('Facturas con numeración legal correlativa'), false);
-  assert.equal(caza('Si cobras por domiciliación, Tentare te prepara la remesa SEPA para que la presentes en tu banco.'), false);
+  assert.equal(caza('Si cobras por domiciliación, Centra te prepara la remesa SEPA para que la presentes en tu banco.'), false);
   assert.equal(esComentario('  // decía «huella encadenada en cada factura»'), true);
 });

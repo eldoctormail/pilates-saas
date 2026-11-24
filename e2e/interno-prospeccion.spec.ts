@@ -32,7 +32,7 @@ const PROSPECTO = {
 const borrador = (o: Partial<{ id: string; asunto: string; cuerpo: string; estado: string }> = {}) => ({
   id: 'p-1', leadId: 'lead-1',
   asunto: 'Sobre las sustituciones en Pilates BCN',
-  cuerpo: 'Hola,\n\nHe visto Pilates BCN y que usáis Bsport. Cubrir una baja sigue siendo manual.\n\nMarcos — Tentare',
+  cuerpo: 'Hola,\n\nHe visto Pilates BCN y que usáis Bsport. Cubrir una baja sigue siendo manual.\n\nMarcos — Centra',
   estado: 'BORRADOR', aprobadoPor: null, aprobadoEn: null, enviadoEn: null, error: null,
   generadoEn: '2026-09-01T11:00:00Z',
   ...o,
@@ -92,7 +92,7 @@ test.describe('Prospección en frío', () => {
     // dice Bsport y el texto dice Momence.
     await montar(page, {
       borradores: [borrador({
-        cuerpo: 'Hola,\n\nHe visto Pilates BCN y que usáis Momence.\n\nMarcos — Tentare',
+        cuerpo: 'Hola,\n\nHe visto Pilates BCN y que usáis Momence.\n\nMarcos — Centra',
       })],
     });
 
@@ -103,7 +103,7 @@ test.describe('Prospección en frío', () => {
   test('el aviso desaparece en cuanto se corrige el texto a mano', async ({ page }) => {
     await montar(page, {
       borradores: [borrador({
-        cuerpo: 'Hola,\n\nHe visto Pilates BCN y que usáis Momence.\n\nMarcos — Tentare',
+        cuerpo: 'Hola,\n\nHe visto Pilates BCN y que usáis Momence.\n\nMarcos — Centra',
       })],
     });
 
@@ -111,7 +111,7 @@ test.describe('Prospección en frío', () => {
     await expect(aviso).toBeVisible({ timeout: 30_000 });
 
     const cuerpo = page.getByRole('textbox', { name: /Cuerpo del correo a Pilates BCN/ });
-    await cuerpo.fill('Hola,\n\nHe visto Pilates BCN y que usáis Bsport.\n\nMarcos — Tentare');
+    await cuerpo.fill('Hola,\n\nHe visto Pilates BCN y que usáis Bsport.\n\nMarcos — Centra');
 
     // Se revisa lo que se está VIENDO, no lo guardado.
     await expect(aviso).toHaveCount(0);

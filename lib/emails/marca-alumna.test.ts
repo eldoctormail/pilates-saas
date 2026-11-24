@@ -5,11 +5,11 @@ import { join } from 'node:path';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Regla de marca del repo: a una ALUMNA se le habla SIEMPRE con la marca de su
-// estudio. Los nombres de producto («Tentare Manager» / «Tentare Core») son para
-// el EQUIPO, y la marca paraguas «Tentare» para los correos de plataforma.
+// estudio. Los nombres de producto («Centra Manager» / «Centra Core») son para
+// el EQUIPO, y la marca paraguas «Centra» para los correos de plataforma.
 //
 // ⚠️ Esto es un test de guardia, no de comportamiento, y existe porque el fallo
-// real fue justo ese: `enviarEmailAvisoAlumna` mandaba con `'Tentare'` mientras
+// real fue justo ese: `enviarEmailAvisoAlumna` mandaba con `'Centra'` mientras
 // el cuerpo del correo ya llevaba el logo y el color del estudio. Nada fallaba;
 // simplemente la alumna recibía «tu clase se cancela» de una marca que no
 // conoce. Un literal es fácil de colar otra vez, y aquí salta.
@@ -34,7 +34,7 @@ test('ningún emisor a clientes manda con la marca de la plataforma', () => {
   const cuerpo = conComentarios.split('\n').filter(l => !l.trim().startsWith('//')).join('\n');
 
   assert.ok(
-    !/'Tentare'/.test(cuerpo),
+    !/'Centra'/.test(cuerpo),
     'el aviso al cliente vuelve a mandarse con la marca de la plataforma',
   );
   assert.ok(
@@ -48,12 +48,12 @@ test('ningún emisor a clientes manda con la marca de la plataforma', () => {
 });
 
 test('los emails al EQUIPO sí conservan el nombre de producto', () => {
-  // Lo contrario también importa: «Tentare Manager» es deliberado para la
+  // Lo contrario también importa: «Centra Manager» es deliberado para la
   // gerencia (ver nombreAppPorRol), y este test no debe empujar a quitarlo.
-  // A las instructoras, desde que se retiró Tentare Core (14-sep-2026), la
+  // A las instructoras, desde que se retiró Centra Core (14-sep-2026), la
   // marca paraguas: ya no hay un producto del panel que nombrarles.
   const src = readFileSync(join(raiz, 'lib/sustituciones/email.ts'), 'utf8');
-  assert.ok(src.includes("'Tentare Manager'"), 'los avisos a gerencia perdieron su marca de producto');
-  assert.ok(src.includes("'Tentare'"), 'los avisos a instructoras perdieron la marca de Tentare');
-  assert.ok(!src.includes("'Tentare Core'"), 'Tentare Core se retiró: no se firma con esa marca');
+  assert.ok(src.includes("'Centra Manager'"), 'los avisos a gerencia perdieron su marca de producto');
+  assert.ok(src.includes("'Centra'"), 'los avisos a instructoras perdieron la marca de Centra');
+  assert.ok(!src.includes("'Centra Core'"), 'Centra Core se retiró: no se firma con esa marca');
 });

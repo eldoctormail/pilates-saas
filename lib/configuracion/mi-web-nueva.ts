@@ -1,7 +1,7 @@
 // «Mi app» y «Mi web» dentro de Configuración (MI_WEB_NUEVA, 16-oct-2026). El fundador: la app de la
 // alumna y los widgets de su web van SOLO en Configuración (no en el menú principal) y por separado,
 // cada uno con lo suyo y en este orden: primero «Mi app» (cómo se ve, qué enseña y dónde se descarga),
-// luego «Mi web» (la dirección, los widgets y ocultar la página) y después Tentare Network.
+// luego «Mi web» (la dirección, los widgets y ocultar la página) y después Centra Network.
 //
 // No mueve datos: las secciones, sus tarjetas y sus direcciones (`?tab=marca`, `?tab=web`,
 // `?abrir=contenido-de-tu-app`…) son las de siempre, para que ningún enlace se rompa. Cambia cómo se

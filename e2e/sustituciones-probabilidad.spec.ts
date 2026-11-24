@@ -1,7 +1,7 @@
 import { test, expect, type Page, type Route } from '@playwright/test';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Tentare Brain · Fase 1 — la card de sustituta ya no enseña un porcentaje
+// Centra Brain · Fase 1 — la card de sustituta ya no enseña un porcentaje
 // inventado.
 //
 // Antes: "Compatibilidad 87 %", donde el 87 era LEAST(99, GREATEST(55, score))

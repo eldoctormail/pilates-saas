@@ -3875,7 +3875,7 @@ export async function dbEmbudoWidgetPorDia(desde: string): Promise<{ dia: string
   return ((data ?? []) as { dia: string; tipo: string; n: number }[]).map((r) => ({ dia: r.dia, tipo: r.tipo, n: Number(r.n) }));
 }
 
-// «Tentare Widgets»: el mismo embudo partido por la etiqueta de cada widget
+// «Centra Widgets»: el mismo embudo partido por la etiqueta de cada widget
 // (`widget_eventos.origen`, migr 20260926035222). `null` = no se pudo leer
 // (distinto de «sin datos»: quien lo pinta no debe decir «0 visitas» si en
 // realidad no sabe).
@@ -6163,7 +6163,7 @@ export async function fetchDeferredStudioDataCon(db: SupabaseClient, studioId?: 
     // ola — sigue sin bloquear el primer pintado, que era el objetivo real.
     db.from('condiciones_salud').select('*').eq('studio_id', sid),
     // Mismo bug que `condicionesSalud` de arriba, encontrado al verificar el
-    // rediseño visual de Comunidad antes de abrir Tentare a 20 estudios
+    // rediseño visual de Comunidad antes de abrir Centra a 20 estudios
     // nuevos: `postsComunidad` quedaba `[]` en cada sesión nueva (staff), así
     // que ni /comunidad ni la pestaña "Comunidad" de /mensajeria mostraban
     // NUNCA el historial de posts — solo lo publicado en la propia pestaña

@@ -366,7 +366,7 @@ export interface ContactoManualSnapshot {
 // frente a un estudio recién abierto).
 export interface ContextoEstudio {
   nSociasActivas: number;
-  antiguedadDatosDias: number; // días desde el alta del estudio en Tentare
+  antiguedadDatosDias: number; // días desde el alta del estudio en Centra
   cadenaId: string | null;
   nSedesCadena: number; // 1 si no pertenece a ninguna cadena
 }

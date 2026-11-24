@@ -36,7 +36,7 @@ export const PREFIJOS_NO_INDEXABLES = [
   '/oauth',
   // Alta de cuenta freelance (feature #9) — mismo criterio que /crear-estudio.
   '/instructora',
-  // Entrada de la app de iOS (usuario de Tentare → la app de su estudio). Es la
+  // Entrada de la app de iOS (usuario de Centra → la app de su estudio). Es la
   // pantalla de acceso de un binario, no contenido que buscar.
   '/app',
   // Cara pública operativa de cada estudio.
@@ -55,7 +55,7 @@ export const PREFIJOS_NO_INDEXABLES = [
   // ⚠️ '/i/' CON barra: sin ella, el prefijo de robots.txt bloqueaba también
   // `/icon1.png`… `/icon4.png` (los favicons que Next sirve desde app/icon*.png)
   // y `/icono-estudio`. Google exige poder rastrear el favicon para enseñarlo en
-  // los resultados: con él bloqueado, Tentare salía con el icono genérico.
+  // los resultados: con él bloqueado, Centra salía con el icono genérico.
   '/portal', '/kiosk', '/i/',
   // Enlaces firmados de un solo uso
   '/aceptar-sustitucion', '/confirmar-reserva', '/disponibilidad', '/no-puedo', '/valorar',
@@ -69,7 +69,7 @@ export const PREFIJOS_NO_INDEXABLES = [
   // y cualquier pantalla futura del envío a la AEAT.
   '/verifactu',
 
-  // Tentare Network — autoservicio de la instructora y buscador privado de
+  // Centra Network — autoservicio de la instructora y buscador privado de
   // la propietaria. `/network/` CON BARRA FINAL, no una lista de rutas
   // nombradas a mano: el rediseño 2026-08 intentó nombrar cada ruta privada
   // una por una y se dejó fuera `app/(dashboard)/network/[perfilId]` (la

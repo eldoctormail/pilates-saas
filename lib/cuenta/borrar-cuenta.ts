@@ -1,4 +1,4 @@
-// «Borrar mi cuenta de Tentare» desde la app de la alumna (App Store 5.1.1(v):
+// «Borrar mi cuenta de Centra» desde la app de la alumna (App Store 5.1.1(v):
 // quien tiene cuenta tiene que poder borrarla desde la propia app).
 //
 // No es la supresión RGPD (lib/student/derechos.ts → `solicitudes_derechos`), que
@@ -75,9 +75,9 @@ const CORREO = 'hola@tentare.app';
 
 /** Qué le decimos, y qué puede hacer. Sin ids ni nombres: le basta con saber el porqué. */
 export const MENSAJE_NO_BORRABLE: Record<MotivoNoBorrable | 'no_verificable', string> = {
-  propietaria: `Esta cuenta es la dueña de un estudio en Tentare, así que no se puede borrar desde aquí: antes hay que decidir qué pasa con el estudio. Escríbenos a ${CORREO} y lo hacemos contigo.`,
+  propietaria: `Esta cuenta es la dueña de un estudio en Centra, así que no se puede borrar desde aquí: antes hay que decidir qué pasa con el estudio. Escríbenos a ${CORREO} y lo hacemos contigo.`,
   equipo: 'Esta cuenta también es del equipo de un estudio. Pide al estudio que te elimine del equipo y después podrás borrarla desde aquí.',
-  plataforma: `Esta cuenta tiene acceso de administración de Tentare y no se puede borrar desde aquí. Escríbenos a ${CORREO}.`,
-  network: `Esta cuenta tiene actividad en Tentare Network y no se puede borrar desde aquí. Escríbenos a ${CORREO} y la borramos contigo.`,
+  plataforma: `Esta cuenta tiene acceso de administración de Centra y no se puede borrar desde aquí. Escríbenos a ${CORREO}.`,
+  network: `Esta cuenta tiene actividad en Centra Network y no se puede borrar desde aquí. Escríbenos a ${CORREO} y la borramos contigo.`,
   no_verificable: 'No hemos podido comprobar tu cuenta. No se ha borrado nada: inténtalo de nuevo en unos minutos.',
 };

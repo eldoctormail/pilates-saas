@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // ¿Se puede devolver este recibo?
 //
-// Tentare sabía reaccionar a un reembolso hecho en Stripe (el webhook de
+// Centra sabía reaccionar a un reembolso hecho en Stripe (el webhook de
 // `charge.refunded` marca el recibo DEVUELTO y ofrece revertir la entrega),
 // pero no sabía HACERLO. Este módulo es la regla que decide si se puede, y vive
 // aparte del endpoint por dos motivos:
@@ -119,7 +119,7 @@ export function evaluarReembolso(
 ): Veredicto {
   if (!politica.activos) {
     return no('DESACTIVADA',
-      'Las devoluciones desde Tentare están desactivadas. Puedes activarlas en Configuración → Cobros y facturas → Devoluciones, o devolver desde Stripe.');
+      'Las devoluciones desde Centra están desactivadas. Puedes activarlas en Configuración → Cobros y facturas → Devoluciones, o devolver desde Stripe.');
   }
 
   // DEVUELTO antes que el resto: es el caso que más se intenta dos veces (dos

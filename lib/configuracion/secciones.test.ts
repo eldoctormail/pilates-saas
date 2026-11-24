@@ -81,7 +81,7 @@ test('una herramienta se abre si este rol ve alguna de sus tarjetas', () => {
   }
 });
 
-test('«Plan de Tentare» es de la propietaria; a «Mi cuenta» llega todo el personal del panel', () => {
+test('«Plan de Centra» es de la propietaria; a «Mi cuenta» llega todo el personal del panel', () => {
   assert.deepEqual(seccionPorId('plan').roles, ['PROPIETARIO']);
   for (const rol of ['PROPIETARIO', 'MANAGER', 'RECEPCION'] as const) {
     assert.equal(externaVisible(FILAS_EXTERNAS['mi-cuenta'], rol), true, rol);
@@ -235,7 +235,7 @@ test('«Mi equipo»: crear clases se guarda al tocarlo y la app es una acción; 
   assert.deepEqual(seccionPorId('equipo').tarjetas.map(t => t.id), ['ajuste-instructoras-crean-clases', 'app-de-tus-instructoras']);
   assert.equal(tarjetaPorId('ajuste-instructoras-crean-clases').guardado, 'al-pulsar');
   assert.equal(tarjetaPorId('app-de-tus-instructoras').guardado, 'accion');
-  // Con Tentare Core retirado la instructora no edita clases en ningún sitio: la frase no puede prometerlo.
+  // Con Centra Core retirado la instructora no edita clases en ningún sitio: la frase no puede prometerlo.
   assert.doesNotMatch(tarjetaPorId('ajuste-instructoras-crean-clases').frase, /editar/);
   assert.deepEqual(
     FILAS_A_OTRA_PANTALLA.filter(f => f.seccion === 'equipo').map(f => f.href),

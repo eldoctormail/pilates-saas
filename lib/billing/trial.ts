@@ -3,7 +3,7 @@
 //
 // Antes la prueba la daba Stripe (`trial_period_days` en el Checkout), así que
 // para empezar había que pasar por la pasarela y dejar una tarjeta. Al abrir
-// Tentare al público eso es la fricción más cara del embudo: se cambia por una
+// Centra al público eso es la fricción más cara del embudo: se cambia por una
 // prueba LOCAL que arranca al crear el estudio y no toca Stripe para nada.
 //
 // ⚠️ La prueba se materializa como `studios.subscription_status = 'trialing'`

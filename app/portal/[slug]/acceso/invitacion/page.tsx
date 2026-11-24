@@ -11,7 +11,7 @@ import { Button } from '@/components/student/ui/Button';
 /**
  * Donde aterriza el correo de invitación de una INSTRUCTORA (15-sep-2026).
  *
- * Antes la invitación llevaba al panel de Tentare a «crear mi cuenta», aunque la
+ * Antes la invitación llevaba al panel de Centra a «crear mi cuenta», aunque la
  * instructora trabaje en la app del estudio, y si ya tenía cuenta se quedaba en
  * «ya existe una cuenta con ese email». Ahora:
  *

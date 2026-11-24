@@ -13,7 +13,7 @@ import { borrarAusencia, crearAusencia, listarAusencias } from '@/lib/sustitucio
 //
 // Todo acotado al estudio de la sesión de staff: nunca se fía del cliente.
 //
-// La instructora ya no pasa por aquí (Tentare Core retirado, 14-sep-2026): sus
+// La instructora ya no pasa por aquí (Centra Core retirado, 14-sep-2026): sus
 // ausencias las gestiona desde la app del estudio (`/api/portal/instructora/ausencias`,
 // misma lógica de `ausencias-servidor.ts`). En el panel, solo quien gestiona el equipo.
 

@@ -2,7 +2,7 @@
 
 // Paso 09 del wizard: tarifa. Extraído tal cual de
 // app/network/crear-perfil/page.tsx (paso === 8) — F0 del roadmap de
-// Tentare Network 2.0, sin cambios de comportamiento.
+// Centra Network 2.0, sin cambios de comportamiento.
 import { SelectorChips } from '@/components/network/selector-chips';
 import { TARIFAS_RANGO_NETWORK, TARIFA_RANGO_LABEL } from '@/lib/network/catalogo';
 import type { FormState } from '../form-state';

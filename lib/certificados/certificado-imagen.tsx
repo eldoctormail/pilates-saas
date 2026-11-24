@@ -3,7 +3,7 @@ import { qrPathData } from '@/lib/qr-svg.ts';
 import { tamanoNombreCertificado } from '@/lib/certificados/tamano-nombre.ts';
 import { TRAZADOS } from '@/components/marca/trazados.ts';
 
-// El certificado «Tentare Verified Studio», como JSX para `ImageResponse`
+// El certificado «Centra Verified Studio», como JSX para `ImageResponse`
 // (next/og, motor Satori) — no como cadena HTML/SVG: Satori renderiza React
 // real, no `dangerouslySetInnerHTML`, así que el QR (lib/qr-svg.ts) y el
 // logotipo (components/marca/trazados.ts) se reconstruyen aquí como
@@ -171,17 +171,17 @@ export function certificadoJsx({
         </div>
 
         <div style={{ display: 'flex', marginTop: 40, fontSize: 32, color: SOLIDO, textAlign: 'center', maxWidth: 1200, lineHeight: 1.5 }}>
-          ha completado satisfactoriamente el proceso de digitalización y configuración operativa de Tentare.
+          ha completado satisfactoriamente el proceso de digitalización y configuración operativa de Centra.
         </div>
         <div style={{ display: 'flex', marginTop: 16, fontSize: 22, color: GRIS, textAlign: 'center', maxWidth: 1000, lineHeight: 1.5 }}>
-          Este reconocimiento acredita la integración del estudio en el ecosistema digital de Tentare.
+          Este reconocimiento acredita la integración del estudio en el ecosistema digital de Centra.
         </div>
         <div style={{ display: 'flex', marginTop: 30, fontSize: 20, fontWeight: 600, color: GRIS, letterSpacing: 4, textAlign: 'center' }}>
           RESERVAS · ALUMNAS · PAGOS · AGENDA · ASISTENCIA · OPERACIONES
         </div>
         {esFounding && (
           <div style={{ display: 'flex', marginTop: 16, fontSize: 18, fontWeight: 600, color: DISCO, textAlign: 'center' }}>
-            Uno de los primeros 100 estudios en formar parte de Tentare
+            Uno de los primeros 100 estudios en formar parte de Centra
           </div>
         )}
 

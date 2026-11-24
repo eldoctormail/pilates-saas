@@ -5,7 +5,7 @@ import { AVISO_AL_DAR_DE_ALTA, AVISO_EN_LA_PANTALLA_DE_EQUIPO } from '@/lib/audi
  * El aviso de que los cambios de dinero de quien trabaja en el panel quedan anotados
  * (libro `auditoria_estudio`, Cobros → «Cambios del equipo»).
  *
- * Lo da el estudio: es el responsable del tratamiento, y Tentare pone el sitio y el
+ * Lo da el estudio: es el responsable del tratamiento, y Centra pone el sitio y el
  * texto. Llega a la propia persona por el correo de invitación
  * (lib/emails/tentare/equipo.ts); aquí se le recuerda a QUIEN invita, para que no
  * dé de alta a alguien sin saber que se anota lo que hace.

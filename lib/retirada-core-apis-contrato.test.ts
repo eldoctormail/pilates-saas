@@ -4,7 +4,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Guardia de contrato: Tentare Core retirado (decisión del fundador, 14-sep-2026).
+// Guardia de contrato: Centra Core retirado (decisión del fundador, 14-sep-2026).
 //
 // La instructora trabaja en la app del estudio, con sus propias rutas
 // (`/api/portal/instructora/*`, acotadas a ella en servidor). Las rutas del

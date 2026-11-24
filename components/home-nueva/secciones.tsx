@@ -313,9 +313,9 @@ export function Preguntas() {
       <div className="lf-faq-izq" id="que-es">
         <Etiqueta icono={<ShieldCheck size={15} strokeWidth={1.6} />}>{FAQ.etiqueta}</Etiqueta>
         <h2 id="lf-faq-t">{FAQ.titulo}</h2>
-        <h3 className="lf-faq-que">¿Qué es Tentare?</h3>
+        <h3 className="lf-faq-que">¿Qué es Centra?</h3>
         <p>
-          Tentare es el software para estudios y centros de Pilates y yoga en España que reúne en un solo panel las{' '}
+          Centra es el software para estudios y centros de Pilates y yoga en España que reúne en un solo panel las{' '}
           <Link href="/funcionalidades/reservas-online">reservas online</Link> con lista de espera, la{' '}
           <Link href="/funcionalidades/app-para-alumnas">app de tus alumnas</Link>, los bonos y los{' '}
           <Link href="/funcionalidades/cobros-recurrentes">cobros recurrentes</Link>, el{' '}

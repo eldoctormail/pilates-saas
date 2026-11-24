@@ -128,7 +128,7 @@ test('el puente acepta el email de su intento, y solo con forma de email', () =>
   assert.equal(emailDelIntento({ tipo: TIPO_EMAIL_DEL_INTENTO, nonce: NONCE, email: 'nueva@example.com' }, null), null);
 });
 
-// ── El acceso entero en la ventana de Tentare (16-oct-2026) ──────────────────
+// ── El acceso entero en la ventana de Centra (16-oct-2026) ──────────────────
 // La site key de Turnstile da 110200 fuera de tentare.app: el widget encarga el
 // acceso a la ventana del puente. Estas son las reglas de forma de ese
 // intercambio; el origen y la ventana los comprueba quien escucha.

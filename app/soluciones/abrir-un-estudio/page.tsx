@@ -17,7 +17,7 @@ import { GRATIS_CON_LIMITES, GRATIS_MARGEN_DIAS, GRATIS_RESERVAS_MES, PRECIO_FOU
 import { paginaDe, urlDe } from '@/lib/seo/paginas';
 import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
-// Tentare para quien VA A ABRIR su estudio (fase 2.3 de la web, 20-oct-2026). Una
+// Centra para quien VA A ABRIR su estudio (fase 2.3 de la web, 20-oct-2026). Una
 // de las dos soluciones nuevas de la estrategia de la fase 1: la otra, «Varias
 // sedes», se quedó en /funcionalidades/multi-centro (dos páginas casi iguales
 // competirían en el buscador por la misma búsqueda).
@@ -30,7 +30,7 @@ import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 // lib/landing/founding-gratis.ts; «tu horario y tu página de reservas, listos en tu
 // primera sesión» es la promesa ya publicada en la home (CierreHome); la app con la
 // marca del estudio va en todos los planes; los pagos van por la cuenta de Stripe
-// del estudio sin comisión de Tentare (PrecioHome). Tentare NO hace trámites: lo
+// del estudio sin comisión de Centra (PrecioHome). Centra NO hace trámites: lo
 // dicen las guías y lo dice la FAQ.
 
 const PATH = '/soluciones/abrir-un-estudio';
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
   openGraph: {
-    siteName: 'Tentare',
+    siteName: 'Centra',
     type: 'website',
     locale: 'es_ES',
     title: pagina.titulo,
@@ -62,7 +62,7 @@ const GUIAS = [
 
 const FAQ = [
   {
-    q: '¿Puedo montar Tentare antes de abrir?',
+    q: '¿Puedo montar Centra antes de abrir?',
     a: 'Sí. Montas tus clases, tus salas, tus bonos y la app de tu estudio antes de la primera clase, y tu página de reservas puede aceptar reservas desde el día que la publiques.',
   },
   {
@@ -72,12 +72,12 @@ const FAQ = [
   {
     q: '¿Puedo cobrar online desde el primer día?',
     a: ES
-      ? 'Sí, en cuanto conectas tu cuenta de Stripe: las alumnas pagan con tarjeta, el dinero va a tu cuenta y Tentare no se queda comisión sobre lo que cobras.'
-      : 'Sí, en cuanto conectas tu cuenta de Mercado Pago: las alumnas pagan desde la app, el dinero va a tu cuenta y Tentare no se queda comisión sobre lo que cobras.',
+      ? 'Sí, en cuanto conectas tu cuenta de Stripe: las alumnas pagan con tarjeta, el dinero va a tu cuenta y Centra no se queda comisión sobre lo que cobras.'
+      : 'Sí, en cuanto conectas tu cuenta de Mercado Pago: las alumnas pagan desde la app, el dinero va a tu cuenta y Centra no se queda comisión sobre lo que cobras.',
   },
   {
-    q: '¿Tentare me ayuda con los trámites de apertura?',
-    a: 'No: Tentare es el programa del estudio, no una gestoría. Lo que cuesta abrir, la licencia, el epígrafe o la titulación lo explican nuestras guías, con sus fuentes a la vista.',
+    q: '¿Centra me ayuda con los trámites de apertura?',
+    a: 'No: Centra es el programa del estudio, no una gestoría. Lo que cuesta abrir, la licencia, el epígrafe o la titulación lo explican nuestras guías, con sus fuentes a la vista.',
   },
   {
     q: '¿Sirve igual para un estudio de yoga?',
@@ -107,19 +107,19 @@ export default function AbrirUnEstudioPage() {
           { etiqueta: 'Primera semana · Lun 09:00', estado: 'Reservada', texto: 'Reservó desde tu página' },
           { etiqueta: 'Bono 10 clases', estado: 'Cobrado', texto: 'Con su tarjeta, en la app' },
         ]}
-        pieFoto="Una sala de Pilates con reformers de madera, lista para su primera clase, con dos avisos de ejemplo de Tentare: una reserva de la primera semana hecha desde la página del estudio y un bono cobrado con tarjeta en la app."
+        pieFoto="Una sala de Pilates con reformers de madera, lista para su primera clase, con dos avisos de ejemplo de Centra: una reserva de la primera semana hecha desde la página del estudio y un bono cobrado con tarjeta en la app."
       />
 
       <ResumenSolucion
         pregunta="¿Qué programa necesita un estudio que va a abrir?"
         datos={[
           { cifra: 'Gratis', texto: GRATIS_CON_LIMITES },
-          { cifra: '0 %', texto: 'Comisión de Tentare sobre lo que cobras' },
+          { cifra: '0 %', texto: 'Comisión de Centra sobre lo que cobras' },
           { cifra: '1 sesión', texto: 'Para tener tu horario, tus bonos y tu app listos' },
         ]}
       >
         Uno que esté listo antes que el local: un horario que tus alumnas puedan reservar desde el móvil, bonos y
-        cuotas que se cobren solos y una app con el nombre de tu estudio. Tentare lo monta en tu primera sesión, es
+        cuotas que se cobren solos y una app con el nombre de tu estudio. Centra lo monta en tu primera sesión, es
         gratis mientras el estudio es pequeño y crece contigo cuando ya no lo es.
       </ResumenSolucion>
 
@@ -137,7 +137,7 @@ export default function AbrirUnEstudioPage() {
       <FilaProducto
         eyebrow="Tu horario"
         titulo="Tu horario, listo en tu primera sesión"
-        pieza={{ descripcion: 'Ejemplo del día en el calendario de Tentare: tres clases con su ocupación y una llena con dos alumnas en lista de espera.', contenido: <AgendaDia /> }}
+        pieza={{ descripcion: 'Ejemplo del día en el calendario de Centra: tres clases con su ocupación y una llena con dos alumnas en lista de espera.', contenido: <AgendaDia /> }}
         puntos={[
           'Clases semanales que programas una vez',
           'Aforo por sala y lista de espera automática',
@@ -166,11 +166,11 @@ export default function AbrirUnEstudioPage() {
       <FilaProducto
         eyebrow="Tus cobros"
         titulo="Cobrar sin perseguir a nadie, desde el primer bono"
-        pieza={{ descripcion: 'Ejemplo del resumen de cobros de Tentare: quién ha pagado, quién se reintenta solo y las próximas cuotas.', contenido: <PanelCobros completo /> }}
+        pieza={{ descripcion: 'Ejemplo del resumen de cobros de Centra: quién ha pagado, quién se reintenta solo y las próximas cuotas.', contenido: <PanelCobros completo /> }}
         puntos={[
           'Clase suelta, bono y cuota mensual a la vez',
           ES ? 'Tarjeta guardada o remesa SEPA para tu banco' : 'Mercado Pago online, y efectivo, posnet o transferencia en el mostrador',
-          'Sin comisión de Tentare sobre lo que cobras',
+          'Sin comisión de Centra sobre lo que cobras',
         ]}
         enlace={{ href: '/funcionalidades/bonos-y-membresias', texto: 'Bonos y cuotas' }}
       >

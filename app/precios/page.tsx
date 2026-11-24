@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   title: pagina.titulo,
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
-  openGraph: { siteName: 'Tentare', type: 'website', locale: 'es_ES', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH), images: [{ url: '/precios/opengraph-image' }] },
+  openGraph: { siteName: 'Centra', type: 'website', locale: 'es_ES', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH), images: [{ url: '/precios/opengraph-image' }] },
 };
 
 // Precios, topes y features salen de lib/billing/entitlements.ts — la MISMA
@@ -51,7 +51,7 @@ const FAQ = [
   },
   {
     q: '¿Os lleváis una comisión de lo que cobro a mis alumnas?',
-    a: 'No. Tentare no añade ninguna comisión sobre tus cobros ni tiene un marketplace donde competir por tus clientas. ' + (ES
+    a: 'No. Centra no añade ninguna comisión sobre tus cobros ni tiene un marketplace donde competir por tus clientas. ' + (ES
       ? 'Lo que sí pagas es la comisión de Stripe por procesar cada pago, que es de Stripe y la ves en su propio panel.'
       : 'Lo que sí pagas es la comisión de Mercado Pago por procesar cada pago, que es de Mercado Pago y la ves en su propio panel.'),
   },
@@ -112,18 +112,18 @@ export default function PreciosPage() {
         <section style={{ marginTop: 'clamp(48px,6vw,72px)' }}>
           <h2 style={{ fontWeight: 600, fontSize: 'clamp(24px,2.8vw,34px)', letterSpacing: 'var(--w-track-h2)', color: 'var(--w-texto)', margin: '0 0 12px' }}>¿Cuánto cuesta un software de gestión para un estudio de Pilates?</h2>
           <p style={{ fontSize: 16, lineHeight: 1.65, color: 'var(--w-texto-2)', margin: 0, maxWidth: 820 }}>
-            Tentare es gratis en el plan {PLAN_INFO.BASE.nombre} (todas las funcionalidades menos varias sedes,{' '}
+            Centra es gratis en el plan {PLAN_INFO.BASE.nombre} (todas las funcionalidades menos varias sedes,{' '}
             {LIMITES_GRATIS}; {SI_PASAS}, y con ese plan {COMPLEMENTOS_DE_PAGO} van aparte), cuesta {PLAN_INFO.ESTUDIO.precioMes} € al mes en el plan{' '}
             {PLAN_INFO.ESTUDIO.nombre}, que los incluye, y{' '}
             {PLAN_INFO.CADENA.precioMes} € en el plan {PLAN_INFO.CADENA.nombre} (dos o más centros bajo la misma marca).
-            Los precios son públicos, con IVA incluido y sin permanencia. Tentare no añade ninguna comisión sobre lo que
+            Los precios son públicos, con IVA incluido y sin permanencia. Centra no añade ninguna comisión sobre lo que
             cobras a tus alumnas: solo pagas la de {ES ? 'Stripe' : 'Mercado Pago'} por procesar cada cobro online, que es de {ES ? 'Stripe' : 'Mercado Pago'}. Traer
             tus datos desde otra plataforma no se cobra aparte.
           </p>
         </section>
 
         <section style={{ marginTop: 'clamp(44px,5.5vw,68px)' }}>
-          <h2 style={{ fontWeight: 600, fontSize: 'clamp(24px,2.8vw,34px)', letterSpacing: 'var(--w-track-h2)', color: 'var(--w-texto)', margin: '0 0 8px' }}>Todo lo que incluye Tentare</h2>
+          <h2 style={{ fontWeight: 600, fontSize: 'clamp(24px,2.8vw,34px)', letterSpacing: 'var(--w-track-h2)', color: 'var(--w-texto)', margin: '0 0 8px' }}>Todo lo que incluye Centra</h2>
           <p style={{ fontSize: 16, color: 'var(--w-texto-2)', margin: '0 0 22px' }}>
             Lo esencial —reservas, cobros, facturación y fichas— está en los tres. Lo que cambia es cuánto se automatiza y se
             controla —Centro de Control, sustituciones autónomas, IA— y las sedes; y en {PLAN_INFO.BASE.nombre} de pago, {COMPLEMENTOS_DE_PAGO} van aparte.
@@ -153,7 +153,7 @@ export default function PreciosPage() {
               <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'grid', gap: 10 }}>
                 <li style={{ fontSize: 14.5, lineHeight: 1.5, color: 'var(--w-texto)' }}>
                   <strong>La comisión de {ES ? 'Stripe' : 'Mercado Pago'}</strong> por procesar cada cobro online. Es de {ES ? 'Stripe' : 'Mercado Pago'}, la ves en su
-                  panel y Tentare no añade nada encima.
+                  panel y Centra no añade nada encima.
                 </li>
                 <li style={{ fontSize: 14.5, lineHeight: 1.5, color: 'var(--w-texto)' }}>
                   <strong>Tu número de WhatsApp Business</strong>, si quieres enviar por ese canal: se conecta tu propia

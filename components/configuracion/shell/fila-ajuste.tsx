@@ -222,7 +222,7 @@ export function FilaInterruptor({
 }
 
 /**
- * Lo que Tentare hace de serie y no se configura («Tentare lo hace así»): se
+ * Lo que Centra hace de serie y no se configura («Centra lo hace así»): se
  * cuenta en una fila, sin chevron ni interruptor, para que no parezca un ajuste
  * que no lleva a ningún sitio. Cada frase, comprobada contra el código que lo hace.
  */

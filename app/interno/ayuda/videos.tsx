@@ -1,6 +1,6 @@
 'use client';
 
-// Vídeos de las guías (Tentare Academy). Quien graba pega aquí el enlace de Vimeo de cada guía y la publica; no hace falta desplegar.
+// Vídeos de las guías (Centra Academy). Quien graba pega aquí el enlace de Vimeo de cada guía y la publica; no hace falta desplegar.
 // El TEXTO de las guías no se edita aquí: vive en código, con sus pruebas. Una guía sin vídeo publicado se ve igual, sin hueco.
 // Lo escribe `PUT /api/interno/ayuda-videos` (permiso `content.write`); lo que valida el servidor (enlace de Vimeo, duración, nivel)
 // es lo que se prueba en lib/ayuda/videos.test.ts, aquí solo se recogen los datos y se enseña el motivo si dice que no.

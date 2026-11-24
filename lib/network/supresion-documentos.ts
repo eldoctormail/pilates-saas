@@ -1,4 +1,4 @@
-// Reglas PURAS de qué objetos de Storage se borran en Tentare Network — sin
+// Reglas PURAS de qué objetos de Storage se borran en Centra Network — sin
 // Supabase ni React, para poder probarlas con `node --test`.
 //
 // Por qué existe: el bucket privado `red-documentos-identidad` guarda el DNI/NIE

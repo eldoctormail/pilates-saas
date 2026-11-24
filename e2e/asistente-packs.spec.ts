@@ -5,7 +5,7 @@ import { enOscuro } from './panel-sembrado';
 import { json, conAsistente, chat, sugerencia, abrirDesdeLaBarra, SALDO } from './asistente-andamiaje';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Los packs de consultas de «Pregúntale a Tentare» (fase 3, 6-oct-2026).
+// Los packs de consultas de «Pregúntale a Centra» (fase 3, 6-oct-2026).
 //
 //   · Sin consultas, DENTRO del chat: los tres packs para la propietaria y
 //     «pídeselo a la propietaria» para la gerente (sin un solo botón de pagar).
@@ -13,7 +13,7 @@ import { json, conAsistente, chat, sugerencia, abrirDesdeLaBarra, SALDO } from '
 //     servidor y espera a que el webhook haya creado el pack.
 //   · La compra que falla (400, 500, red caída) lo dice y no redirige; cada
 //     caso cuenta sus peticiones: un «no mintió» sin intento no prueba nada.
-//   · /suscripcion: «Consultas de Tentare» con el uso del mes, los packs vivos
+//   · /suscripcion: «Consultas de Centra» con el uso del mes, los packs vivos
 //     y los tres para comprar.
 //
 // Nunca se llama a Stripe: POST /api/asistente/packs y su estado van mockeados.

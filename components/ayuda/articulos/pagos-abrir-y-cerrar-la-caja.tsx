@@ -30,7 +30,7 @@ export default function Contenido() {
 
       <AyudaPaso numero={3} titulo="Al cerrar, cuenta el efectivo">
         <p>
-          Tentare te dice lo que debería haber y tú tecleas lo que has contado. La diferencia sale en pantalla.
+          Centra te dice lo que debería haber y tú tecleas lo que has contado. La diferencia sale en pantalla.
         </p>
         <p style={{ margin: 0 }}>
           Ese «debería haber» sale del libro, sumando <strong>solo el efectivo</strong>: fondo inicial, ventas en
@@ -41,7 +41,7 @@ export default function Contenido() {
 
       <AyudaResultado>
         El arqueo queda guardado con las tres cifras: esperado, contado y diferencia. Una diferencia no es un
-        fallo de Tentare ni algo que disimular — es el número que te dice si falta cambio, si alguien cobró fuera
+        fallo de Centra ni algo que disimular — es el número que te dice si falta cambio, si alguien cobró fuera
         de la Caja o si hubo un despiste, que son tres conversaciones distintas.
       </AyudaResultado>
     </>

@@ -23,7 +23,7 @@
 // · `firmado`: sale alguien con permiso nuestro y su documento firmado existe
 //   (vive fuera del repo).
 // · `propia`: sale quien la sube y la autoriza, la propia persona al frente de
-//   Tentare. No hay documento: es su propia imagen y lo decide ella.
+//   Centra. No hay documento: es su propia imagen y lo decide ella.
 // · `aportada`: la aporta el fundador para la web y responde él de sus derechos
 //   (autoría y permiso de quien sale); no hay documento en el repo, que es público.
 export type Consentimiento = 'no-aplica' | 'firmado' | 'propia' | 'aportada';
@@ -118,9 +118,9 @@ export const FOTOS = {
     presupuesto: { ancho: 1512, kb: 160 },
     credito: {
       autor: 'Aportada por el fundador',
-      fuente: 'Tentare',
+      fuente: 'Centra',
       url: '',
-      licencia: 'Uso en la web de Tentare autorizado por el fundador',
+      licencia: 'Uso en la web de Centra autorizado por el fundador',
       fechaDescarga: '2026-10-20',
     },
     consentimiento: 'aportada',
@@ -154,7 +154,7 @@ export const FOTOS = {
       fechaDescarga: '2026-10-09',
     },
     presupuesto: { ancho: 960, kb: 140 },
-    // Sale la propia persona al frente de Tentare, con la cara tapada por el
+    // Sale la propia persona al frente de Centra, con la cara tapada por el
     // móvil, y ella decide usarla.
     consentimiento: 'propia',
   },

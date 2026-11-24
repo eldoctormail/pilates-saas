@@ -7,10 +7,10 @@
 // cuando ese estudio es el único que «tiene» la cuenta:
 //   · nunca si la cuenta es del equipo de algún estudio (propietaria de un
 //     estudio o de una cadena, o ficha de equipo, activa o no) o del equipo de
-//     Tentare: la verificación protege el panel (y /interno), y un estudio no
+//     Centra: la verificación protege el panel (y /interno), y un estudio no
 //     puede abrir el panel de otro, ni el suyo propio por la puerta de atrás;
 //   · nunca si la cuenta vive también fuera de este estudio: alumna de un
-//     estudio que NO es de la misma cadena, o con perfil en Tentare Network.
+//     estudio que NO es de la misma cadena, o con perfil en Centra Network.
 //     Un estudio no decide sobre la seguridad de la cuenta con la que su alumna
 //     entra en otro sitio.
 // En esos casos no se toca nada, y el mensaje es el MISMO para los dos: decir
@@ -23,9 +23,9 @@ export interface CuentaParaQuitar {
   tieneCuenta: boolean;
   /** Factores verificados de la cuenta. */
   factoresVerificados: number;
-  /** Propietaria de un estudio o una cadena, ficha de equipo en alguno, o del equipo de Tentare. */
+  /** Propietaria de un estudio o una cadena, ficha de equipo en alguno, o del equipo de Centra. */
   esDelEquipo: boolean;
-  /** Tiene perfil en Tentare Network (profesional o alumna). */
+  /** Tiene perfil en Centra Network (profesional o alumna). */
   enNetwork: boolean;
   /** Estudios en los que la cuenta tiene ficha de alumna (sin dar de baja o no: la cuenta sigue siendo la misma). */
   estudiosComoAlumna: Array<{ studioId: string; cadenaId: string | null }>;
@@ -44,7 +44,7 @@ export function motivoNoQuitar(c: CuentaParaQuitar): MotivoNoQuitar | null {
   return null;
 }
 
-const FUERA_DE_ALCANCE = 'Su cuenta no se puede gestionar desde tu estudio, así que no se la puedes quitar desde aquí. Si ha perdido el acceso, que escriba a soporte de Tentare.';
+const FUERA_DE_ALCANCE = 'Su cuenta no se puede gestionar desde tu estudio, así que no se la puedes quitar desde aquí. Si ha perdido el acceso, que escriba a soporte de Centra.';
 
 export const MENSAJE_NO_QUITAR: Record<MotivoNoQuitar, string> = {
   sin_cuenta: 'Todavía no ha creado su cuenta en la app.',

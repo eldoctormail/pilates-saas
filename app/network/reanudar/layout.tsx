@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 // Ver el comentario de app/network/crear-perfil/layout.tsx — mismo motivo.
 export const metadata: Metadata = {
-  title: 'Continúa tu perfil | Tentare Network',
+  title: 'Continúa tu perfil | Centra Network',
   description: 'Retoma tu perfil de instructora justo donde lo dejaste.',
   robots: { index: false, follow: false },
 };

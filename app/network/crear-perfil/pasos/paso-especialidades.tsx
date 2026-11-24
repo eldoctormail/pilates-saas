@@ -2,7 +2,7 @@
 
 // Paso 05 del wizard: especialidades. Extraído tal cual de
 // app/network/crear-perfil/page.tsx (paso === 4) — F0 del roadmap de
-// Tentare Network 2.0, sin cambios de comportamiento. Único paso que guarda
+// Centra Network 2.0, sin cambios de comportamiento. Único paso que guarda
 // al vuelo (`guardar`) en vez de esperar al botón Continuar — se mantiene
 // igual, es el padre quien pasa esa función.
 import { SelectorChips } from '@/components/network/selector-chips';

@@ -28,7 +28,7 @@ test('la rama nueva: el código, los textos de la maqueta y NINGÚN enlace', () 
   const { nueva } = partirPlantillaDelRepo(FICHERO);
   assert.match(nueva, /\{\{ \.Token \}\}/);
   for (const texto of [
-    'Te damos la bienvenida a Tentare',
+    'Te damos la bienvenida a Centra',
     'escribe este código en la pantalla donde te has registrado:',
     'Caduca en 10 minutos',
     'Lo que viene después, en unos 10 minutos:',
@@ -37,7 +37,7 @@ test('la rama nueva: el código, los textos de la maqueta y NINGÚN enlace', () 
     'El enlace de la app de tus alumnas, listo para mandar',
     'Si no has sido tú, ignora este correo: sin el código no se crea nada.',
     'te responde una persona',
-    'Tentare · Software para estudios de Pilates · Hecho en España',
+    'Centra · Software para estudios de Pilates · Hecho en Argentina',
   ]) assert.ok(nueva.includes(texto), texto);
   // Decisión 1 del fundador: los escáneres de correo abren los enlaces y gastan el acceso.
   assert.doesNotMatch(nueva, /href=|ConfirmationURL|TokenHash|<a[\s>]/);
@@ -48,8 +48,8 @@ test('la rama nueva: el código, los textos de la maqueta y NINGÚN enlace', () 
 
 test('el asunto de referencia: el código solo para el alta nueva, el de siempre para el resto', () => {
   const asunto = /\[auth\.email\.template\.confirmation\][\s\S]*?subject = "([^"]+)"/.exec(CONFIG)?.[1];
-  assert.equal(asunto, asuntoCondicional('Tu código de verificación de Tentare'));
-  assert.equal(ASUNTO_ALTA_NUEVA, '{{ .Token }} es tu código · Te damos la bienvenida a Tentare');
+  assert.equal(asunto, asuntoCondicional('Tu código de verificación de Centra'));
+  assert.equal(ASUNTO_ALTA_NUEVA, '{{ .Token }} es tu código · Te damos la bienvenida a Centra');
 });
 
 test('al componer, la rama de siempre es la de producción, no la del repo', () => {
@@ -59,11 +59,11 @@ test('al componer, la rama de siempre es la de producción, no la del repo', () 
   assert.equal(c.yaAplicada, false);
   assert.ok(c.contenido.startsWith(APERTURA) && c.contenido.endsWith(`${SEPARADOR}${hoy}${CIERRE}`));
   assert.equal(partirPlantillaDelRepo(c.contenido).deSiempre, hoy);
-  assert.equal(c.asunto, '{{ if .Data.alta_nueva }}{{ .Token }} es tu código · Te damos la bienvenida a Tentare{{ else }}Asunto de hoy{{ end }}');
+  assert.equal(c.asunto, '{{ if .Data.alta_nueva }}{{ .Token }} es tu código · Te damos la bienvenida a Centra{{ else }}Asunto de hoy{{ end }}');
 
   // Con producción igual que el repo, lo dice.
   const igual = componerPlantillaCodigo({
-    ficheroDelRepo: FICHERO, contenidoDeHoy: partirPlantillaDelRepo(FICHERO).deSiempre, asuntoDeHoy: 'Tu código de verificación de Tentare',
+    ficheroDelRepo: FICHERO, contenidoDeHoy: partirPlantillaDelRepo(FICHERO).deSiempre, asuntoDeHoy: 'Tu código de verificación de Centra',
   });
   assert.equal(igual.laDeSiempreCoincide, true);
   assert.equal(igual.contenido, FICHERO);

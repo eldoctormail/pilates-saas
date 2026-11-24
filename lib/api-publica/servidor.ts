@@ -79,7 +79,7 @@ async function rolActual(admin: SupabaseClient, studioId: string, authUserId: st
 }
 
 /**
- * ¿Tiene el estudio la API activada? Todos la tienen, salvo los que Tentare
+ * ¿Tiene el estudio la API activada? Todos la tienen, salvo los que Centra
  * haya desactivado a mano desde /interno (lib/api-publica/acceso.ts).
  *
  * ⚠️ Si la lectura FALLA, la respuesta es «no»: el interruptor de apagado no
@@ -98,7 +98,7 @@ export type AccesoVigente =
 
 /**
  * Lo que una credencial (o un webhook) necesita HOY para seguir valiendo: el
- * estudio con acceso a Tentare y quien la concedió todavía en él. La misma
+ * estudio con acceso a Centra y quien la concedió todavía en él. La misma
  * regla para la API y para los webhooks.
  */
 export async function accesoVigente(admin: SupabaseClient, studioId: string, concedidaPor: string): Promise<AccesoVigente> {
@@ -160,7 +160,7 @@ export async function autenticarApiPublica(req: NextRequest, admin: SupabaseClie
     scopesCredencial = fila.scopes ?? [];
     concedidaPor = fila.auth_user_id;
 
-    // Una app que Tentare da de baja deja de entrar al momento, no cuando
+    // Una app que Centra da de baja deja de entrar al momento, no cuando
     // caduque su token (1 h).
     const { data: app } = await admin.from('oauth_clientes').select('activo, scopes_permitidos').eq('id', fila.cliente_id).maybeSingle();
     if (!app?.activo) {
@@ -192,7 +192,7 @@ export async function autenticarApiPublica(req: NextRequest, admin: SupabaseClie
     }
   }
 
-  // La API es de todos los estudios (16-oct-2026) salvo el que Tentare haya
+  // La API es de todos los estudios (16-oct-2026) salvo el que Centra haya
   // desactivado a mano; una clave de cadena no llega a una sede desactivada.
   if (credencial.tipo === 'clave' && !(await apiActivada(admin, studioId))) {
     return { ok: false, studioId, credencial, resultado: error(403, 'api_no_activada', 'La API no está activada para este estudio.', requestId) };
@@ -200,7 +200,7 @@ export async function autenticarApiPublica(req: NextRequest, admin: SupabaseClie
 
   const acceso = await accesoVigente(admin, studioId, concedidaPor);
   if (!acceso.ok && acceso.motivo === 'estudio_sin_acceso') {
-    return { ok: false, studioId, credencial, resultado: error(403, 'estudio_sin_acceso', 'El estudio no tiene acceso a Tentare ahora mismo.', requestId) };
+    return { ok: false, studioId, credencial, resultado: error(403, 'estudio_sin_acceso', 'El estudio no tiene acceso a Centra ahora mismo.', requestId) };
   }
   if (!acceso.ok) {
     // Quien la concedió ya no está en el estudio: la credencial muere con su acceso.

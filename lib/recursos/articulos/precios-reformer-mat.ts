@@ -166,7 +166,7 @@ const articulo: Articulo = {
         {
           t: 'producto',
           titulo: 'El reformer y el mat, cada uno con su precio y sus reglas',
-          texto: 'En Tentare los bonos y las cuotas pueden ser de un tipo de clase concreto, si defines los puestos de la sala la alumna elige su reformer al reservar, y la plaza que se libera pasa sola a la primera de la lista de espera. Gratis hasta 150 reservas al mes, sin permanencia.',
+          texto: 'En Centra los bonos y las cuotas pueden ser de un tipo de clase concreto, si defines los puestos de la sala la alumna elige su reformer al reservar, y la plaza que se libera pasa sola a la primera de la lista de espera. Gratis hasta 150 reservas al mes, sin permanencia.',
         },
       ],
     },

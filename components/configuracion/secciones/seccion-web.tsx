@@ -22,7 +22,7 @@ import { useMiWebNueva } from '@/lib/estudio/panel-nuevo-cliente';
 //
 // Filas con su valor de hoy (15-sep, v2): la dirección de tu página con
 // «Copiar» y su cajón, ocultar tu página (16-sep: su única pantalla estaba en el
-// editor de apariencia, en mantenimiento), Tentare Network como un sí/no que se
+// editor de apariencia, en mantenimiento), Centra Network como un sí/no que se
 // guarda al tocarlo (sin dinero ni nada en cadena, y vuelve atrás si falla), y
 // el contenido de tu app y los widgets, que tienen su propia pantalla (#2061).
 // «Cómo le va a tu página» sigue dentro de los widgets.
@@ -76,7 +76,7 @@ export function SeccionWeb({ showToast }: { showToast: (m: string) => void }) {
   async function cambiarNetwork(v: boolean): Promise<string | null> {
     const res = await updateStudio({ visibleEnNetwork: v });
     if (!res.ok) return res.error;
-    showToast(v ? 'Tu estudio ya aparece en Tentare Network' : 'Tu estudio ya no aparece en Tentare Network');
+    showToast(v ? 'Tu estudio ya aparece en Centra Network' : 'Tu estudio ya no aparece en Centra Network');
     return null;
   }
 

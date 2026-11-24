@@ -77,7 +77,7 @@ test('propietaria, manager y recepción apuntan en cualquier clase', () => {
   }
 });
 
-test('la instructora ya no apunta en ninguna clase desde el panel, ni en las suyas (Tentare Core retirado)', () => {
+test('la instructora ya no apunta en ninguna clase desde el panel, ni en las suyas (Centra Core retirado)', () => {
   assert.equal(puedeApuntarEnClase('INSTRUCTOR'), false);
 });
 

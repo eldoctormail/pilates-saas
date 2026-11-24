@@ -1,4 +1,4 @@
-/* Service Worker de Tentare.
+/* Service Worker de Centra.
 
    DOS responsabilidades, y conviene no confundirlas:
 
@@ -34,10 +34,10 @@ function avisarServidor(evento, nid) {
 self.addEventListener('push', (event) => {
   let data = {};
   try { data = event.data ? event.data.json() : {}; } catch { data = {}; }
-  const title = data.title || 'Tentare';
+  const title = data.title || 'Centra';
   const options = {
     body: data.body || '',
-    // El icono era SIEMPRE el genérico de Tentare. El servidor manda ya
+    // El icono era SIEMPRE el genérico de Centra. El servidor manda ya
     // siempre uno propio del estudio (su logo si lo subió, si no un monograma
     // con su inicial y su color de marca — lib/monograma-estudio.ts): este
     // fallback a `/icon-192.png` solo cubre un payload viejo o incompleto, no
@@ -62,7 +62,7 @@ self.addEventListener('notificationclick', (event) => {
   const datos = event.notification.data || {};
   const url = datos.url || '/';
   // URL absoluta y del propio origen: un `url` externo o mal formado no puede
-  // sacar a la usuaria de Tentare.
+  // sacar a la usuaria de Centra.
   let destino;
   try {
     destino = new URL(url, self.location.origin);
@@ -73,7 +73,7 @@ self.addEventListener('notificationclick', (event) => {
     avisarServidor('click', datos.nid),
     self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(async (wins) => {
       // Una ventana ya en esa pantalla: solo se enfoca. Cualquier otra ventana
-      // de Tentare se lleva a la pantalla del aviso (antes solo se enfocaba si su
+      // de Centra se lleva a la pantalla del aviso (antes solo se enfocaba si su
       // URL «contenía» la del aviso, y si no, se abría OTRA ventana).
       const misma = wins.find((w) => w.url === destino.href);
       if (misma && 'focus' in misma) return misma.focus();

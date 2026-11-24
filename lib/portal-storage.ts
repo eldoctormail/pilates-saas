@@ -318,10 +318,10 @@ export async function eliminarImagenBienvenida(studioId: string): Promise<{ ok: 
   return { ok: true };
 }
 
-// Foto de perfil de Tentare Network — mismo bucket público, prefijo propio.
+// Foto de perfil de Centra Network — mismo bucket público, prefijo propio.
 // A diferencia de `subirFotoInstructor`, la autorización del path es por
 // dueño (`red_perfiles.auth_user_id = auth.uid()`), no por estudio: un
-// perfil de Network puede no pertenecer a ningún estudio Tentare
+// perfil de Network puede no pertenecer a ningún estudio Centra
 // (avatars_path_autorizado, rama `network-%`).
 export async function subirFotoPerfilNetwork(perfilId: string, file: File): Promise<{ url: string } | { error: string }> {
   const path = `network-${perfilId}`;

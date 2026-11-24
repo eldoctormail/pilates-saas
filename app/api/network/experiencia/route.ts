@@ -9,7 +9,7 @@ import { esEspecialidadValida } from '@/lib/network/catalogo';
 // CRUD de experiencia laboral — docs/NETWORK-IMPLEMENTATION-PLAN.md §3/§6.
 //
 // `studio_id` NUNCA se fija desde aquí: enlazar una experiencia a un estudio
-// Tentare real es parte del flujo de "Verificar experiencia" (Fase 7), no
+// Centra real es parte del flujo de "Verificar experiencia" (Fase 7), no
 // del alta. Solo POST/DELETE (sin PATCH) — editar es borrar y volver a
 // crear, mismo criterio de mínimo alcance que el resto de esta fase.
 

@@ -20,7 +20,7 @@ test('hay exactamente cinco estados, con su etiqueta en español', () => {
 test('un estudio vacío lo tiene todo pendiente; lo manual nunca se da por hecho solo', () => {
   const p = resolverPasos([], VACIO);
   assert.ok(p.every(x => x.estado === 'PENDIENTE'));
-  // Aunque tenga datos de sobra, lo que ocurre fuera de Tentare o lo decide ella no se completa solo.
+  // Aunque tenga datos de sobra, lo que ocurre fuera de Centra o lo decide ella no se completa solo.
   const conTodo = resolverPasos([], { numAlumnas: 50, numPlanesActivos: 3, numSuscripciones: 40, numClases: 30, numReservas: 200 });
   for (const x of conTodo) assert.equal(x.estado === 'COMPLETADO', x.paso.modo === 'datos', x.paso.id);
 });
@@ -81,7 +81,7 @@ test('los cinco softwares pedidos están, con fecha, y solo se dan pasos si cons
   assert.deepEqual(ORIGENES.filter(o => o.verificado).map(o => o.id).sort(), ['eversports', 'otro', 'timp']);
 });
 
-test('nada promete que Tentare haga la migración por ella (se retiró el 21-oct-2026)', () => {
+test('nada promete que Centra haga la migración por ella (se retiró el 21-oct-2026)', () => {
   const texto = JSON.stringify([PASOS, ORIGENES, LIMITES_DE_LA_MIGRACION]).toLowerCase();
   for (const mal of ['te la hacemos', 'lo hacemos nosotros', 'migración automática', 'migramos por ti', 'sin esfuerzo']) assert.ok(!texto.includes(mal), mal);
 });

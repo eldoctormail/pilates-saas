@@ -25,7 +25,7 @@ import type { MostrarToast } from '@/components/ui/toast';
 // Urban Sports Club tiene además conexión por API: con su ID de proveedor y de
 // ubicación guardados en esta misma fila, el cron publica el horario y sus
 // reservas entran solas (lib/plataformas/usc/). El formulario solo aparece
-// cuando Tentare tiene las credenciales de integrador de USC; mientras no haya
+// cuando Centra tiene las credenciales de integrador de USC; mientras no haya
 // conexión automática, cada plataforma lo dice con «próximamente» (decisión del
 // fundador, 1-oct-2026): el modo manual sigue funcionando igual.
 //
@@ -63,7 +63,7 @@ interface EstadoUsc {
 }
 
 /**
- * La config de USC y si Tentare tiene sus credenciales de integrador. `usc`
+ * La config de USC y si Centra tiene sus credenciales de integrador. `usc`
  * null = cargando; si falla la lectura, `error` y se trabaja en manual sin
  * perder nada (el interruptor de USC espera a saber qué config hay para no pisarla).
  */
@@ -83,7 +83,7 @@ function useEstadoUsc() {
   return { usc, setUsc, errorUsc: error };
 }
 
-/** Hoy solo USC se puede conectar, y solo con las credenciales de Tentare. */
+/** Hoy solo USC se puede conectar, y solo con las credenciales de Centra. */
 function conexionDe(p: Plataforma, usc: EstadoUsc | null): { disponible: boolean; conectada: boolean } {
   const disponible = p === USC && usc?.apiDisponible === true;
   return { disponible, conectada: disponible && !!usc && uscPublicaPorApi(usc.config) };
@@ -93,7 +93,7 @@ function conexionDe(p: Plataforma, usc: EstadoUsc | null): { disponible: boolean
  * Los pasos para pedir la conexión a Wellhub. Es SU trámite, no el nuestro:
  * Wellhub activa la integración de un software cuando sus estudios se la piden
  * desde su portal (su ayuda: «How to set up your CMS integration?»), y mientras
- * no lo hagan Tentare no tiene a quién pedir credenciales para esa sede. Por eso
+ * no lo hagan Centra no tiene a quién pedir credenciales para esa sede. Por eso
  * el estudio lo ve aquí, sin buscarlo. No promete plazo: lo que ocurre después
  * lo decide Wellhub.
  */
@@ -106,11 +106,11 @@ function PedirConexionWellhub() {
       <ol className="mt-2 list-decimal space-y-1 pl-4">
         <li>Entra en tu <span className="font-semibold text-foreground">Partner Portal</span> de Wellhub.</li>
         <li>En el menú, abre <span className="font-semibold text-foreground">Integraciones</span> y elige tu sede.</li>
-        <li>En el sistema de gestión elige <span className="font-semibold text-foreground">«Others»</span> y escribe <span className="font-semibold text-foreground">Tentare</span>.</li>
+        <li>En el sistema de gestión elige <span className="font-semibold text-foreground">«Others»</span> y escribe <span className="font-semibold text-foreground">Centra</span>.</li>
         <li>Pulsa <span className="font-semibold text-foreground">«Request integration»</span>.</li>
       </ol>
       <p className="mt-2">
-        Wellhub se pone en contacto con Tentare para activarla. Hasta entonces, apunta tú sus reservas desde la clase.
+        Wellhub se pone en contacto con Centra para activarla. Hasta entonces, apunta tú sus reservas desde la clase.
         Cuantos más estudios la pidan, antes la abren.
       </p>
     </details>
@@ -406,7 +406,7 @@ function ConexionUsc({ config, ventaCortada, onGuardada, showToast }: {
           ? `En pausa: ${porQueSinVentaExterna(ventaCortada)}. Mientras tanto no se publica nada en Urban Sports Club ni entran sus reservas, y lo que estaba publicado se retira.`
           : conectada
           ? 'Conectada. Las clases cuyo tipo tiene lugares cedidos a Urban Sports Club se publican solas en su app (dos semanas vista), y sus reservas entran solas en la clase.'
-          : 'Para activarlo: 1) pídele a Urban Sports Club que active Tentare como tu software de reservas (lo hace su equipo de soporte, no es automático); 2) te enviarán dos IDs, el de proveedor y el de ubicación; 3) pégalos aquí. Después, en cada tipo de clase, elige cuántos lugares cedes a Urban Sports Club: solo esas clases se publican en su app.'}
+          : 'Para activarlo: 1) pídele a Urban Sports Club que active Centra como tu software de reservas (lo hace su equipo de soporte, no es automático); 2) te enviarán dos IDs, el de proveedor y el de ubicación; 3) pégalos aquí. Después, en cada tipo de clase, elige cuántos lugares cedes a Urban Sports Club: solo esas clases se publican en su app.'}
       </p>
       <div className="grid gap-2 sm:grid-cols-2">
         <label className="block text-xs font-medium text-foreground">

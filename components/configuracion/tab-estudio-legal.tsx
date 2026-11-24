@@ -86,7 +86,7 @@ export function FormContratoYPrivacidad({ onGuardado }: PropsFormularioCajon) {
         {sinPenalizaciones && (
           <p className="flex gap-2 rounded-lg bg-destructive/10 px-3 py-2.5 text-sm text-foreground text-pretty">
             <AlertTriangle size={16} className="mt-0.5 shrink-0 text-destructive" aria-hidden />
-            <span>Con términos propios no se cobra ninguna penalización. Si borras el texto se usan los de Tentare, que solo incluyen el cargo si el importe está puesto en el estudio, y solo se cobrará a quien acepte ese texto.</span>
+            <span>Con términos propios no se cobra ninguna penalización. Si borras el texto se usan los de Centra, que solo incluyen el cargo si el importe está puesto en el estudio, y solo se cobrará a quien acepte ese texto.</span>
           </p>
         )}
         {/* Sin razón social ni NIF no se identifica al responsable del

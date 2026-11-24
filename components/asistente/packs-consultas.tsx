@@ -9,8 +9,8 @@ import { mensajeSeguro, mensajeHttp } from '@/lib/errores';
 import { cn, TZ_ESTUDIO } from '@/lib/utils';
 import { PACKS_CONSULTAS, PACK_CADUCA_MESES, eurosDe, miles, precioPorConsulta, textoQuedan, type PackConsultas } from '@/lib/asistente/packs';
 
-// Los packs de consultas de «Pregúntale a Tentare» en pantalla: la sección
-// «Consultas de Tentare» de /suscripcion (uso del mes, packs vivos y comprar),
+// Los packs de consultas de «Pregúntale a Centra» en pantalla: la sección
+// «Consultas de Centra» de /suscripcion (uso del mes, packs vivos y comprar),
 // la tarjeta que sale DENTRO del chat cuando se acaban, y el botón de comprar
 // que comparten. Comprar solo abre el Checkout de Stripe: el pack lo crea el
 // webhook cuando Stripe confirma el pago, y la vuelta solo LEE en qué quedó.
@@ -106,7 +106,7 @@ export function PacksEnVenta({ desde, compacto = false, claseBoton }: { desde: D
         })}
       </ul>
       <p className="mt-2.5 text-[12.5px] leading-snug text-muted-foreground text-pretty">
-        Pago único con IVA incluido. Se gastan después de las de tu plan, mientras tengas un plan de Tentare, y caducan a los {PACK_CADUCA_MESES} meses.
+        Pago único con IVA incluido. Se gastan después de las de tu plan, mientras tengas un plan de Centra, y caducan a los {PACK_CADUCA_MESES} meses.
       </p>
       {error && (
         <p role="alert" className="mt-2 rounded-xl bg-destructive/10 px-3.5 py-2.5 text-[13.5px] font-medium text-destructive" data-error-compra="">
@@ -131,14 +131,14 @@ export function TarjetaSinConsultas({ puedeComprar }: { puedeComprar: boolean })
         </>
       ) : (
         <p className="mt-1 text-[13.5px] text-muted-foreground text-pretty">
-          Pídeselo a la propietaria: puede comprar un pack de consultas desde Suscripción, y sirve para todo el equipo que usa Tentare.
+          Pídeselo a la propietaria: puede comprar un pack de consultas desde Suscripción, y sirve para todo el equipo que usa Centra.
         </p>
       )}
     </div>
   );
 }
 
-// ── /suscripcion · «Consultas de Tentare» ────────────────────────────────────
+// ── /suscripcion · «Consultas de Centra» ────────────────────────────────────
 
 type EstadoCompra =
   | { estado: 'ACREDITADO'; unidades: number; caducaEn: string }
@@ -220,9 +220,9 @@ export function ConsultasDeTentare({ className }: { className?: string }) {
 
   return (
     <section id="consultas" ref={raiz} data-testid="consultas-tentare" aria-labelledby="consultas-titulo" className={cn('scroll-mt-6', className)}>
-      <h2 id="consultas-titulo" className="text-[19px] font-extrabold tracking-tight text-foreground">Consultas de Tentare</h2>
+      <h2 id="consultas-titulo" className="text-[19px] font-extrabold tracking-tight text-foreground">Consultas de Centra</h2>
       <p className="mt-1 max-w-xl text-[13.5px] text-muted-foreground text-pretty">
-        Cada pregunta a «Pregúntale a Tentare» que mira los datos de tu estudio gasta una consulta. Charlar con él no gasta.
+        Cada pregunta a «Pregúntale a Centra» que mira los datos de tu estudio gasta una consulta. Charlar con él no gasta.
       </p>
 
       <div aria-live="polite">

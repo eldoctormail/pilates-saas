@@ -13,16 +13,16 @@ import './ayuda-marco.css';
  * un robot) flotando. Sustituye a la isla de la web en estas páginas. El pie legal sigue siendo el de toda la web pública.
  */
 export function AyudaMarco({ children, ancho = 760, portada = false }: { children: ReactNode; ancho?: number; portada?: boolean }) {
-  const chat = enlaceWhatsApp(SOPORTE_WHATSAPP, 'Hola, tengo una duda sobre Tentare:');
+  const chat = enlaceWhatsApp(SOPORTE_WHATSAPP, 'Hola, tengo una duda sobre Centra:');
   return (
     <>
       <div className="ay-marco">
         <header className="ay-barra">
-          <Link href="/ayuda" className="ay-logo" aria-label="Centro de ayuda de Tentare">
-            <LogoTentare formato="isotipo" tinta="auto" alto={26} titulo="Tentare" />
+          <Link href="/ayuda" className="ay-logo" aria-label="Centro de ayuda de Centra">
+            <LogoTentare formato="isotipo" tinta="auto" alto={26} titulo="Centra" />
             <span>Ayuda</span>
           </Link>
-          <Link href="/login" className="ay-entrar">Abrir Tentare</Link>
+          <Link href="/login" className="ay-entrar">Abrir Centra</Link>
         </header>
         <main className={`ay-lienzo${portada ? ' ay-lienzo--portada' : ''}`}>
           <div className="ay-contenido" style={{ '--ay-ancho': `${ancho}px` } as CSSProperties}>{children}</div>

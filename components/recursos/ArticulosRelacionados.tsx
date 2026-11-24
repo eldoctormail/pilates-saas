@@ -36,7 +36,7 @@ export function ArticulosRelacionados({
       <p className="art-rel-mas">
         {deProducto.length > 0 && (
           <>
-            En Tentare:{' '}
+            En Centra:{' '}
             {deProducto.map((p, i) => (
               <span key={p.href}>
                 {i > 0 && ' · '}

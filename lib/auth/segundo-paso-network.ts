@@ -1,5 +1,5 @@
 'use client';
-// Tentare Network vive fuera del panel (app/network/layout.tsx) pero entra con
+// Centra Network vive fuera del panel (app/network/layout.tsx) pero entra con
 // la MISMA cuenta y el mismo cliente: una persona del equipo con la verificación
 // en dos pasos activada que abre /network con una sesión sin verificar recibiría
 // 401 en cada llamada (`verificarUsuarioSupabase` la corta en el servidor). Esto

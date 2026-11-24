@@ -1,7 +1,7 @@
 'use client';
 
 // «Reseñas y premio» (Configuración → Cómo me comunico, 21-nov-2026): el enlace de
-// reseñas del estudio y el código que se regala a quien valora una clase en Tentare.
+// reseñas del estudio y el código que se regala a quien valora una clase en Centra.
 //
 // ⚠️ El premio es por valorar EN TENTARE (solo valora quien asistió) y se da con
 // cualquier nota; el enlace de reseñas se ofrece a TODAS, aparte. Nunca «te
@@ -204,7 +204,7 @@ function Cuerpo({ respuesta, resenas, onGuardado }: { respuesta: RespuestaResena
               {id => <input id={id} inputMode="numeric" className={cn(inputCls, 'w-24')} value={form.dias} aria-invalid={premioMal} onChange={e => cambiar({ dias: e.target.value })} />}
             </Campo>
             <p className="rounded-lg bg-muted px-3 py-2.5 text-sm text-pretty text-foreground" data-testid="resenas-aviso-premio" data-consecuencia="">
-              El premio es por <strong className="font-semibold">valorar la clase en Tentare</strong> (solo valora quien asistió) y se da con cualquier nota.
+              El premio es por <strong className="font-semibold">valorar la clase en Centra</strong> (solo valora quien asistió) y se da con cualquier nota.
               No es por dejar una reseña en Google: no se puede comprobar, Google no permite premiar reseñas y la normativa de consumo exige declararlas.
               Por eso el enlace de arriba se ofrece aparte: sin mencionar el premio y sin mirar la nota.
             </p>

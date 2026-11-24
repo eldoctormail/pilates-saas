@@ -134,7 +134,7 @@ function avisarPlazaNoDevuelta(d: unknown): void {
     level: 'error', tags: { area: 'cobros', tipo: 'cupo-matricula' },
     extra: {
       planId, studioId, detalle,
-      // Ninguna pantalla enseña ni edita el contador: la corrección es de Tentare.
+      // Ninguna pantalla enseña ni edita el contador: la corrección es de Centra.
       queHacer: 'El cobro no llegó a crearse y el lugar sigue gastado. Restar 1 a planes_tarifa.matricula_gratis_usados de ese plan (id + studio_id); la pantalla de planes no lo edita.',
     },
   });

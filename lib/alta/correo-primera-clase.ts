@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// El correo n.º 3 del alta nueva: «Tu primera clase en Tentare, en 5 minutos»
+// El correo n.º 3 del alta nueva: «Tu primera clase en Centra, en 5 minutos»
 // (maqueta aprobada del 21-oct-2026, «09 · Correos»). Puro, para probar la regla
 // sin red (correo-primera-clase.test.ts); lo manda el cron horario
 // `altas-sin-terminar` (lib/alta/recordatorio-servidor.ts).

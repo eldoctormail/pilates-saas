@@ -12,13 +12,13 @@ export const metadata: Metadata = {
   title: pagina.titulo,
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
-  openGraph: { siteName: 'Tentare', type: 'website', locale: 'es_ES', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
+  openGraph: { siteName: 'Centra', type: 'website', locale: 'es_ES', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
 };
 
 const FAQ = [
   {
     q: '¿Qué es una clase recurrente?',
-    a: 'Una clase que se repite cada semana el mismo día y a la misma hora durante un número de semanas que eliges tú. Tentare crea todas esas clases de una vez y las trata como una serie, así que después puedes editarlas o cancelarlas juntas.',
+    a: 'Una clase que se repite cada semana el mismo día y a la misma hora durante un número de semanas que eliges tú. Centra crea todas esas clases de una vez y las trata como una serie, así que después puedes editarlas o cancelarlas juntas.',
   },
   {
     q: '¿Cuántas semanas puedo programar?',
@@ -26,7 +26,7 @@ const FAQ = [
   },
   {
     q: '¿Qué pasa cuando la serie se acaba?',
-    a: 'Tentare te avisa antes, no después. Cuando quedan pocas semanas aparece en Resumen, y según se acerca el final recibes aviso en el móvil y por correo. Desde ahí dices cuántas semanas más quieres y, antes de confirmar, te enseña cuántas clases salen, qué fechas no puede crear y por qué, y qué plazas fijas siguen.',
+    a: 'Centra te avisa antes, no después. Cuando quedan pocas semanas aparece en Resumen, y según se acerca el final recibes aviso en el móvil y por correo. Desde ahí dices cuántas semanas más quieres y, antes de confirmar, te enseña cuántas clases salen, qué fechas no puede crear y por qué, y qué plazas fijas siguen.',
   },
   {
     q: '¿Puede renovarse sola?',
@@ -34,7 +34,7 @@ const FAQ = [
   },
   {
     q: '¿Y si renueva sobre un festivo o una semana que cierro?',
-    a: 'No crea clase en los días que tengas cerrado el centro: se los salta y te dice cuáles ha omitido. Un festivo que no hayas cerrado sí recibe clase; de los festivos oficiales con clases, Tentare te avisa antes para que decidas si cierras.',
+    a: 'No crea clase en los días que tengas cerrado el centro: se los salta y te dice cuáles ha omitido. Un festivo que no hayas cerrado sí recibe clase; de los festivos oficiales con clases, Centra te avisa antes para que decidas si cierras.',
   },
   {
     q: '¿Qué pasa con las plazas fijas al renovar?',
@@ -78,7 +78,7 @@ export default function ClasesRecurrentesPage() {
 
       <Seccion id="serie" titulo="Una serie, no cuarenta clases sueltas">
         <p>
-          Al crear una clase recurrente, Tentare genera todas las ocurrencias de una vez, pero las guarda como una{' '}
+          Al crear una clase recurrente, Centra genera todas las ocurrencias de una vez, pero las guarda como una{' '}
           <strong>serie</strong>. Esa diferencia es la que te deja trabajar después:
         </p>
         <Rejilla
@@ -132,7 +132,7 @@ export default function ClasesRecurrentesPage() {
           </ul>
         </PanelClaro>
         <p>
-          La <strong>renovación automática</strong> se activa por serie. Cuando está encendida, Tentare la alarga sola al
+          La <strong>renovación automática</strong> se activa por serie. Cuando está encendida, Centra la alarga sola al
           acercarse el final y te lo cuenta. Si tu estudio no tiene suscripción activa, no renueva nada: no es un despiste,
           es una comprobación que se hace en el último momento.
         </p>
@@ -144,7 +144,7 @@ export default function ClasesRecurrentesPage() {
             Creas el horario con clases recurrentes. Quedan publicadas y tus alumnas ya pueden reservar todas las semanas.
           </CasoDeUso>
           <CasoDeUso hora="Diciembre" titulo="Cierras por Navidad">
-            Pones el cierre del centro. Al renovar, esas fechas se saltan solas y Tentare te dice cuáles ha omitido.
+            Pones el cierre del centro. Al renovar, esas fechas se saltan solas y Centra te dice cuáles ha omitido.
           </CasoDeUso>
           <CasoDeUso hora="Enero" titulo="Se acaba la serie">
             Te avisa antes de la última clase. Renuevas doce semanas más desde el aviso y las plazas fijas de esa franja se
@@ -184,7 +184,7 @@ export default function ClasesRecurrentesPage() {
 
       <CierreCta
         titulo="Que tu horario no se acabe por sorpresa"
-        body="Programa tus clases una vez y deja que Tentare te avise antes del final."
+        body="Programa tus clases una vez y deja que Centra te avise antes del final."
       />
     </FeatureShell>
   );

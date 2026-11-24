@@ -117,7 +117,7 @@ export async function crearBaja(
       'No se han podido calcular las candidatas para cubrir esta clase. Inténtalo de nuevo en unos segundos.'), status: 500 };
   }
 
-  // Sugerencia de Tentare Network (Fase 11, docs/NETWORK-SUSTITUCIONES-
+  // Sugerencia de Centra Network (Fase 11, docs/NETWORK-SUSTITUCIONES-
   // EXTENSION.md) — aparte del ranking interno, nunca fusionada. Best-effort:
   // si falla, la baja se registra igual con el ranking interno solo (mismo
   // criterio que emitirEscalado más abajo).
@@ -237,7 +237,7 @@ export async function crearBaja(
 
   if (sinNadieAQuienPreguntar) {
     // Aviso por email siempre, venga de donde venga la baja: aunque la haya
-    // marcado ella desde el panel, esperaba que Tentare buscara sola.
+    // marcado ella desde el panel, esperaba que Centra buscara sola.
     //
     // Aquí NO se llama a refrescarCandidatosNetwork, a diferencia de los otros
     // sitios donde se llega a 'agotada': los candidatos de Network se acaban de

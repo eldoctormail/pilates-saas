@@ -192,7 +192,7 @@ export function casarRespuestas<T extends Pick<RegistroCola, 'numSerieFactura' |
  * Fault), se usa el valor inicial que fija la orden: 60 segundos. Nunca 0.
  *
  * ⚠️ ÁMBITO NO CONFIRMADO: si la espera cuenta por certificado remitente, por
- * obligado o por sistema. Mientras no se aclare, Tentare la aplica GLOBAL
+ * obligado o por sistema. Mientras no se aclare, Centra la aplica GLOBAL
  * (`verifactu_control_flujo`, clave 'global'): lo más prudente.
  */
 export const ESPERA_AEAT_POR_DEFECTO_SEGUNDOS = 60;

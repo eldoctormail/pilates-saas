@@ -73,7 +73,7 @@ test('recién llegada: bienvenida, la cifra real de clases con lugar y su primer
   const tarjeta = page.getByTestId('primera-clase');
   await expect(tarjeta).toBeVisible({ timeout: 45_000 });
   // El nombre del estudio lo siembra el servidor en E2E_TEST (no el payload del andamiaje).
-  await expect(tarjeta).toContainText('Bienvenida a Tentare');
+  await expect(tarjeta).toContainText('Bienvenida a Centra');
   await expect(page.getByTestId('primera-clase-cifra')).toHaveText('En los próximos 7 días hay 2 clases con lugar.');
   // El andamiaje no vende clase suelta: las dos solo se reservan con bono o cuota, y la tarjeta lo dice.
   await expect(tarjeta).toContainText('Para reservarlas hace falta un bono o una cuota.');

@@ -18,7 +18,7 @@ const almacen = new Map<string, string>();
 };
 
 const lleno: BorradorAlta = {
-  estudio: 'Estudio Tentare',
+  estudio: 'Estudio Centra',
   ciudad: 'Madrid',
   plan: 'ESTUDIO',
   persona: 'María García',
@@ -32,7 +32,7 @@ test('paso 1: hace falta el nombre del estudio, y nada más', () => {
   assert.equal(validarPaso(1, { ...BORRADOR_ALTA, estudio: 'A' }), 'Escribe el nombre de tu estudio.');
   // La ciudad es opcional a propósito: la BD no la exige y no hace falta para
   // empezar. Pedirla como obligatoria sería fricción sin contrapartida.
-  assert.equal(validarPaso(1, { ...BORRADOR_ALTA, estudio: 'Estudio Tentare' }), null);
+  assert.equal(validarPaso(1, { ...BORRADOR_ALTA, estudio: 'Estudio Centra' }), null);
 });
 
 test('paso 1: un nombre larguísimo se rechaza aquí y no en la base', () => {
@@ -75,7 +75,7 @@ test('los espacios sobrantes no cuentan como contenido', () => {
   assert.equal(validarPaso(3, { ...lleno, persona: '  ' }), 'Escribe tu nombre.');
 });
 
-// ── ¿Cómo conociste Tentare? ────────────────────────────────────────────────
+// ── ¿Cómo conociste Centra? ────────────────────────────────────────────────
 // El campo llevaba desde la migración 0123 leyéndose y sin que nada lo
 // escribiera: `crear-estudio` lo mandaba en `pending_studio`, pero no había
 // ningún control en pantalla que lo rellenara. Estos casos fijan que la lista

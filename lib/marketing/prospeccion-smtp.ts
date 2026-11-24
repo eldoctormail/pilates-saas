@@ -53,7 +53,7 @@ export function remitenteProspeccion(): string {
   // El nombre real de quien firma, no un alias de empresa: el correo dice estar
   // escrito por una persona y el remitente tiene que sostenerlo. Si `From` no
   // coincide con la firma, el primer filtro que lo mire ya no se lo cree.
-  return process.env.SPACEMAIL_FROM || `Marcos · Tentare <${process.env.SPACEMAIL_USER ?? ''}>`;
+  return process.env.SPACEMAIL_FROM || `Marcos · Centra <${process.env.SPACEMAIL_USER ?? ''}>`;
 }
 
 /** El buzón al que responder y al que se escribe para darse de baja. */
@@ -73,7 +73,7 @@ function buzonRespuesta(): string {
  * consumidoras. Sobre-construirlo aquí no protegería a nadie más.
  */
 export function pieDeBaja(): string {
-  return `\n\n—\nMarcos Roca · Tentare · tentare.app\nSi prefieres que no vuelva a escribirte, responde "BAJA" a este correo y no recibirás nada más.`;
+  return `\n\n—\nMarcos Roca · Centra · tentare.app\nSi prefieres que no vuelva a escribirte, responde "BAJA" a este correo y no recibirás nada más.`;
 }
 
 function aHtml(cuerpo: string): string {

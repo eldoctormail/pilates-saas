@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: pagina.titulo,
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
-  openGraph: { siteName: 'Tentare', type: 'website', locale: 'es_ES', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
+  openGraph: { siteName: 'Centra', type: 'website', locale: 'es_ES', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
 };
 
 const FAQ = [
@@ -27,8 +27,8 @@ const FAQ = [
   {
     q: '¿Cuánto cuesta un software de reservas y pagos para un estudio de Pilates?',
     a: ES
-      ? 'Tentare es gratis hasta 150 reservas al mes, y sin permanencia. Las reservas y los cobros están en los tres planes, y Tentare no añade comisión sobre lo que cobras: solo pagas la de Stripe por procesar cada pago con tarjeta. Los planes y límites exactos están en la página de precios.'
-      : 'Tentare es gratis hasta 150 reservas al mes, y sin permanencia. Las reservas y los cobros están en los tres planes, y Tentare no añade comisión sobre lo que cobras: solo pagas la de Mercado Pago por procesar cada pago online. Los planes y límites exactos están en la página de precios.',
+      ? 'Centra es gratis hasta 150 reservas al mes, y sin permanencia. Las reservas y los cobros están en los tres planes, y Centra no añade comisión sobre lo que cobras: solo pagas la de Stripe por procesar cada pago con tarjeta. Los planes y límites exactos están en la página de precios.'
+      : 'Centra es gratis hasta 150 reservas al mes, y sin permanencia. Las reservas y los cobros están en los tres planes, y Centra no añade comisión sobre lo que cobras: solo pagas la de Mercado Pago por procesar cada pago online. Los planes y límites exactos están en la página de precios.',
   },
   {
     q: '¿Mis alumnas tienen que instalarse una app?',
@@ -120,10 +120,10 @@ export default function ReservasPage() {
           o cuota— sin pasar por WhatsApp, y que tú veas quién ha reservado, cuántas plazas quedan y qué se ha cobrado.
         </Entradilla>
         <p>
-          En Tentare la reserva comprueba el aforo y las reglas de la clase en la misma operación.{' '}
+          En Centra la reserva comprueba el aforo y las reglas de la clase en la misma operación.{' '}
           {ES
-            ? 'El cobro con tarjeta va a través de tu cuenta de Stripe, de modo que el dinero va de tu alumna a tu cuenta y Tentare no añade comisión; lo único aparte es la de Stripe. Si cobras por domiciliación, Tentare te prepara la remesa SEPA para tu banco. Las facturas se emiten automáticamente, con numeración legal.'
-            : 'El cobro online va a través de tu cuenta de Mercado Pago, de modo que el dinero va de tu alumna a tu cuenta y Tentare no añade comisión; lo único aparte es la de Mercado Pago. Desde cada cobro emites la factura electrónica de ARCA.'}{' '}
+            ? 'El cobro con tarjeta va a través de tu cuenta de Stripe, de modo que el dinero va de tu alumna a tu cuenta y Centra no añade comisión; lo único aparte es la de Stripe. Si cobras por domiciliación, Centra te prepara la remesa SEPA para tu banco. Las facturas se emiten automáticamente, con numeración legal.'
+            : 'El cobro online va a través de tu cuenta de Mercado Pago, de modo que el dinero va de tu alumna a tu cuenta y Centra no añade comisión; lo único aparte es la de Mercado Pago. Desde cada cobro emites la factura electrónica de ARCA.'}{' '}
           Gratis hasta 150 reservas al mes, y sin permanencia: los{' '}
           <Link href="/precios">planes y límites</Link> están en la página de precios.
         </p>

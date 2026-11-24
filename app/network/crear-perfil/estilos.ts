@@ -1,5 +1,5 @@
 // Estilos compartidos por los pasos del wizard (app/network/crear-perfil).
-// Extraído tal cual del componente de página — F0 del roadmap de Tentare
+// Extraído tal cual del componente de página — F0 del roadmap de Centra
 // Network 2.0, sin cambios de valores.
 import { NW_TINTA, NW_BORDE } from '@/components/network-v2/tokens';
 

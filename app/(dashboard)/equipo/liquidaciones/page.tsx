@@ -4,7 +4,7 @@
 // conflictos" → liquidación desglosada y transparente. NO mueve dinero real
 // — genera un documento (BORRADOR→CONFIRMADA→PAGADA) que explica cuánto se
 // le debe a cada instructora y por qué. El pago sigue haciéndose fuera de
-// Tentare; aquí solo se anota que se pagó.
+// Centra; aquí solo se anota que se pagó.
 
 import { LOCALE } from '../../../../lib/locale.ts';
 import { conMoneda, MONEDA_SIMBOLO } from '../../../../lib/moneda.ts';
@@ -184,7 +184,7 @@ export default function LiquidacionesPage() {
     <div className="space-y-5">
       <PageHeader
         title="Liquidaciones de instructoras"
-        description="Lo que le corresponde a cada instructora este mes, desglosado. El pago lo haces tú, fuera de Tentare; aquí queda anotado."
+        description="Lo que le corresponde a cada instructora este mes, desglosado. El pago lo haces tú, fuera de Centra; aquí queda anotado."
         back={{ href: '/equipo', label: 'Volver a Equipo' }}
         actions={
           <SelectorMes anio={anio} mes={mes} onCambiar={(a, m) => { setAnio(a); setMes(m); }} />

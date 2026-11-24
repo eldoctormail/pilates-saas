@@ -127,7 +127,7 @@ test('se cancela la clase o se dejan de ceder lugares: se cancela allí', () => 
   assert.deepEqual(plan([sesion({ cupo: 0 })], [guardado(s)]), [{ tipo: 'cancelar', sesionId: 'ses-1', eventoId: 'ev-1' }]);
 });
 
-test('sesión borrada en Tentare (o sin sesión): su evento vivo se cancela allí', () => {
+test('sesión borrada en Centra (o sin sesión): su evento vivo se cancela allí', () => {
   const s = sesion();
   assert.deepEqual(plan([], [guardado(s)]), [{ tipo: 'cancelar', sesionId: 'ses-1', eventoId: 'ev-1' }]);
   assert.deepEqual(plan([], [guardado(s, { sesionId: null })]), [{ tipo: 'cancelar', sesionId: null, eventoId: 'ev-1' }]);

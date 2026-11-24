@@ -93,7 +93,7 @@ export async function POST(req: NextRequest) {
 
   if (!puedeGestionarCalendario(sesion.rol)) {
     // La instructora devolvía bonos de sus clases canceladas desde el panel; con
-    // Tentare Core retirado (14-sep-2026) es trabajo de mostrador.
+    // Centra Core retirado (14-sep-2026) es trabajo de mostrador.
     return NextResponse.json({ error: 'No autorizado' }, { status: 403 });
   }
 

@@ -7,7 +7,7 @@ import { listarDenunciasDelEstudio } from '@/lib/moderacion/denuncias-servidor';
 // Las denuncias de la app que esperan al estudio (App Store 1.2). Las ve quien
 // revisa cada ámbito (`puedeRevisarDenuncia`): el chat con una instructora, solo
 // la propietaria (es la única que lee esos hilos); el tablón, quien lo modera.
-// Las que van contra el propio estudio no salen aquí: las revisa Tentare.
+// Las que van contra el propio estudio no salen aquí: las revisa Centra.
 //
 // Con service-role: el filtro de estudio y de rol lo hace
 // `listarDenunciasDelEstudio`, y el contenido denunciado viaja solo a quien lo

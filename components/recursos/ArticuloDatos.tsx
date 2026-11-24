@@ -98,7 +98,7 @@ function BloqueArticulo({ b }: { b: Bloque }) {
         <aside style={{ borderLeft: '3px solid var(--w-olive)', padding: '2px 0 2px 18px', margin: '26px 0' }}>
           <p style={{ margin: 0, fontSize: 17, lineHeight: 1.65, color: 'var(--w-texto)' }}>
             {b.texto}{' '}
-            <Link href="/crear-estudio" style={{ color: 'var(--w-olive)', fontWeight: 600, textDecoration: 'underline', textUnderlineOffset: 3 }}>Empieza gratis con Tentare</Link>
+            <Link href="/crear-estudio" style={{ color: 'var(--w-olive)', fontWeight: 600, textDecoration: 'underline', textUnderlineOffset: 3 }}>Empieza gratis con Centra</Link>
             {' '}o <Link href="/precios" style={{ color: 'var(--w-olive)', textDecoration: 'underline', textUnderlineOffset: 3 }}>mira los precios</Link>.
           </p>
         </aside>

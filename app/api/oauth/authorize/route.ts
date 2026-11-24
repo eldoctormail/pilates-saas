@@ -85,7 +85,7 @@ export async function GET(req: NextRequest) {
       error: 'access_denied',
       detalle: fueraPorRol.length > 0
         ? 'Tu rol no puede dar ninguno de los permisos que pide esta app. Pídeselo a la propietaria del estudio.'
-        : 'Esta aplicación pide permisos que Tentare no le deja pedir.',
+        : 'Esta aplicación pide permisos que Centra no le deja pedir.',
     }, { status: 403 });
   }
 
@@ -97,7 +97,7 @@ export async function GET(req: NextRequest) {
     scopes: concedibles.map(s => ({ scope: s, descripcion: DESCRIPCION_SCOPE[s] })),
     // Lo que la app pide y este rol no puede dar: se enseña, y el token sale sin ello.
     fuera: fueraPorRol.map(s => ({ scope: s, descripcion: DESCRIPCION_SCOPE[s] })),
-    // Lo que la app pide y Tentare no le deja pedir (no depende de quién autorice).
+    // Lo que la app pide y Centra no le deja pedir (no depende de quién autorice).
     fueraApp: fueraPorApp.map(s => ({ scope: s, descripcion: DESCRIPCION_SCOPE[s] })),
   });
 }

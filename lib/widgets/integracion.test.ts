@@ -309,7 +309,7 @@ test('⚠️ literal fijo: el código por defecto de cada método, carácter a c
 <script src="${ORIGEN}/widget.js" async></script>`);
   assert.equal(generarCodigo(e, 'nativa', 'react').codigo, `import { useEffect } from 'react';
 
-// Horario y reservas — integración nativa de Tentare (sin marco).
+// Horario y reservas — integración nativa de Centra (sin marco).
 export function TentareHorarioYReservas() {
   useEffect(() => {
     if (document.querySelector('script[src="${ORIGEN}/widget.js"]')) return;
@@ -347,7 +347,7 @@ test('⚠️ literal fijo: el código por defecto de TODOS los widgets, métodos
     }
   }
   assert.equal(partes.length, 164);
-  assert.equal(huella(partes.join('\n\n')), '1pf0zfz');
+  assert.equal(huella(partes.join('\n\n')), '127yzd5');
 });
 
 
@@ -380,7 +380,7 @@ test('React: un componente con el mismo src y el mismo protocolo de mensajes', (
   assert.ok(codigo.includes(`e.origin !== ORIGEN`));
 });
 
-test('popup: botón con la URL incrustada y el runtime de Tentare', () => {
+test('popup: botón con la URL incrustada y el runtime de Centra', () => {
   const { codigo } = generarCodigo(entrada('planes', { textoBoton: 'Precios <y> "bonos"' }), 'popup', 'html');
   assert.ok(codigo.includes(`data-tentare-popup="${ORIGEN}/reservar/${SLUG}?embed=1&tab=planes&ref=web-planes"`));
   assert.ok(codigo.includes(`<script src="${ORIGEN}/widget-popup.js" async></script>`));
@@ -538,7 +538,7 @@ test('calendario semanal: el popup se abre a 960 para que la rejilla no se desli
 
 // ── Huella de lo copiado ─────────────────────────────────────────────────────
 
-test('firma: estable, corta y la misma copiada desde cualquier dirección de Tentare', () => {
+test('firma: estable, corta y la misma copiada desde cualquier dirección de Centra', () => {
   const f = firmaCodigo(entrada('horario'), 'iframe');
   assert.match(f, /^[0-9a-z]{1,32}$/);
   assert.equal(firmaCodigo(entrada('horario'), 'iframe'), f);

@@ -25,7 +25,7 @@ import { AppAlumna } from './piezas';
 //   · asistencia: QR de la alumna que se lee en la puerta (control-de-asistencia);
 //   · cancelación: ventana por tipo de clase, bono configurable y cobro OPCIONAL,
 //     apagado de serie y con tu aprobación (cancelaciones-y-politicas);
-//   · asistente: el FAQ «¿Qué es “Pregúntale a Tentare”?» de components/landing/data.ts;
+//   · asistente: el FAQ «¿Qué es “Pregúntale a Centra”?» de components/landing/data.ts;
 //   · bonos: avisos «por caducar» y «se te ha agotado» (cron notif-bonos) y la
 //     captura real de «Mi plan».
 //
@@ -105,7 +105,7 @@ export function SeOcupaDelResto() {
       <div className="wh-contenedor">
         <div className="wh-bt-cab">
           <h2 id="wh-resto-h" className="wh-h2">Lo que tus alumnas notan, y tú dejas de hacer a mano.</h2>
-          <p className="wh-lead">Pones la regla una vez y Tentare la aplica igual para todas.</p>
+          <p className="wh-lead">Pones la regla una vez y Centra la aplica igual para todas.</p>
         </div>
 
         <div className="wh-bt">
@@ -116,7 +116,7 @@ export function SeOcupaDelResto() {
           </Tarjeta>
 
           <Tarjeta clase="wh-bt-t2" retardo={8} etiqueta="Clases fijas" titulo="Su sitio de los martes, reservado solo."
-            texto="Das la clase fija una vez y Tentare se la reserva cada semana. La pausas en vacaciones y se suelta si deja de tener cuota."
+            texto="Das la clase fija una vez y Centra se la reserva cada semana. La pausas en vacaciones y se suelta si deja de tener cuota."
             href="/funcionalidades/plazas-fijas" enlace="Cómo funcionan las plazas fijas">
             <FotoSala />
             <div className="wh-bt-fija">
@@ -136,7 +136,7 @@ export function SeOcupaDelResto() {
           </Tarjeta>
 
           <Tarjeta clase="wh-bt-t3" retardo={16} etiqueta="Asistencia" titulo="Reservar no es venir."
-            texto="Cada alumna lleva su QR en la app y lo escaneáis en la puerta: Tentare comprueba en ese momento si tiene plaza en su clase."
+            texto="Cada alumna lleva su QR en la app y lo escaneáis en la puerta: Centra comprueba en ese momento si tiene plaza en su clase."
             href="/funcionalidades/control-de-asistencia" enlace="Cómo se controla la asistencia">
             <FotoPersonas />
             <Aviso icono="hecho" titulo="María L. · Escaneado" linea="Reformer Fundamental, 09:00 · plaza confirmada" clase="wh-bt-flota-abajo" />
@@ -158,7 +158,7 @@ export function SeOcupaDelResto() {
             </div>
           </Tarjeta>
 
-          <Tarjeta clase="wh-bt-t5" retardo={8} etiqueta="Asistente" titulo="Pregúntale a Tentare por tu estudio."
+          <Tarjeta clase="wh-bt-t5" retardo={8} etiqueta="Asistente" titulo="Pregúntale a Centra por tu estudio."
             texto="Quién lleva semanas sin venir, qué clases tienen huecos: te responde con tus datos. No cobra, no borra y no escribe a tus alumnas.">
             <div className="wh-bt-chat">
               <p className="wh-bt-pregunta">¿Quién lleva más de tres semanas sin venir?</p>
@@ -174,7 +174,7 @@ export function SeOcupaDelResto() {
           </Tarjeta>
 
           <Tarjeta clase="wh-bt-t6" retardo={16} etiqueta="Bonos y avisos" titulo="Ningún bono caduca por sorpresa."
-            texto="Tentare avisa a la alumna en el móvil cuando su bono está por caducar con sesiones sin usar, y cuando se le agota."
+            texto="Centra avisa a la alumna en el móvil cuando su bono está por caducar con sesiones sin usar, y cuando se le agota."
             href="/funcionalidades/bonos-y-membresias" enlace="Cómo funcionan los bonos">
             <div className="wh-bt-movil"><AppAlumna captura="miPlan" escala={0.7} /></div>
             <Aviso icono="campana" titulo="Tu bono está por caducar" linea="Te quedan 2 sesiones por usar" clase="wh-bt-flota-arriba" />

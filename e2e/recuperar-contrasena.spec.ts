@@ -106,7 +106,7 @@ test.describe('Se puede recuperar la contraseña sin poder entrar', () => {
 
   test('pide el enlace y NO revela si ese email tiene cuenta', async ({ page }) => {
     // Decir "no existe esa cuenta" convertiría el login en una forma de
-    // averiguar quién es cliente de Tentare.
+    // averiguar quién es cliente de Centra.
     let pedido: Record<string, unknown> | null = null;
     await page.route('**/rest/v1/**', route => json(route, []));
     await page.route('**/auth/v1/recover**', route => {

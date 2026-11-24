@@ -12,7 +12,7 @@
 //   - Un aviso push: su `url`, la misma que ya lleva el push web (public/sw.js).
 //
 // ⚠️ Lo que sale de aquí se le pasa a `router.push` o a `location`, así que
-// devuelve SOLO ruta + query de Tentare, nunca una URL. Cualquier otra cosa —
+// devuelve SOLO ruta + query de Centra, nunca una URL. Cualquier otra cosa —
 // otro host, `//otro-host` (que el navegador lee como URL absoluta), un puerto,
 // credenciales en la URL, `javascript:` — se descarta. El fragmento (#…) se
 // descarta también: ningún flujo de la app lo necesita y es donde viajarían
@@ -36,7 +36,7 @@ function aRutaSegura(ruta: string, query: string): string | null {
 
 /**
  * La ruta interna (path + query) a la que lleva un enlace entrante, o `null`
- * si el enlace no es de Tentare.
+ * si el enlace no es de Centra.
  *
  * @param esquemasPropios los esquemas de URL propios de ESTA app (su bundle id:
  *   `app.tentare`, o el de la app de un estudio). Sin ellos, solo valen https.
@@ -65,7 +65,7 @@ export function rutaInternaDeEnlace(url: string, esquemasPropios: readonly strin
 
 /**
  * La ruta a la que lleva pulsar un aviso push, o `null`. Acepta lo que ya manda
- * el push web en `data.url` (ruta relativa o URL absoluta de Tentare) y
+ * el push web en `data.url` (ruta relativa o URL absoluta de Centra) y
  * `data.ruta` como alias.
  */
 export function rutaDeAviso(datos: unknown): string | null {
@@ -75,7 +75,7 @@ export function rutaDeAviso(datos: unknown): string | null {
   if (!valor) return null;
   let absoluta: string;
   try {
-    // Una ruta relativa se resuelve contra Tentare; una absoluta (o `//otro`)
+    // Una ruta relativa se resuelve contra Centra; una absoluta (o `//otro`)
     // conserva su host y la filtra `rutaInternaDeEnlace`.
     absoluta = new URL(valor, ORIGEN_TENTARE).href;
   } catch {

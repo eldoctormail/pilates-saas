@@ -68,19 +68,19 @@ test.describe('Sin ?alta=nueva, el alta de siempre', () => {
     await page.goto('/crear-estudio');
     await expect(page.getByRole('heading', { name: 'Tu estudio' })).toBeVisible();
     await expect(page.getByLabel('Paso 1 de 3')).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'Crea tu estudio en Tentare' })).toHaveCount(0);
+    await expect(page.getByRole('heading', { name: 'Crea tu estudio en Centra' })).toHaveCount(0);
   });
 
   test('con ?alta=nueva, la nueva: una pantalla con los tres campos', async ({ page }) => {
     await page.goto(ALTA);
-    await expect(page.getByRole('heading', { name: 'Crea tu estudio en Tentare' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Crea tu estudio en Centra' })).toBeVisible();
     await expect(page.getByText('Paso 1 de 5 · unos 2 minutos')).toBeVisible();
     await expect(nombre(page)).toBeVisible();
     await expect(email(page)).toBeVisible();
     await expect(contrasena(page)).toBeVisible();
-    // Ni plan que elegir ni «¿Cómo conociste Tentare?».
+    // Ni plan que elegir ni «¿Cómo conociste Centra?».
     await expect(page.getByRole('radio')).toHaveCount(0);
-    await expect(page.getByText('¿Cómo conociste Tentare?')).toHaveCount(0);
+    await expect(page.getByText('¿Cómo conociste Centra?')).toHaveCount(0);
     // La línea legal, con sus dos enlaces.
     await expect(page.getByRole('link', { name: 'condiciones de uso' })).toHaveAttribute('href', '/terminos');
     await expect(page.getByRole('link', { name: 'política de privacidad' })).toHaveAttribute('href', '/privacidad');
@@ -466,7 +466,7 @@ test.describe('El alta cabe entera en la ventana (sin bajar ni subir)', () => {
     test(`escritorio ${ancho}×${alto}: la tarjeta entera se ve sin desplazar la página`, async ({ page }) => {
       await page.setViewportSize({ width: ancho, height: alto });
       await page.goto(ALTA);
-      await expect(page.getByRole('heading', { name: 'Crea tu estudio en Tentare' })).toBeVisible();
+      await expect(page.getByRole('heading', { name: 'Crea tu estudio en Centra' })).toBeVisible();
       await expect(crear(page)).toBeVisible();
       // El HTML del servidor ya trae el titular, SIN encoger: el ajuste (`zoom`) llega al hidratar, y en WebKit con la
       // CI cargada eso tarda más que el `toBeVisible`. Se espera a que quede ajustado, no se mide en el primer instante

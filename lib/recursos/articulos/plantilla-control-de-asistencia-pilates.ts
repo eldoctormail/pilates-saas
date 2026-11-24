@@ -185,7 +185,7 @@ const articulo: Articulo = {
         {
           t: 'p',
           texto:
-            'En ese punto, un programa hace lo mismo sin que lo teclees. Tentare, por ejemplo, tiene [check-in y control de asistencia](/funcionalidades/control-de-asistencia), bonos con caducidad y lista de espera automática, y tus alumnas reservan y cancelan solas desde el móvil. Si ya tienes a tus alumnas en esta plantilla, su importador lee Excel. Tentare es gratis hasta 150 reservas al mes; y si prefieres otras herramientas sin coste, mira qué más puedes montar con [software de pilates gratis](/recursos/software-pilates-gratis).',
+            'En ese punto, un programa hace lo mismo sin que lo teclees. Centra, por ejemplo, tiene [check-in y control de asistencia](/funcionalidades/control-de-asistencia), bonos con caducidad y lista de espera automática, y tus alumnas reservan y cancelan solas desde el móvil. Si ya tienes a tus alumnas en esta plantilla, su importador lee Excel. Centra es gratis hasta 150 reservas al mes; y si prefieres otras herramientas sin coste, mira qué más puedes montar con [software de pilates gratis](/recursos/software-pilates-gratis).',
         },
       ],
     },
@@ -229,7 +229,7 @@ const articulo: Articulo = {
   cta: {
     titulo: 'Cuando la hoja se te quede pequeña',
     texto:
-      'Empieza gratis con Tentare, sin tarjeta: check-in y control de asistencia, bonos con caducidad y lista de espera automática. Si vienes de esta plantilla, puedes importar tu Excel.',
+      'Empieza gratis con Centra, sin tarjeta: check-in y control de asistencia, bonos con caducidad y lista de espera automática. Si vienes de esta plantilla, puedes importar tu Excel.',
   },
   revision: [
     'El texto se ha cotejado con public/recursos/plantillas/control-asistencia-pilates.xlsx tal como estaba el 25-sep-2026 (hojas, columnas, fórmulas de «Sesiones usadas», «Estado», «Reservas», «Asistencias», «Ocupación %» y «Descuenta sesión»). Si se regenera la plantilla, volver a cotejarlo.',

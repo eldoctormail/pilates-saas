@@ -137,7 +137,7 @@ export default function Contenido() {
         factura legal es la electrónica de ARCA, que emites desde cada recibo cobrado.
       </p>
       <p style={{ margin: 0 }}>
-        Si no haces comprobantes con Tentare, la pestaña se llama «Para tu contador»: lo cobrado del trimestre anterior,
+        Si no haces comprobantes con Centra, la pestaña se llama «Para tu contador»: lo cobrado del trimestre anterior,
         el que va y el año anterior, cada uno con su descarga. Las facturas de ARCA las ve tu contador en «Mis
         Comprobantes» de ARCA.
       </p>

@@ -27,7 +27,7 @@ import { emitirConsultaContacto } from '@/lib/notifications/emit';
 //   abuso que obligó a poner topes en /api/public/descargas.
 // - Nunca registra el cuerpo ni la fila en los logs (datos de terceros, a veces
 //   de salud).
-// - Sin CORS: el formulario solo vive en páginas de Tentare (iframe, ventana,
+// - Sin CORS: el formulario solo vive en páginas de Centra (iframe, ventana,
 //   enlace); no hay versión nativa que llame desde otro dominio.
 
 const SIN_SERVICIO = 'No hemos podido enviar tu mensaje ahora mismo. Vuelve a intentarlo en un rato.';

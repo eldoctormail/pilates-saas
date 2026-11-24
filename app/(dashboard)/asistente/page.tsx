@@ -9,7 +9,7 @@ import { puedeVerFinanzas } from '@/lib/permisos-reglas';
 import { tomarPreguntaPendiente, useAsistente, usePuertaAsistente } from '@/lib/asistente-context';
 import { VistaChat } from '@/components/asistente/vista-chat';
 
-// /asistente — «Pregúntale a Tentare», el chat. Propietaria y gerencia
+// /asistente — «Pregúntale a Centra», el chat. Propietaria y gerencia
 // (puedeVer), con la feature `asistente` del plan y el servidor encendido para
 // este estudio; si no, una línea que lo dice y nada más (ni campo, ni Tenti).
 // Se llega por la barra del Centro de Control, la fila de ⌘K o ⌘J.

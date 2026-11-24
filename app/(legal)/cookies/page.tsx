@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: pagina.titulo,
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
-  openGraph: { siteName: 'Tentare', type: 'website', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
+  openGraph: { siteName: 'Centra', type: 'website', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
 };
 
 export default function Cookies() {
@@ -70,7 +70,7 @@ export default function Cookies() {
           <tr>
             <td>De terceros — publicidad (Meta)</td>
             <td>
-              Si aceptas, el píxel de Meta Platforms Ireland mide qué anuncios de Tentare en Facebook e Instagram
+              Si aceptas, el píxel de Meta Platforms Ireland mide qué anuncios de Centra en Facebook e Instagram
               traen visitas y altas de estudios. Guarda las cookies <code>_fbp</code> y <code>_fbc</code> y envía
               a Meta la página visitada y el hecho de que has completado el alta, sin tu correo ni los datos de
               tu estudio. Solo se carga en la web comercial y en el alta, nunca dentro de la aplicación, ni en la

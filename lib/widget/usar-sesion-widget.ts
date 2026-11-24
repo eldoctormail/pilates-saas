@@ -50,7 +50,7 @@ function sesionRecordada(baseUrl: string, slug: string): SesionRecordada | null 
 // signInWithOtp, alta de socia).
 // `baseUrl`: igual que en usar-datos-widget.ts — el bundle embebible corre en
 // el DOM de la web del estudio, así que una ruta relativa a `/api/public/...`
-// resolvería contra el origen del estudio, no el de Tentare.
+// resolvería contra el origen del estudio, no el de Centra.
 export function useSesionWidget(slug: string, baseUrl = '') {
   // En el marco de «solo mirar» del alta nueva (la app de la alumna en el portal,
   // `baseUrl` vacío) no se usa ninguna sesión: se ve como una recién llegada y no

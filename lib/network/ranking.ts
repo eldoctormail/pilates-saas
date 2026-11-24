@@ -51,7 +51,7 @@ function distanciaAproximada(ciudad: string | null, filtroCiudad: string | null)
  * `referenciaProfesional` llegan calculados en LOTE en `PerfilNetworkPublico`
  * (buscarPerfilesPublico). Usada tanto para ORDENAR (aquí) como para ENSEÑAR
  * el contador "X de 5 verificaciones" en la tarjeta del buscador (F2) — una
- * sola fuente de verdad, nunca un porcentaje fabricado (ver Tentare Brain en
+ * sola fuente de verdad, nunca un porcentaje fabricado (ver Centra Brain en
  * .claude/tentare-os.md sobre "Compatibilidad 87%").
  *
  * Certificación se añadió aquí en el P1 de la auditoría 2026-08-25: ya se
@@ -112,7 +112,7 @@ function clavesOrden(p: PerfilNetworkPublico, filtro: FiltroBusquedaNetwork, aho
   // Destacado (app/interno/network, editorial — nunca la propia
   // instructora) es la clave PRIMERA por defecto (manda sobre todo lo
   // demás, incluida la disponibilidad: es una decisión humana del equipo de
-  // Tentare, no una señal del perfil). Con un orden explícito por
+  // Centra, no una señal del perfil). Con un orden explícito por
   // precio/valoración, ese criterio pedido pasa a ser la primera clave y
   // destacado baja a desempate — pedir "ordenar por precio" y ver arriba a
   // alguien caro solo porque el equipo la destacó rompería la promesa del

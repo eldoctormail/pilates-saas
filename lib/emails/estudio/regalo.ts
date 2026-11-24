@@ -1,5 +1,5 @@
 // Tarjeta regalo: el correo a quien la recibe y el justificante de quien la compra.
-// Marca del ESTUDIO (nunca la de Tentare) y sin Tenti. Todo texto de persona va por
+// Marca del ESTUDIO (nunca la de Centra) y sin Tenti. Todo texto de persona va por
 // `correoEstudio`, que lo escapa.
 import { correoEstudio, type MarcaCorreo } from './plantilla.ts';
 

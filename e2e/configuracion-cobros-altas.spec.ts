@@ -112,7 +112,7 @@ for (const vista of VISTAS) {
       expect(await desborde(page), 'Integraciones se sale de lado').toBeLessThanOrEqual(0);
 
       await ir(page, 'configuracion?tab=altas');
-      await expect(valor(page, 'contrato-y-privacidad')).toHaveText('Los textos de Tentare', { timeout: 30_000 });
+      await expect(valor(page, 'contrato-y-privacidad')).toHaveText('Los textos de Centra', { timeout: 30_000 });
       await expect(valor(page, 'compra-desde-tu-enlace')).toHaveText('Se registra antes de pagar');
       // El apagado no se pide en el alta: no cuenta.
       await expect(valor(page, 'datos-extra-de-la-ficha')).toHaveText('3 datos extra · 1 obligatorio');

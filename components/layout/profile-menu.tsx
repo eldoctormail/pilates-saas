@@ -30,7 +30,7 @@ export function ProfileMenu({ variante = 'barra', persona = false }: { variante?
   // Con el panel nuevo no flota el botón de WhatsApp (dashboard-shell.tsx): el
   // soporte vive aquí, a un clic, y en «Pon en marcha tu estudio».
   const panelNuevo = useInterruptor('panelNuevo', studio?.id);
-  const enlaceSoporte = enlaceWhatsApp(SOPORTE_WHATSAPP, `Hola, soy de ${studio?.nombre ?? 'mi estudio'} y tengo una duda con Tentare:`);
+  const enlaceSoporte = enlaceWhatsApp(SOPORTE_WHATSAPP, `Hola, soy de ${studio?.nombre ?? 'mi estudio'} y tengo una duda con Centra:`);
   const { rol } = usePermisos();
   const { dark, setDark } = usePanelTheme();
   const router = useRouter();
@@ -111,7 +111,7 @@ export function ProfileMenu({ variante = 'barra', persona = false }: { variante?
                 <span className="flex size-6 shrink-0 items-center justify-center rounded-md bg-[var(--t-blue-500)] text-[10px] font-bold text-white">
                   {(studio?.nombre ?? 'T').trim().slice(0, 2).toUpperCase()}
                 </span>
-                <span className="min-w-0 flex-1 truncate text-[13px] text-white/90">{studio?.nombre ?? 'Tentare'}</span>
+                <span className="min-w-0 flex-1 truncate text-[13px] text-white/90">{studio?.nombre ?? 'Centra'}</span>
               </>
             )}
             <ChevronDown size={14} aria-hidden className="shrink-0 text-white/50" />
@@ -137,7 +137,7 @@ export function ProfileMenu({ variante = 'barra', persona = false }: { variante?
                   del suyo aquí es la razón por la que este menú "no parecía
                   suyo". La propietaria sin ficha (yo === null) sigue viendo el
                   nombre del estudio, que es lo único que tiene. */}
-              <p className="text-[13px] font-semibold text-foreground truncate">{yo ? yo.nombre : (studio?.nombre ?? 'Tentare')}</p>
+              <p className="text-[13px] font-semibold text-foreground truncate">{yo ? yo.nombre : (studio?.nombre ?? 'Centra')}</p>
               <p className="text-[12px] text-muted-foreground truncate">{userEmail}</p>
             </div>
             {misEstudios.length > 1 && (

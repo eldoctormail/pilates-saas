@@ -53,7 +53,7 @@ export function ResendIcon({ size = 20, className }: IconProps) {
 // El "G" de cuatro colores de Google, según sus guías de marca para el botón
 // "Continuar con Google" — colores fijos de Google a propósito, nunca teñidos
 // con el tema del estudio (sus condiciones de uso lo exigen). Única copia del
-// repo: la usan /login, Tentare Network, el portal de la socia y Configuración.
+// repo: la usan /login, Centra Network, el portal de la socia y Configuración.
 export function GoogleIcon({ size = 20, className }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 18 18" aria-hidden="true" className={className}>

@@ -10,10 +10,10 @@ import { MINUTOS_CODIGO_CORREO } from '@/lib/auth/codigo-correo-reglas';
 // resto de envíos, NO es best-effort: si no sale, la pantalla tiene que saberlo
 // para no decir «te lo hemos enviado» y pasar a la app.
 //
-// Dos caras: desde el panel firma «Tentare» (la marca paraguas del login: el
+// Dos caras: desde el panel firma «Centra» (la marca paraguas del login: el
 // rol aún no importa); desde la app de un estudio (`studioId`, ya comprobado
 // por quien llama que la cuenta es alumna o instructora suya) va con SU marca y
-// su nombre de remitente — la app es marca blanca y la alumna no conoce Tentare.
+// su nombre de remitente — la app es marca blanca y la alumna no conoce Centra.
 export async function enviarEmailCodigoAcceso(params: {
   to: string; codigo: string; studioId?: string | null;
 }): Promise<{ ok: boolean; skipped?: boolean }> {
@@ -32,8 +32,8 @@ export async function enviarEmailCodigoAcceso(params: {
       };
     } else {
       correo = {
-        from: remitentePorMarca('Tentare'),
-        subject: 'Tu código para entrar a Tentare',
+        from: remitentePorMarca('Centra'),
+        subject: 'Tu código para entrar a Centra',
         html: correoCodigoAcceso({ codigo: params.codigo, minutos: MINUTOS_CODIGO_CORREO }),
       };
     }

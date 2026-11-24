@@ -12,7 +12,7 @@
 //   · VOD       → /ondemand  +  el "Vídeos" del portal de socias
 //   · Chat      → /chat               (chat de equipo — RLS roto D2 + no es la cuña)
 //   · Network   → /network/buscar, /vacantes, /favoritas, /mensajes, /comparar y
-//                 /equipo/verificaciones-network — Tentare Network EN EL PANEL
+//                 /equipo/verificaciones-network — Centra Network EN EL PANEL
 //                 (decisión del fundador, 2-oct-2026). Su web pública
 //                 (app/network) sigue viva para las cuentas que ya existen,
 //                 pero sin enlace en ningún menú.
@@ -24,7 +24,7 @@
 //     reconstruyó server-authoritative (la venta la registra
 //     `registrar_venta_pos` releyendo el catálogo, no el navegador), con
 //     stock, caja real, IVA por artículo y bonos que crean la MISMA
-//     suscripción que el resto de Tentare. El TPV viejo se borró.
+//     suscripción que el resto de Centra. El TPV viejo se borró.
 //
 // Ninguno de los dos es una reversión de este documento.
 //
@@ -64,7 +64,7 @@
  * un botón que marcaba Bizum como cobrado sin preguntarle a Stripe, stock
  * inexistente, ninguna caja real). Kiosko, VOD y Chat siguen congelados.
  *
- * Tentare Network (2-oct-2026): prefijos de las pantallas del PANEL, uno a uno,
+ * Centra Network (2-oct-2026): prefijos de las pantallas del PANEL, uno a uno,
  * y no `/network` entero — esa URL es la web pública de Network
  * (app/network), que sigue viva. La ficha `/network/[perfilId]` no tiene
  * prefijo: la cubre el stub de app/(dashboard)/network/layout.tsx, y nadie

@@ -1,4 +1,4 @@
-// Tentare Network → Sustituciones — punto de extensión de la Fase 11
+// Centra Network → Sustituciones — punto de extensión de la Fase 11
 // (docs/NETWORK-SUSTITUCIONES-EXTENSION.md §2-4). Sugiere perfiles de Network
 // para un hueco sin instructora, SIN puntuar (nunca fusionado con el ranking
 // interno de `rankear_candidatas`) y solo cuando el tipo de clase tiene
@@ -28,7 +28,7 @@ const LIMITE = 6;
 type Admin = Pick<SupabaseClient, 'from'>;
 
 /**
- * Perfiles de Tentare Network que "podrían encajar" para cubrir `sesion` —
+ * Perfiles de Centra Network que "podrían encajar" para cubrir `sesion` —
  * sección aparte del ranking interno, nunca puntuada. `especialidadNetwork`
  * viene de `tipos_clase.especialidad_network`; si es `null` (tipo de clase
  * sin mapear), no se busca nada y se devuelve `[]` — no es un fallo, es la
@@ -127,7 +127,7 @@ async function buscarCandidatosNetwork(
  *
  * Solo escribe `sustituciones.candidatos_network`, acotado por id Y estudio
  * (cliente service-role: la RLS no filtra). NUNCA contacta a nadie ni crea
- * `red_solicitudes_contacto`: Tentare propone, el contacto lo decide ella.
+ * `red_solicitudes_contacto`: Centra propone, el contacto lo decide ella.
  *
  * Best-effort, nunca lanza: devuelve cuántos candidatos quedaron guardados, o
  * `null` si no se pudo (y entonces no toca lo que había). Quien llama sigue su

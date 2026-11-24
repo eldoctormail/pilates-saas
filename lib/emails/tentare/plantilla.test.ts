@@ -41,17 +41,17 @@ test('la cabecera es la misma que la de los correos de acceso de Supabase', () =
   // Una propietaria recibe los dos tipos: tienen que reconocerse como del
   // mismo remitente.
   const html = correoTentare(BASICO);
-  assert.ok(html.includes(`src="${LOGO_TENTARE_URL}" width="132" height="35" alt="Tentare"`));
+  assert.ok(html.includes(`src="${LOGO_TENTARE_URL}" width="132" height="35" alt="Centra"`));
   assert.match(LOGO_TENTARE_URL, /^https:\/\/www\./, 'sin www hay proxys de imágenes que no siguen el 308 del ápice');
   assert.ok(html.includes(TENTARE.dorado), 'falta la regla dorada de la marca');
 });
 
-test('la marca es la de Tentare y no se tiñe con la de ningún estudio', () => {
+test('la marca es la de Centra y no se tiñe con la de ningún estudio', () => {
   const html = correoTentare(BASICO);
   const hex = new Set([...html.matchAll(/#[0-9A-Fa-f]{6}\b/g)].map(m => m[0].toUpperCase()));
   const kit = new Set(Object.values(TENTARE).map(c => c.toUpperCase()));
   const fuera = [...hex].filter(h => !kit.has(h));
-  assert.deepEqual(fuera, [], `colores fuera del kit de Tentare: ${fuera.join(', ')}`);
+  assert.deepEqual(fuera, [], `colores fuera del kit de Centra: ${fuera.join(', ')}`);
 });
 
 test('todo lo que es texto sobre un fondo se lee (AA)', () => {

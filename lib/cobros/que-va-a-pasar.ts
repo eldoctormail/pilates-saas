@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // Lo que va a pasar al pulsar «Cobrar» en «Nuevo cobro»: si se apunta en la caja
 // y si sale factura. Antes la maqueta decía «Se apunta en la caja y, si facturas
-// con Tentare, sale su factura», y no siempre es verdad:
+// con Centra, sale su factura», y no siempre es verdad:
 //   · la caja solo apunta un cobro en efectivo, tarjeta o Bizum, y solo con una
 //     caja ABIERTA (`apuntar_cobro_en_caja`, efecto `caja` de `confirmarCobro`);
 //     sin caja abierta no apunta, y no es un error;
@@ -26,7 +26,7 @@ const PASAN_POR_CAJA: ReadonlySet<string> = new Set(['EFECTIVO', 'TARJETA', 'BIZ
 export interface QueVaAPasar {
   /** La frase de la caja, o `null` si no hay nada que decir (transferencia, o no se sabe). */
   caja: string | null;
-  /** La frase de la factura, o `null` si el estudio no factura con Tentare. */
+  /** La frase de la factura, o `null` si el estudio no factura con Centra. */
   factura: string | null;
   /** ¿Se pide factura? (sin NIF del estudio, queda pendiente) */
   saleFactura: boolean;

@@ -15,7 +15,7 @@ import { AnadirAWallet } from '@/components/student/domain/AnadirAWallet';
 //
 // Su QR personal y permanente: no cambia al reservar ni caduca. No lleva ningún
 // dato suyo, solo un código que el estudio lee con su sesión; si puede entrar
-// lo decide Tentare en ese momento, con su reserva real para esa clase.
+// lo decide Centra en ese momento, con su reserva real para esa clase.
 //
 // «Generar uno nuevo» existe para una captura que ha circulado o un móvil
 // perdido: el anterior deja de valer en el acto.

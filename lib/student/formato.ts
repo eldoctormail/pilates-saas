@@ -8,7 +8,7 @@
 // de cobro de los bonos.
 //
 // Aquí se resuelve con `Intl.DateTimeFormat` sobre ZONA_HORARIA, que es la
-// zona del negocio: todos los estudios de Tentare están en España. Si algún día
+// zona del negocio: todos los estudios de Centra están en España. Si algún día
 // hay estudios en otro huso, esto pasa a salir del estudio y no de una
 // constante — pero inventar esa configuración hoy sería adivinar.
 
@@ -20,7 +20,7 @@ const DIAS_C = ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'];
 const MESES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
 const MESES_L = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
 
-/** La zona del negocio. Todos los estudios de Tentare están en España. */
+/** La zona del negocio. Todos los estudios de Centra están en España. */
 export const ZONA = ZONA_HORARIA;
 
 /** El día de HOY en Madrid, no en UTC. Ver la nota de arriba. */

@@ -15,13 +15,13 @@ export const metadata: Metadata = {
   title: pagina.titulo,
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
-  openGraph: { siteName: 'Tentare', type: 'website', locale: 'es_ES', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
+  openGraph: { siteName: 'Centra', type: 'website', locale: 'es_ES', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
 };
 
 const FAQ = [
   {
-    q: '¿Tentare se lleva una comisión de lo que cobro?',
-    a: 'No. El dinero va de tu alumna a tu cuenta de Stripe directamente; Tentare no se interpone ni añade comisión propia. Lo único que pagas aparte es la comisión de Stripe, que es suya y la ves en su panel.',
+    q: '¿Centra se lleva una comisión de lo que cobro?',
+    a: 'No. El dinero va de tu alumna a tu cuenta de Stripe directamente; Centra no se interpone ni añade comisión propia. Lo único que pagas aparte es la comisión de Stripe, que es suya y la ves en su panel.',
   },
   {
     q: '¿Necesito una cuenta de Stripe?',
@@ -33,7 +33,7 @@ const FAQ = [
   },
   {
     q: '¿Qué pasa si una alumna cambia de tarjeta?',
-    a: 'Sus datos de tarjeta los guarda Stripe, no Tentare, y ella los actualiza desde su portal. Además, si su tarjeta caduca antes del próximo cobro, el Centro de Control te lo avisa a ti, para que se lo pidas.',
+    a: 'Sus datos de tarjeta los guarda Stripe, no Centra, y ella los actualiza desde su portal. Además, si su tarjeta caduca antes del próximo cobro, el Centro de Control te lo avisa a ti, para que se lo pidas.',
   },
   {
     q: '¿Y si alguien paga en efectivo o por Bizum?',
@@ -50,7 +50,7 @@ export default function CobrosPage() {
       h1={<>Cobra sin perseguir a nadie.</>}
       intro={<>La cuota se cobra sola el día que toca. Y cuando una tarjeta falla —que fallará—, el sistema lo reintenta con cabeza en vez de dejarte una lista de impagos a fin de mes.</>}
       chips={['Cobro con tarjeta guardada', 'Tres intentos escalonados', 'Remesa SEPA 19.14']}
-      pieza={{ descripcion: 'Ejemplo del resumen de cobros de Tentare: quién ha pagado, quién se reintenta solo y las próximas cuotas.', contenido: <PanelCobros completo /> }}
+      pieza={{ descripcion: 'Ejemplo del resumen de cobros de Centra: quién ha pagado, quién se reintenta solo y las próximas cuotas.', contenido: <PanelCobros completo /> }}
     >
       <Seccion id="problema" titulo="El dinero no se pierde de golpe, se pierde a goteo">
         <Entradilla>
@@ -98,7 +98,7 @@ export default function CobrosPage() {
       <Seccion id="sepa" titulo="SEPA 19.14: la remesa para el banco de siempre">
         <ViasDeCobro />
         <p>
-          Muchos estudios españoles llevan años cobrando por domiciliación bancaria y no quieren cambiar. Tentare genera el
+          Muchos estudios españoles llevan años cobrando por domiciliación bancaria y no quieren cambiar. Centra genera el
           fichero de adeudos en formato <strong>pain.008.001.02</strong> —lo que tu banco llama cuaderno 19.14— con los
           recibos del periodo, para que lo presentes como siempre.
         </p>
@@ -108,7 +108,7 @@ export default function CobrosPage() {
         </p>
         <Limite titulo="La remesa es un fichero, no una pasarela">
           Generarla no cobra el dinero: lo presenta tu banco, con tus plazos y tus devoluciones. Necesitas tu identificador
-          de acreedor SEPA y los mandatos firmados de tus socias. Tentare produce el fichero y guarda los mandatos; el
+          de acreedor SEPA y los mandatos firmados de tus socias. Centra produce el fichero y guarda los mandatos; el
           circuito bancario sigue siendo tuyo.
         </Limite>
       </Seccion>

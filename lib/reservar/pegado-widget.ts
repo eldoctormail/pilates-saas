@@ -15,7 +15,7 @@ import { esOrigenDeTentare, esOrigenPropio, origenAnfitrion, type FormaPegada } 
 import { firmaDeUrl } from '../widgets/firma-contenido.ts';
 
 /**
- * Parámetros que pone la PROPIA Tentare al volver a esta página (la
+ * Parámetros que pone la PROPIA Centra al volver a esta página (la
  * redirección de la nativa con `directo=1`, la vuelta de Stripe, el enlace de
  * acceso, los pasos de la reserva) o el panel al previsualizar. Con cualquiera
  * de ellos, lo que carga no es lo que se pegó: esa URL no es el código de su
@@ -59,12 +59,12 @@ export function pegadoDesde(x: {
   // Wix. Firefox no tiene `ancestorOrigins`: ahí queda el referrer, que con la
   // política por defecto es solo el origen del padre.
   const visto = origenAnfitrion(x.ancestros?.at(-1) ?? x.referrer);
-  // Dentro de la propia Tentare (el onboarding, el portal, la vista previa de
+  // Dentro de la propia Centra (el onboarding, el portal, la vista previa de
   // este mismo despliegue) no es su web: nada, ni siquiera «sin dirección».
   // Solo lo SEGURO: el origen que sirve esta página y el canónico.
   const propios = [x.propio, LEGAL.url];
   if (visto && esOrigenPropio(visto, propios)) return null;
-  // Otro `*.vercel.app` puede ser una vista previa de Tentare o la web de un
+  // Otro `*.vercel.app` puede ser una vista previa de Centra o la web de un
   // estudio alojada ahí, y no se distinguen: se cuenta la carga (forma y
   // versión) sin nombrar la web. Descartarla entera dejaba esa web fuera de la
   // portada para siempre; nombrarla podría decir «Visto en» una vista previa

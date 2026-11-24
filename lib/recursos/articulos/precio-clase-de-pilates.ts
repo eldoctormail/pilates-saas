@@ -135,10 +135,10 @@ const articulo: Articulo = {
             { titulo: 'Publícalo bien', texto: 'Precio por sesión al lado de cada cuota y precio final: la ley de consumidores obliga a informar del precio total, con impuestos, antes de contratar. Si tus clases llevan IVA, lo explicamos en [el IVA de las clases de pilates](/recursos/iva-clases-de-pilates).' },
           ],
         },
-        { t: 'p', texto: 'Cuando tengas la escalera decidida, llevarla a un programa evita errores en recepción. En Tentare configuras [bonos, cuotas mensuales y clases sueltas](/funcionalidades/bonos-y-membresias), con la caducidad de cada bono y reglas distintas por tipo de clase, y tus alumnas reservan y cancelan solas desde el móvil.' },
+        { t: 'p', texto: 'Cuando tengas la escalera decidida, llevarla a un programa evita errores en recepción. En Centra configuras [bonos, cuotas mensuales y clases sueltas](/funcionalidades/bonos-y-membresias), con la caducidad de cada bono y reglas distintas por tipo de clase, y tus alumnas reservan y cancelan solas desde el móvil.' },
         {
           t: 'llamada',
-          texto: 'Con el precio decidido, queda ofrecerlo en bonos, cuotas y clases sueltas: en Tentare los configuras con su caducidad y reglas por tipo de clase.',
+          texto: 'Con el precio decidido, queda ofrecerlo en bonos, cuotas y clases sueltas: en Centra los configuras con su caducidad y reglas por tipo de clase.',
         },
       ],
     },
@@ -212,7 +212,7 @@ const articulo: Articulo = {
   ],
   cta: {
     titulo: 'Bonos, cuotas y clases sueltas en un mismo sitio',
-    texto: 'En Tentare configuras bonos, cuotas mensuales y clases sueltas con su caducidad y reglas por tipo de clase, y tus alumnas reservan y cancelan solas desde el móvil. Empieza gratis, sin tarjeta.',
+    texto: 'En Centra configuras bonos, cuotas mensuales y clases sueltas con su caducidad y reglas por tipo de clase, y tus alumnas reservan y cancelan solas desde el móvil. Empieza gratis, sin tarjeta.',
   },
   revision: [
     'Muestra no aleatoria: solo estudios que publican precios en su web. Las tarifas cambian; revisar las cifras antes de cada actualización del artículo.',

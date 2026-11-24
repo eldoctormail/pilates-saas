@@ -8,7 +8,7 @@ import { ConfirmDialog } from '@/components/ui/confirm-dialog';
 import { BotonCopiar, useOrigen } from '@/components/configuracion/tab-estudio-enlaces';
 import type { MostrarToast } from '@/components/ui/toast';
 
-// El cajón «Certificado Tentare Verified Studio»: generarlo, descargar su
+// El cajón «Certificado Centra Verified Studio»: generarlo, descargar su
 // imagen, copiar el enlace de verificación pública y revocarlo. Un estudio
 // solo tiene un certificado activo a la vez (lo garantiza también la base de
 // datos, no solo esta pantalla) — «generar» de nuevo con uno ya activo
@@ -88,7 +88,7 @@ export function FormCertificado({ showToast }: { showToast: MostrarToast }) {
         <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed border-border px-6 py-10 text-center">
           <Award size={28} className="text-muted-foreground" aria-hidden />
           <p className="text-sm text-muted-foreground text-pretty">
-            Genera el certificado oficial que acredita que tu estudio está digitalizado y operativo en Tentare. Podrás
+            Genera el certificado oficial que acredita que tu estudio está digitalizado y operativo en Centra. Podrás
             descargarlo, imprimirlo y compartirlo.
           </p>
           <button type="button" onClick={() => void generar()} disabled={generando} className={btnPrimary}>
@@ -103,7 +103,7 @@ export function FormCertificado({ showToast }: { showToast: MostrarToast }) {
           {certificado.esFounding && certificado.foundingNumber != null && (
             <span className="inline-flex w-fit items-center gap-1.5 rounded-full border border-[#B4537E] px-3 py-1 text-xs font-semibold text-[#B4537E]">
               <Award size={12} aria-hidden />
-              {`Tentare Founding Studio #${String(certificado.foundingNumber).padStart(3, '0')}`}
+              {`Centra Founding Studio #${String(certificado.foundingNumber).padStart(3, '0')}`}
             </span>
           )}
 
@@ -111,7 +111,7 @@ export function FormCertificado({ showToast }: { showToast: MostrarToast }) {
             // eslint-disable-next-line @next/next/no-img-element -- imagen generada dinámicamente (ImageResponse), no un asset estático de Next.
             <img
               src={imagenUrl}
-              alt={`Certificado ${certificado.esFounding ? 'Tentare Founding Studio' : 'Tentare Verified Studio'}, número ${certificado.codigo}`}
+              alt={`Certificado ${certificado.esFounding ? 'Centra Founding Studio' : 'Centra Verified Studio'}, número ${certificado.codigo}`}
               className="w-full rounded-xl border border-border"
             />
           )}

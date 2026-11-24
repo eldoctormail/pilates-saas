@@ -8,7 +8,7 @@ import { diaLargo, textoDelPremio, type PremioResena } from '@/lib/valoraciones/
 // (si le toca: 3 clases asistidas, una vez cada 180 días) como acción principal y, APARTE,
 // el agradecimiento del estudio (si lo ofrece). Mismos dos bloques y mismas reglas que en
 // la app (components/student/domain/PremioValoracion.tsx): el premio es por valorar en
-// Tentare y no depende de la nota; el enlace no habla del premio. Se canjea en la Caja o al comprar un bono o un
+// Centra y no depende de la nota; el enlace no habla del premio. Se canjea en la Caja o al comprar un bono o un
 // plan; el pago de una clase suelta no tiene campo de código.
 
 export function PremioResena({ premio, enlace }: { premio?: PremioResena | null; enlace?: string | null }) {

@@ -3,7 +3,7 @@
 #
 #   sudo deploy/scripts/restaurar.sh /var/backups/tentare/tentare-20261123-0430.tar.enc ~/supabase-project
 #
-# Para Tentare y Supabase, aparta la carpeta de datos actual (no la borra: queda
+# Para Centra y Supabase, aparta la carpeta de datos actual (no la borra: queda
 # como data.antes-de-restaurar-…), pone la de la copia y los archivos subidos,
 # y vuelve a levantar todo. Los .env NO se pisan: si los secretos de la copia
 # son otros, avisa y deja los de la copia al lado para revisarlos.
@@ -58,7 +58,7 @@ read -r ok
 [ "$ok" = RESTAURAR ] || { echo "No se tocó nada."; exit 1; }
 
 MARCA="$(date +%Y%m%d-%H%M%S)"
-echo "→ Parando Tentare y Supabase"
+echo "→ Parando Centra y Supabase"
 (cd "$DEPLOY" && docker compose down)
 (cd "$SB" && docker compose down)
 

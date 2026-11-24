@@ -6,10 +6,10 @@ import { escaparLike } from '@/lib/escapar-like';
 
 export const runtime = 'nodejs';
 
-// Moderación de perfiles de Tentare Network — docs/NETWORK-IMPLEMENTATION-
+// Moderación de perfiles de Centra Network — docs/NETWORK-IMPLEMENTATION-
 // PLAN.md §10. Cruza el perfil de CUALQUIER persona con service-role, y eso
 // solo es legítimo porque exigirPermiso ya comprobó que quien pregunta es
-// del equipo interno de Tentare — mismo criterio que el resto de /interno.
+// del equipo interno de Centra — mismo criterio que el resto de /interno.
 export async function GET(req: NextRequest) {
   const g = await exigirPermiso(req, 'network.moderate');
   if ('error' in g) return g.error;
@@ -44,7 +44,7 @@ const ESTADOS_VALIDOS = new Set(['draft', 'en_revision', 'published', 'hidden', 
 // sin acción aparte: no hay dos formas de publicar un perfil.
 //
 // `destacado` es un campo aparte, no un estado más: una decisión editorial
-// del equipo de Tentare (empuja al principio del ranking, lib/network/
+// del equipo de Centra (empuja al principio del ranking, lib/network/
 // ranking.ts) que puede cambiar con independencia de si el perfil está
 // publicado o no — se admite en el mismo PATCH para no duplicar el
 // endpoint, pero `estado` sigue siendo opcional cuando solo se toca esto.

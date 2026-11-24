@@ -15,7 +15,7 @@ import dynamic from 'next/dynamic';
 // El chat llega aparte, al abrir la columna: no viaja con el panel (lo vigilan e2e/asistente*.spec.ts).
 const VistaChat = dynamic(() => import('@/components/asistente/vista-chat').then(m => m.VistaChat), { ssr: false });
 
-// «Pregúntale a Tentare» como columna a la derecha del lienzo y como píldora flotante abajo al
+// «Pregúntale a Centra» como columna a la derecha del lienzo y como píldora flotante abajo al
 // centro (marco a sangre). Solo con `SHELL_NUEVO` y donde el asistente está disponible (rol, plan
 // e interruptor `ASISTENTE_IA`, lo decide `usePuertaAsistente`). Sin Tenti: su lista de sitios
 // (`lib/tenti/donde-vive-tenti.test.ts`) no incluye esta superficie.
@@ -40,7 +40,7 @@ export function ColumnaAsistente() {
   const nombre = yo?.nombre?.trim().split(/\s+/)[0] ?? null;
   return (
     <aside
-      aria-label="Pregúntale a Tentare"
+      aria-label="Pregúntale a Centra"
       aria-hidden={!abierta}
       inert={!abierta}
       data-columna-asistente
@@ -53,7 +53,7 @@ export function ColumnaAsistente() {
     >
       {/* Cabecera de Shopify: el título a la izquierda y tres botones redondos con el cristal de las píldoras. */}
       <header className="flex h-12 shrink-0 items-center justify-between pl-4 pr-2">
-        <p className="text-[13px] font-medium text-[#4a4a4a]">Tentare</p>
+        <p className="text-[13px] font-medium text-[#4a4a4a]">Centra</p>
         <div className="flex items-center gap-1.5">
           <BotonCabecera etiqueta="Nueva conversación" onClick={() => window.dispatchEvent(new Event('asistente:nueva'))}><SquarePen size={15} aria-hidden="true" /></BotonCabecera>
           <BotonCabecera etiqueta="Abrir a pantalla completa" onClick={() => { cerrar(); router.push('/asistente'); }}><Maximize2 size={15} aria-hidden="true" /></BotonCabecera>
@@ -109,7 +109,7 @@ export function PildoraAsistente() {
       style={{ opacity: abierta ? 0 : 1, pointerEvents: abierta ? 'none' : 'auto' }}
     >
       <span aria-hidden="true" className="flex size-7 shrink-0 items-center justify-center"><TentiIcono ancho={28} /></span>
-      <span className="flex-1 truncate text-left">Pregúntale a Tentare</span>
+      <span className="flex-1 truncate text-left">Pregúntale a Centra</span>
       <span aria-hidden="true" className="h-5 w-px bg-black/10" />
       <span aria-hidden="true" className="flex size-8 items-center justify-center rounded-full text-[#303030] transition-colors group-hover:bg-[#f7f7f7]"><PanelRight size={18} strokeWidth={1.75} /></span>
     </button>

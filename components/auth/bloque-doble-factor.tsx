@@ -4,7 +4,7 @@
 // cualquiera del equipo del panel puede activarla para su cuenta. Activar y
 // escribir el código se hace en /verificar-acceso; aquí se ve cómo está y se
 // puede quitar (salvo que el estudio la exija a todo el equipo). El factor de
-// la zona interna de Tentare no cuenta aquí: solo se pide en /interno.
+// la zona interna de Centra no cuenta aquí: solo se pide en /interno.
 //
 // Quitarla exige la sesión verificada (`aal2`): Supabase lo rechaza si no, y
 // con la sesión sin verificar ni se llega a este panel. Una sesión que entró

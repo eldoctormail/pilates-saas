@@ -2,7 +2,7 @@
 
 // Piezas visuales compartidas por varios pasos del wizard
 // (app/network/crear-perfil) — extraídas tal cual del final del componente
-// de página, sin rediseñarlas (F0 del roadmap de Tentare Network 2.0:
+// de página, sin rediseñarlas (F0 del roadmap de Centra Network 2.0:
 // partir el wizard en componentes por paso sin cambiar comportamiento).
 //
 // ShellCentrado la usa PasoCuenta (pantallas sin sesión: alta y código OTP).

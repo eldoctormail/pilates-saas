@@ -6,7 +6,7 @@ import { test, expect, type Page, type Route } from '@playwright/test';
 // El importador de membresías casa el plan por NOMBRE. Eso funciona si el
 // estudio llega vacío y copia los nombres del software viejo — que es como se
 // probó. Con un estudio que YA tiene su catálogo montado no casaba NADA:
-// Momence exporta "10 Class Pack" y en Tentare esa tarifa se llama "Bono 10
+// Momence exporta "10 Class Pack" y en Centra esa tarifa se llama "Bono 10
 // Reformer". TODAS las filas de bonos fallaban con «No existe el plan X en tu
 // catálogo» y la dueña no tenía dónde decir que X es su Y.
 //
@@ -190,9 +190,9 @@ test.describe('Emparejar los planes del CSV con las tarifas del estudio', () => 
 });
 
 // ── Tenti en «Analizar» (releva al Orb, 5-oct-2026) ─────────────────────────
-// Aquí Tentare lee unos archivos que no ha visto nunca y decide qué es cada
+// Aquí Centra lee unos archivos que no ha visto nunca y decide qué es cada
 // columna, y el resultado vuelve a esta pantalla: Tenti piensa mientras dura,
-// solo mientras dura. Importar las filas lo hace Tentare solo, sin decidir
+// solo mientras dura. Importar las filas lo hace Centra solo, sin decidir
 // nada: 'trabajando' (5-oct por la noche, lib/tenti/momentos.ts), y el acta
 // dice con su cara si entró todo ('hecho') o algo se paró ('error').
 

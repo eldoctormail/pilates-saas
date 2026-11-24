@@ -5,10 +5,10 @@ import { purgarDocumentoResuelto } from '@/lib/network/documentos-servidor';
 
 export const runtime = 'nodejs';
 
-// Fase 3 del rediseño de Tentare Network — cola de verificación de
+// Fase 3 del rediseño de Centra Network — cola de verificación de
 // identidad. A diferencia de /api/interno/network/verificaciones (que es
 // SOLO LECTURA: la experiencia laboral la confirma el estudio implicado),
-// aquí SÍ resuelve el equipo de Tentare — es exactamente la pieza que
+// aquí SÍ resuelve el equipo de Centra — es exactamente la pieza que
 // faltaba tras diseñar el modelo de datos (red_verificaciones_identidad,
 // service-role-only para UPDATE, sin policy de escritura para
 // authenticated en ninguna dirección).

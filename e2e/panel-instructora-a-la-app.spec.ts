@@ -1,7 +1,7 @@
 import { test, expect, type Page, type Route } from '@playwright/test';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Tentare Core retirado (paso 2, decisión del fundador 14-sep-2026): quien
+// Centra Core retirado (paso 2, decisión del fundador 14-sep-2026): quien
 // entra al panel con rol INSTRUCTOR en la sede activa acaba en la app de su
 // estudio. Lo que se fija aquí:
 //   · la instructora que abre el panel —o un enlace viejo a una pantalla suya—
@@ -71,7 +71,7 @@ async function mockBackend(page: Page, sedes: unknown[] = [SEDE_INSTRUCTORA]) {
   return intentos;
 }
 
-test.describe('Tentare Core retirado: la instructora va a la app del estudio', () => {
+test.describe('Centra Core retirado: la instructora va a la app del estudio', () => {
   test('la instructora que abre el panel acaba en la app de su estudio', async ({ page }) => {
     const intentos = await mockBackend(page);
     await seedSesion(page, UID_INSTRUCTORA, 'marta@example.com');

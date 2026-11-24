@@ -12,7 +12,7 @@ import { ESPECIALIDAD_LABEL, type EspecialidadNetwork } from '@/lib/network/cata
 import { rangoAnios } from '@/lib/network/formato';
 import { cardCls } from '@/components/configuracion/estilos';
 
-// Cola de verificaciones de Tentare Network — docs/NETWORK-IMPLEMENTATION-
+// Cola de verificaciones de Centra Network — docs/NETWORK-IMPLEMENTATION-
 // PLAN.md §4. Solo PROPIETARIO/MANAGER llegan aquí (puedeGestionarEquipo,
 // enforzado en el servidor — esta pantalla vive bajo /equipo, que la RLS y
 // lib/permisos-reglas.ts ya cierran a RECEPCION/INSTRUCTOR).

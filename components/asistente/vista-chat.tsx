@@ -21,7 +21,7 @@ import { Bloque } from './bloques';
 import { TarjetaSinConsultas } from './packs-consultas';
 import { saldoBajo, textoQuedan } from '@/lib/asistente/packs';
 
-// «Pregúntale a Tentare» como un chat (fundador, 6-oct-2026: «como ChatGPT,
+// «Pregúntale a Centra» como un chat (fundador, 6-oct-2026: «como ChatGPT,
 // Gemini, Claude…»): la columna de conversaciones a la izquierda (un cajón en
 // el móvil) y el chat en el centro, a ancho de lectura. La pregunta en burbuja
 // a la derecha; la respuesta a la izquierda, con Tenti de avatar mientras
@@ -120,7 +120,7 @@ export function VistaChat({ studioId, veDinero, nombre, preguntaInicial, flotant
             <button type="button" onClick={() => setListaMovil(true)} aria-label="Tus conversaciones" className="inline-flex size-10 items-center justify-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground">
               <MessagesSquare size={19} aria-hidden="true" />
             </button>
-            <p className="min-w-0 flex-1 truncate text-center text-[14px] font-semibold text-foreground">Tentare</p>
+            <p className="min-w-0 flex-1 truncate text-center text-[14px] font-semibold text-foreground">Centra</p>
             <button type="button" onClick={nueva} aria-label="Nueva conversación" className="inline-flex size-10 items-center justify-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground">
               <SquarePen size={18} aria-hidden="true" />
             </button>
@@ -235,7 +235,7 @@ function ListaConversaciones({ conversaciones, activa, onElegir, onNueva }: {
           </div>
         )}
         {conversaciones?.length === 0 && (
-          <p className="px-3 pt-2 text-[13px] text-muted-foreground text-pretty">Aquí verás tus conversaciones con Tentare.</p>
+          <p className="px-3 pt-2 text-[13px] text-muted-foreground text-pretty">Aquí verás tus conversaciones con Centra.</p>
         )}
         {grupos.map(g => (
           <div key={g.titulo} className="mt-3 first:mt-1">
@@ -510,7 +510,7 @@ function Compositor({ estado, saldo, grande = false, col = false }: { estado: Es
             <textarea
               id="asistente-pregunta" ref={campo} rows={2} value={texto}
               onChange={e => setTexto(e.target.value)} onKeyDown={onKeyDown} maxLength={500} enterKeyHint="send"
-              placeholder="Pregúntale a Tentare…"
+              placeholder="Pregúntale a Centra…"
               className="block max-h-[200px] min-h-[44px] w-full resize-none bg-transparent px-0.5 py-1 text-[13px] leading-5 text-foreground placeholder:text-transparent focus:outline-none"
             />
           </span>
@@ -556,7 +556,7 @@ function Compositor({ estado, saldo, grande = false, col = false }: { estado: Es
           onKeyDown={onKeyDown}
           maxLength={500}
           enterKeyHint="send"
-          placeholder="Pregúntale a Tentare…"
+          placeholder="Pregúntale a Centra…"
           className={cn(
             'max-h-[220px] min-h-10 min-w-0 flex-1 resize-none self-center bg-transparent py-2 text-[16px] leading-6 text-foreground focus:outline-none lg:text-[15px]',
             shell ? 'px-0.5 placeholder:text-transparent lg:text-[13px]' : 'placeholder:text-muted-foreground',
@@ -581,7 +581,7 @@ function Compositor({ estado, saldo, grande = false, col = false }: { estado: Es
             : <span className="font-medium text-foreground" data-testid="saldo-bajo">Pídele más a la propietaria</span>
         ) : (
           /* En el móvil, una sola línea bajo el campo: el saldo. */
-          <span className={saldoTexto ? 'hidden sm:inline' : undefined}>Tentare consulta tus datos y crea clases, salas, eventos y citas si tú confirmas.</span>
+          <span className={saldoTexto ? 'hidden sm:inline' : undefined}>Centra consulta tus datos y crea clases, salas, eventos y citas si tú confirmas.</span>
         )}
       </p>
     </form>

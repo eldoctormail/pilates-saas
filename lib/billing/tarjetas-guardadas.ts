@@ -15,7 +15,7 @@
  * ¿Se crea la CustomerSession (la que deja enseñar y guardar tarjetas)? Las tres cosas:
  *  - la socia sale del TOKEN (nunca una invitada, nunca un id del cuerpo);
  *  - hay Customer;
- *  - la petición viene de la app o del portal de Tentare: sin `Origin` (misma
+ *  - la petición viene de la app o del portal de Centra: sin `Origin` (misma
  *    navegación) o con el `Origin` de la app. NUNCA desde la web de un estudio
  *    (widget): allí la página es de otro y no debe ver las tarjetas de nadie.
  */

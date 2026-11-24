@@ -46,7 +46,7 @@ export interface PropsListaPlanesLazy {
   onCerrar: () => void;
   onComprado?: () => void;
   onIniciarSesion?: () => void;
-  /** El origen de Tentare, para la hoja de fuentes del pago (ver `CheckoutEmbebido`). */
+  /** El origen de Centra, para la hoja de fuentes del pago (ver `CheckoutEmbebido`). */
   origenTentare?: string;
 }
 

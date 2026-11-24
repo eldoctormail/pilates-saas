@@ -43,7 +43,7 @@ export default function Contenido() {
 
       <h2 style={h2}>La regla vale también en mostrador</h2>
       <p>
-        No es solo para la app: si intentas apuntar tú a alguien sin autorizar, Tentare te lo dice y no la
+        No es solo para la app: si intentas apuntar tú a alguien sin autorizar, Centra te lo dice y no la
         apunta. Es a propósito — si recepción pudiera saltársela, creerías que la regla se cumple mientras la
         mitad de las reservas la esquivan. Para dejarla entrar, autorízala en su ficha y vuelve a apuntarla; así
         además queda constancia de quién lo decidió.

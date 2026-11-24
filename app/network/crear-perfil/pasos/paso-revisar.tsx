@@ -2,7 +2,7 @@
 
 // Paso 11 del wizard: revisar (vista previa de cómo verán el perfil los
 // estudios). Extraído tal cual de app/network/crear-perfil/page.tsx — F0
-// del roadmap de Tentare Network 2.0, sin cambios de comportamiento.
+// del roadmap de Centra Network 2.0, sin cambios de comportamiento.
 import { Camera, Check, Clock3 } from 'lucide-react';
 import {
   ESPECIALIDAD_LABEL, DISPONIBILIDAD_ESTADO_LABEL, TARIFA_RANGO_LABEL, tituloProfesionalDe,

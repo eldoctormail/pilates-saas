@@ -1,4 +1,4 @@
-# Ajustes de Tentare sobre el docker-compose oficial de Supabase.
+# Ajustes de Centra sobre el docker-compose oficial de Supabase.
 # Se copia a la carpeta del proyecto de Supabase y se suma en su .env:
 #
 #   COMPOSE_FILE=docker-compose.yml:docker-compose.tentare.yml
@@ -9,11 +9,11 @@ services:
   functions:
     profiles: ["desactivado"]
 
-  # Los correos de acceso con la marca de Tentare y el CÓDIGO de 6 cifras (lo
+  # Los correos de acceso con la marca de Centra y el CÓDIGO de 6 cifras (lo
   # que la app le pide a la alumna y al alta del estudio). Sin esto, Supabase
   # autoalojado manda sus plantillas de fábrica, con un enlace y sin código.
   # Las plantillas son las de supabase/templates/ (las mismas del proyecto de
-  # Tentare); deploy/scripts/migrar.sh las copia a ./plantillas en cada corrida.
+  # Centra); deploy/scripts/migrar.sh las copia a ./plantillas en cada corrida.
   # Los asuntos salen de supabase/config.toml (lo cruza lib/deploy-migraciones.test.ts).
   plantillas:
     image: nginx:alpine
@@ -28,7 +28,7 @@ services:
       GOTRUE_MAILER_TEMPLATES_RECOVERY: http://plantillas/recovery.html
       GOTRUE_MAILER_TEMPLATES_MAGIC_LINK: http://plantillas/magic_link.html
       GOTRUE_MAILER_TEMPLATES_EMAIL_CHANGE: http://plantillas/email_change.html
-      GOTRUE_MAILER_SUBJECTS_CONFIRMATION: '{{ if .Data.alta_nueva }}{{ .Token }} es tu código · Te damos la bienvenida a Tentare{{ else }}Tu código de verificación de Tentare{{ end }}'
-      GOTRUE_MAILER_SUBJECTS_RECOVERY: 'Recupera tu contraseña en Tentare'
-      GOTRUE_MAILER_SUBJECTS_MAGIC_LINK: 'Tu código para entrar en Tentare'
-      GOTRUE_MAILER_SUBJECTS_EMAIL_CHANGE: 'Confirma tu nuevo email en Tentare'
+      GOTRUE_MAILER_SUBJECTS_CONFIRMATION: '{{ if .Data.alta_nueva }}{{ .Token }} es tu código · Te damos la bienvenida a Centra{{ else }}Tu código de verificación de Centra{{ end }}'
+      GOTRUE_MAILER_SUBJECTS_RECOVERY: 'Recupera tu contraseña en Centra'
+      GOTRUE_MAILER_SUBJECTS_MAGIC_LINK: 'Tu código para entrar en Centra'
+      GOTRUE_MAILER_SUBJECTS_EMAIL_CHANGE: 'Confirma tu nuevo email en Centra'

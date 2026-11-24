@@ -1,0 +1,9 @@
+<svg class="t-logo" viewBox="0 0 120 120" width="120" height="120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Centra">
+  <rect width="120" height="120" rx="26" fill="#111827"></rect>
+  <g class="t-marca">
+  <g transform="translate(9.6,9.6) scale(0.84)">
+    <path class="t-tallo" fill="#FFFFFF" d="M94.93 28.55A47 47 0 1 0 94.93 91.45A9 9 0 0 0 81.55 79.4A29 29 0 1 1 81.55 40.6A9 9 0 0 0 94.93 28.55Z"></path>
+    <path class="t-disco" fill="#FFFFFF" d="M60 47.5A12.5 12.5 0 1 1 60 72.5A12.5 12.5 0 1 1 60 47.5Z"></path>
+  </g>
+  </g>
+</svg>

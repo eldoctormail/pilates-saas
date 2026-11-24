@@ -27,7 +27,7 @@ export default function Contenido() {
         </p>
         <p style={{ margin: 0 }}>
           <strong>La fisioterapia es la excepción, y a propósito.</strong> Está exenta de IVA (art. 20.Uno.3º de
-          la Ley del IVA) y hoy la facturación de Tentare no sabe emitir esa exención. Emitirla al tipo general
+          la Ley del IVA) y hoy la facturación de Centra no sabe emitir esa exención. Emitirla al tipo general
           sería una factura <em>incorrecta</em>, así que ahí solo se marca «pagado» como apunte, sin factura — y
           esa factura la haces por tu cuenta.
         </p>

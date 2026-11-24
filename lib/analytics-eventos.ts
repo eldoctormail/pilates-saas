@@ -56,7 +56,7 @@ export type EventoAnalitica =
       props: { salas: number; tipos_clase: number; planes: number; instructora: boolean; horario: boolean; origen?: 'asistente' | 'calendario' };
     }
   // El paso donde se pierde más de la mitad de los estudios (4 de 10 lo
-  // superan). `origen` distingue el horario propuesto por Tentare del que la
+  // superan). `origen` distingue el horario propuesto por Centra del que la
   // propietaria importa de un Excel: son dos caminos con conversiones muy
   // distintas y mezclarlos oculta cuál funciona.
   | { nombre: 'horario_creado'; props: { origen: 'onboarding' | 'importacion' | 'imagen'; sesiones: number } }

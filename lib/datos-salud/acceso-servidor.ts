@@ -6,7 +6,7 @@
 // `instructora_atiende_socia`) no sirven aquí: la primera se salta el filtro de
 // estudio y la segunda devuelve siempre false. Esta es la misma regla escrita
 // en TS, con las mismas columnas:
-//   · rol clínico en el panel (solo PROPIETARIO: Tentare Core se retiró y la
+//   · rol clínico en el panel (solo PROPIETARIO: Centra Core se retiró y la
 //     instructora lee la salud de sus alumnas en la app, por su propia ruta),
 //   · la socia es de ESTE estudio y no está borrada,
 //   · consentimiento de salud vigente (fecha puesta y `consentimiento_salud_revocado_en` NULL).

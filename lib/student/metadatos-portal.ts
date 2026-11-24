@@ -5,9 +5,9 @@ import { logoServible } from '../monograma-estudio.ts';
 // y la de Twitter/X.
 //
 // ⚠️ Sin esto, `/portal/<slug>` heredaba las de `app/layout.tsx`, que son las de
-// Tentare B2B («Tentare: software para estudios de Pilates y Yoga», con
-// `siteName: 'Tentare'`): la app es marca blanca y su enlace se previsualizaba
-// como el anuncio de Tentare. En Next.js, un `openGraph` del hijo SUSTITUYE al
+// Centra B2B («Centra: software para estudios de Pilates y Yoga», con
+// `siteName: 'Centra'`): la app es marca blanca y su enlace se previsualizaba
+// como el anuncio de Centra. En Next.js, un `openGraph` del hijo SUSTITUYE al
 // del padre entero (no se mezclan claves), así que basta con declarar uno.
 //
 // La imagen solo es suya: su portada si la subió, si no su logo, y si no

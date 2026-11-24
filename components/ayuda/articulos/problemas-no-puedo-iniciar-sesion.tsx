@@ -9,7 +9,7 @@ export default function Contenido() {
   return (
     <>
       <QueEstaPasando>
-        No consigues entrar a tu panel de Tentare: contraseña que no funciona, el correo para recuperarla (o el
+        No consigues entrar a tu panel de Centra: contraseña que no funciona, el correo para recuperarla (o el
         código del alta) no llega, o la pantalla se queda cargando sin avanzar.
       </QueEstaPasando>
 

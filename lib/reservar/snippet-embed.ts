@@ -19,7 +19,7 @@
 //
 // Validación en ambos sentidos (P2 de la auditoría — el listener viejo no
 // validaba origen): solo se atienden mensajes cuyo `e.origin` sea el de
-// Tentare Y cuyo `e.source` sea ESTE iframe (dos widgets del mismo estudio en
+// Centra Y cuyo `e.source` sea ESTE iframe (dos widgets del mismo estudio en
 // la misma página no se pisan entre sí).
 //
 // P2 de la auditoría, punto 2 — listeners deduplicados: antes, cada widget

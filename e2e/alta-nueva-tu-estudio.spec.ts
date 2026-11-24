@@ -101,7 +101,7 @@ test.describe('el alta nueva en el panel', () => {
     await cp.fill('35001');
     await expect(page.getByTestId('provincia')).toHaveText(/Provincia: Las Palmas/);
     await expect(page.getByTestId('aviso-canarias')).toHaveText(
-      'Tentare trabaja hoy en hora peninsular: en Canarias, los recordatorios y los cierres de reserva irían una hora antes. Escríbenos antes de abrir reservas.',
+      'Centra trabaja hoy en hora peninsular: en Canarias, los recordatorios y los cierres de reserva irían una hora antes. Escríbenos antes de abrir reservas.',
     );
   });
 

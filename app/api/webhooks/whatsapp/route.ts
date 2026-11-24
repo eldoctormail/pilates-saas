@@ -101,7 +101,7 @@ export async function POST(req: NextRequest) {
       // `studio_id` SIEMPRE resuelto contra la columna phone_number_id (Fase
       // D), nunca contra nada que traiga el payload aparte de este ID —
       // mismo principio de no confiar en datos externos sin cruzar contra lo
-      // que Tentare ya tiene guardado. `activo` filtrado aquí: una fila
+      // que Centra ya tiene guardado. `activo` filtrado aquí: una fila
       // desconectada (Desconectar no borra phone_number_id, solo apaga
       // `activo`) no debe resucitar en la UI ni bloquear una reconexión.
       const { data: fila } = await admin

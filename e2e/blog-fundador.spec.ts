@@ -35,15 +35,15 @@ test('/blog: el listado, su canonical, su RSS y el artículo destacado llevan al
   const blog = nodos.find((n) => n['@type'] === 'Blog');
   expect(blog.blogPost).toHaveLength(1);
   await expect(page.getByRole('link', { name: 'Sobre el autor' })).toHaveAttribute('href', '/blog/marcos-roca');
-  await page.getByRole('link', { name: /quién es el fundador de Tentare/ }).first().click();
+  await page.getByRole('link', { name: /quién es el fundador de Centra/ }).first().click();
   await expect(page).toHaveURL(new RegExp(`${SLUG}$`));
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('quién es el fundador de Tentare');
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('quién es el fundador de Centra');
 });
 
 test('página de autor: nombre, foto cargada, Person con @id estable y solo enlaces que constan', async ({ page }) => {
   await page.goto('/blog/marcos-roca', { waitUntil: 'load' });
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Marcos Roca Rodríguez');
-  await expect(page.getByText('Fundador de Tentare').first()).toBeVisible();
+  await expect(page.getByText('Fundador de Centra').first()).toBeVisible();
   await expect(page.getByText('Barcelona, España')).toBeVisible();
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `${ORIGEN}/blog/marcos-roca`);
   const foto = page.locator('picture img').first();

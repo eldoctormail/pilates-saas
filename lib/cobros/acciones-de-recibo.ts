@@ -13,7 +13,7 @@
 //     si pudo salir en una remesa, «El banco lo ha cobrado / lo devolvió»; y
 //     siempre «No llegó a ir al banco».
 //   · Cobrado: su factura (o «Hacerle factura» si el estudio factura con
-//     Tentare), y las dos devoluciones de `accionesDeDevolucion`, o «Devolver
+//     Centra), y las dos devoluciones de `accionesDeDevolucion`, o «Devolver
 //     desde su ficha» si entró por Stripe.
 // Las que no se pueden ahora salen apagadas con su motivo, no escondidas.
 //
@@ -54,7 +54,7 @@ export interface ReciboParaAcciones extends ReciboParaDevolver {
 export interface ContextoDeAcciones {
   /** La factura del recibo, si la tiene. */
   factura: { numero: string } | null;
-  /** El estudio factura con Tentare (`emiteFacturas`: con o sin Veri*Factu). */
+  /** El estudio factura con Centra (`emiteFacturas`: con o sin Veri*Factu). */
   estudioFactura: boolean;
   /** El estudio prepara remesas (acreedor, IBAN y titular). */
   estudioHaceRemesas: boolean;

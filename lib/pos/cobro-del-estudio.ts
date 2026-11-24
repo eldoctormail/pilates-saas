@@ -61,7 +61,7 @@ function configSumup(env: NodeJS.ProcessEnv = process.env) {
 async function cobroSumup(admin: SupabaseClient, studioId: string, o: { exigirLector: boolean }): Promise<CobroPreparado> {
   const cfg = configSumup();
   if (!cfg.appId || !cfg.key || !cfg.secretoAviso) {
-    return { ok: false, status: 503, motivo: 'El datáfono de SumUp todavía no está disponible en Tentare.' };
+    return { ok: false, status: 503, motivo: 'El datáfono de SumUp todavía no está disponible en Centra.' };
   }
   if (!sumupPuedeCobrarAqui()) {
     return { ok: false, status: 503, motivo: 'Fuera de producción los cobros con SumUp están desactivados.' };

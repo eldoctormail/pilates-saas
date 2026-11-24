@@ -1,4 +1,4 @@
-// ¿Esta cuenta es del EQUIPO de algún estudio, o de Tentare?
+// ¿Esta cuenta es del EQUIPO de algún estudio, o de Centra?
 //
 // Un solo dueño para la pregunta: lo usan quitar la verificación en dos pasos
 // desde la ficha de una alumna (lib/auth/quitar-doble-factor.ts) y el puente de
@@ -7,7 +7,7 @@
 // fundador, 16-oct-2026). Cuenta TODO sitio donde la cuenta es algo más que
 // alumna: ficha de equipo en cualquier estudio (instructora, recepción,
 // gerencia), propietaria de un estudio o de una cadena, o del equipo de
-// Tentare. Fila en la tabla, activa o no: «ya no» puede volver a ser «sí».
+// Centra. Fila en la tabla, activa o no: «ya no» puede volver a ser «sí».
 import 'server-only';
 import type { SupabaseClient } from '@supabase/supabase-js';
 

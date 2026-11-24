@@ -1,4 +1,4 @@
-// Catálogos fijos de Tentare Network — docs/NETWORK-IMPLEMENTATION-PLAN.md §2.
+// Catálogos fijos de Centra Network — docs/NETWORK-IMPLEMENTATION-PLAN.md §2.
 //
 // Sin tabla en BD a propósito: mismo patrón que ROLES_VALIDOS
 // (app/api/equipo/route.ts) o tipos_clase.nivel. Añadir una especialidad
@@ -58,7 +58,7 @@ export function disciplinasDe(especialidades: EspecialidadNetwork[]): Disciplina
 // "Pilates" fijo cuando el dato real dice otra cosa (o nada).
 export function tituloProfesionalDe(especialidades: EspecialidadNetwork[]): string {
   const discs = disciplinasDe(especialidades);
-  if (discs.length === 0) return 'Profesional de Tentare Network';
+  if (discs.length === 0) return 'Profesional de Centra Network';
   return `Instructora de ${discs.map(d => DISCIPLINA_LABEL[d]).join(' y ')}`;
 }
 

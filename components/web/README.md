@@ -38,7 +38,7 @@ seguridad, ayuda y legales. Aquí van las decisiones, no lo que se lee en el CSS
   (#2458, «sin pinta de IA»).
 - **Cortes 640 / 1024 / 1280.** Las propiedades personalizadas no valen dentro de
   `@media`, así que se escriben con su número. La isla: menú tras el botón por
-  debajo de 1024, «Entrar» fuera por debajo de 640, y «Cambiarme a Tentare»
+  debajo de 1024, «Entrar» fuera por debajo de 640, y «Cambiarme a Centra»
   fuera por debajo de 1180 (la única excepción: es lo que mide la isla con todo).
 - **Vidrio solo en la isla y su panel**, en un `::before`: un elemento con
   `backdrop-filter` corta el de sus hijos y el panel no desenfocaría nada. El

@@ -145,7 +145,7 @@ const HorarioSemana = dynamic(
 // para no llamar a new Date() durante el SSR y evitar mismatches de hidratación.
 const FECHA_PLACEHOLDER_SSR = new Date('2026-01-01T12:00:00');
 
-// "Cumpleaños · dd/mm/aaaa" (diseño "Tentare Portal Reservas", campo de texto
+// "Cumpleaños · dd/mm/aaaa" (diseño "Centra Portal Reservas", campo de texto
 // libre, no un `<input type="date">`) → ISO `yyyy-mm-dd` para
 // `fecha_nacimiento` (columna `date`). `null` si no cuadra el patrón o el mes/
 // día no son válidos — el llamador simplemente omite el campo, nunca bloquea.
@@ -284,7 +284,7 @@ type Tab = 'clases' | 'citas' | 'misreservas' | 'estudio' | 'cuenta' | 'planes' 
 // cuenta" (bonos+perfil) son conceptualmente distintos incluso en el portal
 // instalable (rutas separadas). Ver docs/account-widget-diseno.md §4.
 //
-// 'planes' y 'equipo' («Tentare Widgets», lib/widgets/catalogo.ts) son vistas
+// 'planes' y 'equipo' («Centra Widgets», lib/widgets/catalogo.ts) son vistas
 // SOLO del modo incrustado: en la página completa los planes y el equipo ya
 // son secciones (bonos al bajar, equipo dentro de «El estudio») y no ganan
 // una pestaña propia. Ver `tabHabilitada`.
@@ -424,8 +424,8 @@ export default function ReservarPage() {
     || (t === 'cuenta' && configHorario.mostrarCuenta !== false)
     || ((t === 'planes' || t === 'equipo') && searchParams.get('embed') === '1')
     || t === 'contacto';
-  // ⚠️ Sin identidad inventada. Estos cuatro valores caían a los de Tentare y a
-  // una dirección de ejemplo ('Tentare', 'hola@tentare.es', '+34 951 000 000',
+  // ⚠️ Sin identidad inventada. Estos cuatro valores caían a los de Centra y a
+  // una dirección de ejemplo ('Centra', 'hola@tentare.es', '+34 951 000 000',
   // 'Málaga · Calle Larios 12'). Se ven cuando `studio` es null — es decir,
   // cuando los datos del estudio NO han cargado. Medido en el navegador con la
   // API devolviendo 500: la página de reservas de un estudio se pintaba entera,
@@ -478,7 +478,7 @@ export default function ReservarPage() {
   const embedMode = searchParams.get('embed') === '1';
 
   // Cómo se ve DENTRO de la web del estudio. Solo en modo incrustado: la página
-  // suelta `/reservar/<slug>` es de Tentare y sigue con su decorado.
+  // suelta `/reservar/<slug>` es de Centra y sigue con su decorado.
   //
   // El estilo de sus widgets en su web (Fase B del constructor, 28-sep-2026):
   // el que la dueña aplica UNA vez desde el panel para todos sus widgets, y que
@@ -517,7 +517,7 @@ export default function ReservarPage() {
     [embedMode, estiloWeb, searchParams],
   );
   // El resto del snippet (filtros/vista/toggles/diseño/marca), también SOLO
-  // incrustado — la página suelta /reservar/<slug> es de Tentare y no cambia.
+  // incrustado — la página suelta /reservar/<slug> es de Centra y no cambia.
   // `fondo`/`tinta` los sigue resolviendo `resolverApariencia` de arriba
   // (mismos nombres de param de siempre); de aquí solo se consume lo nuevo.
   const configWidget = useMemo(
@@ -593,8 +593,8 @@ export default function ReservarPage() {
   // oscuro, su variante legible; en claro, `undefined` y mandan los de siempre.
   const colorPeligro = esNoche ? textoSemantico('danger', tokensCalendario) : undefined;
   const colorExito = esNoche ? textoSemantico('success', tokensCalendario) : 'var(--success)';
-  // Una familia que sirve Tentare sale de las de `next/font` que la app ya
-  // declara (se descargan de Tentare al pintarse); ninguna se pide a Google
+  // Una familia que sirve Centra sale de las de `next/font` que la app ya
+  // declara (se descargan de Centra al pintarse); ninguna se pide a Google
   // (`familiaCss`, lib/reservar/apariencia-widget.ts).
   const fuenteWidget = familiaCss(apariencia);
   // Titulares/horas/precios (widgetFuenteDisplay). Contrato de AparienciaWidget:
@@ -694,7 +694,7 @@ export default function ReservarPage() {
   // solo quien de verdad da clases (quita recepción/gerencia y bajas), para
   // no ofrecer un filtro que siempre da cero resultados.
   const instructoresVisibles = useMemo(() => queImparten(instructores), [instructores]);
-  // Chips combinados tipo+instructora del bloque sticky (diseño "Tentare
+  // Chips combinados tipo+instructora del bloque sticky (diseño "Centra
   // Portal Reservas"): "Todas" + un chip por tipo + un chip por instructora,
   // en una sola fila — dos filtros independientes (`filtroTipo`/
   // `filtroInstructor`) que conviven porque `slots` ya los aplica los dos a
@@ -836,7 +836,7 @@ export default function ReservarPage() {
   const [datosCobro, setDatosCobro] = useState<{ total: number | null; motivoCodigo: string | null }>({ total: null, motivoCodigo: null });
   const [datosError, setDatosError] = useState('');
   const [datosCargando, setDatosCargando] = useState(false);
-  // "Información adicional" (diseño "Tentare Portal Reservas"): datos de perfil
+  // "Información adicional" (diseño "Centra Portal Reservas"): datos de perfil
   // opcionales del checkout sin login — conflicto aprobado ("con migración",
   // aunque al final no hizo falta: campos_extra/fecha_nacimiento ya existían
   // en el esquema). Van a checkout-embebido → metadata → entregarPlanComprado,
@@ -888,7 +888,7 @@ export default function ReservarPage() {
   // 03): tabs Próximas/Pasadas sobre la MISMA lista ya cargada — sin fetch
   // aparte, `misReservas` ya trae ambas.
   const [misReservasTab, setMisReservasTab] = useState<'proximas' | 'pasadas'>('proximas');
-  // Diseño "Tentare Portal Reservas": "Mis reservas" es un SHEET que se
+  // Diseño "Centra Portal Reservas": "Mis reservas" es un SHEET que se
   // desliza desde abajo sobre la lista de clases, no una pestaña de página
   // completa — el estado que antes vivía en `tab === 'misreservas'` sigue
   // igual (mismo contenido, mismos estados reales), solo cambia el
@@ -1743,7 +1743,7 @@ export default function ReservarPage() {
     return misReservasTab === 'pasadas' ? [...partida].reverse() : partida;
   }, [misReservas, misReservasTab, now]);
 
-  // Badge del botón "Mis reservas" de la cabecera — diseño "Tentare Portal
+  // Badge del botón "Mis reservas" de la cabecera — diseño "Centra Portal
   // Reservas" (`{{ nReservas }}`): cuenta las PRÓXIMAS, no el total con
   // pasadas — es lo que de verdad importa antes de abrir el sheet.
   const misReservasCount = useMemo(
@@ -2030,7 +2030,7 @@ export default function ReservarPage() {
   }
 
   // Walk-in ya autenticada por enlace mágico: solo pide nombre + teléfono.
-  // P0 "reservar sin cuenta" (auditoría Momence vs Tentare): antes este paso
+  // P0 "reservar sin cuenta" (auditoría Momence vs Centra): antes este paso
   // exigía además fijar contraseña — el enlace mágico YA verifica el email,
   // así que era un paso de más que ni el competidor auditado exige. Quien
   // quiera volver entra con su correo y un código desde /acceso (ver el enlace
@@ -2050,7 +2050,7 @@ export default function ReservarPage() {
   // deferred a propósito, fuera del alcance de esta pieza.
   async function handleDatosContinuar() {
     if (!bookingSesionId || !datosPlan || !studio?.id || datosCargando) return;
-    // Diseño "Tentare Portal Reservas": UN solo campo "Nombre y apellido", no
+    // Diseño "Centra Portal Reservas": UN solo campo "Nombre y apellido", no
     // Nombre/Apellidos por separado — `loginForm.apellidos` ya no se usa en
     // este flujo (se queda en el tipo/estado compartido, vacío, sin romper el
     // resto de pasos que sí lo declaran).
@@ -2717,7 +2717,7 @@ export default function ReservarPage() {
   // vista previa enseñan ese estado vacío a propósito).
   const hayCitas = citasServicios.some(sv => sv.activo);
   const tabs = tabsTodas.filter(([t]) => tabHabilitada(t) && (t !== 'citas' || hayCitas || embedMode));
-  // Diseño "Tentare Portal Reservas": sin barra de pestañas en la pantalla
+  // Diseño "Centra Portal Reservas": sin barra de pestañas en la pantalla
   // de Clases — vacía del todo, no una sola píldora "Clases" (a diferencia
   // de `embedMode`/`soloPestana`, que sí dejan la píldora del único
   // propósito visible). Un intento anterior de esto rompió la navegación
@@ -2816,7 +2816,7 @@ export default function ReservarPage() {
   // intentarlo y sigo sin estudio" es exactamente esta condición.
   //
   // Antes esto no se comprobaba y la página seguía adelante: se pintaba entera
-  // con los valores por defecto —el nombre y el teléfono de Tentare— y sin un
+  // con los valores por defecto —el nombre y el teléfono de Centra— y sin un
   // solo aviso. Una clienta veía la página de reservas de su estudio con la
   // marca de otra empresa y un horario vacío, y lo único que podía concluir es
   // que su estudio ya no tiene clases.
@@ -3895,7 +3895,7 @@ export default function ReservarPage() {
         )}
 
         {/* ── SHEET: MIS RESERVAS ──────────────────────────────────────────
-            Diseño "Tentare Portal Reservas": se desliza desde abajo sobre
+            Diseño "Centra Portal Reservas": se desliza desde abajo sobre
             el listado de clases, disparado desde el botón de la cabecera —
             no una pestaña de página completa. `inline={false}` (el
             comportamiento por defecto de `PublicSheet`) es exactamente el
@@ -4076,7 +4076,7 @@ export default function ReservarPage() {
           </div>
         )}
 
-        {/* ── VISTAS SOLO INCRUSTADAS («Tentare Widgets») ─────────────────
+        {/* ── VISTAS SOLO INCRUSTADAS («Centra Widgets») ─────────────────
             «Planes y precios»/«Bonos y packs» y «Instructoras», widgets de un
             solo propósito (lib/widgets/catalogo.ts). Pintan los MISMOS bloques
             que la página completa (`contenidoPlanes`, `EquipoPublico`) — el
@@ -4394,7 +4394,7 @@ export default function ReservarPage() {
                     se confirma, verde solo con confirmación REAL del servidor,
                     ámbar para espera/pendiente/tardando/fallida. */}
                 {!pagoWebSinLogin || confirmacionPago === 'confirmada' ? (
-                  // Icono de éxito con el tratamiento del diseño "Tentare
+                  // Icono de éxito con el tratamiento del diseño "Centra
                   // Portal Reservas": anillo que se expande y se disuelve
                   // detrás de un check con rebote, más 4 confettis — SOLO
                   // para el éxito real, nunca para confirmando/espera/fallo
@@ -4812,7 +4812,7 @@ export default function ReservarPage() {
                 codigoDescuento={codigoDescuento}
                 onChangeCodigo={setCodigoDescuento}
                 onContinuar={handleDatosContinuar}
-                // "Bonos y mensualidades del estudio" — diseño "Tentare Portal
+                // "Bonos y mensualidades del estudio" — diseño "Centra Portal
                 // Reservas": SIEMPRE visible cuando hay al menos un plan PUNTUAL
                 // que cubre la clase (aunque sea uno solo, "Clase suelta" a su
                 // propio precio) — confirma explícitamente qué se está pagando,
@@ -4859,7 +4859,7 @@ export default function ReservarPage() {
                   avisoCodigo: datosCobro.motivoCodigo,
                   // La fuente REAL del widget para dentro del iframe de Stripe
                   // (appearance no resuelve var(--font-ui)), por su nombre: el
-                  // componente la saca de la hoja de Tentare si la servimos
+                  // componente la saca de la hoja de Centra si la servimos
                   // (`fuenteDelPago`); sin fuente personalizada, la de --font-ui.
                   fuentePago: apariencia.fuente ?? undefined,
                   // El radio de input del Widget Builder, para que los campos

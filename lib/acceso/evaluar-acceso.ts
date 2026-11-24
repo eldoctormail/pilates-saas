@@ -2,7 +2,7 @@
 //
 // El QR solo dice QUIÉN es. Esto decide si entra, y no inventa ninguna regla:
 // lee el estado ACTUAL de su reserva para la clase que se está comprobando.
-// Eso basta porque en Tentare todo lo demás ya se decidió al reservar:
+// Eso basta porque en Centra todo lo demás ya se decidió al reservar:
 //
 //   · el bono o la cuota se descuentan dentro de `reservar_plaza` (una reserva
 //     CONFIRMADA ya es «su plan cubre esta clase»);
@@ -13,7 +13,7 @@
 //
 // Volver a calcular aquí si «tiene bono» sería un segundo motor de reservas que
 // tarde o temprano diría otra cosa que el primero. Tener bono sin reserva NO da
-// acceso, igual que no lo da en el resto de Tentare.
+// acceso, igual que no lo da en el resto de Centra.
 //
 // Tres salidas (decisión del fundador, 27-sep):
 //   🟢 PERMITIDO  reserva confirmada o plaza fija.

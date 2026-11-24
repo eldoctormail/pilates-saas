@@ -1,6 +1,6 @@
 import { OG_IMAGE_CONTENT_TYPE, OG_IMAGE_SIZE, generarOgImage } from '@/lib/og-image';
 
-export const alt = 'Programa de gestión para estudios de Pilates en España — Tentare';
+export const alt = 'Programa de gestión para estudios de Pilates en España — Centra';
 export const size = OG_IMAGE_SIZE;
 export const contentType = OG_IMAGE_CONTENT_TYPE;
 

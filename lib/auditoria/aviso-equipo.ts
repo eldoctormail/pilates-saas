@@ -8,7 +8,7 @@
 //
 // ⚠️ LEGAL: el plazo y estos textos son la propuesta técnica que el fundador eligió;
 // la redacción para el contrato o los términos la valida un abogado. El aviso lo da
-// el estudio (responsable del tratamiento); Tentare pone el sitio y el texto.
+// el estudio (responsable del tratamiento); Centra pone el sitio y el texto.
 //
 // Puro, sin I/O ni alias `@/`: lo usan la pantalla, el correo de invitación y la
 // ayuda, y se prueba con `node --test`.
@@ -36,10 +36,10 @@ const PLAZO = `${PLAZO_CONSERVACION_ANIOS} años`;
  */
 export const AVISO_PARA_LA_PERSONA =
   'Cuando trabajes con el dinero del estudio en el panel (recibos, cuotas, planes, reembolsos, ingresos), '
-  + 'Tentare anota quién lo hizo, cuándo y qué valor había antes. Solo lo ve la propietaria y se guarda '
+  + 'Centra anota quién lo hizo, cuándo y qué valor había antes. Solo lo ve la propietaria y se guarda '
   + `${PLAZO}; después se borra solo.`;
 
-/** Lo que se le dice A LA PROPIETARIA al dar de alta a alguien (el aviso es del estudio, no de Tentare). */
+/** Lo que se le dice A LA PROPIETARIA al dar de alta a alguien (el aviso es del estudio, no de Centra). */
 export const AVISO_AL_DAR_DE_ALTA =
   'Lo que esta persona haga con el dinero en el panel (recibos, cuotas, planes, reembolsos, ingresos) quedará '
   + `anotado: quién, cuándo y qué valor había antes. Solo lo ve la propietaria y se guarda ${PLAZO}. `

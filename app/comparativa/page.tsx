@@ -20,10 +20,10 @@ export const metadata: Metadata = {
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
   openGraph: {
-    siteName: 'Tentare',
+    siteName: 'Centra',
     type: 'website',
     title: pagina.titulo,
-    description: ES ? 'Las diferencias que se notan cada día y cada fin de mes en un estudio de Pilates en España.' : 'Tentare frente a los programas que se usan en Argentina: precio, comisión, Mercado Pago y factura de ARCA.',
+    description: ES ? 'Las diferencias que se notan cada día y cada fin de mes en un estudio de Pilates en España.' : 'Centra frente a los programas que se usan en Argentina: precio, comisión, Mercado Pago y factura de ARCA.',
     url: urlDe(PATH),
     images: [{ url: '/comparativa/opengraph-image' }],
   },
@@ -224,9 +224,9 @@ export default function ComparativaPage() {
                 13 rivales; «el mejor software» (la lista editorial) es de
                 /recursos/mejor-software-para-estudios-de-pilates. */}
             <span style={{ fontWeight: 600, display: 'block', fontSize: 14, color: 'var(--w-texto-2)', margin: '0 0 14px', lineHeight: 1.5 }}>Comparativa de software para estudios de Pilates: precios y funciones</span>{' '}
-            Tentare frente a los 13 software con los que más se compara.
+            Centra frente a los 13 software con los que más se compara.
           </h1>
-          <p style={{ fontSize: 'clamp(17px,1.5vw,20px)', lineHeight: 1.55, color: 'var(--w-texto-2)', maxWidth: 620, margin: 0 }}>Para un <strong style={{ color: 'var(--w-texto)' }}>estudio de pilates en España</strong>, Tentare gana donde se nota cada día y cada fin de mes: precio público, sin comisión sobre tus cobros, sustituciones de instructoras y plazas fijas. Compáralo tú misma.</p>
+          <p style={{ fontSize: 'clamp(17px,1.5vw,20px)', lineHeight: 1.55, color: 'var(--w-texto-2)', maxWidth: 620, margin: 0 }}>Para un <strong style={{ color: 'var(--w-texto)' }}>estudio de pilates en España</strong>, Centra gana donde se nota cada día y cada fin de mes: precio público, sin comisión sobre tus cobros, sustituciones de instructoras y plazas fijas. Compáralo tú misma.</p>
           <p style={{ fontSize: 15, lineHeight: 1.55, color: 'var(--w-texto-2)', margin: '16px 0 0' }}>
             ¿Prefieres una guía con criterios para elegir, programa por programa? Lee{' '}
             <Link href="/recursos/mejor-software-para-estudios-de-pilates" style={{ color: 'var(--w-olive)', fontWeight: 600 }}>el mejor software para estudios de Pilates en 2026</Link>.
@@ -246,7 +246,7 @@ export default function ComparativaPage() {
                 <thead>
                   <tr>
                     <th style={{ textAlign: 'left', padding: '18px 20px', fontSize: 13, fontWeight: 600, color: 'var(--w-texto-3)', background: 'var(--w-cream)', borderBottom: '1px solid var(--w-linea)', minWidth: 210 }}>Para tu estudio</th>
-                    <th style={{ textAlign: 'left', padding: '18px 16px', fontSize: 13, fontWeight: 600, color: 'var(--w-sobre-noche)', background: 'var(--w-olive)', borderBottom: '1px solid var(--w-olive)' }}>Tentare</th>
+                    <th style={{ textAlign: 'left', padding: '18px 16px', fontSize: 13, fontWeight: 600, color: 'var(--w-sobre-noche)', background: 'var(--w-olive)', borderBottom: '1px solid var(--w-olive)' }}>Centra</th>
                     {COMPETITORS.map((c) => (
                       <th key={c.slug} style={{ textAlign: 'left', padding: '18px 16px', fontSize: 12.5, fontWeight: 600, color: 'var(--w-texto-2)', background: 'var(--w-cream)', borderBottom: '1px solid var(--w-linea)' }}>{c.name}</th>
                     ))}
@@ -288,7 +288,7 @@ export default function ComparativaPage() {
               <Reveal key={c.slug} delay={i * 40}>
                 <a href={`/comparativa/${c.slug}`} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 14, background: '#fff', border: '1px solid var(--w-linea)', borderRadius: 16, padding: '18px 20px', textDecoration: 'none', color: 'inherit' }}>
                   <span style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 15, fontWeight: 600 }}>
-                    Tentare vs {c.name}
+                    Centra vs {c.name}
                   </span>
                   <span style={{ color: 'var(--w-texto-3)', fontSize: 15 }}>→</span>
                 </a>
@@ -301,18 +301,18 @@ export default function ComparativaPage() {
       <section style={{ background: 'var(--w-noche)', color: 'var(--w-sobre-noche)', padding: 'clamp(56px,7vw,88px) clamp(20px,4vw,44px)' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
           <Reveal style={{ fontWeight: 600, fontSize: 14, color: 'var(--w-sand)', marginBottom: 16 }}>Para que lo sepas antes</Reveal>
-          <Reveal delay={80}><h2 style={{ fontWeight: 600, fontSize: 'clamp(26px,3.8vw,42px)', lineHeight: 1.05, letterSpacing: 'var(--w-track-h2)', margin: '0 0 28px', color: 'var(--w-sobre-noche)' }}>Lo que Tentare todavía no tiene.</h2></Reveal>
+          <Reveal delay={80}><h2 style={{ fontWeight: 600, fontSize: 'clamp(26px,3.8vw,42px)', lineHeight: 1.05, letterSpacing: 'var(--w-track-h2)', margin: '0 0 28px', color: 'var(--w-sobre-noche)' }}>Lo que Centra todavía no tiene.</h2></Reveal>
           <div className="cmp-two">
             <Reveal style={{ background: 'var(--w-noche)', border: '1px solid rgba(255,255,255,.07)', borderRadius: 18, padding: 24 }}>
               <h3 style={{ fontSize: 17, fontWeight: 600, color: 'var(--w-sobre-noche)', margin: '0 0 8px' }}>App nativa para tus alumnas</h3>
-              <p style={{ fontSize: 14.5, lineHeight: 1.55, color: 'var(--w-sobre-noche-2)', margin: 0 }}>Hoy tus alumnas usan una app web (funciona en cualquier móvil, sin pasar por la App Store). Bsport, Eversports, Mindbody y otros ofrecen apps propias para los clientes del estudio; la de Tentare se instala desde el navegador, con el nombre, el icono, el logo y los colores de tu estudio en todos los planes, pero no está en las tiendas de aplicaciones.</p>
+              <p style={{ fontSize: 14.5, lineHeight: 1.55, color: 'var(--w-sobre-noche-2)', margin: 0 }}>Hoy tus alumnas usan una app web (funciona en cualquier móvil, sin pasar por la App Store). Bsport, Eversports, Mindbody y otros ofrecen apps propias para los clientes del estudio; la de Centra se instala desde el navegador, con el nombre, el icono, el logo y los colores de tu estudio en todos los planes, pero no está en las tiendas de aplicaciones.</p>
             </Reveal>
             <Reveal delay={90} style={{ background: 'var(--w-noche)', border: '1px solid rgba(255,255,255,.07)', borderRadius: 18, padding: 24 }}>
               <h3 style={{ fontSize: 17, fontWeight: 600, color: 'var(--w-sobre-noche)', margin: '0 0 8px' }}>Un marketplace que te traiga clientas</h3>
-              <p style={{ fontSize: 14.5, lineHeight: 1.55, color: 'var(--w-sobre-noche-2)', margin: 0 }}>Mindbody y Eversports tienen su propio marketplace de captación (Mindbody cobra hasta un 20 %, con tope, en la primera compra de cada clienta nueva). Tentare no tiene marketplace, y tampoco cobra comisión por clienta nueva.</p>
+              <p style={{ fontSize: 14.5, lineHeight: 1.55, color: 'var(--w-sobre-noche-2)', margin: 0 }}>Mindbody y Eversports tienen su propio marketplace de captación (Mindbody cobra hasta un 20 %, con tope, en la primera compra de cada clienta nueva). Centra no tiene marketplace, y tampoco cobra comisión por clienta nueva.</p>
             </Reveal>
           </div>
-          <Reveal><p style={{ fontSize: 15, lineHeight: 1.6, color: 'var(--w-sobre-noche-2)', margin: '24px 0 0' }}>Preferimos decírtelo antes de que lo descubras. Si algo de esto es imprescindible para ti hoy, escríbenos antes de probar y te decimos con franqueza si Tentare te sirve.</p></Reveal>
+          <Reveal><p style={{ fontSize: 15, lineHeight: 1.6, color: 'var(--w-sobre-noche-2)', margin: '24px 0 0' }}>Preferimos decírtelo antes de que lo descubras. Si algo de esto es imprescindible para ti hoy, escríbenos antes de probar y te decimos con franqueza si Centra te sirve.</p></Reveal>
         </div>
       </section>
 

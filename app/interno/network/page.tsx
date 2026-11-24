@@ -1,6 +1,6 @@
 'use client';
 
-// Moderación de Tentare Network — docs/NETWORK-IMPLEMENTATION-PLAN.md §10.
+// Moderación de Centra Network — docs/NETWORK-IMPLEMENTATION-PLAN.md §10.
 // Colas independientes (perfiles / identidad / verificaciones de
 // experiencia / reportes / reseñas), cada una con su propia carga — mismo
 // criterio que el resto de /interno: no hay un modelo compartido, cada
@@ -9,7 +9,7 @@
 // "Identidad" (Fase 3 del rediseño 2026-08) es la única pestaña que
 // resuelve documentos reales (DNI/certificaciones) — a diferencia de
 // "Verificaciones" (experiencia laboral, solo lectura: resuelve el
-// estudio), aquí SÍ aprueba/rechaza el equipo de Tentare, con motivo
+// estudio), aquí SÍ aprueba/rechaza el equipo de Centra, con motivo
 // obligatorio al rechazar y el documento solo visible con una URL firmada
 // de corta caducidad pedida bajo demanda.
 
@@ -197,7 +197,7 @@ function TabVerificaciones() {
   return (
     <div className="flex flex-col gap-3">
       <p className="text-[12px] text-muted-foreground">
-        Solo lectura: quién confirma o rechaza sigue siendo el estudio implicado, no el equipo de Tentare.
+        Solo lectura: quién confirma o rechaza sigue siendo el estudio implicado, no el equipo de Centra.
       </p>
       <select
         value={estado} onChange={e => setEstado(e.target.value)}
@@ -743,7 +743,7 @@ export default function ModeracionNetworkInterna() {
   return (
     <div className="flex flex-col gap-4">
       <div>
-        <h1 className="text-[17px] font-bold text-foreground">Tentare Network</h1>
+        <h1 className="text-[17px] font-bold text-foreground">Centra Network</h1>
         <p className="text-[12.5px] text-muted-foreground">
           Moderación de perfiles, supervisión de verificaciones y reportes de la comunidad.
         </p>

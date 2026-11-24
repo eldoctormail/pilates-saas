@@ -3,7 +3,7 @@ import { getSupabaseAdmin } from '@/lib/db/supabase-admin';
 import { appUrl } from '@/lib/app-url';
 import type { RowCertificadosEstudio } from '@/lib/db-types';
 
-// Certificación «Tentare Verified Studio»: un certificado oficial por estudio
+// Certificación «Centra Verified Studio»: un certificado oficial por estudio
 // (id TNT-VS-<año>-<NNNN>), generado y revocado SIEMPRE con service-role desde
 // las RPC `crear_certificado_estudio`/`revocar_certificado_estudio`
 // (supabase/migrations/20260922150657_certificados_verificacion.sql) — nunca

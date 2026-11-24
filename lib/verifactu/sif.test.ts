@@ -8,7 +8,7 @@ import { apartadosDesdeTexto } from './declaracion.ts';
 import { validarRegistroAlta, CLAVE_REGIMEN_GENERAL } from './xml.ts';
 
 // ── Identidad del SIF ────────────────────────────────────────────────────────
-test('el SIF: id de 2 caracteres, solo VERI*FACTU y multi-OT (Tentare es un SaaS multiestudio)', () => {
+test('el SIF: id de 2 caracteres, solo VERI*FACTU y multi-OT (Centra es un SaaS multiestudio)', () => {
   assert.match(SIF.id, /^[A-Za-z0-9]{2}$/);
   assert.equal(SIF.soloVerifactu, true);
   assert.equal(SIF.multiOT, true);
@@ -44,11 +44,11 @@ test('IndicadorMultiplesOT: S solo si el usuario tiene más de una facturación'
   assert.equal(indicadorMultiplesOT(7), true);
 });
 
-test('SistemaInformatico: el productor es la PERSONA, no «Tentare»; el nombre del sistema sí es Tentare', () => {
+test('SistemaInformatico: el productor es la PERSONA, no «Centra»; el nombre del sistema sí es Centra', () => {
   const s = sistemaInformaticoParaEstudio({ nombre: 'Nombre Apellido Apellido', nif: '00000000T' }, 'studio-x', 1);
   assert.equal(s.nombreRazon, 'Nombre Apellido Apellido');
   assert.equal(s.nif, '00000000T');
-  assert.equal(s.nombreSistemaInformatico, 'Tentare');
+  assert.equal(s.nombreSistemaInformatico, 'Centra');
   assert.equal(s.idSistemaInformatico, SIF.id);
   assert.equal(s.version, SIF.version);
   assert.equal(s.multiOT, true);
@@ -95,7 +95,7 @@ test('declaración: empieza con el título exacto y lleva a)-l) en el orden del 
 test('declaración: cada dato precedido del texto que lo describe, y con los valores del SIF y del productor', () => {
   const a = Object.fromEntries(apartadosDeclaracion(PRODUCTOR, SUSCRIPCION).map((x, i) => [`${x.letra}#${i}`, x]));
   assert.match(a['1.a#0'].etiqueta, /^Nombre del sistema informático/);
-  assert.equal(a['1.a#0'].valor, 'Tentare');
+  assert.equal(a['1.a#0'].valor, 'Centra');
   assert.equal(a['1.b#1'].valor, SIF.id);
   assert.equal(a['1.c#2'].valor, SIF.version);
   assert.equal(a['1.e#4'].valor, 'S - Sí');
@@ -114,7 +114,7 @@ test('declaración sin productor ni suscripción: los huecos son null, NUNCA un 
   for (const letra of ['1.h', '1.i', '1.j']) assert.equal(ap.find(a => a.letra === letra)?.valor, null, letra);
   assert.ok(ap.filter(a => a.letra === '1.l').every(a => a.valor === null));
   // Lo que es del software sí está.
-  assert.equal(ap.find(a => a.letra === '1.a')?.valor, 'Tentare');
+  assert.equal(ap.find(a => a.letra === '1.a')?.valor, 'Centra');
 });
 
 test('el texto guardado se vuelve a leer igual (lo que se enseña es lo suscrito)', () => {

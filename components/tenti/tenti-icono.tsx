@@ -4,7 +4,7 @@
 // Tenti a tamaño de icono: el mismo dibujo que el canvas, quieto y en SVG.
 //
 // Portado del prototipo web de Coucou (design/prototype/notch-buddy.html),
-// cuyo personaje Tentare usa con autorización escrita de su autor (5-oct-2026).
+// cuyo personaje Centra usa con autorización escrita de su autor (5-oct-2026).
 // El código de Coucou es MIT:
 //
 //   Copyright (c) 2026 Louis Raillé
@@ -18,7 +18,7 @@
 //   substantial portions of the Software. THE SOFTWARE IS PROVIDED "AS IS",
 //   WITHOUT WARRANTY OF ANY KIND.
 //
-// Es la marca de «aquí interviene Tentare» en las pantallas de todos los días,
+// Es la marca de «aquí interviene Centra» en las pantallas de todos los días,
 // donde antes iba el Orb. Desde el 5-oct-2026 (decisión del fundador: «no se
 // mueve en ningún lado») va VIVO: el canvas del motor, el mismo que en
 // /interno/tenti, a tamaño de icono. Parpadea, mira alrededor y sigue el cursor

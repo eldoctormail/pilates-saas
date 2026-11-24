@@ -1,6 +1,6 @@
 // Catálogo de "Explorar todas las funciones" — a diferencia de
 // lib/onboarding.ts (que solo enseña lo PENDIENTE de configurar), esto
-// enseña TODO lo que hace Tentare, esté hecho o no, para que un propietario
+// enseña TODO lo que hace Centra, esté hecho o no, para que un propietario
 // descubra funcionalidad que no sabía que existía.
 //
 // Deriva la lista de rutas reales de lib/nav-config.ts (MODULOS, ya filtrado
@@ -12,7 +12,7 @@
 // La frase de cada módulo vive UNA vez, en la ficha de su pantalla
 // (lib/ayuda/pantallas.ts, `valor`: «un único catálogo por pantalla, con la ruta
 // como clave», decisión del fundador del 12-oct-2026). La usan esta pantalla y
-// «Tu Tentare». El nombre sale siempre del menú, nunca escrito a mano.
+// «Tu Centra». El nombre sale siempre del menú, nunca escrito a mano.
 import { MODULOS } from './nav-config.ts';
 import { valorDeModulo } from './ayuda/pantallas.ts';
 

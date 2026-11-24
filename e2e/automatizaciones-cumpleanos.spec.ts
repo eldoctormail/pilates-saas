@@ -204,7 +204,7 @@ test.describe('Felicitar el cumpleaños (regla opcional)', () => {
     await montar(page, { sonda: { status: 200, body: { cumpleanos: { alcance: null } } }, reglas: [reglaCumple(false)] });
     await page.getByRole('switch', { name: /Felicitar el cumpleaños/ }).click({ timeout: 30_000 });
     const dialogo = page.getByRole('dialog');
-    await expect(dialogo).toContainText('Tentare no ha podido contar a cuántas llegaría');
+    await expect(dialogo).toContainText('Centra no ha podido contar a cuántas llegaría');
     await expect(dialogo).not.toContainText('no felicitaría a nadie');
   });
 

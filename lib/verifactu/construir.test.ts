@@ -5,7 +5,7 @@ import { RegistroInvalidoError, type SistemaInformatico } from './xml.ts';
 import { calcularHuellaAlta } from '../verifactu.ts';
 
 const SISTEMA: SistemaInformatico = {
-  nombreRazon: 'Productor de Ejemplo', nif: '00000000T', nombreSistemaInformatico: 'Tentare',
+  nombreRazon: 'Productor de Ejemplo', nif: '00000000T', nombreSistemaInformatico: 'Centra',
   idSistemaInformatico: 'TE', version: '1.0', numeroInstalacion: 'studio-x',
   soloVerifactu: true, multiOT: true, indicadorMultiplesOT: false,
 };

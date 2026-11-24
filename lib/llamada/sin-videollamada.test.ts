@@ -6,7 +6,7 @@
 // Fuera de alcance a propósito: `lib/csv.ts` (detecta clases ONLINE al importar),
 // `lib/legal-info.ts` (la integración opcional de Zoom para clases online) y
 // `lib/configuracion/secciones.ts` (Zoom). Son clases en línea del estudio, no
-// una ayuda que ofrezca Tentare.
+// una ayuda que ofrezca Centra.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync, statSync } from 'node:fs';

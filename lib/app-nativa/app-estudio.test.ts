@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { BUNDLE_TENTARE, esAppDeEstudio, esBundleDeEstudio, tipoDeApp } from './app-estudio.ts';
 
-test('la web y la app «Tentare» no son una app de estudio', () => {
+test('la web y la app «Centra» no son una app de estudio', () => {
   assert.equal(tipoDeApp(null), 'general');
   assert.equal(tipoDeApp(undefined), 'general');
   assert.equal(tipoDeApp(BUNDLE_TENTARE), 'general');
@@ -14,7 +14,7 @@ test('un bundle con el formato de Apple, en minúsculas, sí lo es', () => {
 });
 
 test('lo que no tiene ese formato no abre ningún estudio', () => {
-  for (const malo of ['', 'luz', 'App.Tentare.Luz', '.app', 'app..luz', 'app.tentare.', 'a b.c', '1app.luz', 'x'.repeat(160) + '.es']) {
+  for (const malo of ['', 'luz', 'App.Centra.Luz', '.app', 'app..luz', 'app.tentare.', 'a b.c', '1app.luz', 'x'.repeat(160) + '.es']) {
     assert.equal(esBundleDeEstudio(malo), false, malo);
   }
   assert.equal(esBundleDeEstudio(42), false);

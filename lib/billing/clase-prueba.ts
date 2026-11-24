@@ -17,7 +17,7 @@
 // forma —fail-CLOSED, `escaparLike`, la guarda de `*`—, no el predicado.
 //
 // ⚠️ «Una por persona» se garantiza por ficha y por email, no por identidad:
-// alguien con otro email es, para Tentare, otra persona. El respaldo es
+// alguien con otro email es, para Centra, otra persona. El respaldo es
 // humano (la app de la instructora marca «Primera clase»).
 //
 // Sin `@/` y con imports `.ts`: lo prueba `node --test`.

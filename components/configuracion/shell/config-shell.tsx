@@ -502,7 +502,7 @@ export function ConfigShell() {
             hostMenu,
           )}
           {!herramienta && !railEnMenu && (
-            // La columna son ~20 filas: en un portátil (≤ 900 px de alto) no cabe y «Plan de Tentare» y «Mi cuenta» quedaban
+            // La columna son ~20 filas: en un portátil (≤ 900 px de alto) no cabe y «Plan de Centra» y «Mi cuenta» quedaban
             // fuera de la vista sin nada que dijera que había más. `.rail-con-sombra` pinta una sombra arriba y abajo SOLO
             // cuando hay más contenido en esa dirección (scroll shadows con `background-attachment: local`, sin JavaScript).
             <div className="rail-con-sombra hidden md:sticky md:top-14 md:block md:max-h-[calc(100dvh-7rem)] md:self-start md:overflow-y-auto lg:top-[calc(var(--panel-sticky-top,0px)+4rem)]">

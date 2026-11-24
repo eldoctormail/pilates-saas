@@ -1,4 +1,4 @@
-// Reglas PURAS de la verificación de experiencia de Tentare Network.
+// Reglas PURAS de la verificación de experiencia de Centra Network.
 //
 // El sello «experiencia verificada» dependía solo de que ALGÚN estudio lo
 // aprobara: no se miraba si ese estudio era de la propia persona, y la ficha

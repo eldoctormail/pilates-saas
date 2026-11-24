@@ -23,7 +23,7 @@ CRON_SECRETO=$(leer "$DEPLOY/.env" SUPABASE_CRON_SECRET)
 [ -n "$APP_URL" ] || { echo "Falta NEXT_PUBLIC_APP_URL en $DEPLOY/.env"; exit 1; }
 [ -n "$CRON_SECRETO" ] || { echo "Falta SUPABASE_CRON_SECRET en $DEPLOY/.env (generar-secretos.sh)"; exit 1; }
 
-# Las plantillas de correo (el código de 6 cifras) y los ajustes de Tentare
+# Las plantillas de correo (el código de 6 cifras) y los ajustes de Centra
 # sobre el compose de Supabase, siempre al día con este repo.
 mkdir -p "$SB/plantillas"
 CAMBIO_SB=no
@@ -88,7 +88,7 @@ else
   echo "  $PENDIENTES aplicadas."
 fi
 
-# Lo que las migraciones nuevas del repo original vuelvan a traer de Tentare
+# Lo que las migraciones nuevas del repo original vuelvan a traer de Centra
 # (su dominio, la zona de Madrid, horarios de Madrid, la prueba de 7 días), se
 # adapta otra vez. Falla si algo sigue llamando a tentare.app.
 echo "→ Adaptación del servidor propio"

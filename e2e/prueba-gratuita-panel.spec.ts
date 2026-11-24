@@ -115,7 +115,7 @@ test.describe('La píldora de la prueba dice la verdad en cada estado', () => {
 
   test('⚠️ un estudio anterior a la apertura no ve NINGUNA píldora', async ({ page }) => {
     // 7 de los 12 estudios de producción tienen `trial_ends_at` a NULL porque
-    // son anteriores a que Tentare abriera. Si «sin prueba» se confundiera con
+    // son anteriores a que Centra abriera. Si «sin prueba» se confundiera con
     // «prueba agotada», a todos ellos les saldría un aviso ROJO de «prueba
     // finalizada» por una prueba que nunca tuvieron.
     await montarPanel(page, { fase: 'SIN_PRUEBA', diasRestantes: 0 });

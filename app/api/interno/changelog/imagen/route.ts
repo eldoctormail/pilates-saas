@@ -11,7 +11,7 @@ export const runtime = 'nodejs';
 // ⚠️ Va por el SERVIDOR y no por `supabase.storage` desde el navegador, a
 // diferencia de las fotos del portal. El bucket `changelog-media` no tiene
 // NINGUNA política de RLS a propósito (ver su migración): quien escribe es
-// Tentare, con `service_role`, nunca un cliente. Subir desde el navegador
+// Centra, con `service_role`, nunca un cliente. Subir desde el navegador
 // exigiría abrirle una política a `authenticated` — y `authenticated` aquí es
 // cualquier persona con cuenta en cualquier estudio, no solo quien administra.
 export async function POST(req: NextRequest) {

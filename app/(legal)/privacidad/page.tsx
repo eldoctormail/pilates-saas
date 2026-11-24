@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: pagina.titulo,
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
-  openGraph: { siteName: 'Tentare', type: 'website', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
+  openGraph: { siteName: 'Centra', type: 'website', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
 };
 
 export default function Privacidad() {
@@ -49,7 +49,7 @@ export default function Privacidad() {
           <tr><td>Datos de uso y registros técnicos</td><td>Seguridad, prevención del fraude y mejora del servicio</td><td>Interés legítimo</td></tr>
           <tr><td>Comunicaciones y soporte</td><td>Atender tus consultas e informarte del servicio</td><td>Ejecución del contrato / interés legítimo</td></tr>
           <tr><td>Comunicaciones comerciales</td><td>Enviarte novedades del producto</td><td>Consentimiento (revocable)</td></tr>
-          <tr><td>Descarga de plantillas (email y, si lo indicas, el nombre de tu estudio)</td><td>Enviarte la plantilla que pides y, solo si marcas la casilla y lo confirmas desde el correo, novedades y guías de Tentare</td><td>Tu solicitud / consentimiento (revocable en cualquier momento)</td></tr>
+          <tr><td>Descarga de plantillas (email y, si lo indicas, el nombre de tu estudio)</td><td>Enviarte la plantilla que pides y, solo si marcas la casilla y lo confirmas desde el correo, novedades y guías de Centra</td><td>Tu solicitud / consentimiento (revocable en cualquier momento)</td></tr>
         </tbody>
       </table>
       <p>
@@ -132,7 +132,7 @@ export default function Privacidad() {
         cuenta, los datos se suprimen o anonimizan una vez transcurridos dichos plazos.
       </p>
       <p>
-        Cuando un estudio deja Tentare, puede descargar sus datos y pedirnos que los suprimamos escribiendo a{' '}
+        Cuando un estudio deja Centra, puede descargar sus datos y pedirnos que los suprimamos escribiendo a{' '}
         <a href={`mailto:${LEGAL.emailPrivacidad}`}>{LEGAL.emailPrivacidad}</a>. Aunque pida la supresión, se
         conservan bloqueados, durante el plazo legal, las facturas, los recibos{ES ? ', los registros de facturación y los mandatos SEPA' : ' y los registros de facturación'}.
       </p>
@@ -180,7 +180,7 @@ export default function Privacidad() {
 
       <h2>9. Menores</h2>
       <p>
-        Para crear una cuenta de estudio en Tentare hay que ser mayor de edad. Los estudios pueden registrar como
+        Para crear una cuenta de estudio en Centra hay que ser mayor de edad. Los estudios pueden registrar como
         clientas a menores; en ese caso el estudio es el responsable de esos datos y de contar con el
         consentimiento de su madre, padre o tutor cuando la ley lo exige. El consentimiento para tratar datos de
         salud de una menor de 14 años lo firma su madre, padre o tutor, y queda registrado con su nombre.

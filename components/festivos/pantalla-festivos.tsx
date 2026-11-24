@@ -7,7 +7,7 @@
 // calendario y su chapa, y el panel lateral de añadir con la búsqueda con IA y
 // los fuegos artificiales.
 //
-// Lo que Tentare hace mejor que Bonsai, a propósito:
+// Lo que Centra hace mejor que Bonsai, a propósito:
 //   · Los oficiales ya están: salen del boletín (BOE y el de la comunidad) por
 //     la dirección del estudio, con su norma. A Bonsai le faltaba la Semana
 //     Santa de 2027 en Madrid y Sant Joan en Barcelona.

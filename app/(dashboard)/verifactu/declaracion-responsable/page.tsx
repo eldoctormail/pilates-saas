@@ -3,7 +3,7 @@
 import { FUNCIONES_DE_ESPANA } from '@/lib/locale';
 import { SoloEspana } from '@/components/configuracion/solo-espana';
 
-// La declaración responsable del sistema de facturación (Tentare), dentro del
+// La declaración responsable del sistema de facturación (Centra), dentro del
 // propio sistema, como exige la Orden HAC/1177/2024 (art. 15.3): «disponible de
 // manera legible e individualizada dentro del propio sistema informático» y
 // «accesible por el usuario de forma rápida, fácil e intuitiva».
@@ -71,7 +71,7 @@ function DeclaracionResponsablePage() {
             <div role="status" className="rounded-2xl border border-amber-500/35 bg-amber-500/[0.06] px-4 py-3 text-[13.5px] leading-relaxed">
               <p className="font-semibold">Pendiente de suscribir por el productor (versión {estado.version}).</p>
               <p className="mt-1 text-muted-foreground">
-                Mientras no esté suscrita, Tentare no envía ningún registro a la AEAT. Falta:
+                Mientras no esté suscrita, Centra no envía ningún registro a la AEAT. Falta:
               </p>
               <ul className="mt-1.5 list-disc pl-5 text-muted-foreground">
                 {estado.falta.map(f => <li key={f}>{f}</li>)}

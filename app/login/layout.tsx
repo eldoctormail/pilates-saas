@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 // contenido. Antes heredaba el título y la descripción comerciales del layout
 // raíz y robots.txt la bloqueaba, así que Google no podía leer ningún `noindex`.
 export const metadata: Metadata = {
-  title: 'Entrar | Tentare',
+  title: 'Entrar | Centra',
   robots: { index: false, follow: true },
 };
 

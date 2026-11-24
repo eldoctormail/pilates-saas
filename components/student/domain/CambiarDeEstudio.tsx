@@ -9,7 +9,7 @@ import { bundleIdDeLaApp } from '@/lib/nativo/puente';
 import { esAppDeEstudio, sedesDeLaApp, tipoDeApp } from '@/lib/app-nativa/app-estudio';
 
 // «Cambiar de estudio», en el Perfil de la app del estudio, SOLO dentro de la app
-// de iOS «Tentare»: ahí una misma cuenta puede estar en varios estudios y la
+// de iOS «Centra»: ahí una misma cuenta puede estar en varios estudios y la
 // entrada (`/app`) es la que los lista. En la web cada estudio tiene su propia
 // app, y la fila no tendría a dónde llevar. En la app de tienda de un estudio
 // suelto, tampoco: está fijada en él. En la de una CADENA es «Cambiar de sede»:
@@ -27,7 +27,7 @@ export function CambiarDeEstudio() {
   const nativa = useAppNativa();
   const [iconos, setIconos] = useState<IconoEstudio[]>([]);
   // Hasta saber que es la app genérica (`app.tentare`), la fila no se pinta: en la de un
-  // estudio no debe ni parpadear. Un hueco de milisegundos en «Tentare», aceptado.
+  // estudio no debe ni parpadear. Un hueco de milisegundos en «Centra», aceptado.
   const [generica, setGenerica] = useState(false);
   // App de una cadena: la fila es «Cambiar de sede», con los iconos de sus sedes.
   const [deCadena, setDeCadena] = useState(false);

@@ -12,7 +12,7 @@ const raiz = join(import.meta.dirname, '..', '..');
 const sinComentarios = (s: string) => s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:])\/\/.*$/gm, '$1');
 const leer = (p: string) => sinComentarios(readFileSync(join(raiz, p), 'utf8'));
 
-test('webhook: la firma se comprueba ANTES de leer nada, con las credenciales de Tentare (sin ellas, 401)', () => {
+test('webhook: la firma se comprueba ANTES de leer nada, con las credenciales de Centra (sin ellas, 401)', () => {
   const s = leer('app/api/plataformas/wellhub/webhook/route.ts');
   const firma = s.indexOf('verificarFirmaWellhub(cred.secretosWebhook');
   const noAutorizado = s.indexOf("if (!cred || !variante) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });");

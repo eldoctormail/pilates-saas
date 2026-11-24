@@ -1256,7 +1256,7 @@ export async function emitirDecisionMensajeDia(
   }
 }
 
-// Tentare Network, Fase 7 — docs/NETWORK-IMPLEMENTATION-PLAN.md §4/§10.
+// Centra Network, Fase 7 — docs/NETWORK-IMPLEMENTATION-PLAN.md §4/§10.
 // `studioId` aquí es el estudio que tiene que RESOLVER la solicitud (audiencia
 // 'gerencia'), no uno al que pertenezca la profesional.
 export async function emitirRedVerificacionSolicitada(
@@ -1571,7 +1571,7 @@ export async function emitirValorarClase(
 }
 
 // 34ª pasada de auditoría: la AEAT ha rechazado una factura Veri*Factu. Antes
-// esto solo quedaba en un Sentry.captureMessage (lo ve Tentare, no la
+// esto solo quedaba en un Sentry.captureMessage (lo ve Centra, no la
 // propietaria, que es la obligada tributaria real) — y en silencio, ninguna
 // factura posterior de ese estudio vuelve a transmitirse nunca (la "última
 // secuencia registrada" que calcula transmitir.ts no avanza más allá de una

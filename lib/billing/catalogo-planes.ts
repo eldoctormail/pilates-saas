@@ -137,7 +137,7 @@ export const CATEGORIAS: CategoriaPlan[] = [
     filas: [
       { nombre: 'Aviso de baja y búsqueda de sustituta', valor: TODOS },
       { nombre: 'Ranking de candidatas por encaje', detalle: 'Ordenadas por disponibilidad y costumbre horaria, no al azar.', valor: TODOS },
-      { nombre: 'Modo asistido', detalle: 'Tentare propone y tú das el visto bueno.', valor: TODOS },
+      { nombre: 'Modo asistido', detalle: 'Centra propone y tú das el visto bueno.', valor: TODOS },
       { nombre: 'Modo autónomo y modo Vacaciones', detalle: 'Contacta a las candidatas y cierra la sustitución sin ti.', valor: porFeature('sustitucionesAutonomas') },
     ],
   },
@@ -148,13 +148,13 @@ export const CATEGORIAS: CategoriaPlan[] = [
       // Con el formato de Argentina, Mercado Pago: sin remesas SEPA ni tarjeta guardada.
       ...(ES
         ? [
-            { nombre: 'Cobro con tarjeta (Stripe)', detalle: 'El dinero va directo a tu cuenta. Tentare no se lleva comisión.', valor: TODOS },
-            { nombre: 'Remesa SEPA para domiciliaciones', detalle: 'Tentare prepara el fichero; lo presentas tú en tu banco.', valor: TODOS },
+            { nombre: 'Cobro con tarjeta (Stripe)', detalle: 'El dinero va directo a tu cuenta. Centra no se lleva comisión.', valor: TODOS },
+            { nombre: 'Remesa SEPA para domiciliaciones', detalle: 'Centra prepara el fichero; lo presentas tú en tu banco.', valor: TODOS },
             { nombre: 'Cobro guardado para renovaciones', valor: TODOS },
             { nombre: 'Recobro automático de impagos', valor: TODOS },
           ]
         : [
-            { nombre: 'Cobro online con Mercado Pago', detalle: 'El dinero va directo a tu cuenta. Tentare no se lleva comisión.', valor: TODOS },
+            { nombre: 'Cobro online con Mercado Pago', detalle: 'El dinero va directo a tu cuenta. Centra no se lleva comisión.', valor: TODOS },
             { nombre: 'Efectivo, posnet, transferencia y QR en el mostrador', valor: TODOS },
           ]),
       { nombre: 'Devoluciones desde el panel', valor: TODOS },
@@ -223,7 +223,7 @@ export const CATEGORIAS: CategoriaPlan[] = [
       { nombre: 'Riesgo de fuga y de impago', valor: porFeature('decisiones') },
       // Hoy, lo que Estudio tiene de más frente a Founding Studio de pago (15-oct-2026);
       // la app propia del estudio se añade aquí cuando se pueda pedir de verdad.
-      { nombre: 'Pregúntale a Tentare', detalle: 'Preguntas sobre tu estudio, con tus datos.', valor: (p, e = PLAN_ENTITLEMENTS[p]) => txt(`${e.consultasAsistenteMes} consultas al mes`) },
+      { nombre: 'Pregúntale a Centra', detalle: 'Preguntas sobre tu estudio, con tus datos.', valor: (p, e = PLAN_ENTITLEMENTS[p]) => txt(`${e.consultasAsistenteMes} consultas al mes`) },
     ],
   },
   {

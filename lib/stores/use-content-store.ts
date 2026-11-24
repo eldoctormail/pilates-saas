@@ -76,7 +76,7 @@ export function useContentStore() {
       id: `post-${uid()}`,
       studioId: getCurrentStudioId(),
       autorId: null,
-      autorNombre: 'Tentare',
+      autorNombre: 'Centra',
       autorInicial: 'TE',
       texto,
       audiencia: opts?.audiencia ?? 'TODAS',

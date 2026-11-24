@@ -4,13 +4,13 @@ import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 
 // Un `openGraph` de página SUSTITUYE entero al del layout raíz (Next mezcla los
-// metadatos sin profundidad), así que el `siteName: 'Tentare'` del layout se
+// metadatos sin profundidad), así que el `siteName: 'Centra'` del layout se
 // perdía en 61 de las 63 páginas públicas (auditoría de la fase 1 de la web,
-// 19-oct-2026). Cada `openGraph: {` de la web de Tentare lo lleva escrito.
+// 19-oct-2026). Cada `openGraph: {` de la web de Centra lo lleva escrito.
 //
 // Fuera a propósito, por marca blanca: la app de la alumna (app/portal) y la
 // página de reservas de cada estudio (app/reservar), que llevan la marca del
-// ESTUDIO, nunca «Tentare».
+// ESTUDIO, nunca «Centra».
 
 const RAIZ = join(import.meta.dirname, '..', '..');
 const FUERA = ['app/portal/', 'app/reservar/'];
@@ -23,7 +23,7 @@ function ficheros(dir: string): string[] {
   });
 }
 
-test('todo openGraph de la web de Tentare lleva siteName', () => {
+test('todo openGraph de la web de Centra lleva siteName', () => {
   const sin: string[] = [];
   for (const f of ficheros(join(RAIZ, 'app'))) {
     const rel = relative(RAIZ, f);
@@ -52,10 +52,10 @@ test('ningún fichero repite siteName dentro del mismo openGraph', () => {
   assert.deepEqual(repetidos, []);
 });
 
-test('la marca blanca no dice «Tentare» como sitio', () => {
+test('la marca blanca no dice «Centra» como sitio', () => {
   for (const d of FUERA) {
     for (const f of ficheros(join(RAIZ, d))) {
-      assert.doesNotMatch(readFileSync(f, 'utf8'), /siteName: 'Tentare'/, `${relative(RAIZ, f)} es marca blanca: no puede firmar como Tentare`);
+      assert.doesNotMatch(readFileSync(f, 'utf8'), /siteName: 'Centra'/, `${relative(RAIZ, f)} es marca blanca: no puede firmar como Centra`);
     }
   }
 });

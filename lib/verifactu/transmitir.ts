@@ -201,7 +201,7 @@ export async function transmitirPendientes(): Promise<ResumenTransmision> {
 }
 
 /**
- * Cuántas «facturaciones» tiene en Tentare la propietaria de este estudio:
+ * Cuántas «facturaciones» tiene en Centra la propietaria de este estudio:
  * estudios suyos que facturan (tienen al menos un registro). Es lo que decide
  * `IndicadorMultiplesOT` (FAQ de desarrolladores de la AEAT, §4: por usuario
  * del SaaS, sin mirar el estado de cada facturación).

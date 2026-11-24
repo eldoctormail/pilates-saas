@@ -37,12 +37,12 @@ export default function AyudaHomePage() {
     <PageShell>
       <OrganizationStructuredData />
       <AyudaMarco ancho={1024} portada>
-            <h1 className="sr-only">Centro de Ayuda de Tentare</h1>
+            <h1 className="sr-only">Centro de Ayuda de Centra</h1>
             <label className="ay-buscador">
               <Search size={16} aria-hidden="true" />
               <input
                 autoFocus
-                aria-label="Buscar en la ayuda de Tentare"
+                aria-label="Buscar en la ayuda de Centra"
                 placeholder="Haz una pregunta"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}

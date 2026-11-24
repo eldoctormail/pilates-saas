@@ -23,7 +23,7 @@ export async function enviarEmailSolicitudDisponibilidad(params: {
     const html = correoSolicitudDisponibilidad(params);
     const resend = new Resend(apiKey);
     const { data, error } = await resend.emails.send({
-      from: remitentePorMarca('Tentare'),
+      from: remitentePorMarca('Centra'),
       to: [params.to],
       subject: `${params.propietariaNombre} te pide tu disponibilidad — ${params.estudioNombre}`,
       html,

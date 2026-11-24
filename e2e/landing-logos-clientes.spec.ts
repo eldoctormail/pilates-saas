@@ -1,7 +1,7 @@
 import { test, expect, type Page } from '@playwright/test';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// La franja «Estudios que ya usan Tentare» de la home (19-oct-2026).
+// La franja «Estudios que ya usan Centra» de la home (19-oct-2026).
 //
 // La home lee sus logos en servidor y se regenera cada hora, así que ninguna prueba
 // puede cambiarle el número de logos: el servidor de e2e (E2E_TEST=1) devuelve CERO
@@ -44,7 +44,7 @@ test('la home, sin ningún estudio con consentimiento: ni franja ni título ni h
   await page.goto('/', { waitUntil: 'domcontentloaded' });
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible({ timeout: 60_000 });
   await expect(page.locator('.lf-confianza')).toHaveCount(0);
-  await expect(page.getByText('Estudios que ya trabajan con Tentare')).toHaveCount(0);
+  await expect(page.getByText('Estudios que ya trabajan con Centra')).toHaveCount(0);
   // Sin hueco: «Funciones» empieza justo donde acaba el héroe, más el aire propio de su sección.
   const [finHeroe, inicioFunciones] = await Promise.all([
     page.locator('.lf-heroe').evaluate((e) => e.getBoundingClientRect().bottom + window.scrollY),
@@ -67,7 +67,7 @@ for (const ancho of [1440, 375]) {
     await abrirPrueba(page, 3, ancho);
     const franja = page.locator('#clientes');
     await expect(franja).toBeVisible();
-    await expect(franja).toHaveAttribute('aria-label', 'Estudios que usan Tentare');
+    await expect(franja).toHaveAttribute('aria-label', 'Estudios que usan Centra');
     // Siempre marquesina (fundador, 20-oct): los 3 reales, más copias decorativas fuera del árbol de accesibilidad.
     await expect(franja.locator('.v7-logos-marq')).toHaveCount(1);
     await expect(franja.locator('.v7-logos-lista:not(.v7-logos-copia) img')).toHaveCount(3);

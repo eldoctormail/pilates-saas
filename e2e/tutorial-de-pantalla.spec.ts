@@ -132,7 +132,7 @@ test.describe('el tutorial de la pantalla', () => {
     await page.addInitScript(() => localStorage.setItem('panel-tour-v2', '{}'));
     await estudioNuevo(page);
     await ir(page, 'productos');
-    await expect(page.getByRole('dialog', { name: 'Visita guiada de Tentare' })).toBeVisible({ timeout: 20_000 });
+    await expect(page.getByRole('dialog', { name: 'Visita guiada de Centra' })).toBeVisible({ timeout: 20_000 });
     // Control: la cabecera de la pantalla SÍ está (el «?» no falta por no haber cargado).
     await expect(page.getByRole('heading', { name: 'Paquetes', level: 1 })).toBeAttached();
     await page.waitForTimeout(1000);

@@ -1,8 +1,8 @@
 'use client';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// El panel del botón de ayuda de la esquina: cinco pestañas (Inicio, Tentare, Novedades,
-// Mensajes, Ayuda), como el de Momence pero con lo que Tentare ya tiene. «Tentare» es el
+// El panel del botón de ayuda de la esquina: cinco pestañas (Inicio, Centra, Novedades,
+// Mensajes, Ayuda), como el de Momence pero con lo que Centra ya tiene. «Centra» es el
 // asistente, con su chat dentro, y solo sale si el estudio y el rol lo tienen. No hay
 // contenido nuevo: guías del centro de ayuda, el registro de actualizaciones,
 // `soporte_solicitudes` y el WhatsApp de soporte (la maqueta aprobada el
@@ -47,7 +47,7 @@ const PestanaTentare = dynamic(() => import('./pestana-tentare').then(m => m.Pes
 
 const PESTANA: Record<PestanaAyuda, { titulo: string; Icono: typeof Home }> = {
   inicio: { titulo: 'Inicio', Icono: Home },
-  tentare: { titulo: 'Tentare', Icono: Home }, // el icono es Tenti: se pinta aparte
+  tentare: { titulo: 'Centra', Icono: Home }, // el icono es Tenti: se pinta aparte
   novedades: { titulo: 'Novedades', Icono: Megaphone },
   mensajes: { titulo: 'Mensajes', Icono: MessageSquare },
   ayuda: { titulo: 'Ayuda', Icono: CircleHelp },
@@ -66,7 +66,7 @@ const ETIQUETA = 'px-1 text-[11.5px] font-bold uppercase tracking-[0.07em] text-
 export function PanelAyuda({ ruta, pestana, conTentare, onPestana, onCerrar, onNovedadVista }: {
   ruta: string;
   pestana: PestanaAyuda;
-  /** El asistente está disponible para este estudio y este rol: sale la pestaña «Tentare». */
+  /** El asistente está disponible para este estudio y este rol: sale la pestaña «Centra». */
   conTentare: boolean;
   onPestana: (p: PestanaAyuda) => void;
   onCerrar: () => void;
@@ -80,14 +80,14 @@ export function PanelAyuda({ ruta, pestana, conTentare, onPestana, onCerrar, onN
   const consumida = useCallback(() => setPregunta(null), []);
   const preguntar = (texto: string) => { setPregunta(texto); onPestana('tentare'); };
   const pestanas = pestanasVisibles(conTentare);
-  // Sin asistente, un enlace a la pestaña «Tentare» cae en Inicio.
+  // Sin asistente, un enlace a la pestaña «Centra» cae en Inicio.
   const actual: PestanaAyuda = pestanas.includes(pestana) ? pestana : 'inicio';
 
   return (
     <div
       ref={raiz}
       role="dialog"
-      aria-label="Ayuda de Tentare"
+      aria-label="Ayuda de Centra"
       tabIndex={-1}
       onKeyDown={e => { if (e.key === 'Escape') { e.stopPropagation(); onCerrar(); } }}
       data-panel-ayuda=""
@@ -211,7 +211,7 @@ function Inicio({ ruta, conTentare, onPestana, onPreguntar }: {
           </div>
         ) : (
           <>
-            <p className="text-[13px] font-semibold text-muted-foreground">Tentare</p>
+            <p className="text-[13px] font-semibold text-muted-foreground">Centra</p>
             <h2 className="mt-3 text-[24px] font-bold leading-tight tracking-tight text-balance">Hola.<br />¿En qué te ayudamos?</h2>
           </>
         )}
@@ -222,8 +222,8 @@ function Inicio({ ruta, conTentare, onPestana, onPreguntar }: {
           <input
             value={texto}
             onChange={e => setTexto(e.target.value)}
-            placeholder="Pregúntale a Tentare…"
-            aria-label="Pregúntale a Tentare"
+            placeholder="Pregúntale a Centra…"
+            aria-label="Pregúntale a Centra"
             className="min-w-0 flex-1 bg-transparent text-[14.5px] outline-none placeholder:text-muted-foreground"
           />
           <button type="submit" disabled={!texto.trim()} aria-label="Preguntar" className="flex size-9 shrink-0 items-center justify-center rounded-full bg-foreground text-background transition-opacity disabled:opacity-30">
@@ -271,7 +271,7 @@ function Inicio({ ruta, conTentare, onPestana, onPreguntar }: {
             <button type="button" onClick={() => onPestana('novedades')} className={cn(FILA, 'border-t border-border')}>
               <span className="flex size-9 shrink-0 items-center justify-center rounded-[10px] bg-muted"><Megaphone size={18} aria-hidden /></span>
               <span className="min-w-0 flex-1">
-                <span className="block text-[14px] font-semibold">Novedades de Tentare</span>
+                <span className="block text-[14px] font-semibold">Novedades de Centra</span>
                 <span className="block text-[12.5px] text-muted-foreground">Lo último que hemos sacado</span>
               </span>
               <ChevronRight size={16} aria-hidden className="shrink-0 text-muted-foreground" />
@@ -380,7 +380,7 @@ function Mensajes() {
   const [enviado, setEnviado] = useState(false);
   const [historial, setHistorial] = useState<SolicitudFila[] | null>(null);
 
-  const href = enlaceWhatsApp(SOPORTE_WHATSAPP, `Hola, soy de ${studio?.nombre ?? 'mi estudio'} y tengo una duda con Tentare:`) ?? '#';
+  const href = enlaceWhatsApp(SOPORTE_WHATSAPP, `Hola, soy de ${studio?.nombre ?? 'mi estudio'} y tengo una duda con Centra:`) ?? '#';
 
   // Solo la propietaria las lee (RLS `soporte_leer_propietaria`): para el resto
   // del equipo ni se pide. `recarga` vuelve a pedirlas tras enviar uno.

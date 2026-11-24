@@ -113,7 +113,7 @@ export const SECCIONES = [
       { id: 'cerrar-el-centro', titulo: 'Cerrar el centro', frase: 'Vacaciones, un puente o una reforma: se cancelan sus clases, y aquí ves y quitas los cierres que pusiste.', guardado: 'barra', roles: SEDE, palabras: ['vacaciones', 'feriados', 'festivos', 'cierre'] },
       { id: 'salas', titulo: 'Salas', frase: 'Tus salas y cuántas personas caben: esa cifra es el tope de lugares de cada clase.', guardado: 'catalogo', ancho: 'amplio', herramienta: 'salas', roles: SEDE, palabras: ['aforo', 'capacidad', 'lugares', 'cupos', 'plazas', 'averías', 'máquinas'] },
       { id: 'sedes', titulo: 'Sedes', frase: 'Tus otras sedes: cámbiate a una o añade otra.', guardado: 'accion', condicion: 'multiSede', palabras: ['cambiar de sede', 'centros', 'cadena'] },
-      { id: 'certificado', titulo: 'Certificado Tentare Verified Studio', frase: 'Un certificado oficial y verificable de que tu estudio está al día con Tentare: para imprimir o compartir.', guardado: 'accion', palabras: ['certificación', 'verificado', 'diploma', 'sello'] },
+      { id: 'certificado', titulo: 'Certificado Centra Verified Studio', frase: 'Un certificado oficial y verificable de que tu estudio está al día con Centra: para imprimir o compartir.', guardado: 'accion', palabras: ['certificación', 'verificado', 'diploma', 'sello'] },
     ],
   },
   {
@@ -138,7 +138,7 @@ export const SECCIONES = [
     frase: 'Las reglas del estudio para reservar y cancelar; cada tipo de clase puede cambiar algunas.',
     roles: SOLO_PROPIETARIA,
     // Cada tarjeta es una FILA con su valor de hoy y se cambia en su cajón
-    // (15-sep, v2). «Cuando algo cambia, Tentare…» ya no es una tarjeta: cada
+    // (15-sep, v2). «Cuando algo cambia, Centra…» ya no es una tarjeta: cada
     // frase va como consecuencia dentro del cajón de su regla. «Cancelar y
     // recuperar» eran siete campos y un cajón lleva seis: lo de la clase entera
     // salió a su propia fila.
@@ -163,7 +163,7 @@ export const SECCIONES = [
     frase: 'Cómo te pagan tus clientes y qué sale en tus facturas.',
     roles: SOLO_PROPIETARIA,
     tarjetas: [
-      { id: 'facturacion', titulo: 'Facturación', frase: FUNCIONES_DE_ESPANA ? 'Si Tentare emite una factura en cada cobro, con su registro para Veri*Factu, o si tus facturas las haces fuera.' : 'Si Tentare genera un comprobante interno en cada cobro. La factura legal de ARCA va en su propia fila.', guardado: 'barra', palabras: ['verifactu', 'aeat', 'justificante', 'gestoría', 'factura'] },
+      { id: 'facturacion', titulo: 'Facturación', frase: FUNCIONES_DE_ESPANA ? 'Si Centra emite una factura en cada cobro, con su registro para Veri*Factu, o si tus facturas las haces fuera.' : 'Si Centra genera un comprobante interno en cada cobro. La factura legal de ARCA va en su propia fila.', guardado: 'barra', palabras: ['verifactu', 'aeat', 'justificante', 'gestoría', 'factura'] },
       { id: 'factura-electronica', titulo: 'Factura electrónica de ARCA', frase: 'Tu CUIT, punto de venta y certificado para emitir facturas con CAE desde cada recibo cobrado.', guardado: 'accion', palabras: ['arca', 'afip', 'cae', 'factura c', 'factura b', 'monotributo', 'certificado'] },
       { id: 'datos-fiscales', titulo: 'Datos fiscales e IVA', frase: FUNCIONES_DE_ESPANA ? 'Razón social, NIF e IVA de tus facturas. Cambiar el IVA solo afecta a las facturas nuevas.' : 'Razón social, CUIT e IVA de tus comprobantes. Cambiar el IVA solo afecta a los nuevos.', guardado: 'barra', palabras: ['nif', 'cif', 'cuit', 'razón social', 'facturas', 'impuestos'] },
       { id: 'cuando-se-cobra-la-cuota', titulo: 'Cuándo se cobra la cuota mensual', frase: 'Cada cliente en su aniversario, o todas el día 1 de cada mes.', guardado: 'barra', palabras: ['día 1', 'fecha de cobro', 'aniversario', 'mensual'] },
@@ -196,7 +196,7 @@ export const SECCIONES = [
     id: 'comunicacion',
     titulo: 'Cómo me comunico',
     resumen: 'Correos y avisos a tus clientes',
-    frase: 'Los correos que Tentare envía sola a tus clientes y los canales para escribirles.',
+    frase: 'Los correos que Centra envía sola a tus clientes y los canales para escribirles.',
     roles: SOLO_PROPIETARIA,
     tarjetas: [
       { id: 'correos-automaticos', titulo: 'Correos automáticos', frase: 'Bienvenida, reserva, recordatorio, cancelación…: apaga los que no quieras o cambia lo que dicen.', guardado: 'catalogo', herramienta: 'correos-automaticos', palabras: ['emails', 'recordatorio', 'bienvenida', 'plantillas'] },
@@ -267,11 +267,11 @@ export const SECCIONES = [
       { id: 'direccion-y-enlaces', titulo: 'Dirección y enlaces', frase: 'El enlace de la app de tus clientes, el de tu página de reservas (para tu web) y el QR de cada uno para imprimir.', guardado: 'accion', palabras: ['enlace', 'app', 'portal', 'página de reservas', 'url', 'qr', 'código qr', 'cartel', 'escaparate'] },
       // «Mi web» guiada (21-oct-2026, decisión 4 de «Mi app»): la descripción sale en tu página de
       // reservas y en Network, no en la app. El dato es el mismo que el de «Cómo te presentas» de «Mi app».
-      { id: 'presentacion-web', titulo: 'Cómo te presentas', frase: 'Dos o tres frases sobre tu estudio. Salen en tu página de reservas y en Tentare Network.', guardado: 'barra', condicion: 'miWebNueva', palabras: ['descripción', 'presentación', 'sobre nosotros'] },
+      { id: 'presentacion-web', titulo: 'Cómo te presentas', frase: 'Dos o tres frases sobre tu estudio. Salen en tu página de reservas y en Centra Network.', guardado: 'barra', condicion: 'miWebNueva', palabras: ['descripción', 'presentación', 'sobre nosotros'] },
       { id: 'pagina-publica', titulo: 'Ocultar tu página', frase: 'Mientras la preparas, tu página de reservas y la app de tus clientes enseñan un aviso en vez de tus clases.', guardado: 'barra', palabras: ['ocultar', 'privada', 'visible', 'esconder', 'clave'] },
       // El directorio NO mira si la página está oculta (lib/configuracion/pagina-publica.ts):
       // se dice aquí, que es donde las dos filas conviven, y no solo dentro del cajón de ocultarla.
-      { id: 'network', titulo: 'Aparecer en Tentare Network', frase: 'Tu estudio sale en el buscador de estudios de Tentare. Aunque ocultes tu página, seguirá saliendo ahí.', guardado: 'al-pulsar', palabras: ['directorio', 'buscador de estudios'] },
+      { id: 'network', titulo: 'Aparecer en Centra Network', frase: 'Tu estudio sale en el buscador de estudios de Centra. Aunque ocultes tu página, seguirá saliendo ahí.', guardado: 'al-pulsar', palabras: ['directorio', 'buscador de estudios'] },
       { id: 'contenido-de-tu-app', titulo: 'Contenido de tu app', frase: 'Las tarjetas de «Descubre» de su app; el mensaje destacado y los avisos de aquí se guardan, pero hoy no salen.', guardado: 'catalogo', ancho: 'amplio', herramienta: 'contenido-de-tu-app', palabras: ['descubre', 'tablón', 'mensaje destacado'] },
       { id: 'widgets', titulo: 'Widgets para tu web', frase: 'Tu horario, tus precios y la cuenta de tus clientes dentro de tu propia web, con un código para pegar.', guardado: 'accion', ancho: 'amplio', herramienta: 'widgets', palabras: ['incrustar', 'código', 'visitas'] },
     ],
@@ -289,7 +289,7 @@ export const SECCIONES = [
     // lectura (lib/configuracion/que-hace-cada-rol.ts): los roles se dan en Equipo.
     palabras: ['roles', 'permisos', 'sustituciones', 'tarifa', 'liquidación'],
     tarjetas: [
-      // «siempre pueden editar las suyas» dejó de ser verdad al retirarse Tentare
+      // «siempre pueden editar las suyas» dejó de ser verdad al retirarse Centra
       // Core (14-sep): la instructora solo trabaja en la app, y allí no edita clases.
       { id: 'ajuste-instructoras-crean-clases', titulo: 'Las instructoras crean sus clases', frase: 'Si pueden crear clases suyas desde su app o solo dan las que tú les asignas.', guardado: 'al-pulsar', palabras: ['profesoras', 'nueva clase'] },
       { id: 'app-de-tus-instructoras', titulo: 'La app de tus instructoras', frase: 'El enlace para que entren con su cuenta a su agenda, sus bajas, su disponibilidad y sus clientes.', guardado: 'accion', palabras: ['app instructoras', 'profesoras', 'enlace'] },
@@ -320,7 +320,7 @@ export const SECCIONES = [
       { id: 'integracion-klaviyo', titulo: 'Klaviyo', frase: 'Lleva a Klaviyo los clientes que aceptaron recibir marketing, cada vez que pulsas «Sincronizar ahora».', guardado: 'accion', palabras: ['marketing', 'listas'] },
       { id: 'integracion-mailchimp', titulo: 'Mailchimp', frase: 'Lleva a tu audiencia de Mailchimp los clientes que aceptaron recibir marketing, al pulsar «Sincronizar ahora».', guardado: 'accion', palabras: ['marketing', 'newsletter', 'audiencia'] },
       { id: 'plataformas-externas', titulo: FUNCIONES_DE_ESPANA ? 'ClassPass, Urban Sports Club y Wellhub' : 'ClassPass y Wellhub', frase: 'Si vendes lugares en estas plataformas, apunta sus reservas en la clase para no vender dos veces el mismo hueco.', guardado: 'accion', palabras: ['classpass', 'urban sports club', 'usc', 'wellhub', 'gympass', 'plataformas', 'agregadores'] },
-      { id: 'integracion-zapier', titulo: 'Zapier', frase: 'Conecta Tentare con miles de apps. La conexión se autoriza desde Zapier, no desde aquí.', guardado: 'accion', palabras: ['automatizar', 'apps'] },
+      { id: 'integracion-zapier', titulo: 'Zapier', frase: 'Conecta Centra con miles de apps. La conexión se autoriza desde Zapier, no desde aquí.', guardado: 'accion', palabras: ['automatizar', 'apps'] },
       { id: 'aplicaciones-con-acceso', titulo: 'Aplicaciones con acceso', frase: 'Apps como Zapier con permiso para ver datos de tu estudio; puedes quitárselo.', guardado: 'accion', palabras: ['zapier', 'permisos'] },
       { id: 'api-publica', titulo: 'API para tu contabilidad', frase: 'Claves para que tu programa de contabilidad (u otro) lea tus cobros, facturas y clientes.', guardado: 'accion', palabras: ['api', 'contabilidad', 'gestoría', 'clave', 'integración', 'holded', 'a3', 'sage'] },
     ],
@@ -343,18 +343,18 @@ export const SECCIONES = [
       { id: 'redaccion-ia', titulo: 'Redactar con IA', frase: 'Las sugerencias del Centro de Control y los mensajes de tus automatizaciones se redactan con IA. Si lo apagas, salen con su texto de serie y no se envía ningún dato de tus clientes a la IA.', guardado: 'al-pulsar', palabras: ['inteligencia artificial', 'ia', 'anthropic', 'privacidad', 'rgpd'] },
     ],
   },
-  // «Plan de Tentare» vivía en /suscripcion, fuera de Configuración (fundador, 22-nov-2026: «bórralo del menú y
+  // «Plan de Centra» vivía en /suscripcion, fuera de Configuración (fundador, 22-nov-2026: «bórralo del menú y
   // ponlo en Configuración como Shopify»). Es la misma vista (`SuscripcionVista`, embebida); /suscripcion queda
   // solo para el estudio bloqueado y para la vuelta de Stripe.
   {
     id: 'plan',
-    titulo: 'Plan de Tentare',
-    resumen: 'Lo que pagas tú a Tentare, no tus clientes',
-    frase: 'Tu plan de Tentare, tus facturas, tu tarjeta y los complementos: lo que pagas tú, no lo que cobras a tus clientes.',
+    titulo: 'Plan de Centra',
+    resumen: 'Lo que pagas tú a Centra, no tus clientes',
+    frase: 'Tu plan de Centra, tus facturas, tu tarjeta y los complementos: lo que pagas tú, no lo que cobras a tus clientes.',
     roles: SOLO_PROPIETARIA,
     palabras: ['suscripción', 'suscripcion', 'prueba gratuita', 'precio', 'facturas', 'tarjeta', 'complementos'],
     tarjetas: [
-      { id: 'plan-de-tentare', titulo: 'Plan de Tentare', frase: 'Tu plan, tus facturas, tu tarjeta y los complementos.', guardado: 'accion', ancho: 'amplio', palabras: ['suscripción', 'pagar tentare', 'cambiar de plan', 'cancelar'] },
+      { id: 'plan-de-tentare', titulo: 'Plan de Centra', frase: 'Tu plan, tus facturas, tu tarjeta y los complementos.', guardado: 'accion', ancho: 'amplio', palabras: ['suscripción', 'pagar tentare', 'cambiar de plan', 'cancelar'] },
     ],
   },
   // «Mis avisos» y «Tu panel» eran pantallas sueltas que no enlazaba nadie
@@ -416,7 +416,7 @@ export interface FilaExterna {
 }
 
 /**
- * Solo «Mi cuenta»: «Plan de Tentare» ya es una sección (`plan`). /suscripcion
+ * Solo «Mi cuenta»: «Plan de Centra» ya es una sección (`plan`). /suscripcion
  * se queda solo para el estudio bloqueado y la vuelta de Stripe.
  */
 export const FILAS_EXTERNAS: Readonly<Record<FilaExternaId, FilaExterna>> = {
@@ -440,10 +440,10 @@ export interface FilaAOtraPantalla {
 export const FILAS_A_OTRA_PANTALLA = [
   { id: 'fila-paquetes', seccion: 'cobros', titulo: 'Paquetes', resumen: 'Tus planes, bonos y precios', href: '/productos' },
   { id: 'fila-cobros', seccion: 'cobros', titulo: 'Cobros', resumen: 'Quién te debe, lo cobrado y tus facturas', href: '/cobros' },
-  { id: 'fila-automatizaciones', seccion: 'comunicacion', titulo: 'Automatizaciones', resumen: 'Lo que Tentare hace solo y las reglas que enciendes tú', href: '/automatizaciones' },
+  { id: 'fila-automatizaciones', seccion: 'comunicacion', titulo: 'Automatizaciones', resumen: 'Lo que Centra hace solo y las reglas que enciendes tú', href: '/automatizaciones' },
   // El modo de autonomía y la tarifa se cambian en su pantalla: su único
   // escritor es su ruta de servidor (`/api/sustituciones`, `/api/equipo/tarifas`).
-  { id: 'fila-sustituciones', seccion: 'equipo', titulo: 'Sustituciones', resumen: 'Cuánto decide Tentare cuando alguien no puede dar su clase', href: '/sustituciones' },
+  { id: 'fila-sustituciones', seccion: 'equipo', titulo: 'Sustituciones', resumen: 'Cuánto decide Centra cuando alguien no puede dar su clase', href: '/sustituciones' },
   { id: 'fila-liquidaciones', seccion: 'equipo', titulo: 'Tarifas y liquidaciones', resumen: 'Lo que cobra cada instructora y lo que le debes cada mes', href: '/equipo/liquidaciones' },
   { id: 'fila-equipo', seccion: 'equipo', titulo: 'Equipo', resumen: 'Da de alta a cada persona y elige su rol', href: '/equipo' },
 ] as const satisfies readonly FilaAOtraPantalla[];
@@ -493,7 +493,7 @@ export const GRUPOS_PANEL_NUEVO: readonly GrupoPanelNuevo[] = [
   { id: 'tus-alumnas', titulo: 'Tus clientes', frase: 'Cómo se dan de alta, qué les llega y lo que las anima a volver.', secciones: ['altas', 'comunicacion', 'motivacion'] },
   { id: 'tu-app-y-tu-web', titulo: 'Tu app y tu web', frase: 'Tu logo, cómo se ve tu app y dónde te encuentran.', secciones: ['marca', 'web'] },
   { id: 'conexiones-y-datos', titulo: 'Conectar y proteger', frase: 'Todo lo que conectas con otras herramientas, tus datos y la seguridad.', secciones: ['conexiones', 'datos'] },
-  { id: 'tu-cuenta', titulo: 'Tu cuenta', frase: 'Tu plan de Tentare, los avisos que te llegan a ti y cómo ves tu panel.', secciones: ['plan', 'avisos', 'panel'], externas: ['mi-cuenta'] },
+  { id: 'tu-cuenta', titulo: 'Tu cuenta', frase: 'Tu plan de Centra, los avisos que te llegan a ti y cómo ves tu panel.', secciones: ['plan', 'avisos', 'panel'], externas: ['mi-cuenta'] },
 ];
 
 /**
@@ -559,7 +559,7 @@ export function tarjetaVisible(id: TarjetaId, rol: RolConfiguracion | string): b
   return (rolesDeTarjeta(TARJETA_POR_ID.get(id)!.tarjeta) as readonly string[]).includes(rol);
 }
 
-/** ¿Este rol ve esa fila de otra pantalla («Plan de Tentare», «Mi cuenta»)? */
+/** ¿Este rol ve esa fila de otra pantalla («Plan de Centra», «Mi cuenta»)? */
 export function externaVisible(f: FilaExterna, rol: RolConfiguracion | string): boolean {
   return ((f.roles ?? SOLO_PROPIETARIA) as readonly string[]).includes(rol);
 }
@@ -572,7 +572,7 @@ export function seccionDeTarjeta(id: TarjetaId): SeccionId {
 // ─── Herramientas ────────────────────────────────────────────────────────────
 //
 // «Mi app y mi web» medía unas diez pantallas de móvil: un interruptor
-// («Aparecer en Tentare Network») iba justo encima del constructor de widgets
+// («Aparecer en Centra Network») iba justo encima del constructor de widgets
 // entero, con su vista previa y su código. El fundador: «secciones muy largas»,
 // «mezcla de cosas muy distintas». Lo que es una herramienta de trabajo —un
 // catálogo, un editor— sale a su propia pantalla, y en su sección queda una fila

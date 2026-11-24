@@ -105,7 +105,7 @@ export function avisoParaSentry(
 }
 
 /**
- * Denuncias de la app que ya le tocan a Tentare (contra el estudio, o el estudio
+ * Denuncias de la app que ya le tocan a Centra (contra el estudio, o el estudio
  * no las revisó en 24 h) y siguen sin decidir. Las 24 h son las de
  * `HORAS_REVISION_ESTUDIO` (lib/moderacion/reglas.ts): duplicadas como número
  * por lo mismo que `VENTANA_ESPERAS_DIAS`; un test las ata.
@@ -118,7 +118,7 @@ export const ID_DEVOLUCION_POS_SIN_REFLEJAR = 'devolucion-pos-sin-reflejar-en-re
  */
 export const ID_ASISTENCIAS_SIN_PREMIO = 'asistencias-sin-premio';
 export const ID_DENUNCIAS_ESPERANDO_A_TENTARE = 'denuncias-esperando-a-tentare';
-/** Las mismas, con más de 48 h desde que se hicieron: tampoco las ha revisado Tentare. */
+/** Las mismas, con más de 48 h desde que se hicieron: tampoco las ha revisado Centra. */
 export const ID_DENUNCIAS_SIN_REVISAR_48H = 'denuncias-sin-revisar-48h';
 const HORAS_REVISION_ESTUDIO = 24;
 
@@ -354,7 +354,7 @@ export const DEFINICIONES: Definicion[] = [
   },
   {
     id: ID_DENUNCIAS_ESPERANDO_A_TENTARE,
-    que: 'Denuncias de la app que ya le tocan a Tentare (van contra el propio estudio, o el estudio no las revisó en 24 h) y siguen sin decidir.',
+    que: 'Denuncias de la app que ya le tocan a Centra (van contra el propio estudio, o el estudio no las revisó en 24 h) y siguen sin decidir.',
     impacto:
       'Un cliente o una instructora denunció un mensaje o un comentario y nadie lo ha mirado: el contenido sigue a la ' +
       'vista y quien denunció no sabe nada. Apple exige actuar sobre una denuncia en 24 h (guía 1.2); se revisan en ' +
@@ -369,7 +369,7 @@ export const DEFINICIONES: Definicion[] = [
   },
   {
     id: ID_DENUNCIAS_SIN_REVISAR_48H,
-    que: 'Denuncias de la app sin decidir más de 48 horas después de hacerse: ni el estudio ni Tentare las han revisado.',
+    que: 'Denuncias de la app sin decidir más de 48 horas después de hacerse: ni el estudio ni Centra las han revisado.',
     impacto:
       'Ya se ha pasado el plazo que se promete a quien denuncia y el que pide Apple para la app (guía 1.2). Una sola ' +
       'basta para que la revisión de la App Store lo tome como moderación que no funciona.',

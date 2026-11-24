@@ -20,7 +20,7 @@ for (const a of MUESTRA) {
   test(`«${a.slug}» sale completo en el HTML del servidor`, async ({ page }) => {
     const res = await page.goto(`/recursos/${a.slug}`, { waitUntil: 'domcontentloaded' });
     expect(res?.status()).toBe(200);
-    await expect(page).toHaveTitle(`${a.tituloSeo} | Tentare`);
+    await expect(page).toHaveTitle(`${a.tituloSeo} | Centra`);
     await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', a.descripcion);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', new RegExp(`/recursos/${a.slug}$`));
     await expect(page.locator('h1')).toHaveCount(1);

@@ -31,7 +31,7 @@ export async function enviarEmailPedirValoracion(params: {
   try {
     const resend = new Resend(apiKey);
     const { data, error } = await resend.emails.send({
-      from: remitentePorMarca(estudioNombre || 'Tentare'),
+      from: remitentePorMarca(estudioNombre || 'Centra'),
       ...(params.replyTo ? { replyTo: params.replyTo } : {}),
       to: [params.to],
       subject: `¿Qué tal tu clase de ${claseNombre}? — ${estudioNombre}`,

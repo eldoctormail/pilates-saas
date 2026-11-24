@@ -117,7 +117,7 @@ export function BotonDevolverRecibo({
         titulo={`¿Devolver ${formatEuro(recibo.importe)}?`}
         descripcion={
           `El dinero vuelve a la tarjeta con la que pagó (tarda unos días en aparecer en su banco) y el recibo `
-          + `quedará marcado como devuelto. Esto no se puede deshacer desde Tentare.`
+          + `quedará marcado como devuelto. Esto no se puede deshacer desde Centra.`
           + (recibo.sesionesAlEntregar != null
             ? ' Después te preguntaremos si quieres quitarle también las sesiones del bono.'
             : '')

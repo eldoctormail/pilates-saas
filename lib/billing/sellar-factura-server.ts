@@ -52,7 +52,7 @@ export interface ResultadoSellado {
   error?: string;
   /**
    * El estudio está en `modo_facturacion = 'sin_facturas'`: no emite facturas
-   * desde Tentare (Configuración → Facturación). No es un fallo: quien llama no
+   * desde Centra (Configuración → Facturación). No es un fallo: quien llama no
    * debe marcar la factura como pendiente ni avisar a Sentry por ello.
    */
   desactivada?: boolean;
@@ -112,7 +112,7 @@ export async function sellarFacturaDeRecibo(
   params: {
     studioId: string; reciboId: string; facturaId: string;
     /**
-     * 'automatica' = la emite Tentare sola al cobrar (confirmarCobro, el TPV, el
+     * 'automatica' = la emite Centra sola al cobrar (confirmarCobro, el TPV, el
      * reintento): respeta el ajuste del estudio «Facturar automáticamente».
      * 'manual' (por defecto) = alguien la pidió (⋯ del recibo, «Hacerle
      * factura»): sale siempre. Independiente de Veri*Factu.
@@ -467,7 +467,7 @@ export function mapSalida(row: { verifactu_hash: string | null; verifactu_prev_h
 // autenticada ni contra su sandbox real — mandar algo adivinado sería firmar
 // (mal) ante la AEAT. La huella propia SÍ se calcula y persiste siempre (es
 // la parte verificada y con tests, lib/verifactu.ts): la rectificativa queda
-// registrada y encadenada en Tentare desde el primer día; falta solo activar
+// registrada y encadenada en Centra desde el primer día; falta solo activar
 // la transmisión externa una vez validado el payload de Fiskaly.
 export interface ParamsRectificativa {
   studioId: string;

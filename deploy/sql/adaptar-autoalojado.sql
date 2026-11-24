@@ -3,7 +3,7 @@
 --
 -- Las migraciones 20261122000000…010200 adaptan la base a Argentina y a tu
 -- dominio, pero solo lo que existía cuando se escribieron. Las migraciones que
--- el repo original siga añadiendo vuelven a traer lo de Tentare: un trabajo de
+-- el repo original siga añadiendo vuelven a traer lo de Centra: un trabajo de
 -- pg_cron que llama a https://www.tentare.app, una función con 'Europe/Madrid',
 -- un horario pensado para Madrid… (pasó el mismo día: `valoraciones-pedir`).
 -- Esto lo arregla cada vez. Es idempotente: correrlo dos veces no cambia nada
@@ -18,7 +18,7 @@
 --      Madrid salía a las 10:00 salga a las 10:00 en Argentina. Cada trabajo se
 --      ajusta una sola vez por horario (lo recuerda autoalojado.cron_ajustados).
 --   4. Sin prueba de 7 días: el estudio nace activo.
---   5. Comprobaciones: si algo sigue apuntando a Tentare, falla a la vista.
+--   5. Comprobaciones: si algo sigue apuntando a Centra, falla a la vista.
 
 \set ON_ERROR_STOP on
 

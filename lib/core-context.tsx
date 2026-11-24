@@ -27,7 +27,7 @@ export interface CoreContextValue {
   dataLoaded: boolean;
   /**
    * La base de datos ha contestado que esta sesión NO tiene estudio (p. ej. una
-   * cuenta de Tentare Network). No es lo mismo que `studio === null`, que
+   * cuenta de Centra Network). No es lo mismo que `studio === null`, que
    * también vale mientras carga o si la carga falla.
    */
   sinEstudio: boolean;

@@ -27,7 +27,7 @@ export async function enviarRecordatorioAlta(params: {
     // devuelve el mismo envío en vez de mandar otro (ventana de 24 h).
     const { data, error } = await conReintentoResend(() => resend.emails.send(
       {
-        from: remitentePorMarca('Tentare'),
+        from: remitentePorMarca('Centra'),
         to: [params.to],
         subject: params.asunto,
         html: params.html,
@@ -46,7 +46,7 @@ export async function enviarRecordatorioAlta(params: {
 
 /**
  * El mismo envío para los correos del alta nueva («Tu cuenta está activa»,
- * app/api/alta/estudio-creado): remitente «Tentare», sin estudio de por medio
+ * app/api/alta/estudio-creado): remitente «Centra», sin estudio de por medio
  * para el Notification Engine, clave de idempotencia de quien llama y los
  * mismos descartes (dominio de ejemplo, Resend sin configurar).
  */

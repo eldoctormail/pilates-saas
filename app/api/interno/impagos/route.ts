@@ -7,7 +7,7 @@ import { CLAVE_POLITICA, diasDesde, leerPolitica } from '@/lib/billing/impagos/r
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
-// Los pagos fallidos de la suscripción de los estudios a Tentare (billing_incidentes_pago) y la
+// Los pagos fallidos de la suscripción de los estudios a Centra (billing_incidentes_pago) y la
 // política de avisos. Stripe reintenta el cobro; aquí solo se ve el estado y se decide cuándo
 // avisar. Suspender un estudio sigue siendo un acto humano, desde su ficha.
 

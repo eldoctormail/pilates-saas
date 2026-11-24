@@ -3,7 +3,7 @@ import { contarVinculosCuenta } from '../socios/cuenta-acceso-servidor.ts';
 import { conReintentos, cuentaYaNoExiste, mensajeDe } from '../socios/terceros-supresion.ts';
 import { decidirAutoborrado, type MotivoNoBorrable } from './borrar-cuenta.ts';
 
-// «Borrar mi cuenta de Tentare», lado servidor (la ruta es
+// «Borrar mi cuenta de Centra», lado servidor (la ruta es
 // app/api/public/cuenta/borrar/route.ts; quién puede, en ./borrar-cuenta.ts).
 //
 // Con service-role y SOLO sobre la cuenta del JWT (quien llama pasa `userId` ya

@@ -102,9 +102,9 @@ export async function POST(req: NextRequest) {
       return ok({ resultado: 'registrado' });
     }
     case 'integracion-pedida':
-      // Un gym ha elegido Tentare en su portal de Wellhub. El estudio aún no
+      // Un gym ha elegido Centra en su portal de Wellhub. El estudio aún no
       // está vinculado (se vincula su gym desde /interno): se avisa para hacerlo.
-      Sentry.captureMessage('[wellhub] un gym ha elegido Tentare en Wellhub', {
+      Sentry.captureMessage('[wellhub] un gym ha elegido Centra en Wellhub', {
         level: 'info', tags: { area: 'plataformas', plataforma: 'wellhub' }, extra: { gymId: e.gymId, gym: e.nombreGym },
       });
       return ok({ resultado: 'integracion' });

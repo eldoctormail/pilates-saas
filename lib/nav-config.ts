@@ -25,7 +25,7 @@ export interface NavItemDef {
    *
    * El buscador casa solo contra `label`, así que RENOMBRAR una sección la
    * hace inencontrable por su nombre viejo — y quien lleva meses usando
-   * Tentare busca por el nombre que aprendió, no por el nuevo. Aquí van esos
+   * Centra busca por el nombre que aprendió, no por el nuevo. Aquí van esos
    * nombres, en minúsculas y sin tildes (`normalizar` ya las quita).
    */
   alias?: string[];
@@ -59,7 +59,7 @@ export interface NavSection {
 //   · Negocio: dinero y resultados;
 //   · Estudio: ajustes y cosas que se tocan una vez.
 // Antes «Estudio» mezclaba once entradas —equipo, informes, cierre fiscal,
-// ajustes, changelog y la suscripción a Tentare— y Automatizaciones colgaba
+// ajustes, changelog y la suscripción a Centra— y Automatizaciones colgaba
 // sola entre Dashboard y Marketing. Ninguna ruta, permiso ni pantalla cambia:
 // solo el sitio en el menú. El orden que cada estudio haya guardado a mano
 // (`ordenarItemsMenu`) se sigue respetando dentro de cada grupo.
@@ -96,7 +96,7 @@ const allSections: NavSection[] = [
     label: 'Equipo',
     items: [
       { href: '/equipo', label: 'Equipo', icon: UserCog },
-      // Sustituciones vive junto a Tentare Network (P1 de la auditoría
+      // Sustituciones vive junto a Centra Network (P1 de la auditoría
       // 2026-08-25, "unificar sustituciones"): las dos resuelven la misma
       // pregunta —"necesito a alguien"— solo que una busca dentro (candidatas
       // ya conocidas del estudio) y la otra fuera (marketplace). Fusión
@@ -105,7 +105,7 @@ const allSections: NavSection[] = [
       // sin fusionar sus rankings, ver lib/network/candidatos-sustitucion.ts)
       // no se tocan.
       { href: '/sustituciones', label: 'Sustituciones', icon: Replace },
-      // Buscador de candidatas de Tentare Network — herramienta de
+      // Buscador de candidatas de Centra Network — herramienta de
       // contratación de la propietaria/manager/recepción, NO donde una
       // instructora gestiona su propio perfil (eso se mudó fuera del panel,
       // a app/network/mi-perfil — cuenta independiente, sin studio_id). Por
@@ -113,12 +113,12 @@ const allSections: NavSection[] = [
       // /network/buscar y no /network: esa URL literal la ocupa ahora la
       // landing PÚBLICA de Network (app/network/page.tsx, rediseño 2026-08) —
       // no puede haber dos páginas en la misma ruta.
-      // Label "Tentare Network" (no "Buscar instructoras"): desde Fase 2
+      // Label "Centra Network" (no "Buscar instructoras"): desde Fase 2
       // esta ruta abre una sección con su propio sub-nav
       // (app/(dashboard)/network/layout.tsx: Buscar/Favoritas/Mensajes), no
       // una sola pantalla — el sidebar general solo necesita apuntar a la
       // entrada, la separación real la da ese sub-nav.
-      { href: '/network/buscar', label: 'Tentare Network', icon: Network },
+      { href: '/network/buscar', label: 'Centra Network', icon: Network },
       { href: '/chat', label: 'Chat de equipo', icon: Users2 },
     ],
   },
@@ -177,7 +177,7 @@ const allSections: NavSection[] = [
       { href: '/libreta', label: 'Libreta de clientes', icon: Notebook },
       // «Actualizaciones» ya no está en el menú (fundador, 12-nov-2026). La pantalla sigue en /actualizaciones: la abre
       // «Ver todas las novedades» del botón de ayuda de la esquina.
-      // «Plan de Tentare» ya no es una entrada del menú: vive en Configuración → Plan (fundador, 22-nov-2026).
+      // «Plan de Centra» ya no es una entrada del menú: vive en Configuración → Plan (fundador, 22-nov-2026).
     ],
   },
 ];

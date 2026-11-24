@@ -116,7 +116,7 @@ test.describe('Urban Sports Club: los IDs de la conexión no se pierden', () => 
     expect(guardados).toHaveLength(0);
   });
 
-  test('sin las credenciales de Tentare en USC no se piden IDs que no servirían', async ({ page }) => {
+  test('sin las credenciales de Centra en USC no se piden IDs que no servirían', async ({ page }) => {
     await montar(page, { apiDisponible: false });
     await expect(interruptorUsc(page)).toBeEnabled();
     await expect(page.getByTestId('conexion-usc')).toHaveCount(0);

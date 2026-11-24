@@ -13,7 +13,7 @@ export default function Contenido() {
         'Está intentando entrar con un email distinto al que usó para reservar por primera vez.',
         'Nunca ha puesto contraseña — necesita pedir el código de acceso por email, no adivinar una que no existe.',
         'El correo con el código de acceso ha caído en spam.',
-        'Está entrando en el portal de otro estudio (una URL parecida, pero de otra propietaria de Tentare).',
+        'Está entrando en el portal de otro estudio (una URL parecida, pero de otra propietaria de Centra).',
         'Tiene activada la verificación en dos pasos y ha perdido el acceso a su app de códigos y a su correo.',
       ]} />
 
@@ -37,7 +37,7 @@ export default function Contenido() {
           dos cosas, la propietaria o la gerencia pueden quitársela desde su ficha (<strong>Más acciones → Verificación en dos pasos</strong>): volverá
           a entrar solo con su contraseña, le avisamos por correo y puede activarla otra vez desde su perfil. Hazlo
           solo si te lo pide ella. Si su cuenta no se puede gestionar desde tu estudio (por ejemplo, la usa también
-          fuera de él), la ficha te lo dirá: entonces que escriba a soporte de Tentare.
+          fuera de él), la ficha te lo dirá: entonces que escriba a soporte de Centra.
         </p>
       </ComoSolucionarlo>
 

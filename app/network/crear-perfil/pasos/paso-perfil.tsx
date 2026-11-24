@@ -2,7 +2,7 @@
 
 // Paso 10 del wizard: foto + idiomas + redes. Extraído tal cual de
 // app/network/crear-perfil/page.tsx (paso === 9) — F0 del roadmap de
-// Tentare Network 2.0, sin cambios de comportamiento.
+// Centra Network 2.0, sin cambios de comportamiento.
 import { useId } from 'react';
 import { Camera } from 'lucide-react';
 import { NW_TINTA, NW_BORDE, NW_MUTED, NW_MUTED_2, NW_SAGE } from '@/components/network-v2/tokens';

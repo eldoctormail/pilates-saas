@@ -12,7 +12,7 @@ import { ConstructorWidgets } from '@/components/widgets/constructor-widgets';
 
 // «Widgets para tu web» (Configuración → Mi app y mi web → `?abrir=widgets`).
 //
-// El constructor vive en components/widgets/ («Tentare Widgets»): un catálogo
+// El constructor vive en components/widgets/ («Centra Widgets»): un catálogo
 // (lib/widgets/catalogo.ts), un generador de código probado contra el parser
 // del motor (lib/widgets/integracion.ts) y una vista previa que ES el motor.
 // Cada widget es una vista de la MISMA página pública de reservas de siempre

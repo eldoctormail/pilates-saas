@@ -23,20 +23,20 @@ import type { SistemaInformatico } from './xml.ts';
 
 /** a) + b) + c) + e) + f) de la declaración: lo que es del software. */
 export const SIF = {
-  nombre: 'Tentare',
+  nombre: 'Centra',
   /** 2 caracteres alfanuméricos (Orden HAC/1177/2024, anexo 2.6). */
   id: 'TE',
   version: '1.0.0',
   /** Solo puede funcionar como VERI*FACTU: no hay modo «no verificable» (sin firma XAdES). */
   soloVerifactu: true,
-  /** Un mismo Tentare da soporte a la facturación de muchos obligados (estudios). */
+  /** Un mismo Centra da soporte a la facturación de muchos obligados (estudios). */
   multiOT: true,
 } as const;
 
 /**
  * Número de instalación de la facturación de un estudio.
  *
- * Tentare es un SaaS: cada estudio es una «facturación» independiente, un SIF
+ * Centra es un SaaS: cada estudio es una «facturación» independiente, un SIF
  * «virtual» con su número propio (FAQ §4, art. 7.a del RRSIF). El id del estudio
  * es estable, único en toda la plataforma y no se reutiliza, así que dos sedes
  * con el mismo NIF tienen instalaciones distintas.
@@ -56,8 +56,8 @@ export function numeroInstalacionDeEstudio(studioId: string): string {
  * el SIF SaaS, independientemente del estado de dichas facturaciones (alta,
  * baja…) y de si son de igual o de distinto OEF» (FAQ de desarrolladores, §4).
  *
- * En Tentare el usuario es la propietaria (`studios.owner_auth_user_id`) y una
- * facturación es un estudio suyo que factura con Tentare (ver `contarFacturaciones`
+ * En Centra el usuario es la propietaria (`studios.owner_auth_user_id`) y una
+ * facturación es un estudio suyo que factura con Centra (ver `contarFacturaciones`
  * en transmitir.ts).
  */
 export function indicadorMultiplesOT(facturacionesDelUsuario: number): boolean {
@@ -126,9 +126,9 @@ export interface ApartadoDeclaracion {
 }
 
 /**
- * 1.d: qué es Tentare y qué hace. Descripción de lo que existe en el código.
+ * 1.d: qué es Centra y qué hace. Descripción de lo que existe en el código.
  * La frase de la remisión es la redacción que propuso el asesor fiscal
- * (30-sep-2026). Que las subsanaciones y anulaciones las lance Tentare y no un
+ * (30-sep-2026). Que las subsanaciones y anulaciones las lance Centra y no un
  * botón del estudio no impide declararlas: la AEAT pide que el SIF las genere,
  * preferentemente de forma transparente para el usuario.
  */

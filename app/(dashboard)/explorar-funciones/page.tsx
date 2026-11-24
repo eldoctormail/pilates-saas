@@ -9,7 +9,7 @@ import { ModulosNuevo } from '@/components/modulos/modulos-nuevo';
 
 // "Explorar todas las funciones" — botón secundario junto al tour en
 // /primeros-pasos. A diferencia de esa página (solo lo pendiente de
-// configurar), esto enseña TODO lo que hace Tentare, para descubrir
+// configurar), esto enseña TODO lo que hace Centra, para descubrir
 // funcionalidad que no se sabía que existía. Sin progreso, sin checkboxes:
 // cada función es un enlace directo.
 export default function ExplorarFuncionesPage() {
@@ -23,7 +23,7 @@ export default function ExplorarFuncionesPage() {
       <PageHeader
         back={{ href: '/primeros-pasos', label: 'Volver a primeros pasos' }}
         title="Explorar todas las funciones"
-        description="Todo lo que hace Tentare, organizado por lo que resuelve — no hace falta que lo hayas configurado para echar un vistazo."
+        description="Todo lo que hace Centra, organizado por lo que resuelve — no hace falta que lo hayas configurado para echar un vistazo."
       />
 
       <div className="space-y-4">

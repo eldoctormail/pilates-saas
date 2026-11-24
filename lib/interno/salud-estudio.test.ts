@@ -10,10 +10,10 @@ test('un estudio que lo usa y paga está bien, sin avisos', () => {
   assert.deepEqual(evaluarSalud(sano, AHORA), { nivel: 'bien', avisos: [], diasSinEntrar: 1 });
 });
 
-test('el impago a Tentare es riesgo aunque todo lo demás vaya bien', () => {
+test('el impago a Centra es riesgo aunque todo lo demás vaya bien', () => {
   const s = evaluarSalud({ ...sano, estadoSuscripcion: 'past_due' }, AHORA);
   assert.equal(s.nivel, 'riesgo');
-  assert.deepEqual(s.avisos, ['Su pago a Tentare ha fallado']);
+  assert.deepEqual(s.avisos, ['Su pago a Centra ha fallado']);
 });
 
 test('la dueña sin entrar: atención a la semana, riesgo a las dos, y nunca es riesgo', () => {

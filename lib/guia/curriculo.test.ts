@@ -195,7 +195,7 @@ test('el siguiente capítulo es el primero pendiente EN ORDEN, no el más corto'
 });
 
 test('un capítulo sin pasos es explicativo, no «pendiente para siempre»', () => {
-  // «Conoce Tentare» o «Entiende tu negocio» no se completan: no hay nada que
+  // «Conoce Centra» o «Entiende tu negocio» no se completan: no hay nada que
   // configurar. Marcarlos como pendientes dejaría la guía imposible de acabar.
   const p = calcularProgresoGuia(calcularOnboarding(estudioCompleto()).categorias);
   const sinPasos = p.capitulos.filter(c => c.capitulo.pasos.length === 0);

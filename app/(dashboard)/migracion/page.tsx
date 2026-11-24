@@ -569,11 +569,11 @@ export default function MigracionPage() {
                   ? cn(BOTON_VIVO, 'mt-2 h-12 w-full gap-2 text-[14px] [&:disabled:not([aria-busy=true])]:opacity-60')
                   : 'mt-2 w-full flex items-center justify-center gap-2 py-3 rounded-2xl bg-brand text-brand-foreground text-[14px] font-extrabold hover:brightness-95 [&:disabled:not([aria-busy=true])]:opacity-60 transition'}
               >
-                {/* Tenti en sus dos estados. Aquí Tentare está de verdad
+                {/* Tenti en sus dos estados. Aquí Centra está de verdad
                     leyendo unos ficheros que no ha visto nunca y decidiendo qué
                     es cada columna, y el resultado vuelve a esta pantalla. No se
                     cambia de icono al ponerse a trabajar: es el mismo, pensando.
-                    Importar (más abajo) es otra cosa: Tentare mete las filas
+                    Importar (más abajo) es otra cosa: Centra mete las filas
                     solo, sin decidir nada, y eso es 'trabajando'. */}
                 <TentiIcono ancho={20} sobre="invertida" estado={paso === 'analizando' ? 'pensando' : 'reposo'} />
                 {paso === 'analizando'
@@ -847,7 +847,7 @@ export default function MigracionPage() {
       )}
 
       {/* ── Paso 3: ejecutando ─────────────────────────────────────────────── */}
-      {/* Tentare importa solo: 'trabajando' (lib/tenti/momentos.ts), en lugar
+      {/* Centra importa solo: 'trabajando' (lib/tenti/momentos.ts), en lugar
           del spinner. Responde al clic en «Importar», así que su cambio suena
           ('work'), y el acta de abajo suena al terminar ('finish' o 'error').
           Cada uno va en su paso: nunca hay dos Tentis a la vez. */}

@@ -16,7 +16,7 @@ export const dynamic = 'force-dynamic';
 // ─────────────────────────────────────────────────────────────────────────────
 // Devolver un recibo desde el panel.
 //
-// Hasta ahora Tentare solo REACCIONABA: el webhook de `charge.refunded` marcaba
+// Hasta ahora Centra solo REACCIONABA: el webhook de `charge.refunded` marcaba
 // el recibo DEVUELTO, anotaba la fila en `devoluciones` y ofrecía revertir la
 // entrega — pero el reembolso había que hacerlo a mano en Stripe.
 //
@@ -143,7 +143,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({
       error: 'Este recibo tiene MÁS DE UN COBRO en Stripe, así que aquí no podemos elegir cuál devolver. '
         + 'Ábrelos en Stripe y devuelve el que sobra: ' + duplicados.join(', ') + '. '
-        + 'Tentare detectará la devolución igual y te ofrecerá quitar el bono.',
+        + 'Centra detectará la devolución igual y te ofrecerá quitar el bono.',
       motivo: 'VARIOS_COBROS',
       paymentIntents: duplicados,
     }, { status: 409 });
@@ -155,7 +155,7 @@ export async function POST(req: NextRequest) {
     // no debe sonar a fallo suyo.
     return NextResponse.json({
       error: 'No encontramos el cobro de este recibo en Stripe, así que no se puede devolver desde aquí. '
-        + 'Búscalo en Stripe por el importe y la fecha y devuélvelo allí: Tentare lo detectará igual y '
+        + 'Búscalo en Stripe por el importe y la fecha y devuélvelo allí: Centra lo detectará igual y '
         + 'te ofrecerá quitar el bono.',
       motivo: 'SIN_RASTRO_STRIPE',
     }, { status: 409 });
@@ -194,7 +194,7 @@ export async function POST(req: NextRequest) {
 
     // Sigue sin marcarse el recibo DEVUELTO aquí — eso lo hace el webhook de
     // `charge.refunded`, igual que con un reembolso hecho desde Stripe. Lo que
-    // se anota es otra cosa: que Tentare lo PIDIÓ. Con esto puesto y el estado
+    // se anota es otra cosa: que Centra lo PIDIÓ. Con esto puesto y el estado
     // todavía COBRADO, la pantalla puede decir "devolviendo…" en vez de no
     // decir nada, y si el webhook nunca llega se ve que quedó a medias en vez
     // de parecer que no pasó (el patrón que costó el cobro perdido del 8-ago).

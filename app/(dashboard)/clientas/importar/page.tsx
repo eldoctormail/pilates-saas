@@ -229,8 +229,8 @@ export default function ImportarSociasPage() {
         className="flex items-center gap-3 rounded-2xl border border-brand/25 bg-brand/5 px-4 py-3 hover:bg-brand/10 transition-colors"
       >
         {/* Era un emoji suelto — lo único de todo el panel que representaba
-            «esto lo hace Tentare por ti» con un carácter de texto. El destino
-            de este enlace ES la migración automática, donde Tentare lee los
+            «esto lo hace Centra por ti» con un carácter de texto. El destino
+            de este enlace ES la migración automática, donde Centra lee los
             archivos por ti, así que lleva su misma marca: Tenti. */}
         <TentiIcono ancho={22} />
         <span className="flex-1 text-[13px] text-foreground">

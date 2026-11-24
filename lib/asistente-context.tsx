@@ -9,7 +9,7 @@ import { tieneFeature } from './billing/entitlements';
 import { puedeUsarAsistente } from './asistente/roles';
 import { authHeader } from './api-client';
 
-// «Pregúntale a Tentare»: el chat vive en su propia pantalla, /asistente, y se
+// «Pregúntale a Centra»: el chat vive en su propia pantalla, /asistente, y se
 // llega por tres puertas: la barra del Centro de Control, la fila de ⌘K y el
 // atajo ⌘J. Las tres llevan ahí con la pregunta ya enviada (si la hay).
 //

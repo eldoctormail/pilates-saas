@@ -44,7 +44,7 @@ export async function GET(req: NextRequest) {
   if (!periodo) return NextResponse.json({ error: 'Falta anio/mes válidos' }, { status: 400 });
 
   // La instructora consultaba aquí su propia liquidación desde el panel, sin
-  // ninguna pantalla que lo usara; con Tentare Core retirado (14-sep-2026), 403.
+  // ninguna pantalla que lo usara; con Centra Core retirado (14-sep-2026), 403.
   if (!puedeGestionarEquipo(sesion.rol)) {
     return NextResponse.json({ error: 'No tienes permiso para ver liquidaciones' }, { status: 403 });
   }

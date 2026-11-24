@@ -226,7 +226,7 @@ export interface ReservaCalendarioProps {
   estiloDias?: 'semana' | 'dias' | 'grid';
   /**
    * Chips de filtro (tipo de clase + instructora), pintados DEBAJO de la tira
-   * de días dentro del mismo bloque sticky — diseño "Tentare Portal
+   * de días dentro del mismo bloque sticky — diseño "Centra Portal
    * Reservas". El ESTADO del filtro (qué está activo, a qué tabla afecta)
    * sigue viviendo en el llamador (Modo A, `app/reservar/[slug]/page.tsx`):
    * este componente solo pinta la fila, nunca decide qué filtra. Solo
@@ -357,7 +357,7 @@ export interface ReservaCalendarioProps {
   /**
    * Intercepta el CLIC EN LA TARJETA de una clase, antes de abrir la ficha
    * interna — pensado para Modo B sin sesión (`app/widget-bundle/main.tsx`),
-   * que redirige a la página real de Tentare en vez de mostrar la ficha
+   * que redirige a la página real de Centra en vez de mostrar la ficha
    * embebida: sin esto, la visitante sin sesión tenía que dar DOS toques
    * (abrir la ficha, y solo LUEGO "Reservar" dentro de ella dispara la
    * navegación) para llegar al mismo sitio — un paso intermedio que no
@@ -384,7 +384,7 @@ export interface ReservaCalendarioProps {
    * que ven Modo B y cualquier otro caller que no pase esta prop).
    * 'vista': rediseño "sin popup" de Modo A (`/reservar/[slug]`) — la ficha
    * toma la PÁGINA entera (`window.scrollTo(0,0)` incluido), pensado para un
-   * iframe/página propia que Tentare controla de punta a punta.
+   * iframe/página propia que Centra controla de punta a punta.
    * 'inline': mismo "sin popup" pero para Modo B (bundle Shadow DOM
    * embebido a mitad de la web del estudio) — sin backdrop y sin invadir el
    * resto de la página anfitriona: nunca hace scroll de `window`, solo lleva
@@ -441,14 +441,14 @@ function fmtHoraOferta(iso: string): string {
 // la web de un tercero, donde una URL relativa resolvería contra el dominio del
 // estudio y daría 404 (mismo motivo por el que todo aquí llega por props).
 //
-// `conFotoPorDefecto` activa la MISMA foto de Tentare por familia de clase que
+// `conFotoPorDefecto` activa la MISMA foto de Centra por familia de clase que
 // ya usa el portal de la socia (`imagenDeClase`, lib/imagenes-por-defecto.ts) —
 // a propósito solo en la cabecera de la hoja de detalle, no en la lista: ese
 // documento ya deja escrito que la lista se distingue mejor por color (la
 // misma foto repetida ocho veces se lee como un error) y que la vista grande
 // «detalle, sesión guiada» sí lleva default. El widget público es exactamente
 // ese caso «detalle» y no lo tenía — la propietaria veía la promesa cumplida en
-// Configuración («mientras no pongas la tuya, se usa una foto de Tentare») pero
+// Configuración («mientras no pongas la tuya, se usa una foto de Centra») pero
 // la visitante seguía viendo solo la inicial.
 //
 // `origenTentare` prefija esa foto por defecto con el origen de la app
@@ -692,7 +692,7 @@ export function ReservaCalendario({
       }
     }
   }
-  // Agrupación Mañana/Tarde/Noche del rediseño (diseño "Tentare Portal
+  // Agrupación Mañana/Tarde/Noche del rediseño (diseño "Centra Portal
   // Reservas", 2026-08-26) — en hora LOCAL del estudio (`franjaLocalDe`,
   // lib/utils.ts), no la del navegador de quien reserva: el mismo motivo por
   // el que el motor de señales del Decision OS ya usa esta función.
@@ -808,7 +808,7 @@ export function ReservaCalendario({
       {variant === 'calendario' && estiloDias === 'dias' && !loading && (
         // Bloque sticky único — eyebrow (rango de meses + "N clases") encima
         // de la tira de días, y los chips de filtro DEBAJO, todo pegado al
-        // borde superior al hacer scroll. Diseño "Tentare Portal Reservas":
+        // borde superior al hacer scroll. Diseño "Centra Portal Reservas":
         // las tres filas viven juntas, no como bloques sueltos.
         <div
           style={{
@@ -880,7 +880,7 @@ export function ReservaCalendario({
             return (
               <div
                 // Fila única con scroll horizontal, no envuelve — igual que el
-                // diseño ("Tentare Portal Reservas": `overflow-x:auto`, sin
+                // diseño ("Centra Portal Reservas": `overflow-x:auto`, sin
                 // wrap) y que la propia tira de días de al lado. Con
                 // `flexWrap:'wrap'` un estudio con muchos tipos+instructoras
                 // (caso real: 5 tipos + 5 instructoras) empujaba el feed varias
@@ -1056,7 +1056,7 @@ export function ReservaCalendario({
         const countLabel = error ? '—' : (totalDia ? `${totalDia} ${totalDia === 1 ? 'clase' : 'clases'}` : 'Sin clases');
         return (
           // Cabecera «día · nº de clases» + tarjetas por clase agrupadas por
-          // franja (Mañana/Tarde/Noche), diseño "Tentare Portal Reservas"
+          // franja (Mañana/Tarde/Noche), diseño "Centra Portal Reservas"
           // (2026-08-26). Solo en Modo A (única consumidora de
           // `estiloDias='dias'`); `SlotRow` sigue intacto para el portal
           // privado ('semana') y «Mis reservas» ('lista').
@@ -1478,7 +1478,7 @@ function SlotRowImpl({ t, slot, onOpen }: { t: ModoTokens; slot: ReservaSlot; on
 // reconciliaba TODAS las filas visibles, no solo la que cambió.
 const SlotRow = memo(SlotRowImpl);
 
-// ── Tarjeta de clase (diseño "Tentare Portal Reservas", 2026-08-26) ─────────
+// ── Tarjeta de clase (diseño "Centra Portal Reservas", 2026-08-26) ─────────
 //
 // Horizontal y compacta: foto a la izquierda a toda altura, hora+duración y
 // plazas arriba a la derecha, nombre de la clase, instructora, precio+CTA
@@ -1687,7 +1687,7 @@ function BookingSheet({
   useEffect(() => {
     if (!sinBackdrop) return;
     if (variantePresentacion === 'vista') {
-      // Modo A ('vista'): la página ENTERA es de Tentare (iframe propio), así
+      // Modo A ('vista'): la página ENTERA es de Centra (iframe propio), así
       // que llevarla arriba del todo es seguro y es lo que se pidió — nunca
       // queda a media altura donde se pulsó "Reservar". `{ preventScroll:
       // true }` en el foco de abajo: sin él, el navegador centra la ventana en
@@ -1979,7 +1979,7 @@ function BookingSheet({
 
         {/* Foto a sangre con su velo y, encima, el nivel, el nombre y los
             chips (components/reserva/heroe-clase.tsx). Con la foto de catálogo
-            de Tentare por familia de clase si el estudio no ha subido la suya
+            de Centra por familia de clase si el estudio no ha subido la suya
             (ver FotoClase). El nombre sigue siendo el `h2` de la ficha y el que
             recibe el foco al abrirla; ya no va en versales, como en la app. */}
         <HeroeClase

@@ -201,11 +201,11 @@ export function IslaWeb({ enHome = false }: { enHome?: boolean }) {
         }}
       >
         {enHome ? (
-          <a href="#top" onClick={irSinAncla} className="v5-nav-logo" aria-label="Tentare — inicio">
+          <a href="#top" onClick={irSinAncla} className="v5-nav-logo" aria-label="Centra — inicio">
             <LogoTentare formato="isotipo" tinta="color" alto={30} decorativo />
           </a>
         ) : (
-          <Link href="/" className="v5-nav-logo" aria-label="Tentare — inicio">
+          <Link href="/" className="v5-nav-logo" aria-label="Centra — inicio">
             <LogoTentare formato="isotipo" tinta="color" alto={30} decorativo />
           </Link>
         )}

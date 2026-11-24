@@ -63,7 +63,7 @@ export function PildoraPonEnMarcha({ variante }: { variante: 'escritorio' | 'mov
     return () => { document.removeEventListener('mousedown', fuera); document.removeEventListener('keydown', tecla); };
   }, [abierta, variante]);
 
-  // En el Resumen está la tarjeta entera; el chat de Tentare ocupa toda la pantalla.
+  // En el Resumen está la tarjeta entera; el chat de Centra ocupa toda la pantalla.
   if (pathname === '/dashboard' || pathname === '/asistente') return null;
   if (visitaEnMarcha || !studio || !pasos || ocultada || pasos.terminada) return null;
 

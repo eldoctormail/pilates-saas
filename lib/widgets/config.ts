@@ -292,7 +292,7 @@ export interface Copiado {
   /**
    * Una foto de la configuración copiada (sin huérfanos). Con ella, «qué
    * cambió» se calcula por grupos contra la MISMA plantilla (`gruposCambiados`,
-   * ./en-tu-web.ts): un cambio en la plantilla de Tentare no sale como un
+   * ./en-tu-web.ts): un cambio en la plantilla de Centra no sale como un
    * cambio suyo, que es lo que pasa comparando solo `firma`.
    */
   config?: ConfigConstructor;

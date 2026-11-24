@@ -12,7 +12,7 @@ import path from 'node:path';
 // dentro del bundle nadie podía entrar ni darse de alta desde la nativa en
 // ninguna web, y ningún test lo veía: los e2e no pasan por Cloudflare.
 //
-// Ahora el acceso lo hace la ventana de Tentare (app/widget-auth-retorno).
+// Ahora el acceso lo hace la ventana de Centra (app/widget-auth-retorno).
 // Esta guardia falla si el bundle vuelve a llamar a gotrue para entrar o a
 // cargar Turnstile, y si alguien manda un mensaje con tokens a `'*'`.
 // ─────────────────────────────────────────────────────────────────────────────
@@ -36,7 +36,7 @@ const CAPTCHA = /challenges\.cloudflare\.com|useCaptcha\b|turnstile-widget|turns
 test('el bundle de la nativa no llama a gotrue para entrar (sin captcha posible en la web del estudio)', () => {
   assert.ok(DEL_BUNDLE.length > 5, 'la guardia no encuentra los ficheros del bundle: ¿se han movido?');
   const conAcceso = DEL_BUNDLE.filter((f) => ACCESO_A_GOTRUE.test(fs.readFileSync(path.join(raiz, f), 'utf8')));
-  assert.deepEqual(conAcceso, [], 'El acceso va por la ventana de Tentare (useAuthWidget().acceder), nunca desde la web del estudio.');
+  assert.deepEqual(conAcceso, [], 'El acceso va por la ventana de Centra (useAuthWidget().acceder), nunca desde la web del estudio.');
 });
 
 test('el bundle de la nativa no carga Turnstile', () => {

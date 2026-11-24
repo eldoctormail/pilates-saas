@@ -231,7 +231,7 @@ export function TiendaDeApps() {
                 <p className="mt-1.5 text-[14.5px] leading-[1.55] text-muted-foreground text-pretty">{destacada.frase}</p>
                 <p className="mt-2 text-[13.5px] text-muted-foreground">
                   <span className="font-semibold tabular-nums text-foreground/80">{aparte ? textoPrecio(destacada.precio) : 'Incluido'}</span>
-                  {aparte && ' · se suma a tu suscripción de Tentare'}
+                  {aparte && ' · se suma a tu suscripción de Centra'}
                 </p>
                 <div className="mt-4">{accion(destacada)}</div>
               </div>

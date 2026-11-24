@@ -227,7 +227,7 @@ export function NavPaso({ onAtras, trabajando, textoSiguiente = 'Siguiente', mas
 
 /** «¿Dudas? Escríbenos · Te responde una persona»: el WhatsApp de soporte, el mismo de Primeros pasos (decisión D5). */
 export function WhatsAppPersona({ nombreEstudio }: { nombreEstudio: string }) {
-  const href = enlaceWhatsApp(SOPORTE_WHATSAPP, `Hola, soy de ${nombreEstudio || 'mi estudio'} y estoy poniendo en marcha Tentare:`);
+  const href = enlaceWhatsApp(SOPORTE_WHATSAPP, `Hola, soy de ${nombreEstudio || 'mi estudio'} y estoy poniendo en marcha Centra:`);
   if (!href) return null;
   return (
     <a
@@ -248,7 +248,7 @@ export function WhatsAppPersona({ nombreEstudio }: { nombreEstudio: string }) {
 
 /** Lo mismo en texto plano para el pie del modo foco: «¿Dudas? Escríbenos · Te responde una persona». */
 export function WhatsAppTexto({ nombreEstudio }: { nombreEstudio: string }) {
-  const href = enlaceWhatsApp(SOPORTE_WHATSAPP, `Hola, soy de ${nombreEstudio || 'mi estudio'} y estoy poniendo en marcha Tentare:`);
+  const href = enlaceWhatsApp(SOPORTE_WHATSAPP, `Hola, soy de ${nombreEstudio || 'mi estudio'} y estoy poniendo en marcha Centra:`);
   if (!href) return null;
   return (
     <p className="ob-ayuda">

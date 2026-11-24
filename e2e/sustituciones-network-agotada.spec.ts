@@ -1,7 +1,7 @@
 import { test, expect, type Page, type Route } from '@playwright/test';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Sustitución agotada → Tentare Network. Cuando no queda nadie del equipo, la
+// Sustitución agotada → Centra Network. Cuando no queda nadie del equipo, la
 // tarjeta propone profesionales de Network y la propietaria pide, con UN toque
 // por persona. Estas pruebas vigilan tres cosas:
 //  1. las propuestas salen, con el enlace a la ficha DENTRO del panel;
@@ -95,15 +95,15 @@ async function abrirSustituciones(page: Page) {
   await expect(page.getByText('Sustituciones').first()).toBeVisible({ timeout: 30_000 });
 }
 
-// CONGELADO (2-oct-2026): Tentare Network salió del panel (lib/frozen-features.ts).
+// CONGELADO (2-oct-2026): Centra Network salió del panel (lib/frozen-features.ts).
 // Se salta, no se borra: al descongelarlo, quitar el `.skip` y vuelve a cubrirlo.
-test.describe.skip('Sustitución agotada → propuestas de Tentare Network', () => {
+test.describe.skip('Sustitución agotada → propuestas de Centra Network', () => {
   test('propone profesionales con su ficha dentro del panel, y el toque pide contacto una sola vez', async ({ page }) => {
     const posts = await mockBackend(page, { status: 200, body: { ok: true, solicitudId: 'redcontacto-1' } });
     await seedSesionDeDuena(page);
     await abrirSustituciones(page);
 
-    await expect(page.getByText('No queda nadie de tu equipo. Estas profesionales de Tentare Network podrían cubrirla')).toBeVisible();
+    await expect(page.getByText('No queda nadie de tu equipo. Estas profesionales de Centra Network podrían cubrirla')).toBeVisible();
     const fichaAna = page.getByRole('link', { name: /Ana Ejemplo/ });
     await expect(fichaAna).toHaveAttribute('href', '/network/perfil-ana');
     await expect(fichaAna).not.toHaveAttribute('target', '_blank');

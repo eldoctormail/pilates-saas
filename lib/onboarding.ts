@@ -217,7 +217,7 @@ export interface RecomendacionOnboarding {
 
 const AUTOMATIZACIONES_ONBOARDING: { id: string; trigger: string; label: string; descripcion: string }[] = [
   // Sin «Recordatorios de clase» (CLASE_MANANA): el recordatorio lo manda
-  // Tentare de serie a todos los estudios. Pedir aquí que se activara la regla
+  // Centra de serie a todos los estudios. Pedir aquí que se activara la regla
   // era pedir un segundo recordatorio por la misma clase — un paso del
   // checklist que, completado, empeoraba el producto.
   { id: 'ausencias', trigger: 'AUSENCIA_DIAS', label: 'Recupera clientes ausentes', descripcion: 'Pregunta cómo están las que llevan días sin venir y ofrece una vuelta con descuento si la ausencia se alarga — te ahorra llevar la cuenta a mano.' },
@@ -310,7 +310,7 @@ export function calcularOnboarding(d: DatosOnboarding): {
   // estudios llegan aquí — es la cifra que este checklist existe para mover.
   configuracionInicial.push({
     id: 'primera-reserva', label: 'Recibe tu primera reserva',
-    descripcion: 'El momento en que Tentare empieza a trabajar para ti. Comparte tu enlace y deja que alguien reserve.',
+    descripcion: 'El momento en que Centra empieza a trabajar para ti. Comparte tu enlace y deja que alguien reserve.',
     minutos: 1, done: estudioActivado(d), href: '/calendario',
   });
 
@@ -349,7 +349,7 @@ export function calcularOnboarding(d: DatosOnboarding): {
   const enlaces: EnlaceOnboarding[] = [
     { id: 'informes', label: 'Ingresos, ocupación y margen por clase', descripcion: 'Qué clases dan dinero de verdad y cuáles no.', href: '/informes' },
     { id: 'rendimiento', label: 'Rendimiento de tus instructoras', descripcion: 'Retención y conversión de cada una, para decidir turnos con datos.', href: '/equipo/rendimiento' },
-    { id: 'sustituciones', label: 'Sustituciones sin llamadas', descripcion: 'Cuando una instructora avisa de que no puede, Tentare ordena a quién pedírselo y espera tu visto bueno, o las contacta sola si activas el modo autónomo.', href: '/sustituciones' },
+    { id: 'sustituciones', label: 'Sustituciones sin llamadas', descripcion: 'Cuando una instructora avisa de que no puede, Centra ordena a quién pedírselo y espera tu visto bueno, o las contacta sola si activas el modo autónomo.', href: '/sustituciones' },
     { id: 'centro-control', label: 'Recomendaciones para tu estudio', descripcion: 'Qué merece la pena atender esta semana, calculado a partir de tus propios datos.', href: '/centro-de-control' },
   ];
 

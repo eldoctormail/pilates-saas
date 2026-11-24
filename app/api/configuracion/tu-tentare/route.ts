@@ -4,7 +4,7 @@ import { tuTentareVisible } from '@/lib/tu-tentare/interruptor';
 
 export const dynamic = 'force-dynamic';
 
-// ¿Ve este estudio «Tu Tentare» (P2.5) en Configuración › Tu panel? Solo la
+// ¿Ve este estudio «Tu Centra» (P2.5) en Configuración › Tu panel? Solo la
 // propietaria (la sección ya es solo suya) y solo si el interruptor
 // `TU_TENTARE` lo enciende para su estudio. Contesta 200 también apagado: el
 // panel lo pide al abrir la sección y, ante cualquier otra cosa, no enseña nada.

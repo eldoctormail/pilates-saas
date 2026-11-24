@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: pagina.titulo,
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
-  openGraph: { siteName: 'Tentare', type: 'website', locale: 'es_ES', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
+  openGraph: { siteName: 'Centra', type: 'website', locale: 'es_ES', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
 };
 
 const FAQ = [
@@ -26,7 +26,7 @@ const FAQ = [
   },
   {
     q: '¿El cuestionario de salud es el mismo para todos los estudios?',
-    a: 'No. Cada estudio define sus propias preguntas y el tipo de respuesta (texto libre, sí/no, o una lista de opciones) desde Configuración. No hay un formulario fijo de Tentare de por medio.',
+    a: 'No. Cada estudio define sus propias preguntas y el tipo de respuesta (texto libre, sí/no, o una lista de opciones) desde Configuración. No hay un formulario fijo de Centra de por medio.',
   },
   {
     q: '¿Hace falta consentimiento para guardar esos datos?',
@@ -51,7 +51,7 @@ export default function FichaPage() {
       intro={<>Historial, bonos, asistencia y notas de progreso de cada alumna. Y sus limitaciones físicas donde tienen que estar: delante de quien le va a dar la clase.</>}
       chips={['Historial completo', 'Ficha de salud operativa', 'Consentimiento trazable']}
       foto={{ src: '/disciplinas/pilates.jpg', alt: 'Alumna en una clase de Pilates reformer', encuadre: 'center 30%' }}
-      captura={{ src: '/producto/v2/panel-clientas-1110.webp', alt: 'Listado de clientas del panel de Tentare con datos de muestra: filtros por estado y una fila por alumna con su plan, su saldo, su última clase y avisos', pie: 'Cada fila dice lo que necesitas antes de saludarla: su plan, lo que le queda, su última clase y si hay algo que mirar.', ancho: 1110, alto: 489 }}
+      captura={{ src: '/producto/v2/panel-clientas-1110.webp', alt: 'Listado de clientas del panel de Centra con datos de muestra: filtros por estado y una fila por alumna con su plan, su saldo, su última clase y avisos', pie: 'Cada fila dice lo que necesitas antes de saludarla: su plan, lo que le queda, su última clase y si hay algo que mirar.', ancho: 1110, alto: 489 }}
     >
       <Seccion id="problema" titulo="La información existe. Está repartida en cinco sitios">
         <Entradilla>
@@ -79,7 +79,7 @@ export default function FichaPage() {
           compromete, se avisa.
         </p>
         <p>
-          Las preguntas no vienen fijadas por Tentare: <strong>las defines tú</strong>, desde Configuración — texto libre,
+          Las preguntas no vienen fijadas por Centra: <strong>las defines tú</strong>, desde Configuración — texto libre,
           sí/no, o una lista de opciones, tantas como quieras. Cada estudio pregunta lo que de verdad necesita saber, no un
           formulario genérico igual para todos. Las rellena quien atiende a la clienta, desde su ficha.
         </p>

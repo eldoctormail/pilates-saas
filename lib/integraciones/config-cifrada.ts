@@ -1,6 +1,6 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // Los secretos de `integraciones.config`: lo que el estudio pega de otro
-// servicio para que Tentare actúe en su nombre (el token de WhatsApp, la clave
+// servicio para que Centra actúe en su nombre (el token de WhatsApp, la clave
 // API de Kisi y la de Mailchimp). Se cifran con el mismo esquema que los tokens
 // OAuth (./cifrado-credenciales.ts); el resto de la config (remitente, id de la
 // cerradura, prefijo del servidor, plantillas aprobadas…) no es secreto y se

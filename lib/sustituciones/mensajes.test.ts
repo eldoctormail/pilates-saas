@@ -2,12 +2,12 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { cuerpoNudgeCandidata, lineaNetworkAgotada, parametrosNudgeCandidata } from './mensajes.ts';
 
-test('email agotada: línea de Tentare Network solo con un número positivo', () => {
+test('email agotada: línea de Centra Network solo con un número positivo', () => {
   for (const n of [0, -1, undefined, null, Number.NaN]) assert.equal(lineaNetworkAgotada(n), null);
   assert.equal(lineaNetworkAgotada(1),
-    'Hay 1 profesional de Tentare Network que podría cubrirla: la tienes en Sustituciones.');
+    'Hay 1 profesional de Centra Network que podría cubrirla: la tienes en Sustituciones.');
   assert.equal(lineaNetworkAgotada(3),
-    'Hay 3 profesionales de Tentare Network que podrían cubrirla: las tienes en Sustituciones.');
+    'Hay 3 profesionales de Centra Network que podrían cubrirla: las tienes en Sustituciones.');
 });
 
 test('nudge a la candidata: primer nombre + clase + enlace', () => {

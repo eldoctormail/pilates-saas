@@ -12,7 +12,7 @@ import { montarHome } from './hoy-home-mock';
 //     delante, una 'sorpresa';
 //   · «Sistema autónomo»: la cifra de automatizaciones de la BANDEJA;
 //   · la tira de Hoy: 'dormido' solo si el estudio descansa, siempre con
-//     «Tentare sigue atento…»; con un problema, la firma.
+//     «Centra sigue atento…»; con un problema, la firma.
 // Los mocks propios van DESPUÉS de montarHome() (memoria «mock antes del arnés
 // = no existe») y se recarga para que la pantalla los pida.
 // ─────────────────────────────────────────────────────────────────────────────
@@ -68,7 +68,7 @@ test.describe('La bandeja', () => {
     await expect(titular(page, 'Nada espera tu visto bueno')).toBeVisible({ timeout: 60_000 });
     await expect(titular(page, 'Nada espera tu visto bueno').locator('[data-tenti-icono]')).toHaveCount(0);
     await expect(titular(page, 'Nada espera tu visto bueno').locator('svg.lucide-check')).toHaveCount(1);
-    await expect(region(page).getByText('Tentare lo está haciendo').locator('[data-tenti-icono]')).toHaveAttribute('data-estado', 'trabajando');
+    await expect(region(page).getByText('Centra lo está haciendo').locator('[data-tenti-icono]')).toHaveAttribute('data-estado', 'trabajando');
   });
 
   test('si la bandeja sube con la pantalla delante, una sorpresa (y al cargar, ninguna)', async ({ page }) => {
@@ -121,14 +121,14 @@ test.describe('«Sistema autónomo» sigue a la bandeja', () => {
 test.describe('La tira de Hoy', () => {
   test('con un problema por resolver, la firma: nunca una cara dormida', async ({ page }) => {
     await montarHome(page);
-    const tira = page.getByText(/^Tentare ha encontrado/);
+    const tira = page.getByText(/^Centra ha encontrado/);
     await expect(tira).toBeVisible({ timeout: 60_000 });
     await expect(tira.locator('xpath=..').locator('[data-tenti-icono]')).toHaveAttribute('data-estado', 'reposo');
   });
 
-  test('sin clases hoy, el estudio descansa: dormido, y la frase dice que Tentare sigue', async ({ page }) => {
+  test('sin clases hoy, el estudio descansa: dormido, y la frase dice que Centra sigue', async ({ page }) => {
     await montarHome(page, { calendarioVacio: true });
-    const tira = page.getByText('Hoy no hay clases. Tentare sigue atento a las reservas y los avisos.');
+    const tira = page.getByText('Hoy no hay clases. Centra sigue atento a las reservas y los avisos.');
     await expect(tira).toBeVisible({ timeout: 60_000 });
     await expect(tira.locator('xpath=..').locator('[data-tenti-icono]')).toHaveAttribute('data-estado', 'dormido');
   });
@@ -155,14 +155,14 @@ test.describe('La tira de Hoy', () => {
       });
     });
     await page.reload();
-    const tira = page.getByText('Hoy ya no quedan clases. Tentare sigue atento a las reservas y los avisos.');
+    const tira = page.getByText('Hoy ya no quedan clases. Centra sigue atento a las reservas y los avisos.');
     await expect(tira).toBeVisible({ timeout: 60_000 });
     expect(pedidas).toBeGreaterThan(0);
     await expect(tira.locator('xpath=..').locator('[data-tenti-icono]')).toHaveAttribute('data-estado', 'dormido');
 
     // Otro día no hay estudio que descanse: la tira se va (no hay nada que contar).
     await page.getByRole('button', { name: 'Día anterior' }).click();
-    await expect(page.getByText(/Tentare sigue atento/)).toHaveCount(0);
+    await expect(page.getByText(/Centra sigue atento/)).toHaveCount(0);
     await expect(page.locator('[data-tenti-icono][data-estado="dormido"]')).toHaveCount(0);
   });
 });

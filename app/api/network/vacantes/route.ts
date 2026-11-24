@@ -7,7 +7,7 @@ import { uid } from '@/lib/utils';
 import { mapFilaAVacante, type FilaRedVacante } from '@/lib/network/mapeo';
 import { esEspecialidadValida, esHorarioValido, esTipoTrabajoValido, esTarifaRangoValida } from '@/lib/network/catalogo';
 
-// Vacantes de Tentare Network (Fase 2, "estudio → busca instructora") —
+// Vacantes de Centra Network (Fase 2, "estudio → busca instructora") —
 // "Mis vacantes" del panel: GET lista todas las del estudio (cualquier
 // estado, con el contador de candidaturas), POST crea una nueva en 'draft'.
 // Mismo criterio de permiso que red_verificaciones_experiencia: publicar

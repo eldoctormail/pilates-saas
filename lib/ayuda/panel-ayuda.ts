@@ -14,7 +14,7 @@ export type PestanaAyuda = 'inicio' | 'tentare' | 'novedades' | 'mensajes' | 'ay
 export const PESTANAS_AYUDA: readonly PestanaAyuda[] = ['inicio', 'tentare', 'novedades', 'mensajes', 'ayuda'];
 
 /**
- * Las pestañas que se enseñan: «Tentare» (el asistente, con su chat dentro) solo si el
+ * Las pestañas que se enseñan: «Centra» (el asistente, con su chat dentro) solo si el
  * asistente está disponible para este estudio y este rol; sin él, las otras cuatro.
  */
 export function pestanasVisibles(conTentare: boolean): readonly PestanaAyuda[] {
@@ -42,7 +42,7 @@ export const GUIAS_EN_INICIO = 3;
 /**
  * Las guías de la pantalla en la que estás: primero la de su ficha y luego el
  * resto de su categoría. Una pantalla sin ficha no inventa nada y devuelve las de
- * «Empezar con Tentare»: un panel de ayuda vacío es peor que uno general.
+ * «Empezar con Centra»: un panel de ayuda vacío es peor que uno general.
  */
 export function guiasParaInicio(ruta: string | null | undefined, max = GUIAS_EN_INICIO): { titulo: string; guias: ArticuloAyuda[] } {
   const ayuda = ayudaDePantalla(ruta);

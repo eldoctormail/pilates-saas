@@ -10,7 +10,7 @@ import { borrarCuentaTentare } from '@/lib/student/cuenta';
 import { PALABRA_BORRAR_CUENTA, confirmaBorrarCuenta } from '@/lib/cuenta/borrar-cuenta';
 import { esAppNativa } from '@/lib/nativo/puente';
 
-// «Borrar mi cuenta de Tentare» (App Store 5.1.1(v)), al final de «Privacidad y
+// «Borrar mi cuenta de Centra» (App Store 5.1.1(v)), al final de «Privacidad y
 // datos» (decisión del fundador, 4-oct: es ahí donde se busca), en la web y en la
 // app. Borra la CUENTA al momento; no es la solicitud al estudio de que borre sus
 // datos, que está en la misma pantalla, justo encima.
@@ -50,7 +50,7 @@ export function BorrarCuenta({ slug, nombreEstudio, hrefLogin }: {
     if (saliendo) return;
     setSaliendo(true);
     await olvidarCuentaBorrada();
-    // En la app de iOS, a la entrada de Tentare; en la web, al acceso de este estudio.
+    // En la app de iOS, a la entrada de Centra; en la web, al acceso de este estudio.
     window.location.replace(esAppNativa() ? '/app' : hrefLogin);
   };
 
@@ -63,7 +63,7 @@ export function BorrarCuenta({ slug, nombreEstudio, hrefLogin }: {
 
   return (
     <>
-      <ProfileSection items={[{ label: 'Borrar mi cuenta de Tentare', onClick: abrir, destructivo: true }]} />
+      <ProfileSection items={[{ label: 'Borrar mi cuenta de Centra', onClick: abrir, destructivo: true }]} />
 
       {/* Montada solo tras un «sí» del servidor: una hoja cerrada sigue en el DOM,
           y un «se ha borrado» escondido no puede estar ahí antes de que lo sea. */}
@@ -71,10 +71,10 @@ export function BorrarCuenta({ slug, nombreEstudio, hrefLogin }: {
         <ConfirmationDialog
           open={abierta}
           onClose={cerrar}
-          titulo="Tu cuenta de Tentare se ha borrado"
+          titulo="Tu cuenta de Centra se ha borrado"
           // Apple (TN3194): si entró con Apple y no guardamos su token para
-          // revocarlo, se le dice cómo quitarle el acceso a Tentare ella misma.
-          cuerpo="Ya no podrás entrar con ella en ningún estudio. Si alguna vez entraste con Apple, quita también Tentare en los Ajustes del iPhone, en tu cuenta de Apple › Iniciar sesión con Apple."
+          // revocarlo, se le dice cómo quitarle el acceso a Centra ella misma.
+          cuerpo="Ya no podrás entrar con ella en ningún estudio. Si alguna vez entraste con Apple, quita también Centra en los Ajustes del iPhone, en tu cuenta de Apple › Iniciar sesión con Apple."
           confirmar="Entendido"
           cancelar={null}
           loading={saliendo}
@@ -85,7 +85,7 @@ export function BorrarCuenta({ slug, nombreEstudio, hrefLogin }: {
       <ConfirmationDialog
         open={abierta && !borrada}
         onClose={cerrar}
-        titulo="¿Borrar tu cuenta de Tentare?"
+        titulo="¿Borrar tu cuenta de Centra?"
         confirmar="Borrar mi cuenta"
         tono="danger"
         loading={borrando}

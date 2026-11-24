@@ -11,7 +11,7 @@ import { pngQr } from '@/lib/qr/png';
 // dice que no existe, que es lo mismo que teclearla.
 //
 // La dirección es la misma que el enlace del correo (`NEXT_PUBLIC_APP_URL`, o la
-// de Tentare). El mismo slug da siempre el mismo PNG: caché larga.
+// de Centra). El mismo slug da siempre el mismo PNG: caché larga.
 
 export const runtime = 'nodejs';
 

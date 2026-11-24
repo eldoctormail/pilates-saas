@@ -8,7 +8,7 @@ import {
 } from './correo-primera-clase.ts';
 import { AVISO_VENTA_SIN_STRIPE } from '../onboarding.ts';
 
-// El correo 3 del alta nueva, «Tu primera clase en Tentare, en 5 minutos»
+// El correo 3 del alta nueva, «Tu primera clase en Centra, en 5 minutos»
 // (PR-5): a quién, cuándo, una vez, y qué dice según lo que de verdad falta.
 
 const AHORA = Date.parse('2026-10-22T17:42:00Z');

@@ -1,7 +1,7 @@
 import { expect, type Page, type Route } from '@playwright/test';
 import { montar, ir } from './panel-sembrado';
 
-// El andamiaje de «Pregúntale a Tentare» que comparten e2e/asistente.spec.ts
+// El andamiaje de «Pregúntale a Centra» que comparten e2e/asistente.spec.ts
 // (Chromium) y e2e/asistente-movil.spec.ts (WebKit/iPhone): el estudio
 // sembrado con el asistente, POST /api/asistente mockeado como NDJSON (nunca se
 // llama a Anthropic) y las respuestas de ejemplo. Los mocks van DESPUÉS de
@@ -11,7 +11,7 @@ export const STUDIO_ID = 'studio-test';
 export const UID = 'auth-e2e-duena';
 export const CONVERSACION = '4f1d2c3b-7a8e-4b9c-9d0e-1f2a3b4c5d6e';
 /** Un literal que solo está en components/asistente/vista-chat.tsx. */
-export const HUELLA_DEL_CHAT = 'Tentare consulta tus datos y crea clases, salas, eventos y citas si tú confirmas.';
+export const HUELLA_DEL_CHAT = 'Centra consulta tus datos y crea clases, salas, eventos y citas si tú confirmas.';
 
 export const json = (r: Route, b: unknown, s = 200) => r.fulfill({ status: s, contentType: 'application/json', body: JSON.stringify(b) });
 export const ndjson = (eventos: unknown[]) => eventos.map(e => JSON.stringify(e)).join('\n') + '\n';

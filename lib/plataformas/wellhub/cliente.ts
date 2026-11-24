@@ -1,6 +1,6 @@
 // Cliente de la API de Wellhub (Booking y Access Control).
 //
-// Credenciales de Tentare como integrador, no de cada estudio: un solo token
+// Credenciales de Centra como integrador, no de cada estudio: un solo token
 // Bearer sirve para sus APIs (developers.wellhub.com › Getting started) y, por
 // estudio, su gym y su producto en `plataforma_conexiones`. Sin credenciales,
 // `credencialesWellhub()` es null y nadie llama a nada.
@@ -25,7 +25,7 @@ export interface CredencialesWellhub {
   token: string;
   /** El secreto de los webhooks y, si se está rotando, el anterior. */
   secretosWebhook: string[];
-  /** `system_id` de Tentare en Wellhub, si lo dan (opcional al crear clases). */
+  /** `system_id` de Centra en Wellhub, si lo dan (opcional al crear clases). */
   systemId: number | null;
 }
 
@@ -110,7 +110,7 @@ export async function productosWellhub(c: CredencialesWellhub, gymId: string): P
 /**
  * Crea la clase. Sus clases no tienen clave de idempotencia: si una respuesta se
  * perdió en la pasada anterior, antes de crear otra se busca por `reference`
- * (el id del tipo de clase de Tentare) y se adopta.
+ * (el id del tipo de clase de Centra) y se adopta.
  */
 export async function crearClaseWellhub(c: CredencialesWellhub, gymId: string, cuerpo: CuerpoClaseWellhub): Promise<ResultadoWellhub<string>> {
   const existente = await claseWellhubPorReferencia(c, gymId, cuerpo.reference);

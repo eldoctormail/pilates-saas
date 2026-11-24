@@ -10,7 +10,7 @@ test('solo cuentan los factores verificados', () => {
 
 test('el factor de la zona interna no enciende la verificación de la cuenta', () => {
   assert.equal(factoresVerificados([{ status: 'verified', friendly_name: 'Tentare Internal' }]), 0);
-  assert.equal(factoresVerificados([{ status: 'verified', friendly_name: 'Tentare Internal' }, { status: 'verified', friendly_name: 'Tentare' }]), 1);
+  assert.equal(factoresVerificados([{ status: 'verified', friendly_name: 'Tentare Internal' }, { status: 'verified', friendly_name: 'Centra' }]), 1);
   // El de la app del estudio lleva el nombre del estudio: cuenta.
   assert.equal(factoresVerificados([{ status: 'verified', friendly_name: 'Estudio' }]), 1);
 });

@@ -1,4 +1,4 @@
-// El autor del blog personal: Marcos Roca Rodríguez, fundador de Tentare. FUENTE ÚNICA de su nombre, su cargo, su
+// El autor del blog personal: Marcos Roca Rodríguez, fundador de Centra. FUENTE ÚNICA de su nombre, su cargo, su
 // @id y sus datos: la página de autor, el JSON-LD de cada artículo, la firma de las guías de /recursos y la
 // Organization (`founder`) salen de aquí.
 //
@@ -22,7 +22,7 @@ export const ID_BLOG_PERSONAL = `${LEGAL.url}${RUTA_BLOG}#blog`;
 /**
  * Perfil personal de LinkedIn de Marcos, o `null` hasta que el fundador dé el real.
  * ⚠️ NO se inventa ni se adivina una URL: con `null` ni se pinta el enlace ni entra en `sameAs`. La de la EMPRESA
- * (linkedin.com/company/tentare) es de Tentare, no suya, y se enseña aparte.
+ * (linkedin.com/company/tentare) es de Centra, no suya, y se enseña aparte.
  */
 export const LINKEDIN_PERSONAL: string | null = null;
 export const LINKEDIN_TENTARE = 'https://www.linkedin.com/company/tentare/';
@@ -30,8 +30,8 @@ export const LINKEDIN_TENTARE = 'https://www.linkedin.com/company/tentare/';
 export const AUTOR_BLOG = {
   nombre: LEGAL.titular, // «Marcos Roca Rodríguez», tal como consta en el aviso legal
   nombreCorto: 'Marcos Roca',
-  cargo: 'Fundador de Tentare',
-  cargoEn: 'Founder of Tentare',
+  cargo: 'Fundador de Centra',
+  cargoEn: 'Founder of Centra',
   ciudad: 'Barcelona',
   pais: 'España',
   /** La dio el fundador para esta página. Cambia cada año: la edad no se guarda en el JSON-LD. */
@@ -52,7 +52,7 @@ export const AUTOR_BLOG = {
     anchos: [480, 800] as const,
     ancho: 800,
     alto: 1000,
-    alt: 'Marcos Roca Rodríguez, fundador de Tentare, con traje azul marino y camisa blanca',
+    alt: 'Marcos Roca Rodríguez, fundador de Centra, con traje azul marino y camisa blanca',
   },
   /** La imagen para redes (1200×630), con URL propia. */
   og: { ruta: '/blog/marcos-roca-og.jpg', ancho: 1200, alto: 630 },

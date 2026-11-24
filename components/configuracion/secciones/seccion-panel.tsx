@@ -21,7 +21,7 @@ import { usePanelNuevo } from '@/lib/estudio/panel-nuevo-cliente';
 import { HREF_MODULOS } from '@/lib/modulos/menu';
 import { CajaValor, FILA_NUEVA } from '@/components/configuracion/shell/fila-herramienta';
 
-// «Tu Tentare» (P2.5): solo se carga si el servidor lo enciende para el estudio
+// «Tu Centra» (P2.5): solo se carga si el servidor lo enciende para el estudio
 // (interruptor `TU_TENTARE`). Apagado, esta sección es exactamente la de antes.
 const TusModulos = dynamic(() => import('@/components/configuracion/tu-tentare/tus-modulos').then(m => m.TusModulos), { ssr: false });
 // «Quién viene a cada clase» (P3.11): igual, solo con `TARJETA_CLASE` encendido.
@@ -166,7 +166,7 @@ export function SeccionPanel({ showToast }: { showToast: (m: string) => void }) 
           sección ya es solo suya, y el servidor lo vuelve a comprobar). */}
       {tarjetaClase && <QuienVieneACadaClase key={studio?.id} showToast={showToast} />}
 
-      {/* «Tu Tentare», después de lo de siempre: diecinueve filas delante
+      {/* «Tu Centra», después de lo de siempre: diecinueve filas delante
           enterrarían «Claro u oscuro». Tras cada cambio el hook vuelve a leer:
           el cajón «Tu menú» no puede quedarse con datos viejos y deshacerlo. */}
       {tuTentare && !panelNuevo && (

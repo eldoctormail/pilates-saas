@@ -29,17 +29,17 @@ function Mark({ v, label }: { v: Verdict; label: string }) {
 // La nota pública de G2 (lib/seo/g2.ts): se enseña porque cualquiera puede comprobarla.
 
 /**
- * Lo que distingue a Tentare frente a cualquiera de la lista. Solo cosas que el
+ * Lo que distingue a Centra frente a cualquiera de la lista. Solo cosas que el
  * producto hace hoy. «Pilates y yoga», no «solo Pilates»: desde el 6-oct-2026 el
  * producto se presenta para las dos disciplinas (decisión del fundador).
  */
 const POR_QUE = [
   { titulo: 'Pensado para Pilates y yoga', texto: 'Plaza por reformer, plazas fijas, bonos y lista de espera pensados para tu estudio, no para un gimnasio.' },
-  { titulo: 'Si falla una instructora, Tentare busca quién la cubre', texto: 'Propone sustituta y, con tu visto bueno, la contacta y avisa a tus clientes. Sin llamadas ni grupos de WhatsApp.' },
-  { titulo: 'Cobras tú, sin comisión', texto: 'La tarjeta, directa a tu cuenta con Stripe; la domiciliación, con la remesa SEPA para tu banco. Tentare no se queda nada de cada cobro.' },
+  { titulo: 'Si falla una instructora, Centra busca quién la cubre', texto: 'Propone sustituta y, con tu visto bueno, la contacta y avisa a tus clientes. Sin llamadas ni grupos de WhatsApp.' },
+  { titulo: 'Cobras tú, sin comisión', texto: 'La tarjeta, directa a tu cuenta con Stripe; la domiciliación, con la remesa SEPA para tu banco. Centra no se queda nada de cada cobro.' },
 ];
 
-/** La columna de Tentare del resumen: la misma en las trece comparativas.
+/** La columna de Centra del resumen: la misma en las trece comparativas.
  *  Founding Studio es gratis desde el 15-oct-2026 y ya no hay prueba de 7 días. */
 const TENTARE_RESUMEN = {
   queEs: 'Software de gestión para estudios de Pilates y yoga, hecho en España',
@@ -63,7 +63,7 @@ export interface ResumenCompetidor {
   /** Su prueba gratuita. Es la cuarta fila salvo que haya `destacado`. */
   prueba?: string;
   /**
-   * La cuarta fila cuando la prueba no es lo que más distingue a Tentare frente a
+   * La cuarta fila cuando la prueba no es lo que más distingue a Centra frente a
    * este competidor (p. ej. uno con un mes de prueba, pero sin app con su marca
    * salvo en el plan más caro). Mismo criterio que la tabla: se elige qué se
    * compara, nunca se falsea lo comparado.
@@ -134,7 +134,7 @@ export function CompetitorPage({
     ...(revisada ? { dateModified: revisada } : {}),
     isPartOf: { '@id': `${LEGAL.url}/#web` },
     publisher: { '@id': ID_ORGANIZACION },
-    about: { '@type': 'SoftwareApplication', name: 'Tentare', url: LEGAL.url },
+    about: { '@type': 'SoftwareApplication', name: 'Centra', url: LEGAL.url },
     mentions: { '@type': 'SoftwareApplication', name },
   } : null;
 
@@ -148,7 +148,7 @@ export function CompetitorPage({
   return (
     <PageShell>
       <OrganizationStructuredData />
-      <ComparativaBreadcrumb slug={slug} name={`Tentare vs ${name}`} />
+      <ComparativaBreadcrumb slug={slug} name={`Centra vs ${name}`} />
       {webPageLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageLd).replace(/</g, '\\u003c') }} />}
       {faq && faq.length > 0 && <FaqStructuredData items={faq} />}
       <IslaWeb />
@@ -160,7 +160,7 @@ export function CompetitorPage({
             <span aria-hidden>/</span>
             <Link href="/comparativa">Comparativa</Link>
             <span aria-hidden>/</span>
-            <span>Tentare vs {name}</span>
+            <span>Centra vs {name}</span>
           </nav>
           <div className="cmp1-logos">
             <div className="cmp1-logo">
@@ -200,14 +200,14 @@ export function CompetitorPage({
           <div className="cmp1-cifras-cab" aria-hidden>
             <span />
             <span>{name}</span>
-            <span className="cmp1-cifras-nuestro">Tentare</span>
+            <span className="cmp1-cifras-nuestro">Centra</span>
           </div>
           <dl className="cmp1-cifras">
             {filasResumen.map((f) => (
               <div key={f.etiqueta} className="cmp1-cifra">
                 <dt>{f.etiqueta}</dt>
                 <dd><span className="cmp1-cifra-quien">{name}</span>{f.suyo}</dd>
-                <dd className="cmp1-cifras-nuestro"><span className="cmp1-cifra-quien">Tentare</span>{f.nuestro}</dd>
+                <dd className="cmp1-cifras-nuestro"><span className="cmp1-cifra-quien">Centra</span>{f.nuestro}</dd>
               </div>
             ))}
           </dl>
@@ -229,13 +229,13 @@ export function CompetitorPage({
 
       <section className="cmp1-zona">
         <div className="cmp1-ancho">
-          <h2 className="cmp1-h2">Tentare frente a {name}, punto por punto</h2>
+          <h2 className="cmp1-h2">Centra frente a {name}, punto por punto</h2>
           <Reveal className="cmp1-tabla-marco">
             <table className="cmp1-tabla">
               <thead>
                 <tr>
                   <th scope="col">Para tu estudio</th>
-                  <th scope="col" className="cmp1-th-nuestro">Tentare</th>
+                  <th scope="col" className="cmp1-th-nuestro">Centra</th>
                   <th scope="col">{name}</th>
                 </tr>
               </thead>
@@ -243,7 +243,7 @@ export function CompetitorPage({
                 {rows.map((r) => (
                   <tr key={r.feature}>
                     <th scope="row">{r.feature}</th>
-                    <td className="cmp1-td-nuestro" data-quien="Tentare"><Mark v={r.tentare[0]} label={r.tentare[1]} /></td>
+                    <td className="cmp1-td-nuestro" data-quien="Centra"><Mark v={r.tentare[0]} label={r.tentare[1]} /></td>
                     <td data-quien={name}><Mark v={r.them[0]} label={r.them[1]} /></td>
                   </tr>
                 ))}
@@ -268,7 +268,7 @@ export function CompetitorPage({
               </section>
             ))}
             <p className="cmp1-metodo">
-              <strong>Cómo hacemos esta comparativa.</strong> La escribe el equipo de Tentare. De {name} solo afirmamos lo que
+              <strong>Cómo hacemos esta comparativa.</strong> La escribe el equipo de Centra. De {name} solo afirmamos lo que
               consta en su web pública, con la fecha de la revisión; cuando un dato no aparece, lo decimos así, sin suponerlo.
               Si ves algo desactualizado, escríbenos a <a href={`mailto:${LEGAL.email}`}>{LEGAL.email}</a> y lo corregimos.
             </p>
@@ -279,7 +279,7 @@ export function CompetitorPage({
       <section style={{ background: 'var(--w-noche)', color: 'var(--w-sobre-noche)', padding: 'clamp(56px,7vw,88px) clamp(20px,4vw,44px)' }}>
         <Reveal style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center' }}>
           <p style={{ fontSize: 14, fontWeight: 600, color: 'var(--w-sand)', margin: '0 0 16px' }}>Nuestro veredicto</p>
-          <h2 style={{ fontWeight: 600, fontSize: 'clamp(28px,4.2vw,46px)', lineHeight: 1.08, letterSpacing: 'var(--w-track-h2)', margin: '0 0 18px', color: 'var(--w-sobre-noche)' }}>Tentare, el Nº1 para tu estudio de Pilates.</h2>
+          <h2 style={{ fontWeight: 600, fontSize: 'clamp(28px,4.2vw,46px)', lineHeight: 1.08, letterSpacing: 'var(--w-track-h2)', margin: '0 0 18px', color: 'var(--w-sobre-noche)' }}>Centra, el Nº1 para tu estudio de Pilates.</h2>
           <p style={{ fontSize: 'clamp(16px,1.4vw,18px)', lineHeight: 1.6, color: 'var(--w-sobre-noche-2)', margin: '0 0 28px' }}>{veredicto}</p>
           <Link href="/crear-estudio" className="cmp1-btn cmp1-btn--claro">{CTA_ALTA} →</Link>
         </Reveal>

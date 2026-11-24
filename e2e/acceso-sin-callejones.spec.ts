@@ -17,7 +17,7 @@ import { avisoDelLogin, entrarPorLogin } from './entrar-por-login';
 // reenvío vive DENTRO de esa pantalla.
 //
 // **2. Dar de alta a alguien del equipo interno** obligaba a que esa persona
-// hubiera entrado antes en Tentare por su cuenta. Para montar tu propio equipo
+// hubiera entrado antes en Centra por su cuenta. Para montar tu propio equipo
 // eso es un ida y vuelta absurdo: quien da de alta quiere crear la cuenta,
 // pasar las credenciales, y que la otra persona entre.
 // ─────────────────────────────────────────────────────────────────────────────

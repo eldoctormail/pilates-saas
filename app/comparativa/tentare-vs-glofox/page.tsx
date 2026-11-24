@@ -11,9 +11,9 @@ export const metadata: Metadata = {
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
   openGraph: {
-    siteName: 'Tentare',
+    siteName: 'Centra',
     type: 'website',
-    title: 'Tentare vs Glofox',
+    title: 'Centra vs Glofox',
     description: 'Precio, permanencia, plaza por reformer y sustitución de instructoras, comparados con lo que consta en la web pública de Glofox.',
     url: urlDe(PATH),
   },
@@ -34,7 +34,7 @@ const ROWS: ComparativaRow[] = [
   { feature: 'Sustitución de instructoras', tentare: ['yes', 'Propone candidatas, contacta y avisa; autónoma en el plan gratis, Estudio y Cadena, o con un complemento de 12 €/mes'], them: ['partial', 'No consta como función nativa en su web pública'] },
   { feature: 'App con la marca del estudio', tentare: ['yes', 'Con tu nombre, tu icono, tu logo y tus colores, en todos los planes; se instala desde el navegador'], them: ['yes', 'App con marca propia, según su web'] },
   { feature: 'Reglas de reserva y cancelación por tipo de clase', tentare: ['yes', 'Antelación, cancelación, bono exigido y lista de espera se fijan por tipo de clase'], them: ['yes', 'Aforo, ventana de reserva y cancelación configurables por clase, según su web'] },
-  { feature: 'Cobros con Stripe y domiciliación', tentare: ['yes', 'Stripe para la tarjeta; para la domiciliación, Tentare genera la remesa SEPA que presentas en tu banco'], them: ['yes', 'Stripe y GoCardless, según su web'] },
+  { feature: 'Cobros con Stripe y domiciliación', tentare: ['yes', 'Stripe para la tarjeta; para la domiciliación, Centra genera la remesa SEPA que presentas en tu banco'], them: ['yes', 'Stripe y GoCardless, según su web'] },
   { feature: 'Empezar gratis, sin tarjeta', tentare: ['yes', 'Sí: Founding Studio es gratis hasta 150 reservas al mes, sin pedir tarjeta'], them: ['partial', 'No consta en su web pública'] },
   { feature: 'Varias sedes en un panel único', tentare: ['yes', 'Una sola suscripción y un solo acceso, con datos aislados por sede (plan Cadena)'], them: ['yes', 'Plan para varias sedes y franquicias, según su web'] },
   { feature: 'Soporte en español', tentare: ['yes', 'Nativo en castellano'], them: ['yes', 'Disponible, según su web'] },
@@ -43,19 +43,19 @@ const ROWS: ComparativaRow[] = [
 const FAQ = [
   {
     q: '¿Cuánto cuesta Glofox?',
-    a: 'Su web anuncia planes desde 99 USD al mes, en dólares, y remite a pedir una demo para conocer el precio de cada nivel. Tentare publica sus tres planes en euros: Founding Studio gratis (hasta 150 reservas al mes; si pasas de ahí, 29 €/mes), Estudio 79 €/mes y Cadena 249 €/mes, IVA incluido.',
+    a: 'Su web anuncia planes desde 99 USD al mes, en dólares, y remite a pedir una demo para conocer el precio de cada nivel. Centra publica sus tres planes en euros: Founding Studio gratis (hasta 150 reservas al mes; si pasas de ahí, 29 €/mes), Estudio 79 €/mes y Cadena 249 €/mes, IVA incluido.',
   },
   {
     q: '¿Glofox tiene permanencia?',
-    a: 'No consta en su web pública. Si estás valorando contratarlo, pregúntales por escrito la duración del contrato y las condiciones de baja. Tentare no tiene permanencia: se paga mes a mes.',
+    a: 'No consta en su web pública. Si estás valorando contratarlo, pregúntales por escrito la duración del contrato y las condiciones de baja. Centra no tiene permanencia: se paga mes a mes.',
   },
   {
     q: '¿Glofox gestiona cada reformer por separado?',
-    a: 'No consta en su web pública que reserve una máquina concreta dentro de una misma sesión; sí describe aforo y reglas por clase. En Tentare cada alumna reserva su reformer si la sala tiene sus puestos definidos, y la lista de espera es por clase.',
+    a: 'No consta en su web pública que reserve una máquina concreta dentro de una misma sesión; sí describe aforo y reglas por clase. En Centra cada alumna reserva su reformer si la sala tiene sus puestos definidos, y la lista de espera es por clase.',
   },
   {
-    q: '¿Puedo pasar mis datos de Glofox a Tentare?',
-    a: 'Sí, con el importador de Tentare: te enseña un acta con lo importado antes de guardar nada y puedes deshacerlo con un botón. Conviene exportar antes tus clientas, bonos y reservas desde Glofox.',
+    q: '¿Puedo pasar mis datos de Glofox a Centra?',
+    a: 'Sí, con el importador de Centra: te enseña un acta con lo importado antes de guardar nada y puedes deshacerlo con un botón. Conviene exportar antes tus clientas, bonos y reservas desde Glofox.',
   },
 ];
 
@@ -64,7 +64,7 @@ const RESUMEN: ResumenCompetidor = {
   precio: 'Desde 99 USD/mes según su web, en dólares; para el resto remite a una demo',
   permanencia: 'No consta en su web pública',
   prueba: 'No consta en su web pública',
-  respuesta: <>Glofox está pensado para gimnasios y centros de fitness con volumen, y su web no detalla la gestión por reformer ni la sustitución de instructoras. Para un estudio de Pilates en España pesan además el precio en dólares y que no consta su permanencia. Tentare publica sus tres planes en euros, sin permanencia, y gestiona cada reformer y las bajas de instructoras.</>,
+  respuesta: <>Glofox está pensado para gimnasios y centros de fitness con volumen, y su web no detalla la gestión por reformer ni la sustitución de instructoras. Para un estudio de Pilates en España pesan además el precio en dólares y que no consta su permanencia. Centra publica sus tres planes en euros, sin permanencia, y gestiona cada reformer y las bajas de instructoras.</>,
 };
 
 const ANALISIS: SeccionAnalisis[] = [
@@ -73,7 +73,7 @@ const ANALISIS: SeccionAnalisis[] = [
     cuerpo: (
       <>
         <p>Glofox anuncia planes desde 99 USD al mes y, para saber el precio de cada nivel, remite a pedir una demo. Está en dólares, así que lo que pagas en euros depende del cambio y de las condiciones que te den por escrito.</p>
-        <p>Pide tres cosas: la cuota mensual con impuestos, la duración mínima del contrato y qué incluye cada nivel (app propia, varias sedes, integraciones). En Tentare los tres planes están publicados en <Link href="/precios">/precios</Link>: Founding Studio gratis (hasta 150 reservas al mes, 29 €/mes si pasas de ahí, y con la app con tu marca), Estudio 79 €/mes y Cadena 249 €/mes, IVA incluido y sin permanencia.</p>
+        <p>Pide tres cosas: la cuota mensual con impuestos, la duración mínima del contrato y qué incluye cada nivel (app propia, varias sedes, integraciones). En Centra los tres planes están publicados en <Link href="/precios">/precios</Link>: Founding Studio gratis (hasta 150 reservas al mes, 29 €/mes si pasas de ahí, y con la app con tu marca), Estudio 79 €/mes y Cadena 249 €/mes, IVA incluido y sin permanencia.</p>
       </>
     ),
   },
@@ -81,16 +81,16 @@ const ANALISIS: SeccionAnalisis[] = [
     titulo: 'Lo que cambia en un estudio con reformers',
     cuerpo: (
       <>
-        <p>En un estudio de reformer no vendes clases: vendes una máquina a una hora. Tentare gestiona cada sala con su aforo y cada reformer con su plaza, con <Link href="/funcionalidades/plazas-fijas">plazas fijas</Link> para las alumnas de siempre y <Link href="/funcionalidades/lista-de-espera">lista de espera</Link> en cada clase.</p>
-        <p>Cuando una instructora avisa de que no puede, <Link href="/funcionalidades/sustituciones">Tentare busca quién la cubre</Link> según su disponibilidad, la contacta y avisa a las alumnas del cambio.</p>
+        <p>En un estudio de reformer no vendes clases: vendes una máquina a una hora. Centra gestiona cada sala con su aforo y cada reformer con su plaza, con <Link href="/funcionalidades/plazas-fijas">plazas fijas</Link> para las alumnas de siempre y <Link href="/funcionalidades/lista-de-espera">lista de espera</Link> en cada clase.</p>
+        <p>Cuando una instructora avisa de que no puede, <Link href="/funcionalidades/sustituciones">Centra busca quién la cubre</Link> según su disponibilidad, la contacta y avisa a las alumnas del cambio.</p>
       </>
     ),
   },
   {
-    titulo: 'Cómo cambiarte de Glofox a Tentare',
+    titulo: 'Cómo cambiarte de Glofox a Centra',
     cuerpo: (
       <>
-        <p>El importador de Tentare lee las exportaciones de otras plataformas. Antes de guardar nada te enseña un acta con lo que va a entrar, y si algo no cuadra lo deshaces con un botón. Más detalle en <Link href="/soluciones/cambiar-de-software">cambiarte de software</Link>.</p>
+        <p>El importador de Centra lee las exportaciones de otras plataformas. Antes de guardar nada te enseña un acta con lo que va a entrar, y si algo no cuadra lo deshaces con un botón. Más detalle en <Link href="/soluciones/cambiar-de-software">cambiarte de software</Link>.</p>
         <p>Lo único que ninguna plataforma puede pasarte son las tarjetas guardadas de tus alumnas: cada una la vuelve a introducir la primera vez que paga.</p>
       </>
     ),
@@ -103,11 +103,11 @@ export default function TentareVsGlofoxPage() {
       name="Glofox"
       slug="tentare-vs-glofox"
       logo={{ src: '/comparativa/logos/glofox.svg', alt: 'Logo de Glofox', height: 24, width: 120 }}
-      intro={<>Glofox es una plataforma irlandesa de gestión para gimnasios y centros de fitness. Para un <strong style={{ color: 'var(--w-texto)' }}>estudio de Pilates en España</strong>, Tentare te deja saber el precio antes de hablar con nadie, gestiona cada reformer y cubre las bajas de las instructoras.</>}
+      intro={<>Glofox es una plataforma irlandesa de gestión para gimnasios y centros de fitness. Para un <strong style={{ color: 'var(--w-texto)' }}>estudio de Pilates en España</strong>, Centra te deja saber el precio antes de hablar con nadie, gestiona cada reformer y cubre las bajas de las instructoras.</>}
       resumen={RESUMEN}
       rows={ROWS}
       analisis={ANALISIS}
-      veredicto={<>Si tu estudio es de Pilates con reformers y equipo de instructoras, Tentare encaja mejor: precio en euros publicado, sin permanencia, plaza por reformer y sustituciones. Glofox puede tener sentido si gestionas un centro de fitness de más volumen y ya trabajas con su ecosistema.</>}
+      veredicto={<>Si tu estudio es de Pilates con reformers y equipo de instructoras, Centra encaja mejor: precio en euros publicado, sin permanencia, plaza por reformer y sustituciones. Glofox puede tener sentido si gestionas un centro de fitness de más volumen y ya trabajas con su ecosistema.</>}
       footnote="Basado en la información pública de Glofox (www.glofox.com) a 29 de septiembre de 2026. «No consta» significa que su web pública no lo indica, no que no exista. Las funciones y precios cambian: verifica siempre con el proveedor."
       faq={FAQ}
     />

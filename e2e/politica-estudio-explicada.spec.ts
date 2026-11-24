@@ -299,7 +299,7 @@ test('Sustituciones, recepción: lo que pasa y quién lo decide, sin interruptor
   await page.goto('/sustituciones');
 
   await expect(page.getByText(
-    'Tentare avisa a sus clientes por email y en su app cuando se cubre, se mueve o se cancela una clase. Lo decide la propietaria o la gerencia.',
+    'Centra avisa a sus clientes por email y en su app cuando se cubre, se mueve o se cancela una clase. Lo decide la propietaria o la gerencia.',
   )).toBeVisible({ timeout: 30_000 });
   await expect(interruptorAvisar(page)).toHaveCount(0);
   // El marco del panel tiene su propio enlace de cuenta a /configuracion; lo que

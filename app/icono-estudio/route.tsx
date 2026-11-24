@@ -3,7 +3,7 @@ import { inicialDe, coloresMonograma, tamanoValido, logoServible } from '@/lib/m
 
 // El icono cuadrado de un estudio a un tamaño exacto: la pestaña, el icono de
 // iOS y el de la app instalada. Por orden: el icono que subió (`icono=`), su
-// logo sobre su color (`logo=`) o la inicial de su nombre. Nunca el de Tentare.
+// logo sobre su color (`logo=`) o la inicial de su nombre. Nunca el de Centra.
 // Ver `urlIconoEstudio` en lib/monograma-estudio.ts para el porqué completo.
 //
 // Los datos van EN LA URL (inicial + color ya resueltos), no un id de
@@ -96,7 +96,7 @@ export async function GET(req: Request) {
   // Sin icono, con logo: SU logo sobre su color, no una inicial. Es lo que
   // hace que la app instalada en el móvil de su alumna lleve la marca correcta
   // a los tamaños exactos que pide un instalador de Android — antes, el único
-  // candidato de 192/512 era el icono de Tentare. El color de fondo se queda
+  // candidato de 192/512 era el icono de Centra. El color de fondo se queda
   // aquí a propósito: un logo en blanco sobre transparente, sobre blanco,
   // desaparecería.
   const logo = searchParams.get('logo');

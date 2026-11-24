@@ -104,7 +104,7 @@ test('Configuración › Tu panel: «Tus módulos» da paso al enlace a Módulos
   const fila = page.getByTestId('fila-modulos');
   await expect(fila).toHaveAttribute('href', '/explorar-funciones', { timeout: 60_000 });
   await expect(fila).toContainText(/\d+ de \d+ activos/);
-  // Aunque «Tu Tentare» esté encendido para el estudio, su lista no sale: la sustituye Módulos.
+  // Aunque «Tu Centra» esté encendido para el estudio, su lista no sale: la sustituye Módulos.
   await expect(page.getByTestId('tu-tentare')).toHaveCount(0);
 
   await page.locator('#menu-del-panel').click();

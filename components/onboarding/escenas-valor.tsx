@@ -41,7 +41,7 @@ function AntesDespues({
   despues: React.ReactNode;
   activa: boolean;
   pie: string;
-  /** Cuando la hay, el panel «Con Tentare» enseña una CAPTURA REAL del producto
+  /** Cuando la hay, el panel «Con Centra» enseña una CAPTURA REAL del producto
    *  en vez de filas de texto. Se generan con `capturas-onboarding.mjs` contra
    *  el build, así que no pueden enseñar una pantalla que ya no existe — y hay
    *  que regenerarlas cuando esa pantalla cambie. */
@@ -71,7 +71,7 @@ function AntesDespues({
           transition: `transform 520ms ${T}, opacity 380ms linear`,
         }}
       >
-        <Panel etiqueta="Con Tentare" tono="despues" ajustada={!!captura}>
+        <Panel etiqueta="Con Centra" tono="despues" ajustada={!!captura}>
           {captura ? (
             // `<img>` y no next/image: va dentro de un panel de ancho fijo, ya
             // está servida al tamaño justo, y no necesita el runtime de
@@ -137,7 +137,7 @@ function Suelto({ texto, meta }: { texto: string; meta: string }) {
   );
 }
 
-/** Fila del panel «Con Tentare»: lo mismo, ya resuelto. */
+/** Fila del panel «Con Centra»: lo mismo, ya resuelto. */
 function Resuelto({ texto, meta }: { texto: string; meta: string }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '4px 0' }}>

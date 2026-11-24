@@ -121,7 +121,7 @@ test.describe('Quien no lleva la caja no ve la caja', () => {
   });
 
   test('la instructora ya no llega al panel: acaba en la app de su estudio, sin ver la caja', async ({ page }) => {
-    // Tentare Core se retiró (14-sep-2026): el panel entero se sustituye por la
+    // Centra Core se retiró (14-sep-2026): el panel entero se sustituye por la
     // puerta a la app, así que la caja ni siquiera llega a pintarse.
     await mockBackend(page, { verRecibos: false });
     await seedSesion(page, UID_INSTRUCTORA, 'marta@example.com');

@@ -15,7 +15,7 @@ export default function Contenido() {
       </AyudaAntesDeEmpezar>
 
       <p>
-        En cuanto avisa, Tentare busca candidatas entre el resto de tu equipo según su disponibilidad y su afinidad
+        En cuanto avisa, Centra busca candidatas entre el resto de tu equipo según su disponibilidad y su afinidad
         con ese tipo de clase (quién suele dar clases similares, a horas parecidas) y las ordena. Según el modo,
         las contacta ella sola —y si una no responde a tiempo, pasa a la siguiente— o espera tu visto bueno para
         avisar a cada una, y si una no contesta o dice que no, te lo cuenta para que elijas a la siguiente.

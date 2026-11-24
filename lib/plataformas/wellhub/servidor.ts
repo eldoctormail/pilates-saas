@@ -245,7 +245,7 @@ export async function sincronizarReservaWellhub(
 /** Sin respuesta útil: lo reintenta la próxima pasada. Si son nuestras credenciales, que lo vea alguien ya. */
 function sinRespuesta(status: number, reservaId: string): 'pendiente' {
   if (status === 401 || status === 403) {
-    Sentry.captureMessage('[wellhub] Wellhub rechaza las credenciales de Tentare', {
+    Sentry.captureMessage('[wellhub] Wellhub rechaza las credenciales de Centra', {
       level: 'error', tags: { area: 'plataformas', plataforma: 'wellhub' }, extra: { reservaId, status }, fingerprint: ['wellhub-credenciales'],
     });
   }
@@ -416,7 +416,7 @@ export async function resolverCheckinWellhub(admin: SupabaseClient, cred: Creden
     const intentos = (ck.intentos as number) + 1;
     if (r === 'sin-checkin' && intentos >= INTENTOS_SIN_CHECKIN) { await cerrar('SIN_CHECKIN'); return; }
     if (r === 'sin-permiso') {
-      Sentry.captureMessage('[wellhub] Wellhub rechaza las credenciales de Tentare al validar', { level: 'error', tags: { area: 'plataformas', plataforma: 'wellhub' } });
+      Sentry.captureMessage('[wellhub] Wellhub rechaza las credenciales de Centra al validar', { level: 'error', tags: { area: 'plataformas', plataforma: 'wellhub' } });
     }
     await admin.from('plataforma_checkins').update({ intentos }).eq('id', ck.id).eq('estado', 'PENDIENTE');
     return;

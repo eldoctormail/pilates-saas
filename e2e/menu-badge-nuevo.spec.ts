@@ -1,7 +1,7 @@
 import { test, expect, type Page, type Route } from '@playwright/test';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Badge «NUEVO» del menú lateral: Tentare marca una entrada desde /interno
+// Badge «NUEVO» del menú lateral: Centra marca una entrada desde /interno
 // (tabla `menu_novedades`) y a la propietaria le sale un distintivo al lado.
 // Puramente manual: no caduca y no se apaga al visitar la sección, la única
 // forma de quitarlo es borrar la fila desde /interno.

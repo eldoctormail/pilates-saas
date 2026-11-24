@@ -15,7 +15,7 @@ export const CAMPOS_REQUERIDOS: Record<string, readonly string[]> = {
   // porque no basta con que existan (ver validarDatosEmail).
   recibo: ['concepto'],
   // Autodefensiva: todos sus campos tienen default o van con `{x && ...}`, y el
-  // asunto ya usa `?? 'Tentare'`. Con data = {} el email sale íntegro.
+  // asunto ya usa `?? 'Centra'`. Con data = {} el email sale íntegro.
   bienvenida: [],
   // El mensaje es el email entero; el título es el asunto.
   automatizacion: ['titulo', 'mensaje'],
@@ -39,7 +39,7 @@ export const CAMPOS_REQUERIDOS: Record<string, readonly string[]> = {
 };
 
 // `null` cuenta como ausente: los defaults de parámetro de las plantillas
-// (`estudioNombre = 'Tentare'`) sólo se disparan con `undefined`, así que un
+// (`estudioNombre = 'Centra'`) sólo se disparan con `undefined`, así que un
 // null del JSON se cuela hasta el render.
 function vacio(v: unknown): boolean {
   return v === undefined || v === null || (typeof v === 'string' && v.trim() === '');

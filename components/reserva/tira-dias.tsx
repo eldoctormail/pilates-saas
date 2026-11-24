@@ -110,7 +110,7 @@ export function TiraDias({
           const activo = key === seleccionado;
           const n = conteos.get(key) ?? 0;
           const hayClases = n > 0;
-          // Diseño "Tentare Portal Reservas": HOY y MAÑANA llevan etiqueta
+          // Diseño "Centra Portal Reservas": HOY y MAÑANA llevan etiqueta
           // literal, no su abreviatura de día de la semana — las dos únicas
           // excepciones de la tira, el resto sigue en DOW_CORTO.
           const etiqueta = key === hoyKey ? 'HOY' : key === mananaKey ? 'MAÑ' : DOW_CORTO[d.getDay()];

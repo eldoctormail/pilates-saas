@@ -103,8 +103,8 @@ test.describe('En el portátil', () => {
     await expect(resumen(page, 'reservas')).toHaveText('Cancelar 12 h · lista de espera al momento');
     await expect(resumen(page, 'cobros')).toHaveText('IVA 21 %');
     // El tema sembrado trae el oliva de fábrica.
-    await expect(resumen(page, 'marca')).toHaveText('Sin logo · color de Tentare');
-    await expect(resumen(page, 'web')).toHaveText('Fuera de Tentare Network');
+    await expect(resumen(page, 'marca')).toHaveText('Sin logo · color de Centra');
+    await expect(resumen(page, 'web')).toHaveText('Fuera de Centra Network');
     // Lo que no se sabe no se inventa: la motivación se carga al abrir su sección.
     await expect(resumen(page, 'motivacion')).toHaveAttribute('data-resumen', 'descripcion');
 

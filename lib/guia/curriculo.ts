@@ -5,7 +5,7 @@
 // Lo que había respondía a «¿qué te falta configurar?» y lo respondía bien: 17
 // pasos, cada uno con su `done` derivado de datos reales. Lo que no respondía
 // —ni intentaba— es «¿qué es esto y por qué me importa?». Una propietaria que
-// nunca ha usado Tentare entraba directamente a una lista de tareas de un
+// nunca ha usado Centra entraba directamente a una lista de tareas de un
 // producto que todavía no conocía.
 //
 // Esto es la capa que faltaba. NO duplica el progreso: cada capítulo declara de
@@ -111,19 +111,19 @@ export const CAPITULOS: CapituloGuia[] = [
   {
     id: 'conoce-tentare',
     numero: '01',
-    titulo: 'Conoce Tentare',
+    titulo: 'Conoce Centra',
     resumen: 'El mapa antes que el camino: cómo está organizado y dónde está cada cosa.',
     nivel: 'esencial',
     minutos: 4,
     queAprendes: [
-      'Qué hace Tentare por ti y qué sigue siendo cosa tuya',
+      'Qué hace Centra por ti y qué sigue siendo cosa tuya',
       'Las seis zonas del panel y qué vive en cada una',
       'Por dónde empezar y qué puedes dejar para más adelante',
     ],
     porQue: 'Cinco minutos aquí te ahorran buscar a ciegas durante semanas.',
     apartados: [
       {
-        titulo: 'Qué es Tentare',
+        titulo: 'Qué es Centra',
         texto: 'Es el sitio donde vive tu estudio: tu horario, tus clientes, sus bonos, sus reservas y su dinero. Tú decides las reglas una vez; a partir de ahí tus clientes reservan solas desde su móvil y tú dejas de llevar la cuenta en una libreta o en un grupo de WhatsApp.',
       },
       {
@@ -180,7 +180,7 @@ export const CAPITULOS: CapituloGuia[] = [
       },
       {
         titulo: 'Cerrar por vacaciones',
-        texto: 'Si cierras unos días, dilo en «Cerrar el centro», dentro de Mi estudio. Tentare cancela las clases de esas fechas, avisa a quien tuviera reserva, devuelve las sesiones de bono y —esto es lo que nadie hace a mano— alarga la caducidad de los bonos y las recuperaciones de todas tus clientes tantos días como dure el cierre.',
+        texto: 'Si cierras unos días, dilo en «Cerrar el centro», dentro de Mi estudio. Centra cancela las clases de esas fechas, avisa a quien tuviera reserva, devuelve las sesiones de bono y —esto es lo que nadie hace a mano— alarga la caducidad de los bonos y las recuperaciones de todas tus clientes tantos días como dure el cierre.',
       },
     ],
     acciones: [
@@ -188,7 +188,7 @@ export const CAPITULOS: CapituloGuia[] = [
       { label: 'Datos y textos de mi estudio', href: '/configuracion?tab=estudio' },
       { label: 'Mi horario de apertura', href: '/configuracion?tab=estudio#horario' },
     ],
-    consejo: 'Si bajas la capacidad de una sala, Tentare te avisa de las clases futuras que se quedarían sobrevendidas antes de guardar. Léelo: esos lugares ya están vendidos.',
+    consejo: 'Si bajas la capacidad de una sala, Centra te avisa de las clases futuras que se quedarían sobrevendidas antes de guardar. Léelo: esos lugares ya están vendidos.',
     pasos: ['salas'],
   },
 
@@ -204,7 +204,7 @@ export const CAPITULOS: CapituloGuia[] = [
       'Los cuatro roles y qué ve cada uno',
       'Por qué la disponibilidad de tus instructoras hace trabajar al buscador de sustitutas',
       'Cómo se gestionan vacaciones y bajas',
-      'Cómo sabe Tentare qué clases dio cada una y a qué hora (contratada o autónoma)',
+      'Cómo sabe Centra qué clases dio cada una y a qué hora (contratada o autónoma)',
     ],
     porQue: 'Sin al menos una instructora no puedes programar ninguna clase: toda clase necesita quien la dé.',
     apartados: [
@@ -218,7 +218,7 @@ export const CAPITULOS: CapituloGuia[] = [
       },
       {
         titulo: 'Su disponibilidad, y por qué merece la pena',
-        texto: 'Cada instructora puede decir en qué franjas puede trabajar. Esto alimenta al buscador de sustitutas: cuando alguien no pueda dar una clase, Tentare propone quién puede cubrirla explicándote por qué —«ya ha dado esta clase 4 veces», «este mes va holgada de horas»—, en vez de dejarte llamando una por una.',
+        texto: 'Cada instructora puede decir en qué franjas puede trabajar. Esto alimenta al buscador de sustitutas: cuando alguien no pueda dar una clase, Centra propone quién puede cubrirla explicándote por qué —«ya ha dado esta clase 4 veces», «este mes va holgada de horas»—, en vez de dejarte llamando una por una.',
       },
       {
         titulo: 'Que la rellene ella, no tú',
@@ -315,7 +315,7 @@ export const CAPITULOS: CapituloGuia[] = [
       },
       {
         titulo: 'Mover una clase suelta',
-        texto: 'En el calendario, desde el ordenador o la tablet, puedes arrastrar una clase: en el Día, a otra hora o a otra sala; en la Semana, a otro día a la misma hora (en el móvil, ábrela y, en su «⋯», «Editar esta clase»). La duración se mantiene, y si al soltarla chocara con otra clase en la misma sala, Tentare te lo dice antes de guardar. Dos clases no pueden solapar en la misma sala: eso lo impide la propia base de datos, no un aviso que se pueda ignorar.',
+        texto: 'En el calendario, desde el ordenador o la tablet, puedes arrastrar una clase: en el Día, a otra hora o a otra sala; en la Semana, a otro día a la misma hora (en el móvil, ábrela y, en su «⋯», «Editar esta clase»). La duración se mantiene, y si al soltarla chocara con otra clase en la misma sala, Centra te lo dice antes de guardar. Dos clases no pueden solapar en la misma sala: eso lo impide la propia base de datos, no un aviso que se pueda ignorar.',
       },
       {
         titulo: 'Cancelar una clase',
@@ -348,7 +348,7 @@ export const CAPITULOS: CapituloGuia[] = [
       'Qué ve un cliente que entra por primera vez',
       'Cómo meter el calendario en tu propia web',
     ],
-    porQue: 'Es el momento en que Tentare empieza a trabajar para ti en vez de al revés.',
+    porQue: 'Es el momento en que Centra empieza a trabajar para ti en vez de al revés.',
     apartados: [
       {
         titulo: 'Ya tienes app, aunque no lo sepas',
@@ -476,7 +476,7 @@ export const CAPITULOS: CapituloGuia[] = [
     nivel: 'recomendado',
     minutos: 8,
     queAprendes: [
-      'Cómo conectar tu cuenta y por qué el dinero no pasa por Tentare',
+      'Cómo conectar tu cuenta y por qué el dinero no pasa por Centra',
       'Las formas de cobrar: internet, tarjeta guardada, efectivo, Bizum, recibo bancario',
       'Dónde se ve lo que has cobrado y lo que te deben',
     ],
@@ -484,7 +484,7 @@ export const CAPITULOS: CapituloGuia[] = [
     apartados: [
       {
         titulo: 'El dinero es tuyo desde el primer momento',
-        texto: 'Al conectar Stripe, los cobros entran en tu propia cuenta, no en la de Tentare. No hay que introducir ninguna clave: se hace con un botón y se completa en la web de Stripe con tus datos y tu cuenta bancaria.',
+        texto: 'Al conectar Stripe, los cobros entran en tu propia cuenta, no en la de Centra. No hay que introducir ninguna clave: se hace con un botón y se completa en la web de Stripe con tus datos y tu cuenta bancaria.',
       },
       {
         titulo: 'Cuando un cliente compra por internet',
@@ -492,7 +492,7 @@ export const CAPITULOS: CapituloGuia[] = [
       },
       {
         titulo: 'Cobrar en el mostrador',
-        texto: 'Efectivo, Bizum, transferencia o datáfono: marcas el recibo como cobrado con el método que fuera y queda registrado igual. Tentare no te obliga a cobrar por internet.',
+        texto: 'Efectivo, Bizum, transferencia o datáfono: marcas el recibo como cobrado con el método que fuera y queda registrado igual. Centra no te obliga a cobrar por internet.',
       },
       {
         titulo: 'Quién me debe',
@@ -517,7 +517,7 @@ export const CAPITULOS: CapituloGuia[] = [
     nivel: 'recomendado',
     minutos: 8,
     queAprendes: [
-      'Cómo conectar tu cuenta de Mercado Pago y por qué el dinero no pasa por Tentare',
+      'Cómo conectar tu cuenta de Mercado Pago y por qué el dinero no pasa por Centra',
       'Las formas de cobrar: Mercado Pago, efectivo, tarjeta en el posnet y transferencia',
       'Dónde se ve lo que has cobrado y lo que te deben',
     ],
@@ -525,7 +525,7 @@ export const CAPITULOS: CapituloGuia[] = [
     apartados: [
       {
         titulo: 'El dinero es tuyo desde el primer momento',
-        texto: 'Al conectar Mercado Pago, los cobros entran en tu propia cuenta, no en la de Tentare. Se conecta en Apps e integraciones › Mercado Pago, con el Access Token y la clave secreta de tu aplicación de Mercado Pago.',
+        texto: 'Al conectar Mercado Pago, los cobros entran en tu propia cuenta, no en la de Centra. Se conecta en Apps e integraciones › Mercado Pago, con el Access Token y la clave secreta de tu aplicación de Mercado Pago.',
       },
       {
         titulo: 'Cuando un cliente compra por internet',
@@ -533,7 +533,7 @@ export const CAPITULOS: CapituloGuia[] = [
       },
       {
         titulo: 'Cobrar en el mostrador',
-        texto: 'Efectivo, tarjeta en el posnet, transferencia o el QR de Mercado Pago: marcas el recibo como cobrado con el método que fuera y queda registrado igual. Tentare no te obliga a cobrar por internet.',
+        texto: 'Efectivo, tarjeta en el posnet, transferencia o el QR de Mercado Pago: marcas el recibo como cobrado con el método que fuera y queda registrado igual. Centra no te obliga a cobrar por internet.',
       },
       {
         titulo: 'Quién me debe',
@@ -557,7 +557,7 @@ export const CAPITULOS: CapituloGuia[] = [
     id: 'tus-alumnas',
     numero: '10',
     titulo: 'Tus clientes',
-    resumen: 'Su ficha, su historial y todo lo que Tentare sabe de cada persona que entrena contigo.',
+    resumen: 'Su ficha, su historial y todo lo que Centra sabe de cada persona que entrena contigo.',
     nivel: 'recomendado',
     minutos: 7,
     queAprendes: [
@@ -585,7 +585,7 @@ export const CAPITULOS: CapituloGuia[] = [
       },
       {
         titulo: 'Consentimientos',
-        texto: 'Tentare lleva tres por separado: las condiciones del estudio, los datos de salud y el marketing. Sin el de marketing, ninguna campaña ni automatización comercial alcanza a esa persona. No es burocracia: es lo que te protege.',
+        texto: 'Centra lleva tres por separado: las condiciones del estudio, los datos de salud y el marketing. Sin el de marketing, ninguna campaña ni automatización comercial alcanza a esa persona. No es burocracia: es lo que te protege.',
       },
     ],
     acciones: [
@@ -650,7 +650,7 @@ export const CAPITULOS: CapituloGuia[] = [
     id: 'facturar',
     numero: '12',
     titulo: 'Facturas y contabilidad',
-    resumen: 'Si Tentare emite tus facturas o las haces fuera, tus datos fiscales y el cierre para tu gestoría.',
+    resumen: 'Si Centra emite tus facturas o las haces fuera, tus datos fiscales y el cierre para tu gestoría.',
     nivel: 'recomendado',
     minutos: 6,
     queAprendes: [
@@ -659,7 +659,7 @@ export const CAPITULOS: CapituloGuia[] = [
       'Cuándo se emite una factura sola y cuándo la haces tú',
       'Cómo se le manda todo a la gestoría',
     ],
-    porQue: 'Tentare emite la factura de cada cobro. Lo único que necesita es tu NIF. Veri*Factu (huella, QR y envío a la AEAT) va aparte y está desactivado de entrada.',
+    porQue: 'Centra emite la factura de cada cobro. Lo único que necesita es tu NIF. Veri*Factu (huella, QR y envío a la AEAT) va aparte y está desactivado de entrada.',
     apartados: [
       {
         titulo: 'Con o sin Veri*Factu',
@@ -667,7 +667,7 @@ export const CAPITULOS: CapituloGuia[] = [
       },
       {
         titulo: 'Lo que hace falta',
-        texto: 'Tu NIF y tu razón social, en la misma pantalla, en «Datos fiscales e IVA». El NIF se valida: uno de relleno no cuela. Sin él Tentare cobra igual pero no emite ninguna factura, y te lo avisa en rojo en Facturas y en lo que espera tu visto bueno.',
+        texto: 'Tu NIF y tu razón social, en la misma pantalla, en «Datos fiscales e IVA». El NIF se valida: uno de relleno no cuela. Sin él Centra cobra igual pero no emite ninguna factura, y te lo avisa en rojo en Facturas y en lo que espera tu visto bueno.',
       },
       {
         titulo: 'Se emiten solas',
@@ -698,16 +698,16 @@ export const CAPITULOS: CapituloGuia[] = [
     nivel: 'recomendado',
     minutos: 6,
     queAprendes: [
-      'Cómo se conecta Tentare con ARCA',
+      'Cómo se conecta Centra con ARCA',
       'Qué factura sale: C, B o A',
       'Cómo se emite desde un recibo cobrado',
       'Qué le pasás a tu contador',
     ],
-    porQue: 'Tentare emite la factura electrónica de ARCA, con CAE y QR, desde cada recibo cobrado. Se configura una vez, con tu CUIT, un punto de venta y un certificado.',
+    porQue: 'Centra emite la factura electrónica de ARCA, con CAE y QR, desde cada recibo cobrado. Se configura una vez, con tu CUIT, un punto de venta y un certificado.',
     apartados: [
       {
         titulo: 'Conectar con ARCA',
-        texto: 'En Configuración → Cobros y facturas → «Factura electrónica de ARCA» cargás tu CUIT, tu condición (monotributo o responsable inscripto) y un punto de venta «RECE para aplicativo y web services». Tentare genera el pedido de certificado: lo subís a ARCA y pegás el certificado que te devuelve. Empezá en el entorno de prueba.',
+        texto: 'En Configuración → Cobros y facturas → «Factura electrónica de ARCA» cargás tu CUIT, tu condición (monotributo o responsable inscripto) y un punto de venta «RECE para aplicativo y web services». Centra genera el pedido de certificado: lo subís a ARCA y pegás el certificado que te devuelve. Empezá en el entorno de prueba.',
       },
       {
         titulo: 'Qué factura sale',
@@ -749,7 +749,7 @@ export const CAPITULOS: CapituloGuia[] = [
       'Pasar lista y qué desencadena',
       'Qué hacer cuando una instructora no puede venir',
     ],
-    porQue: 'Cuando el estudio ya rueda, Tentare deja de ser algo que configuras y pasa a ser algo que usas cinco minutos al día.',
+    porQue: 'Cuando el estudio ya rueda, Centra deja de ser algo que configuras y pasa a ser algo que usas cinco minutos al día.',
     apartados: [
       {
         titulo: 'Tu inicio',
@@ -761,7 +761,7 @@ export const CAPITULOS: CapituloGuia[] = [
       },
       {
         titulo: 'Una baja de última hora',
-        texto: 'La instructora avisa desde su móvil sin entrar al panel, o lo marcas tú. Tentare propone quién puede cubrirla y por qué, y según cómo lo tengas configurado las contacta solo o espera tu visto bueno.',
+        texto: 'La instructora avisa desde su móvil sin entrar al panel, o lo marcas tú. Centra propone quién puede cubrirla y por qué, y según cómo lo tengas configurado las contacta solo o espera tu visto bueno.',
       },
       {
         titulo: 'Rellenar un hueco',
@@ -789,7 +789,7 @@ export const CAPITULOS: CapituloGuia[] = [
     nivel: 'avanzado',
     minutos: 5,
     queAprendes: [
-      'Qué hace Tentare solo y qué dos automatizaciones merecen la pena desde el principio',
+      'Qué hace Centra solo y qué dos automatizaciones merecen la pena desde el principio',
       'Cómo se conecta WhatsApp',
       'Qué correos ven tus clientes y cómo cambiarlos',
     ],
@@ -797,7 +797,7 @@ export const CAPITULOS: CapituloGuia[] = [
     apartados: [
       {
         titulo: 'Lo que ya va solo',
-        texto: 'No tienes que encender nada para lo básico: Tentare recuerda cada clase a quien ha reservado, confirma las reservas, pasa el lugar libre a la lista de espera, avisa del bono que se acaba y reintenta los cobros que fallan. Las automatizaciones son para lo que depende de cómo trabajas tú.',
+        texto: 'No tienes que encender nada para lo básico: Centra recuerda cada clase a quien ha reservado, confirma las reservas, pasa el lugar libre a la lista de espera, avisa del bono que se acaba y reintenta los cobros que fallan. Las automatizaciones son para lo que depende de cómo trabajas tú.',
       },
       {
         titulo: 'Recuperar a quien no viene',

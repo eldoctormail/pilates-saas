@@ -13,9 +13,9 @@ export function StructuredData() {
   const videoObjectLd = {
     '@context': 'https://schema.org',
     '@type': 'VideoObject',
-    name: 'Tentare por dentro: el panel de un estudio de Pilates en 78 segundos',
+    name: 'Centra por dentro: el panel de un estudio de Pilates en 78 segundos',
     description:
-      'Tentare por dentro: la semana entera en el calendario, reservas online y los cobros del mes.',
+      'Centra por dentro: la semana entera en el calendario, reservas online y los cobros del mes.',
     thumbnailUrl: `${BASE_URL}/producto/tour-poster.jpg`,
     contentUrl: `${BASE_URL}/producto/tour.mp4`,
     uploadDate: '2026-09-17',

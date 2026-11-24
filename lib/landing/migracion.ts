@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// Qué se trae al cambiarse a Tentare (ronda 3 de la landing, 19-oct-2026).
+// Qué se trae al cambiarse a Centra (ronda 3 de la landing, 19-oct-2026).
 //
-// 21-oct-2026: fuera las «dos rutas». La segunda prometía que Tentare hacía la
+// 21-oct-2026: fuera las «dos rutas». La segunda prometía que Centra hacía la
 // migración por la propietaria, y nadie la hace (decisión del fundador). La
 // única vía es la real: el importador del panel, que hace ella misma.
 //
@@ -31,5 +31,5 @@ export const SE_LLEVA: string[] = [
 /** Lo que no viaja solo, dicho como la página lo dice. */
 export const NO_SE_LLEVA = {
   titulo: 'Las tarjetas guardadas',
-  texto: 'Ningún software puede leer la tarjeta que otro tiene guardada. Cada alumna la vuelve a introducir una vez, la primera vez que le cobres con Tentare.',
+  texto: 'Ningún software puede leer la tarjeta que otro tiene guardada. Cada alumna la vuelve a introducir una vez, la primera vez que le cobres con Centra.',
 } as const;

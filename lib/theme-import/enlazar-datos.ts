@@ -1,4 +1,4 @@
-// Enlaza datos REALES de Tentare en un tema importado — punto 12 del encargo:
+// Enlaza datos REALES de Centra en un tema importado — punto 12 del encargo:
 // «TEMA ORIGINAL + TENTARE DATA → THEME RENDERER», nunca reconstruir el tema
 // para meter el dato.
 //

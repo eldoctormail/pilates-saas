@@ -5,7 +5,7 @@ import { test, expect, type Page } from '@playwright/test';
 test.use({ timezoneId: 'Europe/Madrid' });
 
 // ─────────────────────────────────────────────────────────────────────────────
-// «Clase de prueba» (Tentare Widgets): la vista `?prueba=1` de /reservar.
+// «Clase de prueba» (Centra Widgets): la vista `?prueba=1` de /reservar.
 //
 // Lo que se vigila:
 //  - solo salen las clases que cubre la oferta, a su precio, con la regla

@@ -8,7 +8,7 @@ export default function Contenido() {
     <>
       <AyudaAntesDeEmpezar>
         Exporta tus clientes de tu software actual a un archivo .csv o .xlsx antes de empezar — no hace falta que
-        conectes ninguna cuenta ni des permisos a Tentare sobre tu plataforma anterior.
+        conectes ninguna cuenta ni des permisos a Centra sobre tu plataforma anterior.
       </AyudaAntesDeEmpezar>
 
       <AyudaPaso numero={1} titulo="Sube tu archivo">
@@ -21,7 +21,7 @@ export default function Contenido() {
       </AyudaPaso>
 
       <AyudaPaso numero={2} titulo="Revisa el mapeo de columnas">
-        <p>Tentare intenta emparejar tus columnas (nombre, email, teléfono…) automáticamente. Revísalas antes de continuar: es más rápido corregir un mapeo mal detectado ahora que arreglar cientos de fichas después.</p>
+        <p>Centra intenta emparejar tus columnas (nombre, email, teléfono…) automáticamente. Revísalas antes de continuar: es más rápido corregir un mapeo mal detectado ahora que arreglar cientos de fichas después.</p>
       </AyudaPaso>
 
       <AyudaPaso numero={3} titulo="Corrige lo que salga marcado">
@@ -31,7 +31,7 @@ export default function Contenido() {
       <AyudaResultado>
         Esta pantalla importa solo los datos del cliente. Si además quieres traer sus bonos y membresías activas, o
         sus clases fijas semanales, esta misma pantalla enlaza a esos dos importadores aparte — o, si vienes de otra
-        plataforma entera, prueba la migración automática (arrastras tus exports tal cual y Tentare los reconoce
+        plataforma entera, prueba la migración automática (arrastras tus exports tal cual y Centra los reconoce
         solos, con deshacer).
       </AyudaResultado>
     </>

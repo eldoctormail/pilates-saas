@@ -9,19 +9,19 @@ export default function Contenido() {
   return (
     <>
       <AyudaAntesDeEmpezar>
-        Tentare sabe cuándo trabaja tu equipo de dos maneras: la <strong>jornada</strong> (entrada y salida, lo que
+        Centra sabe cuándo trabaja tu equipo de dos maneras: la <strong>jornada</strong> (entrada y salida, lo que
         exige la ley a quien tiene contrato) y cada <strong>clase</strong> (si la dio y a qué hora empezó). No es la
         asistencia de los clientes: es el control horario de la instructora.
       </AyudaAntesDeEmpezar>
 
-      <h2 style={{ ...h2, marginTop: 4 }}>Primero, dile a Tentare cómo trabaja cada una</h2>
+      <h2 style={{ ...h2, marginTop: 4 }}>Primero, dile a Centra cómo trabaja cada una</h2>
       <p>
         En <strong>Equipo → Liquidaciones</strong>, en la tarjeta de cada instructora, elige su <strong>Relación</strong>:
       </p>
       <ul style={lista}>
         <li>
           <strong>Contratada</strong> — ficha su jornada, entrada y salida, desde su app. Si empieza una clase sin
-          haber fichado, Tentare le ficha la entrada y se lo dice. Las clases que caen dentro de su jornada cuentan
+          haber fichado, Centra le ficha la entrada y se lo dice. Las clases que caen dentro de su jornada cuentan
           como dadas sin que tenga que hacer nada.
         </li>
         <li>

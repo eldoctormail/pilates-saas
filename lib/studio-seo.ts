@@ -185,7 +185,7 @@ export const getStudioSeoResultado = cache(async (slug: string): Promise<Resulta
     // `global-error` (e2e/student-error-al-cargar-estudio.spec.ts).
     if (slug === 'tentare-no-disponible') return { estudio: null, causa: 'no-disponible' };
     return { estudio: {
-      id: 'studio-test', nombre: 'Tentare', ciudad: 'Málaga', direccion: 'Calle Test 1',
+      id: 'studio-test', nombre: 'Centra', ciudad: 'Málaga', direccion: 'Calle Test 1',
       // Configurable por el mismo motivo que `E2E_LOGO_URL` y
       // `E2E_PAGINA_OCULTA` de más abajo: el acento del estudio se inyecta en
       // SERVIDOR (`app/portal/[slug]/layout.tsx` → `acentoCssText`), así que

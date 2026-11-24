@@ -8,7 +8,7 @@
 // siguen con los valores de fábrica sin haberlos elegido: esto no los cambia,
 // los explica.
 //
-// Hasta el 15-sep iban en una lista («Cuando algo cambia, Tentare…»); desde las
+// Hasta el 15-sep iban en una lista («Cuando algo cambia, Centra…»); desde las
 // filas con cajón (v2), cada frase es la línea de consecuencia del cajón de su
 // regla (`tarjeta`), así que tiene que leerse SOLA y caber en una línea (≤ 120).
 //

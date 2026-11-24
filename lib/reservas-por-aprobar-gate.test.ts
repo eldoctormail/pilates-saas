@@ -7,7 +7,7 @@ import type { Rol } from './types';
 
 // Quién ve la tarjeta «reservas por aprobar» de la home.
 //
-// ⚠️ Esto NO puede ser un e2e. Desde #2013 (Tentare Core retirado) el panel no
+// ⚠️ Esto NO puede ser un e2e. Desde #2013 (Centra Core retirado) el panel no
 // monta /dashboard para una INSTRUCTORA con el rol resuelto: el shell pinta la
 // puerta a la app del estudio. Y mientras el rol carga, el rol mínimo también
 // es INSTRUCTOR. INSTRUCTOR es el único rol sin `puedeGestionarCalendario`,

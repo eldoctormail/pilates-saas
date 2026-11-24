@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getSupabaseAdmin } from '@/lib/db/supabase-admin';
 
 // CORS para los endpoints públicos que el bundle embebible (Modo B, script+div
-// sin iframe) llama desde el dominio del ESTUDIO, no desde el de Tentare — sin
+// sin iframe) llama desde el dominio del ESTUDIO, no desde el de Centra — sin
 // iframe no hay same-origin gratis. Nunca un wildcard: se refleja el Origin
 // solo si está en la lista blanca del estudio (studios.widget_dominios_autorizados).
 //

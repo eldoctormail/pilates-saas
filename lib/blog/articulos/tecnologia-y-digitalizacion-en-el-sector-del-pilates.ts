@@ -20,7 +20,7 @@ const articulo: ArticuloBlog = {
     '¿Qué datos públicos quieres citar? Cada cifra llevará su fuente y su fecha.',
     '¿Qué le piden las propietarias que el software actual no da?',
     '¿Qué mito del sector quieres desmontar?',
-    '¿Hay algo que Tentare no vaya a hacer y quieras decirlo?',
+    '¿Hay algo que Centra no vaya a hacer y quieras decirlo?',
   ],
 };
 

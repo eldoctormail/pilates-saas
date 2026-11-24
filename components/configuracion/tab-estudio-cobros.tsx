@@ -111,7 +111,7 @@ export function FormDomiciliaciones({ onGuardado }: PropsFormularioCajon) {
 // ── Devoluciones ─────────────────────────────────────────────────────────────
 // Apagadas de fábrica a propósito: mientras lo estén, en la ficha de la alumna
 // no aparece ningún botón de devolver, y el endpoint rechaza aunque se le llame
-// a mano. Se puede seguir devolviendo desde Stripe — Tentare se entera igual por
+// a mano. Se puede seguir devolviendo desde Stripe — Centra se entera igual por
 // el webhook. Es dinero: «Guardar» pregunta antes, con lo que va a pasar.
 
 type DevolucionesForm = { activos: boolean; plazo: string; soloSinUsar: boolean };
@@ -131,14 +131,14 @@ function confirmacion(antes: DevolucionesForm, ahora: Politica) {
   const politica = resumenDevoluciones(ahora) ?? '';
   if (!antes.activos && ahora.reembolsosActivos) {
     return {
-      titulo: '¿Permitir devolver desde Tentare?',
+      titulo: '¿Permitir devolver desde Centra?',
       descripcion: `Tú y recepción veréis «Devolver» en los pagos de cada cliente (${politica.toLowerCase()}). Cada devolución mueve dinero de verdad a su forma de pago original.`,
       textoConfirmar: 'Sí, permitirlo',
     };
   }
   if (antes.activos && !ahora.reembolsosActivos) {
     return {
-      titulo: '¿Dejar de devolver desde Tentare?',
+      titulo: '¿Dejar de devolver desde Centra?',
       descripcion: `Desaparece «Devolver» de las fichas. Podrás seguir devolviendo desde ${NOMBRE_PASARELA}.`,
       textoConfirmar: 'Sí, dejar de devolver',
     };
@@ -189,10 +189,10 @@ export function FormDevoluciones({ onGuardado }: PropsFormularioCajon) {
       <div className="space-y-5 pb-6">
         <div className="flex items-center justify-between gap-4">
           <div className="min-w-0">
-            <p className="text-sm font-medium text-foreground">Permitir devolver desde Tentare</p>
+            <p className="text-sm font-medium text-foreground">Permitir devolver desde Centra</p>
             <p className="text-sm text-muted-foreground text-pretty">Tú y recepción veis «Devolver» en sus pagos.</p>
           </div>
-          <Toggle on={form.activos} onChange={v => cambiar({ activos: v })} ariaLabel="Permitir devolver desde Tentare" />
+          <Toggle on={form.activos} onChange={v => cambiar({ activos: v })} ariaLabel="Permitir devolver desde Centra" />
         </div>
 
         {form.activos && (
@@ -630,19 +630,19 @@ export function FormAlCancelarCuota({ onGuardado }: PropsFormularioCajon) {
 
 // ── Facturación ──────────────────────────────────────────────────────────────
 //
-// Si Tentare emite una factura por cobro (con su registro Veri*Factu) o no
+// Si Centra emite una factura por cobro (con su registro Veri*Factu) o no
 // emite facturas y el estudio factura fuera. Por defecto, no (decisión del
 // fundador, 29-sep-2026). La base de datos es la que impide que nazca una
 // factura con el modo apagado (`reservar_numero_factura`), y la cadena de cada
 // estudio no se toca.
 //
-// ⚠️ Encenderlo exige el envío a la AEAT ya activado (30-sep-2026): Tentare solo
+// ⚠️ Encenderlo exige el envío a la AEAT ya activado (30-sep-2026): Centra solo
 // funciona como VERI*FACTU, así que no emite una factura cuyo registro no vaya a
 // enviarse (migración 20260930170000, lib/verifactu/facturacion-activa.ts). La
 // pantalla lo dice antes de que la base lo rechace. Apagarlo con el envío
 // activo se deja, pero avisando de la permanencia (art. 17.2).
 //
-// ⚠️ Los textos no prometen lo que no depende de Tentare: ni «cumple», ni el QR
+// ⚠️ Los textos no prometen lo que no depende de Centra: ni «cumple», ni el QR
 // (ver lib/factura-sello-cliente.ts). Solo lo que pasa de verdad al guardar.
 
 type FacturacionForm = { modo: ModoFacturacion };
@@ -662,7 +662,7 @@ const MODOS_FACTURACION: { valor: ModoFacturacion; titulo: string; descripcion: 
   },
 ];
 
-// Argentina: la factura legal es la electrónica de ARCA (con CAE) y Tentare no la
+// Argentina: la factura legal es la electrónica de ARCA (con CAE) y Centra no la
 // emite. Lo único que se ofrece es el comprobante interno numerado, que el PDF
 // rotula «Documento no válido como factura» (lib/factura-pdf.ts).
 const MODOS_FACTURACION_AR: typeof MODOS_FACTURACION = [
@@ -851,7 +851,7 @@ export function FormFacturacion({ onGuardado }: PropsFormularioCajon) {
       {!FUNCIONES_DE_ESPANA && (
         <div className="mb-6 rounded-xl border border-border bg-muted/40 px-4 py-3 text-sm">
           <p className="text-foreground text-pretty">
-            En Argentina, la factura legal es la electrónica de ARCA, con su CAE. Tentare la emite desde cada recibo cobrado cuando configurás «Factura electrónica de ARCA», más abajo en esta misma pantalla.
+            En Argentina, la factura legal es la electrónica de ARCA, con su CAE. Centra la emite desde cada recibo cobrado cuando configurás «Factura electrónica de ARCA», más abajo en esta misma pantalla.
           </p>
           <p className="mt-2 text-muted-foreground text-pretty">
             Lo que sale de acá es un comprobante interno numerado, rotulado «Documento no válido como factura», para que la clienta tenga constancia de lo que pagó.

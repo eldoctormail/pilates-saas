@@ -3,7 +3,7 @@
 //
 // El bug que cierra esto: `resend.emails.send()` devuelve 200 y un id cuando
 // ACEPTA la petición, no cuando entrega el correo. Lo que pasa después —rebote,
-// queja, supresión— llega solo por webhook, y Tentare no tenía ninguno. De ahí
+// queja, supresión— llega solo por webhook, y Centra no tenía ninguno. De ahí
 // «1 aviso enviado» sobre un correo que rebotó dos segundos más tarde.
 //
 // Módulo puro a propósito: la ruta del webhook arrastra Supabase y Resend, y

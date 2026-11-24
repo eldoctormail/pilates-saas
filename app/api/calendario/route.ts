@@ -23,7 +23,7 @@ export async function GET(req: NextRequest) {
   const sesion = await verificarSesionStaff(req);
   if (!sesion) return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
 
-  // Tentare Core retirado (14-sep-2026): el calendario del panel no es de la
+  // Centra Core retirado (14-sep-2026): el calendario del panel no es de la
   // instructora; su agenda la sirve `/api/portal/instructora/agenda`.
   if (sesion.rol === 'INSTRUCTOR') return NextResponse.json({ error: 'No tienes permiso para esto' }, { status: 403 });
 

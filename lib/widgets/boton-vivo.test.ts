@@ -72,9 +72,9 @@ test('⚠️ cssBotonVivo es anti-inyección: un slug o un color raro no escribe
 
 // ── slugDePopup ──────────────────────────────────────────────────────────────
 
-test('slugDePopup: el slug de lo que el runtime abriría, en cualquier origen de Tentare y con el apex como www', () => {
+test('slugDePopup: el slug de lo que el runtime abriría, en cualquier origen de Centra y con el apex como www', () => {
   assert.equal(slugDePopup(`${O}/reservar/pilates-centro?embed=1&tab=clases&ref=web-horario`, O), 'pilates-centro');
-  // Otra instalación de Tentare (la de las pruebas e2e, en http).
+  // Otra instalación de Centra (la de las pruebas e2e, en http).
   const T = 'http://tentare.example.com';
   assert.equal(slugDePopup(`${T}/reservar/alba?embed=1&tab=clases`, T), 'alba');
   // El apex redirige a www: el runtime lo abre, y el botón también sigue el estilo.

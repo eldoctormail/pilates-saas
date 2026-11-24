@@ -20,7 +20,7 @@ const CATALOGO = {
   cobro: { stripeConectado: true, datafonoEmparejado: true },
   productos: [
     { id: 'p1', nombre: 'Calcetines Pilates', descripcion: 'Antideslizantes', categoria: 'PRODUCTO', precio: 25, activo: true, stock: 12, stockMinimo: 5, ivaPct: 21, imagenUrl: null, sku: 'CAL-01', codigoBarras: null },
-    { id: 'p2', nombre: 'Botella Tentare', descripcion: '750 ml', categoria: 'PRODUCTO', precio: 14.9, activo: true, stock: 3, stockMinimo: 5, ivaPct: 21, imagenUrl: null, sku: null, codigoBarras: null },
+    { id: 'p2', nombre: 'Botella Centra', descripcion: '750 ml', categoria: 'PRODUCTO', precio: 14.9, activo: true, stock: 3, stockMinimo: 5, ivaPct: 21, imagenUrl: null, sku: null, codigoBarras: null },
     { id: 'p3', nombre: 'Banda elástica', descripcion: null, categoria: 'PRODUCTO', precio: 9.5, activo: true, stock: 0, stockMinimo: 2, ivaPct: 21, imagenUrl: null, sku: null, codigoBarras: null },
     { id: 'p4', nombre: 'Toalla', descripcion: null, categoria: 'PRODUCTO', precio: 18, activo: true, stock: null, stockMinimo: 0, ivaPct: 21, imagenUrl: null, sku: null, codigoBarras: null },
   ],

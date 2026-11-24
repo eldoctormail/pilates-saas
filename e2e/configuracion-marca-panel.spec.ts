@@ -11,7 +11,7 @@ import { CATEGORIAS_POR_ROL } from '../lib/notifications/catalog';
 //   · en Marca hay UNA sola forma de guardar lo que se escribe: el «Guardar» de
 //     su cajón. «Guardar colores» ya no existe;
 //   · lo que NO se puede cambiar desde aquí se dice: la foto de la portada;
-//   · «Aparecer en Tentare Network» avisa de que el directorio no mira si la
+//   · «Aparecer en Centra Network» avisa de que el directorio no mira si la
 //     página está oculta — las dos filas viven juntas y antes no se decía;
 //   · «Mis avisos» tiene fila con su valor, y la tabla vive en su pantalla.
 //
@@ -113,7 +113,7 @@ test.describe('Tu panel y Mis avisos, en filas', () => {
   });
 });
 
-test.describe('Ocultar tu página y Tentare Network, que conviven', () => {
+test.describe('Ocultar tu página y Centra Network, que conviven', () => {
   test.use({ viewport: { width: 1280, height: 800 } });
 
   // El directorio NO mira si la página está oculta (lib/configuracion/pagina-publica.ts):
@@ -124,6 +124,6 @@ test.describe('Ocultar tu página y Tentare Network, que conviven', () => {
 
     const network = page.locator('#network');
     await expect(network).toContainText('Aunque ocultes tu página, seguirá saliendo ahí', { timeout: 30_000 });
-    await expect(network.getByRole('switch', { name: 'Aparecer en Tentare Network' })).toHaveAttribute('aria-checked', 'false');
+    await expect(network.getByRole('switch', { name: 'Aparecer en Centra Network' })).toHaveAttribute('aria-checked', 'false');
   });
 });

@@ -40,7 +40,7 @@ interface BaseBlog {
 
 export interface ArticuloBlogPublicado extends BaseBlog {
   estado: 'publicado';
-  /** El <title>, SIN « | Tentare» (se añade solo). */
+  /** El <title>, SIN « | Centra» (se añade solo). */
   tituloSeo: string;
   /** Meta description: 110-170 caracteres. */
   descripcion: string;

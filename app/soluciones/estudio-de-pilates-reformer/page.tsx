@@ -31,7 +31,7 @@ import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 // PIDE la alumna y el estudio la aprueba; la penalización por cancelación tardía
 // o no-show es opcional y exige tarjeta guardada y consentimiento; los bonos
 // online, Stripe conectado. La calculadora NO promete cuántas plazas recupera
-// Tentare: solo pone precio a las que se quedan vacías. No prometer más de lo que hay.
+// Centra: solo pone precio a las que se quedan vacías. No prometer más de lo que hay.
 
 const PATH = '/soluciones/estudio-de-pilates-reformer';
 const pagina = paginaDe(PATH)!;
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
   openGraph: {
-    siteName: 'Tentare',
+    siteName: 'Centra',
     type: 'website',
     locale: 'es_ES',
     title: pagina.titulo,
@@ -78,7 +78,7 @@ const FAQ = [
     a: 'No hace falta. Reservan desde el navegador del móvil con el enlace de tu estudio. Si quieren, lo añaden a su pantalla de inicio y se comporta como una app, con tu nombre, tu icono y tus colores.',
   },
   {
-    q: '¿Puedo cambiarme a Tentare desde otro programa?',
+    q: '¿Puedo cambiarme a Centra desde otro programa?',
     a: 'Sí. El importador lee archivos CSV o Excel de cualquier programa: te enseña lo que va a traer antes de guardarlo y lo puedes deshacer con un botón.',
   },
 ];
@@ -89,7 +89,7 @@ export default function EstudioDePilatesReformerPage() {
       <HeroSolucion
         miga="Pilates reformer"
         busqueda="Software para estudios de Pilates reformer"
-        titular={<>Vendes reformers a una hora. Tentare los gestiona así.</>}
+        titular={<>Vendes reformers a una hora. Centra los gestiona así.</>}
         entrada={<>Cada sala con su aforo, cada máquina con su plaza, las alumnas de siempre con su sitio fijo y una lista de espera que ofrece sola la plaza que se libera. Para estudios de Pilates reformer en España.</>}
         foto={{
           src: '/landing/fotos/reformers-madera-tapizado-negro-plazas-movil-1170.webp',
@@ -102,7 +102,7 @@ export default function EstudioDePilatesReformerPage() {
           { etiqueta: 'Reserva · Reformer 4', estado: 'Confirmada', texto: 'Lucía reservó el martes a las 19:00' },
           { etiqueta: 'Lista de espera', estado: 'Plaza ocupada', texto: 'Carmen entra en la clase de las 19:00' },
         ]}
-        pieFoto="Sala de reformers con dos avisos de ejemplo de Tentare: una reserva confirmada en el reformer 4 y una alumna de la lista de espera que entra en la clase de las 19:00."
+        pieFoto="Sala de reformers con dos avisos de ejemplo de Centra: una reserva confirmada en el reformer 4 y una alumna de la lista de espera que entra en la clase de las 19:00."
       />
 
       <ResumenSolucion
@@ -110,12 +110,12 @@ export default function EstudioDePilatesReformerPage() {
         datos={[
           { cifra: '25 €', texto: 'Precio mediano de una clase suelta de reformer, de una muestra de 32 estudios españoles' },
           { cifra: '18,75 €', texto: 'Lo que sale cada sesión con una cuota de una clase a la semana' },
-          { cifra: 'Gratis', texto: 'Tentare Founding Studio, hasta 150 reservas al mes' },
+          { cifra: 'Gratis', texto: 'Centra Founding Studio, hasta 150 reservas al mes' },
         ]}
       >
         Uno que trate cada reformer como una plaza: que la alumna reserve su máquina desde el móvil, que el aforo de
         cada sala se respete solo, que la plaza que se libera pase a la lista de espera sin escribir un WhatsApp y que
-        el reformer y el mat puedan tener reglas y precios distintos. Tentare hace todo eso, junto con los cobros, los
+        el reformer y el mat puedan tener reglas y precios distintos. Centra hace todo eso, junto con los cobros, los
         bonos y las sustituciones de instructoras, gratis hasta 150 reservas al mes, y sin permanencia.
       </ResumenSolucion>
 
@@ -139,7 +139,7 @@ export default function EstudioDePilatesReformerPage() {
         ]}
         enlace={{ href: '/funcionalidades/calendario-y-salas', texto: 'Cómo funcionan el calendario y las salas' }}
       >
-        <p>En Tentare el aforo no es un número que escribes en cada clase: sale de la sala. Si defines los puestos, la alumna ve qué reformers quedan libres al reservar y elige el suyo; si no, reserva por aforo.</p>
+        <p>En Centra el aforo no es un número que escribes en cada clase: sale de la sala. Si defines los puestos, la alumna ve qué reformers quedan libres al reservar y elige el suyo; si no, reserva por aforo.</p>
         <p>Cada tipo de clase tiene sus reglas: con cuánta antelación se reserva, hasta cuándo se cancela, si exige bono y si admite lista de espera.</p>
       </FilaProducto>
 
@@ -161,7 +161,7 @@ export default function EstudioDePilatesReformerPage() {
       <FilaProducto
         eyebrow="Bonos, cuotas y plazas fijas"
         titulo="El reformer y el mat, cada uno con su precio"
-        captura={{ src: '/producto/v2/panel-clientas-1110.webp', alt: 'Listado de clientas del panel de Tentare con datos de muestra: filtros por estado y una fila por alumna con su plan, su saldo, su última clase y avisos', ancho: 1110, alto: 489 }}
+        captura={{ src: '/producto/v2/panel-clientas-1110.webp', alt: 'Listado de clientas del panel de Centra con datos de muestra: filtros por estado y una fila por alumna con su plan, su saldo, su última clase y avisos', ancho: 1110, alto: 489 }}
         puntos={[
           'Bonos con caducidad y recuperaciones',
           'Cuotas mensuales, con o sin límite de clases a la semana',
@@ -197,7 +197,7 @@ export default function EstudioDePilatesReformerPage() {
       <FilaProducto
         eyebrow="Ocupación y rentabilidad"
         titulo="Qué clases te dan dinero, clase por clase"
-        pieza={{ descripcion: 'Ejemplo de los informes de Tentare: lo que deja cada clase y la ocupación por tipo.', contenido: <PanelInformes completo /> }}
+        pieza={{ descripcion: 'Ejemplo de los informes de Centra: lo que deja cada clase y la ocupación por tipo.', contenido: <PanelInformes completo /> }}
         puntos={[
           'Ocupación por tipo de clase',
           'Retención de tus alumnas mes a mes',
@@ -215,12 +215,12 @@ export default function EstudioDePilatesReformerPage() {
         captura={{ src: '/landing/fotos-aportadas/instructora-y-alumna-reformers-estudio-pilates.webp', alt: 'Una instructora y una alumna charlando sobre sus reformers en un estudio de Pilates con cortinas de luz', ancho: 434, alto: 600, foto: true }}
         enlace={{ href: '/funcionalidades/sustituciones', texto: 'Cómo funcionan las sustituciones' }}
       >
-        <p>Tentare busca quién puede cubrirla según su disponibilidad y su costumbre, la contacta con tu visto bueno y avisa a las alumnas del cambio. Puede hacerlo sola, sin esperar a que lo apruebes, en el plan gratis, en Estudio y en Cadena; en Founding Studio de pago, con el complemento de 12 €/mes.</p>
+        <p>Centra busca quién puede cubrirla según su disponibilidad y su costumbre, la contacta con tu visto bueno y avisa a las alumnas del cambio. Puede hacerlo sola, sin esperar a que lo apruebes, en el plan gratis, en Estudio y en Cadena; en Founding Studio de pago, con el complemento de 12 €/mes.</p>
       </FilaProducto>
 
-      <PlanesSolucion titulo="Lo que cuesta Tentare para un estudio de reformer" />
+      <PlanesSolucion titulo="Lo que cuesta Centra para un estudio de reformer" />
 
-      <FaqSolucion titulo="Preguntas sobre Tentare para estudios de reformer" items={FAQ} />
+      <FaqSolucion titulo="Preguntas sobre Centra para estudios de reformer" items={FAQ} />
 
       <CierreSolucion
         titulo="Tu estudio de reformer, funcionando solo."

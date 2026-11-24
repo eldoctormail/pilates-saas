@@ -28,7 +28,7 @@ test('toda ruta que abre un Checkout de Stripe lleva el guardia de modo (regla d
 test('el Checkout del pack es de PLATAFORMA y de pago único, con su marca, factura y precio del catálogo', () => {
   const src = leer('lib/asistente/packs-servidor.ts');
   assert.match(src, /mode: 'payment'/);
-  assert.doesNotMatch(src, /stripeAccount/, 'nunca sobre una cuenta Connect: es dinero de Tentare');
+  assert.doesNotMatch(src, /stripeAccount/, 'nunca sobre una cuenta Connect: es dinero de Centra');
   assert.match(src, /metadata = \{ origen: ORIGEN_PACK, studio_id: studioId, pack: String\(pack\.unidades\) \}/);
   assert.match(src, /payment_intent_data: \{ metadata/, 'el PaymentIntent lleva la marca: los reembolsos y disputas se reconocen por ella');
   assert.match(src, /invoice_creation: \{ enabled: true/);

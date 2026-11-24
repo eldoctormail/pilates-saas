@@ -27,7 +27,7 @@ interface ResultadoLote {
   restantes: number;
 }
 
-// Backfill de lat/lng para perfiles de Network y estudios — Tentare Network
+// Backfill de lat/lng para perfiles de Network y estudios — Centra Network
 // 2.0 F2 (mapa real del buscador). Nadie ha rellenado nunca estas columnas
 // (nullable desde F0, migr 20260824191258); este endpoint se llama a mano,
 // REPETIDAMENTE, hasta vaciar el backlog. Sin cron nuevo a propósito —

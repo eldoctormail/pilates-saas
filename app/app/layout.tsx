@@ -6,7 +6,7 @@ import { PuenteNativo } from '@/components/nativo/PuenteNativo';
 // de la app de la alumna, sin la marca de ningún estudio todavía: eso llega al
 // entrar en el suyo. No se indexa (PREFIJOS_NO_INDEXABLES).
 export const metadata: Metadata = {
-  title: 'Tentare',
+  title: 'Centra',
   robots: { index: false, follow: false },
 };
 

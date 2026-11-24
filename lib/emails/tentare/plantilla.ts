@@ -2,7 +2,7 @@
 // Los correos que TENTARE manda a los estudios: fallo de pago de la
 // suscripción, estudio vencido, accesos del equipo, el resumen semanal...
 //
-// Aquí manda la marca de Tentare, NO la del estudio: quien escribe es el
+// Aquí manda la marca de Centra, NO la del estudio: quien escribe es el
 // proveedor del servicio. Por eso la paleta es fija (el kit oliva) y no se
 // deriva de nada, y la cara es la misma que ya tienen los correos de acceso de
 // Supabase (`supabase/templates/*.html`): el logo horizontal, la regla dorada y
@@ -18,7 +18,7 @@
 import { LEGAL } from '../../legal-info.ts';
 import { escaparHtml, hrefSeguro, preheaderHtml, cabezaHtml } from '../html.ts';
 
-/** El kit de marca de Tentare. Los únicos colores de esta familia. */
+/** El kit de marca de Centra. Los únicos colores de esta familia. */
 export const TENTARE = {
   fondo: '#EEEEE8',
   papel: '#FFFFFF',
@@ -92,7 +92,7 @@ export function correoTentare(o: CorreoTentareOpts): string {
 }
 
 /**
- * El marco de todos los correos de Tentare: cabeza, preheader, la tarjeta de
+ * El marco de todos los correos de Centra: cabeza, preheader, la tarjeta de
  * 600 px (con su tabla para Outlook) y el pie. Lo usa `correoTentare` y lo usa
  * el correo del alta nueva (`alta.ts`), que necesita un orden de bloques que
  * `correoTentare` no tiene (el enlace de su página entre dos párrafos) y un pie
@@ -102,7 +102,7 @@ export function marcoTentare(preheader: string, bloques: string, pieHtml: string
   const t = TENTARE;
   return `<!doctype html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
-${cabezaHtml('Tentare', t.fondo, t.olivaMedio, ANCHO, '* { font-family: Arial, Helvetica, sans-serif !important; }')}
+${cabezaHtml('Centra', t.fondo, t.olivaMedio, ANCHO, '* { font-family: Arial, Helvetica, sans-serif !important; }')}
 <body style="margin:0;padding:0;background:${t.fondo};">
 ${preheaderHtml(preheader)}
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="${t.fondo}" style="background:${t.fondo};">
@@ -125,7 +125,7 @@ ${pieHtml}
 
 // ── Piezas ───────────────────────────────────────────────────────────────────
 
-/** El logo y la regla de color: la misma cabecera en todos los correos de Tentare. */
+/** El logo y la regla de color: la misma cabecera en todos los correos de Centra. */
 export function cabeceraTentare(regla: string = TENTARE.dorado): string {
   return cabecera(regla);
 }
@@ -139,7 +139,7 @@ function cabecera(regla: string): string {
   // Mismas medidas que en supabase/templates/*.html: 132×35. Con las imágenes
   // bloqueadas —el caso por defecto en media bandeja— el `alt` dice de quién es.
   return `<tr><td class="px-mobile" style="padding:26px 32px 20px;">
-<img src="${LOGO_TENTARE_URL}" width="132" height="35" alt="Tentare" style="display:block;border:0;width:132px;height:35px;">
+<img src="${LOGO_TENTARE_URL}" width="132" height="35" alt="Centra" style="display:block;border:0;width:132px;height:35px;">
 </td></tr>
 <tr><td style="padding:0 32px;"><div style="height:2px;line-height:2px;font-size:0;background:${regla};">&nbsp;</div></td></tr>`;
 }
@@ -234,6 +234,6 @@ function pie(motivo?: string | null): string {
   const porQue = motivo?.trim() ? `${escaparHtml(motivo.trim())}<br>` : '';
   return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
 <td class="px-mobile" style="padding:18px 8px 0;font-family:${PILA};font-size:11px;line-height:1.6;color:${t.tintaSuave};text-align:center;">
-${porQue}Tentare · software para estudios de Pilates · <a href="mailto:${LEGAL.email}" style="color:${t.tintaSuave};text-decoration:underline;">${LEGAL.email}</a>
+${porQue}Centra · software para estudios de Pilates · <a href="mailto:${LEGAL.email}" style="color:${t.tintaSuave};text-decoration:underline;">${LEGAL.email}</a>
 </td></tr></table>`;
 }

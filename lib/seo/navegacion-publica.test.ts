@@ -71,7 +71,7 @@ test('la línea de cada entrada de Soluciones y Recursos es el resumen del regis
 
 test('el pie lleva TODOS los documentos legales y el soporte', () => {
   const enPie = new Set(PIE_PUBLICO.flatMap((c) => c.enlaces.map((e) => e.href)));
-  // Fuera, a propósito: las legales de Tentare Network (/network/*), congelado y
+  // Fuera, a propósito: las legales de Centra Network (/network/*), congelado y
   // sin enlazar desde la web comercial (components/landing/enlaces.ts, NAV_NETWORK).
   const legales = PAGINAS.filter((p) => p.grupo === 'legal' && !p.path.startsWith('/network/')).map((p) => p.path);
   // CONTROL: son cinco (aviso legal, privacidad, términos, cookies y soporte).

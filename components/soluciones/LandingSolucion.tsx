@@ -316,7 +316,7 @@ export function PlanesSolucion({ titulo, nota }: { titulo: string; nota?: string
             </div>
           ))}
         </div>
-        <p className="sol-planes-nota">{nota ?? 'Sin permanencia y sin comisión de Tentare sobre tus cobros. Se empieza gratis, sin tarjeta.'} <Link href="/precios">Qué incluye cada plan →</Link></p>
+        <p className="sol-planes-nota">{nota ?? 'Sin permanencia y sin comisión de Centra sobre tus cobros. Se empieza gratis, sin tarjeta.'} <Link href="/precios">Qué incluye cada plan →</Link></p>
       </div>
     </section>
   );

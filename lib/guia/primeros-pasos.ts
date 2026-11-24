@@ -67,7 +67,7 @@ export const TAREAS: readonly TareaPrimerosPasos[] = [
   {
     id: 'primera-reserva',
     titulo: 'Recibe tu primera reserva',
-    para: 'Comparte el enlace de tu app: ahí empieza Tentare a trabajar por ti.',
+    para: 'Comparte el enlace de tu app: ahí empieza Centra a trabajar por ti.',
     href: '/configuracion?tab=web#direccion-y-enlaces',
   },
 ];

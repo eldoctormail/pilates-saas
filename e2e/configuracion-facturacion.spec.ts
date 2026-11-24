@@ -40,7 +40,7 @@ interface Exportacion { total: number; fichero?: 'ok' | 'error' }
 /** El alta del envío a la AEAT (`/api/verifactu/estudio`). 'error' = la ruta falla. */
 type Envio = { estado: string; activadoEn: string | null } | 'error';
 
-// Tentare solo emite facturas con el envío a la AEAT ya activado (migración
+// Centra solo emite facturas con el envío a la AEAT ya activado (migración
 // 20260930170000): encenderlas exige esto.
 const ENVIO_ACTIVO: Envio = { estado: 'PRODUCCION', activadoEn: '2026-10-01T10:00:00.000Z' };
 
@@ -187,12 +187,12 @@ test('en el estado de sistema «sin facturas»: la pestaña es «Para tu gestor�
   await montar(page, '/facturas', { fila: { ...FILA, modo_facturacion: 'sin_facturas' } });
   await expect(page.getByRole('button', { name: 'Para tu gestoría' })).toBeVisible({ timeout: 30_000 });
   await expect(page.getByText(/Tus facturas las hace tu gestoría/)).toBeVisible();
-  await expect(page.getByRole('link', { name: /Facturar con Tentare/ })).toHaveAttribute('href', '/configuracion?tab=cobros#facturacion');
+  await expect(page.getByRole('link', { name: /Facturar con Centra/ })).toHaveAttribute('href', '/configuracion?tab=cobros#facturacion');
   await expect(page.getByText('No se está emitiendo ninguna factura')).toHaveCount(0);
 });
 
 // Exportación de los registros (mandato, cláusula 8). Se ofrece aunque el
-// estudio ya no emita con Tentare: es cuando más falta hace llevárselos.
+// estudio ya no emita con Centra: es cuando más falta hace llevárselos.
 
 test('sin registros no ofrece exportar nada', async ({ page }) => {
   await montar(page, '/configuracion?tab=cobros#facturacion', { exportacion: { total: 0 } });

@@ -85,7 +85,7 @@ export function useApiPublica(): ApiPublica {
 export function resumenApiPublica(a: ApiPublica): string | null {
   if (a.error) return 'No se ha podido cargar';
   if (!a.datos) return null;
-  if (!a.datos.activada) return 'Desactivada por Tentare';
+  if (!a.datos.activada) return 'Desactivada por Centra';
   const activas = a.datos.claves.filter((c) => c.estado === 'activa');
   if (activas.length === 0) return 'Activada · ninguna clave todavía';
   const usos = activas.map((c) => c.ultimoUsoEn).filter((x): x is string => !!x).sort();
@@ -103,14 +103,14 @@ export function DetalleApiPublica({ a, showToast }: { a: ApiPublica } & Pick<Pro
 }
 
 function SinActivar() {
-  const enlace = enlaceWhatsApp(SOPORTE_WHATSAPP, 'Hola, la API de Tentare aparece desactivada en mi estudio y quiero saber por qué.');
+  const enlace = enlaceWhatsApp(SOPORTE_WHATSAPP, 'Hola, la API de Centra aparece desactivada en mi estudio y quiero saber por qué.');
   return (
     <div className="flex flex-col gap-4 pb-6">
       <p className="text-sm text-foreground text-pretty">
         La API permite que tu programa de contabilidad (u otra herramienta) lea por su cuenta tus cobros, facturas, devoluciones,
         ventas de la caja y clientes, sin exportar nada a mano.
       </p>
-      <p className="text-sm text-foreground text-pretty">Tentare la ha desactivado en tu estudio. Escríbenos y lo revisamos.</p>
+      <p className="text-sm text-foreground text-pretty">Centra la ha desactivado en tu estudio. Escríbenos y lo revisamos.</p>
       {enlace && (
         <a href={enlace} target="_blank" rel="noopener noreferrer" className={cn(btnPrimary, 'self-start no-underline')}>
           Escribirnos por WhatsApp <ExternalLink size={14} aria-hidden />
@@ -167,7 +167,7 @@ function Activada({ datos, recargar, showToast }: { datos: Datos; recargar: () =
       <p className="text-xs text-muted-foreground text-pretty m-0">
         Para quien conecte el programa: la especificación está en{' '}
         <a href="/api/v1/openapi.json" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">/api/v1/openapi.json</a>.
-        Importes en céntimos; las cifras restan lo devuelto, igual que en Tentare.
+        Importes en céntimos; las cifras restan lo devuelto, igual que en Centra.
       </p>
     </div>
   );
@@ -287,7 +287,7 @@ function SedesDeLaClave({ sedes, abierto = false }: { sedes: SedeCadena[]; abier
           <li key={s.id} className="flex flex-wrap gap-x-2 text-foreground">
             <span>{s.nombre}</span>
             <code className="text-xs text-muted-foreground">{s.id}</code>
-            {!s.apiActivada && <span className="text-xs text-muted-foreground">· Tentare tiene la API desactivada en esta sede: la clave no llegará a ella</span>}
+            {!s.apiActivada && <span className="text-xs text-muted-foreground">· Centra tiene la API desactivada en esta sede: la clave no llegará a ella</span>}
           </li>
         ))}
       </ul>

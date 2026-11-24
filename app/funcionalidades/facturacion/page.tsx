@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: pagina.titulo,
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
-  openGraph: { siteName: 'Tentare', type: 'website', locale: 'es_ES', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
+  openGraph: { siteName: 'Centra', type: 'website', locale: 'es_ES', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
 };
 
 const FAQ = [
@@ -24,7 +24,7 @@ const FAQ = [
   },
   {
     q: '¿Y si mis facturas ya las hace mi gestoría?',
-    a: 'Apaga la facturación, que viene encendida: está en Configuración → Cobros y facturas, «Facturar automáticamente». Tentare sigue registrando cada cobro y tu alumna recibe su justificante de pago; las facturas las seguís haciendo como hasta ahora.',
+    a: 'Apaga la facturación, que viene encendida: está en Configuración → Cobros y facturas, «Facturar automáticamente». Centra sigue registrando cada cobro y tu alumna recibe su justificante de pago; las facturas las seguís haciendo como hasta ahora.',
   },
   {
     q: '¿Qué pasa si me equivoco en una factura ya emitida?',
@@ -110,7 +110,7 @@ export default function FacturacionPage() {
         <Tabla
           cabeceras={['Paso', 'Estado hoy']}
           filas={[
-            ['Emitir las facturas desde Tentare', 'Sí: viene encendido y se apaga en Configuración'],
+            ['Emitir las facturas desde Centra', 'Sí: viene encendido y se apaga en Configuración'],
             ['Numeración correlativa y a prueba de carreras', 'Sí, siempre'],
             ['Huella SHA-256 encadenada', 'Solo con Veri*Factu, todavía no activo'],
             ['QR de cotejo AEAT', 'Solo con Veri*Factu, todavía no activo'],

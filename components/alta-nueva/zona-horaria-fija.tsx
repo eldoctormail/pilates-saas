@@ -21,7 +21,7 @@ export function nombreZonaHoraria(zona: string = ZONA_HORARIA): string {
 }
 
 export const AVISO_CANARIAS =
-  'Tentare trabaja hoy en hora peninsular: en Canarias, los recordatorios y los cierres de reserva irían una hora antes. Escríbenos antes de abrir reservas.';
+  'Centra trabaja hoy en hora peninsular: en Canarias, los recordatorios y los cierres de reserva irían una hora antes. Escríbenos antes de abrir reservas.';
 
 /** Solo el aviso, para quien pinta la zona por su cuenta. `null` fuera de Canarias. */
 export function AvisoCanarias({ codigoPostal, className }: { codigoPostal: string; className?: string }) {

@@ -38,8 +38,8 @@ export function DialogoPausaPlazaFija({ plaza, nombre, onClose, onHecho }: {
   // nueva sigue el ajuste del estudio.
   const liberaSitio = actual ? plaza.pausaLiberaSitio === true : studio?.plazaFijaPausaLiberaSitio === true;
   const alVolver = studio?.plazaFijaFinPausa === 'PENDIENTE_CONFIRMAR'
-    ? 'Tentare te pregunta si vuelve'
-    : 'vuelve sola si su sitio sigue libre; si no, Tentare te pregunta';
+    ? 'Centra te pregunta si vuelve'
+    : 'vuelve sola si su sitio sigue libre; si no, Centra te pregunta';
   const [desde, setDesde] = useState(actual?.desde ?? hoy);
   const [hasta, setHasta] = useState(actual?.hasta ?? '');
   const [error, setError] = useState<string | null>(null);

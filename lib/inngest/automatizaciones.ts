@@ -146,7 +146,7 @@ interface ProcesarOpts {
   // Credenciales de WhatsApp del PROPIO estudio (Meta Cloud API). `null` = no
   // las tiene conectadas, que es un estado normal y no un fallo de
   // configuración de la plataforma: WhatsApp dejó de ser un secreto único de
-  // Tentare cuando se retiró Twilio (ver WHATSAPP_AUDIT.md §0).
+  // Centra cuando se retiró Twilio (ver WHATSAPP_AUDIT.md §0).
   whatsapp: WhatsAppDelEstudio | null;
   /**
    * AUT-4: direcciones (normalizadas) que `email_rebotes` tiene como rotas

@@ -19,7 +19,7 @@ import { PAGINAS, paginaDe, type PaginaSeo } from './paginas.ts';
 //    `lib/seo/paginas.ts` es lo que dejó títulos desincronizados otras veces.
 //
 // Las comparativas «¿X merece la pena? …» llevan descripciones largas a
-// propósito (el dato del rival más lo de Tentare) y no llevan «| Tentare» (ver el
+// propósito (el dato del rival más lo de Centra) y no llevan «| Centra» (ver el
 // comentario de su plantilla en paginas.ts): se miden con su propio techo.
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -100,7 +100,7 @@ test('las páginas de producto que valen para yoga no dicen solo Pilates', () =>
 test('los títulos de producto llevan la marca al final, igual en todos', () => {
   const sinMarca = COMERCIALES
     .filter((p) => p.path === '/' || p.path === '/precios' || p.path === '/glosario' || p.path === '/recursos' || p.path === '/funcionalidades' || p.path.startsWith('/funcionalidades/'))
-    .filter((p) => !p.titulo.endsWith(' | Tentare'))
+    .filter((p) => !p.titulo.endsWith(' | Centra'))
     .map((p) => p.path);
   assert.deepEqual(sinMarca, []);
 });
@@ -117,7 +117,7 @@ test('las páginas de conversión terminan la descripción en la acción real', 
 });
 
 test('CONTROL: el validador caza lo que debe cazar (sin esto, el test de arriba sería hueco)', () => {
-  assert.deepEqual(problemasDeMetadatos({ path: '/x', titulo: 'Título correcto | Tentare', descripcion: 'a'.repeat(120) }), []);
+  assert.deepEqual(problemasDeMetadatos({ path: '/x', titulo: 'Título correcto | Centra', descripcion: 'a'.repeat(120) }), []);
   assert.ok(problemasDeMetadatos({ path: '/x', titulo: '', descripcion: 'a'.repeat(120) }).some((f) => f.includes('title vacío')));
   assert.ok(problemasDeMetadatos({ path: '/x', titulo: 'T', descripcion: '   ' }).some((f) => f.includes('description vacía')));
   assert.ok(problemasDeMetadatos({ path: '/x', titulo: 'T'.repeat(80), descripcion: 'a'.repeat(120) }).some((f) => f.includes('title de 80')));
@@ -127,9 +127,9 @@ test('CONTROL: el validador caza lo que debe cazar (sin esto, el test de arriba 
   assert.deepEqual(problemasDeMetadatos({ path: '/comparativa/tentare-vs-x', titulo: 'T', descripcion: 'a'.repeat(170) }), []);
   assert.ok(problemasDeMetadatos({ path: '/comparativa/tentare-vs-x', titulo: 'T', descripcion: 'a'.repeat(210) }).length > 0);
   // Pilates sin yoga, sí; con yoga o de reformer, no.
-  assert.ok(problemaPilatesSinYoga({ path: '/funcionalidades/x', titulo: 'Reservas para estudios de Pilates | Tentare' }));
-  assert.equal(problemaPilatesSinYoga({ path: '/funcionalidades/x', titulo: 'Reservas para Pilates y yoga | Tentare' }), null);
-  assert.equal(problemaPilatesSinYoga({ path: '/funcionalidades/x', titulo: 'Aforo por reformer | Tentare' }), null);
+  assert.ok(problemaPilatesSinYoga({ path: '/funcionalidades/x', titulo: 'Reservas para estudios de Pilates | Centra' }));
+  assert.equal(problemaPilatesSinYoga({ path: '/funcionalidades/x', titulo: 'Reservas para Pilates y yoga | Centra' }), null);
+  assert.equal(problemaPilatesSinYoga({ path: '/funcionalidades/x', titulo: 'Aforo por reformer | Centra' }), null);
 });
 
 // ─── La página lee el registro ───────────────────────────────────────────────
@@ -158,7 +158,7 @@ test('cada página comercial toma title y description del registro, no de una co
 });
 
 test('CONTROL: una página con el title escrito a mano se detecta', () => {
-  assert.equal(leeDelRegistro("export const metadata = { title: 'Algo | Tentare', description: 'Otra cosa' };"), false);
+  assert.equal(leeDelRegistro("export const metadata = { title: 'Algo | Centra', description: 'Otra cosa' };"), false);
   assert.equal(
     leeDelRegistro("const pagina = paginaDe('/x')!;\nexport const metadata = { title: pagina.titulo, description: pagina.descripcion };"),
     true,

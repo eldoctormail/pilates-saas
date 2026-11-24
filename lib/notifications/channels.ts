@@ -144,7 +144,7 @@ export function motivoApns(detalle: string | undefined): string | null {
  * cadena, de sus sedes (`sedesDeLaApp`)— y solo mientras esa app siga activa (`bundlesActivos`: los
  * de `apps_estudio` activos del dueño de la app). Sin esto, una alumna de dos estudios con la app de
  * uno recibía los avisos del otro con la marca del primero, y pausar una app no cortaba sus avisos.
- * La web y la app «Tentare» sirven a cualquier estudio.
+ * La web y la app «Centra» sirven a cualquier estudio.
  */
 export function suscripcionesDelAviso<T extends { endpoint: string; studio_id?: string | null }>(
   subs: readonly T[], sedesDeLaApp: ReadonlySet<string>, bundlesActivos: ReadonlySet<string>,
@@ -261,11 +261,11 @@ const push: Canal = {
       return { status: 'SKIPPED', error: apns ? 'push web no configurado (VAPID pendiente)' : 'avisos de la app de iOS sin configurar (falta la clave de APNs)' };
     }
 
-    // El icono mostraba SIEMPRE el logo genérico de Tentare (hardcodeado en
+    // El icono mostraba SIEMPRE el logo genérico de Centra (hardcodeado en
     // public/sw.js), aunque cada estudio ya puede subir el suyo desde
     // Apariencia (mismo studio.logoUrl que usa el manifest del portal y los
     // emails). Se manda en el payload, y con logo no cambia nada; sin logo ya
-    // no cae al genérico de Tentare — cae al monograma del propio estudio
+    // no cae al genérico de Centra — cae al monograma del propio estudio
     // (inicial + su color de marca), mismo criterio que el manifest de la PWA.
     const { data: st } = await admin.from('studios').select('logo_url, nombre, color_primario').eq('id', notificacion.studioId).maybeSingle();
     const logoUrl = st?.logo_url as string | null;
@@ -331,7 +331,7 @@ const email: Canal = {
     const { data: st } = await admin.from('studios')
       .select('nombre, color_primario, logo_url, email').eq('id', notificacion.studioId).maybeSingle();
     const color = (st?.color_primario as string | null) || '#343825';
-    const estudio = (st?.nombre as string | null) || 'Tentare';
+    const estudio = (st?.nombre as string | null) || 'Centra';
     const logo = st?.logo_url as string | null;
     const base = process.env.NEXT_PUBLIC_APP_URL || LEGAL.url;
     const cta = notificacion.deepLink
@@ -341,7 +341,7 @@ const email: Canal = {
       + (logo ? `<img src="${logo}" alt="${esc(estudio)}" style="height:40px;margin-bottom:20px"/>` : `<p style="font-weight:800;color:${color};margin:0 0 20px">${esc(estudio)}</p>`)
       + `<h1 style="font-size:20px;margin:0 0 8px">${esc(notificacion.title)}</h1>`
       + `<p style="font-size:15px;line-height:1.5;color:#444;margin:0">${esc(notificacion.body)}</p>${cta}`
-      + `<p style="font-size:12px;color:#999;margin-top:28px">${esc(estudio)} · enviado con Tentare</p></div>`;
+      + `<p style="font-size:12px;color:#999;margin-top:28px">${esc(estudio)} · enviado con Centra</p></div>`;
 
     try {
       const { Resend } = await import('resend');
@@ -349,8 +349,8 @@ const email: Canal = {
       // Este canal EMAIL lo usan tanto avisos a staff (propietaria/manager/
       // recepción/instructora) como a socias — el remitente con nombre del
       // estudio solo tiene sentido cuando quien recibe es una socia; el resto
-      // sigue viendo "Tentare" (es el propio producto avisando al equipo).
-      const from = destinatario.role === 'SOCIA' ? remitentePorMarca(estudio) : (process.env.RESEND_FROM || 'Tentare <onboarding@resend.dev>');
+      // sigue viendo "Centra" (es el propio producto avisando al equipo).
+      const from = destinatario.role === 'SOCIA' ? remitentePorMarca(estudio) : (process.env.RESEND_FROM || 'Centra <onboarding@resend.dev>');
       // Reply-To solo cuando quien recibe es una SOCIA, por el mismo motivo
       // que el remitente: si el aviso es para el equipo del estudio, poner su
       // propia dirección como respuesta les haría escribirse a sí mismos.
@@ -394,7 +394,7 @@ const email: Canal = {
 //   destinatario ES el estudio. Mandarle un aviso de plataforma desde su propio
 //   WhatsApp Business es escribirse a sí misma —Meta rechaza un envío al mismo
 //   número que lo emite— y encima haría depender el aviso «algo va mal en tu
-//   Tentare» de una integración que puede ser justo lo que va mal.
+//   Centra» de una integración que puede ser justo lo que va mal.
 //
 // Si algún día hace falta un canal de móvil para avisos de plataforma, será una
 // decisión nueva (con qué credencial, de quién) y no rellenar este hueco.

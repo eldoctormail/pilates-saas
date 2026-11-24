@@ -44,7 +44,7 @@ export function evaluarSalud(s: SenalesEstudio, ahora: Date = new Date()): Salud
   let riesgo = false;
 
   if (s.estadoSuscripcion && IMPAGO.has(s.estadoSuscripcion)) {
-    avisos.push('Su pago a Tentare ha fallado');
+    avisos.push('Su pago a Centra ha fallado');
     riesgo = true;
   }
 

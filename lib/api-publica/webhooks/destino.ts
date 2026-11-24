@@ -2,7 +2,7 @@
 //
 // La URL la escribe el estudio, y quien llama es NUESTRO servidor: sin esto, un
 // webhook a `https://169.254.169.254/…` o a un nombre que resuelve a 10.0.0.5
-// pondría a Tentare a hacer peticiones dentro de la red de Vercel o de quien
+// pondría a Centra a hacer peticiones dentro de la red de Vercel o de quien
 // sea. Tres cerraduras:
 //   1. al guardar: https, puerto 443, sin usuario/contraseña, sin nombres
 //      locales y, si es una IP, pública (`validarUrlWebhook`);
@@ -73,7 +73,7 @@ export function validarUrlWebhook(texto: unknown): UrlValidada {
     return { ok: false, error: 'Esa dirección es privada o interna: tiene que ser pública en internet.' };
   }
   if (DOMINIOS_PROPIOS.some((d) => host === d || host.endsWith(`.${d}`))) {
-    return { ok: false, error: 'El webhook tiene que apuntar a tu programa, no a Tentare.' };
+    return { ok: false, error: 'El webhook tiene que apuntar a tu programa, no a Centra.' };
   }
   return { ok: true, url };
 }

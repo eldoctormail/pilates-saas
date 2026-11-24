@@ -17,7 +17,7 @@ export default function Contenido() {
     <>
       <AyudaAntesDeEmpezar>
         Cierras en agosto, cae un puente o tienes la sala en obras. En vez de ir clase por clase cancelando y luego
-        acordarte de compensar los bonos, marcas las fechas una vez y Tentare hace las tres cosas: cancela, avisa y
+        acordarte de compensar los bonos, marcas las fechas una vez y Centra hace las tres cosas: cancela, avisa y
         alarga los bonos.
       </AyudaAntesDeEmpezar>
 
@@ -52,7 +52,7 @@ export default function Contenido() {
       </ul>
       <p>
         Los días se suman <strong>una sola vez</strong>. Si vuelves a cerrar unas fechas que ya habías cerrado —o
-        amplías un cierre existente—, a los bonos no se les regala dos veces: Tentare lleva la cuenta de qué días ya
+        amplías un cierre existente—, a los bonos no se les regala dos veces: Centra lleva la cuenta de qué días ya
         se prorrogaron y te lo dice en el resultado.
       </p>
       <p>

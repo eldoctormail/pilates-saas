@@ -6,7 +6,7 @@ import { PuertaDeEntrada } from '@/components/student/acceso/PuertaDeEntrada';
 
 /**
  * Entrar en el estudio (P08, 5-oct-2026): tu correo y un código de 6 cifras en
- * casillas, como la entrada de la app Tentare. La contraseña pasa a segunda
+ * casillas, como la entrada de la app Centra. La contraseña pasa a segunda
  * opción («Usar mi contraseña») y Google y Apple siguen al lado.
  *
  * Antes era «Hola de nuevo» con email y contraseña, también para quien llegaba

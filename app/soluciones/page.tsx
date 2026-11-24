@@ -21,7 +21,7 @@ import { FAQ_SOLUCIONES } from '@/lib/seo/faq-hubs';
 // concretas de esa solución, y la que no tiene foto (cambiarse de programa) enseña lo que se revisa antes de tocar nada.
 //
 // ⚠️ Las frases de «Si…» y las pastillas salen de lo que ya dicen las páginas de cada solución y el registro; no añaden funciones. Y la
-// sección «Lo que no cambia» repite solo lo que ya consta en /precios (sin comisión de Tentare, el mismo precio público) y en las
+// sección «Lo que no cambia» repite solo lo que ya consta en /precios (sin comisión de Centra, el mismo precio público) y en las
 // páginas de solución (es la misma plataforma para yoga y Pilates).
 
 const PATH = '/soluciones';
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   title: pagina.titulo,
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
-  openGraph: { siteName: 'Tentare', type: 'website', locale: 'es_ES', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
+  openGraph: { siteName: 'Centra', type: 'website', locale: 'es_ES', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
 };
 
 /** La foto de cada tarjeta, si su tipo de estudio tiene una real (fotos.ts / fotos aportadas). */
@@ -56,7 +56,7 @@ const PARA: Record<string, { si: string; trae: string[] }> = {
 const IGUAL = [
   { titulo: 'El mismo producto', texto: 'Reservas, bonos, cobros, app y equipo son los mismos en todos los tipos de estudio. Cambia cómo los configuras: tus clases, tus bonos y tus reglas.' },
   { titulo: 'El mismo precio público', texto: `Empiezas gratis, con ${LIMITES_GRATIS}, y los planes de pago están en `, enlace: { href: '/precios', texto: 'Precios' }, cola: '. Sin permanencia.' },
-  { titulo: 'Sin comisión sobre tus cobros', texto: 'Tentare no añade ninguna comisión a lo que cobras a tus alumnas. Solo pagas la de ' + (ES ? 'Stripe' : 'Mercado Pago') + ' por procesar cada pago.' },
+  { titulo: 'Sin comisión sobre tus cobros', texto: 'Centra no añade ninguna comisión a lo que cobras a tus alumnas. Solo pagas la de ' + (ES ? 'Stripe' : 'Mercado Pago') + ' por procesar cada pago.' },
 ] as const;
 
 export default function SolucionesPage() {
@@ -69,7 +69,7 @@ export default function SolucionesPage() {
       <HeroHub
         etiqueta={<Etiqueta icono={<Store size={16} strokeWidth={1.6} />}>Soluciones</Etiqueta>}
         categoria="Software para cada tipo de estudio"
-        titulo={<>Tentare, según tu estudio.</>}
+        titulo={<>Centra, según tu estudio.</>}
         texto="Es el mismo producto y el mismo precio para todos. Lo que cambia es por dónde empezar: un estudio de Pilates, uno de reformer, uno de yoga, varias sedes o venir de otro programa."
       />
 

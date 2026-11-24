@@ -48,7 +48,7 @@ function casa(palabrasBuscadas: readonly string[], textos: readonly string[]): b
 }
 
 /**
- * Secciones, tarjetas y filas de otra pantalla («Plan de Tentare») en cuyo
+ * Secciones, tarjetas y filas de otra pantalla («Plan de Centra») en cuyo
  * título o `palabras` están TODAS las palabras buscadas, en el orden del
  * inicio. Las tarjetas que este estudio no tiene (sedes, catálogo de la cadena)
  * no salen: llevarían a nada. Cuáles tiene lo dice quien llama, con lo que ya
@@ -115,7 +115,7 @@ export const MAX_AJUSTES_EN_BUSCADOR_GLOBAL = 5;
  * Configuración) y a cinco. Un rol que no entra en Configuración no ve ninguna:
  * un resultado que lleva a una pantalla cerrada es un enlace que miente.
  *
- * Sin las filas de otra pantalla («Plan de Tentare», «Mi cuenta»): no son un
+ * Sin las filas de otra pantalla («Plan de Centra», «Mi cuenta»): no son un
  * ajuste con su tarjeta, y ⌘K ya las encuentra por su entrada del menú.
  */
 export function ajustesParaBuscadorGlobal(

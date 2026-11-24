@@ -128,10 +128,10 @@ function OAuthAuthorizeContenido() {
                 No incluye, porque solo puede darlo la propietaria del estudio: {estado.fuera.map(s => s.descripcion.toLowerCase()).join('; ')}.
               </p>
             )}
-            {/* Lo que la app pide y Tentare no le deja pedir, sea quien sea quien autorice. */}
+            {/* Lo que la app pide y Centra no le deja pedir, sea quien sea quien autorice. */}
             {estado.fueraApp.length > 0 && (
               <p className="text-[12px] text-muted-foreground text-pretty">
-                Tampoco incluye, porque Tentare no permite que esta aplicación lo pida: {estado.fueraApp.map(s => s.descripcion.toLowerCase()).join('; ')}.
+                Tampoco incluye, porque Centra no permite que esta aplicación lo pida: {estado.fueraApp.map(s => s.descripcion.toLowerCase()).join('; ')}.
               </p>
             )}
             <div className="flex gap-2">

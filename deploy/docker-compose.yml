@@ -1,4 +1,4 @@
-# Tentare en servidor propio: la app, Inngest (trabajos de fondo) y los crons.
+# Centra en servidor propio: la app, Inngest (trabajos de fondo) y los crons.
 # Supabase va aparte, con su docker-compose oficial (ver deploy/README.md).
 #
 #   cd deploy && docker compose up -d --build

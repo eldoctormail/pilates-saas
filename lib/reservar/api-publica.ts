@@ -27,10 +27,10 @@ export interface OpcionesPostPublicoWidget {
 
 // `url` debe llegar YA absoluta cuando el caller es el bundle embebible
 // (`${origenTentare}/api/public/...`, ver lib/widget/usar-datos-widget.ts) —
-// `window.location.origin` aquí sería el del ESTUDIO, no el de Tentare, así
+// `window.location.origin` aquí sería el del ESTUDIO, no el de Centra, así
 // que no sirve de base por defecto. Se mantiene solo como fallback para no
 // reventar si algún día se llama con una ruta relativa desde el propio origen
-// de Tentare (p. ej. en tests).
+// de Centra (p. ej. en tests).
 function conQueryCors(url: string, opciones: OpcionesPostPublicoWidget): string {
   const u = new URL(url, typeof window !== 'undefined' ? window.location.origin : 'http://localhost');
   if (opciones.origenCors === 'query-slug' && opciones.slug) u.searchParams.set('slug', opciones.slug);

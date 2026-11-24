@@ -152,7 +152,7 @@ test.describe('Crecimiento no deja que una señal se pierda ni infla las que hay
 });
 
 // El concierge de migración se retiró el 21-oct-2026: el formulario «Te la
-// hacemos nosotros» prometía que Tentare hacía la migración, y nadie la hace.
+// hacemos nosotros» prometía que Centra hacía la migración, y nadie la hace.
 // La ruta se queda contestando 410 para una pestaña vieja, sin guardar ningún
 // lead ni avisar a nadie. Los que ya entraron siguen en Crecimiento.
 test.describe('El concierge de migración está retirado', () => {

@@ -2,7 +2,7 @@
 // «Para tu gestoría» y la línea de «Facturas» (decisión 8 de las maquetas
 // aprobadas el 2-oct-2026).
 //
-// · Un estudio que NO factura con Tentare ve lo que su gestoría necesita: lo
+// · Un estudio que NO factura con Centra ve lo que su gestoría necesita: lo
 //   cobrado del trimestre natural (el del IVA) anterior, el que va, y el año
 //   anterior. Las cifras son las de «Lo que he cobrado» (`cobradoEnTramo`).
 // · Uno que SÍ factura ve una línea del periodo —base, IVA por tipo y total—
@@ -91,7 +91,7 @@ export function resumenFacturado(facturas: readonly FacturaParaResumen[], t: Tra
 
 /**
  * Cobros del periodo que no tienen factura, en un estudio que factura con
- * Tentare: los de efectivo (no la sacan solos) y los que quedaron pendientes de
+ * Centra: los de efectivo (no la sacan solos) y los que quedaron pendientes de
  * sellar. `reciboConFactura` dice si un recibo ya tiene la suya.
  */
 export function cobrosSinFactura<R extends { id: string; metodoCobro?: string | null; facturaPendienteSellar?: boolean | null }>(

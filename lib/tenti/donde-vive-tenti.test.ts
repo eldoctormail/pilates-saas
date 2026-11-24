@@ -1,11 +1,11 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // Dónde vive Tenti, y dónde no.
 //
-// Tenti es Tentare. Donde Tentare interviene —lo hace solo, lo vigila o te lo
+// Tenti es Centra. Donde Centra interviene —lo hace solo, lo vigila o te lo
 // ofrece— va Tenti, y desde el 5-oct-2026 (decisión del fundador) va en TODOS
 // los sitios donde antes iba el Orb, que ya no existe. `Sparkles` sigue
 // queriendo decir «novedad» (el changelog), y el robot sigue fuera. Desde el
-// asistente (fundador, 5-oct-2026) Tentare SÍ responde preguntas: responde
+// asistente (fundador, 5-oct-2026) Centra SÍ responde preguntas: responde
 // Tenti, con los datos del estudio y su cara. Un robot genérico es justo lo
 // contrario.
 //
@@ -183,15 +183,15 @@ const AVISO_MIT = 'Copyright (c) 2026 Louis Raillé';
  */
 const CON_TENTI: Record<string, { usos: number; motivo: string }> = {
   // Resumen: los tres sitios donde estaba el Orb.
-  'app/(dashboard)/dashboard/page.tsx': { usos: 1, motivo: 'el enlace «Sistema autónomo»: Tentare ejecuta cosas por su cuenta (solo la propietaria)' },
+  'app/(dashboard)/dashboard/page.tsx': { usos: 1, motivo: 'el enlace «Sistema autónomo»: Centra ejecuta cosas por su cuenta (solo la propietaria)' },
   // 3 en el código, 1 en pantalla: la home de siempre pinta la tira; la nueva (panel nuevo, 14-oct-2026) la pinta dentro de su
-  // tarjeta o, con el día vacío, como el propio vacío («Hoy no hay clases. Tentare sigue atento…»), nunca las dos.
-  'components/dashboard/hoy-en-el-estudio.tsx': { usos: 3, motivo: 'la tira «Tentare ha encontrado…»: lo que Tentare ha visto en la agenda del día (y, en la home nueva, la misma frase como vacío del día)' },
+  // tarjeta o, con el día vacío, como el propio vacío («Hoy no hay clases. Centra sigue atento…»), nunca las dos.
+  'components/dashboard/hoy-en-el-estudio.tsx': { usos: 3, motivo: 'la tira «Centra ha encontrado…»: lo que Centra ha visto en la agenda del día (y, en la home nueva, la misma frase como vacío del día)' },
   // Dos desde el 5-oct (fundador: «cada estado en su momento»): el titular de
   // «Decidir» solo lleva a Tenti si algo espera tu visto bueno (si no, el Check).
-  'components/dashboard/estado-del-estudio.tsx': { usos: 2, motivo: '«Tentare lo está haciendo» (trabajando) y el titular de «Decidir» (espera tu visto bueno / agobiado)' },
+  'components/dashboard/estado-del-estudio.tsx': { usos: 2, motivo: '«Centra lo está haciendo» (trabajando) y el titular de «Decidir» (espera tu visto bueno / agobiado)' },
   // Automatizaciones, fuera desde el 6-oct-2026 (fundador: «En
-  // Automatizaciones quita a Tenti»): «Esto ya lo hace Tentare…» y la fila
+  // Automatizaciones quita a Tenti»): «Esto ya lo hace Centra…» y la fila
   // «Sistema autónomo» se quedan sin icono.
   'components/decision/piloto-automatico.tsx': { usos: 1, motivo: 'el piloto automático: ejecuta solo lo de alta confianza' },
   // Tres, cada uno en su paso (nunca dos a la vez): analizar, importar y el acta.
@@ -206,12 +206,12 @@ const CON_TENTI: Record<string, { usos: number; motivo: string }> = {
   // (estadoDelVeredicto → sin Tenti si aprobar cobra).
   'components/decision/veredicto-del-dia.tsx': { usos: 1, motivo: 'el veredicto del día: analizando, recién hecho, el mensaje que te pregunta o lo que el piloto no pudo; nunca junto a un cobro' },
   // El botón flotante del chat vivía solo (8-oct-2026); el 11-nov el fundador lo quiso DENTRO del botón de ayuda: «no deben de
-  // estar los 2 separados». Ahora Tenti es el icono de ese único botón y de la pestaña «Tentare» (no en «Mensajes», la de la persona).
+  // estar los 2 separados». Ahora Tenti es el icono de ese único botón y de la pestaña «Centra» (no en «Mensajes», la de la persona).
   'components/ayuda/ayuda-del-panel.tsx': { usos: 1, motivo: 'el botón único de la esquina: Tenti es su icono cuando el asistente está disponible (no junto a un cobro)' },
-  // La píldora flotante «Pregúntale a Tentare» (fundador, 21-nov-2026): el icono de destellos «era muy IA»; en su lugar, la mascota, como el
+  // La píldora flotante «Pregúntale a Centra» (fundador, 21-nov-2026): el icono de destellos «era muy IA»; en su lugar, la mascota, como el
   // avatar del campo de Sidekick en Shopify. Va dentro de un botón: no se toca, solo mira y parpadea.
   'components/asistente/columna-asistente.tsx': { usos: 1, motivo: 'la píldora flotante que abre el asistente: Tenti es su avatar (pedido del fundador)' },
-  'components/ayuda/panel-ayuda.tsx': { usos: 2, motivo: 'el panel de ayuda: la pestaña «Tentare» (su icono) y el saludo de Inicio, donde se le pregunta al asistente' },
+  'components/ayuda/panel-ayuda.tsx': { usos: 2, motivo: 'el panel de ayuda: la pestaña «Centra» (su icono) y el saludo de Inicio, donde se le pregunta al asistente' },
   // La demo personalizada de la landing (/demo, 28-oct-2026): la propietaria que aún no es clienta habla con Tenti, que entiende
   // su duda y le prepara un recorrido. UN solo Tenti, en la cabecera del chat (no uno por mensaje: cada uno monta un canvas),
   // «pensando» solo mientras la petición al servidor va (PENSANDO_CUANDO) y sin Tenti en la transición de «preparando».
@@ -237,7 +237,7 @@ const ANCHOS_DEL_ICONO = new Set(['18', '20', '22', '24', '28']);
  *
  * `sinSpinner` dice si en ese fichero NO puede quedar ningún `Loader2`. Desde
  * el 5-oct, ninguno: el último (importar, en la migración) es ahora Tenti
- * 'trabajando', porque Tentare mete las filas solo y sin decidir nada.
+ * 'trabajando', porque Centra mete las filas solo y sin decidir nada.
  */
 const PENSANDO_CUANDO: { fichero: string; variable: string; sinSpinner: boolean }[] = [
   { fichero: 'components/calendario/adaptaciones-clase.tsx', variable: 'preparando', sinSpinner: true },
@@ -271,7 +271,7 @@ const IMPORTAN_EL_COMPONENTE = new Set([
 
 /**
  * Los únicos que importan `components/tenti/tenti-asistente`: la cara del
- * asistente («Pregúntale a Tentare»), solo en su chat (/asistente). Habla en
+ * asistente («Pregúntale a Centra»), solo en su chat (/asistente). Habla en
  * «momentos» del asistente (lib/asistente/estado-ui.ts) y el envoltorio los
  * traduce a estados del motor (lib/tenti/asistente.ts): quien lo usa nunca
  * escribe un estado del catálogo. Dos usos que nunca están a la vez: el
@@ -303,13 +303,13 @@ const IMPORTAN_EL_DECORATIVO: Record<string, { tamano: number; motivo: string }>
   // aparece en el sitio de la lupa y mira hacia lo que se escribe. Lo ven los
   // tres roles del panel. Solo vive con la hoja abierta. 40 px: la fila del
   // input no crece (el cuerpo mide unos 27 px).
-  'components/search/global-search.tsx': { tamano: 40, motivo: 'el buscador ⌘K: Tentare te ayuda a encontrar lo que quieres hacer' },
+  'components/search/global-search.tsx': { tamano: 40, motivo: 'el buscador ⌘K: Centra te ayuda a encontrar lo que quieres hacer' },
   // El resumen del día de Automatizaciones lo tuvo a 56 px del 5 al 6-oct; el
   // fundador lo quitó («En Automatizaciones quita a Tenti») y vuelve el Zap.
 };
 
 /** Los únicos props de <TentiDecorativo>. Sin `estado`: siempre en reposo (el
- *  que decía lo que Tentare hace solo era de Automatizaciones, y se fue). */
+ *  que decía lo que Centra hace solo era de Automatizaciones, y se fue). */
 const PROPS_DEL_DECORATIVO = new Set(['tamano', 'reserva', 'mira', 'className']);
 
 /** Donde 'hecho' va CON celebración (`celebra`, giro y chispas): "hecho" es que
@@ -358,7 +358,7 @@ const NOMBRES_DEL_SONIDO = /\b(sonarTenti|prepararSonidos|useSonidosDeTenti|pone
 const VETADOS: { grupo: string; motivo: string; rutas: string[]; deRebote: boolean }[] = [
   {
     grupo: 'marca blanca', deRebote: true,
-    motivo: 'ahí manda la marca del ESTUDIO: el cliente no conoce a Tentare',
+    motivo: 'ahí manda la marca del ESTUDIO: el cliente no conoce a Centra',
     rutas: [
       'app/portal', 'app/reservar', 'app/kiosk', 'app/widget-bundle', 'app/widget-auth-retorno',
       'components/widget', 'components/widgets', 'components/checkout-widget', 'components/cuenta-widget',
@@ -525,7 +525,7 @@ test('los imports de valor dejan fuera los tipos y los import() (otro chunk)', (
 
 test('el Orb ya no existe: ni su componente, ni quien lo use, ni su CSS', () => {
   assert.ok(!existsSync(join(raiz, 'components/marca/tentare-orb.tsx')),
-    'Tenti releva al Orb (5-oct-2026, decisión del fundador): dos marcas de «esto lo hace Tentare» no dicen nada.');
+    'Tenti releva al Orb (5-oct-2026, decisión del fundador): dos marcas de «esto lo hace Centra» no dicen nada.');
   // Primero el texto en crudo (barato) y luego sin comentarios: una historia
   // contada en un comentario no es un Orb.
   const conOrb = TODAS.filter(f => (TEXTOS.get(f)!.includes('TentareOrb') && /\bTentareOrb\b/.test(leerCodigo(f)))
@@ -566,8 +566,8 @@ for (const [fichero, { usos, motivo }] of Object.entries(CON_TENTI)) {
     // recuento, los props cerrados y la regla de 'pensando', y tsc no lo para.
     assert.equal(src.match(/\bTentiIcono\b/g)?.length ?? 0, usos + 1,
       `${fichero}: TentiIcono solo puede aparecer en su import y en sus ${usos} etiqueta(s); nada de alias.`);
-    assert.doesNotMatch(src, /\bSparkles\b/, '`Sparkles` significa «novedad» (el changelog). Para «esto lo hace Tentare», Tenti.');
-    assert.doesNotMatch(src, /<Bot\b/, 'El robot tampoco: Tentare SÍ responde (el asistente), pero responde Tenti, con los datos del estudio y su cara; un robot genérico es lo contrario.');
+    assert.doesNotMatch(src, /\bSparkles\b/, '`Sparkles` significa «novedad» (el changelog). Para «esto lo hace Centra», Tenti.');
+    assert.doesNotMatch(src, /<Bot\b/, 'El robot tampoco: Centra SÍ responde (el asistente), pero responde Tenti, con los datos del estudio y su cara; un robot genérico es lo contrario.');
   });
 }
 
@@ -1098,5 +1098,5 @@ test('«Sparkles» sigue siendo el icono del changelog', () => {
 // sistema. Se comprueba aparte porque CON_TENTI mira etiquetas, no caracteres.
 test('app/(dashboard)/alumnas/importar/page.tsx: ya no queda ningún ✨ suelto', () => {
   assert.doesNotMatch(leerCodigo('app/(dashboard)/clientas/importar/page.tsx'), /✨/,
-    'Aquí va Tenti: es un enlace a lo que Tentare hace por ti, y su marca no es un emoji que cada sistema dibuja a su manera.');
+    'Aquí va Tenti: es un enlace a lo que Centra hace por ti, y su marca no es un emoji que cada sistema dibuja a su manera.');
 });

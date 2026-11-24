@@ -71,7 +71,7 @@ export async function POST(req: NextRequest) {
   const event: Stripe.Event = firma.evento;
 
   // I-12 (59ª auditoría, 13-sep-2026). Este destino solo escucha la cuenta
-  // PLATAFORMA (la suscripción de un estudio a Tentare); su gemelo,
+  // PLATAFORMA (la suscripción de un estudio a Centra); su gemelo,
   // `/api/stripe/webhook`, es el que procesa eventos de las cuentas Connect
   // de las socias y SIEMPRE resuelve el tenant por `event.account`, nunca por
   // la metadata a secas (D-3, 22ª pasada — el mismo criterio que cerró C-1 de

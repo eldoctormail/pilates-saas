@@ -19,10 +19,10 @@ export async function generateMetadata({ params }: { params: Promise<{ categoria
   if (!articulo || articulo.estado !== 'publicado') return {};
   const path = urlArticulo(articulo);
   return {
-    title: `${articulo.titulo} | Ayuda de Tentare`,
+    title: `${articulo.titulo} | Ayuda de Centra`,
     description: articulo.descripcion,
     alternates: { canonical: urlDe(path) },
-    openGraph: { siteName: 'Tentare', type: 'article', title: articulo.titulo, description: articulo.descripcion, url: urlDe(path) },
+    openGraph: { siteName: 'Centra', type: 'article', title: articulo.titulo, description: articulo.descripcion, url: urlDe(path) },
   };
 }
 

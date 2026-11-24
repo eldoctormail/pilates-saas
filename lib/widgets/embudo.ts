@@ -1,4 +1,4 @@
-// «Tentare Widgets»: el embudo POR WIDGET, a partir de las filas crudas de
+// «Centra Widgets»: el embudo POR WIDGET, a partir de las filas crudas de
 // `embudo_widget_por_origen` (origen, tipo, n). Puro: lo usan «Cómo le va a tu
 // página» y el constructor, y se prueba con `node --test`.
 //

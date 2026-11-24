@@ -168,7 +168,7 @@ test('Modo A (Checkout hospedado): lo del formulario tampoco va al crear la sesi
   assert.ok(crea > 0 && update > crea && responde > update);
   // La descripción de una compra de plan no lleva el nombre del formulario.
   // Con el cobro proporcional, una cuota lleva además la frase del primer cobro (`cuotaFrase`): sigue sin llevar el nombre del formulario.
-  assert.match(s, /description: body\.reciboId && body\.socioNombre \? `Tentare · \$\{body\.socioNombre\}` : (?:cuotaFrase \? `Tentare · \$\{cuotaFrase\}` : )?'Tentare'/);
+  assert.match(s, /description: body\.reciboId && body\.socioNombre \? `Centra · \$\{body\.socioNombre\}` : (?:cuotaFrase \? `Centra · \$\{cuotaFrase\}` : )?'Centra'/);
 });
 
 

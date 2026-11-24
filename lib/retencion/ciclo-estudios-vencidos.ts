@@ -286,13 +286,13 @@ export function fueraDelCicloPorElGratis(
 /**
  * Por qué no se puede pedir el borrado anticipado de un estudio sin el contrato
  * terminado. Una sede cerrada de una cadena que dejó de pagar no lo tiene
- * terminado mientras otra sede siga en Tentare (la principal en el plan gratis):
+ * terminado mientras otra sede siga en Centra (la principal en el plan gratis):
  * decirle «tu suscripción sigue activa» sería falso.
  */
 export function motivoSinBorradoAnticipado(e: { cadenaId: string | null; subscriptionStatus: string | null }): string {
   const cerrada = e.subscriptionStatus === null || (ESTADOS_SUSCRIPCION_TERMINADA as readonly string[]).includes(e.subscriptionStatus);
   if (e.cadenaId && cerrada) {
-    return 'Esta sede está cerrada, pero mientras otra sede de tu cadena siga en Tentare guardamos sus datos. Si quieres que los borremos ya, escríbenos a soporte.';
+    return 'Esta sede está cerrada, pero mientras otra sede de tu cadena siga en Centra guardamos sus datos. Si quieres que los borremos ya, escríbenos a soporte.';
   }
   return 'Tu suscripción sigue activa: el borrado solo se puede pedir cuando ha terminado.';
 }

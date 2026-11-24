@@ -239,7 +239,7 @@ export function GlobalSearch({
       : instructores.filter(i => i.activo).slice(0, 3);
   }, [instructores, puedeVerEquipo, q]);
 
-  // «Preguntar a Tentare» (el asistente): para quien puede usarlo (rol, plan y
+  // «Preguntar a Centra» (el asistente): para quien puede usarlo (rol, plan y
   // servidor; si no, ni se pinta). Con la caja vacía, tres preguntas de ejemplo;
   // con texto, una fila que va PRIMERA si parece una pregunta (o no hay nada
   // más) y si no al final, para no robarle la navegación a quien busca algo.
@@ -252,14 +252,14 @@ export function GlobalSearch({
   const asistentePrimero = puertaAsistente && !!query.trim() && (pareceUnaPregunta(query) || !hasResults);
   const filaAsistente = puertaAsistente && !!query.trim() && (
     <div className="mb-1">
-      <p className="text-[10px] font-bold uppercase tracking-widest px-3 py-2" style={{ color: 'var(--muted-foreground)' }}>Pregúntale a Tentare</p>
+      <p className="text-[10px] font-bold uppercase tracking-widest px-3 py-2" style={{ color: 'var(--muted-foreground)' }}>Pregúntale a Centra</p>
       <button onClick={() => preguntarATentare(query)} data-testid="buscador-preguntar"
         data-resultado className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-muted data-[activo]:bg-muted transition-colors text-left group">
         <div className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 bg-brand/10">
           <MessageCircleQuestionMark size={14} className="text-brand-medio" />
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-semibold text-foreground truncate">Preguntar a Tentare: «{query.trim()}»</p>
+          <p className="text-sm font-semibold text-foreground truncate">Preguntar a Centra: «{query.trim()}»</p>
           <p className="text-xs truncate" style={{ color: 'var(--muted-foreground)' }}>Te responde con los datos de tu estudio</p>
         </div>
         <ArrowRight size={14} className="shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: 'var(--muted-foreground)' }} />
@@ -412,10 +412,10 @@ export function GlobalSearch({
                 </div>
               )}
 
-              {/* Preguntas de ejemplo para Tentare, con la caja vacía */}
+              {/* Preguntas de ejemplo para Centra, con la caja vacía */}
               {puertaAsistente && !q && (
                 <div className="mb-1">
-                  <p className="text-[10px] font-bold uppercase tracking-widest px-3 py-2" style={{ color: 'var(--muted-foreground)' }}>Pregúntale a Tentare</p>
+                  <p className="text-[10px] font-bold uppercase tracking-widest px-3 py-2" style={{ color: 'var(--muted-foreground)' }}>Pregúntale a Centra</p>
                   {sugerenciasPara(puedeVerFinanzas(rol), 3).map(s => (
                     <button key={s} onClick={() => preguntarATentare(s)}
                       data-resultado className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-muted data-[activo]:bg-muted transition-colors text-left group">

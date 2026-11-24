@@ -48,10 +48,10 @@ export function mensajeInvitacionWhatsApp(d: DatosAvisoWhatsApp): string | null 
   const hola = `Hola ${primerNombre(d.nombre)}`;
   const correo = enmascararCorreo(email);
   if (d.rol === 'INSTRUCTOR') {
-    return `${hola}, te he dado acceso a ${d.estudio} en Tentare. Entra en la app del estudio con tu correo ${correo} y, cuando te pregunte cómo quieres entrar, elige «Como instructora»: ${d.urlApp}`;
+    return `${hola}, te he dado acceso a ${d.estudio} en Centra. Entra en la app del estudio con tu correo ${correo} y, cuando te pregunte cómo quieres entrar, elige «Como instructora»: ${d.urlApp}`;
   }
   if (!d.invitacionEnviada) return null;
-  return `${hola}, te acabo de mandar a ${correo} la invitación para entrar en ${d.estudio} en Tentare. Ábrela desde ese correo (si no la ves, mira en spam).`;
+  return `${hola}, te acabo de mandar a ${correo} la invitación para entrar en ${d.estudio} en Centra. Ábrela desde ese correo (si no la ves, mira en spam).`;
 }
 
 /** El enlace wa.me con el +34 de un móvil español; sin teléfono, que elija el chat. */

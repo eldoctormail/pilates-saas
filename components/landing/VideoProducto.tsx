@@ -1,5 +1,5 @@
 // El vídeo de producto («Ver cómo funciona» en el hero): el resumen de 78 s
-// del panel REAL de Tentare con datos de un estudio de prueba inventado —
+// del panel REAL de Centra con datos de un estudio de prueba inventado —
 // quién cubre una baja, la semana entera en el calendario, reservas,
 // cobros— narrado con tipografía y avisos sobre el propio producto.
 //
@@ -28,7 +28,7 @@
 
 const ANCHO = 1920;
 const ALTO = 1080;
-const ALT = 'Tentare por dentro: la semana entera en el calendario, reservas online y los cobros del mes.';
+const ALT = 'Centra por dentro: la semana entera en el calendario, reservas online y los cobros del mes.';
 
 export function VideoProducto() {
   return (

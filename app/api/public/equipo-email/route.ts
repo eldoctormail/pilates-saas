@@ -11,7 +11,7 @@ import { EMAIL_VALIDO } from '@/lib/recursos/descargas';
 // PÚBLICO y sin sesión (la persona aún no tiene cuenta). Devuelve SOLO un
 // booleano — nunca el estudio, el nombre ni el rol — y va con tope por IP
 // estricto, porque un sí/no por correo es, aun así, una forma de averiguar quién
-// trabaja en un estudio de Tentare. No es la cerradura: vincular la cuenta a la
+// trabaja en un estudio de Centra. No es la cerradura: vincular la cuenta a la
 // ficha sigue exigiendo el enlace firmado (lib/equipo/reclamar-reglas.ts).
 export async function POST(req: NextRequest) {
   const limitado =

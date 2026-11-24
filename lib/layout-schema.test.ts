@@ -252,7 +252,7 @@ test('el orden guardado manda', () => {
 
 test('un módulo NUEVO va al final, no desaparece', () => {
   // El estudio guardó su orden antes de que existiera /nuevo. Si los no
-  // listados se cayeran, cada módulo que saque Tentare sería invisible para
+  // listados se cayeran, cada módulo que saque Centra sería invisible para
   // quien alguna vez tocó su menú.
   const items = [it('/a'), it('/nuevo'), it('/b')];
   assert.deepEqual(ordenarItemsMenu(items, ['/b', '/a']).map(x => x.href), ['/b', '/a', '/nuevo']);

@@ -1,4 +1,4 @@
-// Tokens de formulario para el autoservicio de Tentare Network
+// Tokens de formulario para el autoservicio de Centra Network
 // (app/network/*, fuera de (dashboard)) — copia deliberada de los mismos
 // valores que `components/configuracion/estilos.tsx` exporta, NO un
 // re-export de ese módulo.

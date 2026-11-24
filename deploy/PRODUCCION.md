@@ -1,6 +1,6 @@
 # Pasar a producción
 
-Para cuando el ensayo (`deploy/ensayo/PRUEBAS.md`) salió bien. Al terminar, Tentare queda:
+Para cuando el ensayo (`deploy/ensayo/PRUEBAS.md`) salió bien. Al terminar, Centra queda:
 
 - en tu dominio, por HTTPS, con un túnel de Cloudflare (no se abren puertos en el router);
 - con copias de seguridad diarias;
@@ -66,7 +66,7 @@ https://app.tudominio.com.ar/api/mercadopago/webhook
 
 ## 4. Copias de seguridad
 
-Cada copia es **un solo archivo** con todo lo necesario para volver a levantar Tentare:
+Cada copia es **un solo archivo** con todo lo necesario para volver a levantar Centra:
 - **Un volcado de la base** (`pg_dump`), hecho sin parar nada.
 - **La carpeta de datos de Postgres**, con la base parada unos segundos. Es lo que restaura todo tal cual.
 - **Los archivos subidos:** avatares y fotos.

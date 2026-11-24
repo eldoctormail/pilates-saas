@@ -37,7 +37,7 @@ export function instructorasConRelacion(
 // INSTRUCTORA desde el panel. Sin esto el selector le listaba TODAS las socias
 // del estudio y casi todas acababan en SIN_RELACION_VALIDA. Otra vez UX: la
 // cerradura sigue siendo la RPC (y acotar `socios_lectura` queda para cuando
-// se retire Tentare Core).
+// se retire Centra Core).
 export function sociasConRelacion<T extends { id: string }>(
   socios: T[], reservas: Reserva[], sesiones: Sesion[], instructorId: string | null,
 ): T[] {

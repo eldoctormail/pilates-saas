@@ -15,7 +15,7 @@ test('la tarjeta del enlace de la app es del ESTUDIO: título y sitio con su nom
   assert.equal(t.twitter.title, 'Estudio Prueba');
   assert.equal(t.twitter.description, DESC);
   for (const v of [t.openGraph.title, t.openGraph.siteName, t.openGraph.description, t.twitter.title]) {
-    assert.doesNotMatch(v, /Tentare/);
+    assert.doesNotMatch(v, /Centra/);
   }
 });
 
@@ -36,7 +36,7 @@ test('imagen: su portada › su logo › ninguna (nunca la de serie ni una exter
   assert.equal(deSerie.openGraph.images, undefined);
 });
 
-test('el layout de /portal declara openGraph y twitter propios (si no, hereda los de Tentare B2B)', () => {
+test('el layout de /portal declara openGraph y twitter propios (si no, hereda los de Centra B2B)', () => {
   const src = readFileSync(new URL('../../app/portal/[slug]/layout.tsx', import.meta.url), 'utf8');
   const meta = src.slice(src.indexOf('export async function generateMetadata'), src.indexOf('export default'));
   assert.match(meta, /tarjetasDelPortal\(/);

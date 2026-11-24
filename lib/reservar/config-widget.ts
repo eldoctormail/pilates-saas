@@ -88,7 +88,7 @@ export interface ConfigWidget {
    * Nombre de familia (el del catálogo) para el cuerpo/UI (Modo B; en Modo A
    * ya existe `?fuente=`, resuelto por `resolverApariencia` con lo guardado en
    * el tema debajo — mismo reparto que `fondo`/`tinta`). Ningún modo la pide a
-   * Google: si la sirve Tentare sale de lo suyo, y si no, se nombra
+   * Google: si la sirve Centra sale de lo suyo, y si no, se nombra
    * (`letraNativa`, lib/widget/fuentes-nativa.ts).
    */
   fuente: string | null;

@@ -26,8 +26,8 @@ import { NW_FONDO, NW_TINTA, NW_MUTED, NW_SAND_2, NW_PRODUCTO } from '@/componen
 // es específico de la demanda de instructoras, no encaja con un directorio
 // de estudios vacío.
 export const metadata: Metadata = {
-  title: 'Estudios de Pilates y Yoga | Tentare Network',
-  description: 'Descubre estudios de Pilates y Yoga en el directorio de Tentare Network.',
+  title: 'Estudios de Pilates y Yoga | Centra Network',
+  description: 'Descubre estudios de Pilates y Yoga en el directorio de Centra Network.',
 };
 
 export default async function MarketplaceEstudiosPage({

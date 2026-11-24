@@ -3,7 +3,7 @@
 //
 // La usa scripts/identidad-ios.mjs (`npm run cap:sync`) para escribir
 // ios/identidad.local.xcconfig: así la app de un estudio sale del mismo
-// proyecto que la de Tentare sin editar ni un fichero versionado. Puro, con
+// proyecto que la de Centra sin editar ni un fichero versionado. Puro, con
 // tests (identidad-app.test.ts).
 //
 // ⚠️ Un xcconfig no tiene comillas ni escapes: `//` empieza un comentario y

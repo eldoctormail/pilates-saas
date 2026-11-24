@@ -4,7 +4,7 @@
 // que es el ÚNICO que crea o retira packs, y el de Connect (/api/stripe/webhook),
 // que tiene que reconocerlos para NO tocarlos.
 //
-// El pack es dinero de Tentare (cuenta de PLATAFORMA, como la suscripción
+// El pack es dinero de Centra (cuenta de PLATAFORMA, como la suscripción
 // SaaS), no de una socia: nunca pasa por Connect.
 //
 // Reglas (encargo del 6-oct-2026 + revisión de cobros):

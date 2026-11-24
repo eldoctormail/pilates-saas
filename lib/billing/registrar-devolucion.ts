@@ -90,7 +90,7 @@ export function estadoInicialDevolucion(recibo: {
 //
 // Un refund puede fallar mucho después de `charge.refunded` (SEPA sobre todo):
 // Stripe devuelve el dinero al estudio y DECREMENTA `amount_refunded` — pero
-// Tentare ya marcó el recibo DEVUELTO, anotó la devolución y quizá la
+// Centra ya marcó el recibo DEVUELTO, anotó la devolución y quizá la
 // propietaria ya pulsó REVERTIDA (le quitó lo entregado a la socia): pagó Y
 // perdió sesiones. Aquí se DECIDE qué corregir; el webhook ejecuta.
 //

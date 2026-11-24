@@ -5,15 +5,15 @@ import { urlDe } from '@/lib/seo/paginas';
 // metadata de la home del Centro de Ayuda vive aquí — mismo motivo que
 // app/recursos/layout.tsx.
 export const metadata: Metadata = {
-  title: 'Centro de Ayuda — Documentación de Tentare',
+  title: 'Centro de Ayuda — Documentación de Centra',
   description:
-    'La documentación oficial de Tentare: cómo configurar tu estudio, reservas, pagos, bonos, el portal de reservas, el widget y qué hacer cuando algo falla.',
+    'La documentación oficial de Centra: cómo configurar tu estudio, reservas, pagos, bonos, el portal de reservas, el widget y qué hacer cuando algo falla.',
   alternates: { canonical: urlDe('/ayuda') },
   openGraph: {
-    siteName: 'Tentare',
+    siteName: 'Centra',
     type: 'website',
-    title: 'Centro de Ayuda — Tentare',
-    description: 'La documentación oficial de Tentare, paso a paso.',
+    title: 'Centro de Ayuda — Centra',
+    description: 'La documentación oficial de Centra, paso a paso.',
     url: urlDe('/ayuda'),
     images: [{ url: '/ayuda/opengraph-image' }],
   },

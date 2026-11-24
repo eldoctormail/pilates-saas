@@ -54,7 +54,7 @@ for (const p of PAGINAS) {
     await expect(page.locator('footer.w-pie')).toHaveCount(1);
     // Los antiguos: la barra de las interiores, su pie, el pie de la home y la cabecera legal.
     await expect(page.locator('.sitenav, footer.sf, footer.v5-pie')).toHaveCount(0);
-    await expect(page.getByText('← Volver a Tentare')).toHaveCount(0);
+    await expect(page.getByText('← Volver a Centra')).toHaveCount(0);
     // CONTROL: el localizador de los antiguos sí encuentra algo cuando lo hay.
     await page.evaluate(() => document.body.insertAdjacentHTML('beforeend', '<nav class="sitenav" id="control-sitenav"></nav>'));
     await expect(page.locator('.sitenav, footer.sf, footer.v5-pie')).toHaveCount(1);

@@ -8,7 +8,7 @@ import { useEffect, useSyncExternalStore, type CSSProperties, type ReactNode } f
  * y debajo van entrando, uno tras otro, el compositor y el resto del Inicio.
  *
  * Suena **cada vez que se entra al software**, no solo la primera vez que se abre el estudio: una vez por sesión de
- * navegador (`sessionStorage`), así que pasar de Calendario a Inicio no la repite pero abrir Tentare otra vez, sí.
+ * navegador (`sessionStorage`), así que pasar de Calendario a Inicio no la repite pero abrir Centra otra vez, sí.
  * Sin «reducir movimiento» no hay nada que animar, y con un navegador automatizado (los e2e) tampoco: esperarían
  * casi tres segundos a que el contenido deje de estar oculto.
  *

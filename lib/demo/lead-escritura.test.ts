@@ -23,7 +23,7 @@ test('lead nuevo con la casilla marcada: permiso PENDIENTE con el texto exacto y
   const e = escrituraLeadDemo(null, { ...datos, comercial: true }, AHORA, () => 'x');
   assert.ok(e.tipo === 'insertar' && e.solicitud && e.fila.consentimiento_comercial === true);
   if (e.tipo === 'insertar') {
-    assert.match(String(e.fila.consentimiento_texto), /novedades y guías de Tentare/);
+    assert.match(String(e.fila.consentimiento_texto), /novedades y guías de Centra/);
     assert.equal(e.fila.consentimiento_en, AHORA);
     assert.equal(e.fila.consentimiento_confirmado_en, undefined, 'no se da por confirmado');
   }

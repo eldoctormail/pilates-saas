@@ -86,7 +86,7 @@ const ACTUALIZADO_1_03 = '2026-09-16';
 const FUNCIONALIDADES: PaginaSeo[] = [
   {
     path: '/funcionalidades/reservas-online',
-    titulo: 'Reservas y pagos para estudios de Pilates y yoga | Tentare',
+    titulo: 'Reservas y pagos para estudios de Pilates y yoga | Centra',
     descripcion:
       'Tus alumnas reservan y pagan desde el móvil, 24/7: bono, clase suelta o cuota, con tarjeta. Reglas por tipo de clase. Empieza gratis.',
     grupo: 'funcionalidades',
@@ -99,7 +99,7 @@ const FUNCIONALIDADES: PaginaSeo[] = [
   },
   {
     path: '/funcionalidades/lista-de-espera',
-    titulo: 'Lista de espera automática para Pilates y yoga | Tentare',
+    titulo: 'Lista de espera automática para Pilates y yoga | Centra',
     descripcion:
       'Cuando alguien cancela, la plaza se ofrece sola a la siguiente de la lista — con un plazo de aceptación configurable por tipo de clase. El hueco no se pierde.',
     grupo: 'funcionalidades',
@@ -112,7 +112,7 @@ const FUNCIONALIDADES: PaginaSeo[] = [
   },
   {
     path: '/funcionalidades/calendario-y-salas',
-    titulo: 'Calendario de clases, salas y aforo por reformer | Tentare',
+    titulo: 'Calendario de clases, salas y aforo por reformer | Centra',
     descripcion:
       'Series recurrentes, varias salas y capacidad por reformer, no solo un número de aforo. Una máquina averiada baja la capacidad de esa clase sola.',
     grupo: 'funcionalidades',
@@ -125,7 +125,7 @@ const FUNCIONALIDADES: PaginaSeo[] = [
   },
   {
     path: '/funcionalidades/gestion-de-instructoras',
-    titulo: 'Gestión de instructoras de Pilates y yoga | Tentare',
+    titulo: 'Gestión de instructoras de Pilates y yoga | Centra',
     descripcion:
       'Disponibilidad semanal, vacaciones y bajas, tarifa por hora y liquidación mensual. Y un aviso cuando tu estudio depende demasiado de una sola persona.',
     grupo: 'funcionalidades',
@@ -138,12 +138,12 @@ const FUNCIONALIDADES: PaginaSeo[] = [
   },
   {
     path: '/funcionalidades/sustituciones',
-    titulo: 'Sustituciones de instructoras automáticas | Tentare',
+    titulo: 'Sustituciones de instructoras automáticas | Centra',
     descripcion:
-      'Una instructora avisa de que no puede y Tentare busca sustituta, la contacta con tu visto bueno (o sola, en modo autónomo) y avisa a las alumnas.',
+      'Una instructora avisa de que no puede y Centra busca sustituta, la contacta con tu visto bueno (o sola, en modo autónomo) y avisa a las alumnas.',
     grupo: 'funcionalidades',
     etiqueta: 'Sustituciones',
-    resumen: 'Tentare busca quién cubre la baja y espera tu sí: candidatas, contacto, escalado y aviso.',
+    resumen: 'Centra busca quién cubre la baja y espera tu sí: candidatas, contacto, escalado y aviso.',
     prioridad: 1,
     changeFrequency: 'monthly',
     actualizado: PUBLICADO,
@@ -151,7 +151,7 @@ const FUNCIONALIDADES: PaginaSeo[] = [
   },
   {
     path: '/funcionalidades/bonos-y-membresias',
-    titulo: 'Gestión de bonos y cuotas para Pilates y yoga | Tentare',
+    titulo: 'Gestión de bonos y cuotas para Pilates y yoga | Centra',
     descripcion:
       'Bonos de sesiones con caducidad, cuotas mensuales, planes por tipo de clase y plazas fijas con recuperaciones: los cuatro modelos de cobro de un estudio.',
     grupo: 'funcionalidades',
@@ -164,9 +164,9 @@ const FUNCIONALIDADES: PaginaSeo[] = [
   },
   {
     path: '/funcionalidades/plazas-fijas',
-    titulo: 'Plazas fijas: el sitio semanal de tus alumnas | Tentare',
+    titulo: 'Plazas fijas: el sitio semanal de tus alumnas | Centra',
     descripcion:
-      'Da a una alumna su plaza en la clase de cada semana y Tentare se la reserva sola. Con pausa para vacaciones y peticiones desde su propia app.',
+      'Da a una alumna su plaza en la clase de cada semana y Centra se la reserva sola. Con pausa para vacaciones y peticiones desde su propia app.',
     grupo: 'funcionalidades',
     etiqueta: 'Plazas fijas',
     resumen: 'Su hueco semanal, reservado solo, con pausa y reglas propias.',
@@ -177,7 +177,7 @@ const FUNCIONALIDADES: PaginaSeo[] = [
   },
   {
     path: '/funcionalidades/clases-recurrentes',
-    titulo: 'Clases recurrentes y renovación del horario | Tentare',
+    titulo: 'Clases recurrentes y renovación del horario | Centra',
     descripcion:
       'Programa las clases que se repiten cada semana, edítalas o cancélalas en bloque y renueva la serie antes de que se acabe, sin crear clases en días de cierre.',
     grupo: 'funcionalidades',
@@ -190,7 +190,7 @@ const FUNCIONALIDADES: PaginaSeo[] = [
   },
   {
     path: '/funcionalidades/cobros-recurrentes',
-    titulo: ES ? 'Cobros automáticos y SEPA para Pilates y yoga | Tentare' : 'Cobros con Mercado Pago para Pilates y yoga | Tentare',
+    titulo: ES ? 'Cobros automáticos y SEPA para Pilates y yoga | Centra' : 'Cobros con Mercado Pago para Pilates y yoga | Centra',
     descripcion: ES
       ? 'Cobro automático con la tarjeta guardada, tres intentos escalonados cuando falla, reembolsos desde el panel y remesa SEPA 19.14 para tu banco de siempre.'
       : 'Tus alumnas pagan bonos y cuotas desde su app con Mercado Pago; efectivo, posnet y transferencia en el mostrador, y devoluciones desde el panel.',
@@ -204,7 +204,7 @@ const FUNCIONALIDADES: PaginaSeo[] = [
   },
   {
     path: '/funcionalidades/facturacion',
-    titulo: 'Facturación para estudios de Pilates y yoga | Tentare',
+    titulo: 'Facturación para estudios de Pilates y yoga | Centra',
     // ⚠️ Decía «firmada y transmitida a la AEAT» / «enviada a Hacienda», y el
     // envío automático NO está ocurriendo todavía — la propia página lo dice en
     // «Dónde está el límite, dicho claro». Que el título de Google prometa una
@@ -226,7 +226,7 @@ const FUNCIONALIDADES: PaginaSeo[] = [
   },
   {
     path: '/funcionalidades/ficha-de-clienta',
-    titulo: 'Ficha de alumna y CRM para Pilates y yoga | Tentare',
+    titulo: 'Ficha de alumna y CRM para Pilates y yoga | Centra',
     descripcion:
       'Historial, bonos, asistencia y notas de cada alumna en un sitio, con ficha de salud (lesiones y adaptaciones) visible solo para quien debe verla.',
     grupo: 'funcionalidades',
@@ -239,7 +239,7 @@ const FUNCIONALIDADES: PaginaSeo[] = [
   },
   {
     path: '/funcionalidades/automatizaciones-y-avisos',
-    titulo: 'Automatizaciones y avisos por app, push y email | Tentare',
+    titulo: 'Automatizaciones y avisos por app, push y email | Centra',
     // ⚠️ El recuento de esta página se comprobó contra el código antes de
     // escribirla y NO era el que se suponía: los 10 disparadores de
     // `TriggerAutomatizacion` solo se configuran desde /marketing, que está
@@ -263,7 +263,7 @@ const FUNCIONALIDADES: PaginaSeo[] = [
   },
   {
     path: '/funcionalidades/informes-y-rentabilidad',
-    titulo: 'Informes de rentabilidad y ocupación de clases | Tentare',
+    titulo: 'Informes de rentabilidad y ocupación de clases | Centra',
     descripcion:
       'Ingresos, ocupación por tipo de clase, retención y el margen de cada clase: lo que pagó cada asistente menos la tarifa real de la instructora.',
     grupo: 'funcionalidades',
@@ -277,7 +277,7 @@ const FUNCIONALIDADES: PaginaSeo[] = [
 
   {
     path: '/funcionalidades/cancelaciones-y-politicas',
-    titulo: 'Política de cancelación y no-shows para tu estudio | Tentare',
+    titulo: 'Política de cancelación y no-shows para tu estudio | Centra',
     descripcion:
       'Ventana de cancelación por tipo de clase, qué pasa con el bono y, si quieres, penalización por cancelar tarde o no presentarse, con consentimiento previo.',
     grupo: 'funcionalidades',
@@ -290,7 +290,7 @@ const FUNCIONALIDADES: PaginaSeo[] = [
   },
   {
     path: '/funcionalidades/app-para-alumnas',
-    titulo: 'App para estudios de Pilates y yoga, con tu marca | Tentare',
+    titulo: 'App para estudios de Pilates y yoga, con tu marca | Centra',
     descripcion:
       'Tus alumnas reservan, compran y ven su progreso desde una app con tu nombre, tu logo y tus colores, que se instala en su móvil sin pasar por ninguna tienda.',
     grupo: 'funcionalidades',
@@ -304,7 +304,7 @@ const FUNCIONALIDADES: PaginaSeo[] = [
 
   {
     path: '/funcionalidades/control-de-asistencia',
-    titulo: 'Control de asistencia en clases de Pilates y yoga | Tentare',
+    titulo: 'Control de asistencia en clases de Pilates y yoga | Centra',
     descripcion:
       'Marca quién vino con el QR de cada alumna o sin hacer nada, y detecta a quien reserva y falla con un riesgo de plantón que pesa lo reciente.',
     grupo: 'funcionalidades',
@@ -317,7 +317,7 @@ const FUNCIONALIDADES: PaginaSeo[] = [
   },
   {
     path: '/funcionalidades/multi-centro',
-    titulo: 'Software para cadenas de centros de Pilates y yoga | Tentare',
+    titulo: 'Software para cadenas de centros de Pilates y yoga | Centra',
     descripcion:
       'Varias sedes con un solo acceso y datos separados, menú compartido por cadena e instructoras en varios centros con rol y tarifa propios en cada uno.',
     grupo: 'funcionalidades',
@@ -356,7 +356,7 @@ export const PAGINAS: PaginaSeo[] = [
     // ya decía «Software de gestión para estudios de Pilates». La marca vuelve
     // al final: unos dos de cada tres clics de la home llegan buscando «tentare».
     path: '/',
-    titulo: `Software de gestión para Pilates y yoga en ${ES ? 'España' : 'Argentina'} | Tentare`,
+    titulo: `Software de gestión para Pilates y yoga en ${ES ? 'España' : 'Argentina'} | Centra`,
     descripcion:
       'Programa para centros de Pilates y yoga: llena tus clases con reservas y lista de espera, app con tu marca para tus alumnas, bonos y cobros. Empieza gratis.',
     grupo: 'home',
@@ -368,7 +368,7 @@ export const PAGINAS: PaginaSeo[] = [
   },
   {
     path: '/precios',
-    titulo: 'Precios: software para estudios de Pilates y yoga | Tentare',
+    titulo: 'Precios: software para estudios de Pilates y yoga | Centra',
     descripcion:
       'Sin permanencia: Founding Studio gratis hasta 150 reservas al mes (si pasas, 29 €/mes), Estudio 79 € y Cadena 249 €. Empieza gratis.',
     grupo: 'software',
@@ -381,9 +381,9 @@ export const PAGINAS: PaginaSeo[] = [
   },
   {
     path: '/funcionalidades',
-    titulo: 'Funcionalidades: software para Pilates y yoga | Tentare',
+    titulo: 'Funcionalidades: software para Pilates y yoga | Centra',
     descripcion:
-      'Todo lo que hace Tentare, área por área: reservas, lista de espera, salas, instructoras, sustituciones, bonos, cobros, facturación, fichas e informes.',
+      'Todo lo que hace Centra, área por área: reservas, lista de espera, salas, instructoras, sustituciones, bonos, cobros, facturación, fichas e informes.',
     grupo: 'funcionalidades',
     etiqueta: 'Funcionalidades',
     resumen: 'El mapa completo del producto, área por área.',
@@ -394,16 +394,16 @@ export const PAGINAS: PaginaSeo[] = [
   },
   ...FUNCIONALIDADES,
 
-  // ── Tentare Network — marketplace público de instructoras de Pilates y Yoga ──
+  // ── Centra Network — marketplace público de instructoras de Pilates y Yoga ──
   // Rediseño 2026-08: `/network` pasa de ruta bloqueada (buscador privado de
   // la propietaria, movido a /network/buscar) a landing pública del
   // marketplace — ver el comentario sobre PREFIJOS_NO_INDEXABLES más arriba.
   {
     path: '/network',
-    titulo: 'Tentare Network — Encuentra tu instructora de Pilates y Yoga',
+    titulo: 'Centra Network — Encuentra tu instructora de Pilates y Yoga',
     descripcion: 'Directorio público de instructoras de Pilates y Yoga, por especialidad, ciudad y disponibilidad. El alta de perfiles nuevos está cerrada por ahora.',
     grupo: 'funcionalidades',
-    etiqueta: 'Tentare Network',
+    etiqueta: 'Centra Network',
     resumen: 'El directorio público de instructoras de Pilates y Yoga.',
     prioridad: 0.8,
     changeFrequency: 'weekly',
@@ -418,11 +418,11 @@ export const PAGINAS: PaginaSeo[] = [
   // vive en EXCEPCIONES_INDEXABLES, no aquí.
   {
     path: '/network/instructoras',
-    titulo: 'Instructoras de Pilates y Yoga | Tentare Network',
+    titulo: 'Instructoras de Pilates y Yoga | Centra Network',
     descripcion: 'Encuentra instructoras de Pilates y Yoga disponibles cerca de ti. Filtra por especialidad, ubicación y disponibilidad.',
     grupo: 'funcionalidades',
     etiqueta: 'Marketplace de instructoras',
-    resumen: 'El marketplace de Tentare Network, con filtros reales.',
+    resumen: 'El marketplace de Centra Network, con filtros reales.',
     prioridad: 0.7,
     changeFrequency: 'daily',
     relacionadas: ['/network', '/funcionalidades/sustituciones'],
@@ -434,8 +434,8 @@ export const PAGINAS: PaginaSeo[] = [
   // punto de conversión, no de descubrimiento.
   {
     path: '/network/crear-perfil',
-    titulo: 'Crea tu perfil de instructora | Tentare Network',
-    descripcion: 'El alta de perfiles nuevos en Tentare Network está cerrada por ahora. Quien ya tiene perfil puede seguir editándolo.',
+    titulo: 'Crea tu perfil de instructora | Centra Network',
+    descripcion: 'El alta de perfiles nuevos en Centra Network está cerrada por ahora. Quien ya tiene perfil puede seguir editándolo.',
     grupo: 'funcionalidades',
     etiqueta: 'Alta de instructora',
     resumen: 'El alta de perfiles nuevos, cerrada por ahora.',
@@ -445,15 +445,15 @@ export const PAGINAS: PaginaSeo[] = [
   },
   // Términos y privacidad propios de Network (2026-08-30, tras el clon
   // literal de la landing #1482): la relación es de tres partes
-  // (instructora↔estudio↔Tentare), distinta de una suscripción SaaS — los
+  // (instructora↔estudio↔Centra), distinta de una suscripción SaaS — los
   // /terminos y /privacidad generales no la cubren. `grupo: 'legal'` como
   // el resto de páginas legales, aunque viven bajo /network (route group
   // `(legal)`, no aporta segmento de URL — mismo mecanismo que
   // app/(legal)/).
   {
     path: '/network/terminos',
-    titulo: 'Términos y condiciones — Tentare Network',
-    descripcion: 'Condiciones de uso de Tentare Network: cómo funciona el contacto entre instructoras y estudios, verificación de perfiles y moderación.',
+    titulo: 'Términos y condiciones — Centra Network',
+    descripcion: 'Condiciones de uso de Centra Network: cómo funciona el contacto entre instructoras y estudios, verificación de perfiles y moderación.',
     grupo: 'legal',
     etiqueta: 'Términos de Network',
     prioridad: 0.3,
@@ -462,8 +462,8 @@ export const PAGINAS: PaginaSeo[] = [
   },
   {
     path: '/network/privacidad',
-    titulo: 'Política de privacidad — Tentare Network',
-    descripcion: 'Cómo trata Tentare Network los datos de instructoras y estudios: qué se publica, qué queda privado y cómo se verifica un perfil.',
+    titulo: 'Política de privacidad — Centra Network',
+    descripcion: 'Cómo trata Centra Network los datos de instructoras y estudios: qué se publica, qué queda privado y cómo se verifica un perfil.',
     grupo: 'legal',
     etiqueta: 'Privacidad de Network',
     prioridad: 0.3,
@@ -474,17 +474,17 @@ export const PAGINAS: PaginaSeo[] = [
   // ── Ya existían antes de este registro ────────────────────────────────────
   {
     path: '/comparativa',
-    // Intención propia (7-oct-2026): el hub de «Tentare frente a cada uno» y la
+    // Intención propia (7-oct-2026): el hub de «Centra frente a cada uno» y la
     // tabla de precios de los 14. La lista editorial («el mejor software…») es de
     // /recursos/mejor-software-para-estudios-de-pilates; antes los dos títulos
     // decían «13 comparados» y competían por la misma búsqueda.
-    titulo: ES ? 'Comparativa: 13 programas de software para Pilates | Tentare' : 'Comparativa de software para Pilates en Argentina | Tentare',
+    titulo: ES ? 'Comparativa: 13 programas de software para Pilates | Centra' : 'Comparativa de software para Pilates en Argentina | Centra',
     descripcion: ES
-      ? 'bsport, Eversports, Mindbody, TIMP, Lorari, Bonsai y 7 más frente a Tentare: precio publicado, permanencia, sustituciones y Veri*Factu, con fuente y fecha.'
-      : 'Reservalo, Turnito, MiduApp, CrossHero y Fitco frente a Tentare: precio, comisión, Mercado Pago y factura de ARCA, con fuente y fecha.',
+      ? 'bsport, Eversports, Mindbody, TIMP, Lorari, Bonsai y 7 más frente a Centra: precio publicado, permanencia, sustituciones y Veri*Factu, con fuente y fecha.'
+      : 'Reservalo, Turnito, MiduApp, CrossHero y Fitco frente a Centra: precio, comisión, Mercado Pago y factura de ARCA, con fuente y fecha.',
     grupo: 'software',
     etiqueta: 'Comparativa',
-    resumen: ES ? 'Tentare frente a las trece plataformas con las que más se compara.' : 'Tentare frente a los programas que se usan en Argentina.',
+    resumen: ES ? 'Centra frente a las trece plataformas con las que más se compara.' : 'Centra frente a los programas que se usan en Argentina.',
     prioridad: 0.8,
     changeFrequency: 'monthly',
     actualizado: '2026-10-15',
@@ -501,19 +501,19 @@ export const PAGINAS: PaginaSeo[] = [
   // competidor concreto — ver docs/SEO-AI-MASTERPLAN.md §28.
   ...([
     ['tentare-vs-mindbody', 'Mindbody', ['/funcionalidades/cobros-recurrentes', '/seguridad'],
-      'Mindbody publica desde 99 € al mes por ubicación; el resto de planes, a consultar. Frente a Tentare (gratis hasta 150 reservas al mes, sin permanencia), punto por punto.'],
+      'Mindbody publica desde 99 € al mes por ubicación; el resto de planes, a consultar. Frente a Centra (gratis hasta 150 reservas al mes, sin permanencia), punto por punto.'],
     ['tentare-vs-bsport', 'bsport', ['/funcionalidades/sustituciones', '/funcionalidades/facturacion'],
-      'bsport no publica precios: hay que pedir presupuesto. Compáralo con Tentare (gratis hasta 150 reservas al mes, sin permanencia) en sustituciones y funciones.'],
+      'bsport no publica precios: hay que pedir presupuesto. Compáralo con Centra (gratis hasta 150 reservas al mes, sin permanencia) en sustituciones y funciones.'],
     ['tentare-vs-momence', 'Momence', ['/funcionalidades/cobros-recurrentes', '/funcionalidades/facturacion'],
-      'Momence no publica precios: pide hablar con ellos. Frente a Tentare (gratis hasta 150 reservas al mes, sin permanencia): cobros y funciones, punto por punto.'],
+      'Momence no publica precios: pide hablar con ellos. Frente a Centra (gratis hasta 150 reservas al mes, sin permanencia): cobros y funciones, punto por punto.'],
     ['tentare-vs-timp', 'TIMP', ['/funcionalidades/sustituciones', '/funcionalidades/cobros-recurrentes'],
-      'TIMP publica desde 50 €/mes para un profesional (no consta si incluye IVA). Frente a Tentare (gratis hasta 150 reservas al mes, sin permanencia), punto por punto.'],
+      'TIMP publica desde 50 €/mes para un profesional (no consta si incluye IVA). Frente a Centra (gratis hasta 150 reservas al mes, sin permanencia), punto por punto.'],
     ['tentare-vs-eversports', 'Eversports', ['/funcionalidades/cobros-recurrentes', '/funcionalidades/facturacion'],
-      'Eversports publica desde 33 €/mes (anual) o 41 €/mes (mensual), sin IVA y según reservas. Frente a Tentare (gratis hasta 150 reservas al mes), punto por punto.'],
+      'Eversports publica desde 33 €/mes (anual) o 41 €/mes (mensual), sin IVA y según reservas. Frente a Centra (gratis hasta 150 reservas al mes), punto por punto.'],
     ['tentare-vs-lorari', 'Lorari', ['/funcionalidades/sustituciones', '/funcionalidades/facturacion'],
-      'Lorari: 16 €/mes + IVA mes a mes, o 12 € pagando el año (hasta 50 alumnos). Frente a Tentare (gratis hasta 150 reservas al mes, sin permanencia).'],
+      'Lorari: 16 €/mes + IVA mes a mes, o 12 € pagando el año (hasta 50 alumnos). Frente a Centra (gratis hasta 150 reservas al mes, sin permanencia).'],
     ['tentare-vs-bonsai', 'Bonsai', ['/funcionalidades/facturacion', '/funcionalidades/sustituciones'],
-      'Bonsai: plan gratis (con un 3 % extra por cobro) o desde 29 €/mes + IVA con pago anual. Frente a Tentare (gratis hasta 150 reservas al mes, sin permanencia), punto por punto.'],
+      'Bonsai: plan gratis (con un 3 % extra por cobro) o desde 29 €/mes + IVA con pago anual. Frente a Centra (gratis hasta 150 reservas al mes, sin permanencia), punto por punto.'],
     // Estos 5 no salieron de una lista genérica de "competidores conocidos"
     // como los 8 de arriba — son los que de verdad aparecen en el SERP español
     // para "gestión pilates"/"gestión centros de pilates", las 2 únicas
@@ -522,25 +522,25 @@ export const PAGINAS: PaginaSeo[] = [
     // en su web pública — donde no se encontró un dato, la fila dice
     // "no encontrada"/"no especifica", nunca se asumió.
     ['tentare-vs-viday', 'ViDay', ['/funcionalidades/sustituciones', '/precios'],
-      'ViDay publica desde 39 €/mes (plan Individual), IVA no incluido. Frente a Tentare (gratis hasta 150 reservas al mes, sin permanencia), punto por punto.'],
+      'ViDay publica desde 39 €/mes (plan Individual), IVA no incluido. Frente a Centra (gratis hasta 150 reservas al mes, sin permanencia), punto por punto.'],
     ['tentare-vs-gesyoga', 'GesYoga', ['/funcionalidades/sustituciones', '/precios'],
-      'GesYoga publica desde 12 €/mes (plan Personal), IVA no incluido. Frente a Tentare (gratis hasta 150 reservas al mes, sin permanencia): funciones y límites.'],
+      'GesYoga publica desde 12 €/mes (plan Personal), IVA no incluido. Frente a Centra (gratis hasta 150 reservas al mes, sin permanencia): funciones y límites.'],
     ['tentare-vs-bookyway', 'BookyWay', ['/funcionalidades/sustituciones', '/funcionalidades/facturacion'],
-      'BookyWay no tiene suscripción: 1,50 € por usuario adicional tras 30 días. Frente a Tentare (gratis hasta 150 reservas al mes, sin permanencia), punto por punto.'],
+      'BookyWay no tiene suscripción: 1,50 € por usuario adicional tras 30 días. Frente a Centra (gratis hasta 150 reservas al mes, sin permanencia), punto por punto.'],
     ['tentare-vs-deporweb', 'DeporWeb', ['/funcionalidades/sustituciones', '/precios'],
-      'DeporWeb no publica precios. Frente a Tentare (gratis hasta 150 reservas al mes, sin permanencia): reservas por reformer, sustituciones y facturación.'],
+      'DeporWeb no publica precios. Frente a Centra (gratis hasta 150 reservas al mes, sin permanencia): reservas por reformer, sustituciones y facturación.'],
     ['tentare-vs-flowstark', 'Flowstark', ['/funcionalidades/sustituciones', '/precios'],
-      'Flowstark es gratis hasta 50 clientes o 19 €/mes + impuestos. Frente a Tentare (gratis hasta 150 reservas al mes, sin permanencia), punto por punto.'],
+      'Flowstark es gratis hasta 50 clientes o 19 €/mes + impuestos. Frente a Centra (gratis hasta 150 reservas al mes, sin permanencia), punto por punto.'],
   ] as const).map(([slug, nombre, relacionadasFuncionalidad, descripcion]): PaginaSeo => ({
     path: `/comparativa/${slug}`,
     // Lo que se busca de un competidor es su precio y su alternativa («bsport
-    // precios», «timp precios», «alternativa a mindbody»), no «Tentare vs X»:
+    // precios», «timp precios», «alternativa a mindbody»), no «Centra vs X»:
     // nadie busca aún la marca. La descripción responde el precio con el dato
     // verificado de su fila. Y desde el 7-oct-2026 el título hace la pregunta que hace quien evalúa: «¿merece la
     // pena?». La página la responde arriba del todo («En resumen»), así que el
     // título no promete nada que no esté. Sin «opiniones»: la página no recoge
     // reseñas de usuarios del competidor, y prometerlas sería engañar al clic.
-    // Sin «| Tentare»: con él pasaban de 60 caracteres y Google ya enseña el
+    // Sin «| Centra»: con él pasaban de 60 caracteres y Google ya enseña el
     // nombre del sitio encima del título.
     titulo: `¿${nombre} merece la pena? Precios y alternativa para Pilates`,
     // Desde el 23-sep las descripciones no prometen un cruce de datos que la
@@ -549,7 +549,7 @@ export const PAGINAS: PaginaSeo[] = [
     // que se buscaba con «precio», conserva la suya.
     descripcion,
     grupo: 'software',
-    etiqueta: `Tentare vs ${nombre}`,
+    etiqueta: `Centra vs ${nombre}`,
     // Fecha de la última revisión contra la web pública del competidor (visible
     // en pantalla y en el JSON-LD). Se pone SOLO si se ha revisado de verdad:
     // una fecha inventada es peor que ninguna (ver `actualizado`). Las 12
@@ -562,7 +562,7 @@ export const PAGINAS: PaginaSeo[] = [
     changeFrequency: 'monthly',
     // /precios sigue alcanzable desde el footer de estas páginas — aquí el
     // hueco lo gana /soluciones/cambiar-de-software: quien termina de leer
-    // "Tentare vs X" está decidiendo si (y cómo) cambiarse, no mirando precio.
+    // "Centra vs X" está decidiendo si (y cómo) cambiarse, no mirando precio.
     relacionadas: [...relacionadasFuncionalidad, '/soluciones/cambiar-de-software'],
   })),
   // Glofox lleva su entrada propia (título y descripción a medida), pero la página
@@ -571,9 +571,9 @@ export const PAGINAS: PaginaSeo[] = [
     path: '/comparativa/tentare-vs-glofox',
     titulo: '¿Glofox merece la pena? Precios y alternativa para Pilates',
     descripcion:
-      'Glofox: precio publicado (en dólares), permanencia, plaza por reformer y sustitución de instructoras, frente a Tentare (gratis hasta 150 reservas al mes, sin permanencia).',
+      'Glofox: precio publicado (en dólares), permanencia, plaza por reformer y sustitución de instructoras, frente a Centra (gratis hasta 150 reservas al mes, sin permanencia).',
     grupo: 'software',
-    etiqueta: 'Tentare vs Glofox',
+    etiqueta: 'Centra vs Glofox',
     prioridad: 0.7,
     changeFrequency: 'monthly',
     // Revisada de nuevo el 29-sep-2026 (corrección de la fila Stripe/GoCardless, PR #2349).
@@ -582,7 +582,7 @@ export const PAGINAS: PaginaSeo[] = [
   },
   {
     path: '/soluciones/cambiar-de-software',
-    titulo: 'Cambiarte a Tentare desde otro software, sin perder nada',
+    titulo: 'Cambiarte a Centra desde otro software, sin perder nada',
     descripcion:
       'Migración de clientas, bonos, clases, reservas y pagos históricos, revisada antes de tocar nada y reversible con un clic.',
     grupo: 'soluciones',
@@ -595,16 +595,16 @@ export const PAGINAS: PaginaSeo[] = [
   },
   {
     // Página única, no un árbol de 15 funcionalidades en paralelo: nace sin
-    // ningún estudio de yoga real usando Tentare todavía y sin lógica de
+    // ningún estudio de yoga real usando Centra todavía y sin lógica de
     // negocio específica de yoga (el motor de reservas/bonos/cobros es
     // agnóstico de disciplina, verificado en `tipos_clase`; lo único
-    // yoga-específico que existe de verdad hoy es que Tentare Network ya
+    // yoga-específico que existe de verdad hoy es que Centra Network ya
     // trata 'yoga' como especialidad propia — `ESPECIALIDADES_NETWORK` en
     // `lib/network/catalogo.ts`). Ampliar a más páginas cuando haya
     // demanda real que lo justifique, no antes — mismo criterio que ya se
     // aplicó a `/soluciones/cambiar-de-software`.
     path: '/soluciones/estudio-de-yoga',
-    titulo: 'Software para estudios de yoga: reservas y bonos | Tentare',
+    titulo: 'Software para estudios de yoga: reservas y bonos | Centra',
     descripcion:
       'Reservas, bonos, mensualidades y cobros automáticos para tu estudio de yoga, con app con tu marca. Empieza gratis, sin tarjeta.',
     grupo: 'soluciones',
@@ -621,7 +621,7 @@ export const PAGINAS: PaginaSeo[] = [
   // /funcionalidades/multi-centro: una segunda página competiría con ella.
   {
     path: '/soluciones/abrir-un-estudio',
-    titulo: 'Software para abrir tu estudio de Pilates o yoga | Tentare',
+    titulo: 'Software para abrir tu estudio de Pilates o yoga | Centra',
     descripcion:
       'Abre con tu horario, tu página de reservas y tu app listos en tu primera sesión. Gratis mientras empiezas, sin tarjeta y sin permanencia.',
     grupo: 'soluciones',
@@ -640,7 +640,7 @@ export const PAGINAS: PaginaSeo[] = [
   // página propia.
   {
     path: '/soluciones/estudio-de-pilates-reformer',
-    titulo: 'Reservas por reformer: software para Pilates | Tentare',
+    titulo: 'Reservas por reformer: software para Pilates | Centra',
     descripcion:
       'Reservas por reformer, aforo por sala, plazas fijas y lista de espera automática para estudios de Pilates reformer. Empieza gratis, sin tarjeta.',
     grupo: 'soluciones',
@@ -672,12 +672,12 @@ export const PAGINAS: PaginaSeo[] = [
   // tres páginas.
   {
     path: '/soluciones',
-    titulo: 'Soluciones: Pilates, reformer y yoga | Tentare',
+    titulo: 'Soluciones: Pilates, reformer y yoga | Centra',
     descripcion:
-      'Tentare para cada tipo de estudio: Pilates, Pilates reformer, yoga, varias sedes o quien viene de otro programa. Reservas, bonos y cobros con precio público.',
+      'Centra para cada tipo de estudio: Pilates, Pilates reformer, yoga, varias sedes o quien viene de otro programa. Reservas, bonos y cobros con precio público.',
     grupo: 'soluciones',
     etiqueta: 'Soluciones',
-    resumen: 'Tentare según el tipo de estudio.',
+    resumen: 'Centra según el tipo de estudio.',
     prioridad: 0.6,
     changeFrequency: 'monthly',
     actualizado: '2026-10-07',
@@ -685,7 +685,7 @@ export const PAGINAS: PaginaSeo[] = [
   },
   {
     path: '/recursos',
-    titulo: 'Guías: gestionar un estudio de Pilates y yoga | Tentare',
+    titulo: 'Guías: gestionar un estudio de Pilates y yoga | Centra',
     descripcion:
       'Guías prácticas para propietarias de estudios de Pilates y yoga: ocupación, precios, sustituciones, retención y la parte administrativa que nadie te contó.',
     grupo: 'recursos',
@@ -699,7 +699,7 @@ export const PAGINAS: PaginaSeo[] = [
   // descripción y su enlazado salen del propio artículo, que es la fuente única.
   ...ARTICULOS_META.map((a): PaginaSeo => ({
     path: `/recursos/${a.slug}`,
-    titulo: `${a.tituloSeo} | Tentare`,
+    titulo: `${a.tituloSeo} | Centra`,
     descripcion: a.descripcion,
     grupo: 'recursos',
     etiqueta: a.titulo,
@@ -713,12 +713,12 @@ export const PAGINAS: PaginaSeo[] = [
   // El listado y los artículos salen de lib/blog/meta.ts (solo lo PUBLICADO: un borrador no entra en el sitemap).
   {
     path: '/blog',
-    titulo: 'Blog del fundador de Tentare: emprendimiento y tecnología | Tentare',
+    titulo: 'Blog del fundador de Centra: emprendimiento y tecnología | Centra',
     descripcion:
-      'El blog personal de Marcos Roca Rodríguez, fundador de Tentare: emprendimiento, tecnología, startups y cómo se construye un software para estudios de Pilates y yoga.',
+      'El blog personal de Marcos Roca Rodríguez, fundador de Centra: emprendimiento, tecnología, startups y cómo se construye un software para estudios de Pilates y yoga.',
     grupo: 'blog',
     etiqueta: 'Blog del fundador',
-    resumen: 'Emprendimiento, tecnología y la construcción de Tentare, contados por su fundador.',
+    resumen: 'Emprendimiento, tecnología y la construcción de Centra, contados por su fundador.',
     prioridad: 0.6,
     changeFrequency: 'monthly',
     ...(ARTICULOS_BLOG_META.length ? { actualizado: ARTICULOS_BLOG_META.map(fechaArticuloBlog).sort().at(-1)! } : {}),
@@ -726,12 +726,12 @@ export const PAGINAS: PaginaSeo[] = [
   },
   {
     path: '/blog/marcos-roca',
-    titulo: 'Marcos Roca Rodríguez | Fundador de Tentare',
+    titulo: 'Marcos Roca Rodríguez | Fundador de Centra',
     descripcion:
-      'Marcos Roca Rodríguez es el fundador de Tentare, un software de gestión para estudios de Pilates y yoga en España. Tiene 23 años y trabaja desde Barcelona.',
+      'Marcos Roca Rodríguez es el fundador de Centra, un software de gestión para estudios de Pilates y yoga en España. Tiene 23 años y trabaja desde Barcelona.',
     grupo: 'blog',
     etiqueta: 'Marcos Roca Rodríguez',
-    resumen: 'Quién es el fundador de Tentare y de qué escribe.',
+    resumen: 'Quién es el fundador de Centra y de qué escribe.',
     prioridad: 0.7,
     changeFrequency: 'monthly',
     actualizado: FECHA_PERFIL,
@@ -739,7 +739,7 @@ export const PAGINAS: PaginaSeo[] = [
   },
   ...ARTICULOS_BLOG_META.map((a): PaginaSeo => ({
     path: `/blog/marcos-roca/${a.slug}`,
-    titulo: `${a.tituloSeo} | Tentare`,
+    titulo: `${a.tituloSeo} | Centra`,
     descripcion: a.descripcion,
     grupo: 'blog',
     etiqueta: a.titulo,
@@ -764,7 +764,7 @@ export const PAGINAS: PaginaSeo[] = [
   })),
   {
     path: '/glosario',
-    titulo: 'Glosario: software para Pilates y yoga | Tentare',
+    titulo: 'Glosario: software para Pilates y yoga | Centra',
     descripcion: ES
       ? 'Definiciones claras y neutrales de los términos del sector: software de gestión, pilates reformer, Veri*factu, lista de espera automática, CRM de estudio y más.'
       : 'Definiciones claras y neutrales de los términos del sector: software de gestión, pilates reformer, factura electrónica y CAE, lista de espera, monotributo y más.',
@@ -780,11 +780,11 @@ export const PAGINAS: PaginaSeo[] = [
   // las guías y el JSON-LD de la organización (`founder`).
   {
     path: '/sobre-tentare',
-    titulo: 'Sobre Tentare: quién hay detrás del software',
+    titulo: 'Sobre Centra: quién hay detrás del software',
     descripcion:
-      'Tentare es un software de gestión para estudios de Pilates y yoga hecho en España. Quién lo hace, cómo trabajamos y cómo contactar con nosotros.',
+      'Centra es un software de gestión para estudios de Pilates y yoga hecho en España. Quién lo hace, cómo trabajamos y cómo contactar con nosotros.',
     grupo: 'software',
-    etiqueta: 'Sobre Tentare',
+    etiqueta: 'Sobre Centra',
     resumen: 'Quién hay detrás y cómo trabajamos.',
     prioridad: 0.5,
     changeFrequency: 'yearly',
@@ -793,10 +793,10 @@ export const PAGINAS: PaginaSeo[] = [
   },
   {
     path: '/seguridad',
-    titulo: 'Seguridad y privacidad — Tentare',
+    titulo: 'Seguridad y privacidad — Centra',
     descripcion: ES
-      ? 'Cómo protege Tentare los datos de tu estudio y de tus alumnas: aislamiento por estudio, base de datos en la UE, RGPD, pagos con Stripe y copias de seguridad.'
-      : 'Cómo protege Tentare los datos de tu estudio y de tus alumnas: aislamiento por estudio, Ley 25.326, pagos con Mercado Pago y copias de seguridad.',
+      ? 'Cómo protege Centra los datos de tu estudio y de tus alumnas: aislamiento por estudio, base de datos en la UE, RGPD, pagos con Stripe y copias de seguridad.'
+      : 'Cómo protege Centra los datos de tu estudio y de tus alumnas: aislamiento por estudio, Ley 25.326, pagos con Mercado Pago y copias de seguridad.',
     grupo: 'recursos',
     etiqueta: 'Seguridad',
     resumen: ES ? 'Aislamiento por estudio, RGPD y base de datos en la UE.' : 'Aislamiento por estudio y Ley 25.326.',
@@ -814,11 +814,11 @@ export const PAGINAS: PaginaSeo[] = [
   // lib/ayuda/registro.ts (mismo patrón que los perfiles de Network).
   {
     path: '/academy',
-    titulo: 'Academy: aprende Tentare paso a paso | Tentare',
-    descripcion: 'Rutas de aprendizaje, guías y vídeos para configurar tu estudio de Pilates o yoga en Tentare, de la primera clase al primer cobro, a tu ritmo.',
+    titulo: 'Academy: aprende Centra paso a paso | Centra',
+    descripcion: 'Rutas de aprendizaje, guías y vídeos para configurar tu estudio de Pilates o yoga en Centra, de la primera clase al primer cobro, a tu ritmo.',
     grupo: 'ayuda',
     etiqueta: 'Academy',
-    resumen: 'Rutas, guías y vídeos para aprender Tentare paso a paso.',
+    resumen: 'Rutas, guías y vídeos para aprender Centra paso a paso.',
     prioridad: 0.8,
     changeFrequency: 'weekly',
     actualizado: '2026-11-14',
@@ -826,19 +826,19 @@ export const PAGINAS: PaginaSeo[] = [
   },
   {
     path: '/ayuda',
-    titulo: 'Centro de Ayuda — Documentación de Tentare',
-    descripcion: 'La documentación oficial de Tentare: cómo configurar tu estudio, reservas, pagos, bonos, el portal de reservas, el widget y qué hacer cuando algo falla.',
+    titulo: 'Centro de Ayuda — Documentación de Centra',
+    descripcion: 'La documentación oficial de Centra: cómo configurar tu estudio, reservas, pagos, bonos, el portal de reservas, el widget y qué hacer cuando algo falla.',
     grupo: 'ayuda',
     etiqueta: 'Centro de Ayuda',
-    resumen: 'Documentación oficial de Tentare, paso a paso.',
+    resumen: 'Documentación oficial de Centra, paso a paso.',
     prioridad: 0.8,
     changeFrequency: 'weekly',
     actualizado: '2026-08-28',
   },
   {
     path: '/ayuda/novedades',
-    titulo: 'Novedades de Tentare | Centro de Ayuda',
-    descripcion: 'Nuevas funcionalidades, mejoras y correcciones publicadas en Tentare, versión a versión.',
+    titulo: 'Novedades de Centra | Centro de Ayuda',
+    descripcion: 'Nuevas funcionalidades, mejoras y correcciones publicadas en Centra, versión a versión.',
     grupo: 'ayuda',
     etiqueta: 'Novedades',
     prioridad: 0.5,
@@ -849,21 +849,21 @@ export const PAGINAS: PaginaSeo[] = [
 
   // ── Legales ───────────────────────────────────────────────────────────────
   // `titulo`/`descripcion` van ya con el texto real de cada page.tsx (más
-  // descriptivo que el `${etiqueta} — Tentare` genérico de antes) — solo se
+  // descriptivo que el `${etiqueta} — Centra` genérico de antes) — solo se
   // estandarizó el separador a "—" para que coincida con el resto del sitio
   // (`/seguridad`, `/glosario`…), que usaban "—" mientras estas 4 usaban "·".
   // `etiqueta` se queda corta a propósito: la usan breadcrumbs/footer/nav.
   ...([
-    ['/legal', 'Aviso legal', 'Aviso legal — Tentare',
+    ['/legal', 'Aviso legal', 'Aviso legal — Centra',
       'Información legal y datos identificativos del titular de tentare.app conforme a la LSSI-CE.'],
-    ['/privacidad', 'Privacidad', 'Política de privacidad — Tentare',
-      'Cómo Tentare trata los datos personales conforme al RGPD y la LOPDGDD: qué datos, con qué base legal y cómo ejercer tus derechos.'],
-    ['/terminos', 'Términos', 'Términos y condiciones — Tentare',
-      'Condiciones de uso del servicio Tentare para estudios de Pilates: contratación, planes, pagos y cancelación.'],
-    ['/cookies', 'Cookies', 'Política de cookies — Tentare',
+    ['/privacidad', 'Privacidad', 'Política de privacidad — Centra',
+      'Cómo Centra trata los datos personales conforme al RGPD y la LOPDGDD: qué datos, con qué base legal y cómo ejercer tus derechos.'],
+    ['/terminos', 'Términos', 'Términos y condiciones — Centra',
+      'Condiciones de uso del servicio Centra para estudios de Pilates: contratación, planes, pagos y cancelación.'],
+    ['/cookies', 'Cookies', 'Política de cookies — Centra',
       'Qué cookies y tecnologías similares utiliza tentare.app, para qué sirven y cómo puedes gestionarlas o rechazarlas.'],
-    ['/soporte', 'Soporte', 'Soporte — Tentare',
-      'Cómo pedir ayuda con Tentare y con su app: quién gestiona tus reservas y pagos, cómo escribirnos y cómo borrar tu cuenta.'],
+    ['/soporte', 'Soporte', 'Soporte — Centra',
+      'Cómo pedir ayuda con Centra y con su app: quién gestiona tus reservas y pagos, cómo escribirnos y cómo borrar tu cuenta.'],
   ] as const).map(([path, etiqueta, titulo, descripcion]): PaginaSeo => ({
     path,
     titulo,

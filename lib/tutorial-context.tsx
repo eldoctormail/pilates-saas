@@ -45,7 +45,7 @@ interface ValorTutorial {
   /** Al llegar a la pantalla: solo si `debeAbrirseSolo`, o si se pidió con `abrirAlLlegar`. */
   pedirAbrirSolo: (ruta: string) => void;
   /**
-   * «Abrir y ver cómo se usa» desde «Tu Tentare» (P2.5): la pantalla aún no
+   * «Abrir y ver cómo se usa» desde «Tu Centra» (P2.5): la pantalla aún no
    * está montada, así que se apunta aquí (en memoria, 10 s) y la atiende su «?»
    * al llegar. Es una petición de la persona, como pulsar el «?».
    */

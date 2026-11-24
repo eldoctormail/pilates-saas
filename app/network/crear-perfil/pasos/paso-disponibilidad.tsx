@@ -2,7 +2,7 @@
 
 // Paso 08 del wizard: disponibilidad (estado + horarios). Extraído tal cual
 // de app/network/crear-perfil/page.tsx (paso === 7) — F0 del roadmap de
-// Tentare Network 2.0, sin cambios de comportamiento.
+// Centra Network 2.0, sin cambios de comportamiento.
 import { SelectorChips } from '@/components/network/selector-chips';
 import {
   HORARIOS_NETWORK, HORARIO_LABEL, DISPONIBILIDAD_ESTADOS_NETWORK, DISPONIBILIDAD_ESTADO_LABEL,

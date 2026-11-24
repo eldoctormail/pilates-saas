@@ -1,11 +1,11 @@
-// Tipos compartidos de Tentare Network — docs/NETWORK-IMPLEMENTATION-PLAN.md §1.
+// Tipos compartidos de Centra Network — docs/NETWORK-IMPLEMENTATION-PLAN.md §1.
 import type {
   EspecialidadNetwork, HorarioNetwork, TipoTrabajoNetwork,
   TarifaRangoNetwork, DisponibilidadEstadoNetwork,
 } from './catalogo.ts';
 
 // Identidad profesional 1:1 con auth_user_id (NO con studio_id) — una
-// persona puede no pertenecer a ningún estudio Tentare todavía.
+// persona puede no pertenecer a ningún estudio Centra todavía.
 export interface PerfilNetwork {
   id: string;
   authUserId: string;
@@ -27,12 +27,12 @@ export interface PerfilNetwork {
   emailContacto: string | null;
   telefonoContacto: string | null;
   // 'en_revision': el wizard está completo y la instructora lo ha enviado,
-  // pero todavía no es 'published' — eso lo decide el equipo de Tentare
+  // pero todavía no es 'published' — eso lo decide el equipo de Centra
   // desde /interno/network (evitar spam/perfiles falsos, feedback directo
   // del fundador). Nunca lo pone el dueño directamente: ni la API ni la
   // RLS (migración red_perfiles_en_revision) se lo permiten.
   estado: 'draft' | 'en_revision' | 'published' | 'hidden' | 'suspended';
-  // Solo el equipo de Tentare lo escribe (app/interno/network) — nunca desde
+  // Solo el equipo de Centra lo escribe (app/interno/network) — nunca desde
   // /network/mi-perfil. Empuja al principio del ranking (lib/network/
   // ranking.ts), no es un badge de confianza (esos son hechos verificables,
   // esto es una decisión editorial).
@@ -47,7 +47,7 @@ export interface PerfilNetwork {
   instagram: string | null;
   linkedin: string | null;
   web: string | null;
-  // F1 "Actualmente en Tentare" — opt-in, apagado por defecto (migración
+  // F1 "Actualmente en Centra" — opt-in, apagado por defecto (migración
   // 20260824193100). Si es `true`, el perfil público muestra las sedes
   // reales donde la instructora trabaja HOY en el SaaS (mis_estudios()),
   // solo nombre/ciudad. Decisión del fundador: una instructora activa en un
@@ -169,7 +169,7 @@ export function esOrdenarPorValido(v: unknown): v is OrdenarPorNetwork {
 
 // Historial laboral declarado — docs/NETWORK-IMPLEMENTATION-PLAN.md §3.
 // `studioId` se queda en null desde el CRUD de Fase 6: enlazarla a un
-// estudio Tentare real es parte del flujo de "Verificar experiencia"
+// estudio Centra real es parte del flujo de "Verificar experiencia"
 // (Fase 7), no de darla de alta.
 export interface ExperienciaNetwork {
   id: string;
@@ -200,7 +200,7 @@ export type ExperienciaNetworkPublica = Omit<ExperienciaNetwork, 'perfilId'> & {
   estudioVerificadorNombre?: string | null;
 };
 
-// F1 "Actualmente en Tentare" — una sede real donde la instructora trabaja
+// F1 "Actualmente en Centra" — una sede real donde la instructora trabaja
 // HOY (JOIN instructores↔studios, no mis_estudios(): el detalle público
 // corre con service_role, sin auth.uid()). Deliberadamente solo
 // nombre/ciudad — nunca rol/tarifa/cualquier otra columna de
@@ -211,7 +211,7 @@ export interface EstudioActualNetwork {
 }
 
 // Referencia profesional — red_referencias (migr 20260813111231). El
-// referente NO tiene por qué ser usuaria de Tentare: se resuelve por token
+// referente NO tiene por qué ser usuaria de Centra: se resuelve por token
 // (app/network/referencia/[token]), no por sesión. `token`/`tokenExpiraEn`
 // nunca viajan al cliente propietario del perfil (solo al servidor que
 // genera el enlace del email), así que no forman parte de este tipo.
@@ -296,7 +296,7 @@ export interface RespuestaMensajesNetwork {
   limiteRestante: number | null;
 }
 
-// Sugerencia sin puntuar de Tentare Network para cubrir un hueco de
+// Sugerencia sin puntuar de Centra Network para cubrir un hueco de
 // sustitución (docs/NETWORK-SUSTITUCIONES-EXTENSION.md §2) — snapshot en el
 // momento de crear la baja, guardado aparte del ranking interno puntuado
 // (`sustituciones.candidatos_network`, migr 20260818010000). Sin
@@ -359,7 +359,7 @@ export type EstadoVerificacionDocumento = 'pendiente' | 'en_revision' | 'verific
 // nueva, el historial no se sobrescribe (ver índice único parcial en la
 // migración). `documentoPath` es una ruta del bucket privado
 // red-documentos-identidad, nunca una URL — el documento solo lo puede leer
-// el equipo de Tentare, con una URL firmada generada server-side (Fase 3).
+// el equipo de Centra, con una URL firmada generada server-side (Fase 3).
 export interface VerificacionIdentidadNetwork {
   id: string;
   perfilId: string;

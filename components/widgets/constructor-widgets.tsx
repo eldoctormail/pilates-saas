@@ -29,9 +29,9 @@ import { GestionDominios } from './dominios';
 import { hayCopias, useConstructorWidgets } from './usar-constructor';
 import type { MostrarToast } from '@/components/ui/toast';
 
-// «Tentare Widgets»: el constructor, en el orden en que lo piensa la dueña de
+// «Centra Widgets»: el constructor, en el orden en que lo piensa la dueña de
 // un estudio —con qué está hecha su web (una vez), qué pone y dónde, cómo se
-// ve, y ponerlo—. Tentare no hace la web del estudio: le da piezas que
+// ve, y ponerlo—. Centra no hace la web del estudio: le da piezas que
 // funcionan de verdad para meter en la suya.
 //
 // ⚠️ La config efectiva viaja CONGELADA en el código copiado (decisión de
@@ -69,7 +69,7 @@ import type { MostrarToast } from '@/components/ui/toast';
 // copiar se guarda la versión que dirá ver su web (`firmaContenidoDe`).
 //
 // El código por ID (30-sep-2026, lib/widgets/pieza.ts): el código lleva solo el
-// id del widget, y su contenido lo pone Tentare con lo PUBLICADO (`widget_piezas`).
+// id del widget, y su contenido lo pone Centra con lo PUBLICADO (`widget_piezas`).
 // Lo publicado se crea al abrir «Ponlo en tu web» la primera vez (aún no hay
 // nada pegado con ese id: no cambia nada en su web) y después solo cambia con
 // «Aplicar en mi web» o al copiar el código. Lo que va en el propio HTML (el

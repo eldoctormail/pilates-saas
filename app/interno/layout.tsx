@@ -1,7 +1,7 @@
 'use client';
 
 // Chrome del panel interno. Deliberadamente MUY distinto del panel de un
-// estudio (menú lateral oscuro, marca «Tentare · Zona interna»): mirando media
+// estudio (menú lateral oscuro, marca «Centra · Zona interna»): mirando media
 // pantalla tienes que saber si estás en tu backoffice o dentro del negocio de un
 // cliente. Confundirlos es como se cometen los errores caros.
 //
@@ -139,12 +139,12 @@ export default function LayoutInterno({ children }: { children: React.ReactNode 
           <span className="w-11 h-11 rounded-full bg-amber-500/10 text-warning grid place-items-center">
             <ShieldAlert size={20} />
           </span>
-          <h1 className="text-[17px] font-bold text-foreground">Zona interna de Tentare</h1>
+          <h1 className="text-[17px] font-bold text-foreground">Zona interna de Centra</h1>
           {conCuentaAjena ? (
             <>
               <p className="text-[13.5px] text-muted-foreground">
                 Has entrado como <strong className="text-foreground">{user?.email}</strong>, que no es una cuenta
-                del equipo de Tentare. Entra con tu cuenta de empresa.
+                del equipo de Centra. Entra con tu cuenta de empresa.
               </p>
               <button
                 type="button"
@@ -166,7 +166,7 @@ export default function LayoutInterno({ children }: { children: React.ReactNode 
               </Link>
             </>
           )}
-          <Link href="/" className="text-[12.5px] font-semibold text-muted-foreground">Volver a Tentare</Link>
+          <Link href="/" className="text-[12.5px] font-semibold text-muted-foreground">Volver a Centra</Link>
         </div>
       </div>
     );

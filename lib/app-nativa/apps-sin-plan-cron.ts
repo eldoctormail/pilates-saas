@@ -72,8 +72,8 @@ export async function revisarAppsSinPlan(admin: SupabaseClient, ahora = new Date
         await emitirAppTiendaPausada(admin, { studioId: f.studio_id, sinPlanDesde: f.sin_plan_desde, publicada });
         await avisarEquipoApps(`App de ${f.studios?.nombre ?? f.studio_id}: en pausa por no pagar`,
           publicada
-            ? 'Han pasado 30 días sin pagar Estudio o Cadena. Está en pausa en Tentare: RETÍRALA DE LA VENTA en App Store Connect (eso no lo hace nadie solo). A la propietaria ya se le ha avisado.'
-            : 'Han pasado 30 días sin pagar Estudio o Cadena. Está en pausa en Tentare y no estaba publicada: no hay nada que retirar. A la propietaria ya se le ha avisado.');
+            ? 'Han pasado 30 días sin pagar Estudio o Cadena. Está en pausa en Centra: RETÍRALA DE LA VENTA en App Store Connect (eso no lo hace nadie solo). A la propietaria ya se le ha avisado.'
+            : 'Han pasado 30 días sin pagar Estudio o Cadena. Está en pausa en Centra y no estaba publicada: no hay nada que retirar. A la propietaria ya se le ha avisado.');
       }
     }
   }

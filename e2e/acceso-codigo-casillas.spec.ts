@@ -128,7 +128,7 @@ test.describe('Entrar en el estudio con el código del correo', () => {
     // Sin contraseña: se crea después, si se quiere.
     await expect(page.getByLabel('Contraseña')).toHaveCount(0);
 
-    // El texto que se acepta es el del estudio, en una hoja, no la política de Tentare.
+    // El texto que se acepta es el del estudio, en una hoja, no la política de Centra.
     await page.getByRole('button', { name: 'las condiciones y la política de privacidad' }).click();
     await expect(page.getByTestId('texto-legal-estudio')).toContainText(PRIVACIDAD);
     // Y la hoja sale con el kit del estudio: dentro de `.student-app`, no suelta en <body> sin estilo.

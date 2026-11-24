@@ -4,12 +4,12 @@ import { test, expect, type Page, type BrowserContext, type Request, type Route 
 
 // ─────────────────────────────────────────────────────────────────────────────
 // El acceso desde el widget sin marco, con la web del estudio en OTRO SITIO que
-// Tentare (16-oct-2026).
+// Centra (16-oct-2026).
 //
 // En producción nadie podía entrar ni darse de alta desde la nativa en ninguna
 // web: la site key de Turnstile solo da token en tentare.app (en la web del
 // estudio contesta 110200, «dominio no autorizado») y gotrue exige el captcha
-// en todo acceso. Ahora el widget abre una ventana de Tentare
+// en todo acceso. Ahora el widget abre una ventana de Centra
 // (/widget-auth-retorno) y le encarga el acceso; allí corre el captcha.
 //
 // Lo distinto de esta spec: la web del estudio es `127.0.0.1` y la app es
@@ -164,7 +164,7 @@ async function enLaWebDelEstudio(page: Page, context: BrowserContext, app: strin
   return c;
 }
 
-test('con contraseña: la ventana de Tentare entra (desde tentare, no desde la web) y el widget queda dentro', async ({ page, context, baseURL }) => {
+test('con contraseña: la ventana de Centra entra (desde tentare, no desde la web) y el widget queda dentro', async ({ page, context, baseURL }) => {
   const app = new URL(baseURL!).origin;
   const c = await enLaWebDelEstudio(page, context, app);
   await page.getByPlaceholder('Email').fill('socia@example.com');
@@ -173,7 +173,7 @@ test('con contraseña: la ventana de Tentare entra (desde tentare, no desde la w
   await page.getByRole('button', { name: 'Entrar', exact: true }).click();
   const ventana = await ventanaPromesa;
 
-  // La ventana es la página de Tentare, y el origen que lleva es el de la web.
+  // La ventana es la página de Centra, y el origen que lleva es el de la web.
   const url = new URL(ventana.url());
   expect(url.origin).toBe(app);
   expect(url.pathname).toBe('/widget-auth-retorno');
@@ -187,7 +187,7 @@ test('con contraseña: la ventana de Tentare entra (desde tentare, no desde la w
   await expect(page.getByRole('button', { name: 'Mi cuenta' })).toBeVisible({ timeout: 15_000 });
   await expect(page.getByText('Inicia sesión para reservar')).toHaveCount(0);
 
-  // UNA petición de acceso, y salió de la ventana de Tentare, no de la web del estudio.
+  // UNA petición de acceso, y salió de la ventana de Centra, no de la web del estudio.
   expect(c.acceso).toHaveLength(1);
   expect(c.acceso[0].url).toContain('grant_type=password');
   expect(c.acceso[0].origen).toBe(app);
@@ -310,11 +310,11 @@ test('cuenta de equipo con contraseña: la ventana no entrega la sesión, la cie
   const ventana = await ventanaPromesa;
 
   // La ventana se queda abierta, con el porqué y la página de reservas entera.
-  await expect(ventana.getByRole('heading', { name: 'Esta cuenta es de un equipo de Tentare: entra desde tentare.app.' })).toBeVisible({ timeout: 90_000 });
+  await expect(ventana.getByRole('heading', { name: 'Esta cuenta es de un equipo de Centra: entra desde tentare.app.' })).toBeVisible({ timeout: 90_000 });
   await expect(ventana.getByRole('link', { name: 'entra desde la página de reservas del estudio' })).toHaveAttribute('href', `${app}/reservar/${SLUG}`);
   // El widget también lo dice, con el mismo enlace.
   const aviso = page.getByTestId('widget-acceso-cuenta-de-equipo');
-  await expect(aviso).toContainText('Esta cuenta es de un equipo de Tentare');
+  await expect(aviso).toContainText('Esta cuenta es de un equipo de Centra');
   await expect(aviso.getByRole('link')).toHaveAttribute('href', `${app}/reservar/${SLUG}`);
   await expect(page.getByRole('button', { name: 'Mi cuenta' })).toHaveCount(0);
 
@@ -421,7 +421,7 @@ test('cuenta de equipo con el código del correo: no llega nada a la web, y el w
   await expect(page.getByText('Te hemos escrito a')).toBeVisible({ timeout: 90_000 });
   await ventana.getByTestId('codigo-correo').fill('123456');
 
-  await expect(ventana.getByRole('heading', { name: 'Esta cuenta es de un equipo de Tentare: entra desde tentare.app.' })).toBeVisible({ timeout: 30_000 });
+  await expect(ventana.getByRole('heading', { name: 'Esta cuenta es de un equipo de Centra: entra desde tentare.app.' })).toBeVisible({ timeout: 30_000 });
   await expect(page.getByTestId('widget-acceso-cuenta-de-equipo')).toBeVisible();
   await expect(page.getByRole('button', { name: 'Mi cuenta' })).toHaveCount(0);
   expect(verificar.veces).toBe(1);

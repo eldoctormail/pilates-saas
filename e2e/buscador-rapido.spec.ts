@@ -5,7 +5,7 @@ import { test, expect, type Page, type Route } from '@playwright/test';
 // instructora/sala/tipo sin navegar semana a semana. Busca sobre TODO el
 // estudio (contexto completo, no /api/calendario) — por eso el punto crítico
 // a probar es que una instructora NO vea en los resultados clases de sus
-// compañeras (red de debajo: desde el retiro de Tentare Core la instructora ya
+// compañeras (red de debajo: desde el retiro de Centra Core la instructora ya
 // no llega al calendario del panel).
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -114,7 +114,7 @@ test.describe('Buscador rápido', () => {
     await expect(page.getByRole('button', { name: 'Buscar clase' })).toBeVisible();
   });
 
-  // El caso «instructora: no ve clases de sus compañeras» se fue con Tentare
+  // El caso «instructora: no ve clases de sus compañeras» se fue con Centra
   // Core (14-sep-2026): ya no abre el calendario del panel, y en la app solo
   // se le sirven las suyas desde el servidor.
 

@@ -17,7 +17,7 @@ export default function Contenido() {
     <>
       <AyudaAntesDeEmpezar>
         Casi todo tu horario son clases que se repiten: el Reformer de los martes a las 18:00, siempre en la misma
-        sala. En Tentare eso es una <strong>serie</strong>: se crea una vez, se ve de un vistazo hasta cuándo llega y
+        sala. En Centra eso es una <strong>serie</strong>: se crea una vez, se ve de un vistazo hasta cuándo llega y
         se alarga antes de que se acabe.
       </AyudaAntesDeEmpezar>
 
@@ -49,7 +49,7 @@ export default function Contenido() {
       <h2 style={h2}>El aviso de que una serie se acaba</h2>
       <p>
         Una serie que llega a su fecha de fin deja ese hueco sin clase, y a quien tenga clase fija sin reserva. Para
-        que no pase por descuido, Tentare lo revisa una vez al día y te avisa <strong>en tres tiempos</strong>:
+        que no pase por descuido, Centra lo revisa una vez al día y te avisa <strong>en tres tiempos</strong>:
       </p>
       <ul style={lista}>
         <li><strong>Un mes antes</strong>: aparece en Resumen, entre lo que espera tu visto bueno. Sin notificación.</li>

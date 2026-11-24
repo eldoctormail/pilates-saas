@@ -73,12 +73,12 @@ const cargar = cache(async (slug: string) => {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const detalle = await cargar(slug);
-  if (!detalle) return { title: 'Perfil no encontrado | Tentare Network' };
+  if (!detalle) return { title: 'Perfil no encontrado | Centra Network' };
 
   const { perfil } = detalle;
   const ciudad = perfil.ciudad ? ` en ${perfil.ciudad}` : '';
   const profesion = tituloProfesionalDe(perfil.especialidades);
-  const title = `${perfil.nombre} — ${profesion}${ciudad} | Tentare Network`;
+  const title = `${perfil.nombre} — ${profesion}${ciudad} | Centra Network`;
   const description = perfil.descripcion?.slice(0, 155)
     ?? `${profesion}${ciudad}. ${perfil.especialidades.map(e => ESPECIALIDAD_LABEL[e]).join(', ')}.`;
   const url = `${LEGAL.url}/network/instructoras/${slug}`;
@@ -86,7 +86,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title, description,
     alternates: { canonical: url },
-    openGraph: { siteName: 'Tentare', title, description, url, images: perfil.fotoUrl ? [perfil.fotoUrl] : undefined },
+    openGraph: { siteName: 'Centra', title, description, url, images: perfil.fotoUrl ? [perfil.fotoUrl] : undefined },
     twitter: { card: 'summary', title, description, images: perfil.fotoUrl ? [perfil.fotoUrl] : undefined },
   };
 }

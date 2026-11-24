@@ -194,7 +194,7 @@ export interface DatosConsentimientos {
 }
 
 /**
- * La prueba de cada consentimiento: el estudio la necesita aunque deje Tentare
+ * La prueba de cada consentimiento: el estudio la necesita aunque deje Centra
  * (es él quien tiene que poder demostrarlo). Sin IP ni cuenta del personal. Del
  * contrato sale la huella del texto aceptado, que es lo que se guarda.
  */

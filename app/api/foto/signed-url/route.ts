@@ -15,7 +15,7 @@ import { errorInterno, errorPeticion } from '@/lib/errores-servidor';
 // de punta a punta (sube ahí `app/api/public/foto-perfil/route.ts`, lee ahí
 // esta ruta); instructor-/network- se QUEDAN en `avatars` (público) a
 // propósito, deliberadamente fuera de esta fase — instructor- porque las
-// fotos de Tentare Network son un marketplace público por diseño
+// fotos de Centra Network son un marketplace público por diseño
 // (`components/network-publico/tarjeta-instructora.tsx`: "la que ve alguien
 // SIN CUENTA viniendo de Google"), no una fuga; instructor- interno del panel
 // queda pendiente de decidir en una fase aparte, no mezclada con la de

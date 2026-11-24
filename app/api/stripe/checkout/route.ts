@@ -210,7 +210,7 @@ export async function POST(req: NextRequest) {
   // dinero (la socia paga desde el portal o un enlace público, sin sesión de
   // staff) — el guardia de suscripción ya protegía charge-off-session,
   // pos-bizum, terminal/cobrar y reembolsos, pero no esta ni
-  // /api/public/checkout-embebido: un estudio con la suscripción a Tentare
+  // /api/public/checkout-embebido: un estudio con la suscripción a Centra
   // caducada seguía cobrando a sus socias por enlace público y widget.
   const bloqueo = await bloqueoPorSuscripcion(body.studioId);
   if (bloqueo) return conCorsWidget(req, bloqueo);
@@ -809,7 +809,7 @@ export async function POST(req: NextRequest) {
   // separados por minutos— producían DOS sesiones pagables del mismo recibo, y
   // las dos cobraban de verdad. El segundo cargo era además invisible: el
   // webhook lo acota con `.in('estado', [...])`, así que casaba 0 filas y no
-  // dejaba rastro en ninguna parte de Tentare.
+  // dejaba rastro en ninguna parte de Centra.
   //
   // Se reutiliza la sesión que ya esté abierta en vez de crear otra (y de paso
   // la socia recupera su checkout, que es mejor que un error). Si pide otro
@@ -955,7 +955,7 @@ export async function POST(req: NextRequest) {
               // En la compra de un plan, sin el nombre: es del formulario, y con la
               // misma clave de idempotencia corregirlo daba `idempotency_error`. La
               // ficha saca el nombre de lo que Stripe recoge (`customer_details`).
-              description: body.reciboId && body.socioNombre ? `Tentare · ${body.socioNombre}` : cuotaFrase ? `Tentare · ${cuotaFrase}` : 'Tentare',
+              description: body.reciboId && body.socioNombre ? `Centra · ${body.socioNombre}` : cuotaFrase ? `Centra · ${cuotaFrase}` : 'Centra',
             },
             unit_amount: Math.round(importe * 100),
           },
@@ -1158,7 +1158,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Se registra ANTES de devolver la URL. Si esto fallara y devolviéramos la
-    // sesión igualmente, quedaría una sesión pagable que Tentare no conoce — y
+    // sesión igualmente, quedaría una sesión pagable que Centra no conoce — y
     // la siguiente petición crearía otra: exactamente el bug que cierra esto.
     // Regla de la casa: cero escritura optimista en el camino del dinero.
     if (body.reciboId) {
@@ -1174,7 +1174,7 @@ export async function POST(req: NextRequest) {
         // `importe_devuelto >= importe`, que PostgREST no compara), y que la sesión
         // guardada siga siendo la que se leyó: si otra petición (otra pestaña, el
         // enlace del email y la app a la vez) guardó la suya entre medias, esta no la
-        // pisa —quedarían dos sesiones pagables y Tentare solo conocería una—.
+        // pisa —quedarían dos sesiones pagables y Centra solo conocería una—.
         .in('estado', [...ESTADOS_COBRABLES])
         .is('reembolso_stripe_id', null)
         .is('reembolso_solicitado_en', null)
@@ -1191,7 +1191,7 @@ export async function POST(req: NextRequest) {
       // Sin error pero sin tocar ninguna fila: el recibo ya no existe (se borró
       // entre la lectura de arriba y aquí, p. ej. el de una penalización que se
       // decidió no cobrar), o se está cobrando con su tarjeta guardada o en la Caja.
-      // Devolver la URL sería abrir un pago de algo que Tentare ya no tiene, o un
+      // Devolver la URL sería abrir un pago de algo que Centra ya no tiene, o un
       // segundo cobro.
       const reciboDesaparecido = !errGuardar && (guardadas?.length ?? 0) === 0;
       if (reciboDesaparecido) {
@@ -1211,7 +1211,7 @@ export async function POST(req: NextRequest) {
             idempotencyKey: `checkout-expirar-${session.id}`,
           });
         } catch (errExpirar) {
-          // Queda viva una sesión pagable que Tentare no conoce: que se vea. Solo ids.
+          // Queda viva una sesión pagable que Centra no conoce: que se vea. Solo ids.
           Sentry.captureException(
             errExpirar instanceof Error ? errExpirar : new Error('No se pudo expirar la sesión de Checkout'),
             {

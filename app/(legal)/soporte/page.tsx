@@ -5,7 +5,7 @@ import { paginaDe, urlDe } from '@/lib/seo/paginas';
 
 // La URL de soporte que pide el App Store (y que cualquiera puede abrir sin cuenta).
 // Dice la verdad sobre quién resuelve qué: las reservas, los bonos y los cobros
-// los gestiona cada estudio; la app y la cuenta, Tentare.
+// los gestiona cada estudio; la app y la cuenta, Centra.
 const PATH = '/soporte';
 const pagina = paginaDe(PATH)!;
 
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title: pagina.titulo,
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
-  openGraph: { siteName: 'Tentare', type: 'website', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
+  openGraph: { siteName: 'Centra', type: 'website', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
 };
 
 export default function Soporte() {
@@ -38,7 +38,7 @@ export default function Soporte() {
 
       <h2>Borrar tu cuenta</h2>
       <p>
-        Desde la app: <strong>Perfil → Privacidad y datos → Borrar mi cuenta de Tentare</strong>. Se borra al
+        Desde la app: <strong>Perfil → Privacidad y datos → Borrar mi cuenta de Centra</strong>. Se borra al
         momento y ya no podrás entrar con ella en ningún estudio. Cada estudio conserva tu ficha y lo que la ley le
         obliga a guardar, como facturas y pagos. Si alguna vez entraste con Apple, quita también {LEGAL.marca} en
         los Ajustes del iPhone, en tu cuenta de Apple → Iniciar sesión con Apple.

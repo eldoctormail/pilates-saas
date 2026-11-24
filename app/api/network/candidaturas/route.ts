@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
     admin.from('red_perfiles').select('id, nombre, estado').eq('auth_user_id', usuario.userId).maybeSingle(),
     admin.from('red_vacantes').select('id, studio_id, titulo, estado').eq('id', vacanteId).maybeSingle(),
   ]);
-  if (!perfil) return errorPeticion('Todavía no tienes un perfil en Tentare Network.', 403);
+  if (!perfil) return errorPeticion('Todavía no tienes un perfil en Centra Network.', 403);
   if (perfil.estado !== 'published') {
     return errorPeticion('Tu perfil tiene que estar publicado para poder aplicar a una vacante.', 403);
   }

@@ -396,7 +396,7 @@ async function procesarEvento(
     if (adminDedup) await marcarWebhookProcesado(adminDedup, claveEvento);
   };
 
-  // Los packs de consultas del asistente son dinero de Tentare en la cuenta de
+  // Los packs de consultas del asistente son dinero de Centra en la cuenta de
   // PLATAFORMA (como la suscripción SaaS) y los procesa SOLO
   // /api/billing/webhook. Este destino también recibe eventos de la plataforma
   // (el estudio de demostración cobra en ella), y sin esta salida un pack pagado
@@ -1629,7 +1629,7 @@ async function procesarEvento(
 
   // Fase 1 (docs/ARQUITECTURA-LEGAL-PAGOS-FACTURACION.md) — disputa/chargeback:
   // el cargo ya se había cobrado y la socia lo impugna ante su banco. Antes esto
-  // era invisible para Tentare (solo se veía entrando a Stripe directamente).
+  // era invisible para Centra (solo se veía entrando a Stripe directamente).
   // Los datos de metadata viven en el PaymentIntent (no en la disputa), igual
   // que en charge.refunded.
   if (event.type === 'charge.dispute.created') {
@@ -1950,8 +1950,8 @@ async function procesarEvento(
         // cuando el snapshot lo tiene.
         let sesionesTexto = '';
         if (fila?.estado === 'REVERTIDA' && fila.aplicado?.automatica === true) {
-          // PR-14: la reversión la hizo Tentare sola (clase pagada que se quedó sin plaza), no la propietaria.
-          sesionesTexto = ' Al ver la devolución, Tentare le retiró el bono de esa compra y su sitio en la lista de espera: si no vas a devolverle el dinero, devuélveselo a mano.';
+          // PR-14: la reversión la hizo Centra sola (clase pagada que se quedó sin plaza), no la propietaria.
+          sesionesTexto = ' Al ver la devolución, Centra le retiró el bono de esa compra y su sitio en la lista de espera: si no vas a devolverle el dinero, devuélveselo a mano.';
         } else if (fila?.estado === 'REVERTIDA') {
           const delta = rec.entrega_tipo === 'BONO'
             && typeof rec.entrega_sesiones_antes === 'number'

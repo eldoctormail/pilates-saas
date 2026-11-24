@@ -26,7 +26,7 @@ export default function Contenido() {
       <p>
         Si ya es cliente tuya, con el código entra directamente. Si es su primera vez, después le pedimos su nombre,
         su teléfono si quiere darlo y que acepte tus condiciones y tu política de privacidad (las tuyas, no las de
-        Tentare). Quien tiene contraseña puede usarla con <strong>&ldquo;Usar mi contraseña&rdquo;</strong>, y si no se
+        Centra). Quien tiene contraseña puede usarla con <strong>&ldquo;Usar mi contraseña&rdquo;</strong>, y si no se
         acuerda, <strong>&ldquo;¿Has olvidado la contraseña?&rdquo;</strong> le manda un enlace para crear una nueva.
         También puede entrar con su cuenta de Google, o con Apple desde la app de iPhone.
       </p>

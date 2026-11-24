@@ -25,7 +25,7 @@ async function marcarRespondido(admin: SupabaseClient, studioId: string) {
 
 // Feedback interno de Review Boost: 1-5 estrellas + comentario opcional. Solo
 // PROPIETARIO (misma decisión que /configuracion → Facturación: es sobre la
-// relación con la suscripción de Tentare, no caja diaria).
+// relación con la suscripción de Centra, no caja diaria).
 //
 // 1-3 → queda en feedback interno, sin recompensa ni invitación externa.
 // 4-5 → además concede la recompensa (20% primer mes) AQUÍ MISMO, desacoplada

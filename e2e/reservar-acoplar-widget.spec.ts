@@ -77,11 +77,11 @@ test('⚠️ fondo transparente: se ve el de la web anfitriona', async ({ page }
   expect(r.fondo).toBe('rgba(0, 0, 0, 0)');
 });
 
-test('⚠️ la tipografía se NOMBRA y la pone Tentare, sin pedirle nada a Google', async ({ page }) => {
+test('⚠️ la tipografía se NOMBRA y la pone Centra, sin pedirle nada a Google', async ({ page }) => {
   // Un iframe no puede heredar la fuente de la web anfitriona —son documentos
   // distintos—, así que el estudio la nombra y la ponemos nosotros. Antes, con
   // un `<link>` a fonts.googleapis.com: la IP de cada visitante de su web, a
-  // Google. Ahora, las que sirve Tentare salen de las de la app (`next/font`).
+  // Google. Ahora, las que sirve Centra salen de las de la app (`next/font`).
   await page.setViewportSize({ width: 1100, height: 760 });
   await mocks(page);
   const google = await contarGoogleFonts(page);
@@ -94,7 +94,7 @@ test('⚠️ la tipografía se NOMBRA y la pone Tentare, sin pedirle nada a Goog
   expect(google).toEqual([]);
 });
 
-test('la tipografía de TITULARES también se nombra y la pone Tentare (widgetFuenteDisplay resucitado)', async ({ page }) => {
+test('la tipografía de TITULARES también se nombra y la pone Centra (widgetFuenteDisplay resucitado)', async ({ page }) => {
   // El control existía en el editor de temas y se guardaba… y la página nunca
   // lo consumía (auditoría P1): los titulares seguían en la serif fija.
   await page.setViewportSize({ width: 1100, height: 760 });
@@ -113,7 +113,7 @@ test('la tipografía de TITULARES también se nombra y la pone Tentare (widgetFu
 });
 
 test('⚠️ una letra que no servimos (un código de antes) se nombra tal cual y no se pide a nadie', async ({ page }) => {
-  // Space Grotesk y Lobster no las sirve Tentare. Se nombran con su reserva:
+  // Space Grotesk y Lobster no las sirve Centra. Se nombran con su reserva:
   // en este iframe solo se ven si quien mira las tiene instaladas. Lo que no
   // puede pasar es que se le pidan a Google.
   await page.setViewportSize({ width: 1100, height: 760 });
@@ -143,7 +143,7 @@ test('sin pie y con una sola pestaña', async ({ page }) => {
 });
 
 test('⚠️ la página SUELTA no cambia, aunque le pases los parámetros', async ({ page }) => {
-  // Sin `embed=1` no se aplica nada: `/reservar/<slug>` es la página de Tentare
+  // Sin `embed=1` no se aplica nada: `/reservar/<slug>` es la página de Centra
   // y ahí es el único sitio donde viven los legales.
   // ⚠️ `&tab=estudio`, no el `clases` por defecto: una sección que no es la
   // del horario, donde el widget sí pintaría su píldora de un solo propósito.

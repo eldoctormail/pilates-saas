@@ -2,7 +2,7 @@
 
 // Paso 06 del wizard: formación (certificaciones + documento). Extraído tal
 // cual de app/network/crear-perfil/page.tsx (paso === 5) — F0 del roadmap
-// de Tentare Network 2.0, sin cambios de comportamiento. Llama a la API
+// de Centra Network 2.0, sin cambios de comportamiento. Llama a la API
 // directamente (crearCertificacionNetwork/eliminarCertificacionNetwork), no
 // a través del padre — mismo patrón que ya usaba este componente antes de
 // partir el fichero.

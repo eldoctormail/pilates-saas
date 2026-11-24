@@ -18,7 +18,7 @@ import { imagenesSitemap } from '@/lib/recursos/schema';
 //  · y no había `lastModified` en ninguna entrada.
 // `lib/seo/paginas.test.ts` falla si aparece una página pública sin registrar.
 //
-// Tentare Network añade entradas DINÁMICAS aparte del registro estático: un
+// Centra Network añade entradas DINÁMICAS aparte del registro estático: un
 // perfil publicado por instructora, con su `slug` real — nunca miles de
 // páginas vacías generadas a priori (brief punto 12), solo las que existen
 // de verdad. `getSupabaseAdmin()` puede ser `null` en build sin env vars

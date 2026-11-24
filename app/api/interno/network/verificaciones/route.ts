@@ -6,7 +6,7 @@ export const runtime = 'nodejs';
 
 // Solo lectura a propósito: quién CONFIRMA/RECHAZA una experiencia sigue
 // siendo el estudio implicado (app/api/network/verificaciones/resolver),
-// nunca el equipo interno de Tentare — esto es supervisión (¿hay algo
+// nunca el equipo interno de Centra — esto es supervisión (¿hay algo
 // atascado?, ¿hay abuso?), no un atajo para resolver en su lugar.
 export async function GET(req: NextRequest) {
   const g = await exigirPermiso(req, 'network.moderate');

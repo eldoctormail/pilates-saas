@@ -23,7 +23,7 @@ function reglaO1(socio: SnapshotEstudio['socios'][number], estado: ResultadoEsta
   if (!socio.activo) return null;
   // Solo quien acaba de empezar DE VERDAD: Activa y «nueva» (primera compra de
   // hace 30 días o menos, sin historial importado ni años viniendo antes). Una
-  // veterana recién migrada a Tentare no está «cogiendo ritmo»; y las
+  // veterana recién migrada a Centra no está «cogiendo ritmo»; y las
   // interesadas y las de prueba son de Captación.
   if (estado?.estado !== 'ACTIVA' || !estado.nueva || !estado.primeraCompraReal) return null;
 

@@ -74,7 +74,7 @@ export function BarraInferiorMovil({ items, onMenu, menuAbierto, porDecidir }: {
           </button>
         </div>
         {puertaAsistente
-          ? <Link href="/asistente" data-movil-redondo aria-label="Pregúntale a Tentare"><Sparkles size={22} strokeWidth={1.8} aria-hidden="true" /></Link>
+          ? <Link href="/asistente" data-movil-redondo aria-label="Pregúntale a Centra"><Sparkles size={22} strokeWidth={1.8} aria-hidden="true" /></Link>
           : <span data-movil-redondo-hueco aria-hidden="true" />}
       </nav>
     </div>

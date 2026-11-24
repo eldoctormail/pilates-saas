@@ -32,7 +32,7 @@ import { registrarDevolucion, referenciaDevolucion, origenDeReembolso, type Orig
 import { seguirCreditosAlRecibo } from './creditos-recibo-server.ts';
 import { esReciboDePagoOnline, reembolsoTotalDelCargo, revertirCompraDeClaseDelRecibo } from './revertir-compra-de-clase.ts';
 
-// Orígenes cuyo PaymentIntent apunta a un recibo real de Tentare, y que por
+// Orígenes cuyo PaymentIntent apunta a un recibo real de Centra, y que por
 // tanto hay que marcar DEVUELTO/disputado cuando se devuelve o se impugna.
 //
 // ⚠️ Es una LISTA, no dos comparaciones sueltas, porque ya se olvidó una: al

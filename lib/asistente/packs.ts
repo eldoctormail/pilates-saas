@@ -9,7 +9,7 @@
 // es la única dueña del «te quedan N». Aquí solo vive el catálogo y lo que la
 // pantalla necesita saber para decirlo con verdad.
 //
-// Compra SOLO la propietaria (es dinero de Tentare al estudio, no de una socia):
+// Compra SOLO la propietaria (es dinero de Centra al estudio, no de una socia):
 // a la gerente se le dice «pídeselo a la propietaria».
 //
 // Puro: se prueba con `node --test`.

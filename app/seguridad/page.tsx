@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
   openGraph: {
-    siteName: 'Tentare',
+    siteName: 'Centra',
     type: 'website',
     title: pagina.titulo,
     description: ES
@@ -64,7 +64,7 @@ const PILLARS = [
   {
     icon: <CreditCard size={22} />,
     title: 'Pagos que no tocan tu servidor',
-    body: `Los cobros se procesan con ${ES ? 'Stripe' : 'Mercado Pago'}. Tentare no almacena los números de tarjeta de tus clientes — los gestiona el proveedor de pagos certificado.`,
+    body: `Los cobros se procesan con ${ES ? 'Stripe' : 'Mercado Pago'}. Centra no almacena los números de tarjeta de tus clientes — los gestiona el proveedor de pagos certificado.`,
   },
   {
     icon: <Database size={22} />,
@@ -90,7 +90,7 @@ export default function SeguridadPage() {
         <div className="sec-cab-in">
           <p className="sec-antetitulo"><Shield size={16} aria-hidden /> Seguridad y privacidad</p>
           <h1 className="sec-h1">Tus datos y los de tus<br />clientes, protegidos.</h1>
-          <p className="sec-entrada">Tentare gestiona información sensible de tu negocio y de tus socias. Está construido desde el primer día para que esos datos estén aislados{ES ? ', alojados en Europa' : ''} y bajo tu control.</p>
+          <p className="sec-entrada">Centra gestiona información sensible de tu negocio y de tus socias. Está construido desde el primer día para que esos datos estén aislados{ES ? ', alojados en Europa' : ''} y bajo tu control.</p>
           <ul className="sec-sellos">
             {(ES ? ['Base de datos en la UE', 'Diseñado con el RGPD en mente', 'Cifrado en tránsito', 'Sin permanencia'] : ['Diseñado con la Ley 25.326 en mente', 'Cifrado en tránsito', 'Sin permanencia']).map((t) => <li key={t}>{t}</li>)}
           </ul>

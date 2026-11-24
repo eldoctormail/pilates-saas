@@ -6,7 +6,7 @@ import { getSupabaseAdmin } from '@/lib/db/supabase-admin';
 import { cayoEnLaTrampa, CAMPO_TRAMPA } from '@/lib/auth/trampa-bots';
 import { camposVaciosARellenar } from '@/lib/network/fusionar-lead';
 
-// Captación de demanda de ESTUDIO en Tentare Network mientras la oferta de
+// Captación de demanda de ESTUDIO en Centra Network mientras la oferta de
 // instructoras todavía es pequeña (brief "captación de estudios", punto 17 y
 // empty state de ciudad/búsqueda, punto 16/19). Reusa `plataforma_lead`
 // (mismo patrón que /api/public/migracion-concierge) en vez de una tabla
@@ -100,7 +100,7 @@ export async function POST(req: NextRequest) {
         ? `Network: un estudio busca instructora${ciudad ? ` en ${esc(ciudad)}` : ''}`
         : `Network: interés en una ciudad${ciudad ? ` (${esc(ciudad)})` : ''}`;
       const { error } = await resend.emails.send({
-        from: process.env.RESEND_FROM || 'Tentare <onboarding@resend.dev>',
+        from: process.env.RESEND_FROM || 'Centra <onboarding@resend.dev>',
         to: ['soporte@tentare.app'],
         replyTo: email,
         subject: asunto,

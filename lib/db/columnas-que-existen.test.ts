@@ -15,7 +15,7 @@ import { join } from 'node:path';
 // lo leía con un `?? []`.
 //
 // El resultado no era una pantalla rota, que se habría arreglado en un día: era
-// un CERO creíble. El panel interno de Tentare llevaba quién sabe cuánto
+// un CERO creíble. El panel interno de Centra llevaba quién sabe cuánto
 // diciendo que la plataforma entera no tenía ni una clase programada, y que
 // «programar clases» era el paso que bloqueaba a todos los estudios. Un número
 // falso que encaja con la historia que ya te esperabas no lo mira nadie dos

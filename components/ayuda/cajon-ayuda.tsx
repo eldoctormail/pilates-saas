@@ -44,7 +44,7 @@ export function CajonAyuda({ ayuda, ruta, abierto, onCerrar }: {
   const guias = articulosPublicadosDe(ayuda.destino.categoria)
     .sort((a, b) => Number(b.slug === ayuda.destino.slug) - Number(a.slug === ayuda.destino.slug))
     .slice(0, 6);
-  const soporte = enlaceWhatsApp(SOPORTE_WHATSAPP, `Hola, tengo una duda con «${ayuda.titulo}» en Tentare:`);
+  const soporte = enlaceWhatsApp(SOPORTE_WHATSAPP, `Hola, tengo una duda con «${ayuda.titulo}» en Centra:`);
 
   return (
     <DashboardDrawer open={abierto} onClose={onCerrar} label={`Ayuda: ${ayuda.titulo}`}>

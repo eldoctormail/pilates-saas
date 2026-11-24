@@ -54,7 +54,7 @@ test('la URL cambia si cambia el color: cachear por URL no deja iconos viejos', 
 // El manifest del portal declaraba /icon-192.png y /icon-512.png —los de
 // TENTARE— como candidatos junto al logo. Un instalador que exige un tamaño
 // exacto descarta el logo (`sizes: 'any'`) y se queda con la marca ajena: la
-// alumna acababa con el icono de Tentare en su pantalla de inicio.
+// alumna acababa con el icono de Centra en su pantalla de inicio.
 
 const BASE = 'https://proyecto.supabase.co';
 const LOGO = `${BASE}/storage/v1/object/public/marca/logo-abc?v=1`;
@@ -86,7 +86,7 @@ test('con logo servible, el icono lo lleva en la URL', () => {
 });
 
 // Sin logo —o con uno que no podemos servir— se cae al monograma, NUNCA al
-// icono de Tentare.
+// icono de Centra.
 test('sin logo servible se cae al monograma, no a la marca de la plataforma', () => {
   for (const malo of [null, undefined, '', 'https://evil.example/x.png']) {
     const u = urlIconoEstudio('Studio Carmen', '#343825', 512, { iconoUrl: malo, logoUrl: malo }, BASE);

@@ -11,9 +11,9 @@ export const metadata: Metadata = {
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
   openGraph: {
-    siteName: 'Tentare',
+    siteName: 'Centra',
     type: 'website',
-    title: 'Tentare vs Bonsai',
+    title: 'Centra vs Bonsai',
     description: 'Precio, permanencia, comisiones y sustitución de instructoras — comparados con lo que consta en la web pública de Bonsai.',
     url: urlDe(PATH),
   },
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 const ROWS: ComparativaRow[] = [
   { feature: 'Precio de entrada', tentare: ['yes', 'Gratis hasta 150 reservas al mes; si pasas de ahí, 29 €/mes con IVA'], them: ['yes', 'Plan gratis (con un 3 % extra por cobro) o Starter desde 29 €/mes + IVA con pago anual (39 € mes a mes)'] },
   { feature: 'Sin permanencia', tentare: ['yes', 'Sí, mes a mes'], them: ['partial', 'Mensual sin compromiso; el plan anual se paga por adelantado'] },
-  { feature: 'Comisión de la plataforma por cobro', tentare: ['yes', 'Ninguna de Tentare (solo la de Stripe)'], them: ['partial', '3 % extra en el plan gratis; ninguna en los de pago'] },
+  { feature: 'Comisión de la plataforma por cobro', tentare: ['yes', 'Ninguna de Centra (solo la de Stripe)'], them: ['partial', '3 % extra en el plan gratis; ninguna en los de pago'] },
   { feature: 'Datos alojados en la UE', tentare: ['yes', 'Base de datos en la UE; algunos proveedores, fuera (ver privacidad)'], them: ['yes', 'Servidores en la UE, según sus condiciones'] },
   { feature: 'Sustitución de instructoras', tentare: ['yes', 'Propone candidatas y contacta con tu visto bueno; autónoma en el plan gratis, Estudio y Cadena, o con un complemento de 12 €/mes'], them: ['partial', 'No consta en su web pública'] },
   // Nuevos ejes (mybonsai.app/precios y mybonsai.app/faqs, revisados el 29-sep-2026):
@@ -43,11 +43,11 @@ const ROWS: ComparativaRow[] = [
 const FAQ = [
   {
     q: '¿Cuánto cuesta Bonsai?',
-    a: 'Tiene un plan Seed gratuito (con un 3 % extra por transacción y límites: hasta 100 reservas grupales al mes y 30 cuotas activas), Starter a 39 €/mes, o 29 €/mes con pago anual (500 reservas al mes), Pro a 69 €/mes, o 49 €/mes con pago anual, y Premium a medida. Los precios de Bonsai no incluyen IVA. Los de Tentare sí: Founding Studio gratis (hasta 150 reservas al mes; si pasas de ahí, 29 €/mes), Estudio 79 €/mes y Cadena 249 €/mes.',
+    a: 'Tiene un plan Seed gratuito (con un 3 % extra por transacción y límites: hasta 100 reservas grupales al mes y 30 cuotas activas), Starter a 39 €/mes, o 29 €/mes con pago anual (500 reservas al mes), Pro a 69 €/mes, o 49 €/mes con pago anual, y Premium a medida. Los precios de Bonsai no incluyen IVA. Los de Centra sí: Founding Studio gratis (hasta 150 reservas al mes; si pasas de ahí, 29 €/mes), Estudio 79 €/mes y Cadena 249 €/mes.',
   },
   {
-    q: '¿Puedo pasar mis datos de Bonsai a Tentare?',
-    a: 'El importador de Tentare lee ficheros de Excel y las exportaciones de otros programas; te enseña un acta con lo importado y puedes deshacerlo.',
+    q: '¿Puedo pasar mis datos de Bonsai a Centra?',
+    a: 'El importador de Centra lee ficheros de Excel y las exportaciones de otros programas; te enseña un acta con lo importado y puedes deshacerlo.',
   },
 ];
 
@@ -59,7 +59,7 @@ const RESUMEN: ResumenCompetidor = {
   precio: 'Gratis con un 3 % extra por cobro; de pago desde 39 €/mes + IVA (29 € pagando el año)',
   permanencia: 'Mensual sin compromiso; el plan anual se paga por adelantado',
   destacado: { etiqueta: 'App con tu marca', suyo: 'App nativa con tu marca solo en Premium, a medida', nuestro: 'En todos los planes, con tu nombre e icono' },
-  respuesta: <>Bonsai tiene un plan gratis, pero se queda un 3 % extra de cada cobro y limita las reservas y las cuotas activas; los planes de pago empiezan en 39 €/mes + IVA, y la app nativa con tu marca solo va en Premium, con precio a medida. Para un estudio de Pilates o yoga en España, la alternativa es Tentare: gratis hasta 150 reservas al mes, sin comisión de la plataforma y con la app con tu marca en todos los planes.</>,
+  respuesta: <>Bonsai tiene un plan gratis, pero se queda un 3 % extra de cada cobro y limita las reservas y las cuotas activas; los planes de pago empiezan en 39 €/mes + IVA, y la app nativa con tu marca solo va en Premium, con precio a medida. Para un estudio de Pilates o yoga en España, la alternativa es Centra: gratis hasta 150 reservas al mes, sin comisión de la plataforma y con la app con tu marca en todos los planes.</>,
 };
 
 const ANALISIS: SeccionAnalisis[] = [
@@ -69,7 +69,7 @@ const ANALISIS: SeccionAnalisis[] = [
       <>
         <p>El plan Seed de Bonsai no tiene cuota, pero cobra un 3 % extra en cada transacción y tiene límites: hasta 100 reservas grupales al mes y 30 cuotas activas. Si cobras 3.000 € al mes a través de la plataforma, ese 3 % son 90 € al mes: más que sus planes Starter y Pro, incluso con IVA.</p>
         <p>Los de pago, sin IVA: Starter 39 €/mes (29 € pagando el año, hasta 500 reservas al mes), Pro 69 €/mes (49 € anual) y Premium a medida. Con IVA, el Starter mensual sale a 47,19 €.</p>
-        <p>Tentare Founding Studio también es gratis, con límites (hasta 150 reservas al mes), pero sin el 3 % extra sobre tus cobros; si pasas de ahí, 29 €/mes con IVA y ya sin límite de reservas. <Link href="/precios">Ver los planes</Link>.</p>
+        <p>Centra Founding Studio también es gratis, con límites (hasta 150 reservas al mes), pero sin el 3 % extra sobre tus cobros; si pasas de ahí, 29 €/mes con IVA y ya sin límite de reservas. <Link href="/precios">Ver los planes</Link>.</p>
       </>
     ),
   },
@@ -77,15 +77,15 @@ const ANALISIS: SeccionAnalisis[] = [
     titulo: 'La app con tu marca, desde el primer plan',
     cuerpo: (
       <>
-        <p>Según su web, la app nativa con la marca del estudio va solo en el plan Premium, con precio a medida; los demás planes traen una app «personalizable». En Tentare, todas las alumnas instalan desde el navegador una app con tu nombre, tu icono y tus colores, en todos los planes y sin pasar por ninguna tienda. <Link href="/funcionalidades/app-para-alumnas">Cómo es la app</Link>.</p>
-        <p>Y cuando falla una instructora, Tentare busca quién la cubre y avisa a las alumnas: algo que la web de Bonsai no menciona. <Link href="/funcionalidades/sustituciones">Sustituciones</Link>.</p>
+        <p>Según su web, la app nativa con la marca del estudio va solo en el plan Premium, con precio a medida; los demás planes traen una app «personalizable». En Centra, todas las alumnas instalan desde el navegador una app con tu nombre, tu icono y tus colores, en todos los planes y sin pasar por ninguna tienda. <Link href="/funcionalidades/app-para-alumnas">Cómo es la app</Link>.</p>
+        <p>Y cuando falla una instructora, Centra busca quién la cubre y avisa a las alumnas: algo que la web de Bonsai no menciona. <Link href="/funcionalidades/sustituciones">Sustituciones</Link>.</p>
       </>
     ),
   },
   {
-    titulo: 'Cómo cambiarte de Bonsai a Tentare',
+    titulo: 'Cómo cambiarte de Bonsai a Centra',
     cuerpo: (
-      <p>Exporta tus alumnas y bonos de Bonsai en Excel o CSV y súbelos al importador de Tentare: te enseña un acta antes de guardar y lo puedes deshacer con un botón. <Link href="/soluciones/cambiar-de-software">Cómo es el cambio</Link>.</p>
+      <p>Exporta tus alumnas y bonos de Bonsai en Excel o CSV y súbelos al importador de Centra: te enseña un acta antes de guardar y lo puedes deshacer con un botón. <Link href="/soluciones/cambiar-de-software">Cómo es el cambio</Link>.</p>
     ),
   },
 ];
@@ -96,11 +96,11 @@ export default function TentareVsBonsaiPage() {
       name="Bonsai"
       slug="tentare-vs-bonsai"
       logo={{ src: '/comparativa/logos/bonsai.svg', alt: 'Logo de Bonsai', height: 26, width: 109 }}
-      intro={<>Bonsai es una app de gestión para estudios de yoga, pilates y barre, con un plan gratuito que cobra un extra por cada transacción. Para un <strong style={{ color: 'var(--w-texto)' }}>estudio de pilates en España</strong> que vende bonos y cuotas, Tentare te da más por un precio claro y sin comisión de la plataforma.</>}
+      intro={<>Bonsai es una app de gestión para estudios de yoga, pilates y barre, con un plan gratuito que cobra un extra por cada transacción. Para un <strong style={{ color: 'var(--w-texto)' }}>estudio de pilates en España</strong> que vende bonos y cuotas, Centra te da más por un precio claro y sin comisión de la plataforma.</>}
       resumen={RESUMEN}
       rows={ROWS}
       analisis={ANALISIS}
-      veredicto={<>Tentare es la mejor opción para tu estudio de Pilates: sustituciones de instructoras, plazas fijas y cobros que se reintentan solos, con precio público y sin que la plataforma se quede nada de tus cobros. Empieza gratis, sin tarjeta.</>}
+      veredicto={<>Centra es la mejor opción para tu estudio de Pilates: sustituciones de instructoras, plazas fijas y cobros que se reintentan solos, con precio público y sin que la plataforma se quede nada de tus cobros. Empieza gratis, sin tarjeta.</>}
       footnote="Basado en la información pública de Bonsai (mybonsai.app) a 7 de octubre de 2026. «No consta» significa que su web pública no lo indica, no que no exista. Las funciones y precios cambian con el tiempo; verifica siempre con la fuente actual. Bonsai es marca de su respectivo propietario; esta comparación es orientativa y sin ánimo de menoscabo."
       faq={FAQ}
     />

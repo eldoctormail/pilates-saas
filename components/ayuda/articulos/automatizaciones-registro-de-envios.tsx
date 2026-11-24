@@ -6,7 +6,7 @@ export default function Contenido() {
   return (
     <>
       <AyudaAntesDeEmpezar>
-        Los avisos que Tentare ha enviado en tu nombre: a qué perfil, cuándo, por qué canal y con qué resultado.
+        Los avisos que Centra ha enviado en tu nombre: a qué perfil, cuándo, por qué canal y con qué resultado.
         Es la respuesta a «¿le llegó el recordatorio de su clase en su app?», que hasta ahora solo se podía suponer.
         Salen los últimos 150.
       </AyudaAntesDeEmpezar>

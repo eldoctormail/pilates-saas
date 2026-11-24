@@ -10,7 +10,7 @@ import type { Traje } from '@/lib/tenti/trajes';
 import { ID_ANFITRION_PANEL } from '@/lib/panel-portal';
 import { capturarExcepcion } from '@/lib/sentry-cliente';
 
-// La mascota de Tentare. El dibujo y las animaciones viven en lib/tenti/motor.ts;
+// La mascota de Centra. El dibujo y las animaciones viven en lib/tenti/motor.ts;
 // esto solo lo monta en un <canvas> y lo conecta con la página.
 //
 // Desde el 5-oct-2026 (decisión del fundador: «en /interno/tenti está

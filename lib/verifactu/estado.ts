@@ -154,7 +154,7 @@ export type ClaseFault = 'SIN_PODER' | 'SUSPENDIDO' | 'NO_HABILITADO' | 'TRANSIT
 
 /**
  * Clasificación de los rechazos de envío (4100-4141) del catálogo en vivo de la
- * AEAT (`errores.properties`, copiado el 30-sep-2026). Criterio de Tentare a
+ * AEAT (`errores.properties`, copiado el 30-sep-2026). Criterio de Centra a
  * partir del texto literal de cada código; no hay una tabla oficial de «qué
  * hacer» con ellos.
  */
@@ -187,7 +187,7 @@ export interface EfectoFault {
   registros: 'LISTO' | 'REINTENTAR' | 'RECHAZADA';
   /** Efecto sobre el estudio del sobre. */
   estudio: 'PAUSADO' | null;
-  /** Efecto sobre TODA la transmisión de Tentare. */
+  /** Efecto sobre TODA la transmisión de Centra. */
   global: 'SUSPENDIDO_AEAT' | null;
   /** Avisar a la propietaria. */
   avisar: boolean;
@@ -199,7 +199,7 @@ export function efectoDeFault(codigo: string | null): EfectoFault {
     // Sin poder: los registros están bien; lo que falta es el apoderamiento.
     // Se pausa el estudio (no se vuelve a intentar hasta que se revise) y se avisa.
     case 'SIN_PODER': return { clase, registros: 'LISTO', estudio: 'PAUSADO', global: null, avisar: true };
-    // Suspensión o servicio no habilitado: afecta a todo lo que manda Tentare.
+    // Suspensión o servicio no habilitado: afecta a todo lo que manda Centra.
     case 'SUSPENDIDO': return { clase, registros: 'LISTO', estudio: null, global: 'SUSPENDIDO_AEAT', avisar: false };
     case 'NO_HABILITADO': return { clase, registros: 'LISTO', estudio: null, global: 'SUSPENDIDO_AEAT', avisar: false };
     // Técnico de la AEAT: se reintenta el MISMO XML con espera.

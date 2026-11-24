@@ -1,4 +1,4 @@
-// Interruptor único del cierre de Tentare Network (29-sep-2026, decisión del
+// Interruptor único del cierre de Centra Network (29-sep-2026, decisión del
 // fundador): con `true`, /network/acceso y el paso «Tu cuenta» de
 // /network/crear-perfil (quien llega sin sesión) enseñan el aviso de
 // mantenimiento en vez del login y del alta. El resto de Network —
@@ -35,6 +35,6 @@ export const ACCESO_NETWORK_EN_MANTENIMIENTO = true;
 
 // Los avisos, en un solo sitio: los enseñan las dos pantallas y el servidor.
 export const MENSAJE_ACCESO_NETWORK_CERRADO =
-  'El acceso a Tentare Network está temporalmente cerrado. Vuelve a intentarlo más tarde.';
+  'El acceso a Centra Network está temporalmente cerrado. Vuelve a intentarlo más tarde.';
 export const MENSAJE_ALTA_NETWORK_CERRADA =
-  'La creación de perfiles nuevos en Tentare Network está temporalmente cerrada. Vuelve a intentarlo más tarde.';
+  'La creación de perfiles nuevos en Centra Network está temporalmente cerrada. Vuelve a intentarlo más tarde.';

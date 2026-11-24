@@ -11,9 +11,9 @@ export const metadata: Metadata = {
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
   openGraph: {
-    siteName: 'Tentare',
+    siteName: 'Centra',
     type: 'website',
-    title: 'Tentare vs TIMP',
+    title: 'Centra vs TIMP',
     description: 'Precio, compromiso mínimo y comisión de TIMPY — comparados con lo que consta en la web pública de TIMP.',
     url: urlDe(PATH),
   },
@@ -49,15 +49,15 @@ const ROWS: ComparativaRow[] = [
 const FAQ = [
   {
     q: '¿Cuánto cuesta TIMP?',
-    a: 'Según su web, por centro y al mes: Starter 50 € (1 profesional), Basic 85 € (3), Pro 130 € (10) y Premium 170 € (15), con descuento en planes semestrales y anuales; la web no aclara si incluye IVA. Tentare: Founding Studio gratis (hasta 150 reservas al mes; si pasas de ahí, 29 €/mes), Estudio 79 €/mes y Cadena 249 €/mes, IVA incluido.',
+    a: 'Según su web, por centro y al mes: Starter 50 € (1 profesional), Basic 85 € (3), Pro 130 € (10) y Premium 170 € (15), con descuento en planes semestrales y anuales; la web no aclara si incluye IVA. Centra: Founding Studio gratis (hasta 150 reservas al mes; si pasas de ahí, 29 €/mes), Estudio 79 €/mes y Cadena 249 €/mes, IVA incluido.',
   },
   {
     q: '¿TIMP tiene permanencia?',
-    a: 'Su web indica que «la contratación mínima en la mayoría de planes es sólo de 3 meses». Tentare no tiene permanencia: se paga mes a mes.',
+    a: 'Su web indica que «la contratación mínima en la mayoría de planes es sólo de 3 meses». Centra no tiene permanencia: se paga mes a mes.',
   },
   {
-    q: '¿Puedo pasar mis datos de TIMP a Tentare?',
-    a: 'Sí. El importador de Tentare lee los archivos CSV o Excel que exportas de Timp o de cualquier otro programa: te enseña un acta con lo importado y puedes deshacerlo con un botón.',
+    q: '¿Puedo pasar mis datos de TIMP a Centra?',
+    a: 'Sí. El importador de Centra lee los archivos CSV o Excel que exportas de Timp o de cualquier otro programa: te enseña un acta con lo importado y puedes deshacerlo con un botón.',
   },
 ];
 
@@ -69,7 +69,7 @@ const RESUMEN: ResumenCompetidor = {
   precio: 'Por centro y por profesionales: de 50 €/mes (1) a 170 €/mes (15)',
   permanencia: 'Mínimo de 3 meses en la mayoría de planes',
   destacado: { etiqueta: 'Instructoras', suyo: 'El precio sube con cada profesional del centro', nuestro: 'El precio no cuenta instructoras' },
-  respuesta: <>TIMP sirve para muchos negocios de citas y clases, y su precio depende de cuántos profesionales trabajan en tu centro, con un mínimo de 3 meses en la mayoría de planes. Un estudio de Pilates con cuatro instructoras ya entra en su plan de 130 €/mes. Si quieres un precio que no cuente instructoras y sin compromiso, la alternativa es Tentare: gratis hasta 150 reservas al mes, sin tarjeta y sin permanencia.</>,
+  respuesta: <>TIMP sirve para muchos negocios de citas y clases, y su precio depende de cuántos profesionales trabajan en tu centro, con un mínimo de 3 meses en la mayoría de planes. Un estudio de Pilates con cuatro instructoras ya entra en su plan de 130 €/mes. Si quieres un precio que no cuente instructoras y sin compromiso, la alternativa es Centra: gratis hasta 150 reservas al mes, sin tarjeta y sin permanencia.</>,
 };
 
 const ANALISIS: SeccionAnalisis[] = [
@@ -78,7 +78,7 @@ const ANALISIS: SeccionAnalisis[] = [
     cuerpo: (
       <>
         <p>TIMP cotiza por centro y al mes, según los profesionales: Starter 50 € (1), Basic 85 € (3), Pro 130 € (10) y Premium 170 € (15), con pago mensual y algo menos en planes semestrales y anuales. Su web no aclara si el precio incluye IVA, y la contratación mínima en la mayoría de planes es de 3 meses.</p>
-        <p>En un estudio de Pilates el equipo crece pronto: con cuatro instructoras ya no vale el plan Basic y pasas a Pro, 130 € al mes. En Tentare el precio no depende de cuántas instructoras tengas: Founding Studio gratis hasta 150 reservas al mes y 29 €/mes si pasas de ahí, IVA incluido y sin permanencia. <Link href="/precios">Ver los planes</Link>.</p>
+        <p>En un estudio de Pilates el equipo crece pronto: con cuatro instructoras ya no vale el plan Basic y pasas a Pro, 130 € al mes. En Centra el precio no depende de cuántas instructoras tengas: Founding Studio gratis hasta 150 reservas al mes y 29 €/mes si pasas de ahí, IVA incluido y sin permanencia. <Link href="/precios">Ver los planes</Link>.</p>
       </>
     ),
   },
@@ -86,15 +86,15 @@ const ANALISIS: SeccionAnalisis[] = [
     titulo: 'Hecho para estudios de Pilates y yoga',
     cuerpo: (
       <>
-        <p>TIMP sirve para negocios muy distintos: fisioterapia, estética, academias, yoga o pilates. Tentare está hecho para estudios de clases: plaza por reformer, aforo por sala, plazas fijas, bonos por tipo de clase y lista de espera que se gestiona sola. <Link href="/soluciones/estudio-de-pilates-reformer">Tentare para estudios de reformer</Link>.</p>
-        <p>Su web tampoco menciona sustituciones de instructoras. En Tentare, si una instructora no puede, el sistema busca quién la cubre, la contacta y avisa a las alumnas. <Link href="/funcionalidades/sustituciones">Así funcionan</Link>.</p>
+        <p>TIMP sirve para negocios muy distintos: fisioterapia, estética, academias, yoga o pilates. Centra está hecho para estudios de clases: plaza por reformer, aforo por sala, plazas fijas, bonos por tipo de clase y lista de espera que se gestiona sola. <Link href="/soluciones/estudio-de-pilates-reformer">Centra para estudios de reformer</Link>.</p>
+        <p>Su web tampoco menciona sustituciones de instructoras. En Centra, si una instructora no puede, el sistema busca quién la cubre, la contacta y avisa a las alumnas. <Link href="/funcionalidades/sustituciones">Así funcionan</Link>.</p>
       </>
     ),
   },
   {
-    titulo: 'Cómo cambiarte de TIMP a Tentare',
+    titulo: 'Cómo cambiarte de TIMP a Centra',
     cuerpo: (
-      <p>El importador de Tentare lee los archivos CSV o Excel que exportas de TIMP: clientas, bonos, clases y reservas, con un acta para revisarlo y un botón para deshacerlo. <Link href="/soluciones/cambiar-de-software">Cómo es el cambio</Link>. Y si aún estás comparando, tenemos una guía con <Link href="/recursos/alternativas-a-timp">las alternativas a TIMP</Link>.</p>
+      <p>El importador de Centra lee los archivos CSV o Excel que exportas de TIMP: clientas, bonos, clases y reservas, con un acta para revisarlo y un botón para deshacerlo. <Link href="/soluciones/cambiar-de-software">Cómo es el cambio</Link>. Y si aún estás comparando, tenemos una guía con <Link href="/recursos/alternativas-a-timp">las alternativas a TIMP</Link>.</p>
     ),
   },
 ];
@@ -105,11 +105,11 @@ export default function TentareVsTimpPage() {
       name="TIMP"
       slug="tentare-vs-timp"
       logo={{ src: '/comparativa/logos/timp.webp', alt: 'Logo de TIMP', height: 24, width: 89 }}
-      intro={<>TIMP es un software de gestión para muchos tipos de negocio de citas y clases. Para un <strong style={{ color: 'var(--w-texto)' }}>estudio de pilates en España</strong>, Tentare cuesta menos para empezar, no te pide compromiso mínimo y no cobra comisión por captar clientas.</>}
+      intro={<>TIMP es un software de gestión para muchos tipos de negocio de citas y clases. Para un <strong style={{ color: 'var(--w-texto)' }}>estudio de pilates en España</strong>, Centra cuesta menos para empezar, no te pide compromiso mínimo y no cobra comisión por captar clientas.</>}
       resumen={RESUMEN}
       rows={ROWS}
       analisis={ANALISIS}
-      veredicto={<>Tentare es la mejor opción para tu estudio de Pilates: precio de entrada más bajo, sin compromiso mínimo ni comisión por captar clientas, y un producto hecho para Pilates. Empieza gratis, sin tarjeta.</>}
+      veredicto={<>Centra es la mejor opción para tu estudio de Pilates: precio de entrada más bajo, sin compromiso mínimo ni comisión por captar clientas, y un producto hecho para Pilates. Empieza gratis, sin tarjeta.</>}
       footnote="Basado en la información pública de TIMP (timp.pro) revisada el 7 de octubre de 2026. «No consta» significa que su web pública no lo indica, no que no exista. Las funciones y precios cambian con el tiempo; verifica siempre con la fuente actual. TIMP es marca de su respectivo propietario; esta comparación es orientativa y sin ánimo de menoscabo."
       faq={FAQ}
     />

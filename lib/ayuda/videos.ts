@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// Los vídeos de las guías (Tentare Academy). Puro y sin `@/`: se prueba con `node --test`.
+// Los vídeos de las guías (Centra Academy). Puro y sin `@/`: se prueba con `node --test`.
 //
 // Un vídeo cuelga de UNA guía del registro (`lib/ayuda/registro.ts`) por su clave «categoria/slug». Vive en la base de datos
 // (`ayuda_videos`, global y solo servidor) y no en el código para poder publicarlo sin desplegar; el TEXTO de la guía sigue en

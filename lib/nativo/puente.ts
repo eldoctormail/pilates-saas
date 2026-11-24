@@ -302,7 +302,7 @@ export async function alPulsarAviso(handler: (aviso: AvisoPulsado) => void): Pro
 /**
  * Avisa cuando un enlace abre la app (Universal Link de tentare.app o el
  * esquema propio `<bundle id>://…`) con la ruta INTERNA a la que llevarla:
- * solo path + query, ya validados. Los enlaces que no son de Tentare no llegan.
+ * solo path + query, ya validados. Los enlaces que no son de Centra no llegan.
  * Devuelve cómo dejar de escuchar.
  */
 export async function alAbrirEnlace(handler: (ruta: string) => void): Promise<() => void> {

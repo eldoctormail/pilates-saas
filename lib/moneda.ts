@@ -7,7 +7,7 @@
 // esperados están escritos en euros.
 //
 // Lo que queda en euros a propósito: Stripe (cobros online, apagado en esta
-// instalación), VeriFactu y las páginas comerciales de Tentare.
+// instalación), VeriFactu y las páginas comerciales de Centra.
 
 import { LOCALE } from './locale.ts';
 

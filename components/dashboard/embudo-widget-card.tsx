@@ -3,7 +3,7 @@
 // Versión condensada, para la home, del embudo del widget público que ya vive
 // en Configuración → API → Crecimiento web (components/configuracion/tab-crecimiento-web.tsx,
 // fuente de verdad de las cifras y de los comentarios que explican cada una).
-// La auditoría Momence vs Tentare la señalaba como el hallazgo más barato del
+// La auditoría Momence vs Centra la señalaba como el hallazgo más barato del
 // roadmap con datos ya construidos ("solo falta query + UI") — la query y la
 // pantalla ya existían (Fase 8 CRO), lo que faltaba de verdad era que la
 // propietaria la viera sin ir a buscarla a Configuración.

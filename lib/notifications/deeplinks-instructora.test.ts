@@ -1,4 +1,4 @@
-// Tentare Core se retiró (14-sep-2026): la instructora trabaja en la app del
+// Centra Core se retiró (14-sep-2026): la instructora trabaja en la app del
 // estudio y el panel la manda allí. Un aviso que la llevara al panel no se
 // rompe (la puerta la redirige), pero la deja en «Hoy» en vez de en lo que el
 // aviso le cuenta. Esta guardia fija que cada aviso a INSTRUCTOR abre ya la app.

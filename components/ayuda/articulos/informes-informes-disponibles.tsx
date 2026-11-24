@@ -28,7 +28,7 @@ export default function Contenido() {
 
       <AyudaResultado>
         El margen por clase solo se calcula si has puesto la tarifa por hora de cada instructora — sin ese dato,
-        Tentare no inventa un coste, simplemente no muestra el margen para esa clase. Informes es de la
+        Centra no inventa un coste, simplemente no muestra el margen para esa clase. Informes es de la
         propietaria: recepción y responsable de sede no lo ven.
       </AyudaResultado>
     </>

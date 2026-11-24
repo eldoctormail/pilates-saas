@@ -204,7 +204,7 @@ export function LoginNuevoTarjeta(p: LoginNuevoProps) {
       <div className="ln-cajas" style={alto === undefined ? undefined : { height: alto }}>
         {/* 1 · Correo */}
         <PanelAnimado {...panelDe('correo')}>
-          {cabecera('Inicia sesión', 'Continúa a tu estudio en Tentare')}
+          {cabecera('Inicia sesión', 'Continúa a tu estudio en Centra')}
           <form
             className="mt-7"
             onSubmit={e => { e.preventDefault(); if (p.email.trim()) p.onContinuarCorreo(); }}
@@ -226,7 +226,7 @@ export function LoginNuevoTarjeta(p: LoginNuevoProps) {
             </button>
           )}
           <p className="mt-6 text-center text-[14px] text-[color:var(--t-ink-500)] max-sm:text-[15px]">
-            ¿Primera vez en Tentare? <Link href="/crear-estudio" className={ENLACE}>Crea tu estudio</Link>
+            ¿Primera vez en Centra? <Link href="/crear-estudio" className={ENLACE}>Crea tu estudio</Link>
           </p>
           <p className="mt-2 text-center text-[13px] text-[color:var(--t-ink-500)]">
             ¿Eres del equipo y aún no tienes cuenta?{' '}
@@ -237,7 +237,7 @@ export function LoginNuevoTarjeta(p: LoginNuevoProps) {
 
         {/* 2 · Contraseña */}
         <PanelAnimado {...panelDe('clave')}>
-          {cabecera('Inicia sesión', 'Continúa a tu estudio en Tentare')}
+          {cabecera('Inicia sesión', 'Continúa a tu estudio en Centra')}
           <form className="mt-7" onSubmit={p.onSubmit}>
             <div className="flex items-center justify-between gap-3 rounded-xl border border-[color:color-mix(in_srgb,var(--t-ink-900)_10%,white)] bg-[color:var(--t-ink-950)]/[.03] px-3.5 py-2.5 max-sm:rounded-[14px] max-sm:py-3.5">
               <span className="min-w-0 break-all text-[15px]">{p.email}</span>

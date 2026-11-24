@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   title: pagina.titulo,
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
-  openGraph: { siteName: 'Tentare', type: 'website', locale: 'es_ES', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
+  openGraph: { siteName: 'Centra', type: 'website', locale: 'es_ES', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
 };
 
 const FAQ = [
@@ -50,11 +50,11 @@ export default function SustitucionesPage() {
     <FeatureShell
       path={PATH}
       busqueda="Sustituciones automáticas de instructoras de Pilates"
-      h1={<>Tentare busca quién cubre la baja.</>}
+      h1={<>Centra busca quién cubre la baja.</>}
       intro={<>Una instructora avisa de que no puede dar su clase. Antes de que llegues a leer el mensaje, el sistema ya sabe quién puede cubrirla y te la propone. Con tu visto bueno —o solo, si lo dejas en autónomo— le escribe y le insiste.</>}
       chips={['Candidatas por disponibilidad real', 'Escalado automático', 'Cuatro niveles de autonomía']}
       foto={{ src: '/disciplinas/pilates.jpg', alt: 'Sala de reformers de un estudio de Pilates', encuadre: 'center 42%' }}
-      pieza={{ descripcion: 'Ejemplo de una sustitución en Tentare: la clase sin instructora, las candidatas por orden y en qué punto está el contacto.', contenido: <PanelSustitucion completo /> }}
+      pieza={{ descripcion: 'Ejemplo de una sustitución en Centra: la clase sin instructora, las candidatas por orden y en qué punto está el contacto.', contenido: <PanelSustitucion completo /> }}
     >
       <Seccion id="problema" titulo="El problema no es la baja. Es todo lo que cuelga de ella">
         <Entradilla>
@@ -71,7 +71,7 @@ export default function SustitucionesPage() {
           más caro se paga si se olvida, y es justo el que se olvida cuando ya has resuelto lo difícil.
         </p>
         <p>
-          Tentare no hace ese trabajo más rápido: lo quita. Y lo hace con los datos que ya tienes puestos para cuadrar el
+          Centra no hace ese trabajo más rápido: lo quita. Y lo hace con los datos que ya tienes puestos para cuadrar el
           horario, no con un módulo aparte que haya que alimentar.
         </p>
       </Seccion>
@@ -168,7 +168,7 @@ export default function SustitucionesPage() {
       <Seccion id="faq" titulo="Preguntas frecuentes">
         <FeatureFaq items={FAQ} />
         <p style={{ marginTop: 26 }}>
-          Si lo que buscas es cómo montar este proceso en tu estudio —con o sin Tentare—, la guía{' '}
+          Si lo que buscas es cómo montar este proceso en tu estudio —con o sin Centra—, la guía{' '}
           <Link href="/recursos/cubrir-baja-instructora">cómo cubrir una baja de instructora sin hacer una llamada</Link>{' '}
           lo desmonta paso a paso.
         </p>

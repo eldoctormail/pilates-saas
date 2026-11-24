@@ -263,7 +263,7 @@ export function AsistenteRapido({
 
   const horarioEtiquetas = useMemo(() => OPCIONES_HORARIO.map((o) => o.label), []);
   // La ayuda humana que existe: el WhatsApp de soporte, el mismo de «Primeros pasos».
-  const soporte = enlaceWhatsApp(SOPORTE_WHATSAPP, `Hola, soy de ${studio.nombre || 'mi estudio'} y estoy poniendo en marcha Tentare:`);
+  const soporte = enlaceWhatsApp(SOPORTE_WHATSAPP, `Hola, soy de ${studio.nombre || 'mi estudio'} y estoy poniendo en marcha Centra:`);
 
   return (
     <div

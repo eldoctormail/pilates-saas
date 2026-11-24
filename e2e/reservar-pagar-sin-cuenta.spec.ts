@@ -60,7 +60,7 @@ test('rellenar datos y continuar llama a checkout-embebido con nombre/email/tel�
     return r.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ clientSecret: 'pi_3QeXaMPLe000000000000_secret_ExAmPle0000000000000000' }) });
   });
 
-  // Diseño "Tentare Portal Reservas": un solo campo "Nombre y apellido"
+  // Diseño "Centra Portal Reservas": un solo campo "Nombre y apellido"
   // (Email/Móvil en dos columnas), no Nombre/Apellidos por separado.
   await page.getByPlaceholder('Nombre y apellido').fill('Marta Ruiz');
   await page.getByPlaceholder('Email').fill('marta.ruiz@example.com');
@@ -120,7 +120,7 @@ test('⚠️ un 409 de checkout-embebido NO se anuncia como pago iniciado', asyn
     return r.fulfill({ status: 409, contentType: 'application/json', body: JSON.stringify({ error: 'Esta clase ya ha empezado' }) });
   });
 
-  // Diseño "Tentare Portal Reservas": un solo campo "Nombre y apellido"
+  // Diseño "Centra Portal Reservas": un solo campo "Nombre y apellido"
   // (Email/Móvil en dos columnas), no Nombre/Apellidos por separado.
   await page.getByPlaceholder('Nombre y apellido').fill('Marta Ruiz');
   await page.getByPlaceholder('Email').fill('marta.ruiz@example.com');

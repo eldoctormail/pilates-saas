@@ -13,7 +13,7 @@
 // `canonicalizarOrigen` lo lee de aquí y no de LEGAL: la usan los scripts que
 // se sirven en las webs de los estudios, y así no arrastran el resto del objeto.
 // Autoalojado: el origen sale de NEXT_PUBLIC_APP_URL (sin barra final). Sin ella,
-// el de Tentare de siempre.
+// el de Centra de siempre.
 import { FUNCIONES_DE_ESPANA as ES } from './locale.ts';
 
 const URL_CANONICA = (
@@ -25,7 +25,7 @@ const hostDe = (url: string): string => new URL(url).host;
 const DOMINIO_CANONICO = /* @__PURE__ */ hostDe(URL_CANONICA);
 
 export const LEGAL = {
-  marca: 'Tentare',
+  marca: 'Centra',
   // ⚠️ CON www, y no es un capricho de estilo.
   //
   // El host que sirve el sitio de verdad es `www.tentare.app`: el ápice
@@ -82,14 +82,14 @@ export const PROVEEDORES: { nombre: string; uso: string; ubicacion: string }[] =
     ? { nombre: 'Stripe', uso: 'Procesamiento de pagos y facturación', ubicacion: 'UE / EE. UU.' }
     : { nombre: 'Mercado Pago', uso: 'Procesamiento de pagos', ubicacion: 'Argentina' },
   { nombre: 'Resend', uso: 'Envío de correos transaccionales', ubicacion: 'UE / EE. UU.' },
-  { nombre: 'Spacemail', uso: 'Correo saliente de Tentare', ubicacion: 'UE / EE. UU.' },
+  { nombre: 'Spacemail', uso: 'Correo saliente de Centra', ubicacion: 'UE / EE. UU.' },
   { nombre: 'Cloudflare', uso: 'Copias de seguridad cifradas (R2, en la UE), archivos, vídeo (Stream) y verificación anti-bots (Turnstile)', ubicacion: 'UE / EE. UU.' },
   { nombre: 'Sentry', uso: 'Monitorización de errores', ubicacion: 'UE / EE. UU.' },
   { nombre: 'Inngest', uso: 'Ejecución de tareas y automatizaciones', ubicacion: 'UE / EE. UU.' },
   { nombre: 'Anthropic', uso: 'Asistente de IA: redacción de mensajes, notas de sesión dictadas y análisis de ficheros importados', ubicacion: 'EE. UU.' },
   { nombre: 'PostHog', uso: 'Analítica de uso del producto y del sitio', ubicacion: 'UE' },
   { nombre: 'Ahrefs', uso: 'Analítica del sitio web público', ubicacion: 'Fuera de la UE' },
-  { nombre: 'OpenStreetMap', uso: 'Mapas y ubicación aproximada en Tentare Network', ubicacion: 'Reino Unido / UE' },
+  { nombre: 'OpenStreetMap', uso: 'Mapas y ubicación aproximada en Centra Network', ubicacion: 'Reino Unido / UE' },
   // Sin Google Fonts: las letras se sirven desde el propio dominio (app/_fuentes).
   // Sin Gmail: se retiró el 1-oct-2026.
   { nombre: 'Google', uso: 'Inicio de sesión con Google e integración con Google Calendar, si la activas', ubicacion: 'UE / EE. UU.' },

@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Marketplace público de Tentare Network (app/network/instructoras, vista
+// Marketplace público de Centra Network (app/network/instructoras, vista
 // compartida en components/network-v2/MarketplaceLayout.tsx) — la pantalla
-// que Google indexa, sin sesión. Pública + la sufre alguien fuera de Tentare
+// que Google indexa, sin sesión. Pública + la sufre alguien fuera de Centra
 // (docs .claude/tentare-os.md §"WebKit"), así que corre también en
 // `webkit-publico` (ver SPECS_WEBKIT, playwright.config.ts).
 //

@@ -4,7 +4,7 @@ import { AyudaResultado } from '@/components/ayuda/AyudaPasos';
 export default function Contenido() {
   return (
     <>
-      <p>Tentare soporta tres tipos de plan, y puedes combinarlos: un cliente puede tener a la vez, por ejemplo, una cuota y un bono suelto.</p>
+      <p>Centra soporta tres tipos de plan, y puedes combinarlos: un cliente puede tener a la vez, por ejemplo, una cuota y un bono suelto.</p>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 14, margin: '20px 0' }}>
         {[

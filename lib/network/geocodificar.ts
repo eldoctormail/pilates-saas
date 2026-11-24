@@ -20,7 +20,7 @@ const NOMINATIM_URL = 'https://nominatim.openstreetmap.org/search';
 
 // hola@tentare.es es el mismo remitente ya usado en el resto del repo
 // (lib/emails/remitente.ts) — un contacto real, no un placeholder inventado.
-const USER_AGENT = 'Tentare/1.0 (hola@tentare.es)';
+const USER_AGENT = 'Centra/1.0 (hola@tentare.es)';
 
 interface RespuestaNominatim {
   lat: string;

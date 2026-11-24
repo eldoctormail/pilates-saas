@@ -77,7 +77,7 @@ export function ListaSecciones({
   onElegir,
 }: {
   secciones: readonly SeccionConfiguracion[];
-  /** Para las filas de otra pantalla: «Plan de Tentare» es de la propietaria. */
+  /** Para las filas de otra pantalla: «Plan de Centra» es de la propietaria. */
   rol: string;
   /** `null` = el inicio. */
   activa: SeccionId | null;
@@ -177,7 +177,7 @@ export function ListaSecciones({
         })}
       </ul>
 
-      {/* «Plan de Tentare» y «Mi cuenta» tienen su propia pantalla. Van aparte
+      {/* «Plan de Centra» y «Mi cuenta» tienen su propia pantalla. Van aparte
           para que no se lean como una sección más. */}
       <ul className="space-y-0.5 border-t border-border pt-2">
         {externas.map(id => {

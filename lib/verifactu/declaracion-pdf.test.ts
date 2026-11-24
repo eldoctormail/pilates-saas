@@ -6,7 +6,7 @@ const base: DeclaracionImprimible = {
   titulo: 'DECLARACIÓN RESPONSABLE DEL SISTEMA INFORMÁTICO DE FACTURACIÓN',
   version: '1.0.0',
   apartados: [
-    { letra: '1.a', etiqueta: 'Nombre del sistema', valor: 'Tentare' },
+    { letra: '1.a', etiqueta: 'Nombre del sistema', valor: 'Centra' },
     { letra: '1.j', etiqueta: 'Dirección postal', valor: 'Calle Ejemplo 1, 08001 Barcelona' },
     { letra: '1.k', etiqueta: 'La persona productora hace constar que cumple', valor: '' },
   ],
@@ -16,7 +16,7 @@ const base: DeclaracionImprimible = {
 test('el documento lleva versión, cada apartado, fecha y lugar de suscripción y la huella del texto', () => {
   const h = htmlDeclaracion(base);
   assert.ok(h.includes('Versión del sistema 1.0.0'));
-  assert.ok(h.includes('1.a) Nombre del sistema:') && h.includes('Tentare'));
+  assert.ok(h.includes('1.a) Nombre del sistema:') && h.includes('Centra'));
   assert.ok(h.includes('Suscrita el 30-09-2026 en Barcelona, España'));
   assert.ok(h.includes('a'.repeat(64)));
 });

@@ -54,7 +54,7 @@ async function getTarifas(
   // BACKWARD COMPAT: si no hay admin, devolver items vacío (no error)
   if (!admin) return { items: [] };
 
-  // La instructora leía aquí su propia tarifa desde el panel. Con Tentare Core
+  // La instructora leía aquí su propia tarifa desde el panel. Con Centra Core
   // retirado (14-sep-2026) la ve en la app del estudio, por su ruta de servidor
   // (`/api/portal/instructora/perfil`): aquí, 403 como cualquier rol sin permiso.
   if (!puedeGestionarEquipo(sesion.rol)) {

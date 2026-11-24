@@ -6,7 +6,7 @@
 // (lib/bono-logic.ts y lib/booking-logic.ts). Aquí no hay una segunda copia de
 // la regla: si cambia en el producto, esta demo cambia con ella.
 //
-// Lo que Tentare hace de verdad (y por eso es lo único que la demo afirma):
+// Lo que Centra hace de verdad (y por eso es lo único que la demo afirma):
 //   · el bono lleva una fecha de fin (`validezDias` desde la compra); un bono
 //     vale TODO ese día y deja de valer el siguiente (`fechaFin >= hoy`);
 //   · cancelar a tiempo devuelve la sesión; cancelar tarde la devuelve solo si
@@ -161,7 +161,7 @@ export function generar(p: Parametros, ctx: ContextoDemo = CONTEXTO_POR_DEFECTO)
     {
       pantalla: ficha(restantesTrasReservar, fechaReserva, 'Reserva la clase', `Se descuenta una sesión: ${p.restantesAntesDeReservar} → ${restantesTrasReservar}.`),
       id: 'reserva', titulo: 'Reserva la clase',
-      proposito: 'Al reservar, Tentare descuenta una sesión del bono que corresponde.',
+      proposito: 'Al reservar, Centra descuenta una sesión del bono que corresponde.',
       bloques: [
         bonoBloque(restantesTrasReservar, fechaReserva),
         { tipo: 'texto', texto: `Reserva la clase del ${ETIQUETA_DIA[p.diaClase]}. El bono pasa de ${p.restantesAntesDeReservar} a ${restantesTrasReservar} sesiones.` },

@@ -12,7 +12,7 @@
 //
 // La comparten la página (`misReservasBody`, app/reservar/[slug]/page.tsx) y la
 // lista del widget nativo (./mis-reservas-lista.tsx), para que la misma reserva
-// se vea igual en la web del estudio y en la página de Tentare. Qué dice cada
+// se vea igual en la web del estudio y en la página de Centra. Qué dice cada
 // una lo decide lib/reservar/mis-reservas.ts.
 //
 // ⚠️ Solo estilos EN LÍNEA: esto también lo compila esbuild para el widget

@@ -8,7 +8,7 @@ import { borrarMiCuenta } from '@/lib/cuenta/borrar-cuenta-servidor';
 
 export const dynamic = 'force-dynamic';
 
-// POST /api/public/cuenta/borrar — «Borrar mi cuenta de Tentare» desde la app de
+// POST /api/public/cuenta/borrar — «Borrar mi cuenta de Centra» desde la app de
 // la alumna (App Store 5.1.1(v)). Borra la CUENTA de acceso al momento; las fichas
 // de los estudios se quedan, desvinculadas. La supresión de los datos de un
 // estudio sigue siendo una solicitud a ese estudio (/api/public/solicitud-derechos).

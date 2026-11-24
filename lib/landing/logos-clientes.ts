@@ -1,4 +1,4 @@
-// La franja «Estudios que ya usan Tentare» de la home: QUÉ estudios salen. Pura y
+// La franja «Estudios que ya usan Centra» de la home: QUÉ estudios salen. Pura y
 // sin red, para probarla con `node --test`; la consulta y la caché viven en
 // `logos-clientes-servidor.ts`.
 //
@@ -8,7 +8,7 @@
 // y estudios casi vacíos: presumir de «clientes» que no lo son es prueba social
 // falsa, y usar la marca de un cliente en publicidad sin que lo sepa es un riesgo.
 // Por eso sale solo quien tiene `mostrar_logo_en_landing = true` (consentimiento,
-// apagado de serie, lo pone el equipo de Tentare por SQL: nunca el navegador) y,
+// apagado de serie, lo pone el equipo de Centra por SQL: nunca el navegador) y,
 // además, cumple lo de aquí abajo. Cada condición se repite en la consulta SQL y
 // otra vez aquí: si una de las dos capas se rompe, la otra aguanta.
 
@@ -18,7 +18,7 @@ export const MAX_LOGOS = 12;
 /** Con este número o más, la franja pasa de fila centrada a marquesina. */
 export const LOGOS_PARA_MARQUESINA = 7;
 
-/** Estados de suscripción de un estudio que de verdad usa Tentare hoy. */
+/** Estados de suscripción de un estudio que de verdad usa Centra hoy. */
 export const ESTADOS_VIVOS = ['active', 'trialing', 'gratis'] as const;
 
 /** Lo que Supabase Storage sirve del bucket donde los estudios suben su logo. */

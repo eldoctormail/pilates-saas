@@ -6,7 +6,7 @@
 //
 // El bug que justifica este módulo: `resolverMarcaEstudio` devolvía `nombre`,
 // y las plantillas esperan la prop `estudioNombre`. Cada `{ ...marca }` dejaba
-// esa prop sin poner, así que saltaba el default `estudioNombre = 'Tentare'` y
+// esa prop sin poner, así que saltaba el default `estudioNombre = 'Centra'` y
 // el ENCABEZADO del correo salía "TENTARE" en mayúsculas — mientras el
 // remitente salía bien, porque el From sí usa `.nombre`. La vista previa del
 // panel pasaba `estudioNombre` a mano y tampoco lo destapaba.
@@ -45,7 +45,7 @@ export type MarcaEstudio = {
   //
   // Mientras esto no existió, una clienta que contestaba a "Reserva
   // confirmada" —un correo cuyo remitente dice el nombre de SU estudio— le
-  // escribía en realidad al buzón compartido de Tentare, y su estudio no se
+  // escribía en realidad al buzón compartido de Centra, y su estudio no se
   // enteraba nunca. Ninguno de los correos a clientas ponía Reply-To.
   replyTo?: string;
   // Los CANALES del estudio (su web y sus redes), ya resueltos a enlaces
@@ -81,7 +81,7 @@ export function marcaDesdeFila(
     ...(email ? { replyTo: email } : {}),
     // Solo si hay nombre de verdad: una clave presente con valor `undefined`
     // PISA igualmente el valor bueno en `{ ...datos, ...marca }`, y el correo
-    // volvería al default 'Tentare' por la puerta de atrás.
+    // volvería al default 'Centra' por la puerta de atrás.
     ...(nombre ? { estudioNombre: nombre } : {}),
     colorPrimario: (fila.color_primario as string | null) ?? undefined,
     colorSecundario: colorSecundario ?? null,

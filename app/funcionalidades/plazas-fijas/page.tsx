@@ -12,13 +12,13 @@ export const metadata: Metadata = {
   title: pagina.titulo,
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
-  openGraph: { siteName: 'Tentare', type: 'website', locale: 'es_ES', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
+  openGraph: { siteName: 'Centra', type: 'website', locale: 'es_ES', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
 };
 
 const FAQ = [
   {
     q: '¿Qué es una plaza fija?',
-    a: 'Es el sitio de una alumna en una clase que se repite todas las semanas: mismo día, misma hora y misma sala. Tentare le reserva esa clase sola cada semana, sin que ella tenga que entrar a reservar ni tú apuntarla a mano.',
+    a: 'Es el sitio de una alumna en una clase que se repite todas las semanas: mismo día, misma hora y misma sala. Centra le reserva esa clase sola cada semana, sin que ella tenga que entrar a reservar ni tú apuntarla a mano.',
   },
   {
     q: '¿Hace falta que tenga cuota?',
@@ -30,7 +30,7 @@ const FAQ = [
   },
   {
     q: 'Durante la pausa, ¿su sitio se queda vacío?',
-    a: 'Tú decides. De serie conserva su sitio, que es lo que espera casi todo el mundo. Si prefieres aprovecharlo, puedes activar que las pausas largas lo liberen para otra alumna: entonces, una semana antes de que acabe, Tentare le devuelve la plaza si su sitio sigue libre, y si no te lo pregunta a ti.',
+    a: 'Tú decides. De serie conserva su sitio, que es lo que espera casi todo el mundo. Si prefieres aprovecharlo, puedes activar que las pausas largas lo liberen para otra alumna: entonces, una semana antes de que acabe, Centra le devuelve la plaza si su sitio sigue libre, y si no te lo pregunta a ti.',
   },
   {
     q: 'Si se queda sin cuota, ¿pierde las clases que ya tenía reservadas?',
@@ -52,14 +52,14 @@ export default function PlazasFijasPage() {
       path={PATH}
       busqueda="Plazas fijas para las alumnas de tu estudio de Pilates"
       h1={<>Su sitio de los martes, reservado sin que nadie lo pida.</>}
-      intro={<>La alumna que viene siempre a la misma clase no debería tener que reservarla cada semana. Le das su plaza una vez y Tentare se la reserva, la pausa cuando se va de vacaciones y la suelta si deja de tener cuota.</>}
+      intro={<>La alumna que viene siempre a la misma clase no debería tener que reservarla cada semana. Le das su plaza una vez y Centra se la reserva, la pausa cuando se va de vacaciones y la suelta si deja de tener cuota.</>}
       chips={['Reserva automática cada semana', 'Pausa con fechas', 'Reglas que eliges tú']}
       visual={
         <PanelClaro titulo="La semana de una plaza fija" nota="Seis semanas por delante, siempre">
           <ol style={{ margin: 0, paddingLeft: 18, display: 'grid', gap: 8 }}>
             <li>Le das la plaza eligiendo la clase a la que viene.</li>
             <li>Sus próximas clases quedan reservadas al momento.</li>
-            <li>Cada noche, Tentare reserva la semana que entra en el horizonte.</li>
+            <li>Cada noche, Centra reserva la semana que entra en el horizonte.</li>
             <li>Si cancela una suelta, sigue teniendo la de la semana siguiente.</li>
           </ol>
         </PanelClaro>
@@ -95,7 +95,7 @@ export default function PlazasFijasPage() {
             },
             {
               titulo: 'Y sigue sola cada noche',
-              body: 'Tentare mantiene reservadas todas las clases que ya tienes programadas, hasta unos seis meses por delante. Cuando creas una clase nueva, su sitio se aparta en el momento.',
+              body: 'Centra mantiene reservadas todas las clases que ya tienes programadas, hasta unos seis meses por delante. Cuando creas una clase nueva, su sitio se aparta en el momento.',
             },
             {
               titulo: 'Con su cuota por delante',
@@ -108,7 +108,7 @@ export default function PlazasFijasPage() {
           ]}
         />
         <p>
-          Al asignar una cuota a una clienta, Tentare te pregunta si quieres darle también plaza fija. Es el momento en que
+          Al asignar una cuota a una clienta, Centra te pregunta si quieres darle también plaza fija. Es el momento en que
           se decide de verdad, y hasta ahora había que acordarse aparte.
         </p>
       </Seccion>
@@ -135,7 +135,7 @@ export default function PlazasFijasPage() {
 
       <Seccion id="sin-cuota" titulo="Qué pasa cuando deja de tener cuota">
         <p>
-          Una cuota se cancela, se pausa, vence o se cambia por un bono. Su plaza fija sigue guardada y Tentare deja de
+          Una cuota se cancela, se pausa, vence o se cambia por un bono. Su plaza fija sigue guardada y Centra deja de
           reservarle clases nuevas. Con las que ya tenía reservadas, eliges entre tres comportamientos:
         </p>
         <Tabla
@@ -180,7 +180,7 @@ export default function PlazasFijasPage() {
             nadie tenga que acordarse.
           </CasoDeUso>
           <CasoDeUso hora="Fin de mes" titulo="No renueva la cuota">
-            Deja de tener cuota. Tentare deja de reservarle clases nuevas y, con lo ya reservado, hace lo que hayas elegido
+            Deja de tener cuota. Centra deja de reservarle clases nuevas y, con lo ya reservado, hace lo que hayas elegido
             en Configuración.
           </CasoDeUso>
         </div>
@@ -222,7 +222,7 @@ export default function PlazasFijasPage() {
 
       <CierreCta
         titulo="Deja de apuntar a mano a las de siempre"
-        body="Dales su plaza una vez y olvídate: Tentare se la reserva cada semana, con tus reglas."
+        body="Dales su plaza una vez y olvídate: Centra se la reserva cada semana, con tus reglas."
       />
     </FeatureShell>
   );

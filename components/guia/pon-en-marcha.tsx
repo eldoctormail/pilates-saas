@@ -220,7 +220,7 @@ export function OpcionalesAlta({ pasos, alNavegar }: { pasos: PrimerosPasosAltaN
 
 /** Una persona por WhatsApp (decisión D5): «no un robot». */
 export function AyudaPersona({ nombreEstudio, compacta = false }: { nombreEstudio: string | null | undefined; compacta?: boolean }) {
-  const href = enlaceWhatsApp(SOPORTE_WHATSAPP, `Hola, soy de ${nombreEstudio || 'mi estudio'} y estoy poniendo en marcha Tentare:`);
+  const href = enlaceWhatsApp(SOPORTE_WHATSAPP, `Hola, soy de ${nombreEstudio || 'mi estudio'} y estoy poniendo en marcha Centra:`);
   if (!href) return null;
   if (compacta) {
     return (
@@ -233,7 +233,7 @@ export function AyudaPersona({ nombreEstudio, compacta = false }: { nombreEstudi
     <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2.5 rounded-2xl bg-muted/60 px-4 py-3" data-testid="ayuda-persona">
       <div className="min-w-[12rem] flex-1">
         <p className="text-[14px] font-semibold text-foreground">¿Te ayudamos?</p>
-        <p className="text-[13px] text-muted-foreground">Te responde una persona del equipo de Tentare, no un robot.</p>
+        <p className="text-[13px] text-muted-foreground">Te responde una persona del equipo de Centra, no un robot.</p>
       </div>
       <a href={href} target="_blank" rel="noreferrer" className="inline-flex h-9 items-center gap-2 rounded-full border border-border bg-card px-4 text-[13px] font-semibold text-foreground hover:bg-muted">
         <WhatsAppIcon size={15} /> Escríbenos por WhatsApp

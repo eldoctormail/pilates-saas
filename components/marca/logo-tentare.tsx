@@ -4,7 +4,7 @@ import { useId } from 'react';
 import { cn } from '@/lib/utils';
 import { TRAZADOS } from './trazados';
 
-// El logotipo de Tentare, en línea y no como <img>: así el CSS alcanza cada
+// El logotipo de Centra, en línea y no como <img>: así el CSS alcanza cada
 // pieza (modo oscuro, color por producto, y las animaciones de marca si algún
 // día se importan) y desaparecen del camino crítico ~1,1 MB de PNG.
 //
@@ -60,7 +60,7 @@ export function LogoTentare({
   producto,
   animacion,
   alto,
-  titulo = 'Tentare',
+  titulo = 'Centra',
   decorativo = false,
   className,
 }: {
@@ -73,7 +73,7 @@ export function LogoTentare({
   /** Altura en px del dibujo. El ancho sale del viewBox, así que no hay salto
    *  de maquetación. Si prefieres dimensionar por CSS, omítelo y usa className. */
   alto?: number;
-  /** Se anuncia como imagen con este nombre. Varía por rol: «Tentare Core». */
+  /** Se anuncia como imagen con este nombre. Varía por rol: «Centra Core». */
   titulo?: string;
   /** Cuando el enlace que lo envuelve ya tiene nombre accesible, para no
    *  anunciar la marca dos veces. */

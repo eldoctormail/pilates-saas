@@ -15,7 +15,7 @@ import { datosEstiloNativaDeBase, estiloDeLaNativa } from '../lib/widget/estilo-
 test.use({ timezoneId: 'Europe/Madrid' });
 
 // ─────────────────────────────────────────────────────────────────────────────
-// «Tentare Widgets»: el constructor del panel (Configuración → Mi app y mi web →
+// «Centra Widgets»: el constructor del panel (Configuración → Mi app y mi web →
 // Widgets para tu web).
 //
 // El encargo es literal: «cada control debe estar conectado al widget real» —
@@ -200,7 +200,7 @@ const soloAlgunas = (page: Page) => page.getByRole('group', { name: 'Qué clases
 const ultimoBuilder = (patches: Record<string, unknown>[]) =>
   [...patches].reverse().find(p => typeof p.widget_builder === 'object' && p.widget_builder !== null)?.widget_builder as Record<string, Record<string, unknown>> | undefined;
 
-test.describe('Tentare Widgets — cada control conectado al código y a la vista previa', () => {
+test.describe('Centra Widgets — cada control conectado al código y a la vista previa', () => {
 
   test('⚠️ sin tocar nada, el código solo lleva la pestaña, «solo el horario» y la etiqueta del widget', async ({ page }) => {
     await montar(page);
@@ -461,7 +461,7 @@ test.describe('Tentare Widgets — cada control conectado al código y a la vist
     await expect(snippet(page)).toContainText('fuente=Poppins');
     await expect(snippet(page)).toContainText('fuente-display=Cormorant%20Garamond');
 
-    // En la página también solo las que sirve Tentare (seis y «la de por
+    // En la página también solo las que sirve Centra (seis y «la de por
     // defecto»): /reservar ya no le pide nada a Google.
     await page.getByRole('button', { name: 'Letra', exact: true }).click();
     await expect(page.getByRole('option')).toHaveCount(7);
@@ -511,7 +511,7 @@ test.describe('Tentare Widgets — cada control conectado al código y a la vist
     expect(muestra.startsWith((await letraDeLaApp(page, '--font-poppins')).pila)).toBe(true);
     await page.keyboard.press('Escape');
     // La previa de la página (el iframe de /reservar de verdad): la letra
-    // servida se pinta, y se descarga de Tentare.
+    // servida se pinta, y se descarga de Centra.
     const previa = page.frameLocator('iframe').first();
     await previa.locator('#horario').waitFor({ timeout: 60_000 });
     const enLaPrevia = await previa.locator('#horario').evaluate(el => getComputedStyle(el).fontFamily);

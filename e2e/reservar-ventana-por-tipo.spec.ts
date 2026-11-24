@@ -15,7 +15,7 @@ function studioDataFixture() {
   const hoy = FECHA;
   return {
     studio: {
-      id: 'studio-test', nombre: 'Tentare', slug: SLUG, ciudad: 'Málaga', direccion: 'Calle Test 1',
+      id: 'studio-test', nombre: 'Centra', slug: SLUG, ciudad: 'Málaga', direccion: 'Calle Test 1',
       email: 'hola@tentare.app', telefono: '+34 000 000 000', cancelacionVentanaHoras: 12,
       reservaAntelacionMaximaDias: 30,
     },

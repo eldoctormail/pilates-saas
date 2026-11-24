@@ -10,7 +10,7 @@ function referenciaCaducada(tokenExpiraEn: string): boolean {
 }
 
 // Página PÚBLICA (sin login): el referente de una referencia profesional de
-// Tentare Network confirma/rechaza desde el enlace del email. Mismo patrón
+// Centra Network confirma/rechaza desde el enlace del email. Mismo patrón
 // que app/aceptar-sustitucion/[token] — un Server Component hace la lectura
 // inicial con service-role (la RLS de red_referencias no da SELECT a
 // `anon`, a propósito) y decide qué pantalla mostrar; el formulario en sí es

@@ -1,4 +1,4 @@
-// SERVER-ONLY — operaciones de Storage de Tentare Network con el cliente
+// SERVER-ONLY — operaciones de Storage de Centra Network con el cliente
 // service_role. Sin alias `@/` (solo imports relativos `.ts` y un `import type`)
 // para que `node --test` lo pueda probar con un cliente falso: aquí vive el
 // orden de los borrados, que es justo lo que no puede fallar en silencio.
@@ -117,7 +117,7 @@ export type ResultadoSupresionPerfil =
 
 /**
  * Supresión del perfil de Network a petición de su titular. NO borra la cuenta
- * de Auth (puede ser socia, instructora o propietaria en Tentare).
+ * de Auth (puede ser socia, instructora o propietaria en Centra).
  *
  * Orden deliberado: 1) documentos del bucket privado, 2) foto pública,
  * 3) comprobar que la carpeta quedó vacía, 4) fila `red_perfiles` (el resto de

@@ -2,7 +2,7 @@
 
 // Paso 03 del wizard: ubicación (ciudad/zona/radio). Extraído tal cual de
 // app/network/crear-perfil/page.tsx (paso === 2) — F0 del roadmap de
-// Tentare Network 2.0, sin cambios de comportamiento.
+// Centra Network 2.0, sin cambios de comportamiento.
 import { useId } from 'react';
 import { NW_TINTA, NW_BORDE } from '@/components/network-v2/tokens';
 import type { FormState } from '../form-state';

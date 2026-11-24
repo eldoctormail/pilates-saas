@@ -2,7 +2,7 @@
 
 // Paso 07 del wizard: modalidad y tipo de oportunidades. Extraído tal cual
 // de app/network/crear-perfil/page.tsx (paso === 6) — F0 del roadmap de
-// Tentare Network 2.0, sin cambios de comportamiento.
+// Centra Network 2.0, sin cambios de comportamiento.
 import { SelectorChips } from '@/components/network/selector-chips';
 import { TIPOS_TRABAJO_NETWORK, TIPO_TRABAJO_LABEL } from '@/lib/network/catalogo';
 import { NW_TINTA } from '@/components/network-v2/tokens';

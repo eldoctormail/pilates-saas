@@ -26,7 +26,7 @@ import './armazon.css';
 // la isla lo lleva siempre a la vista.
 // ─────────────────────────────────────────────────────────────────────────────
 
-// Redes sociales de Tentare (la marca, no las del estudio — esas son por
+// Redes sociales de Centra (la marca, no las del estudio — esas son por
 // estudio, ver REDES_SOCIALES en /reservar/[slug]). X (@tentaresoftware) se
 // quitó el 1-oct-2026: la cuenta no tenía ni una publicación y enlazarla daba
 // imagen de abandono. Si se activa, vuelve aquí y a OrganizationStructuredData.
@@ -58,7 +58,7 @@ function IconoLinkedIn({ size = 18 }: { size?: number }) {
 }
 
 export function PieWeb() {
-  const enlaceWa = enlaceWhatsApp(WHATSAPP_SOPORTE, 'Hola, tengo una duda sobre Tentare:') ?? `https://wa.me/${WHATSAPP_SOPORTE.replace(/\D/g, '')}`;
+  const enlaceWa = enlaceWhatsApp(WHATSAPP_SOPORTE, 'Hola, tengo una duda sobre Centra:') ?? `https://wa.me/${WHATSAPP_SOPORTE.replace(/\D/g, '')}`;
   // Las etiquetas salen del mapa completo (una sola fuente); en «Alternativas» solo el nombre del programa.
   const etiqueta = new Map(PIE_PUBLICO.flatMap((c) => c.enlaces.map((e) => [e.href, e.label] as const)));
   const nombre = (href: string, titulo: string) => {
@@ -73,7 +73,7 @@ export function PieWeb() {
       <div className="w-pie-in">
         <div className="w-pie-rejilla" role="navigation" aria-label="Mapa del sitio">
           <div className="w-pie-marca">
-            <Link href="/" aria-label="Tentare — inicio">
+            <Link href="/" aria-label="Centra — inicio">
               <LogoTentare formato="horizontal" tinta="negativo" alto={28} decorativo />
             </Link>
             <p className="w-pie-lema">

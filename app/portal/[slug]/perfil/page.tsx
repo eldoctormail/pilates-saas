@@ -162,7 +162,7 @@ export default function PerfilPage() {
           </Link>
         )}
 
-        {/* Solo en la app de iOS «Tentare» (dentro se pinta sola o no). */}
+        {/* Solo en la app de iOS «Centra» (dentro se pinta sola o no). */}
         <CambiarDeEstudio />
 
         {/* ⚠️ Dos bloques y no uno. «Cuenta» acumulaba OCHO filas seguidas,
@@ -256,7 +256,7 @@ export default function PerfilPage() {
 
 
         <p className="t-meta" style={{ textAlign: 'center', color: 'var(--subtle-foreground)' }}>
-          App de {estudio.nombre} · con Tentare
+          App de {estudio.nombre} · con Centra
           {/* Lo exige la licencia gratuita de los iconos de logros y recompensas (lib/gamificacion/insignias.ts):
               un enlace visible a icons8.com. Quitarlo obliga a comprar la licencia de pago. */}
           {' · '}

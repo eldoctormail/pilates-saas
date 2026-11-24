@@ -31,7 +31,7 @@ async function pedir<T>(ruta: string, init?: RequestInit): Promise<T> {
       window.dispatchEvent(new Event(EVENTO_MFA_REQUERIDO));
       throw new SinAcceso('mfa-requerido', 'Confirma tu identidad con la verificación en dos pasos.');
     }
-    throw new SinAcceso('no-eres-del-equipo', 'Esta zona es solo para el equipo de Tentare.');
+    throw new SinAcceso('no-eres-del-equipo', 'Esta zona es solo para el equipo de Centra.');
   }
   if (res.status === 403) {
     const cuerpo = await res.json().catch(() => ({ error: '' }));
@@ -119,7 +119,7 @@ export interface FichaEstudio {
   apiPublica?: { activa: boolean; activadaEn: string | null; clavesActivas: number };
   /** Cuentas que parecen el mismo negocio (plan gratis, lib/billing/vinculos-gratis.ts). */
   vinculos?: VinculoFicha[];
-  /** Wellhub por API: el gym y el producto vinculados, y si Tentare tiene sus credenciales. */
+  /** Wellhub por API: el gym y el producto vinculados, y si Centra tiene sus credenciales. */
   wellhub?: { gymId: string | null; productoId: string | null; credenciales: boolean };
   reviewBoost: {
     elegibleEn: string | null;
@@ -147,7 +147,7 @@ export interface ImpagosSaas {
   abiertos: IncidenteImpago[]; recientes: IncidenteImpago[];
   politica: { dias: number[]; horaDesde: number; horaHasta: number };
 }
-/** Pagos fallidos de la suscripción de los estudios a Tentare y la política de avisos. */
+/** Pagos fallidos de la suscripción de los estudios a Centra y la política de avisos. */
 export const fetchImpagos = () => pedir<ImpagosSaas>('/impagos');
 export interface RevenueInterno {
   metricas: import('../billing/metricas/reglas.ts').Metricas;
@@ -346,7 +346,7 @@ export const publicarVersionChangelog = (id: string) =>
  *
  * Va por el servidor (`/api/interno/changelog/imagen`) y no por
  * `supabase.storage`: el bucket `changelog-media` no tiene ninguna política de
- * RLS a propósito, porque quien escribe es Tentare con `service_role`. Abrirle
+ * RLS a propósito, porque quien escribe es Centra con `service_role`. Abrirle
  * una política a `authenticated` sería abrírsela a cualquiera con cuenta en
  * cualquier estudio.
  */
@@ -372,7 +372,7 @@ export async function subirImagenCambio(file: File): Promise<{ url: string }> {
 export const borrarVersionChangelog = (id: string) =>
   pedir<{ ok: true }>(`/changelog/${id}`, { method: 'DELETE' });
 
-// Moderación de Tentare Network — docs/NETWORK-IMPLEMENTATION-PLAN.md §10.
+// Moderación de Centra Network — docs/NETWORK-IMPLEMENTATION-PLAN.md §10.
 export interface PerfilNetworkInterno {
   id: string; nombre: string; ciudad: string | null; estado: string; destacado: boolean;
   creado_en: string; actualizado_en: string; ultimo_acceso_en: string | null;
@@ -413,9 +413,9 @@ export const fetchResenasNetworkInterno = (estado: string) =>
 export const moderarResenaNetworkInterno = (id: string, estado: 'publicada' | 'oculta') =>
   pedir<{ ok: true }>('/network/resenas', { method: 'PATCH', body: JSON.stringify({ id, estado }) });
 
-// Fase 3 del rediseño de Tentare Network — a diferencia de
+// Fase 3 del rediseño de Centra Network — a diferencia de
 // VerificacionNetworkInterna (solo lectura, resuelve el estudio), estas dos
-// colas SÍ las resuelve el equipo de Tentare: documento de identidad y
+// colas SÍ las resuelve el equipo de Centra: documento de identidad y
 // certificaciones, ambas con motivo obligatorio al rechazar.
 export interface VerificacionIdentidadNetworkInterna {
   id: string; estado: string; motivoRechazo: string | null;

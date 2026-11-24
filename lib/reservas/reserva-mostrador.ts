@@ -110,7 +110,7 @@ export function puedeVenderClaseSuelta(rol: Rol): boolean {
  * ¿Puede este miembro del equipo apuntar a alguien en una clase desde el panel?
  *
  * PROPIETARIO, MANAGER y RECEPCION en cualquier clase. INSTRUCTOR en ninguna,
- * tampoco en las suyas: Tentare Core se retiró (14-sep-2026) y la ruta ya no
+ * tampoco en las suyas: Centra Core se retiró (14-sep-2026) y la ruta ya no
  * resuelve su ficha. Con service-role la guardia de `reservar_plaza` no corre,
  * por eso la comprueba la ruta.
  */

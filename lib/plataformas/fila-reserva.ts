@@ -3,7 +3,7 @@
 //
 // Una reserva de ClassPass/USC/Wellhub no tiene socia (`socioId` null): no hay
 // ficha a la que enlazar, ni semáforo de salud, ni sentido en «Repetir» o
-// «Hacer fija» (las dos apuntan a una socia de Tentare a otra clase). Lo que SÍ
+// «Hacer fija» (las dos apuntan a una socia de Centra a otra clase). Lo que SÍ
 // se hace igual que con cualquiera: pasar lista, marcar que no vino y quitarla.
 //
 // Puro y sin `@/` para poder probarlo con `node --test`.

@@ -13,7 +13,7 @@ export const maxDuration = 60;
 // pg_cron + pg_net cada hora, y solo si hay altas pendientes (migración
 // 20261001195953) — mismo patrón bucket A que zoom-sync.
 //
-// Y, desde el PR-5 del alta nueva, «Tu primera clase en Tentare, en 5 minutos»
+// Y, desde el PR-5 del alta nueva, «Tu primera clase en Centra, en 5 minutos»
 // a quien creó su estudio con el alta nueva hace 24-72 h y todavía no tiene
 // una clase que una alumna nueva pueda reservar (la guarda del job llama
 // también entonces: migración 20261021160000). Cada parte, con su propio

@@ -33,16 +33,16 @@ export interface CategoriaAyuda {
 }
 
 export const CATEGORIAS: CategoriaAyuda[] = [
-  { slug: 'empezar', titulo: 'Empezar con Tentare', descripcion: 'Crea tu cuenta, configura tu estudio y prepara tu primera semana de clases.', icono: 'Sparkles' },
+  { slug: 'empezar', titulo: 'Empezar con Centra', descripcion: 'Crea tu cuenta, configura tu estudio y prepara tu primera semana de clases.', icono: 'Sparkles' },
   { slug: 'reservas', titulo: 'Reservas y calendario', descripcion: 'Clases, horarios, lista de espera, cancelaciones y las reglas con las que reserva cada cliente.', icono: 'CalendarDays' },
   { slug: 'clientes', titulo: 'Clientes y CRM', descripcion: 'Ficha de cada cliente, historial, notas e importación desde tu software anterior.', icono: 'Users' },
   { slug: 'instructores', titulo: 'Instructoras y equipo', descripcion: 'Altas, disponibilidad, tarifas, permisos y sustituciones cuando alguien no puede dar su clase.', icono: 'UserRound' },
   { slug: 'pagos', titulo: 'Pagos y facturación', descripcion: FUNCIONES_DE_ESPANA ? 'Stripe, tarjeta guardada, cobros fallidos, reembolsos y factura de cada cobro.' : 'Mercado Pago, cobros en el mostrador, reembolsos y comprobantes.', icono: 'CreditCard' },
   { slug: 'bonos', titulo: 'Bonos y membresías', descripcion: 'Bonos de sesiones, cuotas mensuales, clases fijas, créditos y caducidades.', icono: 'Ticket' },
   { slug: 'portal', titulo: 'App y página de reservas', descripcion: 'La app donde tus clientes reservan, su enlace y su QR, y la página de reservas que va en tu web: personalización, marca y acceso.', icono: 'LayoutTemplate' },
-  { slug: 'widget', titulo: 'Widget para tu web', descripcion: 'Incrusta las reservas de Tentare en tu propia web, con WordPress, Webflow o HTML.', icono: 'CodeXml' },
-  { slug: 'automatizaciones', titulo: 'Automatizaciones y avisos', descripcion: 'Recordatorios, avisos de bono a punto de acabar y lo que Tentare avisa solo, en la app, por email y por WhatsApp.', icono: 'Zap' },
-  { slug: 'integraciones', titulo: 'Integraciones', descripcion: 'Qué conecta con Tentare hoy y cómo activarlo.', icono: 'Plug' },
+  { slug: 'widget', titulo: 'Widget para tu web', descripcion: 'Incrusta las reservas de Centra en tu propia web, con WordPress, Webflow o HTML.', icono: 'CodeXml' },
+  { slug: 'automatizaciones', titulo: 'Automatizaciones y avisos', descripcion: 'Recordatorios, avisos de bono a punto de acabar y lo que Centra avisa solo, en la app, por email y por WhatsApp.', icono: 'Zap' },
+  { slug: 'integraciones', titulo: 'Integraciones', descripcion: 'Qué conecta con Centra hoy y cómo activarlo.', icono: 'Plug' },
   { slug: 'app', titulo: 'App de tus clientes', descripcion: 'Lo que ve un cliente en su móvil: próxima clase, plan, progreso y recompensas.', icono: 'Smartphone' },
   { slug: 'configuracion', titulo: 'Configuración de tu cuenta', descripcion: 'Datos del estudio, usuarios y permisos, marca, idioma y seguridad.', icono: 'Settings2' },
   { slug: 'informes', titulo: 'Informes y analítica', descripcion: 'Ocupación, ingresos, retención y el rendimiento de cada instructora.', icono: 'BarChart3' },
@@ -228,7 +228,7 @@ const TODOS_LOS_ARTICULOS: ArticuloAyuda[] = [
   {
     slug: 'sustituciones', categoria: 'instructores', tipo: 'guia',
     titulo: 'Cómo funcionan las sustituciones',
-    descripcion: 'Una instructora avisa desde la app de que no puede dar su clase y Tentare busca sustituta en tu equipo, con el grado de autonomía que elijas.',
+    descripcion: 'Una instructora avisa desde la app de que no puede dar su clase y Centra busca sustituta en tu equipo, con el grado de autonomía que elijas.',
     terminos: ['baja', 'no puedo asistir', 'candidatas', 'autonomía'],
     actualizado: '2026-09-15',
     relacionados: ['instructores/disponibilidad-y-tarifas', 'reservas/editar-o-cancelar-una-clase'],
@@ -329,7 +329,7 @@ const TODOS_LOS_ARTICULOS: ArticuloAyuda[] = [
     slug: 'facturas', categoria: 'pagos', tipo: 'guia',
     soloEspana: true,
     titulo: 'Facturas y Veri*Factu',
-    descripcion: 'Si Tentare emite tus facturas o las haces fuera — cómo activarlo, dónde encontrarlas, cómo descargarlas y en qué punto está el envío a la AEAT.',
+    descripcion: 'Si Centra emite tus facturas o las haces fuera — cómo activarlo, dónde encontrarlas, cómo descargarlas y en qué punto está el envío a la AEAT.',
     actualizado: '2026-09-30',
     relacionados: ['pagos/reembolsos', 'pagos/cobrar-en-la-caja'],
     estado: 'publicado',
@@ -493,7 +493,7 @@ const TODOS_LOS_ARTICULOS: ArticuloAyuda[] = [
   {
     slug: 'que-es-el-widget', categoria: 'widget', tipo: 'guia',
     titulo: 'Qué es el widget de reservas',
-    descripcion: 'Tu calendario de Tentare, incrustado en tu propia web — sin que el cliente salga de tu dominio.',
+    descripcion: 'Tu calendario de Centra, incrustado en tu propia web — sin que el cliente salga de tu dominio.',
     actualizado: '2026-09-15',
     relacionados: ['widget/instalar-en-wordpress', 'widget/instalar-con-html'],
     estado: 'publicado',
@@ -537,7 +537,7 @@ const TODOS_LOS_ARTICULOS: ArticuloAyuda[] = [
   {
     slug: 'recordatorios-automaticos', categoria: 'automatizaciones', tipo: 'guia',
     titulo: 'Recordatorios y avisos automáticos',
-    descripcion: 'Qué avisa Tentare de serie, sin activar nada: recordatorio de clase, bono a punto de acabar, clase cubierta tras una sustitución y más.',
+    descripcion: 'Qué avisa Centra de serie, sin activar nada: recordatorio de clase, bono a punto de acabar, clase cubierta tras una sustitución y más.',
     actualizado: '2026-09-15',
     relacionados: ['problemas/no-llega-un-email', 'problemas/no-llega-un-whatsapp'],
     estado: 'publicado',

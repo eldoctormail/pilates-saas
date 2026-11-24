@@ -107,11 +107,11 @@ export function AccionesRecomendacion({
         </Button>
       )}
       {/* El «Hecho» de una oferta a quien no ha aceptado recibirlas: sin esto
-          parecería que le falta el email. Tentare no se la manda
+          parecería que le falta el email. Centra no se la manda
           (docs/decision-os-mensajes-comerciales.md). */}
       {efecto === 'MARCAR' && recomendacion.sinPermisoOfertas && (
         <p className="w-full text-[12px] text-muted-foreground">
-          No ha aceptado recibir ofertas del estudio, así que Tentare no le envía este mensaje.
+          No ha aceptado recibir ofertas del estudio, así que Centra no le envía este mensaje.
         </p>
       )}
     </div>

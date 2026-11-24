@@ -57,11 +57,11 @@ import type { Instructor, Reserva, Sala, Sesion } from '@/lib/types';
 // dentro del panel de rellenar hueco, el histórico de asistencia: cosas que
 // este endpoint no da y que no son cifras del día.
 //
-// ── Tenti en la tira de lo que ha visto Tentare (lib/tenti/momentos.ts) ──────
+// ── Tenti en la tira de lo que ha visto Centra (lib/tenti/momentos.ts) ──────
 // Un solo Tenti, y la tira sale si hay algo que contar: huecos, problemas,
 // alumnas que vienen por primera vez, un récord, o que el estudio descansa.
 //   · 'dormido' — hoy ya no quedan clases (o no hay) y nada por resolver.
-//     Siempre con «Tentare sigue atento…»: es el estudio el que duerme.
+//     Siempre con «Centra sigue atento…»: es el estudio el que duerme.
 //   · Una emoción por carga y una vez al día en este dispositivo: 'amor' si
 //     alguien viene por primera vez, 'orgullo' con el récord del día, 'guino'
 //     si lo único es un hueco que puedes llenar. Y 'bostezo' al volver a la
@@ -203,7 +203,7 @@ export function HoyEnElEstudio({ nueva = false }: { nueva?: boolean } = {}) {
 
   const resumen = useMemo(() => resumirDia(clases), [clases]);
 
-  // ── Lo que ha visto Tentare hoy ────────────────────────────────────────────
+  // ── Lo que ha visto Centra hoy ────────────────────────────────────────────
   const esHoy = fecha !== null && fecha === hoy;
   const listo = !cargando && !fallo;
 
@@ -385,7 +385,7 @@ export function HoyEnElEstudio({ nueva = false }: { nueva?: boolean } = {}) {
 
         <h3 className="sr-only">Tu día en el estudio</h3>
 
-        {/* Con clases, lo que ha visto Tentare va arriba de la lista. Sin
+        {/* Con clases, lo que ha visto Centra va arriba de la lista. Sin
             clases, su frase es el vacío (abajo): nunca las dos. */}
         {frase && clases.length > 0 && (
           <div className="flex items-center gap-2.5 border-b border-muted px-5 py-3">
@@ -494,11 +494,11 @@ export function HoyEnElEstudio({ nueva = false }: { nueva?: boolean } = {}) {
 
       <h2 className="sr-only">Tu día en el estudio</h2>
 
-      {/* Lo que ha visto Tentare. Solo aparece cuando de verdad hay algo que
+      {/* Lo que ha visto Centra. Solo aparece cuando de verdad hay algo que
           contar — si el día está limpio, no se interrumpe a nadie. Tenti firma
           la frase, no la dice él: si hay un aviso («sin instructora») lo da el
           texto, nunca su cara. Dormido solo si el estudio descansa, y con la
-          frase que dice que Tentare sigue. */}
+          frase que dice que Centra sigue. */}
       {frase && (
         <div className="mb-3 flex items-center gap-2.5 rounded-xl border border-border bg-card px-3.5 py-2.5">
           <TentiIcono ancho={28} estado={estadoTenti} emocion={emocionTenti} />

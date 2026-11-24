@@ -96,13 +96,13 @@ export interface Guia {
 }
 
 /**
- * Las portadas del blog las generó el fundador con IA para Tentare: no son
+ * Las portadas del blog las generó el fundador con IA para Centra: no son
  * fotos de clientas ni de un estudio real, y ningún texto ni `alt` puede
  * presentarlas así. Por eso cada `alt` empieza por «Escena ilustrativa».
  */
 const CREDITO_IA: CreditoPortada = {
-  autor: 'Tentare',
-  fuente: 'Generada con IA para Tentare',
+  autor: 'Centra',
+  fuente: 'Generada con IA para Centra',
   url: '',
   licencia: 'Propia',
   fechaDescarga: '2026-09-16',
@@ -119,7 +119,7 @@ export const GUIAS: Guia[] = [
   {
     slug: 'facturacion-electronica-verifactu',
     titulo: 'Facturación electrónica para estudios en España',
-    // Sin «| Tentare»: con la marca pasaría de 64 caracteres y el buscador lo cortaría.
+    // Sin «| Centra»: con la marca pasaría de 64 caracteres y el buscador lo cortaría.
     tituloSeo: 'Veri*Factu para estudios de Pilates: qué cambia en 2026',
     descripcionSeo: 'Veri*Factu en tu estudio de Pilates: si es una sociedad, el programa debe estar adaptado antes del 1 de enero de 2027; si eres autónoma, antes del 1 de julio.',
     resumen: 'Qué cambia con Veri*factu, cuándo es obligatorio y qué tiene que hacer tu programa de facturación.',
@@ -135,7 +135,7 @@ export const GUIAS: Guia[] = [
   {
     slug: 'estudios-pilates-de-exito',
     titulo: 'Qué puedes aprender de los estudios de pilates que más crecen',
-    tituloSeo: 'Estudios de pilates de éxito: 4 lecciones | Tentare',
+    tituloSeo: 'Estudios de pilates de éxito: 4 lecciones | Centra',
     descripcionSeo: 'Datos reales de Club Pilates, SLT y el mercado español: qué hacen distinto los estudios de pilates que más crecen y qué puede copiar un estudio pequeño.',
     resumen: 'Datos reales de Club Pilates, SLT y el mercado español (Eversports, Statista): qué hacen distinto — y qué puedes copiar mañana.',
     categoria: 'rentabilidad',
@@ -149,7 +149,7 @@ export const GUIAS: Guia[] = [
   {
     slug: 'checklist-elegir-software-estudio',
     titulo: 'Checklist: cómo elegir el software de tu estudio',
-    tituloSeo: 'Elegir software para un estudio de yoga o pilates | Tentare',
+    tituloSeo: 'Elegir software para un estudio de yoga o pilates | Centra',
     descripcionSeo: 'Checklist para elegir el software de un estudio de yoga o pilates: 10 criterios, las preguntas de la demo y las señales de alarma antes de firmar.',
     resumen: 'Lo que dicen miles de reseñas en Capterra y G2 — y las preguntas exactas para la demo.',
     categoria: 'software',
@@ -164,7 +164,7 @@ export const GUIAS: Guia[] = [
   {
     slug: 'reservas-en-tu-web',
     titulo: 'Por qué mandar a la alumna a otra web te cuesta reservas',
-    tituloSeo: 'Reservas en tu web: widget, plugin o API | Tentare',
+    tituloSeo: 'Reservas en tu web: widget, plugin o API | Centra',
     descripcionSeo: 'Cuando la alumna sale de tu web para reservar, casi siempre no vuelve. Qué pierdes con la redirección y qué opciones hay: widget, plugin de WordPress o API.',
     resumen: 'La alumna que sale de tu web para reservar, casi siempre no vuelve. Qué se pierde y qué opciones tienes: widget, plugin o API.',
     categoria: 'software',
@@ -179,7 +179,7 @@ export const GUIAS: Guia[] = [
   {
     slug: 'widget-vs-iframe-reservas-pilates',
     titulo: 'Cómo instalar reservas en tu web: WordPress, Wix y Squarespace paso a paso',
-    tituloSeo: 'Instalar reservas en WordPress, Wix y Squarespace | Tentare',
+    tituloSeo: 'Instalar reservas en WordPress, Wix y Squarespace | Centra',
     descripcionSeo: 'Cómo instalar reservas online en tu web en WordPress, Wix y Squarespace: redirección, iframe o widget, qué configurar después y el checklist antes de publicar.',
     resumen: 'Redirección, iframe o widget: cómo instalar cada uno en WordPress, Wix o Squarespace, qué configurar después y el checklist antes de publicar.',
     categoria: 'software',
@@ -216,7 +216,7 @@ export const TARJETAS_SIN_GUIA: TarjetaSinGuia[] = [
   {
     // Es una comparativa (/comparativa), no una guía: sin portada y con su meta propia.
     clave: 'tentare-vs-glofox',
-    titulo: 'Glofox vs. Tentare: cuál conviene a tu estudio de Pilates',
+    titulo: 'Glofox vs. Centra: cuál conviene a tu estudio de Pilates',
     resumen: 'Precio publicado (en dólares), permanencia, gestión por reformer individual y sustitución de instructoras — sin folletos de marketing.',
     categoria: 'software',
     href: '/comparativa/tentare-vs-glofox',

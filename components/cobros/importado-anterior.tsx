@@ -1,7 +1,7 @@
 'use client';
 
 // Lo que la propietaria cobró en su software anterior y trajo con «Traer mis
-// datos», enseñado AL LADO de lo cobrado en Tentare y no dentro: no son recibos
+// datos», enseñado AL LADO de lo cobrado en Centra y no dentro: no son recibos
 // (sin factura, sin NIF verificado, ya declarados), así que no suman en
 // «Cobrado», que es la cifra que cuadra con facturas y gestoría. Pero no puede
 // quedarse fuera de vista: una propietaria que migra 3 meses de pagos y ve
@@ -31,7 +31,7 @@ export function ImportadoDelSoftwareAnterior({ actual, anterior, comparacion, co
       {anterior && comparacion && (
         <> (<CifraPrivada inline>{formatEuro(anterior.total)}</CifraPrivada> {comparacion})</>
       )}
-      . No suman en «Cobrado»: no son recibos de Tentare, así que no se facturan ni entran en el cierre de la gestoría.
+      . No suman en «Cobrado»: no son recibos de Centra, así que no se facturan ni entran en el cierre de la gestoría.
       {!completo && ' Son tantos que esta cifra puede quedarse corta.'}
     </p>
   );

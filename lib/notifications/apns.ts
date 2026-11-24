@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// Avisos nativos de iOS por APNs (app de Tentare en el App Store, 2-oct-2026).
+// Avisos nativos de iOS por APNs (app de Centra en el App Store, 2-oct-2026).
 //
 // Dentro de la app no hay Web Push: el WebView no lo tiene. El token del iPhone se
 // guarda en la MISMA tabla que las suscripciones web (`push_subscription`), con

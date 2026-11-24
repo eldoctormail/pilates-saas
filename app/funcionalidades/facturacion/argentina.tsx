@@ -12,11 +12,11 @@ import { CierreCta, Entradilla, FeatureFaq, Limite, Seccion, Tabla } from '@/com
 const FAQ = [
   {
     q: '¿Las facturas salen solas?',
-    a: 'No: se emiten desde el recibo cobrado, con un botón. Eliges la condición frente al IVA de la alumna y Tentare le pide el CAE a ARCA. La pantalla solo dice «emitida» cuando ARCA devolvió el CAE.',
+    a: 'No: se emiten desde el recibo cobrado, con un botón. Eliges la condición frente al IVA de la alumna y Centra le pide el CAE a ARCA. La pantalla solo dice «emitida» cuando ARCA devolvió el CAE.',
   },
   {
     q: '¿Qué necesito para empezar?',
-    a: 'Tu CUIT, tu punto de venta de factura electrónica y tu certificado de ARCA. Tentare te prepara el pedido de certificado (el CSR) desde el panel; lo subes en ARCA y pegas el certificado que te da.',
+    a: 'Tu CUIT, tu punto de venta de factura electrónica y tu certificado de ARCA. Centra te prepara el pedido de certificado (el CSR) desde el panel; lo subes en ARCA y pegas el certificado que te da.',
   },
   {
     q: '¿Qué factura emite, A, B o C?',
@@ -48,7 +48,7 @@ export function FacturacionArgentina({ path }: { path: string }) {
           <Link href="/funcionalidades/cobros-recurrentes">cobro</Link>.
         </Entradilla>
         <p>
-          Tentare habla con ARCA por el servicio de factura electrónica (WSFEv1): pide el último número autorizado de tu
+          Centra habla con ARCA por el servicio de factura electrónica (WSFEv1): pide el último número autorizado de tu
           punto de venta, toma el siguiente y solicita el CAE. Si ARCA no contesta, el comprobante queda pendiente y el
           siguiente intento lo resuelve con el mismo número, sin saltarse ninguno ni emitirlo dos veces.
         </p>

@@ -7,7 +7,7 @@ import { listarDenunciasParaTentare } from '@/lib/moderacion/denuncias-servidor'
 
 export const runtime = 'nodejs';
 
-// La cola de moderación de Tentare (App Store 1.2; decisión del fundador,
+// La cola de moderación de Centra (App Store 1.2; decisión del fundador,
 // 5-oct-2026): las denuncias contra el propio estudio (su hilo con la alumna, o
 // algo escrito por una propietaria) y las que el estudio no revisó en 24 h.
 // Se lee lo que escribieron alumnas e instructoras en chats privados, así que

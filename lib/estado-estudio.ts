@@ -11,8 +11,8 @@
 //
 // Tres bandejas, que son las tres cosas que ella necesita saber:
 //   · DECIDIR    — no avanza sin ti.
-//   · EN MARCHA  — Tentare lo está haciendo; no tienes que tocar nada.
-//   · RESUELTO   — Tentare lo ha hecho por ti (hoy / últimas 24 h).
+//   · EN MARCHA  — Centra lo está haciendo; no tienes que tocar nada.
+//   · RESUELTO   — Centra lo ha hecho por ti (hoy / últimas 24 h).
 //
 // NO es un motor nuevo ni una fuente nueva: son recuentos de los estados que
 // ya escriben los flujos existentes. Y NO incluye las recomendaciones del
@@ -37,7 +37,7 @@ export interface ConteosEstudio {
   // Decidir
   sustitucionesPorDecidir?: number | null;
   /**
-   * De esas, las 'agotada' con candidatos de Tentare Network guardados. NO es
+   * De esas, las 'agotada' con candidatos de Centra Network guardados. NO es
    * una línea ni suma al contador: es un sufijo de `sustitucionesPorDecidir`
    * (son las MISMAS clases, contarlas dos veces inflaría el «espera tu visto
    * bueno»). Clases, nunca nombres.
@@ -82,7 +82,7 @@ export interface ConteosEstudio {
   jornadasPorRevisar?: number | null;
   /**
    * Denuncias y bloqueos de la app que esperan al estudio (App Store 1.2): las de
-   * los ámbitos que revisa quien mira. Si nadie las revisa en 24 h, las revisa Tentare.
+   * los ámbitos que revisa quien mira. Si nadie las revisa en 24 h, las revisa Centra.
    */
   denunciasPorRevisar?: number | null;
   /** Clases que una instructora dijo no dar y nadie ha revisado todavía. */
@@ -203,7 +203,7 @@ const LINEAS: DefLinea[] = [
   { id: 'alertasApertura', bandeja: 'decidir', href: null,
     uno: 'Tu apertura tiene un aviso', varios: n => `Tu apertura tiene ${n} avisos` },
   // Una alumna espera que alguien mire lo que denunció, y el plazo es de horas:
-  // si nadie lo revisa en 24 h, lo revisa Tentare. Se decide en su tarjeta.
+  // si nadie lo revisa en 24 h, lo revisa Centra. Se decide en su tarjeta.
   { id: 'pedidosConsumidor', bandeja: 'decidir', href: '/clientas/pedidos',
     uno: 'Un pedido de arrepentimiento o de baja por atender', varios: n => `${n} pedidos de arrepentimiento o de baja por atender` },
   { id: 'denunciasPorRevisar', bandeja: 'decidir', href: null,
@@ -290,15 +290,15 @@ export function tituloDecidir(n: number): string {
 }
 
 /**
- * Sufijo de la línea «clases sin cubrir» cuando en alguna Tentare Network tiene
+ * Sufijo de la línea «clases sin cubrir» cuando en alguna Centra Network tiene
  * a quién proponer. Cuenta CLASES, nunca nombres. Acotado a `nClases`: son un
  * subconjunto de las mismas filas, pero salen de dos consultas y una carrera
  * entre ambas no puede decir «en 3» de 2 clases.
  */
 export function sufijoNetwork(nClases: number, nConNetwork: number | null | undefined): string {
   if (typeof nConNetwork !== 'number' || !Number.isFinite(nConNetwork) || nConNetwork <= 0) return '';
-  if (nClases === 1) return ' — te proponemos profesionales de Tentare Network';
-  return ` — en ${Math.min(nConNetwork, nClases)} te proponemos profesionales de Tentare Network`;
+  if (nClases === 1) return ' — te proponemos profesionales de Centra Network';
+  return ` — en ${Math.min(nConNetwork, nClases)} te proponemos profesionales de Centra Network`;
 }
 
 /** Cuántas filas traen `candidatos_network` como array jsonb NO vacío (NULL = no se buscó). */

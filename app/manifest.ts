@@ -2,11 +2,11 @@ import type { MetadataRoute } from 'next';
 
 // Manifest de la PLATAFORMA (landing + panel de gestión). El portal de socias
 // tiene el suyo propio POR ESTUDIO en app/portal/[slug]/manifest.webmanifest —
-// ese es el de la "app de marca"; este representa a Tentare.
+// ese es el de la "app de marca"; este representa a Centra.
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Tentare',
-    short_name: 'Tentare',
+    name: 'Centra',
+    short_name: 'Centra',
     description: 'Software para estudios de pilates: reservas, cobros y sustituciones',
     start_url: '/',
     display: 'standalone',

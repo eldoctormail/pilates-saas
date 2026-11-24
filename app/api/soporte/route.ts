@@ -14,7 +14,7 @@ import { getSupabaseAdmin } from '@/lib/db/supabase-admin';
 // Twilio. Se retiró el 2026-09-09 con el resto de Twilio y, a diferencia de los
 // otros seis emisores, NO se ha migrado a la Meta Cloud API: esa integración es
 // de cada estudio y sirve para que un estudio hable con SUS clientas. Esto va en
-// la dirección contraria —un estudio escribiendo a Tentare— así que no hay
+// la dirección contraria —un estudio escribiendo a Centra— así que no hay
 // ninguna cuenta de WhatsApp que sea la correcta para mandarlo.
 //
 // ⚠️ Exige sesión de personal. Antes era un relay abierto: sin sesión, cualquiera
@@ -64,10 +64,10 @@ export async function POST(req: NextRequest) {
   try {
     const resend = new Resend(apiKey);
     const { error } = await resend.emails.send({
-      from: process.env.RESEND_FROM || 'Tentare <onboarding@resend.dev>',
+      from: process.env.RESEND_FROM || 'Centra <onboarding@resend.dev>',
       to: ['soporte@tentare.app'],
       ...(staff.email ? { replyTo: staff.email } : {}),
-      subject: `[${tipo}] Soporte Tentare · ${estudio}`,
+      subject: `[${tipo}] Soporte Centra · ${estudio}`,
       html:
         `<p><strong>${esc(tipo)}</strong> desde <strong>${esc(estudio)}</strong> (${esc(staff.studioId)})</p>` +
         `<p style="white-space:pre-wrap">${esc(mensaje)}</p>` +

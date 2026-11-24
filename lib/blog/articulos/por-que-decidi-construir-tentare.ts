@@ -6,7 +6,7 @@ import type { ArticuloBlog } from '../tipos.ts';
 const articulo: ArticuloBlog = {
   estado: 'borrador',
   slug: 'por-que-decidi-construir-tentare',
-  titulo: 'Por qué decidí construir Tentare',
+  titulo: 'Por qué decidí construir Centra',
   categoria: 'construccion-de-tentare',
   guion: [
     'El momento en que aparece la idea',
@@ -17,7 +17,7 @@ const articulo: ArticuloBlog = {
     'Lo que todavía no se sabe',
   ],
   preguntas: [
-    '¿Cuándo y cómo surgió la idea de Tentare?',
+    '¿Cuándo y cómo surgió la idea de Centra?',
     '¿Cuál era tu relación con el Pilates o con los estudios antes de empezar?',
     '¿Qué viste que no funcionaba en el software que usaban los estudios?',
     '¿Con qué estudio hablaste primero y qué te dijo?',

@@ -115,7 +115,7 @@ export function AlineacionAlumnasActuales() {
     <section className="mt-6 rounded-xl border border-border p-4" aria-labelledby="titulo-alineacion">
       <h3 id="titulo-alineacion" className="text-sm font-semibold text-foreground">¿Y los clientes que ya tienes?</h3>
       <p className="mt-1 text-sm text-muted-foreground text-pretty">
-        Pasan al día 1 en su próxima renovación. Elige cómo. Solo afecta a cuotas mensuales de Tentare que aún no acaban a fin de mes; cada cliente cambia una sola vez, en su renovación.
+        Pasan al día 1 en su próxima renovación. Elige cómo. Solo afecta a cuotas mensuales de Centra que aún no acaban a fin de mes; cada cliente cambia una sola vez, en su renovación.
       </p>
 
       {/* Región viva siempre presente: un role="status" que aparece de golpe muchas veces no se anuncia. */}
@@ -168,7 +168,7 @@ export function AlineacionAlumnasActuales() {
         <div className="mt-4">
           <h4 className="text-sm font-medium text-foreground">Vista previa con tus clientes reales (no se cobra nada)</h4>
           {vista.alumnas === 0 ? (
-            <p className="mt-2 text-sm text-muted-foreground text-pretty">Hoy ningún cliente cambiaría: todas acaban ya a fin de mes o no tienen cuota mensual de Tentare.</p>
+            <p className="mt-2 text-sm text-muted-foreground text-pretty">Hoy ningún cliente cambiaría: todas acaban ya a fin de mes o no tienen cuota mensual de Centra.</p>
           ) : (
             <>
               <p className="mt-1 text-sm text-muted-foreground text-pretty">

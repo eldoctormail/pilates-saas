@@ -53,7 +53,7 @@ export const GRUPOS: Array<{ titulo: string; secciones: Seccion[] }> = [
   {
     titulo: 'Moderar',
     secciones: [
-      // Denuncias de la app de los estudios que le tocan a Tentare (App Store 1.2).
+      // Denuncias de la app de los estudios que le tocan a Centra (App Store 1.2).
       { href: '/interno/denuncias', etiqueta: 'Denuncias', icono: Flag, permisos: ['app.moderate'] },
       { href: '/interno/network', etiqueta: 'Network', icono: Network, permisos: ['network.moderate'] },
     ],
@@ -85,10 +85,10 @@ export function MarcaInterna({ pequena }: { pequena?: boolean }) {
     <span className="flex items-center gap-2.5">
       <span className={`grid shrink-0 place-items-center rounded-lg bg-white font-bold text-[#14161c] ${pequena ? 'h-7 w-7 text-[13px]' : 'h-8 w-8 text-[15px]'}`}>T</span>
       {pequena ? (
-        <span className="text-[13px] font-semibold text-white">Tentare <span className="text-amber-300/90">· Zona interna</span></span>
+        <span className="text-[13px] font-semibold text-white">Centra <span className="text-amber-300/90">· Zona interna</span></span>
       ) : (
         <span className="leading-tight">
-          <span className="block text-[14px] font-semibold text-white">Tentare</span>
+          <span className="block text-[14px] font-semibold text-white">Centra</span>
           <span className="block text-[11px] font-medium uppercase tracking-[0.08em] text-amber-300/90">Zona interna</span>
         </span>
       )}

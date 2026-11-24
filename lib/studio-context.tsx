@@ -302,7 +302,7 @@ import type { AparienciaWidget } from '@/lib/reservar/apariencia-widget';
 // lo trae al ámbito de este fichero, y aquí se usa (`studioConfig: StudioConfig`).
 import { configLegalDe, defaultStudioConfig, textoConsentimientoMarketing, tieneTextoPropio, type StudioConfig } from '@/lib/legal-textos';
 
-/** Qué documentos ha reescrito el estudio, de lo GUARDADO (vacío = el de Tentare). Lo que no viene, se queda como estaba. */
+/** Qué documentos ha reescrito el estudio, de lo GUARDADO (vacío = el de Centra). Lo que no viene, se queda como estaba. */
 function textosPropiosDe(
   guardados: Partial<Record<keyof StudioConfig, string | null>> | null | undefined,
   antes: Record<keyof StudioConfig, boolean> = { politicaPrivacidad: false, terminosServicio: false },
@@ -809,7 +809,7 @@ interface StudioContextValue {
   // Studio config (policy, terms)
   studioConfig: StudioConfig;
   /**
-   * ¿Ha escrito el estudio su propio texto? `studioConfig` ya trae el de Tentare
+   * ¿Ha escrito el estudio su propio texto? `studioConfig` ya trae el de Centra
    * en lo que está vacío, y no se puede saber mirándolo: con unos términos
    * propios no se cobra ninguna penalización (lib/billing/penalizacion-consentimiento.ts).
    * `null` = sin cargar.
@@ -3419,7 +3419,7 @@ export function StudioProvider({ children, studioIdOverride, publicSlug }: { chi
   //
   // Alcance deliberadamente acotado: si la suscripción tenía `stripeSubscriptionId`
   // (cobro automático), este botón NO reintenta cobrar en Stripe — solo la
-  // reactiva en Tentare, a la espera del próximo ciclo normal de
+  // reactiva en Centra, a la espera del próximo ciclo normal de
   // renovación/dunning. Reactivar un PaymentIntent/Subscription real en Stripe
   // desde aquí es una pieza de riesgo/alcance distinta, no construida.
   async function reactivarSuscripcion(susId: string): Promise<ResultadoEscritura> {
@@ -3558,7 +3558,7 @@ export function StudioProvider({ children, studioIdOverride, publicSlug }: { chi
     const res = await dbInsertSesion(nueva);
     if (!res.ok) return res;
     setSesiones(prev => [...prev, nueva]);
-    // (La instructora ya no crea clases desde el panel: Tentare Core se retiró
+    // (La instructora ya no crea clases desde el panel: Centra Core se retiró
     // y lo hace en la app, que avisa a la propietaria desde su servidor.)
     return res;
   }

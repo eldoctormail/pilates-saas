@@ -5,7 +5,7 @@ import { errorInterno } from '@/lib/errores-servidor';
 
 export const dynamic = 'force-dynamic';
 
-// «Facturar automáticamente» (9-oct-2026): si Tentare emite la factura sola al
+// «Facturar automáticamente» (9-oct-2026): si Centra emite la factura sola al
 // cobrar (salvo en efectivo) o solo cuando alguien la pide. Es un ajuste del
 // estudio y NO tiene nada que ver con Veri*Factu (`modo_facturacion`, que tiene
 // su ruta aparte): ni lo lee ni lo cambia.

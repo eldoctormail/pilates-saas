@@ -2,7 +2,7 @@
 //
 // Lleva SOLO un token opaco: `TNT1-` y 22 caracteres (128 bits). Ni nombre, ni
 // email, ni id de socia, ni reservas. El token no sirve para nada por sí solo:
-// lo lee alguien del equipo con su sesión, en su estudio, y Tentare decide en ese
+// lo lee alguien del equipo con su sesión, en su estudio, y Centra decide en ese
 // momento si puede entrar (lib/acceso/evaluar-acceso.ts). Un QR permanente no es
 // un acceso permanente.
 //

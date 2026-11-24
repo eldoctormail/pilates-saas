@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   description: pagina.descripcion,
   alternates: alternatesBlog(RUTA_AUTOR),
   openGraph: {
-    siteName: 'Tentare',
+    siteName: 'Centra',
     type: 'profile',
     locale: 'es_ES',
     title: pagina.titulo,
@@ -44,7 +44,7 @@ export default function AutorPage() {
               <p className="bl-kicker">{AUTOR_BLOG.cargo}</p>
               <h1 className="bl-h1">{AUTOR_BLOG.nombre}</h1>
               <p className="bl-dek">
-                Fundador de Tentare, un software de gestión para estudios de Pilates y yoga en España. Escribe sobre emprendimiento, tecnología y cómo se construye un producto desde cero.
+                Fundador de Centra, un software de gestión para estudios de Pilates y yoga en España. Escribe sobre emprendimiento, tecnología y cómo se construye un producto desde cero.
               </p>
               <ul className="bl-datos">
                 <li>{AUTOR_BLOG.ciudad}, {AUTOR_BLOG.pais}</li>
@@ -64,13 +64,13 @@ export default function AutorPage() {
             <h2 id="a-quien">Quién es</h2>
             <div className="bl-prosa">
               <p>
-                <strong>{AUTOR_BLOG.nombre}</strong> tiene {AUTOR_BLOG.edad} años (a {AUTOR_BLOG.edadAl}) y trabaja desde {AUTOR_BLOG.ciudad}. Es el fundador de Tentare y quien la mantiene: su nombre consta como titular en el <Link href="/legal">aviso legal</Link>.
+                <strong>{AUTOR_BLOG.nombre}</strong> tiene {AUTOR_BLOG.edad} años (a {AUTOR_BLOG.edadAl}) y trabaja desde {AUTOR_BLOG.ciudad}. Es el fundador de Centra y quien la mantiene: su nombre consta como titular en el <Link href="/legal">aviso legal</Link>.
               </p>
               <p>
-                Además de construir el producto, firma las <Link href="/recursos">guías de recursos</Link> de Tentare sobre cómo abrir y gestionar un estudio de Pilates. Cómo se escriben y se comprueban está contado en <Link href="/sobre-tentare#como-escribimos">Sobre Tentare</Link>.
+                Además de construir el producto, firma las <Link href="/recursos">guías de recursos</Link> de Centra sobre cómo abrir y gestionar un estudio de Pilates. Cómo se escriben y se comprueban está contado en <Link href="/sobre-tentare#como-escribimos">Sobre Centra</Link>.
               </p>
               <p>
-                Este blog es su espacio personal: aquí cuenta cómo se construye Tentare y lo que va aprendiendo emprendiendo.
+                Este blog es su espacio personal: aquí cuenta cómo se construye Centra y lo que va aprendiendo emprendiendo.
               </p>
             </div>
           </div>
@@ -78,11 +78,11 @@ export default function AutorPage() {
 
         <section className="bl-seccion" aria-labelledby="a-tentare">
           <div className="bl-columnas">
-            <h2 id="a-tentare">Tentare</h2>
+            <h2 id="a-tentare">Centra</h2>
             <div>
               <div className="bl-prosa">
                 <p>
-                  Tentare es un software de gestión para estudios de Pilates y yoga en España: reservas, cobros, bonos y la gestión del equipo, en un solo panel y con una app con la marca de cada estudio para sus alumnas.
+                  Centra es un software de gestión para estudios de Pilates y yoga en España: reservas, cobros, bonos y la gestión del equipo, en un solo panel y con una app con la marca de cada estudio para sus alumnas.
                 </p>
               </div>
               <ul className="bl-datos-lista">
@@ -120,12 +120,12 @@ export default function AutorPage() {
             <ul className="bl-enlaces">
               <li>
                 <Link href="/">
-                  <span>Tentare<small>La web de la empresa</small></span><span className="bl-flecha" aria-hidden="true">→</span>
+                  <span>Centra<small>La web de la empresa</small></span><span className="bl-flecha" aria-hidden="true">→</span>
                 </Link>
               </li>
               <li>
                 <Link href="/sobre-tentare">
-                  <span>Sobre Tentare<small>Quién hay detrás y cómo se trabaja</small></span><span className="bl-flecha" aria-hidden="true">→</span>
+                  <span>Sobre Centra<small>Quién hay detrás y cómo se trabaja</small></span><span className="bl-flecha" aria-hidden="true">→</span>
                 </Link>
               </li>
               {LINKEDIN_PERSONAL && (
@@ -137,7 +137,7 @@ export default function AutorPage() {
               )}
               <li>
                 <a href={LINKEDIN_TENTARE} target="_blank" rel="noopener noreferrer">
-                  <span>LinkedIn de Tentare<small>La página de la empresa</small></span><span className="bl-flecha" aria-hidden="true">↗</span>
+                  <span>LinkedIn de Centra<small>La página de la empresa</small></span><span className="bl-flecha" aria-hidden="true">↗</span>
                 </a>
               </li>
               <li>

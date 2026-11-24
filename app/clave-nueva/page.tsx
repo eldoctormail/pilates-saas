@@ -67,7 +67,7 @@ export default function ClaveNueva() {
   // ⚠️ Antes mandaba SIEMPRE a /dashboard, sin mirar si la identidad tenía
   // estudio de verdad — exactamente el mismo bug que ya se documentó en
   // destino-post-login (docs/NETWORK-AUDIT-2.md §2), aquí sin arreglar: una
-  // cuenta de Tentare Network que recuperase su contraseña aterrizaba en el
+  // cuenta de Centra Network que recuperase su contraseña aterrizaba en el
   // panel de gestión, vacío o ajeno. Recuperar la contraseña no es "entrar en"
   // ningún producto (no hay gate aquí, a diferencia de /login y
   // /network/acceso): se manda a donde esta identidad de verdad tiene algo.

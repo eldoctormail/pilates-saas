@@ -14,7 +14,7 @@ test.use({ viewport: { width: 1280, height: 800 } });
 async function abrir(page: Page) {
   await ir(page, 'dashboard');
   await page.getByTestId('boton-ayuda').click({ timeout: 90_000 });
-  const panel = page.getByRole('dialog', { name: 'Ayuda de Tentare' });
+  const panel = page.getByRole('dialog', { name: 'Ayuda de Centra' });
   await expect(panel).toBeVisible();
   return panel;
 }
@@ -36,7 +36,7 @@ test.describe('Botón de ayuda', () => {
     await expect(panel.getByText(/\d+ categorías/)).toBeVisible();
 
     await page.keyboard.press('Escape');
-    await expect(page.getByRole('dialog', { name: 'Ayuda de Tentare' })).toHaveCount(0);
+    await expect(page.getByRole('dialog', { name: 'Ayuda de Centra' })).toHaveCount(0);
   });
 
   test('un mensaje llega a las dos vías, y si fallan las dos no dice «Enviado» y conserva lo escrito', async ({ page }) => {
@@ -86,6 +86,6 @@ test.describe('Botón de ayuda', () => {
     await ir(page, 'dashboard');
     await page.getByRole('button', { name: 'Abrir menú de perfil' }).click({ timeout: 90_000 });
     await page.getByRole('button', { name: 'Ayuda', exact: true }).click();
-    await expect(page.getByRole('dialog', { name: 'Ayuda de Tentare' })).toBeVisible();
+    await expect(page.getByRole('dialog', { name: 'Ayuda de Centra' })).toBeVisible();
   });
 });

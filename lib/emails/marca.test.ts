@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { marcaDesdeFila } from './marca.ts';
 
-// Las plantillas de correo declaran `estudioNombre = 'Tentare'` como default.
+// Las plantillas de correo declaran `estudioNombre = 'Centra'` como default.
 // Ese default existe para los correos de plataforma (fallo de pago del SaaS),
 // NO para los que manda un estudio a su clienta. El bug real: la marca traía
 // `nombre` y las plantillas leen `estudioNombre`, así que todo correo salía
@@ -23,7 +23,7 @@ test('el nombre del estudio gana al hacer spread sobre los datos del email', () 
   const datos: { claseNombre: string; estudioNombre?: string } = { claseNombre: 'Reformer' };
   const props = { ...datos, ...marcaDesdeFila({ nombre: 'Studio Pilates Barcelona' }) };
   assert.equal(props.estudioNombre, 'Studio Pilates Barcelona');
-  assert.notEqual(props.estudioNombre, 'Tentare');
+  assert.notEqual(props.estudioNombre, 'Centra');
 });
 
 test('sin nombre en la fila NO se pisa el que traiga el caller', () => {

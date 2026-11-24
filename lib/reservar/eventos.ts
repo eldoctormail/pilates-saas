@@ -38,7 +38,7 @@ const CLAVE_SESSION_ID = 'tentare_widget_session';
 // La etiqueta de seguimiento (`?ref=`) con la que se abrió este widget. La
 // fija la página una vez al montar y la llevan TODOS sus eventos, no solo los
 // cuatro que ya la pasaban a mano: sin eso, el embudo de un widget concreto
-// («Tentare Widgets», una etiqueta por widget) tendría visitas pero ninguna
+// («Centra Widgets», una etiqueta por widget) tendría visitas pero ninguna
 // reserva.
 let origenPorDefecto: string | null = null;
 
@@ -152,7 +152,7 @@ export function trackEventoWidget(
   try {
     // `baseUrl` (por defecto '', ruta relativa de siempre): el bundle
     // embebible (Modo B) llama desde el DOM de la web del estudio, donde una
-    // ruta relativa resolvería contra SU origen — necesita el de Tentare.
+    // ruta relativa resolvería contra SU origen — necesita el de Centra.
     // Con `baseUrl` (cross-origin) el studioId va TAMBIÉN en la URL: el
     // preflight CORS no puede leer el body JSON.
     const url = extra?.baseUrl

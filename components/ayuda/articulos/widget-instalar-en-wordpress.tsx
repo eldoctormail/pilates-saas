@@ -24,7 +24,7 @@ export default function Contenido() {
       </AyudaPaso>
 
       <AyudaResultado>
-        No hace falta ningún plugin de terceros para reservas: el widget de Tentare funciona con el bloque de HTML
+        No hace falta ningún plugin de terceros para reservas: el widget de Centra funciona con el bloque de HTML
         que ya trae WordPress de serie.
       </AyudaResultado>
     </>

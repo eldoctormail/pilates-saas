@@ -1,11 +1,11 @@
 'use client';
 
-// La cola de moderación de Tentare (App Store 1.2; decisión del fundador,
+// La cola de moderación de Centra (App Store 1.2; decisión del fundador,
 // 5-oct-2026). El estudio revisa en su panel las denuncias de su app; aquí
 // llegan solo dos cosas: las que van contra el propio estudio (su hilo con la
 // alumna, o algo escrito por una propietaria) y las que el estudio no revisó en
 // 24 h. Decidir avisa a cada parte igual que cuando decide el estudio, y la RPC
-// vuelve a comprobar que le toca a Tentare.
+// vuelve a comprobar que le toca a Centra.
 
 import { useCallback, useEffect, useState } from 'react';
 import { Flag, Loader2 } from 'lucide-react';
@@ -58,7 +58,7 @@ export default function DenunciasInternoPage() {
       setAviso({ error: false, texto: accion === 'MANTENER' ? 'Mantenido. Avisamos a quien la hizo.' : accion === 'OCULTAR'
         ? 'Retirado. Avisamos a quien la hizo y a quien lo escribió.' : 'Conversación cerrada.' });
     } catch (e) {
-      // Ya decidida (por el estudio o por otra persona de Tentare): se relee igual.
+      // Ya decidida (por el estudio o por otra persona de Centra): se relee igual.
       setAviso({ error: true, texto: e instanceof Error ? e.message : 'No se ha podido guardar la decisión.' }); // toast-no-es-error: lleva `error` y se pinta como alert en rojo
     } finally {
       setEnviando(null);
@@ -89,7 +89,7 @@ export default function DenunciasInternoPage() {
       )}
 
       {items.length === 0 ? (
-        <p className="text-[13.5px] text-muted-foreground">No hay ninguna denuncia esperando a Tentare.</p>
+        <p className="text-[13.5px] text-muted-foreground">No hay ninguna denuncia esperando a Centra.</p>
       ) : (
         <div className="flex flex-col gap-3">
           {items.map((d) => (

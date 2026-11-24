@@ -113,7 +113,7 @@ export function recomendar(c: ContextoRecomendaciones): Recomendacion[] {
       : { id: 'plan-fundadora', titulo: 'Crea la cuota Fundadora', motivo: 'Primero el plan con su precio especial; después, su etapa aquí.', href: '/productos' });
   }
   if (objetivos.has('CONTRATAR')) {
-    out.push({ id: 'contratar', titulo: 'Busca instructoras', motivo: 'Encuentra y contacta profesionales en Tentare Network.', href: '/network/buscar' });
+    out.push({ id: 'contratar', titulo: 'Busca instructoras', motivo: 'Encuentra y contacta profesionales en Centra Network.', href: '/network/buscar' });
   }
   if (objetivos.has('PRIMERAS_CLIENTAS') || objetivos.has('LISTA_ESPERA')) {
     out.push({ id: 'interesadas', titulo: 'Apunta a tus primeras interesadas', motivo: 'Tenlas localizadas para avisarlas cuando abras la venta.', href: '/clientas?nuevo=1' });

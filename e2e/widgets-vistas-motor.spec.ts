@@ -2,7 +2,7 @@ import { test, expect, type Page } from '@playwright/test';
 import { firmaDeUrl } from '../lib/widgets/firma-contenido.ts';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// «Tentare Widgets»: las vistas del motor que añadió el catálogo
+// «Centra Widgets»: las vistas del motor que añadió el catálogo
 // (lib/widgets/catalogo.ts), verificadas sobre la página pública REAL en modo
 // incrustado — la misma URL que genera el constructor:
 //   - `tab=planes` (+ `planes=BONO`): «Planes y precios» / «Bonos y packs»
@@ -205,7 +205,7 @@ test('dentro de su web, `widget_loaded` dice dónde (solo el origen) y con qué 
 // que dice si ese widget convierte. Dentro de un marco (`embed=1`) no es ella,
 // y la visita cuenta como cualquier otra.
 //
-// Lo que no cambia con ningún parámetro que pone la propia Tentare
+// Lo que no cambia con ningún parámetro que pone la propia Centra
 // (`PARAMS_DE_EJECUCION`, lib/reservar/pegado-widget.ts): esa URL no es el
 // código de su web, así que la carga no dice dónde ni con qué versión. El
 // control es que `widget_loaded` SÍ sale: sin él, «no lleva nada» pasaría sin
@@ -217,7 +217,7 @@ test('⚠️ `directo=1` dentro de su web no es la redirección de la nativa: cu
   expect(eventos.some(lleva), JSON.stringify(eventos)).toBe(false);
 });
 
-test('⚠️ con otro parámetro que pone la propia Tentare (`clase=`), dentro de su web: cuenta la visita, sin decir dónde ni con qué versión', async ({ page, baseURL }) => {
+test('⚠️ con otro parámetro que pone la propia Centra (`clase=`), dentro de su web: cuenta la visita, sin decir dónde ni con qué versión', async ({ page, baseURL }) => {
   const { eventos } = await enSuWeb(page, baseURL!, `${CODIGO}&clase=s1`);
   await expect.poll(() => eventos.filter(e => e.tipo === 'widget_loaded').length, { timeout: 15_000 }).toBeGreaterThan(0);
   expect(eventos.some(lleva), JSON.stringify(eventos)).toBe(false);

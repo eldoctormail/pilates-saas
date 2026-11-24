@@ -47,7 +47,7 @@ export async function enviarEmailImpago(params: {
       : `Problema con tu pago — ${params.concepto}`);
     const resend = new Resend(apiKey);
     const { data, error } = await resend.emails.send({
-      from: remitentePorMarca(marca.nombre || params.estudioNombre || 'Tentare'),
+      from: remitentePorMarca(marca.nombre || params.estudioNombre || 'Centra'),
       // Reply-To del estudio: un problema de cobro es justo el correo al que
       // una clienta responde, y esa respuesta tiene que llegarle al estudio.
       ...(marca.replyTo ? { replyTo: marca.replyTo } : {}),

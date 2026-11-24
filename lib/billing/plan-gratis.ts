@@ -3,13 +3,13 @@
 //
 // Y qué toca al pasarse (decisiones del fundador del 15-oct): el segundo límite
 // son 250 RESERVAS al mes, no cobros (~02:15: los cobros se esquivan cobrando
-// fuera de Tentare; las reservas no, como las «inscripciones» de Bonsai). Al
+// fuera de Centra; las reservas no, como las «inscripciones» de Bonsai). Al
 // pasar CUALQUIERA de los dos límites, Founding Studio DE PAGO: 29 €/mes, lo
 // mismo y sin límites (08:30: «cuando pasa de esos limites cuesta 29€ y el
 // estudio ya 59 y cadena 149»). Nadie va obligado a Estudio: lo que lo
 // distingue es la app propia del estudio (`appPropia`, entitlements.ts).
 //
-// Un estudio que no paga usa Tentare ENTERO (todo salvo varias sedes) mientras
+// Un estudio que no paga usa Centra ENTERO (todo salvo varias sedes) mientras
 // no pase de LIMITE_RESERVAS_MES reservas en un mes (13-nov-2026: sin tope de
 // alumnas y 150 reservas; antes 150 alumnas «Activa» y 250 reservas). Al pasarse tiene MARGEN_DIAS para elegir plan de pago; pasado el
 // margen, el panel se cierra hasta que lo elija. La app de sus alumnas no se toca nunca.
@@ -19,7 +19,7 @@
 //     «Activa» (lib/clientas/estado.ts, el mismo número que el Resumen) y
 //     reservas de clases que se dieron (sin canceladas, lista de espera ni
 //     pendientes de aprobar; las de clase fija, sí). Importar fichas viejas no
-//     suma, y cobrar fuera de Tentare no lo esquiva.
+//     suma, y cobrar fuera de Centra no lo esquiva.
 //   · Las reservas se cuentan en los ÚLTIMOS 30 DÍAS (por la fecha de la
 //     clase), no por mes natural: no se reinicia todo el día 1 (pasarse el 28
 //     y volver a cero el 1 sería una trampa), y si de verdad vuelve a bajar, se ve.

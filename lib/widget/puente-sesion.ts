@@ -130,7 +130,7 @@ function emailConForma(email: string): string | null {
   return limpio.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(limpio) ? limpio : null;
 }
 
-// ── El acceso entero, en la ventana de Tentare (16-oct-2026) ────────────────
+// ── El acceso entero, en la ventana de Centra (16-oct-2026) ────────────────
 //
 // La site key de Turnstile solo vale en los dominios que Cloudflare tiene
 // autorizados (tentare.app): en la web de un estudio devuelve el error 110200
@@ -261,13 +261,13 @@ export function olvidarSesionDelPuente(almacen: Pick<Storage, 'removeItem'> | nu
 //
 // La sesión que entrega el puente vale para la cuenta ENTERA, y el widget es
 // para alumnas: quien sea del equipo de un estudio (propietaria, gerencia,
-// recepción, instructora) o de Tentare entra desde tentare.app. Así que el puente pregunta al SERVIDOR (`/api/auth/cuenta-de-equipo`) antes de
+// recepción, instructora) o de Centra entra desde tentare.app. Así que el puente pregunta al SERVIDOR (`/api/auth/cuenta-de-equipo`) antes de
 // entregar y, si es de equipo —o si no hay respuesta clara—, no entrega nada.
 // Tampoco a quien es equipo en un estudio y alumna en otro: reserva desde la
 // página entera, en tentare.app.
 export const RUTA_CUENTA_DE_EQUIPO = '/api/auth/cuenta-de-equipo';
 export const MOTIVO_CUENTA_DE_EQUIPO = 'cuenta_de_equipo';
-export const MENSAJE_CUENTA_DE_EQUIPO = 'Esta cuenta es de un equipo de Tentare: entra desde tentare.app.';
+export const MENSAJE_CUENTA_DE_EQUIPO = 'Esta cuenta es de un equipo de Centra: entra desde tentare.app.';
 export const ERROR_COMPROBAR_CUENTA = 'No se ha podido iniciar sesión. Inténtalo de nuevo en unos segundos.';
 
 export type VeredictoCuenta = 'alumna' | 'equipo' | 'sin-respuesta';

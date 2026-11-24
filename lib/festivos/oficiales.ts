@@ -1,6 +1,6 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // Festivos laborales oficiales (nacionales + autonómicos) de las comunidades
-// donde trabaja Tentare. Puro: lo leen el aviso de la bandeja, «Comprobar mi
+// donde trabaja Centra. Puro: lo leen el aviso de la bandeja, «Comprobar mi
 // horario» y «Repetir este mes».
 //
 // ⚠️ Esto son FECHAS LEGALES: se copian a mano del boletín oficial, nunca las

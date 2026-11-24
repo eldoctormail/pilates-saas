@@ -9,13 +9,13 @@ import { redirect } from 'next/navigation';
 //
 // Se congela por decisión de producto del fundador: la experiencia actual (una
 // página de alta aislada) se considera de baja calidad y va a sustituirse por
-// "Tentare Network" (una red/marketplace de instructoras freelance), todavía en
+// "Centra Network" (una red/marketplace de instructoras freelance), todavía en
 // diseño — no por un fallo técnico. `studios.tipo_cuenta='FREELANCE'`, el motor
 // de reserva reutilizado en `/i/[slug]`, y la cuenta ya creada antes de este
 // cambio (studio `ana-garcia`) SIGUEN funcionando: congelar solo cierra la
 // puerta de entrada a gente NUEVA, no rompe a quien ya se dio de alta.
 //
-// Reactivar (o sustituir por el flujo real de Tentare Network cuando esté
+// Reactivar (o sustituir por el flujo real de Centra Network cuando esté
 // diseñado): renombrar page.frozen.tsx → page.tsx (borrando este stub) y
 // devolver el enlace del pie. No reabrir sin pedirlo expresamente.
 // ─────────────────────────────────────────────────────────────────────────────

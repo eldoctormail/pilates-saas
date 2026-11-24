@@ -594,7 +594,7 @@ export const AFORO_VENTANA_DIAS = 60;
  */
 /**
  * Las plazas APARTADAS para una plataforma que vende a mano (ClassPass) en estas
- * sesiones: desde Tentare no las coge nadie hasta que se liberan
+ * sesiones: desde Centra no las coge nadie hasta que se liberan
  * (`plazas_apartadas_de`, migr 20261007164222). Solo números, ni personas ni el
  * nombre de la plataforma: vale para la respuesta pública y cacheada. Si falla,
  * vacío y aviso: la base de datos sigue decidiendo al reservar, así que lo peor
@@ -974,7 +974,7 @@ export async function fetchPublicStudioData(
         planesConTiposPub,
         (susPlanesRes.data ?? []).map(r => ({ planId: r.plan_id as string }) as Suscripcion),
       ),
-      // P1 auditoría Momence: "Tentare tiene el motor de sustituciones entero
+      // P1 auditoría Momence: "Centra tiene el motor de sustituciones entero
       // y no lo enseña en público" — permite a la página resolver, por
       // sesión, si hubo un cambio de instructora confirmado.
       sustitucionesConfirmadas: (sustitucionesRes.data ?? []).map(r => ({
@@ -1661,7 +1661,7 @@ async function datosClaseParaEmail(
     fecha, hora,
     sala: sala?.nombre ?? '',
     instructor: inst?.nombre ?? '',
-    estudioNombre: studio?.nombre ?? 'Tentare',
+    estudioNombre: studio?.nombre ?? 'Centra',
     zoomJoinUrl: (ses.zoom_join_url as string | null) ?? null,
   };
 }
@@ -8127,7 +8127,7 @@ export async function dbSetStripeAccountId(studioId: string, stripeAccountId: st
   const { error } = await admin.from('studios').update({ stripe_account_id: stripeAccountId }).eq('id', studioId);
   if (error) {
     if (error.code === '23505' && error.message.includes('uq_studios_stripe_account')) {
-      return { ok: false, error: 'Esta cuenta de Stripe ya está conectada a otro estudio de Tentare.' };
+      return { ok: false, error: 'Esta cuenta de Stripe ya está conectada a otro estudio de Centra.' };
     }
     reportDbError('[dbSetStripeAccountId]', error);
     return { ok: false, error: 'No se pudo guardar la conexión con Stripe.' };
@@ -8515,7 +8515,7 @@ export async function dbGuardarIntegracion(
     if (error.code === '23505') {
       // USC: mismo mensaje neutro que la comprobación previa (no dice de quién es el ID).
       if (datos.tipo === 'URBAN_SPORTS_CLUB') return { ok: false, conflict: true, error: MENSAJE_IDS_USC_NO_VALIDOS };
-      return { ok: false, conflict: true, error: 'Ese número de WhatsApp ya está conectado a otro estudio en Tentare.' };
+      return { ok: false, conflict: true, error: 'Ese número de WhatsApp ya está conectado a otro estudio en Centra.' };
     }
     reportDbError('[dbGuardarIntegracion]', error);
     return { ok: false, error: 'No se ha podido guardar.' };
@@ -8621,7 +8621,7 @@ export async function dbGuardarConexionWhatsappEmbeddedSignup(
     // actuar) de un fallo de infraestructura (500, no es su culpa) para
     // quien llama — antes ambos volvían indistinguibles como `{ok:false}`.
     if (error.code === '23505') {
-      return { ok: false, conflict: true, error: 'Ese número de WhatsApp ya está conectado a otro estudio en Tentare.' };
+      return { ok: false, conflict: true, error: 'Ese número de WhatsApp ya está conectado a otro estudio en Centra.' };
     }
     reportDbError('[dbGuardarConexionWhatsappEmbeddedSignup]', error);
     return { ok: false, error: 'No se pudo guardar la conexión de WhatsApp.' };

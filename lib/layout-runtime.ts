@@ -141,7 +141,7 @@ export function aplicarLayout(todos: string[], cfg: OrdenVisibilidad): string[] 
  * los grupos se quedan donde están.
  *
  * Lo que NO está en la lista guardada va al final, en su orden de siempre: así
- * un módulo NUEVO de Tentare aparece —abajo, pero aparece— en vez de
+ * un módulo NUEVO de Centra aparece —abajo, pero aparece— en vez de
  * desaparecer para todo estudio que hubiera guardado un orden antes de que
  * existiera.
  */

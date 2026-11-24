@@ -17,7 +17,7 @@ const articulo: ArticuloBlog = {
   ],
   preguntas: [
     '¿Qué reto concreto no esperabas?',
-    '¿Cómo has ganado la confianza de los primeros estudios que usan Tentare?',
+    '¿Cómo has ganado la confianza de los primeros estudios que usan Centra?',
     '¿Qué consejo te ha servido y cuál ignorarías?',
     '¿Cómo compaginas la empresa con el resto de tu vida?',
     '¿Qué le dirías a alguien de tu edad que quiere emprender?',

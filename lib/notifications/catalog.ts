@@ -33,21 +33,21 @@ export type Audiencia =
   // tiene recepción, resuelve solo a la dueña (comportamiento previo intacto).
   | 'mostrador'
   | 'mostrador-y-socia'
-  // Tentare Network (Fase 7): quien decide sobre el equipo, SIN recepción —
+  // Centra Network (Fase 7): quien decide sobre el equipo, SIN recepción —
   // verificar una experiencia es una decisión de gerencia, no de mostrador
   // (mismo criterio que ya separa `puede_gestionar_equipo()` de `puedeVerFinanzas`
   // en lib/permisos-reglas.ts).
   | 'gerencia'
-  // Tentare Network: la profesional dueña de un perfil de Network, resuelta
+  // Centra Network: la profesional dueña de un perfil de Network, resuelta
   // por `data.authUserId` — no tiene rol dentro del `studioId` del evento (ese
   // studioId es el del ESTUDIO que resolvió la verificación, no uno al que
   // ella pertenezca).
   | 'red-profesional'
-  // Tentare Network (Fase 9): quien ENVIÓ una solicitud de contacto, resuelta
+  // Centra Network (Fase 9): quien ENVIÓ una solicitud de contacto, resuelta
   // por `data.solicitanteAuthUserId` — nunca toda la gerencia, el mensaje
   // lleva datos de contacto privados.
   | 'red-solicitante-contacto'
-  // Tentare Network (Fase 2, matching): lista de profesionales resuelta por
+  // Centra Network (Fase 2, matching): lista de profesionales resuelta por
   // `data.authUserIds` (N personas, no una) — a diferencia de
   // 'red-profesional', que resuelve una sola por `data.authUserId`. Sin
   // relación con el `studioId` del evento (el estudio que publicó, no uno al
@@ -299,7 +299,7 @@ export const REGLAS: Record<string, ReglaEvento> = {
   // misma promesa. Sin EMAIL: el mensaje es del día, no algo para revisar
   // luego en la bandeja.
   [EVENTOS.DECISION_MENSAJE_DIA]: { category: 'decisiones', priority: 'ALTA', canales: ['PUSH'], audiencia: 'propietaria' },
-  // Tentare Network, Fase 7. MEDIA (no ALTA): accionable pero sin urgencia de
+  // Centra Network, Fase 7. MEDIA (no ALTA): accionable pero sin urgencia de
   // reloj, a diferencia de INSTRUCTORA_BAJA (una clase se queda sin cubrir HOY).
   [EVENTOS.RED_VERIFICACION_SOLICITADA]: { category: 'red', priority: 'MEDIA', canales: ['PUSH', 'EMAIL'], audiencia: 'gerencia' },
   [EVENTOS.RED_EXPERIENCIA_CONFIRMADA]:  { category: 'red', priority: 'MEDIA', canales: ['PUSH', 'EMAIL'], audiencia: 'red-profesional' },
@@ -326,7 +326,7 @@ export const REGLAS: Record<string, ReglaEvento> = {
   // Moderación (App Store 1.2). Destinatarios explícitos (`recipients`), por id y
   // con su papel: quien revisa en el estudio (de entre el mostrador, según el
   // ámbito), quien denunció, quien escribió.
-  // ALTA la nueva: si en 24 h no la revisa nadie, pasa a Tentare. Solo PUSH:
+  // ALTA la nueva: si en 24 h no la revisa nadie, pasa a Centra. Solo PUSH:
   // ninguna lleva el texto denunciado.
   [EVENTOS.DENUNCIA_NUEVA]: { category: 'mensajeria', priority: 'ALTA', canales: ['PUSH'], audiencia: 'mostrador' },
   [EVENTOS.DENUNCIA_RESUELTA]: { category: 'mensajeria', priority: 'MEDIA', canales: ['PUSH'], audiencia: 'participantes-conversacion' },
@@ -462,7 +462,7 @@ function plantillasMensajeRecibido(): Record<string, Plantilla> {
     body: '{quienEscribe} te ha escrito.',
     deepLink: (d: Datos) => (d.slug ? `/portal/${s(d.slug)}/mensajes/${s(d.conversacionId)}` : null),
   };
-  // La instructora lee sus mensajes en la app del estudio (Tentare Core se
+  // La instructora lee sus mensajes en la app del estudio (Centra Core se
   // retiró el 14-sep-2026). El canal de equipo no está en la app —decisión
   // expresa, sin uso medido—, así que un mensaje de equipo la lleva a «Hoy».
   const instructora: Plantilla = {
@@ -516,7 +516,7 @@ function plantillasModeracion(): Record<string, Plantilla> {
   };
   const nueva: Plantilla = {
     title: 'Una denuncia por revisar',
-    body: '{queDenuncia} Si nadie la revisa en 24 horas, la revisa Tentare.',
+    body: '{queDenuncia} Si nadie la revisa en 24 horas, la revisa Centra.',
     deepLink: () => '/dashboard#decidir-denuncias',
   };
   return {
@@ -552,7 +552,7 @@ function plantillasMensajeDigest(): Record<string, Plantilla> {
         rol => [`${EVENTOS.MENSAJE_DIGEST_NO_LEIDO}#${rol}`, staff],
       ),
     ),
-    // La instructora, a sus mensajes de la app (Tentare Core retirado).
+    // La instructora, a sus mensajes de la app (Centra Core retirado).
     [`${EVENTOS.MENSAJE_DIGEST_NO_LEIDO}#INSTRUCTOR`]: {
       title: staff.title,
       body: staff.body,
@@ -757,7 +757,7 @@ export const PLANTILLAS: Record<string, Plantilla> = {
   },
   // Los mismos dos eventos, contados desde el lado de quien imparte la clase:
   // no es "tu reserva", es tu turno de trabajo el que se cae o se mueve.
-  // A la app del estudio, no al panel: Tentare Core se retiró (14-sep-2026).
+  // A la app del estudio, no al panel: Centra Core se retiró (14-sep-2026).
   // Sin slug, al panel: la puerta la reencamina, mejor que un `/portal//…`.
   [`${EVENTOS.CLASE_CANCELADA}#INSTRUCTOR`]: {
     title: 'Se ha cancelado tu clase',
@@ -893,7 +893,7 @@ export const PLANTILLAS: Record<string, Plantilla> = {
   },
   [`${EVENTOS.VERIFACTU_PODER_CADUCA}#PROPIETARIO`]: {
     title: 'El poder para enviar tus facturas a la AEAT caduca pronto',
-    body: 'El poder que diste en la AEAT para enviar tus registros de facturación termina el {vigenteHasta}. Puedes prorrogarlo en la sede de la AEAT en los dos meses previos; si no, ese día Tentare dejará de enviar y de emitir tus facturas.',
+    body: 'El poder que diste en la AEAT para enviar tus registros de facturación termina el {vigenteHasta}. Puedes prorrogarlo en la sede de la AEAT en los dos meses previos; si no, ese día Centra dejará de enviar y de emitir tus facturas.',
     deepLink: () => `/configuracion/verifactu`,
   },
   // {tipoTexto} distingue total de parcial dentro del mismo evento — mismo
@@ -1050,8 +1050,8 @@ export const PLANTILLAS: Record<string, Plantilla> = {
   },
   // El cajón «API para tu contabilidad», donde están sus webhooks.
   [`${EVENTOS.WEBHOOK_FALLANDO}#PROPIETARIO`]: {
-    title: 'Tu programa no está recibiendo los avisos de Tentare',
-    body: '«{nombre}» no consigue entregar nada desde el {desde} ({error}). Tentare sigue reintentando, pero si no se arregla se desactivará solo en unos días.',
+    title: 'Tu programa no está recibiendo los avisos de Centra',
+    body: '«{nombre}» no consigue entregar nada desde el {desde} ({error}). Centra sigue reintentando, pero si no se arregla se desactivará solo en unos días.',
     deepLink: () => `/configuracion?tab=conexiones#api-publica`,
   },
   [`${EVENTOS.WEBHOOK_DESACTIVADO}#PROPIETARIO`]: {
@@ -1142,7 +1142,7 @@ export const PLANTILLAS: Record<string, Plantilla> = {
     body: '{motivo}',
     deepLink: () => `/centro-de-control`,
   },
-  // ── Tentare Network (Fase 7) ──
+  // ── Centra Network (Fase 7) ──
   [`${EVENTOS.RED_VERIFICACION_SOLICITADA}#PROPIETARIO`]: {
     title: 'Solicitud de verificación en Network',
     body: '{profesional} indica que trabajó en tu estudio y pide que lo confirmes.',
@@ -1155,17 +1155,17 @@ export const PLANTILLAS: Record<string, Plantilla> = {
   },
   [`${EVENTOS.RED_EXPERIENCIA_CONFIRMADA}#INSTRUCTOR`]: {
     title: 'Experiencia verificada',
-    body: '{estudio} ha confirmado tu experiencia en Tentare Network.',
+    body: '{estudio} ha confirmado tu experiencia en Centra Network.',
     deepLink: () => `/network/mi-perfil`,
   },
   [`${EVENTOS.RED_EXPERIENCIA_RECHAZADA}#INSTRUCTOR`]: {
     title: 'Experiencia no confirmada',
-    body: '{estudio} no ha podido confirmar tu experiencia en Tentare Network.',
+    body: '{estudio} no ha podido confirmar tu experiencia en Centra Network.',
     deepLink: () => `/network/mi-perfil`,
   },
   [`${EVENTOS.RED_CONTACTO_SOLICITADO}#INSTRUCTOR`]: {
     title: 'Un estudio quiere contactar contigo',
-    body: '{estudio} te ha encontrado en Tentare Network y quiere hablar contigo.',
+    body: '{estudio} te ha encontrado en Centra Network y quiere hablar contigo.',
     deepLink: () => `/network/solicitudes`,
   },
   // El único sitio de todo Network donde el cuerpo lleva datos de contacto
@@ -1202,7 +1202,7 @@ export const PLANTILLAS: Record<string, Plantilla> = {
   },
   [`${EVENTOS.RED_VACANTE_ENCAJA}#INSTRUCTOR`]: {
     title: 'Una vacante que podría interesarte',
-    body: '"{titulo}" encaja con tu perfil en Tentare Network.',
+    body: '"{titulo}" encaja con tu perfil en Centra Network.',
     deepLink: () => `/network/oportunidades`,
   },
   // ── Community & Messaging OS (P0) ──
@@ -1238,7 +1238,7 @@ export const CATEGORIA_ETIQUETA: Record<NotificationCategory, string> = {
   marketing: 'Novedades y promociones',
   sistema: 'Sistema',
   decisiones: 'Centro de Control',
-  red: 'Tentare Network',
+  red: 'Centra Network',
   mensajeria: 'Mensajes',
 };
 

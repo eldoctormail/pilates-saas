@@ -5,7 +5,7 @@ import { normalizarNombrePlan, planesSinCasar, aplicarMapeoPlanes } from './plan
 // El importador de membresías casa por NOMBRE. Funciona si el estudio llega
 // vacío y copia los nombres del software viejo — que es como se probó. Con un
 // estudio que YA tiene su catálogo montado no casaba NADA: Momence exporta
-// "10 Class Pack" y en Tentare esa tarifa se llama "Bono 10 Reformer". Todas
+// "10 Class Pack" y en Centra esa tarifa se llama "Bono 10 Reformer". Todas
 // las filas fallaban y no había dónde decir que son la misma.
 
 const CATALOGO = [

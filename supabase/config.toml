@@ -264,7 +264,7 @@ otp_expiry = 600
 # admin_email = "admin@email.com"
 # sender_name = "Admin"
 
-# Plantillas de marca Tentare (mismo lenguaje visual que lib/emails/tentare/plantilla.ts:
+# Plantillas de marca Centra (mismo lenguaje visual que lib/emails/tentare/plantilla.ts:
 # oliva #343825, logo de la plataforma) para los correos que Supabase Auth
 # envía directamente y que este repo no puede interceptar con código propio:
 # recuperar contraseña (resetPasswordForEmail, ver app/clave-nueva) y el
@@ -278,19 +278,19 @@ otp_expiry = 600
 # solo el alta nueva (`alta_nueva: true` en la metadata, app/crear-estudio/
 # alta-nueva.tsx) recibe el código en el asunto; el resto, el de siempre.
 [auth.email.template.confirmation]
-subject = "{{ if .Data.alta_nueva }}{{ .Token }} es tu código · Te damos la bienvenida a Tentare{{ else }}Tu código de verificación de Tentare{{ end }}"
+subject = "{{ if .Data.alta_nueva }}{{ .Token }} es tu código · Te damos la bienvenida a Centra{{ else }}Tu código de verificación de Centra{{ end }}"
 content_path = "./supabase/templates/confirmation.html"
 
 [auth.email.template.recovery]
-subject = "Recupera tu contraseña en Tentare"
+subject = "Recupera tu contraseña en Centra"
 content_path = "./supabase/templates/recovery.html"
 
 [auth.email.template.magic_link]
-subject = "Tu código para entrar en Tentare"
+subject = "Tu código para entrar en Centra"
 content_path = "./supabase/templates/magic_link.html"
 
 [auth.email.template.email_change]
-subject = "Confirma tu nuevo email en Tentare"
+subject = "Confirma tu nuevo email en Centra"
 content_path = "./supabase/templates/email_change.html"
 
 # Uncomment to customize email template

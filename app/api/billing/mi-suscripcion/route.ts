@@ -6,7 +6,7 @@ import { accionesDe, cargarContexto, isoDe, leerSuscripcion } from '@/lib/billin
 
 export const dynamic = 'force-dynamic';
 
-// «Mi suscripción»: todo lo que la propietaria ve de lo que paga a Tentare, leído de STRIPE (la
+// «Mi suscripción»: todo lo que la propietaria ve de lo que paga a Centra, leído de STRIPE (la
 // fuente de verdad) en cada visita: plan, importe, periodo, próxima renovación, método de pago,
 // estado, facturas descargables y qué puede hacer. Una lectura por visita a esa pantalla.
 export async function GET(req: NextRequest) {

@@ -23,7 +23,7 @@ import { cn } from '@/lib/utils';
 // salgan iguales.
 // ─────────────────────────────────────────────────────────────────────────────
 
-/** El oliva de Tentare: el panel de un estudio sin tema propio se ve así. */
+/** El oliva de Centra: el panel de un estudio sin tema propio se ve así. */
 const MARCA_POR_DEFECTO = '#343825';
 const NEGRO = COLOR_CODIGO_POR_DEFECTO;
 /** El cartel en imagen, a 200 ppp: nítido impreso y de sobra para una historia. */

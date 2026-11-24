@@ -10,7 +10,7 @@
 // (otro ancho, otra pantalla) se salta: un bocadillo apuntando a nada es peor
 // que uno menos.
 //
-// Sin Tenti: es soporte y orientación, no «Tentare lo hace por ti».
+// Sin Tenti: es soporte y orientación, no «Centra lo hace por ti».
 // Puro, sin `@/`: los textos y dónde va el bocadillo se prueban con `node --test`.
 // ─────────────────────────────────────────────────────────────────────────────
 

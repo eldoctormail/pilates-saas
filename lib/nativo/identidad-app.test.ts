@@ -14,10 +14,10 @@ test('esBundleIdValido: DNS inverso, como pide Apple', () => {
 });
 
 test('esNombreValido: lo que un xcconfig no puede llevar tal cual, fuera', () => {
-  assert.equal(esNombreValido('Tentare'), true);
+  assert.equal(esNombreValido('Centra'), true);
   assert.equal(esNombreValido('Estudio Luz & Co'), true);
   assert.equal(esNombreValido(''), false);
-  assert.equal(esNombreValido(' Tentare'), false);
+  assert.equal(esNombreValido(' Centra'), false);
   assert.equal(esNombreValido('Precio $(HOME)'), false);
   assert.equal(esNombreValido('Mi//Estudio'), false);
   assert.equal(esNombreValido('Dos\nlíneas'), false);
@@ -31,11 +31,11 @@ test('esNombreValido cuenta como la petición y la BD: un emoji es UN carácter'
 });
 
 test('identidadDesde: dice QUÉ variable arreglar', () => {
-  assert.deepEqual(identidadDesde({ appId: 'app.tentare', appName: 'Tentare' }), { bundleId: 'app.tentare', nombre: 'Tentare', equipo: '' });
-  assert.throws(() => identidadDesde({ appId: 'tentare', appName: 'Tentare' }), /TENTARE_APP_ID/);
+  assert.deepEqual(identidadDesde({ appId: 'app.tentare', appName: 'Centra' }), { bundleId: 'app.tentare', nombre: 'Centra', equipo: '' });
+  assert.throws(() => identidadDesde({ appId: 'tentare', appName: 'Centra' }), /TENTARE_APP_ID/);
   assert.throws(() => identidadDesde({ appId: 'app.tentare', appName: '' }), /TENTARE_APP_NAME/);
-  assert.throws(() => identidadDesde({ appId: 'app.tentare', appName: 'Tentare', equipo: 'abc' }), /TENTARE_APPLE_TEAM_ID/);
-  assert.equal(identidadDesde({ appId: 'app.tentare', appName: 'Tentare', equipo: 'AB12CD34EF' }).equipo, 'AB12CD34EF');
+  assert.throws(() => identidadDesde({ appId: 'app.tentare', appName: 'Centra', equipo: 'abc' }), /TENTARE_APPLE_TEAM_ID/);
+  assert.equal(identidadDesde({ appId: 'app.tentare', appName: 'Centra', equipo: 'AB12CD34EF' }).equipo, 'AB12CD34EF');
 });
 
 test('xcconfigDeIdentidad: las tres variables que leen project.pbxproj e Info.plist', () => {

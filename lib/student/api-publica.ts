@@ -36,7 +36,7 @@ export async function cargarDatosPublicos(slug: string, opts?: { liviano?: boole
   // `baseUrl` (opcional, `''` de forma que la ruta sigue siendo relativa por
   // defecto — el comportamiento de siempre para /reservar y el portal): el
   // bundle embebible (Modo B) corre en el DOM de la web del estudio, así que
-  // una ruta relativa resolvería contra SU origen, no el de Tentare. Ver
+  // una ruta relativa resolvería contra SU origen, no el de Centra. Ver
   // lib/widget/usar-datos-widget.ts, que es el único caller que lo pasa.
   //
   // Con `baseUrl` (llamada cross-origin) el slug va TAMBIÉN en la URL

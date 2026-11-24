@@ -1,6 +1,6 @@
 import { correoFalloPagoSaas } from '@/lib/emails/tentare/cuenta';
 
-// Familia Tentare (lib/emails/tentare/): el sistema devuelve el documento
+// Familia Centra (lib/emails/tentare/): el sistema devuelve el documento
 // entero, así que se inyecta tal cual. Ver la nota de emails/reserva.tsx.
 const Preview = () => (
   <div dangerouslySetInnerHTML={{

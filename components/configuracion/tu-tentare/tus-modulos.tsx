@@ -20,7 +20,7 @@ import { EstadoAjuste } from '@/components/configuracion/shell/estado-ajuste';
 const ENLACE = 'inline-flex min-h-11 items-center rounded-sm sm:min-h-10 underline-offset-2 focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring/50';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// «Tu Tentare» (P2.5): todos los módulos del menú, con lo que hacen, el plan que
+// «Tu Centra» (P2.5): todos los módulos del menú, con lo que hacen, el plan que
 // necesitan y si están en el menú. Se monta en Configuración › Tu panel SOLO si
 // el servidor lo enciende para el estudio (interruptor `TU_TENTARE`); si no, la
 // sección se ve exactamente como siempre.

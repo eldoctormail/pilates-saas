@@ -14,7 +14,7 @@ export async function enviarEmailAccesoActivado(params: {
   rol: Rol;
   emailCuenta: string | null;
   estudioNombre: string;
-  // Ya no se usan: este correo lo firma Tentare, no el estudio. Se aceptan para
+  // Ya no se usan: este correo lo firma Centra, no el estudio. Se aceptan para
   // no romper a quien los pase (lib/equipo/avisar-acceso-activado.ts).
   logoUrl?: string | null;
   colorPrimario?: string | null;
@@ -30,7 +30,7 @@ export async function enviarEmailAccesoActivado(params: {
     });
     const resend = new Resend(apiKey);
     const { data, error } = await resend.emails.send({
-      from: remitentePorMarca('Tentare Manager'),
+      from: remitentePorMarca('Centra Manager'),
       to: [params.to],
       subject: `${params.nombre} ya tiene acceso a ${params.estudioNombre}`,
       html,

@@ -12,11 +12,11 @@ export const runtime = 'nodejs';
 // Los vídeos de las guías (`ayuda_videos`), gestionados desde /interno/ayuda por quien tiene `content.write` (el mismo permiso que el
 // changelog y la lectura de feedback). El texto de las guías NO se edita aquí: sigue en código, con sus pruebas.
 const GUIAS = new Map(ARTICULOS.filter(a => a.estado === 'publicado').map(a => [`${a.categoria}/${a.slug}`, a]));
-// Y las lecciones del curso dentro del panel (`/primeros-pasos/<capítulo>` y «Cambiar a Tentare»): su vídeo vive en la misma tabla, con la
+// Y las lecciones del curso dentro del panel (`/primeros-pasos/<capítulo>` y «Cambiar a Centra»): su vídeo vive en la misma tabla, con la
 // clave `primeros-pasos/<id>` (components/ayuda/use-videos-academy.ts), y se carga desde /api/ayuda/videos, no al servir la página.
 const LECCIONES = new Map<string, string>([
   ...CAPITULOS.map(c => [`primeros-pasos/${c.id}`, c.titulo] as [string, string]),
-  ['primeros-pasos/cambiar-de-software', 'Cambiar a Tentare'],
+  ['primeros-pasos/cambiar-de-software', 'Cambiar a Centra'],
 ]);
 const CLAVES = new Set([...GUIAS.keys(), ...LECCIONES.keys()]);
 

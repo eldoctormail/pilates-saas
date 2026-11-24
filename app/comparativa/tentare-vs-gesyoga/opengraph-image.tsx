@@ -1,9 +1,9 @@
 import { OG_IMAGE_CONTENT_TYPE, OG_IMAGE_SIZE, generarOgImage } from '@/lib/og-image';
 
-export const alt = 'Tentare vs GesYoga';
+export const alt = 'Centra vs GesYoga';
 export const size = OG_IMAGE_SIZE;
 export const contentType = OG_IMAGE_CONTENT_TYPE;
 
 export default async function Image() {
-  return generarOgImage('Tentare vs GesYoga.', 'Precio, permanencia, reformer individual y sustitución de instructoras — comparados punto por punto.');
+  return generarOgImage('Centra vs GesYoga.', 'Precio, permanencia, reformer individual y sustitución de instructoras — comparados punto por punto.');
 }

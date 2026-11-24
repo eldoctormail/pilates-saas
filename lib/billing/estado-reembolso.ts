@@ -15,7 +15,7 @@
 // Lo de DEVUELTA importa más de lo que parece: "Devuelto" a secas hace pensar
 // que la socia ya lo tiene, y luego escribe preguntando dónde está su dinero.
 // Un reembolso de tarjeta tarda entre 5 y 10 días hábiles en aparecer en su
-// extracto, y eso no lo controla ni Tentare ni el estudio.
+// extracto, y eso no lo controla ni Centra ni el estudio.
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { cobroEntroPorStripe } from './devolucion-reglas.ts';
@@ -43,7 +43,7 @@ export interface EstadoReembolso {
 
 export interface ReciboConDevolucion {
   estado: string;
-  /** Cuándo se le pidió a Stripe. Null = nunca se pidió desde Tentare. */
+  /** Cuándo se le pidió a Stripe. Null = nunca se pidió desde Centra. */
   reembolsoSolicitadoEn?: string | null;
   /** Cuándo lo confirmó Stripe (lo escribe el webhook). */
   fechaDevolucion?: string | null;

@@ -2,7 +2,7 @@
 
 // La píldora «Paso n de 10» de la barra: la guía paso a paso siempre a un toque. Lleva a la
 // explicación del paso que toca. No sale en el Resumen (ahí está la tarjeta entera), en la propia
-// guía, en el chat de Tentare, con la visita guiada en marcha, ni con la lista oculta o terminada.
+// guía, en el chat de Centra, con la visita guiada en marcha, ni con la lista oculta o terminada.
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';

@@ -6,7 +6,7 @@ import { PieWeb } from '@/components/web/PieWeb';
 import { URL_BLOG } from '@/lib/blog/autor';
 import '@/components/blog/blog.css';
 
-// El blog personal del fundador vive DENTRO de Tentare (misma isla, mismo pie, mismos tokens) pero con identidad
+// El blog personal del fundador vive DENTRO de Centra (misma isla, mismo pie, mismos tokens) pero con identidad
 // editorial propia: ver components/blog/blog.css. El layout pone lo común —armazón, Organization y el RSS—; cada página
 // declara su propio título, canonical y JSON-LD.
 export const metadata: Metadata = {

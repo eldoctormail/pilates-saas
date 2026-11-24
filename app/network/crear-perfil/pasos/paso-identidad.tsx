@@ -2,7 +2,7 @@
 
 // Paso 02 del wizard: verificación de identidad (documento + dirección
 // privada). Extraído tal cual de app/network/crear-perfil/page.tsx (paso
-// === 1) — F0 del roadmap de Tentare Network 2.0, sin cambios de
+// === 1) — F0 del roadmap de Centra Network 2.0, sin cambios de
 // comportamiento. DropzoneDocumento/EstadoDocumento vienen de
 // ../componentes (compartidos con PasoFormacion, que verifica otro
 // documento distinto con el mismo patrón).

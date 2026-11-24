@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title: pagina.titulo,
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
-  openGraph: { siteName: 'Tentare', type: 'website', locale: 'es_ES', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
+  openGraph: { siteName: 'Centra', type: 'website', locale: 'es_ES', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
 };
 
 const FAQ = [
@@ -34,8 +34,8 @@ const FAQ = [
     a: 'Sí, como notificación del sistema. En iPhone hay una condición de Apple: la app tiene que estar instalada en la pantalla de inicio y el móvil ser iOS 16.4 o superior. En Android funciona sin instalar.',
   },
   {
-    q: '¿Aparece Tentare por algún lado?',
-    a: 'Apenas. El nombre de la app instalada, el icono, el color y los correos que recibe son de tu estudio; Tentare solo aparece en una línea discreta al pie de su perfil y de la página de reservas. La app de marca está incluida en todos los planes, también en Founding Studio, que es gratis.',
+    q: '¿Aparece Centra por algún lado?',
+    a: 'Apenas. El nombre de la app instalada, el icono, el color y los correos que recibe son de tu estudio; Centra solo aparece en una línea discreta al pie de su perfil y de la página de reservas. La app de marca está incluida en todos los planes, también en Founding Studio, que es gratis.',
   },
   {
     q: '¿Puede gestionar su plaza fija ella sola?',
@@ -68,7 +68,7 @@ export default function AppAlumnasPage() {
 
       <Seccion id="pantallas" titulo="Qué tiene dentro">
         <PantallasDelPortal />
-        <CapturaMovil pie="La app de un estudio en el móvil de su alumna: su próxima clase, sus accesos a reservar, a su plan y a la comunidad, y su progreso de la semana. El nombre, el logo y el color son del estudio, no de Tentare.">
+        <CapturaMovil pie="La app de un estudio en el móvil de su alumna: su próxima clase, sus accesos a reservar, a su plan y a la comunidad, y su progreso de la semana. El nombre, el logo y el color son del estudio, no de Centra.">
           <AppAlumna />
         </CapturaMovil>
         <p>

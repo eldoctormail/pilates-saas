@@ -90,7 +90,7 @@ const SIN_FICHA_A_PROPOSITO: Record<string, string> = {
   // "sección" que explicar (lib/frozen-features.ts, MARKETING_MODULE_ENABLED).
   '/chat': 'congelada',
   '/ondemand': 'congelada',
-  '/network/buscar': 'congelada (Tentare Network, 2-oct-2026)',
+  '/network/buscar': 'congelada (Centra Network, 2-oct-2026)',
   '/marketing': 'oculta tras MARKETING_MODULE_ENABLED',
 };
 

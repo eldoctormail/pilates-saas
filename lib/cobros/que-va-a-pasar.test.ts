@@ -38,7 +38,7 @@ test('factura siempre (2-oct-2026): sin Veri*Factu sale igual', () => {
   assert.equal(queVaAPasar({ ...base, metodo: 'EFECTIVO', modoFacturacion: 'facturas' }).ofrecerHacerFactura, true);
 });
 
-test('un estudio que no factura con Tentare: ni frase de factura ni casilla', () => {
+test('un estudio que no factura con Centra: ni frase de factura ni casilla', () => {
   assert.deepEqual(queVaAPasar({ ...base, metodo: 'EFECTIVO', modoFacturacion: 'sin_facturas' }), { caja: 'Se apunta en la caja.', factura: null, saleFactura: false, ofrecerHacerFactura: false });
   assert.equal(queVaAPasar({ ...base, metodo: 'TARJETA', modoFacturacion: null }).factura, null, 'sin estudio cargado, nada');
 });

@@ -1,5 +1,5 @@
 // Mailchimp — email marketing. Cada estudio pega su PROPIA clave API de
-// Mailchimp (su propia cuenta, BYO account — Tentare no crea ni paga
+// Mailchimp (su propia cuenta, BYO account — Centra no crea ni paga
 // cuentas de Mailchimp) en Configuración → Integraciones — no hay cuenta
 // compartida de plataforma. Mismo criterio que Kisi (lib/kisi.ts): sin
 // OAuth, clave API generada a mano desde el propio panel de Mailchimp,

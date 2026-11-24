@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   description: SEO.descripcion,
   alternates: { canonical: urlDe('/recursos/checklist-elegir-software-estudio') },
   openGraph: {
-    siteName: 'Tentare',
+    siteName: 'Centra',
     type: 'article',
     title: 'Checklist: cómo elegir el software de tu estudio',
     description: 'Las señales de alarma que las reseñas públicas ya han encontrado por ti, antes de que firmes un contrato de un año.',
@@ -55,11 +55,11 @@ const CRITERIOS: [string, string, string][] = [
 const FAQ = [
   {
     q: '¿Sirve el mismo software para un estudio de yoga y uno de pilates?',
-    a: 'En lo común sí: reservas, bonos, cuotas, cobros y lista de espera funcionan igual. Lo que cambia es el aforo: en pilates reformer cada plaza es una máquina, y conviene que el programa lo entienda. Tentare nació con foco en Pilates y el mismo motor funciona para yoga y para centros que combinan las dos disciplinas.',
+    a: 'En lo común sí: reservas, bonos, cuotas, cobros y lista de espera funcionan igual. Lo que cambia es el aforo: en pilates reformer cada plaza es una máquina, y conviene que el programa lo entienda. Centra nació con foco en Pilates y el mismo motor funciona para yoga y para centros que combinan las dos disciplinas.',
   },
   {
     q: '¿Cuánto cuesta un software para un estudio de pilates o yoga?',
-    a: 'Depende del programa y de si publica precio. Mira siempre también las comisiones sobre tus cobros y la permanencia. Tentare publica sus planes en la página de precios, sin permanencia: Founding Studio es gratis hasta 150 reservas al mes y cuesta 29 € al mes si pasas de ahí, y Estudio, 79 €, con IVA. La guía de mejor software compara 13 programas con lo que dice la web de cada uno.',
+    a: 'Depende del programa y de si publica precio. Mira siempre también las comisiones sobre tus cobros y la permanencia. Centra publica sus planes en la página de precios, sin permanencia: Founding Studio es gratis hasta 150 reservas al mes y cuesta 29 € al mes si pasas de ahí, y Estudio, 79 €, con IVA. La guía de mejor software compara 13 programas con lo que dice la web de cada uno.',
   },
   {
     q: '¿Un contrato anual es siempre una mala señal?',
@@ -152,7 +152,7 @@ export default function ChecklistSoftwarePage() {
           </table>
         </div>
         <p>
-          Si das clases de reformer, mira con calma <Link href="/soluciones/estudio-de-pilates-reformer">cómo lo resuelve Tentare en un estudio de Pilates reformer</Link>; si es yoga, <Link href="/soluciones/estudio-de-yoga">en uno de yoga</Link>. Y para ver las diferencias entre programas con lo que publica cada uno, la guía de <Link href="/recursos/mejor-software-para-estudios-de-pilates">mejor software para estudios de pilates</Link>.
+          Si das clases de reformer, mira con calma <Link href="/soluciones/estudio-de-pilates-reformer">cómo lo resuelve Centra en un estudio de Pilates reformer</Link>; si es yoga, <Link href="/soluciones/estudio-de-yoga">en uno de yoga</Link>. Y para ver las diferencias entre programas con lo que publica cada uno, la guía de <Link href="/recursos/mejor-software-para-estudios-de-pilates">mejor software para estudios de pilates</Link>.
         </p>
 
         <h2 id="s3">Las preguntas que hay que hacer en la demo</h2>
@@ -195,14 +195,14 @@ export default function ChecklistSoftwarePage() {
 
         <CtaBlock
           title="Sin permanencia y con ayuda para traer tus datos"
-          body="Tentare no ata con contrato anual ni cobra comisión sobre tus cobros. Y si te vas, tus datos son tuyos — los exportas cuando quieras."
+          body="Centra no ata con contrato anual ni cobra comisión sobre tus cobros. Y si te vas, tus datos son tuyos — los exportas cuando quieras."
         />
 
         <RelatedLinks
           items={[
             { href: '/recursos/mejor-software-para-estudios-de-pilates', category: 'Elegir software', categoryColor: '#6E7650', title: 'Mejor software para estudios de pilates: 13 comparados' },
             { href: '/precios', category: 'Precios', categoryColor: '#6E7650', title: 'Planes y precios, con Founding Studio gratis' },
-            { href: '/soluciones/cambiar-de-software', category: 'Cambiarte de software', categoryColor: '#4E9E7F', title: 'Cambiarte a Tentare sin perder nada' },
+            { href: '/soluciones/cambiar-de-software', category: 'Cambiarte de software', categoryColor: '#4E9E7F', title: 'Cambiarte a Centra sin perder nada' },
             { href: '/recursos/cubrir-baja-instructora', category: 'Sustituciones y equipo', categoryColor: '#3E7C86', title: 'Cómo cubrir una baja de instructora sin hacer una llamada' },
           ]}
         />

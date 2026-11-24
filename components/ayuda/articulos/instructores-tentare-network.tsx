@@ -8,7 +8,7 @@ export default function Contenido() {
       <AyudaAntesDeEmpezar>
         Las <Link href="/ayuda/instructores/sustituciones" style={{ color: 'inherit', textDecoration: 'underline' }}>sustituciones</Link> buscan <strong>dentro</strong>: entre
         las instructoras que ya trabajan contigo, y cuando no queda nadie te proponen profesionales de Network.
-        Tentare Network busca <strong>fuera</strong>, entre profesionales de Pilates y Yoga que están disponibles
+        Centra Network busca <strong>fuera</strong>, entre profesionales de Pilates y Yoga que están disponibles
         para dar clase en un estudio.
       </AyudaAntesDeEmpezar>
 

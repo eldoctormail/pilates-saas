@@ -23,11 +23,11 @@ import { semantic } from '@/lib/portal-tokens';
 import { euros } from '@/lib/student/formato';
 
 /**
- * El origen de Tentare, de donde el iframe de Stripe pide las letras: el que
+ * El origen de Centra, de donde el iframe de Stripe pide las letras: el que
  * pase quien monta el pago; sin marco, si no llega (un widget.js viejo en su
  * caché), el de la hoja que ya está en su web (`<link data-tentare-fuentes>`,
  * una letra elegida); y si no, el de la página, que en /reservar y en la app
- * ya es Tentare.
+ * ya es Centra.
  */
 function origenDelPago(origenTentare: string | undefined): string {
   if (origenTentare) return origenTentare;
@@ -107,15 +107,15 @@ export function CheckoutEmbebido({
    * `appearance` no resuelve custom properties (`var(--font-ui)` ahí no
    * existe) ni ve las fuentes cargadas fuera del iframe: hacen falta nombres
    * de familia literales + sus caras (`fonts`) para que el bloque de tarjeta
-   * no salga en Times/serif del navegador. Las caras son las de Tentare, nunca
+   * no salga en Times/serif del navegador. Las caras son las de Centra, nunca
    * Google (`fuenteDelPago`). Sin prop, la primera familia de `--font-ui`.
    */
   fuentePago?: string;
   /**
-   * El origen de Tentare, de donde salen las letras del pago. Solo hace falta
+   * El origen de Centra, de donde salen las letras del pago. Solo hace falta
    * sin marco: allí la página es la web del estudio y una ruta relativa
    * resolvería contra SU origen. Sin prop, el de la página, que en /reservar
-   * y en la app ya es Tentare (`origenDelPago`).
+   * y en la app ya es Centra (`origenDelPago`).
    */
   origenTentare?: string;
   /**
@@ -227,9 +227,9 @@ export function CheckoutEmbebido({
   // lo que debe ser: un override explícito, no el único camino.
   //
   // Del `font-family` resuelto solo interesa la PRIMERA familia: la de la
-  // hoja en la nativa («Tentare Poppins»), la de `next/font` en la app
+  // hoja en la nativa («Centra Poppins»), la de `next/font` en la app
   // («Instrument_Sans», con guion bajo: app/_fuentes/fuentes.ts) o un nombre
-  // cualquiera. `fuenteDelPago` decide qué familia de Tentare le corresponde
+  // cualquiera. `fuenteDelPago` decide qué familia de Centra le corresponde
   // (con sus caras, en URL absoluta: la hoja como `cssSrc` no le llega al
   // iframe de Stripe, ver `carasDelPago`), y si ninguna, la nombra sin
   // pedirla a nadie.
@@ -273,7 +273,7 @@ export function CheckoutEmbebido({
     locale: 'es' as const,
     // Ver el docblock de `fuentePago`: dentro del iframe de Stripe ni
     // existen las custom properties ni están cargadas nuestras fuentes.
-    // Las caras de Tentare, con system-ui de reserva mientras cargan.
+    // Las caras de Centra, con system-ui de reserva mientras cargan.
     fonts: fuenteCheckout?.fuentes.length ? fuenteCheckout.fuentes : undefined,
     // El PaymentElement ya trae su propio skeleton por campo — con
     // 'always' se pinta desde el primer frame en vez de dejar un hueco

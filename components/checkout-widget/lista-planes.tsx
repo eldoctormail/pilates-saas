@@ -39,7 +39,7 @@ export function ListaPlanes({
   /** Refresca bonos/suscripciones tras una compra confirmada. */
   onComprado?: () => void;
   onIniciarSesion?: () => void;
-  /** El origen de Tentare (la página es la web del estudio): de ahí sale la letra del pago. */
+  /** El origen de Centra (la página es la web del estudio): de ahí sale la letra del pago. */
   origenTentare?: string;
 }) {
   const [estado, setEstado] = useState<EstadoCompra>({ fase: 'lista' });

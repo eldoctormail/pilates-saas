@@ -11,7 +11,7 @@ import {
 } from '@/lib/avisos/app-instructora';
 
 // La puerta del panel para quien tiene rol INSTRUCTOR en la sede activa
-// (retirada de Tentare Core, paso 2, 14-sep-2026). Sustituye el panel entero:
+// (retirada de Centra Core, paso 2, 14-sep-2026). Sustituye el panel entero:
 // ni menú ni páginas, que ya no son su sitio.
 //
 // Normalmente la manda a «Hoy» de la app de su estudio con `location.replace`

@@ -173,7 +173,7 @@ test('estudios que miraría: los peores primero, y los gratis solo si se acercan
     [
       { id: 'p1', nombre: 'Bien', plan: 'CADENA', impago: false, reservas7d: 120, semanaAnterior: 110, nivel: 'bien', primerAviso: null },
       { id: 'p2', nombre: 'Sin reservas', plan: 'BASE', impago: false, reservas7d: 0, semanaAnterior: 41, nivel: 'atencion', primerAviso: 'Ninguna reserva en los últimos 7 días' },
-      { id: 'p3', nombre: 'Impago', plan: 'ESTUDIO', impago: true, reservas7d: 50, semanaAnterior: 48, nivel: 'riesgo', primerAviso: 'Su pago a Tentare ha fallado' },
+      { id: 'p3', nombre: 'Impago', plan: 'ESTUDIO', impago: true, reservas7d: 50, semanaAnterior: 48, nivel: 'riesgo', primerAviso: 'Su pago a Centra ha fallado' },
     ],
     [{ id: 'g1', nombre: 'Gratis cerca', estado: gratis.get('g1')! }, { id: 'g2', nombre: 'Gratis lejos', estado: gratis.get('g2')! }],
   );

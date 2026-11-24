@@ -24,7 +24,7 @@ async function enviar(to: string, subject: string, html: string, estudioNombre: 
   const resend = new Resend(apiKey);
   try {
     const { data, error } = await resend.emails.send({
-      from: remitentePorMarca(estudioNombre || 'Tentare'),
+      from: remitentePorMarca(estudioNombre || 'Centra'),
       // Si la alumna contesta «no puedo ir», esa respuesta tiene que llegarle a
       // SU estudio y no al buzón compartido de la plataforma.
       ...(replyTo ? { replyTo } : {}),

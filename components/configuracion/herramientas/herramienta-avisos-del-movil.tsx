@@ -254,7 +254,7 @@ const SELECT_CORTO = 'h-10 rounded-[10px] border border-border bg-card px-3 text
 
 /**
  * «¿Qué se le dice a la alumna?», editable en la tarjeta como en Bonsai: los
- * campos vacíos enseñan el texto de Tentare y vacío = sale ese; las variables se
+ * campos vacíos enseñan el texto de Centra y vacío = sale ese; las variables se
  * meten donde está el cursor; los caracteres libres y «Así lo recibirá» van en
  * vivo. Se guarda al salir del campo, solo si cambió y vale; si el servidor dice
  * que no, lo escrito se queda y se dice por qué.
@@ -265,7 +265,7 @@ function TextoEnLinea({ evento, textos, datos }: { evento: string; textos: Texto
   const propio = textos.propios?.[evento] ?? null;
   const [title, setTitle] = useState(propio?.title ?? '');
   const [body, setBody] = useState(propio?.body ?? '');
-  // Lo que sale ahora (el suyo guardado, o el de Tentare), para no guardar sin cambios.
+  // Lo que sale ahora (el suyo guardado, o el de Centra), para no guardar sin cambios.
   const [guardado, setGuardado] = useState<TextoAviso>(propio ?? fabrica);
   const [estado, setEstado] = useState<{ tipo: 'ok' | 'error'; texto: string } | null>(null);
   const [ocupado, setOcupado] = useState(false);
@@ -278,7 +278,7 @@ function TextoEnLinea({ evento, textos, datos }: { evento: string; textos: Texto
 
   async function guardarSiCambio() {
     if (!studio?.id || ocupado) return;
-    // Los dos vacíos: vuelve el de Tentare (si había uno suyo).
+    // Los dos vacíos: vuelve el de Centra (si había uno suyo).
     if (!title.trim() && !body.trim()) { if (esPropio) await volverAlOriginal(); return; }
     if (efectivo.title === guardado.title.trim() && efectivo.body === guardado.body.trim()) return;
     const error = validarTexto(evento, efectivo);
@@ -302,7 +302,7 @@ function TextoEnLinea({ evento, textos, datos }: { evento: string; textos: Texto
     setBody('');
     setGuardado(fabrica);
     textos.setPropios(p => { const n = { ...(p ?? {}) }; delete n[evento]; return n; });
-    setEstado({ tipo: 'ok', texto: 'Vuelve el texto de Tentare' });
+    setEstado({ tipo: 'ok', texto: 'Vuelve el texto de Centra' });
   }
 
   // Como en Bonsai: la variable entra donde estaba el cursor y el foco vuelve
@@ -364,10 +364,10 @@ function TextoEnLinea({ evento, textos, datos }: { evento: string; textos: Texto
         <span>
           {estado
             ? <span role={estado.tipo === 'error' ? 'alert' : 'status'} className={estado.tipo === 'error' ? 'font-medium text-destructive' : 'font-medium text-success'}>{estado.texto}</span>
-            : enLista.yaNoSeUsa ? 'Tu texto guardado ya no vale: sale el de Tentare hasta que lo corrijas.' : esPropio ? 'Sale tu texto.' : 'Se enviará el mensaje de Tentare.'}
+            : enLista.yaNoSeUsa ? 'Tu texto guardado ya no vale: sale el de Centra hasta que lo corrijas.' : esPropio ? 'Sale tu texto.' : 'Se enviará el mensaje de Centra.'}
           {esPropio && !ocupado && (
             <button type="button" onClick={() => void volverAlOriginal()} className="ml-2 font-semibold underline-offset-2 hover:underline" style={{ color: 'var(--t-text-link)' }}>
-              Volver al de Tentare
+              Volver al de Centra
             </button>
           )}
         </span>
@@ -473,7 +473,7 @@ function Textos({ showToast, textos, sinRecordatorios = false }: { showToast: Mo
       <div>
         <h3 className="text-sm font-semibold">Lo que dicen los avisos</h3>
         <p className="text-xs text-muted-foreground mt-0.5">
-          El texto que ve cada cliente en su móvil y en los avisos de su app. Si no cambias nada, sale el de Tentare.
+          El texto que ve cada cliente en su móvil y en los avisos de su app. Si no cambias nada, sale el de Centra.
         </p>
       </div>
       {TIPOS_CON_TEXTO_EDITABLE.filter(g => !sinRecordatorios || !g.tipos.some(x => x.evento === EVENTOS.RECORDATORIO_24H || x.evento === EVENTOS.RECORDATORIO_1H)).map(grupo => (

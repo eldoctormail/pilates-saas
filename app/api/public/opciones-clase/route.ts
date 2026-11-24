@@ -23,7 +23,7 @@ import { errorInterno } from '@/lib/errores-servidor';
 //
 // Antes de enseñar «Pagar y reservar», la hoja de la app pregunta aquí:
 //   · si el estudio puede cobrar online (Stripe conectado, modo correcto,
-//     suscripción a Tentare al día);
+//     suscripción a Centra al día);
 //   · si le faltan las preguntas del estudio (se le abren antes de nada de pago);
 //   · si ya tiene un pago de esta clase en marcha (entonces no se le ofrece pagar:
 //     se confirma ese);

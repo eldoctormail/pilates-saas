@@ -110,7 +110,7 @@ const ESCENAS: Record<string, { descripcion: string; contenido: React.ReactNode 
           sizes="(max-width: 1000px) 92vw, 720px"
           width={1110}
           height={489}
-          alt="Listado de clientas del panel de Tentare con datos de muestra: filtros por estado y una fila por alumna con su plan, su saldo, su última clase y avisos"
+          alt="Listado de clientas del panel de Centra con datos de muestra: filtros por estado y una fila por alumna con su plan, su saldo, su última clase y avisos"
           // Sin `lazy`: va en una pestaña oculta (`hidden`) y el navegador no pide una
           // imagen perezosa que no se pinta, así que al abrir «Alumnas» salía en blanco
           // un instante (y e2e/landing-imagenes la daba por colgada). Pesa unos 10 KB.
@@ -155,11 +155,11 @@ export function PestanasProducto() {
       <div className="wh-contenedor">
         <div className="wh-cabecera lp-rv">
           <h2 id="wh-tabs-h" className="wh-h2">Así se ve tu estudio por dentro.</h2>
-          <p className="wh-lead">Elige un área y mira lo que Tentare hace en ella.</p>
+          <p className="wh-lead">Elige un área y mira lo que Centra hace en ella.</p>
         </div>
-        <PestanasCliente pestanas={pestanas} etiqueta="Áreas de Tentare" />
+        <PestanasCliente pestanas={pestanas} etiqueta="Áreas de Centra" />
         <div className="wh-video">
-          <p className="wh-video-titulo">¿Prefieres verlo en marcha? Tentare por dentro, en 78 segundos.</p>
+          <p className="wh-video-titulo">¿Prefieres verlo en marcha? Centra por dentro, en 78 segundos.</p>
           <VideoProducto />
         </div>
       </div>

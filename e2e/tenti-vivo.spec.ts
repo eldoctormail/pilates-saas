@@ -31,7 +31,7 @@ const BANDEJA_CON_MARCHA = {
 const iconos = (page: Page) => page.locator('[data-tenti-icono]');
 
 async function tresVivos(page: Page) {
-  await expect(page.getByText(/^Tentare ha encontrado/)).toBeVisible({ timeout: 60_000 });
+  await expect(page.getByText(/^Centra ha encontrado/)).toBeVisible({ timeout: 60_000 });
   await expect(iconos(page)).toHaveCount(3);
   await expect(page.locator('[data-tenti-icono] canvas[data-tenti]')).toHaveCount(3, { timeout: 30_000 });
 }
@@ -86,7 +86,7 @@ test('Resumen con esperaTuOk, trabajando y dormido: oscilan al entrar y, asentad
   const fotogramas = await contarFotogramas(page);
   const sonidos = await espiarSonidos(page);
   await montarHome(page, { estadoEstudio: BANDEJA_CON_TODO, calendarioVacio: true });
-  await expect(page.getByText(/Tentare sigue atento/)).toBeVisible({ timeout: 60_000 });
+  await expect(page.getByText(/Centra sigue atento/)).toBeVisible({ timeout: 60_000 });
   await expect(page.locator('[data-tenti-icono] canvas[data-tenti]')).toHaveCount(4, { timeout: 30_000 });
   for (const estado of ['esperaTuOk', 'trabajando', 'dormido']) {
     await expect(page.locator(`[data-tenti-icono][data-estado="${estado}"] canvas[data-tenti]`)).toHaveCount(1);
@@ -111,7 +111,7 @@ test('tocar a Tenti fuera de un botón lo aplasta, sin sonar; en un enlace, el c
   const sonidos = await espiarSonidos(page);
   await montarHome(page, { estadoEstudio: BANDEJA_CON_MARCHA });
   await tresVivos(page);
-  const tira = page.getByText(/^Tentare ha encontrado/).locator('xpath=..').locator('[data-tenti-icono] canvas[data-tenti]');
+  const tira = page.getByText(/^Centra ha encontrado/).locator('xpath=..').locator('[data-tenti-icono] canvas[data-tenti]');
   await expect(tira).toHaveCSS('cursor', 'pointer');
   // Tocarlo e insistir (se molesta y se marea): antes, cada toque sonaba.
   for (let i = 0; i < 5; i++) await tira.click();

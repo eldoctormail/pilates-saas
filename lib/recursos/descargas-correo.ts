@@ -39,13 +39,13 @@ export function correoDescarga(recurso: RecursoDescargable, enlaces: EnlacesCorr
     `<p>${esc(recurso.consejo)} El enlace funciona durante 30 días.</p>`,
     enlaces.novedades
       ? `<div style="background:#f1f2ea;border-radius:12px;padding:14px 16px;margin:20px 0">` +
-        `<p style="margin:0 0 10px">Nos pediste también recibir novedades y guías de Tentare por email. Para confirmarlo:</p>` +
+        `<p style="margin:0 0 10px">Nos pediste también recibir novedades y guías de Centra por email. Para confirmarlo:</p>` +
         `<p style="margin:0 0 10px">${boton(enlaces.novedades, 'Sí, quiero recibirlas')}</p>` +
         `<p style="margin:0;font-size:13px;color:#5a5a52">Si no fuiste tú o has cambiado de idea, no hagas nada: sin confirmarlo no te escribiremos.</p>` +
         `</div>`
       : '',
     `<p>En la guía tienes el resto, con lo que dice la ley: <a href="${esc(enlaces.guia)}" style="color:${OLIVA}">${esc(enlaces.guia.replace(/^https?:\/\//, ''))}</a></p>`,
-    `<p>Un saludo,<br>Marcos Roca<br>Fundador de Tentare</p>`,
+    `<p>Un saludo,<br>Marcos Roca<br>Fundador de Centra</p>`,
     `<p style="font-size:12px;color:#5a5a52;border-top:1px solid #e1e1d9;padding-top:12px;margin-top:24px">` +
       `Recibes este correo porque pediste ${esc(recurso.titulo)} en tentare.app.` +
       (enlaces.baja ? ` ¿No quieres recibir novedades? <a href="${esc(enlaces.baja)}" style="color:#5a5a52">Darme de baja</a>.` : '') +
@@ -61,7 +61,7 @@ export function correoDescarga(recurso: RecursoDescargable, enlaces: EnlacesCorr
     '',
     `${recurso.consejo} El enlace funciona durante 30 días.`,
     ...(enlaces.novedades
-      ? ['', 'Nos pediste también recibir novedades y guías de Tentare por email. Para confirmarlo, abre este enlace:', enlaces.novedades,
+      ? ['', 'Nos pediste también recibir novedades y guías de Centra por email. Para confirmarlo, abre este enlace:', enlaces.novedades,
         'Si no fuiste tú o has cambiado de idea, no hagas nada: sin confirmarlo no te escribiremos.']
       : []),
     '',
@@ -69,7 +69,7 @@ export function correoDescarga(recurso: RecursoDescargable, enlaces: EnlacesCorr
     '',
     'Un saludo,',
     'Marcos Roca',
-    'Fundador de Tentare',
+    'Fundador de Centra',
     '',
     `Recibes este correo porque pediste ${recurso.titulo} en tentare.app.`,
     ...(enlaces.baja ? [`¿No quieres recibir novedades? Date de baja aquí: ${enlaces.baja}`] : []),
@@ -95,11 +95,11 @@ export function paginaDescargas(p: {
 }): string {
   return `<!doctype html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex,nofollow"><title>${esc(p.titulo)} · Tentare</title></head>
+<meta name="robots" content="noindex,nofollow"><title>${esc(p.titulo)} · Centra</title></head>
 <body style="margin:0;background:#eeeee8;font-family:Arial,Helvetica,sans-serif;color:#1b1c17">
 <main style="max-width:520px;margin:12vh auto 0;padding:0 20px">
 <div style="background:#ffffff;border:1px solid #e1e1d9;border-radius:18px;padding:28px 26px">
-<p style="margin:0 0 6px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#5a5a52">Tentare</p>
+<p style="margin:0 0 6px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#5a5a52">Centra</p>
 <h1 style="margin:0 0 12px;font-size:24px;line-height:1.2">${esc(p.titulo)}</h1>
 <p style="margin:0 0 20px;font-size:15px;line-height:1.6">${esc(p.texto)}</p>
 ${p.accion ? `<form method="post" action="${esc(p.accion.url)}" style="margin:0 0 16px"><button type="submit" style="background:${OLIVA};color:#fff;border:0;border-radius:999px;padding:12px 22px;font-size:15px;font-weight:700;cursor:pointer">${esc(p.accion.etiqueta)}</button></form>` : ''}

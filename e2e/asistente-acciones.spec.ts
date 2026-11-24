@@ -5,7 +5,7 @@ import { enOscuro } from './panel-sembrado';
 import { ACCION_ID, PROPUESTAS, conAcciones, conAsistente, respuestaPropuesta, chat, ndjson, json, pedirAlAsistente, type TipoPropuesta } from './asistente-andamiaje';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// «Pregúntale a Tentare», Fase 2: crear clases, salas, eventos y citas CON
+// «Pregúntale a Centra», Fase 2: crear clases, salas, eventos y citas CON
 // confirmación. El modelo propone (tarjeta) y solo «Confirmar» crea.
 //
 // Nunca se llama a Anthropic ni al servidor real: el chat y los endpoints de
@@ -104,7 +104,7 @@ test('403 (sin permiso): lo dice y no crea; 410 (caducada) cierra la tarjeta', a
 });
 
 test('la propuesta caducó en el servidor: la tarjeta lo dice y no queda Confirmar', async ({ page }) => {
-  const n = await conAcciones(page, { confirmar: (r) => json(r, { error: 'La propuesta caducó: pídeselo de nuevo a Tentare.', codigo: 'CADUCADA' }, 410) });
+  const n = await conAcciones(page, { confirmar: (r) => json(r, { error: 'La propuesta caducó: pídeselo de nuevo a Centra.', codigo: 'CADUCADA' }, 410) });
   const tarjeta = await pedirAlAsistente(page);
   await tarjeta.getByRole('button', { name: 'Confirmar' }).click();
   await expect(tarjeta).toContainText('ha caducado y no se ha creado nada');

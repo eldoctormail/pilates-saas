@@ -1,11 +1,11 @@
-// Qué hay que decirle a Wellhub para que su app enseñe el horario de Tentare.
-// Función pura: entra lo que hay en Tentare y lo que ya se envió, sale la lista
+// Qué hay que decirle a Wellhub para que su app enseñe el horario de Centra.
+// Función pura: entra lo que hay en Centra y lo que ya se envió, sale la lista
 // de llamadas. Quien llama (lib/plataformas/wellhub/horario-servidor.ts) solo
 // las ejecuta y guarda el resultado. Mismo planteamiento que USC
 // (lib/plataformas/usc/horario.ts); lo que cambia es su API:
 //
 //  · Dos niveles: una «clase» de Wellhub es un tipo de actividad (aquí, un tipo
-//    de clase de Tentare, `reference` = su id) y un «slot» es una clase en un
+//    de clase de Centra, `reference` = su id) y un «slot» es una clase en un
 //    día y hora (aquí, una sesión). El slot cuelga de su clase.
 //  · Un slot se puede editar entero (PUT), hora incluida: no hace falta cancelar
 //    y recrear como en USC. Borrarlo cancela allí sus reservas (nos llegan por
@@ -82,7 +82,7 @@ export interface SesionParaWellhub {
 }
 
 export interface ClaseWellhubGuardada {
-  /** null = el tipo de clase se borró en Tentare. */
+  /** null = el tipo de clase se borró en Centra. */
   tipoClaseId: string | null;
   /** El gym en el que se publicó (puede no ser el de la conexión de hoy). */
   gymId: string;
@@ -92,7 +92,7 @@ export interface ClaseWellhubGuardada {
 }
 
 export interface SlotWellhubGuardado {
-  /** null = la sesión se borró en Tentare: el slot sigue vivo allí. */
+  /** null = la sesión se borró en Centra: el slot sigue vivo allí. */
   sesionId: string | null;
   slotId: string;
   claseId: string;
@@ -321,7 +321,7 @@ export function planificarHorarioWellhub(p: {
     }
   }
 
-  // Slots vivos cuya sesión ya no existe (borrada en Tentare): se borran allí.
+  // Slots vivos cuya sesión ya no existe (borrada en Centra): se borran allí.
   // Quien llama tiene que pasar en `sesiones` TODAS las sesiones de los slots
   // vivos, también las que ya empezaron o se movieron lejos — si no, esto
   // borraría en Wellhub una clase que sigue existiendo.
@@ -351,7 +351,7 @@ export function planificarHorarioWellhub(p: {
   // Primero lo que quita plazas (borrar), luego clases (los slots nuevos las
   // necesitan), luego cambios de slots, y lo último lo que solo crea: si la
   // pasada se corta por tope de llamadas, que no quede abierto en Wellhub algo
-  // que en Tentare ya no existe.
+  // que en Centra ya no existe.
   const orden: Record<OperacionWellhub['tipo'], number> = {
     'borrar-slot': 0, 'ocultar-clase': 1, 'crear-clase': 2, 'editar-clase': 3,
     'editar-slot': 4, 'aforo-slot': 5, 'crear-slot': 6,

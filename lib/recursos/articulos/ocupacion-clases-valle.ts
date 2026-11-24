@@ -201,11 +201,11 @@ const articulo: Articulo = {
     },
     {
       id: 'con-tentare',
-      titulo: 'Cómo verlo en Tentare',
+      titulo: 'Cómo verlo en Centra',
       bloques: [
         {
           t: 'p',
-          texto: 'En los informes de Tentare tienes la ocupación por tipo de clase, que es donde se ven las franjas que salen medio vacías todas las semanas, y el margen de cada clase sobre lo que cobra la instructora, por tipo de clase y por franja: es la primera línea de la tabla de arriba, calculada con lo que paga de verdad cada alumna según su cuota o su bono. Lo explica [informes y rentabilidad](/funcionalidades/informes-y-rentabilidad).',
+          texto: 'En los informes de Centra tienes la ocupación por tipo de clase, que es donde se ven las franjas que salen medio vacías todas las semanas, y el margen de cada clase sobre lo que cobra la instructora, por tipo de clase y por franja: es la primera línea de la tabla de arriba, calculada con lo que paga de verdad cada alumna según su cuota o su bono. Lo explica [informes y rentabilidad](/funcionalidades/informes-y-rentabilidad).',
         },
         {
           t: 'p',
@@ -257,7 +257,7 @@ const articulo: Articulo = {
   ],
   cta: {
     titulo: 'Mira el margen de cada clase antes de cambiar el horario',
-    texto: 'Empieza gratis con Tentare, sin tarjeta: pon las tarifas de tu equipo, mira la ocupación por tipo de clase y el margen de cada clase, y avisa solo a quien puede venir.',
+    texto: 'Empieza gratis con Centra, sin tarjeta: pon las tarifas de tu equipo, mira la ocupación por tipo de clase y el margen de cada clase, y avisa solo a quien puede venir.',
   },
   revision: [
     'Costes y precios: escenario A de rentabilidad-estudio-de-pilates y mediana de cuotas de precio-clase-de-pilates (25-sep-2026); si cambian, rehacer la tabla de las dos líneas.',

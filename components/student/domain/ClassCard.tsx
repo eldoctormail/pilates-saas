@@ -11,7 +11,7 @@ import { EstadoDeClase } from '@/components/student/domain/EstadoDeClase';
 // ⚠️ Los enlaces del paquete son absolutos ('/reservar/…') porque allí la app
 // es la única del proyecto. Aquí cuelgan del slug del estudio, así que pasan
 // por `usePortalHref()`: dejarlos absolutos mandaría a la alumna a la landing
-// de Tentare o al panel.
+// de Centra o al panel.
 /** Fila de clase del horario (kit): hora mono | divisor | logo | nombre + avatar instructora | badge + precio. */
 export function ClassCard({ clase, instructora, estado, bono, delay = 0 }: {
   clase: Clase; instructora?: Instructora; estado: Disponibilidad;

@@ -12,7 +12,7 @@ import { supabase } from '@/lib/db/supabase';
 // referencia ese path (POST /api/network/perfil/verificacion-identidad o
 // /api/network/certificaciones) y, más adelante, LEER el documento — el
 // bucket no tiene ninguna policy de SELECT para authenticated/anon, solo
-// service_role puede generar una URL firmada (Fase 3, Tentare Interno).
+// service_role puede generar una URL firmada (Fase 3, Centra Interno).
 const BUCKET = 'red-documentos-identidad';
 const TIPOS_ACEPTADOS = ['image/png', 'image/jpeg', 'image/webp', 'application/pdf'];
 const TAMANO_MAXIMO = 10 * 1024 * 1024;

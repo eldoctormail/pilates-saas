@@ -7,7 +7,7 @@ import {
 } from './borrar-cuenta.ts';
 import { borrarMiCuenta } from './borrar-cuenta-servidor.ts';
 
-// «Borrar mi cuenta de Tentare» (App Store 5.1.1(v)): quién puede borrarse desde
+// «Borrar mi cuenta de Centra» (App Store 5.1.1(v)): quién puede borrarse desde
 // la app de la alumna, y que el servidor no da nada por borrado sin confirmarlo.
 
 const ceros = (): RecuentoVinculos => Object.fromEntries(VINCULOS_CUENTA.map((v) => [v.clave, 0]));

@@ -463,7 +463,7 @@ export function useAccionesRecibo(avisos: AvisosCobros): AccionesRecibo {
             <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">
               Para cobrarle sin que esté delante hace falta que ella autorice una tarjeta una vez.
               Genera el enlace y mándaselo por donde habléis normalmente: lo rellena en Stripe,
-              no aquí, y su tarjeta no pasa en ningún momento por Tentare.
+              no aquí, y su tarjeta no pasa en ningún momento por Centra.
             </p>
             {enlaceTarjeta && (
               <div className="mt-4 space-y-2">

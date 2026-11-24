@@ -164,7 +164,7 @@ test('v2: "Automatizaciones" refleja las automatizaciones realmente activas por 
   assert.equal(automatizaciones.pasos.find(p => p.id === 'nuevas')!.done, false);
 });
 
-test('el checklist no pide activar el recordatorio de clase: ya lo manda Tentare de serie', () => {
+test('el checklist no pide activar el recordatorio de clase: ya lo manda Centra de serie', () => {
   // Activar CLASE_MANANA duplicaba el recordatorio nativo (barrido de pg_cron `notif-recordatorios`).
   const r = calcularOnboarding(VACIO_V2);
   const pasos = r.categorias.flatMap(c => c.pasos);

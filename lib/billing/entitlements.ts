@@ -33,7 +33,7 @@ export interface Entitlements {
                            // el plan de entrada pasó a llamarse Founding Studio y la incluye.
     sustitucionesAutonomas: boolean; // modos autónomo/vacaciones del motor de
                                      // sustituciones (Base se queda en manual/asistido)
-    asistente: boolean;    // «Pregúntale a Tentare»: preguntas sobre el estudio con sus
+    asistente: boolean;    // «Pregúntale a Centra»: preguntas sobre el estudio con sus
                            // datos. En TODOS los planes (fundador, 5-oct-2026); lo que
                            // cambia es cuántas al mes (`consultasAsistenteMes`). Es una
                            // feature aparte de `ia` a propósito: Founding Studio lo tiene
@@ -214,7 +214,7 @@ export function addonsDe(studio: EstudioConPlan): Addon[] {
 /**
  * Founding Studio GRATIS (decisión del fundador, 15-oct-2026; reglas en
  * plan-gratis.ts): un estudio con `subscription_status = 'gratis'` usa TODO
- * Tentare salvo varias sedes y la app propia, hasta 150 reservas al mes
+ * Centra salvo varias sedes y la app propia, hasta 150 reservas al mes
  * (sin tope de alumnas, decisión del fundador del 13-nov-2026).
  * Lo que cuesta dinero por uso va con tope: el asistente, 50 consultas al mes
  * (el `plan` de la fila es 'BASE', así que `ia_cuota_mensual()` en SQL da el

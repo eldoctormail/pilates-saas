@@ -10,9 +10,9 @@ export const runtime = 'nodejs';
 
 const ACCIONES: AccionDenuncia[] = ['MANTENER', 'OCULTAR', 'CERRAR_CONVERSACION'];
 
-// Tentare decide una denuncia: mantener, retirar el contenido o cerrar la
+// Centra decide una denuncia: mantener, retirar el contenido o cerrar la
 // conversación. El estudio sale de la propia denuncia, nunca del navegador; la
-// RPC vuelve a comprobar que le toca a Tentare (contra el estudio, o 24 h sin
+// RPC vuelve a comprobar que le toca a Centra (contra el estudio, o 24 h sin
 // revisar) y se avisa a cada parte igual que cuando decide el estudio.
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const g = await exigirPermiso(req, 'app.moderate');

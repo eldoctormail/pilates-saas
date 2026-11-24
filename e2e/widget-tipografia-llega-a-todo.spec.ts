@@ -14,7 +14,7 @@ import { contarGoogleFonts, letraDeLaApp } from './letras-sin-google';
 //
 // Por eso aquí NO se mide la raíz: se mide el sitio donde el estudio lo nota.
 //
-// ⚠️ Y en ninguno se le pide nada a Google: las que sirve Tentare salen de la
+// ⚠️ Y en ninguno se le pide nada a Google: las que sirve Centra salen de la
 // app (`next/font`) y las demás se nombran sin pedirse
 // (lib/reservar/apariencia-widget.ts). Cada test lleva su contador.
 // ─────────────────────────────────────────────────────────────────────────────
@@ -68,7 +68,7 @@ test('la fuente elegida llega al calendario, no solo al div de fuera', async ({ 
   });
   // (Computada, la variable ya viene con el `var()` resuelto.)
   expect(varUi).toContain('Cormorant');
-  // Servida por Tentare: se descarga de verdad, y no de Google.
+  // Servida por Centra: se descarga de verdad, y no de Google.
   await expect.poll(async () => (await letraDeLaApp(page, '--font-cormorant')).cargada).toBe(true);
   expect(google).toEqual([]);
 });
@@ -77,7 +77,7 @@ test('la fuente de titulares llega por --font-display, no solo por --portal-head
   await page.setViewportSize({ width: 1100, height: 760 });
   await mocks(page);
   const google = await contarGoogleFonts(page);
-  // Inter y Fraunces no las sirve Tentare (un código de antes): se nombran y
+  // Inter y Fraunces no las sirve Centra (un código de antes): se nombran y
   // llegan igual a las variables, pero no se piden a nadie.
   await abrir(page, '&fuente=Inter&fuente-display=Fraunces');
 

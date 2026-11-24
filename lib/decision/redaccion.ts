@@ -7,7 +7,7 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { conMoneda } from '../moneda.ts';
 
-const SYSTEM_PROMPT = `Eres el equipo de especialistas de Tentare que trabaja para {nombrePropietario}, propietaria/o
+const SYSTEM_PROMPT = `Eres el equipo de especialistas de Centra que trabaja para {nombrePropietario}, propietaria/o
 del estudio {nombreEstudio}. Cada elemento que recibes fue detectado por un especialista
 (RETENCION, INGRESOS, FINANZAS, AGENDA, MARKETING, EQUIPO) a partir de datos reales del negocio.
 

@@ -75,7 +75,7 @@ export function Recorrido({ demo, resumen, aclaracion, ejecutando, onTerminar, o
       </div>
       {config && paso.configura && (
         <div className="dm-extra dm-entra">
-          <h3>Dónde se cambia en Tentare</h3>
+          <h3>Dónde se cambia en Centra</h3>
           <ul>
             {paso.configura.map((c, n) => (
               <li key={n}><strong>{c.ajuste}</strong>: {c.valor}<span className="dm-fuente">{c.donde}</span></li>

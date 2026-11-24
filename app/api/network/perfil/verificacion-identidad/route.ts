@@ -12,7 +12,7 @@ import { limpiarHuerfanosTrasRegistrar } from '@/lib/network/documentos-servidor
 // documentos-identidad.ts, subida directa del cliente vía RLS de
 // storage.objects); este endpoint solo registra la fila que referencia esa
 // ruta y la deja 'pendiente'. Revisar/aprobar/rechazar es Fase 3
-// (Tentare Interno), no aquí — este endpoint nunca escribe `estado` a otra
+// (Centra Interno), no aquí — este endpoint nunca escribe `estado` a otra
 // cosa que 'pendiente'.
 
 const SELECT_COLUMNAS = 'id, perfil_id, estado, motivo_rechazo, documento_path, documento_path_reverso, creado_en, resuelto_en';

@@ -6,7 +6,7 @@ import {
 } from './plazas-vacias.ts';
 
 let n = 0;
-/** Una reserva de Tentare, rastreada y con su cobro decidido (llegó a tener plaza). */
+/** Una reserva de Centra, rastreada y con su cobro decidido (llegó a tener plaza). */
 const r = (o: Partial<ReservaPlazasVacias> & { socio_id: string; sesion_id: string; estado: string }): ReservaPlazasVacias => ({
   id: `res-${++n}`, creado_en: `2026-10-0${(n % 9) + 1}T10:00:00Z`, origen: 'TENTARE',
   bono_consumo_rastreado: true, bono_decidido_en: '2026-10-01T10:00:00Z', cancelada_tardia: false, cancelada_motivo: null,

@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
   //
   // Va ANTES del corte por plan vacío a propósito: si solo sube el logo y se
   // salta todas las preguntas, el plan es «nada que crear» y aun así queremos
-  // que su pestaña deje de ser la de Tentare.
+  // que su pestaña deje de ser la de Centra.
   //
   // El favicon vive en el TEMA, no en `studios` (a diferencia del logo), y
   // apunta a la MISMA URL que el logo en vez de copiar el fichero: es la

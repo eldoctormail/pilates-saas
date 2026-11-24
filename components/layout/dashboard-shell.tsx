@@ -165,15 +165,15 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
   //
   // Mientras el rol no está resuelto, `useRol()` cae al mínimo (INSTRUCTOR,
   // fail-closed de A-2) — con el rebranding por rol eso se veía como un
-  // parpadeo real (la marca de la instructora un instante, luego "Tentare
-  // Manager" al cargar el estudio de una propietaria). Con "Tentare" a secas
+  // parpadeo real (la marca de la instructora un instante, luego "Centra
+  // Manager" al cargar el estudio de una propietaria). Con "Centra" a secas
   // mientras carga no se afirma un rol que aún no se conoce.
   useEffect(() => {
     const item = seccionesDelMenu(panelNuevo)
       .flatMap(s => s.items)
       .filter(i => pathname === i.href || pathname.startsWith(i.href + '/'))
       .sort((a, b) => b.href.length - a.href.length)[0];
-    const marca = rolResuelto ? nombreAppPorRol(rol) : 'Tentare';
+    const marca = rolResuelto ? nombreAppPorRol(rol) : 'Centra';
     document.title = item ? `${marca} · ${item.label}` : marca;
   }, [pathname, rol, rolResuelto, panelNuevo]);
 
@@ -236,7 +236,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
   // con el fetch temprano de sesión sin resolver, como explica el bloque de rol).
   // I3 (desactualizado, ver docs/NETWORK-AUDIT-2.md §2): se asumía que
   // `/login` solo dejaba llegar aquí a cuentas con estudio — falso para una
-  // cuenta de Tentare Network sin studio_id, que se quedaba en un skeleton
+  // cuenta de Centra Network sin studio_id, que se quedaba en un skeleton
   // perpetuo (`studio` nunca deja de ser `null`). El origen ya se corrigió
   // (`/api/auth/destino-post-login`), pero esta pantalla necesita su PROPIA
   // red de seguridad: un enlace viejo, un bookmark o un `?destino=`
@@ -387,7 +387,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
     );
   }
 
-  // Cuenta que no pertenece a este panel (p. ej. una de Tentare Network sin
+  // Cuenta que no pertenece a este panel (p. ej. una de Centra Network sin
   // studio_id): salida explícita, no un callejón sin salida.
   if (cuentaSinEstudio) {
     return (
@@ -395,7 +395,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
         <PanelThemeProvider className="panel-app min-h-dvh bg-background">
           <main className="min-h-dvh flex items-center justify-center px-4">
             <div className="max-w-sm text-center space-y-3">
-              <p className="text-[14px] text-foreground font-medium">Esta cuenta no tiene ningún estudio de Tentare todavía.</p>
+              <p className="text-[14px] text-foreground font-medium">Esta cuenta no tiene ningún estudio de Centra todavía.</p>
               <p className="text-[13px] text-muted-foreground">
                 Si vienes a montar el tuyo, lo creas en un minuto y con tu cuenta actual.
               </p>
@@ -403,7 +403,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
                 Crear mi estudio
               </Link>
               <p className="text-[12px] text-muted-foreground">
-                ¿Te has registrado para Tentare Network?{' '}
+                ¿Te has registrado para Centra Network?{' '}
                 <Link href="/network/mi-perfil" className="font-semibold text-foreground underline-offset-2 hover:underline">
                   Ir a mi perfil
                 </Link>
@@ -415,7 +415,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
     );
   }
 
-  // Tentare Core retirado (paso 2, 14-sep-2026): quien tiene rol INSTRUCTOR en
+  // Centra Core retirado (paso 2, 14-sep-2026): quien tiene rol INSTRUCTOR en
   // la sede activa no ve el panel, va a la app de su estudio. Solo con el rol
   // RESUELTO: mientras carga, el rol mínimo también es INSTRUCTOR y mandaría a
   // la app a la propietaria, la gerencia o recepción.
@@ -518,7 +518,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
         <TourProvider>
           {/* El tutorial de cada pantalla (P1.1): dentro de la visita, que manda sobre él. */}
           <TutorialProvider>
-          {/* «Pregúntale a Tentare»: el panel llega aparte, al abrirlo por primera vez. */}
+          {/* «Pregúntale a Centra»: el panel llega aparte, al abrirlo por primera vez. */}
           <AsistenteProvider>
           <ColumnaAsistenteProvider>
           <Sidebar />
@@ -564,8 +564,8 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
             </div>
             </LienzoDelPanel>
           </main>
-          {/* La esquina: el WhatsApp de soporte y el chat de Tentare encima. En el
-              chat de Tentare el botón flotante tapaba el de enviar: ahí el soporte
+          {/* La esquina: el WhatsApp de soporte y el chat de Centra encima. En el
+              chat de Centra el botón flotante tapaba el de enviar: ahí el soporte
               sigue en el menú de ayuda. Con el panel nuevo, el soporte va en el
               menú de ayuda y no flota (se amontonaban WhatsApp, el asistente y la
               visita)… salvo con el alta nueva mientras «Pon en marcha tu estudio»

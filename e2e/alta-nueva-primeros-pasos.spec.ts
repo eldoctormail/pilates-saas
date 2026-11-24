@@ -80,7 +80,7 @@ test.describe('«Pon en marcha tu estudio» del alta nueva', () => {
     // La de siempre no sale: una sola guía.
     await expect(page.getByText('Pon en marcha tu estudio, te enseñamos cómo')).toHaveCount(0);
     // Una persona, no un robot.
-    await expect(tarjeta(page).getByTestId('ayuda-persona')).toContainText('Te responde una persona del equipo de Tentare, no un robot.');
+    await expect(tarjeta(page).getByTestId('ayuda-persona')).toContainText('Te responde una persona del equipo de Centra, no un robot.');
     await expect(tarjeta(page).getByRole('link', { name: /Escríbenos por WhatsApp/ })).toHaveAttribute('href', /^https:\/\/wa\.me\//);
     expect(red.estado).toBeGreaterThan(0);
   });

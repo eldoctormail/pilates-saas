@@ -8,7 +8,7 @@ import { enforceRateLimit } from '@/lib/rate-limit';
 import { ROLES_QUE_RESUELVEN_VERIFICACION, motivoVerificadorNoPermitido } from '@/lib/network/verificacion-experiencia';
 
 // Solicitar verificación de una experiencia — docs/NETWORK-IMPLEMENTATION-PLAN.md
-// §4. Enlaza la experiencia a un estudio Tentare REAL (studio_id, hasta ahora
+// §4. Enlaza la experiencia a un estudio Centra REAL (studio_id, hasta ahora
 // null — ver app/api/network/experiencia/route.ts) y crea la solicitud.
 //
 // Se puede volver a pedir tras un rechazo: la RLS/índice único de

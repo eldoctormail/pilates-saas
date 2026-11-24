@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   alternates: alternatesBlog(RUTA_BLOG),
   robots: hayArticulos ? undefined : { index: false, follow: true },
   openGraph: {
-    siteName: 'Tentare',
+    siteName: 'Centra',
     type: 'website',
     locale: 'es_ES',
     title: pagina.titulo,
@@ -47,10 +47,10 @@ export default function BlogPage() {
           <Migas migas={[{ nombre: 'Blog' }]} />
           <div className="bl-cab-rejilla">
             <div>
-              <p className="bl-kicker">Fundador de Tentare</p>
+              <p className="bl-kicker">Fundador de Centra</p>
               <h1 className="bl-h1">Blog de {AUTOR_BLOG.nombre}</h1>
               <p className="bl-dek">
-                El blog del fundador de Tentare. Emprendimiento, tecnología, startups y cómo se construye un software para estudios de Pilates y yoga desde Barcelona.
+                El blog del fundador de Centra. Emprendimiento, tecnología, startups y cómo se construye un software para estudios de Pilates y yoga desde Barcelona.
               </p>
               <ul className="bl-datos">
                 <li><Link href={RUTA_AUTOR}>Sobre el autor</Link></li>
@@ -111,7 +111,7 @@ export default function BlogPage() {
         </section>
 
         <footer className="bl-pie">
-          <span>Escrito por <Link href={RUTA_AUTOR}>{AUTOR_BLOG.nombre}</Link>, fundador de <Link href="/">Tentare</Link>.</span>
+          <span>Escrito por <Link href={RUTA_AUTOR}>{AUTOR_BLOG.nombre}</Link>, fundador de <Link href="/">Centra</Link>.</span>
           <span><a href={`${RUTA_BLOG}/feed.xml`}>Suscribirse por RSS</a></span>
         </footer>
       </main>

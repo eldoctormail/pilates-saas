@@ -93,8 +93,8 @@ export function textoFalloConexionSumup(codigo: string | null): string {
 }
 
 /**
- * Los permisos que Tentare pide a la cuenta de SumUp del estudio. Tienen que estar
- * también marcados en la app OAuth de Tentare en SumUp (Ajustes → Para
+ * Los permisos que Centra pide a la cuenta de SumUp del estudio. Tienen que estar
+ * también marcados en la app OAuth de Centra en SumUp (Ajustes → Para
  * desarrolladores → Aplicaciones de OAuth2 → Acceso a datos):
  *  · `payments`: cobrar y devolver. Restringido: SumUp lo aprueba a mano.
  *  · `readers.read` / `readers.write`: ver el Solo y emparejarlo. Sin ellos no hay
@@ -427,7 +427,7 @@ export function clienteSumup(o: { token: string; fetch?: FetchSumup; base?: stri
 
     /**
      * Los cobros hechos (SUCCESSFUL, de tipo pago) desde `desde`, los más nuevos
-     * primero. Incluye los que la dueña cobre desde la app de SumUp sin Tentare.
+     * primero. Incluye los que la dueña cobre desde la app de SumUp sin Centra.
      */
     async historial(merchantCode: string, p: { desde: Date; limite?: number }): Promise<MovimientoSumup[]> {
       const q = new URLSearchParams({ oldest_time: p.desde.toISOString(), order: 'descending', limit: String(p.limite ?? 100) });

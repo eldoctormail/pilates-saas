@@ -1,5 +1,5 @@
 // Lenguaje visual de la página pública `/reservar/[slug]` — rediseño completo
-// (2026-08-26, diseño del fundador "Tentare Portal Reservas" en Claude
+// (2026-08-26, diseño del fundador "Centra Portal Reservas" en Claude
 // Design): Plus Jakarta Sans + IBM Plex Mono, tarjetas sobre hueso cálido,
 // radios/sombras suaves. Sustituye al lenguaje anterior ("Instrument Serif +
 // Instrument Sans", pixel-exacto a un diseño previo) como aspecto POR DEFECTO

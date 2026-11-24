@@ -124,7 +124,7 @@ test('⚠️ sin destello: el HTML del SERVIDOR ya trae el estilo de su web (col
   // Y el documento del iframe, con el fondo de su estilo (no el de `:root`).
   expect(incrustada.html).toContain('html,body{background:#F4EEE5 !important;}');
 
-  // La página suelta del MISMO estudio es de Tentare: el estilo de su web no le llega.
+  // La página suelta del MISMO estudio es de Centra: el estilo de su web no le llega.
   const suelta = await estilosDelServidor(page, '/reservar/tentare-web-arena?tab=clases');
   expect(suelta.estilos.filter(s => /#F4EEE5|--font-libre-caslon/i.test(s))).toEqual([]);
   expect(suelta.html).not.toContain('html,body{background:');

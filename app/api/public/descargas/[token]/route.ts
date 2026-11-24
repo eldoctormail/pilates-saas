@@ -27,7 +27,7 @@ import { paginaDescargas } from '@/lib/recursos/descargas-correo';
 
 type Contexto = { params: Promise<{ token: string }> };
 
-const VOLVER = { url: `${LEGAL.url}/recursos`, texto: 'Ir a las guías de Tentare' };
+const VOLVER = { url: `${LEGAL.url}/recursos`, texto: 'Ir a las guías de Centra' };
 
 const resumenError = (e: unknown) =>
   e && typeof e === 'object'
@@ -109,14 +109,14 @@ export async function GET(req: NextRequest, ctx: Contexto) {
   if (datos.alcance === 'novedades') {
     return html(200, paginaDescargas({
       titulo: 'Confirma que quieres recibir novedades',
-      texto: 'Te escribiremos con novedades y guías de Tentare para llevar tu estudio. Podrás darte de baja en cualquier momento.',
+      texto: 'Te escribiremos con novedades y guías de Centra para llevar tu estudio. Podrás darte de baja en cualquier momento.',
       accion: { ...accion, etiqueta: 'Sí, quiero recibirlas' },
       volver: VOLVER,
     }));
   }
   return html(200, paginaDescargas({
     titulo: '¿Te damos de baja?',
-    texto: 'Dejarás de recibir novedades y guías de Tentare por email.',
+    texto: 'Dejarás de recibir novedades y guías de Centra por email.',
     accion: { ...accion, etiqueta: 'Sí, darme de baja' },
     volver: VOLVER,
   }));
@@ -174,7 +174,7 @@ export async function POST(req: NextRequest, ctx: Contexto) {
     if (!filas?.length) return NO_ESTA();
     return html(200, paginaDescargas({
       titulo: 'Listo, te escribiremos',
-      texto: 'Recibirás novedades y guías de Tentare para llevar tu estudio. Si cambias de idea, puedes darte de baja en cualquier momento.',
+      texto: 'Recibirás novedades y guías de Centra para llevar tu estudio. Si cambias de idea, puedes darte de baja en cualquier momento.',
       volver: VOLVER,
     }));
   }
@@ -202,7 +202,7 @@ export async function POST(req: NextRequest, ctx: Contexto) {
   if (!filas?.length) return NO_ESTA();
   return html(200, paginaDescargas({
     titulo: 'Te hemos dado de baja',
-    texto: 'No te enviaremos más novedades de Tentare.',
+    texto: 'No te enviaremos más novedades de Centra.',
     volver: VOLVER,
   }));
 }

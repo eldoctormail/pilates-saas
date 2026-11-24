@@ -30,7 +30,7 @@ const json = (r: Route, b: unknown, s = 200) =>
 
 const rec = (o: Record<string, unknown> & { id: string; titulo: string }) => ({
   studioId: STUDIO_ID, decisionSessionId: 'ds-1', algorithmVersion: 'v1', dedupeKey: `k:${o.id}`,
-  especialista: 'AGENDA', tipo: 'FUSIONAR_SESIONES', motivo: 'Lo que ha visto Tentare.',
+  especialista: 'AGENDA', tipo: 'FUSIONAR_SESIONES', motivo: 'Lo que ha visto Centra.',
   datosUsados: {}, riesgo: 'OPORTUNIDAD', impacto: null,
   confianza: { nivel: 'ALTA', evidencia: ['Una evidencia'], autonomiaMaxima: 0 },
   score: 80, prioridad: 'ALTA', nivelAutonomia: 0,
@@ -129,7 +129,7 @@ test('un día de SILENCIO con una acción del piloto que no salió lo dice apart
 
   const v = veredictoDe(page, 'Hoy no te interrumpo con nada.');
   await expect(v).toBeVisible({ timeout: 30_000 });
-  await expect(v).toContainText('Tentare ha resuelto 2 acciones por su cuenta. 1 no salió: lo ves en Actividad.');
+  await expect(v).toContainText('Centra ha resuelto 2 acciones por su cuenta. 1 no salió: lo ves en Actividad.');
   await expect(page.locator('body')).not.toContainText(PROHIBIDAS);
 });
 

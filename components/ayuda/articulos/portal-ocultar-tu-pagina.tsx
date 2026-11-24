@@ -40,7 +40,7 @@ export default function Contenido() {
           Los <Link href="/ayuda/widget/que-es-el-widget" style={enlace}>widgets de tu web</Link> enseñan el aviso,
           también el calendario incrustado.
         </li>
-        <li>Si sales en Tentare Network, sigues apareciendo, pero tu enlace lleva al aviso.</li>
+        <li>Si sales en Centra Network, sigues apareciendo, pero tu enlace lleva al aviso.</li>
         <li>Le pedimos a Google que no la enseñe.</li>
       </ul>
       <p>
@@ -68,7 +68,7 @@ export default function Contenido() {
         </li>
         <li>
           <strong>Desde el calendario incrustado en tu web no se reserva ni con la clave.</strong> Ahí el navegador no
-          puede llevar el pase. Para entrar con clave hay que abrir tu página de reservas de Tentare.
+          puede llevar el pase. Para entrar con clave hay que abrir tu página de reservas de Centra.
         </li>
       </ul>
       <p>El pase dura 30 días; pasados, vuelve a pedirla.</p>

@@ -21,11 +21,11 @@ export default function Contenido() {
         El logo y el color están en Configuración &gt; Marca: el logo lo subes en «Logo y favicon», que se guarda al
         elegir el archivo, y el color lo pruebas en «El color de tu marca» antes de pulsar «Guardar».
         Los dos los ven tus clientes en tu página de reservas y en su app — es lo
-        primero que distingue tu estudio del de cualquier otra propietaria de Tentare.
+        primero que distingue tu estudio del de cualquier otra propietaria de Centra.
       </p>
 
       <AyudaResultado>
-        Ninguno de estos datos es obligatorio para empezar a usar Tentare — puedes completarlos poco a poco. Lo
+        Ninguno de estos datos es obligatorio para empezar a usar Centra — puedes completarlos poco a poco. Lo
         único que conviene tener listo antes de tu primer cobro es el NIF y la dirección fiscal. Sigue con{' '}
         <Link href="/ayuda/empezar/primera-semana-de-clases" style={{ color: 'inherit', textDecoration: 'underline' }}>preparar tu primera semana de clases</Link>.
       </AyudaResultado>

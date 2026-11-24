@@ -114,7 +114,7 @@ export function MiAppGuiada({ datos, acciones, slug, hrefPresentacion }: {
           <aside className="rounded-2xl border border-dashed border-border px-5 py-4 text-sm leading-relaxed text-muted-foreground">
             <p className="font-semibold text-foreground">Normas del centro y descripción</p>
             <p className="mt-1 text-pretty">
-              Tus normas las ven tus clientes en su app, en Ayuda. La descripción sale en tu página de reservas y en Tentare Network.{' '}
+              Tus normas las ven tus clientes en su app, en Ayuda. La descripción sale en tu página de reservas y en Centra Network.{' '}
               <Link href={hrefPresentacion} className="font-medium text-foreground underline underline-offset-2 hover:no-underline">Editar normas y descripción</Link>
             </p>
           </aside>

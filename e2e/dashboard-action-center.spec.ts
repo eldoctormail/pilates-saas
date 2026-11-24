@@ -1,7 +1,7 @@
 import { test, expect, type Page, type Route } from '@playwright/test';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Tentare Brain · Fase 5 — el Action Center.
+// Centra Brain · Fase 5 — el Action Center.
 //
 // El problema no era de inteligencia, era de sitio: todo el Decision OS vivía
 // en /centro-de-control y /dashboard —la pantalla que se abre al entrar— no lo
@@ -102,7 +102,7 @@ test.describe('El dashboard trae lo que necesita atención, sin ir a buscarlo', 
     await expect(page.getByText('+340 €')).toBeVisible();
   });
 
-  test('dice cuántas resuelve Tentare sola — lo que nivelAutonomia sabía y nadie enseñaba', async ({ page }) => {
+  test('dice cuántas resuelve Centra sola — lo que nivelAutonomia sabía y nadie enseñaba', async ({ page }) => {
     // Con el `efecto` que manda GET /api/decisiones (lib/decision/efecto-aprobar.ts):
     // «la hago yo» es exactamente donde el botón del Centro de Control no dice «Hecho».
     await montarDashboard(page, {

@@ -119,7 +119,7 @@ function VistaMiWeb({ datos: base, acciones, network, showToast, slug, widgets, 
                     </>
                   ) : widgets && widgets.nombres.length > 0 ? 'Al día: no hay nada sin publicar' : 'Aún no has puesto nada'}
                 </Publicado>
-                <Publicado titulo="Tentare Network" tono={network.on ? 'ok' : 'neutro'}>
+                <Publicado titulo="Centra Network" tono={network.on ? 'ok' : 'neutro'}>
                   {network.on === null ? 'Mirando…' : network.on ? 'Apareces' : 'No apareces'}
                 </Publicado>
               </div>
@@ -269,7 +269,7 @@ function InterruptorNetwork({ on, onCambiar }: Comun['network']) {
       <Interruptor
         on={pedido ?? on ?? false}
         onChange={v => { void cambiar(v); }}
-        ariaLabel="Aparecer en Tentare Network"
+        ariaLabel="Aparecer en Centra Network"
         disabled={on === null}
         ocupado={pedido !== null}
       />

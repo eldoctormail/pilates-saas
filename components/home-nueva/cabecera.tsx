@@ -54,7 +54,7 @@ export function Cabecera({ fija }: { fija?: 'producto' | 'soluciones' | 'precios
     <header className="lf-cabecera">
       {/* Con el menú del móvil abierto la píldora no se encoge (el panel colgaría de unos botones que ya no se ven). */}
       <div ref={barra} className="lf-cabecera-barra" data-menu-abierto={abierto || undefined}>
-        <Link href="/" className="lf-marca" aria-label="Tentare — inicio">
+        <Link href="/" className="lf-marca" aria-label="Centra — inicio">
           <LogoTentare formato="horizontal" tinta="color" alto={28} decorativo />
         </Link>
 

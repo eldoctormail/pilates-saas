@@ -12,10 +12,10 @@ import { SoloEspana } from '@/components/configuracion/solo-espana';
 // es ella. Las fechas y el tipo de poder llevan los valores de la AEAT y solo se
 // tocan si se cambiaron allí.
 //
-// El poder se otorga en la sede de la AEAT, con su certificado o Cl@ve. Tentare
+// El poder se otorga en la sede de la AEAT, con su certificado o Cl@ve. Centra
 // nunca pide ni ve esas credenciales; solo recoge la prueba (el CSV) y el
 // apoderado la verifica en su «Consulta de apoderamientos recibidos». Mientras el
-// estudio no esté en producción (lo activa Tentare, a mano), no se envía nada.
+// estudio no esté en producción (lo activa Centra, a mano), no se envía nada.
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -50,11 +50,11 @@ interface Estado {
 const TEXTO_ESTADO: Record<EstadoEstudio, { titulo: string; detalle: string }> = {
   SIN_CONFIGURAR: { titulo: 'Sin dar de alta', detalle: 'Tus facturas salen igual, sin envío a la AEAT. Para enviarlas, sigue estos pasos.' },
   PENDIENTE_AUTORIZACION: { titulo: 'Falta tu autorización', detalle: 'Da el permiso en la AEAT y pega aquí el código que te dan. Hasta que se active el envío, tus facturas salen sin envío a la AEAT.' },
-  AUTORIZACION_EN_REVISION: { titulo: 'Comprobando tu autorización', detalle: 'Ya está todo por tu parte. Tentare comprueba tu permiso en la AEAT y activa el envío; no tienes que hacer nada más. Mientras tanto, tus facturas salen sin envío.' },
-  VERIFICADO: { titulo: 'Autorización comprobada', detalle: 'Tu permiso está comprobado. Tentare activará el envío: desde ese día, el registro de cada factura se envía a la AEAT.' },
-  PRODUCCION: { titulo: 'Enviando a la AEAT', detalle: 'Tus facturas se emiten desde Tentare y sus registros se envían a la AEAT.' },
+  AUTORIZACION_EN_REVISION: { titulo: 'Comprobando tu autorización', detalle: 'Ya está todo por tu parte. Centra comprueba tu permiso en la AEAT y activa el envío; no tienes que hacer nada más. Mientras tanto, tus facturas salen sin envío.' },
+  VERIFICADO: { titulo: 'Autorización comprobada', detalle: 'Tu permiso está comprobado. Centra activará el envío: desde ese día, el registro de cada factura se envía a la AEAT.' },
+  PRODUCCION: { titulo: 'Enviando a la AEAT', detalle: 'Tus facturas se emiten desde Centra y sus registros se envían a la AEAT.' },
   PAUSADO: { titulo: 'Envío en pausa', detalle: 'Tus facturas se siguen emitiendo, pero ahora no se envían.' },
-  SUSPENDIDO_AEAT: { titulo: 'Envío suspendido por la AEAT', detalle: 'La AEAT ha suspendido temporalmente el envío. Tentare se está ocupando.' },
+  SUSPENDIDO_AEAT: { titulo: 'Envío suspendido por la AEAT', detalle: 'La AEAT ha suspendido temporalmente el envío. Centra se está ocupando.' },
 };
 
 const NOMBRE_TIPO: Record<TipoEmisor, string> = {
@@ -169,7 +169,7 @@ function VerifactuAltaPage() {
     <div className="space-y-6 pb-10">
       <PageHeader
         title="Envío a la AEAT"
-        description="Con Veri*Factu, Tentare envía a la AEAT el registro de cada factura. Lo autorizas una sola vez y lleva unos 5 minutos."
+        description="Con Veri*Factu, Centra envía a la AEAT el registro de cada factura. Lo autorizas una sola vez y lleva unos 5 minutos."
       />
 
       {error && <p role="alert" className="rounded-2xl border border-red-500/30 bg-red-500/[0.05] px-4 py-3 text-[13.5px]">{error}</p>}
@@ -181,7 +181,7 @@ function VerifactuAltaPage() {
             <p className="rounded-2xl border border-border bg-muted/40 px-4 py-3 text-[13.5px] text-pretty">
               <strong>Es obligatorio por ley.</strong> Con la ley antifraude, tu programa de facturación tiene que
               estar adaptado antes del 1 de enero de 2027 si tu estudio es una sociedad, o del 1 de julio de 2027 si
-              eres autónoma. En Tentare se cumple con esto, y se hace una sola vez.
+              eres autónoma. En Centra se cumple con esto, y se hace una sola vez.
             </p>
           )}
 
@@ -346,7 +346,7 @@ function VerifactuAltaPage() {
               <div className="space-y-1">
                 <label className="flex items-start gap-2 text-[13px]">
                   <input type="checkbox" checked={aceptaMandato} onChange={ev => setAceptaMandato(ev.target.checked)} className="mt-0.5" />
-                  <span>Acepto el mandato a Tentare para enviar mis registros a la AEAT y confirmo que los datos son ciertos.</span>
+                  <span>Acepto el mandato a Centra para enviar mis registros a la AEAT y confirmo que los datos son ciertos.</span>
                 </label>
                 {/* Fuera de la etiqueta: abrir el texto no debe marcar la casilla. */}
                 {e.mandato && (
@@ -367,13 +367,13 @@ function VerifactuAltaPage() {
                 Enviar
               </Button>
               <p className="text-[12.5px] text-muted-foreground">
-                Tentare nunca te pedirá tu certificado ni tu Cl@ve. <a href={e.urls.ayuda} target="_blank" rel="noopener noreferrer" className="underline">Ayuda de la AEAT para dar un poder</a>.
+                Centra nunca te pedirá tu certificado ni tu Cl@ve. <a href={e.urls.ayuda} target="_blank" rel="noopener noreferrer" className="underline">Ayuda de la AEAT para dar un poder</a>.
               </p>
             </section>
           )}
 
           {pideAutorizacion && !e.apoderado && (
-            <p className="rounded-2xl border border-border bg-muted/40 px-4 py-3 text-[13.5px]">Tentare todavía no ha preparado el envío a la AEAT. Vuelve más adelante.</p>
+            <p className="rounded-2xl border border-border bg-muted/40 px-4 py-3 text-[13.5px]">Centra todavía no ha preparado el envío a la AEAT. Vuelve más adelante.</p>
           )}
 
           {puedeConfigurar && !muestraDatos && e.estado !== 'SIN_CONFIGURAR' && (
@@ -387,7 +387,7 @@ function VerifactuAltaPage() {
           {tieneRepresentacionViva && (
             <section className="rounded-2xl border border-border bg-card px-4 py-4 sm:px-5 space-y-2">
               <h2 className="text-[15px] font-bold">¿Has revocado el poder en la AEAT?</h2>
-              <p className="text-[13px] text-muted-foreground">Si lo has retirado en la sede, díselo también a Tentare: dejamos de enviar al momento, y tus facturas siguen saliendo, sin envío.</p>
+              <p className="text-[13px] text-muted-foreground">Si lo has retirado en la sede, díselo también a Centra: dejamos de enviar al momento, y tus facturas siguen saliendo, sin envío.</p>
               <Button variant="outline" disabled={enviando} onClick={() => void enviar({ accion: 'revocar' })}>He revocado el poder</Button>
             </section>
           )}

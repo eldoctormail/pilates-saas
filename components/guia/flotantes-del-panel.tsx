@@ -1,7 +1,7 @@
 'use client';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Lo que flota en la esquina del panel: UN botón de ayuda (con el asistente de Tentare y
+// Lo que flota en la esquina del panel: UN botón de ayuda (con el asistente de Centra y
 // el WhatsApp de soporte dentro de su panel) y, con el alta nueva (PR-5), el recorrido
 // rápido. Antes eran dos botones apilados (el de Tenti y el de ayuda): el fundador quiso
 // uno solo (11-nov-2026). Solo se esconde en /asistente, donde el chat ocupa la pantalla.
@@ -30,7 +30,7 @@ export function FlotantesDelPanel() {
   // persona a mano de más que dejarla sola el primer minuto.
   const listaPendiente = alta.activo === true && !(estado && listaTerminadaEnServidor(estado));
   // UN solo botón en la esquina (fundador, 11-nov-2026: «no deben de estar los 2 separados»): el de
-  // ayuda, con el asistente de Tentare dentro como pestaña. Solo se esconde en /asistente, donde el
+  // ayuda, con el asistente de Centra dentro como pestaña. Solo se esconde en /asistente, donde el
   // chat ocupa la pantalla.
   const conLanzador = pathname !== '/asistente';
 

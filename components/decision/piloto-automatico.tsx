@@ -42,7 +42,7 @@ export function PilotoAutomatico({ autonomia }: { autonomia: AutonomiaEstado }) 
     <div className="rounded-3xl border border-border bg-card p-5">
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-start gap-3">
-          {/* Tenti, no destellos: aquí Tentare ejecuta acciones por su cuenta.
+          {/* Tenti, no destellos: aquí Centra ejecuta acciones por su cuenta.
               `Sparkles` en este producto ya quiere decir «novedad» (el
               changelog). Quieto con el interruptor encendido o apagado, y
               también mientras se guarda: no dice si el piloto va, eso lo dice

@@ -12,13 +12,13 @@ export default function Contenido() {
       </QueEstaPasando>
 
       <CausasComunes items={[
-        'La tarjeta ha sido rechazada por el banco (fondos, límite, antifraude) — no es un fallo de Tentare, es la respuesta del banco.',
+        'La tarjeta ha sido rechazada por el banco (fondos, límite, antifraude) — no es un fallo de Centra, es la respuesta del banco.',
         'Se ha quedado colgado en "Procesando el pago…" por una conexión inestable justo en el momento de confirmar.',
         'El navegador tiene bloqueadas cookies de terceros o extensiones que interfieren con el formulario de pago.',
       ]} />
 
       <ComoSolucionarlo>
-        <p style={{ margin: '0 0 12px' }}>Si la tarjeta se rechaza, pide que pruebe otra o que contacte con su banco — el motivo exacto lo decide el banco, no Tentare.</p>
+        <p style={{ margin: '0 0 12px' }}>Si la tarjeta se rechaza, pide que pruebe otra o que contacte con su banco — el motivo exacto lo decide el banco, no Centra.</p>
         <p style={{ margin: '0 0 12px' }}>Si se queda colgado en &ldquo;Procesando el pago…&rdquo;, a los 90 segundos la propia pantalla lo avisa: que mire antes en su banco si le han cobrado. Si ve el cargo, no debe volver a pagar; si no lo ve, puede intentarlo de nuevo.</p>
         <p style={{ margin: 0 }}>Si pasa siempre, en el mismo dispositivo, prueba en una pestaña nueva o en otro navegador para descartar una extensión que bloquee el formulario.</p>
       </ComoSolucionarlo>

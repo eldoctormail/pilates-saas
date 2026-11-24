@@ -58,7 +58,7 @@ export const OPCIONES_COMO_NOS_CONOCIO = [
   'Un evento o conferencia',
   'Un artículo o blog',
   'Buscando un software para mi estudio',
-  'Ya conocía Tentare',
+  'Ya conocía Centra',
   'Otro',
 ] as const;
 

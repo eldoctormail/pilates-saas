@@ -190,11 +190,11 @@ const articulo: Articulo = {
     },
     {
       id: 'con-tentare',
-      titulo: 'Recordatorios, cancelaciones y lista de espera en Tentare',
+      titulo: 'Recordatorios, cancelaciones y lista de espera en Centra',
       bloques: [
         {
           t: 'p',
-          texto: 'En Tentare el recordatorio de clase viene puesto desde el primer día y son dos: el largo, con aviso en la app de la alumna, correo y WhatsApp si conectas la cuenta de Meta de tu estudio, y el corto, con aviso en la app. Tú eliges la antelación de cada uno: el largo, medio día, un día o dos días antes; el corto, 30, 60 o 120 minutos antes.',
+          texto: 'En Centra el recordatorio de clase viene puesto desde el primer día y son dos: el largo, con aviso en la app de la alumna, correo y WhatsApp si conectas la cuenta de Meta de tu estudio, y el corto, con aviso en la app. Tú eliges la antelación de cada uno: el largo, medio día, un día o dos días antes; el corto, 30, 60 o 120 minutos antes.',
         },
         {
           t: 'p',
@@ -253,7 +253,7 @@ const articulo: Articulo = {
   ],
   cta: {
     titulo: 'Menos plazas perdidas, sin estar pendiente del móvil',
-    texto: 'Empieza gratis con Tentare, sin tarjeta: pon tu ventana de cancelación por tipo de clase, deja que los recordatorios salgan solos y que la lista de espera ocupe las plazas que se liberan.',
+    texto: 'Empieza gratis con Centra, sin tarjeta: pon tu ventana de cancelación por tipo de clase, deja que los recordatorios salgan solos y que la lista de espera ocupe las plazas que se liberan.',
   },
   revision: [
     'Reglas de SoulCycle, Barry\'s, CorePower y ClassPass: sus páginas, 7-oct-2026; cambian sin aviso, revisar cada seis meses.',

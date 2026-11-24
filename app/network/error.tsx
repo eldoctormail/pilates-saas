@@ -38,7 +38,7 @@ export default function NetworkError({ error, reset }: { error: Error & { digest
   return (
     <div className="min-h-dvh flex items-center justify-center px-6" style={{ background: NW_FONDO }}>
       <div className="max-w-sm text-center">
-        <LogoTentare formato="horizontal" producto="network" titulo="Tentare Network" alto={26} className="mx-auto mb-6" />
+        <LogoTentare formato="horizontal" producto="network" titulo="Centra Network" alto={26} className="mx-auto mb-6" />
         <h1 className="text-[18px] font-extrabold" style={{ color: NW_TINTA }}>Algo ha ido mal</h1>
         <p className="mt-2 text-[13.5px]" style={{ color: NW_MUTED }}>
           No hemos podido cargar esta página. Inténtalo de nuevo en unos segundos.

@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// CONGELADO — Tentare Network en el panel (decisión del fundador, 2-oct-2026).
+// CONGELADO — Centra Network en el panel (decisión del fundador, 2-oct-2026).
 // Un layout y no un stub por página: cubre de una vez Buscar, Vacantes,
 // Favoritas, Mensajes, Comparar y la ficha `/network/[perfilId]`, que no tiene
 // prefijo propio en RUTAS_CONGELADAS. El layout real está intacto en

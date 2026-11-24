@@ -51,7 +51,7 @@ async function mockear(page: Page, opts: {
       status: 200,
       body: c.tenti === 1
         ? { turno: { tipo: 'pregunta', texto: '¿Avisa con más de 12 horas de antelación?', opciones: ['Sí', 'No'] } }
-        : { turno: { tipo: 'demo', escenario: 'caducidad_bono', parametros: {}, resumen: 'Quieres ver qué pasa con un bono cuando el cliente avisa de que no va.', aclaracion: 'En Tentare cada bono caduca en su fecha de fin, no un día fijo de la semana.', demo: demo('caducidad_bono') } },
+        : { turno: { tipo: 'demo', escenario: 'caducidad_bono', parametros: {}, resumen: 'Quieres ver qué pasa con un bono cuando el cliente avisa de que no va.', aclaracion: 'En Centra cada bono caduca en su fecha de fin, no un día fijo de la semana.', demo: demo('caducidad_bono') } },
     };
     return json(route, r.body, r.status);
   });
@@ -162,7 +162,7 @@ test.describe('pantalla de la demo', () => {
     // «Ver cómo se configura» y «¿Por qué ocurre esto?» despliegan y se pliegan.
     const configura = page.getByRole('button', { name: 'Ver cómo se configura' });
     await configura.click();
-    await expect(page.getByText('Dónde se cambia en Tentare')).toBeVisible();
+    await expect(page.getByText('Dónde se cambia en Centra')).toBeVisible();
     await page.getByRole('button', { name: '¿Por qué ocurre esto?' }).click();
     await expect(page.getByText('La regla que lo decide')).toBeVisible();
 
@@ -173,7 +173,7 @@ test.describe('pantalla de la demo', () => {
       await page.getByRole('button', { name: 'Siguiente paso' }).click();
       await expect(page.getByText(`Paso ${n} de ${total}`)).toBeVisible();
       // Cambiar de paso pliega lo desplegado.
-      await expect(page.getByText('Dónde se cambia en Tentare')).toBeHidden();
+      await expect(page.getByText('Dónde se cambia en Centra')).toBeHidden();
     }
     await expect(page.getByText('Comprobaciones de esta demo')).toBeVisible();
     await expect(page.getByText('Correcta:').first()).toBeVisible();

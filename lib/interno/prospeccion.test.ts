@@ -133,7 +133,7 @@ una cosa concreta: cubrir una baja de instructora sigue siendo trabajo manual.
 
 Si os interesa, os lo enseño en 15 minutos.
 
-Marcos — Tentare`;
+Marcos — Centra`;
 
 test('revisarBorrador no inventa avisos cuando el correo cuadra con el CSV', () => {
   const avisos = revisarBorrador({ asunto: 'Sobre las sustituciones en Pilates BCN', cuerpo: CUERPO_LIMPIO }, LEAD);

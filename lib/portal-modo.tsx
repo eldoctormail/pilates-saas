@@ -1,7 +1,7 @@
 'use client';
 
 // El portal de la clienta ya no tiene modo noche — retirado (2026-09):
-// el diseño real de "Tentare Studio App" (las 20 capturas de
+// el diseño real de "Centra Studio App" (las 20 capturas de
 // docs/diseno-referencia-portal/) es claro único, y con la mayoría de
 // pantallas ya convertidas a valores literales claros, el interruptor de
 // Perfil había quedado a medias — solo Nav/Inicio/Horario/Perfil seguían

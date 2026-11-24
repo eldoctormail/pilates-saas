@@ -15,7 +15,7 @@ SCRIPT="$(cd "$(dirname "$0")" && pwd)/copia.sh"
 
 cat > /etc/systemd/system/tentare-copia.service <<EOF
 [Unit]
-Description=Copia de seguridad de Tentare
+Description=Copia de seguridad de Centra
 After=docker.service
 Requires=docker.service
 
@@ -26,7 +26,7 @@ EOF
 
 cat > /etc/systemd/system/tentare-copia.timer <<EOF
 [Unit]
-Description=Copia diaria de Tentare
+Description=Copia diaria de Centra
 
 [Timer]
 OnCalendar=*-*-* $HORA:00

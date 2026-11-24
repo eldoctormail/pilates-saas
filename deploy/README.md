@@ -1,11 +1,11 @@
-# Tentare en servidor propio
+# Centra en servidor propio
 
 La instalación tiene dos partes que corren en el mismo servidor:
 
 | Parte | Qué es | Dónde |
 | --- | --- | --- |
 | Supabase | Postgres, Auth, API, Storage y Realtime. Se usa el `docker-compose` oficial | `~/supabase-project` (fuera del repo) |
-| Tentare | La app Next.js, Inngest (trabajos de fondo) y los crons | `deploy/` de este repo |
+| Centra | La app Next.js, Inngest (trabajos de fondo) y los crons | `deploy/` de este repo |
 
 Sin dominio todavía, todo funciona con la IP del servidor:
 
@@ -88,7 +88,7 @@ SMTP_USER=...
 SMTP_PASS=...
 SMTP_SENDER_NAME=Pilates
 
-# Sumar los ajustes de Tentare
+# Sumar los ajustes de Centra
 COMPOSE_FILE=docker-compose.yml:docker-compose.tentare.yml
 ```
 
@@ -128,11 +128,11 @@ deploy/scripts/migrar.sh ~/supabase-project
 El script hace cuatro cosas:
 
 1. Prepara una copia de las migraciones con los cinco arreglos que hacen falta para recorrerlas desde una base vacía (`deploy/scripts/preparar-migraciones.sh`; son los mismos que usa el CI del repo original) y las aplica una por una con `psql` dentro del contenedor de la base, cada una en su transacción. Las anota en `supabase_migrations.schema_migrations`, la misma tabla que usa la CLI de Supabase. No se usa la CLI: corre las sentencias fuera de una transacción y las migraciones con `LOCK TABLE` fallan. Las de `supabase/migrations/` no se tocan.
-2. Vuelve a adaptar la base al servidor propio (`deploy/sql/adaptar-autoalojado.sql`): zona de Argentina, la URL de tu servidor en lugar de `tentare.app`, los horarios fijos de `pg_cron` corridos a la hora de Argentina y el estudio sin prueba de 7 días. Hace falta en **cada** actualización: las migraciones nuevas del repo original vuelven a traer lo de Tentare. Si algo sigue llamando a `tentare.app`, el script falla y lo dice. Si avisa de un horario que no puede correr solo (`WARNING: horario: …`), ajustalo a mano: `pg_cron` va en UTC y Argentina es UTC−3.
+2. Vuelve a adaptar la base al servidor propio (`deploy/sql/adaptar-autoalojado.sql`): zona de Argentina, la URL de tu servidor en lugar de `tentare.app`, los horarios fijos de `pg_cron` corridos a la hora de Argentina y el estudio sin prueba de 7 días. Hace falta en **cada** actualización: las migraciones nuevas del repo original vuelven a traer lo de Centra. Si algo sigue llamando a `tentare.app`, el script falla y lo dice. Si avisa de un horario que no puede correr solo (`WARNING: horario: …`), ajustalo a mano: `pg_cron` va en UTC y Argentina es UTC−3.
 3. Carga en Vault `app_url` y `supabase_cron_secret`, que usan los trabajos de `pg_cron`.
 4. Al final verifica que ningún trabajo siga apuntando a `tentare.app`; el resultado tiene que ser 0.
 
-Además copia a la carpeta de Supabase las **plantillas de correo** de Tentare (`plantillas/`) y `docker-compose.tentare.yml`. Ahí un contenedor `plantillas` se las sirve a Auth, y así los correos de acceso llevan el código de 6 cifras que pide la app. Sin eso, Supabase manda sus plantillas de fábrica, con un enlace y sin código. Si cambiaron, el script avisa que hay que correr `docker compose up -d` en la carpeta de Supabase.
+Además copia a la carpeta de Supabase las **plantillas de correo** de Centra (`plantillas/`) y `docker-compose.tentare.yml`. Ahí un contenedor `plantillas` se las sirve a Auth, y así los correos de acceso llevan el código de 6 cifras que pide la app. Sin eso, Supabase manda sus plantillas de fábrica, con un enlace y sin código. Si cambiaron, el script avisa que hay que correr `docker compose up -d` en la carpeta de Supabase.
 
 Se puede volver a correr: solo aplica las migraciones nuevas. **No** carga `supabase/seed.sql`, que son datos de demostración y empiezan con un `TRUNCATE`.
 
@@ -156,9 +156,9 @@ La primera compilación tarda varios minutos. Después:
 Las alumnas pueden, desde la app y con Checkout Pro: **pagar sus recibos pendientes** (cuotas, renovaciones, lo que les cargues) y **comprar un bono o plan** de tu tienda (con código de descuento, matrícula y cobro proporcional). **Hace falta un dominio con HTTPS**, porque Mercado Pago tiene que poder llamar al webhook.
 
 1. En [Tus integraciones](https://www.mercadopago.com.ar/developers/panel/app), creá una aplicación de **Checkout Pro**.
-2. En el panel de Tentare, como propietaria: **Apps e integraciones › Mercado Pago**. Ahí está la dirección del webhook para copiar.
+2. En el panel de Centra, como propietaria: **Apps e integraciones › Mercado Pago**. Ahí está la dirección del webhook para copiar.
 3. En la aplicación de Mercado Pago › **Webhooks**, cargá esa dirección con el evento **Pagos** y copiá la clave secreta.
-4. De vuelta en Tentare, pegá el **Access Token** (Credenciales de producción; para probar, el de una cuenta vendedora de prueba) y la clave secreta, y tocá **Guardar y comprobar**. Tentare lo comprueba con Mercado Pago y lo guarda cifrado (hace falta `INTEGRACIONES_CLAVE_CIFRADO`, que crea `generar-secretos.sh`).
+4. De vuelta en Centra, pegá el **Access Token** (Credenciales de producción; para probar, el de una cuenta vendedora de prueba) y la clave secreta, y tocá **Guardar y comprobar**. Centra lo comprueba con Mercado Pago y lo guarda cifrado (hace falta `INTEGRACIONES_CLAVE_CIFRADO`, que crea `generar-secretos.sh`).
 
 No hace falta tocar el `.env` ni compilar de nuevo: con el formato de Argentina la app ya cobra con Mercado Pago. Cada estudio de la instalación conecta su propia cuenta, y un pago solo se aplica en el estudio de esa cuenta. Si preferís una cuenta para toda la instalación, sigue valiendo `MERCADOPAGO_ACCESS_TOKEN` y `MERCADOPAGO_WEBHOOK_SECRET` en `deploy/.env`, para los estudios que no carguen la suya.
 
@@ -168,11 +168,11 @@ Cada compra de plan queda en `compras_mercadopago` con lo que se decidió cobrar
 
 **Conciliador:** cada 30 minutos el contenedor `cron` repasa los pagos de tu cuenta de las últimas 72 h y aplica los que el webhook no haya aplicado (servidor caído, clave mal puesta, dominio sin resolver). Si eso pasa, queda un aviso en Sentry para revisar el webhook. Para forzarlo a mano: `docker compose exec cron llamar mercadopago-conciliar`.
 
-**Devoluciones:** en la ficha de la alumna, el botón «Devolver» de un recibo pagado con Mercado Pago le pide la devolución a Mercado Pago (con la política de devoluciones que tengas configurada: plazo y «solo sin usar»). Cuando Mercado Pago la confirma, Tentare marca el recibo como devuelto, anota la devolución, avisa a la alumna y te ofrece quitarle el bono. Una devolución o un contracargo hechos desde tu cuenta de Mercado Pago siguen el mismo camino. Si la compra incluía matrícula, se devuelve el pago entero desde el recibo del plan.
+**Devoluciones:** en la ficha de la alumna, el botón «Devolver» de un recibo pagado con Mercado Pago le pide la devolución a Mercado Pago (con la política de devoluciones que tengas configurada: plazo y «solo sin usar»). Cuando Mercado Pago la confirma, Centra marca el recibo como devuelto, anota la devolución, avisa a la alumna y te ofrece quitarle el bono. Una devolución o un contracargo hechos desde tu cuenta de Mercado Pago siguen el mismo camino. Si la compra incluía matrícula, se devuelve el pago entero desde el recibo del plan.
 
 **Pagar y reservar una clase en un paso:** en la ficha de una clase, si la alumna no tiene bono que la cubra, «Ver opciones» le ofrece la clase suelta (y los bonos que la incluyen). Antes de mandarla a Mercado Pago se comprueba que haya plaza para ella, y el pago caduca cuando se cierra la reserva de la clase (si quedan menos de 15 minutos, no se abre). Al volver, la ficha espera lo que diga el servidor: «Reservada» solo cuando la plaza está confirmada. Si la clase se llenó mientras pagaba, el bono queda entregado, entra en la lista de espera o lo tiene a su favor, y te llega el aviso de «pagó y no hubo plaza».
 
-**Sin cuenta (invitada):** en `/reservar/<tu-slug>` (y desde el widget de tu web, que manda ahí a quien no ha entrado) se puede pagar y reservar una clase solo con nombre, email y teléfono. Al confirmarse el pago, Tentare crea su ficha con esos datos, le entrega la clase o el bono y le reserva la plaza. Comprar un bono suelto sin cuenta sigue el ajuste «Compra pública» del estudio. A la vuelta, la página avisa de que el pago se está confirmando.
+**Sin cuenta (invitada):** en `/reservar/<tu-slug>` (y desde el widget de tu web, que manda ahí a quien no ha entrado) se puede pagar y reservar una clase solo con nombre, email y teléfono. Al confirmarse el pago, Centra crea su ficha con esos datos, le entrega la clase o el bono y le reserva la plaza. Comprar un bono suelto sin cuenta sigue el ajuste «Compra pública» del estudio. A la vuelta, la página avisa de que el pago se está confirmando.
 
 **Widget de tu web:** con sesión iniciada, «Planes» lleva a la alumna a Mercado Pago para pagar y, a la vuelta, llega a `/reservar/<tu-slug>`. Para que el widget pueda llamar al cobro desde tu dominio, ese dominio tiene que estar en los dominios autorizados del widget (Configuración › Mi web). Si cambiaste las condiciones del estudio, el widget no tiene la casilla para aceptarlas: la alumna las acepta comprando desde la app o desde `/reservar`.
 

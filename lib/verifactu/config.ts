@@ -59,7 +59,7 @@ export function qrEnProduccion(env: Env = process.env): boolean {
 /**
  * El productor del SIF (nombre, NIF, dirección), de la configuración del
  * servidor. La identidad del software (id, versión, instalación por estudio)
- * vive en `sif.ts`. Ya no hay «Tentare» por defecto como productor: el
+ * vive en `sif.ts`. Ya no hay «Centra» por defecto como productor: el
  * productor es una persona, y sin sus datos no se transmite.
  */
 export function productor(env: Env = process.env): Productor | null {

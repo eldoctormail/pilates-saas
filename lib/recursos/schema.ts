@@ -94,7 +94,7 @@ export function blogLd() {
     '@context': 'https://schema.org',
     '@type': 'Blog',
     '@id': ID_BLOG,
-    name: 'Centro de Recursos de Tentare',
+    name: 'Centro de Recursos de Centra',
     description: 'Guías prácticas para propietarias de estudios de Pilates: ocupación, precios, sustituciones, retención y la parte administrativa que nadie te contó.',
     url: `${LEGAL.url}/recursos`,
     inLanguage: IDIOMA,

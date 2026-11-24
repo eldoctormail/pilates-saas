@@ -3,7 +3,7 @@
 //
 // Qué se registra: todo lo que CAMBIA algo, y las lecturas de datos sensibles
 // de un cliente (entrar en la ficha de un estudio, exportar sus datos). Lo que
-// no se registra: navegar por los KPIs agregados de la propia Tentare.
+// no se registra: navegar por los KPIs agregados de la propia Centra.
 //
 // La tabla rechaza UPDATE y DELETE por trigger, así que esto solo puede añadir.
 // Escribir aquí NUNCA debe tumbar la operación que se estaba auditando: si el

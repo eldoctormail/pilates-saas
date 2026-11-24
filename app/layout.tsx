@@ -23,20 +23,20 @@ import './globals.css';
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   // Con la marca al final (fase 5, 23-sep): era el único título del sitio sin
-  // «Tentare», y es el de la página que más busca la marca.
+  // «Centra», y es el de la página que más busca la marca.
   // Pilates Y yoga, como el resto de la web (decisión del fundador), y las bajas
   // «con tu visto bueno»: el modo por defecto es asistido, no se cubren solas
   // (fase 1 de la web, 19-oct-2026). Lo heredan las páginas sin metadatos propios.
-  title: 'Software de gestión para estudios de Pilates y yoga | Tentare',
+  title: 'Software de gestión para estudios de Pilates y yoga | Centra',
   description: `Reservas desde la app de tu estudio, cobros que se reintentan solos y sustituciones con tu visto bueno. Para estudios de Pilates y yoga. ${GRATIS_CON_LIMITES}.`,
   // Sin `alternates.canonical` aquí (23-sep): un canonical en el layout raíz lo
   // heredan TODAS las páginas que no declaran el suyo, y las declara como copia de
   // la home. Cada página indexable pone el suyo; la home, en app/page.tsx.
   openGraph: {
-    siteName: 'Tentare',
+    siteName: 'Centra',
     type: 'website',
     locale: 'es_ES',
-    title: 'Tentare: software para estudios de Pilates y yoga',
+    title: 'Centra: software para estudios de Pilates y yoga',
     description: `Reservas, cobros, bonos y sustituciones de instructoras para estudios de Pilates y yoga. Sin permanencia. ${GRATIS_CON_LIMITES}.`,
   },
   // Solo la tarjeta, sin título ni descripción (fase 3, 20-oct-2026): los metadatos

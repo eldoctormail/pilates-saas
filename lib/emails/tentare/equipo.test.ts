@@ -12,11 +12,11 @@ test('la invitación de una instructora la lleva a la app; la del resto, al pane
   const inst = correoInvitacionEquipo({ nombre: 'Marta', propietariaNombre: 'Carmen', estudioNombre: 'Casa Pilates', rol: 'INSTRUCTOR', url: URL });
   assert.match(inst, /te lleva a la app de Casa Pilates/i);
   assert.match(inst, /Aceptar invitación/);
-  assert.match(inst, /como instructora en el equipo de Casa Pilates en Tentare\./);
+  assert.match(inst, /como instructora en el equipo de Casa Pilates en Centra\./);
 
   const rec = correoInvitacionEquipo({ nombre: 'Lola', propietariaNombre: 'Carmen', estudioNombre: 'Casa Pilates', rol: 'RECEPCION', url: URL });
   assert.match(rec, /Crear mi cuenta o entrar/);
-  assert.match(rec, /en Tentare Manager\./);
+  assert.match(rec, /en Centra Manager\./);
   assert.ok(!rec.includes('Como instructora'));
 });
 
@@ -53,9 +53,9 @@ test('una baja recién avisada no se pinta como alarma; una clase sin cubrir sí
 
 test('Network solo se menciona cuando se agotó el ranking, y solo con el número', () => {
   const base = { estudioNombre: 'Casa Pilates', claseNombre: 'Reformer', cuando: 'lunes', urlPanel: URL };
-  assert.match(correoAlertaPropietaria({ ...base, tipo: 'agotada', nNetwork: 2 }), /Hay 2 profesionales de Tentare Network/);
-  assert.ok(!correoAlertaPropietaria({ ...base, tipo: 'agotada', nNetwork: 0 }).includes('Tentare Network que'));
-  assert.ok(!correoAlertaPropietaria({ ...base, tipo: 'sin_respuesta', nNetwork: 2 }).includes('Tentare Network que'));
+  assert.match(correoAlertaPropietaria({ ...base, tipo: 'agotada', nNetwork: 2 }), /Hay 2 profesionales de Centra Network/);
+  assert.ok(!correoAlertaPropietaria({ ...base, tipo: 'agotada', nNetwork: 0 }).includes('Centra Network que'));
+  assert.ok(!correoAlertaPropietaria({ ...base, tipo: 'sin_respuesta', nNetwork: 2 }).includes('Centra Network que'));
 });
 
 test('el cierre para la gestoría lleva cifras con dos decimales y filtra el trimestre', () => {

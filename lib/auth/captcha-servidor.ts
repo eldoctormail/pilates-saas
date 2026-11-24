@@ -97,7 +97,7 @@ export async function verificarCaptcha(
     if (!res.ok) {
       console.error('[captcha] siteverify respondió', res.status);
       // P2 de la auditoría del checkout, punto 3 — un 429 aquí es Cloudflare
-      // frenándonos a NOSOTROS (todo el tráfico de Tentare comparte el mismo
+      // frenándonos a NOSOTROS (todo el tráfico de Centra comparte el mismo
       // secreto), no a una persona ni a un bot concreto: si empieza a pasar de
       // verdad, cada alta/login que dependa de este veredicto queda fail-open
       // (sin proteger, silenciosamente) hasta que se note. `console.error` en

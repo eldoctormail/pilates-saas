@@ -25,7 +25,7 @@
 // la toca; (3) medir nunca escribe la fecha de exceso en estudios de otra dueña.
 //   · SOLO AVISAN (`cuenta = false`): 'nif' (lo escribe la dueña sin verificar:
 //     alguien podría «ocupar» hoy el NIF de un negocio que aún no está en
-//     Tentare), y 'dispositivo' e 'ip', la huella del alta, tras HUELLA_ALTA.
+//     Centra), y 'dispositivo' e 'ip', la huella del alta, tras HUELLA_ALTA.
 //     Una IP compartida (un local, un coworking) no es el mismo negocio.
 //
 // Lo detecta la base de datos (`detectar_vinculos_gratis`: las alumnas no salen

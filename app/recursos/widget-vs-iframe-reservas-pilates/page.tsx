@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   description: SEO.descripcion,
   alternates: { canonical: urlDe(`/recursos/${SLUG}`) },
   openGraph: {
-    siteName: 'Tentare',
+    siteName: 'Centra',
     type: 'article',
     title: TITLE,
     description: 'El método que elijas determina cuántas alumnas potenciales llegan al final del proceso sin abandonar.',
@@ -89,7 +89,7 @@ export default function WidgetVsIframePage() {
         <p>El iframe incrusta el sistema del proveedor dentro de un recuadro en tu propia página. Visualmente parece integrado, pero técnicamente no lo está: la alumna sigue interactuando con una web de terceros dentro de un marco. Los problemas más habituales en móvil son el diseño que no se adapta bien a pantallas pequeñas, el desplazamiento horizontal y los <a href="https://help.reservio.com/es/articles/10656312-como-solucionar-los-problemas-del-boton-de-reserva-en-iframe-en-safari-iphone-y-ipad" target="_blank" rel="noopener noreferrer nofollow" style={{ color: 'inherit', textDecorationColor: '#C7C7BC' }}>fallos en Safari para iPhone</a>, donde la protección contra el seguimiento entre sitios puede bloquear las cookies de terceros dentro del iframe y romper el flujo de reserva. Úsalo solo como solución temporal o cuando el proveedor no ofrezca una alternativa mejor.</p>
 
         <h3>Widget nativo: la integración que sí cuida la experiencia de usuario</h3>
-        <p>Un widget nativo es un fragmento de código que se muestra directamente en tu página, puede adaptarse a tus colores y tipografía, y el proceso de reserva ocurre sin que la alumna salga en ningún momento de tu dominio. La alumna permanece en tu web, con tu marca, desde que aterriza hasta que confirma la clase. El <Link href="/funcionalidades/reservas-online" style={{ color: ACC }}>software de gestión</Link> para <Link href="/" style={{ color: ACC }}>estudios de pilates</Link> de Tentare ofrece un widget de reservas configurado con los colores y la imagen de tu estudio: con la sesión iniciada, la alumna reserva dentro de tu web; la primera vez, la reserva se termina en la página de tu estudio en Tentare.</p>
+        <p>Un widget nativo es un fragmento de código que se muestra directamente en tu página, puede adaptarse a tus colores y tipografía, y el proceso de reserva ocurre sin que la alumna salga en ningún momento de tu dominio. La alumna permanece en tu web, con tu marca, desde que aterriza hasta que confirma la clase. El <Link href="/funcionalidades/reservas-online" style={{ color: ACC }}>software de gestión</Link> para <Link href="/" style={{ color: ACC }}>estudios de pilates</Link> de Centra ofrece un widget de reservas configurado con los colores y la imagen de tu estudio: con la sesión iniciada, la alumna reserva dentro de tu web; la primera vez, la reserva se termina en la página de tu estudio en Centra.</p>
 
         <Callout title="¿Por qué la redirección cuesta tanto?" bg="#F1F2EA" border="#E0E5D0" iconColor={ACC} textColor="#3E4430">
           Si quieres entender la fuga de confianza que provoca la redirección externa, y por qué el widget embebido es la opción más rentable para la mayoría, lee <Link href="/recursos/reservas-en-tu-web" style={{ color: ACC, fontWeight: 700 }}>cómo integrar reservas de Pilates en tu propia web</Link>.
@@ -119,7 +119,7 @@ export default function WidgetVsIframePage() {
         <p>Configura los productos de pago antes de publicar: clase suelta, bono de sesiones con fecha de caducidad y cuota mensual recurrente. En España, los métodos más habituales en este sector son tarjeta a través de Redsys para pagos online y Bizum, que gana terreno cada año; para cuotas periódicas, la domiciliación SEPA sigue siendo la opción más robusta. Comprueba que tu proveedor los soporta todos y que el cobro automático funciona antes de lanzar. La automatización real llega cuando el pago y la reserva van juntos: si permites reservar sin pagar, perderás una parte importante del control sobre tu agenda.</p>
 
         <h3>Políticas de cancelación y lista de espera</h3>
-        <p>Define un plazo de cancelación gratuita, por ejemplo, hasta 12 o 24 horas antes de la clase, y decide qué ocurre si la alumna cancela fuera de plazo: pérdida de la sesión del bono, ninguna acción o algún tipo de penalización. No hay una respuesta única; depende del modelo de cada estudio. Lo que sí es imprescindible es activar la lista de espera automática: si alguien cancela dentro del plazo, la plaza se ofrece a la siguiente alumna sin que tengas que intervenir. Tentare gestiona este proceso de forma completamente automática, incluido el aviso a la alumna en lista de espera.</p>
+        <p>Define un plazo de cancelación gratuita, por ejemplo, hasta 12 o 24 horas antes de la clase, y decide qué ocurre si la alumna cancela fuera de plazo: pérdida de la sesión del bono, ninguna acción o algún tipo de penalización. No hay una respuesta única; depende del modelo de cada estudio. Lo que sí es imprescindible es activar la lista de espera automática: si alguien cancela dentro del plazo, la plaza se ofrece a la siguiente alumna sin que tengas que intervenir. Centra gestiona este proceso de forma completamente automática, incluido el aviso a la alumna en lista de espera.</p>
 
         <h3>Recordatorios automáticos que reducen el absentismo</h3>
         <p>Configura avisos por correo electrónico, notificación de aplicación o WhatsApp 24 horas y 1 hora antes de la clase. Los recordatorios bien configurados son una de las acciones con mayor retorno inmediato: reducen las ausencias sin que tengas que hacer nada. Es una configuración que se completa en cinco minutos y que te ahorra llamadas y mensajes a lo largo de toda la semana.</p>
@@ -161,14 +161,14 @@ export default function WidgetVsIframePage() {
         <h2 id="conclusion">La decisión de cómo integrar reservas web para pilates importa más de lo que parece</h2>
         <p>La forma en que integras las reservas online determina cuántas alumnas potenciales llegan al final del proceso sin abandonar. La redirección externa es la opción más rápida de implementar, pero la que más conversión pierde. El widget nativo, bien configurado y adaptado a tu marca, es el que mejor cuida la experiencia de la alumna y la imagen de tu estudio desde el primer clic hasta la confirmación.</p>
         <p>Integrar un sistema de reservas para pilates en tu web no es solo pegar el código de incrustación: los pagos, las cancelaciones, los recordatorios y el cumplimiento legal son parte del mismo proceso, no añadidos opcionales. Un sistema que funciona a medias genera desconfianza en el momento más crítico.</p>
-        <p>Revisa ahora con qué opción trabaja tu estudio. Si hay fricción en el proceso de reserva o el widget que tienes no refleja tu marca, es el mejor momento para cambiarlo. Tentare está diseñado específicamente para estudios de pilates y ofrece este tipo de integración gratis hasta 150 reservas al mes, sin permanencia, con el widget de reservas en tu propia web y con tus colores.</p>
+        <p>Revisa ahora con qué opción trabaja tu estudio. Si hay fricción en el proceso de reserva o el widget que tienes no refleja tu marca, es el mejor momento para cambiarlo. Centra está diseñado específicamente para estudios de pilates y ofrece este tipo de integración gratis hasta 150 reservas al mes, sin permanencia, con el widget de reservas en tu propia web y con tus colores.</p>
 
-        <CtaBlock title="El widget nativo, sin montarlo tú a mano" body="Tentare gestiona pagos, bonos, cancelaciones, lista de espera y recordatorios desde el mismo widget — sin iframe y con tu marca en todo momento." />
+        <CtaBlock title="El widget nativo, sin montarlo tú a mano" body="Centra gestiona pagos, bonos, cancelaciones, lista de espera y recordatorios desde el mismo widget — sin iframe y con tu marca en todo momento." />
 
         <RelatedLinks
           items={[
             { href: '/recursos/reservas-en-tu-web', category: 'Software y web', categoryColor: '#22251A', title: 'Por qué mandar a la alumna a otra web te cuesta reservas' },
-            { href: '/comparativa/tentare-vs-glofox', category: 'Comparativa', categoryColor: ACC, title: 'Glofox vs. Tentare: cuál conviene a tu estudio de Pilates' },
+            { href: '/comparativa/tentare-vs-glofox', category: 'Comparativa', categoryColor: ACC, title: 'Glofox vs. Centra: cuál conviene a tu estudio de Pilates' },
             { href: '/recursos', category: 'Centro de Recursos', categoryColor: '#22251A', title: 'Ver todas las guías para tu estudio →' },
           ]}
         />

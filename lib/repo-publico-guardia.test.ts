@@ -65,7 +65,7 @@ const DOMINIOS_PERMITIDOS: RegExp[] = [
   // Reservados para ejemplos y pruebas (RFC 2606 / 6761).
   /(^|\.)example(\.(com|org|net))?$/i,
   /\.(invalid|test|local|localhost)$/i,
-  // Corporativos de Tentare: buzones de empresa, no de particulares.
+  // Corporativos de Centra: buzones de empresa, no de particulares.
   /^tentare\.(app|es)$/i,
   // Remitentes públicos de terceros citados en docs: sandbox de Resend y AEAT.
   /^resend\.dev$/i,

@@ -8,7 +8,7 @@
 // lectura enseña un resultado grande, y un 🟢 se cierra solo para leer a la
 // siguiente. Escanear → resultado, sin buscar a nadie ni elegir la clase.
 //
-// La clase: por defecto, «cualquiera de las de ahora» — Tentare mira en cuál
+// La clase: por defecto, «cualquiera de las de ahora» — Centra mira en cuál
 // tiene plaza ella. Si se llega desde una clase (`?sesion=<id>`), o se toca una
 // de la fila de arriba, se comprueba contra ESA.
 //
@@ -104,12 +104,12 @@ export default function ControlDeAccesoPage() {
   const { videoRef, camara, encender, olvidarUltimo } = useLectorQr({
     pausado: resultado !== null || enviando,
     onLectura: (valor) => {
-      // Solo van al servidor los QR de acceso de Tentare. Cualquier otro código
+      // Solo van al servidor los QR de acceso de Centra. Cualquier otro código
       // que vea la cámara —el de una caja, el de la web del estudio, el pase de
       // 2 minutos que se retiró el 28-sep— se contesta aquí: no es un intento de
       // entrar y no tiene por qué llenar el historial de accesos.
       if (!leerTokenQr(valor)) {
-        setError('Ese código no es un QR de acceso de Tentare. Pídele que abra Perfil → QR de acceso en su app.');
+        setError('Ese código no es un QR de acceso de Centra. Pídele que abra Perfil → QR de acceso en su app.');
         return;
       }
       void escanear(valor, fijada);
@@ -186,7 +186,7 @@ export default function ControlDeAccesoPage() {
     else setErrorDecision(r.error);
   };
 
-  const cabecera = <PageHeader title="Control de acceso" description="Escanea el QR del cliente: Tentare comprueba en el momento si puede entrar a su clase." back={{ href: '/calendario', label: 'Volver al calendario' }} />;
+  const cabecera = <PageHeader title="Control de acceso" description="Escanea el QR del cliente: Centra comprueba en el momento si puede entrar a su clase." back={{ href: '/calendario', label: 'Volver al calendario' }} />;
 
   if (dataLoaded && studio && studio.controlAccesoQr === false) {
     return (

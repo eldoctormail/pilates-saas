@@ -1,12 +1,12 @@
 import type { Articulo } from './tipos.ts';
 
 // Rehecho el 7-oct-2026 a partir de la guía antigua del mismo nombre (TSX), que
-// contaba el proceso con Tentare pero no decía nada de lo que pregunta quien
+// contaba el proceso con Centra pero no decía nada de lo que pregunta quien
 // busca esto: qué hacer esta noche, cuánto esperar a cada compañera, quién paga
 // la baja médica y si se puede contratar a alguien. Mantiene la URL.
 //
 // La regla del margen por candidata (un tercio de lo que falta, entre 2 y 45
-// minutos, recordatorio y después la siguiente) es la del motor de Tentare
+// minutos, recordatorio y después la siguiente) es la del motor de Centra
 // (lib/sustituciones/ventanas.ts): si cambia allí, cambia aquí.
 
 const articulo: Articulo = {
@@ -108,7 +108,7 @@ const articulo: Articulo = {
       bloques: [
         {
           t: 'p',
-          texto: 'Un plazo fijo no sirve: media hora es muy poco para una clase de pasado mañana y demasiado para una que empieza dentro de una hora. La regla que seguimos en el motor de sustituciones de Tentare es dar a cada candidata **un tercio del tiempo que falta para la clase, con un mínimo de 2 minutos y un máximo de 45**. Si no contesta en ese plazo, se le recuerda; si en otro plazo igual sigue sin contestar, se pasa a la siguiente (en Tentare, eso lo hace solo el modo autónomo; en el asistido, te avisa a ti para que decidas).',
+          texto: 'Un plazo fijo no sirve: media hora es muy poco para una clase de pasado mañana y demasiado para una que empieza dentro de una hora. La regla que seguimos en el motor de sustituciones de Centra es dar a cada candidata **un tercio del tiempo que falta para la clase, con un mínimo de 2 minutos y un máximo de 45**. Si no contesta en ese plazo, se le recuerda; si en otro plazo igual sigue sin contestar, se pasa a la siguiente (en Centra, eso lo hace solo el modo autónomo; en el asistido, te avisa a ti para que decidas).',
         },
         {
           t: 'tabla',
@@ -201,11 +201,11 @@ const articulo: Articulo = {
     },
     {
       id: 'con-tentare',
-      titulo: 'Cómo lo hace Tentare',
+      titulo: 'Cómo lo hace Centra',
       bloques: [
         {
           t: 'p',
-          texto: 'En Tentare, la instructora avisa desde la app del estudio o desde un enlace en el móvil, sin instalar nada. El sistema mira quién da ese formato, su disponibilidad, sus vacaciones y bajas y las clases que ya tiene, y te propone la candidata. En el modo asistido, el que viene puesto, no escribe a nadie hasta que das el visto bueno; después la avisa por correo, con un enlace para aceptar o rechazar, se lo recuerda con los plazos de arriba (también por WhatsApp si lo conectaste) y, si sigue sin contestar, te avisa para que decidas a quién escribir. En el modo autónomo (en el plan gratis, Estudio y Cadena, o con un complemento de 12 €/mes) pasa sola a la siguiente y lo hace todo sin ti.',
+          texto: 'En Centra, la instructora avisa desde la app del estudio o desde un enlace en el móvil, sin instalar nada. El sistema mira quién da ese formato, su disponibilidad, sus vacaciones y bajas y las clases que ya tiene, y te propone la candidata. En el modo asistido, el que viene puesto, no escribe a nadie hasta que das el visto bueno; después la avisa por correo, con un enlace para aceptar o rechazar, se lo recuerda con los plazos de arriba (también por WhatsApp si lo conectaste) y, si sigue sin contestar, te avisa para que decidas a quién escribir. En el modo autónomo (en el plan gratis, Estudio y Cadena, o con un complemento de 12 €/mes) pasa sola a la siguiente y lo hace todo sin ti.',
         },
         {
           t: 'p',
@@ -260,7 +260,7 @@ const articulo: Articulo = {
   ],
   cta: {
     titulo: 'La próxima baja, con la sustituta ya propuesta',
-    texto: 'Empieza gratis con Tentare, sin tarjeta: da de alta a tu equipo con sus formatos y su disponibilidad, y arranca en modo asistido, aprobando cada aviso.',
+    texto: 'Empieza gratis con Centra, sin tarjeta: da de alta a tu equipo con sus formatos y su disponibilidad, y arranca en modo asistido, aprobando cada aviso.',
   },
   revision: [
     'Incapacidad temporal: páginas de la Seguridad Social, 7-oct-2026; hay una reforma de la «baja flexible» en negociación sin texto en el BOE: revisar cuando se publique.',

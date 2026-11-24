@@ -2,7 +2,7 @@
 // Tenti — la geometría del dibujo. Una sola, para el canvas y para el icono.
 //
 // Portado del prototipo web de Coucou (design/prototype/notch-buddy.html),
-// cuyo personaje Tentare usa con autorización escrita de su autor (5-oct-2026).
+// cuyo personaje Centra usa con autorización escrita de su autor (5-oct-2026).
 // El código de Coucou es MIT:
 //
 //   Copyright (c) 2026 Louis Raillé

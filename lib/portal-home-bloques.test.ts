@@ -19,7 +19,7 @@ test('DEFAULT_BLOQUES_POR_PANTALLA.home: los fijos delante y los de siempre detr
   // pinta: ya se pintaban, escritos a fuego encima del contenedor de bloques.
   // Lo que cambia es que ahora EXISTEN para el editor.
   // `tiraSemana`/`progresoSemanal`/`retos` se sumaron aquí en la auditoría del
-  // Theme Builder / rediseño "Tentare Studio App" (2026-08-26): nacían solo
+  // Theme Builder / rediseño "Centra Studio App" (2026-08-26): nacían solo
   // para Oliva/Noir/Bloom, ahora son parte del Inicio de siempre.
   // Van INMEDIATAMENTE detrás de los fijos (no al final): en el diseño real
   // "Tu ritmo" (bono, arriba, escrito a fuego) y "Mi progreso"/"Retos" son un

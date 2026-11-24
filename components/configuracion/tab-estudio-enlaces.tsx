@@ -36,8 +36,8 @@ import { useMiWebNueva } from '@/lib/estudio/panel-nuevo-cliente';
 // fundador, 22-oct-2026; lib/enlaces-estudio.ts). La página de reservas
 // (`/reservar/<slug>`) es la de la web del estudio y va después, dicho así.
 //
-// Aparecer en Tentare Network es un sí/no de su sección (FilaInterruptor).
-// Los widgets tienen su pantalla (components/widgets/, «Tentare Widgets»).
+// Aparecer en Centra Network es un sí/no de su sección (FilaInterruptor).
+// Los widgets tienen su pantalla (components/widgets/, «Centra Widgets»).
 // ─────────────────────────────────────────────────────────────────────────────
 
 const sinSuscripcion = () => () => {};

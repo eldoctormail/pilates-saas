@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // Badge «NUEVO» en el menú del panel.
 //
-// Tentare marca desde `/interno` qué entrada del menú es nueva, y a la
+// Centra marca desde `/interno` qué entrada del menú es nueva, y a la
 // propietaria le aparece un distintivo al lado. Existe porque publicar algo en
 // el changelog no basta: si no se sabe DÓNDE está lo nuevo, no se encuentra.
 //

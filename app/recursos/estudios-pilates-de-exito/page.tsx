@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   description: SEO.descripcion,
   alternates: { canonical: urlDe('/recursos/estudios-pilates-de-exito') },
   openGraph: {
-    siteName: 'Tentare',
+    siteName: 'Centra',
     type: 'article',
     title: 'Qué aprender de los estudios de pilates que más crecen',
     description: 'Lecciones con datos reales de las cadenas líderes y del mercado español, aplicables a cualquier estudio.',
@@ -97,7 +97,7 @@ export default function EstudiosPilatesExitoPage() {
             { value: '+20,1%', label: 'reservas en España 2024→2025 (Eversports)' },
             { value: '9,7%', label: 'crecimiento anual del mercado en EE. UU.' },
           ]}
-          note="Fuentes: Lifestyle.fit / El Debate (Statista, Eversports) y Scheduling Kit. Cifras del sector, no de Tentare."
+          note="Fuentes: Lifestyle.fit / El Debate (Statista, Eversports) y Scheduling Kit. Cifras del sector, no de Centra."
         />
 
         <h2 id="s2">Lección 1 — el reformer no es un capricho, es el motor de ingresos</h2>
@@ -166,7 +166,7 @@ export default function EstudiosPilatesExitoPage() {
 
         <CtaBlock
           title="La gestión que protege tu retención, sin el presupuesto de una cadena"
-          body="Tentare cubre reservas, cobros y equipo — y busca quién cubre una baja de instructora sin que tengas que hacer una sola llamada."
+          body="Centra cubre reservas, cobros y equipo — y busca quién cubre una baja de instructora sin que tengas que hacer una sola llamada."
         />
 
         <RelatedLinks

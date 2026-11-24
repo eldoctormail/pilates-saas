@@ -332,7 +332,7 @@
 
    ⚠️ `line-height: inherit` no cambia nada a propósito: es lo que ya hacía.
    Desde el Brand System (brand/tokens.css, fase 1) existe además una `.t-label`
-   GLOBAL —la etiqueta en mono de Tentare— que trae su propio interlineado
+   GLOBAL —la etiqueta en mono de Centra— que trae su propio interlineado
    (16px), y esta regla no lo declaraba: se le habría colado a los ~60 rótulos
    de la app. Se fija aquí el de siempre hasta que la app de la alumna pase al
    sistema nuevo (fase 16 de brand/implementation-plan.md). */

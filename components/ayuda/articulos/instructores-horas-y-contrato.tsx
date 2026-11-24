@@ -9,7 +9,7 @@ export default function Contenido() {
     <>
       <AyudaAntesDeEmpezar>
         Si tienes instructoras contratadas por horas, la pregunta de cada mes es la misma: ¿le estoy dando lo que
-        le pago? Tentare te la responde sin que lleves una hoja aparte.
+        le pago? Centra te la responde sin que lleves una hoja aparte.
       </AyudaAntesDeEmpezar>
 
       <h2 style={{ ...h2, marginTop: 4 }}>Apunta sus horas de contrato</h2>

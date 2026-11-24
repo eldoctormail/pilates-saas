@@ -6,7 +6,7 @@
 // estudios/[id], network, crecimiento...) sin `error.tsx`: su layout maneja el
 // error de SESIÓN, pero un throw de render en cualquier subpágina subía hasta
 // `app/global-error.tsx`, que reemplaza el documento entero y deja al equipo
-// de Tentare sin la navegación de /interno para volver atrás.
+// de Centra sin la navegación de /interno para volver atrás.
 //
 // Icono neutro y no la ilustración del panel: /interno es "Tentare Internal",
 // otro contexto de marca (ver .claude/tentare-os.md).

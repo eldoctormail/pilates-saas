@@ -12,11 +12,11 @@ import { geocodificarDireccion } from '@/lib/network/geocodificar';
 import { suprimirPerfilNetwork } from '@/lib/network/documentos-servidor';
 import { enforceRateLimit } from '@/lib/rate-limit';
 
-// Perfil profesional de Tentare Network (docs/NETWORK-IMPLEMENTATION-PLAN.md
+// Perfil profesional de Centra Network (docs/NETWORK-IMPLEMENTATION-PLAN.md
 // §1). Identidad por auth_user_id, NUNCA por studio_id — verificarSesionStaff
 // exige pertenecer a un estudio y por eso no sirve aquí; verificarUsuarioSupabase
 // solo valida el JWT, que es justo lo que hace falta: cualquier persona con
-// cuenta de Supabase Auth en Tentare (staff de cualquier rol, en cualquier
+// cuenta de Supabase Auth en Centra (staff de cualquier rol, en cualquier
 // estudio o en ninguno) puede tener un perfil de Network.
 
 const SELECT_COLUMNAS = `
@@ -150,7 +150,7 @@ export async function PUT(req: NextRequest) {
     .maybeSingle();
   if (errLeer) return errorInterno('network:perfil:PUT:leer', errLeer, 'No se ha podido guardar tu perfil.');
 
-  // Cierre de Tentare Network (lib/network/mantenimiento.ts): crear un perfil NUEVO
+  // Cierre de Centra Network (lib/network/mantenimiento.ts): crear un perfil NUEVO
   // está cerrado también aquí, no solo en la pantalla. Editar el que ya existe
   // (borrador o publicado) sigue funcionando. Va ANTES de geocodificar: no se
   // consulta a un tercero para un alta que se va a rechazar.
@@ -212,7 +212,7 @@ export async function PUT(req: NextRequest) {
 // bucket privado (identidad, certificaciones, portfolio), su foto pública y la
 // fila `red_perfiles` —el resto de tablas `red_*` cuelgan en CASCADE—, en ese
 // orden (lib/network/documentos-servidor.ts). NO borra la cuenta de Auth: la
-// misma cuenta puede ser socia, instructora o propietaria en Tentare.
+// misma cuenta puede ser socia, instructora o propietaria en Centra.
 //
 // Se pide `confirmar: true` en el cuerpo para que ningún DELETE accidental
 // (un cliente mal escrito, un reintento) se lleve un perfil entero.

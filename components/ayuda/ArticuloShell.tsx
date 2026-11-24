@@ -40,7 +40,7 @@ export function ArticuloShell({ articulo, video = null, children }: { articulo: 
         <h1 className="ay-h1">{articulo.titulo}</h1>
         <p className="ay-intro">{articulo.descripcion}</p>
         <div className="ay-meta">
-          <span>Equipo Tentare</span>
+          <span>Equipo Centra</span>
           <span>·</span>
           <span>Actualizado el {fecha(articulo.actualizado)}</span>
         </div>

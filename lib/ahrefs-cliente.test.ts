@@ -47,7 +47,7 @@ test('no mide el portal del cliente ni el kiosko', () => {
   assert.equal(debeMedirse('/kiosk/estudio-carmen', false), false);
 });
 
-test('no mide el backoffice de Tentare ni las pantallas de acceso', () => {
+test('no mide el backoffice de Centra ni las pantallas de acceso', () => {
   for (const path of ['/interno', '/interno/kpis', '/login', '/crear-estudio', '/invitacion', '/clave-nueva', '/oauth']) {
     assert.equal(debeMedirse(path, false), false, `${path} NO debería medirse`);
   }
@@ -69,7 +69,7 @@ test('/reservar sí, porque se abrió a indexación a propósito', () => {
 
 test('…pero NO incrustada en la web del estudio', () => {
   // La misma página dentro de un iframe en el sitio de la clienta: ahí sus
-  // visitantes no son tráfico de Tentare, y el tracker sería un tercero metido
+  // visitantes no son tráfico de Centra, y el tracker sería un tercero metido
   // en una propiedad ajena.
   assert.equal(debeMedirse('/reservar/estudio-carmen', true), false);
 });

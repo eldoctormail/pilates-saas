@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   title: pagina.titulo,
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
-  openGraph: { siteName: 'Tentare', type: 'website', locale: 'es_ES', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH), images: [{ url: '/funcionalidades/opengraph-image' }] },
+  openGraph: { siteName: 'Centra', type: 'website', locale: 'es_ES', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH), images: [{ url: '/funcionalidades/opengraph-image' }] },
 };
 
 // «Producto» en el menú. Rediseñada el 16-nov-2026 al idioma de la home nueva (ver components/web/hub/Hub.tsx): cada área enseña el
@@ -113,7 +113,7 @@ export default function FuncionalidadesPage() {
       <HeroHub
         etiqueta={<Etiqueta icono={<Compass size={16} strokeWidth={1.6} />}>Producto</Etiqueta>}
         categoria="Funcionalidades del software para estudios de Pilates"
-        titulo={<>Todo lo que hace Tentare, sin adjetivos.</>}
+        titulo={<>Todo lo que hace Centra, sin adjetivos.</>}
         texto={<>{funcionalidades().length} funciones en cinco áreas, explicadas por lo que resuelven en un estudio de Pilates de verdad, con sus reglas, sus umbrales y también sus límites.</>}
         indice={INDICE}
       />
@@ -127,7 +127,7 @@ export default function FuncionalidadesPage() {
         )}
       </div>
 
-      {/* Lo que Tentare todavía no hace, dicho en el propio índice (la comparativa lo detalla). El texto es el que ya estaba publicado. */}
+      {/* Lo que Centra todavía no hace, dicho en el propio índice (la comparativa lo detalla). El texto es el que ya estaba publicado. */}
       <section className="hx-limites" aria-labelledby="hx-limites-t">
         <div className="hx-limites-in">
           <div>

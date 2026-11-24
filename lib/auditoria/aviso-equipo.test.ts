@@ -80,11 +80,11 @@ test('se avisa a quien trabaja con el dinero en el panel, y solo a esa gente', (
 test('el correo de invitación avisa a recepción antes de aceptar, y no a una instructora', () => {
   const base = { nombre: 'Lola', propietariaNombre: 'Carmen', estudioNombre: 'Casa Pilates', url: 'https://app.example.com/x' };
   const recepcion = correoInvitacionEquipo({ ...base, rol: 'RECEPCION' });
-  assert.match(recepcion, /Tentare anota quién lo hizo, cuándo y qué valor había antes/);
+  assert.match(recepcion, /Centra anota quién lo hizo, cuándo y qué valor había antes/);
   assert.match(recepcion, /se guarda 6 años/);
   assert.match(recepcion, /Solo lo ve la propietaria/);
   // Va ANTES del botón: se lee antes de crear la cuenta.
-  assert.ok(recepcion.indexOf('Tentare anota quién lo hizo') < recepcion.indexOf('Crear mi cuenta o entrar'));
+  assert.ok(recepcion.indexOf('Centra anota quién lo hizo') < recepcion.indexOf('Crear mi cuenta o entrar'));
 
   const instructora = correoInvitacionEquipo({ ...base, rol: 'INSTRUCTOR' });
   assert.doesNotMatch(instructora, /anota quién lo hizo/);

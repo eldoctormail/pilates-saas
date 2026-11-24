@@ -37,7 +37,7 @@ export function parametrosNudgeCandidata(params: {
 export type TipoAlertaPropietaria = 'agotada' | 'sin_respuesta' | 'baja' | 'sin_sustituta';
 
 /**
- * Línea extra del email 'agotada' cuando Tentare Network tiene a quién
+ * Línea extra del email 'agotada' cuando Centra Network tiene a quién
  * proponer. Solo el número, nunca nombres: el email sale de la plataforma y el
  * perfil se ve en el panel, donde ella decide si contacta. `null` = no hay
  * nada que añadir (0, ausente o un número que no es número).
@@ -45,8 +45,8 @@ export type TipoAlertaPropietaria = 'agotada' | 'sin_respuesta' | 'baja' | 'sin_
 export function lineaNetworkAgotada(n: number | null | undefined): string | null {
   if (typeof n !== 'number' || !Number.isFinite(n) || n <= 0) return null;
   return n === 1
-    ? 'Hay 1 profesional de Tentare Network que podría cubrirla: la tienes en Sustituciones.'
-    : `Hay ${n} profesionales de Tentare Network que podrían cubrirla: las tienes en Sustituciones.`;
+    ? 'Hay 1 profesional de Centra Network que podría cubrirla: la tienes en Sustituciones.'
+    : `Hay ${n} profesionales de Centra Network que podrían cubrirla: las tienes en Sustituciones.`;
 }
 
 // El cuerpo de texto de la alerta a la propietaria (`cuerpoAlertaPropietaria`)

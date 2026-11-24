@@ -22,7 +22,7 @@ const TOKEN = `${b64({ alg: 'HS256', typ: 'JWT' })}.${b64({
 const USUARIO = {
   id: UID, email: EMAIL, aud: 'authenticated', role: 'authenticated', app_metadata: {}, user_metadata: {},
   created_at: '2026-01-01T00:00:00Z',
-  factors: [{ id: 'f1', factor_type: 'totp', status: 'verified', friendly_name: 'Tentare', created_at: '2026-01-01T00:00:00Z', updated_at: '2026-01-01T00:00:00Z' }],
+  factors: [{ id: 'f1', factor_type: 'totp', status: 'verified', friendly_name: 'Centra', created_at: '2026-01-01T00:00:00Z', updated_at: '2026-01-01T00:00:00Z' }],
 };
 
 const json = (r: Route, b: unknown, s = 200) => r.fulfill({ status: s, contentType: 'application/json', body: JSON.stringify(b) });

@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { ANCLA_DECIDIR, construirEstadoEstudio, contarConCandidatosNetwork, textoMargenGratis, tituloDecidir } from './estado-estudio.ts';
 
-const SUFIJO = 'te proponemos profesionales de Tentare Network';
+const SUFIJO = 'te proponemos profesionales de Centra Network';
 
 test('Network: sufijo en la MISMA línea de clases sin cubrir, sin sumar al contador ni crear otra', () => {
   const e = construirEstadoEstudio({ sustitucionesPorDecidir: 3, sustitucionesConNetwork: 2, reservasPorAprobar: 1 });

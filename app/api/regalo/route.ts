@@ -70,7 +70,7 @@ const METODOS = ['EFECTIVO', 'TARJETA', 'BIZUM', 'TRANSFERENCIA'] as const;
 
 // POST: { accion: 'vender' | 'buscar' }.
 //  · vender: alta de una tarjeta COBRADA FUERA (mostrador). Queda anotado quién y cómo; no
-//    mueve la caja de Tentare (la venta por Caja/POS es Fase 2). Devuelve el código UNA vez.
+//    mueve la caja de Centra (la venta por Caja/POS es Fase 2). Devuelve el código UNA vez.
 //  · buscar: localiza una tarjeta por su código para gastarla en el mostrador.
 export async function POST(req: NextRequest) {
   const sesion = await verificarSesionStaff(req);

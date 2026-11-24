@@ -8,7 +8,7 @@
 // con el suyo. `t` va firmado para que una petición capturada no se pueda
 // reenviar días después: quien verifica rechaza un `t` de hace más de 5 minutos.
 //
-// La verificación vive aquí aunque Tentare no la necesite: es la referencia que
+// La verificación vive aquí aunque Centra no la necesite: es la referencia que
 // enseña docs/api-publica.md, y el test garantiza que la guía y la firma no se
 // separan.
 

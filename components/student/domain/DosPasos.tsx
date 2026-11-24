@@ -70,7 +70,7 @@ export function DosPasos({ volverA }: { volverA: string }) {
       setEstado({ tipo: 'error' }); return;
     }
     if (factores.error || aal.error) { setEstado({ tipo: 'error' }); return; }
-    // El factor de la zona interna de Tentare no cuenta aquí (lib/auth/doble-factor-reglas.ts).
+    // El factor de la zona interna de Centra no cuenta aquí (lib/auth/doble-factor-reglas.ts).
     const verificado = factores.data.totp.find((f) => f.status === 'verified' && !esFactorInterno(f)) ?? null;
     const soloInterno = !verificado && factores.data.totp.some((f) => f.status === 'verified');
     setEstado({
@@ -172,7 +172,7 @@ export function DosPasos({ volverA }: { volverA: string }) {
         </>
       ) : estado.soloInterno ? (
         <p className="t-meta" style={{ lineHeight: 1.5 }}>
-          Tu cuenta tiene una app de códigos para la zona interna de Tentare. Aquí no se pide.
+          Tu cuenta tiene una app de códigos para la zona interna de Centra. Aquí no se pide.
         </p>
       ) : !activando ? (
         <>

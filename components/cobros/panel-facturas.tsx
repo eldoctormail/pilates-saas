@@ -44,7 +44,7 @@ export function PanelFacturas() {
   // como si sí: la pantalla de siempre, sin un aviso que parpadee.
   const emite = studio ? emiteFacturas(studio.modoFacturacion) : true;
   const conVerifactu = studio?.modoFacturacion === 'verifactu';
-  const emisorNombre = studio?.nombre ?? 'Tentare';
+  const emisorNombre = studio?.nombre ?? 'Centra';
   const emisorNif = studio?.nif ?? '—';
   const emisorDireccion = [studio?.direccion, studio?.ciudad].filter(Boolean).join(', ') || '—';
 

@@ -22,7 +22,7 @@ export default function Contenido() {
 
       <ComoSolucionarlo>
         <p style={{ margin: '0 0 12px' }}>
-          No hace falta que hagas nada en el primer fallo: Tentare lo reintenta solo a los 3 y a los 7 días del
+          No hace falta que hagas nada en el primer fallo: Centra lo reintenta solo a los 3 y a los 7 días del
           vencimiento — tres intentos en total. Al cliente le llega un aviso en el primer fallo para que revise su
           tarjeta; si un reintento entra, el plan sigue activo.
         </p>

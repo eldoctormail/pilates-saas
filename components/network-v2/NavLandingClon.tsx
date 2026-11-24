@@ -60,7 +60,7 @@ export function NavLandingClon() {
         }}
       >
         <Link href="/network" className="inline-flex shrink-0" onClick={() => setAbierto(false)}>
-          <LogoTentare formato="horizontal" tinta="blanco" producto="network" titulo="Tentare Network" alto={24} decorativo />
+          <LogoTentare formato="horizontal" tinta="blanco" producto="network" titulo="Centra Network" alto={24} decorativo />
         </Link>
         <div className="hidden sm:flex gap-[18px] items-center">
           {ENLACES.map((e, i) => (

@@ -27,13 +27,13 @@ export default function Contenido() {
           <li><strong>Efectivo</strong> — lo cuentas tú, y el recuento del cierre lo verifica.</li>
           <li><strong>Datáfono</strong> — se manda al lector; el cobro lo confirma Stripe.</li>
           <li><strong>Bizum</strong> — paga desde su móvil; también lo confirma Stripe.</li>
-          <li><strong>Tarjeta</strong> — el TPV de tu banco. Ese cobro Tentare no lo ve.</li>
+          <li><strong>Tarjeta</strong> — el TPV de tu banco. Ese cobro Centra no lo ve.</li>
           <li><strong>Transferencia</strong> — ya te la han hecho.</li>
         </ul>
         <p>
           La diferencia entre los tres primeros y los dos últimos importa, y por eso la pantalla no los trata
           igual. En Datáfono y Bizum, «Cobrado» significa que Stripe lo ha confirmado. En Tarjeta y Transferencia
-          la pantalla dice <strong>«Registrado»</strong>: lo has dicho tú y nadie más puede saberlo, así que Tentare te lo pregunta
+          la pantalla dice <strong>«Registrado»</strong>: lo has dicho tú y nadie más puede saberlo, así que Centra te lo pregunta
           en vez de darlo por hecho. Registrarlo es correcto; pintarlo como un cobro verificado no lo sería.
         </p>
         <p style={{ margin: 0 }}>
@@ -46,12 +46,12 @@ export default function Contenido() {
         <p>Tres formas:</p>
         <ul style={{ paddingLeft: 20, lineHeight: 1.7 }}>
           <li><strong>Efectivo</strong> — lo cuentas tú, y el recuento del cierre lo verifica.</li>
-          <li><strong>Tarjeta</strong> — el posnet o el Point. Ese cobro Tentare no lo ve.</li>
+          <li><strong>Tarjeta</strong> — el posnet o el Point. Ese cobro Centra no lo ve.</li>
           <li><strong>Transferencia</strong> — ya te la han hecho, o te pagó con el QR de Mercado Pago.</li>
         </ul>
         <p style={{ margin: 0 }}>
           En Tarjeta y Transferencia la pantalla dice <strong>«Registrado»</strong>: lo has dicho tú y nadie más puede
-          saberlo, así que Tentare te lo pregunta en vez de darlo por hecho. Registrarlo es correcto; pintarlo como un
+          saberlo, así que Centra te lo pregunta en vez de darlo por hecho. Registrarlo es correcto; pintarlo como un
           cobro verificado no lo sería.
         </p>
         </>)}
@@ -79,7 +79,7 @@ export default function Contenido() {
 
       {ES ? (
       <AyudaResultado>
-        Cada venta, salvo en efectivo, lleva su factura, igual que cualquier otro cobro de Tentare (la de efectivo la
+        Cada venta, salvo en efectivo, lleva su factura, igual que cualquier otro cobro de Centra (la de efectivo la
         haces desde Cobros si te la piden), y queda en <strong>Ventas</strong>{' '}
         con su número y su método. Ojo con una cosa: la factura de una venta sin cliente se emite como{' '}
         <strong>simplificada</strong>, y asignarla después <em>no</em> le cambia el receptor — un documento fiscal
@@ -88,7 +88,7 @@ export default function Contenido() {
       ) : (
       <AyudaResultado>
         Cada venta queda en <strong>Ventas</strong> con su número y su método, y lleva su comprobante como cualquier
-        otro cobro de Tentare. La factura electrónica de ARCA la emites desde el recibo cobrado.
+        otro cobro de Centra. La factura electrónica de ARCA la emites desde el recibo cobrado.
       </AyudaResultado>
       )}
     </>

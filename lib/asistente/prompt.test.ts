@@ -26,11 +26,11 @@ test('la fecha va DESPUÉS del punto de caché, en contextoDelDia', () => {
 test('el nombre del estudio, su ciudad y su plan van en el contexto del día (no en el prefijo)', () => {
   const c = contextoDelDia({ hoy: '2026-10-06', rol: 'PROPIETARIO', estudio: { nombre: 'Pilates Centro', ciudad: 'Almería', plan: 'BASE', enPrueba: false } });
   assert.match(c, /El estudio se llama «Pilates Centro», en Almería\./);
-  assert.match(c, /Su plan de Tentare es Founding Studio\./);
-  assert.match(contextoDelDia({ hoy: '2026-10-06', rol: 'PROPIETARIO', estudio: { nombre: 'X', ciudad: null, plan: 'ESTUDIO', enPrueba: true } }), /«X»\. Su plan de Tentare es Estudio, en prueba gratuita\./);
+  assert.match(c, /Su plan de Centra es Founding Studio\./);
+  assert.match(contextoDelDia({ hoy: '2026-10-06', rol: 'PROPIETARIO', estudio: { nombre: 'X', ciudad: null, plan: 'ESTUDIO', enPrueba: true } }), /«X»\. Su plan de Centra es Estudio, en prueba gratuita\./);
   // Sin datos, no inventa nada; un plan desconocido no se nombra.
   const vacio = contextoDelDia({ hoy: '2026-10-06', rol: 'PROPIETARIO', estudio: { nombre: '  ', ciudad: null, plan: 'RARO', enPrueba: false } });
-  assert.doesNotMatch(vacio, /se llama|plan de Tentare/);
+  assert.doesNotMatch(vacio, /se llama|plan de Centra/);
   assert.doesNotMatch(PROMPT_SISTEMA, /El estudio se llama/);
 });
 
@@ -56,22 +56,22 @@ test('glosario: «activa» no es «pagando»; quien tiene plan o bono vigente es
   assert.match(PROMPT_SISTEMA, /No digas «pagando».*salvo con datos de cobros/);
 });
 
-test('no es un chat cerrado: guía en Tentare y da consejo de negocio con sus datos, sin la coletilla final', () => {
+test('no es un chat cerrado: guía en Centra y da consejo de negocio con sus datos, sin la coletilla final', () => {
   assert.match(PROMPT_SISTEMA, /# Consejo de negocio/);
   assert.match(PROMPT_SISTEMA, /alumnas_sin_venir/);
   assert.match(PROMPT_SISTEMA, /No cierres con «¿Hay algo más del negocio que quieras saber\?»/);
   assert.doesNotMatch(PROMPT_SISTEMA, /No eres un chat general/);
 });
 
-test('el mapa de Tentare sale del menú real y no ofrece nada congelado ni oculto', async () => {
+test('el mapa de Centra sale del menú real y no ofrece nada congelado ni oculto', async () => {
   const { navSections } = await import('../nav-config.ts');
-  const mapa = PROMPT_SISTEMA.slice(PROMPT_SISTEMA.indexOf('# Mapa de Tentare'), PROMPT_SISTEMA.indexOf('# Glosario del estudio'));
+  const mapa = PROMPT_SISTEMA.slice(PROMPT_SISTEMA.indexOf('# Mapa de Centra'), PROMPT_SISTEMA.indexOf('# Glosario del estudio'));
   // Cada entrada del menú que ve la propietaria está en el mapa…
   for (const item of navSections.flatMap(s => s.items)) {
     assert.ok(mapa.includes(item.label), `falta «${item.label}» en el mapa`);
   }
   // …y lo congelado (Network, Chat de equipo, vídeos, kiosko) o escondido (Marketing) no.
-  for (const fuera of ['Tentare Network', 'Chat de equipo', 'Oferta digital', 'Kiosko', 'Marketing']) {
+  for (const fuera of ['Centra Network', 'Chat de equipo', 'Oferta digital', 'Kiosko', 'Marketing']) {
     assert.ok(!mapa.includes(fuera), `el mapa ofrece «${fuera}», que no está en el menú`);
   }
   assert.match(mapa, /ClassPass, Urban Sports Club y Wellhub/);

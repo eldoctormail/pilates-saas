@@ -4,7 +4,7 @@
 // El importador de membresías casa por NOMBRE. Eso funciona cuando el estudio
 // llega vacío y crea sus tarifas copiando los nombres del software viejo — que
 // es como se probó. Con un estudio que YA tiene su catálogo montado, no casa
-// nada: Momence exporta "10 Class Pack" o "Monthly Unlimited", y en Tentare esa
+// nada: Momence exporta "10 Class Pack" o "Monthly Unlimited", y en Centra esa
 // misma tarifa se llama "Bono 10 Reformer". Cada fila fallaba con «No existe el
 // plan X en tu catálogo» y la dueña no tenía dónde decir «X es mi Y».
 //

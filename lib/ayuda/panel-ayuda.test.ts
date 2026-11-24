@@ -5,7 +5,7 @@ import {
 } from './panel-ayuda.ts';
 import { AYUDA_POR_PANTALLA } from './pantallas.ts';
 
-test('las pestañas son cinco, «Tentare» solo con asistente, y lo demás no es una pestaña', () => {
+test('las pestañas son cinco, «Centra» solo con asistente, y lo demás no es una pestaña', () => {
   for (const p of ['inicio', 'tentare', 'novedades', 'mensajes', 'ayuda']) assert.equal(esPestanaAyuda(p), true, p);
   assert.deepEqual(pestanasVisibles(true), ['inicio', 'tentare', 'novedades', 'mensajes', 'ayuda']);
   assert.deepEqual(pestanasVisibles(false), ['inicio', 'novedades', 'mensajes', 'ayuda']);
@@ -20,7 +20,7 @@ test('Inicio enseña las guías de la pantalla, la de su ficha primero, y nunca 
   assert.ok(r.guias.every(g => g.estado === 'publicado'));
 });
 
-test('una pantalla sin ficha cae en «Empezar con Tentare», no en un panel vacío', () => {
+test('una pantalla sin ficha cae en «Empezar con Centra», no en un panel vacío', () => {
   for (const ruta of ['/ruta-que-no-existe', '', null, undefined]) {
     const r = guiasParaInicio(ruta);
     assert.equal(r.titulo, 'Para empezar', String(ruta));

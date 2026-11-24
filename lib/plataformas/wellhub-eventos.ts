@@ -2,7 +2,7 @@
 //
 // Tres traducciones y nada más:
 //   1. el cuerpo que manda Wellhub → un evento validado (`leerEventoWellhub`);
-//   2. por qué Tentare no acepta una reserva → el PATCH que Wellhub entiende
+//   2. por qué Centra no acepta una reserva → el PATCH que Wellhub entiende
 //      (`respuestaReservaWellhub`, con su `reason_category`);
 //   3. lo que contesta su validación de check-in → qué ha pasado (`leerValidacionWellhub`).
 //
@@ -362,7 +362,7 @@ export function avisoValidacionWellhub(r: ResultadoValidacionWellhub): string | 
     case 'cancelado':
       return 'Canceló su check-in en la app de Wellhub.';
     case 'sin-permiso':
-      return 'Wellhub ha rechazado la conexión de Tentare. Avísanos para revisarla.';
+      return 'Wellhub ha rechazado la conexión de Centra. Avísanos para revisarla.';
     case 'error':
       return 'Wellhub no ha contestado. Vuelve a marcarla en un momento.';
   }

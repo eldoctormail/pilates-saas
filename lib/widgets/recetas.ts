@@ -90,7 +90,7 @@ export interface Receta {
 const MOTIVO_POR_FORMA: Record<MetodoIntegracion, string> = {
   iframe: 'Va dentro de la página y se adapta sola a su alto.',
   nativa: 'Va dentro de la página, sin marco.',
-  popup: 'Funciona mejor con un botón que se abre encima: quien viene por primera vez reserva sin ir a tu página de Tentare.',
+  popup: 'Funciona mejor con un botón que se abre encima: quien viene por primera vez reserva sin ir a tu página de Centra.',
   boton: 'Un botón que lleva a tu página de reservas funciona en cualquier web.',
   enlace: 'Va mejor en un enlace: para un post, una story o tu newsletter.',
 };
@@ -308,7 +308,7 @@ export function mensajeParaTuWeb(d: {
   return {
     asunto: `Para la web de ${d.estudio}: ${d.queEs.toLowerCase()}`,
     cuerpo: [
-      `Hola, ¿puedes poner esto en la web de ${d.estudio}? Es ${d.queEs.toLowerCase()} de Tentare (${d.forma.toLowerCase()}).`,
+      `Hola, ¿puedes poner esto en la web de ${d.estudio}? Es ${d.queEs.toLowerCase()} de Centra (${d.forma.toLowerCase()}).`,
       `${d.esEnlace ? 'El enlace' : 'El código'}:\n${d.codigo}`,
       `Pasos:\n${pasos}`,
       `Guía: ${d.guia}`,

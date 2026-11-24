@@ -1,4 +1,4 @@
-// Los correos de Tentare sobre la CUENTA del estudio: su suscripción, qué pasa
+// Los correos de Centra sobre la CUENTA del estudio: su suscripción, qué pasa
 // con sus datos si no paga o se da de baja, quién entra a su panel y cómo ha ido la semana.
 // Aquí solo se decide qué dice cada uno; cómo se ve lo pone `correoTentare`.
 
@@ -29,7 +29,7 @@ export function correoFalloPagoSaas(p: {
     // ⚠️ La ruta de verdad. Antes decía «Ajustes → Facturación», que no existe.
     nota: 'También desde tu panel: Suscripción → «Facturas, tarjeta y cambio de plan».',
     acento: TENTARE.alerta,
-    motivo: `Te escribimos porque eres la propietaria de ${p.estudioNombre} en Tentare.`,
+    motivo: `Te escribimos porque eres la propietaria de ${p.estudioNombre} en Centra.`,
   });
 }
 
@@ -63,7 +63,7 @@ export function correoImpagoSaas(p: {
       parrafos: [`Hemos podido cobrar la suscripción de ${p.estudioNombre} al plan ${p.plan}${importe}. No tienes que hacer nada más.`],
       boton: null,
       acento: TENTARE.dorado,
-      motivo: `Te escribimos porque eres la propietaria de ${p.estudioNombre} en Tentare.`,
+      motivo: `Te escribimos porque eres la propietaria de ${p.estudioNombre} en Centra.`,
     });
   }
   const titulares = {
@@ -94,7 +94,7 @@ export function correoImpagoSaas(p: {
     boton: { href: p.urlActualizar, texto: 'Actualizar la tarjeta' },
     nota: 'También desde tu panel: Suscripción → «Facturas, tarjeta y cambio de plan».',
     acento: TENTARE.alerta,
-    motivo: `Te escribimos porque eres la propietaria de ${p.estudioNombre} en Tentare.`,
+    motivo: `Te escribimos porque eres la propietaria de ${p.estudioNombre} en Centra.`,
   });
 }
 
@@ -142,7 +142,7 @@ export function correoEstudioVencido(p: {
       ? 'Último aviso sobre los datos de tu estudio'
       : baja ? 'Descarga los datos de tu estudio' : 'Tus datos se conservarán hasta una fecha',
     parrafos: [baja
-      ? `La suscripción de ${p.estudioNombre} a Tentare ha terminado.`
+      ? `La suscripción de ${p.estudioNombre} a Centra ha terminado.`
       : `La prueba gratuita de ${p.estudioNombre} terminó y el estudio no tiene un plan activo.`],
     destacado: { titulo: p.fechaPurga, texto: queDiceLaFecha },
     // En una baja lo primero es llevarse los datos; en una prueba, elegir plan.
@@ -152,7 +152,7 @@ export function correoEstudioVencido(p: {
       ? `La descarga es ${queLleva}. Si reactivas la suscripción antes de esa fecha, todo queda como estaba. Las facturas y lo que la ley obliga a guardar se conservan durante el plazo legal.`
       : `Si eliges un plan, todo queda como estaba. Si no, descarga tus datos antes de esa fecha: ${queLleva}. Las facturas y lo que la ley obliga a guardar se conservan durante el plazo legal.`,
     acento: final ? TENTARE.alerta : null,
-    motivo: `Te escribimos porque eres la propietaria de ${p.estudioNombre} en Tentare.`,
+    motivo: `Te escribimos porque eres la propietaria de ${p.estudioNombre} en Centra.`,
   });
 }
 
@@ -167,10 +167,10 @@ export function correoDatosBorrados(p: { estudioNombre: string; fecha: string })
     antetitulo: 'Tu estudio',
     titular: 'Hemos borrado los datos de tu estudio',
     parrafos: [
-      `El ${p.fecha} borramos de Tentare los datos personales de los clientes y del equipo de ${p.estudioNombre}: sus fichas quedan anonimizadas, y se han borrado la salud, las notas, los mensajes, las credenciales de las integraciones y las copias de seguridad.`,
+      `El ${p.fecha} borramos de Centra los datos personales de los clientes y del equipo de ${p.estudioNombre}: sus fichas quedan anonimizadas, y se han borrado la salud, las notas, los mensajes, las credenciales de las integraciones y las copias de seguridad.`,
     ],
     nota: 'Conservamos bloqueados, solo durante el plazo que marca la ley, las facturas, los recibos, los registros de facturación y los mandatos SEPA. Este correo es la confirmación del borrado: guárdalo si lo necesitas.',
-    motivo: `Te escribimos porque eres la propietaria de ${p.estudioNombre} en Tentare.`,
+    motivo: `Te escribimos porque eres la propietaria de ${p.estudioNombre} en Centra.`,
   });
 }
 
@@ -208,7 +208,7 @@ export function correoAccesoActivado(p: {
     destacado: p.emailCuenta ? { titulo: 'Ha entrado con este correo', texto: p.emailCuenta } : null,
     boton: { href: p.urlEquipo, texto: 'Ver mi equipo' },
     nota: 'Si no esperabas este acceso, entra en Equipo y dale de baja: se le retira al momento.',
-    motivo: `Te escribimos porque eres la propietaria de ${p.estudioNombre} en Tentare.`,
+    motivo: `Te escribimos porque eres la propietaria de ${p.estudioNombre} en Centra.`,
   });
 }
 
@@ -224,10 +224,10 @@ export function correoCodigoAcceso(p: { codigo: string; minutos: number }): stri
     preheader: `Para terminar de entrar a tu panel. Caduca en ${p.minutos} minutos.`,
     antetitulo: 'Tu acceso',
     titular: 'Tu código para entrar',
-    parrafos: [`Escríbelo en la pantalla de Tentare para terminar de entrar al panel. Caduca en ${p.minutos} minutos y solo sirve una vez.`],
+    parrafos: [`Escríbelo en la pantalla de Centra para terminar de entrar al panel. Caduca en ${p.minutos} minutos y solo sirve una vez.`],
     destacado: { titulo: 'Código', texto: legible },
-    nota: 'Si no estabas entrando tú, alguien tiene tu contraseña: cámbiala ya con «He olvidado mi contraseña» en la pantalla de entrar. No compartas este código: nadie de Tentare te lo pedirá nunca.',
-    motivo: 'Te escribimos porque alguien acaba de entrar con tu contraseña a tu cuenta de Tentare, que tiene la verificación en dos pasos activada.',
+    nota: 'Si no estabas entrando tú, alguien tiene tu contraseña: cámbiala ya con «He olvidado mi contraseña» en la pantalla de entrar. No compartas este código: nadie de Centra te lo pedirá nunca.',
+    motivo: 'Te escribimos porque alguien acaba de entrar con tu contraseña a tu cuenta de Centra, que tiene la verificación en dos pasos activada.',
   });
 }
 
@@ -253,6 +253,6 @@ export function correoResumenSemanal(p: {
       : null,
     boton: { href: p.urlCentroDeControl, texto: 'Abrir Centro de Control' },
     nota: 'Es el único aviso que mandamos cuando una semana ha sido así de tranquila. Puedes desactivarlo desde Centro de Control.',
-    motivo: `Te escribimos porque eres la propietaria de ${p.estudioNombre} en Tentare.`,
+    motivo: `Te escribimos porque eres la propietaria de ${p.estudioNombre} en Centra.`,
   });
 }

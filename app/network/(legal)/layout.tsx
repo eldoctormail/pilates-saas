@@ -6,7 +6,7 @@ import { NW_FONDO, NW_TINTA, NW_MUTED, NW_MUTED_2, NW_BORDE, NW_PRODUCTO } from 
 // Chrome compartido de las dos páginas legales propias de Network
 // (/network/terminos, /network/privacidad) — pedido explícito del
 // fundador tras el clon literal de la landing (#1482): el marketplace
-// tiene una relación de tres partes (instructora↔estudio↔Tentare) que las
+// tiene una relación de tres partes (instructora↔estudio↔Centra) que las
 // páginas legales generales (/terminos, /privacidad) no cubren, así que
 // necesita las suyas propias. Mismo patrón que app/(legal)/layout.tsx
 // (cabecera + prosa + nav entre documentos + pie), pero con la marca y los
@@ -24,8 +24,8 @@ export default function NetworkLegalLayout({ children }: { children: React.React
       <header
         style={{ borderBottom: `1px solid ${NW_BORDE}`, maxWidth: 780, margin: '0 auto', padding: '18px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12 }}
       >
-        <Link href="/network" aria-label="Ir a Tentare Network" className="inline-flex items-center">
-          <LogoTentare formato="horizontal" tinta="tinta" producto="network" titulo="Tentare Network" alto={24} decorativo />
+        <Link href="/network" aria-label="Ir a Centra Network" className="inline-flex items-center">
+          <LogoTentare formato="horizontal" tinta="tinta" producto="network" titulo="Centra Network" alto={24} decorativo />
         </Link>
         <Link href="/network" style={{ fontSize: 13, fontWeight: 600, color: NW_PRODUCTO, textDecoration: 'none', whiteSpace: 'nowrap' }}>
           ← Volver a Network
@@ -39,11 +39,11 @@ export default function NetworkLegalLayout({ children }: { children: React.React
           {DOCUMENTOS.map((d) => (
             <Link key={d.href} href={d.href} style={{ fontSize: 13, color: NW_MUTED, textDecoration: 'none' }}>{d.label}</Link>
           ))}
-          <Link href="/legal" style={{ fontSize: 13, color: NW_MUTED, textDecoration: 'none' }}>Aviso legal de Tentare</Link>
+          <Link href="/legal" style={{ fontSize: 13, color: NW_MUTED, textDecoration: 'none' }}>Aviso legal de Centra</Link>
           <Link href="/cookies" style={{ fontSize: 13, color: NW_MUTED, textDecoration: 'none' }}>Cookies</Link>
         </nav>
         <p style={{ marginTop: 14, fontSize: 12, color: NW_MUTED_2 }}>
-          © 2026 Tentare Network · Última actualización: {LEGAL.actualizado}
+          © 2026 Centra Network · Última actualización: {LEGAL.actualizado}
         </p>
       </main>
 

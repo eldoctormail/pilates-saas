@@ -26,8 +26,8 @@ const ESTADO_VERIFICACION_INFO: Record<ExperienciaNetwork['estadoVerificacion'],
 };
 
 // Picker de estudio para "Verificar experiencia" — búsqueda en vivo contra
-// /api/network/estudios/buscar (solo estudios Tentare reales: una
-// experiencia en un estudio fuera de Tentare no se puede verificar en V1,
+// /api/network/estudios/buscar (solo estudios Centra reales: una
+// experiencia en un estudio fuera de Centra no se puede verificar en V1,
 // docs/NETWORK-IMPLEMENTATION-PLAN.md §3, límite conocido).
 function PickerEstudio({ onElegir, onCancelar, enviando, v2 }: {
   onElegir: (estudio: EstudioBusqueda) => void;
@@ -63,7 +63,7 @@ function PickerEstudio({ onElegir, onCancelar, enviando, v2 }: {
           autoFocus className={`${v2 ? 'w-full px-3.5 py-2.5 rounded-xl text-[14px] outline-none' : inputCls} pl-8`}
           style={v2 ? { border: `1px solid ${NW_BORDE}`, color: NW_TINTA } : undefined}
           value={q} onChange={e => setQ(e.target.value)}
-          placeholder="Busca el estudio en Tentare…"
+          placeholder="Busca el estudio en Centra…"
         />
       </div>
       {buscando && (
@@ -73,7 +73,7 @@ function PickerEstudio({ onElegir, onCancelar, enviando, v2 }: {
       )}
       {!buscando && q.trim().length >= 2 && resultados.length === 0 && (
         <p className="text-[11px]" style={v2 ? { color: NW_MUTED_2 } : undefined}>
-          Ningún estudio Tentare coincide. Solo se pueden verificar experiencias en estudios que usan Tentare.
+          Ningún estudio Centra coincide. Solo se pueden verificar experiencias en estudios que usan Centra.
         </p>
       )}
       <div className="space-y-1">

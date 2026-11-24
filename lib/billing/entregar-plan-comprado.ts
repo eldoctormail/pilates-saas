@@ -122,7 +122,7 @@ export interface CompraPlan {
    */
   esInvitada: boolean;
   /**
-   * "Información adicional" del formulario de pago sin login (diseño "Tentare
+   * "Información adicional" del formulario de pago sin login (diseño "Centra
    * Portal Reservas"): género, cómo nos ha conocido y código postal van a
    * `campos_extra` (JSONB ya existente en `socios`, sin migración); cumpleaños
    * va directo a `fecha_nacimiento` (columna ya existente). Mismo criterio que

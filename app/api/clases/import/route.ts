@@ -58,7 +58,7 @@ interface Cuerpo {
   rows?: FilaClase[];
   semanas?: number;   // cuántas semanas expandir las filas recurrentes
   desde?: string;     // 'YYYY-MM-DD' — inicio de la expansión
-  /** De dónde viene el horario. El propuesto por Tentare al empezar y el que
+  /** De dónde viene el horario. El propuesto por Centra al empezar y el que
    *  la propietaria importa de un Excel son dos caminos con conversiones muy
    *  distintas, y mezclarlos en la misma métrica oculta cuál funciona. */
   origen?: 'onboarding' | 'importacion' | 'imagen';

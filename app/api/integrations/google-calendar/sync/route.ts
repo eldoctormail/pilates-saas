@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
   // Auditoría 2026-09-16 (AUTH-2): mismo gate que sus nueve hermanas de
   // /api/integrations (ver gmail/disconnect). Esta ruta ESCRIBE
   // `sesiones.google_event_id` con service-role, así que sin él una
-  // instructora —que desde la retirada de Tentare Core no tiene ninguna
+  // instructora —que desde la retirada de Centra Core no tiene ninguna
   // pantalla de panel— podía escribir columnas que la RLS le niega y vaciar el
   // Google Calendar de la propietaria.
   if (sesion.rol !== 'PROPIETARIO') {
@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
     // El cajón tiene «Desconectar» justo debajo de este botón.
     if (e instanceof PermisoGoogleRetirado) {
       return NextResponse.json({
-        error: 'Google ya no deja a Tentare entrar en tu calendario. Desconéctalo aquí abajo y vuelve a conectarlo.',
+        error: 'Google ya no deja a Centra entrar en tu calendario. Desconéctalo aquí abajo y vuelve a conectarlo.',
       }, { status: 409 });
     }
     return errorInterno('google-calendar:sync', e, 'No hemos podido hablar con Google. Vuelve a intentarlo en un rato.', 502);

@@ -30,7 +30,7 @@ import { nombreGuardado } from '@/lib/nativo/nombre-apple';
  *     sesión y sin ficha, esta pantalla es «Tus datos»: nombre, teléfono y el
  *     consentimiento del ESTUDIO. Aquí llega desde `/acceso/verificar` (rama
  *     sin-firma, `?firma=1`) tras el código, Google o Apple, o desde la app
- *     Tentare cuando eliges un estudio en el que aún no estás.
+ *     Centra cuando eliges un estudio en el que aún no estás.
  *
  * ⚠️ Lo que no cambia, y es lo que importa del alta: la firma se guarda en
  * `sessionStorage` (`guardarFirma`) con el texto legal COMPLETO del estudio que
@@ -71,7 +71,7 @@ export default function RegistroPage() {
     if (!isLoading && autenticado && socia) r.replace(href('/acceso/verificar'));
   }, [isLoading, autenticado, socia, r, href]);
 
-  // «Tus datos» en cuanto hay sesión, aunque no venga `?firma=1` (la app Tentare
+  // «Tus datos» en cuanto hay sesión, aunque no venga `?firma=1` (la app Centra
   // manda aquí a quien ya ha entrado): pedirle otra vez correo sería pedirle
   // una cuenta que ya tiene.
   const tusDatos = sp.get('firma') === '1' || autenticado;
@@ -239,7 +239,7 @@ function TusDatos({ viaCodigo, autenticado, online, entrarConGoogle, alTerminar 
         <span style={{ fontSize: 'var(--t-small)', color: 'var(--muted-foreground)', lineHeight: 1.5 }}>
           He leído y acepto{' '}
           {/* El texto del ESTUDIO, el mismo que se firma, en una hoja: antes este
-              enlace llevaba a la política de Tentare, que no es lo que acepta. */}
+              enlace llevaba a la política de Centra, que no es lo que acepta. */}
           <button
             type="button" onClick={() => setVerLegal(true)} disabled={!legal}
             style={{ background: 'none', border: 'none', padding: 0, font: 'inherit', color: 'var(--foreground)', fontWeight: 700, textDecoration: 'underline', textUnderlineOffset: 2, cursor: 'pointer' }}

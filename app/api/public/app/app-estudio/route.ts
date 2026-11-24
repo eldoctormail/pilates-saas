@@ -9,7 +9,7 @@ import { sedesDeCadena } from '@/lib/app-nativa/app-de-cadena';
 export const dynamic = 'force-dynamic';
 
 // GET /api/public/app/app-estudio?bundle=<bundle id> | ?slug=<slug> — de qué estudio
-// es una app de tienda por estudio (la que sale de la cuenta de Tentare con su
+// es una app de tienda por estudio (la que sale de la cuenta de Centra con su
 // nombre, icono y color). La entrada de la app (`/app`) lo pregunta al abrirse, y el
 // script que compila la app de un estudio lee de aquí su nombre.
 //

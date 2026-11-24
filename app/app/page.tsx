@@ -30,7 +30,7 @@ import {
 } from '@/lib/app-nativa/mis-estudios';
 
 /**
- * La entrada de la app «Tentare» del App Store (decisión del fundador, 2-oct-2026;
+ * La entrada de la app «Centra» del App Store (decisión del fundador, 2-oct-2026;
  * rediseño del 4-oct tras comparar bsport, TIMP, Momence y Mindbody).
  *
  * Se entra con el EMAIL y un código de 6 cifras (o con Apple o Google): entrar y darse de alta es el mismo
@@ -50,7 +50,7 @@ import {
  * Una app de tienda de UN estudio (nombre, icono y color propios: `apps_estudio`) usa
  * esta misma entrada, pero fijada en su estudio: no lista ni busca otros, y entra
  * directa en él (o a darse de alta, si aún no es suya). Lo decide el bundle id de
- * la carcasa; sin una fila activa para él, esto es la app «Tentare» de siempre.
+ * la carcasa; sin una fila activa para él, esto es la app «Centra» de siempre.
  */
 
 // `color`: el de su tema, para la inicial que se ve mientras llega el icono (`AvatarEstudio`).
@@ -64,9 +64,9 @@ const SLUG = /^[a-z0-9-]{1,80}$/;
 const emailValido = (e: string) => /.+@.+\..+/.test(e.trim());
 
 /**
- * ¿Es esta la app de un estudio? `null` = no (la web o la app «Tentare»); `'error'` = no
+ * ¿Es esta la app de un estudio? `null` = no (la web o la app «Centra»); `'error'` = no
  * hemos podido comprobarlo; `'no-disponible'` = es la app de un estudio pero no está activa
- * (desactivada desde /interno). En los dos últimos NO se cae al selector de «Tentare»: una
+ * (desactivada desde /interno). En los dos últimos NO se cae al selector de «Centra»: una
  * app con el nombre de un estudio que enseña el logo de otro producto y un buscador con otros
  * estudios es peor que decir que no hay conexión o que no está disponible.
  */
@@ -103,10 +103,10 @@ export default function EntradaApp() {
   const [antesDeBuscar, setAntesDeBuscar] = useState<Fase>('puerta');
   const [estudios, setEstudios] = useState<Estudio[]>([]);
   // La app de un estudio fija la entrada en él. `listo`: ya sabemos si lo es (hasta
-  // entonces no se pinta ningún logo: en una app de estudio saldría el de Tentare un instante).
+  // entonces no se pinta ningún logo: en una app de estudio saldría el de Centra un instante).
   const [fijo, setFijo] = useState<{ listo: boolean; app: AppDeEstudio | null }>({ listo: false, app: null });
   // ¿Es la app de UN estudio (aunque no esté activa o no se haya podido comprobar)? Entonces nunca
-  // se ofrece la entrada genérica de Tentare, con su buscador de estudios.
+  // se ofrece la entrada genérica de Centra, con su buscador de estudios.
   const [deEstudio, setDeEstudio] = useState(false);
   // App de una CADENA: sus sedes, y en cuáles es ya alumna (para elegir a cuál entra).
   const [sedes, setSedes] = useState<(SedeDeLaApp & { suya: EstudioDeLaCuenta | null })[]>([]);
@@ -290,7 +290,7 @@ export default function EntradaApp() {
       <div style={{ maxWidth: 440, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 14 }}>
         {(fase === 'cargando' || fase === 'puerta' || fase === 'elegir' || fase === 'sede' || fase === 'sin-estudios' || fase === 'error') && (
           <div style={{ display: 'flex', justifyContent: 'center', padding: fase === 'puerta' ? '18px 0 14px' : '4px 0' }}>
-            {/* Nada hasta saber de qué app es: sin esto, en la de un estudio parpadearía el logo de Tentare. */}
+            {/* Nada hasta saber de qué app es: sin esto, en la de un estudio parpadearía el logo de Centra. */}
             {fijo.listo && (fijo.app
               ? <AvatarEstudio icono={fijo.app.icono} nombre={fijo.app.nombre} color={fijo.app.color} lado={fase === 'puerta' ? 72 : 52} radio={fase === 'puerta' ? 18 : 14} />
               : <LogoTentare alto={fase === 'puerta' ? 30 : 24} />)}
@@ -313,7 +313,7 @@ export default function EntradaApp() {
             {deEstudio || !fijo.listo ? 'No hemos podido abrir la app. Revisa la conexión e inténtalo de nuevo.' : 'No hemos podido cargar tus estudios. Revisa la conexión.'}
             <div style={{ marginTop: 10, display: 'flex', flexDirection: 'column', gap: 8 }}>
               <Button full onClick={() => void cargarEstudios()}>Reintentar</Button>
-              {/* Sin saber aún de qué app es, no se ofrece: llevaría a la entrada genérica de Tentare. */}
+              {/* Sin saber aún de qué app es, no se ofrece: llevaría a la entrada genérica de Centra. */}
               {fijo.listo && (fijo.app || !deEstudio) && <Button full variant="secondary" onClick={() => void salir()}>Entrar con otra cuenta</Button>}
             </div>
           </div>
@@ -326,7 +326,7 @@ export default function EntradaApp() {
               <p className="t-meta" style={{ marginTop: 4 }}>
                 {fijo.app
                   ? 'Escribe tu email. Si ya eres cliente, te reconocemos; si no, te das de alta.'
-                  : 'Escribe tu email. Si ya vas a un estudio con Tentare, te reconocemos.'}
+                  : 'Escribe tu email. Si ya vas a un estudio con Centra, te reconocemos.'}
               </p>
             </div>
             {global && <div role="alert" className="note note--danger" data-testid="error-acceso">{global}</div>}
@@ -554,7 +554,7 @@ function BuscarEstudio({ autoFocus = false }: { autoFocus?: boolean }) {
       {!corto && !buscando && !fallo && encontrados?.length === 0 && (
         <div style={{ padding: 14, borderRadius: 16, background: 'var(--muted)' }}>
           <p style={{ fontWeight: 800, margin: 0 }}>No sale ningún estudio con ese nombre</p>
-          <p className="t-meta" style={{ margin: '4px 0 0' }}>Puede que tu estudio todavía no use Tentare. Pídele el enlace de su app.</p>
+          <p className="t-meta" style={{ margin: '4px 0 0' }}>Puede que tu estudio todavía no use Centra. Pídele el enlace de su app.</p>
         </div>
       )}
       {!corto && encontrados && encontrados.length > 0 && (

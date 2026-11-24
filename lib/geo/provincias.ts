@@ -84,7 +84,7 @@ export function provinciaDeCp(codigoPostal: string | null | undefined): Provinci
 }
 
 /**
- * ¿Es de Canarias (35 Las Palmas, 38 Santa Cruz de Tenerife)? Tentare calcula
+ * ¿Es de Canarias (35 Las Palmas, 38 Santa Cruz de Tenerife)? Centra calcula
  * todo en hora peninsular (`TZ_ESTUDIO`, lib/utils.ts): allí los recordatorios
  * y los cierres de reserva irían una hora antes, y se dice.
  */

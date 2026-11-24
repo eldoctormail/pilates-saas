@@ -67,19 +67,19 @@ test('⚠️ un nombre de fuente solo admite letras, números y espacios', () =>
 
 test('la familia CSS lleva su pila de reserva detrás', () => {
   // Mientras la fuente carga —o si no existe— sin reserva se ve Times New
-  // Roman, que es peor que la tipografía de Tentare.
+  // Roman, que es peor que la tipografía de Centra.
   const r = resolverApariencia(null, params('fuente=Space Grotesk'));
   assert.equal(familiaCss(r), "'Space Grotesk', system-ui, sans-serif");
 });
 
-test('⚠️ una letra que sirve Tentare sale de `next/font`, no de Google (ni con su nombre de Google delante)', () => {
+test('⚠️ una letra que sirve Centra sale de `next/font`, no de Google (ni con su nombre de Google delante)', () => {
   // Antes /reservar pintaba un `<link>` a fonts.googleapis.com con cualquier
   // `?fuente=`: la IP de cada visitante de la web del estudio, a Google. Las
-  // familias que sirve Tentare ya las declara la app (app/_fuentes).
+  // familias que sirve Centra ya las declara la app (app/_fuentes).
   const r = resolverApariencia(null, params('fuente=Poppins&fuente-display=cormorant garamond'));
   assert.equal(familiaCss(r), 'var(--font-poppins), system-ui, sans-serif');
   assert.equal(familiaDisplayCss(r), "var(--font-cormorant), Georgia, 'Times New Roman', serif");
-  // La de Tentare, sin `--font-ui`: /reservar redefine esa variable con la
+  // La de Centra, sin `--font-ui`: /reservar redefine esa variable con la
   // pareja de la app, y la del widget no puede referirse a sí misma.
   const base = familiaCss(resolverApariencia(null, params('fuente=Instrument Sans')))!;
   assert.ok(base.startsWith('var(--font-ui-latin), var(--font-ui-ext)'), base);

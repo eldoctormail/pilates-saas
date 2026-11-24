@@ -125,7 +125,7 @@ export function ProximaClaseQueDaCard({ clase, foto, cuando, enCurso: enCursoPor
               {control.enviando ? 'Anotando…' : 'Empezar clase'}
             </button>
             <p style={{ margin: '6px 0 0', fontSize: 'var(--t-meta)', color: 'color-mix(in srgb, var(--accent-deep-foreground) 75%, transparent)' }}>
-              Tentare anota la hora a la que empiezas. Al acabar no tienes que hacer nada.
+              Centra anota la hora a la que empiezas. Al acabar no tienes que hacer nada.
             </p>
           </div>
         )}

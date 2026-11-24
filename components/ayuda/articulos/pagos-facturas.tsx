@@ -4,7 +4,7 @@ export default function Contenido() {
   return (
     <>
       <p>
-        Tentare emite tus facturas: cada cobro que se completa (salvo en efectivo, donde la haces si te la piden)
+        Centra emite tus facturas: cada cobro que se completa (salvo en efectivo, donde la haces si te la piden)
         genera su factura con número correlativo, sin que tengas que crearlas una a una. La encuentras en Cobros
         &gt; Facturas, con opción de descargarla en PDF. Lo único que hace falta es tu NIF, en Configuración &gt; Cobros y
         facturas, en «Datos fiscales e IVA»: sin él no sale ninguna.
@@ -13,7 +13,7 @@ export default function Contenido() {
         Veri*Factu va aparte y está desactivado de entrada: es lo que añade a cada factura su huella y su QR y envía su
         registro a la AEAT. Con el calendario publicado hoy, el reglamento de sistemas de facturación obliga desde el 1
         de enero de 2027 a las sociedades y desde el 1 de julio de 2027 al resto: confírmalo con tu asesoría. Para
-        activarlo, tu envío a la AEAT tiene que estar activo: lo autorizas en la propia AEAT y Tentare lo comprueba y lo
+        activarlo, tu envío a la AEAT tiene que estar activo: lo autorizas en la propia AEAT y Centra lo comprueba y lo
         activa. En «Facturación» ves en qué punto está. Si retiras tu autorización o caduca, tus facturas siguen
         saliendo, sin envío, hasta que la renueves.
       </p>

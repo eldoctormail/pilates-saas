@@ -76,7 +76,7 @@ const INTEGRACIONES: AppDeTienda[] = ([
   { id: 'kisi', nombre: 'Kisi', frase: 'Abre la puerta de tu estudio sola con cada check-in de tus clientes.', categoria: 'agenda', pestana: 'kisi' },
   { id: 'klaviyo', nombre: 'Klaviyo', frase: 'Lleva a Klaviyo los clientes que aceptaron recibir marketing.', categoria: 'marketing', pestana: 'klaviyo' },
   { id: 'mailchimp', nombre: 'Mailchimp', frase: 'Lleva a tu audiencia de Mailchimp los clientes que aceptaron recibir marketing.', categoria: 'marketing', pestana: 'mailchimp' },
-  { id: 'zapier', nombre: 'Zapier', frase: 'Conecta Tentare con miles de apps. La conexión se autoriza desde Zapier.', categoria: 'automatizar', pestana: 'zapier' },
+  { id: 'zapier', nombre: 'Zapier', frase: 'Conecta Centra con miles de apps. La conexión se autoriza desde Zapier.', categoria: 'automatizar', pestana: 'zapier' },
 ] as const).map((i): AppDeTienda => ({ ...i, origen: 'integracion', precio: { tipo: 'incluida' }, href: hrefIntegracion(i.pestana) }));
 
 const PLATAFORMAS: AppDeTienda[] = ([

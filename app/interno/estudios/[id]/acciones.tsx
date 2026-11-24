@@ -238,7 +238,7 @@ export function AccionesEstudio({ id, plan, suspendido, motivo, reviewBoost, api
               : 'Sin vincular. '}
             {wellhub.credenciales
               ? 'Publica las clases con plazas cedidas a Wellhub si el estudio tiene activado «Vendo en Wellhub».'
-              : 'Tentare aún no tiene las credenciales de Wellhub: se puede vincular, pero no se publica nada hasta tenerlas.'}
+              : 'Centra aún no tiene las credenciales de Wellhub: se puede vincular, pero no se publica nada hasta tenerlas.'}
           </p>
           <div className="flex flex-wrap items-center gap-2">
             <input value={gymWellhub} onChange={e => setGymWellhub(e.target.value)} placeholder="Gym" inputMode="numeric"

@@ -51,9 +51,9 @@ export function PantallaInicioVisita({ capitulos, obligatoria, onEmpezar, onSali
 }) {
   const minutos = capitulos.reduce((n, c) => n + c.minutos, 0) || MINUTOS_TOTALES;
   return (
-    <Marco etiqueta="Visita guiada de Tentare">
+    <Marco etiqueta="Visita guiada de Centra">
       <p className="text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">Visita guiada</p>
-      <h2 className="mt-1 text-2xl font-extrabold tracking-tight text-foreground text-balance">Vamos a recorrer Tentare juntas</h2>
+      <h2 className="mt-1 text-2xl font-extrabold tracking-tight text-foreground text-balance">Vamos a recorrer Centra juntas</h2>
       <p className="mt-3 text-[14.5px] leading-relaxed text-muted-foreground text-pretty">
         {capitulos.length} capítulos, unos {minutos} minutos en total. Cada uno dura entre {Math.min(...capitulos.map(c => c.minutos))} y {Math.max(...capitulos.map(c => c.minutos))} minutos
         y puedes parar al acabar cualquiera y seguir otro día: te esperamos donde lo dejaste. Lo que ya tienes hecho te lo marcamos con un ✓.
@@ -156,7 +156,7 @@ export function PantallaFinVisita({ aplazados, onTerminar, onIr }: {
       <div className="flex justify-center">
         <span className="grid size-16 place-items-center rounded-full bg-success/15 text-success" aria-hidden><Check size={32} /></span>
       </div>
-      <h2 className="mt-4 text-center text-2xl font-extrabold tracking-tight text-foreground text-balance">Has recorrido Tentare entera</h2>
+      <h2 className="mt-4 text-center text-2xl font-extrabold tracking-tight text-foreground text-balance">Has recorrido Centra entera</h2>
       <p className="mt-3 text-center text-[14.5px] leading-relaxed text-muted-foreground text-pretty">
         Ya sabes dónde está todo. Y si quieres repasar algo, está explicado por escrito en «Primeros pasos».
       </p>

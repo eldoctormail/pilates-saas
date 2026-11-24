@@ -10,7 +10,7 @@ import { join, relative } from 'node:path';
 //    socia y no lleva su `socio_id` sobrevive a la supresión con el nombre dentro.
 //    Por eso toda inserción declara `socio_id` de forma explícita (null solo
 //    cuando no hay socia de por medio).
-//  · `origen` 'TENTARE' solo lo escribe el servidor, y solo cuando Tentare actuó
+//  · `origen` 'TENTARE' solo lo escribe el servidor, y solo cuando Centra actuó
 //    o apuntó algo solo. En TypeScript, el piloto automático (lo vigila este test);
 //    en SQL, la incidencia CODIGO_REPETIDO_AL_ASIGNAR que deja
 //    `asignar_venta_pos_a_socia` (migr 20261016140551), que este test no lee. La

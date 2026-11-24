@@ -1,7 +1,7 @@
-// Hasta cuándo vale un pago de Mercado Pago abierto desde Tentare. Puro: lo
+// Hasta cuándo vale un pago de Mercado Pago abierto desde Centra. Puro: lo
 // usan el checkout y los tests.
 
-/** Validez máxima de un pago de Mercado Pago abierto desde Tentare. */
+/** Validez máxima de un pago de Mercado Pago abierto desde Centra. */
 export const HORAS_VALIDEZ_COMPRA = 24;
 /** Menos que esto hasta que se cierre la reserva de la clase: no se abre el pago (no daría tiempo a pagar). */
 export const MINIMO_PARA_PAGAR_CLASE_MS = 15 * 60 * 1000;

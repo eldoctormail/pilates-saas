@@ -28,7 +28,7 @@ export const TEXTO_BLOQUEO_PANEL =
 
 /**
  * Horas que tiene el estudio para revisar una denuncia antes de que la pueda
- * resolver Tentare. Es la MISMA cifra que `resolver_denuncia` en SQL
+ * resolver Centra. Es la MISMA cifra que `resolver_denuncia` en SQL
  * (`interval '24 hours'`): un test las cruza.
  */
 export const HORAS_REVISION_ESTUDIO = 24;

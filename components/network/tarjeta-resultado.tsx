@@ -34,7 +34,7 @@ export function TarjetaResultadoNetwork({
 }) {
   // Contador honesto de badges de confianza (identidad, experiencia,
   // referencia profesional, actividad reciente) — nunca un porcentaje
-  // fabricado, ver Tentare Brain / .claude/tentare-os.md sobre el bug de
+  // fabricado, ver Centra Brain / .claude/tentare-os.md sobre el bug de
   // "Compatibilidad 87%". Misma función que ya ordena el buscador
   // (lib/network/ranking.ts), ahora también se enseña.
   const verificaciones = contarBadgesVerificacion(perfil, new Date());

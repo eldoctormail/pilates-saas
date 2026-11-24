@@ -13,7 +13,7 @@ export function resendEmailProvider(resend: Resend): EmailProvider {
     async enviar({ to, subject, html, studioNombre, idempotencyKey }): Promise<ResultadoEnvioProvider> {
       const { data, error } = await conReintentoResend(() =>
         resend.emails.send(
-          { from: remitentePorMarca(studioNombre || 'Tentare'), to: [to], subject, html },
+          { from: remitentePorMarca(studioNombre || 'Centra'), to: [to], subject, html },
           idempotencyKey ? { idempotencyKey } : undefined,
         )
       );

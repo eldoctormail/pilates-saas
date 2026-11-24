@@ -84,7 +84,7 @@ export function DetallePresentacion({ showToast, onGuardado, campos = 'todo' }: 
   return (
     <>
       <div className="flex flex-col gap-5 pb-6">
-        {ver.descripcion && <Campo label="Cómo te presentas" ayuda="Sale en tu página de reservas, debajo del nombre del estudio, y en Tentare Network. No sale en la app de tus clientes.">
+        {ver.descripcion && <Campo label="Cómo te presentas" ayuda="Sale en tu página de reservas, debajo del nombre del estudio, y en Centra Network. No sale en la app de tus clientes.">
           {id => (
             <textarea
               id={id}

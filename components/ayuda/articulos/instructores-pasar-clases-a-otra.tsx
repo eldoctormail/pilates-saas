@@ -36,14 +36,14 @@ export default function Contenido() {
 
       <h2 style={h2}>Esto no es una sustitución</h2>
       <p>
-        Aquí decides tú quién las da. Si lo que necesitas es <strong>buscar</strong> a alguien —que Tentare mire
+        Aquí decides tú quién las da. Si lo que necesitas es <strong>buscar</strong> a alguien —que Centra mire
         quién está libre, las ordene por encaje y las contacte—, eso es el{' '}
         <Link href="/ayuda/instructores/sustituciones" style={enlace}>motor de sustituciones</Link>, y funciona
         clase a clase.
       </p>
       <p>
         Y ojo con esto: <strong>registrar una ausencia no reasigna nada</strong>. Cuando anotas unas vacaciones o
-        una baja, Tentare te dice cuántas clases se quedan sin cubrir, pero no las mueve solo. Esa decisión es
+        una baja, Centra te dice cuántas clases se quedan sin cubrir, pero no las mueve solo. Esa decisión es
         tuya, y esta es la herramienta para ejecutarla de una vez.
       </p>
 

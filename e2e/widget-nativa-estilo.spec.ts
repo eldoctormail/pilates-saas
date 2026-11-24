@@ -21,9 +21,9 @@ import { HOJA_FUENTES_NATIVA, RUTA_FUENTES_NATIVA } from '../lib/widget/fuentes-
 //   · sin nada elegido, la nativa se ve como siempre, con el color del TEMA;
 //   · con un estilo, sus tokens, su recuadro o su fundido;
 //   · con «Como tu app», la letra de su web y ni una petición de fuentes; con
-//     una letra elegida, la hoja de Tentare, una sola vez por página;
+//     una letra elegida, la hoja de Centra, una sola vez por página;
 //   · un diseño propio en sus atributos gana, y ni siquiera se pide el estilo;
-//     con una letra que sirve Tentare, su hoja; con otra, nada; Google, nunca;
+//     con una letra que sirve Centra, su hoja; con otra, nada; Google, nunca;
 //   · `widget_loaded` lleva la firma de sus `data-*`, la misma que el panel.
 //
 // Todo en orígenes ficticios `http` servidos con `page.route`, como la Fase D:
@@ -354,7 +354,7 @@ test('Carbón con «Siete días en columnas» (lo de por defecto): no se pinta e
   await expect(linksFuentes(page)).toHaveCount(0);
 });
 
-test('una letra ELEGIDA («Editorial»), con dos widgets: una sola hoja de Tentare, y la pareja en el cuerpo y en los titulares', async ({ page }) => {
+test('una letra ELEGIDA («Editorial»), con dos widgets: una sola hoja de Centra, y la pareja en el cuerpo y en los titulares', async ({ page }) => {
   const respuesta = estiloWidget({ letra: 'editorial' });
   expect(esperado(respuesta, true).letra).toBe('editorial');
 
@@ -370,15 +370,15 @@ test('una letra ELEGIDA («Editorial»), con dos widgets: una sola hoja de Tenta
   // El navegador baja el woff2 que usa, y lo CARGA de verdad desde otro origen
   // (sin la cabecera CORS, `document.fonts` no lo daría por cargado).
   await expect.poll(() => fuentes.some(u => u.endsWith('/figtree/figtree-latin.woff2'))).toBe(true);
-  await expect.poll(() => page.evaluate(() => document.fonts.check("12px 'Tentare Figtree'"))).toBe(true);
+  await expect.poll(() => page.evaluate(() => document.fonts.check("12px 'Centra Figtree'"))).toBe(true);
 
   for (const i of [0, 1]) {
     const m = await medir(page, i);
-    expect(m.letra).toContain('Tentare Figtree');
-    expect(m.titular).toContain('Tentare Libre Caslon Text');
+    expect(m.letra).toContain('Centra Figtree');
+    expect(m.titular).toContain('Centra Libre Caslon Text');
   }
   // La rejilla lee la misma variable que el resto.
-  expect((await medir(page, 0)).celda?.letra).toContain('Tentare Figtree');
+  expect((await medir(page, 0)).celda?.letra).toContain('Centra Figtree');
 });
 
 test('⚠️ el diseño propio del código gana: ni se pide el estilo, ni se pinta, ni se piden fuentes', async ({ page, context }) => {
@@ -404,10 +404,10 @@ test('⚠️ el diseño propio del código gana: ni se pide el estilo, ni se pin
   expect(x.fuentes).toEqual([]);
 });
 
-test('⚠️ diseño propio con letras que sirve Tentare: su hoja una sola vez con dos widgets, y ni una petición a Google', async ({ page }) => {
+test('⚠️ diseño propio con letras que sirve Centra: su hoja una sola vez con dos widgets, y ni una petición a Google', async ({ page }) => {
   // Lo que copia hoy el constructor con Poppins y Cormorant Garamond (antes,
   // dos `<link>` a fonts.googleapis.com en su web). El segundo widget mezcla:
-  // Poppins servida y Playfair Display, que Tentare no sirve.
+  // Poppins servida y Playfair Display, que Centra no sirve.
   const html = `${divDe(entrada({ identidad: 'propia', fuente: 'Poppins', fuenteDisplay: 'Cormorant Garamond' }))}
 ${divDe(entrada({ identidad: 'propia', fuente: 'Poppins', fuenteDisplay: 'Playfair Display', diseno: 'completo', etiqueta: 'portada' }))}
 ${SCRIPT}`;
@@ -420,32 +420,32 @@ ${SCRIPT}`;
   expect(datos.length).toBeGreaterThan(1);
   expect(datos.some(d => d.estiloWidget === true)).toBe(false);
 
-  // Una sola hoja, la de Tentare, y el navegador baja y CARGA de verdad las letras que usa.
+  // Una sola hoja, la de Centra, y el navegador baja y CARGA de verdad las letras que usa.
   await expect(linksFuentes(page)).toHaveCount(1);
   await expect(linksFuentes(page)).toHaveAttribute('href', `${TENTARE}${HOJA_FUENTES_NATIVA}`);
   expect(fuentes.filter(u => u === HOJA_FUENTES_NATIVA)).toHaveLength(1);
   await expect.poll(() => fuentes.some(u => u.startsWith(`${RUTA_FUENTES_NATIVA}/poppins/`))).toBe(true);
-  await expect.poll(() => page.evaluate(() => document.fonts.check("12px 'Tentare Poppins'"))).toBe(true);
+  await expect.poll(() => page.evaluate(() => document.fonts.check("12px 'Centra Poppins'"))).toBe(true);
   // La de titulares solo baja cuando algo la pinta (en columnas, nada): se
-  // pide a mano, y sale de Tentare como la otra.
-  expect(await page.evaluate(() => document.fonts.load("12px 'Tentare Cormorant Garamond'").then(f => f.length))).toBeGreaterThan(0);
+  // pide a mano, y sale de Centra como la otra.
+  expect(await page.evaluate(() => document.fonts.load("12px 'Centra Cormorant Garamond'").then(f => f.length))).toBeGreaterThan(0);
   expect(fuentes.some(u => u.startsWith(`${RUTA_FUENTES_NATIVA}/cormorantgaramond/`))).toBe(true);
 
   const [uno, dos] = [await medir(page, 0), await medir(page, 1)];
-  expect(uno.letra).toContain('Tentare Poppins');
-  expect(uno.titular).toContain('Tentare Cormorant Garamond');
-  expect(uno.celda?.letra).toContain('Tentare Poppins');
-  expect(dos.letra).toContain('Tentare Poppins');
-  // La que no sirve Tentare se nombra tal cual (se vería si su web la cargara).
+  expect(uno.letra).toContain('Centra Poppins');
+  expect(uno.titular).toContain('Centra Cormorant Garamond');
+  expect(uno.celda?.letra).toContain('Centra Poppins');
+  expect(dos.letra).toContain('Centra Poppins');
+  // La que no sirve Centra se nombra tal cual (se vería si su web la cargara).
   expect(dos.titular).toContain('Playfair Display');
-  expect(dos.titular).not.toContain('Tentare');
+  expect(dos.titular).not.toContain('Centra');
 
   // Nada a Google: ni la hoja ni sus ficheros, ni en el <head> de su web.
   expect(google).toEqual([]);
   expect(await page.locator('link[href*="fonts.googleapis"]').count()).toBe(0);
 });
 
-test('⚠️ una letra que Tentare no sirve (un código de antes con Inter): ni Google ni la hoja; si su web la tiene, se ve', async ({ page }) => {
+test('⚠️ una letra que Centra no sirve (un código de antes con Inter): ni Google ni la hoja; si su web la tiene, se ve', async ({ page }) => {
   // Un código pegado antes de esto, con dos letras del selector de entonces.
   const html = `<div data-tentare-booking data-studio="${SLUG}" data-fuente="Inter" data-fuente-display="Playfair Display"></div>${SCRIPT}`;
   const { datos, fuentes, google } = await enSuWeb(page, html, { letraDeSuWeb: 'Inter' });

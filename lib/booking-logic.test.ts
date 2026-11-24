@@ -693,7 +693,7 @@ test('aperturaPendiente: solo mientras falta para abrirse', () => {
 
 // ── Plazas apartadas para ClassPass (7-oct-2026) ─────────────────────────────
 
-test('lugares libres para Tentare: aforo − ocupadas − apartadas, nunca por debajo de 0', () => {
+test('lugares libres para Centra: aforo − ocupadas − apartadas, nunca por debajo de 0', () => {
   assert.equal(plazasLibresParaReservar(10, 3), 7);
   assert.equal(plazasLibresParaReservar(10, 3, 2), 5);
   assert.equal(plazasLibresParaReservar(4, 2, 2), 0, 'las apartadas llenan la clase para la app');

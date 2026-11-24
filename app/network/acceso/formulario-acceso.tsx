@@ -6,7 +6,7 @@
 // movida aquí para que reabrir sea cambiar ese valor y no rescatarla de git.
 //
 // "Dos puertas + login" (1d del rediseño) — la puerta de entrada única de
-// Tentare Network. A diferencia de app/login/page.tsx (que también resuelve
+// Centra Network. A diferencia de app/login/page.tsx (que también resuelve
 // alta de estudio pendiente, reclamo de invitación y alta de instructora
 // freelance vía metadata `pending_*`), esta pantalla asume una cuenta YA
 // creada y confirmada — es la puerta rápida, no la que termina un alta a
@@ -148,10 +148,10 @@ export function FormularioAccesoNetwork() {
       <div className="p-10 lg:p-16 flex flex-col justify-center" style={{ background: NW_SAGE }}>
         <div className="max-w-[440px] mx-auto w-full">
           <Link href="/network" className="inline-flex mb-10">
-            <LogoTentare formato="horizontal" tinta="tinta" producto="network" titulo="Tentare Network" alto={24} decorativo />
+            <LogoTentare formato="horizontal" tinta="tinta" producto="network" titulo="Centra Network" alto={24} decorativo />
           </Link>
           <h1 className="text-[34px] font-extrabold leading-[1.05] tracking-tight" style={{ color: NW_TINTA }}>
-            Entra en <span style={{ color: NW_PRODUCTO }}>Tentare Network</span>
+            Entra en <span style={{ color: NW_PRODUCTO }}>Centra Network</span>
           </h1>
           <p className="mt-2 text-[14.5px]" style={{ color: NW_MUTED }}>
             La red profesional de Pilates y Yoga.
@@ -176,16 +176,16 @@ export function FormularioAccesoNetwork() {
 
             <div className="rounded-2xl p-6" style={{ background: NW_VERDE_OSCURO }}>
               <p className="text-[11px] font-bold uppercase tracking-wide" style={{ color: 'rgba(255,255,255,.6)' }}>Soy propietaria</p>
-              <p className="mt-1.5 text-[15px] font-bold text-white">Gestiono un estudio con Tentare</p>
-              {/* Enlace al OTRO producto, no un login compartido aquí: Tentare
-                  Network y Tentare Software son dos cuentas independientes —
+              <p className="mt-1.5 text-[15px] font-bold text-white">Gestiono un estudio con Centra</p>
+              {/* Enlace al OTRO producto, no un login compartido aquí: Centra
+                  Network y Centra Software son dos cuentas independientes —
                   una cuenta de estudio no entra por esta puerta. */}
               <Link
                 href="/login"
                 className="inline-flex items-center gap-1.5 mt-4 px-5 py-2.5 rounded-full text-[13.5px] font-bold text-white"
                 style={{ border: '1.5px solid rgba(255,255,255,.5)' }}
               >
-                Ir a Tentare Software
+                Ir a Centra Software
                 <ArrowLeftRight size={14} aria-hidden="true" />
               </Link>
             </div>
@@ -200,9 +200,9 @@ export function FormularioAccesoNetwork() {
             <div className="mx-auto mb-4 flex h-11 w-11 items-center justify-center rounded-full" style={{ background: NW_SAGE }}>
               <ArrowLeftRight size={18} style={{ color: NW_PRODUCTO }} aria-hidden="true" />
             </div>
-            <p className="text-[16px] font-bold" style={{ color: NW_TINTA }}>Esta cuenta es de Tentare Software</p>
+            <p className="text-[16px] font-bold" style={{ color: NW_TINTA }}>Esta cuenta es de Centra Software</p>
             <p className="mt-1.5 text-[13.5px] leading-relaxed" style={{ color: NW_MUTED }}>
-              El email y la contraseña son correctos, pero esta cuenta pertenece a Tentare Software, no a Tentare
+              El email y la contraseña son correctos, pero esta cuenta pertenece a Centra Software, no a Centra
               Network — son dos productos independientes. Para tu perfil profesional necesitas una cuenta de
               Network.
             </p>
@@ -211,7 +211,7 @@ export function FormularioAccesoNetwork() {
               className="block w-full mt-5 rounded-xl py-2.5 text-center text-[13.5px] font-bold text-white"
               style={{ background: NW_PRODUCTO }}
             >
-              Ir a Tentare Software
+              Ir a Centra Software
             </Link>
             <button
               type="button"
@@ -302,7 +302,7 @@ export function FormularioAccesoNetwork() {
             <Link href="/login" className="font-semibold" style={{ color: NW_TINTA }}>¿Has olvidado tu clave?</Link>
           </div>
           <div className="mt-8 rounded-xl p-4 text-[12.5px]" style={{ background: NW_SAGE, color: NW_TINTA }}>
-            Esta cuenta es solo de Tentare Network. Si gestionas un estudio, entra en tentare.app.
+            Esta cuenta es solo de Centra Network. Si gestionas un estudio, entra en tentare.app.
           </div>
         </>
         )}

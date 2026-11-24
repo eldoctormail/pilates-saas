@@ -5,13 +5,13 @@ import { HUELLA_DEL_CHAT, json, conAsistente } from './asistente-andamiaje';
 import { PLAN_INFO, planMinimoPara } from '../lib/billing/entitlements.ts';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// El chat flotante de «Pregúntale a Tentare» y la salida del Centro de Control
+// El chat flotante de «Pregúntale a Centra» y la salida del Centro de Control
 // sin plan (8-oct-2026).
 //
 // Los estudios decían que «no les dejaba entrar» al Centro de Control: con el
 // plan Founding Studio o la prueba vencida la pantalla decía «No hemos podido
 // cargar…» con un «Reintentar» inútil, y como la puerta principal del asistente
-// era la barra DENTRO de esa pantalla, tampoco llegaban a Tentare. Ahora el
+// era la barra DENTRO de esa pantalla, tampoco llegaban a Centra. Ahora el
 // asistente tiene un botón flotante en todas las pantallas del panel, y el
 // Centro de Control sin plan explica por qué y a dónde ir.
 //
@@ -22,11 +22,11 @@ test.describe.configure({ timeout: 120_000 });
 
 const flotante = (page: import('@playwright/test').Page) => page.getByTestId('chat-asistente-flotante');
 
-const panel = (page: import('@playwright/test').Page) => page.getByRole('dialog', { name: 'Ayuda de Tentare' });
+const panel = (page: import('@playwright/test').Page) => page.getByRole('dialog', { name: 'Ayuda de Centra' });
 
 // 11-nov-2026: el botón del asistente ya no flota aparte. Hay UN botón de ayuda en la esquina y
-// Tentare vive dentro de su panel, como pestaña (fundador: «no deben de estar los 2 separados»).
-test('un solo botón en cualquier pantalla: Tentare está dentro de su panel, y el chat no viaja antes de abrir su pestaña', async ({ page }) => {
+// Centra vive dentro de su panel, como pestaña (fundador: «no deben de estar los 2 separados»).
+test('un solo botón en cualquier pantalla: Centra está dentro de su panel, y el chat no viaja antes de abrir su pestaña', async ({ page }) => {
   const scripts = recolectarScripts(page);
   const n = await conAsistente(page);
   await ir(page, 'calendario');
@@ -38,9 +38,9 @@ test('un solo botón en cualquier pantalla: Tentare está dentro de su panel, y 
 
   await boton.click();
   await expect(panel(page)).toBeVisible({ timeout: 60_000 });
-  // Con el panel abierto y sin entrar en «Tentare», el chat sigue sin descargarse.
+  // Con el panel abierto y sin entrar en «Centra», el chat sigue sin descargarse.
   expect(await scripts.contiene(HUELLA_DEL_CHAT)).toBe(false);
-  await panel(page).getByRole('tab', { name: 'Tentare' }).click();
+  await panel(page).getByRole('tab', { name: 'Centra' }).click();
   await expect(flotante(page).getByText(/¿En qué te ayudo hoy/)).toBeVisible({ timeout: 60_000 });
   expect(await scripts.contiene(HUELLA_DEL_CHAT)).toBe(true);
   // Sigue en la misma pantalla: no ha navegado.
@@ -60,9 +60,9 @@ test('lo que se escribe en Inicio lo contesta el asistente, en su pestaña', asy
   const n = await conAsistente(page);
   await ir(page, 'calendario');
   await page.getByTestId('boton-ayuda').click({ timeout: 30_000 });
-  await panel(page).getByLabel('Pregúntale a Tentare', { exact: true }).fill('¿Qué clases hay mañana?');
+  await panel(page).getByLabel('Pregúntale a Centra', { exact: true }).fill('¿Qué clases hay mañana?');
   await panel(page).getByRole('button', { name: 'Preguntar' }).click();
-  await expect(panel(page).getByRole('tab', { name: 'Tentare' })).toHaveAttribute('aria-selected', 'true');
+  await expect(panel(page).getByRole('tab', { name: 'Centra' })).toHaveAttribute('aria-selected', 'true');
   await expect.poll(() => n.preguntas, { timeout: 60_000 }).toBe(1);
   await expect(flotante(page).getByTestId('chat-respuesta')).toContainText('Mañana tienes 5 clases');
 });
@@ -71,20 +71,20 @@ test('«Abrir en pantalla completa» lleva a /asistente y ahí no hay botón flo
   await conAsistente(page);
   await ir(page, 'calendario');
   await page.getByTestId('boton-ayuda').click({ timeout: 30_000 });
-  await panel(page).getByRole('tab', { name: 'Tentare' }).click();
+  await panel(page).getByRole('tab', { name: 'Centra' }).click();
   await page.getByRole('link', { name: 'Abrir en pantalla completa' }).click();
   await expect(page).toHaveURL(/\/asistente$/, { timeout: 30_000 });
   await expect(page.getByTestId('chat-asistente')).toBeVisible({ timeout: 60_000 });
   await expect(page.getByTestId('boton-ayuda')).toHaveCount(0);
 });
 
-test('sin asistente para el estudio, o sin rol, el botón de ayuda sigue pero sin la pestaña «Tentare»', async ({ page }) => {
+test('sin asistente para el estudio, o sin rol, el botón de ayuda sigue pero sin la pestaña «Centra»', async ({ page }) => {
   const apagado = await conAsistente(page, { disponible: false });
   await ir(page, 'calendario');
   await expect.poll(() => apagado.disponible, { timeout: 30_000 }).toBeGreaterThan(0);
   await page.getByTestId('boton-ayuda').click({ timeout: 30_000 });
   await expect(panel(page)).toBeVisible();
-  await expect(panel(page).getByRole('tab', { name: 'Tentare' })).toHaveCount(0);
+  await expect(panel(page).getByRole('tab', { name: 'Centra' })).toHaveCount(0);
   await expect(panel(page).getByRole('tab')).toHaveCount(4);
 });
 
@@ -105,5 +105,5 @@ test('Centro de Control sin plan: explica el porqué y da salida, sin «Reintent
   await expect(pantalla.getByRole('button', { name: 'Reintentar' })).toHaveCount(0);
   await expect(page.getByText('No hemos podido cargar el Centro de Control')).toHaveCount(0);
   // Lo que SÍ pueden usar: el asistente, desde la propia pantalla.
-  await expect(pantalla.getByRole('button', { name: 'Pregúntale a Tentare' })).toBeVisible();
+  await expect(pantalla.getByRole('button', { name: 'Pregúntale a Centra' })).toBeVisible();
 });

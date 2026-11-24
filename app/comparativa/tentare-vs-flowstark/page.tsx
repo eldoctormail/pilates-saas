@@ -11,9 +11,9 @@ export const metadata: Metadata = {
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
   openGraph: {
-    siteName: 'Tentare',
+    siteName: 'Centra',
     type: 'website',
-    title: 'Tentare vs Flowstark',
+    title: 'Centra vs Flowstark',
     description: 'Precio y alcance — comparados con lo que consta en la web pública de Flowstark.',
     url: urlDe(PATH),
   },
@@ -44,7 +44,7 @@ const ROWS: ComparativaRow[] = [
 const FAQ = [
   {
     q: '¿Cuánto cuesta Flowstark?',
-    a: 'Tiene un plan gratuito (con límites de clientes, servicios y suscripciones) y un plan Pro a 19 €/mes sin límite; los precios no incluyen impuestos. Tentare es gratis hasta 150 reservas al mes; si pasas de ahí, 29 €/mes con IVA.',
+    a: 'Tiene un plan gratuito (con límites de clientes, servicios y suscripciones) y un plan Pro a 19 €/mes sin límite; los precios no incluyen impuestos. Centra es gratis hasta 150 reservas al mes; si pasas de ahí, 29 €/mes con IVA.',
   },
 ];
 
@@ -56,7 +56,7 @@ const RESUMEN: ResumenCompetidor = {
   precio: 'Gratis hasta 50 clientes o 19 €/mes + impuestos',
   permanencia: 'Cancelas cuando quieras',
   destacado: { etiqueta: 'Reservas de clases', suyo: 'No consta: es una herramienta de cobros', nuestro: 'Reservas con plaza por reformer y lista de espera' },
-  respuesta: <>Flowstark resuelve los cobros recurrentes, pero un estudio de Pilates necesita además reservas con sala y reformer, bonos, plazas fijas y alguien que cubra la clase cuando falla una instructora. Si quieres todo eso en un solo programa, la alternativa es Tentare: gratis hasta 150 reservas al mes, sin tarjeta y sin permanencia.</>,
+  respuesta: <>Flowstark resuelve los cobros recurrentes, pero un estudio de Pilates necesita además reservas con sala y reformer, bonos, plazas fijas y alguien que cubra la clase cuando falla una instructora. Si quieres todo eso en un solo programa, la alternativa es Centra: gratis hasta 150 reservas al mes, sin tarjeta y sin permanencia.</>,
 };
 
 const ANALISIS: SeccionAnalisis[] = [
@@ -64,7 +64,7 @@ const ANALISIS: SeccionAnalisis[] = [
     titulo: 'Cobrar es una parte; gestionar el estudio es todo lo demás',
     cuerpo: (
       <>
-        <p>Con una herramienta solo de cobros, las reservas, el horario y las bajas de las instructoras siguen en otro sitio, y casi siempre en WhatsApp. Tentare junta las reservas con plaza por reformer, los bonos y cuotas, las plazas fijas y los cobros automáticos con reintentos y remesa SEPA. <Link href="/funcionalidades">Ver todo lo que hace</Link>.</p>
+        <p>Con una herramienta solo de cobros, las reservas, el horario y las bajas de las instructoras siguen en otro sitio, y casi siempre en WhatsApp. Centra junta las reservas con plaza por reformer, los bonos y cuotas, las plazas fijas y los cobros automáticos con reintentos y remesa SEPA. <Link href="/funcionalidades">Ver todo lo que hace</Link>.</p>
       </>
     ),
   },
@@ -76,11 +76,11 @@ export default function TentareVsFlowstarkPage() {
       name="Flowstark"
       slug="tentare-vs-flowstark"
       logo={{ src: '/comparativa/logos/flowstark.svg', alt: 'Logo de Flowstark', height: 20, width: 120 }}
-      intro={<>Flowstark es una herramienta de cobros recurrentes y suscripciones. Para un <strong style={{ color: 'var(--w-texto)' }}>estudio de pilates en España</strong>, Tentare es el software completo: reservas con sala y reformer, bonos, plazas fijas, sustituciones y cobros en un solo sitio.</>}
+      intro={<>Flowstark es una herramienta de cobros recurrentes y suscripciones. Para un <strong style={{ color: 'var(--w-texto)' }}>estudio de pilates en España</strong>, Centra es el software completo: reservas con sala y reformer, bonos, plazas fijas, sustituciones y cobros en un solo sitio.</>}
       resumen={RESUMEN}
       rows={ROWS}
       analisis={ANALISIS}
-      veredicto={<>Tentare es la mejor opción para gestionar tu estudio de Pilates entero: reservas con plaza por reformer, plazas fijas, bonos, sustituciones y cobros en un solo programa. Empieza gratis, sin tarjeta.</>}
+      veredicto={<>Centra es la mejor opción para gestionar tu estudio de Pilates entero: reservas con plaza por reformer, plazas fijas, bonos, sustituciones y cobros en un solo programa. Empieza gratis, sin tarjeta.</>}
       footnote="Basado en la información pública de Flowstark (flowstark.com) a 29 de septiembre de 2026. «No consta» significa que su web pública no lo indica, no que no exista. Las funciones y precios cambian con el tiempo; verifica siempre con la fuente actual. Flowstark es marca de su respectivo propietario; esta comparación es orientativa y sin ánimo de menoscabo."
       faq={FAQ}
     />

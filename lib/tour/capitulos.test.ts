@@ -73,7 +73,7 @@ test('el href de «Llévame» cuelga de la ruta del paso', () => {
 });
 
 test('el copy no enseña lo congelado ni lo que no es para todos', () => {
-  const prohibido = /Kiosko|Oferta digital|On ?Demand|VOD|Chat de equipo|Tentare Network|Asistente IA|Pregúntale a Tentare/i;
+  const prohibido = /Kiosko|Oferta digital|On ?Demand|VOD|Chat de equipo|Centra Network|Asistente IA|Pregúntale a Centra/i;
   for (const p of TODOS_LOS_PASOS) {
     assert.ok(!prohibido.test(`${p.titulo} ${p.texto}`), `${p.id} menciona algo congelado o no disponible`);
   }

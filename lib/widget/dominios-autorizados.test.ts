@@ -62,7 +62,7 @@ test('la línea de Actividad dice qué se autorizó y qué se retiró', () => {
 test('el navegador ya no escribe los dominios del widget', () => {
   const datos = leer('lib/supabase-data.ts');
   assert.doesNotMatch(datos, /db\.widget_dominios_autorizados\s*=/);
-  // El constructor (Tentare Widgets) guarda por la ruta de servidor, nunca con updateStudio.
+  // El constructor (Centra Widgets) guarda por la ruta de servidor, nunca con updateStudio.
   // La lógica del constructor vive en su hook (`usar-constructor.tsx`), que comparten la v1 y «Tu web» v2.
   for (const f of ['components/widgets/constructor-widgets.tsx', 'components/widgets/usar-constructor.tsx', 'components/widgets/dominios.tsx', 'components/configuracion/tab-api.tsx']) {
     assert.doesNotMatch(leer(f), /updateStudio\(\{\s*widgetDominiosAutorizados/, f);

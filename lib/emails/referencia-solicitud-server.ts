@@ -22,9 +22,9 @@ export async function enviarEmailReferenciaSolicitud(params: {
     const html = correoReferenciaSolicitud(params);
     const resend = new Resend(apiKey);
     const { data, error } = await resend.emails.send({
-      from: remitentePorMarca('Tentare Network'),
+      from: remitentePorMarca('Centra Network'),
       to: [params.to],
-      subject: `${params.profesionalNombre} te ha puesto como referencia en Tentare Network`,
+      subject: `${params.profesionalNombre} te ha puesto como referencia en Centra Network`,
       html,
     });
     if (error) { console.error('[referencia-solicitud-server]', error); return { ok: false, error: error.message }; }

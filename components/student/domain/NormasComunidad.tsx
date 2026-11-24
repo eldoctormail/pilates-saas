@@ -12,7 +12,7 @@ import { aceptarNormasComunidad } from '@/lib/student/normas';
 // SERVIDOR al enviar (409 `NORMAS_PENDIENTES`), y entonces se enseñan, se
 // aceptan y el mismo envío se repite solo — el borrador no se pierde.
 
-/** Contacto de Tentare como desarrollador de la app (App Store 1.2). */
+/** Contacto de Centra como desarrollador de la app (App Store 1.2). */
 export const CONTACTO_TENTARE = 'hola@tentare.app';
 
 function ListaNormas() {
@@ -98,7 +98,7 @@ export function NormasYContacto() {
           </div>
         </details>
         <p style={{ margin: 0, padding: '13px 15px', fontSize: 'var(--t-small)', lineHeight: 1.55, color: 'var(--muted-foreground)' }}>
-          Esta app funciona con Tentare. Para cualquier problema con la app, o si algo de lo que has denunciado sigue sin resolverse,
+          Esta app funciona con Centra. Para cualquier problema con la app, o si algo de lo que has denunciado sigue sin resolverse,
           escríbenos a <a href={`mailto:${CONTACTO_TENTARE}`} style={{ color: 'var(--accent)', fontWeight: 700 }}>{CONTACTO_TENTARE}</a>.
         </p>
       </div>

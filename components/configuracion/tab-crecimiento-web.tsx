@@ -168,7 +168,7 @@ export function TabCrecimientoWeb({ showToast: _showToast, enfoque = null }: {
   );
 }
 
-// «Tentare Widgets»: el mismo embudo, partido por la etiqueta de cada widget
+// «Centra Widgets»: el mismo embudo, partido por la etiqueta de cada widget
 // (lib/widgets/embudo.ts). Solo cuenta lo que llegó con etiqueta: los códigos
 // pegados antes de las etiquetas salen juntos en «Sin etiqueta», y se dice.
 //

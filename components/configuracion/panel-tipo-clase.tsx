@@ -386,7 +386,7 @@ function Previsualizacion({ form, fotoUrl, logoUrl, onEditarImagenes, esNueva }:
 }
 
 /**
- * Las imágenes de banner que ya trae Tentare.
+ * Las imágenes de banner que ya trae Centra.
  *
  * Existen desde siempre en `public/por-defecto/` y se usaban SOLO como
  * respaldo automático adivinado por el nombre de la clase: no había forma de
@@ -401,7 +401,7 @@ function BannersPorDefecto({ actual, onElegir, ocupado }: {
   const opciones = Object.entries(IMAGENES_CLASE) as [FamiliaClase, string][];
   return (
     <div className="mt-2">
-      <p className="mb-1.5 text-[11px] text-muted-foreground">O elige una de Tentare:</p>
+      <p className="mb-1.5 text-[11px] text-muted-foreground">O elige una de Centra:</p>
       <div className="flex flex-wrap gap-1.5">
         {opciones.map(([familia, url]) => (
           <button
@@ -1164,7 +1164,7 @@ export function PanelTipoClase({
         {/* NIVEL 4 — instructoras / Network */}
         <Seccion
           titulo="Instructoras y sustituciones"
-          ayuda="Solo entra en juego cuando te falta instructora para esta clase y quieres que Tentare te sugiera a alguien de fuera de tu equipo."
+          ayuda="Solo entra en juego cuando te falta instructora para esta clase y quieres que Centra te sugiera a alguien de fuera de tu equipo."
           resumen={
             form.especialidadNetwork
               ? `Busca ${ESPECIALIDAD_LABEL[form.especialidadNetwork]} en Network`
@@ -1172,7 +1172,7 @@ export function PanelTipoClase({
           }
         >
           <Campo
-            label="¿Qué especialidad es, para Tentare Network?"
+            label="¿Qué especialidad es, para Centra Network?"
             ayuda="Sin elegir ninguna, esta clase no sugiere a nadie de fuera de tu equipo."
           >
             <select
@@ -1181,7 +1181,7 @@ export function PanelTipoClase({
               onChange={e =>
                 setForm(f => ({ ...f, especialidadNetwork: e.target.value as ClaseForm['especialidadNetwork'] }))
               }
-              aria-label="Especialidad en Tentare Network"
+              aria-label="Especialidad en Centra Network"
             >
               <option value="">Sin mapear (no sugiere Network)</option>
               {ESPECIALIDADES_NETWORK.map(e => (

@@ -37,7 +37,7 @@ const CLAVES_SENSIBLES = new Set([
 const RE_EMAIL = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g;
 const RE_JWT = /\beyJ[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}\b/g;
 const RE_CLAVE_STRIPE = /\b(?:sk|rk|whsec)_(?:live|test)?_?[A-Za-z0-9]{8,}\b/g;
-// Claves de la API pública de Tentare (lib/api-publica/claves.ts). El `\b` de la
+// Claves de la API pública de Centra (lib/api-publica/claves.ts). El `\b` de la
 // de Stripe no casa tras «tnt_», así que una clave pegada fuera de una cabecera
 // Bearer (un mensaje de error, un cuerpo) salía entera.
 const RE_CLAVE_TENTARE = /tnt_sk_[A-Za-z0-9_-]{8,}/g;

@@ -41,7 +41,7 @@ export interface SesionCalendario extends Sesion {
    *  sostienen. Solo para quien ve el Centro de Control; sin recomendación, null. */
   floja: FlojaDeClase | null;
   /** Plazas apartadas para ClassPass y hasta cuándo (migr 20261007164222):
-   *  desde Tentare no se pueden coger. Sin ninguna, null o ausente. */
+   *  desde Centra no se pueden coger. Sin ninguna, null o ausente. */
   apartadas?: ApartadasDeClase | null;
 }
 

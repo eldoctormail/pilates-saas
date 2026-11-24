@@ -44,7 +44,7 @@ import { TONO_SECCION_CONFIG } from './tono-config';
 //      guía (`calcularProgresoGuia`). Desaparece cuando está hecho;
 //   4. las secciones en seis grupos, cada una con su valor de hoy
 //      (lib/configuracion/resumenes.ts) y, si toca, su estado. «Tu cuenta»
-//      lleva además «Plan de Tentare» y «Mi cuenta», que abren otra pantalla.
+//      lleva además «Plan de Centra» y «Mi cuenta», que abren otra pantalla.
 //
 // Casi todo sale de lo que el panel ya tiene cargado. Lo que no está en
 // `useStudio` —cómo va tu plan, el color publicado y dónde va el menú— se lee
@@ -201,7 +201,7 @@ export function InicioConfiguracion({
           <ul className={LISTA} aria-label="Resultados de la búsqueda">
             {resultados.map(r => {
               const id = `inicio-buscar-${r.id}`;
-              // Una sección se abre por el shell; «Plan de Tentare» es otra pantalla.
+              // Una sección se abre por el shell; «Plan de Centra» es otra pantalla.
               // Una tarjeta de una herramienta abre la pantalla de esa herramienta.
               const enlace = r.seccion
                 ? { href: hrefDeLugar({ tab: r.seccion, abrir: r.abrir, ancla: r.ancla }), onClick: abrir(r.seccion, id, r.ancla, r.abrir) }

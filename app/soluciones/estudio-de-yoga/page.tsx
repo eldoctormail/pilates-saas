@@ -16,7 +16,7 @@ import { paginaDe, urlDe } from '@/lib/seo/paginas';
 import { AgendaDia, PanelCobros } from '@/components/web/home/piezas';
 import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
-// Tentare para estudios de YOGA (rehecha el 7-oct-2026: desde el 6-oct el
+// Centra para estudios de YOGA (rehecha el 7-oct-2026: desde el 6-oct el
 // producto se presenta para Pilates y yoga, decisión del fundador). Ya no se
 // disculpa de «haber nacido para Pilates»: habla el idioma de un estudio de
 // yoga —estilos, mensualidades, bonos, talleres, profesoras— con el mismo motor.
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
   openGraph: {
-    siteName: 'Tentare',
+    siteName: 'Centra',
     type: 'website',
     locale: 'es_ES',
     title: pagina.titulo,
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
 
 const FAQ = [
   {
-    q: '¿Tentare sirve para un estudio de yoga?',
+    q: '¿Centra sirve para un estudio de yoga?',
     a: 'Sí. Las reservas, los bonos, las mensualidades, la lista de espera, los cobros y la app con tu marca funcionan igual para el yoga que para el Pilates: cada estilo es un tipo de clase con su nombre, su horario, su aforo y su precio.',
   },
   {
@@ -60,14 +60,14 @@ const FAQ = [
   },
   {
     q: '¿Qué pasa si una profesora no puede dar su clase?',
-    a: 'Tentare busca quién puede cubrirla según su disponibilidad, la contacta con tu visto bueno y avisa a las alumnas del cambio. Puede hacerlo sola, sin esperar a que lo apruebes, en el plan gratis, en Estudio y en Cadena; en Founding Studio de pago, con el complemento de 12 €/mes.',
+    a: 'Centra busca quién puede cubrirla según su disponibilidad, la contacta con tu visto bueno y avisa a las alumnas del cambio. Puede hacerlo sola, sin esperar a que lo apruebes, en el plan gratis, en Estudio y en Cadena; en Founding Studio de pago, con el complemento de 12 €/mes.',
   },
   {
     q: '¿Hay funciones pensadas solo para yoga?',
     a: 'No: es la misma plataforma para yoga y Pilates. Lo que cambia es cómo la configuras tú: los nombres de tus clases, tus bonos, tus mensualidades y tus reglas de reserva.',
   },
   {
-    q: '¿Cuánto cuesta Tentare para un estudio de yoga?',
+    q: '¿Cuánto cuesta Centra para un estudio de yoga?',
     a: 'Founding Studio es gratis hasta 150 reservas al mes, con todas las funcionalidades menos varias sedes, también la app con tu marca; si pasas de ahí, 29 €/mes, y con ese plan el Centro de Control, las sustituciones automáticas y la redacción con IA van aparte. Estudio, 79 €/mes con IVA, los incluye, y Cadena, 249 €/mes, es para varias sedes. Sin permanencia y sin tarjeta para empezar.',
   },
 ];
@@ -92,20 +92,20 @@ export default function EstudioDeYogaPage() {
           { etiqueta: 'Reserva · Vinyasa 19:30', estado: 'Confirmada', texto: 'Ana reservó desde la app' },
           { etiqueta: 'Mensualidad de octubre', estado: 'Cobrada', texto: 'Con su tarjeta guardada' },
         ]}
-        pieFoto="Alumna con el móvil y una esterilla de yoga, con dos avisos de ejemplo de Tentare: una reserva confirmada en una clase de vinyasa y una mensualidad cobrada."
+        pieFoto="Alumna con el móvil y una esterilla de yoga, con dos avisos de ejemplo de Centra: una reserva confirmada en una clase de vinyasa y una mensualidad cobrada."
       />
 
       <ResumenSolucion
         pregunta="¿Qué software necesita un estudio de yoga?"
         datos={[
           { cifra: '24/7', texto: 'Reservas y cancelaciones desde el móvil, con tus reglas' },
-          { cifra: '0 %', texto: 'Comisión de Tentare sobre lo que cobras' },
+          { cifra: '0 %', texto: 'Comisión de Centra sobre lo que cobras' },
           { cifra: 'Gratis', texto: 'Founding Studio, con la app con tu marca, hasta 150 reservas al mes' },
         ]}
       >
         Uno que te quite el trabajo de mostrador: reservas online con lista de espera, bonos y mensualidades que se
         cobran y se renuevan solos, una app con la marca de tu estudio para tus alumnas y un sitio donde ver quién viene
-        y cuánto deja cada clase. Tentare hace todo eso para estudios de yoga y de Pilates, gratis hasta 150 reservas
+        y cuánto deja cada clase. Centra hace todo eso para estudios de yoga y de Pilates, gratis hasta 150 reservas
         al mes, y sin permanencia.
       </ResumenSolucion>
 
@@ -113,7 +113,7 @@ export default function EstudioDeYogaPage() {
         titulo="Una semana normal en un estudio de yoga"
         items={[
           { hora: 'Domingo · 22:10', titulo: 'Reservan sin escribirte', texto: 'La alumna abre la app de tu estudio, ve la clase de vinyasa del lunes con plazas libres y reserva. Tú no contestas ningún mensaje.' },
-          { hora: 'Día 1 del mes', titulo: 'Las mensualidades se cobran solas', texto: 'La cuota se cobra con la tarjeta guardada y, si una falla, Tentare vuelve a intentarlo antes de avisarte.' },
+          { hora: 'Día 1 del mes', titulo: 'Las mensualidades se cobran solas', texto: 'La cuota se cobra con la tarjeta guardada y, si una falla, Centra vuelve a intentarlo antes de avisarte.' },
           { hora: 'Sábado', titulo: 'Un taller con su propio precio', texto: 'El taller de inversiones va en el mismo calendario que tus clases semanales, con su aforo y su precio.' },
         ]}
       />
@@ -121,7 +121,7 @@ export default function EstudioDeYogaPage() {
       <FilaProducto
         eyebrow="Horario por estilos"
         titulo="Cada estilo con su horario, su aforo y sus reglas"
-        pieza={{ descripcion: 'Ejemplo del día en el calendario de Tentare: tres clases con su ocupación y una llena con dos alumnas en lista de espera.', contenido: <AgendaDia /> }}
+        pieza={{ descripcion: 'Ejemplo del día en el calendario de Centra: tres clases con su ocupación y una llena con dos alumnas en lista de espera.', contenido: <AgendaDia /> }}
         puntos={[
           'Series semanales que programas una vez',
           'Talleres y clases especiales con su propio precio',
@@ -136,7 +136,7 @@ export default function EstudioDeYogaPage() {
         invertida
         eyebrow="Bonos y mensualidades"
         titulo="Clase suelta, bono y mensualidad, a la vez"
-        pieza={{ descripcion: 'Ejemplo del resumen de cobros de Tentare: quién ha pagado, quién se reintenta solo y las próximas cuotas.', contenido: <PanelCobros completo /> }}
+        pieza={{ descripcion: 'Ejemplo del resumen de cobros de Centra: quién ha pagado, quién se reintenta solo y las próximas cuotas.', contenido: <PanelCobros completo /> }}
         puntos={[
           'Mensualidades con o sin límite de clases a la semana',
           'Bonos con caducidad, que puedes ampliar en lote si cierras en agosto',
@@ -144,12 +144,12 @@ export default function EstudioDeYogaPage() {
         ]}
         enlace={{ href: '/funcionalidades/bonos-y-membresias', texto: 'Bonos y cuotas' }}
       >
-        <p>Un estudio de yoga vende de todo: la clase suelta para quien viene de paso, el bono para quien viene a ratos y la mensualidad para las de siempre. En Tentare conviven en la misma alumna, cada uno con su caducidad, y se cobran sin que tengas que perseguir a nadie.</p>
+        <p>Un estudio de yoga vende de todo: la clase suelta para quien viene de paso, el bono para quien viene a ratos y la mensualidad para las de siempre. En Centra conviven en la misma alumna, cada uno con su caducidad, y se cobran sin que tengas que perseguir a nadie.</p>
       </FilaProducto>
 
       <TablaSolucion
-        titulo="Cómo vende un estudio de yoga, y cómo se monta en Tentare"
-        cabeceras={['Lo que vendes', 'Para quién', 'En Tentare']}
+        titulo="Cómo vende un estudio de yoga, y cómo se monta en Centra"
+        cabeceras={['Lo que vendes', 'Para quién', 'En Centra']}
         filas={[
           ['Clase suelta', 'Quien viene de paso o a probar', 'Una tarifa puntual que gasta una sesión'],
           ['Bono de 10 clases', 'Quien viene a ratos', 'Bono con caducidad, de un estilo o de todos'],
@@ -166,7 +166,7 @@ export default function EstudioDeYogaPage() {
         puntos={[
           'En todos los planes, también en el gratuito',
           'Avisos de sus reservas y de la lista de espera',
-          'Sin comisión de Tentare sobre lo que venden',
+          'Sin comisión de Centra sobre lo que venden',
         ]}
         enlace={{ href: '/funcionalidades/app-para-alumnas', texto: 'Cómo es la app de tus alumnas' }}
       >
@@ -177,7 +177,7 @@ export default function EstudioDeYogaPage() {
         invertida
         eyebrow="Tus alumnas"
         titulo="Saber quién viene y qué necesita"
-        captura={{ src: '/producto/v2/panel-clientas-1110.webp', alt: 'Listado de clientas del panel de Tentare con datos de muestra: filtros por estado y una fila por alumna con su plan, su saldo, su última clase y avisos', ancho: 1110, alto: 489 }}
+        captura={{ src: '/producto/v2/panel-clientas-1110.webp', alt: 'Listado de clientas del panel de Centra con datos de muestra: filtros por estado y una fila por alumna con su plan, su saldo, su última clase y avisos', ancho: 1110, alto: 489 }}
         puntos={[
           'Asistencia, bono e historial de cada alumna',
           'Ficha de salud con lesiones y adaptaciones, visible solo para quien debe verla',
@@ -185,12 +185,12 @@ export default function EstudioDeYogaPage() {
         ]}
         enlace={{ href: '/funcionalidades/ficha-de-clienta', texto: 'La ficha de cada alumna' }}
       >
-        <p>En una clase prenatal o con alumnas que vienen de una lesión, saber lo que cada una necesita importa. La ficha lo reúne, y la parte de salud solo la ve quien la tiene que ver. Si una profesora no puede dar su clase, Tentare <Link href="/funcionalidades/sustituciones">busca quién la cubre</Link> y avisa a las alumnas.</p>
+        <p>En una clase prenatal o con alumnas que vienen de una lesión, saber lo que cada una necesita importa. La ficha lo reúne, y la parte de salud solo la ve quien la tiene que ver. Si una profesora no puede dar su clase, Centra <Link href="/funcionalidades/sustituciones">busca quién la cubre</Link> y avisa a las alumnas.</p>
       </FilaProducto>
 
-      <PlanesSolucion titulo="Lo que cuesta Tentare para un estudio de yoga" />
+      <PlanesSolucion titulo="Lo que cuesta Centra para un estudio de yoga" />
 
-      <FaqSolucion titulo="Preguntas sobre Tentare para estudios de yoga" items={FAQ} />
+      <FaqSolucion titulo="Preguntas sobre Centra para estudios de yoga" items={FAQ} />
 
       <CierreSolucion
         titulo="Pruébalo con tu estudio de yoga."

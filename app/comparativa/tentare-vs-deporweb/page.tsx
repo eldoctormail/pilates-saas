@@ -11,9 +11,9 @@ export const metadata: Metadata = {
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
   openGraph: {
-    siteName: 'Tentare',
+    siteName: 'Centra',
     type: 'website',
-    title: 'Tentare vs DeporWeb',
+    title: 'Centra vs DeporWeb',
     description: 'Precio y elección de reformer — comparados con lo que consta en la web pública de DeporWeb.',
     url: urlDe(PATH),
   },
@@ -44,7 +44,7 @@ const ROWS: ComparativaRow[] = [
 const FAQ = [
   {
     q: '¿Cuánto cuesta DeporWeb?',
-    a: 'DeporWeb no publica precios en su web: hay que contactar con ellos. Tentare sí: Founding Studio gratis (hasta 150 reservas al mes; si pasas de ahí, 29 €/mes), Estudio 79 €/mes y Cadena 249 €/mes, IVA incluido.',
+    a: 'DeporWeb no publica precios en su web: hay que contactar con ellos. Centra sí: Founding Studio gratis (hasta 150 reservas al mes; si pasas de ahí, 29 €/mes), Estudio 79 €/mes y Cadena 249 €/mes, IVA incluido.',
   },
 ];
 
@@ -56,7 +56,7 @@ const RESUMEN: ResumenCompetidor = {
   precio: 'No lo publica: hay que contactar con ellos',
   permanencia: 'No consta en su web pública',
   prueba: 'No consta en su web pública',
-  respuesta: <>DeporWeb está pensado para centros deportivos con muchas disciplinas y no publica sus precios. Para un estudio de Pilates o yoga que quiere saber lo que paga sin pedir una demo, y un producto hecho para clases con reformer, la alternativa es Tentare: gratis hasta 150 reservas al mes, sin tarjeta y sin permanencia.</>,
+  respuesta: <>DeporWeb está pensado para centros deportivos con muchas disciplinas y no publica sus precios. Para un estudio de Pilates o yoga que quiere saber lo que paga sin pedir una demo, y un producto hecho para clases con reformer, la alternativa es Centra: gratis hasta 150 reservas al mes, sin tarjeta y sin permanencia.</>,
 };
 
 const ANALISIS: SeccionAnalisis[] = [
@@ -64,7 +64,7 @@ const ANALISIS: SeccionAnalisis[] = [
     titulo: 'Un gimnasio y un estudio de Pilates no se gestionan igual',
     cuerpo: (
       <>
-        <p>Un centro deportivo vende accesos, zonas y muchas actividades. Un estudio de Pilates vende plazas en una máquina a una hora concreta, con alumnas que repiten cada semana. Por eso Tentare trae plaza por reformer, aforo por sala, plazas fijas y lista de espera automática. <Link href="/soluciones/estudio-de-pilates-reformer">Tentare para estudios de reformer</Link>.</p>
+        <p>Un centro deportivo vende accesos, zonas y muchas actividades. Un estudio de Pilates vende plazas en una máquina a una hora concreta, con alumnas que repiten cada semana. Por eso Centra trae plaza por reformer, aforo por sala, plazas fijas y lista de espera automática. <Link href="/soluciones/estudio-de-pilates-reformer">Centra para estudios de reformer</Link>.</p>
         <p>Y el precio está publicado: Founding Studio gratis (hasta 150 reservas al mes; si pasas de ahí, 29 €/mes), Estudio 79 €/mes y Cadena 249 €/mes, IVA incluido. <Link href="/precios">Ver los planes</Link>.</p>
       </>
     ),
@@ -77,11 +77,11 @@ export default function TentareVsDeporWebPage() {
       name="DeporWeb"
       slug="tentare-vs-deporweb"
       logo={{ src: '/comparativa/logos/deporweb.svg', alt: 'Logo de DeporWeb', height: 20, width: 130 }}
-      intro={<>DeporWeb es un software de gestión para centros deportivos con muchas disciplinas. Para un <strong style={{ color: 'var(--w-texto)' }}>estudio de pilates en España</strong>, Tentare es un producto hecho para tu estudio, con precios públicos desde el primer día.</>}
+      intro={<>DeporWeb es un software de gestión para centros deportivos con muchas disciplinas. Para un <strong style={{ color: 'var(--w-texto)' }}>estudio de pilates en España</strong>, Centra es un producto hecho para tu estudio, con precios públicos desde el primer día.</>}
       resumen={RESUMEN}
       rows={ROWS}
       analisis={ANALISIS}
-      veredicto={<>Tentare es la mejor opción para tu estudio de Pilates: un producto hecho para estudios como el tuyo y con precios públicos, sin tener que hablar con nadie para saber lo que pagas. Empieza gratis, sin tarjeta.</>}
+      veredicto={<>Centra es la mejor opción para tu estudio de Pilates: un producto hecho para estudios como el tuyo y con precios públicos, sin tener que hablar con nadie para saber lo que pagas. Empieza gratis, sin tarjeta.</>}
       footnote="Basado en la información pública de DeporWeb (deporweb.es) a 29 de septiembre de 2026. «No consta» significa que su web pública no lo indica, no que no exista. Las funciones y precios cambian con el tiempo; verifica siempre con la fuente actual. DeporWeb es marca de su respectivo propietario; esta comparación es orientativa y sin ánimo de menoscabo."
       faq={FAQ}
     />

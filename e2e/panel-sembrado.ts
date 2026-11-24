@@ -148,7 +148,7 @@ const FACTURAS = [
 
 const PRODUCTOS = [
   { id: 'p1', studio_id: STUDIO_ID, nombre: 'Calcetines Pilates', categoria: 'PRODUCTO', precio: 25, activo: true, stock: 12, stock_minimo: 5, descripcion: 'Antideslizantes', iva_pct: 21, sku: 'CAL-01', codigo_barras: null, imagen_url: null, orden: 0 },
-  { id: 'p2', studio_id: STUDIO_ID, nombre: 'Botella Tentare', categoria: 'PRODUCTO', precio: 14.9, activo: true, stock: 3, stock_minimo: 5, descripcion: '750 ml', iva_pct: 21, sku: null, codigo_barras: null, imagen_url: null, orden: 1 },
+  { id: 'p2', studio_id: STUDIO_ID, nombre: 'Botella Centra', categoria: 'PRODUCTO', precio: 14.9, activo: true, stock: 3, stock_minimo: 5, descripcion: '750 ml', iva_pct: 21, sku: null, codigo_barras: null, imagen_url: null, orden: 1 },
 ];
 
 
@@ -454,7 +454,7 @@ export async function montar(page: Page): Promise<CoberturaPanel> {
   await page.route((u) => u.pathname === '/api/sustituciones', (r) => json(r, { sustituciones: [] }));
   await page.route((u) => u.pathname === '/api/valoraciones', (r) => json(r, { valoraciones: [] }));
   await page.route((u) => u.pathname === '/api/migracion/recientes', (r) => json(r, { importaciones: [] }));
-  // «Tu Tentare» (P2.5): apagado de serie (interruptor `TU_TENTARE`). Su spec lo enciende.
+  // «Tu Centra» (P2.5): apagado de serie (interruptor `TU_TENTARE`). Su spec lo enciende.
   await page.route((u) => u.pathname === '/api/configuracion/tu-tentare', (r) => json(r, { activo: false }));
   // Los interruptores por estudio, apagados (como en cualquier estudio que ya trabaja).
   await page.route((u) => u.pathname === '/api/estudio/interruptores', (r) => json(r, { filtrosClientas: false, importarPegando: false, invitarWhatsApp: false, horarioDesdeImagen: false, nivelesConRitmo: false, tarjetaClase: false, panelNuevo: false }));

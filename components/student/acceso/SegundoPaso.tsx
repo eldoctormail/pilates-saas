@@ -3,7 +3,7 @@
 // El segundo paso de la verificación en dos pasos de la alumna y la instructora
 // (4-oct-2026, opcional: la activa cada una en su perfil). Lo pintan la app del
 // estudio (`/portal/[slug]/acceso/dos-pasos`, con su marca) y la entrada de la app
-// de iOS (`/app`, sin estudio todavía: el correo sale con la marca de Tentare).
+// de iOS (`/app`, sin estudio todavía: el correo sale con la marca de Centra).
 //
 // Por defecto un código al CORREO de la cuenta; la app de autenticación para «No
 // tengo acceso a mi correo», y siempre si entró sin contraseña (con un enlace, un

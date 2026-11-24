@@ -1388,7 +1388,7 @@ export async function eliminarPersonaDelEquipo(
   };
 }
 
-// ── Billing del SaaS (suscripción del estudio a Tentare) ───────────────────────
+// ── Billing del SaaS (suscripción del estudio a Centra) ───────────────────────
 
 export interface EstadoBilling {
   plan: string;
@@ -3092,7 +3092,7 @@ async function patchClases(cuerpo: Record<string, unknown>): Promise<{ ok: boole
   }
 }
 
-// ── Tentare Network: perfil profesional (Fase 2) ─────────────────────────────
+// ── Centra Network: perfil profesional (Fase 2) ─────────────────────────────
 // Identidad por auth_user_id, no por studio_id — mismo JWT de staff
 // (authHeader) que el resto del panel, validado en el servidor por
 // verificarUsuarioSupabase en vez de verificarSesionStaff (no exige

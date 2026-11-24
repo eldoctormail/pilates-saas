@@ -1,6 +1,6 @@
 import { OG_IMAGE_CONTENT_TYPE, OG_IMAGE_SIZE, generarOgImage } from '@/lib/og-image';
 
-export const alt = 'Clases recurrentes y renovación de series — Tentare';
+export const alt = 'Clases recurrentes y renovación de series — Centra';
 export const size = OG_IMAGE_SIZE;
 export const contentType = OG_IMAGE_CONTENT_TYPE;
 

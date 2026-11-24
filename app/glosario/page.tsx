@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   description: pagina.descripcion,
   alternates: { canonical: urlDe('/glosario') },
   openGraph: {
-    siteName: 'Tentare',
+    siteName: 'Centra',
     type: 'website',
     title: 'Glosario del software de gestión para estudios de Pilates',
     description: 'Definiciones claras y neutrales de los términos que se usan al gestionar un estudio de Pilates.',
@@ -119,7 +119,7 @@ const TERMINOS_ESPANA: Termino[] = [
     name: 'Comisión por reserva (marketplace de clases)',
     description:
       'Modelo en el que un software de gestión también opera un directorio público donde alumnas nuevas descubren y reservan clase en distintos estudios, a cambio de una comisión sobre cada reserva o cobro captado por esa vía. Es distinto de un software sin marketplace, que no cobra ese porcentaje pero tampoco aporta esa visibilidad.',
-    guia: { href: '/comparativa', label: 'Qué modelo usa cada software con el que se compara Tentare' },
+    guia: { href: '/comparativa', label: 'Qué modelo usa cada software con el que se compara Centra' },
   },
   {
     slug: 'lista-de-espera-automatica',
@@ -278,7 +278,7 @@ const TERMINOS_ESPANA: Termino[] = [
     name: 'Ficha de salud operativa',
     description:
       'Registro de condiciones, lesiones o adaptaciones de una alumna pensado para que la instructora sepa qué tener en cuenta al dar la clase —no un historial clínico médico. No diagnostica ni prescribe: es una nota operativa, visible solo para quien debe verla.',
-    guia: { href: '/seguridad', label: 'Quién puede ver qué dato en Tentare' },
+    guia: { href: '/seguridad', label: 'Quién puede ver qué dato en Centra' },
   },
 ];
 

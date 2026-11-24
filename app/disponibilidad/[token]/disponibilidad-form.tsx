@@ -138,7 +138,7 @@ export function DisponibilidadForm({
           </p>
         </div>
       </div>
-      <p className="mt-6 text-center text-[11px] text-slate-300">Tentare</p>
+      <p className="mt-6 text-center text-[11px] text-slate-300">Centra</p>
     </main>
   );
 }

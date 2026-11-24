@@ -137,7 +137,7 @@ export function PreviewActualizacion({ categoria, className = '' }: { categoria:
  * separación importa: las de `por-defecto` son la foto que se le presta a un
  * estudio que aún no ha subido la suya —se recortan en cinco sitios, tres van
  * bajo un velo que las tiñe, y su README prohíbe las caras justo por eso—.
- * Esta es de Tentare hablando de Tentare, se ve entera y en un solo sitio.
+ * Esta es de Centra hablando de Centra, se ve entera y en un solo sitio.
  * Meterla en aquella carpeta la habría dejado a un `imagenDeEstudio()` de
  * distancia de acabar siendo la portada del portal de una clienta.
  *

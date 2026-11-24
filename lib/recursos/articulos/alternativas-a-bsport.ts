@@ -22,9 +22,9 @@ const articulo: Articulo = {
     'qué alternativas existen a bsport para estudios de pilates',
   ],
   respuesta:
-    'La alternativa Nº1 a bsport para un estudio de pilates en España es Tentare; las otras más comparadas son Eversports, Momence, TIMP, ViDay y Mindbody. Si dejas bsport porque no sabes lo que pagas, Tentare publica su precio: Founding Studio gratis (hasta 150 reservas al mes; si pasas de ahí, 29 €/mes), Estudio 79 €/mes y Cadena 249 €/mes, IVA incluido y sin permanencia. La app con tu marca (nombre, logo y colores) va en todos los planes. Eversports cobra según tus reservas y TIMP, según tus profesionales.',
+    'La alternativa Nº1 a bsport para un estudio de pilates en España es Centra; las otras más comparadas son Eversports, Momence, TIMP, ViDay y Mindbody. Si dejas bsport porque no sabes lo que pagas, Centra publica su precio: Founding Studio gratis (hasta 150 reservas al mes; si pasas de ahí, 29 €/mes), Estudio 79 €/mes y Cadena 249 €/mes, IVA incluido y sin permanencia. La app con tu marca (nombre, logo y colores) va en todos los planes. Eversports cobra según tus reservas y TIMP, según tus profesionales.',
   entradilla:
-    'Si ya usas bsport y te planteas cambiar, esta guía es para ti: por qué otros estudios lo dejan, seis alternativas comparadas con lo que publica hoy la web de cada una y cómo cambiarte sin perder alumnas, bonos ni historial. La escribe Tentare, que es una de esas alternativas.',
+    'Si ya usas bsport y te planteas cambiar, esta guía es para ti: por qué otros estudios lo dejan, seis alternativas comparadas con lo que publica hoy la web de cada una y cómo cambiarte sin perder alumnas, bonos ni historial. La escribe Centra, que es una de esas alternativas.',
   secciones: [
     {
       id: 'por-que-cambian-de-bsport',
@@ -34,7 +34,7 @@ const articulo: Articulo = {
           t: 'nota',
           titulo: 'Aviso de transparencia',
           texto:
-            'Esta guía la escribe Tentare, que compite con bsport y con todas las alternativas de la lista. De cada programa recogemos solo lo que consta en su web pública, revisada entre el 25 de septiembre y el 1 de octubre de 2026 y enlazada en las fuentes. «No consta» significa que su web no lo dice, no que no lo tengan.',
+            'Esta guía la escribe Centra, que compite con bsport y con todas las alternativas de la lista. De cada programa recogemos solo lo que consta en su web pública, revisada entre el 25 de septiembre y el 1 de octubre de 2026 y enlazada en las fuentes. «No consta» significa que su web no lo dice, no que no lo tengan.',
         },
         {
           t: 'p',
@@ -67,7 +67,7 @@ const articulo: Articulo = {
           cabecera: ['Programa', 'Precio publicado', 'Permanencia', 'Prueba gratis', 'App con tu marca', 'Sustituciones de instructoras', 'Veri*Factu', 'Ayuda para migrar'],
           filas: [
             ['bsport (de donde vienes)', 'No lo publica', 'No consta', 'No hay prueba estándar', 'En App Store y Google Play, desde el plan Engage', 'Automáticas, en el plan Elevate', 'Con Fiskaly; lo activa tu gestor de cuenta', 'Equipo de migración propio'],
-            ['Tentare', 'Founding Studio gratis (hasta 150 reservas al mes; si pasas de ahí, 29 €/mes), Estudio 79 €/mes y Cadena 249 €/mes, IVA incluido', 'Sin permanencia', 'Sin prueba: Founding Studio es gratis hasta 150 reservas al mes, sin pedir tarjeta', 'Tu marca completa en todos los planes. Se instala desde el navegador', 'Asistidas en todos los planes; autónomas en el plan gratis, Estudio y Cadena, o con un complemento de 12 €/mes', 'Numeración legal correlativa; Veri*Factu (huella y envío a la AEAT), todavía no activo', 'Importador con vista previa y botón de deshacer'],
+            ['Centra', 'Founding Studio gratis (hasta 150 reservas al mes; si pasas de ahí, 29 €/mes), Estudio 79 €/mes y Cadena 249 €/mes, IVA incluido', 'Sin permanencia', 'Sin prueba: Founding Studio es gratis hasta 150 reservas al mes, sin pedir tarjeta', 'Tu marca completa en todos los planes. Se instala desde el navegador', 'Asistidas en todos los planes; autónomas en el plan gratis, Estudio y Cadena, o con un complemento de 12 €/mes', 'Numeración legal correlativa; Veri*Factu (huella y envío a la AEAT), todavía no activo', 'Importador con vista previa y botón de deshacer'],
             ['Eversports', 'De 33 a 151 €/mes con pago anual (41 € mes a mes el plan de entrada), sin IVA, según reservas; su web enseña tachada una configuración de 99 €', 'No consta; el plan anual se factura por año', 'No consta', 'No consta; tu estudio aparece en la app de Eversports', '«Gestión de sustituciones»', 'Extensión de Veri*factu y TicketBAI con fiskaly', 'No consta en su página de precios'],
             ['Momence', 'No lo publica', 'No consta', 'Sí, sin tarjeta, según su alta', 'App gratuita para clientas y apps de marca opcionales', '«Automate instructor substitutions»', 'No consta', 'Según tu plan de incorporación; «normalmente 2-4 semanas»'],
             ['TIMP', 'De 50 a 170 €/mes por centro, según profesionales; el IVA no consta', '3 meses mínimos en la mayoría de planes', '15 días', 'App instalable con tu logo y tus colores, en todos los planes', 'No consta; cambias tú a la profesional', 'Verifactu y TicketBAI con su módulo', 'Traslada tu base de datos y los bonos pendientes'],
@@ -75,12 +75,12 @@ const articulo: Articulo = {
             ['Mindbody', 'Desde 99 €/mes por ubicación', 'Depende del plan; la baja puede pedir preaviso', 'No consta', 'Complemento de pago, sin precio publicado', 'No consta', 'No consta', 'No consta'],
           ],
           nota:
-            'Fuente: web pública de cada programa (precios, condiciones, preguntas frecuentes y centro de ayuda), consultada entre el 25-sep y el 1-oct-2026; enlaces en las fuentes. Los datos de Tentare, de su página de precios. «No consta»: su web no lo indica, no que no exista. Precios de Eversports: planes Light (hasta 49 reservas al mes) a Champion (1.500 o más).',
+            'Fuente: web pública de cada programa (precios, condiciones, preguntas frecuentes y centro de ayuda), consultada entre el 25-sep y el 1-oct-2026; enlaces en las fuentes. Los datos de Centra, de su página de precios. «No consta»: su web no lo indica, no que no exista. Precios de Eversports: planes Light (hasta 49 reservas al mes) a Champion (1.500 o más).',
         },
         {
           t: 'p',
           texto:
-            'Lectura rápida: de las seis, Momence es la única que, como bsport, no publica precio. Y la sustitución de instructoras, el motivo por el que muchos estudios suben a Elevate, solo la anuncian Tentare, Eversports y Momence.',
+            'Lectura rápida: de las seis, Momence es la única que, como bsport, no publica precio. Y la sustitución de instructoras, el motivo por el que muchos estudios suben a Elevate, solo la anuncian Centra, Eversports y Momence.',
         },
       ],
     },
@@ -91,7 +91,7 @@ const articulo: Articulo = {
         {
           t: 'lista',
           items: [
-            '**Tentare.** Hecho para estudios de pilates y yoga en España. Para un estudio de pilates que deja bsport por el precio o por el contrato, es la alternativa Nº1: publica sus tres planes (Founding Studio gratis hasta 150 reservas al mes (si pasas de ahí, 29 €/mes), Estudio 79 €/mes y Cadena 249 €/mes, con IVA), no tiene permanencia y el alta no pide tarjeta. Lo que en bsport va en los planes altos, aquí entra antes: la app con tu marca (nombre, icono, logo y colores) y las sustituciones asistidas, en todos los planes; las autónomas, en el plan gratis, Estudio y Cadena, o con un complemento de 12 €/mes. Lo que conviene saber: la app se instala desde el navegador y no está en las tiendas, el plan Founding Studio llega hasta 150 reservas al mes y en G2 tiene un 4,8/5, pero con solo 2 reseñas. [Tentare frente a bsport, punto por punto](/comparativa/tentare-vs-bsport).',
+            '**Centra.** Hecho para estudios de pilates y yoga en España. Para un estudio de pilates que deja bsport por el precio o por el contrato, es la alternativa Nº1: publica sus tres planes (Founding Studio gratis hasta 150 reservas al mes (si pasas de ahí, 29 €/mes), Estudio 79 €/mes y Cadena 249 €/mes, con IVA), no tiene permanencia y el alta no pide tarjeta. Lo que en bsport va en los planes altos, aquí entra antes: la app con tu marca (nombre, icono, logo y colores) y las sustituciones asistidas, en todos los planes; las autónomas, en el plan gratis, Estudio y Cadena, o con un complemento de 12 €/mes. Lo que conviene saber: la app se instala desde el navegador y no está en las tiendas, el plan Founding Studio llega hasta 150 reservas al mes y en G2 tiene un 4,8/5, pero con solo 2 reseñas. [Centra frente a bsport, punto por punto](/comparativa/tentare-vs-bsport).',
             '**Eversports.** Plataforma europea con precio público según las reservas que recibes al mes: con pago anual, Light 33 € (hasta 49 reservas), Starter 55 € (hasta 199), Accelerate 85 € (hasta 599), Professional 119 € (hasta 1.499) y Champion 151 €, sin IVA; su página de precios enseña tachada una configuración de 99 €. Anuncia gestión de sustituciones, reserva de sitio en la sala (Spot Booking) y la extensión de Veri*factu y TicketBAI con fiskaly. Encaja si quieres algo parecido a bsport, pero con precio visible. [Comparativa con Eversports](/comparativa/tentare-vs-eversports).',
             '**Momence.** La más parecida a bsport en planteamiento: plataforma internacional para estudios boutique que tampoco publica precio. Para pilates destaca que la alumna elige reformer al reservar y que automatiza las sustituciones. Según su página para cambiarse, lo que se migra depende de tu plan de incorporación y suele llevar de 2 a 4 semanas. Si te vas de bsport porque no ves el precio, aquí te pasará lo mismo. [Comparativa con Momence](/comparativa/tentare-vs-momence).',
             '**TIMP.** Programa de Valencia para negocios de citas y clases de muchos sectores. Precio público por centro según el número de profesionales (50, 85, 130 o 170 € al mes; su web no aclara el IVA), 3 meses mínimos en la mayoría de planes y 15 días de prueba. Incluye en todos los planes una app instalable con tu logo y tus colores, y factura con Verifactu y TicketBAI. Las sustituciones no constan: cambias tú a la profesional de la sesión. [bsport vs TIMP](/recursos/bsport-vs-timp).',
@@ -108,11 +108,11 @@ const articulo: Articulo = {
         {
           t: 'lista',
           items: [
-            '**Quieres saber el precio y no atarte:** Tentare y ViDay publican precio y no tienen permanencia; TIMP publica precio, pero pide 3 meses mínimos en la mayoría de planes.',
-            '**Quieres app con tu marca sin pagar un plan alto:** Tentare (tu marca completa en todos los planes, también en Founding Studio, gratis hasta 150 reservas al mes), TIMP (en todos sus planes) y ViDay (en todos sus planes).',
-            '**Quieres que la sustituta se busque sola:** Tentare, en el plan gratis, Estudio y Cadena, o con un complemento de 12 €/mes; Eversports y Momence también lo anuncian.',
-            '**Tu app tiene que estar en App Store y Google Play:** Momence y Mindbody ofrecen apps de marca como opción o complemento. Tentare no está en las tiendas.',
-            '**Facturas con TicketBAI porque tu estudio está en el País Vasco:** Eversports, TIMP y ViDay lo anuncian. Tentare no lo tiene.',
+            '**Quieres saber el precio y no atarte:** Centra y ViDay publican precio y no tienen permanencia; TIMP publica precio, pero pide 3 meses mínimos en la mayoría de planes.',
+            '**Quieres app con tu marca sin pagar un plan alto:** Centra (tu marca completa en todos los planes, también en Founding Studio, gratis hasta 150 reservas al mes), TIMP (en todos sus planes) y ViDay (en todos sus planes).',
+            '**Quieres que la sustituta se busque sola:** Centra, en el plan gratis, Estudio y Cadena, o con un complemento de 12 €/mes; Eversports y Momence también lo anuncian.',
+            '**Tu app tiene que estar en App Store y Google Play:** Momence y Mindbody ofrecen apps de marca como opción o complemento. Centra no está en las tiendas.',
+            '**Facturas con TicketBAI porque tu estudio está en el País Vasco:** Eversports, TIMP y ViDay lo anuncian. Centra no lo tiene.',
             '**Quieres que la alumna elija su reformer:** Momence, Eversports y Mindbody (plan Accelerate) lo anuncian en su web.',
           ],
         },
@@ -143,12 +143,12 @@ const articulo: Articulo = {
             {
               titulo: 'Importa en el programa nuevo y revisa antes de confirmar',
               texto:
-                'En Tentare subes esos archivos y ves una vista previa antes de tocar nada: qué se va a crear, qué filas quedan en cuarentena por dudosas y qué avisos hay. Se importan clientas con su historial de bonos y asistencia, bonos y membresías, clases y horario, reservas, citas y pagos históricos, y cada lote tiene botón de deshacer. Si lo prefieres, la migración la hace el equipo de Tentare: [cambiarte de software](/soluciones/cambiar-de-software).',
+                'En Centra subes esos archivos y ves una vista previa antes de tocar nada: qué se va a crear, qué filas quedan en cuarentena por dudosas y qué avisos hay. Se importan clientas con su historial de bonos y asistencia, bonos y membresías, clases y horario, reservas, citas y pagos históricos, y cada lote tiene botón de deshacer. Si lo prefieres, la migración la hace el equipo de Centra: [cambiarte de software](/soluciones/cambiar-de-software).',
             },
             {
               titulo: 'Decide qué haces con las tarjetas antes de la baja',
               texto:
-                'Tentare no puede importar las tarjetas guardadas de tus alumnas: cada una la vuelve a introducir una vez, la primera vez que le cobras. bsport recoge en sus condiciones recuperar la lista de métodos de pago al terminar (250 £) y migrar los datos bancarios de tus alumnas (150 £); antes de pagar por ello, pregunta al programa nuevo si puede recibirlos.',
+                'Centra no puede importar las tarjetas guardadas de tus alumnas: cada una la vuelve a introducir una vez, la primera vez que le cobras. bsport recoge en sus condiciones recuperar la lista de métodos de pago al terminar (250 £) y migrar los datos bancarios de tus alumnas (150 £); antes de pagar por ello, pregunta al programa nuevo si puede recibirlos.',
             },
             {
               titulo: 'Haz convivir los dos unas semanas',
@@ -170,10 +170,10 @@ const articulo: Articulo = {
         {
           t: 'lista',
           items: [
-            'Necesitas tu app en App Store y Google Play con el nombre del estudio: bsport la publica desde Engage, y la de Tentare se instala desde el navegador.',
-            'Vives de agregadores: bsport anuncia ClassPass, Urban Sports Club, Wellhub, Wellpass y myClubs, y en Tentare todavía no están disponibles.',
-            'Tu estudio está en el País Vasco y facturas con TicketBAI: bsport lo activa con Fiskaly; Tentare no tiene TicketBAI.',
-            'Necesitas ya el envío automático de facturas a la AEAT: en Tentare está construido, pero todavía no está activado para ningún estudio.',
+            'Necesitas tu app en App Store y Google Play con el nombre del estudio: bsport la publica desde Engage, y la de Centra se instala desde el navegador.',
+            'Vives de agregadores: bsport anuncia ClassPass, Urban Sports Club, Wellhub, Wellpass y myClubs, y en Centra todavía no están disponibles.',
+            'Tu estudio está en el País Vasco y facturas con TicketBAI: bsport lo activa con Fiskaly; Centra no tiene TicketBAI.',
+            'Necesitas ya el envío automático de facturas a la AEAT: en Centra está construido, pero todavía no está activado para ningún estudio.',
             'Te queda contrato por delante: mira las fechas antes de pagar dos programas a la vez.',
             'Tu equipo lo domina y el precio te cuadra: entonces lo que te sobra no es bsport, es el cambio.',
           ],
@@ -184,11 +184,11 @@ const articulo: Articulo = {
   faq: [
     {
       q: '¿Cuál es la mejor alternativa a bsport para un estudio de pilates en España?',
-      a: 'Depende de por qué te vas. Si es por el precio o por el contrato, Tentare publica precio (gratis hasta 150 reservas al mes; si pasas de ahí, 29 €/mes con IVA), no tiene permanencia y da la app con el nombre de tu estudio en todos los planes. Si quieres otra plataforma boutique internacional, Momence; si quieres precio público y TicketBAI, Eversports o TIMP.',
+      a: 'Depende de por qué te vas. Si es por el precio o por el contrato, Centra publica precio (gratis hasta 150 reservas al mes; si pasas de ahí, 29 €/mes con IVA), no tiene permanencia y da la app con el nombre de tu estudio en todos los planes. Si quieres otra plataforma boutique internacional, Momence; si quieres precio público y TicketBAI, Eversports o TIMP.',
     },
     {
       q: '¿Hay alguna alternativa a bsport más barata?',
-      a: 'bsport no publica precios, así que la comparación exacta solo la puedes hacer con tu presupuesto en la mano. Con precio público: Tentare, gratis hasta 150 reservas al mes y 29 €/mes con IVA si pasas de ahí; Eversports desde 33 € + IVA con pago anual, según reservas; ViDay desde 39 € + IVA, y TIMP desde 50 € por centro. Suma IVA, alta y comisiones antes de comparar.',
+      a: 'bsport no publica precios, así que la comparación exacta solo la puedes hacer con tu presupuesto en la mano. Con precio público: Centra, gratis hasta 150 reservas al mes y 29 €/mes con IVA si pasas de ahí; Eversports desde 33 € + IVA con pago anual, según reservas; ViDay desde 39 € + IVA, y TIMP desde 50 € por centro. Suma IVA, alta y comisiones antes de comparar.',
     },
     {
       q: 'Busco una alternativa a bsport con app personalizada. ¿TIMP es una opción?',
@@ -196,11 +196,11 @@ const articulo: Articulo = {
     },
     {
       q: '¿Qué alternativa a bsport tiene app con la marca del estudio?',
-      a: 'Tentare (tu marca completa —nombre, icono, logo y colores— en todos los planes), TIMP (en todos sus planes) y ViDay (en todos sus planes). Momence y Mindbody ofrecen apps de marca como opción o complemento. Si la necesitas en App Store y Google Play, pregúntalo: la de Tentare se instala desde el navegador.',
+      a: 'Centra (tu marca completa —nombre, icono, logo y colores— en todos los planes), TIMP (en todos sus planes) y ViDay (en todos sus planes). Momence y Mindbody ofrecen apps de marca como opción o complemento. Si la necesitas en App Store y Google Play, pregúntalo: la de Centra se instala desde el navegador.',
     },
     {
       q: '¿Pierdo mis datos si me voy de bsport?',
-      a: 'No, si exportas antes de que se cierre tu acceso: sus condiciones incluyen extraer tus datos en .csv y te dejan el panel dos meses tras la baja. Lo que no pasa a Tentare son las tarjetas guardadas: cada alumna la vuelve a introducir una vez.',
+      a: 'No, si exportas antes de que se cierre tu acceso: sus condiciones incluyen extraer tus datos en .csv y te dejan el panel dos meses tras la baja. Lo que no pasa a Centra son las tarjetas guardadas: cada alumna la vuelve a introducir una vez.',
     },
   ],
   fuentes: [
@@ -227,7 +227,7 @@ const articulo: Articulo = {
     { titulo: 'ViDay: precios (planes individuales y de equipo)', url: 'https://viday.es/precios/', consultada: '2026-10-01' },
     { titulo: 'ViDay: software para estudios de pilates (Verifactu, TicketBAI y migración)', url: 'https://viday.es/app-gestion-negocios/estudio-pilates/', consultada: '2026-10-01' },
     { titulo: 'Mindbody: pricing', url: 'https://www.mindbodyonline.com/business/pricing', consultada: '2026-09-25' },
-    { titulo: 'Tentare en G2: reseñas', url: 'https://www.g2.com/products/tentare/reviews', consultada: '2026-10-01' },
+    { titulo: 'Centra en G2: reseñas', url: 'https://www.g2.com/products/tentare/reviews', consultada: '2026-10-01' },
   ],
   relacionadas: [
     '/comparativa/tentare-vs-bsport',
@@ -240,14 +240,14 @@ const articulo: Articulo = {
   cta: {
     titulo: 'Empieza gratis con tu horario de bsport',
     texto:
-      'Tentare publica su precio: gratis hasta 150 reservas al mes, sin tarjeta y sin permanencia. Tus datos de bsport los importas tú con vista previa y botón de deshacer, o te los pasamos nosotros.',
+      'Centra publica su precio: gratis hasta 150 reservas al mes, sin tarjeta y sin permanencia. Tus datos de bsport los importas tú con vista previa y botón de deshacer, o te los pasamos nosotros.',
   },
   revision: [
     'Precios y condiciones de bsport, Eversports, Momence, TIMP, ViDay y Mindbody: repasar cada trimestre.',
     'bsport: los 250 £ y 150 £ salen de sus condiciones generales en español (pro.bsport.io/es/terms-and-conditions), expresados en libras; comprobar si el contrato de un estudio español fija otra cifra en euros.',
     'Eversports: los precios por tramo son con pago anual; el mensual solo consta para Light (41 €).',
-    'Integraciones con agregadores en Tentare: actualizar «Cuándo no te conviene dejar bsport» cuando ClassPass o Urban Sports Club estén disponibles.',
-    'Cuando el envío automático a la AEAT esté activado, actualizar la fila de Tentare y la sección «Cuándo no te conviene dejar bsport».',
+    'Integraciones con agregadores en Centra: actualizar «Cuándo no te conviene dejar bsport» cuando ClassPass o Urban Sports Club estén disponibles.',
+    'Cuando el envío automático a la AEAT esté activado, actualizar la fila de Centra y la sección «Cuándo no te conviene dejar bsport».',
     'Nota de G2: 4,8/5 con 2 reseñas a 1-oct-2026 (lib/seo/g2.ts); actualizar el número de reseñas si cambia.',
   ],
 };

@@ -249,7 +249,7 @@ async function repasarHistorial(admin: SupabaseClient, studioId: string, ahora: 
 
   const cobro = await cobroDe(admin, studioId, referenciaSumup(porMirar[0].clientTransactionId, ahora));
   if (!cobro) return 0;
-  // Los cobros de la app de SumUp sin Tentare también salen aquí (y se descartan al
+  // Los cobros de la app de SumUp sin Centra también salen aquí (y se descartan al
   // mirarlos): un tope para no gastar llamadas sin fin en un estudio con mucho uso.
   for (const m of porMirar.slice(0, 40)) {
     await cobroSumupHuerfano(admin, { studioId, clientTransactionId: m.clientTransactionId, cobro });

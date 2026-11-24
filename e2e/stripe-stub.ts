@@ -15,7 +15,7 @@
 //   · `__TENTARE_STRIPE_INIT`     — cada `Stripe(pk, opciones)`: con qué clave y
 //                                   con qué `stripeAccount` se cargó (el cargo
 //                                   directo de Connect exige la cuenta del
-//                                   estudio; sin ella el pago iría a la de Tentare).
+//                                   estudio; sin ella el pago iría a la de Centra).
 //   · `__TENTARE_STRIPE_ELEMENTS` — las opciones con que se crea cada Elements
 //                                   (`fonts` y `appearance` incluidos): es lo
 //                                   único que el iframe de pago de verdad

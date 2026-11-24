@@ -122,7 +122,7 @@ test('no se salta la verificación en dos pasos: una cuenta con factor verificad
   assert.deepEqual(emitidas, []);
 });
 
-test('solo una cuenta que es solo cliente: ni equipo, ni dueña, ni Tentare, ni Network', async () => {
+test('solo una cuenta que es solo cliente: ni equipo, ni dueña, ni Centra, ni Network', async () => {
   for (const clave of ['instructora', 'duena_estudio', 'duena_cadena', 'admin_plataforma', 'permiso_plataforma', 'perfil_network']) {
     const { d, emitidas } = deps({ vinculos: async () => ({ ...soloAlumna(), [clave]: 1 }) });
     assert.deepEqual(await intentarAccesoRevision(CFG, 'revision@example.com', '480913', d), { tipo: 'rechazado', motivo: 'no_solo_alumna' }, clave);

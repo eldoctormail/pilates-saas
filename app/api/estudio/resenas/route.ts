@@ -7,7 +7,7 @@ import { hoyEnEstudio, masDias } from '@/lib/utils';
 import { LIMITES_PREMIO, PREFIJO_CODIGO_PREMIO_RESENA, validarAjustesResenas, type AjustesResenas } from '@/lib/valoraciones/premio';
 
 // «Reseñas y premio» (Configuración → Cómo me comunico): el enlace de reseñas del
-// estudio y el código que se regala a quien valora una clase en Tentare. Solo la
+// estudio y el código que se regala a quien valora una clase en Centra. Solo la
 // propietaria, como el resto de esa sección (Marketing está desactivado y recepción
 // y gerencia no ven Configuración).
 //

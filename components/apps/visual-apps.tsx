@@ -3,7 +3,7 @@
 // esto importa iconos de React.
 //
 // Una baldosa por app, siempre del mismo juego (`IconoApp`). Las integraciones
-// de otras marcas llevan su logo real; las apps de Tentare, un glifo propio.
+// de otras marcas llevan su logo real; las apps de Centra, un glifo propio.
 
 import type { ReactNode } from 'react';
 import { Compass, Replace, Smartphone, Sparkles, Gift, Wallet, ScanLine, type LucideIcon } from 'lucide-react';

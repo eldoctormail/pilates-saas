@@ -83,7 +83,7 @@ export default function AyudaPage() {
         </section>
 
         {/* App Store 1.2: las normas de la comunidad a mano y el contacto de
-            Tentare como desarrollador de la app. */}
+            Centra como desarrollador de la app. */}
         <NormasYContacto />
 
         {/* ⚠️ Faltaba. El paquete cierra esta pantalla con un pie legal, y no

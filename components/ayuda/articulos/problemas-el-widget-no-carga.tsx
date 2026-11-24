@@ -14,7 +14,7 @@ export default function Contenido() {
         'El código del widget se ha pegado incompleto o en el sitio equivocado de tu página.',
         'Pusiste el horario «sin marco» (la integración nativa) y tu web todavía no está autorizada en Configuración > Mi app y mi web > Widgets para tu web, en el paso «Ponlo en tu web», dentro de «Para quien te hace la web» — esa forma, a diferencia del resto, lo exige antes de funcionar.',
         'Usas «Un botón que se abre encima» y tu web no ejecuta la línea <script> del código (algunos constructores de páginas no lo hacen dentro de un bloque): pégala en el pie global de tu web.',
-        'Un bloqueador de scripts o un plugin de "optimización" de tu web retrasa o bloquea el script de Tentare.',
+        'Un bloqueador de scripts o un plugin de "optimización" de tu web retrasa o bloquea el script de Centra.',
         'La caché de tu web (muy común en WordPress) sigue sirviendo una versión antigua de la página, de antes de instalarlo.',
       ]} />
 

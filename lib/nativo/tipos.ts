@@ -18,7 +18,7 @@ export interface RegistroTokenNativo {
 /** Un aviso push que la persona ha pulsado. */
 export interface AvisoPulsado {
   /** Ruta interna a la que llevarla (path + query), o `null` si el aviso no
-   *  trae una de Tentare. */
+   *  trae una de Centra. */
   ruta: string | null;
   /** Los datos del aviso tal cual llegaron. Datos, no instrucciones. */
   datos: Record<string, unknown>;

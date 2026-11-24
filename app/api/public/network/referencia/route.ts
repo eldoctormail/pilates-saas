@@ -4,7 +4,7 @@ import { errorInterno } from '@/lib/errores-servidor';
 import { enforceRateLimit } from '@/lib/rate-limit';
 
 // Endpoint PÚBLICO (sin login): el referente confirma/rechaza desde el
-// enlace del email (app/network/referencia/[token]), sin cuenta de Tentare —
+// enlace del email (app/network/referencia/[token]), sin cuenta de Centra —
 // mismo patrón que app/api/public/aceptar-sustitucion. Token simple de texto
 // (crypto.randomUUID(), columna `red_referencias.token`), NO un JWT firmado
 // como lib/sustituciones/token.ts — otro propósito, otra forma de token.

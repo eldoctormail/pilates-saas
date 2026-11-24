@@ -6,7 +6,7 @@
 //
 // Dos señales, y por qué las dos: el `Referer` que mandan estos sitios (cuando lo mandan: la app móvil de ChatGPT, por ejemplo, a veces
 // no) y `utm_source`, que ChatGPT añade a los enlaces que cita. NO se mira nada más (ni el user-agent ni la IP): una etiqueta de origen,
-// nunca un dato de la persona. Un modelo que cita Tentare sin enlace no deja rastro aquí: esto mide visitas, no menciones.
+// nunca un dato de la persona. Un modelo que cita Centra sin enlace no deja rastro aquí: esto mide visitas, no menciones.
 
 export type MotorIA = 'chatgpt' | 'perplexity' | 'gemini' | 'claude' | 'copilot';
 

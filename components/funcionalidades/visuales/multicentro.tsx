@@ -50,7 +50,7 @@ const FILAS: [string, string, string][] = [
   ['Facturación y numeración', 'Por sede', 'Series independientes'],
   ['Equipo y tarifas', 'Por sede', 'La misma persona, condiciones distintas'],
   ['Menú y pantalla de inicio', 'Por cadena', 'Se configura una vez para todas'],
-  ['Suscripción a Tentare', 'Por cadena', 'Un plan Cadena, no uno por centro'],
+  ['Suscripción a Centra', 'Por cadena', 'Un plan Cadena, no uno por centro'],
 ];
 
 export function QueSeCompartYQueNo() {

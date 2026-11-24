@@ -11,9 +11,9 @@ export const metadata: Metadata = {
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
   openGraph: {
-    siteName: 'Tentare',
+    siteName: 'Centra',
     type: 'website',
-    title: 'Tentare vs BookyWay',
+    title: 'Centra vs BookyWay',
     description: 'Modelo de precio, sustitución de instructoras y elección de reformer — comparados con lo que consta en la web pública de BookyWay.',
     url: urlDe(PATH),
   },
@@ -42,7 +42,7 @@ const ROWS: ComparativaRow[] = [
 const FAQ = [
   {
     q: '¿Cuánto cuesta BookyWay?',
-    a: 'No tiene suscripción: según su web, tras 30 días de prueba se paga un único pago de 1,50 € por cada usuario adicional. Tentare funciona por cuota mensual: Founding Studio gratis (hasta 150 reservas al mes; si pasas de ahí, 29 €/mes), Estudio 79 €/mes y Cadena 249 €/mes, IVA incluido.',
+    a: 'No tiene suscripción: según su web, tras 30 días de prueba se paga un único pago de 1,50 € por cada usuario adicional. Centra funciona por cuota mensual: Founding Studio gratis (hasta 150 reservas al mes; si pasas de ahí, 29 €/mes), Estudio 79 €/mes y Cadena 249 €/mes, IVA incluido.',
   },
 ];
 
@@ -54,7 +54,7 @@ const RESUMEN: ResumenCompetidor = {
   precio: 'Sin suscripción: 1,50 € por cada usuario adicional tras 30 días',
   permanencia: 'Sin suscripción ni cancelación',
   destacado: { etiqueta: 'Elegir reformer', suyo: 'No consta: «Reformer» es un tipo de actividad', nuestro: 'Sí: cada alumna elige su máquina' },
-  respuesta: <>BookyWay es una app de reservas para muchos tipos de negocio que cobra por usuario en lugar de por mes. Para un estudio de Pilates en España, con alumnas que entran y salen cada temporada, un precio mensual fijo es más fácil de prever, y Tentare suma plaza por reformer, plazas fijas, cobros y sustituciones: gratis hasta 150 reservas al mes, sin permanencia.</>,
+  respuesta: <>BookyWay es una app de reservas para muchos tipos de negocio que cobra por usuario en lugar de por mes. Para un estudio de Pilates en España, con alumnas que entran y salen cada temporada, un precio mensual fijo es más fácil de prever, y Centra suma plaza por reformer, plazas fijas, cobros y sustituciones: gratis hasta 150 reservas al mes, sin permanencia.</>,
 };
 
 const ANALISIS: SeccionAnalisis[] = [
@@ -63,7 +63,7 @@ const ANALISIS: SeccionAnalisis[] = [
     cuerpo: (
       <>
         <p>BookyWay no tiene cuota mensual: según su web, tras 30 días de prueba pagas 1,50 € por cada usuario adicional. En un estudio que cada septiembre recibe a decenas de alumnas nuevas, el coste depende de cuántas pasen por la puerta.</p>
-        <p>Tentare tiene un precio mensual fijo: gratis hasta 150 reservas al mes, y 29 €/mes con IVA si pasas de ahí. Y cuenta las reservas de las clases que se dan, no las canceladas ni las de la lista de espera. <Link href="/precios">Ver los planes</Link>.</p>
+        <p>Centra tiene un precio mensual fijo: gratis hasta 150 reservas al mes, y 29 €/mes con IVA si pasas de ahí. Y cuenta las reservas de las clases que se dan, no las canceladas ni las de la lista de espera. <Link href="/precios">Ver los planes</Link>.</p>
       </>
     ),
   },
@@ -75,11 +75,11 @@ export default function TentareVsBookyWayPage() {
       name="BookyWay"
       slug="tentare-vs-bookyway"
       logo={{ src: '/comparativa/logos/bookyway.svg', alt: 'Logo de BookyWay', height: 20, width: 120 }}
-      intro={<>BookyWay es una plataforma italiana de reservas para estudios y gimnasios que cobra por cada usuario adicional. Para un <strong style={{ color: 'var(--w-texto)' }}>estudio de pilates en España</strong>, Tentare es un software hecho para Pilates, con un precio mensual fijo que sabes desde el primer día.</>}
+      intro={<>BookyWay es una plataforma italiana de reservas para estudios y gimnasios que cobra por cada usuario adicional. Para un <strong style={{ color: 'var(--w-texto)' }}>estudio de pilates en España</strong>, Centra es un software hecho para Pilates, con un precio mensual fijo que sabes desde el primer día.</>}
       resumen={RESUMEN}
       rows={ROWS}
       analisis={ANALISIS}
-      veredicto={<>Tentare es la mejor opción para tu estudio de Pilates: plaza por reformer, plazas fijas, cobros recurrentes y sustituciones de instructoras, con un precio mensual fijo y público. Empieza gratis, sin tarjeta.</>}
+      veredicto={<>Centra es la mejor opción para tu estudio de Pilates: plaza por reformer, plazas fijas, cobros recurrentes y sustituciones de instructoras, con un precio mensual fijo y público. Empieza gratis, sin tarjeta.</>}
       footnote="Basado en la información pública de BookyWay (bookyway.com) a 29 de septiembre de 2026. «No consta» significa que su web pública no lo indica, no que no exista. Las funciones y precios cambian con el tiempo; verifica siempre con la fuente actual. BookyWay es marca de su respectivo propietario; esta comparación es orientativa y sin ánimo de menoscabo."
       faq={FAQ}
     />

@@ -138,7 +138,7 @@ export function DetalleLogoYFavicon({ favicon, puedeEditarFavicon, soyPropietari
         <h4 className={labelCls}>Favicon</h4>
         {puedeEditarFavicon ? (
           // Tampoco lleva `respaldo`, por el mismo motivo que el logo:
-          // sin favicon la pestaña enseña el de Tentare, y poner ahí
+          // sin favicon la pestaña enseña el de Centra, y poner ahí
           // una imagen genérica de Pilates sería peor, no mejor.
           <CampoImagen
             etiqueta="favicon"

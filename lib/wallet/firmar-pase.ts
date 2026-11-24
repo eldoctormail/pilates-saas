@@ -6,7 +6,7 @@ import { paseJson, type ConfigWallet, type DatosPase } from './pase.ts';
 // PKCS#7 con el certificado del Pass Type ID y el intermedio WWDR de Apple.
 //
 // Los iconos son los del ESTUDIO (marca blanca: el pase es suyo, no de
-// Tentare), los mismos PNG que ya sirve `urlIconoEstudio` para su app.
+// Centra), los mismos PNG que ya sirve `urlIconoEstudio` para su app.
 
 export async function firmarPase(
   config: ConfigWallet,

@@ -1,9 +1,9 @@
 // Qué hay que decirle a Urban Sports Club para que su app enseñe el horario de
-// Tentare. Función pura: entra lo que hay en Tentare y lo que ya se envió,
+// Centra. Función pura: entra lo que hay en Centra y lo que ya se envió,
 // sale la lista de llamadas. Quien llama (lib/plataformas/usc/horario-servidor.ts)
 // solo las ejecuta y guarda el resultado.
 //
-// Reglas que vienen de USC, no de Tentare:
+// Reglas que vienen de USC, no de Centra:
 //  · Un evento es UNA clase suelta (no hay recurrencias en su API).
 //  · Solo se publica a dos semanas vista: su app no enseña más.
 //  · Inicio, ubicación y plazo de cancelación tardía NO se pueden cambiar en un
@@ -57,7 +57,7 @@ export interface SesionParaUsc {
 }
 
 export interface EventoUscGuardado {
-  /** null = la sesión se borró en Tentare: el evento sigue vivo allí. */
+  /** null = la sesión se borró en Centra: el evento sigue vivo allí. */
   sesionId: string | null;
   eventoId: string;
   cancelado: boolean;
@@ -218,7 +218,7 @@ export function planificarHorarioUsc(p: {
     }
   }
 
-  // Eventos vivos cuya sesión ya no existe (borrada en Tentare): se cancelan
+  // Eventos vivos cuya sesión ya no existe (borrada en Centra): se cancelan
   // allí. Quien llama tiene que pasar en `sesiones` TODAS las sesiones de los
   // eventos vivos, también las que ya empezaron o se movieron lejos — si no,
   // esto cancelaría en USC una clase que sigue existiendo.
@@ -229,7 +229,7 @@ export function planificarHorarioUsc(p: {
 
   // Primero lo que quita plazas (cancelar), luego lo que las cambia, y lo
   // último lo que solo crea: si la pasada se corta por tope de llamadas, que no
-  // quede abierto en USC algo que en Tentare ya no existe.
+  // quede abierto en USC algo que en Centra ya no existe.
   const orden = { cancelar: 0, recrear: 1, editar: 2, ocupacion: 3, crear: 4 } as const;
   return ops.sort((a, b) => orden[a.tipo] - orden[b.tipo]);
 }

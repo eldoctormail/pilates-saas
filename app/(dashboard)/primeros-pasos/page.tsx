@@ -90,8 +90,8 @@ export default function PrimerosPasosPage() {
     <div data-tour="guia-vista" className="space-y-6 max-w-3xl">
       <PageHeader
         back={{ href: '/dashboard', label: 'Volver al inicio' }}
-        title="Aprende a llevar tu estudio con Tentare"
-        badge={<span className="text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">Tentare Academy</span>}
+        title="Aprende a llevar tu estudio con Centra"
+        badge={<span className="text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">Centra Academy</span>}
         description={`Empieza por ${esenciales.length} capítulos, unos ${minutosEsenciales} minutos: lo justo para recibir reservas. El resto está plegado abajo para cuando lo necesites.`}
       />
 
@@ -179,8 +179,8 @@ export default function PrimerosPasosPage() {
         >
           <Repeat size={18} className="shrink-0 text-brand-secondary" aria-hidden />
           <span className="min-w-0 flex-1">
-            <span className="block text-[14px] font-semibold text-foreground">Cambiar a Tentare</span>
-            <span className="block text-[12px] text-muted-foreground">¿Vienes de otro programa? Un recorrido de 11 pasos, desde sacar tus datos hasta activar Tentare como el principal.</span>
+            <span className="block text-[14px] font-semibold text-foreground">Cambiar a Centra</span>
+            <span className="block text-[12px] text-muted-foreground">¿Vienes de otro programa? Un recorrido de 11 pasos, desde sacar tus datos hasta activar Centra como el principal.</span>
           </span>
           <ArrowRight size={14} className="shrink-0 text-muted-foreground" aria-hidden />
         </Link>
@@ -247,7 +247,7 @@ export default function PrimerosPasosPage() {
 function FilaCapitulo({ item }: { item: CapituloConEstado }) {
   const { capitulo, estado, hechos, total } = item;
 
-  // Un capítulo sin pasos (Conoce Tentare, Entiende tu negocio) NO lleva
+  // Un capítulo sin pasos (Conoce Centra, Entiende tu negocio) NO lleva
   // círculo de tarea: no hay nada que completar, y marcarlo como pendiente
   // dejaría una guía imposible de terminar.
   const icono =

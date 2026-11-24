@@ -257,7 +257,7 @@ test('a sangre — el compositor de Inicio abre la columna con la pregunta envia
   const compositor = page.locator('[data-compositor-inicio]');
   await expect(compositor).toBeVisible({ timeout: 120_000 });
   await page.screenshot({ path: 'test-results/shell-sangre-compositor-inicio.png' });
-  await compositor.getByLabel('Pregúntale a Tentare').fill('¿Cuántos clientes activos tengo?');
+  await compositor.getByLabel('Pregúntale a Centra').fill('¿Cuántos clientes activos tengo?');
   await compositor.getByRole('button', { name: 'Preguntar' }).click();
   const columna = page.locator('[data-columna-asistente]');
   await expect(columna).toBeVisible();
@@ -461,7 +461,7 @@ test('a sangre — móvil como app: el asistente y los vacíos', async ({ page }
   await page.setViewportSize({ width: 402, height: 874 });
   await ir(page, 'dashboard');
   await listo(page);
-  await expect(page.locator('[data-movil-barra] a[aria-label="Pregúntale a Tentare"]')).toBeVisible({ timeout: 60_000 });
+  await expect(page.locator('[data-movil-barra] a[aria-label="Pregúntale a Centra"]')).toBeVisible({ timeout: 60_000 });
   await page.screenshot({ path: 'test-results/shell-movil-asistente.png' });
   for (const ruta of ['sustituciones', 'notificaciones', 'equipo']) {
     await ir(page, ruta);

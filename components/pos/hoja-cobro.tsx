@@ -310,7 +310,7 @@ export function HojaCobro({
   const disponible = (m: MetodoPago) => {
     if (m === 'DATAFONO') return estadoDatafono !== 'sin-stripe';
     if (m === 'BIZUM') return cobroDisponible.stripeConectado && bizumPermitido;
-    // Se cobran fuera de Tentare ANTES de confirmar: sin el total comprobado, no.
+    // Se cobran fuera de Centra ANTES de confirmar: sin el total comprobado, no.
     if (necesitaAtestiguar(m)) return !sinComprobar;
     return true;
   };
@@ -503,7 +503,7 @@ export function HojaCobro({
           )}
 
           {/* ── Atestiguar (tarjeta del banco, transferencia) ────────────
-              A Tentare NO le consta este cobro: se hace en el datáfono del
+              A Centra NO le consta este cobro: se hace en el datáfono del
               banco o en la cuenta, fuera de aquí. Antes se registraba como
               «Cobrado» en cuanto se pulsaba el método —el proveedor manual
               devuelve PAGADO al instante— y en pantalla salía idéntico a un
@@ -526,8 +526,8 @@ export function HojaCobro({
               </p>
               <p className="text-[13.5px] text-muted-foreground max-w-[340px] mx-auto">
                 {fase.metodo === 'TARJETA'
-                  ? `Tentare no ve los cobros del datáfono de tu banco. Confirma que has cobrado ${formatEuro(totalVisto)} y lo registramos a tu nombre.`
-                  : `Tentare no ve tu cuenta bancaria. Confirma que has recibido ${formatEuro(totalVisto)} y lo registramos a tu nombre.`}
+                  ? `Centra no ve los cobros del datáfono de tu banco. Confirma que has cobrado ${formatEuro(totalVisto)} y lo registramos a tu nombre.`
+                  : `Centra no ve tu cuenta bancaria. Confirma que has recibido ${formatEuro(totalVisto)} y lo registramos a tu nombre.`}
               </p>
               <div className="flex flex-col gap-2 pt-1">
                 <button
@@ -679,7 +679,7 @@ export function HojaCobro({
                   mostrador no son lo mismo, aunque los dos sean dinero real. */}
               {!fase.verificado && (
                 <p className="text-[12.5px] text-muted-foreground max-w-[300px]">
-                  Queda anotado a tu nombre. Tentare no ha podido comprobarlo por su cuenta.
+                  Queda anotado a tu nombre. Centra no ha podido comprobarlo por su cuenta.
                 </p>
               )}
               {fase.venta.cambio != null && fase.venta.cambio > 0 && (

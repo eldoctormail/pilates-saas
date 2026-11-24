@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
   const g = await propietaria(req);
   if ('error' in g) return g.error;
   if (!g.estudio.contrato_terminado_en) {
-    // Una sede cerrada de una cadena cuya principal sigue en Tentare (plan gratis) no tiene el contrato
+    // Una sede cerrada de una cadena cuya principal sigue en Centra (plan gratis) no tiene el contrato
     // terminado: «tu suscripción sigue activa» sería falso (migr 20261015141653).
     const error = motivoSinBorradoAnticipado({ cadenaId: g.estudio.cadena_id, subscriptionStatus: g.estudio.subscription_status });
     return NextResponse.json({ error }, { status: 409 });
@@ -77,7 +77,7 @@ export async function POST(req: NextRequest) {
 
   if (!purgaEstudiosActiva(process.env)) {
     // Con el borrado automático apagado, el ciclo solo calcula un informe: que
-    // alguien de Tentare lo haga, o lo encienda, a tiempo.
+    // alguien de Centra lo haga, o lo encienda, a tiempo.
     Sentry.captureMessage('[supresion] un estudio ha pedido el borrado de sus datos con PURGA_ESTUDIOS_VENCIDOS apagada', {
       level: 'warning', tags: { area: 'retencion' }, extra: { studioId: g.sesion.studioId },
     });

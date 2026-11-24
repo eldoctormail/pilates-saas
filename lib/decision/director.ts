@@ -93,7 +93,7 @@ export interface EntradaMientrasDormias {
 export function construirMientrasDormias(entrada: EntradaMientrasDormias): ItemMientrasDormias[] {
   const items: ItemMientrasDormias[] = [];
 
-  // Solo lo que hizo Tentare SOLO (piloto automático, resuelto_por='AUTONOMIA'):
+  // Solo lo que hizo Centra SOLO (piloto automático, resuelto_por='AUTONOMIA'):
   // el bloque dice «Mientras dormías, esto es lo que hice» bajo «Ejecutado
   // automáticamente». Un cobro lo aprueba siempre la propietaria (COBRAR_RECIBOS
   // nunca es autónomo, autonomia.ts), así que hoy no entra ninguno: lo que pasó

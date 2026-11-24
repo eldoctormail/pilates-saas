@@ -47,7 +47,7 @@ export function tenantAutorizado(
  * Normalmente es `event.account`: el cargo es directo sobre la cuenta conectada
  * del estudio y Stripe firma el evento con ella. Pero cuando el
  * `stripe_account_id` de un estudio ES la propia cuenta de la plataforma
- * —le pasa al estudio de demostración de Tentare, que es además el único que ha
+ * —le pasa al estudio de demostración de Centra, que es además el único que ha
  * cobrado de verdad—, Stripe considera el cobro "de tu cuenta" y entrega el
  * evento SIN `account`. Ahí `event.account` es `undefined`, no resolvía ningún
  * estudio y `tenantAutorizado` lo rechazaba con un 403.

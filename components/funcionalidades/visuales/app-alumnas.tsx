@@ -51,7 +51,7 @@ export function MockMovil() {
     <PanelOscuro titulo="Instalada, con tu nombre">
       <div style={{ display: 'flex', gap: 18, alignItems: 'center', flexWrap: 'wrap' }}>
         {/* Pantalla de inicio del móvil: el icono lleva el logo y el nombre del
-            estudio, no los de Tentare. Es literalmente lo que produce el
+            estudio, no los de Centra. Es literalmente lo que produce el
             manifest por estudio. */}
         <div style={{ width: 132, background: 'rgba(255,255,255,.05)', border: '1px solid rgba(255,255,255,.12)', borderRadius: 18, padding: 12 }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
@@ -113,7 +113,7 @@ export function InstalableVsNativa() {
           <thead>
             <tr>
               <th style={{ textAlign: 'left', padding: '11px 14px', fontSize: 12.5, fontWeight: 600, color: '#62736A', borderBottom: '1px solid #DCE8E1', minWidth: 200 }} />
-              <th style={{ textAlign: 'left', padding: '11px 14px', fontSize: 11.5, fontWeight: 700, color: '#214E36', background: '#E8F1EC', borderBottom: '1px solid #D3E4DA' }}>La de Tentare</th>
+              <th style={{ textAlign: 'left', padding: '11px 14px', fontSize: 11.5, fontWeight: 700, color: '#214E36', background: '#E8F1EC', borderBottom: '1px solid #D3E4DA' }}>La de Centra</th>
               <th style={{ textAlign: 'left', padding: '11px 14px', fontSize: 11.5, fontWeight: 700, color: '#5A5A52', borderBottom: '1px solid #DCE8E1' }}>App de tienda</th>
             </tr>
           </thead>

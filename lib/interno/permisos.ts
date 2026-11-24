@@ -44,7 +44,7 @@ export const PERMISO_ETIQUETA: Record<Permiso, string> = {
   'users.create':   'Dar de alta usuarios internos',
   'users.delete':   'Dar de baja usuarios internos',
   'content.write':  'Publicar el changelog de Actualizaciones',
-  'network.moderate': 'Moderar perfiles, verificaciones y reportes de Tentare Network',
+  'network.moderate': 'Moderar perfiles, verificaciones y reportes de Centra Network',
   // Aparte de `network.moderate` a propósito: aquí se LEE lo que escribieron
   // alumnas e instructoras en chats privados de un estudio (lo denunciado), no
   // perfiles públicos. Quien modera Network no tiene por qué leer eso.

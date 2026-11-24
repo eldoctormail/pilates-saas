@@ -111,7 +111,7 @@ export function RegistroNuevo({ items, cargando, reintentando, errorReintento, o
         tono="azul"
         Icono={Bell}
         titulo="Aquí verás cada aviso que sale"
-        texto="Cada vez que Tentare avisa a alguien del estudio o a un cliente, queda apuntado: a quién, por qué canal y con qué resultado."
+        texto="Cada vez que Centra avisa a alguien del estudio o a un cliente, queda apuntado: a quién, por qué canal y con qué resultado."
         ejemplos={[
           { accion: 'Reserva confirmada', cuando: 'al cliente, en su app y por push' },
           { accion: 'Recordatorio de clase', cuando: 'al cliente, antes de su clase' },

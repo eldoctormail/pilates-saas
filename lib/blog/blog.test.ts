@@ -78,7 +78,7 @@ test('el autor: un solo Person, con @id estable y sin nada que no conste', () =>
   const p = personaLd() as Record<string, unknown>;
   assert.equal(p['@id'], ID_AUTOR);
   assert.equal(p.name, 'Marcos Roca Rodríguez');
-  assert.equal(p.jobTitle, 'Fundador de Tentare');
+  assert.equal(p.jobTitle, 'Fundador de Centra');
   assert.deepEqual(p.worksFor, { '@id': ID_ORGANIZACION_BLOG });
   for (const prohibido of ['award', 'birthDate', 'taxID', 'vatID', 'telephone', 'email', 'alumniOf', 'hasCredential']) {
     assert.ok(!(prohibido in p), `Person no debe llevar ${prohibido}`);

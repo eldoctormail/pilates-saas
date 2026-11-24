@@ -18,7 +18,7 @@ import { mensajeSeguro } from '@/lib/errores';
 // problema que aquí no existe: al vivir en el dominio del estudio necesita
 // `baseUrl` en cada llamada y un puente de pestaña + `postMessage` para el
 // enlace mágico, ya que `detectSessionInUrl` no puede capturar el retorno en un
-// DOM de tercero. En `/portal/<slug>` estamos en el origen de Tentare y el
+// DOM de tercero. En `/portal/<slug>` estamos en el origen de Centra y el
 // retorno lo recoge el propio cliente.
 //
 // Lo que SÍ se comparte, y es lo que importa: el mismo `supabasePortal`
@@ -258,7 +258,7 @@ export function useAuthStudent(slug: string) {
       provider: 'google',
       options: {
         ...(redirectTo ? { redirectTo } : {}),
-        // Solo lo mínimo para autenticar: Tentare no llama a ninguna API de
+        // Solo lo mínimo para autenticar: Centra no llama a ninguna API de
         // Google, así que no hay motivo para pedir más scope.
         scopes: 'openid email profile',
       },

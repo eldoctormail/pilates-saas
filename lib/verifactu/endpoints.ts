@@ -10,7 +10,7 @@
 //    SELLO de entidad (www10). El WSDL lo dice así: «Entorno de PRODUCCION para
 //    acceso con certificado de sello» para www10.
 //
-// Con la vía de Tentare (apoderamiento IZ860 a una persona física, que remite
+// Con la vía de Centra (apoderamiento IZ860 a una persona física, que remite
 // con SU certificado de persona física) el destino es SIEMPRE `www1` / `prewww1`.
 // El tipo 'sello' se mantiene tipado para no perder la información del WSDL,
 // pero `config.ts` no lo permite: un sello es de personas jurídicas (eIDAS art. 3).

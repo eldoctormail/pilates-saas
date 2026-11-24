@@ -9,7 +9,7 @@ import {
 import { EVENTOS, plantillaDe, render } from '../notifications/catalog.ts';
 import { noContraQuienMira } from './denuncias.ts';
 
-test('a Tentare cuando el estudio es parte: su hilo con el cliente, o algo escrito por una propietaria', () => {
+test('a Centra cuando el estudio es parte: su hilo con el cliente, o algo escrito por una propietaria', () => {
   assert.equal(destinoDeDenuncia({ ambito: 'CHAT_ESTUDIO', autorEsPropietaria: false }), 'TENTARE');
   assert.equal(destinoDeDenuncia({ ambito: 'CHAT_INSTRUCTORA', autorEsPropietaria: true }), 'TENTARE');
   assert.equal(destinoDeDenuncia({ ambito: 'TABLON', autorEsPropietaria: true }), 'TENTARE');
@@ -27,14 +27,14 @@ test('quién revisa: el chat con una instructora, solo la propietaria; el tabló
   }
 });
 
-test('qué se puede decidir: cerrar solo un chat con instructora y solo la propietaria (o Tentare); retirar, si hay contenido', () => {
+test('qué se puede decidir: cerrar solo un chat con instructora y solo la propietaria (o Centra); retirar, si hay contenido', () => {
   assert.deepEqual(accionesPosibles('PROPIETARIO', { ambito: 'CHAT_INSTRUCTORA', tieneContenido: true }), ['MANTENER', 'OCULTAR', 'CERRAR_CONVERSACION']);
   assert.deepEqual(accionesPosibles('TENTARE', { ambito: 'CHAT_INSTRUCTORA', tieneContenido: false }), ['MANTENER', 'CERRAR_CONVERSACION']);
   assert.deepEqual(accionesPosibles('RECEPCION', { ambito: 'TABLON', tieneContenido: true }), ['MANTENER', 'OCULTAR']);
   assert.deepEqual(accionesPosibles('TENTARE', { ambito: 'CHAT_ESTUDIO', tieneContenido: true }), ['MANTENER', 'OCULTAR']);
 });
 
-test('las 24 h: horas que quedan y cuándo le toca a Tentare', () => {
+test('las 24 h: horas que quedan y cuándo le toca a Centra', () => {
   const ahora = new Date('2026-10-05T12:00:00Z');
   assert.equal(horasHastaTentare('2026-10-05T11:00:00Z', ahora), 23);
   assert.equal(horasHastaTentare('2026-10-04T11:00:00Z', ahora), 0);
@@ -43,7 +43,7 @@ test('las 24 h: horas que quedan y cuándo le toca a Tentare', () => {
   assert.equal(leTocaATentare({ destino: 'TENTARE', creadaEn: '2026-10-05T11:59:00Z' }, ahora), true);
 });
 
-test('la cola de Tentare: el corte de las 24 h y por qué le toca', () => {
+test('la cola de Centra: el corte de las 24 h y por qué le toca', () => {
   assert.equal(corteTurnoTentare(new Date('2026-10-05T12:00:00Z')), '2026-10-04T12:00:00.000Z');
   assert.equal(porQueLaRevisaTentare({ destino: 'TENTARE' }), 'CONTRA_EL_ESTUDIO');
   assert.equal(porQueLaRevisaTentare({ destino: 'ESTUDIO' }), 'SIN_REVISAR_POR_EL_ESTUDIO');
@@ -110,24 +110,24 @@ test('/interno: su propio permiso, el estudio sale de la denuncia, decide como T
   // La cola usa la misma regla que la RPC: contra el estudio, o 24 h sin revisar.
   const servidor = leer('lib/moderacion/denuncias-servidor.ts');
   assert.match(servidor, /\.or\(`destino\.eq\.TENTARE,creada_en\.lte\.\$\{corteTurnoTentare\(ahora\)\}`\)/);
-  // Tentare tampoco puede tomar una decisión que no esté entre las suyas.
+  // Centra tampoco puede tomar una decisión que no esté entre las suyas.
   assert.match(servidor, /const quien = p\.revisor\.tipo === 'ESTUDIO' \? p\.revisor\.rol : 'TENTARE'/);
 });
 
-test('revisión de seguridad: nadie ve ni decide lo que va contra sí misma; el estudio no deshace lo de Tentare', () => {
+test('revisión de seguridad: nadie ve ni decide lo que va contra sí misma; el estudio no deshace lo de Centra', () => {
   // La bandeja y su contador excluyen las denuncias contra quien mira.
   assert.match(leer('app/api/moderacion/denuncias/route.ts'), /listarDenunciasDelEstudio\(admin, sesion\.studioId, sesion\.rol, sesion\.userId\)/);
   const servidor = leer('lib/moderacion/denuncias-servidor.ts');
   assert.match(servidor, /\.or\(noContraQuienMira\(userId\)\)/);
   assert.match(leer('supabase/migrations/20261020100000_estado_estudio_conteos.sql'), /\(dn\.autor_auth_user_id is null or dn\.autor_auth_user_id <> p_user_id\)/);
-  // Retirar o volver a mostrar: la RPC rechaza a la autora y lo retirado por Tentare, y el estudio solo cierra lo suyo.
+  // Retirar o volver a mostrar: la RPC rechaza a la autora y lo retirado por Centra, y el estudio solo cierra lo suyo.
   const sql = leer('supabase/migrations/20261006014051_moderacion_esquema.sql');
   const ocultar = sql.slice(sql.indexOf('create or replace function public.ocultar_comentario_comunidad'), sql.indexOf('-- ── 6. Resolver una denuncia'));
   assert.match(ocultar, /raise exception 'ES_AUTORA'/);
   assert.match(ocultar, /raise exception 'RETIRADO_POR_TENTARE'/);
   assert.match(ocultar, /and \(p_revisor = 'TENTARE' or d\.destino = 'ESTUDIO'\)/);
   assert.match(sql, /set cerrada_en = now\(\), cerrada_por = p_por, cerrada_revisor = p_revisor/);
-  // Reabrir desde el panel: nunca quien es parte del hilo, ni lo que cerró Tentare.
+  // Reabrir desde el panel: nunca quien es parte del hilo, ni lo que cerró Centra.
   const cerrar = servidor.slice(servidor.indexOf('export async function cerrarConversacion'));
   assert.match(cerrar, /partes\.some\(\(x\) => x\.auth_user_id === p\.userId\)/);
   assert.match(cerrar, /conv\.cerrada_revisor === 'TENTARE'/);

@@ -78,7 +78,7 @@ test('asignar una venta cobrada sin ficha apunta su código, y si ya lo había u
   assert.ok(asigna > 0 && consumo > asigna, `${fichero}: asignar ya no apunta el uso del código de la venta`);
   // El mismo índice que la venta de la Caja y los cobros online: nada de una copia.
   assert.match(cuerpo.slice(consumo, consumo + 300), /ON\s+CONFLICT\s*\(\s*codigo_id,\s*socio_id\s*\)\s+DO\s+NOTHING/i, fichero);
-  // Ya lo había usado: una línea por venta, apuntada por Tentare, y la venta no se revierte ni se bloquea.
+  // Ya lo había usado: una línea por venta, apuntada por Centra, y la venta no se revierte ni se bloquea.
   assert.match(cuerpo, /INSERT\s+INTO\s+public\.actividad_reciente[\s\S]*?'CODIGO_REPETIDO_AL_ASIGNAR'[\s\S]*?'TENTARE'[\s\S]*?ON\s+CONFLICT\s*\(\s*id\s*\)\s+DO\s+NOTHING/i, fichero);
   assert.doesNotMatch(cuerpo, /SET\s+(total|descuento|subtotal|importe)\b/i, `${fichero}: asignar no toca un importe`);
   assert.doesNotMatch(cuerpo, /RAISE\s+EXCEPTION\s+'CODIGO_YA_USADO_POR_SOCIA'/i, `${fichero}: asignar una venta ya cobrada no se bloquea por el código`);

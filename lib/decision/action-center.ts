@@ -41,7 +41,7 @@ export interface ItemAccion {
   titulo: string;
   severidad: NivelSeveridad;
   /**
-   * true = con un toque lo hace Tentare (manda el email, el WhatsApp, cobra el
+   * true = con un toque lo hace Centra (manda el email, el WhatsApp, cobra el
    * recibo). false = solo te lo cuenta; la acción es tuya.
    *
    * Sale del dueño único de «qué hace aprobar» (efecto-aprobar.ts, el mismo que

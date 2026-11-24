@@ -107,7 +107,7 @@ export const PUSH_POR_TIPO: Record<RolConPushPorTipo, GrupoPush[]> = {
       ],
     },
     {
-      titulo: 'Tentare Network',
+      titulo: 'Centra Network',
       tipos: [
         { evento: EVENTOS.RED_VACANTE_ENCAJA, titulo: 'Vacantes que encajan contigo' },
         { evento: EVENTOS.RED_CONTACTO_SOLICITADO, titulo: 'Un estudio quiere contactar contigo' },

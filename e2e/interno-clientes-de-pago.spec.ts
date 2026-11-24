@@ -83,6 +83,6 @@ test('su ficha dice cómo está y qué estado tiene su suscripción', async ({ p
   await expect(bloque).toBeVisible({ timeout: 40_000 });
   await expect(bloque).toContainText('Atención');
   await expect(bloque).toContainText('Ninguna reserva en los últimos 7 días');
-  await expect(page.getByText('Suscripción a Tentare')).toBeVisible();
+  await expect(page.getByText('Suscripción a Centra')).toBeVisible();
   await expect(page.getByText('Pagando', { exact: true })).toBeVisible();
 });

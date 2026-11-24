@@ -6,14 +6,14 @@
 // landing, el panel, el portal de las alumnas y el widget de reservas desde UN
 // solo root layout (mismo motivo que lib/ahrefs-cliente.ts). Aquí la puerta es
 // una LISTA BLANCA y no `esNoIndexable()`: `/reservar/<slug>` es indexable, pero
-// es la página de un estudio cliente y sus visitantes no son tráfico de Tentare.
+// es la página de un estudio cliente y sus visitantes no son tráfico de Centra.
 //
 // ⚠️ **Solo con consentimiento.** `_fbp` es una cookie de publicidad: la LSSI
 // exige el sí ANTES de cargar `fbevents.js`, y la política de cookies prometía
 // no usarlas. Sin decisión no se carga nada; un «no» se respeta 180 días.
 // ─────────────────────────────────────────────────────────────────────────────
 
-/** ID del dataset «Tentare Web» (Business Manager de Tentare). Es público. */
+/** ID del dataset «Centra Web» (Business Manager de Centra). Es público. */
 export const PIXEL_ID = '1082790444609431';
 
 /** Etiqueta de verificación de dominio de Meta para tentare.app. También pública. */

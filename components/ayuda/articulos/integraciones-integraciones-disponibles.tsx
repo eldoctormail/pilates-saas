@@ -37,7 +37,7 @@ const GRUPOS: { seccion: string; tarjetas: (readonly [string, string])[] }[] = [
       ['Kisi', 'Abre la puerta de tu estudio sola con cada check-in de tus clientes.'],
       ['Klaviyo', 'Lleva a Klaviyo los clientes que aceptaron recibir marketing, cada vez que pulsas «Sincronizar ahora».'],
       ['Mailchimp', 'Lleva a tu audiencia de Mailchimp los clientes que aceptaron recibir marketing, al pulsar «Sincronizar ahora».'],
-      ['Zapier', 'Conecta Tentare con miles de apps. La conexión se autoriza desde Zapier, no desde aquí.'],
+      ['Zapier', 'Conecta Centra con miles de apps. La conexión se autoriza desde Zapier, no desde aquí.'],
     ],
   },
 ];
@@ -46,7 +46,7 @@ export default function Contenido() {
   return (
     <>
       <p>
-        Puedes conectar Tentare con las herramientas que ya usas — cada una con un botón, sin tocar código. Cada
+        Puedes conectar Centra con las herramientas que ya usas — cada una con un botón, sin tocar código. Cada
         integración está en Configuración &gt; Integraciones ({ES ? 'el cobro con tarjeta' : 'Mercado Pago'}, WhatsApp, calendario, marketing, plataformas y tu API);
         solo el nombre y la respuesta de tus correos están en Cómo me comunico.
       </p>
@@ -69,7 +69,7 @@ export default function Contenido() {
       <p>
         La mayoría se conecta entrando con tu cuenta ({ES ? 'Google Calendar, Klaviyo, Stripe, Zoom' : 'Google Calendar, Klaviyo, Zoom'}): das permiso en
         la ventana del propio servicio, sin copiar ninguna clave. Mailchimp y Kisi piden tu clave API, WhatsApp los
-        datos de tu cuenta de Meta{ES ? '' : ', y Mercado Pago el Access Token y la clave secreta de tu aplicación'}. Zapier funciona al revés: la conexión se autoriza desde Zapier, no desde Tentare.
+        datos de tu cuenta de Meta{ES ? '' : ', y Mercado Pago el Access Token y la clave secreta de tu aplicación'}. Zapier funciona al revés: la conexión se autoriza desde Zapier, no desde Centra.
       </p>
       <p>
         Para llevarte tus datos a una hoja de cálculo no hace falta conectar nada: en Configuración &gt; Datos y
@@ -77,7 +77,7 @@ export default function Contenido() {
       </p>
 
       <AyudaResultado>
-        Ninguna integración es obligatoria — Tentare funciona completo sin conectar ninguna. Relacionado:{' '}
+        Ninguna integración es obligatoria — Centra funciona completo sin conectar ninguna. Relacionado:{' '}
         {ES
           ? <Link href="/ayuda/pagos/conectar-stripe" style={{ color: 'inherit', textDecoration: 'underline' }}>conectar Stripe</Link>
           : <Link href="/ayuda/pagos/conectar-mercadopago" style={{ color: 'inherit', textDecoration: 'underline' }}>conectar Mercado Pago</Link>}.

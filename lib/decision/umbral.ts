@@ -54,7 +54,7 @@ const IMPACTO_MIN_EUR_POR_SOCIA_SEDE_MES = 0.05;
 // para mover el listón — se queda en el punto de partida.
 const MIN_MUESTRAS_PARA_CALIBRAR = 5;
 
-// Impacto REAL medido por tipo (Pilar 3 de "Tentare 2030", ver
+// Impacto REAL medido por tipo (Pilar 3 de "Centra 2030", ver
 // dbCalcularImpactoRealPorTipo) — el subconjunto `confianza_medicion=MEDIDO`
 // es un subconjunto de las ya "seguidas", así que exige más muestra que la
 // puerta de urgencia antes de fiarse de él.

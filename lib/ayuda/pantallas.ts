@@ -41,7 +41,7 @@ export interface AyudaPantalla {
   /** Qué te quita de encima. Una sola línea, en concreto y sin adornos. */
   ahorra: string;
   /**
-   * Lo que hace el módulo, en una frase (≤ 140): la de «Tu Tentare» y
+   * Lo que hace el módulo, en una frase (≤ 140): la de «Tu Centra» y
    * «Explorar todas las funciones». Solo en las pantallas del menú.
    */
   valor?: string;
@@ -124,7 +124,7 @@ export const AYUDA_POR_PANTALLA = {
     titulo: 'Caja',
     valor: 'Cobras en el mostrador un bono, una clase suelta o un producto, en efectivo o con tarjeta, y queda apuntado con lo demás.',
     resumen:
-      'El mostrador: cobras un bono, una clase suelta o un producto en el momento, con tarjeta o en efectivo, y queda registrado como cualquier otro cobro, con su factura si Tentare emite tus facturas.',
+      'El mostrador: cobras un bono, una clase suelta o un producto en el momento, con tarjeta o en efectivo, y queda registrado como cualquier otro cobro, con su factura si Centra emite tus facturas.',
     ahorra: 'Apuntar en una hoja lo que cobras a pie de mostrador para pasarlo luego.',
     destino: { categoria: 'pagos', slug: 'cobrar-en-la-caja' },
   },
@@ -150,9 +150,9 @@ export const AYUDA_POR_PANTALLA = {
 
   '/sustituciones': {
     titulo: 'Sustituciones',
-    valor: 'Si una instructora no puede dar su clase, Tentare busca quién la cubre y se lo pide por orden; de serie, con tu visto bueno.',
+    valor: 'Si una instructora no puede dar su clase, Centra busca quién la cubre y se lo pide por orden; de serie, con tu visto bueno.',
     resumen:
-      'Una instructora avisa desde la app (o lo marcas tú) de que no puede dar su clase y Tentare busca por orden a las que encajan hasta que una dice que sí. Si no queda nadie, te lo dice para que decidas tú.',
+      'Una instructora avisa desde la app (o lo marcas tú) de que no puede dar su clase y Centra busca por orden a las que encajan hasta que una dice que sí. Si no queda nadie, te lo dice para que decidas tú.',
     ahorra: 'La cadena de WhatsApps a las once de la noche buscando quién cubre mañana.',
     destino: { categoria: 'instructores', slug: 'sustituciones' },
   },
@@ -170,7 +170,7 @@ export const AYUDA_POR_PANTALLA = {
   // «Apps e integraciones» (12-nov-2026): la puerta de la tienda, las conexiones y la API.
   '/apps': {
     titulo: 'Apps e integraciones',
-    valor: 'La tienda donde enciendes lo que Tentare puede hacer por ti, y desde aquí mismo conectas tus herramientas y tu API.',
+    valor: 'La tienda donde enciendes lo que Centra puede hacer por ti, y desde aquí mismo conectas tus herramientas y tu API.',
     resumen:
       'Tres páginas: la Tienda de apps, con lo que puedes activar y lo que cuesta; Integraciones de terceros, con una pestaña por herramienta (Stripe, Zoom, Google Calendar, Kisi, Klaviyo, Mailchimp, Zapier y las plataformas que venden tus clases); y la API de desarrollador, con tus claves y los datos que puede leer.',
     ahorra: 'Buscar por Configuración dónde se conectaba cada cosa y qué complemento hacía falta para cada función.',
@@ -196,7 +196,7 @@ export const AYUDA_POR_PANTALLA = {
     titulo: 'Informes',
     valor: 'Cuánto has cobrado, cómo se llena cada clase y quién viene, frente al periodo anterior. Sin montar un Excel.',
     resumen:
-      'Las cifras del estudio sin montar un Excel: cuánto has cobrado, cómo se llena cada clase y quién viene, frente al mismo tramo del periodo anterior. Sale todo de lo que ya pasa en Tentare, no hay que meter nada.',
+      'Las cifras del estudio sin montar un Excel: cuánto has cobrado, cómo se llena cada clase y quién viene, frente al mismo tramo del periodo anterior. Sale todo de lo que ya pasa en Centra, no hay que meter nada.',
     ahorra: 'Decidir a ojo qué franja abrir y qué clase quitar.',
     destino: { categoria: 'informes', slug: 'informes-disponibles' },
   },
@@ -260,14 +260,14 @@ export const AYUDA_POR_PANTALLA = {
   '/actualizaciones': {
     titulo: 'Actualizaciones',
     resumen:
-      'Todo lo que ha cambiado en Tentare, versión a versión: lo que es nuevo, lo que hemos mejorado y lo que hemos corregido. Publicamos casi cada semana y aquí queda el registro completo, contado sin tecnicismos.',
+      'Todo lo que ha cambiado en Centra, versión a versión: lo que es nuevo, lo que hemos mejorado y lo que hemos corregido. Publicamos casi cada semana y aquí queda el registro completo, contado sin tecnicismos.',
     ahorra: 'Enterarte de una función nueva meses después de tenerla.',
     destino: { categoria: 'empezar', slug: 'primera-semana-de-clases' },
   },
   '/notificaciones': {
     titulo: 'Notificaciones',
     resumen:
-      'El registro de los avisos que Tentare ha enviado en tu nombre: a qué perfil, por qué canal y si llegó. Si algo no salió, aquí tienes el motivo y el botón para reintentarlo.',
+      'El registro de los avisos que Centra ha enviado en tu nombre: a qué perfil, por qué canal y si llegó. Si algo no salió, aquí tienes el motivo y el botón para reintentarlo.',
     ahorra: 'Fiarte de que el recordatorio salió sin poder comprobarlo.',
     destino: { categoria: 'automatizaciones', slug: 'registro-de-envios' },
   },
@@ -276,16 +276,16 @@ export const AYUDA_POR_PANTALLA = {
     titulo: 'Automatizaciones',
     valor: 'Lo que sale solo, como el recordatorio de clase, y reglas que enciendes tú, como escribir a quien lleva días sin venir.',
     resumen:
-      'Lo que Tentare ya hace de serie —recordar la clase, avisar de un bono que se acaba, reintentar un cobro que falló— y las reglas que enciendes tú. Lo que mueve dinero te pide siempre el visto bueno.',
+      'Lo que Centra ya hace de serie —recordar la clase, avisar de un bono que se acaba, reintentar un cobro que falló— y las reglas que enciendes tú. Lo que mueve dinero te pide siempre el visto bueno.',
     ahorra: 'Acordarte tú de cada aviso, todos los días.',
     destino: { categoria: 'automatizaciones', slug: 'recordatorios-automaticos' },
   },
 
   '/suscripcion': {
-    titulo: 'Plan de Tentare',
+    titulo: 'Plan de Centra',
     // Sin `valor`: ya no es una entrada del menú, es una sección de Configuración.
     resumen:
-      'Lo que le pagas tú a Tentare: tu plan, tus facturas y la tarjeta con la que se cobra. Nada que ver con lo que cobras a tus clientes, que va por Cobros.',
+      'Lo que le pagas tú a Centra: tu plan, tus facturas y la tarjeta con la que se cobra. Nada que ver con lo que cobras a tus clientes, que va por Cobros.',
     ahorra: 'Confundir tu cuota con el dinero de tu estudio.',
     destino: { categoria: 'pagos', slug: 'prueba-de-7-dias' },
   },

@@ -4,7 +4,7 @@ import { exigirPermiso } from '@/lib/interno/auth';
 
 export const runtime = 'nodejs';
 
-// Reportes de Tentare Network — docs/NETWORK-IMPLEMENTATION-PLAN.md §10.
+// Reportes de Centra Network — docs/NETWORK-IMPLEMENTATION-PLAN.md §10.
 // `red_reportes` no tiene política SELECT para `authenticated` a propósito
 // (Fase 1): solo se lee aquí, con service-role, tras exigirPermiso.
 export async function GET(req: NextRequest) {

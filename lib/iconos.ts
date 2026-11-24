@@ -1,6 +1,6 @@
 // Canon de iconos del producto: UN icono por concepto, con su alias semántico.
 //
-// Lucide es la única familia de iconos UI de Tentare (outline, grosor 2).
+// Lucide es la única familia de iconos UI de Centra (outline, grosor 2).
 // Este módulo existe porque la auditoría de 2026-08-20 encontró 5 iconos
 // distintos para "éxito", 6 para "alerta", 7 para "dinero" y 9 para
 // "calendario" repartidos por 213 ficheros. Los re-exports son tree-shakeable:

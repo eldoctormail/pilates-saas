@@ -27,7 +27,7 @@
 //     con un factor verificado se rechaza antes de emitir nada. Las guardias de
 //     siempre (`verificarUsuarioSupabase`) siguen pidiendo el segundo paso.
 //   · Solo una cuenta que es SOLO alumna (`decidirAutoborrado`, el mismo criterio
-//     que «Borrar mi cuenta»: ni equipo, ni dueña, ni Tentare, ni Network) y con
+//     que «Borrar mi cuenta»: ni equipo, ni dueña, ni Centra, ni Network) y con
 //     ficha en EL estudio de la demo (no en cualquiera: otro estudio podría darla
 //     de alta con ese email). Si alguien pusiera ahí el email de una propietaria,
 //     el código fijo no le abre el panel.

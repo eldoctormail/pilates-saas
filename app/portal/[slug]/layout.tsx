@@ -69,7 +69,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   // Si no se ha podido leer, un título neutro: decir «no encontrado» sería
   // afirmar algo que no sabemos, y este título acaba en la pestaña y en el
   // enlace que se comparte.
-  // Con su propia tarjeta neutra también: si no, heredaría la de Tentare B2B.
+  // Con su propia tarjeta neutra también: si no, heredaría la de Centra B2B.
   if (estudio === 'no-disponible') return { title: 'Portal del estudio', ...tarjetaNeutra('Portal del estudio') };
   if (!estudio) return { title: 'Estudio no encontrado', ...tarjetaNeutra('Estudio no encontrado') };
 
@@ -90,16 +90,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: estudio.nombre,
     ...(appTienda ? { itunes: { appId: appTienda.id } } : {}),
     description: descripcion,
-    // Su tarjeta al compartir el enlace o el QR, no la de Tentare B2B que
+    // Su tarjeta al compartir el enlace o el QR, no la de Centra B2B que
     // pondría `app/layout.tsx` (ver lib/student/metadatos-portal.ts).
     openGraph,
     twitter,
     // Manifest POR ESTUDIO: es lo que hace que instalarla dé la app del
-    // estudio y no «Tentare». El de la plataforma (app/manifest.ts) sigue
+    // estudio y no «Centra». El de la plataforma (app/manifest.ts) sigue
     // sirviendo a la web pública.
     manifest: `${base}/manifest.webmanifest`,
     appleWebApp: { capable: true, statusBarStyle: 'black-translucent', title: estudio.nombre },
-    // Su icono › su logo › su inicial; nunca el de Tentare. ⚠️ Antes esto no
+    // Su icono › su logo › su inicial; nunca el de Centra. ⚠️ Antes esto no
     // leía el favicon que sube el estudio: pintaba el LOGO completo al 68 %
     // sobre el color de la app, y ese marco de color era el favicon verde que
     // se veía en la pestaña. Ver `iconosDeEstudio`.

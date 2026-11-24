@@ -132,7 +132,7 @@ export function CuentaMercadoPago({ showToast }: { showToast: (m: string) => voi
               </button>
             </div>
             <p className="text-muted-foreground text-pretty">
-              Mercado Pago avisa ahí de cada pago. Si un aviso no llega, Tentare lo encuentra igual cada 30 minutos, pero tarda más.
+              Mercado Pago avisa ahí de cada pago. Si un aviso no llega, Centra lo encuentra igual cada 30 minutos, pero tarda más.
               {cuenta.webhookUrl.startsWith('http://') && ' Ojo: empieza con http://. Mercado Pago necesita una dirección pública con https (el túnel de Cloudflare).'}
             </p>
           </>

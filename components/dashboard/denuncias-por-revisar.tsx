@@ -14,7 +14,7 @@ import type { MostrarToast } from '@/components/ui/toast';
 // y se oculta sola si no hay nada.
 //
 // Decisión del fundador (5-oct-2026): las revisa el estudio; si nadie lo hace en
-// 24 h, las revisa Tentare. Lo que se puede decidir lo manda el servidor
+// 24 h, las revisa Centra. Lo que se puede decidir lo manda el servidor
 // (`acciones`): cerrar la conversación solo la propietaria y solo en un chat con
 // una instructora. Quien escribió lo denunciado no lo ve aquí para decidir sobre
 // sí mismo (lo comprueba la base de datos).
@@ -61,7 +61,7 @@ export function DenunciasPorRevisar({ onToast }: { onToast: MostrarToast }) {
     const r = await decidirDenuncia(d.id, accion);
     setEnviando(null);
     if ('error' in r) {
-      // Ya la decidió otra persona (o ya le toca a Tentare): la fila sobra, y se dice por qué se va.
+      // Ya la decidió otra persona (o ya le toca a Centra): la fila sobra, y se dice por qué se va.
       if (r.status === 409 || r.status === 404) quitar(d.id);
       onToast(r.error, { variant: 'error' });
       return;
@@ -84,7 +84,7 @@ export function DenunciasPorRevisar({ onToast }: { onToast: MostrarToast }) {
         </p>
       </div>
       <p className="mb-3 text-[11px] text-muted-foreground">
-        Si nadie la revisa en 24 horas, la revisa Tentare. Quien la hizo recibe un aviso con lo que decidas.
+        Si nadie la revisa en 24 horas, la revisa Centra. Quien la hizo recibe un aviso con lo que decidas.
       </p>
 
       <div className="flex flex-col gap-2">
@@ -99,7 +99,7 @@ export function DenunciasPorRevisar({ onToast }: { onToast: MostrarToast }) {
                 </p>
                 <p className="text-[11px] text-muted-foreground">
                   {[d.denunciante && `De ${d.denunciante}`, d.autor && `sobre ${d.autor}`,
-                    horas > 0 ? `${horas} h para que la revise Tentare` : 'Tentare ya puede revisarla'].filter(Boolean).join(' · ')}
+                    horas > 0 ? `${horas} h para que la revise Centra` : 'Centra ya puede revisarla'].filter(Boolean).join(' · ')}
                 </p>
                 {d.contenido && (
                   <p className="mt-1 whitespace-pre-wrap break-words rounded-md border border-border bg-background px-2.5 py-1.5 text-[12.5px] text-foreground">

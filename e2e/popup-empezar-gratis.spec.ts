@@ -119,7 +119,7 @@ test.describe('El popup invita, no persigue', () => {
 
   test('no interrumpe a quien ya está en el CTA final del pie', async ({ page }) => {
     await page.goto('/');
-    // Abajo del todo ya hay un botón grande de «Probar Tentare»: taparlo con
+    // Abajo del todo ya hay un botón grande de «Probar Centra»: taparlo con
     // un modal es interrumpir justo a quien iba a pulsarlo.
     await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
     await expect(popup(page)).toHaveCount(0);

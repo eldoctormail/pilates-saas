@@ -62,7 +62,7 @@ export async function enviarEmailesCambioClase(
       masClasesDeLaSerie: datos.masClasesDeLaSerie,
     });
     const { error } = await resend.emails.send({
-      from: remitentePorMarca(marca.nombre || 'Tentare'),
+      from: remitentePorMarca(marca.nombre || 'Centra'),
       // Reply-To del estudio: si la clienta contesta, le contesta a SU estudio.
       // La dirección que firma sigue siendo la verificada de la plataforma.
       ...(marca.replyTo ? { replyTo: marca.replyTo } : {}),

@@ -14,7 +14,7 @@ export default function Contenido() {
       </p>
       <p>
         Y sirve para algo menos evidente, que es a propósito: <strong>es tu copia</strong>. Si algún día dejas
-        Tentare, tus datos no se quedan aquí dentro. Puedes sacarlos en cualquier momento, sin pedir permiso ni
+        Centra, tus datos no se quedan aquí dentro. Puedes sacarlos en cualquier momento, sin pedir permiso ni
         abrir una incidencia.
       </p>
 

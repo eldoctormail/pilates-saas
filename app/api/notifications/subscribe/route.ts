@@ -64,7 +64,7 @@ export async function POST(req: NextRequest) {
   // Un token de la app de un ESTUDIO solo se guarda bajo ese estudio: el bundle id
   // tiene que ser el de una app activa de este `studio_id`. Es integridad del dato, no
   // el límite de seguridad (ese es la pertenencia de arriba): un bundle inventado solo
-  // daría un token que Apple rechaza. La app «Tentare» sirve a cualquier estudio.
+  // daría un token que Apple rechaza. La app «Centra» sirve a cualquier estudio.
   // En una cadena la app es UNA (su fila va con la sede principal) y vale para todas sus sedes.
   if (endpointNativo && bundleNativo && bundleNativo !== BUNDLE_TENTARE) {
     let duenaId: string;

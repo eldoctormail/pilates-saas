@@ -72,7 +72,7 @@ export async function enviarEmailReciboWebhook(
     // confirmado» a la socia. La notificación in-app ya dedupea por
     // `pago-ok:${reciboId}` (emit.ts); esto le da al correo la misma clave.
     const { data, error } = await resend.emails.send({
-      from: remitentePorMarca(marca.nombre ?? 'Tentare'),
+      from: remitentePorMarca(marca.nombre ?? 'Centra'),
       // Reply-To del estudio: un justificante de pago es de los correos que
       // más se contestan ("no reconozco este cargo"), y esa respuesta tiene
       // que llegarle al estudio, no al buzón de la plataforma.

@@ -101,7 +101,7 @@ export default function CapituloPage({ params }: { params: Promise<{ capitulo: s
       {capitulo.consejo && (
         <div className="rounded-2xl border border-border bg-muted/40 p-5">
           <p className="flex items-center gap-2 text-[11px] font-semibold text-muted-foreground uppercase tracking-wide">
-            <Lightbulb size={13} className="text-warning" /> Consejo de Tentare
+            <Lightbulb size={13} className="text-warning" /> Consejo de Centra
           </p>
           <p className="text-[13px] text-foreground mt-2 leading-relaxed">{capitulo.consejo}</p>
         </div>

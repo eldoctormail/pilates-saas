@@ -47,7 +47,7 @@ function hoyLleno(): Hoy {
     }),
     estudios: estudiosAMirar(
       [
-        { id: 'est-aurora', nombre: 'Estudio Aurora', plan: 'ESTUDIO', impago: true, reservas7d: 52, semanaAnterior: 49, nivel: 'riesgo', primerAviso: 'Su pago a Tentare ha fallado' },
+        { id: 'est-aurora', nombre: 'Estudio Aurora', plan: 'ESTUDIO', impago: true, reservas7d: 52, semanaAnterior: 49, nivel: 'riesgo', primerAviso: 'Su pago a Centra ha fallado' },
         { id: 'est-flow', nombre: 'Flow Barcelona', plan: 'CADENA', impago: false, reservas7d: 120, semanaAnterior: 111, nivel: 'bien', primerAviso: null },
         { id: 'est-norte', nombre: 'Pilates Norte', plan: 'BASE', impago: false, reservas7d: 0, semanaAnterior: 41, nivel: 'atencion', primerAviso: 'Ninguna reserva en los últimos 7 días' },
       ],

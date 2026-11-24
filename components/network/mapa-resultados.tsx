@@ -9,7 +9,7 @@ import { ProfileAvatar } from '@/components/ui/profile-avatar';
 import { ESPECIALIDAD_LABEL } from '@/lib/network/catalogo';
 import type { PerfilNetworkPublico } from '@/lib/network/tipos';
 
-// Mapa real del buscador — F2 de Tentare Network 2.0. Solo pinta perfiles
+// Mapa real del buscador — F2 de Centra Network 2.0. Solo pinta perfiles
 // que YA tienen lat/lng (la mayoría no las tendrá hasta que el backfill de
 // app/api/interno/network/geocodificar-backfill corra en producción), y lo
 // dice siempre en voz alta: nunca finge cobertura completa (mismo criterio

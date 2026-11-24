@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 // Retirada el 21-oct-2026. Era el formulario «Te la hacemos nosotros» de
-// /soluciones/cambiar-de-software: prometía que Tentare hacía la migración por
+// /soluciones/cambiar-de-software: prometía que Centra hacía la migración por
 // la propietaria, y nadie la hace. El formulario se quitó de la página y la
 // única vía que queda es la real, el importador del panel.
 //

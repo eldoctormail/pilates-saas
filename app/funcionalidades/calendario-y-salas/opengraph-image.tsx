@@ -1,6 +1,6 @@
 import { OG_IMAGE_CONTENT_TYPE, OG_IMAGE_SIZE, generarOgImage } from '@/lib/og-image';
 
-export const alt = 'Calendario de clases, salas y aforo por reformer — Tentare';
+export const alt = 'Calendario de clases, salas y aforo por reformer — Centra';
 export const size = OG_IMAGE_SIZE;
 export const contentType = OG_IMAGE_CONTENT_TYPE;
 

@@ -31,7 +31,7 @@ import { estaEnCurso, yaTermino } from '@/lib/student/estado-clase';
 // todas partes: no es de esta reserva ni caduca. Hasta el 27-sep era un token
 // de dos minutos atado a la próxima clase, con un código de seis caracteres; lo
 // sustituyó el control de acceso con QR. Enseñarlo no marca nada: el estudio lo
-// escanea y Tentare mira en ese momento si esta reserva sigue en pie.
+// escanea y Centra mira en ese momento si esta reserva sigue en pie.
 export default function DetalleReservaPage() {
   const { reservaId } = useParams<{ reservaId: string }>();
   const router = useRouter();

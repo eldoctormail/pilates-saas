@@ -1,6 +1,6 @@
 'use client';
 
-// F2 (B2.11) — PDF "libreta" (garantía de salida): "Tu estudio en Tentare". Cada
+// F2 (B2.11) — PDF "libreta" (garantía de salida): "Tu estudio en Centra". Cada
 // socia con su plan, sus sesiones, sus recuperaciones vivas y su plaza fija. Es la
 // promesa anti-lock-in del informe: "si cerráis, me quedo con mi libreta, en mejor".
 // Sin dependencia de PDF: vista imprimible (Imprimir → Guardar como PDF).
@@ -104,7 +104,7 @@ export default function Libreta() {
       ) : (
       <div className="libreta-doc border border-border rounded-xl p-4 sm:p-8 bg-card">
         <div className="mb-6">
-          <h2 className="text-2xl font-extrabold text-foreground">Tu estudio en Tentare</h2>
+          <h2 className="text-2xl font-extrabold text-foreground">Tu estudio en Centra</h2>
           <p className="text-sm text-muted-foreground mt-1">{studio?.nombre ?? 'Mi estudio'} · {mes} · {filas.length} clientes activos</p>
         </div>
 

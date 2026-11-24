@@ -19,7 +19,7 @@ import { montar } from './panel-sembrado';
 const json = (r: Route, body: unknown, status = 200) =>
   r.fulfill({ status, contentType: 'application/json', body: JSON.stringify(body) });
 
-const SIN_ESTUDIO = 'Esta cuenta no tiene ningún estudio de Tentare todavía.';
+const SIN_ESTUDIO = 'Esta cuenta no tiene ningún estudio de Centra todavía.';
 
 test('una cuenta sin estudio lo ve dicho, con la salida a crear el suyo y a su perfil de Network', async ({ page }) => {
   await montar(page);

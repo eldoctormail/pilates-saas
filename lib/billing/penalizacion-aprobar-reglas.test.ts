@@ -248,7 +248,7 @@ test('⚠️ Stripe no está listo: no se escribe, sigue pendiente, 503 que la t
   }
 });
 
-test('Stripe no está listo: lo del estudio manda a Cobros y facturas; lo de Tentare, no', () => {
+test('Stripe no está listo: lo del estudio manda a Cobros y facturas; lo de Centra, no', () => {
   for (const c of ['SIN_STRIPE_CONECTADO', 'CUENTA_NO_LISTA'] as const) {
     assert.match(planificarTrasCobro(fallo(c), leido('PENDIENTE')).desenlace.mensaje ?? '', /Configuración → Cobros y facturas/, c);
   }

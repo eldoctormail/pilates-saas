@@ -1,6 +1,6 @@
 'use client';
 
-// Home del autoservicio de ALUMNA en Tentare Network — primera pieza de
+// Home del autoservicio de ALUMNA en Centra Network — primera pieza de
 // código de F3 (docs/tentare-os.md, "F3 de Network"). F0 ya resuelve el
 // destino `/network/alumna/inicio` en resolverAccesoPorProducto
 // (lib/network/routing-post-login.ts) desde antes de que esta página
@@ -119,7 +119,7 @@ export default function InicioAlumnaNetworkPage() {
           <Building2 size={16} style={{ color: NW_MUTED }} className="mb-2" />
           <p className="text-[13px] font-semibold" style={{ color: NW_TINTA }}>Descubre estudios</p>
           <p className="text-[12.5px] mt-0.5 mb-3" style={{ color: NW_MUTED }}>
-            Explora estudios de Pilates y Yoga en el directorio de Tentare Network.
+            Explora estudios de Pilates y Yoga en el directorio de Centra Network.
           </p>
           <Link
             href="/network/estudios"

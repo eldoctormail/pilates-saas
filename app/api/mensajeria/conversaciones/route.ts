@@ -23,7 +23,7 @@ type TipoAbrible = (typeof TIPOS_ABRIBLES)[number];
 // guardia queda como defensa en profundidad, no como el único candado.
 //
 // Criterio de "en nombre de quién":
-// - ALUMNA_INSTRUCTORA: la INSTRUCTOR ya no la abre desde aquí (Tentare Core
+// - ALUMNA_INSTRUCTORA: la INSTRUCTOR ya no la abre desde aquí (Centra Core
 //   retirado, 14-sep-2026: escribe a sus alumnas desde la app del estudio,
 //   `/api/portal/instructora/mensajes`). PROPIETARIO/MANAGER/RECEPCION sí pueden abrirla en nombre de
 //   cualquier instructora del estudio (p.ej. desde la ficha de la clienta en

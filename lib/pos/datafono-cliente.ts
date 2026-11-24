@@ -14,7 +14,7 @@ export type ProveedorDatafono = 'stripe' | 'sumup';
 
 /** Lo que hay de SumUp para este estudio. */
 export interface EstadoSumup {
-  /** ¿Se le ofrece SumUp? (Tentare lo tiene dado de alta y el estudio está en la lista.) */
+  /** ¿Se le ofrece SumUp? (Centra lo tiene dado de alta y el estudio está en la lista.) */
   disponible: boolean;
   /** La cuenta de SumUp conectada, o `null`. */
   cuenta: { comercio: string | null } | null;

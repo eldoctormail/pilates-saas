@@ -80,7 +80,7 @@ function CierreDeAnoPage() {
   const tarjeta = (vieja: string, nueva: string) => (panelNuevo ? nueva : vieja);
 
   const [anio, setAnio] = useState<number>(() => new Date().getFullYear());
-  // Lo cobrado del año, para la gestoría de quien no factura con Tentare: el
+  // Lo cobrado del año, para la gestoría de quien no factura con Centra: el
   // mismo fichero que Cobros e Informes (lib/billing/export-cobrado.ts).
   const [descargandoCobrado, setDescargandoCobrado] = useState<'idle' | 'loading' | 'error'>('idle');
   const descargarCobradoDelAnio = async () => {
@@ -227,7 +227,7 @@ function CierreDeAnoPage() {
   const descargarCsv = () => {
     const headers = ['Fecha', 'Nº factura', 'Origen', 'Cliente', 'NIF', 'Base imponible', 'Tipo IVA', 'Cuota IVA', 'Total'];
     const rows = cierre.lineas.map((l: CierreLinea) => [
-      l.fecha, l.numero ?? '', l.origen === 'FACTURA' ? 'Factura Tentare' : 'Manual', l.nombre, l.nif ?? '',
+      l.fecha, l.numero ?? '', l.origen === 'FACTURA' ? 'Factura Centra' : 'Manual', l.nombre, l.nif ?? '',
       l.base.toFixed(2), String(l.tipoIva), l.cuota.toFixed(2), l.total.toFixed(2),
     ]);
     const csv = serializeCsv(headers, rows);
@@ -321,7 +321,7 @@ function CierreDeAnoPage() {
     <div data-tour="cierre-vista" className="space-y-6" style={{ minHeight: '100%', padding: '0 0 40px' }}>
       <PageHeader
         title="Cierre de año"
-        description="Todo lo facturado y el IVA que repercutiste en el año, cuadrado y listo para tu gestoría. Sale de las facturas emitidas desde Tentare y de los ingresos que añades a mano — no tienes que rehacer ningún Excel."
+        description="Todo lo facturado y el IVA que repercutiste en el año, cuadrado y listo para tu gestoría. Sale de las facturas emitidas desde Centra y de los ingresos que añades a mano — no tienes que rehacer ningún Excel."
         actions={
           panelNuevo ? (
             <div className="flex flex-wrap items-center gap-2">
@@ -339,12 +339,12 @@ function CierreDeAnoPage() {
         }
       />
 
-      {/* Sin facturas desde Tentare (solo el estado de sistema 'sin_facturas'):
+      {/* Sin facturas desde Centra (solo el estado de sistema 'sin_facturas'):
           este cierre solo recoge lo que se facturó aquí. Lo que sí tiene es el
           registro de cobros, y se dice dónde exportarlo para la gestoría. */}
       {studio && studio.modoFacturacion === 'sin_facturas' && (
         <div role="note" className="rounded-xl border border-border bg-muted/60 p-4 text-sm">
-          <p className="font-bold text-foreground m-0">Tentare no emite tus facturas</p>
+          <p className="font-bold text-foreground m-0">Centra no emite tus facturas</p>
           <p className="text-muted-foreground mt-1 mb-0">
             Este cierre solo recoge las facturas emitidas desde aquí. Para tu gestoría, descarga lo que has cobrado
             en {anio} (o un trimestre en <Link href="/cobros?tab=facturas" className="font-semibold text-foreground underline underline-offset-2 hover:no-underline">Cobros → Para tu gestoría</Link>).
@@ -388,7 +388,7 @@ function CierreDeAnoPage() {
       <div className="flex gap-2.5 items-start rounded-xl border border-border bg-accent px-4 py-3 text-sm">
         <Info className="size-4 shrink-0 mt-0.5 text-brand-medio" aria-hidden />
         <p className="text-foreground/85 leading-relaxed m-0">
-          <b>Esto recopila tus ingresos y el IVA repercutido</b>, no es tu declaración. No incluye gastos ni IVA soportado, y no se presenta a Hacienda — el cierre lo valida y presenta tu gestoría. Tentare te da el paquete hecho.
+          <b>Esto recopila tus ingresos y el IVA repercutido</b>, no es tu declaración. No incluye gastos ni IVA soportado, y no se presenta a Hacienda — el cierre lo valida y presenta tu gestoría. Centra te da el paquete hecho.
         </p>
       </div>
 
@@ -592,8 +592,8 @@ function CierreDeAnoPage() {
             <CabeceraTarjeta
               tono="verde"
               Icono={Wallet}
-              titulo="Ingresos cobrados fuera de Tentare"
-              sub="¿Cobraste algo en efectivo, por transferencia o en otra plataforma? Añádelo a mano para que el cierre esté completo. Se suma a los totales, marcado como manual (sin factura de Tentare)."
+              titulo="Ingresos cobrados fuera de Centra"
+              sub="¿Cobraste algo en efectivo, por transferencia o en otra plataforma? Añádelo a mano para que el cierre esté completo. Se suma a los totales, marcado como manual (sin factura de Centra)."
             />
             {!mostrarForm && (
               <button type="button" onClick={abrirNuevo} className={cn(BOTON_BORDE, 'mt-3 sm:ml-11')}><Plus className="size-4" aria-hidden /> Añadir ingreso</button>
@@ -602,8 +602,8 @@ function CierreDeAnoPage() {
         ) : (
         <div className="flex items-center justify-between gap-3 flex-wrap px-5 py-4 border-b border-border">
           <div>
-            <h2 className="text-base font-bold m-0">Ingresos cobrados fuera de Tentare</h2>
-            <p className="text-xs text-muted-foreground mt-1 mb-0 max-w-lg">¿Cobraste algo en efectivo, por transferencia o en otra plataforma? Añádelo a mano para que el cierre esté completo. Se suma a los totales, marcado como manual (sin factura de Tentare).</p>
+            <h2 className="text-base font-bold m-0">Ingresos cobrados fuera de Centra</h2>
+            <p className="text-xs text-muted-foreground mt-1 mb-0 max-w-lg">¿Cobraste algo en efectivo, por transferencia o en otra plataforma? Añádelo a mano para que el cierre esté completo. Se suma a los totales, marcado como manual (sin factura de Centra).</p>
           </div>
           {!mostrarForm && <Button variant="outline" onClick={abrirNuevo}><Plus className="size-4" /> Añadir ingreso</Button>}
         </div>
@@ -659,7 +659,7 @@ function CierreDeAnoPage() {
             <Button variant="ghost" className="mt-3" onClick={() => void cargarManuales(anio)}>Reintentar</Button>
           </div>
         ) : manuales.length === 0 ? (
-          <div className="px-5 py-8 text-center text-sm text-muted-foreground">Nada añadido para {anio}. Todo lo que cobraste fuera de Tentare va aquí.</div>
+          <div className="px-5 py-8 text-center text-sm text-muted-foreground">Nada añadido para {anio}. Todo lo que cobraste fuera de Centra va aquí.</div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm tabular-nums">
@@ -788,7 +788,7 @@ function CierreDeAnoPage() {
       )}
 
       <p className="text-xs text-muted-foreground/80 leading-relaxed max-w-3xl">
-        <b className="text-muted-foreground">De dónde sale cada dato:</b> se calcula en vivo a partir de tus facturas emitidas en Tentare (base imponible, tipo y cuota de IVA, fecha, NIF y sello Verifactu) más los ingresos que añades a mano. Tentare <b>no</b> presenta impuestos ni sustituye a tu asesor: registra ingresos, no gastos ni IVA soportado.
+        <b className="text-muted-foreground">De dónde sale cada dato:</b> se calcula en vivo a partir de tus facturas emitidas en Centra (base imponible, tipo y cuota de IVA, fecha, NIF y sello Verifactu) más los ingresos que añades a mano. Centra <b>no</b> presenta impuestos ni sustituye a tu asesor: registra ingresos, no gastos ni IVA soportado.
       </p>
 
       <ConfirmDialog

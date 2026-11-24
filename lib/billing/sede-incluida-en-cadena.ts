@@ -170,7 +170,7 @@ export const ESTADOS_SUELTA_A_CANCELAR: readonly string[] = [...ESTADOS_VIVOS, '
  */
 const CADENA_MANDA_EN_SUS_SEDES: readonly string[] = ['active', 'trialing', 'past_due'];
 
-const COMENTARIO_CANCELACION = 'Sustituida por la suscripción de su cadena (Tentare cancela el plan suelto de la sede al confirmarse Cadena).';
+const COMENTARIO_CANCELACION = 'Sustituida por la suscripción de su cadena (Centra cancela el plan suelto de la sede al confirmarse Cadena).';
 
 export interface ResultadoSueltasDeLasSedes extends ResultadoCancelaciones {
   /**

@@ -1,4 +1,4 @@
-// Capa de datos pública de Tentare Network — server-only, service_role.
+// Capa de datos pública de Centra Network — server-only, service_role.
 //
 // docs/NETWORK-AUDIT-2.md §11: nada en el repo consulta red_perfiles
 // directamente desde el navegador (siempre vía API routes con
@@ -287,7 +287,7 @@ export interface DetallePerfilPublico {
   badges: BadgesNetwork;
   resenas: ResenaNetwork[];
   mediaFotos: MediaNetwork[];
-  // F1 "Actualmente en Tentare" — vacío si el opt-in está apagado
+  // F1 "Actualmente en Centra" — vacío si el opt-in está apagado
   // (mostrar_estudios_actuales=false) o si no trabaja hoy en ninguna sede.
   estudiosActuales: EstudioActualNetwork[];
 }
@@ -370,7 +370,7 @@ async function detallePerfilDesdeFila(
     activaRecientemente: activaRecientemente(filaPublica.ultimo_acceso_en, new Date()),
   };
 
-  // F1 "Actualmente en Tentare" — solo si la dueña activó el opt-in
+  // F1 "Actualmente en Centra" — solo si la dueña activó el opt-in
   // (apagado por defecto). JOIN directo instructores↔studios por
   // auth_user_id: mis_estudios() exige auth.uid() real y este endpoint
   // corre con service_role (sin sesión de la instructora). Columnas

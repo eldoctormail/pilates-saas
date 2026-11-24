@@ -203,7 +203,7 @@ export function contenidoRecordatorio(
         preheader: 'Pide un código nuevo y tu estudio queda montado con lo que ya nos contaste.',
         titular: 'Te falta confirmar tu email',
         parrafos: [
-          `Empezaste a dar de alta ${estudio} en Tentare y te mandamos un código de 6 cifras para confirmar tu email. Ese código caduca a los pocos minutos, así que lo más fácil es pedir uno nuevo.`,
+          `Empezaste a dar de alta ${estudio} en Centra y te mandamos un código de 6 cifras para confirmar tu email. Ese código caduca a los pocos minutos, así que lo más fácil es pedir uno nuevo.`,
           'Entra con tu email y la contraseña que elegiste, pulsa «Reenviar código» y, al escribirlo, montamos tu estudio con lo que ya nos contaste. No tienes que rellenar nada otra vez.',
         ],
         boton: { href, texto: 'Pedir un código nuevo' },
@@ -244,7 +244,7 @@ export function contenidoRecordatorio(
           preheader: foundingGratis ? 'Empiezas gratis, sin tarjeta.' : `Son ${TRIAL_DIAS} días gratis, sin tarjeta.`,
           titular: 'Te falta un paso',
           parrafos: [
-            `Empezaste a montar ${estudio} en Tentare, pero no llegaste a terminar el alta.`,
+            `Empezaste a montar ${estudio} en Centra, pero no llegaste a terminar el alta.`,
             foundingGratis
               ? `Empiezas gratis, con todo menos varias sedes, sin tarjeta y sin permanencia. ${terminarlo}`
               : `Son ${TRIAL_DIAS} días gratis, sin tarjeta y sin permanencia. ${terminarlo}`,
@@ -259,7 +259,7 @@ export function contenidoRecordatorio(
           preheader: 'Empiezas gratis, sin tarjeta.',
           titular: 'Te falta un paso',
           parrafos: [
-            `Empezaste a montar ${estudio} en Tentare, pero no llegaste a terminar el alta.`,
+            `Empezaste a montar ${estudio} en Centra, pero no llegaste a terminar el alta.`,
             'Empiezas gratis, con todo menos varias sedes, sin tarjeta y sin permanencia. Entra con tu cuenta y te llevamos al alta: son dos pasos, el nombre y el plan.',
           ],
           boton: { href, texto: 'Terminar el alta' },
@@ -271,7 +271,7 @@ export function contenidoRecordatorio(
         preheader: `Son ${TRIAL_DIAS} días gratis, sin tarjeta.`,
         titular: 'Te falta elegir tu plan',
         parrafos: [
-          `Empezaste a montar ${estudio} en Tentare, pero no llegaste a elegir el plan de prueba.`,
+          `Empezaste a montar ${estudio} en Centra, pero no llegaste a elegir el plan de prueba.`,
           `Son ${TRIAL_DIAS} días gratis, sin tarjeta y sin permanencia, y puedes cambiar de plan cuando quieras. Entra con tu cuenta y te llevamos al alta: son dos pasos, el nombre y el plan.`,
         ],
         boton: { href, texto: 'Elegir mi plan' },

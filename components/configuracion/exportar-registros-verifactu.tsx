@@ -11,7 +11,7 @@ type Formato = 'csv' | 'xml';
 
 // Descarga de los registros de facturación Veri*Factu del estudio.
 //
-// Se enseña aunque el estudio ya NO emita facturas con Tentare: es justo cuando
+// Se enseña aunque el estudio ya NO emita facturas con Centra: es justo cuando
 // más falta hace llevarse sus registros (mandato, cláusula 8). Y no se enseña si
 // no tiene ninguno. Solo la propietaria llega a esta pantalla; la ruta lo
 // vuelve a comprobar.

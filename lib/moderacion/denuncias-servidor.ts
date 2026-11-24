@@ -221,7 +221,7 @@ export async function enriquecer(
   });
 }
 
-// ── La cola de Tentare (/interno) ────────────────────────────────────────────
+// ── La cola de Centra (/interno) ────────────────────────────────────────────
 
 export interface DenunciaParaTentare extends DenunciaParaRevisar {
   estudio: { id: string; nombre: string };
@@ -229,7 +229,7 @@ export interface DenunciaParaTentare extends DenunciaParaRevisar {
 }
 
 /**
- * Lo que le toca a Tentare, de todos los estudios: las que van contra el propio
+ * Lo que le toca a Centra, de todos los estudios: las que van contra el propio
  * estudio y las que el estudio no revisó en `HORAS_REVISION_ESTUDIO`. La misma
  * regla que aplica `resolver_denuncia`; de la más antigua a la más nueva.
  */
@@ -371,7 +371,7 @@ export type ResultadoModeracionPanel = { ok: true; cambiado: boolean } | { ok: f
 
 /**
  * Retirar o volver a mostrar un comentario desde el panel. La RPC rechaza que lo
- * haga quien lo escribió y que el estudio vuelva a mostrar lo que retiró Tentare;
+ * haga quien lo escribió y que el estudio vuelva a mostrar lo que retiró Centra;
  * al retirar, solo cierra las denuncias que le tocan al estudio.
  */
 export async function retirarComentario(
@@ -383,7 +383,7 @@ export async function retirarComentario(
   if (error) {
     if (error.message.includes('ES_AUTORA')) return { ok: false, status: 403, error: 'No puedes moderar un comentario tuyo.' };
     if (error.message.includes('RETIRADO_POR_TENTARE')) {
-      return { ok: false, status: 409, error: 'Lo retiró Tentare al revisar una denuncia: no se puede volver a mostrar desde aquí.' };
+      return { ok: false, status: 409, error: 'Lo retiró Centra al revisar una denuncia: no se puede volver a mostrar desde aquí.' };
     }
     throw new Error(`ocultar_comentario_comunidad: ${error.message}`);
   }
@@ -400,7 +400,7 @@ export async function retirarComentario(
  * Cerrar (o reabrir) un hilo instructora–alumna desde el panel. Solo ese tipo:
  * el hilo con el estudio no se cierra nunca. Quien es parte del hilo (la dueña
  * que también da clase) no decide sobre él, y el estudio no reabre lo que cerró
- * Tentare. `cambiado: false` si no existe o ya estaba así.
+ * Centra. `cambiado: false` si no existe o ya estaba así.
  */
 export async function cerrarConversacion(
   admin: SupabaseClient, p: { studioId: string; conversacionId: string; cerrar: boolean; userId: string },
@@ -415,7 +415,7 @@ export async function cerrarConversacion(
     return { ok: false, status: 403, error: 'Eres parte de esta conversación: no puedes cerrarla ni reabrirla tú.' };
   }
   if (!p.cerrar && conv.cerrada_en && conv.cerrada_revisor === 'TENTARE') {
-    return { ok: false, status: 409, error: 'La cerró Tentare al revisar una denuncia: no se puede reabrir desde aquí.' };
+    return { ok: false, status: 409, error: 'La cerró Centra al revisar una denuncia: no se puede reabrir desde aquí.' };
   }
   let q = admin.from('conversaciones')
     .update(p.cerrar

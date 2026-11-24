@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Tu rol no puede registrar cobros' }, { status: 403 });
   }
   // Mismo gate de suscripción del SaaS que el datáfono (terminal/cobrar) y el cobro
-  // off-session: un estudio con la suscripción a Tentare no activa no debe poder
+  // off-session: un estudio con la suscripción a Centra no activa no debe poder
   // generar cobros. Antes pos-bizum se lo saltaba → enforcement inconsistente.
   const bloqueo = await bloqueoPorSuscripcion(sesion.studioId);
   if (bloqueo) return bloqueo;

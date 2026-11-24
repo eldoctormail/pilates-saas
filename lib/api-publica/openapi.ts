@@ -34,11 +34,11 @@ export const ESQUEMAS: Record<string, Esquema> = {
     id: strReq(), nombre: str(), razonSocial: str(), nif: str(), direccion: str(),
     zonaHoraria: strReq('Zona horaria de las fechas del estudio, p. ej. America/Argentina/Buenos_Aires.'), moneda,
     ivaPorDefecto: { type: ['number', 'null'], description: 'Tipo de IVA (%) que aplica el estudio por defecto.' },
-    modoFacturacion: str('`facturas`: Tentare emite las facturas, sin envío a la AEAT. `verifactu`: además las registra y las envía a la AEAT (Veri*Factu). `sin_facturas`: no las emite; la contabilidad sale de /recibos.'),
+    modoFacturacion: str('`facturas`: Centra emite las facturas, sin envío a la AEAT. `verifactu`: además las registra y las envía a la AEAT (Veri*Factu). `sin_facturas`: no las emite; la contabilidad sale de /recibos.'),
   }),
   Clienta: obj({
     id: strReq(), nombre: str(), apellidos: str(), email: str(), telefono: str(),
-    activa: bool(), fechaAlta: instante('Alta en Tentare.'),
+    activa: bool(), fechaAlta: instante('Alta en Centra.'),
     activo: bool('Igual que `activa` (nombre de la v1 original).'), creadoEn: instante('Igual que `fechaAlta` (nombre de la v1 original).'),
     nif: str('Solo con el permiso clientas:datos_fiscales.'), direccion: str('Solo con el permiso clientas:datos_fiscales.'),
   }),
@@ -197,7 +197,7 @@ export const RUTAS: Record<string, unknown> = {
   '/tarifas': { get: { summary: 'Catálogo de planes y bonos', security: [{ bearer: [] }], 'x-scope': 'planes:leer', parameters: [q('activas', 'true: solo las que se venden.')], responses: { 200: { description: 'Todas (sin paginar)', content: { 'application/json': { schema: { type: 'array', items: { $ref: '#/components/schemas/Tarifa' } } } } }, ...ERRORES } } },
   '/planes': { get: { summary: 'Obsoleto: usa /suscripciones', deprecated: true, security: [{ bearer: [] }], 'x-scope': 'planes:leer', responses: { 200: { description: 'Suscripciones (forma antigua)' }, ...ERRORES } } },
   '/reservas': {
-    get: { summary: 'Reservas', security: [{ bearer: [] }], 'x-scope': 'reservas:leer', parameters: [q('estado', 'CONFIRMADA por defecto.'), q('socioId', 'Filtra por clienta.'), { name: 'limit', in: 'query', schema: { type: 'integer', minimum: 1, maximum: 100, default: 25 } }], responses: { 200: { description: 'Las más recientes primero (sin paginar: es la forma con la que nació para Zapier). Solo reservas de clientas de Tentare.', content: { 'application/json': { schema: { type: 'array', items: { $ref: '#/components/schemas/Reserva' } } } } }, ...ERRORES } },
+    get: { summary: 'Reservas', security: [{ bearer: [] }], 'x-scope': 'reservas:leer', parameters: [q('estado', 'CONFIRMADA por defecto.'), q('socioId', 'Filtra por clienta.'), { name: 'limit', in: 'query', schema: { type: 'integer', minimum: 1, maximum: 100, default: 25 } }], responses: { 200: { description: 'Las más recientes primero (sin paginar: es la forma con la que nació para Zapier). Solo reservas de clientas de Centra.', content: { 'application/json': { schema: { type: 'array', items: { $ref: '#/components/schemas/Reserva' } } } } }, ...ERRORES } },
     post: { summary: 'Crear una reserva', security: [{ bearer: [] }], 'x-scope': 'reservas:escribir', parameters: [IDEMPOTENCIA], responses: { 201: { description: 'Creada' }, ...ERRORES_IDEMPOTENCIA, ...ERRORES } },
   },
   '/reservas/cancelar': { post: { summary: 'Cancelar una reserva', security: [{ bearer: [] }], 'x-scope': 'reservas:escribir', parameters: [IDEMPOTENCIA], responses: { 200: { description: 'Cancelada' }, ...ERRORES_IDEMPOTENCIA, ...ERRORES } } },
@@ -238,7 +238,7 @@ for (const [ruta, operaciones] of Object.entries(RUTAS as Record<string, Record<
   for (const op of Object.values(operaciones)) op.parameters = [...(op.parameters ?? []), ESTUDIO];
 }
 
-/** Los webhooks (OpenAPI 3.1): lo que Tentare manda a la URL del estudio. */
+/** Los webhooks (OpenAPI 3.1): lo que Centra manda a la URL del estudio. */
 export const WEBHOOKS: Record<string, unknown> = Object.fromEntries(TIPOS_EVENTO.map((tipo) => [tipo, {
   post: {
     summary: `Aviso «${tipo}»`,
@@ -264,7 +264,7 @@ export function documentoOpenApi(servidor: string) {
   return {
     openapi: '3.1.0',
     info: {
-      title: 'API de Tentare',
+      title: 'API de Centra',
       version: '1',
       description: 'API pública v1. Autenticación con `Authorization: Bearer <clave de API del estudio o token OAuth>`. '
         + 'Una clave de cadena llega a todas sus sedes: cada petición lleva la cabecera `Tentare-Estudio` con la sede (GET /estudios las lista). '

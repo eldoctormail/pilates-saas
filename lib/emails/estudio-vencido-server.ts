@@ -39,7 +39,7 @@ export async function enviarAvisoEstudioVencido(params: {
       urlExportar: `${base}/suscripcion#exportar-datos`,
     });
     const { error } = await new Resend(apiKey).emails.send({
-      from: remitentePorMarca('Tentare'),
+      from: remitentePorMarca('Centra'),
       to: [params.to],
       subject: asuntoAvisoEstudioVencido(params.fase, params.fechaPurga, purgaEstudiosActiva(process.env)),
       html,
@@ -68,7 +68,7 @@ export async function enviarConfirmacionBorrado(params: {
   try {
     const fecha = formatearFechaAviso(params.fecha);
     const { error } = await new Resend(apiKey).emails.send({
-      from: remitentePorMarca('Tentare'),
+      from: remitentePorMarca('Centra'),
       to: [params.to],
       subject: `Hemos borrado los datos de ${params.estudioNombre}`,
       html: correoDatosBorrados({ estudioNombre: params.estudioNombre, fecha }),

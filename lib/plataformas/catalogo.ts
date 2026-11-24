@@ -1,4 +1,4 @@
-// Las plataformas que venden plazas de un estudio fuera de Tentare.
+// Las plataformas que venden plazas de un estudio fuera de Centra.
 //
 // Una reserva de estas ocupa plaza en la clase, pero la persona no es socia del
 // estudio: va en `reservas` con `socio_id = null`, su `origen` y el nombre que

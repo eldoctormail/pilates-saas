@@ -50,7 +50,7 @@ async function cargarBilling(admin: SupabaseClient | null, studioId: string): Pr
 }
 
 /**
- * Denegación si el equipo de Tentare ha suspendido el estudio a mano.
+ * Denegación si el equipo de Centra ha suspendido el estudio a mano.
  *
  * A propósito NO mira `billingEnforced()`: suspender es una decisión explícita
  * (impago persistente, abuso, petición del cliente), no una inferencia de
@@ -102,7 +102,7 @@ export async function evaluarSuscripcion(admin: SupabaseClient | null, studioId:
   if (accesoProducto({ subscriptionStatus: billing.subscriptionStatus }) && !trial.agotada) return null;
   return {
     status: 402,
-    error: 'Tu suscripción no está activa. Reactívala en Plan de Tentare para seguir operando.',
+    error: 'Tu suscripción no está activa. Reactívala en Plan de Centra para seguir operando.',
     code: 'SUSCRIPCION_INACTIVA',
   };
 }
@@ -127,8 +127,8 @@ export async function evaluarFeature(
   return {
     status: 403,
     error: complemento
-      ? `«${ADDONS[complemento].nombre}» es un complemento de tu plan. Actívalo en Plan de Tentare.`
-      : 'Tu plan no incluye esta función. Mejóralo en Plan de Tentare.',
+      ? `«${ADDONS[complemento].nombre}» es un complemento de tu plan. Actívalo en Plan de Centra.`
+      : 'Tu plan no incluye esta función. Mejóralo en Plan de Centra.',
     code: 'PLAN_SIN_FEATURE',
     feature,
   };

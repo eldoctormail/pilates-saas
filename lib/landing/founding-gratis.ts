@@ -1,6 +1,6 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // Lo que la web comercial dice del plan Founding Studio desde que es GRATIS
-// (decisión del fundador, 15-oct-2026): todo Tentare menos varias sedes,
+// (decisión del fundador, 15-oct-2026): todo Centra menos varias sedes,
 // mientras el estudio no pase de GRATIS_RESERVAS_MES reservas en un mes
 // (sin tope de alumnas desde el 13-nov-2026). Al pasarse tiene GRATIS_MARGEN_DIAS días
 // para pasarse a Founding Studio de pago (PRECIO_FOUNDING_PAGO), sin tope y, desde
@@ -13,7 +13,7 @@
 // exista. Ya no hay prueba de 7 días: se empieza gratis, con todo.
 //
 // El segundo límite son RESERVAS y no cobros (decisión del fundador, la misma
-// noche): los cobros se esquivan cobrando fuera de Tentare; las reservas no, y
+// noche): los cobros se esquivan cobrando fuera de Centra; las reservas no, y
 // sin ellas no se usa el programa (Bonsai cuenta igual sus «inscripciones», y
 // da 80 gratis). Cómo se cuentan lo decide el producto (lib/billing/plan-gratis.ts).
 //

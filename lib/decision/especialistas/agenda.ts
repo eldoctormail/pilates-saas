@@ -33,7 +33,7 @@ const A2_PROPORCION_ALTA = 0.4; // fracción de clases casi vacías que sube la 
 // «Sin datos» no es «vacía»: un estudio que acaba de importar su horario (o que
 // se dio de alta hoy) tiene decenas de clases ya empezadas y cero reservas
 // registradas, y el motor decía con «confianza alta» que todas iban vacías.
-const A2_MIN_ANTIGUEDAD_DIAS = 14; // el estudio lleva al menos esto en Tentare
+const A2_MIN_ANTIGUEDAD_DIAS = 14; // el estudio lleva al menos esto en Centra
 
 // Día y hora de una franja: `etiquetaFranja` (senales.ts), en hora del estudio,
 // compartida con Ingresos.
@@ -432,7 +432,7 @@ function reglaA5(s: SnapshotEstudio, idx: IndicesSenal, now: Date): Candidata[] 
     const reservas = idx.ocupadasPorSesion.get(se.id) ?? 0;
 
     const motivoMotor = bloqueo
-      ? `${nombre} tiene marcado que no está disponible el ${diaSemana} ${dia}, y esa clase sigue asignada a ella. ${reservas === 0 ? 'Todavía no hay nadie apuntado' : reservas === 1 ? 'Ya hay 1 cliente apuntado' : `Ya hay ${reservas} clientes apuntados`}. Si marcas la baja en Sustituciones, Tentare prepara a quién pedírselo por orden de encaje.`
+      ? `${nombre} tiene marcado que no está disponible el ${diaSemana} ${dia}, y esa clase sigue asignada a ella. ${reservas === 0 ? 'Todavía no hay nadie apuntado' : reservas === 1 ? 'Ya hay 1 cliente apuntado' : `Ya hay ${reservas} clientes apuntados`}. Si marcas la baja en Sustituciones, Centra prepara a quién pedírselo por orden de encaje.`
       : `${nombre} está asignada a dos clases que se pisan el ${diaSemana} a las ${hora}. Una de las dos se va a quedar sin quien la dé.`;
 
     candidatas.push({

@@ -1,6 +1,6 @@
 'use client';
 
-// Autoservicio de Tentare Network para la PROFESIONAL — deliberadamente fuera
+// Autoservicio de Centra Network para la PROFESIONAL — deliberadamente fuera
 // de app/(dashboard): antes /network/mi-perfil vivía dentro del panel de
 // gestión (DashboardShell), que exige studio/instructores para esa
 // auth_user_id (components/layout/dashboard-shell.tsx) — una cuenta que se
@@ -207,7 +207,7 @@ function CabeceraAutoservicio({ pathname }: { pathname: string }) {
     <header className="border-b" style={{ borderColor: NW_BORDE, background: '#fff' }}>
       <div className="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
         <Link href="/network/inicio" className="flex items-center gap-2.5 shrink-0">
-          <LogoTentare formato="horizontal" producto="network" titulo="Tentare Network" alto={26} />
+          <LogoTentare formato="horizontal" producto="network" titulo="Centra Network" alto={26} />
           <InsigniaBeta alto={26} />
         </Link>
         {perfil && (

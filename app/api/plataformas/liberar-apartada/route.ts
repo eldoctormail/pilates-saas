@@ -7,7 +7,7 @@ import { uid } from '@/lib/utils';
 export const dynamic = 'force-dynamic';
 
 // «La he cerrado en ClassPass: liberar 1», en la hoja de la clase. Las plazas
-// apartadas para ClassPass no las coge nadie desde Tentare (decisión del
+// apartadas para ClassPass no las coge nadie desde Centra (decisión del
 // fundador, 7-oct-2026); si recepción quiere dar una a una clienta, primero la
 // cierra en ClassPass y después la libera aquí. Lo hace la base de datos con el
 // candado de la sesión (`liberar_plaza_apartada`: baja el cupo de ESA sesión,

@@ -30,7 +30,7 @@ const COMPARTIR = {
   titulo: 'El software que lleva tu estudio de Pilates y yoga.',
   descripcion: 'Reservas y lista de espera, app con tu marca para tus alumnas, bonos y cobros en un solo panel, para estudios de Pilates y yoga. Empieza gratis, sin tarjeta.',
   imagen: '/og-image.png',
-  alt: 'Tentare',
+  alt: 'Centra',
 };
 
 export const metadata: Metadata = {
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   // `app/opengraph-image.tsx` que había (diseño anterior a la marca actual): con
   // ese fichero-convención al lado habría dos `og:image` en la misma página. Se declara aquí con URL absoluta (`metadataBase` del layout).
   openGraph: {
-    siteName: 'Tentare',
+    siteName: 'Centra',
     type: 'website',
     locale: 'es_ES',
     title: COMPARTIR.titulo,
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
   },
 };
 
-// La home nueva (nov-2026): el diseño de Figma de la diseñadora, en español, con la identidad y los datos reales de Tentare (planes y
+// La home nueva (nov-2026): el diseño de Figma de la diseñadora, en español, con la identidad y los datos reales de Centra (planes y
 // precios de `PLAN_INFO`, preguntas de `FAQ_ITEMS`, logos de estudios con consentimiento, el panel real en el héroe, el pie de la web
 // pública). Sustituye a la home anterior (héroe + «Lo que antes te llevaba la tarde» + producto por áreas + momentos + etapas…).
 //

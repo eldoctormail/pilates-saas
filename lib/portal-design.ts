@@ -1,5 +1,5 @@
 // El lenguaje visual del portal de la clienta, extraído del diseño
-// "Tentare App Cliente v2". Cada valor de aquí sale medido del diseño, no
+// "Centra App Cliente v2". Cada valor de aquí sale medido del diseño, no
 // redondeado ni "aproximado": si allí pone 33 px de radio, aquí pone 33.
 //
 // ⚠️ CONVIVE CON `lib/portal-tokens.ts`, que es el lenguaje SALIENTE. Las 14
@@ -55,13 +55,13 @@ export function transicion(props: string[], ms: number = dur.control): string {
 // ── Tipografía ───────────────────────────────────────────────────────────────
 //
 // ⚠️ CORREGIDO (31-ago) tras verificar contra capturas REALES de Claude
-// Design ("Tentare Studio App") y contra el <link> de Google Fonts del
+// Design ("Centra Studio App") y contra el <link> de Google Fonts del
 // propio .dc.html exportado: una sola familia, Plus Jakarta Sans, en dos
 // pesos — bold para titulares, regular/medium para el resto. NINGUNA
 // pantalla de las 20 capturas reales lleva serif ni cursiva.
 //
 // El "serif dice QUÉ es esto, la sans dice qué HACER" de antes describía
-// "Tentare App Cliente v2" — un diseño ANTERIOR y ya sustituido, no el
+// "Centra App Cliente v2" — un diseño ANTERIOR y ya sustituido, no el
 // vigente. Se mantiene el nombre `serif` (evita tocar cada call-site que lo
 // importa) pero ya no es una serif: es Jakarta a peso alto.
 // --portal-heading-font la sigue declarando lib/theme-runtime.ts cuando el

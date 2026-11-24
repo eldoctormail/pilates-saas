@@ -4,7 +4,7 @@ import { exigirPermiso } from '@/lib/interno/auth';
 
 export const runtime = 'nodejs';
 
-// Analítica de Tentare Network — última pieza del brief 0→100 (tras
+// Analítica de Centra Network — última pieza del brief 0→100 (tras
 // marketplace/SEO/reviews/mensajería/geolocalización). Mismo principio que
 // /interno/page.tsx: ningún número sin procedencia, y lo que no se puede
 // calcular todavía se dice explícitamente en vez de mostrarse como 0.

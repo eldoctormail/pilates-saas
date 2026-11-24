@@ -222,7 +222,7 @@ export function plazasOcupadas(sesionId: string, reservas: readonly Pick<Reserva
 }
 
 // Plazas APARTADAS para una plataforma que vende a mano (ClassPass, decisión del
-// fundador del 7-oct-2026): no son de los canales de Tentare hasta que se
+// fundador del 7-oct-2026): no son de los canales de Centra hasta que se
 // liberan X horas antes de la clase. Las calcula la base de datos
 // (`plazas_apartadas_de`) y llegan en el aforo público como `aforoApartadas`;
 // quien enseña plazas libres las resta, igual que la RPC al reservar.
@@ -237,7 +237,7 @@ export function apartadasPorSesion(filas: readonly AforoApartado[] | null | unde
   return m;
 }
 
-/** Lo que se puede reservar desde Tentare: el aforo, menos las ocupadas y menos las apartadas. */
+/** Lo que se puede reservar desde Centra: el aforo, menos las ocupadas y menos las apartadas. */
 export function plazasLibresParaReservar(aforo: number, ocupadas: number, apartadas = 0): number {
   return Math.max(0, aforo - ocupadas - Math.max(0, apartadas));
 }

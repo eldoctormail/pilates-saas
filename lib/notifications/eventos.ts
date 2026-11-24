@@ -64,7 +64,7 @@ export const EVENTOS = {
   CLASE_SUSTITUTA: 'clase.sustituta',
   SUSTITUCION_ACEPTADA: 'sustitucion.aceptada',
   SUSTITUCION_RECHAZADA: 'sustitucion.rechazada',
-  // Cierre del bucle para la propietaria: Tentare encontró quién cubre la clase.
+  // Cierre del bucle para la propietaria: Centra encontró quién cubre la clase.
   // Evento propio y no otra audiencia de SUSTITUCION_ACEPTADA, porque a la
   // sustituta y a la dueña se les cuenta un hecho distinto («tienes una clase
   // nueva» / «ya está resuelto, no tienes que hacer nada»).
@@ -182,7 +182,7 @@ export const EVENTOS = {
   SISTEMA_STRIPE_DESCONECTADO: 'sistema.stripe_desconectado',
   SISTEMA_EMAIL_FALLIDO: 'sistema.email_fallido',
   // API pública: un webhook del estudio (su programa de contabilidad) que no
-  // consigue entregar, que Tentare ha desactivado, o que vuelve a funcionar
+  // consigue entregar, que Centra ha desactivado, o que vuelve a funcionar
   // (cierra el primero). lib/api-publica/webhooks/salud.ts decide cuál.
   WEBHOOK_FALLANDO: 'sistema.webhook_fallando',
   WEBHOOK_DESACTIVADO: 'sistema.webhook_desactivado',
@@ -226,7 +226,7 @@ export const EVENTOS = {
   // día por estudio (reforzado por el UNIQUE(studio_id,fecha) de
   // decision_mensajes_dia) — nunca se dispara si el día es de silencio.
   DECISION_MENSAJE_DIA: 'decision.mensaje_dia',
-  // Tentare Network, Fase 7 (docs/NETWORK-IMPLEMENTATION-PLAN.md §4/§10).
+  // Centra Network, Fase 7 (docs/NETWORK-IMPLEMENTATION-PLAN.md §4/§10).
   // Una profesional pide a un estudio que confirme una experiencia laboral.
   RED_VERIFICACION_SOLICITADA: 'red.verificacion_solicitada',
   RED_EXPERIENCIA_CONFIRMADA: 'red.experiencia_confirmada',
@@ -264,7 +264,7 @@ export const EVENTOS = {
   // criterio que RESERVA_CONFIRMADA.
   DOCUMENTO_SOCIO_NUEVO: 'documento_socio.nuevo',
   // 34ª pasada de auditoría: la AEAT ha rechazado una factura Veri*Factu.
-  // Antes esto solo quedaba en un Sentry.captureMessage (lo ve Tentare, no
+  // Antes esto solo quedaba en un Sentry.captureMessage (lo ve Centra, no
   // la propietaria, que es la obligada tributaria real). Desde sep-2026 un
   // rechazo ya no congela las facturas posteriores (lib/verifactu/
   // politica-cadena.ts): la rechazada se corrige con un registro de

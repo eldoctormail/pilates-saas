@@ -556,9 +556,9 @@ export default function EquipoPage() {
     { href: '/equipo/rendimiento', texto: 'Rendimiento', icono: TrendingUp, nota: 'Retención y conversión de cada una, últimos 90 días', onClick: () => router.push('/equipo/rendimiento') },
     { href: '/equipo/tiempo-trabajado', texto: 'Tiempo trabajado', icono: Clock, nota: 'Las jornadas que fichan y las clases que dan', onClick: () => router.push('/equipo/tiempo-trabajado') },
     { href: '/equipo/liquidaciones', texto: 'Liquidaciones', icono: IconoMoneda, nota: 'Lo que le corresponde a cada una este mes', onClick: () => router.push('/equipo/liquidaciones') },
-    // Tentare Network está congelado (lib/frozen-features.ts): vuelve solo al descongelarlo.
+    // Centra Network está congelado (lib/frozen-features.ts): vuelve solo al descongelarlo.
     ...(!esRutaCongelada('/network/buscar')
-      ? [{ href: '/network/buscar', texto: 'Buscar en Tentare Network', icono: Network, onClick: () => router.push('/network/buscar') }]
+      ? [{ href: '/network/buscar', texto: 'Buscar en Centra Network', icono: Network, onClick: () => router.push('/network/buscar') }]
       : []),
   ] : [];
   const [rendimiento, ...otrasPantallas] = pantallasEquipo;
@@ -594,11 +594,11 @@ export default function EquipoPage() {
           <div className="flex items-center gap-2">
             {puedeGestionarEquipo(miRol) && (
               <>
-                {/* Tentare Network está congelado en el panel (lib/frozen-features.ts):
+                {/* Centra Network está congelado en el panel (lib/frozen-features.ts):
                     el botón vuelve solo al quitarlo de RUTAS_CONGELADAS. */}
                 {!esRutaCongelada('/network/buscar') && (
                   <Link href="/network/buscar" className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-border text-sm font-bold text-foreground hover:bg-muted transition-colors">
-                    <Network size={16} /> Buscar en Tentare Network
+                    <Network size={16} /> Buscar en Centra Network
                   </Link>
                 )}
                 <Link href="/equipo/rendimiento" className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-border text-sm font-bold text-foreground hover:bg-muted transition-colors">

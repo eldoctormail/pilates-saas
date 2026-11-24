@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 // La ruta que comprueba el código del correo (`/api/auth/otp/verificar`) la usan
-// la app del estudio, la app Tentare (/app), /reservar y el alta del equipo. Se
+// la app del estudio, la app Centra (/app), /reservar y el alta del equipo. Se
 // lee como texto: es una ruta de Next y este runner no la importa.
 const ruta = readFileSync(join(process.cwd(), 'app/api/auth/otp/verificar/route.ts'), 'utf8')
   .replace(/\/\/[^\n]*/g, '');

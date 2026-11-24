@@ -1,6 +1,6 @@
 'use client';
 
-// Tenti, la mascota de Tentare: catálogo para verla y aprobarla antes de meterla
+// Tenti, la mascota de Centra: catálogo para verla y aprobarla antes de meterla
 // en ninguna pantalla de estudio. Todos sus estados, sus emociones, los tamaños
 // y las dos colocaciones propuestas para el panel, con sus textos de verdad.
 //
@@ -56,7 +56,7 @@ export default function TentiPagina() {
       <header>
         <h1 className="text-[22px] font-bold text-foreground">Tenti</h1>
         <p className="mt-1 max-w-2xl text-[13.5px] text-muted-foreground">
-          La mascota de Tentare. Mueve los ojos hacia el cursor, parpadea sola, se aplasta si la tocas y se marea si insistes.
+          La mascota de Centra. Mueve los ojos hacia el cursor, parpadea sola, se aplasta si la tocas y se marea si insistes.
           Así se comporta también en el panel, en todos sus sitios; abajo, las dos primeras veces de la propietaria.
         </p>
       </header>

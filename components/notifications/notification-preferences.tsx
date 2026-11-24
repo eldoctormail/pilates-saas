@@ -145,7 +145,7 @@ export function NotificationPreferences({ role, studioId, getHeaders }: {
       <p role="note" data-testid="avisos-como-texto" className="text-[12.5px] text-muted-foreground rounded-xl bg-muted/40 px-3.5 py-2.5">
         {{
           denied: 'Pulsa el candado junto a la dirección de la web → Notificaciones → Permitir, y recarga la página. En iPhone: Ajustes → Notificaciones → tu app.',
-          'ios-sin-instalar': 'En Safari: Compartir → Añadir a pantalla de inicio. Abre Tentare desde ese icono y vuelve aquí: aparecerá el botón Activar.',
+          'ios-sin-instalar': 'En Safari: Compartir → Añadir a pantalla de inicio. Abre Centra desde ese icono y vuelve aquí: aparecerá el botón Activar.',
           unsupported: 'Este navegador no admite avisos al móvil. Prueba con Chrome, Edge o Safari actualizados (en iPhone, con la app instalada en inicio).',
           'sin-clave': 'Los avisos aún no están listos en el servidor. Inténtalo de nuevo en unos minutos.',
         }[estado as 'denied' | 'ios-sin-instalar' | 'unsupported' | 'sin-clave'] ?? ''}

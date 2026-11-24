@@ -2,7 +2,7 @@ import { test, expect, type Page, type Route } from '@playwright/test';
 import { montar, ir } from './panel-sembrado';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Academy dentro del panel (14-nov-2026): el curso «Conoce Tentare» (/primeros-pasos) y el curso «Cambiar a Tentare» con su progreso.
+// Academy dentro del panel (14-nov-2026): el curso «Conoce Centra» (/primeros-pasos) y el curso «Cambiar a Centra» con su progreso.
 //  · El curso de migración enseña de qué software vienes y SOLO da pasos de exportación donde constan en su ayuda pública.
 //  · Un paso se guarda con lo que CONTESTA el servidor (y con un 4xx no se anuncia nada): cada test cuenta las peticiones de escritura,
 //    porque «no mintió» sin haber intentado nada no prueba nada.
@@ -42,17 +42,17 @@ async function abrir(page: Page, ruta: string, o: Opciones = {}) {
   return { escrituras };
 }
 
-test('el curso «Conoce Tentare» ofrece «Cambiar a Tentare» a quien gestiona clientas', async ({ page }) => {
+test('el curso «Conoce Centra» ofrece «Cambiar a Centra» a quien gestiona clientas', async ({ page }) => {
   await abrir(page, 'primeros-pasos');
-  const enlace = page.getByRole('link', { name: /Cambiar a Tentare/ });
+  const enlace = page.getByRole('link', { name: /Cambiar a Centra/ });
   await expect(enlace).toBeVisible({ timeout: 300_000 });
-  await expect(page.getByText('Tentare Academy')).toBeVisible();
+  await expect(page.getByText('Centra Academy')).toBeVisible();
   await enlace.click();
   await expect(page).toHaveURL(/\/primeros-pasos\/cambiar-de-software$/);
-  await expect(page.getByRole('heading', { name: 'Cambiar a Tentare' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Cambiar a Centra' })).toBeVisible();
 });
 
-test('«Cambiar a Tentare» enseña los 11 pasos, los límites y no inventa pasos de exportación', async ({ page }) => {
+test('«Cambiar a Centra» enseña los 11 pasos, los límites y no inventa pasos de exportación', async ({ page }) => {
   await abrir(page, 'primeros-pasos/cambiar-de-software');
   await expect(page.getByTestId('resumen-migracion')).toBeVisible({ timeout: 300_000 });
   await expect(page.locator('li[data-paso]')).toHaveCount(11);
@@ -96,7 +96,7 @@ test('el vídeo de una lección va con fachada: no se pide nada a Vimeo hasta pu
   page.on('request', (q) => { if (q.url().includes('vimeo.com')) aVimeo.push(q.url()); });
   await page.route('**/player.vimeo.com/**', (r) => r.fulfill({ status: 200, contentType: 'text/html', body: '<html></html>' }));
   await abrir(page, 'primeros-pasos/cambiar-de-software', {
-    videos: [{ articulo: 'primeros-pasos/cambiar-de-software', videoId: '123456789', hashPrivado: null, titulo: 'Así se cambia a Tentare', duracionSeg: 245, nivel: 'esencial', resultado: 'Sabrás por dónde empezar', destacado: false, publicado: true }],
+    videos: [{ articulo: 'primeros-pasos/cambiar-de-software', videoId: '123456789', hashPrivado: null, titulo: 'Así se cambia a Centra', duracionSeg: 245, nivel: 'esencial', resultado: 'Sabrás por dónde empezar', destacado: false, publicado: true }],
   });
   const reproducir = page.getByRole('button', { name: /reproducir/i });
   await expect(reproducir).toBeVisible({ timeout: 300_000 });
@@ -116,7 +116,7 @@ test('la /academy pública es un escaparate: enseña el curso y manda al panel, 
   const res = await request.get('/academy');
   expect(res.status()).toBe(200);
   const html = await res.text();
-  expect(html).toContain('Aprende a sacar el máximo partido a Tentare');
+  expect(html).toContain('Aprende a sacar el máximo partido a Centra');
   expect(html).toContain('/soluciones/cambiar-de-software');
   expect(html).not.toContain('player.vimeo.com');
 });

@@ -61,7 +61,7 @@ export function nuevoIdRegalo(): string {
   return `mpr_${globalThis.crypto.randomUUID().replace(/-/g, '')}`;
 }
 
-/** ¿Es un id de regalo de Tentare? (lo que se acepta en `?mp=` de la página del regalo). */
+/** ¿Es un id de regalo de Centra? (lo que se acepta en `?mp=` de la página del regalo). */
 export function esIdRegalo(s: string): boolean {
   return /^mpr_[0-9a-f]{32}$/.test(s);
 }
@@ -84,7 +84,7 @@ export function urlsDeClase(base: string, slug: string, sesionId: string, compra
   return { successUrl: `${ficha}?mp=${encodeURIComponent(compraId)}`, cancelUrl: `${ficha}?mp=${RETORNO_CANCELADO}` };
 }
 
-/** ¿Es un id de compra de Tentare? (lo que se acepta en `?mp=` y en el estado de una compra). */
+/** ¿Es un id de compra de Centra? (lo que se acepta en `?mp=` y en el estado de una compra). */
 export function esIdCompra(s: string): boolean {
   return /^mpc_[0-9a-f]{32}$/.test(s);
 }

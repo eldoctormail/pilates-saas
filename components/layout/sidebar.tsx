@@ -50,7 +50,7 @@ export function useNavMode() {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- Lee localStorage. No es accesible durante el render (ni en servidor ni en la hidratación): leerlo en render rompería la hidratación.
     if (leerModoMenu() === 'avanzado') setMode('avanzado');
-    // «Ver el menú entero» de «Tu Tentare» (Configuración) cambia el modo desde
+    // «Ver el menú entero» de «Tu Centra» (Configuración) cambia el modo desde
     // fuera: el menú se pone al día sin recargar. Sin ese evento, nada cambia.
     const alCambiar = (e: Event) => setMode(modoDelEvento(e));
     window.addEventListener(EVENTO_MODO_MENU, alCambiar);
@@ -59,7 +59,7 @@ export function useNavMode() {
 
   function setNavMode(next: 'esencial' | 'avanzado') {
     setMode(next);
-    // Guarda y avisa: «Tu Tentare» (Configuración) dice qué se ve en cada modo.
+    // Guarda y avisa: «Tu Centra» (Configuración) dice qué se ve en cada modo.
     guardarModoMenu(next);
   }
 
@@ -68,7 +68,7 @@ export function useNavMode() {
 
 // ─── Desktop nav item ─────────────────────────────────────────────────────────
 
-// Distintivo «NUEVO»: lo que Tentare señala desde /interno (ver
+// Distintivo «NUEVO»: lo que Centra señala desde /interno (ver
 // lib/menu-novedades.ts). Arena sobre el casi negro del menú — NO `bg-brand`,
 // que es el relleno del item ACTIVO: si compartieran color, «nuevo» y «donde
 // estás» se leerían igual.
@@ -265,7 +265,7 @@ function BotonBuscarAjuste() {
 /**
  * El resplandor de abajo del menú (el «trial-wave» de Shopify, medido: una franja de 400 px con el
  * degradado que se enciende en el último 18 % y dos haces que se desplazan 17,5 s en bucle lineal),
- * con los colores de Tentare: turquesa de la marca abajo y un haz magenta que cruza despacio. Va
+ * con los colores de Centra: turquesa de la marca abajo y un haz magenta que cruza despacio. Va
  * detrás del menú (`z-10`) y con «reducir movimiento» se queda quieto. Decoración: `aria-hidden`.
  */
 function BrilloDelMarco() {
@@ -698,15 +698,15 @@ export function Sidebar() {
   const shellNuevo = useShellNuevo();
   // Mientras `studio` no ha cargado, `useRol()` cae al mínimo (INSTRUCTOR,
   // fail-closed de A-2 en lib/permisos.ts) — sin este guard se veía el logo/
-  // título de Tentare Core un instante en CUALQUIER rol, incluida la
-  // propietaria, antes de resolver el real. El genérico "Tentare" no afirma
+  // título de Centra Core un instante en CUALQUIER rol, incluida la
+  // propietaria, antes de resolver el real. El genérico "Centra" no afirma
   // un rol que todavía no se conoce (mismo criterio que
   // app/(dashboard)/layout.tsx, que gatea igual con `rolResuelto`).
   const rolResuelto = studio !== null;
-  const marca = rolResuelto ? nombreAppPorRol(rol) : 'Tentare';
+  const marca = rolResuelto ? nombreAppPorRol(rol) : 'Centra';
   // Solo hay lockup horizontal por rol (isotipo + palabra + nombre de producto
   // en fila); el logo colapsado (solo isotipo) y el de /login siguen siendo el
-  // genérico Tentare hasta que haya un caso de uso que lo pida — el rol no se
+  // genérico Centra hasta que haya un caso de uso que lo pida — el rol no se
   // conoce antes de autenticar. Sin rol resuelto no se pasa `producto`, así
   // que se pinta la marca paraguas.
   const producto = !rolResuelto ? undefined : rol === 'INSTRUCTOR' ? 'core' : 'manager';

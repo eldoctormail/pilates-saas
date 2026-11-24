@@ -62,7 +62,7 @@ test('«avisos», «color» y «plan» llevan a lo que se trajo dentro de Config
   assert.ok(ids('color').includes('tarjeta-color-de-marca'));
   assert.equal(buscarAjustes('color').find(r => r.id === 'tarjeta-color-de-marca')!.seccion, 'marca');
   assert.ok(ids('modo oscuro').includes('tarjeta-claro-u-oscuro'));
-  // «Plan de Tentare» es una sección de «Tu cuenta» (ya no lleva a /suscripcion).
+  // «Plan de Centra» es una sección de «Tu cuenta» (ya no lleva a /suscripcion).
   const plan = buscarAjustes('plan').find(r => r.id === 'seccion-plan')!;
   assert.equal(plan.seccion, 'plan');
   assert.ok(ids('suscripcion').includes('seccion-plan'));
@@ -94,7 +94,7 @@ test('⌘K, gerencia: sus ajustes sí, el dinero y la cuenta no', () => {
     { donde: 'Mi estudio', href: '/configuracion?tab=estudio#horario' },
   );
   assert.deepEqual(ajustesParaBuscadorGlobal('IVA', GERENCIA), []);
-  // «Plan de Tentare» y «Mi cuenta» no salen en ⌘K por aquí para nadie (van por
+  // «Plan de Centra» y «Mi cuenta» no salen en ⌘K por aquí para nadie (van por
   // su entrada del menú), y recepción no abre Configuración: ni un resultado.
   assert.deepEqual(ajustesParaBuscadorGlobal('horario', { rol: 'RECEPCION' }), []);
 });
@@ -165,7 +165,7 @@ test('⌘K: quien no entra en Configuración no ve ningún ajuste', () => {
 });
 
 test('⌘K: sin filas de otra pantalla, y cada enlace abre la tarjeta que dice', () => {
-  // «Plan de Tentare» ya no tiene entrada de menú: ⌘K lo encuentra como sección de Configuración.
+  // «Plan de Centra» ya no tiene entrada de menú: ⌘K lo encuentra como sección de Configuración.
   assert.ok(ajustesParaBuscadorGlobal('suscripción', PROPIETARIA).some(a => a.id === 'seccion-plan'));
   for (const consulta of ['a', 'e', 'o', 'iva', 'horario', 'sedes']) {
     for (const a of ajustesParaBuscadorGlobal(consulta, { ...PROPIETARIA, haySedes: true, esCadena: true })) {

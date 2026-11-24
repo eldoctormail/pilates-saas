@@ -5,7 +5,7 @@
 // aprobado puede no llegar nunca: la alumna pagó y no tiene su bono o su
 // recibo sigue pendiente. Este barrido repasa los pagos de la cuenta de los
 // últimos días y aplica, con la MISMA función que el webhook (`procesarPago`),
-// los que Tentare no tiene anotados o tiene en otro estado.
+// los que Centra no tiene anotados o tiene en otro estado.
 //
 // También cierra las compras de plan caducadas de todos los estudios (devuelve
 // su plaza de matrícula gratis), por si nadie abrió una compra nueva en ese
@@ -54,7 +54,7 @@ export async function conciliarMercadoPago(
     }
     const pagos = res.datos.results ?? [];
     r.revisados += pagos.length;
-    // De Tentare y, con una cuenta del panel, solo de su estudio (procesarPago lo vuelve a mirar).
+    // De Centra y, con una cuenta del panel, solo de su estudio (procesarPago lo vuelve a mirar).
     const nuestros = pagos.filter(p => {
       const ref = leerReferencia(p.external_reference);
       return ref !== null && (opciones.puedeAplicar?.(ref.studioId) ?? true);

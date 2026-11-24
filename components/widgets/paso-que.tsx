@@ -472,7 +472,7 @@ export function QueEnsena({ w, c, metodo, cambiar, datos, porId, tituloHorario =
   return (
     <Tarjeta titulo="Qué enseña" etiqueta="vivo">
       <p className="text-[13px] leading-relaxed text-muted-foreground">
-        {SE_ACTUALIZA_SOLO[w.id] ?? 'Tus datos de Tentare tal cual.'} Si cambias algo allí, se ve en tu web al momento, sin volver a copiar nada.
+        {SE_ACTUALIZA_SOLO[w.id] ?? 'Tus datos de Centra tal cual.'} Si cambias algo allí, se ve en tu web al momento, sin volver a copiar nada.
       </p>
       {reglas}
     </Tarjeta>

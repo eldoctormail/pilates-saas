@@ -194,7 +194,7 @@ const OAUTH: Record<TipoOAuth, ConfigOAuth> = {
     ruta: '/api/integrations/zoom',
     paraQue: 'Conéctalo para crear las reuniones de tus clases online',
     // Sin `zoom_email`, el cron (lib/zoom-sync.ts) ya no pasa por este estudio.
-    alDesconectar: 'Tentare deja de crear reuniones de Zoom para tus clases online. Las ya creadas siguen en tu cuenta de Zoom.',
+    alDesconectar: 'Centra deja de crear reuniones de Zoom para tus clases online. Las ya creadas siguen en tu cuenta de Zoom.',
     avisos: {
       zoom_connected: () => 'Zoom conectado',
       zoom_error: v => `Error al conectar Zoom: ${v}`,
@@ -405,8 +405,8 @@ const CON_CLAVE: Record<TipoConClave, ConfigConClave> = {
       'Inicia sesión en tu panel de Kisi (kisi.io).',
       'Arriba a la derecha, pulsa en tu email y entra en «Mi cuenta».',
       'En el menú de la izquierda, entra en «API».',
-      'Pulsa «Agregar clave API» (si ya tenías una para Tentare, bórrala antes).',
-      'Ponle de nombre «Tentare» y confirma con tu contraseña de Kisi.',
+      'Pulsa «Agregar clave API» (si ya tenías una para Centra, bórrala antes).',
+      'Ponle de nombre «Centra» y confirma con tu contraseña de Kisi.',
       'Copia la clave, pégala aquí y pulsa «Guardar».',
       'Si tu cuenta tiene varias cerraduras, pon también el ID de la puerta del estudio (panel de Kisi → Cerraduras).',
     ],
@@ -545,7 +545,7 @@ export function DetalleConexionConClave({ c, onGuardado }: { c: ConexionConClave
 }
 
 // ── Zapier y las apps con acceso ────────────────────────────────────────────
-// Al revés que el resto: Tentare es el SERVIDOR OAuth, así que la conexión la
+// Al revés que el resto: Centra es el SERVIDOR OAuth, así que la conexión la
 // inicia Zapier, nunca un botón de aquí. Se lee de los consentimientos
 // (GET /api/oauth/consentimientos) y se puede quitar el acceso.
 
@@ -557,7 +557,7 @@ export function DetalleConexionConClave({ c, onGuardado }: { c: ConexionConClave
 // sitio al que mandar a la propietaria. Desde el 29-sep-2026 se usa el
 // enlace PRIVADO de invitación (developer.zapier.com/app/245096/sharing →
 // «Invite your users to use your app with a link»), verificado en vivo
-// (título "You've Been Invited to Tentare | Zapier"): funciona sin esperar a
+// (título "You've Been Invited to Centra | Zapier"): funciona sin esperar a
 // la revisión pública de Zapier. Si algún día se publica en el directorio,
 // cambiar esto por esa URL — comprobando antes en el navegador que carga.
 const ZAPIER_URL = 'https://zapier.com/developer/public-invite/245096/fab6aa3a08b2d024c6e75bf832360de9/';
@@ -695,7 +695,7 @@ function QuitarAcceso({ app, a, onQuitado }: { app: AppConAcceso; a: AppsConAcce
         open={preguntando}
         onOpenChange={setPreguntando}
         titulo={`¿Quitar el acceso a ${app.nombre}?`}
-        descripcion={`${app.nombre} deja de ver los datos de tu estudio y lo que tengas montado con Tentare deja de funcionar, hasta que lo vuelvas a conectar desde ${app.nombre}.`}
+        descripcion={`${app.nombre} deja de ver los datos de tu estudio y lo que tengas montado con Centra deja de funcionar, hasta que lo vuelvas a conectar desde ${app.nombre}.`}
         textoConfirmar="Sí, quitarlo"
         destructivo
         onConfirm={() => { void confirmar(); }}

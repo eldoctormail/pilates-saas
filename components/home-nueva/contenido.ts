@@ -1,13 +1,13 @@
 // Todo el texto de la maqueta, en español, en UN sitio: para corregir una frase se toca aquí y nada más. Sin imports.
 // La estructura y los mensajes salen del diseño de Figma (que está en inglés); el español es traducción, con cuatro cambios
 // de fondo que hay que conocer:
-//   · PRECIOS: los planes del diseño (Starter/Professional/Business, 19/49/99 $) eran de ejemplo y no son los de Tentare. Aquí
+//   · PRECIOS: los planes del diseño (Starter/Professional/Business, 19/49/99 $) eran de ejemplo y no son los de Centra. Aquí
 //     van los reales (lib/billing/entitlements.ts → `PLAN_INFO`): Founding Studio, Estudio y Cadena, en euros. Las filas de
 //     cada plan son las que el producto cumple hoy (y nada de «sustituciones» ni de lo congelado).
 //   · CONFIANZA: «Trusted by thousand of countries» y sus marcas (Puma, Nike…) eran de relleno: aquí van los logos de los
-//     estudios que ya trabajan con Tentare y dieron su consentimiento, o la sección no se pinta.
+//     estudios que ya trabajan con Centra y dieron su consentimiento, o la sección no se pinta.
 //   · HÉROE: el panel que se veía en el ordenador era de otro producto (ofertas de licitaciones, en PLN): es una captura REAL
-//     del panel de Tentare.
+//     del panel de Centra.
 //   · FAQ: el diseño solo enseña la respuesta de «¿Cómo se gestionan los pagos?»; las otras cuatro son nuestras y dicen solo
 //     lo que el producto hace hoy.
 // Lo de las tarjetas de «Funciones» (calendario, gráfica, importes) es ilustrativo, como en el diseño.
@@ -31,11 +31,11 @@ export const HERO = {
   texto: 'Reservas, cuotas, cobros y comunidad en una sola plataforma para estudios de pilates, yoga y bienestar.',
   demo: { texto: 'Pedir una demo', href: '#contacto' },
   como: { texto: 'Ver cómo funciona', href: '#funciones' },
-  panel: 'El panel de Tentare: las clases de hoy, sus plazas y lo que falta por hacer',
+  panel: 'El panel de Centra: las clases de hoy, sus plazas y lo que falta por hacer',
 } as const;
 
 export const CONFIANZA = {
-  titulo: 'Estudios que ya trabajan con Tentare',
+  titulo: 'Estudios que ya trabajan con Centra',
 } as const;
 
 export const FUNCIONES = {
@@ -144,7 +144,7 @@ export const PRECIOS = {
 export const FAQ = {
   etiqueta: 'Preguntas frecuentes',
   titulo: '¿Tienes dudas? Tenemos respuestas.',
-  texto: '¿Quieres saber más sobre Tentare? Aquí tienes algunas respuestas para empezar.',
+  texto: '¿Quieres saber más sobre Centra? Aquí tienes algunas respuestas para empezar.',
   boton: { texto: 'Ver planes', href: '#precio' },
   preguntas: [
     { q: '¿Pueden mis alumnas reservar clases online?', a: 'Sí. Reservan desde la página de tu estudio o desde su propia app, a cualquier hora del día.' },
@@ -188,7 +188,7 @@ export const PIE = {
     { titulo: 'EMPRESA', enlaces: [{ t: 'Contacto', h: '#contacto' }, { t: 'Seguridad', h: '/seguridad' }, { t: 'Privacidad', h: '/privacidad' }, { t: 'Cookies', h: '/cookies' }] },
     { titulo: 'RECURSOS', enlaces: [{ t: 'Centro de ayuda', h: '/ayuda' }, { t: 'Preguntas frecuentes', h: '#faq' }, { t: 'Guías', h: '/recursos' }, { t: 'Soporte', h: '/soporte' }] },
   ],
-  copyright: '© 2026 Tentare',
+  copyright: '© 2026 Centra',
   legal: [{ t: 'Privacidad', h: '/privacidad' }, { t: 'Términos y condiciones', h: '/terminos' }],
 } as const;
 

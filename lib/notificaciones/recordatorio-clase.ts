@@ -205,7 +205,7 @@ export function datosClaseRecordatorio(c: ClaseParaRecordar): DatosClaseEmail {
     hora: horaEstudio(inicio),
     sala: c.sala ?? '',
     instructor: c.instructor ?? '',
-    estudioNombre: c.estudioNombre ?? 'Tentare',
+    estudioNombre: c.estudioNombre ?? 'Centra',
     zoomJoinUrl: c.zoomJoinUrl ?? null,
   };
 }
@@ -298,7 +298,7 @@ export async function enviarWhatsAppRecordatorio(
 ): Promise<ResultadoWhatsApp | null> {
   if (!(await reclamar(admin, envio.sesionId, envio.socioId, 'WHATSAPP'))) return null;
   const d = envio.data;
-  const estudio = d.estudioNombre ?? 'Tentare';
+  const estudio = d.estudioNombre ?? 'Centra';
   const res = envio.whatsapp.plantillaRecordatorio
     ? await enviarWhatsAppPlantilla(envio.whatsapp, envio.telefono, PLANTILLA_RECORDATORIO, [
         estudio, d.claseNombre, d.fecha, d.hora, d.sala || 'tu estudio',

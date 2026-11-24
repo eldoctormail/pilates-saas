@@ -89,7 +89,7 @@ test.describe('Invitación: alta de la persona invitada', () => {
     expect(await page.evaluate(() => sessionStorage.getItem('pending_invitacion'))).toBe(TOKEN);
   });
 
-  test('la invitación de una instructora lleva a la app del estudio, no a crear cuenta de Tentare', async ({ page }) => {
+  test('la invitación de una instructora lleva a la app del estudio, no a crear cuenta de Centra', async ({ page }) => {
     await page.route('**/api/**', route => json(route, {}));
     await page.route('**/api/public/invitacion**', route => json(route, {
       yaVinculada: false, nombre: 'Marta', email: 'marta@example.com', estudio: 'Studio Carmen', rol: 'INSTRUCTOR', slug: 'studio-carmen',

@@ -17,11 +17,11 @@ import { VideoFachada } from '@/components/ayuda/VideoFachada';
 import { useVideosAcademy } from '@/components/ayuda/use-videos-academy';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// «Cambiar a Tentare»: el curso de migración de Academy (lib/migracion/recorrido.ts). Del software que usas hoy a Tentare como software
+// «Cambiar a Centra»: el curso de migración de Academy (lib/migracion/recorrido.ts). Del software que usas hoy a Centra como software
 // principal, en 11 pasos con cinco estados, sin perder el control.
 //
 // Los pasos de DATOS (importar alumnas, bonos, horario) se completan solos cuando el dato existe en el estudio; los que ocurren fuera de
-// Tentare o solo ella puede dar por buenos, los marca ella y se guardan (`migracion_checklist`). Nada de «próximamente»: lo que no se puede
+// Centra o solo ella puede dar por buenos, los marca ella y se guardan (`migracion_checklist`). Nada de «próximamente»: lo que no se puede
 // traer se dice (límites), y de cada software de origen solo hay pasos cuando constan en SU documentación pública, con la fecha.
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -78,7 +78,7 @@ export default function CambiarDeSoftwarePage() {
   if (!puede) {
     return (
       <div className="space-y-6 max-w-3xl">
-        <PageHeader back={{ href: '/primeros-pasos', label: 'Volver a Academy' }} title="Cambiar a Tentare" description="Este recorrido lo llevan quienes gestionan las clientas del estudio." />
+        <PageHeader back={{ href: '/primeros-pasos', label: 'Volver a Academy' }} title="Cambiar a Centra" description="Este recorrido lo llevan quienes gestionan las clientas del estudio." />
       </div>
     );
   }
@@ -89,8 +89,8 @@ export default function CambiarDeSoftwarePage() {
     <div className="space-y-6 max-w-3xl">
       <PageHeader
         back={{ href: '/primeros-pasos', label: 'Volver a Academy' }}
-        title="Cambiar a Tentare"
-        description="Del programa que usas hoy a Tentare como tu software principal, paso a paso y sin perder el control. Puedes ir a tu ritmo: nada cambia en tu estudio hasta que tú lo activas."
+        title="Cambiar a Centra"
+        description="Del programa que usas hoy a Centra como tu software principal, paso a paso y sin perder el control. Puedes ir a tu ritmo: nada cambia en tu estudio hasta que tú lo activas."
       />
 
       {video && <VideoFachada video={video} />}

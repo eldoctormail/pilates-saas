@@ -1,12 +1,12 @@
 // Devolver desde el panel un recibo cobrado con Mercado Pago (autoalojado).
 //
 // Mismo reparto que con Stripe (`/api/reembolsos`): aquí solo se PIDE la
-// devolución a Mercado Pago y se anota que Tentare la pidió. Lo que viene
+// devolución a Mercado Pago y se anota que Centra la pidió. Lo que viene
 // después —recibo DEVUELTO, fila en `devoluciones`, factura rectificativa,
 // aviso a la socia, ofrecer quitarle el bono— lo hace `procesarChargeRefunded`
 // cuando Mercado Pago avisa del pago devuelto (webhook) o cuando el conciliador
 // lo ve. Así un reembolso hecho desde el panel de Mercado Pago sigue el mismo
-// camino que uno pedido desde Tentare.
+// camino que uno pedido desde Centra.
 //
 // Quién puede, la política del estudio (plazo, sin usar) y el recibo del
 // estudio ya los comprobó la ruta antes de llegar aquí.
@@ -51,7 +51,7 @@ export async function pedirReembolsoMercadoPago(
       ok: false, status: 409, motivo: esMatricula ? 'MATRICULA_JUNTO_AL_PLAN' : 'SIN_RASTRO_MERCADOPAGO',
       error: esMatricula
         ? 'La matrícula se pagó junto con el plan en un solo pago de Mercado Pago. Devolvé el recibo del plan: se devuelven los dos.'
-        : 'No encontramos el pago de este recibo en Mercado Pago, así que no se puede devolver desde aquí. Devolvelo desde tu cuenta de Mercado Pago: Tentare lo detectará igual.',
+        : 'No encontramos el pago de este recibo en Mercado Pago, así que no se puede devolver desde aquí. Devolvelo desde tu cuenta de Mercado Pago: Centra lo detectará igual.',
     };
   }
   if (pagos.length > 1) {
@@ -72,7 +72,7 @@ export async function pedirReembolsoMercadoPago(
   if (!res.ok) {
     // 400 con el pago ya devuelto: alguien lo devolvió desde Mercado Pago entre medias.
     if (res.status === 400 && /refund|devoluci|already/i.test(res.error)) {
-      return { ok: false, status: 409, error: `Mercado Pago no aceptó la devolución: ${res.error}. Si ya estaba devuelto, Tentare lo anotará solo.` };
+      return { ok: false, status: 409, error: `Mercado Pago no aceptó la devolución: ${res.error}. Si ya estaba devuelto, Centra lo anotará solo.` };
     }
     Sentry.captureMessage('[mercadopago/reembolso] no se pudo devolver', {
       level: 'error', tags: { area: 'cobros', tipo: 'reembolso', pasarela: 'mercadopago' },

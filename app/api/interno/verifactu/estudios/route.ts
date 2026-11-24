@@ -11,7 +11,7 @@ import {
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
-// Lado Tentare del alta Veri*Factu: verificar el poder IZ860 que cada estudio
+// Lado Centra del alta Veri*Factu: verificar el poder IZ860 que cada estudio
 // dice haber otorgado (lo comprueba el apoderado en «Consulta de apoderamientos
 // recibidos» de la sede y coteja el CSV) y activar/pausar la producción.
 //

@@ -99,7 +99,7 @@ function efectos(opts: { selladoFalla?: boolean; desactivada?: boolean; renovaci
     },
     sellar: async () => {
       orden.push('factura');
-      if (opts.desactivada) return { ok: false, desactivada: true, error: 'Este estudio no emite facturas desde Tentare.' };
+      if (opts.desactivada) return { ok: false, desactivada: true, error: 'Este estudio no emite facturas desde Centra.' };
       return opts.selladoFalla
         ? { ok: false, error: 'Configura un NIF fiscal válido' }
         : { ok: true, sellada: true, factura: { numeroCompleto: 'F2026-0007' } };
@@ -180,7 +180,7 @@ test('la renovación entregada no lleva `renovacionFallida`', async () => {
   assert.equal(r.ok && 'renovacionFallida' in r, false);
 });
 
-test('estudio sin facturas desde Tentare: el cobro sigue igual, sin marca de pendiente ni «sellado fallido»', async () => {
+test('estudio sin facturas desde Centra: el cobro sigue igual, sin marca de pendiente ni «sellado fallido»', async () => {
   const { admin, updates } = fakeAdmin({ trasCas: GANA });
   const { orden, deps } = efectos({ desactivada: true });
   const r = await confirmarCobro(admin, BASE, deps);

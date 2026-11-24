@@ -2,7 +2,7 @@
 // R2 · Take-rate de plataforma sobre el GMV de las socias.
 //
 // Los cobros socia→estudio son CARGOS DIRECTOS en la cuenta Connect (Standard,
-// OAuth) del estudio. En ese modelo la plataforma (Tentare) puede recaudar una
+// OAuth) del estudio. En ese modelo la plataforma (Centra) puede recaudar una
 // comisión por cargo vía `application_fee_amount`: Stripe la transfiere sola a
 // la cuenta de plataforma; la cuenta del estudio paga las fees de Stripe.
 //
@@ -18,8 +18,8 @@
 //   TENTARE_APPLICATION_FEE_BPS=200  → 2,0 %   (200 bp)
 //
 // NOTA FISCAL (pendiente, no es código): cobrar esta comisión es un servicio B2B
-// de Tentare al estudio y requiere su propia factura con IVA por parte de
-// Tentare. `application_fee_amount` mueve el dinero, no emite esa factura.
+// de Centra al estudio y requiere su propia factura con IVA por parte de
+// Centra. `application_fee_amount` mueve el dinero, no emite esa factura.
 // ─────────────────────────────────────────────────────────────────────────────
 
 const TOPE_BPS = 5_000; // 50 % — tope defensivo por si la env viene mal puesta.

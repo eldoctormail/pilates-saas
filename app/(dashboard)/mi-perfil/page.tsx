@@ -5,7 +5,7 @@
 // nombre/email/contraseña propios no es "configuración del negocio": cualquier
 // rol del panel debe poder llegar aquí.
 //
-// La instructora ya no: Tentare Core se retiró (14-sep-2026) y su perfil,
+// La instructora ya no: Centra Core se retiró (14-sep-2026) y su perfil,
 // disponibilidad, ausencias y estudios están en la app del estudio.
 
 import { useCallback } from 'react';

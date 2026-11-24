@@ -8,7 +8,7 @@ import { denunciarComentario } from '@/lib/comunidad/comentarios-servidor';
 import { TEXTO_GRACIAS_DENUNCIA } from '@/lib/moderacion/denuncias';
 
 // La alumna denuncia un comentario del tablón (App Store 1.2). Lo revisa el
-// estudio; si lo escribió una propietaria, Tentare. Quién es sale del token y de
+// estudio; si lo escribió una propietaria, Centra. Quién es sale del token y de
 // su ficha en ESTE estudio, y solo puede denunciar lo que puede ver.
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const limited = await enforceRateLimit(req, 'public-comunidad-denunciar', { max: 20, windowSeconds: 60 });

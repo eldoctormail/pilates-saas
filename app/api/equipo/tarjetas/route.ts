@@ -41,7 +41,7 @@ export async function GET(req: NextRequest) {
 
   const sesion = await verificarSesionStaff(req);
   if (!sesion) return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
-  // Recepción no gestiona el equipo. La instructora tampoco llega ya: con Tentare
+  // Recepción no gestiona el equipo. La instructora tampoco llega ya: con Centra
   // Core retirado (14-sep-2026) no tiene pantalla en el panel, y esta ruta le
   // servía la agenda y la ocupación de sus compañeras aunque recortara campos.
   if (sesion.rol === 'RECEPCION' || sesion.rol === 'INSTRUCTOR') {

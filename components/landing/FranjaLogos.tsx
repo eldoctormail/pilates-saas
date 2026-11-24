@@ -1,6 +1,6 @@
 import { usaMarquesina, type LogoCliente } from '@/lib/landing/logos-clientes';
 
-// «Estudios que ya usan Tentare» — la franja de logos de clientes (19-oct-2026,
+// «Estudios que ya usan Centra» — la franja de logos de clientes (19-oct-2026,
 // encargo del fundador tras mirar a Bsport, Momence y Mariana Tek: los tres tienen
 // una tira de logos en gris justo debajo de la promesa). Aquí solo se copia la
 // FORMA: una línea de título, logos a una tinta, todos a la misma altura y, con
@@ -62,7 +62,7 @@ export function FranjaLogos({ logos }: { logos: readonly LogoCliente[] }) {
   return (
     // Sin frase encima (fundador, 20-oct-2026: «quita la frase»), como la franja de Mariana Tek;
     // el nombre de la sección queda para los lectores de pantalla.
-    <section id="clientes" className="v7-logos" aria-label="Estudios que usan Tentare">
+    <section id="clientes" className="v7-logos" aria-label="Estudios que usan Centra">
 
       <div className={marquesina ? 'v7-logos-carril v7-logos-marq' : 'v7-logos-carril'}>
         <div className="v7-logos-pista" style={{ ['--n' as string]: logos.length * (2 * k) }}>

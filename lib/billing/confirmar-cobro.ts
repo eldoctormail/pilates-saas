@@ -336,7 +336,7 @@ export async function aplicarEfectosCobro(
             if (typeof n === 'string') numeroFactura = n;
             await limpiarFacturaPendiente();
           } else if (r.desactivada) {
-            // El estudio no emite facturas desde Tentare: no hay nada pendiente
+            // El estudio no emite facturas desde Centra: no hay nada pendiente
             // que reintentar ni que avisar. El cobro es el mismo.
             await limpiarFacturaPendiente();
           } else {

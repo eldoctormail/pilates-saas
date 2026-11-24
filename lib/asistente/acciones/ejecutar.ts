@@ -67,7 +67,7 @@ async function bloqueosDe(admin: Admin, sesion: SesionConfirmar, instructorId: s
 }
 
 function noHaPasado(inicio: string, ahora: Date) {
-  if (Date.parse(inicio) <= ahora.getTime()) throw new Cambio('Esa hora ya ha pasado: pídele a Tentare otra.');
+  if (Date.parse(inicio) <= ahora.getTime()) throw new Cambio('Esa hora ya ha pasado: pídele a Centra otra.');
 }
 
 async function instructoraActiva(admin: Admin, sesion: SesionConfirmar, id: string) {
@@ -191,8 +191,8 @@ export async function confirmarAccion(admin: Admin, sesion: SesionConfirmar, id:
   const ahoraIso = deps.ahora.toISOString();
   const yaHecha = (f: Fila): ResultadoConfirmar | null => {
     if (f.estado === 'EJECUTADA') return { ok: true, estado: 'EJECUTADA', resultado: (f.resultado as Hecho | null) ?? null, yaCreada: true };
-    if (f.estado === 'CANCELADA') return { ok: false, status: 409, codigo: 'CANCELADA', error: 'La cancelaste: pídeselo de nuevo a Tentare.' };
-    if (f.estado === 'CADUCADA') return { ok: false, status: 410, codigo: 'CADUCADA', error: 'La propuesta caducó: pídeselo de nuevo a Tentare.' };
+    if (f.estado === 'CANCELADA') return { ok: false, status: 409, codigo: 'CANCELADA', error: 'La cancelaste: pídeselo de nuevo a Centra.' };
+    if (f.estado === 'CADUCADA') return { ok: false, status: 410, codigo: 'CADUCADA', error: 'La propuesta caducó: pídeselo de nuevo a Centra.' };
     return null;
   };
   const previa = yaHecha(fila);
@@ -200,7 +200,7 @@ export async function confirmarAccion(admin: Admin, sesion: SesionConfirmar, id:
   if (fila.estado === 'PROPUESTA' && Date.parse(fila.caduca_en) <= deps.ahora.getTime()) {
     await admin.from('asistente_acciones').update({ estado: 'CADUCADA', resuelta_en: ahoraIso })
       .eq('studio_id', sesion.studioId).eq('auth_user_id', sesion.userId).eq('id', id).eq('estado', 'PROPUESTA');
-    return { ok: false, status: 410, codigo: 'CADUCADA', error: 'La propuesta caducó: pídeselo de nuevo a Tentare.' };
+    return { ok: false, status: 410, codigo: 'CADUCADA', error: 'La propuesta caducó: pídeselo de nuevo a Centra.' };
   }
 
   // El ganador: PROPUESTA vigente → EJECUTANDO, o una toma muerta (>2 min) que se retoma (la creación es idempotente por id).

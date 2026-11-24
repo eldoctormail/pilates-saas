@@ -5,7 +5,7 @@
 # Uso:  deploy/scripts/preparar-migraciones.sh /carpeta/destino
 #       (deja en /carpeta/destino/supabase/migrations/ la copia arreglada)
 #
-# Por qué: en producción (la de Tentare) cada migración se aplicó en su momento,
+# Por qué: en producción (la de Centra) cada migración se aplicó en su momento,
 # y unas pocas dependen de un estado intermedio que no se puede reproducir desde
 # cero. El job de base de datos de CI (.github/workflows/ci.yml, «Aplicar
 # migraciones desde cero») los arregla en su copia efímera; un servidor propio

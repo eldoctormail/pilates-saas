@@ -665,7 +665,7 @@ export default function Dashboard() {
             ningún error. Lo fija `estado-del-estudio.spec.ts`: «si el
             recuento aún dice nada y la tarjeta sí tiene algo, se ve la
             tarjeta». Probado y revertido el 23-sep. */}
-        {/* Denuncias de la app: tienen reloj (a las 24 h las revisa Tentare). Quien revisa algún ámbito. */}
+        {/* Denuncias de la app: tienen reloj (a las 24 h las revisa Centra). Quien revisa algún ámbito. */}
         {ambitosQueRevisa(rolActual).length > 0 && <DenunciasPorRevisar onToast={showToast} />}
         {/* La primera: es la única que puede caducar sola (la clase empieza). */}
         {gestionaCalendario && <ReservasPorAprobar onToast={showToast} />}
@@ -880,7 +880,7 @@ export default function Dashboard() {
 
         {/* ── Lo que espera tu visto bueno ────────────────────────────────────
             La bandeja única (lib/estado-estudio.ts): lo que no avanza sin ella,
-            lo que Tentare está haciendo solo y lo que ya ha resuelto. No es solo
+            lo que Centra está haciendo solo y lo que ya ha resuelto. No es solo
             de la propietaria: cada fuente va acotada por rol en el servidor, y a
             quien no ve ninguna (instructora) no se le pinta nada.
 
@@ -1001,7 +1001,7 @@ export default function Dashboard() {
               href="/automatizaciones"
               className="flex items-center gap-3 rounded-xl bg-primary px-4 py-3 text-primary-foreground transition-colors hover:bg-primary/90"
             >
-              {/* Tenti, no un robot: aquí Tentare ejecuta cosas por su
+              {/* Tenti, no un robot: aquí Centra ejecuta cosas por su
                   cuenta. Es decorativo (aria-hidden): el nombre del enlace
                   sigue siendo «Sistema autónomo — …», y el texto dice lo
                   mismo que su cara. Sobre bg-primary, con la silueta del

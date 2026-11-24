@@ -82,7 +82,7 @@ const VACIO: DatosCrudos = {
 
 // `baseUrl`: el bundle corre en el DOM de la web del ESTUDIO — todas las
 // rutas relativas de siempre (`/api/public/...`) resolverían contra SU
-// origen si no se les da explícitamente el de Tentare. Ver
+// origen si no se les da explícitamente el de Centra. Ver
 // app/widget-bundle/main.tsx, que lo resuelve del propio <script src="...">.
 //
 // `opciones.estilo` (Fase E): pedir también el estilo de los widgets de su web

@@ -9,7 +9,7 @@ import { Badge } from '@/components/student/ui/Badge';
 // ⚠️ Los enlaces del paquete son absolutos ('/reservar/…') porque allí la app
 // es la única del proyecto. Aquí cuelgan del slug del estudio, así que pasan
 // por `usePortalHref()`: dejarlos absolutos mandaría a la alumna a la landing
-// de Tentare o al panel.
+// de Centra o al panel.
 /** Card de bono del kit: nombre, barra de progreso, "quedan N" en mono, caducidad. */
 export function CreditCard({ bono, compacta = false }: { bono: Bono; compacta?: boolean }) {
   const href = usePortalHref();

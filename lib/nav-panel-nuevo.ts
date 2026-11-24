@@ -6,7 +6,7 @@
 // 14-oct pasó a todos los estudios (está en `allSections`).
 //
 // Viven FUERA de `navSections`/`MODULOS` (lib/nav-config.ts) a propósito, como
-// `/asistente`: de esos dos leen también el «Mapa de Tentare» del asistente (un
+// `/asistente`: de esos dos leen también el «Mapa de Centra» del asistente (un
 // prompt cacheado para TODOS los estudios: cambiarlo le hablaría de Festivos a
 // quien no lo tiene y partiría la caché de todos), «Explorar funciones» y las
 // novedades del menú. Las meten solo quienes pintan el menú de ESTE estudio, con

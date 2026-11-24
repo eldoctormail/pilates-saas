@@ -55,6 +55,6 @@ test('cada pieza que falta se nombra, en cristiano', () => {
   assert.ok(falta.some(f => f.includes('CERTIFICATE_PFX')));
   assert.ok(falta.some(f => f.includes('CERTIFICATE_PASSWORD')));
   assert.ok(falta.some(f => f.includes('VERIFACTU_PRODUCTOR_NIF')));
-  assert.ok(falta.some(f => f.includes('VERIFACTU_PRODUCTOR_NOMBRE')), 'sin «Tentare» por defecto: el productor es una persona');
+  assert.ok(falta.some(f => f.includes('VERIFACTU_PRODUCTOR_NOMBRE')), 'sin «Centra» por defecto: el productor es una persona');
   assert.ok(falta.some(f => f.includes('VERIFACTU_PRODUCTOR_DIRECCION')));
 });

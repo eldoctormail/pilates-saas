@@ -2,7 +2,7 @@
 // docs/marketing-integrations-arquitectura.md §6/§8 — primer proveedor
 // externo del Marketing Hub. Mismo patrón que lib/google-calendar.ts: una
 // sola app de Klaviyo para toda la plataforma (KLAVIYO_CLIENT_ID/SECRET),
-// cada estudio conecta su propia cuenta (BYO account — Tentare no crea
+// cada estudio conecta su propia cuenta (BYO account — Centra no crea
 // cuentas de Klaviyo) y sus tokens viven en `integracion_credenciales`
 // (provider='klaviyo'), sin policies de RLS para anon/authenticated.
 //
@@ -38,7 +38,7 @@ const API_BASE = 'https://a.klaviyo.com/api';
 const API_REVISION = '2026-07-15';
 
 // accounts:read → identificar la cuenta conectada (nombre para la UI).
-// lists:write → crear la lista "Tentare — Marketing" en el primer connect.
+// lists:write → crear la lista "Centra — Marketing" en el primer connect.
 // profiles:write + subscriptions:write → el propio envío de sincronización.
 const SCOPES = 'accounts:read lists:write profiles:write subscriptions:write';
 
@@ -196,7 +196,7 @@ export async function crearListaMarketing(accessToken: string): Promise<string> 
   const res = await fetchExterno(`${API_BASE}/lists`, {
     method: 'POST',
     headers: headers(accessToken),
-    body: JSON.stringify({ data: { type: 'list', attributes: { name: 'Tentare — Marketing' } } }),
+    body: JSON.stringify({ data: { type: 'list', attributes: { name: 'Centra — Marketing' } } }),
   });
   const data = await res.json();
   if (!res.ok || !data?.data?.id) throw new Error(data?.errors?.[0]?.detail ?? 'No se pudo crear la lista en Klaviyo');
@@ -223,7 +223,7 @@ export async function suscribirPerfiles(accessToken: string, listId: string, per
       data: {
         type: 'profile-subscription-bulk-create-job',
         attributes: {
-          custom_source: 'Tentare — consentimiento de marketing',
+          custom_source: 'Centra — consentimiento de marketing',
           historical_import: true,
           profiles: {
             data: perfiles.map(p => ({

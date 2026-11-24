@@ -19,7 +19,7 @@ import type { PropsTenti } from './tenti';
 //     5-oct): parpadea, mira alrededor, sigue el cursor con los ojos y se deja
 //     tocar (se aplasta; se molesta y se marea si insistes). Tocarlo no le
 //     quita el foco al campo del buscador. Sin sonido: Tenti no suena (6-oct).
-//   · Siempre en reposo: el estado que decía lo que Tentare hace solo
+//   · Siempre en reposo: el estado que decía lo que Centra hace solo
 //     (`estadoDelAutonomo`) solo lo usaba Automatizaciones, y se fue con él.
 //     La guardia lib/tenti/donde-vive-tenti.test.ts vigila quién lo usa y a
 //     qué tamaño.

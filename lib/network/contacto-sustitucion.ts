@@ -1,5 +1,5 @@
-// Sustitución agotada → pedir a una profesional de Tentare Network que cubra la
-// clase, con UN toque por persona (decisión del fundador: Tentare PROPONE, la
+// Sustitución agotada → pedir a una profesional de Centra Network que cubra la
+// clase, con UN toque por persona (decisión del fundador: Centra PROPONE, la
 // propietaria contacta; nunca a nadie de fuera automáticamente, nunca «contactar
 // a todas»). Aquí vive solo lo puro: qué se le escribe y cómo se lee la
 // respuesta del servidor. El envío es `contactarPerfilNetwork`

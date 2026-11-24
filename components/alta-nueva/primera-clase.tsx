@@ -212,7 +212,7 @@ export function PrimeraClase({ studio, onAtras, onPublicada, saliendo = false, e
   const resumen = resumenPrimeraClase(form, yo, ya);
   const sinStripe = avisoVentaOnline({ stripeAccountId: studio.stripeAccountId, reservaExigirPlan: true, numPlanesActivos: 1 }) !== null;
   const ocupado = enviando || saliendo;
-  const whatsapp = enlaceWhatsApp(SOPORTE_WHATSAPP, `Hola, soy de ${studio.nombre || 'mi estudio'} y estoy creando mi primera clase en Tentare:`);
+  const whatsapp = enlaceWhatsApp(SOPORTE_WHATSAPP, `Hola, soy de ${studio.nombre || 'mi estudio'} y estoy creando mi primera clase en Centra:`);
 
   /** Cualquier cambio del formulario es otro intento: el que falló no se reutiliza para otra cosa. */
   function cambiar(c: Partial<FormPrimeraClase>) {

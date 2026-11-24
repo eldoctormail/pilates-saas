@@ -4,7 +4,7 @@ import { generarCertificado, obtenerCertificadoDeEstudio, urlVerificacion } from
 
 export const dynamic = 'force-dynamic';
 
-// El certificado «Tentare Verified Studio» de tu estudio: consultarlo o
+// El certificado «Centra Verified Studio» de tu estudio: consultarlo o
 // generarlo. El studio_id sale SIEMPRE de la sesión de staff, nunca del
 // body — mismo criterio que el resto de rutas (/api/cierres, etc.). Generar o
 // revocar el certificado es SOLO de la propietaria (mismo criterio que el

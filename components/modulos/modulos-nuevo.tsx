@@ -59,7 +59,7 @@ import { cn } from '@/lib/utils';
  * tiñe sus tarjetas.
  */
 const GRUPOS: Record<string, { frase: string; Icono: ElementType; texto: string; tinte: string }> = {
-  Principal: { frase: 'Tu día, lo que merece tu atención y lo que Tentare hace solo', Icono: Star, texto: 'var(--t-text-accent)', tinte: 'var(--t-magenta-500)' },
+  Principal: { frase: 'Tu día, lo que merece tu atención y lo que Centra hace solo', Icono: Star, texto: 'var(--t-text-accent)', tinte: 'var(--t-magenta-500)' },
   'Operación': { frase: 'Clases, citas, clientes y lo que os escribís', Icono: CalendarDays, texto: 'var(--t-text-link)', tinte: 'var(--t-blue-500)' },
   Equipo: { frase: 'Quién da las clases y cómo se cubren las bajas', Icono: Users, texto: 'var(--cat-2)', tinte: 'var(--cat-2)' },
   Negocio: { frase: 'Lo que vendes, lo que cobras y cómo va', Icono: TrendingUp, texto: 'var(--cat-5)', tinte: 'var(--cat-5)' },

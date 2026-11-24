@@ -18,7 +18,7 @@ const ESTUDIOS = [
   { slug: 'nucleo-reformer', nombre: 'Núcleo Reformer', como: 'las-dos', ciudad: 'Madrid', icono: '/icono-estudio?inicial=N&color=%23B4537E&size=192' },
 ];
 
-const FACTOR = { id: 'fac-1', factor_type: 'totp', status: 'verified', friendly_name: 'Tentare', created_at: '2026-01-01T00:00:00Z', updated_at: '2026-01-01T00:00:00Z' };
+const FACTOR = { id: 'fac-1', factor_type: 'totp', status: 'verified', friendly_name: 'Centra', created_at: '2026-01-01T00:00:00Z', updated_at: '2026-01-01T00:00:00Z' };
 
 /** gotrue y el usuario, mockeados; `conSesion` siembra una sesión ya abierta (con `conFactor`, con la verificación en dos pasos activada). */
 async function montar(page: Page, { conSesion = false, conFactor = false } = {}) {

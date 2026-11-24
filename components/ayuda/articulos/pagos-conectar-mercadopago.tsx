@@ -30,7 +30,7 @@ export default function Contenido() {
 
       <AyudaPaso numero={3} titulo="Guarda y comprueba">
         <p style={{ margin: 0 }}>
-          Pega el Access Token y la clave secreta y pulsa «Guardar y comprobar». Tentare pregunta a Mercado Pago si
+          Pega el Access Token y la clave secreta y pulsa «Guardar y comprobar». Centra pregunta a Mercado Pago si
           el token vale antes de guardarlo, y lo guarda cifrado.
         </p>
       </AyudaPaso>

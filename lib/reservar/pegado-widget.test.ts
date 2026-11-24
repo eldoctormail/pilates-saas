@@ -80,7 +80,7 @@ test('sin `ancestorOrigins` (Firefox), el referrer; y de él solo el ORIGEN, nun
   assert.equal(enSuWeb(CODIGO, { ancestros: [], referrer: `${WEB}/clases` })?.anfitrion, WEB);
 });
 
-test('⚠️ dentro de la propia Tentare (onboarding, portal, vista previa de un despliegue): nada', () => {
+test('⚠️ dentro de la propia Centra (onboarding, portal, vista previa de un despliegue): nada', () => {
   // El onboarding (components/onboarding/listo-para-reservar.tsx) incrusta /reservar sin `vista-previa`.
   assert.equal(enSuWeb(CODIGO, { ancestros: [PROPIO], referrer: `${PROPIO}/onboarding` }), null);
   // El apex cuenta como `www`, que es adonde redirige.
@@ -98,7 +98,7 @@ test('⚠️ dentro de la propia Tentare (onboarding, portal, vista previa de un
 test('⚠️ otro `*.vercel.app`: la carga cuenta (forma y firma), pero sin nombrar la web', () => {
   // Puede ser la web de un estudio alojada en Vercel: descartarla entera la
   // dejaba fuera de la portada para siempre. Tampoco se nombra: podría ser una
-  // vista previa de Tentare (y el servidor anula esa dirección igualmente).
+  // vista previa de Centra (y el servidor anula esa dirección igualmente).
   const firma = firmaDeUrl(new URLSearchParams(CODIGO));
   for (const web of ['https://albapilates.vercel.app', 'https://tentare-git-rama.vercel.app']) {
     assert.deepEqual(enSuWeb(CODIGO, { ancestros: [web] }), { forma: 'incrustado', anfitrion: null, firma }, web);

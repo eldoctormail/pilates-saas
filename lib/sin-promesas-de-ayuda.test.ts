@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// Guardia: Tentare no promete ayuda que nadie da (fundador, 21-oct-2026).
+// Guardia: Centra no promete ayuda que nadie da (fundador, 21-oct-2026).
 //
 // Nadie llama a los estudios y nadie los configura ni les hace la migración por
 // ellos. Hasta el 21-oct el asistente de bienvenida ofrecía que la llamaran o que
@@ -37,7 +37,7 @@ const FRASES = [
   // El paso «Programa tus clases» y el aviso de estudio sin horario.
   'te proponemos un horario',
   'te ayudamos a montarlo',
-  // La migración hecha por Tentare, en la web y en el producto.
+  // La migración hecha por Centra, en la web y en el producto.
   'te lo hacemos nosotros',
   'lo hacemos nosotros',
   'la hacemos nosotros',

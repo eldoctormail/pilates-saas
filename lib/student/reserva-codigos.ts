@@ -192,7 +192,7 @@ export function desenlaceDeRespuesta(r: RespuestaReserva | null, sinRed = false)
       // situación real de la alumna —está apuntada y espera respuesta del
       // estudio— y su copy («te avisamos al momento») encaja sin mentir.
       // DESIGN CONFLICT documentado: el paquete no contempla que un estudio
-      // exija aprobar cada reserva, y Tentare sí (`requiere_aprobacion`).
+      // exija aprobar cada reserva, y Centra sí (`requiere_aprobacion`).
       case 'PENDIENTE_APROBACION':
         return { state: 'waitlisted', reservaId: r.reservaId, posicionEspera: null, pendienteAprobacion: true };
       default:

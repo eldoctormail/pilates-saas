@@ -8,7 +8,7 @@ import { HUELLA_DEL_MOTOR, recolectarScripts } from './recolector-scripts';
 // (lib/tenti/trajes-coucou.ts). Los bordes de la temporada los prueba
 // lib/tenti/trajes.test.ts y el dibujo trajes-coucou.test.ts; aquí, lo que se
 // ve en el panel:
-//   · lo lleva donde se toca (la tira de Hoy, «Tentare lo está haciendo», el
+//   · lo lleva donde se toca (la tira de Hoy, «Centra lo está haciendo», el
 //     buscador ⌘K) y NO dentro de un botón o un
 //     enlace («Sistema autónomo» de Resumen): la misma regla que decide si se
 //     toca;
@@ -41,9 +41,9 @@ const sinCanvas2D = (page: Page) => page.addInitScript(() => {
   } as typeof HTMLCanvasElement.prototype.getContext;
 });
 
-const tira = (page: Page) => page.getByText(/^Tentare ha encontrado/).locator('xpath=..').locator('[data-tenti-icono]');
+const tira = (page: Page) => page.getByText(/^Centra ha encontrado/).locator('xpath=..').locator('[data-tenti-icono]');
 const enMarcha = (page: Page) => page.getByRole('region', { name: 'Lo que espera tu visto bueno' })
-  .getByText('Tentare lo está haciendo').locator('[data-tenti-icono]');
+  .getByText('Centra lo está haciendo').locator('[data-tenti-icono]');
 const autonomo = (page: Page) => page.getByRole('link', { name: /Sistema autónomo/ }).locator('[data-tenti-icono]');
 
 test('Resumen con el gorro: en la tira de Hoy y en la bandeja sí, en el enlace «Sistema autónomo» no; y en el buscador', async ({ page }) => {

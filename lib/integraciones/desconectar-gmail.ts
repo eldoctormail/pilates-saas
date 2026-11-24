@@ -8,7 +8,7 @@
 // y justo en los dos estudios que tenían Gmail, que tienen Calendar con la misma
 // cuenta. Con Calendar en esa cuenta, solo se borra lo de Gmail: el token de
 // Calendar se pide sin `include_granted_scopes`, así que no lleva los permisos
-// de Gmail, y sin el de Gmail Tentare no tiene forma de entrar en él.
+// de Gmail, y sin el de Gmail Centra no tiene forma de entrar en él.
 
 /**
  * ¿Se revoca el permiso en Google al desconectar Gmail? Ante la duda, no:

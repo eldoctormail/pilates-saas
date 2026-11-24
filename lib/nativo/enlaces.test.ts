@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { esUrlAbrible, esVueltaDeOAuth, resultadoDeVuelta, rutaDeAviso, rutaInternaDeEnlace } from './enlaces.ts';
 
-test('rutaInternaDeEnlace: un Universal Link de Tentare da su ruta y su query', () => {
+test('rutaInternaDeEnlace: un Universal Link de Centra da su ruta y su query', () => {
   assert.equal(rutaInternaDeEnlace('https://www.tentare.app/portal/mi-estudio/reservas?d=2'), '/portal/mi-estudio/reservas?d=2');
   assert.equal(rutaInternaDeEnlace('https://tentare.app/app'), '/app');
   assert.equal(rutaInternaDeEnlace('https://www.tentare.app'), '/');
@@ -13,7 +13,7 @@ test('rutaInternaDeEnlace: el fragmento nunca pasa (ahí viajarían tokens de un
   assert.equal(rutaInternaDeEnlace('https://www.tentare.app/app?x=1#access_token=abc'), '/app?x=1');
 });
 
-test('rutaInternaDeEnlace: otro host, aunque se le parezca, no es Tentare', () => {
+test('rutaInternaDeEnlace: otro host, aunque se le parezca, no es Centra', () => {
   for (const url of [
     'https://evil.example/app',
     'https://tentare.app.evil.example/app',
@@ -37,7 +37,7 @@ test('rutaInternaDeEnlace: solo https, sin puerto y sin credenciales en la URL',
 });
 
 test('rutaInternaDeEnlace: `//otro-host` en la ruta no se convierte en una URL de otro sitio', () => {
-  // `router.push('//evil.example/x')` navegaría FUERA de Tentare.
+  // `router.push('//evil.example/x')` navegaría FUERA de Centra.
   assert.equal(rutaInternaDeEnlace('https://www.tentare.app//evil.example/x'), '/evil.example/x');
   assert.equal(rutaInternaDeEnlace('https://www.tentare.app/\\evil.example/x'), '/evil.example/x');
   const r = rutaInternaDeEnlace('https://www.tentare.app///evil.example');
@@ -50,7 +50,7 @@ test('rutaInternaDeEnlace: el esquema propio de la app solo vale si es el SUYO',
   assert.equal(rutaInternaDeEnlace('APP.TENTARE://auth/vuelta?code=abc', propios), '/auth/vuelta?code=abc');
   assert.equal(rutaInternaDeEnlace('app.tentare:/auth/vuelta', propios), '/auth/vuelta');
   assert.equal(rutaInternaDeEnlace('app.tentare://', propios), '/');
-  // La app de un estudio no acepta el esquema de la de Tentare, ni al revés.
+  // La app de un estudio no acepta el esquema de la de Centra, ni al revés.
   assert.equal(rutaInternaDeEnlace('app.tentare://auth/vuelta?code=abc', ['app.tentare.estudio']), null);
   // Sin esquemas declarados, solo https.
   assert.equal(rutaInternaDeEnlace('app.tentare://auth/vuelta?code=abc'), null);
@@ -58,7 +58,7 @@ test('rutaInternaDeEnlace: el esquema propio de la app solo vale si es el SUYO',
   assert.equal(rutaInternaDeEnlace('app.tentare://usuario@auth/x', propios), null);
 });
 
-test('rutaDeAviso: la `url` del aviso, relativa o absoluta, siempre dentro de Tentare', () => {
+test('rutaDeAviso: la `url` del aviso, relativa o absoluta, siempre dentro de Centra', () => {
   assert.equal(rutaDeAviso({ url: '/portal/mi-estudio' }), '/portal/mi-estudio');
   assert.equal(rutaDeAviso({ url: 'https://www.tentare.app/portal/x?y=1' }), '/portal/x?y=1');
   assert.equal(rutaDeAviso({ ruta: '/app' }), '/app');

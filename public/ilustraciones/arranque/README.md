@@ -10,5 +10,5 @@ Una por tarjeta, en WebP, **1120 × 560 px** (2:1; se muestran a unos 280 × 137
 | `equipo.webp` | Invita a tu equipo |
 | `sedes.webp` | Abre tu otra sede |
 
-Sin fichero, el hueco se queda como una caja gris con bisel. Ilustraciones propias de Tentare:
+Sin fichero, el hueco se queda como una caja gris con bisel. Ilustraciones propias de Centra:
 nada de Shopify.

@@ -48,7 +48,7 @@ function entradaPanel(x: WidgetDisponible, parcial: Partial<ConfigConstructor>):
   return { widget: x, config: { ...CONFIG_POR_DEFECTO, sesion: 'ses-1', ...parcial }, origen: ORIGEN, slug: SLUG };
 }
 
-/** Sigue el 307 de un código por ID: lo que devuelve la ruta, resuelto contra Tentare. */
+/** Sigue el 307 de un código por ID: lo que devuelve la ruta, resuelto contra Centra. */
 function sigue(url: string, x: WidgetDisponible, parcial: Partial<ConfigConstructor>): URL {
   const u = new URL(url);
   const e = entradaDePieza({ widget: x.id, config: guardada(parcial) }, SLUG);

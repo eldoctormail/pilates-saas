@@ -11,7 +11,7 @@ import { mensajeTotalNoCoincide } from '../lib/pos/total-esperado.ts';
 // (`/api/pos/venta/presupuesto`), la venta manda el que se ha visto
 // (`totalEsperado`) y el servidor la rechaza si no es el suyo (409
 // IMPORTE_NO_COINCIDE). Con el TPV del banco o una transferencia el dinero se
-// mueve FUERA de Tentare antes de confirmar: sin el total comprobado, esos dos
+// mueve FUERA de Centra antes de confirmar: sin el total comprobado, esos dos
 // métodos no se ofrecen, y tras un rechazo se dice cuánto falta, no «el total».
 //
 // ⚠️ Es dinero: cada camino cuenta las peticiones. Un «no dijo Cobrado» sin

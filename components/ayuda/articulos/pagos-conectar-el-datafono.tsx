@@ -31,7 +31,7 @@ export default function Contenido() {
         <p>
           Enciéndelo y conéctalo al wifi del estudio. Desliza desde el borde izquierdo de su pantalla, entra en{' '}
           <strong>Ajustes</strong> (si te pide una clave, es la de fábrica de Stripe, <strong>07139</strong>) y pulsa{' '}
-          <strong>Generar código de emparejamiento</strong>. Salen tres palabras: escríbelas en Tentare.
+          <strong>Generar código de emparejamiento</strong>. Salen tres palabras: escríbelas en Centra.
         </p>
         <p style={{ margin: 0 }}>
           Ponle un nombre (por defecto, «Mostrador») y revisa la dirección: Stripe pide dónde está el datáfono y usamos la
@@ -72,7 +72,7 @@ export default function Contenido() {
       <p>
         La primera vez, la propietaria conecta la cuenta de SumUp: se abre SumUp, entra con su usuario y acepta. Después,
         en el Solo, abre el <strong>Menú</strong>, entra en <strong>Conexiones › API</strong> y pulsa{' '}
-        <strong>Conectar</strong>: sale un código de 8 o 9 letras y números. Escríbelo en Tentare y listo.
+        <strong>Conectar</strong>: sale un código de 8 o 9 letras y números. Escríbelo en Centra y listo.
       </p>
       <p>
         Cobrar es igual: eliges <strong>Datáfono</strong>, el importe sale en el Solo y la venta queda cobrada cuando
@@ -84,7 +84,7 @@ export default function Contenido() {
       <h2 style={{ fontSize: 18, fontWeight: 700, margin: '28px 0 12px' }}>Con el datáfono de tu banco (próximamente)</h2>
       <p>
         También sale en el primer paso, como <strong>Próximamente</strong>. Mientras, cobra en la Caja con{' '}
-        <strong>Tarjeta</strong>: tecleas el importe en el datáfono de tu banco y el cobro queda apuntado en Tentare.
+        <strong>Tarjeta</strong>: tecleas el importe en el datáfono de tu banco y el cobro queda apuntado en Centra.
       </p>
 
       <h2 style={{ fontSize: 18, fontWeight: 700, margin: '28px 0 12px' }}>Cambiarlo o desconectarlo</h2>

@@ -86,7 +86,7 @@ export async function entregarVentaPOS(
   const hoy = hoyEnEstudio();
   const ahora = new Date().toISOString();
 
-  // ── 1. Bonos y planes: la MISMA suscripción que el resto de Tentare ──────
+  // ── 1. Bonos y planes: la MISMA suscripción que el resto de Centra ──────
   //
   // Aquí está la diferencia con el TPV anterior, que vendía un "PACK" del
   // catálogo POS y no creaba nada: la clienta pagaba un bono que no existía en

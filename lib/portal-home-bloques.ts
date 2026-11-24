@@ -43,7 +43,7 @@ export const BLOQUES_SISTEMA_IDS = [
   'cabecera', 'proximaClase',
   // ⚠️ `accesosRapidos` ("Mis reservas"/"Mi progreso"/"Notificaciones"/
   // "El equipo") se retiró de este catálogo (31-ago, decisión explícita): no
-  // existe en el diseño real de referencia ("Tentare Studio App") — nunca fue
+  // existe en el diseño real de referencia ("Centra Studio App") — nunca fue
   // decorativo, era contenido funcional del Inicio, así que su retirada SÍ
   // rompe a propósito el "no se pueden eliminar" de más abajo, que sigue
   // siendo la regla para el resto de bloques `sistema`.
@@ -994,7 +994,7 @@ export function getBlockCatalogEntry(kind: string): BlockCatalogEntry | undefine
 // que los pide (lib/theme-definitions.ts, bloquesHome) o los activa a mano.
 //
 // ⚠️ `tiraSemana`/`progresoSemanal`/`retos` YA NO están aquí (auditoría del
-// Theme Builder / rediseño "Tentare Studio App", 2026-08-26): nacían ocultos
+// Theme Builder / rediseño "Centra Studio App", 2026-08-26): nacían ocultos
 // porque cada uno era exclusivo de UN tema (Oliva/Noir/Bloom), pero el nuevo
 // diseño los quiere siempre visibles en el Inicio — decisión de producto
 // explícita, no un restyle. `portal-home-view.tsx` YA sabía pintar los tres

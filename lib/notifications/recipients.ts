@@ -84,12 +84,12 @@ async function gerencia(admin: SupabaseClient, studioId: string): Promise<Recipi
   return [...p, ...managers];
 }
 
-// Tentare Network: la profesional dueña de un perfil, resuelta por su
+// Centra Network: la profesional dueña de un perfil, resuelta por su
 // auth_user_id — nunca por una fila `instructores` de ESTE estudio, porque
 // puede no tener ninguna (es la razón de ser de Network, ver docs/NETWORK-
 // AUDIT.md §1). El email es el de su cuenta (auth.users), no el `email_
 // contacto` opcional de `red_perfiles` — ese es para que OTROS la contacten,
-// no para que Tentare le escriba a ella.
+// no para que Centra le escriba a ella.
 async function porAuthUserId(admin: SupabaseClient, authUserId: string, nombre?: string | null): Promise<Recipient[]> {
   const { data } = await admin.auth.admin.getUserById(authUserId);
   return [{
@@ -100,7 +100,7 @@ async function porAuthUserId(admin: SupabaseClient, authUserId: string, nombre?:
   }];
 }
 
-// Tentare Network (Fase 2, matching): N profesionales cuyo perfil encaja con
+// Centra Network (Fase 2, matching): N profesionales cuyo perfil encaja con
 // una vacante nueva, ya filtradas y resueltas por `data.authUserIds` — el
 // endpoint que publica la vacante hace el cálculo de encaje (sin cron), esto
 // solo traduce cada id a un Recipient. Sin studioId (mismo motivo que
@@ -110,7 +110,7 @@ async function porListaAuthUserIds(admin: SupabaseClient, authUserIds: string[])
   return out.flat();
 }
 
-// Tentare Network (Fase 9): quien envió una solicitud de contacto, para
+// Centra Network (Fase 9): quien envió una solicitud de contacto, para
 // avisarle cuando la profesional la acepta — nunca toda la gerencia, para
 // no convertir el contacto (que incluye email/teléfono privados) en un
 // listado (docs/NETWORK-IMPLEMENTATION-PLAN.md §6, comentario de

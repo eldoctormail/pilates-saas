@@ -101,12 +101,12 @@ export default function Contenido() {
         El lugar se guarda como un <strong>hueco semanal</strong>, no como una lista de reservas. Al guardarlo ya
         se le reservan todas las clases que tienes programadas en ese horario, hasta unos seis meses por delante
         (menos las que ya empiezan dentro del plazo de cancelación: esas no se le apuntan solas, porque no podría
-        cancelarlas sin coste). Después Tentare sigue reservándolas cada noche y, además, <strong>en el momento en
+        cancelarlas sin coste). Después Centra sigue reservándolas cada noche y, además, <strong>en el momento en
         que creas una clase nueva</strong> de ese horario: su sitio queda apartado desde que la clase existe, no
         cuando la clase se acerca, así que no se le puede llenar por delante.
       </p>
       <p>
-        Hay cosas que Tentare <strong>no le reserva sola</strong>: una clase cancelada, una que su cuota no incluye,
+        Hay cosas que Centra <strong>no le reserva sola</strong>: una clase cancelada, una que su cuota no incluye,
         una en semanas de pausa o de cierre del estudio, y una a la misma hora que otra clase o cita que ya tiene.
         En esos casos, y si la clase está llena, el cliente recibe un aviso con el motivo. Tampoco se le vuelve a
         reservar una clase en la que ella misma canceló, aunque la cancelación fuera de una reserva hecha a mano.
@@ -155,7 +155,7 @@ export default function Contenido() {
         Si prefieres que durante una pausa larga <strong>su sitio quede libre</strong> para otro cliente, actívalo en
         Configuración → «Cómo reservan mis clientes» → «Si pausa su clase fija». Vale para las pausas nuevas —las que ya
         tengas puestas siguen igual— y solo suelta el sitio en pausas de más de una semana. Una semana antes de que
-        acabe, Tentare le devuelve el lugar si su sitio sigue libre y tiene cuota, o te lo pregunta en Resumen, según lo
+        acabe, Centra le devuelve el lugar si su sitio sigue libre y tiene cuota, o te lo pregunta en Resumen, según lo
         que elijas ahí. Si le dices que no vuelva, se le quita la clase fija.
       </p>
 

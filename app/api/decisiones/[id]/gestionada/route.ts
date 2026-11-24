@@ -18,7 +18,7 @@ import { ventanaDiasDe } from '@/lib/decision/outcomes';
 // EJECUTADA es lo que de verdad pasó: la siguió. Así cuenta como seguida para el
 // Umbral (`dbCalcularSeguimientoPorTipo`), entra en cooldown como cualquier otra
 // ejecutada (`enCooldown`, prioridad.ts) y se mide igual que si el mensaje lo
-// hubiera mandado Tentare: si la socia vuelve, Actividad lo dice («Seguiste
+// hubiera mandado Centra: si la socia vuelve, Actividad lo dice («Seguiste
 // esto: … Funcionó.»).
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const sesion = await verificarSesionStaff(req);
@@ -75,7 +75,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   await dbLogActividadReciente({
     studioId: recomendacion.studioId, tipo: 'DECISION_GESTIONADA',
     texto: `La contactaste tú: ${recomendacion.titulo}`, socioId: recomendacion.socioId,
-    origen: 'EQUIPO', // la contactó la propietaria; Tentare no le mandó nada
+    origen: 'EQUIPO', // la contactó la propietaria; Centra no le mandó nada
   });
 
   return NextResponse.json({ estado: 'EJECUTADA' });

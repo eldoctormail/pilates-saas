@@ -1,6 +1,6 @@
 'use client';
 
-// Actualizaciones — el changelog de Tentare, dentro del panel.
+// Actualizaciones — el changelog de Centra, dentro del panel.
 //
 // Existía ya, pero como una hoja que se abría desde el menú de perfil
 // (`components/layout/actualizaciones-widget.tsx`): un sitio donde no entra
@@ -147,7 +147,7 @@ export default function ActualizacionesPage() {
     <div className="space-y-6">
       <PageHeader
         title="Actualizaciones"
-        description="Novedades, mejoras y correcciones de Tentare. Cada semana, un estudio más fuerte."
+        description="Novedades, mejoras y correcciones de Centra. Cada semana, un estudio más fuerte."
         actions={
           <Button variant="outline" size="sm" render={<a href="/ayuda/novedades" target="_blank" rel="noopener noreferrer" />}>
             <BellRing size={14} />
@@ -229,7 +229,7 @@ export default function ActualizacionesPage() {
           )}
 
           <p className="text-center text-[12px] text-muted-foreground pt-1">
-            Actualizamos Tentare cada semana.
+            Actualizamos Centra cada semana.
           </p>
         </>
       )}

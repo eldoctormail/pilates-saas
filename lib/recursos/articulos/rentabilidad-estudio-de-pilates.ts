@@ -167,10 +167,10 @@ const articulo: Articulo = {
             '**Ajusta el coste de instructora a la ocupación.** Una clase que no llega a su mínimo se paga igual: mueve, fusiona o da tú las franjas que no cubren su coste.',
           ],
         },
-        { t: 'p', texto: 'Para decidir necesitas el margen clase a clase, no la media del mes. El [informe de rentabilidad por clase de Tentare](/funcionalidades/informes-y-rentabilidad) da, para cada clase, lo que ingresó menos lo que costó su instructora, y la [lista de espera automática](/funcionalidades/lista-de-espera) ofrece la plaza que se libera, al momento o con plazo para aceptarla.' },
+        { t: 'p', texto: 'Para decidir necesitas el margen clase a clase, no la media del mes. El [informe de rentabilidad por clase de Centra](/funcionalidades/informes-y-rentabilidad) da, para cada clase, lo que ingresó menos lo que costó su instructora, y la [lista de espera automática](/funcionalidades/lista-de-espera) ofrece la plaza que se libera, al momento o con plazo para aceptarla.' },
         {
           t: 'llamada',
-          texto: 'Para saber qué clases pagan su coste sin hacer la cuenta a mano, el informe de rentabilidad por clase de Tentare resta a lo que ingresó cada clase lo que costó su instructora.',
+          texto: 'Para saber qué clases pagan su coste sin hacer la cuenta a mano, el informe de rentabilidad por clase de Centra resta a lo que ingresó cada clase lo que costó su instructora.',
         },
       ],
     },
@@ -217,7 +217,7 @@ const articulo: Articulo = {
   ],
   cta: {
     titulo: 'Mira qué clases pagan su coste, una a una',
-    texto: 'El informe de rentabilidad por clase de Tentare resta a lo que ingresó cada clase lo que costó su instructora, y la lista de espera automática ofrece las plazas que se liberan. Empieza gratis, sin tarjeta.',
+    texto: 'El informe de rentabilidad por clase de Centra resta a lo que ingresó cada clase lo que costó su instructora, y la lista de espera automática ofrece las plazas que se liberan. Empieza gratis, sin tarjeta.',
   },
   revision: [
     'Los precios de los escenarios son medianas del artículo precio-clase-de-pilates (32 fuentes listadas allí); si se actualiza ese estudio, actualizar aquí.',

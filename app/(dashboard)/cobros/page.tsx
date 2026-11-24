@@ -35,7 +35,7 @@ import { METODO_MOVIL } from '@/lib/cobros/metodo-movil';
 // Rediseño del 2-oct-2026 (maquetas aprobadas): una dueña de estudio lo resumió
 // en «yo necesito dos cosas, quién me debe y cuánto he cobrado», y eso es la
 // línea de arriba y las dos primeras pestañas. La tercera depende de si factura
-// con Tentare: «Facturas» si sí, «Para tu gestoría» si no.
+// con Centra: «Facturas» si sí, «Para tu gestoría» si no.
 const TABS = ['deudas', 'cobrado', 'facturas', 'historial'] as const;
 type TabId = (typeof TABS)[number];
 

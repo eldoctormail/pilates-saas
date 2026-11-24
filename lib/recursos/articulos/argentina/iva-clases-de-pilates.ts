@@ -145,7 +145,7 @@ const articulo: Articulo = {
           t: 'producto',
           titulo: 'La factura, desde el mismo cobro',
           texto:
-            'Tentare emite la factura electrónica de ARCA desde el recibo cobrado: factura A, B o C según tu condición y la de la alumna, con su CAE.',
+            'Centra emite la factura electrónica de ARCA desde el recibo cobrado: factura A, B o C según tu condición y la de la alumna, con su CAE.',
         },
       ],
     },
@@ -169,7 +169,7 @@ const articulo: Articulo = {
         {
           t: 'p',
           texto:
-            'Cómo se arma cada comprobante lo explica [la página de facturación de Tentare](/funcionalidades/facturacion). Nada de esto es asesoramiento fiscal: tu situación concreta la confirma tu contador.',
+            'Cómo se arma cada comprobante lo explica [la página de facturación de Centra](/funcionalidades/facturacion). Nada de esto es asesoramiento fiscal: tu situación concreta la confirma tu contador.',
         },
       ],
     },
@@ -212,7 +212,7 @@ const articulo: Articulo = {
   cta: {
     titulo: 'Cada cobro con su factura de ARCA',
     texto:
-      'Tentare lleva las reservas, los abonos y los cobros con Mercado Pago, y emite la factura electrónica desde el mismo recibo. Empieza gratis, sin tarjeta y sin permanencia.',
+      'Centra lleva las reservas, los abonos y los cobros con Mercado Pago, y emite la factura electrónica desde el mismo recibo. Empieza gratis, sin tarjeta y sin permanencia.',
   },
   revision: [
     'Tasa general del 21 %: la fuente es BBVA Argentina; confirmarla contra el art. 28 del texto vigente de la Ley de IVA antes de publicar.',

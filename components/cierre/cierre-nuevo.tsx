@@ -79,7 +79,7 @@ export function CifrasCierre({ totales, sellado, conVerifactu, anio, eur }: {
               <ShieldCheck size={13} aria-hidden /> {sellado.selladas}/{sellado.totalFacturas} selladas
             </span>
           ) : undefined}
-          abajo={conVerifactu ? 'con Verifactu' : `desde Tentare en ${anio}`}
+          abajo={conVerifactu ? 'con Verifactu' : `desde Centra en ${anio}`}
         />
       </div>
     </div>

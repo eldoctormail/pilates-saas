@@ -1,5 +1,5 @@
-// ¿Lo que se escribe en ⌘K parece una pregunta para Tentare? Entonces la fila
-// «Preguntar a Tentare» va PRIMERA (§12.4: empieza por ¿ o por un
+// ¿Lo que se escribe en ⌘K parece una pregunta para Centra? Entonces la fila
+// «Preguntar a Centra» va PRIMERA (§12.4: empieza por ¿ o por un
 // interrogativo, acaba en ?, o tiene 4 palabras o más); si no, va al final y no
 // le roba la navegación. Puro: se prueba con `node --test`.
 

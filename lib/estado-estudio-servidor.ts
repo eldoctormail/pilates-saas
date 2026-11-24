@@ -21,7 +21,7 @@ import { leerUsoGratis } from '@/lib/billing/uso-gratis-servidor';
 // ruta queda en: sesión → contarConteosEstudio → construirEstadoEstudio.
 //
 // La bandeja única de la home (lib/estado-estudio.ts):
-// qué espera el visto bueno de quien mira, qué está haciendo Tentare solo y qué
+// qué espera el visto bueno de quien mira, qué está haciendo Centra solo y qué
 // ha resuelto.
 //
 // Solo RECUENTOS: ni un nombre ni un importe sale de aquí. El detalle sigue

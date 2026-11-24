@@ -173,7 +173,7 @@ async function entregarAUnWebhook(
   if (!acc.ok) {
     return descartar(todas, acc.motivo === 'sin_rol'
       ? 'Quien creó el webhook ya no forma parte del estudio.'
-      : 'El estudio no tiene acceso a Tentare ahora mismo.');
+      : 'El estudio no tiene acceso a Centra ahora mismo.');
   }
   const url = validarUrlWebhook(w.url);
   if (!url.ok) return descartar(todas, url.error);

@@ -103,7 +103,7 @@ export function esSlugDescarga(x: unknown): x is SlugDescarga {
  * se enseñó, y la prueba del consentimiento no valdría.
  */
 export const TEXTO_CONSENTIMIENTO_NOVEDADES =
-  'Quiero recibir por email novedades y guías de Tentare para llevar mi estudio. Puedo darme de baja cuando quiera.';
+  'Quiero recibir por email novedades y guías de Centra para llevar mi estudio. Puedo darme de baja cuando quiera.';
 
 /**
  * Email aceptable. Más estricto que el de otros formularios porque este manda

@@ -73,6 +73,6 @@ test.describe('Nota de sesión IA: detrás de la ficha clínica', () => {
     await expect(page.getByText('Ana Gil')).toBeVisible({ timeout: 30_000 });
     await expect(page.getByText('Nota de sesión IA')).toHaveCount(0);
   });
-  // La instructora ya no abre fichas en el panel (Tentare Core retirado,
+  // La instructora ya no abre fichas en el panel (Centra Core retirado,
   // 14-sep-2026): lee las notas de sus alumnas en la app del estudio.
 });

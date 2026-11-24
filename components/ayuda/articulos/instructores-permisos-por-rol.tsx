@@ -3,7 +3,7 @@ import { AyudaResultado } from '@/components/ayuda/AyudaPasos';
 export default function Contenido() {
   return (
     <>
-      <p>Tentare tiene cuatro roles. Cada uno ve un panel pensado para lo que necesita hacer, no una versión recortada del mismo panel para todos.</p>
+      <p>Centra tiene cuatro roles. Cada uno ve un panel pensado para lo que necesita hacer, no una versión recortada del mismo panel para todos.</p>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 14, margin: '20px 0' }}>
         {[

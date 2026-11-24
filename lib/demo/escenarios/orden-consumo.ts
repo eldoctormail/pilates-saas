@@ -85,9 +85,9 @@ export function generar(p: Parametros, ctx: ContextoDemo = CONTEXTO_POR_DEFECTO)
       porQue: [regla.cobertura],
     },
     {
-      pantalla: { ruta: '/clientas/soc-1', bonos: bonosPanel(null), titular: 'Reserva una clase', detalle: `Al reservar, Tentare elige de qué bono sale la sesión. Ahora la ficha suma ${saldoTotal} sesiones.` },
+      pantalla: { ruta: '/clientas/soc-1', bonos: bonosPanel(null), titular: 'Reserva una clase', detalle: `Al reservar, Centra elige de qué bono sale la sesión. Ahora la ficha suma ${saldoTotal} sesiones.` },
       id: 'reserva', titulo: 'Reserva una clase',
-      proposito: 'Al reservar, Tentare elige de qué bono sale la sesión.',
+      proposito: 'Al reservar, Centra elige de qué bono sale la sesión.',
       bloques: [{ tipo: 'texto', texto: `Reserva ${ctx.clase} el ${etiquetaFecha(LUNES_DEMO)}.` }],
       porQue: [regla.mensual, regla.cobertura, regla.orden],
     },
@@ -113,7 +113,7 @@ export function generar(p: Parametros, ctx: ContextoDemo = CONTEXTO_POR_DEFECTO)
   return {
     escenario: 'orden_consumo_bonos',
     titulo: 'De qué bono se descuenta la sesión',
-    objetivo: 'Entender qué bono gasta Tentare cuando una alumna tiene varios y reserva una clase.',
+    objetivo: 'Entender qué bono gasta Centra cuando una alumna tiene varios y reserva una clase.',
     modulos: ['Planes y bonos', 'Reservas'],
     reglasAplicables: [regla.mensual, regla.cobertura, regla.orden],
     entidades: [

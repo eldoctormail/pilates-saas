@@ -80,7 +80,7 @@ export interface DatosConfiguracion {
   numPlanesActivos: number | null;
   integraciones: readonly IntegracionResumible[] | null;
   /**
-   * ¿Tentare tiene puesta la conexión con Stripe? Sin ella no hay nada que la
+   * ¿Centra tiene puesta la conexión con Stripe? Sin ella no hay nada que la
    * propietaria pueda conectar (`NEXT_PUBLIC_STRIPE_CONNECT_CLIENT_ID`, el mismo
    * criterio que la tarjeta de Stripe).
    */
@@ -262,7 +262,7 @@ export function avisosDeConfiguracion(d: DatosConfiguracion): AvisoConfiguracion
 
   // 3. Pide bono para reservar, tiene tarifas y no hay Stripe: una alumna nueva
   //    no puede comprarlo online. La misma señal que el aviso de Primeros pasos.
-  //    Si Tentare aún no puede conectar Stripe, lo que sí puede tocar ella es la
+  //    Si Centra aún no puede conectar Stripe, lo que sí puede tocar ella es la
   //    regla de pedir bono.
   if (s.stripeAccountId !== undefined && s.reservaExigirPlan !== undefined && d.numPlanesActivos !== null
     && avisoVentaOnline({ stripeAccountId: s.stripeAccountId, reservaExigirPlan: s.reservaExigirPlan, numPlanesActivos: d.numPlanesActivos })) {
@@ -348,12 +348,12 @@ function valorDe(id: SeccionId, d: DatosConfiguracion): string | null {
     case 'marca':
       return unir([
         s.logoUrl === undefined ? null : s.logoUrl ? 'con logo' : 'sin logo',
-        d.colorPropio == null ? null : d.colorPropio ? 'tu color' : 'color de Tentare',
+        d.colorPropio == null ? null : d.colorPropio ? 'tu color' : 'color de Centra',
       ]);
 
     case 'web':
       return unir([
-        s.visibleEnNetwork === undefined ? null : s.visibleEnNetwork ? 'en Tentare Network' : 'fuera de Tentare Network',
+        s.visibleEnNetwork === undefined ? null : s.visibleEnNetwork ? 'en Centra Network' : 'fuera de Centra Network',
       ]);
 
     case 'panel':
@@ -518,7 +518,7 @@ export function resumenHerramienta(id: HerramientaId, d: DatosHerramientas): str
       return unir([
         encendidos.length === 0 ? 'Recordatorios apagados' : `Recordatorio ${encendidos.join(' y ')}`,
         textosPropios == null ? null
-          : textosPropios === 0 ? 'textos de Tentare'
+          : textosPropios === 0 ? 'textos de Centra'
           : contar(textosPropios, 'texto tuyo', 'textos tuyos'),
       ]);
     }
@@ -683,7 +683,7 @@ export function resumenDatosFiscales(s: Partial<Pick<Studio, 'razonSocial' | 'ni
   // En el estado de sistema 'sin_facturas' un NIF que falta no deja nada sin
   // factura: se dice para qué hace falta, sin ponerlo en rojo.
   if (aviso && s.modoFacturacion === 'sin_facturas') {
-    return { valor: 'Sin NIF válido · solo hace falta si Tentare emite tus facturas', estado: null };
+    return { valor: 'Sin NIF válido · solo hace falta si Centra emite tus facturas', estado: null };
   }
   if (aviso) {
     return {
@@ -708,7 +708,7 @@ export function resumenDatosFiscales(s: Partial<Pick<Studio, 'razonSocial' | 'ni
  */
 export function resumenStripe(e: {
   conectado: boolean;
-  /** ¿Tentare tiene puesta la conexión? Sin ella no hay nada que conectar. */
+  /** ¿Centra tiene puesta la conexión? Sin ella no hay nada que conectar. */
   disponible: boolean;
   fallando: boolean;
   bizum: 'active' | 'pending' | 'inactive' | null;
@@ -827,7 +827,7 @@ export function resumenCobroDia1(s: Partial<Pick<Studio, 'cobroDia1Activo' | 'co
 /**
  * De quién son los textos que acepta la alumna. Con unos términos PROPIOS no se
  * cobra ninguna penalización (`consentimientoCubrePenalizacion`: la cláusula del
- * cargo solo va en los de Tentare), así que si hay una configurada, se dice.
+ * cargo solo va en los de Centra), así que si hay una configurada, se dice.
  */
 export function resumenContrato(e: {
   propios: { politicaPrivacidad: boolean; terminosServicio: boolean } | null;
@@ -839,9 +839,9 @@ export function resumenContrato(e: {
     return { valor: 'Con términos propios no se cobran penalizaciones', estado: { tono: 'problema', etiqueta: 'Con problemas' } };
   }
   const valor = terminos && privacidad ? 'Tus términos y tu privacidad'
-    : terminos ? 'Tus términos · privacidad de Tentare'
-    : privacidad ? 'Términos de Tentare · tu privacidad'
-    : 'Los textos de Tentare';
+    : terminos ? 'Tus términos · privacidad de Centra'
+    : privacidad ? 'Términos de Centra · tu privacidad'
+    : 'Los textos de Centra';
   return { valor, estado: null };
 }
 
@@ -1060,14 +1060,14 @@ export function resumenRemitente(e: {
   return unir([nombre ?? 'sin nombre', email ? `responde a ${email}` : 'sin email de respuesta'], 90);
 }
 
-// ─── Plan de Tentare ─────────────────────────────────────────────────────────
+// ─── Plan de Centra ─────────────────────────────────────────────────────────
 
 const NOMBRE_PLAN: Record<string, string> = Object.fromEntries(
   (Object.keys(PLAN_INFO) as Plan[]).map(p => [p, PLAN_INFO[p].nombre]),
 );
 
 /**
- * La fila «Plan de Tentare»: el plan, cómo está y, si hay que hacer algo, qué.
+ * La fila «Plan de Centra»: el plan, cómo está y, si hay que hacer algo, qué.
  * Lo que no encaja en ninguno de esos casos no se resume: sin prueba local y
  * sin una suscripción viva no se sabe qué decir, y se calla.
  */
@@ -1130,7 +1130,7 @@ export const NO_DISPONIBLE_TODAVIA = 'Lo estamos terminando de conectar por nues
 export function resumenConexion(e: {
   cuenta?: string | null;
   salud: SaludIntegracion;
-  /** ¿Tentare tiene puesta esa conexión? Sin ella no hay nada que conectar. */
+  /** ¿Centra tiene puesta esa conexión? Sin ella no hay nada que conectar. */
   disponible: boolean;
   /** Lo que se gana conectándola, para la fila sin conectar. */
   paraQue: string;
@@ -1155,7 +1155,7 @@ export function resumenConexion(e: {
 /**
  * La fila de una plataforma que vende plazas (ClassPass, Urban Sports Club,
  * Wellhub). Ninguna tiene todavía conexión automática salvo USC, y solo cuando
- * Tentare tenga sus credenciales: hasta entonces la etiqueta es «Próximamente»
+ * Centra tenga sus credenciales: hasta entonces la etiqueta es «Próximamente»
  * (decisión del fundador, 1-oct-2026) y el valor dice si el estudio apunta sus
  * ventas a mano, que funciona igual.
  */
@@ -1270,7 +1270,7 @@ export function resumenPresentacion(s: DatosPresentacion): string | null {
 
 /**
  * «Bienvenida · frase de portada · frase a mano». Lo que se deja vacío no sale
- * en la app (salvo el saludo, que vuelve al de Tentare), así que se dice vacío.
+ * en la app (salvo el saludo, que vuelve al de Centra), así que se dice vacío.
  */
 export function resumenTextosBienvenida(s: DatosBienvenida): string | null {
   if (s.subtituloHeroe === undefined && s.fraseHeroe === undefined && s.fraseManuscrita === undefined) return null;

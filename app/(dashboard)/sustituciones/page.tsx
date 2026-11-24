@@ -362,7 +362,7 @@ export default function SustitucionesPage() {
           se pinta hasta haberlo leído: «no avisa» mientras carga sería mentira. */}
       {panelNuevo ? (
         <section aria-labelledby="como-cubre" className="rounded-t-card border border-border bg-card p-4 shadow-t-card sm:p-5">
-          <CabeceraTarjeta tono="azul" Icono={ArrowLeftRight} id="como-cubre" titulo="Cómo cubre Tentare las bajas" sub="Elige cuánto quieres que haga solo. Lo puedes cambiar cuando quieras." />
+          <CabeceraTarjeta tono="azul" Icono={ArrowLeftRight} id="como-cubre" titulo="Cómo cubre Centra las bajas" sub="Elige cuánto quieres que haga solo. Lo puedes cambiar cuando quieras." />
           <div role="radiogroup" data-modos aria-label="Modo de autonomía" className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2 xl:grid-cols-4">
             {MODOS.map(m => {
               const bloqueado = m.premium && !autonomiaOk;
@@ -425,8 +425,8 @@ export default function SustitucionesPage() {
                 <p className="flex items-center gap-2 text-[13px] text-muted-foreground">
                   <Users size={14} className="shrink-0" aria-hidden />
                   {avisar
-                    ? 'Tentare avisa a sus clientes por email y en su app cuando se cubre, se mueve o se cancela una clase. Lo decide la propietaria o la gerencia.'
-                    : 'Tentare no avisa a los clientes cuando se cubre, se mueve o se cancela una clase. Lo decide la propietaria o la gerencia.'}
+                    ? 'Centra avisa a sus clientes por email y en su app cuando se cubre, se mueve o se cancela una clase. Lo decide la propietaria o la gerencia.'
+                    : 'Centra no avisa a los clientes cuando se cubre, se mueve o se cancela una clase. Lo decide la propietaria o la gerencia.'}
                 </p>
               )}
             </div>
@@ -452,8 +452,8 @@ export default function SustitucionesPage() {
         <p className="flex items-center gap-2 text-[13px] text-muted-foreground">
           <Users size={14} className="shrink-0" aria-hidden />
           {avisar
-            ? 'Tentare avisa a sus clientes por email y en su app cuando se cubre, se mueve o se cancela una clase. Lo decide la propietaria o la gerencia.'
-            : 'Tentare no avisa a los clientes cuando se cubre, se mueve o se cancela una clase. Lo decide la propietaria o la gerencia.'}
+            ? 'Centra avisa a sus clientes por email y en su app cuando se cubre, se mueve o se cancela una clase. Lo decide la propietaria o la gerencia.'
+            : 'Centra no avisa a los clientes cuando se cubre, se mueve o se cancela una clase. Lo decide la propietaria o la gerencia.'}
         </p>
       ))}
 
@@ -1151,12 +1151,12 @@ function SustitucionCard({
   );
 }
 
-// Profesionales de Tentare Network que podrían cubrir la clase. Sección APARTE
+// Profesionales de Centra Network que podrían cubrir la clase. Sección APARTE
 // del ranking interno, nunca fusionada ni puntuada
 // (docs/NETWORK-SUSTITUCIONES-EXTENSION.md §2). Solo aparece si el tipo de clase
 // tiene especialidad de Network mapeada Y hubo resultados; nunca «0 candidatas».
 //
-// Decisión del fundador: Tentare PROPONE y la propietaria pide, con un toque por
+// Decisión del fundador: Centra PROPONE y la propietaria pide, con un toque por
 // profesional. Nunca se contacta a nadie de fuera solo, y no hay «pedir a todas».
 // El mensaje solo lleva tipo de clase, día y hora (nada de alumnas ni del motivo
 // de la baja) — ver lib/network/contacto-sustitucion.ts.
@@ -1231,8 +1231,8 @@ function PropuestasNetwork({ s, tipoClase, destacada = false, bloqueada = false,
     >
       <p className={destacada ? 'text-[14px] font-extrabold text-foreground leading-snug' : 'text-[12px] font-bold text-foreground'}>
         {destacada
-          ? 'No queda nadie de tu equipo. Estas profesionales de Tentare Network podrían cubrirla'
-          : 'Profesionales de Tentare Network'}
+          ? 'No queda nadie de tu equipo. Estas profesionales de Centra Network podrían cubrirla'
+          : 'Profesionales de Centra Network'}
       </p>
       <p className="text-[11.5px] text-muted-foreground mt-0.5">
         Podrían encajar por especialidad y disponibilidad orientativa — confírmalo con ella antes de contar con su clase.

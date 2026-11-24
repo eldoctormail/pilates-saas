@@ -8,7 +8,7 @@
 // tono, iconos saturados, barras que se ponen rojas cuando algo va mal, la
 // gráfica rellena y los botones de un azul que se ve desde lejos.
 //
-// Aquí, lo mismo con los colores de Tentare y sin inventar ninguno:
+// Aquí, lo mismo con los colores de Centra y sin inventar ninguno:
 //   · el azul y el magenta del logo (`--t-blue-500`, `--t-magenta-500`);
 //   · el verde y el índigo de la paleta categórica (`--cat-2`, `--cat-5`), que
 //     ya tienen su versión para oscuro;

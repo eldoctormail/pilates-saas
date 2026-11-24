@@ -8,7 +8,7 @@ import { urlArticulo, articuloDe } from '@/lib/ayuda/registro';
 import '@/components/ayuda/academy.css';
 
 // El ESCAPARATE público de Academy. La formación de verdad está DENTRO del panel, conectada a los datos de cada estudio (el progreso se
-// marca solo cuando lo hecho existe en el estudio: «Primeros pasos» y «Cambiar a Tentare»). Esta página enseña de qué va, para quien aún no
+// marca solo cuando lo hecho existe en el estudio: «Primeros pasos» y «Cambiar a Centra»). Esta página enseña de qué va, para quien aún no
 // tiene cuenta y para quien compara: el índice del curso (que es el currículo real, no una copia) y los vídeos publicados.
 //
 // Es de servidor y sin JavaScript propio: nada de buscador (eso es el Centro de ayuda), ni «hecha» en el navegador, ni datos de nadie.
@@ -17,8 +17,8 @@ export function EscaparateAcademy({ videos }: { videos: VideoAyuda[] }) {
   return (
     <div className="ac-portada">
       <header className="ac-hero">
-        <p className="ac-kicker"><GraduationCap size={14} aria-hidden="true" /> Tentare Academy</p>
-        <h1>Aprende a sacar el máximo partido a Tentare.</h1>
+        <p className="ac-kicker"><GraduationCap size={14} aria-hidden="true" /> Centra Academy</p>
+        <h1>Aprende a sacar el máximo partido a Centra.</h1>
         <p>Un curso dentro de tu panel: cada lección te enseña una parte de tu estudio, te lleva a la pantalla real y se marca sola cuando lo has hecho de verdad.</p>
         <div className="ac-acciones">
           <Link className="ac-boton" href="/crear-estudio">{CTA_ALTA} <ArrowRight size={15} aria-hidden="true" /></Link>

@@ -175,7 +175,7 @@ export async function POST(req: NextRequest) {
   const { asunto, html, texto } = correoDescarga(ficha, enlaces);
   try {
     const { error } = await new Resend(apiKey).emails.send({
-      from: process.env.RESEND_FROM || 'Tentare <onboarding@resend.dev>',
+      from: process.env.RESEND_FROM || 'Centra <onboarding@resend.dev>',
       to: [email],
       replyTo: LEGAL.email,
       subject: asunto,

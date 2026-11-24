@@ -5,13 +5,13 @@ import { ArrowRight } from 'lucide-react';
 import type { BloqueAsistente } from '@/lib/asistente/tipos';
 import { Filas, Tarjeta } from './tarjeta';
 
-// La bandeja («qué espera tu visto bueno» y «lo que Tentare tiene en marcha»),
+// La bandeja («qué espera tu visto bueno» y «lo que Centra tiene en marcha»),
 // la misma de Inicio, con su enlace; y el mensaje del día si lo hay.
 
 export function BloqueRevisar({ bloque }: { bloque: Extract<BloqueAsistente, { tipo: 'revisar' }> }) {
   const grupos = [
     { titulo: 'Espera tu visto bueno', lineas: bloque.lineas.filter(l => l.bandeja === 'decidir') },
-    { titulo: 'Tentare lo tiene en marcha', lineas: bloque.lineas.filter(l => l.bandeja === 'enMarcha') },
+    { titulo: 'Centra lo tiene en marcha', lineas: bloque.lineas.filter(l => l.bandeja === 'enMarcha') },
   ].filter(g => g.lineas.length);
   return (
     <Tarjeta tipo="revisar" titulo="Lo que hay hoy" href="/dashboard">

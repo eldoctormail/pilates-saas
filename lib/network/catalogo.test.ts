@@ -30,6 +30,6 @@ test('tituloProfesionalDe: las dos disciplinas', () => {
 });
 
 test('tituloProfesionalDe: sin disciplina reconocible, genérico — nunca "Pilates" fabricado', () => {
-  assert.equal(tituloProfesionalDe(['hiit']), 'Profesional de Tentare Network');
-  assert.equal(tituloProfesionalDe([]), 'Profesional de Tentare Network');
+  assert.equal(tituloProfesionalDe(['hiit']), 'Profesional de Centra Network');
+  assert.equal(tituloProfesionalDe([]), 'Profesional de Centra Network');
 });

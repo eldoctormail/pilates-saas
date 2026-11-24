@@ -285,7 +285,7 @@ export function PanelRegalo() {
         </Lateral>
       )}
       {hoja?.t === 'vender' && (
-        <Lateral abierta={abierta} onCerrar={cerrar} titulo="Vender en el mostrador" sub="Para una tarjeta que ya has cobrado fuera de Tentare.">
+        <Lateral abierta={abierta} onCerrar={cerrar} titulo="Vender en el mostrador" sub="Para una tarjeta que ya has cobrado fuera de Centra.">
           <FormVender key={hoja.clave} ajustes={a} onCerrar={cerrar} onVendida={avisar} />
         </Lateral>
       )}

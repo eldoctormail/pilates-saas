@@ -101,6 +101,6 @@ test.describe('Buscador global (⌘K) — secciones del menú', () => {
     await expect(page.getByRole('button', { name: /^Equipo$/ })).toBeVisible();
   });
 
-  // Los casos de la instructora se fueron con Tentare Core (14-sep-2026): ya no
+  // Los casos de la instructora se fueron con Centra Core (14-sep-2026): ya no
   // abre el panel, así que tampoco su buscador (ver panel-instructora-a-la-app).
 });

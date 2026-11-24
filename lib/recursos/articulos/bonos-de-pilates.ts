@@ -53,7 +53,7 @@ const articulo: Articulo = {
             '**Clase suelta:** precio de referencia alto que hace atractivos los otros dos.',
           ],
         },
-        { t: 'p', texto: 'Cobrar la cuota a mano es trabajo y deja huecos. En Tentare, con Stripe conectado, las cuotas se cobran solas con la tarjeta guardada; si un cobro falla, se reintenta dos veces (a los 3 y a los 7 días) y te avisa. Si cobras por domiciliación, te prepara la remesa SEPA para tu banco. Los bonos y pagos puntuales admiten también Bizum; las cuotas, no. Más en [cobros recurrentes](/funcionalidades/cobros-recurrentes).' },
+        { t: 'p', texto: 'Cobrar la cuota a mano es trabajo y deja huecos. En Centra, con Stripe conectado, las cuotas se cobran solas con la tarjeta guardada; si un cobro falla, se reintenta dos veces (a los 3 y a los 7 días) y te avisa. Si cobras por domiciliación, te prepara la remesa SEPA para tu banco. Los bonos y pagos puntuales admiten también Bizum; las cuotas, no. Más en [cobros recurrentes](/funcionalidades/cobros-recurrentes).' },
       ],
     },
     {
@@ -101,10 +101,10 @@ const articulo: Articulo = {
         { t: 'p', texto: 'Haz la cuenta con tus precios: la calculadora parte del ejemplo de la tabla y te avisa si un escalón queda por debajo de tu coste o si el bono le quita alumnas a la cuota.' },
         { t: 'herramienta', id: 'calculadora-bonos' },
         { t: 'descarga', recurso: 'simulador-escalera-bonos' },
-        { t: 'p', texto: 'Después, llévalo a tu programa de reservas para no controlar caducidades a mano. En Tentare configuras [bonos, cuotas mensuales y clases sueltas](/funcionalidades/bonos-y-membresias), con la caducidad de cada bono y reglas por tipo de clase; si de momento usas una hoja de cálculo, tienes la [plantilla de control de asistencia](/recursos/plantilla-control-de-asistencia-pilates).' },
+        { t: 'p', texto: 'Después, llévalo a tu programa de reservas para no controlar caducidades a mano. En Centra configuras [bonos, cuotas mensuales y clases sueltas](/funcionalidades/bonos-y-membresias), con la caducidad de cada bono y reglas por tipo de clase; si de momento usas una hoja de cálculo, tienes la [plantilla de control de asistencia](/recursos/plantilla-control-de-asistencia-pilates).' },
         {
           t: 'llamada',
-          texto: 'En Tentare configuras bonos, cuotas y clases sueltas con su caducidad y reglas por tipo de clase, y cobras las cuotas solas.',
+          texto: 'En Centra configuras bonos, cuotas y clases sueltas con su caducidad y reglas por tipo de clase, y cobras las cuotas solas.',
         },
       ],
     },
@@ -149,7 +149,7 @@ const articulo: Articulo = {
         },
         { t: 'p', texto: 'Cuanta más demanda tenga una clase, más larga conviene la ventana, y solo sirve si el hueco se ofrece enseguida a la lista de espera. Más en [cómo reducir las cancelaciones de última hora](/recursos/reducir-cancelaciones-ultima-hora).' },
         { t: 'p', texto: 'Con las congelaciones, dos fórmulas reales: Olimpia deja a sus socias congelar la cuota hasta dos veces al año, y Body Mechanics cobra un 30 % de la mensualidad por guardarte la plaza, como máximo un mes. Escribe la tuya: cuántas veces, cuánto tiempo y con qué aviso.' },
-        { t: 'p', texto: 'En Tentare fijas reglas por tipo de clase, como la antelación para cancelar sin perder la sesión, y la lista de espera automática ofrece la plaza liberada al momento o con plazo para aceptarla: [cancelaciones y políticas](/funcionalidades/cancelaciones-y-politicas).' },
+        { t: 'p', texto: 'En Centra fijas reglas por tipo de clase, como la antelación para cancelar sin perder la sesión, y la lista de espera automática ofrece la plaza liberada al momento o con plazo para aceptarla: [cancelaciones y políticas](/funcionalidades/cancelaciones-y-politicas).' },
       ],
     },
     {
@@ -203,7 +203,7 @@ const articulo: Articulo = {
   ],
   cta: {
     titulo: 'Tus bonos y cuotas, con sus reglas, en un solo sitio',
-    texto: 'En Tentare configuras bonos, cuotas y clases sueltas con su caducidad y reglas por tipo de clase, y cobras las cuotas con tarjeta a través de Stripe o por remesa SEPA en tu banco. Empieza gratis, sin tarjeta.',
+    texto: 'En Centra configuras bonos, cuotas y clases sueltas con su caducidad y reglas por tipo de clase, y cobras las cuotas con tarjeta a través de Stripe o por remesa SEPA en tu banco. Empieza gratis, sin tarjeta.',
   },
   revision: [
     'Escalera de ejemplo: la suelta (25 €) y las cuotas (75 y 130 €) son medianas del estudio de precios; los bonos de 5 (110 €) y 10 (200 €) están redondeados dentro de los descuentos observados, no son medianas.',

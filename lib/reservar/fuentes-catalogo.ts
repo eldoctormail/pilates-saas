@@ -11,7 +11,7 @@
 //
 // ⚠️ Ya no se le pide ninguna a Google (ni la página de reservas, ni la
 // nativa, ni el selector para enseñarlas): de las diez, el selector solo
-// ofrece las que sirve Tentare (`familiaServida`, lib/widget/fuentes-nativa.ts)
+// ofrece las que sirve Centra (`familiaServida`, lib/widget/fuentes-nativa.ts)
 // y los pesos son los de sus woff2 (app/_fuentes/fuentes.ts). Las otras cuatro
 // siguen aquí porque un código de antes puede nombrarlas, y su categoría
 // decide la reserva: una serif detrás de una serif (`reservaDe`).
@@ -19,7 +19,7 @@
 export interface FuenteCatalogo {
   /**
    * El nombre EXACTO de la familia (el de Google Fonts, que es también el que
-   * sirve Tentare). Es a la vez el valor que se guarda en el tema y el que
+   * sirve Centra). Es a la vez el valor que se guarda en el tema y el que
    * viaja en el snippet (`?fuente=`/`data-fuente`), así que el catálogo no
    * introduce un vocabulario nuevo: es el mismo string que ya se escribía a
    * mano, solo que elegido de una lista.
@@ -35,18 +35,18 @@ export interface FuenteCatalogo {
 
 /**
  * Diez familias, seis de palo seco y cuatro con remates; el selector ofrece
- * las seis que sirve Tentare (ver arriba). La lista sirve tanto para el texto
+ * las seis que sirve Centra (ver arriba). La lista sirve tanto para el texto
  * como para los titulares a propósito: hay estudios que quieren una serif
  * elegante solo en los títulos y otros que la quieren en todo.
  */
 export const FUENTES_WIDGET: readonly FuenteCatalogo[] = [
-  { familia: 'Instrument Sans', etiqueta: 'Instrument Sans', categoria: 'sans', pista: 'La de Tentare. Neutra y muy legible en móvil.' },
+  { familia: 'Instrument Sans', etiqueta: 'Instrument Sans', categoria: 'sans', pista: 'La de Centra. Neutra y muy legible en móvil.' },
   { familia: 'Inter', etiqueta: 'Inter', categoria: 'sans', pista: 'Estándar de producto. Segura en cualquier tamaño.' },
   { familia: 'Plus Jakarta Sans', etiqueta: 'Plus Jakarta Sans', categoria: 'sans', pista: 'Geométrica y cálida. Bien para marcas jóvenes.' },
   { familia: 'DM Sans', etiqueta: 'DM Sans', categoria: 'sans', pista: 'Redondeada y tranquila. Muy usada en bienestar.' },
   { familia: 'Poppins', etiqueta: 'Poppins', categoria: 'sans', pista: 'Círculos perfectos. Look moderno y rotundo.' },
   { familia: 'Outfit', etiqueta: 'Outfit', categoria: 'sans', pista: 'Compacta y actual. Rinde en titulares grandes.' },
-  { familia: 'Instrument Serif', etiqueta: 'Instrument Serif', categoria: 'serif', pista: 'La de los titulares de Tentare. Solo peso normal.' },
+  { familia: 'Instrument Serif', etiqueta: 'Instrument Serif', categoria: 'serif', pista: 'La de los titulares de Centra. Solo peso normal.' },
   { familia: 'Playfair Display', etiqueta: 'Playfair Display', categoria: 'serif', pista: 'Contraste alto. Editorial y con carácter.' },
   { familia: 'Cormorant Garamond', etiqueta: 'Cormorant Garamond', categoria: 'serif', pista: 'Fina y clásica. Elegante en títulos grandes.' },
   { familia: 'Fraunces', etiqueta: 'Fraunces', categoria: 'serif', pista: 'Serif con personalidad. Nada corporativa.' },

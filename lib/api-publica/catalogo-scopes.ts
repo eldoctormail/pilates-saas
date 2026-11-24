@@ -1,4 +1,4 @@
-// Catálogo de permisos (scopes) de la API pública de Tentare.
+// Catálogo de permisos (scopes) de la API pública de Centra.
 //
 // Es el MISMO catálogo para las dos credenciales que abren la API: los tokens
 // OAuth de una app (Zapier) y las claves de API de un estudio. Vive aparte de

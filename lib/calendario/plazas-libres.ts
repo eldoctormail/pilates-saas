@@ -73,7 +73,7 @@ export interface HuecoSesion {
   porAprobar: number;
   /** Plazas ofrecidas a la lista de espera con el plazo corriendo (ocupan solo si el estudio lo eligió). */
   ofrecidas: number;
-  /** A: lo que se puede reservar ahora desde Tentare. */
+  /** A: lo que se puede reservar ahora desde Centra. */
   libres: number;
   /** B: el sitio para alguien que viniera todas las semanas (peor caso). */
   paraFija: number;

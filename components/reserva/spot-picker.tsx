@@ -26,7 +26,7 @@ export function SpotPicker({
   // ancho de la hoja — con 8 plazas en 2 filas aquello ocupaba varias
   // pantallas de scroll antes del CTA.
   //
-  // Forma "cama" del diseño "Tentare Portal Reservas" (2026-08-26): celda
+  // Forma "cama" del diseño "Centra Portal Reservas" (2026-08-26): celda
   // rectangular (más ancha que alta, no cuadrada) con una barra vertical
   // interior ("eje") y el número FUERA, debajo — más leyenda libre/ocupada/
   // tuya al pie, que el selector no tenía. "Frente · Instructor" se

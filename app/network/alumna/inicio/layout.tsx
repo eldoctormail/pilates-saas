@@ -11,8 +11,8 @@ import type { Metadata } from 'next';
 // no Network. Mismo patrón que app/(dashboard)/layout.tsx con
 // /panel.webmanifest — ver el comentario ahí.
 export const metadata: Metadata = {
-  title: 'Inicio | Tentare Network',
-  description: 'Tu autoservicio de alumna en Tentare Network.',
+  title: 'Inicio | Centra Network',
+  description: 'Tu autoservicio de alumna en Centra Network.',
   robots: { index: false, follow: false },
   manifest: '/network.webmanifest',
 };

@@ -2,7 +2,7 @@
 
 // Fase 2 del rediseño de la reserva (pedido explícito del fundador, 2026-08):
 // "que deje de sentirse como un modal disfrazado y pase a ser una pantalla
-// propia de Tentare". Referencia de UX: Momence (`secretstudiofit.com/reserva`
+// propia de Centra". Referencia de UX: Momence (`secretstudiofit.com/reserva`
 // → "Reservar ahora"), auditada en vivo — un solo scroll continuo (datos +
 // código promocional + pago), sin pasos fragmentados tipo wizard, dos
 // columnas en escritorio que se apilan en una en móvil. Documentado en
@@ -456,7 +456,7 @@ export function PantallaReserva({
                   </p>
                 </div>
 
-                {/* "Tus datos" — diseño "Tentare Portal Reservas": UN solo
+                {/* "Tus datos" — diseño "Centra Portal Reservas": UN solo
                     campo "Nombre y apellido" (nunca Nombre/Apellidos por
                     separado — `entregarPlanComprado` ya sabe partir un nombre
                     compuesto), Email y Móvil en una fila de dos columnas. Con
@@ -865,7 +865,7 @@ function queIncluye(p: PlanTarifa): string {
  *  qué falta"). */
 function camposFaltantes(loginForm: DatosContacto, privacidadAceptada: boolean): string[] {
   const faltan: string[] = [];
-  // Diseño "Tentare Portal Reservas": un solo campo "Nombre y apellido" — sin
+  // Diseño "Centra Portal Reservas": un solo campo "Nombre y apellido" — sin
   // requisito separado de apellidos.
   if (!loginForm.nombre.trim()) faltan.push('nombre y apellido');
   if (!loginForm.email.trim()) faltan.push('email');

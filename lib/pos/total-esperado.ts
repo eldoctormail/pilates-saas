@@ -72,7 +72,7 @@ export function leerTotalNoCoincide(mensaje: string): TotalNoCoincide | null {
  * Lo que se le dice a quien cobra cuando el servidor rechaza la venta porque el
  * total no es el que vio. La venta no existe (la RPC se deshace antes) y el
  * servidor no ha lanzado ningún cobro; pero con el TPV del banco o una
- * transferencia el dinero se mueve FUERA de Tentare antes de confirmar, y quien
+ * transferencia el dinero se mueve FUERA de Centra antes de confirmar, y quien
  * cobra acaba de afirmar «Sí, he cobrado X». Por eso cada método dice lo suyo, y
  * nunca «no se ha cobrado nada» ni «cobra el total» a quien quizá ya cobró: solo
  * la diferencia, en el sentido que toque.

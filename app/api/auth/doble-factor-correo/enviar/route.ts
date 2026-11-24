@@ -27,7 +27,7 @@ import { instructoraActivaEnEstudio } from '@/lib/auth-instructora';
 // Body: { reenviar?: boolean, slug?: string }. `reenviar`: el botón «Reenviar»
 // (al abrir la pantalla, no). `slug`: desde la app de un estudio, el correo va
 // con SU marca — solo si la cuenta es alumna o instructora de ese estudio; si
-// no, la de Tentare. El slug no cambia nunca a quién se envía: siempre al
+// no, la de Centra. El slug no cambia nunca a quién se envía: siempre al
 // correo de la cuenta.
 export const dynamic = 'force-dynamic';
 
@@ -98,7 +98,7 @@ async function estudioDeLaCuenta(admin: NonNullable<ReturnType<typeof getSupabas
     if (await instructoraActivaEnEstudio(admin, userId, studioId)) return studioId;
     return null;
   } catch {
-    // Sin poder comprobarlo, la marca de Tentare: el correo sale igual.
+    // Sin poder comprobarlo, la marca de Centra: el correo sale igual.
     return null;
   }
 }

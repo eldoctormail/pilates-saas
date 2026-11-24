@@ -42,14 +42,14 @@ test('lineaDelPiloto: sin nada hecho, ninguna línea', () => {
 });
 
 test('lineaDelPiloto: lo que salió, con su número', () => {
-  assert.equal(lineaDelPiloto(1, 0), 'Tentare ha resuelto 1 acción por su cuenta.');
-  assert.equal(lineaDelPiloto(3, 0), 'Tentare ha resuelto 3 acciones por su cuenta.');
+  assert.equal(lineaDelPiloto(1, 0), 'Centra ha resuelto 1 acción por su cuenta.');
+  assert.equal(lineaDelPiloto(3, 0), 'Centra ha resuelto 3 acciones por su cuenta.');
 });
 
 test('lineaDelPiloto: una FALLIDA se dice aparte, nunca sumada a las resueltas', () => {
-  assert.equal(lineaDelPiloto(2, 1), 'Tentare ha resuelto 2 acciones por su cuenta. 1 no salió: lo ves en Actividad.');
-  assert.equal(lineaDelPiloto(0, 1), 'Tentare ha intentado 1 acción por su cuenta. 1 no salió: lo ves en Actividad.');
-  assert.equal(lineaDelPiloto(0, 2), 'Tentare ha intentado 2 acciones por su cuenta. 2 no salieron: las ves en Actividad.');
+  assert.equal(lineaDelPiloto(2, 1), 'Centra ha resuelto 2 acciones por su cuenta. 1 no salió: lo ves en Actividad.');
+  assert.equal(lineaDelPiloto(0, 1), 'Centra ha intentado 1 acción por su cuenta. 1 no salió: lo ves en Actividad.');
+  assert.equal(lineaDelPiloto(0, 2), 'Centra ha intentado 2 acciones por su cuenta. 2 no salieron: las ves en Actividad.');
 });
 
 test('lineaEnSeguimiento: cuánto y dónde, sin calificarlo', () => {

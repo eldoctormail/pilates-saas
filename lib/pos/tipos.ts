@@ -50,7 +50,7 @@ export function esEstadoFinal(e: EstadoPagoPOS): boolean {
  * código afirmaban lo contrario y ganaba el que cobraba. En pantalla eso era:
  * pulsas «Tarjeta» y sale «Cobrado» sin que nadie haya comprobado nada.
  *
- * TARJETA significa «lo he pasado por el datáfono de MI banco», que Tentare no
+ * TARJETA significa «lo he pasado por el datáfono de MI banco», que Centra no
  * ve. Es legítimo registrarlo, pero hay que pedirlo explícitamente y no
  * pintarlo como un cobro verificado.
  */

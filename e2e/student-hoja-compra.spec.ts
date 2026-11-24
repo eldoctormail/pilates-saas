@@ -166,7 +166,7 @@ test.describe('Student PWA · hoja de compra', () => {
     await expect(page.getByText('Compra realizada')).toHaveCount(0);
   });
 
-  test('⚠️ el pago no le pide la letra a Google: la de su app, de Tentare', async ({ page }) => {
+  test('⚠️ el pago no le pide la letra a Google: la de su app, de Centra', async ({ page }) => {
     // El iframe de Stripe no ve las fuentes de la app: se le dan sus caras.
     // Eran de Google (Instrument Sans), o sea la IP de la alumna a un tercero
     // al pagar.
@@ -186,8 +186,8 @@ test.describe('Student PWA · hoja de compra', () => {
       (window as unknown as { __TENTARE_STRIPE_ELEMENTS: { fonts?: { family?: string; src?: string }[]; appearance?: { variables?: { fontFamily?: string } } }[] }).__TENTARE_STRIPE_ELEMENTS);
     const tentare = `url(${new URL(page.url()).origin}/widget-fuentes/v1/`;
     for (const o of opciones) {
-      // La de su pareja de letras, sea cual sea: de las que sirve Tentare.
-      const familia = /^'(Tentare [A-Za-z ]+)', system-ui, sans-serif$/.exec(o.appearance?.variables?.fontFamily ?? '')?.[1];
+      // La de su pareja de letras, sea cual sea: de las que sirve Centra.
+      const familia = /^'(Centra [A-Za-z ]+)', system-ui, sans-serif$/.exec(o.appearance?.variables?.fontFamily ?? '')?.[1];
       expect(familia, o.appearance?.variables?.fontFamily).toBeTruthy();
       expect(o.fonts?.length).toBeGreaterThan(0);
       for (const cara of o.fonts ?? []) {

@@ -398,7 +398,7 @@ export function cartelPdf(datos: DatosCartel): Uint8Array {
     '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>',
     '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>',
     `<< /Length ${contenido.length} >>\nstream\n${contenido}\nendstream`,
-    `<< /Title ${literalPdf(`${TEXTOS_QR[datos.destino].titulo} · ${nombre}`)} /Creator (Tentare) >>`,
+    `<< /Title ${literalPdf(`${TEXTOS_QR[datos.destino].titulo} · ${nombre}`)} /Creator (Centra) >>`,
   ];
 
   // Todo es de un byte por carácter (ASCII + WinAnsi), así que la longitud de la

@@ -162,7 +162,7 @@ export default function MiPerfilNetworkPage() {
       <div className="max-w-lg mx-auto py-16 text-center">
         <h1 className="text-[22px] font-extrabold mb-2" style={{ color: NW_TINTA }}>Tu perfil se ha eliminado</h1>
         <p className="text-[14px] mb-6" style={{ color: NW_MUTED }}>
-          Hemos borrado tu perfil de Network, tus documentos y tus fotos. Tu cuenta de Tentare sigue activa.
+          Hemos borrado tu perfil de Network, tus documentos y tus fotos. Tu cuenta de Centra sigue activa.
         </p>
         <button
           type="button"
@@ -170,7 +170,7 @@ export default function MiPerfilNetworkPage() {
           className="px-5 py-2.5 rounded-full text-[13.5px] font-bold text-white"
           style={{ background: NW_PRODUCTO }}
         >
-          Ir a Tentare Network
+          Ir a Centra Network
         </button>
       </div>
     );
@@ -398,7 +398,7 @@ export default function MiPerfilNetworkPage() {
             <div className="pt-4" style={{ borderTop: `1px solid ${NW_BORDE}` }}>
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <p className="text-[13.5px] font-bold" style={{ color: NW_TINTA }}>Actualmente en Tentare</p>
+                  <p className="text-[13.5px] font-bold" style={{ color: NW_TINTA }}>Actualmente en Centra</p>
                   <p className="text-[12px] mt-0.5" style={{ color: NW_MUTED }}>
                     Muestra en tu perfil público las sedes donde trabajas hoy. Apagado por defecto.
                   </p>
@@ -420,7 +420,7 @@ export default function MiPerfilNetworkPage() {
                   {cargandoSedes ? (
                     <Loader2 size={14} className="animate-spin" style={{ color: NW_MUTED }} />
                   ) : sedesActuales.length === 0 ? (
-                    <p className="text-[12px]" style={{ color: NW_MUTED }}>Hoy no trabajas en ninguna sede de Tentare.</p>
+                    <p className="text-[12px]" style={{ color: NW_MUTED }}>Hoy no trabajas en ninguna sede de Centra.</p>
                   ) : (
                     <ul className="space-y-1">
                       {sedesActuales.map(s => (
@@ -486,11 +486,11 @@ export default function MiPerfilNetworkPage() {
                 <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold mb-1.5" style={estadoEstilo}>{estadoLabel}</span>
                 <p className="text-[13px]" style={{ color: NW_MUTED }}>
                   {perfil.estado === 'published'
-                    ? 'Tu perfil es visible para los estudios que buscan en Tentare Network.'
+                    ? 'Tu perfil es visible para los estudios que buscan en Centra Network.'
                     : perfil.estado === 'suspended'
                       ? 'Tu perfil ha sido suspendido por moderación.'
                       : perfil.estado === 'en_revision'
-                        ? 'El equipo de Tentare lo está revisando antes de publicarlo — normalmente en menos de 48 h.'
+                        ? 'El equipo de Centra lo está revisando antes de publicarlo — normalmente en menos de 48 h.'
                         : 'Tu perfil todavía no es visible para ningún estudio.'}
                 </p>
                 {errorEstado && <p className="text-[12px] mt-1.5" style={{ color: '#A04A3C' }}>{errorEstado}</p>}
@@ -528,7 +528,7 @@ export default function MiPerfilNetworkPage() {
             <TituloSeccion>Eliminar mi perfil</TituloSeccion>
             <p className="text-[13px]" style={{ color: NW_MUTED }}>
               Se borran para siempre tu perfil, tus documentos de identidad y certificados, tus fotos, tu experiencia,
-              referencias, reseñas, candidaturas y las conversaciones con estudios. Tu cuenta de Tentare no se borra:
+              referencias, reseñas, candidaturas y las conversaciones con estudios. Tu cuenta de Centra no se borra:
               si trabajas o reservas en un estudio, eso sigue igual.
             </p>
             {errorBorrado && <p role="alert" className="text-[12.5px] mt-2" style={{ color: '#A04A3C' }}>{errorBorrado}</p>}

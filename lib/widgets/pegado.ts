@@ -103,7 +103,7 @@ function canonico(origen: string): string | null {
  *
  * Aparte porque la página necesita distinguir lo SEGURO (su propio origen y
  * el canónico: la carga no es de ninguna web del estudio) de lo DUDOSO (otro
- * `*.vercel.app`, que puede ser una vista previa de Tentare o la web de un
+ * `*.vercel.app`, que puede ser una vista previa de Centra o la web de un
  * estudio alojada ahí).
  */
 export function esOrigenPropio(origen: string, propios: readonly string[]): boolean {
@@ -112,16 +112,16 @@ export function esOrigenPropio(origen: string, propios: readonly string[]): bool
 }
 
 /**
- * true si el origen es de Tentare: está en `propios` (comparados con
+ * true si el origen es de Centra: está en `propios` (comparados con
  * canonicalizarOrigen) o su host acaba en `.vercel.app`.
  *
- * Lo propio no es «su web»: el widget también se ve dentro de Tentare (el
+ * Lo propio no es «su web»: el widget también se ve dentro de Centra (el
  * onboarding, el portal, las vistas previas de cada despliegue), y contarlo
  * como «Visto en www.tentare.app» sería mentirle. `propios` lo pone quien
  * llama (el origen canónico y el de la propia petición); el apex cuenta como
  * `www`, que es adonde redirige.
  * ⚠️ Una web del estudio alojada en `*.vercel.app` no se distingue de una
- * vista previa de Tentare: nunca se NOMBRA. Pero su carga sí cuenta (la
+ * vista previa de Centra: nunca se NOMBRA. Pero su carga sí cuenta (la
  * página la manda sin dirección, lib/reservar/pegado-widget.ts): si no, esa
  * web no saldría nunca en la portada.
  */

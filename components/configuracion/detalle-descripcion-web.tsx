@@ -8,7 +8,7 @@ import { BarraGuardar } from '@/components/configuracion/shell/barra-guardar';
 import { Campo, useFormularioEstudio } from '@/components/configuracion/formulario-estudio';
 
 // «Cómo te presentas» en «Mi web» guiada (21-oct-2026, decisión 4 de «Mi app»): la descripción sale
-// en tu página de reservas («El estudio») y en Tentare Network, no en la app de tus alumnas, así que
+// en tu página de reservas («El estudio») y en Centra Network, no en la app de tus alumnas, así que
 // se escribe aquí. Es el MISMO campo que el de «Cómo te presentas» de «Mi app» (`studios.descripcion`)
 // y manda SOLO ese campo (#2027): el lema, las normas y el año se quedan como estaban.
 
@@ -36,7 +36,7 @@ export function DetalleDescripcionWeb({ showToast, onGuardado }: {
       <div className="flex flex-col gap-5 pb-6">
         <Campo
           label="Cómo te presentas"
-          ayuda="Sale en tu página de reservas, en «El estudio», y en Tentare Network. No sale en la app de tus clientes."
+          ayuda="Sale en tu página de reservas, en «El estudio», y en Centra Network. No sale en la app de tus clientes."
         >
           {id => (
             <textarea

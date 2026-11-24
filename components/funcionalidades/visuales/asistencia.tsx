@@ -24,7 +24,7 @@ import { PanelClaro, PanelOscuro } from './comunes';
 const VIAS = [
   {
     n: 'Enseña su QR',
-    d: 'Lo lleva en su app. Lo leéis con la cámara del mostrador y Tentare comprueba su reserva al momento.',
+    d: 'Lo lleva en su app. Lo leéis con la cámara del mostrador y Centra comprueba su reserva al momento.',
     pie: 'Con Kisi, la puerta la abre quien mira',
     c: '#214E36',
   },

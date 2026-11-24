@@ -502,7 +502,7 @@ export function consecuenciaRegla(tarjeta: TarjetaReglasId, r: ReglasReserva): s
 
 // ─── Si se queda sin cuota (plaza fija) ─────────────────────────────────────
 //
-// La política la elige el estudio (decisión del fundador, 16-sep: Tentare no
+// La política la elige el estudio (decisión del fundador, 16-sep: Centra no
 // impone una forma de trabajar). En las tres, el motor no le reserva clases
 // NUEVAS sin cuota y lo que ya pasó no se toca.
 
@@ -527,7 +527,7 @@ export const OPCIONES_PLAZA_FIJA_SIN_CUOTA: readonly { valor: PoliticaPlazaFijaS
 
 // ─── Plaza fija desde su app, y sus pausas ───────────────────────────────────
 //
-// Decisiones del fundador (16-sep): el estudio pone las reglas y Tentare las
+// Decisiones del fundador (16-sep): el estudio pone las reglas y Centra las
 // cumple. Todo apagado de serie — REVERTIDO el 22-sep para «solicitar desde la
 // app»: sin él, ninguna alumna ve nunca la opción de quedarse fija en una clase
 // suelta (el interruptor «Clase fija» de su ficha, que se alimenta de `sueltas`

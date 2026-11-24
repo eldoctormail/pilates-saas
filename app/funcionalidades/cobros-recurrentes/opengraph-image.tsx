@@ -1,7 +1,7 @@
 import { OG_IMAGE_CONTENT_TYPE, OG_IMAGE_SIZE, generarOgImage } from '@/lib/og-image';
 import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
-export const alt = ES ? 'Cobros automáticos y SEPA para estudios de Pilates — Tentare' : 'Cobros con Mercado Pago para estudios de Pilates — Tentare';
+export const alt = ES ? 'Cobros automáticos y SEPA para estudios de Pilates — Centra' : 'Cobros con Mercado Pago para estudios de Pilates — Centra';
 export const size = OG_IMAGE_SIZE;
 export const contentType = OG_IMAGE_CONTENT_TYPE;
 

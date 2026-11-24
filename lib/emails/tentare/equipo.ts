@@ -1,6 +1,6 @@
-// Los correos de Tentare al EQUIPO de un estudio y a quien trabaja con él:
+// Los correos de Centra al EQUIPO de un estudio y a quien trabaja con él:
 // invitaciones, peticiones de disponibilidad, sustituciones, el cierre para la
-// gestoría y las referencias de Tentare Network. Los firma Tentare; el estudio
+// gestoría y las referencias de Centra Network. Los firma Centra; el estudio
 // aparece por su nombre, que es lo que reconoce quien lo recibe.
 
 import { correoTentare, TENTARE } from './plantilla.ts';
@@ -183,8 +183,8 @@ export function correoCierreGestoria(p: CierreGestoriaProps): string {
         que: `Base ${formatEuro(t.base)} · IVA ${formatEuro(t.cuota)} · Total ${formatEuro(t.total)}`,
       })),
     },
-    nota: `Incluye ${p.totales.numFacturas} factura(s) emitida(s) en Tentare Manager${manuales}. Este resumen recopila ingresos y el IVA repercutido a partir de las facturas del estudio. No incluye gastos ni IVA soportado, y no sustituye la presentación de impuestos. Puedes responder a este correo para contactar con el estudio.`,
-    motivo: `Te lo envía ${p.estudioNombre} desde Tentare Manager.`,
+    nota: `Incluye ${p.totales.numFacturas} factura(s) emitida(s) en Centra Manager${manuales}. Este resumen recopila ingresos y el IVA repercutido a partir de las facturas del estudio. No incluye gastos ni IVA soportado, y no sustituye la presentación de impuestos. Puedes responder a este correo para contactar con el estudio.`,
+    motivo: `Te lo envía ${p.estudioNombre} desde Centra Manager.`,
   });
 }
 
@@ -196,11 +196,11 @@ export function correoReferenciaSolicitud(p: {
 }): string {
   const relacion = p.relacion?.trim() ? ` (${p.relacion.trim()})` : '';
   return correoTentare({
-    preheader: `${p.profesionalNombre} te ha puesto como referencia en Tentare Network`,
-    antetitulo: 'Tentare Network',
+    preheader: `${p.profesionalNombre} te ha puesto como referencia en Centra Network`,
+    antetitulo: 'Centra Network',
     titular: 'Te piden una referencia profesional',
     parrafos: [
-      `Hola ${p.nombreReferente}, ${p.profesionalNombre} te ha puesto como referencia profesional${relacion} en su perfil de Tentare Network, la red de instructoras de Pilates y estudios que usan Tentare.`,
+      `Hola ${p.nombreReferente}, ${p.profesionalNombre} te ha puesto como referencia profesional${relacion} en su perfil de Centra Network, la red de instructoras de Pilates y estudios que usan Centra.`,
       'Solo te pedimos que confirmes que la conoces por haber trabajado con ella. No hace falta crear ninguna cuenta.',
     ],
     boton: { href: p.url, texto: 'Responder a la solicitud' },

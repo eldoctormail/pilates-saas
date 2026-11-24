@@ -11,7 +11,7 @@
 //
 // ── Reglas al escribir aquí ──────────────────────────────────────────────────
 // 1. Solo lo que EXISTE y no está congelado (lib/frozen-features.ts). Nada de
-//    Kiosko, Oferta digital, Chat de equipo ni Tentare Network: lo vigila
+//    Kiosko, Oferta digital, Chat de equipo ni Centra Network: lo vigila
 //    `capitulos.test.ts`.
 // 2. Los nombres de las pantallas son los del menú de verdad (lib/nav-config.ts)
 //    y los de las secciones de Configuración (lib/configuracion/secciones.ts).
@@ -338,13 +338,13 @@ export const CAPITULOS: readonly CapituloVisita[] = [
       {
         id: 'c7.3', ruta: '/equipo', selector: 'equipo-vista', tipo: 'mira',
         titulo: 'Su disponibilidad',
-        texto: 'Cada instructora marca cuándo puede trabajar. Así Tentare sabe a quién proponer cuando hay una baja y no llama a quien no puede.',
+        texto: 'Cada instructora marca cuándo puede trabajar. Así Centra sabe a quién proponer cuando hay una baja y no llama a quien no puede.',
         accion: 'Mira cómo aparece cada instructora en el equipo.',
       },
       {
         id: 'c7.4', ruta: '/sustituciones', selector: 'sustituciones-vista', tipo: 'mira',
         titulo: 'Sustituciones',
-        texto: 'Cuando una instructora no puede venir, Tentare propone quién la cubre y por qué. Tú das el visto bueno, o lo dejas en automático si prefieres no enterarte.',
+        texto: 'Cuando una instructora no puede venir, Centra propone quién la cubre y por qué. Tú das el visto bueno, o lo dejas en automático si prefieres no enterarte.',
         accion: 'Mira cómo se ve una sustitución cuando la hay.',
       },
     ],
@@ -352,7 +352,7 @@ export const CAPITULOS: readonly CapituloVisita[] = [
   {
     id: 'c8',
     titulo: 'Que el estudio trabaje solo',
-    paraQue: 'Para que Tentare se ocupe de lo repetitivo y tú, de lo importante.',
+    paraQue: 'Para que Centra se ocupe de lo repetitivo y tú, de lo importante.',
     minutos: 6,
     aprendido: ['qué se hace solo y qué decides tú', 'dónde hablas con tus clientes', 'dónde se preparan campañas'],
     pasos: [

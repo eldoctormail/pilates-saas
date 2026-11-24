@@ -22,7 +22,7 @@ import { G2_NOTA, G2_RESENAS, G2_URL } from '@/lib/seo/g2';
 // (MedicionLanding); `$pathname` = /empieza los separa en el embudo.
 
 export const metadata: Metadata = {
-  title: 'Empieza gratis con Tentare',
+  title: 'Empieza gratis con Centra',
   description: `Reservas, bonos y cobros de tu estudio de pilates en una app con tu nombre. ${GRATIS_CON_LIMITES}, sin tarjeta.`,
   robots: { index: false, follow: true },
 };
@@ -30,16 +30,16 @@ export const metadata: Metadata = {
 const VENTAJAS = [
   'Tus clientes reservan y cancelan solas desde el móvil',
   'Los bonos se descuentan solos y las cuotas se cobran con la tarjeta guardada',
-  'Si falla una instructora, Tentare busca sustituta por ti',
+  'Si falla una instructora, Centra busca sustituta por ti',
 ];
 
 export default function EmpiezaPage() {
-  const whatsapp = enlaceWhatsApp(WHATSAPP_SOPORTE, 'Hola, vengo de TikTok y tengo una duda sobre Tentare:') ?? '#';
+  const whatsapp = enlaceWhatsApp(WHATSAPP_SOPORTE, 'Hola, vengo de TikTok y tengo una duda sobre Centra:') ?? '#';
   return (
     <main className="min-h-dvh px-4 py-8" style={{ background: BG, color: ACC }}>
       <MedicionLanding />
       <div className="mx-auto flex max-w-md flex-col gap-8">
-        <Link href="/" aria-label="Tentare, ir a la página principal" className="self-start">
+        <Link href="/" aria-label="Centra, ir a la página principal" className="self-start">
           <LogoTentare alto={28} />
         </Link>
 
@@ -81,7 +81,7 @@ export default function EmpiezaPage() {
         </section>
 
         <p className="text-center text-xs" style={{ color: MUTED }}>
-          <Link href="/" className="underline underline-offset-2">Ver todo lo que hace Tentare</Link>
+          <Link href="/" className="underline underline-offset-2">Ver todo lo que hace Centra</Link>
           {' · '}
           <Link href="/precios" className="underline underline-offset-2">Planes y precios</Link>
         </p>

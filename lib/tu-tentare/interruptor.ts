@@ -1,4 +1,4 @@
-// «Tu Tentare» (P2.5) entra APAGADO: `TU_TENTARE` con el formato de
+// «Tu Centra» (P2.5) entra APAGADO: `TU_TENTARE` con el formato de
 // `ASISTENTE_IA` (lib/asistente/interruptor.ts):
 //
 //   on                    → encendido para todos

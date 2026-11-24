@@ -5,7 +5,7 @@ import { test, expect, type Page, type Route } from '@playwright/test';
 // sobre Resumen (lib/estado-estudio.ts, /api/estado-estudio).
 //
 // Lo que se fija aquí:
-//   · lo que espera decisión, lo que Tentare está haciendo y lo resuelto se ven
+//   · lo que espera decisión, lo que Centra está haciendo y lo resuelto se ven
 //     separados, y el contador del menú suma SOLO lo primero;
 //   · sin nada pendiente dice «nada espera tu visto bueno» — nunca «todo bien»;
 //   · si el endpoint falla, la home (la pantalla principal del negocio) sigue en
@@ -93,7 +93,7 @@ async function montar(
 }
 
 test.describe('Estado del estudio en Resumen', () => {
-  test('separa lo que espera tu decisión de lo que Tentare hace y ya ha hecho', async ({ page }) => {
+  test('separa lo que espera tu decisión de lo que Centra hace y ya ha hecho', async ({ page }) => {
     await montar(page, { cuerpo: CON_PENDIENTES });
 
     const bandeja = page.getByRole('region', { name: 'Lo que espera tu visto bueno' });
@@ -107,9 +107,9 @@ test.describe('Estado del estudio en Resumen', () => {
     await expect(bandeja.getByRole('link', { name: /2 reservas esperan tu aprobación/ }))
       .toHaveAttribute('href', '#decidir-reservas');
 
-    await expect(bandeja.getByText('Tentare lo está haciendo')).toBeVisible();
+    await expect(bandeja.getByText('Centra lo está haciendo')).toBeVisible();
     await expect(bandeja.getByText('Buscando sustituta para una clase')).toBeVisible();
-    await expect(bandeja.getByText('Resuelto por Tentare')).toBeVisible();
+    await expect(bandeja.getByText('Resuelto por Centra')).toBeVisible();
     await expect(bandeja.getByText('Una clase cubierta por una sustituta')).toBeVisible();
   });
 
@@ -299,7 +299,7 @@ test.describe('Denuncias de la app en la bandeja', () => {
     await expect(tarjeta).toContainText('Denuncia · Tablón', { timeout: 30_000 });
     await expect(tarjeta).toContainText('Un comentario feo');
     await expect(tarjeta).toContainText('Me ha faltado al respeto');
-    await expect(tarjeta).toContainText('para que la revise Tentare');
+    await expect(tarjeta).toContainText('para que la revise Centra');
     // Sin cerrar conversación: en el tablón no hay ninguna.
     await expect(tarjeta.getByRole('button', { name: 'Cerrar conversación' })).toHaveCount(0);
     await expect(page.getByRole('region', { name: 'Lo que espera tu visto bueno' })

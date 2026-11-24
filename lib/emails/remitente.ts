@@ -1,6 +1,6 @@
 // RESEND_FROM en producción es una única dirección verificada para TODO el
-// producto (`Tentare <hola@tentare.es>`, ver docs/DEPLOY.md) — si un
-// *-server.ts hiciera `process.env.RESEND_FROM || 'Tentare Core <...>'`, el
+// producto (`Centra <hola@tentare.es>`, ver docs/DEPLOY.md) — si un
+// *-server.ts hiciera `process.env.RESEND_FROM || 'Centra Core <...>'`, el
 // nombre de marca por rol nunca se vería en producción: el env var gana
 // siempre y pisa el fallback entero. Esta función recompone el display name
 // sobre la MISMA dirección configurada, así que el remitente cambia por rol

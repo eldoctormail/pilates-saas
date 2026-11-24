@@ -132,7 +132,7 @@ const articulo: Articulo = {
           t: 'producto',
           titulo: 'La rentabilidad de cada clase, a la vista',
           texto:
-            'Tentare te enseña lo que ingresa cada clase menos lo que cuesta su instructora, con la tarifa por hora que pones a cada una.',
+            'Centra te enseña lo que ingresa cada clase menos lo que cuesta su instructora, con la tarifa por hora que pones a cada una.',
         },
       ],
     },
@@ -173,7 +173,7 @@ const articulo: Articulo = {
   cta: {
     titulo: 'Sabe cuánto te cuesta cada clase',
     texto:
-      'Con Tentare ves la rentabilidad de cada clase, lo que ingresa menos lo que cuesta su instructora, y organizas las sustituciones con tu visto bueno. Empieza gratis, sin tarjeta y sin permanencia.',
+      'Con Centra ves la rentabilidad de cada clase, lo que ingresa menos lo que cuesta su instructora, y organizas las sustituciones con tu visto bueno. Empieza gratis, sin tarjeta y sin permanencia.',
   },
   revision: [
     'Las escalas de UTEDYC cambian casi cada mes: actualizar la tabla con la escala vigente y, si es posible, citar el acuerdo homologado en lugar de un medio.',

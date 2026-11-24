@@ -12,7 +12,7 @@ import { LEGAL } from '@/lib/legal-info';
 import { G2_URL } from '@/lib/seo/g2';
 import { paginaDe, urlDe } from '@/lib/seo/paginas';
 
-// «Sobre Tentare» (fase 5b del rediseño, 23-sep): la página de entidad. Es lo
+// «Sobre Centra» (fase 5b del rediseño, 23-sep): la página de entidad. Es lo
 // primero que un buscador —y una persona— busca para saber quién hay detrás y si
 // es de fiar. Solo dice lo que es verificable en el propio sitio (titular y
 // domicilio del aviso legal, contacto, precio público, sin permanencia). Nada de
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   title: pagina.titulo,
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
-  openGraph: { siteName: 'Tentare', type: 'website', locale: 'es_ES', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
+  openGraph: { siteName: 'Centra', type: 'website', locale: 'es_ES', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
 };
 
 const PRINCIPIOS = [
@@ -49,8 +49,8 @@ const METODO = [
   'De otros programas solo contamos lo que consta en su web pública, con la fecha de la revisión. Si un dato no aparece, lo decimos así: «no consta».',
   'Los precios de los estudios salen de las tarifas que publican en su web: 32 estudios de 8 ciudades, revisados el 25 de septiembre de 2026.',
   'Cada guía dice cuándo se revisó por última vez.',
-  'Somos parte interesada: Tentare es un software para estudios. Cuando una guía o una comparativa habla de Tentare, lo dice.',
-  'Antes de publicarse, esas guías pasan una comprobación automática: que cada tabla de cifras diga de dónde salen, que cada fuente lleve su fecha, que sus enlaces existan y que no usen ninguna de las frases sobre Tentare que tenemos marcadas como no ciertas.',
+  'Somos parte interesada: Centra es un software para estudios. Cuando una guía o una comparativa habla de Centra, lo dice.',
+  'Antes de publicarse, esas guías pasan una comprobación automática: que cada tabla de cifras diga de dónde salen, que cada fuente lleve su fecha, que sus enlaces existan y que no usen ninguna de las frases sobre Centra que tenemos marcadas como no ciertas.',
 ];
 
 const DATOS_PROPIOS = [
@@ -82,15 +82,15 @@ export default function SobreTentarePage() {
   return (
     <PageShell>
       <OrganizationStructuredData />
-      <PageBreadcrumb path={PATH} name="Sobre Tentare" />
+      <PageBreadcrumb path={PATH} name="Sobre Centra" />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld).replace(/</g, '\\u003c') }} />
       <IslaWeb />
 
       <header className="st-cab">
         <div className="st-ancho">
-          <h1 className="st-h1">Sobre Tentare.</h1>
+          <h1 className="st-h1">Sobre Centra.</h1>
           <p className="st-entrada">
-            Tentare es un software de gestión para estudios de Pilates y yoga en España: reservas, cobros, bonos y sustituciones de instructoras, en un solo panel y con una app con la marca de cada estudio para sus alumnas.
+            Centra es un software de gestión para estudios de Pilates y yoga en España: reservas, cobros, bonos y sustituciones de instructoras, en un solo panel y con una app con la marca de cada estudio para sus alumnas.
           </p>
         </div>
       </header>
@@ -99,7 +99,7 @@ export default function SobreTentarePage() {
         <section id="quien" className="st-bloque">
           <h2>Quién está detrás</h2>
           <p>
-            Tentare la fundó y la mantiene <strong><Link href="/blog/marcos-roca">{LEGAL.titular}</Link></strong>, desde {LEGAL.domicilio}. Es también quien firma las guías de{' '}
+            Centra la fundó y la mantiene <strong><Link href="/blog/marcos-roca">{LEGAL.titular}</Link></strong>, desde {LEGAL.domicilio}. Es también quien firma las guías de{' '}
             <Link href="/recursos">recursos</Link>. Los datos del titular, tal como exige la ley, están en el <Link href="/legal">aviso legal</Link>.
           </p>
           <p className="st-enlaces">

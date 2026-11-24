@@ -37,7 +37,7 @@ import { pagaAddonsAparte } from '@/lib/billing/entitlements';
 import { SIN_PLAN_DECISIONES } from '@/lib/decision/plan-decisiones';
 
 // Centro de Control — reorganizado como sistema de decisiones, no como lista
-// de todo lo que Tentare sabe (petición explícita 2026-08-18). Jerarquía fija
+// de todo lo que Centra sabe (petición explícita 2026-08-18). Jerarquía fija
 // al desplegar "Ver todo el detalle": Recomendaciones de hoy (una sola lista
 // de situaciones, PR3) → Cómo trabajo para ti (Piloto automático + Mi
 // Equipo, PR4) → Riesgos → Actividad. Fuera del desplegable, siempre
@@ -274,7 +274,7 @@ export default function CentroDeControlPage() {
     if (!mensaje) return null;
     const socia = socios.find(s => s.id === r.socioId);
     // Una oferta a quien no ha aceptado recibirlas: el chat se abre SIN la oferta
-    // escrita. La tarjeta dice «Tentare no le envía este mensaje» y redactárselo
+    // escrita. La tarjeta dice «Centra no le envía este mensaje» y redactárselo
     // para mandarlo en un toque sería lo mismo por otra puerta (LSSI art. 21).
     return enlaceWhatsApp(socia?.telefono, r.sinPermisoOfertas ? '' : mensaje.cuerpo);
   }
@@ -369,7 +369,7 @@ export default function CentroDeControlPage() {
         </div>
       </div>
 
-      {/* «Pregúntale a Tentare»: abre el panel del asistente. El veredicto sigue
+      {/* «Pregúntale a Centra»: abre el panel del asistente. El veredicto sigue
           siendo lo primero de la pantalla: la barra no empuja nada. */}
       <BarraPreguntar />
 

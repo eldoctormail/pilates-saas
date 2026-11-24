@@ -5,7 +5,7 @@ import { remitentePorMarca } from '@/lib/emails/remitente';
 import { LEGAL } from '@/lib/legal-info';
 
 // Aviso a la propietaria del estudio de un fallo de cobro de SU PROPIA
-// suscripción a Tentare (`invoice.payment_failed` del webhook de billing —
+// suscripción a Centra (`invoice.payment_failed` del webhook de billing —
 // distinto del webhook de Connect, que avisa de fallos de cobro a SUS
 // socias). Sin esto, el primer fallo era invisible hasta que el estudio se
 // suspendía. Best-effort: nunca debe romper el webhook.
@@ -29,7 +29,7 @@ export async function enviarEmailFalloPagoSaas(params: {
     const { error } = await resend.emails.send({
       // `remitentePorMarca` y no `RESEND_FROM` a secas: es el único sitio que
       // recompone el nombre visible sobre la dirección verificada.
-      from: remitentePorMarca('Tentare'),
+      from: remitentePorMarca('Centra'),
       to: [params.to],
       subject: `No hemos podido cobrar tu suscripción — plan ${params.plan}`,
       html,

@@ -233,7 +233,7 @@ test.describe('Datos del estudio: guardar una cosa no borra ni manda otra', () =
 // ─── Cobros ──────────────────────────────────────────────────────────────────
 
 function togglePermitirDevolver(page: Page) {
-  return page.getByRole('switch', { name: 'Permitir devolver desde Tentare' });
+  return page.getByRole('switch', { name: 'Permitir devolver desde Centra' });
 }
 
 // Devoluciones tiene su cajón (15-sep, v2), y SEPA el suyo: ya no conviven en
@@ -250,7 +250,7 @@ test.describe('Cobros: Devoluciones, en su cajón', () => {
     await page.getByRole('spinbutton').fill('30');
     await page.getByRole('button', { name: 'Guardar', exact: true }).click();
 
-    const pregunta = page.getByRole('dialog', { name: '¿Permitir devolver desde Tentare?' });
+    const pregunta = page.getByRole('dialog', { name: '¿Permitir devolver desde Centra?' });
     await expect(pregunta).toContainText('hasta 30 días');
     expect(patches).toHaveLength(0);
     await pregunta.getByRole('button', { name: 'Sí, permitirlo' }).click();

@@ -38,7 +38,7 @@ export default function Contenido() {
 
       <AyudaResultado>
         Esto es lo que mandas <strong>tú</strong>. Lo que sale solo —recordatorios, avisos de bono a punto de
-        acabar— lo hace Tentare de serie, sin configurar nada (ver{' '}
+        acabar— lo hace Centra de serie, sin configurar nada (ver{' '}
         <Link href="/ayuda/automatizaciones/recordatorios-automaticos" style={{ color: 'inherit', textDecoration: 'underline' }}>avisos automáticos</Link>), y lo que ya se ha
         enviado se comprueba en el{' '}
         <Link href="/ayuda/automatizaciones/registro-de-envios" style={{ color: 'inherit', textDecoration: 'underline' }}>registro de envíos</Link>.

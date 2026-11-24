@@ -98,8 +98,8 @@ test('estadoDeHoy: un problema en una clase terminada no se duerme, y otro día 
   assert.equal(estadoDeHoy({ ...base, fallo: true, clases: [] }), 'reposo', 'una agenda que no carga no es un estudio que descansa');
 });
 
-test('la frase de dormido dice que Tentare sigue: nunca se lee «Tentare apagado»', () => {
-  for (const f of Object.values(FRASE_DORMIDO)) assert.match(f, /Tentare sigue/);
+test('la frase de dormido dice que Centra sigue: nunca se lee «Centra apagado»', () => {
+  for (const f of Object.values(FRASE_DORMIDO)) assert.match(f, /Centra sigue/);
   const sin = fraseDeHoy({ resumen: { problemas: 0, alumnas: 0 }, clases: [], primerasVeces: 0, record: false, estado: 'dormido' });
   assert.equal(sin?.texto, FRASE_DORMIDO.sinClases);
   const fin = fraseDeHoy({
@@ -112,9 +112,9 @@ test('la frase de dormido dice que Tentare sigue: nunca se lee «Tentare apagado
 test('fraseDeHoy: primero quien viene por primera vez, luego lo encontrado, el récord y el descanso', () => {
   const clases = [{ finalizada: false, estado: 'OK', huecos: 3 }] as never;
   assert.deepEqual(fraseDeHoy({ resumen: { problemas: 0, alumnas: 12 }, clases, primerasVeces: 0, record: false, estado: 'reposo' }),
-    { texto: 'Tentare ha encontrado 1 clase con hueco que puedes llenar.', soloHuecos: true });
+    { texto: 'Centra ha encontrado 1 clase con hueco que puedes llenar.', soloHuecos: true });
   assert.equal(fraseDeHoy({ resumen: { problemas: 0, alumnas: 12 }, clases, primerasVeces: 2, record: true, estado: 'reposo' })?.texto,
-    '2 clientes vienen hoy por primera vez. Tentare ha encontrado 1 clase con hueco que puedes llenar. Hoy es el día con más clientes desde que usas Tentare (12).');
+    '2 clientes vienen hoy por primera vez. Centra ha encontrado 1 clase con hueco que puedes llenar. Hoy es el día con más clientes desde que usas Centra (12).');
   assert.equal(fraseDeHoy({ resumen: { problemas: 0, alumnas: 0 }, clases: [], primerasVeces: 1, record: false, estado: 'dormido' })?.texto,
     `Un cliente ha venido hoy por primera vez. ${FRASE_DORMIDO.sinClases}`);
   assert.equal(fraseDeHoy({ resumen: { problemas: 0, alumnas: 0 }, clases: [{ finalizada: false, estado: 'OK', huecos: 0 }] as never, primerasVeces: 0, record: false, estado: 'reposo' }), null);

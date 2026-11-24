@@ -126,7 +126,7 @@ for (const vista of VISTAS) {
       await expect(page.getByRole('switch', { name: 'Avisos a los clientes' })).toHaveAttribute('aria-checked', 'true');
       // Lo que es de serie ya no es un grupo de filas aparte: va en el cajón de su regla.
       await expect(page.locator('[data-fila-informativa]')).toHaveCount(0);
-      await expect(page.getByText('Cuando algo cambia, Tentare…')).toHaveCount(0);
+      await expect(page.getByText('Cuando algo cambia, Centra…')).toHaveCount(0);
       expect(await desborde(page), 'Reservas se sale de lado').toBeLessThanOrEqual(0);
 
       await page.locator('#cancelar-y-recuperar').click();

@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// Prompt del outreach en frío de Tentare (panel interno, /interno/crecimiento).
+// Prompt del outreach en frío de Centra (panel interno, /interno/crecimiento).
 //
 // El encargo es que el correo se lea como escrito a mano. Eso NO se consigue
 // pidiendo "que suene humano" —así salen los correos que empiezan con "Espero
@@ -42,9 +42,9 @@ const precios = () => [
   `${PLAN_INFO.CADENA.nombre} ${conMoneda(PLAN_INFO.CADENA.precioMes)}/mes, para varias sedes`,
 ].join(' · ');
 
-export const PROSPECCION_EMAIL_SYSTEM_PROMPT = `Escribes correos de venta en frío para Tentare, un software español de gestión para estudios de Pilates. Los firma Marcos, el fundador.
+export const PROSPECCION_EMAIL_SYSTEM_PROMPT = `Escribes correos de venta en frío para Centra, un software español de gestión para estudios de Pilates. Los firma Marcos, el fundador.
 
-QUÉ ES TENTARE (solo esto es cierto, no añadas nada más):
+QUÉ ES CENTRA (solo esto es cierto, no añadas nada más):
 - Software de gestión para estudios de Pilates en España: reservas online, calendario con salas, bonos y cuotas, cobros recurrentes con tarjeta (y la remesa SEPA preparada para que el estudio la presente en su banco, si cobra por domiciliación), y facturas con numeración legal. Veri*Factu (la huella, el QR y el envío a la AEAT) todavía no está activo: no lo prometas.
 - Sustitución de instructoras integrada: cuando una instructora no puede dar su clase, el sistema propone candidatas según disponibilidad real y costumbre horaria, en vez de que alguien lo resuelva por WhatsApp. No digas que no lo tiene nadie más: otros programas también lo anuncian.
 - Portal de marca para los clientes (web instalable en el móvil, con el logo y los colores del estudio). NO es una app nativa de App Store ni Google Play.
@@ -65,7 +65,7 @@ CÓMO ESCRIBIR:
 - Empieza por el motivo real de escribir, no por presentarte ni por un saludo de relleno.
 - UN solo problema concreto, el que más encaje con su ficha. Nunca una lista de funcionalidades.
 - Cierra con una pregunta pequeña y fácil de contestar (una llamada corta, enseñarlo en 15 minutos). Sin urgencia falsa ni ofertas que caducan.
-- Firma como "Marcos — Tentare".
+- Firma como "Marcos — Centra".
 
 PROHIBIDO:
 - "Espero que este mensaje te encuentre bien", "me pongo en contacto contigo", "no dudes en".

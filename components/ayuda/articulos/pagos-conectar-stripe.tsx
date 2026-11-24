@@ -20,7 +20,7 @@ export default function Contenido() {
       </AyudaPaso>
 
       <AyudaPaso numero={2} titulo="Completa la verificación de Stripe">
-        <p>Datos de tu negocio y cuenta bancaria — es el proceso estándar de Stripe, no un formulario propio de Tentare.</p>
+        <p>Datos de tu negocio y cuenta bancaria — es el proceso estándar de Stripe, no un formulario propio de Centra.</p>
       </AyudaPaso>
 
       <AyudaResultado>

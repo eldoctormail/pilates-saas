@@ -184,7 +184,7 @@ function argentinoE164(digitos: string, teniaPrefijoIntl: boolean): string | nul
 /**
  * Enlace wa.me con el mensaje prerrellenado. `telefono` puede venir con +,
  * espacios, etc. Con `cuerpo` vacío abre el chat SIN texto: lo que se usa con
- * una oferta a quien no ha aceptado recibirlas (Tentare no le redacta la oferta).
+ * una oferta a quien no ha aceptado recibirlas (Centra no le redacta la oferta).
  */
 export function enlaceWhatsApp(telefono: string | null | undefined, cuerpo: string): string | null {
   const e164 = telefonoE164(telefono);

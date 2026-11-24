@@ -7,7 +7,7 @@ import { resolverDestinoPostLogin, resolverAccesoPorProducto, type Producto } fr
 // sesión" — docs/NETWORK-AUDIT-2.md §2/§11. Antes esto no existía: cada
 // pantalla de auth hacía su propio redirect duro, y /login siempre mandaba a
 // /dashboard sin mirar si la cuenta tenía estudio de verdad. Una cuenta de
-// Tentare Network (sin studio_id, sin fila en instructores) se quedaba en un
+// Centra Network (sin studio_id, sin fila en instructores) se quedaba en un
 // skeleton infinito ahí — no un bug de UI, un bug de "a quién le pregunto".
 //
 // verificarSesionStaff ya es la respuesta correcta a "¿esta auth_user_id

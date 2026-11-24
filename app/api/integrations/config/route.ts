@@ -49,7 +49,7 @@ export async function GET(req: NextRequest) {
     const { token: _token, ...resto } = config;
     return NextResponse.json({ config: resto });
   }
-  // USC por API solo existe cuando Tentare tiene sus credenciales de
+  // USC por API solo existe cuando Centra tiene sus credenciales de
   // integrador: hasta entonces la pantalla no pide datos que no servirían. Y un
   // estudio sin contrato o suspendido no publica aunque esté conectado: la
   // pantalla tiene que decirlo en vez de «van solos» (lib/plataformas/venta-externa.ts).

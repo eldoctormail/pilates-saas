@@ -97,7 +97,7 @@ const articulo: Articulo = {
         {
           t: 'llamada',
           texto:
-            'En Tentare la alumna paga su pack con Mercado Pago desde la app, y lo que se cobra en efectivo o por transferencia se apunta en el mostrador, en el mismo histórico.',
+            'En Centra la alumna paga su pack con Mercado Pago desde la app, y lo que se cobra en efectivo o por transferencia se apunta en el mostrador, en el mismo histórico.',
         },
       ],
     },
@@ -178,7 +178,7 @@ const articulo: Articulo = {
   cta: {
     titulo: 'Packs, abonos y clases sueltas en un mismo sitio',
     texto:
-      'En Tentare configuras packs, abonos mensuales y clases sueltas con su vencimiento, y tus alumnas reservan y pagan con Mercado Pago desde el teléfono. Empieza gratis, sin tarjeta.',
+      'En Centra configuras packs, abonos mensuales y clases sueltas con su vencimiento, y tus alumnas reservan y pagan con Mercado Pago desde el teléfono. Empieza gratis, sin tarjeta.',
   },
   revision: [
     'Las tarifas cambian cada pocos meses con la inflación: revisar las de Aditi y Allegra (y su fecha) antes de cada actualización del artículo.',

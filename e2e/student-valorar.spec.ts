@@ -99,7 +99,7 @@ test.describe('Student PWA · valorar la clase', () => {
   });
 
   // ── Reseñas con premio (21-nov-2026) ───────────────────────────────────────
-  // El premio es por valorar EN Tentare y se da con cualquier nota; el enlace de
+  // El premio es por valorar EN Centra y se da con cualquier nota; el enlace de
   // reseñas va a todas y no habla del premio. Ver lib/valoraciones/premio.ts.
   async function valorar(page: Page, estrellas: number) {
     await page.goto(`${base}/mis-reservas/${RESERVA_ID}`);

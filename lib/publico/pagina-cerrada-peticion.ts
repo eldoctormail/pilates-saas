@@ -11,7 +11,7 @@ import { nombreCookieAcceso, puertaPublica, respuestaPuertaPublica } from '@/lib
  * comprueba `lib/publico/puertas-publicas.test.ts` leyendo el código.
  *
  * El pase es la cookie HttpOnly que pone `/api/public/acceso-pagina`, así que
- * solo llega desde las páginas de Tentare (mismo origen). El calendario
+ * solo llega desde las páginas de Centra (mismo origen). El calendario
  * incrustado en la web del estudio no la manda: con la página oculta, desde
  * ahí no se reserva. Es lo decidido.
  *

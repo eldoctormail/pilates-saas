@@ -1,5 +1,5 @@
 // Plazas APARTADAS para una plataforma que vende a mano (ClassPass, decisión del
-// fundador del 7-oct-2026): mientras ella no las venda, desde Tentare no las coge
+// fundador del 7-oct-2026): mientras ella no las venda, desde Centra no las coge
 // nadie; X horas antes de la clase se liberan. La regla vive en la base de datos
 // (`plazas_apartadas`, migr 20261007164222); aquí, lo que la pantalla necesita.
 import { diaEnEstudio } from '../calendario-hora-estudio.ts';

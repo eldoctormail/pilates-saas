@@ -95,11 +95,11 @@ export const PORTADAS_ARTICULOS: Record<string, PortadaRecursos> = {
   'nombres-para-estudio-de-pilates': portada('libreta-boligrafo-nombres-estudio-pilates', '28-nombres-para-estudio-de-pilates.jpg',
     'Una libreta en blanco con un bolígrafo sobre una mesa de madera', 'Kelly Sikkema', 'e0djo08-Ev8'),
   // Captura del calendario del panel (la misma de /funcionalidades/calendario-y-salas,
-  // con datos de demostración). `fuente: 'Tentare'` hace que el pie diga «Captura
-  // del panel de Tentare» en vez de «Foto: … en …».
+  // con datos de demostración). `fuente: 'Centra'` hace que el pie diga «Captura
+  // del panel de Centra» en vez de «Foto: … en …».
   'como-gestionar-un-estudio-de-pilates': conCredito('calendario-semanal-panel-gestionar-estudio-pilates', '29-como-gestionar-un-estudio-de-pilates.jpg',
-    'Calendario semanal de un estudio de pilates en el panel de Tentare, con la ocupación media de la semana y las clases de reformer, mat y prenatal',
-    { autor: 'Tentare', fuente: 'Tentare', url: `${LEGAL.url}/funcionalidades/calendario-y-salas`, licencia: 'Captura propia', fechaDescarga: '2026-10-07' }),
+    'Calendario semanal de un estudio de pilates en el panel de Centra, con la ocupación media de la semana y las clases de reformer, mat y prenatal',
+    { autor: 'Centra', fuente: 'Centra', url: `${LEGAL.url}/funcionalidades/calendario-y-salas`, licencia: 'Captura propia', fechaDescarga: '2026-10-07' }),
   'precios-reformer-mat': conCredito('reformers-tapizado-negro-precios-reformer-mat', '30-precios-reformer-mat.jpg',
     'Fila de reformers de madera con tapizado negro en un estudio de pilates con columnas iluminadas',
     PAULINA_VARGAS('modern-pilates-studio-with-reformers-36833354')),

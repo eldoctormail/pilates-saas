@@ -155,7 +155,7 @@ const articulo: Articulo = {
         },
         {
           t: 'p',
-          texto: '**Datos de salud.** Un cuestionario de salud (lesiones, embarazo, patologías) contiene datos de categoría especial para el RGPD: su tratamiento está prohibido salvo que se dé una excepción del artículo 9, como el consentimiento explícito de la alumna (AEPD). Pide solo lo que vayas a usar, explica para qué y guárdalo bien. En Tentare, la ficha de cada alumna guarda su información de salud junto con el consentimiento que dio para tratarla; qué preguntas y para qué las usas lo decide el estudio, que es el responsable del tratamiento.',
+          texto: '**Datos de salud.** Un cuestionario de salud (lesiones, embarazo, patologías) contiene datos de categoría especial para el RGPD: su tratamiento está prohibido salvo que se dé una excepción del artículo 9, como el consentimiento explícito de la alumna (AEPD). Pide solo lo que vayas a usar, explica para qué y guárdalo bien. En Centra, la ficha de cada alumna guarda su información de salud junto con el consentimiento que dio para tratarla; qué preguntas y para qué las usas lo decide el estudio, que es el responsable del tratamiento.',
         },
         {
           t: 'p',
@@ -205,7 +205,7 @@ const articulo: Articulo = {
         },
         {
           t: 'producto',
-          titulo: 'Tentare, el software de gestión para estudios de Pilates',
+          titulo: 'Centra, el software de gestión para estudios de Pilates',
           texto: 'Reservas, lista de espera, bonos, cobros y facturas desde el primer día, y cuando una instructora no puede venir busca sustituta por ti. Empieza gratis, sin tarjeta.',
         },
       ],
@@ -220,7 +220,7 @@ const articulo: Articulo = {
         },
         {
           t: 'p',
-          texto: 'Tentare emite facturas con numeración legal correlativa, sin huella ni QR: Veri*Factu (la huella, la firma y el envío a la AEAT) todavía no está activo en ningún estudio. Con otro programa, pregunta a tu proveedor cuándo se adapta.',
+          texto: 'Centra emite facturas con numeración legal correlativa, sin huella ni QR: Veri*Factu (la huella, la firma y el envío a la AEAT) todavía no está activo en ningún estudio. Con otro programa, pregunta a tu proveedor cuándo se adapta.',
         },
       ],
     },
@@ -293,7 +293,7 @@ const articulo: Articulo = {
   ],
   cta: {
     titulo: 'Con los papeles en regla, que la gestión no te quite horas',
-    texto: 'Tentare lleva las reservas, los bonos, los cobros y las facturas de tu estudio desde el primer día, con la ficha de salud de cada alumna. Empieza gratis, sin tarjeta.',
+    texto: 'Centra lleva las reservas, los bonos, los cobros y las facturas de tu estudio desde el primer día, con la ficha de salud de cada alumna. Empieza gratis, sin tarjeta.',
   },
   revision: [
     'La DGT publicó en mayo de 2026 la consulta V1288-26 (967.2 frente a actividad profesional, en entrenamiento personal); no se pudo leer el texto oficial porque la base de datos de la DGT no respondía. Revisar si matiza el criterio de V2661-14.',

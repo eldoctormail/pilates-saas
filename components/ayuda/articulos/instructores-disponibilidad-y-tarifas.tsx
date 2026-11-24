@@ -7,7 +7,7 @@ export default function Contenido() {
       <h2 style={{ fontSize: 18, fontWeight: 700, margin: '4px 0 12px' }}>Disponibilidad</h2>
       <p>
         Cada instructora pone su propia disponibilidad semanal desde la app del estudio — no tienes que
-        preguntársela ni cargarla tú. Es lo que usa Tentare para sugerir candidatas cuando hay que cubrir una clase (ver{' '}
+        preguntársela ni cargarla tú. Es lo que usa Centra para sugerir candidatas cuando hay que cubrir una clase (ver{' '}
         <Link href="/ayuda/instructores/sustituciones" style={{ color: 'inherit', textDecoration: 'underline' }}>sustituciones</Link>). Si tu estudio lo permite, además puede crear sus propias clases.
       </p>
       <p>

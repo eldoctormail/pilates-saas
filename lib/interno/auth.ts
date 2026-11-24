@@ -78,7 +78,7 @@ export async function comprobarAdminInterno(
     admin: {
       userId: usuario.userId,
       email: usuario.email,
-      nombre: (fila.nombre as string | null) ?? 'Equipo Tentare',
+      nombre: (fila.nombre as string | null) ?? 'Equipo Centra',
       cargo: (fila.cargo as string | null) ?? null,
       permisos: (permisos ?? []).map(p => p.permiso as string),
       nivel,
@@ -87,7 +87,7 @@ export async function comprobarAdminInterno(
 }
 
 // Igual que `comprobarAdminInterno`, para quien solo necesita saber si entra.
-// null en cualquier otro caso — incluido "es un usuario legítimo de Tentare
+// null en cualquier otro caso — incluido "es un usuario legítimo de Centra
 // pero no es del equipo interno", que es el caso que más importa distinguir.
 export async function verificarAdminInterno(req: NextRequest): Promise<AdminInterno | null> {
   const r = await comprobarAdminInterno(req);

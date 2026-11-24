@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
   if (!admin) return NextResponse.json({ error: 'Servidor no configurado' }, { status: 503 });
 
   // Solo quien gestiona el calendario. La instructora cancelaba reservas de sus
-  // clases desde el panel; con Tentare Core retirado (14-sep-2026) eso es trabajo
+  // clases desde el panel; con Centra Core retirado (14-sep-2026) eso es trabajo
   // de mostrador y aquí recibe 403 como cualquier otro rol sin permiso.
   if (!puedeGestionarCalendario(sesion.rol)) {
     return NextResponse.json({ error: 'No autorizado' }, { status: 403 });

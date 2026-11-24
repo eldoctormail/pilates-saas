@@ -23,7 +23,7 @@ import { AVISO_SOLO_MIRAR, enMarcoSoloMirar } from '@/lib/student/solo-mirar';
 
 /**
  * La puerta del estudio (P08): tu correo, un código de 6 cifras en casillas que
- * el iPhone rellena solo, y dentro. Igual que la entrada de la app Tentare
+ * el iPhone rellena solo, y dentro. Igual que la entrada de la app Centra
  * (`/app`), con la portada del estudio encima (acceso/layout.tsx).
  *
  * UNA puerta para entrar y para darse de alta: el código lo manda

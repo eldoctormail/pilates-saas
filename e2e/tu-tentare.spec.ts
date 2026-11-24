@@ -3,7 +3,7 @@ import { montar, ir } from './panel-sembrado';
 import { accesoProducto, tieneFeature } from '../lib/billing/entitlements.ts';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// «Tu Tentare» (P2.5): el catálogo de módulos en Configuración › Tu panel.
+// «Tu Centra» (P2.5): el catálogo de módulos en Configuración › Tu panel.
 //
 // Entra APAGADO: sin el interruptor (o con cualquier respuesta rara) la sección
 // es exactamente la de antes. Encendido, el interruptor de cada módulo escribe
@@ -60,7 +60,7 @@ async function abrir(page: Page, o: {
 const fila = (page: Page, href: string) => page.locator(`[data-testid="modulo-tu-tentare"][data-modulo="${href}"]`);
 const enElMenu = (page: Page, nombre: string) => page.locator('aside').getByRole('link', { name: nombre, exact: true });
 
-test.describe('Configuración · Tu Tentare', () => {
+test.describe('Configuración · Tu Centra', () => {
   test.describe.configure({ timeout: 180_000 });
 
   test('apagado, o con cualquier respuesta rara: «Tu panel» es exactamente la de antes', async ({ page }) => {
@@ -80,7 +80,7 @@ test.describe('Configuración · Tu Tentare', () => {
     const tu = page.getByTestId('tu-tentare');
     await expect(tu.getByRole('heading', { name: 'Tus módulos' })).toBeVisible({ timeout: 60_000 });
     await expect(tu.getByTestId('modulo-tu-tentare')).toHaveCount(19);
-    for (const congelado of ['Chat de equipo', 'Oferta digital', 'Tentare Network']) await expect(tu.getByText(congelado)).toHaveCount(0);
+    for (const congelado of ['Chat de equipo', 'Oferta digital', 'Centra Network']) await expect(tu.getByText(congelado)).toHaveCount(0);
     await expect(tu.getByText(/próximamente/i)).toHaveCount(0);
     await expect(tu.getByText('No se puede quitar')).toHaveCount(2);
     await expect(fila(page, '/cobros').getByText(/Con tarjeta guardada se cobra sola; las domiciliaciones van en tu remesa al banco/)).toBeVisible();
@@ -178,7 +178,7 @@ test.describe('Configuración · Tu Tentare', () => {
   test('plan Founding: Centro de Control dice qué plan necesita (si `tieneFeature` dice que falta) y se pone y se quita igual que en el cajón', async ({ page }) => {
     const cuenta = await abrir(page, { plan: 'BASE', ocultos: ['/centro-de-control'] });
     const cdc = fila(page, '/centro-de-control');
-    // La misma cifra que la fila «Tu menú»: 19 módulos (con Festivos, 14-oct, y Apps e integraciones, y sin Actualizaciones, 12-nov ni Plan de Tentare, 22-nov), uno quitado.
+    // La misma cifra que la fila «Tu menú»: 19 módulos (con Festivos, 14-oct, y Apps e integraciones, y sin Actualizaciones, 12-nov ni Plan de Centra, 22-nov), uno quitado.
     await expect(page.getByText('En tu menú: 18 de 19.')).toBeVisible({ timeout: 60_000 });
     const base = { plan: 'BASE', subscriptionStatus: 'active' };
     const falta = accesoProducto(base) && !tieneFeature(base, 'decisiones');
@@ -219,7 +219,7 @@ test.describe('Configuración · Tu Tentare', () => {
   });
 });
 
-test.describe('Configuración · Tu Tentare, móvil', () => {
+test.describe('Configuración · Tu Centra, móvil', () => {
   test.describe.configure({ timeout: 180_000 });
   test.use({ viewport: { width: 390, height: 844 } });
 

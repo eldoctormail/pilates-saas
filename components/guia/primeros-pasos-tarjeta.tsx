@@ -51,7 +51,7 @@ export function PrimerosPasosTarjeta() {
     salas, planesTarifa, suscripciones, automationRules, bannersPortal,
   });
   const p = primerosPasos(calcularOnboarding(datos).categorias);
-  const soporte = enlaceWhatsApp(SOPORTE_WHATSAPP, `Hola, soy de ${studio.nombre ?? 'mi estudio'} y estoy poniendo en marcha Tentare:`);
+  const soporte = enlaceWhatsApp(SOPORTE_WHATSAPP, `Hola, soy de ${studio.nombre ?? 'mi estudio'} y estoy poniendo en marcha Centra:`);
   const terminado = p.siguiente === null;
   const pct = Math.round((p.hechas / p.total) * 100);
 
@@ -248,7 +248,7 @@ const FONDO_BANNER =
   'linear-gradient(120deg, color-mix(in srgb, var(--t-blue-500) 22%, var(--card)) 0%, color-mix(in srgb, var(--t-magenta-500) 16%, var(--card)) 100%)';
 
 /**
- * El dibujo del banner, hecho con piezas de Tentare (como Bonsai dibuja con las
+ * El dibujo del banner, hecho con piezas de Centra (como Bonsai dibuja con las
  * suyas): una clase que se llena y el aviso de una reserva nueva. Decorativo.
  */
 function Ilustracion() {

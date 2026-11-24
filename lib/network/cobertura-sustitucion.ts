@@ -1,6 +1,6 @@
-// Sustitución agotada → profesional de Tentare Network → clase asignada.
+// Sustitución agotada → profesional de Centra Network → clase asignada.
 //
-// Decisión del fundador: Tentare propone, la propietaria pide con un toque
+// Decisión del fundador: Centra propone, la propietaria pide con un toque
 // (#1979), la profesional acepta, se formaliza por el flujo que ya existía
 // (ficha `temporal` en el equipo, visible en Equipo y en la liquidación) y
 // entonces se le asigna la clase por la MISMA vía que a cualquier instructora

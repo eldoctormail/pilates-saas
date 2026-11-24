@@ -39,7 +39,7 @@ test('un rebote permanente marca la dirección', () => {
 
 test('una supresión también: es el caso que «funciona» y no llega', () => {
   // Resend contesta 200 con un id y descarta el envío. Sin este evento, la
-  // única señal que tenía Tentare era la de éxito.
+  // única señal que tenía Centra era la de éxito.
   const efecto = interpretarEventoResend({
     type: 'email.suppressed',
     data: { ...BASE, to: ['socia.suprimida@example.com'], suppressed: { type: 'bounce', message: 'On the suppression list' } },

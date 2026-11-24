@@ -283,7 +283,7 @@ function CitaCard({
 export default function CitasPage() {
   const { socios, instructores, citas, sesiones, addCita, updateCita, completarCita, cancelarCita, crearFacturaDirecta, studio } = useStudio();
   const panelNuevo = usePanelNuevo();
-  // Con el estudio sin facturas desde Tentare, cobrar una cita deja su recibo y
+  // Con el estudio sin facturas desde Centra, cobrar una cita deja su recibo y
   // nada más: los textos no pueden prometer una factura.
   const emiteFacturas = emiteFacturasDelEstudio(studio?.modoFacturacion);
   const rol = useRol();

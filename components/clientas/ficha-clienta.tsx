@@ -2359,7 +2359,7 @@ export function FichaClienta({ id, modo = 'pagina' }: {
                         </table>
                       </div>
                       <p className="text-[11px] text-muted-foreground mt-2">
-                        Importados de la plataforma anterior — no son recibos de Tentare y no entran en el cierre fiscal.
+                        Importados de la plataforma anterior — no son recibos de Centra y no entran en el cierre fiscal.
                       </p>
                     </div>
                   )}

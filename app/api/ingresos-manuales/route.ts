@@ -9,7 +9,7 @@ import { puedeMoverDinero } from '@/lib/permisos-reglas';
 import { fetchAllRows } from '@/lib/supabase-data';
 import { avisarAuditoria, registrarAuditoriaServidor } from '@/lib/auditoria/registrar-servidor';
 
-// CRUD de ingresos cobrados FUERA de Tentare que el estudio añade al cierre de
+// CRUD de ingresos cobrados FUERA de Centra que el estudio añade al cierre de
 // año (efectivo, transferencia, otra plataforma…). Solo staff autenticado; el
 // studio_id sale SIEMPRE del JWT (nunca del body) y toda operación se acota a
 // ese estudio, con service-role. Base y cuota de IVA se calculan en el servidor

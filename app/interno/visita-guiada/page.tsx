@@ -146,7 +146,7 @@ export default function VisitaGuiadaInterno() {
                 {confirmando === 'activar-todos' && afectados.some(e => e.paga) && (
                   <p className="mt-2 text-[12.5px] leading-relaxed text-foreground">
                     Ojo: {afectados.filter(e => e.paga).length} de ellos <span className="font-semibold">ya pagan</span>. La visita son ~53 minutos que la propietaria no puede cerrar;
-                    para quien ya trabaja con Tentare puede resultar pesado. Si prefieres, actívala estudio a estudio.
+                    para quien ya trabaja con Centra puede resultar pesado. Si prefieres, actívala estudio a estudio.
                   </p>
                 )}
                 <div className="mt-3 flex flex-wrap gap-2">

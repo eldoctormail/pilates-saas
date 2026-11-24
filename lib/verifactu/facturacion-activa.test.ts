@@ -17,7 +17,7 @@ test('ofrecerAlta: con el alta abierta, a cualquier estudio, también al que no 
 
 test('pasoDelAlta: cada estado previo a la activación dice qué falta', () => {
   assert.match(pasoDelAlta('PENDIENTE_AUTORIZACION'), /Falta tu autorización/);
-  assert.match(pasoDelAlta('VERIFICADO'), /falta que Tentare active el envío/);
+  assert.match(pasoDelAlta('VERIFICADO'), /falta que Centra active el envío/);
 });
 
 test('finDePermanencia: el 31 de diciembre del año en curso, en hora de Madrid', () => {

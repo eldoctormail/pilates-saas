@@ -4,7 +4,7 @@
 // todavía, así que es el único paso que no vive dentro del layout con rail
 // (ver app/network/crear-perfil/page.tsx, que renderiza esto ANTES del
 // `if (!user) return null` implícito del resto del wizard). Extraído tal
-// cual — F0 del roadmap de Tentare Network 2.0, sin cambios de comportamiento.
+// cual — F0 del roadmap de Centra Network 2.0, sin cambios de comportamiento.
 import { useId } from 'react';
 import Link from 'next/link';
 import { LogoTentare } from '@/components/marca/logo-tentare';
@@ -52,7 +52,7 @@ export function PasoCuenta({
   if (emailOtp) {
     return (
       <ShellCentrado>
-        <Link href="/network" className="inline-flex mb-8"><LogoTentare formato="horizontal" tinta="tinta" producto="network" titulo="Tentare Network" alto={24} decorativo /></Link>
+        <Link href="/network" className="inline-flex mb-8"><LogoTentare formato="horizontal" tinta="tinta" producto="network" titulo="Centra Network" alto={24} decorativo /></Link>
         <OtpVerificacion
           email={emailOtp}
           onVerificar={codigo => verificarOtpSignup(emailOtp, codigo)}
@@ -70,7 +70,7 @@ export function PasoCuenta({
 
   return (
     <ShellCentrado>
-      <Link href="/network" className="inline-flex mb-8"><LogoTentare formato="horizontal" tinta="tinta" producto="network" titulo="Tentare Network" alto={24} decorativo /></Link>
+      <Link href="/network" className="inline-flex mb-8"><LogoTentare formato="horizontal" tinta="tinta" producto="network" titulo="Centra Network" alto={24} decorativo /></Link>
       {/* Antes solo había texto "Paso 1 de 12" — el resto del wizard (pasos
           2-12) sí tiene barra+lista completa en su rail; el primer contacto
           de la usuaria con el producto era, de todo el flujo, el que MENOS

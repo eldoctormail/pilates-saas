@@ -168,7 +168,7 @@ test('⚠️ "Tus datos"/"pago" ya NO dicen "Paso X de Y" — es un scroll conti
   await expect(page.getByRole('heading', { name: 'Tus datos' })).toBeVisible();
 });
 
-// Diseño "Tentare Portal Reservas": un solo campo "Nombre y apellido" a ancho
+// Diseño "Centra Portal Reservas": un solo campo "Nombre y apellido" a ancho
 // completo (ya no hay Nombre/Apellidos en dos columnas que puedan
 // estrangularse) — el que sí queda en dos columnas fijas es Email/Móvil, y a
 // 320px sigue teniendo sitio de sobra (placeholders cortos, a diferencia de
@@ -235,7 +235,7 @@ test('⚠️ rellenar el formulario no desplaza el encabezado ni añade salto de
 
   const despuesY = (await titulo.boundingBox())!.y;
   const despuesAlto = await page.evaluate(() => document.documentElement.scrollHeight);
-  // Tolerancia subida de 8 a 16px: el diseño "Tentare Portal Reservas" añadió
+  // Tolerancia subida de 8 a 16px: el diseño "Centra Portal Reservas" añadió
   // tres secciones nuevas a esta pantalla (Información adicional/Elige tu
   // plaza/Bonos), y con más DOM hay algo más de variación de sub-píxel entre
   // dos medidas — sigue siendo un orden de magnitud por debajo del defecto

@@ -29,7 +29,7 @@ import './fuentes.css';
 // ⚠️ El NOMBRE de cada constante es el `font-family` que genera
 // `next/font/local` (`Instrument_Sans`, `Instrument_Sans_Ext`). Los guiones
 // bajos no son estética: el checkout lee la primera familia de `--font-ui` y
-// con ella decide qué letra de Tentare le pasa al iframe de Stripe
+// con ella decide qué letra de Centra le pasa al iframe de Stripe
 // (`fuenteDelPago`, components/checkout-widget/checkout-embebido.tsx; nunca a
 // Google). `Instrument_Sans` no pasa `fuenteValida` (no admite `_`) y cae a su
 // literal 'Instrument Sans'; un `instrumentSans` sí pasaría y se nombraría una

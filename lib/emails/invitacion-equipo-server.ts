@@ -23,7 +23,7 @@ export async function enviarEmailInvitacionEquipo(params: {
   if (!params.to) return { ok: false, error: 'Sin destinatario' };
 
   try {
-    // Firma Tentare: `logoUrl`/`colorPrimario` se aceptan pero ya no pintan.
+    // Firma Centra: `logoUrl`/`colorPrimario` se aceptan pero ya no pintan.
     const html = correoInvitacionEquipo(params);
     const marca = nombreAppPorRol((params.rol as Rol) ?? 'INSTRUCTOR');
     const resend = new Resend(apiKey);

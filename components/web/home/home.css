@@ -4,7 +4,7 @@
    Lenguaje visual de Mariana Tek (calma tipográfica, foto a sangre con
    fragmentos del producto encima), bsport (el producto dibujado en un bento de
    radio 24, sin sombra, que sale por el borde de cada tarjeta) y Momence
-   (producto por resultados, filas alternas), con la identidad de Tentare.
+   (producto por resultados, filas alternas), con la identidad de Centra.
 
    Todo cuelga de `.wh` (el envoltorio de LandingCliente) y lleva el prefijo
    `wh-`: este CSS es global en Next (se queda al navegar) y no puede pisar nada
@@ -89,7 +89,7 @@
 .wh-boton:active { transform: scale(.98); }
 .wh-boton-primario { background: var(--wh-oliva); color: var(--wh-arena); }
 .wh-boton-primario:hover { background: var(--wh-oliva-hondo); }
-/* El botón de la demo personalizada: degradado en movimiento con los colores de Tentare (oliva y los dos del isotipo,
+/* El botón de la demo personalizada: degradado en movimiento con los colores de Centra (oliva y los dos del isotipo,
    verde azulado y magenta, en tonos que dan ≥ 4,5:1 con el texto crema). Sin movimiento con «reducir movimiento». */
 .wh-boton-demo { color: var(--wh-crema); letter-spacing: .06em; border-color: transparent;
   background: linear-gradient(110deg, #343825 0%, #2F7488 25%, #9A3F6B 50%, #2F7488 75%, #343825 100%); background-size: 300% 100%;
@@ -492,7 +492,7 @@
 }
 
 
-/* ── Antes / con Tentare (21-oct-2026): el deslizador de Mariana Tek, WhatsApp frente a la app ── */
+/* ── Antes / con Centra (21-oct-2026): el deslizador de Mariana Tek, WhatsApp frente a la app ── */
 .wh-ad { background: var(--wh-blanco); }
 .wh-ad-rejilla { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
 .wh-ad-visual { display: flex; flex-direction: column; align-items: center; gap: 18px; }

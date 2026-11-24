@@ -97,7 +97,7 @@ export function aplicarFiltro(
 /**
  * ¿Es reciente? Lo que se marca con «Nueva» en la lista.
  *
- * 14 días y no 7: Tentare publica casi cada semana, así que con una semana el
+ * 14 días y no 7: Centra publica casi cada semana, así que con una semana el
  * distintivo lo llevaría siempre la primera y no distinguiría nada. Con dos, hay
  * semanas en que lo llevan dos versiones y semanas en que no lo lleva ninguna —
  * que es justo lo que hace que signifique algo.

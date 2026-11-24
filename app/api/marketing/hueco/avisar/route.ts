@@ -170,7 +170,7 @@ export async function POST(req: NextRequest) {
     // reformers de baja, y la socia llegaba a una clase ya llena.
     const { data: aforoEfectivo } = await admin.rpc('aforo_efectivo', { p_sesion_id: sesionId });
     // Y sin las plazas apartadas para ClassPass: tampoco se pueden reservar desde
-    // Tentare hasta que se liberan. Sin poder leerlas, no se avisa a nadie.
+    // Centra hasta que se liberan. Sin poder leerlas, no se avisa a nadie.
     const { data: apartadas, error: errApartadas } = await admin.rpc('plazas_apartadas', { p_sesion_id: sesionId });
     if (errApartadas) {
       return NextResponse.json({ error: 'No se ha podido comprobar el hueco de esta clase. Inténtalo de nuevo.' }, { status: 503 });

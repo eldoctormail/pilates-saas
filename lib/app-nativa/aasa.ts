@@ -6,7 +6,7 @@
 //
 // Sin el Team ID de Apple no hay nada que publicar (404): no se sirve un fichero a
 // medias que iOS cachearía. Las apps por estudio salen de `apps_estudio` (las
-// activas, con la cuenta de Tentare); las de OTRO equipo de Apple, si algún día las hay,
+// activas, con la cuenta de Centra); las de OTRO equipo de Apple, si algún día las hay,
 // se añaden en APPLE_APP_IDS («TEAM.bundle», separadas por comas).
 
 /** `TEAMID.bundle.id` a partir de las variables de entorno, o `[]` si falta el equipo. */
@@ -24,7 +24,7 @@ export interface AppDeEstudioAasa { appId: string; slug: string }
  * `appsEstudio`: cada app de estudio reclama SOLO las rutas de su estudio
  * (`/portal/<slug>`), no `/app` ni `/portal/*`; la de una cadena, las de todas sus sedes (llegan
  * como varias entradas con el mismo `appId` y van en un solo bloque). Van ANTES de la entrada
- * general: iOS toma la primera que encaja, y si fuera detrás, `/portal/*` de la app «Tentare» se
+ * general: iOS toma la primera que encaja, y si fuera detrás, `/portal/*` de la app «Centra» se
  * las comería todas. Sin ninguna, el fichero es el de siempre.
  */
 export function contenidoAasa(appIds: readonly string[], appsEstudio: readonly AppDeEstudioAasa[] = []) {

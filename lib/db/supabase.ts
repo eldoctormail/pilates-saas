@@ -38,7 +38,7 @@ function clienteStaff(): SupabaseClient {
   //
   // ⚠️ '/network/acceso' se añadió el 2026-08-19 (separación Software/Network).
   // Es el equivalente de '/login' para el producto Network: el ÚNICO punto de
-  // retorno legítimo de un enlace de auth de Tentare Network (Google OAuth,
+  // retorno legítimo de un enlace de auth de Centra Network (Google OAuth,
   // que solo puede volver a una ruta de esta lista — ver el comentario de
   // arriba). No reabre el hallazgo #9: sigue siendo una ruta de STAFF con
   // nombre explícito en la lista, no un valor por defecto ni una página

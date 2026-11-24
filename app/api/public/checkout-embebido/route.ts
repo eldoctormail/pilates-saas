@@ -124,7 +124,7 @@ async function respuestaYaPagado(
 
 /**
  * P16: la sesión de cliente que deja enseñar (y guardar, con la casilla) sus tarjetas en el Payment Element. Solo
- * para la socia del TOKEN, con Customer y desde la app/portal de Tentare (nunca la web de un estudio). Si Stripe
+ * para la socia del TOKEN, con Customer y desde la app/portal de Centra (nunca la web de un estudio). Si Stripe
  * falla, se paga sin tarjetas guardadas: nunca bloquea el cobro.
  */
 async function sesionDeTarjetas(
@@ -196,7 +196,7 @@ export async function POST(req: NextRequest) {
     // Nunca decide el importe (siempre viene de plan.precio abajo) — solo
     // marca qué reservar después.
     sesionId?: string;
-    // "Elige tu plaza" (diseño "Tentare Portal Reservas"): el sitio concreto de
+    // "Elige tu plaza" (diseño "Centra Portal Reservas"): el sitio concreto de
     // la sala que la visitante escogió, si la sala tiene mapa de plazas. Nunca
     // decide el importe — solo viaja hasta reservar_plaza (p_spot_id) tras el
     // pago, con el mismo candado FOR UPDATE que ya usa el resto de la RPC.
@@ -241,7 +241,7 @@ export async function POST(req: NextRequest) {
   // F-30 (auditoría 20ª pasada): la sexta puerta por la que entra dinero —
   // mismo guardia que ya protege charge-off-session, pos-bizum,
   // terminal/cobrar y reembolsos, que aquí faltaba (y en su gemela
-  // /api/stripe/checkout). Sin él, un estudio con la suscripción a Tentare
+  // /api/stripe/checkout). Sin él, un estudio con la suscripción a Centra
   // caducada seguía cobrando a sus socias por el widget embebido.
   const bloqueo = await bloqueoPorSuscripcion(body.studioId);
   if (bloqueo) return conCorsWidget(req, bloqueo);

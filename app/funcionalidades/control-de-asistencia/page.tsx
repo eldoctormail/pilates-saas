@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: pagina.titulo,
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
-  openGraph: { siteName: 'Tentare', type: 'website', locale: 'es_ES', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
+  openGraph: { siteName: 'Centra', type: 'website', locale: 'es_ES', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
 };
 
 const FAQ = [
@@ -30,7 +30,7 @@ const FAQ = [
   },
   {
     q: '¿Puede alguien colarse con una captura del QR de otra?',
-    a: 'El QR solo dice quién es: al escanearlo, Tentare comprueba en ese momento si ella tiene plaza en esa clase, y si no la tiene no entra nadie. Quien escanea ve su nombre y su foto para comparar, un segundo escaneo avisa de que ya había entrado, y la alumna puede generar un QR nuevo desde su app si ha compartido una captura. En los estudios con Kisi la puerta no se abre sola: la abre quien está mirando.',
+    a: 'El QR solo dice quién es: al escanearlo, Centra comprueba en ese momento si ella tiene plaza en esa clase, y si no la tiene no entra nadie. Quien escanea ve su nombre y su foto para comparar, un segundo escaneo avisa de que ya había entrado, y la alumna puede generar un QR nuevo desde su app si ha compartido una captura. En los estudios con Kisi la puerta no se abre sola: la abre quien está mirando.',
   },
   {
     q: '¿Puedo cobrar por no presentarse?',
@@ -44,7 +44,7 @@ export default function AsistenciaPage() {
       path={PATH}
       busqueda="Control de asistencia para clases de Pilates y yoga"
       h1={<>Reservar no es venir.</>}
-      intro={<>Cada alumna lleva su QR en la app: lo escaneáis en la puerta y Tentare comprueba en ese momento si tiene plaza en su clase. O no escaneáis nada y la asistencia se marca sola. Y entérate de quién reserva y falla antes de que se te note en el aforo.</>}
+      intro={<>Cada alumna lleva su QR en la app: lo escaneáis en la puerta y Centra comprueba en ese momento si tiene plaza en su clase. O no escaneáis nada y la asistencia se marca sola. Y entérate de quién reserva y falla antes de que se te note en el aforo.</>}
       chips={['QR de acceso de cada alumna', 'Marcado automático al terminar', 'Riesgo de plantón graduado']}
       visual={<SemaforoDelAcceso />}
     >
@@ -84,7 +84,7 @@ export default function AsistenciaPage() {
           lleva su nombre ni sus datos, solo un código que el estudio lee con su sesión.
         </p>
         <p>
-          Lo importante pasa al escanearlo. Tentare mira <strong>en ese momento</strong> su reserva para la clase de ahora:
+          Lo importante pasa al escanearlo. Centra mira <strong>en ese momento</strong> su reserva para la clase de ahora:
           con reserva confirmada o plaza fija, entra; si está pendiente de aprobación, tiene la ficha desactivada o un
           recibo impagado, decide quien escanea; sin reserva, con la reserva cancelada o en lista de espera, no entra, y la
           pantalla dice por qué.

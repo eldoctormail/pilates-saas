@@ -6,8 +6,8 @@ import { SLUG, STUDIO_ID, AHORA, fixtureSociaLista } from './socia-lista';
 //
 // Lo que hacía antes, medido en el navegador con la API pública devolviendo
 // 500: pintaba la página ENTERA con aspecto normal —hero, pestañas, horario
-// vacío— usando los valores por defecto, que eran los de Tentare: nombre
-// «Tentare», teléfono «+34 951 000 000», email «hola@tentare.es» y una
+// vacío— usando los valores por defecto, que eran los de Centra: nombre
+// «Centra», teléfono «+34 951 000 000», email «hola@tentare.es» y una
 // dirección de ejemplo. Una clienta veía la página de reservas de SU estudio
 // anunciando otra empresa, sin un solo aviso de que algo hubiera fallado, y lo
 // único que podía concluir es que su estudio se había quedado sin clases.

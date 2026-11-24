@@ -5,7 +5,7 @@ import { ir, enOscuro, DECISIONES } from './panel-sembrado';
 import { barra, chat, campoChat, conAcciones, conAsistente, json, LISTA, ndjson, pedirAlAsistente, RESPUESTA, SEGUNDA, sugerencia } from './asistente-andamiaje';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// «Pregúntale a Tentare» en el iPhone (proyecto `webkit-publico`, iPhone 13).
+// «Pregúntale a Centra» en el iPhone (proyecto `webkit-publico`, iPhone 13).
 //
 // El fundador, desde su iPhone (6-oct-2026): «le das a escribir y se hace zoom,
 // le das a cualquier lado zoom, es 0 responsive». Lo que se vigila:
@@ -172,7 +172,7 @@ for (const tema of ['claro', 'oscuro'] as const) {
   });
 }
 
-// ── «Al darle a "Pregúntale a Tentare" vuelve a hacerse ese zoom» (6-oct, tras #2563) ──
+// ── «Al darle a "Pregúntale a Centra" vuelve a hacerse ese zoom» (6-oct, tras #2563) ──
 //
 // Medido en Safari de iOS 26.5 (simulador, con este mismo andamiaje servido por
 // un proxy): con el campo a 16 px NO hay zoom al enfocarlo, ni con la página

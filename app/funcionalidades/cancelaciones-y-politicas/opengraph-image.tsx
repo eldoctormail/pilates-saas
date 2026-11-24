@@ -1,6 +1,6 @@
 import { OG_IMAGE_CONTENT_TYPE, OG_IMAGE_SIZE, generarOgImage } from '@/lib/og-image';
 
-export const alt = 'Política de cancelación y no-shows para tu estudio — Tentare';
+export const alt = 'Política de cancelación y no-shows para tu estudio — Centra';
 export const size = OG_IMAGE_SIZE;
 export const contentType = OG_IMAGE_CONTENT_TYPE;
 

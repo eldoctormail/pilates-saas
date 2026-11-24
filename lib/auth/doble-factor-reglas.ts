@@ -24,7 +24,7 @@ export type NivelSesion = 'aal1' | 'aal2';
 export interface FactorDeUsuario { status?: string | null; factor_type?: string | null; friendly_name?: string | null }
 
 /**
- * El factor que `/interno` obliga a crear al equipo de Tentare (app/interno/mfa).
+ * El factor que `/interno` obliga a crear al equipo de Centra (app/interno/mfa).
  * Solo cuenta en la zona interna (decisión del fundador, 5-oct-2026): el factor
  * de Supabase es uno por cuenta, y con él se pedía el código en el panel y en
  * la app del estudio aunque la persona no la hubiera activado ahí.

@@ -218,10 +218,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // distingue en lib/auth/password-errores.ts.
     const contrasena = mensajeDePassword(error);
     if (contrasena) return contrasena;
-    // Fase 9/10: este Google ya es la identidad de OTRA cuenta de Tentare —
+    // Fase 9/10: este Google ya es la identidad de OTRA cuenta de Centra —
     // el caso que linkIdentity rechaza en vez de fusionar en silencio.
     if (m.includes('identity is already linked') || m.includes('already linked to another user')) {
-      return 'Esta cuenta de Google ya está conectada a otra cuenta de Tentare.';
+      return 'Esta cuenta de Google ya está conectada a otra cuenta de Centra.';
     }
     if (m.includes('manual linking is disabled')) {
       return 'Conectar cuentas no está disponible ahora mismo. Prueba de nuevo en unos minutos.';
@@ -263,7 +263,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // la instructora entraba a una pantalla en blanco, sin estudio asociado.
     // Le pasó a dos instructoras, y hubo que vincularlas a mano.
     // redirectPath por defecto sigue siendo /login (staff de estudio); el alta
-    // de Tentare Network pasa '/network/mi-perfil' porque esa cuenta no tiene
+    // de Centra Network pasa '/network/mi-perfil' porque esa cuenta no tiene
     // ficha de instructora que vincular — /login no sabría qué hacer con ella.
     const redirectTo = typeof window !== 'undefined' ? `${window.location.origin}${redirectPath}` : undefined;
     const { data, error } = await supabase.auth.signUp({
@@ -316,7 +316,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       provider: 'google',
       options: {
         ...(redirectTo ? { redirectTo } : {}),
-        // Solo lo mínimo que gotrue recomienda para autenticar — Tentare no
+        // Solo lo mínimo que gotrue recomienda para autenticar — Centra no
         // llama a ninguna API de Google, así que no hay motivo para pedir
         // más scope del que el propio proveedor ya exige por defecto.
         scopes: 'openid email profile',

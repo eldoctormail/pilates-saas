@@ -427,7 +427,7 @@ export async function copiarAlPortapapeles(texto: string): Promise<boolean> {
 }
 
 /**
- * "María Soler" → "María S." — la forma en que el kit "Tentare Studio App"
+ * "María Soler" → "María S." — la forma en que el kit "Centra Studio App"
  * nombra a la instructora en las filas del horario ("Marta G. · Studio Alma",
  * CHEATSHEET-CSS.md, "Fila de clase").
  *

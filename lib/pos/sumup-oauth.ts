@@ -10,8 +10,8 @@ import { RUTA_CALLBACK_OAUTH } from '@/lib/oauth-state';
 // ─────────────────────────────────────────────────────────────────────────────
 // La cuenta de SumUp del estudio (OAuth 2.0 de SumUp para plataformas).
 //
-// La conecta la dueña desde Configuración; con ella Tentare empareja su Solo y le
-// manda cobros. El dinero va a la cuenta de SumUp del estudio, no pasa por Tentare.
+// La conecta la dueña desde Configuración; con ella Centra empareja su Solo y le
+// manda cobros. El dinero va a la cuenta de SumUp del estudio, no pasa por Centra.
 //
 // La renovación del token (que ROTA, con carreras) está en sumup-token.ts.
 // ─────────────────────────────────────────────────────────────────────────────
@@ -30,7 +30,7 @@ function config() {
   };
 }
 
-/** ¿Tiene Tentare dada de alta su app en SumUp? Sin ella, SumUp no se ofrece. */
+/** ¿Tiene Centra dada de alta su app en SumUp? Sin ella, SumUp no se ofrece. */
 export function sumupConfigurado(): boolean {
   const c = config();
   return !!c.clientId && !!c.clientSecret;

@@ -23,7 +23,7 @@ export const NORMAS_COMUNIDAD = {
   puntos: [
     'Tolerancia cero con los insultos, el acoso, las amenazas y el contenido sexual, violento, discriminatorio o que incite al odio.',
     'Nada de datos personales de otras personas, publicidad ni enlaces a sitios ajenos al estudio.',
-    'Si algo te molesta, denúncialo desde el propio mensaje o comentario, o bloquea a esa persona. Lo revisa tu estudio y, si hace falta, Tentare.',
+    'Si algo te molesta, denúncialo desde el propio mensaje o comentario, o bloquea a esa persona. Lo revisa tu estudio y, si hace falta, Centra.',
     'El estudio puede retirar lo que no cumpla estas normas y cerrar la conversación.',
   ],
 } as const;

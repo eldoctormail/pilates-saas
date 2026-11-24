@@ -28,7 +28,7 @@ import { elegirModoListaEspera, valoresDeListaEspera, type ModoListaEspera } fro
 // Los cajones de «Cómo reservan mis alumnas» (15-sep, v2).
 //
 // Eran cinco tarjetas abiertas, una explicación encima («Cuando algo cambia,
-// Tentare…») y UNA barra de guardar para todas. Ahora cada regla es una fila con
+// Centra…») y UNA barra de guardar para todas. Ahora cada regla es una fila con
 // su valor de hoy (secciones/seccion-reservas.tsx) y se cambia aquí, en su cajón:
 // como mucho seis campos, UNA línea de consecuencia con lo que va a pasar, qué
 // tipos de clase la cambian y su «Guardar», que manda SOLO sus columnas
@@ -117,7 +117,7 @@ function Consecuencia({ texto, alerta }: { texto: string; alerta?: boolean }) {
   );
 }
 
-/** Lo que Tentare hace de serie en esta regla y no se configura: dicho donde se decide lo demás. */
+/** Lo que Centra hace de serie en esta regla y no se configura: dicho donde se decide lo demás. */
 function NotaDeSerie({ children }: { children: ReactNode }) {
   return (
     <p data-nota-de-serie="" className="flex items-start gap-2 text-[12.5px] text-muted-foreground text-pretty">
@@ -696,7 +696,7 @@ export function FormAsistencia({ excepciones, confirmacion, showToast, onGuardad
           onChange={v => cambiar('controlAccesoQr', v)}
         >
           <span className="block text-sm text-muted-foreground text-pretty">
-            Cada cliente tiene su QR en la app. Al escanearlo, Tentare comprueba en el momento si tiene lugar en la clase.
+            Cada cliente tiene su QR en la app. Al escanearlo, Centra comprueba en el momento si tiene lugar en la clase.
             {form.requiereCheckinQr ? ' Si puede entrar, su asistencia queda marcada.' : ''}
           </span>
         </InterruptorCampo>

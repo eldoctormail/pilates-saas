@@ -5,8 +5,8 @@ export default function Contenido() {
   return (
     <>
       <AyudaAntesDeEmpezar>
-        Un reembolso se pide desde Tentare, pero el dinero lo devuelve {ES ? 'Stripe directamente a la tarjeta del cliente' : 'Mercado Pago directamente al cliente'}
-        {' '}— Tentare nunca gestiona el dinero fuera de ese circuito.
+        Un reembolso se pide desde Centra, pero el dinero lo devuelve {ES ? 'Stripe directamente a la tarjeta del cliente' : 'Mercado Pago directamente al cliente'}
+        {' '}— Centra nunca gestiona el dinero fuera de ese circuito.
       </AyudaAntesDeEmpezar>
 
       <AyudaPaso numero={1} titulo="Abre el cobro en la ficha del cliente">
@@ -14,7 +14,7 @@ export default function Contenido() {
       </AyudaPaso>
 
       <AyudaPaso numero={2} titulo="Pide el reembolso">
-        <p style={{ margin: 0 }}>Desde Tentare se devuelve el cobro entero; si necesitas uno parcial, hazlo en {ES ? 'Stripe' : 'Mercado Pago'}. La petición va a {ES ? 'Stripe' : 'Mercado Pago'}, y el dinero tarda lo que tarde normalmente un reembolso con tarjeta (unos días, según el banco del cliente) en aparecer en su cuenta.</p>
+        <p style={{ margin: 0 }}>Desde Centra se devuelve el cobro entero; si necesitas uno parcial, hazlo en {ES ? 'Stripe' : 'Mercado Pago'}. La petición va a {ES ? 'Stripe' : 'Mercado Pago'}, y el dinero tarda lo que tarde normalmente un reembolso con tarjeta (unos días, según el banco del cliente) en aparecer en su cuenta.</p>
       </AyudaPaso>
 
       <AyudaResultado>

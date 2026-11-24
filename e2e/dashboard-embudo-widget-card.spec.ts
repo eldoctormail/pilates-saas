@@ -1,7 +1,7 @@
 import { test, expect, type Page, type Route } from '@playwright/test';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Auditoría Momence vs Tentare — "Vista de embudo de carrito abandonado" ya
+// Auditoría Momence vs Centra — "Vista de embudo de carrito abandonado" ya
 // estaba construida (Fase 8 CRO, embudo_widget/embudo_widget_por_dia) pero
 // escondida dentro de Configuración → API. Esta tarjeta la sube a la home
 // (components/dashboard/embudo-widget-card.tsx) para que la propietaria la

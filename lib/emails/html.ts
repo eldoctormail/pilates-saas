@@ -1,6 +1,6 @@
 // Las piezas de HTML de correo que no tienen marca: escapar lo que escribe una
 // persona y aceptar solo destinos que se pueden pintar. Las comparten los dos
-// sistemas de correo —el del estudio (lib/emails/estudio/) y el de Tentare
+// sistemas de correo —el del estudio (lib/emails/estudio/) y el de Centra
 // (lib/emails/tentare/)— para que la regla de seguridad viva en UN sitio.
 
 export function escaparHtml(texto: string): string {

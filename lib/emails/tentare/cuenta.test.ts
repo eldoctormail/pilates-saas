@@ -42,7 +42,7 @@ test('la baja de un estudio de pago lleva primero a descargar, y solo promete bo
   const base = { fase: 'aviso_baja' as const, motivo: 'baja' as const, estudioNombre: 'Casa Pilates', fechaPurga: '4 de noviembre de 2026', urlSuscripcion: `${URL}/s`, urlExportar: `${URL}/e` };
   const armado = correoEstudioVencido({ ...base, purgaArmada: true });
   const desarmado = correoEstudioVencido({ ...base, purgaArmada: false });
-  assert.match(armado, /La suscripción de Casa Pilates a Tentare ha terminado/);
+  assert.match(armado, /La suscripción de Casa Pilates a Centra ha terminado/);
   assert.ok(!armado.includes('prueba gratuita'));
   // El botón principal es la descarga; reactivar queda como enlace.
   assert.ok(armado.indexOf(`${URL}/e`) < armado.indexOf(`${URL}/s`), 'la descarga va antes que reactivar');
@@ -93,7 +93,7 @@ test('el resumen semanal solo enseña crecimiento si lo hay', () => {
 });
 
 test('ninguno de estos correos lleva la marca de un estudio', () => {
-  // Los firma Tentare. Si un color de estudio se colara, sería señal de que
+  // Los firma Centra. Si un color de estudio se colara, sería señal de que
   // alguien volvió a pasarle `colorPrimario`.
   const correos = [
     correoFalloPagoSaas({ estudioNombre: 'Casa Pilates', plan: 'Estudio', urlSuscripcion: URL }),

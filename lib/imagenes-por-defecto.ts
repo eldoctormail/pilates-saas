@@ -157,7 +157,7 @@ function vacia(url: Candidata): boolean {
 
 /**
  * La foto PROPIA para la miniatura de una clase en el horario: la primera candidata que no esté vacía y que no sea una
- * de las de Tentare (`/por-defecto/`), o `null`. El orden lo pone quien llama (el tipo de clase antes que la sala). La
+ * de las de Centra (`/por-defecto/`), o `null`. El orden lo pone quien llama (el tipo de clase antes que la sala). La
  * del estudio no se pasa nunca: repetida en cada fila se lee como un error (ver la nota de arriba).
  */
 export function fotoPropia(...candidatas: Candidata[]): string | null {

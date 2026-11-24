@@ -11,7 +11,7 @@ import {
 // Conectar, ver, renombrar y desconectar el datáfono de Stripe del estudio.
 //
 // Todo va contra la cuenta Connect del estudio (`stripeAccount`): el lector es
-// SUYO, igual que el dinero que cobra. En Tentare solo se guarda qué lector y en
+// SUYO, igual que el dinero que cobra. En Centra solo se guarda qué lector y en
 // qué ubicación (`studios.stripe_terminal_reader_id` / `_location_id`).
 //
 // La ubicación de Stripe es «dónde está el datáfono» y lleva una dirección. La

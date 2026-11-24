@@ -20,7 +20,7 @@
 // llegan intactos. Una primera versión de este regex era `[\p{L}\p{N} -]` y
 // habría devuelto 404 en «L'Hospitalet de Llobregat», «Sant Joan d'Alacant»,
 // «Nucia, la» o «Donostia/San Sebastián» — páginas que hoy funcionan y que
-// Tentare enlaza desde su propio sitemap.
+// Centra enlaza desde su propio sitemap.
 //
 // Lo que sigue fuera es lo que importa: `%` y `_` (comodines de ILIKE), `*`
 // (que PostgREST traduce a `%`), `<`/`>` y cualquier otro texto arbitrario que

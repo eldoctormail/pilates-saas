@@ -17,13 +17,13 @@
 //
 // No hay slug de rol/estudio aquí (a diferencia del portal por estudio,
 // app/portal/[slug]/manifest.webmanifest): Network no tiene marca blanca,
-// es siempre la marca Tentare Network.
+// es siempre la marca Centra Network.
 export async function GET() {
   return Response.json(
     {
-      name: 'Tentare Network',
+      name: 'Centra Network',
       short_name: 'Network',
-      description: 'Tu autoservicio de alumna en Tentare Network: favoritos, mensajes y solicitudes.',
+      description: 'Tu autoservicio de alumna en Centra Network: favoritos, mensajes y solicitudes.',
       start_url: '/network/alumna/inicio',
       scope: '/network',
       display: 'standalone',

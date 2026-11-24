@@ -11,7 +11,7 @@
 // dedupKey del evento, no esta función).
 //
 // Un estudio que nació del ALTA NUEVA no recibe SIN_CLASES (PR-5): a las 24 h le
-// llega «Tu primera clase en Tentare, en 5 minutos» (lib/alta/correo-primera-clase.ts),
+// llega «Tu primera clase en Centra, en 5 minutos» (lib/alta/correo-primera-clase.ts),
 // y dos avisos por lo mismo sobran. SIN_RESERVAS sí: ese no tiene otro.
 //
 // Regla pura, sin base de datos ni `@/`: se prueba con `node --test`.

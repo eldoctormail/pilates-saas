@@ -56,7 +56,7 @@ export function estudioPublico(f: Fila) {
     id: s(f, 'id'), nombre: s(f, 'nombre'), razonSocial: s(f, 'razon_social'), nif: s(f, 'nif'),
     direccion: s(f, 'direccion'), zonaHoraria: s(f, 'zona_horaria') ?? ZONA_HORARIA, moneda: MONEDA,
     ivaPorDefecto: n(f, 'iva_por_defecto'),
-    // `sin_facturas`: Tentare no emite facturas para este estudio y las hace el
+    // `sin_facturas`: Centra no emite facturas para este estudio y las hace el
     // software contable a partir de los recibos.
     modoFacturacion: s(f, 'modo_facturacion'),
   };

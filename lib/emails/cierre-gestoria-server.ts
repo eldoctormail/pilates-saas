@@ -23,7 +23,7 @@ export async function enviarCierreAGestoria(params: {
   if (!apiKey || apiKey.startsWith('re_XXXX')) return { ok: false, skipped: true };
   if (!params.to) return { ok: false, error: 'Sin destinatario' };
 
-  // `logoUrl`/`colorPrimario` se aceptan pero ya no pintan: el correo lo firma Tentare Manager.
+  // `logoUrl`/`colorPrimario` se aceptan pero ya no pintan: el correo lo firma Centra Manager.
   const { to, estudioNombre, estudioEmail, anio, trimestre, cierre } = params;
   const nombreAdjunto = trimestre
     ? `cierre-${anio}-T${trimestre}-libro-facturas.csv`
@@ -43,7 +43,7 @@ export async function enviarCierreAGestoria(params: {
 
     const resend = new Resend(apiKey);
     const { data, error } = await resend.emails.send({
-      from: remitentePorMarca('Tentare Manager'),
+      from: remitentePorMarca('Centra Manager'),
       to: [to],
       ...(estudioEmail ? { replyTo: estudioEmail } : {}),
       subject: trimestre ? `Cierre T${trimestre} ${anio} — ${estudioNombre}` : `Cierre de año ${anio} — ${estudioNombre}`,

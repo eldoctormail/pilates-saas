@@ -21,7 +21,7 @@ cd deploy && docker compose logs --since 30m app > app.log
    ```
 
    Al terminar, el script muestra la dirección del webhook.
-6. **Conectar Mercado Pago.** Creá el estudio (prueba 1.1) y, como propietaria, abrí Apps e integraciones › Mercado Pago. Copiá la dirección del webhook y cargala en la aplicación de Mercado Pago › Webhooks › modo de prueba, con el evento **Pagos**. Copiá la clave secreta, y pegá en Tentare esa clave y el Access Token de la vendedora de prueba. Tocá **Guardar y comprobar**: tiene que mostrar el nombre de la cuenta vendedora.
+6. **Conectar Mercado Pago.** Creá el estudio (prueba 1.1) y, como propietaria, abrí Apps e integraciones › Mercado Pago. Copiá la dirección del webhook y cargala en la aplicación de Mercado Pago › Webhooks › modo de prueba, con el evento **Pagos**. Copiá la clave secreta, y pegá en Centra esa clave y el Access Token de la vendedora de prueba. Tocá **Guardar y comprobar**: tiene que mostrar el nombre de la cuenta vendedora.
 
 > ⚠️ Las direcciones `trycloudflare.com` cambian cada vez que corrés `empezar`. Si lo volvés a correr, hay que cargar el webhook de nuevo.
 

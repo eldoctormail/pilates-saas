@@ -3,7 +3,7 @@
 // (ESSENTIAL_HREFS, lib/nav-config.ts). Lo lee `useNavMode` (sidebar.tsx).
 //
 // Quien lo cambia desde fuera del propio menú («Ver el menú entero» de «Tu
-// Tentare») dispara `EVENTO_MODO_MENU` para que el menú se ponga al día sin
+// Centra») dispara `EVENTO_MODO_MENU` para que el menú se ponga al día sin
 // recargar. Todo con try/catch: sin almacenamiento (privado, bloqueado) se
 // queda en «Esencial» y no rompe nada.
 

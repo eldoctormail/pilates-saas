@@ -119,7 +119,7 @@ function PuenteApertura() {
   return (
     <main className="grid min-h-dvh place-items-center px-4 py-10">
       <div className="w-full max-w-[420px]">
-        {/* Tenti, donde estaba el Orb: es Tentare quien te propone por dónde
+        {/* Tenti, donde estaba el Orb: es Centra quien te propone por dónde
             empezar. 28 es el ancho más grande del icono; el canvas no entra
             en una pantalla sin enlaces solo para ganar tamaño. 'pregunta'
             (lib/tenti/momentos.ts): son tres preguntas, y «Lo veo más tarde»

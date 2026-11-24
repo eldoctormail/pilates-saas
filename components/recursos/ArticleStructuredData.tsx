@@ -68,7 +68,7 @@ export function RecursosBreadcrumb() {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd).replace(/</g, '\\u003c') }} />;
 }
 
-// BreadcrumbList de dos niveles bajo /comparativa (Inicio > Comparativa > Tentare vs X)
+// BreadcrumbList de dos niveles bajo /comparativa (Inicio > Comparativa > Centra vs X)
 // para las páginas 1-vs-1 en /comparativa/tentare-vs-*.
 export function ComparativaBreadcrumb({ slug, name }: { slug: string; name: string }) {
   const breadcrumbLd = {

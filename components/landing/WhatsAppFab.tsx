@@ -11,7 +11,7 @@ import { enlaceWhatsApp } from '@/lib/decision/mensajes-socia';
 // (`useCore()`), que aquí no existe — quien visita la landing todavía no
 // tiene estudio. Mensaje genérico en su lugar.
 const SOPORTE_WHATSAPP = '+34603556580';
-const MENSAJE = 'Hola, tengo una duda sobre Tentare:';
+const MENSAJE = 'Hola, tengo una duda sobre Centra:';
 
 export function WhatsAppFab() {
   const [open, setOpen] = useState(false);

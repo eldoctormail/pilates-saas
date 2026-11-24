@@ -61,7 +61,7 @@ type Propio = { enLaApp: string; sigue?: string[]; deja?: string[]; aviso?: stri
 export const LO_PROPIO: Record<string, (d: DatosAlOcultar) => Propio> = {
   '/centro-de-control': () => ({
     enLaApp: NO_CAMBIA,
-    sigue: ['Tentare sigue analizando tu estudio cada día.'],
+    sigue: ['Centra sigue analizando tu estudio cada día.'],
   }),
   '/automatizaciones': (d) => ({
     enLaApp: 'Les siguen llegando los mensajes de las automatizaciones que tengas encendidas.',

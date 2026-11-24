@@ -32,9 +32,9 @@ test('generarFacturaHTML escapa el teléfono/email del receptor', () => {
 });
 
 test('generarFacturaHTML sigue pintando los datos normales sin escapar de más', () => {
-  const html = generarFacturaHTML(factura, { nombre: 'Tentare Pilates', nif: 'B12345678', direccion: 'C/ Mayor 1' }, null, null);
+  const html = generarFacturaHTML(factura, { nombre: 'Centra Pilates', nif: 'B12345678', direccion: 'C/ Mayor 1' }, null, null);
   assert.ok(html.includes('Marta Ruiz'));
-  assert.ok(html.includes('Tentare Pilates'));
+  assert.ok(html.includes('Centra Pilates'));
   assert.ok(html.includes('F-2026-001'));
 });
 

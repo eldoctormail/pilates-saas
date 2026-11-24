@@ -1,5 +1,5 @@
-// La app de un estudio (la que sale de la cuenta de Tentare con su nombre, icono y
-// color) frente a la app «Tentare» y la web. Lógica pura: sin imports de `@/`,
+// La app de un estudio (la que sale de la cuenta de Centra con su nombre, icono y
+// color) frente a la app «Centra» y la web. Lógica pura: sin imports de `@/`,
 // para que `node --test` la ejecute.
 //
 // El bundle id lo da la carcasa nativa (`bundleIdDeLaApp`): `null` en la web,
@@ -19,7 +19,7 @@ export function esBundleDeEstudio(bundle: unknown): bundle is string {
     && /^[a-z][a-z0-9-]*(\.[a-z0-9-]+)+$/.test(bundle);
 }
 
-/** `'estudio'` solo si el bundle tiene el formato de una app de estudio; web y app «Tentare», `'general'`. */
+/** `'estudio'` solo si el bundle tiene el formato de una app de estudio; web y app «Centra», `'general'`. */
 export function tipoDeApp(bundle: string | null | undefined): 'general' | 'estudio' {
   return esBundleDeEstudio(bundle) ? 'estudio' : 'general';
 }

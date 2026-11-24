@@ -205,7 +205,7 @@ const articulo: Articulo = {
         },
         {
           t: 'p',
-          texto: 'Que sea rentable depende de la ocupación y de lo que pagues por clase a tus profesoras. El método, con calculadora, está en [¿es rentable un estudio de pilates?](/recursos/rentabilidad-estudio-de-pilates). En Tentare, el informe de rentabilidad por clase resta a lo que ingresa cada clase lo que cuesta su profesora.',
+          texto: 'Que sea rentable depende de la ocupación y de lo que pagues por clase a tus profesoras. El método, con calculadora, está en [¿es rentable un estudio de pilates?](/recursos/rentabilidad-estudio-de-pilates). En Centra, el informe de rentabilidad por clase resta a lo que ingresa cada clase lo que cuesta su profesora.',
         },
         {
           t: 'nota',
@@ -220,11 +220,11 @@ const articulo: Articulo = {
       bloques: [
         {
           t: 'p',
-          texto: 'Tus alumnas tienen que poder reservar y cancelar sin escribirte, y los bonos, descontarse y caducar sin hojas de cálculo. En Tentare reservan y cancelan desde el móvil, con la app del estudio en su pantalla de inicio con tu nombre y tu icono; la lista de espera es automática, y las cuotas se cobran con tarjeta a través de Stripe, con dos reintentos si un cobro falla, o por domiciliación con la remesa SEPA para tu banco. Founding Studio gratis (hasta 150 reservas al mes; si pasas de ahí, 29 €/mes), Estudio 79 €/mes y Cadena 249 €/mes, IVA incluido, sin permanencia: [Tentare para estudios de yoga](/soluciones/estudio-de-yoga).',
+          texto: 'Tus alumnas tienen que poder reservar y cancelar sin escribirte, y los bonos, descontarse y caducar sin hojas de cálculo. En Centra reservan y cancelan desde el móvil, con la app del estudio en su pantalla de inicio con tu nombre y tu icono; la lista de espera es automática, y las cuotas se cobran con tarjeta a través de Stripe, con dos reintentos si un cobro falla, o por domiciliación con la remesa SEPA para tu banco. Founding Studio gratis (hasta 150 reservas al mes; si pasas de ahí, 29 €/mes), Estudio 79 €/mes y Cadena 249 €/mes, IVA incluido, sin permanencia: [Centra para estudios de yoga](/soluciones/estudio-de-yoga).',
         },
         {
           t: 'llamada',
-          texto: 'Tentare funciona igual para yoga que para pilates: reservas, bonos, cuotas y lista de espera, gratis hasta 150 reservas al mes, sin permanencia.',
+          texto: 'Centra funciona igual para yoga que para pilates: reservas, bonos, cuotas y lista de espera, gratis hasta 150 reservas al mes, sin permanencia.',
         },
       ],
     },
@@ -310,7 +310,7 @@ const articulo: Articulo = {
   ],
   cta: {
     titulo: 'Abre tu estudio de yoga con las reservas resueltas',
-    texto: 'Tentare deja listos las reservas, los bonos, las cuotas y la lista de espera de tu estudio antes de la primera clase, con la app del estudio para tus alumnas. Empieza gratis, sin tarjeta.',
+    texto: 'Centra deja listos las reservas, los bonos, las cuotas y la lista de espera de tu estudio antes de la primera clase, con la app del estudio para tus alumnas. Empieza gratis, sin tarjeta.',
   },
   revision: [
     'Precios de material (Yogaes y Zafuki) y tarifas de los 14 estudios consultados el 25-sep-2026: cambian a menudo, revisarlos antes de publicar. La mayoría de los estudios no dice si sus precios incluyen IVA.',

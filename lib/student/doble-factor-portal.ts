@@ -35,7 +35,7 @@ export async function pasoDelPortal(token: string, mismoOrigen = true): Promise<
       supabasePortal.auth.mfa.getAuthenticatorAssuranceLevel(), supabasePortal.auth.getSession(),
     ]);
     // `nextLevel` lo pone cualquier factor, también el de la zona interna de
-    // Tentare, que aquí no cuenta (lib/auth/doble-factor-reglas.ts).
+    // Centra, que aquí no cuenta (lib/auth/doble-factor-reglas.ts).
     const deCuenta = factoresVerificados(session?.user.factors) > 0;
     nivel = { actual: data?.currentLevel ?? null, siguiente: deCuenta ? data?.nextLevel ?? null : null };
   } catch {

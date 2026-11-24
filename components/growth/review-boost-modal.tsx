@@ -185,9 +185,9 @@ export function ReviewBoostModal({ studio, rol, vistaPrevia = false }: { studio:
         {pantalla === 'rating' && (
           <>
             <DialogHeader>
-              <DialogTitle>¿Qué te está pareciendo Tentare?</DialogTitle>
+              <DialogTitle>¿Qué te está pareciendo Centra?</DialogTitle>
               <DialogDescription>
-                Tu opinión nos ayuda a mejorar Tentare y a que otros estudios puedan descubrirlo.
+                Tu opinión nos ayuda a mejorar Centra y a que otros estudios puedan descubrirlo.
               </DialogDescription>
             </DialogHeader>
             <div className="flex items-center justify-center gap-1.5 py-2" role="radiogroup" aria-label="Valoración de 1 a 5 estrellas">

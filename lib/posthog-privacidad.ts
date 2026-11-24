@@ -40,11 +40,11 @@ export const PREFIJOS_EXCLUIDOS_DE_ANALITICA = [
   // Enlaces firmados: el token va EN LA RUTA.
   '/confirmar-reserva', '/valorar', '/aceptar-sustitucion', '/no-puedo', '/disponibilidad',
   '/network/referencia',
-  // Tentare Network del lado de la alumna.
+  // Centra Network del lado de la alumna.
   '/network/alumna',
   // Acceso: retornos con la sesión en el fragmento, invitaciones con token.
   '/login', '/clave-nueva', '/invitacion', '/oauth', '/network/acceso',
-  // Backoffice de Tentare, temas publicados (origen del estudio) y kiosko.
+  // Backoffice de Centra, temas publicados (origen del estudio) y kiosko.
   '/interno', '/tema-publicado', '/kiosk',
 ] as const;
 
@@ -114,7 +114,7 @@ type VentanaMinima = { self: unknown; top: unknown; location: { search: string }
 
 /**
  * ¿Esta vista va incrustada en la web de otro (iframe o `?embed=1`)? Ahí quien
- * navega es visitante del estudio, no de Tentare. Gemela de la privada de
+ * navega es visitante del estudio, no de Centra. Gemela de la privada de
  * `lib/ahrefs-cliente.ts`; se miran las dos señales porque cualquiera puede
  * faltar (el parámetro se pierde al navegar dentro del widget).
  */

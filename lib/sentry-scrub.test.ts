@@ -102,7 +102,7 @@ test('sanearMigaSentry filtra http.query y sanea URLs de fetch', () => {
   assert.ok(!JSON.stringify(miga).includes(EMAIL));
 });
 
-test('una clave de la API de Tentare no llega a Sentry, ni fuera de una cabecera Bearer', () => {
+test('una clave de la API de Centra no llega a Sentry, ni fuera de una cabecera Bearer', () => {
   const clave = `tnt_sk_${'aB3_x-'.repeat(7)}a`;
   const limpio = limpiarTexto(`la integración falló con ${clave} en el cuerpo`);
   assert.ok(!limpio.includes('tnt_sk_aB3'), limpio);

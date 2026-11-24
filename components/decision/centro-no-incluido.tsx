@@ -9,7 +9,7 @@ import { useAsistente, usePuertaAsistente } from '@/lib/asistente-context';
 
 // Lo que ve quien abre el Centro de Control sin que su plan (o su prueba) lo
 // incluya. Antes salía «No hemos podido cargar el Centro de Control» con un
-// «Reintentar» que nunca iba a funcionar: se leía como un fallo de Tentare, y
+// «Reintentar» que nunca iba a funcionar: se leía como un fallo de Centra, y
 // los estudios decían que «no les dejaba entrar». No es un error: es una
 // puerta con un motivo y una salida.
 //
@@ -45,7 +45,7 @@ export function CentroNoIncluido({ pruebaVencida, complemento = false }: { prueb
           <Link href="/suscripcion" className={buttonVariants()}>{pruebaVencida ? 'Elegir mi plan' : 'Ver planes y precios'}</Link>
         )}
         {puertaAsistente && (
-          <Button variant="outline" onClick={() => abrir()}>Pregúntale a Tentare</Button>
+          <Button variant="outline" onClick={() => abrir()}>Pregúntale a Centra</Button>
         )}
       </div>
     </div>

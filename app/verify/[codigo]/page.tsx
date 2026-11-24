@@ -5,7 +5,7 @@ import { IconoDesenlace } from '@/components/publico/icono-desenlace';
 
 export const dynamic = 'force-dynamic';
 
-// Verificación pública de un certificado «Tentare Verified Studio»: sin
+// Verificación pública de un certificado «Centra Verified Studio»: sin
 // sesión, un solo lookup por código (mismo patrón que
 // app/confirmar-reserva/[token]/page.tsx). Un certificado que no existe y uno
 // REVOKED dan el MISMO mensaje de «no válido» — nunca «verificado» para lo
@@ -28,7 +28,7 @@ export default async function VerificarCertificadoPage({ params }: { params: Pro
     );
   }
 
-  const nombre = (await nombreDeEstudio(certificado.studioId)) ?? 'Estudio Tentare';
+  const nombre = (await nombreDeEstudio(certificado.studioId)) ?? 'Estudio Centra';
   const fecha = new Date(certificado.emitidoEn).toLocaleDateString(LOCALE, { day: 'numeric', month: 'long', year: 'numeric' });
 
   return (
@@ -37,7 +37,7 @@ export default async function VerificarCertificadoPage({ params }: { params: Pro
         <IconoDesenlace icono={CheckCircle2} tono="exito" />
         <h1 className="text-lg font-semibold text-slate-900">Certificado verificado</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          {certificado.esFounding ? 'Tentare Founding Studio' : 'Tentare Verified Studio'}
+          {certificado.esFounding ? 'Centra Founding Studio' : 'Centra Verified Studio'}
         </p>
         {certificado.esFounding && certificado.foundingNumber != null && (
           <p className="mt-1 text-xs font-semibold tracking-wide text-[#B4537E]">

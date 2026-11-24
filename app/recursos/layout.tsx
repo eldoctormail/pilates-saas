@@ -13,9 +13,9 @@ export const metadata: Metadata = {
   description: pagina.descripcion,
   alternates: { canonical: urlDe('/recursos') },
   openGraph: {
-    siteName: 'Tentare',
+    siteName: 'Centra',
     type: 'website',
-    title: 'Centro de Recursos — Tentare',
+    title: 'Centro de Recursos — Centra',
     description: 'Guías prácticas para propietarias de estudios de Pilates.',
     url: urlDe('/recursos'),
     images: [{ url: '/recursos/opengraph-image' }],

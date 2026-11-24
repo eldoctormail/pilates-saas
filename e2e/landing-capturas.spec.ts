@@ -53,13 +53,13 @@ async function portalDeMuestra(page: Page, { alDia = false }: { alDia?: boolean 
   await page.route('**/api/public/studio-data', (r) => r.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(datos) }));
 }
 
-/** El nombre del estudio de muestra en la cabecera (el servidor de e2e lo siembra como «Tentare»). */
+/** El nombre del estudio de muestra en la cabecera (el servidor de e2e lo siembra como «Centra»). */
 async function nombrar(page: Page) {
   await page.evaluate(() => {
     const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
     for (let n = w.nextNode(); n; n = w.nextNode()) {
-      if (n.textContent?.trim() === 'Tentare') n.textContent = 'Estudio Alma';
-      else if (n.textContent?.includes(' · Tentare')) n.textContent = n.textContent.replace(' · Tentare', ' · Estudio Alma');
+      if (n.textContent?.trim() === 'Centra') n.textContent = 'Estudio Alma';
+      else if (n.textContent?.includes(' · Centra')) n.textContent = n.textContent.replace(' · Centra', ' · Estudio Alma');
       else if (n.textContent?.trim() === 'Calle Test 1') n.textContent = 'Calle Larios 12';
       else if (n.textContent?.trim() === 'T' && n.parentElement?.closest('header')) n.textContent = 'A';
     }

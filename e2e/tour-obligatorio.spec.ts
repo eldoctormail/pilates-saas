@@ -47,14 +47,14 @@ async function montarVisita(
   return s;
 }
 
-const inicio = (page: Page) => page.getByRole('heading', { name: 'Vamos a recorrer Tentare juntas' });
+const inicio = (page: Page) => page.getByRole('heading', { name: 'Vamos a recorrer Centra juntas' });
 const tarjeta = (page: Page, titulo: string) => page.getByRole('region', { name: `Visita guiada: ${titulo}` });
 
 test.describe('La visita guiada por capítulos', () => {
   test('arranca sola en un estudio nuevo, y no se puede cerrar ni saltar', async ({ page }) => {
     await montarVisita(page);
     await expect(inicio(page)).toBeVisible({ timeout: 30_000 });
-    const pantalla = page.getByRole('dialog', { name: 'Visita guiada de Tentare' });
+    const pantalla = page.getByRole('dialog', { name: 'Visita guiada de Centra' });
     await expect(pantalla).toContainText(/\d+ capítulos, unos \d+ minutos/);
     await expect(pantalla).toContainText('El mapa');
     await expect(pantalla).toContainText('Tarifas: qué vendes, a quién y para qué clases');
@@ -214,7 +214,7 @@ test.describe('La visita guiada por capítulos', () => {
     await expect(page.getByRole('link', { name: 'Calendario' }).first()).toBeVisible({ timeout: 30_000 });
     await page.goto('/primeros-pasos');
     await page.getByRole('button', { name: /Ver la visita guiada del panel/ }).click();
-    const pantalla = page.getByRole('dialog', { name: 'Visita guiada de Tentare' });
+    const pantalla = page.getByRole('dialog', { name: 'Visita guiada de Centra' });
     await expect(pantalla).toBeVisible();
     await pantalla.getByRole('button', { name: 'Ahora no' }).click();
     await expect(pantalla).toHaveCount(0);

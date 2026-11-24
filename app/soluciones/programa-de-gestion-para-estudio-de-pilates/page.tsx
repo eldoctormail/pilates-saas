@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
   openGraph: {
-    siteName: 'Tentare',
+    siteName: 'Centra',
     type: 'website',
     locale: 'es_ES',
     title: pagina.titulo,
@@ -50,13 +50,13 @@ const FAQ = [
   },
   {
     q: `¿Cuánto cuesta un programa de gestión para un estudio de Pilates en ${ES ? 'España' : 'Argentina'}?`,
-    a: 'En Tentare, Founding Studio es gratis hasta 150 reservas al mes, con todas las funcionalidades menos varias sedes, también la app con tu marca; si pasas de ahí, 29 €/mes, y con ese plan el Centro de Control, las sustituciones automáticas y la redacción con IA van aparte. Estudio, 79 €/mes con IVA, los incluye, y Cadena, 249 €/mes, es para varias sedes. Sin permanencia y sin tarjeta para empezar.',
+    a: 'En Centra, Founding Studio es gratis hasta 150 reservas al mes, con todas las funcionalidades menos varias sedes, también la app con tu marca; si pasas de ahí, 29 €/mes, y con ese plan el Centro de Control, las sustituciones automáticas y la redacción con IA van aparte. Estudio, 79 €/mes con IVA, los incluye, y Cadena, 249 €/mes, es para varias sedes. Sin permanencia y sin tarjeta para empezar.',
   },
   {
     q: ES ? '¿Sirve para cobrar y facturar en España?' : '¿Sirve para cobrar y facturar en Argentina?',
     a: ES
-      ? 'Sí. Cobra con tarjeta a través de tu cuenta de Stripe, sin comisión de Tentare, y reintenta solo los cobros con tarjeta que fallan; si cobras por domiciliación, te prepara la remesa SEPA para que la presentes en tu banco. Las facturas salen con numeración legal correlativa. Veri*Factu (la huella, el QR y el envío a la AEAT) todavía no está activo en ningún estudio: en la página de facturación está el detalle.'
-      : 'Sí. Cobra online a través de tu cuenta de Mercado Pago, sin comisión de Tentare, y en el mostrador apuntas efectivo, posnet, transferencia o QR. Desde cada cobro emites la factura electrónica de ARCA, con su CAE, con tu propio certificado.',
+      ? 'Sí. Cobra con tarjeta a través de tu cuenta de Stripe, sin comisión de Centra, y reintenta solo los cobros con tarjeta que fallan; si cobras por domiciliación, te prepara la remesa SEPA para que la presentes en tu banco. Las facturas salen con numeración legal correlativa. Veri*Factu (la huella, el QR y el envío a la AEAT) todavía no está activo en ningún estudio: en la página de facturación está el detalle.'
+      : 'Sí. Cobra online a través de tu cuenta de Mercado Pago, sin comisión de Centra, y en el mostrador apuntas efectivo, posnet, transferencia o QR. Desde cada cobro emites la factura electrónica de ARCA, con su CAE, con tu propio certificado.',
   },
   {
     q: '¿Mis alumnas tienen que descargarse una app?',
@@ -91,13 +91,13 @@ export default function ProgramaDeGestionPage() {
           { etiqueta: 'Reserva · Sala 1', estado: 'Confirmada', texto: 'Lucía reservó el jueves a las 10:00' },
           { etiqueta: 'Cuota mensual', estado: 'Cobrada', texto: 'Carmen · tarjeta guardada' },
         ]}
-        pieFoto="Sala de un estudio de Pilates con dos avisos de ejemplo de Tentare: una reserva confirmada en la sala 1 y una cuota mensual cobrada con tarjeta guardada."
+        pieFoto="Sala de un estudio de Pilates con dos avisos de ejemplo de Centra: una reserva confirmada en la sala 1 y una cuota mensual cobrada con tarjeta guardada."
       />
 
       <ResumenSolucion
         pregunta={`¿Qué debe hacer un programa de gestión para un estudio de Pilates en ${ES ? 'España' : 'Argentina'}?`}
         datos={[
-          { cifra: 'Gratis', texto: 'Tentare Founding Studio, hasta 150 reservas al mes' },
+          { cifra: 'Gratis', texto: 'Centra Founding Studio, hasta 150 reservas al mes' },
           ES
             ? { cifra: 'UE', texto: 'Base de datos en la Unión Europea, con soporte en español' }
             : { cifra: 'ARCA', texto: 'Factura electrónica con CAE, y soporte en español' },
@@ -106,7 +106,7 @@ export default function ProgramaDeGestionPage() {
         Cuatro cosas en un mismo sitio: el calendario con sus salas y su aforo, las reservas de las alumnas con lista de
         espera y bonos, {ES ? 'los cobros con tarjeta o por remesa SEPA con facturas de numeración legal' : 'los cobros con Mercado Pago o en el mostrador con factura electrónica de ARCA'}, y el equipo de
         instructoras con sus sustituciones. Un programa que solo reserva te deja el resto en hojas de cálculo; uno que
-        sirve para cualquier negocio de citas no entiende un bono de sesiones ni un reformer. Tentare está hecho para
+        sirve para cualquier negocio de citas no entiende un bono de sesiones ni un reformer. Centra está hecho para
         estudios de Pilates y yoga en {ES ? 'España' : 'Argentina'}, gratis hasta 150 reservas al mes, y sin permanencia.
       </ResumenSolucion>
 
@@ -114,7 +114,7 @@ export default function ProgramaDeGestionPage() {
         titulo="Lo que hace el programa en un día normal del estudio"
         items={[
           { hora: 'Lunes · 7:30', titulo: 'Las alumnas reservan solas', texto: 'Desde el móvil, con el enlace de tu estudio. El aforo de la sala se respeta solo y la clase llena abre una lista de espera.' },
-          { hora: 'Miércoles · 9:00', titulo: 'Una instructora no puede venir', texto: 'Tentare busca quién puede cubrirla según su disponibilidad, la contacta con tu visto bueno y avisa a las alumnas del cambio.' },
+          { hora: 'Miércoles · 9:00', titulo: 'Una instructora no puede venir', texto: 'Centra busca quién puede cubrirla según su disponibilidad, la contacta con tu visto bueno y avisa a las alumnas del cambio.' },
           ES
             ? { hora: 'Día 1 · 8:00', titulo: 'Se cobra la cuota del mes', texto: 'Se cobra con la tarjeta guardada, y si un cobro falla se reintenta solo en vez de dejarte una lista de impagos. Si cobras por domiciliación, tienes lista la remesa SEPA para tu banco.' }
             : { hora: 'Día 1 · 8:00', titulo: 'Toca renovar la cuota', texto: 'A cada alumna le llega el aviso y paga desde su app con Mercado Pago. Lo que falta cobrar queda a la vista en Cobros, sin listas a mano.' },
@@ -124,7 +124,7 @@ export default function ProgramaDeGestionPage() {
       <FilaProducto
         eyebrow="Calendario y reservas"
         titulo="El calendario, las salas y las reservas en un mismo sitio"
-        pieza={{ descripcion: 'Ejemplo del día en el calendario de Tentare: tres clases con su ocupación y una llena con dos alumnas en lista de espera.', contenido: <AgendaDia /> }}
+        pieza={{ descripcion: 'Ejemplo del día en el calendario de Centra: tres clases con su ocupación y una llena con dos alumnas en lista de espera.', contenido: <AgendaDia /> }}
         puntos={[
           'Series de clases recurrentes y varias salas, cada una con su aforo',
           'Reservas y cancelaciones desde el móvil, con las reglas que pongas por tipo de clase',
@@ -139,11 +139,11 @@ export default function ProgramaDeGestionPage() {
         invertida
         eyebrow="Bonos, cuotas y cobros"
         titulo="Cobros que no dependen de que alguien se acuerde"
-        pieza={{ descripcion: 'Ejemplo del resumen de cobros de Tentare: quién ha pagado, quién se reintenta solo y las próximas cuotas.', contenido: <PanelCobros completo /> }}
+        pieza={{ descripcion: 'Ejemplo del resumen de cobros de Centra: quién ha pagado, quién se reintenta solo y las próximas cuotas.', contenido: <PanelCobros completo /> }}
         puntos={[
           'Bonos de sesiones con caducidad y cuotas mensuales con renovación automática',
           ES ? 'Cobro con tarjeta, directo a tu cuenta de Stripe, y remesa SEPA para tu banco' : 'Cobro online, directo a tu cuenta de Mercado Pago',
-          'Tentare no añade comisión sobre lo que cobras',
+          'Centra no añade comisión sobre lo que cobras',
         ]}
         enlace={{ href: '/funcionalidades/cobros-recurrentes', texto: ES ? 'Cobros automáticos y SEPA' : 'Cobros con Mercado Pago' }}
       >
@@ -153,7 +153,7 @@ export default function ProgramaDeGestionPage() {
       <FilaProducto
         eyebrow="Equipo e informes"
         titulo="Instructoras, sustituciones y números del estudio"
-        pieza={{ descripcion: 'Ejemplo de los informes de Tentare: lo que deja cada clase y la ocupación por tipo.', contenido: <PanelInformes completo /> }}
+        pieza={{ descripcion: 'Ejemplo de los informes de Centra: lo que deja cada clase y la ocupación por tipo.', contenido: <PanelInformes completo /> }}
         puntos={[
           'Disponibilidad, vacaciones y tarifa por hora de cada instructora',
           'Ocupación por tipo de clase y retención de tus alumnas',
@@ -167,13 +167,13 @@ export default function ProgramaDeGestionPage() {
       <TablaSolucion
         titulo="Qué mirar al elegir un programa para tu estudio"
         intro={<p>Diez minutos con esta lista evitan el error más caro: contratar algo pensado para otro tipo de negocio. Hay una versión más larga en la <Link href="/recursos/checklist-elegir-software-estudio">checklist para elegir software</Link>.</p>}
-        cabeceras={['Qué comprobar', 'Por qué importa', 'En Tentare']}
+        cabeceras={['Qué comprobar', 'Por qué importa', 'En Centra']}
         filas={[
           ['Aforo por sala o por reformer', 'Un estudio vende plazas, no citas sueltas', 'Aforo propio por sala y plazas por reformer'],
           ['Bonos, cuotas y lista de espera', 'Es como se vende y se llena una clase', 'Los tres, con reglas por tipo de clase'],
           ES
-            ? ['Cobro con tarjeta y SEPA', 'La mayoría de cuotas se cobran así en España', 'Tarjeta con Stripe y remesa SEPA para tu banco, sin comisión de Tentare']
-            : ['Cobro online y en el mostrador', 'Las alumnas pagan con Mercado Pago, en efectivo o por transferencia', 'Mercado Pago, efectivo, posnet, transferencia y QR, sin comisión de Tentare'],
+            ? ['Cobro con tarjeta y SEPA', 'La mayoría de cuotas se cobran así en España', 'Tarjeta con Stripe y remesa SEPA para tu banco, sin comisión de Centra']
+            : ['Cobro online y en el mostrador', 'Las alumnas pagan con Mercado Pago, en efectivo o por transferencia', 'Mercado Pago, efectivo, posnet, transferencia y QR, sin comisión de Centra'],
           ES
             ? ['Facturas con numeración legal', 'Se exige a quien emite facturas', 'Numeración legal correlativa; Veri*Factu, todavía no activo']
             : ['Factura electrónica', 'ARCA la exige a quien factura', 'Factura electrónica de ARCA con su CAE, desde cada cobro'],

@@ -203,11 +203,11 @@ const articulo: Articulo = {
     },
     {
       id: 'con-tentare',
-      titulo: 'Tu política de cancelación, aplicada sola en Tentare',
+      titulo: 'Tu política de cancelación, aplicada sola en Centra',
       bloques: [
         {
           t: 'p',
-          texto: 'En Tentare, las alumnas cancelan solas desde el móvil, y las reglas se fijan por tipo de clase, entre ellas la antelación para cancelar sin perder la sesión (puedes cerrar el reformer antes que el mat). La plaza liberada pasa sola a la [lista de espera](/funcionalidades/lista-de-espera), al momento o con un plazo para aceptarla. Y si activas la penalización por cancelación tardía o por no venir, el estudio puede cobrarla a la tarjeta guardada de la alumna, de forma automática o cuando tú la apruebas, y solo si ella aceptó esa cláusula: [cancelaciones y políticas](/funcionalidades/cancelaciones-y-politicas).',
+          texto: 'En Centra, las alumnas cancelan solas desde el móvil, y las reglas se fijan por tipo de clase, entre ellas la antelación para cancelar sin perder la sesión (puedes cerrar el reformer antes que el mat). La plaza liberada pasa sola a la [lista de espera](/funcionalidades/lista-de-espera), al momento o con un plazo para aceptarla. Y si activas la penalización por cancelación tardía o por no venir, el estudio puede cobrarla a la tarjeta guardada de la alumna, de forma automática o cuando tú la apruebas, y solo si ella aceptó esa cláusula: [cancelaciones y políticas](/funcionalidades/cancelaciones-y-politicas).',
         },
       ],
     },
@@ -261,7 +261,7 @@ const articulo: Articulo = {
   ],
   cta: {
     titulo: 'Que tu política se aplique sola, igual para todas',
-    texto: 'Con Tentare, tus alumnas cancelan desde el móvil dentro de la ventana que fijas para cada tipo de clase, y la plaza pasa sola a la lista de espera. Empieza gratis, sin tarjeta.',
+    texto: 'Con Centra, tus alumnas cancelan desde el móvil dentro de la ventana que fijas para cada tipo de clase, y la plaza pasa sola a la lista de espera. Empieza gratis, sin tarjeta.',
   },
   revision: [
     'Parte legal (TRLGDCU, LCGC y LSSI): que la revise una abogada de consumo antes de publicar. La tabla de desistimiento es una lectura prudente de los artículos 102 y 103.l y de la guía de la Comisión Europea; no se ha encontrado resolución española sobre bonos o cuotas de clases comprados online.',

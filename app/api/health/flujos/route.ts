@@ -1,6 +1,6 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // Salud de los flujos críticos. La pregunta que responde no es "¿responde el
-// servidor?" (eso es /api/health) sino "¿ha hecho Tentare lo que tenía que
+// servidor?" (eso es /api/health) sino "¿ha hecho Centra lo que tenía que
 // hacer?".
 //
 // DOS PUERTAS, a propósito, porque hay dos consumidores legítimos y distintos:

@@ -9,8 +9,8 @@ import '@/components/web/tokens.css';
 // un recorrido con datos de ejemplo. Sin indexar (lib/seo/no-indexables.ts):
 // es una herramienta con estado, no contenido que buscar.
 export const metadata: Metadata = {
-  title: 'Tu demo personalizada | Tentare',
-  description: 'Cuéntale tu duda a Tenti y mira cómo funcionaría Tentare en tu estudio, paso a paso.',
+  title: 'Tu demo personalizada | Centra',
+  description: 'Cuéntale tu duda a Tenti y mira cómo funcionaría Centra en tu estudio, paso a paso.',
   robots: { index: false, follow: true },
 };
 

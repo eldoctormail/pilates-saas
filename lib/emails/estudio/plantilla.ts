@@ -142,7 +142,7 @@ function estiloMso(fuente?: string | null): string {
 }
 
 // Las piezas sin marca (escapar, destinos seguros, preheader, <head>) viven en
-// lib/emails/html.ts y las comparte la familia de Tentare. Se reexporta
+// lib/emails/html.ts y las comparte la familia de Centra. Se reexporta
 // `escaparHtml` para quien ya la importaba de aquí.
 export { escaparHtml };
 

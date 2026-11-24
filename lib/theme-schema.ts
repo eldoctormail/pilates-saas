@@ -559,7 +559,7 @@ export type ThemeConfig = z.infer<typeof themeConfigSchema>;
 export const themeDraftSchema = themeConfigSchema.partial();
 export type ThemeDraft = z.infer<typeof themeDraftSchema>;
 
-/** Tema por defecto del sistema (identidad Tentare: oliva + arena). */
+/** Tema por defecto del sistema (identidad Centra: oliva + arena). */
 export const DEFAULT_THEME: ThemeConfig = {
   primary: '#343825',
   secondary: '#5A6142',

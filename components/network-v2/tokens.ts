@@ -1,4 +1,4 @@
-// Tokens del rediseño de Tentare Network — README §Identidad visual del
+// Tokens del rediseño de Centra Network — README §Identidad visual del
 // handoff (design_handoff_tentare_network/). Colores/radios FINALES, no
 // aproximados: cítalos de aquí en vez de repetir hex sueltos por los
 // componentes, para que un cambio de paleta sea un solo sitio.

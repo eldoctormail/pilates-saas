@@ -19,9 +19,9 @@ const articulo: Articulo = {
     'bsport o timp para un estudio de pilates',
   ],
   respuesta:
-    'bsport vs TIMP: los dos cubren reservas, bonos, cobros y app para tus alumnas. bsport está hecho para estudios boutique: no publica precios y reserva la app con tu marca y las sustituciones automáticas a sus planes altos. TIMP sirve a muchos negocios de clases y citas: de 50 a 170 € al mes por centro, 3 meses mínimos en la mayoría de planes y 15 días de prueba. Como alternativa con precio publicado, Tentare es gratis hasta 150 reservas al mes, sin permanencia, y la app con tu marca va en todos los planes.',
+    'bsport vs TIMP: los dos cubren reservas, bonos, cobros y app para tus alumnas. bsport está hecho para estudios boutique: no publica precios y reserva la app con tu marca y las sustituciones automáticas a sus planes altos. TIMP sirve a muchos negocios de clases y citas: de 50 a 170 € al mes por centro, 3 meses mínimos en la mayoría de planes y 15 días de prueba. Como alternativa con precio publicado, Centra es gratis hasta 150 reservas al mes, sin permanencia, y la app con tu marca va en todos los planes.',
   entradilla:
-    'Si estás evaluando bsport para tu estudio de pilates y te han hablado de TIMP, aquí tienes bsport vs TIMP lado a lado, con lo que consta hoy en la web de cada uno, para quién encaja cada uno y qué preguntar en la demo. Lo escribe Tentare, que no es ninguno de los dos.',
+    'Si estás evaluando bsport para tu estudio de pilates y te han hablado de TIMP, aquí tienes bsport vs TIMP lado a lado, con lo que consta hoy en la web de cada uno, para quién encaja cada uno y qué preguntar en la demo. Lo escribe Centra, que no es ninguno de los dos.',
   secciones: [
     {
       id: 'bsport-vs-timp-dos-enfoques',
@@ -41,7 +41,7 @@ const articulo: Articulo = {
           t: 'nota',
           titulo: 'Cómo está hecha esta comparación',
           texto:
-            'La escribe Tentare, que compite con los dos. De bsport y de TIMP solo recogemos lo que consta en su web pública (precios, preguntas frecuentes, condiciones y centro de ayuda), revisada el 25 de septiembre de 2026 y enlazada en las fuentes. «No consta» significa que su web no lo dice, no que no lo tengan.',
+            'La escribe Centra, que compite con los dos. De bsport y de TIMP solo recogemos lo que consta en su web pública (precios, preguntas frecuentes, condiciones y centro de ayuda), revisada el 25 de septiembre de 2026 y enlazada en las fuentes. «No consta» significa que su web no lo dice, no que no lo tengan.',
         },
       ],
     },
@@ -228,17 +228,17 @@ const articulo: Articulo = {
         {
           t: 'nota',
           titulo: 'Aviso de transparencia',
-          texto: 'Este apartado habla de Tentare, que es quien escribe esta comparación.',
+          texto: 'Este apartado habla de Centra, que es quien escribe esta comparación.',
         },
         {
           t: 'p',
           texto:
-            'Tentare es un software de gestión para estudios de pilates y yoga en España, con precio público (Founding Studio gratis hasta 150 reservas al mes (si pasas de ahí, 29 €/mes), Estudio 79 €/mes y Cadena 249 €/mes, IVA incluido), sin permanencia y sin pedir tarjeta. Tus alumnas reservan y cancelan solas desde el móvil e instalan la app del estudio en su pantalla de inicio, con su nombre, su icono, su logo y sus colores, en todos los planes. Las sustituciones de instructoras son asistidas en todos los planes, y autónomas en el plan gratis, Estudio y Cadena o con un complemento de 12 €/mes. Lo que aún no tiene: el envío automático de facturas a la AEAT está en desarrollo y la app no está en las tiendas. Si vienes de bsport o de TIMP, el importador trae tus datos con acta y botón de deshacer; las tarjetas guardadas no se migran.',
+            'Centra es un software de gestión para estudios de pilates y yoga en España, con precio público (Founding Studio gratis hasta 150 reservas al mes (si pasas de ahí, 29 €/mes), Estudio 79 €/mes y Cadena 249 €/mes, IVA incluido), sin permanencia y sin pedir tarjeta. Tus alumnas reservan y cancelan solas desde el móvil e instalan la app del estudio en su pantalla de inicio, con su nombre, su icono, su logo y sus colores, en todos los planes. Las sustituciones de instructoras son asistidas en todos los planes, y autónomas en el plan gratis, Estudio y Cadena o con un complemento de 12 €/mes. Lo que aún no tiene: el envío automático de facturas a la AEAT está en desarrollo y la app no está en las tiendas. Si vienes de bsport o de TIMP, el importador trae tus datos con acta y botón de deshacer; las tarjetas guardadas no se migran.',
         },
         {
           t: 'p',
           texto:
-            'Para ver más opciones, en [el mejor software para estudios de pilates](/recursos/mejor-software-para-estudios-de-pilates) comparamos 13 programas con el mismo criterio, y tienes a Tentare frente a cada uno en [Tentare vs bsport](/comparativa/tentare-vs-bsport) y [Tentare vs TIMP](/comparativa/tentare-vs-timp).',
+            'Para ver más opciones, en [el mejor software para estudios de pilates](/recursos/mejor-software-para-estudios-de-pilates) comparamos 13 programas con el mismo criterio, y tienes a Centra frente a cada uno en [Centra vs bsport](/comparativa/tentare-vs-bsport) y [Centra vs TIMP](/comparativa/tentare-vs-timp).',
         },
       ],
     },
@@ -309,9 +309,9 @@ const articulo: Articulo = {
     '/soluciones/cambiar-de-software',
   ],
   cta: {
-    titulo: 'Si ninguno te convence, empieza gratis en Tentare',
+    titulo: 'Si ninguno te convence, empieza gratis en Centra',
     texto:
-      'Tentare publica su precio: gratis hasta 150 reservas al mes, sin tarjeta y sin permanencia.',
+      'Centra publica su precio: gratis hasta 150 reservas al mes, sin tarjeta y sin permanencia.',
   },
   revision: [
     'Precios, planes y condiciones de bsport y TIMP revisados en su web el 25-sep-2026: repasarlos cada trimestre, sobre todo los de bsport, que no publica precio.',

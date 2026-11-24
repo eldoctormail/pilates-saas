@@ -10,12 +10,12 @@ import { estadoDeLaBandeja, subio } from '@/lib/tenti/momentos';
 
 // «Lo que espera tu visto bueno» — la bandeja única de la home, justo debajo de
 // la agenda del día. Contesta la segunda pregunta con la que se abre el panel:
-// después de «qué pasa hoy», «¿tengo que hacer algo, o Tentare ya se encarga?».
+// después de «qué pasa hoy», «¿tengo que hacer algo, o Centra ya se encarga?».
 //
 // Tres bloques, en este orden y por este motivo:
 //   1. Lo que espera tu decisión — lo único que es trabajo tuyo.
-//   2. Tentare lo está haciendo — procesos en marcha que no tienes que tocar.
-//   3. Resuelto por Tentare — para que se vea que el sistema trabaja.
+//   2. Centra lo está haciendo — procesos en marcha que no tienes que tocar.
+//   3. Resuelto por Centra — para que se vea que el sistema trabaja.
 //
 // Sin nada en ninguno de los tres queda una sola línea discreta. No se oculta
 // del todo porque «nada espera tu visto bueno» ES información (es lo que la
@@ -41,7 +41,7 @@ import { estadoDeLaBandeja, subio } from '@/lib/tenti/momentos';
 //     es la de la bandeja, el texto no cambia («N cosas esperan tu visto
 //     bueno») y, si la bandeja sube con la pantalla delante (al volver a la
 //     pestaña o tras resolver algo), una 'sorpresa' sin sonido;
-//   · en «Tentare lo está haciendo», 'trabajando': ese bloque solo existe si
+//   · en «Centra lo está haciendo», 'trabajando': ese bloque solo existe si
 //     hay algo en marcha, así que la cara dice literalmente su título.
 /** `nueva`: con la forma de las tarjetas de la home nueva (panel nuevo). Lo de dentro no cambia. */
 export function EstadoDelEstudio({ accionesEnLinea, nueva = false }: { accionesEnLinea?: React.ReactNode; nueva?: boolean }) {
@@ -107,17 +107,17 @@ export function EstadoDelEstudio({ accionesEnLinea, nueva = false }: { accionesE
           {accionesEnLinea}
         </div>
 
-        {/* Tenti firma lo que Tentare está haciendo por su cuenta: 'trabajando',
+        {/* Tenti firma lo que Centra está haciendo por su cuenta: 'trabajando',
             porque el bloque solo existe si hay algo en marcha. No dice «todo
             bien» ni celebra nada: lo resuelto va aparte, con su Check. */}
         {datos && conBandeja && datos.enMarcha.length > 0 && (
-          <Bloque titulo="Tentare lo está haciendo" icono={<TentiIcono ancho={18} estado="trabajando" />}>
+          <Bloque titulo="Centra lo está haciendo" icono={<TentiIcono ancho={18} estado="trabajando" />}>
             <Lineas lineas={datos.enMarcha} tenue />
           </Bloque>
         )}
 
         {datos && conBandeja && datos.resuelto.length > 0 && (
-          <Bloque titulo="Resuelto por Tentare" icono={<Check size={14} style={{ color: 'var(--success)' }} aria-hidden />}>
+          <Bloque titulo="Resuelto por Centra" icono={<Check size={14} style={{ color: 'var(--success)' }} aria-hidden />}>
             <Lineas lineas={datos.resuelto} tenue />
           </Bloque>
         )}

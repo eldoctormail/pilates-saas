@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { AyudaResultado } from '@/components/ayuda/AyudaPasos';
 
-// Reescrito el 25-sep-2026 con «Tentare Widgets»: los widgets son piezas de la
+// Reescrito el 25-sep-2026 con «Centra Widgets»: los widgets son piezas de la
 // web del estudio, y DÓNDE se meten en la web es una elección aparte de cada
 // widget — antes el «Calendario embebido» figuraba como un widget más cuando
 // era el horario metido de otra forma. El 28-sep, con los nombres llanos del
@@ -11,8 +11,8 @@ export default function Contenido() {
   return (
     <>
       <p>
-        Desde Configuración &gt; Mi app y mi web &gt; Widgets para tu web eliges qué parte de Tentare quieres en tu
-        propia web y dónde, ves cómo queda con el resultado real y copias el código. Tu web sigue siendo tuya: Tentare no la
+        Desde Configuración &gt; Mi app y mi web &gt; Widgets para tu web eliges qué parte de Centra quieres en tu
+        propia web y dónde, ves cómo queda con el resultado real y copias el código. Tu web sigue siendo tuya: Centra no la
         cambia, solo le pone piezas que funcionan de verdad: desde ella se reserva, se paga y se entra a la cuenta.
       </p>
 
@@ -34,7 +34,7 @@ export default function Contenido() {
         <li><strong>Un botón que lleva a tu página de reservas</strong> — no necesita ningún script. En WordPress, Wix, Squarespace y Webflow lo haces con el botón de tu propia web y tu enlace.</li>
         <li><strong>Un enlace</strong> — la dirección tal cual, para la bio de Instagram, un newsletter o WhatsApp.</li>
         <li><strong>Sin marco</strong> (solo el horario, para quien te hace la web) — toma el espacio de tu web como si fuera suyo. Requiere autorizar tu web primero. Si tu cliente no ha
-          iniciado sesión, al tocar una clase sigue la reserva en tu página de Tentare.</li>
+          iniciado sesión, al tocar una clase sigue la reserva en tu página de Centra.</li>
       </ul>
       <p>
         La primera vez te pregunta con qué está hecha tu web y, con eso, te recomienda dónde ponerlo y te da los pasos

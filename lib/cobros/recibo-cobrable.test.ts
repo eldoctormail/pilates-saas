@@ -28,7 +28,7 @@ const leer = (p: string) => readFileSync(join(raiz, p), 'utf8');
  * El fuente SIN comentarios.
  *
  * ⚠️ Imprescindible en un test estructural, y este repo ya se ha tropezado:
- * los comentarios de Tentare citan el código que sustituyen («antes esto era
+ * los comentarios de Centra citan el código que sustituyen («antes esto era
  * `recibo.estado !== 'PENDIENTE'`»), así que un `doesNotMatch` contra el
  * fichero entero da rojo con el arreglo APLICADO — y un `match` da verde con
  * el arreglo BORRADO si la explicación sigue en la cabecera. Las dos

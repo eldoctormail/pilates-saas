@@ -15,7 +15,7 @@ import { Baldosa, type Tono } from './vivo';
 /** El tono de cada sección: el mismo en su cabecera, sus cifras y sus vacíos. */
 /**
  * El icono de una sección en el panel nuevo, cuando no es el del menú: el robot
- * del menú no es Tentare (lib/tenti/donde-vive-tenti.test.ts) y Automatizaciones
+ * del menú no es Centra (lib/tenti/donde-vive-tenti.test.ts) y Automatizaciones
  * es la baldosa del rayo (fundador, 6-oct-2026). El menú de siempre no cambia.
  */
 export const ICONO_PROPIO: Record<string, LucideIcon> = { '/automatizaciones': Zap };

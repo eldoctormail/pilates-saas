@@ -2,7 +2,7 @@
 // Los dos correos de «después de la primera clase» (31-oct-2026). Puro, para
 // probar la regla sin red (correo-empuje.test.ts); los manda el cron horario
 // `altas-sin-terminar` (lib/alta/recordatorio-servidor.ts, `enviarCorreosEmpuje`),
-// el mismo que ya manda «Tu primera clase en Tentare, en 5 minutos».
+// el mismo que ya manda «Tu primera clase en Centra, en 5 minutos».
 //
 // De dónde salen: de mirar a los 23 estudios que se dieron de alta en octubre.
 // Seis crearon su clase y se quedaron ahí sin enseñársela a nadie, y dos

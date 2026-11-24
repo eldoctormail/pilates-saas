@@ -1,6 +1,6 @@
 // Tipos y builders del estado de formulario del wizard de onboarding
 // (app/network/crear-perfil). Extraído del componente de página tal cual
-// (F0 del roadmap de Tentare Network 2.0: partir el wizard en componentes
+// (F0 del roadmap de Centra Network 2.0: partir el wizard en componentes
 // por paso sin cambiar comportamiento) — ni la forma ni la lógica de estos
 // builders cambia, solo su fichero.
 import type { PerfilNetwork, PerfilIdentidadNetwork } from '@/lib/network/tipos';

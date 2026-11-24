@@ -14,19 +14,19 @@
 import { esRutaCongelada } from './frozen-features.ts';
 import type { Rol } from './types';
 
-// Instructoras: NINGUNA pantalla del panel. Tentare Core se retiró (paso 2,
+// Instructoras: NINGUNA pantalla del panel. Centra Core se retiró (paso 2,
 // decisión del fundador 14-sep-2026): su trabajo vive en la app del estudio
 // (`app/portal/[slug]/equipo`) y `DashboardShell` la manda allí
 // (`components/layout/puerta-app-instructora.tsx`). Aquí vivía una lista blanca
 // (/dashboard, /calendario, /clientas, /mensajeria…) que por prefijo llegó a
-// abrirle seis pantallas de importación. Su perfil de Tentare Network sigue
+// abrirle seis pantallas de importación. Su perfil de Centra Network sigue
 // fuera del panel, en app/network, sin pasar por aquí.
 
 // Recepción: todo lo operativo, nada de configuración del negocio,
 // marketing, automatizaciones, informes o gestión del equipo.
 // '/centro-de-control' (Decision OS, MVP): solo PROPIETARIO — la apertura
 // parcial a RECEPCION se decidirá post-MVP (DECISION-OS-ANALISIS.md §8).
-// '/asistente' («Pregúntale a Tentare»): propietaria y gerencia (fundador,
+// '/asistente' («Pregúntale a Centra»): propietaria y gerencia (fundador,
 // 5-oct-2026); recepción no. Lo que el plan incluye y si está encendido lo
 // decide la propia pantalla (feature `asistente`) y, de verdad, el servidor.
 // '/festivos' (módulo del panel nuevo, 14-oct-2026): lo que se decide ahí es
@@ -85,7 +85,7 @@ function coincide(path: string, prefijo: string) {
 // (no el motivo ni las condiciones). Es una barrera de UI; la fuente de verdad
 // se protege también en servidor.
 //
-// La INSTRUCTORA salió de aquí al retirarse Tentare Core (14-sep-2026): la salud
+// La INSTRUCTORA salió de aquí al retirarse Centra Core (14-sep-2026): la salud
 // de sus alumnas la lee en la app del estudio, por su propia ruta de servidor
 // (`lib/datos-salud/salud-para-instructora.ts`), no por el panel.
 export function puedeVerFichaClinica(rol: Rol): boolean {
@@ -283,7 +283,7 @@ export function puedeVerDetalleAusencias(rol: Rol): boolean {
   return puedeGestionarEquipo(rol);
 }
 
-// Leer las solicitudes que el estudio manda a Tentare desde «Ayuda». Texto
+// Leer las solicitudes que el estudio manda a Centra desde «Ayuda». Texto
 // libre: quien escribe describe su caso y a veces el caso es una alumna. Todo
 // el personal puede ESCRIBIR una; leerlas, solo la propietaria. Espejo de
 // `soporte_leer_propietaria` (migr 20260914000205). No hay pantalla que las
@@ -449,7 +449,7 @@ export function puedeGestionarClavesApi(rol: Rol): boolean {
 
 // Actuar sobre UNA clase concreta: avisar a sus alumnas de que se cancela o
 // cambia, o abrir la puerta al marcar asistencia en ella: mostrador y manager,
-// sobre cualquiera. Tentare Core retirado (14-sep-2026): la instructora ya no
+// sobre cualquiera. Centra Core retirado (14-sep-2026): la instructora ya no
 // opera clases desde el panel (apuntar alumnas, Kisi, email de cancelación), ni
 // siquiera las suyas.
 export function puedeOperarClase(rol: Rol): boolean {
@@ -473,7 +473,7 @@ export const TIPOS_EMAIL_DE_CLASE: readonly TipoEmailPanel[] = ['reserva', 'prom
 //     el único tipo con título y texto libres (mensaje a una persona desde la
 //     ficha o Mensajería, aprobación de una automatización).
 //   · cancelacion → quien puede operar la clase (calendario; la instructora ya
-//     no, ni la suya: Tentare Core retirado, 14-sep-2026).
+//     no, ni la suya: Centra Core retirado, 14-sep-2026).
 //   · reserva/promocion/cambio/recordatorio → calendario. Desde el panel no los
 //     llama nadie hoy (el servidor los manda por su cuenta).
 export function puedeEnviarEmail(rol: Rol, tipo: string): boolean {
@@ -525,15 +525,15 @@ export function puedeVerResumenValoracionDe(rol: Rol, _esPropia: boolean): boole
 }
 
 // Arquitectura de marca: el panel es una sola app role-gateada, pero se
-// percibe como dos productos — Tentare Core para instructoras, Tentare
+// percibe como dos productos — Centra Core para instructoras, Centra
 // Manager para propietaria/manager/recepción. Fuente de verdad única del
 // mapeo; todo lo que muestre el nombre del producto (título de página, logo,
 // emails al equipo) pasa por aquí en vez de repetir el `rol === 'INSTRUCTOR'`.
-// Tentare Core se retiró (14-sep-2026): a la instructora ya no se le habla de
+// Centra Core se retiró (14-sep-2026): a la instructora ya no se le habla de
 // un producto propio del panel, solo de la marca paraguas (sus correos de
 // sustituciones, disponibilidad e invitación).
-export function nombreAppPorRol(rol: Rol): 'Tentare' | 'Tentare Manager' {
-  return rol === 'INSTRUCTOR' ? 'Tentare' : 'Tentare Manager';
+export function nombreAppPorRol(rol: Rol): 'Centra' | 'Centra Manager' {
+  return rol === 'INSTRUCTOR' ? 'Centra' : 'Centra Manager';
 }
 
 // Fuente de verdad única de "cómo se llama este rol" — auditoría integral

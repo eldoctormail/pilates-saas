@@ -1,6 +1,6 @@
 'use client';
 
-// El selector de tipografía del widget: las familias que sirve Tentare, cada
+// El selector de tipografía del widget: las familias que sirve Centra, cada
 // una escrita en su propia letra.
 //
 // Antes era un `<input type="text">` con el placeholder «Space Grotesk». Eso
@@ -15,7 +15,7 @@
 // ella. Quitarla habría cambiado el código de un widget en producción sin
 // avisar.
 //
-// ⚠️ Solo se ofrecen las del catálogo que sirve Tentare (`familiaServida`,
+// ⚠️ Solo se ofrecen las del catálogo que sirve Centra (`familiaServida`,
 // lib/widget/fuentes-nativa.ts), en la página de reservas y sin marco: ninguna
 // de las dos le pide ya nada a Google (le daba la IP de cada visitante de su
 // web), así que Inter, DM Sans, Playfair Display y Fraunces no llegarían a
@@ -28,7 +28,7 @@ import { cn } from '@/lib/utils';
 import { FUENTES_WIDGET, fuenteDelCatalogo, type FuenteCatalogo } from '@/lib/reservar/fuentes-catalogo';
 import { familiaServida, letraNativa } from '@/lib/widget/fuentes-nativa';
 
-/** Las del catálogo que sirve Tentare: las únicas que se ven. */
+/** Las del catálogo que sirve Centra: las únicas que se ven. */
 const FUENTES_SERVIDAS = FUENTES_WIDGET.filter(f => familiaServida(f.familia));
 
 /** La muestra de cada una: las fuentes de la app, las mismas que pinta la vista previa. */
@@ -37,7 +37,7 @@ const muestra = (f: FuenteCatalogo) => letraNativa(f.familia, 'app').pila;
 interface Props {
   etiqueta: string;
   ayuda?: string;
-  /** La familia guardada, o `null` = «la de Tentare». */
+  /** La familia guardada, o `null` = «la de Centra». */
   valor: string | null;
   onChange: (v: string | null) => void;
   /** Texto de la opción que deja el valor sin fijar. */
@@ -46,12 +46,12 @@ interface Props {
   pistaPorDefecto?: string;
   /**
    * Para la integración sin marco: cambia lo que se dice de una letra que
-   * Tentare no sirve (allí se ve si su web ya la carga; en la página, no).
+   * Centra no sirve (allí se ve si su web ya la carga; en la página, no).
    */
   sinMarco?: boolean;
 }
 
-export function SelectorFuente({ etiqueta, ayuda, valor, onChange, etiquetaPorDefecto = 'La de Tentare', pistaPorDefecto, sinMarco = false }: Props) {
+export function SelectorFuente({ etiqueta, ayuda, valor, onChange, etiquetaPorDefecto = 'La de Centra', pistaPorDefecto, sinMarco = false }: Props) {
   const [abierto, setAbierto] = useState(false);
   const caja = useRef<HTMLDivElement>(null);
   const idLista = useId();
@@ -73,13 +73,13 @@ export function SelectorFuente({ etiqueta, ayuda, valor, onChange, etiquetaPorDe
   const delCatalogo = fuenteDelCatalogo(valor);
   const enCatalogo = delCatalogo && FUENTES_SERVIDAS.includes(delCatalogo) ? delCatalogo : null;
   // Una familia guardada a mano que no está en la lista (o una de las del
-  // catálogo que Tentare no sirve, elegida antes de que dejáramos de pedirlas a
+  // catálogo que Centra no sirve, elegida antes de que dejáramos de pedirlas a
   // Google): se respeta y se enseña, nunca se descarta en silencio.
   const propia: FuenteCatalogo | null = valor && !enCatalogo
     ? {
         ...(delCatalogo ?? { familia: valor, etiqueta: valor, categoria: 'sans' }),
         // Figtree o Libre Caslon Text, escritas a mano, no están en la lista
-        // pero Tentare sí las sirve: esas se ven.
+        // pero Centra sí las sirve: esas se ven.
         pista: familiaServida(valor)
           ? 'La que escribiste antes a mano.'
           : sinMarco

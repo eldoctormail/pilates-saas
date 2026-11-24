@@ -10,7 +10,7 @@ import { TEXTO_GRACIAS_DENUNCIA } from '@/lib/moderacion/denuncias';
 // La alumna denuncia un mensaje de la otra parte (App Store 1.2). Quién es sale
 // del token y de su ficha en ESTE estudio, nunca del body; `denunciarMensaje`
 // comprueba que el hilo es suyo y que el mensaje no es suyo. Si el hilo es con
-// el estudio, la denuncia la revisa Tentare.
+// el estudio, la denuncia la revisa Centra.
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const limited = await enforceRateLimit(req, 'public-mensajeria-denunciar', { max: 20, windowSeconds: 60 });
   if (limited) return limited;

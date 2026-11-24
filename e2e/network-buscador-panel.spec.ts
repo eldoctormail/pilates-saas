@@ -1,7 +1,7 @@
 import { test, expect, type Page, type Route } from '@playwright/test';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Buscador de Tentare Network desde el panel del estudio
+// Buscador de Centra Network desde el panel del estudio
 // (app/(dashboard)/network/buscar/page.tsx, movido desde /network en el
 // rediseño público #1053) — pieza aplazada de la reconstrucción 0→100 (ver
 // PRs #1039-#1053). Cubre el camino de éxito (buscar → contactar) y el de fallo
@@ -87,7 +87,7 @@ async function montarBuscador(page: Page, opts: { contactoStatus?: number } = {}
   return { intentos: () => intentosContacto };
 }
 
-// CONGELADO (2-oct-2026): Tentare Network salió del panel (lib/frozen-features.ts).
+// CONGELADO (2-oct-2026): Centra Network salió del panel (lib/frozen-features.ts).
 // Se salta, no se borra: al descongelarlo, quitar el `.skip` y vuelve a cubrirlo.
 test.describe.skip('Buscador de Network (panel del estudio)', () => {
   test('busca, ve el resultado con su rating y "cerca de mí", y contacta con éxito', async ({ page }) => {

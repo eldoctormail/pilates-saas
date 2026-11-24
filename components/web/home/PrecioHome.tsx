@@ -18,7 +18,7 @@ import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 // destino del enlace «Precios» de la isla.
 
 export function PrecioHome() {
-  const whatsappCadena = enlaceWhatsApp(WHATSAPP_SOPORTE, 'Hola, tengo varios centros y quiero saber más de Tentare:') ?? '#';
+  const whatsappCadena = enlaceWhatsApp(WHATSAPP_SOPORTE, 'Hola, tengo varios centros y quiero saber más de Centra:') ?? '#';
 
   return (
     <section id="precio" className="wh-seccion wh-precio" aria-labelledby="wh-precio-h">
@@ -45,7 +45,7 @@ export function PrecioHome() {
             </div>
           ))}
         </div>
-        <p className="wh-precio-nota">IVA incluido · Sin permanencia · Pagos con {ES ? 'Stripe' : 'Mercado Pago'}, sin comisión de Tentare</p>
+        <p className="wh-precio-nota">IVA incluido · Sin permanencia · Pagos con {ES ? 'Stripe' : 'Mercado Pago'}, sin comisión de Centra</p>
         <p className="wh-precio-salida"><Link href={SALIDAS.precio.href} className="wh-enlace-flecha">{SALIDAS.precio.label} <span aria-hidden="true">→</span></Link></p>
       </div>
     </section>

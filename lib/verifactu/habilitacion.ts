@@ -1,11 +1,11 @@
-// Veri*Factu — ¿puede Tentare transmitir los registros de ESTE estudio?
+// Veri*Factu — ¿puede Centra transmitir los registros de ESTE estudio?
 //
 // SOLO SERVIDOR. Es el bloqueo duro: sin esto en `true`, el cron no manda nada
 // del estudio, esté como esté configurado el certificado.
 //
 // Se habilita solo con TODO esto (reglas puras en `apoderamiento.ts`,
 // `habilitacionDe`):
-//   · `verifactu_estudios.estado = 'PRODUCCION'` (lo activa Tentare, a mano);
+//   · `verifactu_estudios.estado = 'PRODUCCION'` (lo activa Centra, a mano);
 //   · un poder IZ860 (o general) VERIFICADO y vigente en `verifactu_representaciones`;
 //   · para el NIF que tiene HOY el estudio y para el apoderado configurado;
 //   · y no es el estudio de demostración.

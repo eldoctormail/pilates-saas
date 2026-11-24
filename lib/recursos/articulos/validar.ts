@@ -12,7 +12,7 @@ import type { Articulo, Bloque } from './tipos.ts';
 import { esSlugDescarga } from '../descargas.ts';
 
 /**
- * Lo que Tentare NO puede decir de sí mismo en la web (registro de afirmaciones
+ * Lo que Centra NO puede decir de sí mismo en la web (registro de afirmaciones
  * del 23-sep-2026). Si una frase de estas aparece, el artículo no se publica.
  */
 export const FRASES_PROHIBIDAS: { patron: RegExp; motivo: string }[] = [
@@ -30,7 +30,7 @@ export const FRASES_PROHIBIDAS: { patron: RegExp; motivo: string }[] = [
   { patron: /whatsapp (de serie|incluido|autom[aá]tico)|sms (de serie|incluidos?)/i, motivo: 'WhatsApp solo con la cuenta de Meta del estudio; SMS no' },
   // La factura solo imprime el QR cuando la AEAT ya tiene el registro, y el
   // envío no está activo: «numeración, huella y QR» se coló en cuatro textos.
-  { patron: /(numeraci[oó]n legal|huella)[^.]{0,40}\by (el )?(c[oó]digo )?QR\b/i, motivo: 'las facturas de Tentare no llevan QR hasta que la AEAT tenga el registro' },
+  { patron: /(numeraci[oó]n legal|huella)[^.]{0,40}\by (el )?(c[oó]digo )?QR\b/i, motivo: 'las facturas de Centra no llevan QR hasta que la AEAT tenga el registro' },
   // 21-oct-2026 (auditoría de promesas): sin Veri*Factu —no activo en ningún estudio— la
   // factura nace sin huella; el SEPA de Stripe está retirado; y las sustituciones
   // autónomas son un complemento en Founding Studio de pago. La guardia de toda la web

@@ -76,7 +76,7 @@ export default function InicioNetworkPage() {
   if (!perfil) {
     return (
       <div className="max-w-2xl mx-auto text-center py-16">
-        <p className="text-[13px] mb-4" style={{ color: NW_MUTED }}>Todavía no tienes un perfil en Tentare Network.</p>
+        <p className="text-[13px] mb-4" style={{ color: NW_MUTED }}>Todavía no tienes un perfil en Centra Network.</p>
         <Link href="/network/crear-perfil" className="inline-block px-5 py-2.5 rounded-full text-[13.5px] font-bold text-white" style={{ background: NW_PRODUCTO }}>
           Crear perfil
         </Link>
@@ -122,7 +122,7 @@ export default function InicioNetworkPage() {
   // inventado. "Perfil visto por un estudio" queda fuera a propósito: no
   // hay tracking de vistas (misma decisión que la tarjeta de stats).
   const eventos: { icono: typeof Sparkles; texto: string; fecha: string }[] = [
-    { icono: Sparkles, texto: 'Bienvenida a Tentare Network — cuenta creada.', fecha: perfil.creadoEn },
+    { icono: Sparkles, texto: 'Bienvenida a Centra Network — cuenta creada.', fecha: perfil.creadoEn },
   ];
   if (user?.email_confirmed_at) {
     eventos.push({ icono: ShieldCheck, texto: 'Email verificado correctamente.', fecha: user.email_confirmed_at });

@@ -26,14 +26,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const a = articuloBlogPorSlug(slug);
   if (!a) return {};
   const ruta = urlArticuloBlog(a.slug);
-  const titulo = `${a.tituloSeo} | Tentare`;
+  const titulo = `${a.tituloSeo} | Centra`;
   return {
     title: titulo,
     description: a.descripcion,
     alternates: alternatesBlog(ruta),
     authors: [{ name: AUTOR_BLOG.nombre, url: urlDe(RUTA_AUTOR) }],
     openGraph: {
-      siteName: 'Tentare',
+      siteName: 'Centra',
       type: 'article',
       locale: 'es_ES',
       title: a.titulo,
@@ -117,7 +117,7 @@ export default async function ArticuloBlogPage({ params }: { params: Promise<{ s
               <div>
                 <p className="bl-nombre">{AUTOR_BLOG.nombre}</p>
                 <p>
-                  Fundador de Tentare, un software de gestión para estudios de Pilates y yoga en España. Trabaja desde {AUTOR_BLOG.ciudad}.
+                  Fundador de Centra, un software de gestión para estudios de Pilates y yoga en España. Trabaja desde {AUTOR_BLOG.ciudad}.
                 </p>
                 <Link href={RUTA_AUTOR}>Más sobre {AUTOR_BLOG.nombreCorto} →</Link>
               </div>

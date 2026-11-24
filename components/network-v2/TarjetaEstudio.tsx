@@ -56,7 +56,7 @@ export function TarjetaEstudio({ estudio }: { estudio: EstudioListadoPublico }) 
         )}
         {!estudio.descripcion && (
           <p className="mt-1.5 text-[12.5px]" style={{ color: NW_MUTED_2 }}>
-            Estudio del directorio de Tentare Network.
+            Estudio del directorio de Centra Network.
           </p>
         )}
       </div>

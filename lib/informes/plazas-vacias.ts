@@ -45,7 +45,7 @@ export interface FilaPlazasVacias {
 
 const USAN_PLAZA = new Set(['CONFIRMADA', 'ASISTIDA', 'NO_ASISTIO']);
 
-/** De Tentare (no de ClassPass y compañía), con alumna, y no una clase fija retirada por el estudio. */
+/** De Centra (no de ClassPass y compañía), con alumna, y no una clase fija retirada por el estudio. */
 function cuenta(r: ReservaPlazasVacias): boolean {
   if (typeof r.socio_id !== 'string' || !r.socio_id) return false;
   if (r.origen != null && r.origen !== 'TENTARE') return false;

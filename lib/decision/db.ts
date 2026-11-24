@@ -475,8 +475,8 @@ function mapOutcome(row: RowOutcomes): Outcome {
 // traza en el feed "Actividad" ("todo tenga conexión"). Enlace al Centro.
 //
 // `origen` es obligatorio a propósito: quien llama decide si lo hizo una persona
-// del estudio ('EQUIPO', también cuando Tentare ejecuta lo que la propietaria
-// aprobó) o Tentare solo ('TENTARE', piloto automático). La RLS no deja escribir
+// del estudio ('EQUIPO', también cuando Centra ejecuta lo que la propietaria
+// aprobó) o Centra solo ('TENTARE', piloto automático). La RLS no deja escribir
 // 'TENTARE' desde el cliente; solo este camino de servidor puede.
 export async function dbLogActividadReciente(a: {
   studioId: string; tipo: string; texto: string; socioId?: string | null; origen: 'EQUIPO' | 'TENTARE';
@@ -891,7 +891,7 @@ export async function dbCalcularSeguimientoPorTipo(
 }
 
 // Impacto REAL por tipo — base del ajuste de la puerta 5 del Umbral con
-// evidencia de resultado, no solo de comportamiento (Pilar 3 de "Tentare
+// evidencia de resultado, no solo de comportamiento (Pilar 3 de "Centra
 // 2030", migr 20260806213813, ver lib/decision/umbral.ts calibrarUmbral). Solo
 // entran outcomes `confianza_medicion = 'MEDIDO'` — los NO_MEDIBLE no tienen
 // una cifra real que promediar. `recomendaciones!inner(...)` es un join válido
@@ -969,7 +969,7 @@ export async function dbSetAutonomiaConfig(studioId: string, config: AutonomiaCo
 }
 
 // Lo que el piloto automático cerró HOY con este estado, en el día de Madrid:
-// es lo que el Centro de Control le cuenta a la propietaria («Tentare ha
+// es lo que el Centro de Control le cuenta a la propietaria («Centra ha
 // resuelto N…», «N no salió…»). Por `resuelto_por = 'AUTONOMIA'`, que no cambia
 // al cerrarse.
 async function contarAutonomasHoyEn(studioId: string, now: Date, estado: 'EJECUTADA' | 'FALLIDA'): Promise<number> {
@@ -987,7 +987,7 @@ async function contarAutonomasHoyEn(studioId: string, now: Date, estado: 'EJECUT
 /**
  * Cuántas resolvió hoy el piloto automático DE VERDAD: solo EJECUTADA. Una
  * APROBADA aún no ha hecho nada (el ejecutor va después) y una FALLIDA no salió;
- * contarlas era decir «Tentare ha resuelto 3» con un cobro rechazado dentro.
+ * contarlas era decir «Centra ha resuelto 3» con un cobro rechazado dentro.
  */
 export function dbCountAutonomasHoy(studioId: string, now: Date): Promise<number> {
   return contarAutonomasHoyEn(studioId, now, 'EJECUTADA');

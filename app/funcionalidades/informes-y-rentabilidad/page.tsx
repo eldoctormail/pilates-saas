@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: pagina.titulo,
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
-  openGraph: { siteName: 'Tentare', type: 'website', locale: 'es_ES', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
+  openGraph: { siteName: 'Centra', type: 'website', locale: 'es_ES', title: pagina.titulo, description: pagina.descripcion, url: urlDe(PATH) },
 };
 
 const FAQ = [
@@ -54,7 +54,7 @@ export default function InformesPage() {
       h1={<>¿Qué clases te dan dinero?</>}
       intro={<>Piensas en meses porque tu software te da informes mensuales. Pero tu negocio ocurre por clases — y hay franjas que llevan un año costándote dinero sin que nadie lo haya mirado.</>}
       chips={['Margen por clase concreta', 'Ocupación por tipo', 'Retención por cohorte']}
-      pieza={{ descripcion: 'Ejemplo de los informes de Tentare: lo que deja cada clase y la ocupación por tipo.', contenido: <PanelInformes completo /> }}
+      pieza={{ descripcion: 'Ejemplo de los informes de Centra: lo que deja cada clase y la ocupación por tipo.', contenido: <PanelInformes completo /> }}
     >
       <Seccion id="problema" titulo="El mes cuadra. La clase de las 10:00 no">
         <Entradilla>

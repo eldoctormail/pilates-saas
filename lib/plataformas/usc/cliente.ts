@@ -1,6 +1,6 @@
 // Cliente de la API de Urban Sports Club (horario: eventos, trainers, plazas).
 //
-// Credenciales de Tentare como integrador, no de cada estudio: un solo
+// Credenciales de Centra como integrador, no de cada estudio: un solo
 // `USC_CLIENT_ID`/`USC_CLIENT_SECRET` (el mismo secreto que firma el Instant
 // Booking) y, por estudio, su `providerId` y `locationId` en
 // `integraciones.config`. Sin credenciales, `credencialesUsc()` es null y nadie

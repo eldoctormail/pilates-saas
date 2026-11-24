@@ -996,7 +996,7 @@ export default function Calendario() {
 
   // ── Buscador rápido (Fase 2): sobre TODO el estudio, no solo `datosVista`,
   // porque estos datos vienen del contexto completo. El filtro de instructora
-  // es la red de debajo: desde el retiro de Tentare Core ella no llega aquí.
+  // es la red de debajo: desde el retiro de Centra Core ella no llega aquí.
   const candidatasBusqueda = useMemo<SesionBuscable[]>(() => {
     const tiposById = new Map(tiposClase.map(t => [t.id, t]));
     const salasById = new Map(salas.map(s => [s.id, s]));

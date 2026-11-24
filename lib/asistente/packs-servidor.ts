@@ -3,8 +3,8 @@
 // LEER en qué ha quedado. Nada de aquí crea packs (eso es solo del webhook de la
 // plataforma, lib/asistente/packs-libro.ts).
 //
-// Es la cuenta de PLATAFORMA de Tentare —la misma que cobra la suscripción SaaS
-// (/api/billing/checkout)—, nunca Connect: es Tentare cobrando al estudio, no
+// Es la cuenta de PLATAFORMA de Centra —la misma que cobra la suscripción SaaS
+// (/api/billing/checkout)—, nunca Connect: es Centra cobrando al estudio, no
 // el estudio a una socia.
 //
 // Precio en línea (`price_data`) desde el catálogo en código (lib/asistente/
@@ -66,7 +66,7 @@ export async function crearCheckoutPack(o: {
   if (!studio) return { error: 'ESTUDIO' };
   const customer = await clienteDelEstudio(admin, stripe, studio as Parameters<typeof clienteDelEstudio>[2]);
 
-  const nombre = `${miles(pack.unidades)} consultas de Tentare`;
+  const nombre = `${miles(pack.unidades)} consultas de Centra`;
   const metadata = { origen: ORIGEN_PACK, studio_id: studioId, pack: String(pack.unidades) };
   const volver = new URLSearchParams({ pack: 'ok', desde });
   const session = await stripe.checkout.sessions.create({
@@ -85,7 +85,7 @@ export async function crearCheckoutPack(o: {
         tax_behavior: 'inclusive',
         product_data: {
           name: nombre,
-          description: `Pack de consultas de «Pregúntale a Tentare». Se gastan después de las de tu plan y caducan a los ${PACK_CADUCA_MESES} meses.`,
+          description: `Pack de consultas de «Pregúntale a Centra». Se gastan después de las de tu plan y caducan a los ${PACK_CADUCA_MESES} meses.`,
         },
       },
     }],

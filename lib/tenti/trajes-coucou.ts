@@ -2,7 +2,7 @@
 // Tenti — los trajes, tal cual los dibuja Coucou (Canvas 2D).
 //
 // Portado del renderizador de referencia de Coucou (mochi-outfits.js y su hoja
-// sheet.html), cuyo personaje Tentare usa con autorización escrita de su autor
+// sheet.html), cuyo personaje Centra usa con autorización escrita de su autor
 // (5-oct-2026). El código de Coucou es MIT:
 //
 //   Copyright (c) 2026 Louis Raillé
@@ -184,7 +184,7 @@ export function frontArc(H: MarcoCabeza, y: number, s: number): ProyectadoLon[] 
 export function capClip(H: MarcoCabeza, y: number, s: number, extraTop = 3): Path2D {
   const arc = frontArc(H, y, s);
   const p = new Path2D();
-  if (!arc.length) return p; // (Tentare) el aro entero de espaldas: no cubre nada.
+  if (!arc.length) return p; // (Centra) el aro entero de espaldas: no cubre nada.
   p.moveTo(arc[0].x - H.rx, arc[0].y);
   for (const q of arc) p.lineTo(q.x, q.y);
   p.lineTo(arc[arc.length - 1].x + H.rx, arc[arc.length - 1].y);
@@ -309,7 +309,7 @@ const santaHat: TrajeCoucou = {
   front(ctx, H, path) {
     const s = 1.05, yEdge = 0.52;
     const arc = frontArc(H, yEdge, s);
-    if (!arc.length) return; // (Tentare) el aro entero de espaldas: no hay gorro que ver.
+    if (!arc.length) return; // (Centra) el aro entero de espaldas: no hay gorro que ver.
     const L = arc[0], Rt = arc[arc.length - 1];
     const crown = proj(H, [0, 1.05, 0]);
     // tip: flops to the right and down, plus spring lag

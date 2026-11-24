@@ -106,7 +106,7 @@ const REGLAS_SUGERIDAS: Omit<AutomationRule, 'id' | 'studioId' | 'ejecutadaVeces
     icono: '💳', trigger: 'PAGO_PENDIENTE_DIAS', condicion: { dias: 3, diasSegundo: 8, diasEscalada: 15 }, pasos: [], activa: false,
   },
   // «Recordatorio de clase» (CLASE_MANANA) ya NO se ofrece: el recordatorio lo
-  // manda Tentare de serie a todos los estudios (lib/notificaciones/recordatorio-clase.ts:
+  // manda Centra de serie a todos los estudios (lib/notificaciones/recordatorio-clase.ts:
   // app 24 h y 1 h antes, email y WhatsApp 24 h antes), así que encender esta regla era mandar DOS
   // recordatorios por la misma clase. El trigger sigue existiendo en el motor
   // por si algún estudio lo tuviera encendido (0 en producción el 14-sep).
@@ -153,7 +153,7 @@ const TRIGGERS_QUE_ESCRIBEN_A_CLIENTAS = new Set<AutomationRule['trigger']>([
   'CUMPLEANOS',
 ]);
 
-// ─── Lo que Tentare hace de serie ─────────────────────────────────────────────
+// ─── Lo que Centra hace de serie ─────────────────────────────────────────────
 //
 // La frontera entre AUTOMÁTICO POR DEFECTO y AUTOMATIZACIONES PERSONALIZABLES.
 // Sin ella, esta pantalla sugería que un recordatorio de clase había que
@@ -178,7 +178,7 @@ const HECHO_DE_SERIE: string[] = [
 function HechoPorTentare() {
   return (
     <div className="rounded-2xl border border-border bg-card p-4">
-      <h2 className="text-sm font-semibold text-foreground">Esto ya lo hace Tentare, sin que configures nada</h2>
+      <h2 className="text-sm font-semibold text-foreground">Esto ya lo hace Centra, sin que configures nada</h2>
       <ul className="mt-2.5 space-y-1.5">
         {HECHO_DE_SERIE.map(t => (
           <li key={t} className="flex gap-2 text-xs text-muted-foreground">
@@ -600,7 +600,7 @@ function EditorMensaje({ rule, def, soloLectura }: {
               disabled={guardando}
               className="text-[11px] font-semibold text-muted-foreground hover:underline disabled:opacity-50"
             >
-              Volver al texto de Tentare
+              Volver al texto de Centra
             </button>
           )}
         </div>
@@ -627,7 +627,7 @@ function EditorMensaje({ rule, def, soloLectura }: {
           {rule.trigger === 'CUMPLEANOS' && (
             <p className="text-[11px] text-muted-foreground">
               Este correo no regala ni descuenta nada. Si en el texto prometes algo (una clase, un
-              descuento), tendrás que dárselo tú en el estudio: Tentare no lo aplica.
+              descuento), tendrás que dárselo tú en el estudio: Centra no lo aplica.
             </p>
           )}
           {error && <p role="alert" className="text-[11px] text-destructive">{error}</p>}
@@ -787,7 +787,7 @@ function AlcanceDelCumple({ alcance }: { alcance: AlcanceCumpleCliente | null })
       {alcance === null ? (
         <p>
           Solo escribe a quien tiene guardada su fecha de nacimiento, es mayor de edad y ha aceptado
-          recibir novedades de tu estudio. Ahora mismo Tentare no ha podido contar a cuántas llegaría.
+          recibir novedades de tu estudio. Ahora mismo Centra no ha podido contar a cuántas llegaría.
         </p>
       ) : alcance.alcanzables > 0 ? (
         <p>
@@ -821,7 +821,7 @@ function AlcanceDelCumple({ alcance }: { alcance: AlcanceCumpleCliente | null })
 
 // ─── Panel nuevo (14-oct-2026) ────────────────────────────────────────────────
 // La pantalla al nivel de Bonsai (b-20 «Automatiza tu centro», b-22 el flujo
-// dibujado): cifras de color arriba, lo que Tentare ya hace solo con su icono,
+// dibujado): cifras de color arriba, lo que Centra ya hace solo con su icono,
 // un vacío que enseña con ejemplos y cada regla con su icono (no un emoji) y,
 // al abrirla, el flujo: cuándo → qué hace → qué le llega a tu clienta. La
 // lógica (encender con confirmación, mensajes, aprobar) es la de siempre.
@@ -849,7 +849,7 @@ const CUANDO_DE_TRIGGER: Record<string, string> = {
   CUMPLEANOS: 'El día de su cumpleaños',
 };
 
-/** Lo que ya hace Tentare de serie (HECHO_DE_SERIE, mismo orden), con su nombre corto y su icono. */
+/** Lo que ya hace Centra de serie (HECHO_DE_SERIE, mismo orden), con su nombre corto y su icono. */
 const HECHO_DE_SERIE_NUEVO: { titulo: string; Icono: React.ElementType; tono: Tono }[] = [
   { titulo: 'Recordatorio de cada clase', Icono: Bell, tono: 'azul' },
   { titulo: 'Confirmación al reservar', Icono: CheckCircle2, tono: 'verde' },
@@ -865,7 +865,7 @@ function HechoPorTentareNuevo() {
       <CabeceraTarjeta
         tono="verde"
         Icono={CheckCircle2}
-        titulo="Esto ya lo hace Tentare, sin que configures nada"
+        titulo="Esto ya lo hace Centra, sin que configures nada"
         id="hecho-de-serie"
         sub="Las reglas de abajo son para lo que depende de cómo trabajas tú."
       />
@@ -1236,7 +1236,7 @@ export default function AutomatizacionesPage() {
         <>
           <PageHeader
             title="Automatizaciones"
-            description="Lo que Tentare hace solo por ti cada día, y las reglas que decides tú."
+            description="Lo que Centra hace solo por ti cada día, y las reglas que decides tú."
             actions={
               <button
                 onClick={handleRunNow}
@@ -1263,7 +1263,7 @@ export default function AutomatizacionesPage() {
                 tono="magenta"
                 Icono={AlertTriangle}
                 titulo="Requiere tu intervención"
-                sub="Tentare lo ha preparado, pero no lo hace sin tu sí."
+                sub="Centra lo ha preparado, pero no lo hace sin tu sí."
                 derecha={<span className="rounded-full px-2.5 py-0.5 text-[12px] font-bold text-white" style={{ backgroundColor: TONOS.magenta }}>{pendingAdmin.length}</span>}
               />
             </div>
@@ -1362,7 +1362,7 @@ export default function AutomatizacionesPage() {
               ) : (
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <p className="text-xs text-muted-foreground max-w-xl">
-                  Esto es lo que Tentare puede hacer solo por ti. Añádelas cuando quieras:
+                  Esto es lo que Centra puede hacer solo por ti. Añádelas cuando quieras:
                   llegan <strong className="text-foreground">apagadas</strong>, y las enciendes una a una
                   después de leer qué envía cada una.
                 </p>
@@ -1440,7 +1440,7 @@ export default function AutomatizacionesPage() {
                   </h2>
                   {reglasCumple.length === 0 && (
                     <p className="text-xs text-muted-foreground mt-0.5">
-                      Llega apagada, como las demás. Antes de encenderla, Tentare te dice a cuántos clientes escribiría.
+                      Llega apagada, como las demás. Antes de encenderla, Centra te dice a cuántos clientes escribiría.
                     </p>
                   )}
                 </div>

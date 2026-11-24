@@ -22,7 +22,7 @@
 // rectificativa» (misma fuente, §6.1, y FAQ de desarrolladores §17). Esa
 // decisión es fiscal y la toma la propietaria (o su asesoría), no este código.
 
-/** Qué sabe Tentare del registro que se va a corregir. */
+/** Qué sabe Centra del registro que se va a corregir. */
 export interface SituacionAlta {
   /** ¿Está ese registro (o uno anterior de la misma factura) admitido en la AEAT? */
   existeEnAeat: boolean;

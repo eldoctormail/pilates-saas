@@ -20,11 +20,11 @@ export default function Contenido() {
       <AyudaPaso numero={1} titulo="Entra en tentare.app/crear-estudio">
         <p style={{ margin: '0 0 12px' }}>
           Escribe el nombre de tu estudio (es el que verán tus clientes) y, si quieres, tu ciudad y cómo conociste
-          Tentare — los dos últimos son opcionales y no bloquean el alta.
+          Centra — los dos últimos son opcionales y no bloquean el alta.
         </p>
         <AyudaCaptura
           src="/help/empezar/crear-estudio-paso-1.png"
-          alt="Formulario de alta de estudio, paso 1 de 3: nombre del estudio, ciudad y cómo conociste Tentare"
+          alt="Formulario de alta de estudio, paso 1 de 3: nombre del estudio, ciudad y cómo conociste Centra"
           caption="Paso 1 de 3 — datos de tu estudio."
         />
       </AyudaPaso>
@@ -33,7 +33,7 @@ export default function Contenido() {
         <p>
           Empiezas en {PLAN_INFO.BASE.nombre}, gratis {LIMITES_GRATIS}. Si tu estudio pasa de ahí, sigues en el mismo
           plan por {PRECIO_FOUNDING_PAGO} €/mes: lo contratas desde Suscripción, en el menú, o desde Configuración &gt;
-          Plan de Tentare, sin perder nada de lo que hayas configurado. En ese plan de pago, {COMPLEMENTOS_CORTO} van
+          Plan de Centra, sin perder nada de lo que hayas configurado. En ese plan de pago, {COMPLEMENTOS_CORTO} van
           aparte, como complementos.
         </p>
         <AyudaCaptura

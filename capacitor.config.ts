@@ -1,6 +1,6 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
-// La carcasa nativa de Tentare (docs/APP-IOS.md).
+// La carcasa nativa de Centra (docs/APP-IOS.md).
 //
 // La app NO lleva una copia de la web: carga la web real (`server.url`), que es
 // donde vive la app de la alumna. Así un despliegue de Vercel llega a la app en
@@ -11,7 +11,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 // entorno al compilar — nunca cableando su id o su nombre aquí:
 //
 //   TENTARE_APP_ID    bundle id (por defecto `app.tentare`)
-//   TENTARE_APP_NAME  nombre bajo el icono (por defecto `Tentare`)
+//   TENTARE_APP_NAME  nombre bajo el icono (por defecto `Centra`)
 //
 // La URL de arranque es la MISMA para todas: `/app` sabe qué app la abre por
 // su bundle id (`App.getInfo()`, ver lib/nativo/puente.ts) y decide desde ahí.
@@ -20,7 +20,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 //
 // ⚠️ `allowNavigation` es la lista de lo que puede abrirse DENTRO de la app.
 // Todo lo demás (Stripe, Google, un PDF de otro sitio) lo abre iOS fuera, que
-// es lo que queremos: dentro de la app solo hay Tentare.
+// es lo que queremos: dentro de la app solo hay Centra.
 
 // ⚠️ Si cambia, cambia también en movil/www/index.html (botón de reintentar).
 const URL_DE_ARRANQUE = 'https://www.tentare.app/app';
@@ -29,7 +29,7 @@ const HOSTS_PROPIOS = ['www.tentare.app', 'tentare.app'];
 
 const config: CapacitorConfig = {
   appId: process.env.TENTARE_APP_ID || 'app.tentare',
-  appName: process.env.TENTARE_APP_NAME || 'Tentare',
+  appName: process.env.TENTARE_APP_NAME || 'Centra',
   webDir: 'movil/www',
   // La web lo lee para saber que la abre la app (además de `esAppNativa()`,
   // que solo existe una vez ha cargado el JS): sirve en el servidor.

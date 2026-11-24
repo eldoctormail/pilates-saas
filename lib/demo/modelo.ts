@@ -25,7 +25,7 @@ export type Bloque =
 
 export interface Regla {
   texto: string;
-  /** La función o el ajuste real de Tentare que decide esto (para «¿Por qué ocurre esto?»). */
+  /** La función o el ajuste real de Centra que decide esto (para «¿Por qué ocurre esto?»). */
   fuente: string;
 }
 
@@ -54,7 +54,7 @@ export interface PasoDemo {
   porQue: Regla[];
   /** La pantalla real del panel que se enseña (la guía de la demo la abre). */
   pantalla?: PantallaPanel;
-  /** Dónde se configura esto en Tentare (para «Ver cómo se configura»). */
+  /** Dónde se configura esto en Centra (para «Ver cómo se configura»). */
   configura?: { donde: string; ajuste: string; valor: string }[];
 }
 

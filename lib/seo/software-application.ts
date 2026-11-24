@@ -45,7 +45,7 @@ export function softwareApplicationLd() {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
     '@id': `${BASE_URL}/#software`,
-    name: 'Tentare',
+    name: 'Centra',
     applicationCategory: 'BusinessApplication',
     // «Web» y no «iOS, Android»: no hay app nativa en las tiendas. La app de la
     // alumna se instala desde el navegador (PWA) y el panel es web.
@@ -64,14 +64,14 @@ export function softwareApplicationLd() {
       ES ? 'Facturas con numeración legal' : 'Factura electrónica de ARCA',
       'Calendario por salas',
       'Importación desde Excel y otros programas, con acta y botón de deshacer',
-      'Asistente «Pregúntale a Tentare»: consulta datos y prepara clases, salas, eventos y citas con confirmación',
+      'Asistente «Pregúntale a Centra»: consulta datos y prepara clases, salas, eventos y citas con confirmación',
       'Gestión de instructoras, disponibilidad y sustituciones con tu visto bueno',
     ],
     keywords: 'software para estudios de Pilates, software para estudios de yoga, programa para centros de Pilates y yoga',
     audience: { '@type': 'Audience', audienceType: 'Estudios y centros de Pilates y yoga' },
 
     // TODO: añadir `aggregateRating` ({ '@type': 'AggregateRating', ratingValue,
-    // reviewCount }) en cuanto haya reseñas reales del SOFTWARE Tentare
+    // reviewCount }) en cuanto haya reseñas reales del SOFTWARE Centra
     // (p. ej. G2/Capterra, o un módulo de testimonios propio) — nunca un valor
     // inventado, Google Rich Results lo penaliza. `lib/inngest/valoraciones.ts`
     // es un sistema distinto: valora las CLASES de cada estudio, no el producto.

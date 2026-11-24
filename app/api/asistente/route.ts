@@ -25,7 +25,7 @@ import {
 } from '@/lib/asistente/servidor';
 import type { ContextoHerramienta } from '@/lib/asistente/tipos';
 
-// POST /api/asistente — «Pregúntale a Tentare» (fase 1: solo lectura).
+// POST /api/asistente — «Pregúntale a Centra» (fase 1: solo lectura).
 // Spec: bdd-artefactos/spec-asistente-fase1.md.
 //
 // Todo lo que puede cortar va ANTES de abrir el stream, cada cosa con su

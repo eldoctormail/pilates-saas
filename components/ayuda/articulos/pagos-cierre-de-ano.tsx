@@ -17,9 +17,9 @@ export default function Contenido() {
         </p>
       </AyudaPaso>
 
-      <AyudaPaso numero={2} titulo="Añade lo que cobraste fuera de Tentare">
+      <AyudaPaso numero={2} titulo="Añade lo que cobraste fuera de Centra">
         <p style={{ margin: 0 }}>
-          ¿Un taller que cobraste por transferencia antes de usar Tentare, un alquiler de sala? Se apunta a mano
+          ¿Un taller que cobraste por transferencia antes de usar Centra, un alquiler de sala? Se apunta a mano
           con su fecha, concepto, NIF y tipo de IVA, y entra en los totales. Así el resumen es el de tu negocio,
           no el de una parte.
         </p>

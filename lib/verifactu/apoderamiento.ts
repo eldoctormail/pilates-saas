@@ -2,7 +2,7 @@
 // cuándo deja transmitir.
 //
 // Lógica pura. El poder REAL lo otorga el estudio en la sede de la AEAT; aquí
-// solo está lo que Tentare guarda como evidencia y las reglas de su ciclo de
+// solo está lo que Centra guarda como evidencia y las reglas de su ciclo de
 // vida. Fuentes en la migración 20260930020000.
 
 import type { Habilitacion } from './habilitacion.ts';
@@ -43,7 +43,7 @@ type Env = Record<string, string | undefined>;
 
 /**
  * La persona a la que los estudios apoderan: la titular del certificado con el
- * que se remite. Por defecto, el productor del SIF (misma persona en Tentare);
+ * que se remite. Por defecto, el productor del SIF (misma persona en Centra);
  * `VERIFACTU_APODERADO_*` lo separa si algún día no lo son.
  */
 export function apoderadoDeEntorno(env: Env): Apoderado | null {
@@ -81,16 +81,16 @@ export function textoMandato(p: {
   return [
     `MANDATO PARA LA REMISIÓN DE REGISTROS DE FACTURACIÓN (versión ${MANDATO_VERSION})`,
     '',
-    `${p.estudio.nombreFiscal}, con NIF ${p.estudio.nif} (en adelante, el obligado tributario), usuario del sistema de facturación Tentare:`,
+    `${p.estudio.nombreFiscal}, con NIF ${p.estudio.nif} (en adelante, el obligado tributario), usuario del sistema de facturación Centra:`,
     '',
-    `1. Declara que ha otorgado en el Registro de apoderamientos de la Agencia Estatal de Administración Tributaria un poder a favor de ${p.apoderado.nombre}, con NIF ${p.apoderado.nif}, para ${alcance}, y que los datos de ese poder que comunica a Tentare son ciertos.`,
-    '2. Encarga al apoderado que, con su propio certificado electrónico cualificado, remita a la sede electrónica de la AEAT los registros de facturación que genera Tentare para el obligado tributario, y que consulte su estado, exclusivamente a esos efectos.',
+    `1. Declara que ha otorgado en el Registro de apoderamientos de la Agencia Estatal de Administración Tributaria un poder a favor de ${p.apoderado.nombre}, con NIF ${p.apoderado.nif}, para ${alcance}, y que los datos de ese poder que comunica a Centra son ciertos.`,
+    '2. Encarga al apoderado que, con su propio certificado electrónico cualificado, remita a la sede electrónica de la AEAT los registros de facturación que genera Centra para el obligado tributario, y que consulte su estado, exclusivamente a esos efectos.',
     '3. Este mandato no constituye por sí mismo un apoderamiento ante la Agencia Estatal de Administración Tributaria ni sustituye al poder inscrito en su Registro de Apoderamientos.',
-    '4. Sabe que el poder real es el inscrito en la AEAT; que puede revocarlo en cualquier momento en la sede electrónica, con efecto desde que la AEAT lo recibe; y que debe comunicarlo a Tentare para que deje de remitir.',
+    '4. Sabe que el poder real es el inscrito en la AEAT; que puede revocarlo en cualquier momento en la sede electrónica, con efecto desde que la AEAT lo recibe; y que debe comunicarlo a Centra para que deje de remitir.',
     '5. Sabe que el apoderamiento no le exime de su responsabilidad como obligado a expedir facturas.',
-    '6. Declara que el tratamiento de datos personales realizado por Tentare en el marco de este servicio queda sujeto al acuerdo de encargo de tratamiento aplicable entre las partes.',
+    '6. Declara que el tratamiento de datos personales realizado por Centra en el marco de este servicio queda sujeto al acuerdo de encargo de tratamiento aplicable entre las partes.',
     '7. El presente mandato permanecerá vigente mientras se mantenga el servicio de remisión de registros de facturación y no sea revocado por el obligado tributario, sin perjuicio de que el poder otorgado ante la AEAT se regirá exclusivamente por las condiciones y efectos establecidos por la propia AEAT.',
-    '8. En caso de terminación del servicio, Tentare dejará de realizar nuevas remisiones y pondrá a disposición del obligado tributario la información necesaria para la continuidad de sus obligaciones de facturación, sin perjuicio de los efectos y obligaciones derivados del poder inscrito ante la AEAT.',
+    '8. En caso de terminación del servicio, Centra dejará de realizar nuevas remisiones y pondrá a disposición del obligado tributario la información necesaria para la continuidad de sus obligaciones de facturación, sin perjuicio de los efectos y obligaciones derivados del poder inscrito ante la AEAT.',
   ].join('\n');
 }
 
@@ -172,7 +172,7 @@ const DESTINO: Record<AccionEstudio, { desde: readonly EstadoEstudioVerifactu[];
   ENVIAR_AUTORIZACION: { desde: ['PENDIENTE_AUTORIZACION'], a: 'AUTORIZACION_EN_REVISION' },
   VERIFICAR: { desde: ['AUTORIZACION_EN_REVISION'], a: 'VERIFICADO' },
   RECHAZAR_REVISION: { desde: ['AUTORIZACION_EN_REVISION'], a: 'PENDIENTE_AUTORIZACION' },
-  // Producción solo desde VERIFICADO: lo activa Tentare, a mano.
+  // Producción solo desde VERIFICADO: lo activa Centra, a mano.
   ACTIVAR_PRODUCCION: { desde: ['VERIFICADO'], a: 'PRODUCCION' },
   PAUSAR: { desde: ['PRODUCCION', 'VERIFICADO'], a: 'PAUSADO' },
   // Reanudar no salta a producción: vuelve a VERIFICADO y se reactiva a mano.

@@ -75,7 +75,7 @@ export function precioMensualDePlanRenovado(
 export interface ResultadoMedicion {
   outcome: ResultadoOutcome;
   senalObservada: SenalObservada | null;
-  // Pilar 3 de "Tentare 2030" (medir resultado, no solo actividad, migr
+  // Pilar 3 de "Centra 2030" (medir resultado, no solo actividad, migr
   // 20260806213813): cifra real cuando hay una señal financiera limpia que
   // atribuirle; null si no la hay (ver `confianzaMedicion`).
   impactoReal: Impacto | null;

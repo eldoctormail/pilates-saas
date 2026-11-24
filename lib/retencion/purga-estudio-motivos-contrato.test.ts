@@ -82,7 +82,7 @@ const DESTINO_PLATAFORMA: Record<string, { destino: 'borrar' | 'fuera'; motivo: 
   plataforma_eventos: { destino: 'fuera', motivo: 'ids de lo publicado: sin ellos no se puede cancelar en USC/Wellhub y quedan clases reservables de un estudio que no existe' },
   plataforma_clases: { destino: 'fuera', motivo: 'ids de las clases de Wellhub: sin ellos no se pueden ocultar allí' },
   plataforma_ajustes: { destino: 'fuera', motivo: 'solo las horas antes de la clase en que se liberan lugares apartados: sin nombres, ids ni nada que cancelar fuera' },
-  plataforma_lead: { destino: 'fuera', motivo: 'CRM de Tentare (quien abrió el estudio), no datos del estudio' },
+  plataforma_lead: { destino: 'fuera', motivo: 'CRM de Centra (quien abrió el estudio), no datos del estudio' },
 };
 
 // Tablas con FK a instructores según las migraciones (create table y alter table).
@@ -192,8 +192,8 @@ test('el nombre y el id de quien reservó desde otra plataforma no sobreviven a 
   assert.deepEqual(quedan, [], `${ultima.nombre}: la purga deja el nombre o el id de una persona de otra plataforma; vacíalo en c_vaciar`);
 
   // reservas_origen_coherente exige nombre en toda externa y lo prohíbe en las de
-  // Tentare: un 'null' tumbaría la purga entera, y un texto a secas también (lo
-  // escribiría en las de Tentare). Solo vale sustituirlo donde ya lo hay.
+  // Centra: un 'null' tumbaría la purga entera, y un texto a secas también (lo
+  // escribiría en las de Centra). Solo vale sustituirlo donde ya lo hay.
   const valor = (cVaciar.match(/\[\s*'reservas',\s*'nombre_externo',\s*'((?:[^']|'')*)'\s*\]/)?.[1] ?? '').replace(/''/g, "'");
   assert.match(valor, /^case when nombre_externo is not null then '[^']{1,200}' end$/,
     `${ultima.nombre}: reservas.nombre_externo tiene que vaciarse con un case que deje null lo que ya es null`);

@@ -89,15 +89,15 @@ export const PLANS = [
 export const FAQ_ITEMS: { q: string; a: string }[] = [
   {
     q: '¿Qué programa necesito para gestionar un centro de Pilates o yoga?',
-    a: 'Uno que lleve en un solo sitio las reservas por clase o por reformer con su lista de espera, los bonos y las cuotas, los cobros y el calendario. Tentare es un software hecho para estudios y centros de Pilates que reúne todo eso en un panel, con una app con tu marca para las alumnas. Interfaz y soporte en español.',
+    a: 'Uno que lleve en un solo sitio las reservas por clase o por reformer con su lista de espera, los bonos y las cuotas, los cobros y el calendario. Centra es un software hecho para estudios y centros de Pilates que reúne todo eso en un panel, con una app con tu marca para las alumnas. Interfaz y soporte en español.',
   },
   {
     q: '¿Puedo traer mis alumnas desde Excel u otro programa?',
     a: 'Sí. El importador lee los archivos CSV o Excel que exportas de cualquier programa: alumnas, bonos, reservas y clases. Te enseña un acta con los números para comprobar que todo cuadra y, si algo no te convence, lo deshaces con un botón. Las tarjetas guardadas no se pueden pasar de una plataforma a otra.',
   },
   {
-    q: '¿Cuánto cuesta Tentare?',
-    a: `Founding Studio es gratis hasta ${GRATIS_RESERVAS_MES} reservas al mes, con todas las funcionalidades menos varias sedes; si pasas de ahí, cuesta ${PRECIO_FOUNDING_PAGO} € al mes con IVA, sin tope, y con ese plan ${COMPLEMENTOS_DE_PAGO} se contratan aparte. El plan ${PLANS[1].name} cuesta ${PLANS[1].price.replace('€', ' €')}, y ${PLANS[2].name}, para varias sedes, ${PLANS[2].price.replace('€', ' €')}. Pagas mes a mes y Tentare no se queda comisión de lo que cobras a tus alumnas.`,
+    q: '¿Cuánto cuesta Centra?',
+    a: `Founding Studio es gratis hasta ${GRATIS_RESERVAS_MES} reservas al mes, con todas las funcionalidades menos varias sedes; si pasas de ahí, cuesta ${PRECIO_FOUNDING_PAGO} € al mes con IVA, sin tope, y con ese plan ${COMPLEMENTOS_DE_PAGO} se contratan aparte. El plan ${PLANS[1].name} cuesta ${PLANS[1].price.replace('€', ' €')}, y ${PLANS[2].name}, para varias sedes, ${PLANS[2].price.replace('€', ' €')}. Pagas mes a mes y Centra no se queda comisión de lo que cobras a tus alumnas.`,
   },
   {
     q: '¿Hay permanencia?',
@@ -114,7 +114,7 @@ export const FAQ_ITEMS: { q: string; a: string }[] = [
   {
     q: '¿Cómo cobro a mis alumnas?',
     a: ES
-      ? 'Con tarjeta a través de tu cuenta de Stripe, y Bizum para pagos sueltos. Con la tarjeta guardada, las cuotas se cobran solas y, si un cobro falla, se reintenta automáticamente. Si cobras por domiciliación, Tentare te prepara la remesa SEPA para que la presentes en tu banco. También puedes apuntar pagos en efectivo o por transferencia; cada cobro genera su recibo y, salvo el efectivo, su factura.'
+      ? 'Con tarjeta a través de tu cuenta de Stripe, y Bizum para pagos sueltos. Con la tarjeta guardada, las cuotas se cobran solas y, si un cobro falla, se reintenta automáticamente. Si cobras por domiciliación, Centra te prepara la remesa SEPA para que la presentes en tu banco. También puedes apuntar pagos en efectivo o por transferencia; cada cobro genera su recibo y, salvo el efectivo, su factura.'
       : 'Online, con tu cuenta de Mercado Pago: la alumna compra su bono o paga su cuota desde la app y el dinero va a tu cuenta. En el mostrador apuntas efectivo, posnet, transferencia o QR. Cada cobro genera su recibo, y desde él puedes emitir la factura electrónica de ARCA.',
   },
   {
@@ -124,11 +124,11 @@ export const FAQ_ITEMS: { q: string; a: string }[] = [
   {
     q: '¿Están seguros los datos de mi estudio y mis alumnas?',
     a: 'Cada estudio accede solo a sus datos, con la separación hecha en la propia base de datos, y la ficha de salud de cada alumna tiene permisos aparte. ' + (ES
-      ? 'La base de datos está en la Unión Europea; algunos proveedores tratan datos fuera de ella y están listados en la política de privacidad. Tentare está diseñado con el RGPD en mente.'
-      : 'Los proveedores que tratan datos están listados, con su ubicación, en la política de privacidad. Tentare está diseñado con la Ley 25.326 de Protección de los Datos Personales en mente.'),
+      ? 'La base de datos está en la Unión Europea; algunos proveedores tratan datos fuera de ella y están listados en la política de privacidad. Centra está diseñado con el RGPD en mente.'
+      : 'Los proveedores que tratan datos están listados, con su ubicación, en la política de privacidad. Centra está diseñado con la Ley 25.326 de Protección de los Datos Personales en mente.'),
   },
   {
-    q: '¿Qué es «Pregúntale a Tentare»?',
-    a: 'Es el asistente de Tentare: le preguntas por tu estudio —quién lleva semanas sin venir, qué clases tienen huecos— y responde con tus datos. También prepara clases, salas, eventos y citas, pero no crea nada hasta que tú lo confirmas; no cobra, no borra, no edita y no escribe a tus alumnas. Lo usan la propietaria y la gerencia, y viene en todos los planes con un límite de consultas al mes.',
+    q: '¿Qué es «Pregúntale a Centra»?',
+    a: 'Es el asistente de Centra: le preguntas por tu estudio —quién lleva semanas sin venir, qué clases tienen huecos— y responde con tus datos. También prepara clases, salas, eventos y citas, pero no crea nada hasta que tú lo confirmas; no cobra, no borra, no edita y no escribe a tus alumnas. Lo usan la propietaria y la gerencia, y viene en todos los planes con un límite de consultas al mes.',
   },
 ];

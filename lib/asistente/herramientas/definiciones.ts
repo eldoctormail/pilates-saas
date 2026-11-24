@@ -122,7 +122,7 @@ export const DEFINICIONES: readonly DefinicionHerramienta<unknown>[] = [
   def({
     nombre: 'que_revisar_hoy',
     clase: 'lectura',
-    descripcion: 'Lo que espera el visto bueno de quien pregunta (sustituciones por decidir, reservas por aprobar, cobros fallidos, renovaciones que nadie cobrará solas, bajas por revisar, series por renovar…) y lo que Tentare tiene en marcha, con cuántas hay de cada cosa. Es la misma bandeja que la home del panel. Si la propietaria tiene el Centro de Control, incluye además el mensaje del día. Úsala para «¿qué debería revisar hoy?», «¿tengo algo pendiente?» o «¿qué hay por decidir?».',
+    descripcion: 'Lo que espera el visto bueno de quien pregunta (sustituciones por decidir, reservas por aprobar, cobros fallidos, renovaciones que nadie cobrará solas, bajas por revisar, series por renovar…) y lo que Centra tiene en marcha, con cuántas hay de cada cosa. Es la misma bandeja que la home del panel. Si la propietaria tiene el Centro de Control, incluye además el mensaje del día. Úsala para «¿qué debería revisar hoy?», «¿tengo algo pendiente?» o «¿qué hay por decidir?».',
     esquema: objeto({}),
     zod: sinEntrada,
     permitida: rol => delAsistente(rol),

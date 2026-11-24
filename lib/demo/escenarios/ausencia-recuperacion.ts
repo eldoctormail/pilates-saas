@@ -169,7 +169,7 @@ export function generar(p: Parametros, ctx: ContextoDemo = CONTEXTO_POR_DEFECTO)
     {
       pantalla: config(recuperaciones > 0 ? `Gana ${recuperaciones} ${recuperaciones === 1 ? 'recuperación' : 'recuperaciones'}` : 'No gana ninguna recuperación', 'Cada lunes se cierra la semana: solo se compensa el hueco que se quedó sin usar habiendo cancelado a tiempo.'),
       id: 'cierre', titulo: `Lunes ${etiquetaFecha(lunesSiguiente).split(' ').slice(1).join(' ')}: se cierra la semana`,
-      proposito: 'Es el único momento en que Tentare decide si le da una recuperación.',
+      proposito: 'Es el único momento en que Centra decide si le da una recuperación.',
       bloques: [
         { tipo: 'tabla', filas: [
           { k: 'Semana que se revisa', v: `${etiquetaFecha(semana.desde)} – ${etiquetaFecha(semana.hasta)}` },

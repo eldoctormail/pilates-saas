@@ -90,7 +90,7 @@ test('gruposCambiados: otra forma va delante como «dónde va», y se ve solo si
   );
 });
 
-test('⚠️ gruposCambiados: un cambio en la PLANTILLA de Tentare no cuenta como un cambio suyo', () => {
+test('⚠️ gruposCambiados: un cambio en la PLANTILLA de Centra no cuenta como un cambio suyo', () => {
   // Otro alto del iframe (plantilla): `firmaCodigo` cambia, y aun así no hay nada que avisar.
   const otraPlantilla: EntradaIntegracion = { ...BASE, widget: { ...HORARIO, alto: HORARIO.alto + 100 } };
   assert.notEqual(firmaCodigo(otraPlantilla, 'iframe'), firmaCodigo(BASE, 'iframe'));

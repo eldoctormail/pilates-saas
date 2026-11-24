@@ -8,7 +8,7 @@ import {
 } from './asistente-andamiaje';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// «Pregúntale a Tentare» — la interfaz (PR D de la fase 1).
+// «Pregúntale a Centra» — la interfaz (PR D de la fase 1).
 //
 //   · Las puertas: la barra bajo el h1 del Centro de Control y la fila de ⌘K
 //     (primera si lo escrito parece una pregunta). Sin rol, sin plan o con el
@@ -155,7 +155,7 @@ test('servidor apagado para el estudio: ni barra, ni fila en ⌘K, ni ⌘J; /asi
   expect(n.saldo).toBe(0);
 });
 
-test('gerente: ⌘K con una pregunta pone «Preguntar a Tentare» la primera y lleva al chat ya preguntando; sus sugerencias no son de dinero', async ({ page }) => {
+test('gerente: ⌘K con una pregunta pone «Preguntar a Centra» la primera y lleva al chat ya preguntando; sus sugerencias no son de dinero', async ({ page }) => {
   const n = await conAsistente(page, { rol: 'MANAGER' });
   await ir(page, 'clientas');
   await expect(barra(page)).toHaveCount(0);

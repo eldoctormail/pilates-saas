@@ -7,7 +7,7 @@ import { ORIGENES, PASOS, esEstado } from '@/lib/migracion/recorrido';
 
 export const dynamic = 'force-dynamic';
 
-// El recorrido «Cambiar a Tentare» de Academy: los pasos manuales que marca la propietaria (`migracion_checklist`). Los pasos de datos
+// El recorrido «Cambiar a Centra» de Academy: los pasos manuales que marca la propietaria (`migracion_checklist`). Los pasos de datos
 // no se guardan: se calculan de los datos reales del estudio (lib/migracion/recorrido.ts). El estudio sale SIEMPRE de la sesión; mismo
 // permiso que el importador («Traer mis datos»). Sin la tabla (migración sin aplicar) se contesta vacío: la pantalla sigue funcionando
 // con lo que sale de los datos, y escribir contesta que falta aplicarla.
@@ -44,9 +44,9 @@ export async function PUT(req: NextRequest) {
   const paso = typeof b?.paso === 'string' ? b.paso : '';
   if (!IDS_VALIDOS.has(paso)) return NextResponse.json({ error: 'Ese paso no existe.' }, { status: 400 });
   if (!esEstado(b?.estado)) return NextResponse.json({ error: 'Estado no válido.' }, { status: 400 });
-  // «Completado» a mano solo en lo que ocurre fuera de Tentare: lo de datos se completa por el dato, nunca por una marca.
+  // «Completado» a mano solo en lo que ocurre fuera de Centra: lo de datos se completa por el dato, nunca por una marca.
   if (b.estado === 'COMPLETADO' && !IDS_MANUALES.has(paso)) {
-    return NextResponse.json({ error: 'Ese paso se completa solo cuando tus datos están en Tentare.' }, { status: 400 });
+    return NextResponse.json({ error: 'Ese paso se completa solo cuando tus datos están en Centra.' }, { status: 400 });
   }
   const nota = typeof b.nota === 'string' ? b.nota.trim().slice(0, 300) || null : null;
   let origen: string | null = null;

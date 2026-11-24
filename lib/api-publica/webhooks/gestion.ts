@@ -21,10 +21,10 @@ import type { NextRequest } from 'next/server';
 export type GestorWebhooks = Extract<Gestor, { ok: true }> & {
   tipos: TipoEvento[];
   /**
-   * El estudio tiene acceso a Tentare hoy (no suspendido, con suscripción): lo
+   * El estudio tiene acceso a Centra hoy (no suspendido, con suscripción): lo
    * que exige el trabajador antes de mandar nada. Sin él no se crea, prueba,
    * reactiva ni reenvía: si no, un estudio suspendido podría seguir haciendo que
-   * Tentare llame a direcciones de fuera.
+   * Centra llame a direcciones de fuera.
    */
   conAcceso: boolean;
 };
@@ -36,7 +36,7 @@ export async function exigirGestorWebhooks(req: NextRequest): Promise<{ ok: true
   return { ok: true, g: { ...g, tipos: tiposPermitidos(g.permitidos), conAcceso: acceso.ok } };
 }
 
-export const SIN_ACCESO = 'Tu estudio no tiene acceso a Tentare ahora mismo: no se pueden mandar avisos.';
+export const SIN_ACCESO = 'Tu estudio no tiene acceso a Centra ahora mismo: no se pueden mandar avisos.';
 
 export async function listarWebhooks(admin: SupabaseClient, studioId: string) {
   const { data, error } = await admin.from('api_webhooks').select(COLUMNAS_WEBHOOK_PANEL)
@@ -117,7 +117,7 @@ export async function probarWebhook(g: GestorWebhooks, id: string): Promise<{ ok
   const evento = {
     id: `evt_prueba_${uid()}`, tipo: 'webhook.prueba', creadoEn: ahora, estudioId: g.studioId,
     recurso: 'webhook', recursoId: w.id, version: VERSION_EVENTOS,
-    datos: { mensaje: 'Aviso de prueba desde Tentare. Si lo ves, el webhook funciona.' },
+    datos: { mensaje: 'Aviso de prueba desde Centra. Si lo ves, el webhook funciona.' },
   };
   const cuerpo = JSON.stringify(evento);
   const r: ResultadoEnvio = await enviarWebhook(url.url, cuerpo, {

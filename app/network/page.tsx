@@ -52,13 +52,13 @@ const SAGE = '#F1F2EA';
 const MONO = "'IBM Plex Mono', ui-monospace, monospace";
 
 export const metadata: Metadata = {
-  title: 'Tentare Network — Encuentra tu instructora de Pilates y Yoga',
+  title: 'Centra Network — Encuentra tu instructora de Pilates y Yoga',
   description: 'La red profesional de instructoras de Pilates y Yoga. Estudios buscan por especialidad, ciudad y disponibilidad, y contactan directamente.',
   alternates: { canonical: `${LEGAL.url}/network` },
   openGraph: {
-    siteName: 'Tentare',
+    siteName: 'Centra',
     type: 'website',
-    title: 'Tentare Network — Red de instructoras de Pilates y Yoga',
+    title: 'Centra Network — Red de instructoras de Pilates y Yoga',
     description: 'La red profesional donde estudios buscan instructoras y viceversa.',
     images: [{ url: '/network/opengraph-image' }],
   },
@@ -72,14 +72,14 @@ const PASOS_INSTRUCTORA = [
 
 const PASOS_ESTUDIO = [
   { n: '01', titulo: 'Cuéntanos qué necesitas', desc: 'Especialidad, ciudad, tipo de colaboración — una sustitución puntual o algo fijo.' },
-  { n: '02', titulo: 'Buscamos por ti', desc: 'Cruzamos tu petición contra la red de instructoras, no solo el directorio público — también las que ya trabajan en estudios Tentare.' },
+  { n: '02', titulo: 'Buscamos por ti', desc: 'Cruzamos tu petición contra la red de instructoras, no solo el directorio público — también las que ya trabajan en estudios Centra.' },
   { n: '03', titulo: 'Te presentamos candidatas', desc: 'Hablas directamente con quien encaje. Sin comisión, sin intermediarios de por medio.' },
 ] as const;
 
 const CONFIANZA_ITEMS = [
-  { titulo: 'Sin agencia. Sin comisión.', texto: 'Instructora y estudio habláis directamente — Tentare no se queda en medio ni cobra nada sobre lo que acordéis.' },
+  { titulo: 'Sin agencia. Sin comisión.', texto: 'Instructora y estudio habláis directamente — Centra no se queda en medio ni cobra nada sobre lo que acordéis.' },
   { titulo: 'Email verificado', texto: 'Todo perfil confirma su email antes de publicarse.' },
-  { titulo: 'Experiencia confirmada', texto: 'Puedes pedir que un estudio que ya usa Tentare confirme que trabajaste ahí — se marca como verificada en tu perfil.' },
+  { titulo: 'Experiencia confirmada', texto: 'Puedes pedir que un estudio que ya usa Centra confirme que trabajaste ahí — se marca como verificada en tu perfil.' },
   { titulo: 'Actividad reciente', texto: 'Se nota si sigues buscando o si tu perfil lleva meses parado.' },
 ] as const;
 
@@ -90,12 +90,12 @@ const CASOS_USO = [
 ] as const;
 
 const FAQ_ITEMS = [
-  { q: '¿Cuesta dinero crear mi perfil?', a: 'No. Publicar tu perfil en Tentare Network es gratis y sin comisión sobre lo que cobres a los estudios. Durante la beta no hay ningún plan de pago activo; si eso cambia alguna vez, te avisaremos antes de aplicar cualquier condición nueva a tu cuenta.' },
+  { q: '¿Cuesta dinero crear mi perfil?', a: 'No. Publicar tu perfil en Centra Network es gratis y sin comisión sobre lo que cobres a los estudios. Durante la beta no hay ningún plan de pago activo; si eso cambia alguna vez, te avisaremos antes de aplicar cualquier condición nueva a tu cuenta.' },
   { q: '¿Tengo que dejar mi trabajo actual?', a: 'No. Puedes marcarte como "disponible para sustituciones" aunque ya trabajes en otro estudio, o "buscando trabajo" si es lo que necesitas ahora mismo. Cambias el estado cuando quieras.' },
   { q: '¿Quién ve mi teléfono y mi email?', a: 'Nadie, hasta que tú aceptas una solicitud de contacto de un estudio. Antes de eso, solo ven tu perfil público: especialidad, experiencia, disponibilidad y tarifa orientativa.' },
-  { q: '¿Cómo saben los estudios que mi experiencia es real?', a: 'Puedes pedir que un estudio donde trabajaste, si usa Tentare, confirme esa experiencia desde su propia cuenta — se marca como verificada en tu perfil, no es algo que rellenes tú misma.' },
+  { q: '¿Cómo saben los estudios que mi experiencia es real?', a: 'Puedes pedir que un estudio donde trabajaste, si usa Centra, confirme esa experiencia desde su propia cuenta — se marca como verificada en tu perfil, no es algo que rellenes tú misma.' },
   { q: '¿Puedo ocultar mi perfil si dejo de buscar?', a: 'Sí, en cualquier momento, sin perder los datos que ya rellenaste. Vuelves a publicarlo cuando quieras.' },
-  { q: '¿Qué significa que Tentare Network está en beta?', a: 'Que acabamos de abrir la red y estamos incorporando a las primeras instructoras y estudios. Entrar ahora significa formar parte desde el principio, no llegar tarde a algo ya lleno.' },
+  { q: '¿Qué significa que Centra Network está en beta?', a: 'Que acabamos de abrir la red y estamos incorporando a las primeras instructoras y estudios. Entrar ahora significa formar parte desde el principio, no llegar tarde a algo ya lleno.' },
   { q: '¿En qué ciudades está disponible?', a: 'Empezamos con las primeras instructoras en Barcelona y Madrid, y vamos a sumar más ciudades según se una gente.' },
   { q: '¿Cómo elimino mi cuenta o mi perfil?', a: 'Desde "Mi perfil" puedes ocultar tu perfil sin perder tus datos, o eliminarlo tú misma. Para borrar la cuenta por completo, escríbenos a hola@tentare.app.' },
 ] as const;
@@ -296,7 +296,7 @@ export default function NetworkLandingPage() {
               <h2 className="m-0 font-extrabold leading-[1.04] tracking-[-.035em] text-[clamp(30px,4.4vw,62px)]">Todo tu estudio.<br />En un solo lugar.</h2>
             </Reveal>
             <Reveal delayMs={120} className="flex-1 min-w-[280px] max-w-[560px]">
-              <p className="mt-1.5 text-[clamp(15px,1.4vw,18px)] leading-[1.65]" style={{ color: MUTED }}>Horario, reservas, bonos, pagos e instructoras — sin hojas de cálculo ni WhatsApp. Tú abres Tentare por la mañana y ya sabes qué pasa hoy en tu estudio.</p>
+              <p className="mt-1.5 text-[clamp(15px,1.4vw,18px)] leading-[1.65]" style={{ color: MUTED }}>Horario, reservas, bonos, pagos e instructoras — sin hojas de cálculo ni WhatsApp. Tú abres Centra por la mañana y ya sabes qué pasa hoy en tu estudio.</p>
               <div className="flex flex-wrap gap-[22px] mt-[22px]">
                 <p className="m-0 text-[13.5px] font-extrabold">Reservas <span className="block text-[12px] font-semibold" style={{ color: MUTED_2 }}>con lista de espera</span></p>
                 <p className="m-0 text-[13.5px] font-extrabold">Pagos <span className="block text-[12px] font-semibold" style={{ color: MUTED_2 }}>bonos y mensualidades</span></p>
@@ -419,7 +419,7 @@ export default function NetworkLandingPage() {
       <section className="overflow-hidden mt-[clamp(56px,9vh,110px)] py-[clamp(64px,10vh,120px)] px-[clamp(18px,3.5vw,48px)]" style={{ background: OSCURO, color: PAPEL }}>
         <div className="max-w-[1340px] mx-auto">
           <Reveal>
-            <h2 className="m-0 font-extrabold leading-[1.1] tracking-[-.03em] text-[clamp(28px,3.8vw,54px)]" style={{ color: NW_PRODUCTO_CLARO }}>Cómo funciona Tentare Network.</h2>
+            <h2 className="m-0 font-extrabold leading-[1.1] tracking-[-.03em] text-[clamp(28px,3.8vw,54px)]" style={{ color: NW_PRODUCTO_CLARO }}>Cómo funciona Centra Network.</h2>
           </Reveal>
           <div className="grid md:grid-cols-2 gap-x-[clamp(26px,4vw,70px)] gap-y-10 mt-[clamp(28px,4vh,44px)]">
             {[
@@ -497,7 +497,7 @@ export default function NetworkLandingPage() {
           <Reveal>
             <h2 className="m-0 italic font-extrabold uppercase leading-[.96] tracking-[-.02em] text-[clamp(34px,6.4vw,96px)]">
               <span className="block" style={{ color: NW_PRODUCTO_CLARO }}>Tu estudio.</span>
-              <TituloTrazado texto="TODO LO DEMÁS, TENTARE." viewBox="0 0 1560 172" fontSize={112} fondo={OSCURO} className="w-full max-w-[1300px] mx-auto mt-2" />
+              <TituloTrazado texto="TODO LO DEMÁS, CENTRA." viewBox="0 0 1560 172" fontSize={112} fondo={OSCURO} className="w-full max-w-[1300px] mx-auto mt-2" />
             </h2>
           </Reveal>
           <Reveal delayMs={120}>
@@ -514,11 +514,11 @@ export default function NetworkLandingPage() {
           anclas de su propia landing general). Completado con los enlaces
           reales de Network (pedido explícito tras el clon #1482): el
           marketplace y sus dos legales propios, más el aviso legal y
-          cookies compartidos con el resto de Tentare. */}
+          cookies compartidos con el resto de Centra. */}
       <footer style={{ background: OSCURO, color: 'rgba(250,249,245,.7)', borderTop: '1px solid rgba(250,249,245,.12)' }} className="px-[clamp(18px,3.5vw,48px)] py-[34px]">
         <div className="max-w-[1340px] mx-auto flex flex-col gap-6">
           <div className="flex flex-wrap gap-[18px] items-center justify-between">
-            <LogoTentare formato="horizontal" tinta="blanco" producto="network" titulo="Tentare Network" alto={22} decorativo />
+            <LogoTentare formato="horizontal" tinta="blanco" producto="network" titulo="Centra Network" alto={22} decorativo />
             <div className="flex gap-5 flex-wrap text-[13px]">
               <a href="#estudio" style={{ color: 'rgba(250,249,245,.7)' }}>Producto</a>
               <Link href="/network/instructoras" style={{ color: 'rgba(250,249,245,.7)' }}>Explorar instructoras</Link>
@@ -533,7 +533,7 @@ export default function NetworkLandingPage() {
               <Link href="/legal" style={{ color: 'inherit' }}>Aviso legal</Link>
               <Link href="/cookies" style={{ color: 'inherit' }}>Cookies</Link>
             </div>
-            <p className="m-0 text-[12px]" style={{ color: 'rgba(250,249,245,.45)' }}>© 2026 Tentare · Barcelona</p>
+            <p className="m-0 text-[12px]" style={{ color: 'rgba(250,249,245,.45)' }}>© 2026 Centra · Barcelona</p>
           </div>
         </div>
       </footer>

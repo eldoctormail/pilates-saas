@@ -21,7 +21,7 @@ test('sin credenciales, transporteSpacemail devuelve null en vez de lanzar', () 
 
 test('⚠️ el pie de baja SIEMPRE lleva identidad y una vía de baja (LSSI art. 21)', () => {
   const pie = pieDeBaja();
-  assert.match(pie, /Tentare/);
+  assert.match(pie, /Centra/);
   assert.match(pie, /tentare\.app/);
   // La palabra exacta importa: es la que se le pide a quien responde, y la que
   // habrá que buscar en la bandeja para respetar la baja.
@@ -30,9 +30,9 @@ test('⚠️ el pie de baja SIEMPRE lleva identidad y una vía de baja (LSSI art
 
 test('remitenteProspeccion respeta SPACEMAIL_FROM cuando está puesto', () => {
   const antes = process.env.SPACEMAIL_FROM;
-  process.env.SPACEMAIL_FROM = 'Marcos · Tentare <marcos@tentare.app>';
+  process.env.SPACEMAIL_FROM = 'Marcos · Centra <marcos@tentare.app>';
   try {
-    assert.equal(remitenteProspeccion(), 'Marcos · Tentare <marcos@tentare.app>');
+    assert.equal(remitenteProspeccion(), 'Marcos · Centra <marcos@tentare.app>');
   } finally {
     if (antes === undefined) delete process.env.SPACEMAIL_FROM;
     else process.env.SPACEMAIL_FROM = antes;

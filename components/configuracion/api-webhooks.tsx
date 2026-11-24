@@ -14,7 +14,7 @@ import { btnPrimary, btnSecondary, inputCls, labelCls } from '@/components/confi
 
 // ─────────────────────────────────────────────────────────────────────────────
 // «Avisos automáticos (webhooks)», dentro de «API para tu contabilidad». En vez
-// de que el programa pregunte cada noche, Tentare le avisa en cuanto entra un
+// de que el programa pregunte cada noche, Centra le avisa en cuanto entra un
 // cobro, se devuelve algo o se emite una factura. Solo la propietaria (lo
 // comprueba el servidor: /api/integrations/api-publica/webhooks/*).
 // ─────────────────────────────────────────────────────────────────────────────
@@ -84,8 +84,8 @@ export function WebhooksApi() {
     <section aria-labelledby="webhooks-api" className="flex flex-col gap-3">
       <h3 id="webhooks-api" className="text-sm font-semibold text-foreground m-0">Avisos automáticos (webhooks)</h3>
       <p className="text-sm text-muted-foreground text-pretty m-0">
-        Tentare avisa a tu programa en cuanto entra un cobro, se devuelve algo o se emite una factura, sin que tenga que preguntar.
-        Cada aviso va firmado con un secreto para que tu programa sepa que viene de Tentare.
+        Centra avisa a tu programa en cuanto entra un cobro, se devuelve algo o se emite una factura, sin que tenga que preguntar.
+        Cada aviso va firmado con un secreto para que tu programa sepa que viene de Centra.
       </p>
       {aviso && <p role="status" className="text-sm text-foreground m-0">{aviso}</p>}
       {error && <p role="alert" className="text-sm text-destructive m-0">No se han podido cargar los webhooks.</p>}
@@ -183,7 +183,7 @@ function SecretoRecienCreado({ valor, titulo, onCerrar }: { valor: string; titul
   return (
     <div role="status" className="flex flex-col gap-3 rounded-xl border border-success/40 bg-success/10 p-4">
       <p className="text-sm font-semibold text-foreground m-0">{titulo} Copia el secreto de firma ahora: no lo volverás a ver.</p>
-      <p className="text-sm text-foreground text-pretty m-0">Tu programa lo usa para comprobar que cada aviso viene de Tentare (cabecera <code>Tentare-Firma</code>).</p>
+      <p className="text-sm text-foreground text-pretty m-0">Tu programa lo usa para comprobar que cada aviso viene de Centra (cabecera <code>Tentare-Firma</code>).</p>
       <label htmlFor={`${id}-secreto`} className="sr-only">Secreto de firma</label>
       <input id={`${id}-secreto`} readOnly value={valor} onFocus={(e) => e.currentTarget.select()} className={cn(inputCls, 'font-mono text-xs')} />
       <div className="flex flex-wrap items-center gap-2">

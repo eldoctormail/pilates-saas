@@ -119,7 +119,7 @@ export default function NetworkBuscadorPage() {
     <div className="space-y-6">
       <PageHeader
         title="Buscar instructoras"
-        description="Encuentra profesionales de Pilates y Yoga de Tentare Network disponibles para tu estudio."
+        description="Encuentra profesionales de Pilates y Yoga de Centra Network disponibles para tu estudio."
       />
 
       <div className="flex items-center gap-2 flex-wrap">

@@ -15,7 +15,7 @@
 //  · Ningún dato externo sin fuente: precios, normativa, salarios… van con su
 //    enlace en `fuentes` y la fecha en que se consultó. Si no se ha podido
 //    verificar, no se escribe.
-//  · Nada de Tentare que no esté en el registro de afirmaciones (validar.ts
+//  · Nada de Centra que no esté en el registro de afirmaciones (validar.ts
 //    tiene la lista de lo prohibido).
 //  · Texto con marcado mínimo: **negrita** y [enlace](/ruta) o
 //    [enlace](https://…). Nada más.
@@ -40,12 +40,12 @@ export type Bloque =
   /**
    * Llamada a la acción a mitad del artículo, con el mismo bloque oscuro que la
    * del final y su botón al alta. Para el punto en que el tema lleva solo a
-   * Tentare; texto sin enlaces (el botón ya es el enlace).
+   * Centra; texto sin enlaces (el botón ya es el enlace).
    */
   | { t: 'producto'; titulo: string; texto: string }
   /**
    * Llamada a la acción a mitad del artículo, en el tono editorial (un filete a
-   * la izquierda, sin caja de color): una frase que une el tema con Tentare y
+   * la izquierda, sin caja de color): una frase que une el tema con Centra y
    * dos enlaces, al alta y a /precios. El clic lo mide MedicionPaginasPublicas
    * (cualquier enlace a /crear-estudio de una página pública). Texto sin enlaces.
    */
@@ -80,7 +80,7 @@ export interface Articulo {
   slug: string;
   /** El <h1> y el titular de la tarjeta. */
   titulo: string;
-  /** El <title>, sin « | Tentare» (se añade solo). 30-62 caracteres, con la consulta principal. */
+  /** El <title>, sin « | Centra» (se añade solo). 30-62 caracteres, con la consulta principal. */
   tituloSeo: string;
   /** Meta description: 110-160 caracteres, que invite a hacer clic. */
   descripcion: string;

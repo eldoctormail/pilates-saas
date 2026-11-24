@@ -24,7 +24,7 @@ test('una cuenta del equipo de cualquier estudio nunca se toca desde una ficha d
   assert.equal(motivoNoQuitar({ ...base, esDelEquipo: true }), 'cuenta_de_equipo');
 });
 
-test('con perfil en Tentare Network: no se toca desde un estudio', () => {
+test('con perfil en Centra Network: no se toca desde un estudio', () => {
   assert.equal(motivoNoQuitar({ ...base, enNetwork: true }), 'otro_estudio');
 });
 

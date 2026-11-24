@@ -3,7 +3,7 @@ import { FAQ_ITEMS } from '@/components/landing/data';
 import { LIMITES_GRATIS } from '@/lib/landing/founding-gratis';
 import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
-// «¿Qué es Tentare?» + preguntas frecuentes (fase 2.2).
+// «¿Qué es Centra?» + preguntas frecuentes (fase 2.2).
 //
 // La definición es la de antes, palabra por palabra (la que un buscador o una IA
 // puede citar tal cual, GEO/AEO): ahora abre la sección de preguntas en vez de
@@ -20,9 +20,9 @@ export function PreguntasHome() {
       <div className="wh-contenedor wh-faq-rejilla">
         <div className="wh-faq-intro" id="que-es">
           <h2 id="wh-faq-h" className="wh-h2">Lo que se pregunta antes de empezar</h2>
-          <h3 className="wh-h3 wh-faq-que">¿Qué es Tentare?</h3>
+          <h3 className="wh-h3 wh-faq-que">¿Qué es Centra?</h3>
           <p className="wh-texto">
-            Tentare es el software para estudios y centros de Pilates y yoga en {ES ? 'España' : 'Argentina'} que reúne en un solo panel las{' '}
+            Centra es el software para estudios y centros de Pilates y yoga en {ES ? 'España' : 'Argentina'} que reúne en un solo panel las{' '}
             <Link href="/funcionalidades/reservas-online">reservas online</Link> con lista de espera, la{' '}
             <Link href="/funcionalidades/app-para-alumnas">app de tus alumnas</Link>, los bonos y los{' '}
             <Link href="/funcionalidades/cobros-recurrentes">cobros recurrentes</Link>, el{' '}

@@ -16,7 +16,7 @@
 
 import { PORTAL_VIDEOS_CONGELADO } from './frozen-features.ts';
 
-// Reconstrucción "Tentare Studio App" (2026-08): la barra real del diseño de
+// Reconstrucción "Centra Studio App" (2026-08): la barra real del diseño de
 // Claude Design tiene 4 pestañas, no 5 — Clases/Bonos se fusionan en una
 // única pantalla "Reservas" (plaza fija+bono+pagos+historial ya en un solo
 // scroll) y aparece "Buscar" como pestaña nueva de verdad, no un overlay.
@@ -92,7 +92,7 @@ function migrarSegLegacy(seg: unknown): NavSegId | null {
 
 /**
  * Reescribe un NavConfigShape crudo (posiblemente con ids retirados antes de
- * la reconstrucción "Tentare Studio App") a los ids vigentes, ANTES de
+ * la reconstrucción "Centra Studio App") a los ids vigentes, ANTES de
  * validar/filtrar. La llaman tanto `resolveNavConfig` de aquí como
  * `resolveTheme` (`lib/theme-schema.ts`, campo `navPortal`) — ningún camino
  * de lectura debe perder personalización guardada por un id huérfano.

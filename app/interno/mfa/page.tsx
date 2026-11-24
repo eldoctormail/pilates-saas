@@ -137,7 +137,7 @@ export default function PantallaMfaInterno() {
       </span>
       <div>
         <h1 className="text-[16px] font-bold text-foreground leading-tight">Verificación en dos pasos</h1>
-        <p className="text-[12px] text-muted-foreground">Zona interna de Tentare</p>
+        <p className="text-[12px] text-muted-foreground">Zona interna de Centra</p>
       </div>
     </div>
   );

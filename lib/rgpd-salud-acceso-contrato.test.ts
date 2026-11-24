@@ -129,7 +129,7 @@ test('las rutas de servidor que sirven salud comprueban rol clínico, estudio y 
   assert.match(leer('app/api/ai/ficha-clinica-socio/route.ts'), /comprobarAccesoSaludSocia\([^)]*exigirConsentimiento:\s*true/);
   assert.match(leer('app/api/ai/ficha-clinica-clase/route.ts'), /comprobarAccesoSaludClase\(/);
   const helper = leer('lib/datos-salud/acceso-servidor.ts');
-  // En el panel solo la propietaria tiene rol clínico (Tentare Core retirado);
+  // En el panel solo la propietaria tiene rol clínico (Centra Core retirado);
   // la regla de alumna asignada vive en la app de la instructora (abajo).
   assert.equal(helper.match(/if \(!puedeVerFichaClinica\(sesion\.rol\)\) return NO_AUTORIZADO;/g)?.length, 2);
   assert.match(helper, /VENTANA_ALUMNA_DIAS/);

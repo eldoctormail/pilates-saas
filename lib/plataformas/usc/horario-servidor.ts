@@ -163,7 +163,7 @@ async function asegurarTrainers(
 }
 
 /**
- * El nombre de la instructora vive también en USC. Si ha cambiado en Tentare
+ * El nombre de la instructora vive también en USC. Si ha cambiado en Centra
  * —sobre todo al anonimizarla (eliminar a la persona, purgar el estudio)—, se
  * reescribe allí. Por eso `plataforma_instructoras` se CONSERVA en esos dos
  * flujos: sin su id no habría cómo borrar su nombre de USC.

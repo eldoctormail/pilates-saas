@@ -18,7 +18,7 @@
 //    haber ni una reserva. Un único aviso por estudio en toda su vida
 //    (dedupKey sin fecha en emitirEmbudoSinClasesProgramadas).
 //    ⚠️ Salvo a un estudio que nació del ALTA NUEVA (PR-5): ese recibe a las 24 h
-//    «Tu primera clase en Tentare, en 5 minutos» (el cron `altas-sin-terminar`,
+//    «Tu primera clase en Centra, en 5 minutos» (el cron `altas-sin-terminar`,
 //    lib/alta/recordatorio-servidor.ts), y dos correos por lo mismo sobran.
 //  · Estudio con horario pero sin ninguna reserva (>72h): segundo atasco del
 //    mismo recorrido (lib/onboarding/embudo-avisos.ts). Casi siempre es que el

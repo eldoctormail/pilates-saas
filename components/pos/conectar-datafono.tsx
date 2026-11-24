@@ -348,12 +348,12 @@ export function ConectarDatafono({
                 <>
                   <p className="text-[14px] text-foreground text-pretty">
                     Se hace <strong className="font-semibold">una sola vez</strong>. Se abre SumUp, entras con tu usuario de
-                    siempre y aceptas. Al terminar vuelves a Tentare para escribir el código del Solo.
+                    siempre y aceptas. Al terminar vuelves a Centra para escribir el código del Solo.
                   </p>
                   <ul className="mt-4 space-y-2.5 text-[13.5px] text-foreground">
                     <Hecho>El dinero sigue llegando a <strong className="font-semibold">tu cuenta de SumUp</strong>, como ahora.</Hecho>
-                    <Hecho>Tentare solo manda el importe a tu Solo y apunta el cobro. No ve los datos de la tarjeta.</Hecho>
-                    <Hecho>Las comisiones son las que ya te cobra SumUp. Tentare no añade nada.</Hecho>
+                    <Hecho>Centra solo manda el importe a tu Solo y apunta el cobro. No ve los datos de la tarjeta.</Hecho>
+                    <Hecho>Las comisiones son las que ya te cobra SumUp. Centra no añade nada.</Hecho>
                   </ul>
                   {enCobro && (
                     <p className="mt-4 rounded-xl bg-warning/10 px-3.5 py-3 text-[13.5px] text-foreground text-pretty">

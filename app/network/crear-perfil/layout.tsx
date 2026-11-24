@@ -3,7 +3,7 @@ import { LEGAL } from '@/lib/legal-info';
 
 // page.tsx es 'use client' (wizard con estado/hooks) — un layout Server
 // Component es el sitio correcto para darle su propio <title>, en vez de
-// heredar el de Tentare Studio (app/layout.tsx). Mismo motivo por el que
+// heredar el de Centra Studio (app/layout.tsx). Mismo motivo por el que
 // existe este fichero en acceso/ y reanudar/: la auditoría de unificación
 // Studio↔Network encontró que TODAS las pantallas 'use client' bajo
 // /network heredaban el título "Software de Gestión..." — este es el tramo
@@ -14,7 +14,7 @@ import { LEGAL } from '@/lib/legal-info';
 // lib/seo/paginas.ts) — sin canonical explícito, cualquier querystring que
 // llegue pegado (utm_*, etc.) se indexaría como una URL distinta.
 export const metadata: Metadata = {
-  title: 'Crea tu perfil de instructora | Tentare Network',
+  title: 'Crea tu perfil de instructora | Centra Network',
   description: 'Publica tu perfil una vez. Los estudios de Pilates y Yoga te contactan a ti cuando tu disponibilidad encaja.',
   alternates: { canonical: `${LEGAL.url}/network/crear-perfil` },
 };

@@ -11,7 +11,7 @@
 //
 // Fuera del layout del panel a propósito: ese layout carga los datos del
 // estudio, que con la sesión sin verificar llegarían vacíos. Aquí solo se habla
-// con `supabase.auth.mfa`. La zona interna de Tentare tiene su propia pantalla
+// con `supabase.auth.mfa`. La zona interna de Centra tiene su propia pantalla
 // (app/interno/mfa), con otra marca y otro destino.
 //
 // ⚠️ Verificar un factor nuevo cierra las DEMÁS sesiones de esa cuenta (así lo
@@ -183,7 +183,7 @@ export default function PantallaVerificarAcceso() {
       for (const f of lista?.all ?? []) {
         if (f.factor_type === 'totp' && f.status === 'unverified') await supabase.auth.mfa.unenroll({ factorId: f.id });
       }
-      const { data, error: e } = await supabase.auth.mfa.enroll({ factorType: 'totp', friendlyName: 'Tentare', issuer: 'Tentare' });
+      const { data, error: e } = await supabase.auth.mfa.enroll({ factorType: 'totp', friendlyName: 'Centra', issuer: 'Centra' });
       if (e || !data) { setError(mensajeDeError(e)); return; }
       setEnrolando({ factorId: data.id, qr: data.totp.qr_code, secreto: data.totp.secret });
     } finally {
@@ -309,7 +309,7 @@ export default function PantallaVerificarAcceso() {
           <p className="text-[12.5px] rounded-lg bg-muted px-2.5 py-2 text-foreground">{correo.mensaje}</p>
         )}
         <p className="text-[13.5px] text-muted-foreground">
-          Abre tu app de autenticación y escribe el código de <strong className="text-foreground">Tentare</strong>.
+          Abre tu app de autenticación y escribe el código de <strong className="text-foreground">Centra</strong>.
         </p>
         {campoCodigo(confirmarCodigo)}
         {sePuedeVolverAlCorreo && (

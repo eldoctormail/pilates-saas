@@ -120,7 +120,7 @@ test('cambia la hora o la instructora: se edita el slot entero (Wellhub deja mov
   assert.equal(ops[0].huella, huellaSlotWellhub(ops[0].cuerpo));
 });
 
-test('cancelada en Tentare, sin lugares cedidos o borrado: su slot se borra allí (Wellhub cancela sus reservas)', () => {
+test('cancelada en Centra, sin lugares cedidos o borrado: su slot se borra allí (Wellhub cancela sus reservas)', () => {
   const s = sesion('s1');
   const { clase, slot } = guardados(s);
   const borrar = { tipo: 'borrar-slot', sesionId: 's1', claseId: 'cl-1', slotId: 'sl-1' };
@@ -178,7 +178,7 @@ test('⚠️ deja de ceder lugares con socias de Wellhub ya apuntadas: no se bor
   assert.equal(plan({ sesiones: [{ ...s, ocupadasWellhub: 2 }], clases: [clase], slots: [parado] })[0].tipo, 'editar-slot');
 });
 
-test('⚠️ clase cancelada en Tentare: su slot se borra aunque tenga socias de Wellhub (la clase no se da)', () => {
+test('⚠️ clase cancelada en Centra: su slot se borra aunque tenga socias de Wellhub (la clase no se da)', () => {
   const s = sesion('s1');
   const { clase, slot } = guardados(s);
   const ops = plan({ sesiones: [{ ...s, cancelada: true, ocupadasWellhub: 2 }], clases: [clase], slots: [slot] });

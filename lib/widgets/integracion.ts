@@ -1,4 +1,4 @@
-// Tentare Widgets — el código que se copia.
+// Centra Widgets — el código que se copia.
 //
 // Funciones puras: widget + config → el texto EXACTO que la propietaria pega en
 // su web. Lo que genera aquí es lo que el motor lee de verdad:
@@ -35,7 +35,7 @@ export type Plataforma = 'html' | 'wordpress' | 'webflow' | 'react';
 export interface EntradaIntegracion {
   widget: WidgetDisponible;
   config: ConfigConstructor;
-  /** Origen de Tentare (el de `LEGAL.url` en producción). */
+  /** Origen de Centra (el de `LEGAL.url` en producción). */
   origen: string;
   slug: string;
   /** El color de marca del estudio, para botones con su identidad. */
@@ -50,7 +50,7 @@ export interface EntradaIntegracion {
   /**
    * El id de lo publicado de este widget (`widget_piezas`, ./pieza.ts). Con él,
    * el código lleva SOLO el id y lo que va en el propio HTML (el ancho, la carga
-   * diferida, el botón…); el contenido lo pone Tentare al abrirlo, así que
+   * diferida, el botón…); el contenido lo pone Centra al abrirlo, así que
    * cambiarlo ya no obliga a pegarlo otra vez. Sin él (no hay nada publicado, o
    * no se pudo crear), el código congelado de siempre, que funciona igual.
    */
@@ -64,7 +64,7 @@ export function codigoPorId(e: EntradaIntegracion): boolean {
 
 /**
  * La URL de un código por id: solo `w=<id>` (y `embed=1` dentro de una página).
- * El resto lo añade la ruta de Tentare al abrirla (lib/widgets/pieza-destino.ts).
+ * El resto lo añade la ruta de Centra al abrirla (lib/widgets/pieza-destino.ts).
  * El popup no lleva `embed`: lo añade su runtime, como a cualquier código.
  */
 function urlDePieza(e: EntradaIntegracion, embebido: boolean): string {
@@ -487,7 +487,7 @@ export function faltaParaGenerar(
 /**
  * La huella de lo que va en el código de este widget con esta forma, para
  * avisar si cambia después de copiarlo. Fuera de ella, a propósito:
- *  - el origen de Tentare (el mismo código copiado desde otra dirección de la
+ *  - el origen de Centra (el mismo código copiado desde otra dirección de la
  *    app es el mismo código);
  *  - el `style` del BOTÓN (popup y botón), que lleva el color de marca del
  *    estudio: ese se cambia en Apariencia, no aquí, y no debe saltar como «has
@@ -547,7 +547,7 @@ export function generarCodigo(e: EntradaIntegracion, metodo: MetodoIntegracion, 
       if (react) {
         return {
           lenguaje: 'jsx',
-          codigo: `// ${w.nombre} — botón de Tentare. Pégalo donde quieras que aparezca.
+          codigo: `// ${w.nombre} — botón de Centra. Pégalo donde quieras que aparezca.
 export function ${nombreComponente(w)}Boton() {
   return (
     <a href=${jsString(url)}${nueva ? ` target="_blank" rel="noopener"` : ''} style={${objetoEstiloReact(e, 'boton')}}>
@@ -572,7 +572,7 @@ export function ${nombreComponente(w)}Boton() {
           lenguaje: 'jsx',
           codigo: `import { useEffect } from 'react';
 
-// ${w.nombre} — abre el widget de Tentare en una ventana encima de tu web.
+// ${w.nombre} — abre el widget de Centra en una ventana encima de tu web.
 export function ${nombreComponente(w)}Popup() {
   useEffect(() => {
     if (document.querySelector('script[src=${jsString(script).replace(/'/g, '"')}]')) return;
@@ -611,7 +611,7 @@ export function ${nombreComponente(w)}Popup() {
           lenguaje: 'jsx',
           codigo: `import { useEffect } from 'react';
 
-// ${w.nombre} — integración nativa de Tentare (sin marco).
+// ${w.nombre} — integración nativa de Centra (sin marco).
 export function ${nombreComponente(w)}() {
   useEffect(() => {
     if (document.querySelector('script[src=${jsString(script).replace(/'/g, '"')}]')) return;
@@ -647,7 +647,7 @@ export function ${nombreComponente(w)}() {
           lenguaje: 'jsx',
           codigo: `import { useEffect, useRef } from 'react';
 
-// ${w.nombre} — widget de Tentare. Se ajusta solo a la altura de su contenido.
+// ${w.nombre} — widget de Centra. Se ajusta solo a la altura de su contenido.
 const ORIGEN = ${jsString(e.origen)};
 
 export function ${nombreComponente(w)}() {

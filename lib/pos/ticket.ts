@@ -25,7 +25,7 @@
 //   6. base de línea       = redondear(total / (1 + iva/100))   ← IVA INCLUIDO
 //   7. IVA de línea        = total − base
 //
-// El precio es CON IVA INCLUIDO en todo Tentare (`buildFactura` y
+// El precio es CON IVA INCLUIDO en todo Centra (`buildFactura` y
 // `sellar-factura-server.ts` reparten total → base + cuota, nunca al revés).
 // El porcentaje solo dice cómo se reparte; no encarece nada.
 // ─────────────────────────────────────────────────────────────────────────────

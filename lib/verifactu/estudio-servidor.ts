@@ -1,18 +1,18 @@
 // Veri*Factu — el alta de un estudio y la verificación de su poder IZ860.
 //
 // SOLO SERVIDOR (service-role). Lo llaman las rutas, que ya comprobaron quién
-// pide: la propietaria (su estudio) o Tentare (`admin.full`).
+// pide: la propietaria (su estudio) o Centra (`admin.full`).
 //
 // Orden del alta:
 //   1. La propietaria confirma NIF (el de Datos fiscales) y nombre fiscal EXACTO.
-//   2. Tentare le enseña a quién y qué apoderar (IZ860) y le manda a la sede.
-//   3. Ella otorga el poder EN LA AEAT con su certificado o Cl@ve. Tentare no ve
+//   2. Centra le enseña a quién y qué apoderar (IZ860) y le manda a la sede.
+//   3. Ella otorga el poder EN LA AEAT con su certificado o Cl@ve. Centra no ve
 //      ni pide sus credenciales.
 //   4. Pega aquí el CSV que le da la sede y los datos del poder, y acepta el
 //      mandato (evidencia adicional).
 //   5. El apoderado lo comprueba en «Consulta de apoderamientos recibidos» y
 //      coteja el CSV → VERIFICADO.
-//   6. Tentare activa la producción (a mano). Hasta entonces no se envía nada.
+//   6. Centra activa la producción (a mano). Hasta entonces no se envía nada.
 
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { nifEmisorValido } from '../nif.ts';
@@ -81,7 +81,7 @@ async function leerDecisionesAnteriores(
 }
 
 const VERSION_ANTERIOR_A_LA_DECLARADA =
-  'Una versión de Tentare anterior a la 1.0.0, sin declaración responsable suscrita cuando se generaron.';
+  'Una versión de Centra anterior a la 1.0.0, sin declaración responsable suscrita cuando se generaron.';
 
 /**
  * Deja fuera de la remisión TODOS los registros anteriores a la activación que
@@ -255,7 +255,7 @@ export async function configurarDatosFiscales(
     if (error) throw new AltaVerifactuError([`No se pudo guardar: ${error.message}`], 500);
   } else {
     if (existente.estado === 'PRODUCCION') {
-      throw new AltaVerifactuError(['Ya envías a la AEAT. Para cambiar tus datos fiscales, pide a Tentare que pause el envío.'], 409);
+      throw new AltaVerifactuError(['Ya envías a la AEAT. Para cambiar tus datos fiscales, pide a Centra que pause el envío.'], 409);
     }
     // Cambiar datos fiscales invalida el poder: es de un NIF concreto.
     await admin.from('verifactu_estudios').update({ nif, nombre_fiscal: nombre, tipo_emisor: p.tipoEmisor, actualizado_en: new Date().toISOString() }).eq('studio_id', studioId);
@@ -274,7 +274,7 @@ export async function enviarAutorizacion(
   if (!vf) throw new AltaVerifactuError(['Confirma primero tus datos fiscales.'], 409);
   if (vf.estado !== 'PENDIENTE_AUTORIZACION') throw new AltaVerifactuError(['Ahora mismo no hay ninguna autorización pendiente de enviar.'], 409);
   const apoderado = apoderadoDeEntorno(env);
-  if (!apoderado) throw new AltaVerifactuError(['Tentare todavía no ha configurado a quién apoderar. Vuelve más tarde.'], 503);
+  if (!apoderado) throw new AltaVerifactuError(['Centra todavía no ha configurado a quién apoderar. Vuelve más tarde.'], 503);
 
   const errores = erroresAutorizacion(a, { tipoEmisor: vf.tipo_emisor as TipoEmisor }, hoy);
   if (errores.length) throw new AltaVerifactuError(errores);
@@ -310,7 +310,7 @@ export async function revocarAutorizacion(admin: SupabaseClient, studioId: strin
   await registrarEvento(admin, { studioId, representacionId: (data?.[0]?.id as string | undefined) ?? null, evento: 'autorizacion.revocada', actorTipo: 'propietaria', actorUserId: actor.userId, ip: actor.ip, userAgent: actor.userAgent });
 }
 
-// ── Lado Tentare (/interno, admin.full) ──────────────────────────────────────
+// ── Lado Centra (/interno, admin.full) ──────────────────────────────────────
 
 export async function listarParaTentare(admin: SupabaseClient): Promise<{ estudios: Record<string, unknown>[]; representaciones: Record<string, unknown>[] }> {
   const [{ data: estudios }, { data: representaciones }] = await Promise.all([
@@ -416,13 +416,13 @@ export async function activarProduccion(admin: SupabaseClient, studioId: string,
 /**
  * ⚠️ Pausar es SOLO para incidencias técnicas (certificado, caída de la AEAT…):
  * el estudio sigue emitiendo y lo pendiente se remite al reanudar, que es lo que
- * el fiscalista acepta para una incidencia (30-sep-2026). Si Tentare deja de poder
+ * el fiscalista acepta para una incidencia (30-sep-2026). Si Centra deja de poder
  * remitir por una razón jurídica (poder revocado o caducado), eso no es una pausa:
  * lo hace el estado del poder, y entonces las facturas se paran
  * (migración 20260930190000).
  */
 export async function pausarPorTentare(admin: SupabaseClient, studioId: string, motivo: string, userId: string): Promise<void> {
-  const nuevo = await transitarEstudio(admin, studioId, 'PAUSAR', motivo.trim() || 'Pausado por Tentare');
+  const nuevo = await transitarEstudio(admin, studioId, 'PAUSAR', motivo.trim() || 'Pausado por Centra');
   if (!nuevo) throw new AltaVerifactuError(['Ese estudio no se puede pausar ahora.'], 409);
   await registrarEvento(admin, { studioId, evento: 'envio.pausado', actorTipo: 'tentare', actorUserId: userId, datos: { motivo } });
 }

@@ -65,7 +65,7 @@ const SOLO_MODO_A = new Set([
   'animate-drawer-up-in', 'animate-drawer-up-out',
   // `components/layout/whatsapp-fab.tsx` — botón flotante del panel.
   'animate-wa-fab-ring',
-  // Icono de éxito del paso 'done' (diseño "Tentare Portal Reservas": anillo +
+  // Icono de éxito del paso 'done' (diseño "Centra Portal Reservas": anillo +
   // check + confeti) — vive en el mismo `loginStep === 'done'` de
   // app/reservar/[slug]/page.tsx que ya justifica el resto de esta lista.
   'reserva-check-ring', 'reserva-check-pop',

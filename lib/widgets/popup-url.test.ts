@@ -4,7 +4,7 @@ import { urlPopupPermitida } from './popup-url.ts';
 
 const O = 'https://www.tentare.app';
 
-test('abre la vista incrustada de Tentare, con sus parámetros intactos (y marcada como ventana)', () => {
+test('abre la vista incrustada de Centra, con sus parámetros intactos (y marcada como ventana)', () => {
   assert.equal(
     urlPopupPermitida(`${O}/reservar/pilates-centro?embed=1&tab=planes&planes=BONO&ref=web-bonos`, O),
     `${O}/reservar/pilates-centro?embed=1&tab=planes&planes=BONO&ref=web-bonos&ventana=1`,
@@ -22,7 +22,7 @@ test('⚠️ siempre `ventana=1`: el estilo de su web no se funde en el marco bl
   assert.equal(new URL(urlPopupPermitida(`${O}/reservar/x`, O)!).searchParams.getAll('ventana').length, 1);
 });
 
-test('⚠️ nada que no sea /reservar/<slug> de Tentare', () => {
+test('⚠️ nada que no sea /reservar/<slug> de Centra', () => {
   for (const mala of [
     'https://evil.example/reservar/x?embed=1',
     `${O}/configuracion`,

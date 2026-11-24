@@ -2,7 +2,7 @@
 
 // Pantalla de error del widget público de reservas — la superficie que el
 // estudio incrusta en su web, donde una socia con el widget roto se va y no
-// lo cuenta. Antes caía al global-error raíz (fondo oscuro, marca Tentare).
+// lo cuenta. Antes caía al global-error raíz (fondo oscuro, marca Centra).
 // Variables --portal-* con fallback a neutros y fuente de sistema: si la
 // paleta del estudio sobrevive al error se respeta (temas oscuros incluidos),
 // y si el fallo se llevó el tema por delante cae a neutros legibles. Círculo

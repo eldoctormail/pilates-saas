@@ -1,7 +1,7 @@
 import { test, expect, type Page, type Route } from '@playwright/test';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Sustitución agotada → profesional de Tentare Network → clase asignada.
+// Sustitución agotada → profesional de Centra Network → clase asignada.
 // La tarjeta dice en qué punto está cada profesional, con datos del servidor
 // (`cobertura_network` de GET /api/sustituciones):
 //  · solicitud pendiente → «Solicitud enviada»;
@@ -107,10 +107,10 @@ async function mockBackend(page: Page, confirmar: Respuesta): Promise<Llamadas> 
 
 async function abrirSustituciones(page: Page) {
   await page.goto('/sustituciones');
-  await expect(page.getByText('No queda nadie de tu equipo. Estas profesionales de Tentare Network podrían cubrirla')).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByText('No queda nadie de tu equipo. Estas profesionales de Centra Network podrían cubrirla')).toBeVisible({ timeout: 30_000 });
 }
 
-// CONGELADO (2-oct-2026): Tentare Network salió del panel (lib/frozen-features.ts).
+// CONGELADO (2-oct-2026): Centra Network salió del panel (lib/frozen-features.ts).
 // Se salta, no se borra: al descongelarlo, quitar el `.skip` y vuelve a cubrirlo.
 test.describe.skip('Sustitución agotada → asignar la clase a una profesional de Network', () => {
   test('cada profesional enseña su punto del camino, sacado del servidor', async ({ page }) => {

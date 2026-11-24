@@ -6,7 +6,7 @@ import type { MarcaCorreo } from '@/lib/emails/estudio/plantilla';
 import { remitentePorMarca } from '@/lib/emails/remitente';
 
 // Emails del módulo de sustituciones. Los dos al EQUIPO (contactar a una
-// sustituta, avisar a la propietaria) los firma Tentare y van con su sistema
+// sustituta, avisar a la propietaria) los firma Centra y van con su sistema
 // (lib/emails/tentare/); el aviso a la ALUMNA lleva la marca de su estudio
 // (lib/emails/estudio/). Mismo patrón de degradación que send-server.ts: si
 // Resend no está configurado, no falla → { skipped }.
@@ -28,12 +28,12 @@ export async function enviarEmailContactoSustituta(params: Marca & {
   recordatorio?: boolean; // 2º toque: cambia el tono a "recordatorio"
 }): Promise<EnvioResultado> {
   const { to, toName, estudioNombre, claseNombre, cuando, url, recordatorio } = params;
-  // Firma Tentare: `logoUrl`/`colorPrimario` se aceptan pero ya no pintan.
+  // Firma Centra: `logoUrl`/`colorPrimario` se aceptan pero ya no pintan.
   const html = correoContactoSustituta({ toName, estudioNombre, claseNombre, cuando, url, recordatorio });
   const asunto = recordatorio
     ? `Recordatorio: ¿puedes cubrir ${claseNombre}? — ${estudioNombre}`
     : `¿Puedes cubrir ${claseNombre}? — ${estudioNombre}`;
-  return enviar(to, asunto, html, 'Tentare');
+  return enviar(to, asunto, html, 'Centra');
 }
 
 // Alerta a la propietaria: nadie responde ('sin_respuesta') o se agotó el ranking
@@ -62,7 +62,7 @@ export async function enviarEmailAlertaPropietaria(params: Marca & {
       : sinSustituta
         ? `⚠️ ${claseNombre} se quedó sin cubrir`
         : `${candidataNombre ?? 'La candidata'} no responde — ${claseNombre}`;
-  return enviar(to, asunto, html, 'Tentare Manager');
+  return enviar(to, asunto, html, 'Centra Manager');
 }
 
 // ── Aviso a las alumnas apuntadas ───────────────────────────────────────────
@@ -85,12 +85,12 @@ export async function enviarEmailAvisoAlumna(params: {
   aviso: AvisoAlumna;
 }): Promise<EnvioResultado> {
   const html = correoAvisoSustitucion(params);
-  // ⚠️ Aquí ponía `'Tentare'`. Es un email A LA ALUMNA que dice que su clase se
+  // ⚠️ Aquí ponía `'Centra'`. Es un email A LA ALUMNA que dice que su clase se
   // cancela o cambia de instructora, y llegaba con el nombre de la plataforma
   // como remitente mientras el cuerpo ya llevaba el logo y el color del
   // estudio: incoherente, y contrario a la regla de marca del repo (a las
   // alumnas se les habla SIEMPRE con la marca de su estudio, nunca con la
-  // nuestra). El comentario de `enviar()` justificaba el «Tentare» diciendo que
+  // nuestra). El comentario de `enviar()` justificaba el «Centra» diciendo que
   // los nombres de producto interno no le dicen nada a una alumna — cierto, pero
   // la conclusión correcta de eso es el nombre del ESTUDIO, no la marca
   // paraguas.
@@ -112,8 +112,8 @@ function conTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
   ]);
 }
 
-// `marca`: nombre mostrado como remitente. 'Tentare' para instructoras (Tentare
-// Core se retiró) y 'Tentare Manager' para propietaria/gerencia (ver
+// `marca`: nombre mostrado como remitente. 'Centra' para instructoras (Centra
+// Core se retiró) y 'Centra Manager' para propietaria/gerencia (ver
 // `nombreAppPorRol`); para las ALUMNAS, el nombre de su estudio — a ellas los
 // nombres de producto interno no les dicen nada, y la marca paraguas tampoco.
 //

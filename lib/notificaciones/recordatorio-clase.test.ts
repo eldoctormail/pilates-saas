@@ -101,7 +101,7 @@ test('verano: una clase de las 16:30Z se anuncia a las 18:30 (hora del estudio, 
   const d = datosClaseRecordatorio({ inicioISO: '2026-07-15T16:30:00.000Z', nombre: null, sala: null, instructor: null, estudioNombre: null, zoomJoinUrl: null });
   assert.equal(d.hora, '18:30');
   assert.equal(d.claseNombre, 'Clase');
-  assert.equal(d.estudioNombre, 'Tentare');
+  assert.equal(d.estudioNombre, 'Centra');
   assert.equal(d.sala, '');
 });
 

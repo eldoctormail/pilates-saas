@@ -34,8 +34,8 @@ test('el token es un ES256 que Apple acepta: cabecera, cuerpo y firma verificabl
 });
 
 test('los cuerpos de las peticiones tienen la forma JSON:API de Apple', () => {
-  assert.deepEqual(cuerpoBundleId('app.tentare.cupo-001', 'Tentare cupo 001'), {
-    data: { type: 'bundleIds', attributes: { identifier: 'app.tentare.cupo-001', name: 'Tentare cupo 001', platform: 'IOS' } },
+  assert.deepEqual(cuerpoBundleId('app.tentare.cupo-001', 'Centra cupo 001'), {
+    data: { type: 'bundleIds', attributes: { identifier: 'app.tentare.cupo-001', name: 'Centra cupo 001', platform: 'IOS' } },
   });
   const siwa = cuerpoCapacidad('B1', 'APPLE_ID_AUTH');
   assert.equal(siwa.data.relationships.bundleId.data.id, 'B1');

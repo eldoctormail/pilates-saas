@@ -110,7 +110,7 @@ export function AnadirAClase({
   const [cobrando, setCobrando] = useState(false);
   const [liberando, setLiberando] = useState(false);
   // Las apartadas para ClassPass cuentan como ocupadas, como en el servidor: con
-  // ellas la clase puede estar «llena» para Tentare aunque queden sitios.
+  // ellas la clase puede estar «llena» para Centra aunque queden sitios.
   const enApartadas = apartadas?.plazas ?? 0;
   const llena = confirmadas + enApartadas >= aforo;
   const llenaPorApartadas = llena && confirmadas < aforo;

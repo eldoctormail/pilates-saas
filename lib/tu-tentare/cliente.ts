@@ -3,7 +3,7 @@
 import { authHeader } from '@/lib/api-client';
 
 /**
- * ¿Ve este estudio «Tu Tentare»? Lo decide el servidor (interruptor
+ * ¿Ve este estudio «Tu Centra»? Lo decide el servidor (interruptor
  * `TU_TENTARE` y que sea la propietaria). Cualquier fallo o respuesta rara es
  * «no»: Configuración se queda exactamente como estaba.
  */

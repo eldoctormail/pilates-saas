@@ -18,7 +18,7 @@ export const maxDuration = 300;
 // notif-inactivas/notif-entregas-pendientes.
 //
 // De paso (sin cron nuevo), la alarma de moderación: las denuncias de la app
-// que ya le tocan a Tentare y las que llevan 48 h sin decidir (App Store 1.2).
+// que ya le tocan a Centra y las que llevan 48 h sin decidir (App Store 1.2).
 // Nadie sondea /api/health/flujos, así que si no se cuentan aquí no avisan a
 // nadie. A Sentry solo va el número, nunca filas ni ids.
 const VIGILADAS = [ID_DENUNCIAS_ESPERANDO_A_TENTARE, ID_DENUNCIAS_SIN_REVISAR_48H];

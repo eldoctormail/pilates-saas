@@ -3,7 +3,7 @@ import { getSupabaseAdmin } from '@/lib/db/supabase-admin';
 import { errorInterno } from '@/lib/errores-servidor';
 import { buscarEstudiosPublicos, filtroEstudiosDesdeSearchParams } from '@/lib/network/publico-estudios';
 
-// Primer endpoint público de búsqueda de Tentare Network (piezas 1a+1b de
+// Primer endpoint público de búsqueda de Centra Network (piezas 1a+1b de
 // F3). Su hermano de instructoras (buscarPerfilesPublico,
 // lib/network/publico.ts) NUNCA se sirvió sin sesión: la única versión con
 // API route es app/api/network/buscar (verificarSesionStaff, panel de un

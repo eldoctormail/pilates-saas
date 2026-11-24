@@ -15,7 +15,7 @@ import { paginaDe, relacionadasDe, urlDe } from '@/lib/seo/paginas';
 import { SE_LLEVA } from '@/lib/landing/migracion';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// «Cambiarte a Tentare» (22-oct-2026): la maqueta que mandó el fundador, llevada al
+// «Cambiarte a Centra» (22-oct-2026): la maqueta que mandó el fundador, llevada al
 // sistema de la web. Lo que la maqueta traía y aquí NO está, a propósito:
 //  · el testimonio de «Clara M.» con cinco estrellas: no es de una clienta real;
 //  · la tabla del final con bsport y Mindbody en gris en «Reservas» o «App»: los dos
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
   openGraph: {
-    siteName: 'Tentare',
+    siteName: 'Centra',
     type: 'website',
     title: pagina.titulo,
     description: 'Se hace tú misma en el panel. Nada se importa sin que lo revises antes.',
@@ -73,7 +73,7 @@ const PASOS = [
 ] as const;
 
 // La misma puerta que el pie (PieWeb): el WhatsApp de soporte, con la pregunta ya empezada.
-const ENLACE_WA = enlaceWhatsApp(WHATSAPP_SOPORTE, 'Hola, tengo una duda sobre cambiarme a Tentare:') ?? `https://wa.me/${WHATSAPP_SOPORTE.replace(/\D/g, '')}`;
+const ENLACE_WA = enlaceWhatsApp(WHATSAPP_SOPORTE, 'Hola, tengo una duda sobre cambiarme a Centra:') ?? `https://wa.me/${WHATSAPP_SOPORTE.replace(/\D/g, '')}`;
 
 const COMPARATIVAS = [
   { slug: 'bsport', nombre: 'bsport' },
@@ -90,7 +90,7 @@ const FAQ = [
   },
   {
     q: '¿Se pierden las tarjetas guardadas de mis alumnas?',
-    a: 'Como en cualquier cambio de proveedor de pagos, las tarjetas guardadas no se migran automáticamente — ningún software puede leer el número de tarjeta que otro tiene tokenizado. Cada alumna tendrá que volver a introducir su tarjeta una vez, la primera vez que le cobres con Tentare.',
+    a: 'Como en cualquier cambio de proveedor de pagos, las tarjetas guardadas no se migran automáticamente — ningún software puede leer el número de tarjeta que otro tiene tokenizado. Cada alumna tendrá que volver a introducir su tarjeta una vez, la primera vez que le cobres con Centra.',
   },
   {
     q: '¿Qué pasa si algo se importa mal?',
@@ -179,7 +179,7 @@ export default function CambiarDeSoftwarePage() {
         <div className="cs-ancho cs-heroe-rejilla">
           <div>
             <p className="cs-pildora">Cambiarte de software</p>
-            <h1 className="cs-h1">Cámbiate a Tentare, <span>sin perder nada.</span></h1>
+            <h1 className="cs-h1">Cámbiate a Centra, <span>sin perder nada.</span></h1>
             <p className="cs-entrada">
               Tu <strong>estudio de Pilates</strong> se lleva sus clientas, sus bonos, su calendario y su historial. Lo haces tú misma en
               el panel, sin parar el estudio.
@@ -293,14 +293,14 @@ export default function CambiarDeSoftwarePage() {
           <div className="cs-final">
             <div>
               <h2 className="cs-h2">¿Prefieres verlo antes de decidir?</h2>
-              <p>Compara Tentare con tu software actual, punto por punto.</p>
+              <p>Compara Centra con tu software actual, punto por punto.</p>
               <Link href="/comparativa" className="cs-boton cs-boton-claro">Ver la comparativa <ArrowRight size={16} /></Link>
             </div>
             <ul className="cs-comparativas">
               {COMPARATIVAS.map((c) => (
                 <li key={c.slug}>
                   <Link href={`/comparativa/tentare-vs-${c.slug}`}>
-                    <span>Tentare <i>vs</i> {c.nombre}</span>
+                    <span>Centra <i>vs</i> {c.nombre}</span>
                     <ArrowRight size={16} />
                   </Link>
                 </li>

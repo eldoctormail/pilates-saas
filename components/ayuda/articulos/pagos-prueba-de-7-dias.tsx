@@ -12,7 +12,7 @@ export default function Contenido() {
   return (
     <>
       <p>
-        Al crear tu estudio empiezas en {PLAN_INFO.BASE.nombre}, gratis y con todas las funcionalidades de Tentare
+        Al crear tu estudio empiezas en {PLAN_INFO.BASE.nombre}, gratis y con todas las funcionalidades de Centra
         menos varias sedes y la app propia en la App Store, sin pedirte tarjeta en ningún momento. Es gratis mientras tu estudio no pase de{' '}
         {GRATIS_RESERVAS_MES} reservas al mes.
       </p>

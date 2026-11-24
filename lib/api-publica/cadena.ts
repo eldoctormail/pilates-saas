@@ -86,7 +86,7 @@ export function claveDeCadenaLlega(p: { sede: SedeParaClave | null; cadenaId: st
   return 'llega';
 }
 
-/** Un estudio con acceso a Tentare ahora mismo: ni suspendido ni sin suscripción. */
+/** Un estudio con acceso a Centra ahora mismo: ni suspendido ni sin suscripción. */
 export function estudioConAcceso(s: { suspendido_en: string | null; subscription_status: string | null }): boolean {
   return !s.suspendido_en && suscripcionActiva(s.subscription_status);
 }

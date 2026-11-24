@@ -35,7 +35,7 @@ const SI_LA_OCULTAS = [
   'Tus clientes también ven el aviso al abrir su app, aunque tengan cuenta.',
   'Los widgets de tu web enseñan el aviso, también el calendario incrustado: ahí no se reserva ni con la clave.',
   'Si cambias o quitas la clave, quien ya había entrado se queda fuera.',
-  'En Tentare Network sigues saliendo si lo tienes encendido, pero tu enlace lleva al aviso.',
+  'En Centra Network sigues saliendo si lo tienes encendido, pero tu enlace lleva al aviso.',
   'Le pedimos a Google que no la enseñe.',
 ];
 

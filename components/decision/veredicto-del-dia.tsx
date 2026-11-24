@@ -92,7 +92,7 @@ export function VeredictoDelDia({ veredicto, onAprobar, onYaContactada, onYaLoSe
    * y SILENCIO): no depende de que el Decision OS haya terminado su análisis. */
   bandejaHoy?: React.ReactNode;
   /** Cuántas acciones del piloto automático salieron hoy (EJECUTADA): se
-   * dice en los días sin mensaje, para que se note que Tentare trabajó. */
+   * dice en los días sin mensaje, para que se note que Centra trabajó. */
   nAutonomasHoy?: number;
   /** Las que el piloto intentó hoy y no salieron (FALLIDA): se dicen aparte. */
   nAutonomasFallidasHoy?: number;

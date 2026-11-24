@@ -36,20 +36,20 @@ const cargar = cache(async (slug: string) => {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const detalle = await cargar(slug);
-  if (!detalle) return { title: 'Estudio no encontrado | Tentare Network' };
+  if (!detalle) return { title: 'Estudio no encontrado | Centra Network' };
 
   const { estudio } = detalle;
   const ciudad = estudio.ciudad ? ` en ${estudio.ciudad}` : '';
-  const title = `${estudio.nombre}${ciudad} | Tentare Network`;
+  const title = `${estudio.nombre}${ciudad} | Centra Network`;
   const description = estudio.descripcion?.slice(0, 155)
-    ?? `${estudio.nombre}, un estudio${ciudad} en el directorio de Tentare Network.`;
+    ?? `${estudio.nombre}, un estudio${ciudad} en el directorio de Centra Network.`;
   const url = `${LEGAL.url}/network/estudios/${slug}`;
   const imagen = estudio.fotoUrl ?? estudio.logoUrl ?? undefined;
 
   return {
     title, description,
     alternates: { canonical: url },
-    openGraph: { siteName: 'Tentare', title, description, url, images: imagen ? [imagen] : undefined },
+    openGraph: { siteName: 'Centra', title, description, url, images: imagen ? [imagen] : undefined },
     twitter: { card: 'summary', title, description, images: imagen ? [imagen] : undefined },
   };
 }
@@ -143,7 +143,7 @@ export default async function FichaEstudioPage({ params }: { params: Promise<{ s
             </div>
 
             <p className="mt-6 text-[15px] leading-[1.7] max-w-[640px]" style={{ color: '#4A5347' }}>
-              {estudio.descripcion ?? `${estudio.nombre} todavía no ha añadido una descripción de su estudio en Tentare Network.`}
+              {estudio.descripcion ?? `${estudio.nombre} todavía no ha añadido una descripción de su estudio en Centra Network.`}
             </p>
 
             <Link

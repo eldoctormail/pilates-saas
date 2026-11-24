@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import { MarcoIphone } from '@/components/ui/marco-iphone';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// «Antes / con Tentare» (home, 21-oct-2026): el deslizador de Mariana Tek («Put your
+// «Antes / con Centra» (home, 21-oct-2026): el deslizador de Mariana Tek («Put your
 // brand first»), pero lo que se compara no es otra app: es pedir la plaza por WhatsApp
 // frente a reservarla en la app del estudio (decisión del fundador). Las dos caras
 // cuentan la MISMA clase —Reformer Flow, mañana a las 10:15—, así que se ve lo que
@@ -140,7 +140,7 @@ export function AntesDespues({ captura }: { captura: string }) {
               aria-valuetext="Mitad y mitad"
             />
           </div>
-          <div className="wh-ad-etiquetas" aria-hidden="true"><span>Por WhatsApp</span><span>Con Tentare</span></div>
+          <div className="wh-ad-etiquetas" aria-hidden="true"><span>Por WhatsApp</span><span>Con Centra</span></div>
         </div>
         <div className="wh-ad-texto">
           <h2 id="wh-ad-h" className="wh-h2">Del WhatsApp a la app de tu estudio.</h2>

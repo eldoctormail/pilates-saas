@@ -3,7 +3,7 @@
 // Escanear el QR de una alumna desde «Pasar lista», en la app del estudio.
 //
 // La instructora está en SU clase: la clase ya se sabe, no elige nada. Escanea →
-// Tentare mira la reserva real de esa alumna para esta clase → 🟢/🟠/🔴. Si entra
+// Centra mira la reserva real de esa alumna para esta clase → 🟢/🟠/🔴. Si entra
 // y la clase pasa lista, queda marcada y la lista de detrás se entera
 // (`onAsistio`). Los textos son los mismos que ve recepción en el panel
 // (lib/acceso/textos-acceso.ts); a ella no le llega ningún dato de dinero, ni la
@@ -60,7 +60,7 @@ export function EscanerQrClase({ slug, sesionId, onAsistio, onSesionCaducada }: 
   const { videoRef, camara, encender, olvidarUltimo } = useLectorQr({
     pausado: resultado !== null || enviando,
     onLectura: (valor) => {
-      // Solo van al servidor los QR de acceso de Tentare: el código de una caja
+      // Solo van al servidor los QR de acceso de Centra: el código de una caja
       // o de un cartel no es un intento de entrar.
       if (!leerTokenQr(valor)) {
         setError('Ese código no es un QR de acceso. Pídele que abra Perfil → QR de acceso en su app.');

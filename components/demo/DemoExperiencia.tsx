@@ -188,7 +188,7 @@ export function DemoExperiencia() {
   function abrirChat(conSaludo: boolean) {
     if (!conSaludo) return;
     const quien = datos.nombre.trim().split(' ')[0];
-    setMensajes((m) => [...m, nuevoMensaje('tenti', `Hola${quien ? `, ${quien}` : ''}. Soy Tenti. Cuéntame qué quieres entender de cómo funcionaría Tentare en tu estudio y te preparo una demo con tu caso.`, true)]);
+    setMensajes((m) => [...m, nuevoMensaje('tenti', `Hola${quien ? `, ${quien}` : ''}. Soy Tenti. Cuéntame qué quieres entender de cómo funcionaría Centra en tu estudio y te preparo una demo con tu caso.`, true)]);
     setOpciones(EJEMPLOS);
   }
 
@@ -256,7 +256,7 @@ export function DemoExperiencia() {
   }, [fase]);
 
   // ── El panel real ────────────────────────────────────────────────────────
-  // La demo se ve en el panel de VERDAD de Tentare (con un estudio de ejemplo), no en un dibujo: se deja la marca de esta
+  // La demo se ve en el panel de VERDAD de Centra (con un estudio de ejemplo), no en un dibujo: se deja la marca de esta
   // pestaña con los pasos y se abre la primera pantalla. El panel carga `demo-panel.js` y pone la guía encima.
   function abrirPanel() {
     if (!demo) return;
@@ -308,7 +308,7 @@ export function DemoExperiencia() {
             <ArrowLeft size={20} aria-hidden="true" />
           </button>
           <div className="dm-cabecera-fila">
-            <Link href="/" aria-label="Tentare, volver a la página principal"><LogoTentare alto={24} /></Link>
+            <Link href="/" aria-label="Centra, volver a la página principal"><LogoTentare alto={24} /></Link>
             <Link href="/" className="dm-icono-btn" aria-label="Cerrar la demo"><X size={20} aria-hidden="true" /></Link>
           </div>
         </div>
@@ -381,7 +381,7 @@ export function DemoExperiencia() {
               </div>
               <label className="dm-casilla">
                 <input type="checkbox" checked={comercial} onChange={(e) => setComercial(e.target.checked)} />
-                <span>Quiero recibir por email novedades y guías de Tentare para llevar mi estudio. Puedo darme de baja cuando quiera. <em>(Opcional: no hace falta para ver la demo.)</em></span>
+                <span>Quiero recibir por email novedades y guías de Centra para llevar mi estudio. Puedo darme de baja cuando quiera. <em>(Opcional: no hace falta para ver la demo.)</em></span>
               </label>
               <p className="dm-pequeno">
                 Usamos tus datos para preparar la demo y contestarte sobre ella. Más en nuestra{' '}
@@ -430,7 +430,7 @@ export function DemoExperiencia() {
               <h1 id={`${uid}-titulo`} ref={titulo} tabIndex={-1} className="dm-h1">Tu demo está lista</h1>
               {propuesta?.resumen && <p className="dm-lead">{propuesta.resumen}</p>}
               {propuesta?.aclaracion && <div className="dm-aviso" role="note">{propuesta.aclaracion}</div>}
-              <p className="dm-lead">Te la enseño en el <strong>panel real de Tentare</strong>, con un estudio de ejemplo: las mismas pantallas que usarás tú. Nada de lo que veas toca datos reales.</p>
+              <p className="dm-lead">Te la enseño en el <strong>panel real de Centra</strong>, con un estudio de ejemplo: las mismas pantallas que usarás tú. Nada de lo que veas toca datos reales.</p>
               <div className="dm-acciones">
                 <button type="button" className="dm-boton dm-boton-primario" onClick={abrirPanel}>Verla en el panel real <ArrowRight size={18} aria-hidden="true" /></button>
                 <button type="button" className="dm-boton dm-boton-contorno" onClick={() => setVerTexto(true)}>Prefiero el resumen en texto</button>
@@ -454,7 +454,7 @@ export function DemoExperiencia() {
               <Confeti />
               <div className="dm-fin-corona" aria-hidden="true">🎉</div>
               <h1 id={`${uid}-titulo`} ref={titulo} tabIndex={-1} className="dm-h1">¡Felicidades!</h1>
-              <p className="dm-lead">Has recorrido tu demo personalizada. Así funcionaría Tentare en tu día a día.</p>
+              <p className="dm-lead">Has recorrido tu demo personalizada. Así funcionaría Centra en tu día a día.</p>
               {utilidad === null ? (
                 <>
                   <p className="dm-fin-pregunta" id={`${uid}-pregunta`}>¿Cuánto te ha ayudado esta demo a resolver tus preguntas?</p>

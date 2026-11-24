@@ -13,7 +13,7 @@ import { sumupConfigurado, tokenSumup } from './sumup-oauth.ts';
 // la cuenta de SumUp de la que cuelga. Lo usa /api/terminal/lector (la misma ruta
 // que el datáfono de Stripe) y /api/integrations/sumup (desconectar la cuenta).
 //
-// El lector es de la cuenta de SumUp del ESTUDIO: en Tentare solo se guarda cuál
+// El lector es de la cuenta de SumUp del ESTUDIO: en Centra solo se guarda cuál
 // (`studios.sumup_reader_id`). Un datáfono por sede (CHECK `studios_un_solo_datafono`):
 // al emparejar un Solo se olvida el de Stripe en el MISMO UPDATE.
 //
@@ -22,7 +22,7 @@ import { sumupConfigurado, tokenSumup } from './sumup-oauth.ts';
 
 const MENSAJE_RECONECTAR = 'La cuenta de SumUp del estudio hay que volver a conectarla (Configuración → Cobros y facturas → Datáfono).';
 
-/** ¿Tentare puede ofrecer SumUp a este estudio? Su app dada de alta, sus claves y el estudio en la lista. */
+/** ¿Centra puede ofrecer SumUp a este estudio? Su app dada de alta, sus claves y el estudio en la lista. */
 export function sumupDisponible(studioId: string, env: NodeJS.ProcessEnv = process.env): boolean {
   return sumupConfigurado()
     && !!env.SUMUP_AFFILIATE_APP_ID && !!env.SUMUP_AFFILIATE_KEY && !!env.SUMUP_WEBHOOK_SECRET
@@ -159,7 +159,7 @@ export async function renombrarLectorSumup(
 
 /**
  * Lo da de baja en SumUp y lo olvida aquí. Si la cuenta ya no responde (se
- * desconectó en SumUp), se olvida igual: en Tentare no puede quedar un datáfono al
+ * desconectó en SumUp), se olvida igual: en Centra no puede quedar un datáfono al
  * que no se puede mandar nada.
  */
 export async function desconectarLectorSumup(

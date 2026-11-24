@@ -4,7 +4,7 @@
 //
 // Un cálculo, no una promesa: con los números de la propietaria dice cuántas
 // plazas se ofrecen y no se venden al mes y cuánto dinero es eso al precio medio
-// que ella pone. No dice cuántas recuperaría Tentare: eso no se sabe de
+// que ella pone. No dice cuántas recuperaría Centra: eso no se sabe de
 // antemano y no se inventa. Pura y sin `@/`: se prueba con node --test.
 // ─────────────────────────────────────────────────────────────────────────────
 

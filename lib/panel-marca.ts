@@ -3,7 +3,7 @@
 //
 // El acento del panel (`--brand`) es el del ESTUDIO. Lo nuevo es qué pasa con el
 // estudio que no ha elegido ninguno: hasta ahora recibía el oliva de fábrica
-// (`DEFAULT_THEME` / preset `original`), la identidad anterior de Tentare, que el
+// (`DEFAULT_THEME` / preset `original`), la identidad anterior de Centra, que el
 // Brand System retira. Ahora el provider no escribe nada y manda el valor por
 // defecto de la marca, que vive en CSS (`.marca-panel`, app/globals.css): Sand
 // con texto en Ink.

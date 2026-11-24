@@ -8,7 +8,7 @@ import { revocarConsentimiento } from '@/lib/oauth-server';
 // Revocación desde el panel (pantalla "Apps conectadas"). Autenticado con la
 // sesión de staff — nada que ver con el token endpoint de RFC 7009, que es
 // para que la propia app de terceros revoque SU token; aquí es la
-// propietaria/manager cortando el acceso desde Tentare.
+// propietaria/manager cortando el acceso desde Centra.
 export async function POST(req: NextRequest) {
   const limited = await enforceRateLimit(req, 'oauth-revoke', { max: 20, windowSeconds: 60 });
   if (limited) return limited;

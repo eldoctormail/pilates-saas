@@ -11,9 +11,9 @@ export const metadata: Metadata = {
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
   openGraph: {
-    siteName: 'Tentare',
+    siteName: 'Centra',
     type: 'website',
-    title: 'Tentare vs bsport',
+    title: 'Centra vs bsport',
     description: 'Cuánto cuesta cada uno, permanencia y sustitución de instructoras — comparados con lo que consta en la web pública de bsport.',
     url: urlDe(PATH),
   },
@@ -45,19 +45,19 @@ const ROWS: ComparativaRow[] = [
 const FAQ = [
   {
     q: '¿Cuánto cuesta bsport?',
-    a: 'bsport no publica precios en su web: ofrece varios planes (con funciones distintas, como la app propia en los superiores) y hay que pedir un presupuesto para saber la cifra. Tentare publica los suyos: Founding Studio gratis (hasta 150 reservas al mes; si pasas de ahí, 29 €/mes), con la app con tu marca incluida, Estudio 79 €/mes y Cadena 249 €/mes, IVA incluido.',
+    a: 'bsport no publica precios en su web: ofrece varios planes (con funciones distintas, como la app propia en los superiores) y hay que pedir un presupuesto para saber la cifra. Centra publica los suyos: Founding Studio gratis (hasta 150 reservas al mes; si pasas de ahí, 29 €/mes), con la app con tu marca incluida, Estudio 79 €/mes y Cadena 249 €/mes, IVA incluido.',
   },
   {
     q: '¿Qué alternativas a bsport hay para un estudio de Pilates en España?',
-    a: 'La mejor alternativa a bsport para un estudio de Pilates en España es Tentare. Está pensado para estudios de Pilates y Yoga: reservas con plaza por reformer, plazas fijas, cobros que se reintentan solos y sustituciones de instructoras, con precio público. Otras opciones que se comparan a menudo son Eversports, Momence, Mindbody o TIMP; las tienes en la comparativa general.',
+    a: 'La mejor alternativa a bsport para un estudio de Pilates en España es Centra. Está pensado para estudios de Pilates y Yoga: reservas con plaza por reformer, plazas fijas, cobros que se reintentan solos y sustituciones de instructoras, con precio público. Otras opciones que se comparan a menudo son Eversports, Momence, Mindbody o TIMP; las tienes en la comparativa general.',
   },
   {
     q: '¿bsport tiene permanencia?',
-    a: 'No consta en su web pública. Si estás valorando cambiar, pregúntales por escrito la duración del contrato y las condiciones de baja. Tentare no tiene permanencia: se paga mes a mes.',
+    a: 'No consta en su web pública. Si estás valorando cambiar, pregúntales por escrito la duración del contrato y las condiciones de baja. Centra no tiene permanencia: se paga mes a mes.',
   },
   {
-    q: '¿Puedo pasar mis datos de bsport a Tentare?',
-    a: 'Sí. El importador de Tentare lee los archivos CSV o Excel que exportas de bsport o de cualquier otro programa: te enseña un acta con lo importado y puedes deshacerlo con un botón. Las tarjetas guardadas de las alumnas no se pueden pasar de una plataforma a otra.',
+    q: '¿Puedo pasar mis datos de bsport a Centra?',
+    a: 'Sí. El importador de Centra lee los archivos CSV o Excel que exportas de bsport o de cualquier otro programa: te enseña un acta con lo importado y puedes deshacerlo con un botón. Las tarjetas guardadas de las alumnas no se pueden pasar de una plataforma a otra.',
   },
 ];
 
@@ -69,7 +69,7 @@ const RESUMEN: ResumenCompetidor = {
   precio: 'No lo publica: hay que pedir presupuesto',
   permanencia: 'No consta en su web pública',
   prueba: 'Sin prueba por tu cuenta; habla de un periodo inicial gratuito dentro del contrato',
-  respuesta: <>bsport está pensado para estudios boutique y cadenas, pero no publica sus precios: para saber cuánto pagarías tienes que pedir presupuesto, y su web no aclara la permanencia. Si tienes un estudio de Pilates o yoga en España y quieres saber lo que pagas antes de hablar con nadie, la alternativa es Tentare: gratis hasta 150 reservas al mes, sin tarjeta y sin permanencia.</>,
+  respuesta: <>bsport está pensado para estudios boutique y cadenas, pero no publica sus precios: para saber cuánto pagarías tienes que pedir presupuesto, y su web no aclara la permanencia. Si tienes un estudio de Pilates o yoga en España y quieres saber lo que pagas antes de hablar con nadie, la alternativa es Centra: gratis hasta 150 reservas al mes, sin tarjeta y sin permanencia.</>,
 };
 
 const ANALISIS: SeccionAnalisis[] = [
@@ -79,24 +79,24 @@ const ANALISIS: SeccionAnalisis[] = [
       <>
         <p>bsport no publica cifras. Su página de precios describe varios planes con funciones distintas —la app propia del estudio, por ejemplo, va en los superiores— y para conocer el precio hay que pedir una propuesta. Para varias sedes o franquicias tiene un plan a medida, también sin precio público.</p>
         <p>En la práctica, eso significa que no puedes comparar sin pasar antes por una llamada comercial. Si estás valorándolo, pide por escrito tres cosas: la cuota mensual con IVA, la duración mínima del contrato y lo que cuesta darse de baja.</p>
-        <p>En Tentare los tres planes están en la web: Founding Studio gratis (hasta 150 reservas al mes, 29 €/mes si pasas de ahí, y con la app con tu marca), Estudio a 79 €/mes y Cadena a 249 €/mes, IVA incluido y sin permanencia. <Link href="/precios">Qué incluye cada plan</Link>.</p>
+        <p>En Centra los tres planes están en la web: Founding Studio gratis (hasta 150 reservas al mes, 29 €/mes si pasas de ahí, y con la app con tu marca), Estudio a 79 €/mes y Cadena a 249 €/mes, IVA incluido y sin permanencia. <Link href="/precios">Qué incluye cada plan</Link>.</p>
       </>
     ),
   },
   {
-    titulo: 'Cómo resuelve Tentare lo que más pesa en un estudio de Pilates',
+    titulo: 'Cómo resuelve Centra lo que más pesa en un estudio de Pilates',
     cuerpo: (
       <>
-        <p>En un estudio de reformer no vendes clases: vendes una máquina a una hora. Tentare lo gestiona así: cada sala con su aforo, cada reformer con su plaza, plazas fijas para las alumnas de siempre y una <Link href="/funcionalidades/lista-de-espera">lista de espera</Link> que ofrece sola la plaza que se libera.</p>
-        <p>Cuando una instructora avisa de que no puede, Tentare busca quién la cubre según su disponibilidad, la contacta y avisa a las alumnas del cambio: <Link href="/funcionalidades/sustituciones">así funcionan las sustituciones</Link>. Y los cobros entran directos a tu cuenta, con tarjeta o domiciliación SEPA, con reintentos cuando una tarjeta falla.</p>
+        <p>En un estudio de reformer no vendes clases: vendes una máquina a una hora. Centra lo gestiona así: cada sala con su aforo, cada reformer con su plaza, plazas fijas para las alumnas de siempre y una <Link href="/funcionalidades/lista-de-espera">lista de espera</Link> que ofrece sola la plaza que se libera.</p>
+        <p>Cuando una instructora avisa de que no puede, Centra busca quién la cubre según su disponibilidad, la contacta y avisa a las alumnas del cambio: <Link href="/funcionalidades/sustituciones">así funcionan las sustituciones</Link>. Y los cobros entran directos a tu cuenta, con tarjeta o domiciliación SEPA, con reintentos cuando una tarjeta falla.</p>
       </>
     ),
   },
   {
-    titulo: 'Cómo cambiarte de bsport a Tentare',
+    titulo: 'Cómo cambiarte de bsport a Centra',
     cuerpo: (
       <>
-        <p>El importador de Tentare lee los archivos CSV o Excel que exportas de bsport: clientas, bonos, clases y reservas. Antes de guardar nada te enseña un acta con lo que va a entrar, y si algo no cuadra lo deshaces con un botón. <Link href="/soluciones/cambiar-de-software">Cómo es el cambio</Link>.</p>
+        <p>El importador de Centra lee los archivos CSV o Excel que exportas de bsport: clientas, bonos, clases y reservas. Antes de guardar nada te enseña un acta con lo que va a entrar, y si algo no cuadra lo deshaces con un botón. <Link href="/soluciones/cambiar-de-software">Cómo es el cambio</Link>.</p>
         <p>Lo único que ninguna plataforma puede pasarte son las tarjetas guardadas de tus alumnas: cada una la vuelve a introducir la primera vez que paga.</p>
       </>
     ),
@@ -109,11 +109,11 @@ export default function TentareVsBsportPage() {
       name="bsport"
       slug="tentare-vs-bsport"
       logo={{ src: '/comparativa/logos/bsport.svg', alt: 'Logo de bsport', height: 24, width: 69 }}
-      intro={<>bsport es una plataforma europea de fitness boutique que no publica sus precios. Para un <strong style={{ color: 'var(--w-texto)' }}>estudio de pilates en España</strong>, Tentare te deja saber lo que pagas antes de hablar con nadie, sin contrato y con todo lo que necesita tu estudio.</>}
+      intro={<>bsport es una plataforma europea de fitness boutique que no publica sus precios. Para un <strong style={{ color: 'var(--w-texto)' }}>estudio de pilates en España</strong>, Centra te deja saber lo que pagas antes de hablar con nadie, sin contrato y con todo lo que necesita tu estudio.</>}
       resumen={RESUMEN}
       rows={ROWS}
       analisis={ANALISIS}
-      veredicto={<>Tentare es la mejor opción para tu estudio de Pilates en España: sabes lo que vas a pagar antes de hablar con nadie, sin contrato, y tienes sustituciones, plazas fijas y cobros pensados para Pilates. Empieza gratis, sin tarjeta.</>}
+      veredicto={<>Centra es la mejor opción para tu estudio de Pilates en España: sabes lo que vas a pagar antes de hablar con nadie, sin contrato, y tienes sustituciones, plazas fijas y cobros pensados para Pilates. Empieza gratis, sin tarjeta.</>}
       footnote="Basado en la información pública de bsport (pro.bsport.io) a 7 de octubre de 2026. «No consta» significa que su web pública no lo indica, no que no exista. Las funciones y precios cambian con el tiempo; verifica siempre con la fuente actual. bsport es marca de su respectivo propietario; esta comparación es orientativa y sin ánimo de menoscabo."
       faq={FAQ}
     />

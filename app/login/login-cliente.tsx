@@ -343,7 +343,7 @@ export function LoginCliente({ nuevo = false, apple = false }: { nuevo?: boolean
       if (seguro) { window.location.href = destino!; return; }
 
       // Antes esto era un `/dashboard` fijo, sin mirar si la cuenta tiene
-      // estudio de verdad — una cuenta de Tentare Network (sin studio_id) se
+      // estudio de verdad — una cuenta de Centra Network (sin studio_id) se
       // quedaba atrapada en un skeleton infinito ahí (docs/NETWORK-AUDIT-2.md
       // §2). /api/auth/destino-post-login es la única fuente de verdad de
       // "a dónde pertenece esta cuenta"; fail-open a /dashboard si la llamada
@@ -383,7 +383,7 @@ export function LoginCliente({ nuevo = false, apple = false }: { nuevo?: boolean
       if (resultado?.tipo === 'cuenta-nueva') {
         // Se dice antes de saltar: sin aviso, entrar con Google y acabar en «Crea tu estudio» parecía que la página se recargaba sola.
         setError('');
-        setInfo('Esta cuenta todavía no tiene un estudio en Tentare. Te llevamos a crearlo…');
+        setInfo('Esta cuenta todavía no tiene un estudio en Centra. Te llevamos a crearlo…');
         await new Promise<void>(seguir => setTimeout(seguir, 1800));
         // eslint-disable-next-line @next/next/no-location-assign-relative-destination -- recarga dura a propósito: tras autenticar, la página siguiente tiene que leer la sesión recién creada desde el servidor.
         window.location.href = '/crear-estudio';
@@ -406,7 +406,7 @@ export function LoginCliente({ nuevo = false, apple = false }: { nuevo?: boolean
     setRecuperando(false);
     if (r.error) { setError(r.error); return; }
     // A propósito NO se dice si ese email tiene cuenta: eso convertiría esta
-    // pantalla en una forma de averiguar quién es cliente de Tentare.
+    // pantalla en una forma de averiguar quién es cliente de Centra.
     setInfo(
       `Si hay una cuenta con ${email.trim()}, te llega un correo con un enlace. `
       + 'Es de un solo uso y caduca, así que ábrelo en cuanto lo recibas.',
@@ -516,7 +516,7 @@ export function LoginCliente({ nuevo = false, apple = false }: { nuevo?: boolean
         ) : (
         <div className="flex flex-col items-center mb-8">
           <LogoTentare formato="vertical" alto={76} className="mb-2" />
-          <p className="text-[14px] font-semibold text-[#8E8E86] mt-1">Tentare Software</p>
+          <p className="text-[14px] font-semibold text-[#8E8E86] mt-1">Centra Software</p>
           <p className="text-[12.5px] text-[#A8A89F]">Gestión de tu estudio de Pilates</p>
         </div>
         )}
@@ -548,9 +548,9 @@ export function LoginCliente({ nuevo = false, apple = false }: { nuevo?: boolean
             <div className="mx-auto mb-4 flex h-11 w-11 items-center justify-center rounded-full" style={{ background: 'var(--accent)' }}>
               <ArrowLeftRight size={18} style={{ color: 'var(--accent-foreground)' }} aria-hidden="true" />
             </div>
-            <h2 className="text-[16px] font-semibold text-[#1A1A1A] mb-1.5">Esta cuenta es de Tentare Network</h2>
+            <h2 className="text-[16px] font-semibold text-[#1A1A1A] mb-1.5">Esta cuenta es de Centra Network</h2>
             <p className="text-[13.5px] leading-relaxed text-[#6C6C64] mb-5">
-              El email y la contraseña son correctos, pero esta cuenta pertenece a Tentare Network, no a Tentare
+              El email y la contraseña son correctos, pero esta cuenta pertenece a Centra Network, no a Centra
               Software — son dos productos independientes. Para gestionar un estudio necesitas una cuenta de
               Software.
             </p>
@@ -558,7 +558,7 @@ export function LoginCliente({ nuevo = false, apple = false }: { nuevo?: boolean
               href="/network/acceso"
               className="block w-full rounded-xl bg-brand px-4 py-2.5 text-center text-[13.5px] font-semibold text-brand-foreground transition-colors hover:brightness-95"
             >
-              Ir a Tentare Network
+              Ir a Centra Network
             </Link>
             <button
               type="button"
@@ -724,7 +724,7 @@ export function LoginCliente({ nuevo = false, apple = false }: { nuevo?: boolean
           )}
         </p>
 
-        {/* El enlace «Crea tu perfil en Tentare Network» salió el 2-oct-2026:
+        {/* El enlace «Crea tu perfil en Centra Network» salió el 2-oct-2026:
             Network está congelado (lib/frozen-features.ts). */}
         </>
         )

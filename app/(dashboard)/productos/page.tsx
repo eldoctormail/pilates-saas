@@ -467,7 +467,7 @@ function PlanModal({ initial, tiposClase, tipoInicial, otrasTarifas, onSave, onC
                 )}
                 <Campo
                   id={`${uid}-desc`} etiqueta="Descripción"
-                  ayuda="El argumento de venta, no las condiciones: esas las redacta Tentare sola ahí al lado.">
+                  ayuda="El argumento de venta, no las condiciones: esas las redacta Centra sola ahí al lado.">
                   {p => (
                     <textarea {...p} value={form.descripcion} onChange={e => set('descripcion', e.target.value)}
                       rows={2} className={cn(CAJA, 'border-border resize-none')}
@@ -606,7 +606,7 @@ function PlanModal({ initial, tiposClase, tipoInicial, otrasTarifas, onSave, onC
                   )}
                 </div>
 
-                {/* «Clase de prueba» (Tentare Widgets): la oferta de primera
+                {/* «Clase de prueba» (Centra Widgets): la oferta de primera
                     visita. Solo clase suelta o bono; con ella encendida no hay
                     matrícula, y la caducidad es obligatoria (la base lo exige
                     igual). Una vez vendida, no se cambia. */}

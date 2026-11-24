@@ -80,7 +80,7 @@ export async function POST(req: NextRequest) {
   const { asunto, html } = correoSolicitudDemo(v.solicitud);
   try {
     const { error } = await new Resend(apiKey).emails.send({
-      from: remitentePorMarca('Tentare'),
+      from: remitentePorMarca('Centra'),
       to: [LEGAL.email],
       replyTo: v.solicitud.email,
       subject: asunto,

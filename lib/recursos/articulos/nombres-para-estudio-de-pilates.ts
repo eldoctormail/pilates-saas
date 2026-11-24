@@ -63,7 +63,7 @@ const articulo: Articulo = {
             {
               titulo: 'Que se lea bien bajo un icono',
               texto:
-                'Con Tentare, tus alumnas instalan la app de tu estudio en la pantalla de inicio del móvil, con tu nombre y tu icono. Un nombre corto se lee mejor ahí, en el cartel y en la web.',
+                'Con Centra, tus alumnas instalan la app de tu estudio en la pantalla de inicio del móvil, con tu nombre y tu icono. Un nombre corto se lee mejor ahí, en el cartel y en la web.',
             },
           ],
         },
@@ -325,7 +325,7 @@ const articulo: Articulo = {
         {
           t: 'p',
           texto:
-            'Con el nombre y el dominio asegurados, lleva las reservas a tu web: con el widget de Tentare pegas un código y tus alumnas reservan desde tu propia página ([reservas en tu web](/recursos/reservas-en-tu-web)). Si estás en plena apertura, sigue con [cómo abrir un estudio de pilates](/recursos/como-abrir-un-estudio-de-pilates) y con [los requisitos para abrir un estudio de pilates](/recursos/requisitos-para-abrir-un-estudio-de-pilates). Y si dudas entre marca propia o franquicia, compáralo en [franquicia de pilates](/recursos/franquicia-de-pilates).',
+            'Con el nombre y el dominio asegurados, lleva las reservas a tu web: con el widget de Centra pegas un código y tus alumnas reservan desde tu propia página ([reservas en tu web](/recursos/reservas-en-tu-web)). Si estás en plena apertura, sigue con [cómo abrir un estudio de pilates](/recursos/como-abrir-un-estudio-de-pilates) y con [los requisitos para abrir un estudio de pilates](/recursos/requisitos-para-abrir-un-estudio-de-pilates). Y si dudas entre marca propia o franquicia, compáralo en [franquicia de pilates](/recursos/franquicia-de-pilates).',
         },
         {
           t: 'llamada',
@@ -430,7 +430,7 @@ const articulo: Articulo = {
     '/recursos/reservas-en-tu-web',
   ],
   cta: {
-    titulo: 'Con el nombre elegido, abre tu estudio en Tentare',
+    titulo: 'Con el nombre elegido, abre tu estudio en Centra',
     texto:
       'Tus alumnas reservan desde el móvil e instalan la app de tu estudio con tu nombre y tu icono. Gratis hasta 150 reservas al mes, sin tarjeta y sin permanencia.',
   },

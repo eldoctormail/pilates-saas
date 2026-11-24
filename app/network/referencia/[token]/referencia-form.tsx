@@ -47,7 +47,7 @@ export function ReferenciaForm({
 
   if (estado === 'confirmada' || estado === 'rechazada' || estado === 'ya_resuelta' || estado === 'caducada') {
     const conf = {
-      confirmada: { icono: PartyPopper, tono: 'exito' as const, titulo: '¡Gracias!', texto: `Tu confirmación ayuda a ${profesionalNombre} en Tentare Network.` },
+      confirmada: { icono: PartyPopper, tono: 'exito' as const, titulo: '¡Gracias!', texto: `Tu confirmación ayuda a ${profesionalNombre} en Centra Network.` },
       rechazada: { icono: ThumbsUp, tono: 'neutro' as const, titulo: 'Entendido', texto: 'Gracias por responder — no se mostrará esta referencia.' },
       ya_resuelta: { icono: ThumbsUp, tono: 'neutro' as const, titulo: 'Ya respondiste', texto: 'Esta solicitud ya quedó resuelta.' },
       caducada: { icono: CalendarX, tono: 'neutro' as const, titulo: 'Este enlace ha caducado', texto: 'Pide a la profesional que te lo envíe de nuevo si sigue interesándole.' },
@@ -71,7 +71,7 @@ export function ReferenciaForm({
           ¿Confirmas que conoces a {profesionalNombre}?
         </h1>
         <p className="mt-2 text-sm text-slate-500 leading-relaxed">
-          Te ha puesto como referencia profesional en Tentare Network. No hace falta crear ninguna cuenta.
+          Te ha puesto como referencia profesional en Centra Network. No hace falta crear ninguna cuenta.
         </p>
 
         <div className="mt-4">
@@ -104,7 +104,7 @@ export function ReferenciaForm({
         </button>
         {estado === 'error' && <p className="mt-3 text-center text-sm text-destructive">No se pudo enviar. Inténtalo otra vez.</p>}
       </div>
-      <p className="mt-6 text-center text-[11px] text-slate-300">Tentare Network</p>
+      <p className="mt-6 text-center text-[11px] text-slate-300">Centra Network</p>
     </main>
   );
 }

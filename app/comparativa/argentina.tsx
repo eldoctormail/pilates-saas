@@ -16,7 +16,7 @@ import { OrganizationStructuredData } from '@/components/OrganizationStructuredD
 //    de ese mismo ranking, que es de un competidor: se avisa. Las páginas de
 //    Fitco no publican precio.
 // «No consta» = la fuente no lo dice; nunca se rellena con «sí» ni con «no».
-// Lo de Tentare sale de lo que hace el producto en Argentina (lib/mercadopago,
+// Lo de Centra sale de lo que hace el producto en Argentina (lib/mercadopago,
 // lib/arca, sin WhatsApp desde que se retiró Twilio).
 
 type Verdict = 'yes' | 'no' | 'partial';
@@ -43,7 +43,7 @@ const FILAS: { feature: string; tentare: [Verdict, string]; otros: [Verdict, str
   },
   {
     feature: 'Comisión sobre lo que cobras',
-    tentare: ['yes', 'Sin comisión de Tentare; solo la de Mercado Pago'],
+    tentare: ['yes', 'Sin comisión de Centra; solo la de Mercado Pago'],
     otros: [
       ['partial', '10 % en Starter, 2 % en Pro'],
       ['partial', '5 % si no pagas el plan fijo'],
@@ -111,9 +111,9 @@ export function ComparativaArgentina() {
         <div style={{ position: 'relative', maxWidth: 780, margin: '0 auto' }}>
           <h1 style={{ fontWeight: 600, fontSize: 'clamp(34px,5.2vw,58px)', lineHeight: 1.02, letterSpacing: 'var(--w-track-h1)', margin: '0 0 20px' }}>
             <span style={{ fontWeight: 600, display: 'block', fontSize: 14, color: 'var(--w-texto-2)', margin: '0 0 14px', lineHeight: 1.5 }}>Comparativa de software para estudios de Pilates en Argentina</span>{' '}
-            Tentare frente a los programas que se usan en Argentina.
+            Centra frente a los programas que se usan en Argentina.
           </h1>
-          <p style={{ fontSize: 'clamp(17px,1.5vw,20px)', lineHeight: 1.55, color: 'var(--w-texto-2)', maxWidth: 620, margin: 0 }}>Precio, comisión, Mercado Pago, factura de ARCA y avisos: lo que cada uno publica, con la fuente y la fecha. Donde otro hace algo que Tentare no, también lo decimos.</p>
+          <p style={{ fontSize: 'clamp(17px,1.5vw,20px)', lineHeight: 1.55, color: 'var(--w-texto-2)', maxWidth: 620, margin: 0 }}>Precio, comisión, Mercado Pago, factura de ARCA y avisos: lo que cada uno publica, con la fuente y la fecha. Donde otro hace algo que Centra no, también lo decimos.</p>
         </div>
       </header>
 
@@ -129,7 +129,7 @@ export function ComparativaArgentina() {
                 <thead>
                   <tr>
                     <th style={{ textAlign: 'left', padding: '18px 20px', fontSize: 13, fontWeight: 600, color: 'var(--w-texto-3)', background: 'var(--w-cream)', borderBottom: '1px solid var(--w-linea)', minWidth: 190 }}>Para tu estudio</th>
-                    <th style={{ textAlign: 'left', padding: '18px 16px', fontSize: 13, fontWeight: 600, color: 'var(--w-sobre-noche)', background: 'var(--w-olive)', borderBottom: '1px solid var(--w-olive)' }}>Tentare</th>
+                    <th style={{ textAlign: 'left', padding: '18px 16px', fontSize: 13, fontWeight: 600, color: 'var(--w-sobre-noche)', background: 'var(--w-olive)', borderBottom: '1px solid var(--w-olive)' }}>Centra</th>
                     {COLUMNAS.map((c) => (
                       <th key={c} style={{ textAlign: 'left', padding: '18px 16px', fontSize: 12.5, fontWeight: 600, color: 'var(--w-texto-2)', background: 'var(--w-cream)', borderBottom: '1px solid var(--w-linea)' }}>{c}</th>
                     ))}
@@ -161,11 +161,11 @@ export function ComparativaArgentina() {
       <section style={{ background: 'var(--w-noche)', color: 'var(--w-sobre-noche)', padding: 'clamp(56px,7vw,88px) clamp(20px,4vw,44px)' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
           <Reveal style={{ fontWeight: 600, fontSize: 14, color: 'var(--w-sand)', marginBottom: 16 }}>Para que lo sepas antes</Reveal>
-          <Reveal delay={80}><h2 style={{ fontWeight: 600, fontSize: 'clamp(26px,3.8vw,42px)', lineHeight: 1.05, letterSpacing: 'var(--w-track-h2)', margin: '0 0 28px', color: 'var(--w-sobre-noche)' }}>Lo que Tentare todavía no tiene.</h2></Reveal>
+          <Reveal delay={80}><h2 style={{ fontWeight: 600, fontSize: 'clamp(26px,3.8vw,42px)', lineHeight: 1.05, letterSpacing: 'var(--w-track-h2)', margin: '0 0 28px', color: 'var(--w-sobre-noche)' }}>Lo que Centra todavía no tiene.</h2></Reveal>
           <div className="cmp-two">
             <Reveal style={{ background: 'var(--w-noche)', border: '1px solid rgba(255,255,255,.07)', borderRadius: 18, padding: 24 }}>
               <h3 style={{ fontSize: 17, fontWeight: 600, color: 'var(--w-sobre-noche)', margin: '0 0 8px' }}>Recordatorios por WhatsApp</h3>
-              <p style={{ fontSize: 14.5, lineHeight: 1.55, color: 'var(--w-sobre-noche-2)', margin: 0 }}>Reservalo y Turnito mandan recordatorios por WhatsApp. Tentare avisa a tus alumnas por la app y por email, no por WhatsApp.</p>
+              <p style={{ fontSize: 14.5, lineHeight: 1.55, color: 'var(--w-sobre-noche-2)', margin: 0 }}>Reservalo y Turnito mandan recordatorios por WhatsApp. Centra avisa a tus alumnas por la app y por email, no por WhatsApp.</p>
             </Reveal>
             <Reveal delay={90} style={{ background: 'var(--w-noche)', border: '1px solid rgba(255,255,255,.07)', borderRadius: 18, padding: 24 }}>
               <h3 style={{ fontSize: 17, fontWeight: 600, color: 'var(--w-sobre-noche)', margin: '0 0 8px' }}>Notas de crédito y factura automática</h3>

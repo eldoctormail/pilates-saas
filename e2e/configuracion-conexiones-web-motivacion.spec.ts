@@ -152,7 +152,7 @@ for (const vista of VISTAS) {
       await expect(page.locator('li:has(> #direccion-y-enlaces) [data-resumen]')).toHaveText(/\/portal\/pilates-centro$/, { timeout: 30_000 });
       await expect(page.getByRole('button', { name: 'Copiar el enlace de tu app' })).toBeVisible();
       await expect(valor(page, 'pagina-publica')).toHaveText('Visible para todo el mundo');
-      await expect(page.getByRole('switch', { name: 'Aparecer en Tentare Network' })).toHaveAttribute('aria-checked', 'false');
+      await expect(page.getByRole('switch', { name: 'Aparecer en Centra Network' })).toHaveAttribute('aria-checked', 'false');
       await expect(page.locator('#fila-herramienta-contenido-de-tu-app')).toBeVisible();
       await expect(page.locator('#fila-herramienta-widgets')).toBeVisible();
       expect(await desborde(page), 'Mi app y mi web se sale de lado').toBeLessThanOrEqual(0);
@@ -193,7 +193,7 @@ test.describe('Guardar de verdad', () => {
 
   test('Network se guarda al tocarlo y, si el servidor dice que no, vuelve atrás con solo su columna', async ({ page }) => {
     const { patches } = await abrir(page, 'configuracion?tab=web', { fallo: 500 });
-    const interruptor = page.getByRole('switch', { name: 'Aparecer en Tentare Network' });
+    const interruptor = page.getByRole('switch', { name: 'Aparecer en Centra Network' });
     await expect(interruptor).toHaveAttribute('aria-checked', 'false', { timeout: 30_000 });
     await expect(interruptor).toBeEnabled();
 

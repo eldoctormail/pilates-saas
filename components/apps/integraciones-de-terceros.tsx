@@ -66,7 +66,7 @@ const QUE_HACE: Record<PestanaIntegracion, string> = {
   classpass: 'Si vendes lugares en ClassPass, apunta sus reservas en la clase para no vender dos veces el mismo hueco.',
   'urban-sports-club': 'Si vendes lugares en Urban Sports Club, apunta sus reservas en la clase para no vender dos veces el mismo hueco.',
   wellhub: 'Si vendes lugares en Wellhub, apunta sus reservas en la clase para no vender dos veces el mismo hueco.',
-  zapier: 'Conecta Tentare con miles de apps. La conexión se autoriza desde Zapier, no desde aquí.',
+  zapier: 'Conecta Centra con miles de apps. La conexión se autoriza desde Zapier, no desde aquí.',
 };
 
 export function IntegracionesDeTerceros() {

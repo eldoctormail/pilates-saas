@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
   const sesionId = typeof body?.sesionId === 'string' ? body.sesionId : null;
   if (!sesionId) return NextResponse.json({ error: 'Falta la clase (sesionId)' }, { status: 400 });
 
-  // Tentare Core retirado (14-sep-2026): la instructora pide su baja desde la app
+  // Centra Core retirado (14-sep-2026): la instructora pide su baja desde la app
   // del estudio (`/api/portal/instructora/baja`, que guarda su motivo aparte). Aquí
   // solo marca bajas el panel.
   if (sesion.rol === 'INSTRUCTOR') return NextResponse.json({ error: 'No tienes permiso para esto' }, { status: 403 });
@@ -235,7 +235,7 @@ export async function PATCH(req: NextRequest) {
     }
     if ((modo === 'autonomo' || modo === 'vacaciones') && !(await featureDeEstudio(sesion.studioId, 'sustitucionesAutonomas'))) {
       return NextResponse.json(
-        { error: `Los modos Autónomo y Vacaciones necesitan el complemento «${ADDONS.sustituciones.nombre}» o el plan ${PLAN_INFO[planMinimoPara('sustitucionesAutonomas') ?? 'ESTUDIO'].nombre}. Actívalo en Plan de Tentare.` },
+        { error: `Los modos Autónomo y Vacaciones necesitan el complemento «${ADDONS.sustituciones.nombre}» o el plan ${PLAN_INFO[planMinimoPara('sustitucionesAutonomas') ?? 'ESTUDIO'].nombre}. Actívalo en Plan de Centra.` },
         { status: 403 },
       );
     }
@@ -549,7 +549,7 @@ export async function PATCH(req: NextRequest) {
       return NextResponse.json({ error: 'La sustitución ha cambiado mientras buscábamos. Recarga la página.' }, { status: 409 });
     }
 
-    // «Volver a buscar» también renueva la sugerencia de Tentare Network, que
+    // «Volver a buscar» también renueva la sugerencia de Centra Network, que
     // se congeló igual que el ranking al crear la baja. Best-effort: nunca
     // lanza, y si falla se queda la lista que había.
     await refrescarCandidatosNetwork(admin, { sustitucionId, studioId: sesion.studioId });

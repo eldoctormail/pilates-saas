@@ -5,7 +5,7 @@
 // verdad el panel, no la landing — ver comentario en
 // app/(dashboard)/layout.tsx. No hay slug aquí porque el rol/estudio se
 // resuelve tras autenticar (mismo motivo por el que /login y el manifest
-// raíz se quedan con la marca paraguas "Tentare").
+// raíz se quedan con la marca paraguas "Centra").
 //
 // ⚠️ Un manifest distinto por rol (Core/Manager) se evaluó y se descartó,
 // no es trabajo pendiente. El patrón del portal (slug en la URL) NO es
@@ -22,14 +22,14 @@
 //    descartado: exigiría tocar el mecanismo de auth real (hoy 100% JWT en
 //    localStorage) por un icono de pantalla de inicio, desproporcionado.
 // El peor caso de dejarlo así es el comportamiento de hoy (manifest
-// genérico "Tentare") — cero regresión. La distinción Core/Manager ya vive
+// genérico "Centra") — cero regresión. La distinción Core/Manager ya vive
 // dentro de la app (título de pestaña + color del logo, nombreAppPorRol()
 // en lib/permisos-reglas.ts), solo falta en la pantalla de inicio.
 export async function GET() {
   return Response.json(
     {
-      name: 'Tentare',
-      short_name: 'Tentare',
+      name: 'Centra',
+      short_name: 'Centra',
       description: 'Panel de gestión para tu estudio de pilates',
       start_url: '/dashboard',
       scope: '/',

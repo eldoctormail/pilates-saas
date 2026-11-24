@@ -90,7 +90,7 @@ export function correoRecibo(p: PropsRecibo): string {
       ],
     },
     // «Ver mi factura» solo si la hay: con el estudio sin facturas desde
-    // Tentare (o con la factura aún sin sellar) el botón llevaba a «Pagos»
+    // Centra (o con la factura aún sin sellar) el botón llevaba a «Pagos»
     // prometiendo un documento que no existe.
     boton: p.url ? { href: p.url, texto: p.numeroFactura ? 'Ver mi factura' : 'Ver mis pagos' } : null,
     conPortada: false,

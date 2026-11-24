@@ -25,7 +25,7 @@ const AHORA = `${FECHA}T08:00:00`;
 function studioDataFixture(socia?: { socioId: string; nombre: string; email: string }) {
   const hoy = FECHA;
   return {
-    studio: { id: 'studio-test', nombre: 'Tentare', slug: SLUG, ciudad: 'Málaga', direccion: 'Calle Test 1', email: 'hola@tentare.app', telefono: '+34 000 000 000' },
+    studio: { id: 'studio-test', nombre: 'Centra', slug: SLUG, ciudad: 'Málaga', direccion: 'Calle Test 1', email: 'hola@tentare.app', telefono: '+34 000 000 000' },
     tiposClase: [{ id: 'tc-1', studioId: 'studio-test', nombre: 'Reformer', color: '#F7A6C4', nivel: 'TODOS' }],
     salas: [{ id: 'sala-1', studioId: 'studio-test', nombre: 'Sala 1', capacidad: 10 }],
     instructores: [{ id: 'ins-1', studioId: 'studio-test', nombre: 'Ana Test', rol: 'INSTRUCTOR' }],
@@ -138,7 +138,7 @@ test.describe('Reserva pública (registro · reserva · pago)', () => {
     await page.goto(`/reservar/${SLUG}`);
     // Timeout explícito en la primera aserción tras el goto: con `next dev` la
     // ruta se compila bajo demanda y se pasa de los 5s por defecto de expect.
-    await expect(page.getByText('Tentare').first()).toBeVisible({ timeout: 30_000 });
+    await expect(page.getByText('Centra').first()).toBeVisible({ timeout: 30_000 });
     await expect(page.getByText('Reformer').first()).toBeVisible();
   });
 
@@ -309,7 +309,7 @@ test.describe('Reserva pública (registro · reserva · pago)', () => {
     await mockBackend(page, { onCheckout: (b) => { checkoutBody = b; } });
 
     await page.goto(`/reservar/${SLUG}`);
-    // Diseño "Tentare Portal Reservas": sin barra de pestañas en Clases —
+    // Diseño "Centra Portal Reservas": sin barra de pestañas en Clases —
     // "El estudio" vive detrás del menú de la cabecera (`MenuSecciones`).
     await page.getByRole('button', { name: 'Más secciones' }).click();
     await page.getByRole('menuitem', { name: 'El estudio' }).click();

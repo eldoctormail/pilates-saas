@@ -1,5 +1,5 @@
 #!/bin/sh
-# Copia de seguridad de Tentare (deploy/PRODUCCION.md › Copias).
+# Copia de seguridad de Centra (deploy/PRODUCCION.md › Copias).
 #
 #   deploy/scripts/copia.sh ~/supabase-project
 #

@@ -46,7 +46,7 @@ export interface PlanResultado {
   registros: CambioRegistro[];
   /** Pausar el estudio (4112/4140, datos, fault desconocido). */
   pausarEstudio: boolean;
-  /** Suspender toda la transmisión de Tentare (4141, 4139). */
+  /** Suspender toda la transmisión de Centra (4141, 4139). */
   suspenderTodo: boolean;
   claseFault: ClaseFault | null;
   avisarPropietaria: boolean;

@@ -5,7 +5,7 @@
 // fillStyle, strokeStyle y parada de degradado de cada fotograma. Antes de la
 // paleta por tokens, esta misma sonda encontraba en 'hecho' el aro #000 y el
 // punto #34D399 de la insignia y unos mofletes rgba(255,120,150,…) que no son
-// de Tentare.
+// de Centra.
 //
 // El reloj es falso (performance.now y setTimeout), así que 1,5 s de animación
 // tardan lo que tarda el bucle, y siempre salen igual.

@@ -54,7 +54,7 @@ export default function ReanudarNetworkPage() {
   return (
     <div className="min-h-dvh flex items-center justify-center px-6 py-16" style={{ background: NW_FONDO }}>
       <div className="max-w-[560px] w-full text-center">
-        <Link href="/network" className="inline-flex mb-8"><LogoTentare formato="horizontal" tinta="tinta" producto="network" titulo="Tentare Network" alto={24} decorativo /></Link>
+        <Link href="/network" className="inline-flex mb-8"><LogoTentare formato="horizontal" tinta="tinta" producto="network" titulo="Centra Network" alto={24} decorativo /></Link>
 
         <p className="text-[26px] sm:text-[30px] font-extrabold" style={{ color: NW_TINTA }}>
           Hola de nuevo, <span style={{ color: NW_PRODUCTO }}>{nombrePila}</span>

@@ -1,4 +1,4 @@
-// Capa de datos pública de la ficha de ESTUDIO en Tentare Network — server-only,
+// Capa de datos pública de la ficha de ESTUDIO en Centra Network — server-only,
 // service_role. Hermana de lib/network/publico.ts (ficha de instructora), pero
 // deliberadamente NO reutiliza `fetchPublicStudioData` (lib/reservar-publico.ts):
 // esa función está pensada para el widget de `/reservar/[slug]` (~15 queries,

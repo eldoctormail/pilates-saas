@@ -30,7 +30,7 @@ function firmaDelCuerpo(v: unknown): string | null {
 }
 
 /**
- * Los orígenes que son Tentare para esta petición: el canónico y el de la
+ * Los orígenes que son Centra para esta petición: el canónico y el de la
  * propia petición (el despliegue que la atiende, `localhost` en desarrollo).
  * Aparte para que la ruta y el test usen exactamente la misma lista.
  */
@@ -45,7 +45,7 @@ export function pegadoDelEvento(x: {
   studioIdEnUrl: boolean;
   /** La cabecera `Origin` tal cual, o `null` si no vino. */
   origenCabecera: string | null;
-  /** Los orígenes de Tentare: el canónico y el de la propia petición. */
+  /** Los orígenes de Centra: el canónico y el de la propia petición. */
   propios: readonly string[];
   /**
    * Esa cabecera `Origin` está entre las webs que ESTE estudio autorizó
@@ -62,7 +62,7 @@ export function pegadoDelEvento(x: {
   // cabecera `Origin`, que pone el navegador y no la página. Tener la cabecera
   // no basta (un POST del mismo origen también la manda, según Fetch): hace
   // falta además el `?studioId=` que solo pone el bundle, y que el origen no
-  // sea de Tentare. Del cuerpo aquí solo cuenta la FIRMA (Fase E): la calcula
+  // sea de Centra. Del cuerpo aquí solo cuenta la FIRMA (Fase E): la calcula
   // el bundle de los `data-*` de su código (`firmaDeUrl` sobre su `dataset`);
   // la forma y la web que diga el cuerpo se ignoran. Una firma falsa escrita a
   // mano solo cambia qué versión se enseña de ESA web, que ya es suya.
@@ -80,7 +80,7 @@ export function pegadoDelEvento(x: {
   // del mismo origen no puede ser la nativa, y aceptarla dejaría a cualquiera
   // inventarse una sin cabecera.
   //
-  // ⚠️ Solo si la petición sale de Tentare: la página manda el evento desde
+  // ⚠️ Solo si la petición sale de Centra: la página manda el evento desde
   // su propio origen (un POST del mismo origen, que siempre lleva `Origin`).
   // El precio: un iframe con `sandbox` sin `allow-same-origin` manda `null` y
   // pierde la forma; la visita sigue contando.
@@ -88,7 +88,7 @@ export function pegadoDelEvento(x: {
   const forma = x.cuerpo.forma;
   if (forma !== 'incrustado' && forma !== 'ventana') return NADA;
 
-  // Un anfitrión de Tentare (el onboarding, el portal, una vista previa) no es
+  // Un anfitrión de Centra (el onboarding, el portal, una vista previa) no es
   // su web: se queda la forma y se calla la dirección, en vez de decirle
   // «Visto en www.tentare.app».
   const origen = origenAnfitrion(x.cuerpo.anfitrion);

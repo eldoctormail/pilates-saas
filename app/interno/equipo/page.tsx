@@ -1,6 +1,6 @@
 'use client';
 
-// Quién tiene acceso al backoffice de Tentare.
+// Quién tiene acceso al backoffice de Centra.
 //
 // Hasta ahora esto era SQL escrito a mano, así que en la práctica no se hacía:
 // nadie revisa trimestralmente una tabla que solo se toca abriendo un editor de
@@ -329,7 +329,7 @@ function Alta({ mis, onCreado }: { mis: readonly string[]; onCreado: () => void 
       />
       <p className="mt-1.5 text-[11.5px] text-muted-foreground">
         Se le crea la cuenta con esa contraseña y le pasas los datos para que entre.
-        Si ese email ya tiene cuenta en Tentare, se enlaza la suya y la contraseña
+        Si ese email ya tiene cuenta en Centra, se enlaza la suya y la contraseña
         se ignora.
       </p>
 

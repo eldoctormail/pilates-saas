@@ -12,7 +12,7 @@ const REDES_SOCIALES_TENTARE = [
   'https://www.linkedin.com/company/tentare/',
 ];
 
-// Fichas de Tentare en directorios de software. No son redes sociales, así que
+// Fichas de Centra en directorios de software. No son redes sociales, así que
 // no van en el pie de la landing: solo le dicen a Google y a los buscadores con
 // IA que estas páginas hablan de la misma empresa. Las facilitó el fundador el
 // 25-sep-2026 y se abrieron una a una ese día (Capterra y GetApp detrás de
@@ -20,7 +20,7 @@ const REDES_SOCIALES_TENTARE = [
 // abrir desde fuera (G2 responde 403 a cualquier lector automático): va tal
 // cual la dio el fundador, que es quien la administra.
 const PERFILES_EN_DIRECTORIOS = [
-  'https://www.capterra.com/p/10054501/Tentare/',
+  'https://www.capterra.com/p/10054501/Centra/',
   'https://www.g2.com/es/products/tentare/reviews',
   'https://www.getapp.ca/software/2141983/tentare',
   'https://sellwithboost.com/startups/tentare-pilates-software',
@@ -52,7 +52,7 @@ export function OrganizationStructuredData() {
     // «tentare» es también una palabra italiana (infinitivo de «intentar»): sin esto un buscador o un modelo puede no saber si hablamos de
     // la palabra o de la empresa. `alternateName` recoge cómo se nos nombra en la práctica (el dominio); no se inventan marcas.
     alternateName: ['tentare.app'],
-    disambiguatingDescription: 'Tentare (tentare.app) es una plataforma de software para estudios de Pilates y yoga; no tiene relación con la palabra italiana «tentare».',
+    disambiguatingDescription: 'Centra (tentare.app) es una plataforma de software para estudios de Pilates y yoga; no tiene relación con la palabra italiana «tentare».',
     areaServed: { '@type': 'Country', name: ES ? 'España' : 'Argentina' },
     knowsAbout: ['Software de gestión para estudios de Pilates', 'Software de gestión para estudios de yoga', 'Reservas y bonos de clases', 'Cobros recurrentes para estudios'],
     email: LEGAL.email,

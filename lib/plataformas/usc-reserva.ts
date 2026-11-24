@@ -2,7 +2,7 @@
 //
 // Dos traducciones y nada más:
 //   1. el cuerpo que manda USC → una petición validada;
-//   2. el motivo por el que Tentare no acepta una reserva → la respuesta que
+//   2. el motivo por el que Centra no acepta una reserva → la respuesta que
 //      USC sabe enseñar a su socia (códigos E001…E006 de su documentación).
 //
 // La decisión de si hay plaza NO vive aquí: la toma la RPC transaccional de
@@ -59,7 +59,7 @@ export function leerPeticionReservaUsc(cuerpo: unknown): LecturaPeticionUsc {
   };
 }
 
-/** Por qué Tentare no acepta una reserva externa (vocabulario propio, no de USC). */
+/** Por qué Centra no acepta una reserva externa (vocabulario propio, no de USC). */
 export type RechazoReservaExterna =
   | 'completa'
   | 'clase-no-existe'

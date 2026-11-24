@@ -101,7 +101,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     alternates: { canonical: canonica },
     // Los mismos iconos que su app (icono › logo › inicial), con `sizes`. Antes
     // iba el favicon crudo sin tamaño declarado, compitiendo con el
-    // `favicon.ico` de Tentare que Next inyectaba en toda ruta; y sin favicon,
+    // `favicon.ico` de Centra que Next inyectaba en toda ruta; y sin favicon,
     // la inicial aunque el estudio tuviera logo.
     icons: iconosDeEstudio(
       studio.nombre, studio.colorPrimario,

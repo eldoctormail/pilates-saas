@@ -7,7 +7,7 @@
 // no se transmite nada), que las cuotas se cobraban solas por SEPA guardado (el
 // SEPA de Stripe se retiró: la domiciliación va por remesa), que con el widget se
 // reserva y se paga «sin salir de tu web» (sin sesión, el widget sin marco lleva
-// a la página de Tentare, y el pago va por Stripe), que el plan Estudio era «el
+// a la página de Centra, y el pago va por Stripe), que el plan Estudio era «el
 // más elegido» (ningún estudio lo tenía), un correo que prometía «te devolvemos
 // el dinero» en nombre de un estudio que no lo había decidido, y un aviso de
 // penalización que decía «por cancelar dentro de la ventana permitida» (es por
@@ -55,7 +55,7 @@ const FRASES = [
   // El SEPA de Stripe se retiró: no hay «SEPA guardado» que se cobre solo.
   'tarjeta o sepa guardad',
   'cobra online con tarjeta o sepa',
-  // El widget: el pago va por Stripe y, sin sesión, el sin marco lleva a Tentare.
+  // El widget: el pago va por Stripe y, sin sesión, el sin marco lleva a Centra.
   'sin salir de tu web',
   'no sale de tu web',
   'no salen de tu web',

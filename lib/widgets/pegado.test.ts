@@ -74,10 +74,10 @@ test('origenAnfitrion: lo que no es texto, null', () => {
 
 // ── esOrigenDeTentare ────────────────────────────────────────────────────────
 
-// Como los pasará la ruta: el canónico de Tentare y el de la propia petición.
+// Como los pasará la ruta: el canónico de Centra y el de la propia petición.
 const PROPIOS = [canonicalizarOrigen(new URL(LEGAL.url).origin), 'http://localhost:3000'];
 
-test('⚠️ esOrigenDeTentare: el apex y el www de Tentare, y cualquier *.vercel.app', () => {
+test('⚠️ esOrigenDeTentare: el apex y el www de Centra, y cualquier *.vercel.app', () => {
   const apex = `https://${new URL(LEGAL.url).hostname.replace(/^www\./, '')}`;
   for (const propio of [LEGAL.url, apex, `${LEGAL.url}/`, 'https://tentare-git-rama-equipo.vercel.app', 'https://x.vercel.app', 'http://localhost:3000']) {
     assert.equal(esOrigenDeTentare(propio, PROPIOS), true, propio);
@@ -100,7 +100,7 @@ test('esOrigenPropio: lo de `propios` (el apex como `www`), pero NO cualquier *.
   for (const propio of [LEGAL.url, apex, `${LEGAL.url}/onboarding`, 'http://localhost:3000']) {
     assert.equal(esOrigenPropio(propio, PROPIOS), true, propio);
   }
-  // Una web alojada en Vercel no es de Tentare con certeza: es `esOrigenDeTentare` quien la duda.
+  // Una web alojada en Vercel no es de Centra con certeza: es `esOrigenDeTentare` quien la duda.
   for (const ajeno of ['https://albapilates.vercel.app', 'https://tentare-git-rama.vercel.app', 'https://albapilates.example.com', 'null', '']) {
     assert.equal(esOrigenPropio(ajeno, PROPIOS), false, ajeno);
   }

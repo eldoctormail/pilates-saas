@@ -125,7 +125,7 @@ const SIGUE_PENDIENTE = 'La penalización sigue pendiente.';
 const STRIPE_NO_LISTO: Record<string, string> = {
   SIN_STRIPE_CONECTADO: `No se ha cobrado: este estudio no tiene Stripe conectado. Conéctalo en Configuración → Cobros y facturas. ${SIGUE_PENDIENTE}`,
   CUENTA_NO_LISTA: `No se ha cobrado: no hemos podido confirmar que la cuenta de Stripe del estudio pueda cobrar. Revísala en Configuración → Cobros y facturas. ${SIGUE_PENDIENTE}`,
-  // Estos dos son de Tentare, no del estudio: mandarla a su configuración sería mentir.
+  // Estos dos son de Centra, no del estudio: mandarla a su configuración sería mentir.
   NO_CONFIGURADO: `No se ha cobrado: los cobros con tarjeta no están disponibles ahora mismo. No depende de tu estudio. ${SIGUE_PENDIENTE}`,
   MODO_STRIPE_CRUZADO: `No se ha cobrado: los cobros con tarjeta no están disponibles ahora mismo. No depende de tu estudio. ${SIGUE_PENDIENTE}`,
 };
@@ -1020,7 +1020,7 @@ export interface ReciboDePenalizacionAnulada {
 /**
  * ¿Ya se está devolviendo el dinero de un recibo cobrado? Sí si la devolución ya
  * cubre el importe (`importe_devuelto`, que escriben el webhook y el reembolso), o
- * si Tentare la pidió (`reembolso_solicitado_en`) y Stripe no la ha rechazado
+ * si Centra la pidió (`reembolso_solicitado_en`) y Stripe no la ha rechazado
  * (`reembolso_fallido_en`: el webhook de un refund fallido lo pone y deja la marca
  * de solicitado tal cual, así que solicitado a secas no basta).
  *

@@ -1,7 +1,7 @@
 // Plaza fija desde la app de la alumna: las reglas puras de las solicitudes y de
 // la vuelta de una pausa que liberó su sitio (migr 20260915231920).
 //
-// Decisiones del fundador (16-sep-2026): el estudio controla las reglas y Tentare
+// Decisiones del fundador (16-sep-2026): el estudio controla las reglas y Centra
 // las automatiza. Hasta que el estudio aprueba, la plaza real no cambia; pasar del
 // límite semanal no bloquea la petición (decide el estudio); rechazar la vuelta de
 // una pausa quita la plaza; «sitio libre durante la pausa» vale para todas las

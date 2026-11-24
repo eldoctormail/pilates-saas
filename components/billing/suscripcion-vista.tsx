@@ -29,13 +29,13 @@ import { cn } from '@/lib/utils';
 import type { OpcionesDePlan } from '@/lib/billing/sede-incluida-en-cadena';
 import type { PlanSueltoQueCancelaCadena } from '@/lib/billing/cancelar-suscripcion-anterior';
 
-// Suscripción del estudio a Tentare.
+// Suscripción del estudio a Centra.
 //
 // ⚠️ Esta pantalla tenía su propia paleta: `const ACC = '#FFC8E2'` y un
 // `#F7A6C4` sueltos —restos de la plantilla anterior al cambio de identidad—
 // que pintaban el botón principal, la etiqueta «POPULAR» y los checks. Era el
 // caso más claro de «un botón que parece de otra aplicación»: el rosa no está
-// en ninguna de las cuatro fuentes de verdad del color de Tentare. Ahora todo
+// en ninguna de las cuatro fuentes de verdad del color de Centra. Ahora todo
 // sale de los tokens (`bg-brand`, `text-brand-medio`, `border-border`…), que
 // además es lo único que respeta el modo oscuro y el tema del estudio.
 //
@@ -129,7 +129,7 @@ function AvisoAlPasarACadena({ opciones }: { opciones: OpcionesDePlan | null | u
 }
 
 /**
- * La suscripción del estudio a Tentare. Se pinta en dos sitios:
+ * La suscripción del estudio a Centra. Se pinta en dos sitios:
  *  - `embebida`: dentro de Configuración → «Plan» (el sitio normal, como Shopify);
  *  - suelta: `/suscripcion`, la pantalla a la que va un estudio BLOQUEADO y a la que
  *    vuelve Stripe tras pagar. Con una visita a secas, quien no está bloqueado va a Configuración → Plan; con `?` o `#` (Stripe, avisos de impago, anclas) se queda.
@@ -561,7 +561,7 @@ export function SuscripcionVista({ embebida = false }: { embebida?: boolean }) {
             </section>
 
             <p className="mt-6 text-center text-[12.5px] text-muted-foreground">
-              Los pagos de tus clientes van directos a tu cuenta de Stripe — Tentare no cobra comisión sobre ellos.
+              Los pagos de tus clientes van directos a tu cuenta de Stripe — Centra no cobra comisión sobre ellos.
             </p>
           </>
         )}

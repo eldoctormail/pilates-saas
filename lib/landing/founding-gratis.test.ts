@@ -65,7 +65,7 @@ test('precio en la web: Founding Studio 0, el resto el de su plan', () => {
 // Guardia: la web comercial no vuelve a prometer lo que la decisión quitó.
 // Ya no hay prueba de 7 días ni Founding Studio a 29 €. Las cifras de la
 // competencia (Bonsai también tiene «29 €», GesYoga «30 días de prueba»…) no
-// caen aquí: los patrones hablan de la prueba de Tentare y de su precio.
+// caen aquí: los patrones hablan de la prueba de Centra y de su precio.
 // ─────────────────────────────────────────────────────────────────────────────
 
 const RAIZ = join(import.meta.dirname, '..', '..');
@@ -94,8 +94,8 @@ const PROHIBIDO: [RegExp, string][] = [
   // tope (corrección del fundador, 15-oct-2026): nadie va obligado a Estudio.
   [/después,? (59|79) ?€|29 o (59|79)|más de 150 alumnas,? (el plan )?Estudio|o (59|79) €\/mes sin límite/, 'pasado lo gratis, Founding Studio de pago (29 €), sin tope: nadie va obligado a Estudio'],
   [/con más reservas,? 29/, 'cualquiera de los dos límites lleva a los 29 €: «si pasas de ahí»'],
-  // «+ IVA» es de la competencia (Bonsai: «desde 29 €/mes + IVA»); Tentare lo decía con IVA.
-  [/[Dd]esde 29(\s|&nbsp;)*(€|euros)(?!\/mes \+ IVA)/, 'el precio de entrada de Tentare es gratis'],
+  // «+ IVA» es de la competencia (Bonsai: «desde 29 €/mes + IVA»); Centra lo decía con IVA.
+  [/[Dd]esde 29(\s|&nbsp;)*(€|euros)(?!\/mes \+ IVA)/, 'el precio de entrada de Centra es gratis'],
 ];
 
 test('la web no promete la prueba de 7 días ni Founding Studio a 29 €', () => {

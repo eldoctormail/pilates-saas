@@ -4,7 +4,7 @@ import { esDominioReservado } from '@/lib/emails/dominios-reservados';
 import { remitentePorMarca } from '@/lib/emails/remitente';
 
 // Los avisos de la recuperación de impagos del SaaS (lib/billing/impagos): lo que el
-// estudio paga a Tentare, nunca lo que sus alumnas pagan al estudio. Best-effort: quien
+// estudio paga a Centra, nunca lo que sus alumnas pagan al estudio. Best-effort: quien
 // llama decide qué hacer si no sale (el aviso se «libera» y el siguiente tic lo reintenta).
 const ASUNTOS = {
   primero: (plan: string) => `No hemos podido cobrar tu suscripción — plan ${plan}`,
@@ -35,7 +35,7 @@ export async function enviarEmailImpagoSaas(params: {
       motivo: params.motivo, proximoIntento: params.proximoIntento, urlActualizar: params.urlActualizar,
     });
     const { error } = await new Resend(apiKey).emails.send({
-      from: remitentePorMarca('Tentare'),
+      from: remitentePorMarca('Centra'),
       to: [params.to],
       subject: ASUNTOS[params.fase](params.plan),
       html,

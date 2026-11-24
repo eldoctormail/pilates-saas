@@ -17,7 +17,7 @@ const BASE = {
 
 test('el asunto y la vista previa son los de la maqueta', () => {
   const c = correoCuentaActiva(BASE);
-  assert.equal(c.asunto, 'Estudio Alba Pilates ya está en Tentare');
+  assert.equal(c.asunto, 'Estudio Alba Pilates ya está en Centra');
   assert.equal(c.preheader, 'Tu cuenta está activa. Te queda un paso para recibir reservas: tu primera clase.');
   assert.ok(c.html.includes(c.preheader));
 });
@@ -36,7 +36,7 @@ test('el cuerpo: la APP de sus clientes (no la página de reservas), un solo bot
   for (const paso of PRIMEROS_PASOS_ALTA) assert.ok(html.includes(paso), paso);
   assert.match(html, /te responde una persona/);
   assert.match(html, /href="https:\/\/wa\.me\/34603556580\?text=/);
-  assert.match(html, /Tentare · Software para estudios de Pilates · Hecho en España/);
+  assert.match(html, /Centra · Software para estudios de Pilates · Hecho en Argentina/);
 });
 
 test('el plan sale de las constantes que aplica el producto, y solo dice «gratis» si lo es', () => {
@@ -87,7 +87,7 @@ test('correo 4: asunto, vista previa y cuerpo de la maqueta, con el QR en PNG y 
   assert.match(html, /Abrir mi app<\/a>/);
   assert.equal((html.match(/mso-padding-alt/g) ?? []).length, 1, 'un correo, una llamada a la acción');
   assert.match(html, /te responde una persona/);
-  assert.match(html, /Tentare · Software para estudios de Pilates · Hecho en España/);
+  assert.match(html, /Centra · Software para estudios de Pilates · Hecho en Argentina/);
 });
 
 test('correo 4: lo que escribió una persona se escapa', () => {
@@ -97,7 +97,7 @@ test('correo 4: lo que escribió una persona se escapa', () => {
   assert.equal(asunto, 'Ya puedes recibir reservas en A & B', 'el asunto va en texto, no en HTML');
 });
 
-// ── Correo 3: «Tu primera clase en Tentare, en 5 minutos» (PR-5) ────────────
+// ── Correo 3: «Tu primera clase en Centra, en 5 minutos» (PR-5) ────────────
 
 const SIN_CLASE = {
   estudioNombre: 'Estudio Alba Pilates',
@@ -108,7 +108,7 @@ const SIN_CLASE = {
 
 test('correo 3 sin clase: asunto, vista previa y cuerpo de la maqueta, y un solo botón', () => {
   const c = correoPrimeraClase(SIN_CLASE);
-  assert.equal(c.asunto, 'Tu primera clase en Tentare, en 5 minutos');
+  assert.equal(c.asunto, 'Tu primera clase en Centra, en 5 minutos');
   assert.equal(c.preheader, 'Es lo único que le falta a Estudio Alba Pilates para recibir reservas.');
   assert.match(c.html, /Te falta un paso, Lucía/);
   assert.match(c.html, /A <b>Estudio Alba Pilates<\/b> le falta una cosa para recibir reservas: tu primera clase\./);

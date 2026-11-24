@@ -2,7 +2,7 @@
 
 // Paso 04 del wizard: experiencia (años + recorrido + SeccionExperienciaNetwork).
 // Extraído tal cual de app/network/crear-perfil/page.tsx (paso === 3) — F0
-// del roadmap de Tentare Network 2.0, sin cambios de comportamiento.
+// del roadmap de Centra Network 2.0, sin cambios de comportamiento.
 import { useId } from 'react';
 import { SeccionExperienciaNetwork } from '@/components/network/seccion-experiencia';
 import { NW_TINTA } from '@/components/network-v2/tokens';

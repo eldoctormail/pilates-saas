@@ -45,7 +45,7 @@ test('sin secreto no firma', () => {
   assert.throws(() => firmar(CUERPO, []));
 });
 
-test('el ejemplo de Node de la guía (docs/api-publica.md) verifica lo que firma Tentare', async () => {
+test('el ejemplo de Node de la guía (docs/api-publica.md) verifica lo que firma Centra', async () => {
   const { readFileSync } = await import('node:fs');
   const { join } = await import('node:path');
   const { createRequire } = await import('node:module');

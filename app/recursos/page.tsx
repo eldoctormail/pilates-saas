@@ -212,7 +212,7 @@ export default function RecursosPage() {
           )}
         </div>
 
-        {/* Aquí iba «La newsletter de Tentare — Una idea al mes…»: el botón era un mailto y no
+        {/* Aquí iba «La newsletter de Centra — Una idea al mes…»: el botón era un mailto y no
             existe ningún envío periódico. Retirado el 21-oct-2026. */}
       </div>
 

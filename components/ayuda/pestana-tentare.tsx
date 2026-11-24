@@ -1,6 +1,6 @@
 'use client';
 
-// La pestaña «Tentare» del panel de ayuda: el chat del asistente DENTRO del panel, el mismo
+// La pestaña «Centra» del panel de ayuda: el chat del asistente DENTRO del panel, el mismo
 // de /asistente (misma conversación, mismo saldo, mismo servidor). Es su propio chunk: no
 // viaja hasta que alguien abre la pestaña (lo mide `e2e/asistente-flotante.spec.ts`).
 //
@@ -35,7 +35,7 @@ export function PestanaTentare({ pregunta, onConsumida, onCerrar }: {
   return (
     <div className="flex h-full min-h-0 flex-col">
       <header className="flex h-12 shrink-0 items-center gap-1 border-b border-border/60 pl-4 pr-12">
-        <p className="min-w-0 flex-1 truncate text-[14px] font-semibold text-foreground">Pregúntale a Tentare</p>
+        <p className="min-w-0 flex-1 truncate text-[14px] font-semibold text-foreground">Pregúntale a Centra</p>
         <button type="button" onClick={() => nuevaConversacion()} aria-label="Nueva conversación" className={boton}><SquarePen size={17} aria-hidden="true" /></button>
         <Link href="/asistente" onClick={onCerrar} aria-label="Abrir en pantalla completa" className={boton}><Maximize2 size={16} aria-hidden="true" /></Link>
       </header>

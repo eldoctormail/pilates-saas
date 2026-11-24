@@ -27,7 +27,7 @@ import {
 } from '@/components/configuracion/canales-comunicacion';
 import { FilasPlataformas } from '@/components/configuracion/plataformas-externas';
 
-// Integraciones: todo lo que Tentare conecta con otras herramientas, en un solo
+// Integraciones: todo lo que Centra conecta con otras herramientas, en un solo
 // sitio (16-oct-2026, petición del fundador).
 //
 // Una fila por conexión con UN estado (conexiones.tsx), agrupadas por la

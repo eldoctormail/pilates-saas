@@ -45,7 +45,7 @@ export function BloqueBonos({ estado, hoy, nombreDe, nombrePlan }: {
           <div>
             <h3 className="text-[13.5px] font-semibold text-foreground">Caducan pronto con sesiones sin usar</h3>
             <p className="text-[12.5px] text-muted-foreground text-pretty">
-              El más cercano primero. Es la misma regla con la que Tentare le avisa al móvil cuando le queda una semana, si tiene los avisos activados.
+              El más cercano primero. Es la misma regla con la que Centra le avisa al móvil cuando le queda una semana, si tiene los avisos activados.
             </p>
             {estado.caducanPronto.length === 0 ? (
               <p className="mt-3 text-[13px] text-muted-foreground">

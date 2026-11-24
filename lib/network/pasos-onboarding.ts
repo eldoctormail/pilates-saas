@@ -50,7 +50,7 @@ export const PASOS_ONBOARDING = [
 export function pasoIncompletoDe(perfil: PerfilNetwork | null): number {
   if (!perfil) return 0;
   // 'en_revision' cuenta como completo a estos efectos: el wizard ya se
-  // terminó, lo que falta ahora es que el equipo de Tentare lo apruebe, no
+  // terminó, lo que falta ahora es que el equipo de Centra lo apruebe, no
   // que la instructora siga rellenando pasos.
   if (perfil.estado === 'published' || perfil.estado === 'en_revision') return PASOS_ONBOARDING.length - 1;
   if (!perfil.ciudad) return 2;

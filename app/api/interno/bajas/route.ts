@@ -23,7 +23,7 @@ export const dynamic = 'force-dynamic';
 //   · el plan gratis medido en seco ese día (su columna `gratis`): lo medido, lo
 //     que tiene el gate y si el grupo de la dueña cambia con la regla propuesta.
 //
-// Misma puerta que el resto de /interno: equipo de Tentare activo, sesión `aal2`
+// Misma puerta que el resto de /interno: equipo de Centra activo, sesión `aal2`
 // y el permiso `studios.read`. Cruza estudios con service-role, legítimo solo
 // tras esa comprobación. Enseña nombres de estudio y cifras, nunca datos de una
 // persona, y no los manda a ningún log.

@@ -290,22 +290,22 @@ export function validarPeticionSeguimiento(x: unknown): { ok: true; v: PeticionS
 /**
  * El correo personal que se abre con un clic. Es un mensaje de ayuda de una
  * persona (servicio, no una oferta): no lleva nada comercial y no se envía solo.
- * `mailto:` lo abre el correo del fundador; Tentare no manda nada.
+ * `mailto:` lo abre el correo del fundador; Centra no manda nada.
  */
 export function mailtoContacto(a: AlertaAtascada): string | null {
   const email = a.fila.email;
   if (!email) return null;
   const estudio = a.fila.nombre?.trim() || 'tu estudio';
-  const asunto = `¿Te echo una mano con ${estudio} en Tentare?`;
+  const asunto = `¿Te echo una mano con ${estudio} en Centra?`;
   const cuerpo = [
     'Hola,',
     '',
-    `Te escribo del equipo de Tentare. He visto que empezaste a montar ${estudio} y quería saber si te has atascado en algo o si puedo ayudarte a dejarlo listo.`,
+    `Te escribo del equipo de Centra. He visto que empezaste a montar ${estudio} y quería saber si te has atascado en algo o si puedo ayudarte a dejarlo listo.`,
     '',
     'Si te viene mejor, dime un hueco y lo hacemos juntos en 10 minutos.',
     '',
     'Un abrazo,',
-    'El equipo de Tentare',
+    'El equipo de Centra',
   ].join('\n');
   return `mailto:${encodeURIComponent(email).replace(/%40/g, '@')}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
 }

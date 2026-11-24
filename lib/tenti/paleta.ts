@@ -2,7 +2,7 @@
 //
 // El prototipo traía su paleta escrita en el motor: chispas blancas (invisibles
 // sobre --card), mofletes rosa chicle, un verde menta para 'hecho' y un aro
-// negro en la insignia. Nada de eso es de Tentare. Aquí se lee lo que el panel
+// negro en la insignia. Nada de eso es de Centra. Aquí se lee lo que el panel
 // ya decide para claro y oscuro, así que Tenti cambia de modo con el resto de
 // la pantalla en vez de llevar su propio tema.
 //
@@ -10,7 +10,7 @@
 // uno en su momento», lib/tenti/momentos.ts) el panel enseña también 'error',
 // 'esperaTuOk', 'agobiado' y 'trabajando', así que sus colores salen de los
 // tokens de estado del panel (--destructive, --warning, --info): el azul, el
-// ámbar y el rojo del prototipo no son de Tentare. Son OBLIGATORIOS: existen
+// ámbar y el rojo del prototipo no son de Centra. Son OBLIGATORIOS: existen
 // siempre en :root y en .dark, y si falta uno la paleta entera cae a 'defecto',
 // como con los demás. 'pensando', 'pregunta', 'buscando' y 'dormido' siguen
 // con el color del prototipo (el morado de 'pensando' ya está en producción).

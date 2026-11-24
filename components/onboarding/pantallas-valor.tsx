@@ -12,7 +12,7 @@
 // Reglas de la baraja:
 //   · CUATRO pantallas, no diez. Es una promesa corta que se puede leer de pie
 //     con el móvil en la mano; si hace falta un scroll, ya es un folleto.
-//   · Cada una es UN problema real de su semana → LA pantalla de Tentare que
+//   · Cada una es UN problema real de su semana → LA pantalla de Centra que
 //     lo resuelve. Nada de «potencia tu negocio»: el jueves a las 23:47, una
 //     alumna te escribe.
 //   · Se puede saltar entera, siempre, desde la primera. Quien ya se ha
@@ -57,7 +57,7 @@ const PANTALLAS: Pantalla[] = [
     id: 'reservas',
     problema: '«Me escriben a las once de la noche para apuntarse»',
     titular: 'Tus clientes reservan solas, a cualquier hora',
-    apoyo: 'Tienes la app de tus clientes, con tu nombre y tu color. Se apuntan ellas, y Tentare respeta tu aforo y tus normas de cancelación.',
+    apoyo: 'Tienes la app de tus clientes, con tu nombre y tu color. Se apuntan ellas, y Centra respeta tu aforo y tus normas de cancelación.',
     puntos: ['Aforo por sala', 'Lista de espera', 'Cancelan según tus normas'],
     Escena: EscenaReservas,
   },
@@ -65,7 +65,7 @@ const PANTALLAS: Pantalla[] = [
     id: 'cobros',
     problema: '«Cada mes persigo a las mismas cinco personas»',
     titular: 'Cobras las cuotas y los bonos automáticamente',
-    apoyo: 'El día que toca, Tentare cobra la tarjeta guardada y envía el recibo. Si un pago falla, lo reintenta y te avisa.',
+    apoyo: 'El día que toca, Centra cobra la tarjeta guardada y envía el recibo. Si un pago falla, lo reintenta y te avisa.',
     puntos: ['Cobro el día 1', 'Recibo y factura', 'Reintento si falla'],
     Escena: EscenaCobros,
   },
@@ -73,7 +73,7 @@ const PANTALLAS: Pantalla[] = [
     id: 'sustituciones',
     problema: '«Si una instructora se cae, se me va la mañana en llamadas»',
     titular: 'Cuando una instructora no puede, buscamos sustituta',
-    apoyo: 'Tentare avisa a las que encajan con esa clase, de una en una, hasta que alguna acepta. Y avisa a los clientes.',
+    apoyo: 'Centra avisa a las que encajan con esa clase, de una en una, hasta que alguna acepta. Y avisa a los clientes.',
     puntos: ['Por orden de encaje', 'Avisa a los clientes', 'Sin llamar a nadie'],
     Escena: EscenaSustituciones,
   },

@@ -25,7 +25,7 @@ export const SEPARADOR = '{{/* fin de la rama del alta nueva: lo de abajo es la 
 export const CIERRE = '{{ end -}}\n';
 
 /** El asunto nuevo: el código se lee en la notificación sin abrir el correo. */
-export const ASUNTO_ALTA_NUEVA = '{{ .Token }} es tu código · Te damos la bienvenida a Tentare';
+export const ASUNTO_ALTA_NUEVA = '{{ .Token }} es tu código · Te damos la bienvenida a Centra';
 
 export interface PlantillaDelRepo {
   /** La rama nueva, tal cual se envía. */

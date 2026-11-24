@@ -1,4 +1,4 @@
-// Qué hace Tentare con un pago de Mercado Pago, tal cual lo devuelve su API.
+// Qué hace Centra con un pago de Mercado Pago, tal cual lo devuelve su API.
 // Lo comparten el webhook (`/api/mercadopago/webhook`, cuando avisa Mercado
 // Pago) y el conciliador (`/api/cron/mercadopago-conciliar`, que repasa los
 // pagos aprobados por si un aviso no llegó): los dos aplican un pago EXACTAMENTE
@@ -86,7 +86,7 @@ export async function procesarPago(
 
   const ref = leerReferencia(pago.external_reference);
   if (!ref) {
-    // Un pago de la cuenta que no salió de Tentare (un cobro con QR, un link manual): no es nuestro.
+    // Un pago de la cuenta que no salió de Centra (un cobro con QR, un link manual): no es nuestro.
     return resp({ recibido: true, ignorado: 'sin-referencia-de-tentare' });
   }
   const { studioId } = ref;
@@ -110,7 +110,7 @@ export async function procesarPago(
   if (errPrevio) return resp({ error: 'Base de datos no disponible' }, { status: 503 });
   if (previo?.desenlace === 'aplicado' || previo?.desenlace === 'ya_estaba') {
     // Ya aplicado. Si desde entonces se devolvió (todo o parte, desde el panel o
-    // desde Mercado Pago) o hubo contracargo, se anota en Tentare.
+    // desde Mercado Pago) o hubo contracargo, se anota en Centra.
     if (devueltoDe(pago) > 0) {
       return aplicarDevolucion(admin, pago, studioId, {
         reciboId: (previo.recibo_id as string | null) ?? reciboId,

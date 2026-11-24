@@ -43,7 +43,7 @@ function guardarVista(version: string) {
 
 export function AyudaDelPanel({ conLanzador }: { conLanzador: boolean }) {
   const pathname = usePathname() ?? '/';
-  // El asistente vive DENTRO del panel (pestaña «Tentare»): un solo botón en la esquina.
+  // El asistente vive DENTRO del panel (pestaña «Centra»): un solo botón en la esquina.
   const conTentare = usePuertaAsistente();
   const [abierta, setAbierta] = useState(false);
   const [pestana, setPestana] = useState<PestanaAyuda>('inicio');
@@ -104,7 +104,7 @@ export function AyudaDelPanel({ conLanzador }: { conLanzador: boolean }) {
           <button
             type="button"
             onClick={() => setAbierta(a => !a)}
-            aria-label={abierta ? 'Cerrar la ayuda' : punto ? 'Abrir la ayuda y a Tentare: hay novedades' : 'Abrir la ayuda y a Tentare'}
+            aria-label={abierta ? 'Cerrar la ayuda' : punto ? 'Abrir la ayuda y a Centra: hay novedades' : 'Abrir la ayuda y a Centra'}
             aria-expanded={abierta}
             data-testid="boton-ayuda"
             className="relative flex size-14 items-center justify-center rounded-full bg-foreground text-background shadow-lg ring-1 ring-black/10 transition-transform hover:scale-105 active:scale-95"

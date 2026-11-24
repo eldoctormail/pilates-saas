@@ -48,7 +48,7 @@ let pedido = false;
  *
  * `/reservar/<slug>` es indexable a propósito (decisión del fundador, 2026-08-17),
  * pero la MISMA página se sirve dentro de un iframe en la web del estudio con
- * `?embed=1`. Ahí sus visitantes no son tráfico de Tentare: son de la web de la
+ * `?embed=1`. Ahí sus visitantes no son tráfico de Centra: son de la web de la
  * clienta, y meterles nuestro tracker sería colocar un tercero en una propiedad
  * ajena. Se miran las dos señales porque cualquiera de las dos puede faltar: el
  * parámetro se puede perder al navegar dentro del widget, y el modo B

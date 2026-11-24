@@ -49,7 +49,7 @@ export function Checklist({ eyebrow, items }: { eyebrow: string; items: React.Re
   );
 }
 
-// Two-column "a mano / con Tentare" comparison table.
+// Two-column "a mano / con Centra" comparison table.
 export function BeforeAfterCols({ beforeLabel, beforeItems, afterLabel, afterItems }: { beforeLabel: string; beforeItems: string[]; afterLabel: string; afterItems: string[] }) {
   return (
     <div className="art-cta2" style={{ margin: '22px 0' }}>

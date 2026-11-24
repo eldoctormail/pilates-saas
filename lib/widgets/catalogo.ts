@@ -1,4 +1,4 @@
-// Tentare Widgets — el catálogo.
+// Centra Widgets — el catálogo.
 //
 // UNA entrada por widget y nada más: qué es, en qué categoría vive, qué vista
 // del motor pinta, cómo se puede integrar y qué ajustes de contenido tienen
@@ -244,7 +244,7 @@ export const WIDGETS: readonly Widget[] = [
     id: 'newsletter', estado: 'en-preparacion', categoria: 'captacion', icono: 'Newspaper',
     nombre: 'Newsletter',
     descripcion: 'Suma suscriptoras a tu lista.',
-    falta: 'Tentare todavía no envía newsletters.',
+    falta: 'Centra todavía no envía newsletters.',
   },
 
   // ── Estudio ──────────────────────────────────────────────────────────────

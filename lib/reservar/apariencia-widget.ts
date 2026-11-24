@@ -18,7 +18,7 @@
 // esas palabras en vez de prometer una herencia que no existe.
 //
 // ⚠️ Y la ponemos SIN Google: son las familias que la app ya sirve desde
-// Tentare (`next/font`, app/_fuentes) — las de `letraNativa`, las mismas que
+// Centra (`next/font`, app/_fuentes) — las de `letraNativa`, las mismas que
 // sin marco. Pedirla a fonts.googleapis.com desde este iframe le daba a Google
 // la IP de cada visitante de la web del estudio por haber elegido una letra.
 // Otra familia (un código de antes con Inter, o escrita a mano) se nombra y no
@@ -74,7 +74,7 @@ export interface AparienciaWidget {
   relleno: string | null;
   // Fase 3 del rediseño (docs/widget-reservas-theme-builder-diseno.md §3, "tres
   // piezas que no son solo tokens CSS"): forma/densidad, los dos ejes
-  // estructurales del diseño "Tentare Portal Reservas" que quedaban fuera del
+  // estructurales del diseño "Centra Portal Reservas" que quedaban fuera del
   // sistema de override de siempre.
   /**
    * Preset de radios (tarjeta/botón/input a la vez) — `radio`/`radioBoton`/
@@ -245,9 +245,9 @@ export function fondoCss(a: AparienciaWidget): string | null {
  * El `font-family` completo, con la pila de reserva detrás.
  *
  * La fuente elegida puede tardar en cargar o no existir; sin reserva, ese rato
- * se ve en Times New Roman, que es peor que la tipografía de Tentare.
+ * se ve en Times New Roman, que es peor que la tipografía de Centra.
  *
- * ⚠️ Es para DENTRO de la app (/reservar): una familia que sirve Tentare sale
+ * ⚠️ Es para DENTRO de la app (/reservar): una familia que sirve Centra sale
  * como las variables de `next/font` (`letraNativa(…, 'app')`), que en la web
  * de un estudio no existen. El bundle sin marco usa las suyas.
  */
@@ -264,7 +264,7 @@ export function familiaDisplayCss(a: AparienciaWidget): string | null {
 
 /**
  * Los 3 radios del preset `forma` (tarjeta/botón/input a la vez) — valores
- * del diseño "Tentare Portal Reservas" (`--rCard`/`--rBtn`, más un input
+ * del diseño "Centra Portal Reservas" (`--rCard`/`--rBtn`, más un input
  * intermedio entre ambos para `redondeado`/`recto`, ya que el diseño
  * original solo distingue tarjeta/botón).
  */

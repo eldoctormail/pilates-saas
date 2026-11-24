@@ -5,7 +5,7 @@ import { LEGAL } from '@/lib/legal-info';
 // WebPage.
 //
 // ⚠️ A propósito NO lleva `SoftwareApplication`. Ese tipo describe el PRODUCTO
-// Tentare, que es una sola entidad: repetirlo en once páginas le da a Google
+// Centra, que es una sola entidad: repetirlo en once páginas le da a Google
 // once declaraciones del mismo software con `url` distinta y descripciones
 // parecidas — la señal de duplicado que estas páginas deben evitar. Vive solo
 // en `/` (components/landing/StructuredData.tsx) y en `/precios`, que es donde

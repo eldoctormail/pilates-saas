@@ -43,7 +43,7 @@ const PROHIBIDOS: { patron: RegExp; ahora: string }[] = [
   // panel: «Inicio» suelto sigue siendo legítimo en la app de la alumna, que
   // conserva ese nombre.
   { patron: /\b(?:en|En|de|desde|Desde|a) Inicio\b/, ahora: 'la pantalla del panel se llama Resumen (la del cliente sigue siendo Inicio)' },
-  { patron: /Tentare Core/, ahora: 'la instructora trabaja en la app del estudio' },
+  { patron: /Centra Core/, ahora: 'la instructora trabaja en la app del estudio' },
   { patron: new RegExp(`Configuración${FLECHA}Suscripción`), ahora: 'Suscripción es su propia entrada del menú, no una pestaña' },
   // Configuración se reorganizó por preguntas el 15-sep: las pestañas de antes
   // («Logros y motivación», «Estudio», «API»…) ya no existen.
@@ -99,7 +99,7 @@ const PROHIBIDOS: { patron: RegExp; ahora: string }[] = [
   // 15-sep (PR C): las reglas de reserva ya no se pliegan. Desde v2 son filas con
   // su cajón, y la clase cancelada entera tiene la suya.
   {
-    patron: /Opciones avanzadas|Reservas y cancelaciones|bloque\s+«Recuperaciones»|Permitir lista de espera|Cuando algo cambia, Tentare/,
+    patron: /Opciones avanzadas|Reservas y cancelaciones|bloque\s+«Recuperaciones»|Permitir lista de espera|Cuando algo cambia, Centra/,
     ahora: 'Configuración > Cómo reservan mis clientes, en filas: Reservar, Cancelar y recuperar (con las recuperaciones), Si se cancela una clase entera (con el mínimo), Lista de espera, Asistencia y Si cancela tarde o no viene',
   },
   {

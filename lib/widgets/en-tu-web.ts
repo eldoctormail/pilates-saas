@@ -62,7 +62,7 @@ export const GRUPOS: readonly { nombre: string; campos: (keyof ConfigConstructor
  *
  * Un grupo cambia si el código de la foto con ESE grupo tomado de ahora deja de
  * ser el de la foto (`firmaCodigo`). Las dos huellas salen de la misma
- * plantilla de hoy, así que un cambio en la plantilla de Tentare (el alto del
+ * plantilla de hoy, así que un cambio en la plantilla de Centra (el alto del
  * iframe, su script) nunca cuenta como un cambio suyo.
  *
  * `seVe`: el cambio llega a lo que la página entiende (`firmaContenidoDe`). Un

@@ -175,7 +175,7 @@ export async function POST(req: NextRequest) {
   // (sesión → studios.nombre), no de lo que mande el cliente: ningún emisor de
   // lib/api-client.ts pone `estudioNombre` en el body, así que la variable se
   // interpolaba a cadena vacía y la propietaria veía "Bienvenida a  " en su
-  // propio asunto. Mismo motivo que el default 'Tentare' del encabezado.
+  // propio asunto. Mismo motivo que el default 'Centra' del encabezado.
   const nombreEstudio = marca.nombre || dv.estudioNombre;
   const varsPlantilla = { nombre: toName, estudio: nombreEstudio, clase: dv.claseNombre };
   const introCustom = plantilla.intro ? interpolar(plantilla.intro, varsPlantilla) : undefined;
@@ -240,8 +240,8 @@ export async function POST(req: NextRequest) {
 
   const { data, error } = await resend.emails.send({
     // Remitente con el nombre del estudio (misma dirección verificada de
-    // siempre, ver lib/emails/remitente.ts) — sin nombre resuelto, cae a Tentare.
-    from: remitentePorMarca(nombreEstudio || 'Tentare'),
+    // siempre, ver lib/emails/remitente.ts) — sin nombre resuelto, cae a Centra.
+    from: remitentePorMarca(nombreEstudio || 'Centra'),
     // Reply-To del estudio: si la clienta contesta, le contesta a SU
     // estudio. La dirección que firma sigue siendo la verificada de la
     // plataforma (una del estudio sin verificar en Resend rebotaría).

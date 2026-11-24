@@ -5,12 +5,12 @@ import { COLUMNAS, facturaPublica } from '@/lib/api-publica/serializar';
 
 const TIPOS = ['F1', 'F2', 'R1', 'R2', 'R3', 'R4', 'R5'];
 
-// GET /api/v1/facturas — `facturas:leer`. Las facturas emitidas desde Tentare
+// GET /api/v1/facturas — `facturas:leer`. Las facturas emitidas desde Centra
 // (rectificativas incluidas, con `rectificaA`), por fecha de emisión. Importes
 // en céntimos con su base, tipo y cuota de IVA tal como se sellaron.
 //
 // ⚠️ Un estudio en `modoFacturacion: sin_facturas` (ver /v1/estudio) no emite
-// facturas desde Tentare: su contabilidad sale de /v1/recibos.
+// facturas desde Centra: su contabilidad sale de /v1/recibos.
 export async function GET(req: NextRequest) {
   return conApiPublica(req, { scope: 'facturas:leer', ruta: '/api/v1/facturas' }, async (ctx, admin) => {
     const tipo = req.nextUrl.searchParams.get('tipo');

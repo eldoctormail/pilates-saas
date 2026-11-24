@@ -13,7 +13,7 @@ export function SpotPickerPublico({ spots, takenIds, selected, onSelect, primary
 }) {
   const filas = [...new Set(spots.map(s => s.fila))].sort((a, b) => a - b);
   const columnas = [...new Set(spots.map(s => s.columna))].sort((a, b) => a - b);
-  // Forma "cama" del diseño "Tentare Portal Reservas" — mismo tratamiento que
+  // Forma "cama" del diseño "Centra Portal Reservas" — mismo tratamiento que
   // components/reserva/spot-picker.tsx (el SpotPicker del calendario
   // compartido): celda rectangular con una barra interior ("eje") y el número
   // fuera, debajo, más leyenda libre/ocupada/tuya. Envoltorio con fondo

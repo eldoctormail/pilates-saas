@@ -128,7 +128,7 @@ const articulo: Articulo = {
         },
         {
           t: 'llamada',
-          texto: 'Con Stripe conectado, Tentare cobra las cuotas solas con la tarjeta guardada, reintenta lo que falla y te avisa de lo que queda pendiente; si cobras por domiciliación, te prepara la remesa SEPA para tu banco; los bonos los compra la alumna desde su app.',
+          texto: 'Con Stripe conectado, Centra cobra las cuotas solas con la tarjeta guardada, reintenta lo que falla y te avisa de lo que queda pendiente; si cobras por domiciliación, te prepara la remesa SEPA para tu banco; los bonos los compra la alumna desde su app.',
         },
       ],
     },
@@ -221,7 +221,7 @@ const articulo: Articulo = {
         },
         {
           t: 'producto',
-          titulo: 'Tentare lleva los cinco sistemas en un solo panel',
+          titulo: 'Centra lleva los cinco sistemas en un solo panel',
           texto: 'El horario con aforo por sala y por reformer, las reservas con lista de espera, las cuotas con cobro automático y los bonos que la alumna compra desde su app, el equipo con sus sustituciones y los informes de ocupación y margen por clase. Gratis hasta 150 reservas al mes, sin tarjeta y sin permanencia.',
         },
       ],

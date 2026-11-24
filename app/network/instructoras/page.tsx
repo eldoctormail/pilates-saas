@@ -3,14 +3,14 @@ import { filtroDesdeSearchParams } from '@/lib/network/publico';
 import { MarketplaceLayout } from '@/components/network-v2/MarketplaceLayout';
 import { LEGAL } from '@/lib/legal-info';
 
-// Marketplace público de Tentare Network — Server Component a propósito
+// Marketplace público de Centra Network — Server Component a propósito
 // (docs/NETWORK-AUDIT-2.md §11): sin esto, Google vería un div vacío que se
 // rellena con JS y nunca indexaría "instructoras de pilates en Barcelona".
 // La vista vive en MarketplaceLayout (compartida con las variantes SEO
 // [ciudad] y [ciudad]/[especialidad]) — esta página solo resuelve el
 // filtro desde la querystring, como antes.
 export const metadata: Metadata = {
-  title: 'Instructoras de Pilates y Yoga | Tentare Network',
+  title: 'Instructoras de Pilates y Yoga | Centra Network',
   description: 'Encuentra instructoras de Pilates y Yoga disponibles cerca de ti. Filtra por especialidad, ubicación y disponibilidad.',
   // Canonical fijo a la ruta sin querystring: los filtros (?ciudad=/?especialidades=)
   // no deben indexarse como páginas propias — mismo contenido, mismo destino.

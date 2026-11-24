@@ -1,6 +1,6 @@
 // La tramitación automática de las apps de estudio (`scripts/apps-automatico.mjs`, desde el
 // workflow «Apps de estudio · automático»). Lo puro: qué toca hacer con cada app según su estado en
-// Tentare y lo que diga Apple. Sin imports de `@/`: lo usa un script de Node y `node --test`.
+// Centra y lo que diga Apple. Sin imports de `@/`: lo usa un script de Node y `node --test`.
 //
 // El camino, sin nadie en medio:
 //   PEDIDA ─(nombre en App Store Connect + activarla)→ EN_PREPARACION ─(compilar y subir)→
@@ -84,7 +84,7 @@ export type Paso =
   | { tipo: 'preparar' }
   /** Compilar y subir (no hay compilación, o la última falló). */
   | { tipo: 'compilar' }
-  /** Cambiar algo en Tentare porque Apple ha avanzado. */
+  /** Cambiar algo en Centra porque Apple ha avanzado. */
   | { tipo: 'cambiar'; estado: EstadoApp; urlTienda?: string; evento: 'probando' | 'en-revision' | 'publicada' | 'rechazada' }
   /** Necesita a una persona (y por qué). */
   | { tipo: 'avisar'; motivo: 'sin-hueco' };

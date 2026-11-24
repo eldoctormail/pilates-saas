@@ -25,7 +25,7 @@ export async function procesarInstantBookingUsc(admin: SupabaseClient, p: Petici
     .maybeSingle();
   if (errEvento) return { ok: false, motivo: 'error-interno', detalle: errEvento.message };
   if (!evento) return { ok: false, motivo: 'clase-no-existe' };
-  // Sin sesión: la borraron en Tentare y el cron aún no ha cancelado el evento.
+  // Sin sesión: la borraron en Centra y el cron aún no ha cancelado el evento.
   if (evento.estado_sync === 'CANCELADO' || !evento.sesion_id) return { ok: false, motivo: 'clase-cancelada' };
 
   // El estudio tiene que seguir vendiendo en USC: si lo ha apagado, o se ha

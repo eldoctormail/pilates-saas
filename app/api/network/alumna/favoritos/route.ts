@@ -5,7 +5,7 @@ import { errorInterno, errorPeticion } from '@/lib/errores-servidor';
 import { mapFilaAPerfilPublico, type FilaRedPerfilPublica } from '@/lib/network/mapeo';
 import type { EstudioListadoPublico } from '@/lib/network/publico-estudios';
 
-// Favoritos de la ALUMNA (estudio o instructora) en Tentare Network — F3
+// Favoritos de la ALUMNA (estudio o instructora) en Centra Network — F3
 // pieza 2. Tabla dedicada `red_favoritos_alumna`, distinta de `red_favoritos`
 // (esa es unidireccional estudio→instructora, con GET acotado a
 // verificarSesionStaff en app/api/network/favoritos/route.ts, que se usa

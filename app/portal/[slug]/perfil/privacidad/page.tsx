@@ -20,7 +20,7 @@ import { fetchPersonasBloqueadas } from '@/lib/student/bloqueos';
 // cosas que se hacen casi nunca, así que ahora viven un nivel más abajo, detrás
 // de una sola fila. El orden es a propósito: primero lo que es suyo y es al
 // momento (descargar), y después, como enlaces discretos, lo que retira o pide
-// borrar. Y al final, borrar la cuenta de Tentare entera.
+// borrar. Y al final, borrar la cuenta de Centra entera.
 export default function PrivacidadPage() {
   const { estudio } = useEstudio();
   const href = usePortalHref();
@@ -58,7 +58,7 @@ export default function PrivacidadPage() {
             {/* A quién bloqueó en el tablón o en sus mensajes (App Store 1.2): aquí se desbloquea. */}
             <PersonasBloqueadas studioId={estudio.id} data={bloqueos ?? null} />
             <SolicitudesDerechos slug={estudio.slug} nombreEstudio={estudio.nombre} />
-            {/* Lo último: borrar la CUENTA de Tentare (App Store 5.1.1(v)), que no es
+            {/* Lo último: borrar la CUENTA de Centra (App Store 5.1.1(v)), que no es
                 pedir al estudio que borre sus datos (justo encima). */}
             <BorrarCuenta slug={estudio.slug} nombreEstudio={estudio.nombre} hrefLogin={href('/acceso/login')} />
           </>

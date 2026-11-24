@@ -1,6 +1,6 @@
 'use client';
 
-// «Borrar mi cuenta de Tentare», lado cliente. Dice lo que respondió el SERVIDOR:
+// «Borrar mi cuenta de Centra», lado cliente. Dice lo que respondió el SERVIDOR:
 // solo es «borrada» si la respuesta es 2xx Y trae `borrada: true`. Un 4xx/5xx,
 // un cuerpo raro o la red caída nunca se leen como borrada.
 

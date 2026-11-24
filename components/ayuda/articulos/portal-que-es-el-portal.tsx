@@ -13,7 +13,7 @@ export default function Contenido() {
   return (
     <>
       <p>
-        Tu estudio tiene dos direcciones en Tentare, y sirven para cosas distintas. El enlace que compartes con tus
+        Tu estudio tiene dos direcciones en Centra, y sirven para cosas distintas. El enlace que compartes con tus
         clientes es el de <strong>su app</strong>; el de la <strong>página de reservas</strong> es para ponerlo en tu web.
       </p>
 

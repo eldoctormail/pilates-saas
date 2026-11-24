@@ -191,7 +191,7 @@ const articulo: Articulo = {
         {
           t: 'p',
           texto:
-            'Si usas Tentare, cada factura sale con numeración legal correlativa, sin huella ni QR: Veri*Factu (la huella, la firma y el envío de los registros a la AEAT) todavía no está activo en ningún estudio. Tienes el detalle en [facturación](/funcionalidades/facturacion) y las fechas de la obligación en [facturación electrónica y Veri*Factu](/recursos/facturacion-electronica-verifactu).',
+            'Si usas Centra, cada factura sale con numeración legal correlativa, sin huella ni QR: Veri*Factu (la huella, la firma y el envío de los registros a la AEAT) todavía no está activo en ningún estudio. Tienes el detalle en [facturación](/funcionalidades/facturacion) y las fechas de la obligación en [facturación electrónica y Veri*Factu](/recursos/facturacion-electronica-verifactu).',
         },
       ],
     },
@@ -308,7 +308,7 @@ const articulo: Articulo = {
   cta: {
     titulo: 'Facturas con el IVA bien puesto, sin hacerlas a mano',
     texto:
-      'Tentare emite cada factura con numeración legal correlativa; Veri*Factu (huella y envío a la AEAT) todavía no está activo. Gratis hasta 150 reservas al mes, sin tarjeta y sin permanencia.',
+      'Centra emite cada factura con numeración legal correlativa; Veri*Factu (huella y envío a la AEAT) todavía no está activo. Gratis hasta 150 reservas al mes, sin tarjeta y sin permanencia.',
   },
   revision: [
     'Confirmar que no se ha publicado en el BOE ninguna rebaja del IVA de los servicios deportivos posterior a la última modificación del texto consolidado consultado (28-feb-2026).',

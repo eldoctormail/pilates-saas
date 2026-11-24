@@ -12,14 +12,14 @@ import type { AmbitoDenuncia } from './denuncias';
 // y, si no, responde igual que si no existiera (`null`).
 //
 // · Denunciar: un mensaje de la OTRA parte. Si el hilo es con el estudio, la
-//   denuncia va a Tentare (`destinoDeDenuncia`); si es con una instructora, al
+//   denuncia va a Centra (`destinoDeDenuncia`); si es con una instructora, al
 //   estudio (salvo que la autora sea una propietaria).
 // · Bloquear: solo en un hilo instructora–alumna, y solo la fila propia
 //   (`bloqueo_en`). Desde ese momento nadie escribe en él (trigger
 //   `trg_mensajes_conversacion_abierta`) y el estudio recibe un aviso para
 //   revisarlo (denuncia con motivo BLOQUEO). El hilo de una alumna con su
 //   estudio no se bloquea: es el canal por el que el estudio le da servicio; se
-//   denuncia, y esa denuncia la revisa Tentare.
+//   denuncia, y esa denuncia la revisa Centra.
 // · Desbloquear: quita solo su propio bloqueo. Si la otra parte también
 //   bloqueó, el hilo sigue sin admitir mensajes (y no se le dice por qué).
 

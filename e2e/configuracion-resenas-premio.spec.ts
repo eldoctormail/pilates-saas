@@ -2,11 +2,11 @@ import { test, expect, type Page, type Route } from '@playwright/test';
 import { montar, ir } from './panel-sembrado';
 
 // «Reseñas y premio» (Configuración → Cómo me comunico, 21-nov-2026): el enlace de
-// reseñas del estudio y el código que se regala a quien valora una clase en Tentare.
+// reseñas del estudio y el código que se regala a quien valora una clase en Centra.
 //
 // Lo que rompe a un estudio: decir «Guardado» sin que el servidor lo haya dicho, o
 // guardar un enlace que no es https. Y lo que hace legal el flujo: que la propia
-// pantalla diga que el premio es por valorar en Tentare y no por la reseña pública.
+// pantalla diga que el premio es por valorar en Centra y no por la reseña pública.
 // Siempre con contador de peticiones (un «no escribió» sin contador es un test hueco).
 
 const json = (r: Route, b: unknown, status = 200) =>
@@ -60,7 +60,7 @@ test.describe('Configuración · reseñas y premio', () => {
 
     await cajon(page).getByRole('switch', { name: /regalar un descuento/i }).click();
     const aviso = cajon(page).getByTestId('resenas-aviso-premio');
-    await expect(aviso).toContainText('valorar la clase en Tentare');
+    await expect(aviso).toContainText('valorar la clase en Centra');
     await expect(aviso).toContainText('No es por dejar una reseña en Google');
     // Sin guardar no hay nada que decir: «Guardar» ni se ofrece sin cambios… y ahora SÍ los hay.
     await expect(guardar(page)).toBeVisible();

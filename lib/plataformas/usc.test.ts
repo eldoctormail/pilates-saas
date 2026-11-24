@@ -117,7 +117,7 @@ test('lee el webhook de estado y normaliza el id', () => {
   assert.equal(leerWebhookReservaUsc({ ...WEBHOOK, ModifiedDate: 'ayer' }).ok, false);
 });
 
-test('cada estado de USC hace lo que toca en Tentare', () => {
+test('cada estado de USC hace lo que toca en Centra', () => {
   assert.equal(accionDeEstadoUsc('Cancelled'), 'cancelar');
   assert.equal(accionDeEstadoUsc('LateCancellation'), 'cancelar');
   assert.equal(accionDeEstadoUsc('CheckedIn'), 'asistio');

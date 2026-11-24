@@ -9,7 +9,7 @@ const base: DatosAvisoWhatsApp = {
 
 test('a una instructora: la app del estudio y qué pulsar, con el correo tapado', () => {
   const m = mensajeInvitacionWhatsApp(base)!;
-  assert.match(m, /^Hola Laura, te he dado acceso a Estudio Aurora en Tentare\./);
+  assert.match(m, /^Hola Laura, te he dado acceso a Estudio Aurora en Centra\./);
   assert.match(m, /«Como instructora»: https:\/\/www\.tentare\.app\/portal\/aurora\/acceso\/elegir$/);
   assert.match(m, /la•••@example\.com/);
   assert.doesNotMatch(m, /laura\.gomez@/, 'el correo entero no viaja');

@@ -37,7 +37,7 @@ export function personaLd() {
     givenName: 'Marcos',
     familyName: 'Roca Rodríguez',
     jobTitle: AUTOR_BLOG.cargo,
-    description: `${AUTOR_BLOG.nombre} es el fundador de Tentare, un software de gestión para estudios de Pilates y yoga en España. Trabaja desde ${AUTOR_BLOG.ciudad}.`,
+    description: `${AUTOR_BLOG.nombre} es el fundador de Centra, un software de gestión para estudios de Pilates y yoga en España. Trabaja desde ${AUTOR_BLOG.ciudad}.`,
     url: URL_AUTOR,
     image: IMAGEN_RETRATO,
     worksFor: { '@id': ID_ORGANIZACION_BLOG },
@@ -75,7 +75,7 @@ export function blogLd(metas: readonly ArticuloBlogMeta[]) {
     '@type': 'Blog',
     '@id': ID_BLOG_PERSONAL,
     name: `Blog de ${AUTOR_BLOG.nombre}`,
-    description: 'El blog personal del fundador de Tentare: emprendimiento, tecnología, startups y la construcción de Tentare.',
+    description: 'El blog personal del fundador de Centra: emprendimiento, tecnología, startups y la construcción de Centra.',
     url: URL_BLOG,
     inLanguage: IDIOMA,
     author: { '@id': ID_AUTOR },
@@ -156,7 +156,7 @@ export function rssBlog(metas: readonly ArticuloBlogMeta[]): string {
     <title>Blog de ${esc(AUTOR_BLOG.nombre)}</title>
     <link>${URL_BLOG}</link>
     <atom:link href="${URL_BLOG}/feed.xml" rel="self" type="application/rss+xml" />
-    <description>El blog personal del fundador de Tentare: emprendimiento, tecnología, startups y la construcción de Tentare.</description>
+    <description>El blog personal del fundador de Centra: emprendimiento, tecnología, startups y la construcción de Centra.</description>
     <language>es-es</language>${ultimo ? `\n    <lastBuildDate>${fechaRfc822(ultimo)}</lastBuildDate>` : ''}
 ${items.join('\n')}
   </channel>

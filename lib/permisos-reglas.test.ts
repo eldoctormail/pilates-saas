@@ -61,7 +61,7 @@ test('una instructora no llega a la facturación ni a los informes', () => {
   }
 });
 
-test('Tentare Core retirado: una instructora no llega a ninguna pantalla del panel', () => {
+test('Centra Core retirado: una instructora no llega a ninguna pantalla del panel', () => {
   // Su trabajo está en la app del estudio; DashboardShell la manda allí.
   for (const ruta of ['/dashboard', '/calendario', '/clientas', '/citas', '/mensajeria', '/mi-perfil', '/comunidad', '/actualizaciones', '/calendario/pase']) {
     assert.equal(puedeVer('INSTRUCTOR', ruta), false, ruta);
@@ -73,7 +73,7 @@ test('cualquier rol llega a su propio perfil, aunque no llegue a Configuración'
   // para esto: gestionar el nombre/email/contraseña propios no es
   // "configuración del negocio", y antes una instructora no llegaba ni a
   // intentarlo porque /configuracion entero está bloqueado para su rol.
-  // La instructora ya no: su perfil está en la app del estudio (Tentare Core
+  // La instructora ya no: su perfil está en la app del estudio (Centra Core
   // retirado, 14-sep-2026).
   for (const rol of ['PROPIETARIO', 'MANAGER', 'RECEPCION'] as const) {
     assert.equal(puedeVer(rol, '/mi-perfil'), true, rol);
@@ -348,12 +348,12 @@ test('el personal del panel puede leer un pase de acceso (la instructora pasa li
   assert.equal(puedeVer('PROPIETARIO', '/calendario/pase'), true);
 });
 
-// ── Arquitectura de marca: Tentare Manager (Tentare Core retirado) ─────────
-test('la instructora ve la marca paraguas, el resto Tentare Manager', () => {
-  assert.equal(nombreAppPorRol('INSTRUCTOR'), 'Tentare');
-  assert.equal(nombreAppPorRol('PROPIETARIO'), 'Tentare Manager');
-  assert.equal(nombreAppPorRol('MANAGER'), 'Tentare Manager');
-  assert.equal(nombreAppPorRol('RECEPCION'), 'Tentare Manager');
+// ── Arquitectura de marca: Centra Manager (Centra Core retirado) ─────────
+test('la instructora ve la marca paraguas, el resto Centra Manager', () => {
+  assert.equal(nombreAppPorRol('INSTRUCTOR'), 'Centra');
+  assert.equal(nombreAppPorRol('PROPIETARIO'), 'Centra Manager');
+  assert.equal(nombreAppPorRol('MANAGER'), 'Centra Manager');
+  assert.equal(nombreAppPorRol('RECEPCION'), 'Centra Manager');
 });
 
 // ── Notification Center (vista admin) ──────────────────────────────────────
@@ -389,7 +389,7 @@ test('actuar sobre una clase: mostrador y manager cualquiera; la instructora, ni
   for (const rol of ['PROPIETARIO', 'MANAGER', 'RECEPCION'] as const) {
     assert.equal(puedeOperarClase(rol), true, rol);
   }
-  // Tentare Core retirado (14-sep-2026): ni la suya.
+  // Centra Core retirado (14-sep-2026): ni la suya.
   assert.equal(puedeOperarClase('INSTRUCTOR'), false);
 });
 
@@ -419,7 +419,7 @@ test('un justificante de pago lo manda quien mueve dinero, sin excepciones', () 
 });
 
 test('la instructora no manda ningún email del panel, ni el de cancelación de su clase', () => {
-  // Tentare Core retirado (14-sep-2026): cancelar y avisar es trabajo de mostrador.
+  // Centra Core retirado (14-sep-2026): cancelar y avisar es trabajo de mostrador.
   for (const tipo of TIPOS_EMAIL_PANEL) {
     assert.equal(puedeEnviarEmail('INSTRUCTOR', tipo), false, tipo);
   }
@@ -482,7 +482,7 @@ test('puedeVerSemaforo: propietaria, instructora, recepción y manager sí; nadi
 
 test('puedeVerFichaClinica: en el panel solo la propietaria ve el detalle clínico', () => {
   assert.equal(puedeVerFichaClinica('PROPIETARIO'), true);
-  // La instructora lo lee en la app del estudio, por su propia ruta (Tentare Core retirado).
+  // La instructora lo lee en la app del estudio, por su propia ruta (Centra Core retirado).
   assert.equal(puedeVerFichaClinica('INSTRUCTOR'), false);
   assert.equal(puedeVerFichaClinica('RECEPCION'), false);
   assert.equal(puedeVerFichaClinica('MANAGER'), false);
@@ -609,7 +609,7 @@ test('puedeVerDetalleAusencias: tipo y motivo solo para quien gestiona el equipo
   }
 });
 
-test('puedeVerSolicitudesSoporte: solo la propietaria lee lo que el estudio escribe a Tentare', () => {
+test('puedeVerSolicitudesSoporte: solo la propietaria lee lo que el estudio escribe a Centra', () => {
   // Migr 20260914000205 (`soporte_leer_propietaria`).
   assert.equal(puedeVerSolicitudesSoporte('PROPIETARIO'), true);
   assert.equal(puedeVerSolicitudesSoporte('MANAGER'), false);

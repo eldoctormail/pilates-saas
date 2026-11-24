@@ -10,7 +10,7 @@ export default function Contenido() {
   return (
     <>
       <p>
-        Tentare avisa solo, de serie y sin que tengas que activar ninguna regla ni redactar nada: en la app del
+        Centra avisa solo, de serie y sin que tengas que activar ninguna regla ni redactar nada: en la app del
         cliente y, para el recordatorio de clase, también por email (y por WhatsApp si lo tienes conectado).
         Algunos ejemplos de lo que se envía solo:
       </p>
@@ -40,7 +40,7 @@ export default function Contenido() {
       </p>
 
       <AyudaResultado>
-        Esto es lo que Tentare hace de serie: cada aviso responde a algo que ha pasado de verdad. Para escribir tú
+        Esto es lo que Centra hace de serie: cada aviso responde a algo que ha pasado de verdad. Para escribir tú
         a un grupo está Mensajería &gt; Enviar mensaje, y para reglas propias, Automatizaciones.
         Relacionado:{' '}
         <Link href="/ayuda/problemas/no-llega-un-email" style={{ color: 'inherit', textDecoration: 'underline' }}>no llega un email</Link> y{' '}

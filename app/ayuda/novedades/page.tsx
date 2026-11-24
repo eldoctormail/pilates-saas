@@ -12,8 +12,8 @@ import { MUTED } from '@/components/landing/theme';
 import { urlDe } from '@/lib/seo/paginas';
 
 export const metadata: Metadata = {
-  title: 'Novedades de Tentare | Centro de Ayuda',
-  description: 'Nuevas funcionalidades, mejoras y correcciones publicadas en Tentare, versión a versión.',
+  title: 'Novedades de Centra | Centro de Ayuda',
+  description: 'Nuevas funcionalidades, mejoras y correcciones publicadas en Centra, versión a versión.',
   alternates: { canonical: urlDe('/ayuda/novedades') },
 };
 
@@ -58,7 +58,7 @@ export default async function NovedadesPage() {
 
       <header style={{ maxWidth: 720, margin: '0 auto', padding: 'clamp(32px,5vw,56px) clamp(20px,4vw,44px) 8px' }}>
         <AyudaBreadcrumbs items={migas} />
-        <h1 style={{ fontWeight: 800, fontSize: 'clamp(28px,3.6vw,40px)', letterSpacing: '-.03em', margin: '0 0 12px' }}>Novedades de Tentare</h1>
+        <h1 style={{ fontWeight: 800, fontSize: 'clamp(28px,3.6vw,40px)', letterSpacing: '-.03em', margin: '0 0 12px' }}>Novedades de Centra</h1>
         <p style={{ fontSize: 16, lineHeight: 1.55, color: MUTED, margin: 0 }}>Lo último que hemos lanzado, versión a versión.</p>
       </header>
 

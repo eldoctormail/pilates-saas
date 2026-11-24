@@ -108,7 +108,7 @@ export default function PerfilInstructoraPage() {
           </span>
         </Link>
 
-        {/* Solo en la app de iOS «Tentare»: la lista de la entrada incluye sus
+        {/* Solo en la app de iOS «Centra»: la lista de la entrada incluye sus
             estudios como alumna, que «Tus estudios» (más abajo) no enseña. */}
         <CambiarDeEstudio />
 
@@ -198,7 +198,7 @@ export default function PerfilInstructoraPage() {
           </section>
         )}
 
-        {/* App Store 1.2: las normas del chat y el contacto de Tentare. */}
+        {/* App Store 1.2: las normas del chat y el contacto de Centra. */}
         <NormasYContacto />
 
         {estudios.length > 1 && (
@@ -230,7 +230,7 @@ export default function PerfilInstructoraPage() {
         />
 
         <p className="t-meta" style={{ textAlign: 'center', color: 'var(--subtle-foreground)' }}>
-          App de {estudio.nombre} · con Tentare
+          App de {estudio.nombre} · con Centra
         </p>
       </div>
 

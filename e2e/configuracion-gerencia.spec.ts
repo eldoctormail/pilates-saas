@@ -96,7 +96,7 @@ test.describe('En el portátil', () => {
     for (const id of ['reservas', 'cobros', 'altas', 'comunicacion', 'motivacion', 'marca', 'web', 'equipo', 'conexiones', 'datos', 'avisos', 'panel']) {
       await expect(filaInicio(page, id), id).toHaveCount(0);
     }
-    // «Plan de Tentare» es lo que el estudio le paga a Tentare: de la
+    // «Plan de Centra» es lo que el estudio le paga a Centra: de la
     // propietaria. «Mi cuenta» es su propio perfil, y sí.
     await expect(page.locator('#inicio-seccion-plan')).toHaveCount(0);
     await expect(page.locator('#inicio-mi-cuenta')).toBeVisible();
@@ -108,7 +108,7 @@ test.describe('En el portátil', () => {
     const rail = page.getByRole('navigation', { name: 'Secciones de Configuración' });
     await expect(rail.getByRole('link', { name: 'Mi estudio' })).toBeVisible();
     await expect(rail.getByRole('link', { name: 'Cobros y facturas' })).toHaveCount(0);
-    await expect(rail.getByRole('link', { name: 'Plan de Tentare' })).toHaveCount(0);
+    await expect(rail.getByRole('link', { name: 'Plan de Centra' })).toHaveCount(0);
   });
 
   test('un enlace a una sección que no abre cae al inicio y lo dice', async ({ page }) => {

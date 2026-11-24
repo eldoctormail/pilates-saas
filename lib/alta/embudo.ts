@@ -31,7 +31,7 @@ export const PASOS_EMBUDO = [
   'plan_ensenado', // la tarjeta «Tu plan, sin sorpresas», enseñada UNA vez tras la primera reserva (PR-5)
   'correo_recibir_reservas', // el correo «Ya puedes recibir reservas», una vez (PR-4, migración 20261021134000)
   'recorrido_visto', // el recorrido rápido de tres paradas, la primera vez en el panel (PR-5)
-  'correo_primera_clase', // el correo «Tu primera clase en Tentare, en 5 minutos», una vez (PR-5)
+  'correo_primera_clase', // el correo «Tu primera clase en Centra, en 5 minutos», una vez (PR-5)
   'correo_empuje_compartir', // «Tu clase está lista: falta que lo sepan tus alumnas», una vez (migración 20261102120710)
   'correo_empuje_alumnas', // «Ya compartiste tu enlace: las primeras reservas», una vez (migración 20261102120710)
 ] as const;

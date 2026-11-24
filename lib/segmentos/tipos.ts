@@ -1,5 +1,5 @@
 // Segmentos de clientes guardables (auditoría vs Momence, §9 informe:
-// constructor de condiciones combinables + audiencia reutilizable — Tentare
+// constructor de condiciones combinables + audiencia reutilizable — Centra
 // solo tenía una etiqueta única + 4 presets fijos hardcodeados).
 //
 // v1 es deliberadamente UN SOLO NIVEL: un grupo con un operador (AND u OR)

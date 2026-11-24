@@ -1,7 +1,7 @@
 import { test, expect, type Page, type Route } from '@playwright/test';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// «Que una propietaria que no ha visto Tentare en su vida cree un bono sin
+// «Que una propietaria que no ha visto Centra en su vida cree un bono sin
 // pararse a pensar qué significa cada campo.»
 //
 // La pantalla de tarifas de /productos era una columna con los diez campos de

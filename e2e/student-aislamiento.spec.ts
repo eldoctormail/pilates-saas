@@ -33,7 +33,7 @@ test.describe('Student PWA · aislamiento', () => {
 
   test('todos los enlaces de la app cuelgan del slug del estudio', async ({ page }) => {
     // Un enlace absoluto ('/reservar') mandaría a la alumna a la página pública
-    // de otro sitio o a la landing de Tentare. El paquete los trae así.
+    // de otro sitio o a la landing de Centra. El paquete los trae así.
     await sembrarSociaLista(page);
     await page.goto(`/portal/${SLUG}`);
     // ⚠️ Por NOMBRE, no «la navegación» a secas. Inicio tiene dos landmarks de

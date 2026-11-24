@@ -134,8 +134,8 @@ export async function enviarEmailTransaccional(params: {
     const { data, error } = await resend.emails.send(
       {
         // Remitente con el nombre del estudio (misma dirección verificada de
-        // siempre, ver lib/emails/remitente.ts) — sin marca resuelta, cae a Tentare.
-        from: remitentePorMarca(marca.nombre || params.data.estudioNombre || 'Tentare'),
+        // siempre, ver lib/emails/remitente.ts) — sin marca resuelta, cae a Centra.
+        from: remitentePorMarca(marca.nombre || params.data.estudioNombre || 'Centra'),
       // Reply-To del estudio: si la clienta contesta, le contesta a SU estudio.
       // La dirección que firma sigue siendo la verificada de la plataforma.
         ...(marca.replyTo ? { replyTo: marca.replyTo } : {}),

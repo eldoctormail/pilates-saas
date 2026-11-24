@@ -70,7 +70,7 @@ export default function OportunidadesNetworkPage() {
       <div>
         <h1 className="text-[22px] font-extrabold" style={{ color: NW_TINTA }}>Oportunidades</h1>
         <p className="text-[13px] mt-0.5" style={{ color: NW_MUTED }}>
-          {vacantes ? `${filtradas.length} activa${filtradas.length === 1 ? '' : 's'}${vacantes.length ? ' que encajan con tu perfil' : ''}` : 'Vacantes publicadas por estudios que usan Tentare.'}
+          {vacantes ? `${filtradas.length} activa${filtradas.length === 1 ? '' : 's'}${vacantes.length ? ' que encajan con tu perfil' : ''}` : 'Vacantes publicadas por estudios que usan Centra.'}
         </p>
       </div>
 

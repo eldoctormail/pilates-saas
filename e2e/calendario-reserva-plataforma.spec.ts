@@ -227,7 +227,7 @@ test.describe('Recepción apunta una reserva de ClassPass desde la clase', () =>
     await expect(menu.getByRole('menuitem', { name: /semana que viene/ })).toHaveCount(0);
     await expect(menu.getByRole('menuitem', { name: /clase fija/ })).toHaveCount(0);
     await page.keyboard.press('Escape');
-    // La socia de Tentare sigue enlazando a su ficha.
+    // La socia de Centra sigue enlazando a su ficha.
     await expect(page.getByRole('link', { name: /Ana Ruiz/ })).toHaveAttribute('href', '/clientas/s1');
   });
 });

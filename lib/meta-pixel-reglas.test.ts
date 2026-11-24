@@ -21,7 +21,7 @@ test('mide la web comercial y el alta', () => {
 });
 
 test('no mide el panel, la app de clientes ni las reservas de un estudio', () => {
-  // `/reservar/<slug>` es indexable, pero es la web de una clienta, no tráfico de Tentare.
+  // `/reservar/<slug>` es indexable, pero es la web de una clienta, no tráfico de Centra.
   for (const path of [
     '/dashboard', '/clientas/soc-123', '/socios/soc-123', '/cobros', '/configuracion', '/login',
     '/portal/mi-estudio', '/portal/mi-estudio/reservas', '/reservar/mi-estudio', '/interno', '/cookies',

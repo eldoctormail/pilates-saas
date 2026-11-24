@@ -5,7 +5,7 @@ import { rutaIlustracion } from '@/lib/ilustraciones/manifiesto';
 // ─────────────────────────────────────────────────────────────────────────────
 // Ilustraciones de estados vacíos, sin datos y relleno (18-nov-2026).
 //
-// Dibujos ORIGINALES de Tentare, en SVG en línea para leer los tokens de `brand/` (siguen el
+// Dibujos ORIGINALES de Centra, en SVG en línea para leer los tokens de `brand/` (siguen el
 // modo claro/oscuro solos). El patrón —disco suave detrás y dos o tres objetos planos
 // encima— es una convención de UI, no un dibujo copiado de nadie: ninguna escena reproduce
 // ilustraciones de terceros.

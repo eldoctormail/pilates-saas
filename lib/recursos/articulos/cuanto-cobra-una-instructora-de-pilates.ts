@@ -153,11 +153,11 @@ const articulo: Articulo = {
         {
           t: 'p',
           texto:
-            'La cuenta que de verdad importa es cuánto te deja cada clase después de pagar a quien la da: la misma hora de instructora no pesa igual en una clase llena que en una a medias. Lo desarrollamos en [rentabilidad de un estudio de pilates](/recursos/rentabilidad-estudio-de-pilates) y en [precio de una clase de pilates](/recursos/precio-clase-de-pilates). En Tentare, el [informe de rentabilidad por clase](/funcionalidades/informes-y-rentabilidad) resta a lo que ingresa cada clase lo que cuesta su instructora.',
+            'La cuenta que de verdad importa es cuánto te deja cada clase después de pagar a quien la da: la misma hora de instructora no pesa igual en una clase llena que en una a medias. Lo desarrollamos en [rentabilidad de un estudio de pilates](/recursos/rentabilidad-estudio-de-pilates) y en [precio de una clase de pilates](/recursos/precio-clase-de-pilates). En Centra, el [informe de rentabilidad por clase](/funcionalidades/informes-y-rentabilidad) resta a lo que ingresa cada clase lo que cuesta su instructora.',
         },
         {
           t: 'llamada',
-          texto: 'Si quieres ver lo que ingresa cada clase menos lo que cuesta su instructora, Tentare lo calcula por ti.',
+          texto: 'Si quieres ver lo que ingresa cada clase menos lo que cuesta su instructora, Centra lo calcula por ti.',
         },
       ],
     },
@@ -208,7 +208,7 @@ const articulo: Articulo = {
             {
               titulo: 'Pacta las sustituciones por escrito',
               texto:
-                'Quién cubre una baja, con cuánto aviso y a qué tarifa. Con Tentare lanzas la búsqueda de sustituta y das tú el visto bueno o, en el plan gratis, Estudio y Cadena (o con un complemento de 12 €/mes), dejas que se resuelva sola; y si nadie acepta te avisa en vez de cancelar la clase. Más en [sustituciones](/funcionalidades/sustituciones) y en [gestión de instructoras](/funcionalidades/gestion-de-instructoras).',
+                'Quién cubre una baja, con cuánto aviso y a qué tarifa. Con Centra lanzas la búsqueda de sustituta y das tú el visto bueno o, en el plan gratis, Estudio y Cadena (o con un complemento de 12 €/mes), dejas que se resuelva sola; y si nadie acepta te avisa en vez de cancelar la clase. Más en [sustituciones](/funcionalidades/sustituciones) y en [gestión de instructoras](/funcionalidades/gestion-de-instructoras).',
             },
           ],
         },
@@ -338,7 +338,7 @@ const articulo: Articulo = {
   cta: {
     titulo: 'Sabe cuánto te cuesta cada clase y organiza las bajas con tu visto bueno',
     texto:
-      'Con Tentare ves la rentabilidad de cada clase, lo que ingresa menos lo que cuesta su instructora, y gestionas las sustituciones sin perder el control. Gratis hasta 150 reservas al mes, sin tarjeta y sin permanencia.',
+      'Con Centra ves la rentabilidad de cada clase, lo que ingresa menos lo que cuesta su instructora, y gestionas las sustituciones sin perder el control. Gratis hasta 150 reservas al mes, sin tarjeta y sin permanencia.',
   },
   revision: [
     'Comprobar si se han publicado en el BOE las tablas salariales de 2026 o el VI Convenio estatal de instalaciones deportivas y gimnasios: a 25-sep-2026 no constaban, y UGT informaba en mayo de 2026 de que no había acuerdo.',

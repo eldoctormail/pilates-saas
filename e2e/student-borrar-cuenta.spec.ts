@@ -1,7 +1,7 @@
 import { test, expect, type Page } from '@playwright/test';
 import { SLUG, sembrarSociaCompleta } from './socia-completa';
 
-// «Borrar mi cuenta de Tentare» (App Store 5.1.1(v)) y «Cambiar de estudio»,
+// «Borrar mi cuenta de Centra» (App Store 5.1.1(v)) y «Cambiar de estudio»,
 // en el Perfil de la app del estudio.
 //
 // Lo que importa: sin la palabra NO sale ninguna petición; un «no» del servidor
@@ -44,13 +44,13 @@ async function vigilarSalida(page: Page) {
 
 async function abrirHoja(page: Page) {
   await page.goto(`${base}/perfil/privacidad`, { waitUntil: 'domcontentloaded' });
-  await page.getByRole('button', { name: 'Borrar mi cuenta de Tentare', exact: true }).click({ timeout: 30_000 });
-  const hoja = page.getByRole('dialog', { name: '¿Borrar tu cuenta de Tentare?' });
+  await page.getByRole('button', { name: 'Borrar mi cuenta de Centra', exact: true }).click({ timeout: 30_000 });
+  const hoja = page.getByRole('dialog', { name: '¿Borrar tu cuenta de Centra?' });
   await expect(hoja).toBeVisible();
   return hoja;
 }
 
-test.describe('Student PWA · borrar mi cuenta de Tentare', () => {
+test.describe('Student PWA · borrar mi cuenta de Centra', () => {
   test.describe.configure({ timeout: 120_000 });
 
   test('sin BORRAR no sale nada; el servidor dice que no (409 y 500) y NO dice «borrada»', async ({ page }) => {
@@ -127,7 +127,7 @@ test.describe('Student PWA · borrar mi cuenta de Tentare', () => {
     await hoja.getByRole('button', { name: 'Borrar mi cuenta', exact: true }).click();
 
     // Primero se le dice, y hasta que no lo lee no se cierra nada.
-    const hecha = page.getByRole('dialog', { name: 'Tu cuenta de Tentare se ha borrado' });
+    const hecha = page.getByRole('dialog', { name: 'Tu cuenta de Centra se ha borrado' });
     await expect(hecha).toBeVisible({ timeout: 15_000 });
     // Sin token de Apple que revocar, se le dice cómo quitar el acceso ella misma (Apple TN3194).
     await expect(hecha.getByText(/Iniciar sesión con Apple/)).toBeVisible();
@@ -184,7 +184,7 @@ test.describe('App de iOS · cambiar de estudio y borrar la cuenta', () => {
     expect([...new Set(and.sinMockear())], 'andamiaje incompleto').toEqual([]);
   });
 
-  test('borrada de verdad en la app: vuelve a la entrada de Tentare', async ({ page }) => {
+  test('borrada de verdad en la app: vuelve a la entrada de Centra', async ({ page }) => {
     await sembrarSociaCompleta(page);
     const sesionAlSalir = await vigilarSalida(page);
     await comoAppNativa(page);
@@ -193,7 +193,7 @@ test.describe('App de iOS · cambiar de estudio y borrar la cuenta', () => {
     const hoja = await abrirHoja(page);
     await hoja.getByLabel(ETIQUETA).fill('BORRAR');
     await hoja.getByRole('button', { name: 'Borrar mi cuenta', exact: true }).click();
-    await page.getByRole('dialog', { name: 'Tu cuenta de Tentare se ha borrado' })
+    await page.getByRole('dialog', { name: 'Tu cuenta de Centra se ha borrado' })
       .getByRole('button', { name: 'Entendido', exact: true }).click({ timeout: 15_000 });
     await expect(page).toHaveURL(/\/app$/, { timeout: 30_000 });
     expect(posts).toHaveLength(1);

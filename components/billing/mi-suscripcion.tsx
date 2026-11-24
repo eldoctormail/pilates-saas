@@ -1,7 +1,7 @@
 'use client';
 
 // «Mi suscripción» (Fase 3 de Billing & Revenue, 17-nov-2026). Lo que la propietaria ve de lo que
-// paga a Tentare, LEÍDO DE STRIPE (nada de números nuestros): plan, importe, renovación, tarjeta,
+// paga a Centra, LEÍDO DE STRIPE (nada de números nuestros): plan, importe, renovación, tarjeta,
 // estado y facturas descargables, y lo que puede hacer. Reglas de cuándo se aplica cada cambio en
 // lib/billing/mi-suscripcion/reglas.ts.
 //

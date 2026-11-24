@@ -283,11 +283,11 @@ const COLUMNAS_NOMBRE_DECIDIDAS: Record<string, string> = {
   'reward_redemptions.recompensa_nombre': 'fuera: el nombre de la RECOMPENSA eliminada del catálogo, no el de una persona',
   'tarjetas_regalo.comprador_nombre': 'fuera: quien compró el regalo (un tercero, normalmente cliente), no una persona del equipo',
   'tarjetas_regalo.destinatario_nombre': 'fuera: quien recibe el regalo (un tercero), no una persona del equipo',
-  'plataforma_auditoria.actor_nombre': 'fuera: equipo de Tentare, no del estudio',
-  'sales_leads.estudio_nombre': 'fuera: prospección de Tentare',
+  'plataforma_auditoria.actor_nombre': 'fuera: equipo de Centra, no del estudio',
+  'sales_leads.estudio_nombre': 'fuera: prospección de Centra',
   'altas_estudio.estudio_nombre': 'fuera: el nombre del ESTUDIO que se escribió en el alta, no de una persona; la fila cae con su cuenta (on delete cascade)', 'studios.creditos_nombre': 'fuera: ajuste del estudio',
-  'verifactu_declaraciones_responsables.productor_nombre': 'fuera: el productor del SIF (Tentare), no del estudio; declaración de solo añadir',
-  'verifactu_representaciones.apoderado_nombre': 'fuera: el apoderado de Tentare ante la AEAT, no del estudio',
+  'verifactu_declaraciones_responsables.productor_nombre': 'fuera: el productor del SIF (Centra), no del estudio; declaración de solo añadir',
+  'verifactu_representaciones.apoderado_nombre': 'fuera: el apoderado de Centra ante la AEAT, no del estudio',
   'verifactu_representaciones.otorgante_nombre': 'fuera: quien otorgó el poder IZ860 en la AEAT; evidencia de representación que se conserva por obligación legal',
 };
 

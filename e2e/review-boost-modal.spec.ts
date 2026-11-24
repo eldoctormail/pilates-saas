@@ -90,26 +90,26 @@ async function montarDashboard(page: Page, opts: {
 test.describe('Review Boost — modal tras el trial', () => {
   test('estudio elegible: aparece el modal de valoración', async ({ page }) => {
     await montarDashboard(page, { elegible: true });
-    await expect(page.getByText('¿Qué te está pareciendo Tentare?')).toBeVisible({ timeout: 30_000 });
+    await expect(page.getByText('¿Qué te está pareciendo Centra?')).toBeVisible({ timeout: 30_000 });
   });
 
   test('estudio NO elegible: el dashboard carga normal y el modal no aparece', async ({ page }) => {
     await montarDashboard(page, { elegible: false });
     await expect(page.getByText('Clientes hoy')).toBeVisible({ timeout: 30_000 });
-    await expect(page.getByText('¿Qué te está pareciendo Tentare?')).toHaveCount(0);
+    await expect(page.getByText('¿Qué te está pareciendo Centra?')).toHaveCount(0);
   });
 
   test('ya mostrado antes: no se repite en una nueva carga', async ({ page }) => {
     await montarDashboard(page, { elegible: true, mostrado: true });
     await expect(page.getByText('Clientes hoy')).toBeVisible({ timeout: 30_000 });
-    await expect(page.getByText('¿Qué te está pareciendo Tentare?')).toHaveCount(0);
+    await expect(page.getByText('¿Qué te está pareciendo Centra?')).toHaveCount(0);
   });
 
   test('recargar con el modal abierto NO lo vuelve a enseñar: se apunta al enseñarlo', async ({ page }) => {
     // «Entro, recargo y pum, otra vez la reseña» (14-sep): solo se apuntaba al
     // CERRAR, así que recargar o salir con el modal abierto no escribía nada.
     const { escriturasEstudio } = await montarDashboard(page, { elegible: true });
-    await expect(page.getByText('¿Qué te está pareciendo Tentare?')).toBeVisible({ timeout: 30_000 });
+    await expect(page.getByText('¿Qué te está pareciendo Centra?')).toBeVisible({ timeout: 30_000 });
 
     // Contador: sin esta escritura, que no salga al recargar no probaría nada.
     await expect.poll(() => escriturasEstudio.length, { timeout: 10_000 }).toBeGreaterThan(0);
@@ -121,12 +121,12 @@ test.describe('Review Boost — modal tras el trial', () => {
     await expect(page.getByText('Clientes hoy')).toBeVisible({ timeout: 30_000 });
     // Margen para que el estudio cargue y el modal decida: sin él, «no está» podría ser «aún no».
     await page.waitForTimeout(2_000);
-    await expect(page.getByText('¿Qué te está pareciendo Tentare?')).toHaveCount(0);
+    await expect(page.getByText('¿Qué te está pareciendo Centra?')).toHaveCount(0);
   });
 
   test('5 estrellas: feedback enviado con rating correcto, recompensa mostrada, e invitación SIN condicionar', async ({ page }) => {
     const { feedbackRequests } = await montarDashboard(page, { elegible: true });
-    await expect(page.getByText('¿Qué te está pareciendo Tentare?')).toBeVisible({ timeout: 30_000 });
+    await expect(page.getByText('¿Qué te está pareciendo Centra?')).toBeVisible({ timeout: 30_000 });
 
     await page.getByRole('radio', { name: '5 estrellas' }).click();
 
@@ -158,7 +158,7 @@ test.describe('Review Boost — modal tras el trial', () => {
       ...REAPARICION,
       feedbackPost: { status: 409, body: { error: 'Ya nos habías compartido tu opinión, gracias de nuevo.', recompensa: false } },
     });
-    await expect(page.getByText('¿Qué te está pareciendo Tentare?')).toBeVisible({ timeout: 30_000 });
+    await expect(page.getByText('¿Qué te está pareciendo Centra?')).toBeVisible({ timeout: 30_000 });
 
     await page.getByRole('radio', { name: '5 estrellas' }).click();
 
@@ -177,7 +177,7 @@ test.describe('Review Boost — modal tras el trial', () => {
       ...REAPARICION,
       feedbackPost: { status: 409, body: { error: 'Ya nos habías compartido tu opinión, gracias de nuevo.', recompensa: true } },
     });
-    await expect(page.getByText('¿Qué te está pareciendo Tentare?')).toBeVisible({ timeout: 30_000 });
+    await expect(page.getByText('¿Qué te está pareciendo Centra?')).toBeVisible({ timeout: 30_000 });
     await page.getByRole('radio', { name: '5 estrellas' }).click();
     await expect(page.getByText('Nos alegra mucho saberlo ❤️')).toBeVisible({ timeout: 10_000 });
     await expect(page.getByText(/20% de descuento en tu primer/)).toBeVisible();
@@ -185,7 +185,7 @@ test.describe('Review Boost — modal tras el trial', () => {
 
   test('2 estrellas: va a feedback interno, SIN recompensa ni plataformas externas', async ({ page }) => {
     const { feedbackRequests } = await montarDashboard(page, { elegible: true });
-    await expect(page.getByText('¿Qué te está pareciendo Tentare?')).toBeVisible({ timeout: 30_000 });
+    await expect(page.getByText('¿Qué te está pareciendo Centra?')).toBeVisible({ timeout: 30_000 });
 
     await page.getByRole('radio', { name: '2 estrellas' }).click();
     await expect(page.getByText('Queremos hacerlo mejor')).toBeVisible();
@@ -195,7 +195,7 @@ test.describe('Review Boost — modal tras el trial', () => {
     await page.getByPlaceholder('Lo que quieras contarnos (opcional)').fill('El calendario tarda en cargar.');
     await page.getByRole('button', { name: 'Enviar' }).click();
 
-    await expect(page.getByText('¿Qué te está pareciendo Tentare?')).toHaveCount(0);
+    await expect(page.getByText('¿Qué te está pareciendo Centra?')).toHaveCount(0);
     await expect(page.getByText('Queremos hacerlo mejor')).toHaveCount(0);
     expect(feedbackRequests).toEqual([{ rating: 2, comentario: 'El calendario tarda en cargar.' }]);
   });

@@ -89,7 +89,7 @@ export default function FichaEstudioInterno({ params }: { params: Promise<{ id: 
         </Bloque>
 
         <Bloque titulo="Pagos">
-          <Dato etiqueta="Suscripción a Tentare">
+          <Dato etiqueta="Suscripción a Centra">
             {f.prueba.conSuscripcionStripe ? textoSuscripcion(f.prueba.estado) : `Sin suscripción de Stripe (${textoSuscripcion(f.prueba.estado)})`}
           </Dato>
           <Dato etiqueta="Cliente en Stripe">{f.pagos.tieneClienteStripe ? 'Sí' : 'No'}</Dato>

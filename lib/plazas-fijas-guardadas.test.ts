@@ -65,7 +65,7 @@ test('si falla a mitad, se dice cuáles ya están guardadas', () => {
 });
 
 test('límite semanal: sin límite en la cuota no se avisa nunca, elija las que elija', () => {
-  // Una cuota «2 días a la semana» sin `limite_semanal` puesto: para Tentare no tiene tope.
+  // Una cuota «2 días a la semana» sin `limite_semanal` puesto: para Centra no tiene tope.
   assert.equal(avisoLimiteSemanal(null, 0, 2), null);
   assert.equal(avisoLimiteSemanal(0, 3, 4), null);
 });

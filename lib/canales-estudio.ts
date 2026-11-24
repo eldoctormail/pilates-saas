@@ -1,6 +1,6 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // Canales del estudio: dónde puede encontrar una clienta al estudio FUERA de
-// Tentare. Catálogo único (id, etiqueta, placeholder) + resolución del enlace.
+// Centra. Catálogo único (id, etiqueta, placeholder) + resolución del enlace.
 //
 // ⚠️ Los canales NO viven todos en el mismo sitio, y es a propósito:
 //

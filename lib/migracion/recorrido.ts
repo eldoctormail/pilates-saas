@@ -1,15 +1,15 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// «Cambiar a Tentare»: el recorrido de migración de Academy. Puro y sin `@/`: se prueba con `node --test`.
+// «Cambiar a Centra»: el recorrido de migración de Academy. Puro y sin `@/`: se prueba con `node --test`.
 //
 // El importador (`lib/migracion/**`, «Traer mis datos») ya sabe leer, mapear, revisar y deshacer. Lo que faltaba era el RECORRIDO: de
-// «voy a cambiar de software» a «Tentare es mi software principal», con el miedo de perder datos o parar el estudio a la vista. Son 11
+// «voy a cambiar de software» a «Centra es mi software principal», con el miedo de perder datos o parar el estudio a la vista. Son 11
 // pasos con cinco estados (Pendiente, En progreso, Completado, Requiere revisión, Bloqueado).
 //
 // ── De dónde sale cada estado ────────────────────────────────────────────────
 //  · Los pasos de DATOS (importar alumnas, bonos, horario) se dan por hechos solos cuando el dato existe de verdad en el estudio:
 //    nunca se marcan a mano, igual que el progreso de «Primeros pasos». Si la propietaria los marca «Requiere revisión» o «Bloqueado»,
 //    eso manda sobre el dato.
-//  · Los MANUALES (exportar, revisar, hacer una prueba, activar) son cosas que ocurren fuera de Tentare o que solo ella puede dar por
+//  · Los MANUALES (exportar, revisar, hacer una prueba, activar) son cosas que ocurren fuera de Centra o que solo ella puede dar por
 //    buenas: los marca ella y quedan guardados (`migracion_checklist`).
 //
 // ── Lo que NO se promete ─────────────────────────────────────────────────────
@@ -76,7 +76,7 @@ export const PASOS: readonly PasoMigracion[] = [
     descripcion: 'Que las reservas ya hechas están y que sabes cómo vas a cobrar a partir de ahora.' },
   { id: 'prueba', numero: '10', titulo: 'Haz una prueba de principio a fin', modo: 'manual',
     descripcion: 'Entra como una alumna, reserva una clase y comprueba el aviso, el lugar y el bono. Antes de decirle nada a nadie.' },
-  { id: 'activar', numero: '11', titulo: 'Activa Tentare como tu software principal', modo: 'manual',
+  { id: 'activar', numero: '11', titulo: 'Activa Centra como tu software principal', modo: 'manual',
     descripcion: 'Avisa a tus alumnas, cambia el enlace de reservas de tu web y deja el programa anterior en solo lectura unos días.' },
 ];
 
@@ -115,7 +115,7 @@ export function resumirRecorrido(pasos: readonly PasoConEstado[]): ResumenRecorr
   };
 }
 
-/** Qué falta antes de «Activar Tentare». No lo impide —es su estudio y su decisión—, pero se lo dice con claridad. */
+/** Qué falta antes de «Activar Centra». No lo impide —es su estudio y su decisión—, pero se lo dice con claridad. */
 export function pendientesAntesDeActivar(pasos: readonly PasoConEstado[]): PasoConEstado[] {
   return pasos.filter(p => p.paso.id !== 'activar' && p.estado !== 'COMPLETADO');
 }
@@ -174,7 +174,7 @@ export const ORIGENES: readonly OrigenMigracion[] = [
   {
     id: 'mindbody', nombre: 'Mindbody', verificado: false, comprobado: FECHA_COMPROBACION,
     pasos: [],
-    aviso: 'No hemos encontrado una guía oficial pública de exportación. Las guías de terceros que ayudan a salir de Mindbody citan, dentro de Informes, los de «Mailing List» (clientes) y «Membership» (membresías), con descarga a Excel; los nombres cambian según la versión, así que confírmalo en tu cuenta o con su soporte. El importador de Tentare reconoce un archivo de clientes con las columnas «Pricing Option», «Remaining» y «Expiration Date» y trae también el saldo de cada bono, y lee las fechas en formato MM/DD/AAAA.',
+    aviso: 'No hemos encontrado una guía oficial pública de exportación. Las guías de terceros que ayudan a salir de Mindbody citan, dentro de Informes, los de «Mailing List» (clientes) y «Membership» (membresías), con descarga a Excel; los nombres cambian según la versión, así que confírmalo en tu cuenta o con su soporte. El importador de Centra reconoce un archivo de clientes con las columnas «Pricing Option», «Remaining» y «Expiration Date» y trae también el saldo de cada bono, y lee las fechas en formato MM/DD/AAAA.',
     fuente: { texto: 'Guía de terceros (PushPress), no oficial', href: 'https://help.pushpress.com/en/articles/9864391-core-migration-export-member-list-from-previous-software-platform' },
   },
   {
@@ -190,7 +190,7 @@ export const ORIGENES: readonly OrigenMigracion[] = [
       'Si solo te deja descargar uno, empieza por los clientes: el resto se puede traer después.',
       'Sube los archivos tal cual en «Traer mis datos»: reconoce solo qué es cada uno y ves el plan antes de ejecutar nada.',
     ],
-    aviso: 'Si tu programa no te deja descargar nada, pídeselo a su soporte. Tentare no puede conectarse a otro programa por ti.',
+    aviso: 'Si tu programa no te deja descargar nada, pídeselo a su soporte. Centra no puede conectarse a otro programa por ti.',
     fuente: null,
   },
 ];
@@ -201,7 +201,7 @@ export function origenDe(id: unknown): OrigenMigracion | null {
 
 /** Lo que no se puede traer, dicho claro. Las tarjetas guardadas no pasan de una plataforma a otra (lo dice también la FAQ de la web). */
 export const LIMITES_DE_LA_MIGRACION: readonly string[] = [
-  'Las tarjetas guardadas de tus alumnas no se pueden pasar de una plataforma a otra: tendrán que volver a guardarlas al reservar o pagar con Tentare.',
-  'Los cobros automáticos que tuvieras en el programa anterior no se trasladan: se vuelven a configurar en Tentare, y hasta entonces conviene no cancelar los de allí.',
+  'Las tarjetas guardadas de tus alumnas no se pueden pasar de una plataforma a otra: tendrán que volver a guardarlas al reservar o pagar con Centra.',
+  'Los cobros automáticos que tuvieras en el programa anterior no se trasladan: se vuelven a configurar en Centra, y hasta entonces conviene no cancelar los de allí.',
   'Lo que tu programa no deje exportar, no se puede importar: en ese caso se crea a mano o se pide a su soporte.',
 ];

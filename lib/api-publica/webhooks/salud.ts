@@ -4,7 +4,7 @@
 // Tres avisos, y nunca dos veces el mismo por racha (`aviso_fallando_en`):
 //   · «tu programa no recibe los avisos»: lleva HORAS_PARA_AVISAR sin entregar
 //     nada. Va antes de desactivarlo, para que pueda arreglarlo a tiempo;
-//   · «se ha desactivado»: lo apaga Tentare (días sin entregar, o el destino
+//   · «se ha desactivado»: lo apaga Centra (días sin entregar, o el destino
 //     dice 410). Desde ahí, lo que pase no le llega;
 //   · «vuelve a recibirlos»: cierra el primero cuando entrega otra vez (todo
 //     aviso de problema tiene su aviso de resolución).

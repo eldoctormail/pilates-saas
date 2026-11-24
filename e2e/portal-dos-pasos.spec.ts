@@ -163,7 +163,7 @@ test('si el servidor dice que falta el paso aunque el móvil crea que no, la app
   await expect.poll(() => n.enviar).toBe(1);
 });
 
-test('con solo el factor de la zona interna de Tentare, la app no pide el código', async ({ page }) => {
+test('con solo el factor de la zona interna de Centra, la app no pide el código', async ({ page }) => {
   // 5-oct-2026: el factor que /interno obliga a crear ('Tentare Internal') solo
   // cuenta allí. Antes encendía el código también en la app del estudio.
   await montarPortal(page, { conSesion: true });

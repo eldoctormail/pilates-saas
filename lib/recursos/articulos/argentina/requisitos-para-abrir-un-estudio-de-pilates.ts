@@ -139,7 +139,7 @@ const articulo: Articulo = {
           t: 'producto',
           titulo: 'El apto físico de cada alumna, en su ficha',
           texto:
-            'En Tentare cada alumna tiene su ficha con los datos de salud, que solo ve quien debe verlos. Así sabes, antes de la clase, quién tiene el apto al día.',
+            'En Centra cada alumna tiene su ficha con los datos de salud, que solo ve quien debe verlos. Así sabes, antes de la clase, quién tiene el apto al día.',
         },
       ],
     },
@@ -181,7 +181,7 @@ const articulo: Articulo = {
         },
         {
           t: 'llamada',
-          texto: 'Tentare guarda la ficha de salud de cada alumna con su consentimiento y con acceso por rol: recepción no ve el detalle.',
+          texto: 'Centra guarda la ficha de salud de cada alumna con su consentimiento y con acceso por rol: recepción no ve el detalle.',
         },
       ],
     },
@@ -225,7 +225,7 @@ const articulo: Articulo = {
   ],
   cta: {
     titulo: 'Con los papeles en regla, que la gestión no te quite horas',
-    texto: 'Tentare lleva las reservas, los bonos, los cobros con Mercado Pago y la factura electrónica de ARCA de tu estudio desde el primer día, con la ficha de salud de cada alumna. Empieza gratis.',
+    texto: 'Centra lleva las reservas, los bonos, los cobros con Mercado Pago y la factura electrónica de ARCA de tu estudio desde el primer día, con la ficha de salud de cada alumna. Empieza gratis.',
   },
   revision: [
     'Ley 139: la página del Boletín Oficial indica que la Ley 6779/2024 derogó su artículo 1 (la definición de gimnasio) y que la Ley 6316/2020 sustituyó el artículo 3; se leyó el texto original. Revisar el texto actualizado del Digesto antes de publicar.',

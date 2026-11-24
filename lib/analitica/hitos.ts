@@ -16,7 +16,7 @@
 // crear, pueden repetir un hito. Un embudo de PostHog solo cuenta la primera
 // vez de cada paso, así que repetir no estropea la medida; lo que la estropea
 // es un hueco. Evitarlo del todo exigiría guardar estado en el dispositivo, y
-// la analítica de Tentare no guarda nada en el dispositivo
+// la analítica de Centra no guarda nada en el dispositivo
 // (`app/(legal)/cookies`).
 // ─────────────────────────────────────────────────────────────────────────────
 import type { DatosHecho } from '../tour/hecho.ts';

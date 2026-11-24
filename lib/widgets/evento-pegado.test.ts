@@ -8,7 +8,7 @@ import { firmaDeUrl } from './firma-contenido.ts';
 import { FIRMA_CONTENIDO_VALIDA, FORMAS_PEGADAS } from './pegado.ts';
 import { pegadoDelEvento, propiosDeLaPeticion, type PegadoDelEvento } from './evento-pegado.ts';
 
-// Como la ruta en desarrollo: el canónico de Tentare y el origen que atiende.
+// Como la ruta en desarrollo: el canónico de Centra y el origen que atiende.
 const PROPIOS = propiosDeLaPeticion('http://localhost:3000');
 const TENTARE = new URL(LEGAL.url).origin;
 const APEX = `https://${new URL(LEGAL.url).hostname.replace(/^www\./, '')}`;
@@ -88,7 +88,7 @@ test('la nativa con una cabecera que no es una web: la carga cuenta, la direcci�
   }
 });
 
-test('⚠️ `?studioId=` con Origin de Tentare no es la nativa: cuenta el cuerpo', () => {
+test('⚠️ `?studioId=` con Origin de Centra no es la nativa: cuenta el cuerpo', () => {
   for (const origen of [TENTARE, APEX, 'http://localhost:3000', 'https://tentare-git-rama.vercel.app']) {
     assert.deepEqual(deNativa(origen), NADA, `sin cuerpo, ${origen}`);
     assert.deepEqual(deNativa(origen, { forma: 'nativa', anfitrion: WEB }), NADA, `nativa en el cuerpo, ${origen}`);
@@ -125,13 +125,13 @@ test('⚠️ la nativa desde una web que el estudio NO autorizó no cuenta: ni f
 
 // ── La página: dentro de una página o encima ─────────────────────────────────
 
-test('⚠️ la forma del cuerpo solo cuenta si la petición sale de Tentare', () => {
+test('⚠️ la forma del cuerpo solo cuenta si la petición sale de Centra', () => {
   const cuerpo = { forma: 'incrustado', anfitrion: WEB, firma: FIRMA };
   // Sin cabecera, con la de otra web o con la de un iframe sandbox: nada.
   for (const origenCabecera of [null, '', WEB, 'https://otra.example.com', 'null']) {
     assert.deepEqual(desde({ origenCabecera, cuerpo }), NADA, String(origenCabecera));
   }
-  // Desde Tentare (el canónico, el apex o el despliegue que atiende), sí.
+  // Desde Centra (el canónico, el apex o el despliegue que atiende), sí.
   for (const origenCabecera of [TENTARE, APEX, 'http://localhost:3000']) {
     assert.deepEqual(desde({ origenCabecera, cuerpo }), { forma: 'incrustado', anfitrion: WEB, firma: FIRMA }, origenCabecera);
   }
@@ -167,7 +167,7 @@ test('una forma que no es de iframe ni de popup: nada (botón y enlace no mandan
   }
 });
 
-test('⚠️ un anfitrión de Tentare, de *.vercel.app o una IP se descarta; la forma y la firma se quedan', () => {
+test('⚠️ un anfitrión de Centra, de *.vercel.app o una IP se descarta; la forma y la firma se quedan', () => {
   for (const anfitrion of [
     TENTARE, APEX, `${TENTARE}/onboarding`, 'http://localhost:3000', 'https://tentare-git-rama.vercel.app',
     'http://192.168.1.10', 'null', '', 42, null, undefined,
@@ -190,7 +190,7 @@ test('una firma inválida no tira la visita: firma null, forma y anfitrión se q
   }
 });
 
-test('propiosDeLaPeticion: el canónico de Tentare y el de la petición, con el apex como www', () => {
+test('propiosDeLaPeticion: el canónico de Centra y el de la petición, con el apex como www', () => {
   assert.deepEqual(propiosDeLaPeticion('http://localhost:3000'), [TENTARE, 'http://localhost:3000']);
   assert.deepEqual(propiosDeLaPeticion(APEX), [TENTARE, TENTARE]);
 });

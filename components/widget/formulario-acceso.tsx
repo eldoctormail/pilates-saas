@@ -4,7 +4,7 @@
 // Fase 2 del Booking Engine, ver docs/auth-widget-diseno.md.
 //
 // Contraseña es el camino primario; el correo (enlace o código), para quien no
-// tiene contraseña todavía. Los dos se HACEN en una ventana de Tentare
+// tiene contraseña todavía. Los dos se HACEN en una ventana de Centra
 // (app/widget-auth-retorno), no aquí: el captcha que gotrue exige en todo
 // acceso solo da token en tentare.app, nunca en la web del estudio (error
 // 110200 de Turnstile). Este formulario recoge los datos, abre esa ventana en
@@ -57,7 +57,7 @@ export function FormularioAccesoWidget({
    * Tiene la verificación en dos pasos activada y esta sesión aún no la ha
    * pasado: se le pide aquí mismo el código de su app. Solo la app: la cookie
    * del dispositivo recordado y el código por correo viven en la web de
-   * Tentare, no en la del estudio.
+   * Centra, no en la del estudio.
    */
   segundoPaso?: boolean;
   politicaPrivacidad: string;
@@ -75,7 +75,7 @@ export function FormularioAccesoWidget({
   const [aceptaMarketing, setAceptaMarketing] = useState(false);
   const [enviando, setEnviando] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  // La ventana de Tentare no se pudo usar: se ofrece la página de reservas.
+  // La ventana de Centra no se pudo usar: se ofrece la página de reservas.
   const [sinVentana, setSinVentana] = useState<'bloqueada' | 'cerrada' | null>(null);
   // La cuenta es de un equipo: la ventana no entrega su sesión aquí.
   const [cuentaDeEquipo, setCuentaDeEquipo] = useState(false);
@@ -199,7 +199,7 @@ export function FormularioAccesoWidget({
       {cuentaDeEquipo && <CuentaDeEquipo t={t} href={urlReservarCompleta(baseUrl, slug)} />}
       {enviando && (
         <p style={{ margin: 0, fontSize: 12.5, color: t.muted }}>
-          Sigue en la ventana de Tentare que se ha abierto; se cerrará sola.
+          Sigue en la ventana de Centra que se ha abierto; se cerrará sola.
         </p>
       )}
       {modo === 'password' ? (
@@ -226,7 +226,7 @@ export function FormularioAccesoWidget({
 }
 
 /**
- * La salida cuando la ventana de Tentare no sirve: el navegador no la dejó
+ * La salida cuando la ventana de Centra no sirve: el navegador no la dejó
  * abrir, se cerró antes de terminar, o la web del estudio corta el vínculo
  * entre ventanas. La página de reservas entera vive en tentare.app, donde el
  * acceso funciona siempre.
@@ -246,7 +246,7 @@ function SinVentana({ t, motivo, href }: { t: ModoTokens; motivo: 'bloqueada' | 
 }
 
 /**
- * La cuenta es del equipo de un estudio (o de Tentare): por el widget de la web
+ * La cuenta es del equipo de un estudio (o de Centra): por el widget de la web
  * de un estudio solo entran alumnas (decisión del fundador, 16-oct-2026). Reserva
  * desde la página entera, en tentare.app.
  */

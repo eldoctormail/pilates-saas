@@ -34,7 +34,7 @@ export function GuiaPasoAPaso() {
   const paso = pasoPedido(guia.ruta, params.get('paso'));
   if (!paso) return null;
 
-  const ayudaHref = enlaceWhatsApp(SOPORTE_WHATSAPP, `Hola, soy de ${studio.nombre || 'mi estudio'} y estoy poniendo en marcha Tentare:`);
+  const ayudaHref = enlaceWhatsApp(SOPORTE_WHATSAPP, `Hola, soy de ${studio.nombre || 'mi estudio'} y estoy poniendo en marcha Centra:`);
 
   return (
     <>

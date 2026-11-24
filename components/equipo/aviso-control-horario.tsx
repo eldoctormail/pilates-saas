@@ -31,7 +31,7 @@ export function AvisoControlHorario({ pendientes, enLiquidaciones = false }: {
             Control horario: dinos cómo trabaja cada instructora
           </h2>
           <p className="text-muted-foreground">
-            Tus instructoras empiezan cada clase desde su app («Empezar clase») y Tentare anota si la dieron y a qué hora.
+            Tus instructoras empiezan cada clase desde su app («Empezar clase») y Centra anota si la dieron y a qué hora.
             {' '}<strong className="text-foreground">Contratada</strong>: además ficha su jornada, como exige la ley.
             {' '}<strong className="text-foreground">Autónoma</strong>: no ficha, y se le paga por las clases que da.
           </p>

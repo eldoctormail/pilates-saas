@@ -372,7 +372,7 @@ export const analizarEstudio = inngest.createFunction(
       const tasasPorTipo = new Map(
         (await dbCalcularSeguimientoPorTipo(studioId, now)).map(t => [t.tipo, { total: t.total, seguidas: t.seguidas }])
       );
-      // Fase 3 del Umbral (Pilar 3 de "Tentare 2030"): refina la puerta de
+      // Fase 3 del Umbral (Pilar 3 de "Centra 2030"): refina la puerta de
       // impacto con € realmente medidos, cuando hay evidencia suficiente. Mismo
       // motivo que tasasPorTipo para construirlo aquí dentro y no devolverlo de
       // step.run: no aplica el gotcha de Maps serializándose a `{}` en el replay.
@@ -547,7 +547,7 @@ async function ejecutarEnvioEmail(r: Recomendacion): Promise<{ ok: boolean; deta
   });
   const { error } = await resend.emails.send(
     {
-      from: remitentePorMarca(estudioNombre || 'Tentare'), to: [socio.email], subject: mensaje.asunto, html,
+      from: remitentePorMarca(estudioNombre || 'Centra'), to: [socio.email], subject: mensaje.asunto, html,
       // Si la socia contesta, le contesta a SU estudio y no al buzón de la plataforma.
       ...(studio.replyTo ? { replyTo: studio.replyTo } : {}),
     },
@@ -643,7 +643,7 @@ async function ejecutarContactoSocia(r: Recomendacion): Promise<{ ok: boolean; d
   });
   const { error } = await resend.emails.send(
     {
-      from: remitentePorMarca(studio.nombre || 'Tentare'), to: [socio.email as string], subject: mensaje.asunto, html,
+      from: remitentePorMarca(studio.nombre || 'Centra'), to: [socio.email as string], subject: mensaje.asunto, html,
       ...(studio.replyTo ? { replyTo: studio.replyTo } : {}),
     },
     { idempotencyKey: r.id }
@@ -802,7 +802,7 @@ export const ejecutarRecomendacion = inngest.createFunction(
     const loQuePaso: ResultadoEjecucion = { detalle: resultado.detalle, ...(resultado.cobro ? { cobro: resultado.cobro } : {}) };
     // Quién firma la línea del feed: el piloto automático aprueba con
     // resuelto_por='AUTONOMIA' (aprobar_recomendacion_autonoma) y eso lo hizo
-    // Tentare solo. Si la aprobó la propietaria, la decisión es suya y Tentare
+    // Centra solo. Si la aprobó la propietaria, la decisión es suya y Centra
     // solo la ejecuta: es actividad del equipo.
     const origenActividad = recomendacion.resueltoPor === 'AUTONOMIA' ? 'TENTARE' : 'EQUIPO';
     // Traza visible en el feed "Actividad" del Centro (antes aprobar no dejaba

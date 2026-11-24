@@ -2,7 +2,7 @@ import { OG_IMAGE_CONTENT_TYPE, OG_IMAGE_SIZE, generarOgImage } from '@/lib/og-i
 import { PLAN_INFO } from '@/lib/billing/entitlements';
 import { LIMITES_GRATIS } from '@/lib/landing/founding-gratis';
 
-export const alt = 'Precios de Tentare — Software para estudios de Pilates';
+export const alt = 'Precios de Centra — Software para estudios de Pilates';
 export const size = OG_IMAGE_SIZE;
 export const contentType = OG_IMAGE_CONTENT_TYPE;
 

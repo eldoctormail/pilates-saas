@@ -65,7 +65,7 @@ export const CATALOGO = {
   orden_consumo_bonos: {
     id: 'orden_consumo_bonos',
     titulo: 'De qué bono se descuenta la sesión',
-    descripcion: 'Qué bono gasta Tentare cuando una alumna tiene varios y reserva una clase (y qué pasa si tiene cuota mensual).',
+    descripcion: 'Qué bono gasta Centra cuando una alumna tiene varios y reserva una clase (y qué pasa si tiene cuota mensual).',
     guiaParametros: [
       'bonos (2-3): cada uno {alcance: "todas"|"solo_esta_clase"|"solo_otra_clase", caducaEnDias: 0-120 o null si no caduca, restantes: 0-20}.',
       'tieneCuotaMensualQueCubre (true/false): si además tiene una cuota mensual que cubre la clase.',

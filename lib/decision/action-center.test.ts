@@ -55,7 +55,7 @@ test('el tope acota lo que se PINTA, no lo que se cuenta', () => {
   assert.equal(r.nUnToque, 9);
 });
 
-// ── "lo hace Tentare" sale del mismo dueño que el botón (efecto-aprobar.ts) ──
+// ── "lo hace Centra" sale del mismo dueño que el botón (efecto-aprobar.ts) ──
 
 test('«la hago yo con un toque» solo donde el botón del Centro de Control no dice «Hecho»', () => {
   const r = resumirAcciones([

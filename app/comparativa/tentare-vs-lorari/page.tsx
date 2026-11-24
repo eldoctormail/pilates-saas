@@ -11,9 +11,9 @@ export const metadata: Metadata = {
   description: pagina.descripcion,
   alternates: { canonical: urlDe(PATH) },
   openGraph: {
-    siteName: 'Tentare',
+    siteName: 'Centra',
     type: 'website',
-    title: 'Tentare vs Lorari',
+    title: 'Centra vs Lorari',
     description: 'Precio, permanencia y funciones — comparados con lo que consta en la web pública de Lorari.',
     url: urlDe(PATH),
   },
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 // comprobado (contratos, comisiones, dónde aloja los datos): eso no vuelve a entrar.
 const ROWS: ComparativaRow[] = [
   { feature: 'Sin permanencia', tentare: ['yes', 'Sí, mes a mes'], them: ['yes', '«Cancela cuando quieras», según su web'] },
-  { feature: 'Comisión de la plataforma por cobro', tentare: ['yes', 'Ninguna de Tentare (solo la de Stripe)'], them: ['partial', 'Los cobros por Stripe llevan sus comisiones; no consta si Lorari añade la suya'] },
+  { feature: 'Comisión de la plataforma por cobro', tentare: ['yes', 'Ninguna de Centra (solo la de Stripe)'], them: ['partial', 'Los cobros por Stripe llevan sus comisiones; no consta si Lorari añade la suya'] },
   { feature: 'App con la marca del estudio', tentare: ['yes', 'Con tu nombre, tu icono, tu logo y tus colores, en todos los planes; se instala desde el navegador'], them: ['yes', '«Tu app con tu logo», según su web'] },
   // Revisado el 7-oct-2026 en lorari.com/pricing: la lista de espera va en el plan Pro.
   { feature: 'Lista de espera automática', tentare: ['yes', 'En todos los planes: la plaza que se libera pasa sola a la siguiente'], them: ['partial', 'Lista de espera por WhatsApp, desde el plan Pro'] },
@@ -43,7 +43,7 @@ const ROWS: ComparativaRow[] = [
 const FAQ = [
   {
     q: '¿Cuánto cuesta Lorari?',
-    a: 'Según su web, pagando el año: Starter 12 €/mes (50 alumnos activos), Pro 27 €/mes (150) y Business 51 €/mes (ilimitados); mes a mes, 16, 36 y 68 €. IVA aparte y 14 días de prueba. Tentare: Founding Studio gratis (hasta 150 reservas al mes; si pasas de ahí, 29 €/mes), Estudio 79 €/mes y Cadena 249 €/mes, IVA incluido.',
+    a: 'Según su web, pagando el año: Starter 12 €/mes (50 alumnos activos), Pro 27 €/mes (150) y Business 51 €/mes (ilimitados); mes a mes, 16, 36 y 68 €. IVA aparte y 14 días de prueba. Centra: Founding Studio gratis (hasta 150 reservas al mes; si pasas de ahí, 29 €/mes), Estudio 79 €/mes y Cadena 249 €/mes, IVA incluido.',
   },
 ];
 
@@ -55,7 +55,7 @@ const RESUMEN: ResumenCompetidor = {
   precio: 'Por alumnos activos: de 12 a 51 €/mes + IVA pagando el año; de 16 a 68 € mes a mes',
   permanencia: 'Cancela cuando quieras, según su web',
   prueba: '14 días, pero pide tarjeta al empezar',
-  respuesta: <>Lorari es una app de reservas sencilla para estudios de pilates y yoga, con un precio que sube según tus alumnos activos y sin IVA. Para un estudio con 150 alumnas, Tentare cuesta menos con IVA y además cubre lo que más tiempo te quita: las bajas de las instructoras, el aforo de cada sala y los cobros que fallan. Gratis hasta 150 reservas al mes; si pasas de ahí, 29 €/mes con IVA, sin permanencia.</>,
+  respuesta: <>Lorari es una app de reservas sencilla para estudios de pilates y yoga, con un precio que sube según tus alumnos activos y sin IVA. Para un estudio con 150 alumnas, Centra cuesta menos con IVA y además cubre lo que más tiempo te quita: las bajas de las instructoras, el aforo de cada sala y los cobros que fallan. Gratis hasta 150 reservas al mes; si pasas de ahí, 29 €/mes con IVA, sin permanencia.</>,
 };
 
 const ANALISIS: SeccionAnalisis[] = [
@@ -64,23 +64,23 @@ const ANALISIS: SeccionAnalisis[] = [
     cuerpo: (
       <>
         <p>Lorari cobra por alumnos activos y sus precios no incluyen IVA. Pagando el año: Starter 12 €/mes (hasta 50 alumnos), Pro 27 €/mes (hasta 150) y Business 51 €/mes (sin límite). Mes a mes: 16, 36 y 68 €.</p>
-        <p>Un estudio de reformer en marcha suele pasar de 50 alumnas, así que la comparación real es con el plan Pro. Para 150 alumnas, Lorari Pro sale a 32,67 € al mes con IVA pagando el año por adelantado, o 43,56 € mes a mes. Tentare Founding Studio es gratis hasta 150 reservas al mes; si pasas de ahí, 29 €/mes con IVA, mes a mes y con la app con tu marca incluida. <Link href="/precios">Ver los planes de Tentare</Link>.</p>
+        <p>Un estudio de reformer en marcha suele pasar de 50 alumnas, así que la comparación real es con el plan Pro. Para 150 alumnas, Lorari Pro sale a 32,67 € al mes con IVA pagando el año por adelantado, o 43,56 € mes a mes. Centra Founding Studio es gratis hasta 150 reservas al mes; si pasas de ahí, 29 €/mes con IVA, mes a mes y con la app con tu marca incluida. <Link href="/precios">Ver los planes de Centra</Link>.</p>
       </>
     ),
   },
   {
-    titulo: 'Lo que Tentare hace por ti cuando algo se tuerce',
+    titulo: 'Lo que Centra hace por ti cuando algo se tuerce',
     cuerpo: (
       <>
-        <p>La web de Lorari no menciona sustituciones de instructoras. En Tentare, cuando una instructora avisa de que no puede, el sistema busca quién la cubre según su disponibilidad y su costumbre, la contacta con tu visto bueno y avisa a las alumnas del cambio. <Link href="/funcionalidades/sustituciones">Así funcionan las sustituciones</Link>.</p>
-        <p>Con los cobros pasa algo parecido: si una tarjeta falla, Tentare lo reintenta dos veces más, a los 3 y a los 7 días del vencimiento, y, si no lo consigue, te avisa. Y si prefieres la domiciliación, genera la remesa SEPA para tu banco. <Link href="/funcionalidades/cobros-recurrentes">Cobros automáticos</Link>.</p>
+        <p>La web de Lorari no menciona sustituciones de instructoras. En Centra, cuando una instructora avisa de que no puede, el sistema busca quién la cubre según su disponibilidad y su costumbre, la contacta con tu visto bueno y avisa a las alumnas del cambio. <Link href="/funcionalidades/sustituciones">Así funcionan las sustituciones</Link>.</p>
+        <p>Con los cobros pasa algo parecido: si una tarjeta falla, Centra lo reintenta dos veces más, a los 3 y a los 7 días del vencimiento, y, si no lo consigue, te avisa. Y si prefieres la domiciliación, genera la remesa SEPA para tu banco. <Link href="/funcionalidades/cobros-recurrentes">Cobros automáticos</Link>.</p>
       </>
     ),
   },
   {
-    titulo: 'Cómo cambiarte de Lorari a Tentare',
+    titulo: 'Cómo cambiarte de Lorari a Centra',
     cuerpo: (
-      <p>El importador de Tentare lee ficheros de Excel y CSV: exporta tus alumnas y bonos de Lorari, súbelos y revisa el acta antes de guardar; si algo no cuadra, lo deshaces con un botón. <Link href="/soluciones/cambiar-de-software">Cómo es el cambio</Link>.</p>
+      <p>El importador de Centra lee ficheros de Excel y CSV: exporta tus alumnas y bonos de Lorari, súbelos y revisa el acta antes de guardar; si algo no cuadra, lo deshaces con un botón. <Link href="/soluciones/cambiar-de-software">Cómo es el cambio</Link>.</p>
     ),
   },
 ];
@@ -91,11 +91,11 @@ export default function TentareVsLorariPage() {
       name="Lorari"
       slug="tentare-vs-lorari"
       logo={{ src: '/comparativa/logos/lorari.png', alt: 'Logo de Lorari', height: 34, width: 34 }}
-      intro={<>Lorari es una plataforma de reservas para estudios de pilates y yoga, con precios por número de alumnas activas. Para un <strong style={{ color: 'var(--w-texto)' }}>estudio de pilates en España</strong>, Tentare cubre lo que de verdad te quita tiempo: las bajas de las instructoras, el aforo de cada sala y los cobros.</>}
+      intro={<>Lorari es una plataforma de reservas para estudios de pilates y yoga, con precios por número de alumnas activas. Para un <strong style={{ color: 'var(--w-texto)' }}>estudio de pilates en España</strong>, Centra cubre lo que de verdad te quita tiempo: las bajas de las instructoras, el aforo de cada sala y los cobros.</>}
       resumen={RESUMEN}
       rows={ROWS}
       analisis={ANALISIS}
-      veredicto={<>Tentare es la mejor opción para tu estudio de Pilates: sustituciones de instructoras, plazas fijas, aforo por sala y cobros que se reintentan solos, con precio público en cada plan. Empieza gratis, sin tarjeta.</>}
+      veredicto={<>Centra es la mejor opción para tu estudio de Pilates: sustituciones de instructoras, plazas fijas, aforo por sala y cobros que se reintentan solos, con precio público en cada plan. Empieza gratis, sin tarjeta.</>}
       footnote="Basado en la información pública de Lorari (lorari.com) a 7 de octubre de 2026. «No consta» significa que su web pública no lo indica, no que no exista. Las funciones y precios cambian con el tiempo; verifica siempre con la fuente actual. Lorari es marca de su respectivo propietario; esta comparación es orientativa y sin ánimo de menoscabo."
       faq={FAQ}
     />

@@ -1,4 +1,4 @@
-// El WhatsApp Business de soporte de Tentare: «te responde una persona».
+// El WhatsApp Business de soporte de Centra: «te responde una persona».
 //
 // En un módulo sin dependencias para que lo puedan usar el servidor (los correos
 // del alta nueva) y las pantallas que no viven dentro del panel (/crear-estudio),

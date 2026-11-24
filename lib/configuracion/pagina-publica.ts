@@ -19,7 +19,7 @@
 //   · nadie reserva, compra ni se da de alta desde fuera: sin el pase de la
 //     clave vigente esas rutas contestan 403 (lib/publico/pagina-cerrada-peticion.ts).
 //     Con la clave, sí; cambiarla o quitarla anula el pase de quien ya entró;
-//   · Tentare Network no lo mira: si sale, sigue saliendo y su enlace lleva al aviso.
+//   · Centra Network no lo mira: si sale, sigue saliendo y su enlace lleva al aviso.
 //
 // Pura y sin `@/`: se prueba con `node --test`.
 

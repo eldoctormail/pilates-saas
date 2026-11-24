@@ -34,7 +34,7 @@ export function FormularioContacto() {
     const v = (k: string) => String(d.get(k) ?? '').trim();
     if (!servidor) {
       const cuerpo = [`Nombre: ${v('nombre')}`, `Estudio: ${v('estudio')}`, `Correo: ${v('email')}`, `Tamaño del estudio: ${v('tamano')}`, '', v('mensaje')].join('\n');
-      window.location.href = `mailto:${LEGAL.email}?subject=${encodeURIComponent('Quiero una demo de Tentare')}&body=${encodeURIComponent(cuerpo)}`;
+      window.location.href = `mailto:${LEGAL.email}?subject=${encodeURIComponent('Quiero una demo de Centra')}&body=${encodeURIComponent(cuerpo)}`;
       setEstado('correo');
       return;
     }

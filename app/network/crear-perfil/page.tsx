@@ -1,6 +1,6 @@
 'use client';
 
-// Onboarding de Tentare Network — wizard de 12 pasos (2a-2d del rediseño),
+// Onboarding de Centra Network — wizard de 12 pasos (2a-2d del rediseño),
 // con verificación de identidad y certificaciones por documento. Sustituye
 // al alta de /network/unirse (que se queda viva sin enlazar) como sitio
 // real donde una instructora crea su cuenta Y su perfil — antes eran dos
@@ -19,7 +19,7 @@
 // (formación) son de verdad nuevos — necesitan el modelo de documentos que
 // no existía antes de esta fase.
 //
-// F0 del roadmap de Tentare Network 2.0: partido en un componente por paso
+// F0 del roadmap de Centra Network 2.0: partido en un componente por paso
 // (./pasos/) para no seguir creciendo un único fichero de ~950 líneas. Este
 // fichero se queda solo con el estado de orquestación compartido, las
 // funciones que llaman a la API y mutan `perfil`, el rail de progreso y el
@@ -353,7 +353,7 @@ export default function CrearPerfilNetworkPage() {
           en /network: el wizard tiene firma propia, no una barra lateral
           más. */}
       <aside className="lg:w-[300px] shrink-0 p-8 lg:min-h-dvh" style={{ background: NW_VERDE_OSCURO }}>
-        <Link href="/network" className="inline-flex mb-8"><LogoTentare formato="horizontal" tinta="blanco" producto="network" titulo="Tentare Network" alto={22} decorativo /></Link>
+        <Link href="/network" className="inline-flex mb-8"><LogoTentare formato="horizontal" tinta="blanco" producto="network" titulo="Centra Network" alto={22} decorativo /></Link>
         <h2 className="text-[19px] font-extrabold italic" style={{ color: '#fff' }}>Crea tu perfil</h2>
         <div className="mt-4 h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,.12)' }}>
           <div className="h-full rounded-full transition-all" style={{ width: `${Math.round((paso / (PASOS.length - 1)) * 100)}%`, background: `linear-gradient(90deg, ${NW_PRODUCTO}, ${NW_ARENA})` }} />

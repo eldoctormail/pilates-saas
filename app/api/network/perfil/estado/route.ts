@@ -4,7 +4,7 @@ import { getSupabaseAdmin } from '@/lib/db/supabase-admin';
 import { errorInterno, errorPeticion } from '@/lib/errores-servidor';
 import { mapFilaAPerfil, type FilaRedPerfil } from '@/lib/network/mapeo';
 
-// Tentare Network, Fase 3 (publicación) — docs/NETWORK-IMPLEMENTATION-PLAN.md.
+// Centra Network, Fase 3 (publicación) — docs/NETWORK-IMPLEMENTATION-PLAN.md.
 //
 // Endpoint APARTE de PUT /api/network/perfil a propósito: cambiar de estado
 // tiene una regla de negocio propia (validación mínima para publicar) que no

@@ -15,7 +15,7 @@
 //
 // ⚠️ EL XSD NO ES TODA LA VERDAD. La AEAT valida además reglas de negocio que el
 // esquema no expresa (documento «Validaciones», v1.2.2). `validarRegistroAlta`
-// recoge las que tocan a Tentare —p. ej. `ClaveRegimen` obligatoria con IVA
+// recoge las que tocan a Centra —p. ej. `ClaveRegimen` obligatoria con IVA
 // (error 1245) o `Destinatarios` obligatorio en F1/R1-R4 (error 1189)—, y los
 // constructores se niegan a producir un registro que las incumpla: un registro
 // que sale mal no se arregla reenviándolo, se arregla con otro registro.
@@ -30,11 +30,11 @@ export const NS_SOAP = 'http://schemas.xmlsoap.org/soap/envelope/';
 /** Única versión admitida hoy por el esquema (`VersionType` = 1.0). */
 export const ID_VERSION = '1.0';
 
-/** SHA-256. Es el único valor que usa Tentare y el que fija el motor de huella. */
+/** SHA-256. Es el único valor que usa Centra y el que fija el motor de huella. */
 export const TIPO_HUELLA_SHA256 = '01';
 
 /**
- * Clave de régimen del IVA para las operaciones de Tentare: `01`, «Operación de
+ * Clave de régimen del IVA para las operaciones de Centra: `01`, «Operación de
  * régimen general» (lista L8A). Un estudio de Pilates factura en régimen general;
  * si algún día hubiera otro caso (criterio de caja = 07, recargo de
  * equivalencia = 18…), se decide por factura, no se cambia aquí.
@@ -103,7 +103,7 @@ export interface LineaDesglose {
   impuesto?: string;
   /**
    * Clave de régimen (lista L8A). OBLIGATORIA si el impuesto es IVA/IPSI/IGIC o
-   * no se informa (error 1245). Tentare usa `CLAVE_REGIMEN_GENERAL`.
+   * no se informa (error 1245). Centra usa `CLAVE_REGIMEN_GENERAL`.
    */
   claveRegimen?: string;
   /** 'S1' sujeta no exenta, 'S2' inversión del sujeto pasivo, 'N1'/'N2' no sujeta. */
@@ -208,7 +208,7 @@ function erroresComunes(
 }
 
 /**
- * Las reglas de la AEAT que puede incumplir un registro de Tentare, en local y
+ * Las reglas de la AEAT que puede incumplir un registro de Centra, en local y
  * antes de enviarlo. Devuelve la lista de problemas (vacía = válido). Cada una
  * lleva el código de error de la AEAT al que evita llegar cuando lo hay.
  */
@@ -437,7 +437,7 @@ export interface SobreRegFactu {
   /**
    * Solo para la colaboración social «transitiva» (obligado → asesor →
    * plataforma), que es para lo que la AEAT lo añadió (Descripción del servicio
-   * web, v0.4.0). Con apoderamiento directo —la vía de Tentare— va vacío: quien
+   * web, v0.4.0). Con apoderamiento directo —la vía de Centra— va vacío: quien
    * remite queda identificado por su certificado.
    */
   representante?: EmisorVerifactu;

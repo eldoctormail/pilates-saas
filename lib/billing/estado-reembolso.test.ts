@@ -43,7 +43,7 @@ test('devuelta: avisa de que el dinero AÚN no está en el banco del cliente', (
 });
 
 test('una devolución hecha desde Stripe también explica el plazo del banco', () => {
-  // Sin `reembolsoSolicitadoEn` (no se pidió desde Tentare). La duda de la
+  // Sin `reembolsoSolicitadoEn` (no se pidió desde Centra). La duda de la
   // socia es idéntica, así que la respuesta también.
   const e = estadoReembolso({ estado: 'DEVUELTO' }, AHORA);
   assert.equal(e?.fase, 'DEVUELTA');
@@ -74,7 +74,7 @@ test('D-8: reembolso fallido → FALLIDA, no "atascada" con su mentira de que el
   assert.equal(r?.fase, 'FALLIDA');
 });
 
-test('D-8: FALLIDA aunque el reembolso no se pidiera desde Tentare (hecho en Stripe)', () => {
+test('D-8: FALLIDA aunque el reembolso no se pidiera desde Centra (hecho en Stripe)', () => {
   const r = estadoReembolso(
     { estado: 'COBRADO', reembolsoFallidoEn: '2026-08-20T10:00:00Z' },
     new Date('2026-08-20T12:00:00Z'),

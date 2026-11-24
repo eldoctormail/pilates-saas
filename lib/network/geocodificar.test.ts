@@ -13,7 +13,7 @@ test('geocodificarDireccion: devuelve lat/lng cuando Nominatim encuentra un resu
     assert.match(url, /^https:\/\/nominatim\.openstreetmap\.org\/search\?/);
     assert.match(url, /q=Salamanca%2C\+Madrid%2C\+Espa%C3%B1a|q=Salamanca%2C%20Madrid%2C%20Espa%C3%B1a/);
     const headers = init?.headers as Record<string, string>;
-    assert.match(headers['User-Agent'], /Tentare/);
+    assert.match(headers['User-Agent'], /Centra/);
     return new Response(JSON.stringify([{ lat: '40.4168', lon: '-3.7038' }]), { status: 200 });
   });
   try {

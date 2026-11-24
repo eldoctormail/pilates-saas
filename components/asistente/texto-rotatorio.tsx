@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react';
  * cada 4 s. Decorativo: el campo conserva su `placeholder` y su etiqueta para lectores de pantalla, y con
  * «reducir movimiento» se queda en la primera frase.
  */
-const FRASES_DEL_CAMPO = ['Pregúntale a Tentare…', '¿Cuántos clientes activos tengo?', '¿Qué clases hay mañana?', '¿Qué debería revisar hoy?'];
+const FRASES_DEL_CAMPO = ['Pregúntale a Centra…', '¿Cuántos clientes activos tengo?', '¿Qué clases hay mañana?', '¿Qué debería revisar hoy?'];
 
 export function TextoRotatorio({ visible }: { visible: boolean }) {
   const [i, setI] = useState(0);

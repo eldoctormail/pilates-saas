@@ -1,6 +1,6 @@
 'use client';
 
-// Puerta de login de Tentare Network. EN MANTENIMIENTO desde el 29-sep-2026
+// Puerta de login de Centra Network. EN MANTENIMIENTO desde el 29-sep-2026
 // (decisión del fundador): mientras ACCESO_NETWORK_EN_MANTENIMIENTO esté a
 // `true` se ve el aviso; el formulario real (email/contraseña, Google, OTP y
 // resolución post-login) vive intacto en ./formulario-acceso.tsx. El resto de
@@ -16,7 +16,7 @@ export default function AccesoNetworkPage() {
   return (
     <AvisoMantenimientoNetwork
       mensaje={MENSAJE_ACCESO_NETWORK_CERRADO}
-      pieAdicional={<>¿Gestionas un estudio con Tentare Software? Esto no te afecta — <Link href="/login" className="font-bold underline">inicia sesión aquí</Link>.</>}
+      pieAdicional={<>¿Gestionas un estudio con Centra Software? Esto no te afecta — <Link href="/login" className="font-bold underline">inicia sesión aquí</Link>.</>}
     />
   );
 }

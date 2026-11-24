@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { Search, Heart, MessageCircle, Briefcase } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-// Sub-nav de Tentare Network dentro del panel (Fase 2, punto 16 del brief:
+// Sub-nav de Centra Network dentro del panel (Fase 2, punto 16 del brief:
 // "separado del dashboard normal... así no contaminas el SaaS principal").
 // Mismo patrón que app/(dashboard)/contenido/layout.tsx — un layout anidado
 // con una barra de pills por encima de `children`, sin tocar DashboardShell

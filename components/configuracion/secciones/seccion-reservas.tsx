@@ -38,7 +38,7 @@ import { tarjetaDeOtroPais } from '@/lib/configuracion/secciones';
 // decide cómo reserva y vive en otra pantalla —clases por semana de cada plan,
 // recordatorios— tiene aquí su fila-enlace.
 //
-// Lo que Tentare hace de serie y no se toca (el corte del mínimo a 2 h, la plaza
+// Lo que Centra hace de serie y no se toca (el corte del mínimo a 2 h, la plaza
 // libre a la primera de la lista) se cuenta
 // DENTRO del cajón de su regla (tab-estudio-reservas.tsx, `NotaDeSerie`), no en
 // un grupo aparte que repetía lo que ya decía cada cajón.

@@ -64,7 +64,7 @@ const BANDEJA_CON_MARCHA = {
 };
 
 test.describe('Resumen: Tenti en los tres sitios donde estaba el Orb', () => {
-  test('la propietaria lo ve en el enlace de automatizaciones, en la tira del día y en lo que Tentare está haciendo', async ({ page }) => {
+  test('la propietaria lo ve en el enlace de automatizaciones, en la tira del día y en lo que Centra está haciendo', async ({ page }) => {
     const scripts = recolectarScripts(page);
     await montarHome(page, { estadoEstudio: BANDEJA_CON_MARCHA });
 
@@ -74,23 +74,23 @@ test.describe('Resumen: Tenti en los tres sitios donde estaba el Orb', () => {
     // Decorativo: el enlace se sigue llamando como dice su texto.
     await expect(page.getByRole('link', { name: /Tenti/i })).toHaveCount(0);
 
-    // La tira de lo que ha visto Tentare en la agenda (la agenda del arnés
+    // La tira de lo que ha visto Centra en la agenda (la agenda del arnés
     // tiene huecos y una clase sin instructora).
-    const tira = page.getByText(/^Tentare ha encontrado/);
+    const tira = page.getByText(/^Centra ha encontrado/);
     await expect(tira).toBeVisible();
     await expect(tira.locator('xpath=..').locator('[data-tenti-icono]')).toHaveCount(1);
 
     // La bandeja: Tenti firma lo que está en marcha; lo resuelto lleva su Check.
     const bandeja = page.getByRole('region', { name: 'Lo que espera tu visto bueno' });
-    await expect(bandeja.getByText('Tentare lo está haciendo').locator('[data-tenti-icono]')).toHaveCount(1);
-    await expect(bandeja.getByText('Resuelto por Tentare').locator('svg.lucide-check')).toHaveCount(1);
-    await expect(bandeja.getByText('Resuelto por Tentare').locator('[data-tenti-icono]')).toHaveCount(0);
+    await expect(bandeja.getByText('Centra lo está haciendo').locator('[data-tenti-icono]')).toHaveCount(1);
+    await expect(bandeja.getByText('Resuelto por Centra').locator('svg.lucide-check')).toHaveCount(1);
+    await expect(bandeja.getByText('Resuelto por Centra').locator('[data-tenti-icono]')).toHaveCount(0);
 
     await expect(tenti(page)).toHaveCount(3);
     await todosVivosYDecorativos(page);
     // Cada uno en su estado (lib/tenti/momentos.ts): lo que está en marcha,
     // 'trabajando'; los otros dos, la firma.
-    await expect(bandeja.getByText('Tentare lo está haciendo').locator('[data-tenti-icono]')).toHaveAttribute('data-estado', 'trabajando');
+    await expect(bandeja.getByText('Centra lo está haciendo').locator('[data-tenti-icono]')).toHaveAttribute('data-estado', 'trabajando');
     await expect(banner.locator('[data-tenti-icono]')).toHaveAttribute('data-estado', 'reposo');
     await expect(tira.locator('xpath=..').locator('[data-tenti-icono]')).toHaveAttribute('data-estado', 'reposo');
     expect(await animacionesSinFin(page)).toBe(0);
@@ -102,8 +102,8 @@ test.describe('Resumen: Tenti en los tres sitios donde estaba el Orb', () => {
   for (const rol of ['RECEPCION', 'MANAGER'] as const) {
     test(`${rol}: sin el enlace de automatizaciones, pero con Tenti donde lo veía el Orb`, async ({ page }) => {
       await montarHome(page, { rol, estadoEstudio: BANDEJA_CON_MARCHA });
-      await expect(page.getByText(/^Tentare ha encontrado/)).toBeVisible({ timeout: 60_000 });
-      await expect(page.getByRole('region', { name: 'Lo que espera tu visto bueno' }).getByText('Tentare lo está haciendo')).toBeVisible();
+      await expect(page.getByText(/^Centra ha encontrado/)).toBeVisible({ timeout: 60_000 });
+      await expect(page.getByRole('region', { name: 'Lo que espera tu visto bueno' }).getByText('Centra lo está haciendo')).toBeVisible();
       // /automatizaciones es solo de la propietaria: su enlace no está.
       await expect(page.getByRole('link', { name: /Sistema autónomo/ })).toHaveCount(0);
       await expect(tenti(page)).toHaveCount(2);
@@ -126,7 +126,7 @@ const briefing = (page: Page) => page.locator('div.rounded-2xl.bg-primary', { ha
 test.describe('Automatizaciones, sin Tenti: la baldosa del Zap de siempre', () => {
   // Fundador, 6-oct-2026: «En Automatizaciones quita a Tenti». Ni el canvas del
   // resumen del día, ni el icono de «Sistema autónomo», ni el de «Esto ya lo
-  // hace Tentare». Los textos del resumen, los mismos.
+  // hace Centra». Los textos del resumen, los mismos.
   test('ningún Tenti, el Zap en el resumen, y el resumen solo afirma lo que cuenta', async ({ page }) => {
     const scripts = recolectarScripts(page);
     await montar(page);
@@ -140,7 +140,7 @@ test.describe('Automatizaciones, sin Tenti: la baldosa del Zap de siempre', () =
     await expect(briefing(page).getByText('Sistema autónomo')).toBeVisible();
 
     await page.getByRole('button', { name: 'Reglas', exact: true }).click();
-    await expect(page.getByRole('heading', { name: 'Esto ya lo hace Tentare, sin que configures nada' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Esto ya lo hace Centra, sin que configures nada' })).toBeVisible();
     await expect(tenti(page)).toHaveCount(0);
     await expect(page.locator('canvas[data-tenti]')).toHaveCount(0);
     // Y sin Tenti en la pantalla, su motor no viaja.
@@ -231,7 +231,7 @@ test('sin canvas 2D, cada icono es el Tenti quieto de siempre, en su misma caja'
   });
   const scripts = recolectarScripts(page);
   await montarHome(page, { estadoEstudio: BANDEJA_CON_MARCHA });
-  await expect(page.getByText(/^Tentare ha encontrado/)).toBeVisible({ timeout: 60_000 });
+  await expect(page.getByText(/^Centra ha encontrado/)).toBeVisible({ timeout: 60_000 });
   await expect.poll(() => scripts.contiene(HUELLA_DEL_MOTOR), { timeout: 30_000 }).toBe(true);
   await expect(tenti(page)).toHaveCount(3);
   await expect(page.locator('canvas[data-tenti]')).toHaveCount(0);

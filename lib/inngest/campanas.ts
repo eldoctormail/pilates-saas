@@ -121,7 +121,7 @@ export const procesarEnvioCampana = inngest.createFunction(
       // color ya no sale de `color_primario` (ver lib/emails/color-marca.ts).
       return fila ? { ...fila, marca: marcaCorreoDesde(marcaEstudio, fila.nombre || 'Tu estudio') } : null;
     });
-    const studioNombre = studio?.nombre || 'Tentare';
+    const studioNombre = studio?.nombre || 'Centra';
     // Una campaña que empezó antes de este despliegue trae el paso memoizado
     // sin `marca`: solo para ese caso se cae a las columnas de siempre.
     const marcaCorreo = studio?.marca ?? marcaCorreoDesde(

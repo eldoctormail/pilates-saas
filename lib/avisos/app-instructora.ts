@@ -1,7 +1,7 @@
 // La instructora ya no trabaja en el panel: su sitio es la app del estudio.
 //
 // Decisión del fundador (14-sep-2026): la app de la alumna es también la de la
-// instructora y Tentare Core se retira. El paso 1 fue un aviso en el panel; el
+// instructora y Centra Core se retira. El paso 1 fue un aviso en el panel; el
 // paso 2 (esto) es una puerta: quien entra al panel con rol INSTRUCTOR en la
 // sede activa acaba en «Hoy» de la app de su estudio.
 //

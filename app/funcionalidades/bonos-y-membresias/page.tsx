@@ -4,6 +4,7 @@ import { FeatureShell } from '@/components/funcionalidades/FeatureShell';
 import { CierreCta, Entradilla, FeatureFaq, Limite, Rejilla, Seccion } from '@/components/funcionalidades/bloques';
 import { AjustesDelPlan, CuatroModelos, PlazaFijaYRecuperacion } from '@/components/funcionalidades/visuales/bonos';
 import { paginaDe, urlDe } from '@/lib/seo/paginas';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
 const PATH = '/funcionalidades/bonos-y-membresias';
 const pagina = paginaDe(PATH)!;
@@ -124,12 +125,15 @@ export default function BonosPage() {
 
       <Seccion id="cobro" titulo="Y todo esto, ¿cómo se cobra?">
         <p>
-          Definir el plan es la mitad; la otra es que el dinero entre sin que persigas a nadie. Las cuotas se renuevan y se
-          cobran solas con la tarjeta guardada, los bonos se pueden comprar desde el portal de la alumna, y todo lo que se
-          cobra —salvo el efectivo— genera su factura: la facturación viene encendida.
+          Definir el plan es la mitad; la otra es que el dinero entre sin que persigas a nadie.{' '}
+          {ES
+            ? 'Las cuotas se renuevan y se cobran solas con la tarjeta guardada, los bonos se pueden comprar desde el portal de la alumna, y todo lo que se cobra —salvo el efectivo— genera su factura: la facturación viene encendida.'
+            : 'Cuando toca renovar, a la alumna le llega el aviso y paga desde su app con Mercado Pago; los bonos también se compran desde ahí, y desde cada cobro emites la factura electrónica de ARCA.'}
         </p>
         <p>
-          El detalle de cómo se cobra, qué pasa cuando una tarjeta falla y cómo se generan las remesas SEPA está en{' '}
+          {ES
+            ? 'El detalle de cómo se cobra, qué pasa cuando una tarjeta falla y cómo se generan las remesas SEPA está en'
+            : 'El detalle de cómo se cobra con Mercado Pago y en el mostrador está en'}{' '}
           <Link href="/funcionalidades/cobros-recurrentes">cobros recurrentes</Link>. La parte fiscal, en{' '}
           <Link href="/funcionalidades/facturacion">facturación</Link>.
         </p>

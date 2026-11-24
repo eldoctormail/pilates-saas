@@ -14,6 +14,7 @@ import { TarjetasPrecios } from '@/components/precios/tarjetas-precios';
 import { COMPLEMENTOS_DE_PAGO, GRATIS_MARGEN_DIAS, GRATIS_RESERVAS_MES, LIMITES_GRATIS, PRECIO_FOUNDING_PAGO, SI_PASAS } from '@/lib/landing/founding-gratis';
 import { funcionalidades, paginaDe, urlDe } from '@/lib/seo/paginas';
 import { softwareApplicationLd } from '@/lib/seo/software-application';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
 const PATH = '/precios';
 const pagina = paginaDe(PATH)!;
@@ -50,7 +51,9 @@ const FAQ = [
   },
   {
     q: '¿Os lleváis una comisión de lo que cobro a mis alumnas?',
-    a: 'No. Tentare no añade ninguna comisión sobre tus cobros ni tiene un marketplace donde competir por tus clientas. Lo que sí pagas es la comisión de Stripe por procesar cada pago, que es de Stripe y la ves en su propio panel.',
+    a: 'No. Tentare no añade ninguna comisión sobre tus cobros ni tiene un marketplace donde competir por tus clientas. ' + (ES
+      ? 'Lo que sí pagas es la comisión de Stripe por procesar cada pago, que es de Stripe y la ves en su propio panel.'
+      : 'Lo que sí pagas es la comisión de Mercado Pago por procesar cada pago, que es de Mercado Pago y la ves en su propio panel.'),
   },
   {
     q: `¿Qué pasa si supero las ${GRATIS_RESERVAS_MES} reservas al mes del plan Founding Studio?`,
@@ -114,7 +117,7 @@ export default function PreciosPage() {
             {PLAN_INFO.ESTUDIO.nombre}, que los incluye, y{' '}
             {PLAN_INFO.CADENA.precioMes} € en el plan {PLAN_INFO.CADENA.nombre} (dos o más centros bajo la misma marca).
             Los precios son públicos, con IVA incluido y sin permanencia. Tentare no añade ninguna comisión sobre lo que
-            cobras a tus alumnas: solo pagas la de Stripe por procesar cada cobro con tarjeta, que es de Stripe. Traer
+            cobras a tus alumnas: solo pagas la de {ES ? 'Stripe' : 'Mercado Pago'} por procesar cada cobro online, que es de {ES ? 'Stripe' : 'Mercado Pago'}. Traer
             tus datos desde otra plataforma no se cobra aparte.
           </p>
         </section>
@@ -138,7 +141,7 @@ export default function PreciosPage() {
             <div style={{ background: 'var(--w-papel)', border: '1px solid var(--w-linea)', borderRadius: 'var(--w-r-tarjeta)', padding: '24px 26px' }}>
               <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--w-exito)', marginBottom: 14 }}>Incluido en la cuota</div>
               <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'grid', gap: 10 }}>
-                {['Todas las funcionalidades de tu plan', 'Actualizaciones y funciones nuevas', 'Importación de tus datos desde otra plataforma', 'Soporte en español', 'Facturas con numeración legal correlativa', 'Exportación de tus datos cuando quieras'].map((t) => (
+                {['Todas las funcionalidades de tu plan', 'Actualizaciones y funciones nuevas', 'Importación de tus datos desde otra plataforma', 'Soporte en español', ES ? 'Facturas con numeración legal correlativa' : 'Factura electrónica de ARCA, con su CAE', 'Exportación de tus datos cuando quieras'].map((t) => (
                   <li key={t} style={{ display: 'flex', gap: 9, fontSize: 14.5, lineHeight: 1.5, color: 'var(--w-texto)' }}>
                     <span style={{ color: 'var(--w-exito)', flexShrink: 0 }}>✓</span>{t}
                   </li>
@@ -149,16 +152,18 @@ export default function PreciosPage() {
               <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--w-aviso)', marginBottom: 14 }}>No lo cobramos nosotros</div>
               <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'grid', gap: 10 }}>
                 <li style={{ fontSize: 14.5, lineHeight: 1.5, color: 'var(--w-texto)' }}>
-                  <strong>La comisión de Stripe</strong> por procesar cada cobro con tarjeta. Es de Stripe, la ves en su
+                  <strong>La comisión de {ES ? 'Stripe' : 'Mercado Pago'}</strong> por procesar cada cobro online. Es de {ES ? 'Stripe' : 'Mercado Pago'}, la ves en su
                   panel y Tentare no añade nada encima.
                 </li>
                 <li style={{ fontSize: 14.5, lineHeight: 1.5, color: 'var(--w-texto)' }}>
                   <strong>Tu número de WhatsApp Business</strong>, si quieres enviar por ese canal: se conecta tu propia
                   cuenta de Meta, no una compartida.
                 </li>
-                <li style={{ fontSize: 14.5, lineHeight: 1.5, color: 'var(--w-texto)' }}>
-                  <strong>Lo que te cobre tu banco</strong> por presentar remesas SEPA, si cobras por domiciliación.
-                </li>
+                {ES && (
+                  <li style={{ fontSize: 14.5, lineHeight: 1.5, color: 'var(--w-texto)' }}>
+                    <strong>Lo que te cobre tu banco</strong> por presentar remesas SEPA, si cobras por domiciliación.
+                  </li>
+                )}
               </ul>
             </div>
           </div>

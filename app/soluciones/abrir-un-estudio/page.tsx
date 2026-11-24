@@ -15,6 +15,7 @@ import { AgendaDia, PanelCobros } from '@/components/web/home/piezas';
 import { FOTOS, rutaFoto } from '@/components/landing/fotos';
 import { GRATIS_CON_LIMITES, GRATIS_MARGEN_DIAS, GRATIS_RESERVAS_MES, PRECIO_FOUNDING_PAGO } from '@/lib/landing/founding-gratis';
 import { paginaDe, urlDe } from '@/lib/seo/paginas';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
 // Tentare para quien VA A ABRIR su estudio (fase 2.3 de la web, 20-oct-2026). Una
 // de las dos soluciones nuevas de la estrategia de la fase 1: la otra, «Varias
@@ -70,7 +71,9 @@ const FAQ = [
   },
   {
     q: '¿Puedo cobrar online desde el primer día?',
-    a: 'Sí, en cuanto conectas tu cuenta de Stripe: las alumnas pagan con tarjeta, el dinero va a tu cuenta y Tentare no se queda comisión sobre lo que cobras.',
+    a: ES
+      ? 'Sí, en cuanto conectas tu cuenta de Stripe: las alumnas pagan con tarjeta, el dinero va a tu cuenta y Tentare no se queda comisión sobre lo que cobras.'
+      : 'Sí, en cuanto conectas tu cuenta de Mercado Pago: las alumnas pagan desde la app, el dinero va a tu cuenta y Tentare no se queda comisión sobre lo que cobras.',
   },
   {
     q: '¿Tentare me ayuda con los trámites de apertura?',
@@ -125,7 +128,9 @@ export default function AbrirUnEstudioPage() {
         items={[
           { hora: 'Antes de abrir', titulo: 'Publicas tu horario', texto: 'Creas tus clases, tus salas y tus bonos, y compartes el enlace de tu página de reservas en Instagram o en WhatsApp.' },
           { hora: 'La semana de apertura', titulo: 'Las primeras reservas llegan solas', texto: 'Tus primeras alumnas reservan desde el móvil y, si una clase se llena, entran en la lista de espera.' },
-          { hora: 'El primer mes', titulo: 'Los bonos y las cuotas se cobran solos', texto: <>Con la tarjeta guardada y, si un cobro falla, se reintenta; por domiciliación, con la remesa SEPA que presentas en tu banco. Tú das las clases. Más en <Link href="/funcionalidades/cobros-recurrentes">cobros recurrentes</Link>.</> },
+          ES
+            ? { hora: 'El primer mes', titulo: 'Los bonos y las cuotas se cobran solos', texto: <>Con la tarjeta guardada y, si un cobro falla, se reintenta; por domiciliación, con la remesa SEPA que presentas en tu banco. Tú das las clases. Más en <Link href="/funcionalidades/cobros-recurrentes">cobros recurrentes</Link>.</> }
+            : { hora: 'El primer mes', titulo: 'Los bonos y las cuotas se pagan desde la app', texto: <>Cuando toca renovar, a la alumna le llega el aviso y paga con Mercado Pago. Tú das las clases. Más en <Link href="/funcionalidades/cobros-recurrentes">cobros</Link>.</> },
         ]}
       />
 
@@ -164,12 +169,14 @@ export default function AbrirUnEstudioPage() {
         pieza={{ descripcion: 'Ejemplo del resumen de cobros de Tentare: quién ha pagado, quién se reintenta solo y las próximas cuotas.', contenido: <PanelCobros completo /> }}
         puntos={[
           'Clase suelta, bono y cuota mensual a la vez',
-          'Tarjeta guardada o remesa SEPA para tu banco',
+          ES ? 'Tarjeta guardada o remesa SEPA para tu banco' : 'Mercado Pago online, y efectivo, posnet o transferencia en el mostrador',
           'Sin comisión de Tentare sobre lo que cobras',
         ]}
         enlace={{ href: '/funcionalidades/bonos-y-membresias', texto: 'Bonos y cuotas' }}
       >
-        <p>Conectas tu cuenta de Stripe y el dinero entra en tu cuenta. Los bonos se descuentan solos al reservar y las cuotas se cobran cada mes.</p>
+        <p>{ES
+          ? 'Conectas tu cuenta de Stripe y el dinero entra en tu cuenta. Los bonos se descuentan solos al reservar y las cuotas se cobran cada mes.'
+          : 'Conectas tu cuenta de Mercado Pago y el dinero entra en tu cuenta. Los bonos se descuentan solos al reservar y las cuotas se renuevan cada mes desde la app.'}</p>
       </FilaProducto>
 
       <section className="sol-zona">

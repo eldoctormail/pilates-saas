@@ -23,6 +23,7 @@
 import { PLAN_INFO } from '../billing/entitlements.ts';
 import { COMPLEMENTOS_DE_PAGO, LIMITES_GRATIS, PRECIO_FOUNDING_PAGO } from '../landing/founding-gratis.ts';
 import type { PreguntaFaq } from './faq-jsonld.ts';
+import { FUNCIONES_DE_ESPANA as ES } from '../locale.ts';
 
 const PRECIO_ESTUDIO = PLAN_INFO.ESTUDIO.precioMes;
 const PRECIO_CADENA = PLAN_INFO.CADENA.precioMes;
@@ -47,8 +48,12 @@ export const FAQ_FUNCIONALIDADES: PreguntaFaq[] = [
   {
     // Fuente: /funcionalidades/cobros-recurrentes (comisión, Stripe y remesa
     // SEPA 19.14: «generarla no cobra el dinero, lo presenta tu banco»).
-    q: '¿Puedo cobrar con tarjeta y por domiciliación SEPA? ¿Se lleva Tentare comisión?',
-    a: 'Sí a las dos cosas, y Tentare no añade comisión propia. La tarjeta se cobra desde tu cuenta de Stripe, y lo único que pagas aparte es la comisión de Stripe. Para la domiciliación, Tentare genera la remesa SEPA (el cuaderno 19.14 de tu banco) con los recibos del periodo y guarda los mandatos de tus alumnas; la presentas tú en tu banco.',
+    q: ES
+      ? '¿Puedo cobrar con tarjeta y por domiciliación SEPA? ¿Se lleva Tentare comisión?'
+      : '¿Puedo cobrar online y en el mostrador? ¿Se lleva Tentare comisión?',
+    a: ES
+      ? 'Sí a las dos cosas, y Tentare no añade comisión propia. La tarjeta se cobra desde tu cuenta de Stripe, y lo único que pagas aparte es la comisión de Stripe. Para la domiciliación, Tentare genera la remesa SEPA (el cuaderno 19.14 de tu banco) con los recibos del periodo y guarda los mandatos de tus alumnas; la presentas tú en tu banco.'
+      : 'Sí a las dos cosas, y Tentare no añade comisión propia. Online, tus alumnas pagan con Mercado Pago desde su app y el dinero va a tu cuenta; lo único que pagas aparte es la comisión de Mercado Pago. En el mostrador apuntas efectivo, posnet, transferencia o QR.',
   },
   {
     // Fuente: lib/notificaciones/recordatorio-clase.ts (24 h antes: app + email
@@ -62,15 +67,21 @@ export const FAQ_FUNCIONALIDADES: PreguntaFaq[] = [
     // ENCENDIDA (`facturar_automatico` true de serie, migr 20261008231750) y, sin
     // Veri*Factu —no activo en ningún estudio—, la factura sale sin huella ni QR
     // y sin envío (migr 20261002191517). El efectivo no emite la factura solo.
-    q: '¿Emite Tentare las facturas por mí?',
-    a: 'Sí, y viene encendido: con tu NIF, cada cobro, salvo el efectivo, genera su factura con numeración correlativa, y el cierre de año sale listo para tu gestoría. Si te las hace la gestoría, apágalo en Configuración → Cobros y facturas. Veri*Factu (la huella, el QR y el envío a la AEAT) todavía no está activo en ningún estudio.',
+    q: ES
+      ? '¿Emite Tentare las facturas por mí?'
+      : '¿Emite Tentare la factura electrónica de ARCA?',
+    a: ES
+      ? 'Sí, y viene encendido: con tu NIF, cada cobro, salvo el efectivo, genera su factura con numeración correlativa, y el cierre de año sale listo para tu gestoría. Si te las hace la gestoría, apágalo en Configuración → Cobros y facturas. Veri*Factu (la huella, el QR y el envío a la AEAT) todavía no está activo en ningún estudio.'
+      : 'Sí, desde cada recibo cobrado: Tentare le pide el CAE a ARCA con tu certificado y tu punto de venta, y la factura (A, B o C) sale con el QR de ARCA. Se emite con un botón desde el recibo, no sola al cobrar.',
   },
   {
     // Fuente: /seguridad (base de datos en la UE, aislamiento por estudio,
     // proveedores listados en la política de privacidad), /funcionalidades/
     // ficha-de-clienta y puedeVerFichaClinica / semáforo en lib/permisos-reglas.ts.
     q: '¿Dónde se guardan los datos de mis alumnas y quién ve los de salud?',
-    a: 'En la Unión Europea (Fráncfort), con cada estudio aislado de los demás en la propia base de datos. Los datos de salud se guardan con el consentimiento de la alumna: los ve la propietaria y, de sus alumnas, cada instructora; recepción y gerencia solo ven un semáforo de color. Los proveedores que pueden tratar datos fuera de la UE están listados en la política de privacidad.',
+    a: ES
+      ? 'En la Unión Europea (Fráncfort), con cada estudio aislado de los demás en la propia base de datos. Los datos de salud se guardan con el consentimiento de la alumna: los ve la propietaria y, de sus alumnas, cada instructora; recepción y gerencia solo ven un semáforo de color. Los proveedores que pueden tratar datos fuera de la UE están listados en la política de privacidad.'
+      : 'En la base de datos de Tentare, con cada estudio aislado de los demás. Los datos de salud se guardan con el consentimiento de la alumna: los ve la propietaria y, de sus alumnas, cada instructora; recepción y gerencia solo ven un semáforo de color. Los proveedores que usamos, con su ubicación, están listados en la política de privacidad.',
   },
 ];
 

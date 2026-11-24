@@ -36,12 +36,18 @@ r.recomendaciones = o.recomendaciones.map(x => x.id);
 r.onboarding = JSON.stringify(o);
 r.avisoVenta = onboarding.avisoVentaOnline(vacio);
 r.penalizacionOculta = secciones.tarjetaDeOtroPais('si-cancela-tarde-o-no-viene');
+const seo = await import('./lib/seo/paginas.ts');
+const faqs = await import('./lib/seo/faq-hubs.ts');
+const legal = await import('./lib/legal-info.ts');
+const COMERCIALES = ['/precios', '/funcionalidades/cobros-recurrentes', '/funcionalidades/facturacion',
+  '/soluciones/programa-de-gestion-para-estudio-de-pilates', '/seguridad'];
+r.comercial = JSON.stringify([COMERCIALES.map(p => seo.paginaDe(p)), Object.values(faqs), legal.PROVEEDORES]);
 console.log(JSON.stringify(r));
 `;
 
 function enArgentina(): {
   textos: string; articulos: string[]; ayuda: string; visita: string[]; pasos: string[];
-  recomendaciones: string[]; onboarding: string; avisoVenta: string | null; penalizacionOculta: boolean;
+  recomendaciones: string[]; onboarding: string; avisoVenta: string | null; penalizacionOculta: boolean; comercial: string;
 } {
   const salida = execFileSync(process.execPath, [
     '--import', './scripts/register-test-hooks.mjs', '--experimental-strip-types', '--no-warnings',
@@ -80,4 +86,10 @@ test('Argentina: el Centro de ayuda publica Mercado Pago y no los artículos de 
 
 test('Argentina: sin tarjeta guardada no se ofrece el cargo por cancelar tarde', () => {
   assert.equal(r.penalizacionOculta, true);
+});
+
+test('Argentina: las fichas de buscador de precios, cobros, facturación, soluciones y seguridad, sus FAQ y los proveedores no hablan de Stripe ni de España', () => {
+  assert.doesNotMatch(r.comercial, DE_ESPANA);
+  assert.match(r.comercial, /Mercado Pago/);
+  assert.match(r.comercial, /ARCA/);
 });

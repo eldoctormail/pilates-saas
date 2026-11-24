@@ -8,6 +8,7 @@ import { CtaBlock } from '@/components/recursos/ArticlePrimitives';
 import { PageBreadcrumb } from '@/components/recursos/ArticleStructuredData';
 import { OrganizationStructuredData } from '@/components/OrganizationStructuredData';
 import { paginaDe, urlDe } from '@/lib/seo/paginas';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
 const PATH = '/seguridad';
 const pagina = paginaDe(PATH)!;
@@ -20,7 +21,9 @@ export const metadata: Metadata = {
     siteName: 'Tentare',
     type: 'website',
     title: pagina.titulo,
-    description: 'Datos aislados por estudio, base de datos en la UE y diseñado con el RGPD en mente. Sin permanencia.',
+    description: ES
+      ? 'Datos aislados por estudio, base de datos en la UE y diseñado con el RGPD en mente. Sin permanencia.'
+      : 'Datos aislados por estudio y diseñado con la Ley 25.326 en mente. Sin permanencia.',
     url: urlDe(PATH),
     images: [{ url: '/seguridad/opengraph-image' }],
   },
@@ -39,23 +42,29 @@ const PILLARS = [
   },
   {
     icon: <Globe size={22} />,
-    title: 'Datos en Europa, RGPD',
-    body: 'La base de datos se aloja en la Unión Europea (Fráncfort). Algunos proveedores que usamos pueden tratar datos fuera de la UE: están listados, con su ubicación, en la política de privacidad.',
+    title: ES ? 'Datos en Europa, RGPD' : 'Datos personales, Ley 25.326',
+    body: ES
+      ? 'La base de datos se aloja en la Unión Europea (Fráncfort). Algunos proveedores que usamos pueden tratar datos fuera de la UE: están listados, con su ubicación, en la política de privacidad.'
+      : 'Los datos personales se tratan según la Ley 25.326 de Protección de los Datos Personales. Los proveedores que usamos, con su ubicación, están listados en la política de privacidad.',
   },
   {
     icon: <Activity size={22} />,
     title: 'Datos de salud, con consentimiento',
-    body: 'La ficha clínica de tus clientes (lesiones, embarazo, condiciones) es categoría especial del RGPD. Se guarda con consentimiento explícito y acceso restringido por rol.',
+    body: ES
+      ? 'La ficha clínica de tus clientes (lesiones, embarazo, condiciones) es categoría especial del RGPD. Se guarda con consentimiento explícito y acceso restringido por rol.'
+      : 'La ficha clínica de tus clientes (lesiones, embarazo, condiciones) son datos sensibles para la Ley 25.326. Se guarda con consentimiento expreso y acceso restringido por rol.',
   },
   {
     icon: <FileCheck size={22} />,
-    title: 'Facturas con numeración legal',
-    body: 'Las facturas se emiten con numeración legal correlativa. Veri*Factu (la huella, el QR y el envío del registro a la AEAT) todavía no está activo en ningún estudio: hoy no llevan huella ni QR y no se envían a la AEAT.',
+    title: ES ? 'Facturas con numeración legal' : 'Factura electrónica de ARCA',
+    body: ES
+      ? 'Las facturas se emiten con numeración legal correlativa. Veri*Factu (la huella, el QR y el envío del registro a la AEAT) todavía no está activo en ningún estudio: hoy no llevan huella ni QR y no se envían a la AEAT.'
+      : 'Cada factura la autoriza ARCA con su CAE, con el certificado del propio estudio, y lleva el QR de ARCA para comprobarla.',
   },
   {
     icon: <CreditCard size={22} />,
     title: 'Pagos que no tocan tu servidor',
-    body: 'Los cobros se procesan con Stripe. Tentare no almacena los números de tarjeta de tus clientes — los gestiona el proveedor de pagos certificado.',
+    body: `Los cobros se procesan con ${ES ? 'Stripe' : 'Mercado Pago'}. Tentare no almacena los números de tarjeta de tus clientes — los gestiona el proveedor de pagos certificado.`,
   },
   {
     icon: <Database size={22} />,
@@ -81,9 +90,9 @@ export default function SeguridadPage() {
         <div className="sec-cab-in">
           <p className="sec-antetitulo"><Shield size={16} aria-hidden /> Seguridad y privacidad</p>
           <h1 className="sec-h1">Tus datos y los de tus<br />clientes, protegidos.</h1>
-          <p className="sec-entrada">Tentare gestiona información sensible de tu negocio y de tus socias. Está construido desde el primer día para que esos datos estén aislados, alojados en Europa y bajo tu control.</p>
+          <p className="sec-entrada">Tentare gestiona información sensible de tu negocio y de tus socias. Está construido desde el primer día para que esos datos estén aislados{ES ? ', alojados en Europa' : ''} y bajo tu control.</p>
           <ul className="sec-sellos">
-            {['Base de datos en la UE', 'Diseñado con el RGPD en mente', 'Cifrado en tránsito', 'Sin permanencia'].map((t) => <li key={t}>{t}</li>)}
+            {(ES ? ['Base de datos en la UE', 'Diseñado con el RGPD en mente', 'Cifrado en tránsito', 'Sin permanencia'] : ['Diseñado con la Ley 25.326 en mente', 'Cifrado en tránsito', 'Sin permanencia']).map((t) => <li key={t}>{t}</li>)}
           </ul>
         </div>
       </header>
@@ -116,7 +125,7 @@ export default function SeguridadPage() {
           <Reveal className="sec-infra">
             <p className="sec-infra-t">Construido sobre infraestructura de referencia</p>
             <ul className="sec-sellos sec-sellos-claros">
-              {['Supabase · Postgres + Auth', 'Stripe · pagos', 'Cloudflare · copias y antibots', 'Sentry · monitorización'].map((t) => <li key={t}>{t}</li>)}
+              {['Supabase · Postgres + Auth', ES ? 'Stripe · pagos' : 'Mercado Pago · pagos', 'Cloudflare · copias y antibots', 'Sentry · monitorización'].map((t) => <li key={t}>{t}</li>)}
             </ul>
           </Reveal>
         </div>

@@ -16,6 +16,7 @@ import {
 import { CalculadoraPlazasVacias } from '@/components/soluciones/CalculadoraPlazasVacias';
 import { paginaDe, urlDe } from '@/lib/seo/paginas';
 import { PanelInformes } from '@/components/web/home/piezas';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
 // Página pilar del estudio de Pilates REFORMER (fase 5 del rediseño, 23-sep;
 // rehecha el 7-oct-2026 como página de producto, no como artículo).
@@ -56,7 +57,9 @@ const FAQ = [
   },
   {
     q: '¿Puedo cobrar distinto el reformer y el mat?',
-    a: 'Sí. Los bonos y las cuotas pueden ser de un tipo de clase concreto, así que el reformer y el mat tienen cada uno su precio. Una alumna puede tener a la vez un bono de reformer y una cuota de mat. Para venderlos online hace falta conectar tu cuenta de Stripe; también puedes apuntar pagos en efectivo o por transferencia.',
+    a: 'Sí. Los bonos y las cuotas pueden ser de un tipo de clase concreto, así que el reformer y el mat tienen cada uno su precio. Una alumna puede tener a la vez un bono de reformer y una cuota de mat. ' + (ES
+      ? 'Para venderlos online hace falta conectar tu cuenta de Stripe; también puedes apuntar pagos en efectivo o por transferencia.'
+      : 'Para venderlos online hace falta conectar tu cuenta de Mercado Pago; también puedes apuntar pagos en efectivo, posnet o transferencia.'),
   },
   {
     q: '¿Cómo funcionan las plazas fijas?',
@@ -162,7 +165,7 @@ export default function EstudioDePilatesReformerPage() {
         puntos={[
           'Bonos con caducidad y recuperaciones',
           'Cuotas mensuales, con o sin límite de clases a la semana',
-          'Cobro automático con tarjeta y remesa SEPA para tu banco',
+          ES ? 'Cobro automático con tarjeta y remesa SEPA para tu banco' : 'Cobro online con Mercado Pago, desde la app de la alumna',
         ]}
         enlace={{ href: '/funcionalidades/bonos-y-membresias', texto: 'Bonos y cuotas' }}
       >

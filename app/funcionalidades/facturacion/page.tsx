@@ -4,6 +4,8 @@ import { FeatureShell } from '@/components/funcionalidades/FeatureShell';
 import { CierreCta, Entradilla, FeatureFaq, Limite, Rejilla, Seccion, Tabla } from '@/components/funcionalidades/bloques';
 import { CadenaDeHuellas, DelCobroALaFactura, LoQueLlevaLaFactura } from '@/components/funcionalidades/visuales/facturacion';
 import { paginaDe, urlDe } from '@/lib/seo/paginas';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
+import { FacturacionArgentina } from './argentina';
 
 const PATH = '/funcionalidades/facturacion';
 const pagina = paginaDe(PATH)!;
@@ -43,6 +45,7 @@ const FAQ = [
 ];
 
 export default function FacturacionPage() {
+  if (!ES) return <FacturacionArgentina path={PATH} />;
   return (
     <FeatureShell
       path={PATH}

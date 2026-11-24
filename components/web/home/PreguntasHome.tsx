@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { FAQ_ITEMS } from '@/components/landing/data';
 import { LIMITES_GRATIS } from '@/lib/landing/founding-gratis';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
 // «¿Qué es Tentare?» + preguntas frecuentes (fase 2.2).
 //
@@ -21,7 +22,7 @@ export function PreguntasHome() {
           <h2 id="wh-faq-h" className="wh-h2">Lo que se pregunta antes de empezar</h2>
           <h3 className="wh-h3 wh-faq-que">¿Qué es Tentare?</h3>
           <p className="wh-texto">
-            Tentare es el software para estudios y centros de Pilates y yoga en España que reúne en un solo panel las{' '}
+            Tentare es el software para estudios y centros de Pilates y yoga en {ES ? 'España' : 'Argentina'} que reúne en un solo panel las{' '}
             <Link href="/funcionalidades/reservas-online">reservas online</Link> con lista de espera, la{' '}
             <Link href="/funcionalidades/app-para-alumnas">app de tus alumnas</Link>, los bonos y los{' '}
             <Link href="/funcionalidades/cobros-recurrentes">cobros recurrentes</Link>, el{' '}
@@ -30,7 +31,7 @@ export function PreguntasHome() {
           </p>
           <dl className="wh-faq-datos">
             <div><dt>Para quién</dt><dd>Estudios y centros de Pilates y yoga, independientes o con varias sedes</dd></div>
-            <div><dt>Dónde</dt><dd>España: interfaz y soporte en español, base de datos en la Unión Europea</dd></div>
+            <div><dt>Dónde</dt><dd>{ES ? 'España: interfaz y soporte en español, base de datos en la Unión Europea' : 'Argentina: interfaz y soporte en español, cobros con Mercado Pago y factura de ARCA'}</dd></div>
             <div><dt>Cuánto</dt><dd><Link href="/precios">Gratis</Link> {LIMITES_GRATIS}, sin permanencia</dd></div>
           </dl>
         </div>

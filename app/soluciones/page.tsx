@@ -5,6 +5,7 @@ import { FOTOS, rutaFoto } from '@/components/landing/fotos';
 import { PageBreadcrumb } from '@/components/recursos/ArticleStructuredData';
 import { OrganizationStructuredData } from '@/components/OrganizationStructuredData';
 import { CierreHub, Etiqueta, FaqHub, HeroHub, HubShell } from '@/components/web/hub/Hub';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 import { EscenaCambio, EscenaPilates } from '@/components/web/hub/fragmentos';
 import { GRATIS_CON_LIMITES, LIMITES_GRATIS } from '@/lib/landing/founding-gratis';
 import { paginaDe, relacionadasDe, urlDe } from '@/lib/seo/paginas';
@@ -44,7 +45,7 @@ const FOTO: Record<string, { src: string; alt: string; pos?: string }> = {
 
 /** Para quién es cada una y qué trae de concreto. */
 const PARA: Record<string, { si: string; trae: string[] }> = {
-  '/soluciones/programa-de-gestion-para-estudio-de-pilates': { si: 'Quieres un solo programa para reservas, bonos, cobros, facturas y equipo.', trae: ['Calendario con salas', 'Cobro con tarjeta o SEPA', 'Facturas'] },
+  '/soluciones/programa-de-gestion-para-estudio-de-pilates': { si: 'Quieres un solo programa para reservas, bonos, cobros, facturas y equipo.', trae: ['Calendario con salas', ES ? 'Cobro con tarjeta o SEPA' : 'Cobro con Mercado Pago', ES ? 'Facturas' : 'Factura electrónica de ARCA'] },
   '/soluciones/estudio-de-pilates-reformer': { si: 'Tus reformers son las plazas y cada una se reserva por separado.', trae: ['Aforo por sala', 'Plazas fijas', 'Lista de espera'] },
   '/soluciones/estudio-de-yoga': { si: 'Das yoga, solo o junto al Pilates, y vendes clase suelta, bono y mensualidad.', trae: ['Cada estilo, un tipo de clase', 'Talleres con precio propio', 'Mensualidades'] },
   '/soluciones/abrir-un-estudio': { si: 'Estás montando tu estudio y quieres empezar con todo listo.', trae: ['Tu horario', 'Tu página de reservas', 'Tu app'] },
@@ -55,7 +56,7 @@ const PARA: Record<string, { si: string; trae: string[] }> = {
 const IGUAL = [
   { titulo: 'El mismo producto', texto: 'Reservas, bonos, cobros, app y equipo son los mismos en todos los tipos de estudio. Cambia cómo los configuras: tus clases, tus bonos y tus reglas.' },
   { titulo: 'El mismo precio público', texto: `Empiezas gratis, con ${LIMITES_GRATIS}, y los planes de pago están en `, enlace: { href: '/precios', texto: 'Precios' }, cola: '. Sin permanencia.' },
-  { titulo: 'Sin comisión sobre tus cobros', texto: 'Tentare no añade ninguna comisión a lo que cobras a tus alumnas. Solo pagas la de Stripe por procesar cada pago.' },
+  { titulo: 'Sin comisión sobre tus cobros', texto: 'Tentare no añade ninguna comisión a lo que cobras a tus alumnas. Solo pagas la de ' + (ES ? 'Stripe' : 'Mercado Pago') + ' por procesar cada pago.' },
 ] as const;
 
 export default function SolucionesPage() {

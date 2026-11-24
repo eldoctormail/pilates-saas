@@ -11,6 +11,7 @@ import { pagarRenovacion } from '@/lib/student/pagos-acciones';
 import { clavePublicableStripe } from '@/lib/student/comprar';
 import { euros } from '@/lib/student/formato';
 import { textoVence, type PorPagar } from '@/lib/student/mi-plan-vista';
+import { CON_MERCADOPAGO } from '@/lib/pasarela';
 
 /**
  * Pagar UN recibo desde la app, con la hoja de siempre (`HojaPagarRecibo`): Mi plan y Recibos la comparten.
@@ -103,8 +104,14 @@ export function PagoPendienteCard({ porPagar, hoy, preparando, confirmando, onPa
           <p className="t-card-title t-num" style={{ margin: 0 }}>{uno.concepto} · {euros(uno.importe)}</p>
           {uno.esRenovacion ? (
             <>
-              <p className="t-meta" style={{ margin: 0 }}>No se ha podido cobrar sola porque no tienes una tarjeta guardada.</p>
-              <p className="t-meta" style={{ margin: 0 }}>Al pagarla con tarjeta, queda guardada y las próximas renovaciones se cobran solas.</p>
+              {CON_MERCADOPAGO ? (
+                <p className="t-meta" style={{ margin: 0 }}>Tu cuota se ha renovado y está pendiente de pago. Puedes pagarla aquí con Mercado Pago.</p>
+              ) : (
+                <>
+                  <p className="t-meta" style={{ margin: 0 }}>No se ha podido cobrar sola porque no tienes una tarjeta guardada.</p>
+                  <p className="t-meta" style={{ margin: 0 }}>Al pagarla con tarjeta, queda guardada y las próximas renovaciones se cobran solas.</p>
+                </>
+              )}
             </>
           ) : uno.vence && <p className="t-meta" style={{ margin: 0 }}>{textoVence(uno.vence, hoy)}</p>}
           {confirmando.has(uno.reciboId) ? (
@@ -124,7 +131,7 @@ export function PagoPendienteCard({ porPagar, hoy, preparando, confirmando, onPa
       ) : renovacionSinPagoOnline && (
         <>
           <p className="t-card-title t-num" style={{ margin: 0 }}>{renovacionSinPagoOnline.concepto} · {euros(renovacionSinPagoOnline.importe)}</p>
-          <p className="t-meta" style={{ margin: 0 }}>No se ha podido cobrar sola porque no tienes una tarjeta guardada. Págala en el estudio.</p>
+          <p className="t-meta" style={{ margin: 0 }}>{CON_MERCADOPAGO ? 'Tu cuota se ha renovado y está pendiente de pago. Págala en el estudio.' : 'No se ha podido cobrar sola porque no tienes una tarjeta guardada. Págala en el estudio.'}</p>
         </>
       )}
     </section>

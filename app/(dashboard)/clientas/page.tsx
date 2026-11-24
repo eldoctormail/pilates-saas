@@ -1,6 +1,6 @@
 'use client';
 
-import { TELEFONO_EJEMPLO } from '@/lib/locale';
+import { TELEFONO_EJEMPLO, FUNCIONES_DE_ESPANA } from '@/lib/locale';
 import { NOMBRE_ID_CLIENTA } from '@/lib/nif';
 import { LOCALE } from '../../../lib/locale.ts';
 import { conMoneda } from '../../../lib/moneda.ts';
@@ -76,6 +76,7 @@ import { GraficaAltas } from '@/components/dashboard/grafica-altas';
 import { CifrasClientas, type CifraClientas } from '@/components/clientas/cifras-clientas';
 import { AvisoSinCorreo } from '@/components/clientas/aviso-sin-correo';
 import { resumenSinCorreo } from '@/lib/clientas/sin-correo';
+import { METODO_MOVIL } from '@/lib/cobros/metodo-movil';
 
 // La ficha de la clienta solo se pinta al abrir una (panel al lado de la lista, pantallas
 // anchas): ~65 KB gz que no hacen falta para ver la lista. `ssr: false` porque el panel solo
@@ -2308,8 +2309,8 @@ export default function Socios() {
                       onChange={(e) => setForm((f) => ({ ...f, cobroMetodo: e.target.value as Exclude<MetodoCobro, 'SEPA'> }))}
                     >
                       <option value="EFECTIVO">Efectivo</option>
-                      <option value="TARJETA">Tarjeta (datáfono)</option>
-                      <option value="BIZUM">Bizum</option>
+                      <option value="TARJETA">{FUNCIONES_DE_ESPANA ? 'Tarjeta (datáfono)' : 'Tarjeta (posnet)'}</option>
+                      <option value={METODO_MOVIL.metodo}>{METODO_MOVIL.etiqueta}</option>
                       <option value="TRANSFERENCIA">Transferencia</option>
                     </select>
                   )}

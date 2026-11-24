@@ -160,7 +160,7 @@ const allSections: NavSection[] = [
         alias: ['tienda de apps', 'apps', 'integraciones', 'conexiones', 'api', 'zapier', 'desarrollador', 'modulos', 'complementos'],
         hijos: [
           { href: '/apps', label: 'Tienda de apps', grupo: 'Catálogo', nota: 'Complementos, módulos y lo que viene' },
-          { href: '/apps/integraciones', label: 'Integraciones de terceros', grupo: 'Conexiones', nota: 'Stripe, Zoom, Google Calendar y más' },
+          { href: '/apps/integraciones', label: 'Integraciones de terceros', grupo: 'Conexiones', nota: FUNCIONES_DE_ESPANA ? 'Stripe, Zoom, Google Calendar y más' : 'Mercado Pago, Zoom, Google Calendar y más' },
           { href: '/apps/api', label: 'API de desarrollador', grupo: 'Desarrollo', nota: 'Tus claves y cada endpoint' },
         ],
       },

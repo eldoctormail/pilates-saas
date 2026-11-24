@@ -18,6 +18,7 @@ import {
   FormPlazaFijaDesdeApp, FormReservar, FormSinCuota,
   useConfirmacionRiesgo, type PropsCajonRegla,
 } from '@/components/configuracion/tab-estudio-reservas';
+import { tarjetaDeOtroPais } from '@/lib/configuracion/secciones';
 
 // Cómo reservan mis alumnas: cada regla, una fila con su valor de hoy
 // («Hasta 12 h antes · después pierde la sesión», y debajo «Reformer: cancela
@@ -143,7 +144,7 @@ export function SeccionReservas({ showToast }: { showToast: (m: string) => void 
       <GrupoFilas titulo="Si cambia de planes">
         {fila('cancelar-y-recuperar')}
         {fila('recuperaciones')}
-        {fila('si-cancela-tarde-o-no-viene')}
+        {!tarjetaDeOtroPais('si-cancela-tarde-o-no-viene') && fila('si-cancela-tarde-o-no-viene')}
       </GrupoFilas>
 
       <GrupoFilas titulo="El día de la clase">

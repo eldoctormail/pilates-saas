@@ -6,6 +6,7 @@
 // motor y las superficies no cambian. Nada hardcodeado fuera de aquí.
 // ─────────────────────────────────────────────────────────────────────────────
 import { conMoneda } from '../moneda.ts';
+import { CON_MERCADOPAGO } from '../pasarela.ts';
 import type {
   NotificationCategory, NotificationChannel, NotificationPriority, NotificationRole,
 } from './types.ts';
@@ -855,7 +856,9 @@ export const PLANTILLAS: Record<string, Plantilla> = {
   },
   [`${EVENTOS.RENOVACION_SIN_TARJETA}#SOCIA`]: {
     title: 'Tu renovación está pendiente',
-    body: `No hemos podido cobrar {concepto} (${conMoneda('{importe}')}) porque no tienes una tarjeta guardada. Toca para ver cómo pagarla.`,
+    body: CON_MERCADOPAGO
+      ? `La renovación de {concepto} (${conMoneda('{importe}')}) está pendiente de pago. Toca para pagarla.`
+      : `No hemos podido cobrar {concepto} (${conMoneda('{importe}')}) porque no tienes una tarjeta guardada. Toca para ver cómo pagarla.`,
     // Bonos le enseña la renovación con «Pagar ahora» (o «págala en el estudio»
     // si el estudio no cobra online). Pagarla desde ahí guarda la tarjeta.
     deepLink: (d: Datos) => `/portal/${s(d.slug)}/bonos`,

@@ -45,6 +45,7 @@
  * que no le falta.
  */
 import { FUNCIONES_DE_ESPANA } from '../locale.ts';
+import { HREF_CONECTAR_PASARELA, NOMBRE_PASARELA } from '../pasarela.ts';
 
 export type NivelGuia = 'esencial' | 'recomendado' | 'avanzado';
 
@@ -135,7 +136,9 @@ export const CAPITULOS: CapituloGuia[] = [
       },
       {
         titulo: 'No necesitas configurarlo todo para empezar',
-        texto: 'Para que un cliente reserve no hace falta ni Stripe ni tu NIF. Puedes abrir hoy cobrando en el mostrador y dejar lo de cobrar por internet para cuando te apetezca.',
+        texto: FUNCIONES_DE_ESPANA
+          ? 'Para que un cliente reserve no hace falta ni Stripe ni tu NIF. Puedes abrir hoy cobrando en el mostrador y dejar lo de cobrar por internet para cuando te apetezca.'
+          : 'Para que un cliente reserve no hace falta ni Mercado Pago ni tu CUIT. Puedes abrir hoy cobrando en el mostrador y dejar lo de cobrar por internet para cuando te apetezca.',
       },
     ],
     acciones: [{ label: 'Ver un tour del panel', tour: true }],
@@ -352,8 +355,8 @@ export const CAPITULOS: CapituloGuia[] = [
         texto: 'Tu estudio tiene la app de sus clientes desde el primer día, con tu nombre y tu color. Ahí se ve tu horario y desde ahí se reserva. No hay que publicarla ni activarla: en cuanto tienes clases programadas, funciona.',
       },
       {
-        titulo: 'No necesitas Stripe para esto',
-        texto: 'Recibir reservas y cobrar por internet son dos cosas distintas. Puedes abrir hoy y seguir cobrando en el mostrador; conectar Stripe es el capítulo 09 y puede esperar.',
+        titulo: `No necesitas ${NOMBRE_PASARELA} para esto`,
+        texto: `Recibir reservas y cobrar por internet son dos cosas distintas. Puedes abrir hoy y seguir cobrando en el mostrador; conectar ${NOMBRE_PASARELA} es el capítulo 09 y puede esperar.`,
       },
       {
         titulo: 'Comparte el enlace donde ya te buscan',
@@ -464,7 +467,8 @@ export const CAPITULOS: CapituloGuia[] = [
   },
 
   // ── 09 ─────────────────────────────────────────────────────────────────────
-  {
+  // Argentina (lib/locale.ts): Mercado Pago en lugar de Stripe, sin tarjeta guardada ni recibos al banco.
+  FUNCIONES_DE_ESPANA ? {
     id: 'cobrar',
     numero: '09',
     titulo: 'Cobrar',
@@ -505,6 +509,47 @@ export const CAPITULOS: CapituloGuia[] = [
     ],
     consejo: 'Antes de cobrarle a nadie de verdad, haz una compra de prueba desde tu propia página con un importe pequeño. Ver el recibo aparecer solo es la mejor forma de fiarte del sistema.',
     pasos: ['stripe', 'renovacion'],
+  } : {
+    id: 'cobrar',
+    numero: '09',
+    titulo: 'Cobrar',
+    resumen: 'Conectar Mercado Pago, cobrar en el mostrador y saber en todo momento quién te debe.',
+    nivel: 'recomendado',
+    minutos: 8,
+    queAprendes: [
+      'Cómo conectar tu cuenta de Mercado Pago y por qué el dinero no pasa por Tentare',
+      'Las formas de cobrar: Mercado Pago, efectivo, tarjeta en el posnet y transferencia',
+      'Dónde se ve lo que has cobrado y lo que te deben',
+    ],
+    porQue: 'Con el pago desde la app dejas de perseguir a nadie a final de mes.',
+    apartados: [
+      {
+        titulo: 'El dinero es tuyo desde el primer momento',
+        texto: 'Al conectar Mercado Pago, los cobros entran en tu propia cuenta, no en la de Tentare. Se conecta en Apps e integraciones › Mercado Pago, con el Access Token y la clave secreta de tu aplicación de Mercado Pago.',
+      },
+      {
+        titulo: 'Cuando un cliente compra por internet',
+        texto: 'Paga con Mercado Pago desde su app o desde tu web. Se le entrega el bono o la cuota al instante y se le genera el recibo. Tú no tienes que hacer nada.',
+      },
+      {
+        titulo: 'Cobrar en el mostrador',
+        texto: 'Efectivo, tarjeta en el posnet, transferencia o el QR de Mercado Pago: marcas el recibo como cobrado con el método que fuera y queda registrado igual. Tentare no te obliga a cobrar por internet.',
+      },
+      {
+        titulo: 'Quién me debe',
+        texto: 'Es la pantalla que más vas a mirar. Una fila por cliente con lo que debe: marcas como cobrado lo que te ha pagado en mano, y lo demás lo paga ella desde su app.',
+      },
+      {
+        titulo: 'Renovaciones',
+        texto: 'Las cuotas generan su recibo solas cada ciclo, y tu cliente lo paga desde su app con Mercado Pago. Si no lo paga, lo ves en «Quién me debe».',
+      },
+    ],
+    acciones: [
+      { label: 'Conectar Mercado Pago', href: HREF_CONECTAR_PASARELA },
+      { label: 'Ver quién me debe', href: '/cobros' },
+    ],
+    consejo: 'Antes de cobrarle a nadie de verdad, haz una compra de prueba desde tu propia página con un importe pequeño. Ver el recibo aparecer solo es la mejor forma de fiarte del sistema.',
+    pasos: ['renovacion'],
   },
 
   // ── 10 ─────────────────────────────────────────────────────────────────────

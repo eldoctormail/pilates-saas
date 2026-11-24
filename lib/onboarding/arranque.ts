@@ -10,6 +10,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import type { ProgresoGuia } from '../guia/progreso.ts';
 import type { PasoOnboarding } from '../onboarding.ts';
+import { NOMBRE_PASARELA } from '../pasarela.ts';
 
 export interface FilaArranque {
   id: string;
@@ -47,7 +48,7 @@ const HECHO_EN_PASADO: Readonly<Record<string, string>> = {
   reservas: 'Tus reservas están abiertas.',
   'primera-reserva': 'Ya tienes tu primera reserva.',
   bonos: 'Tu primera tarifa está creada.',
-  stripe: 'Stripe está conectado.',
+  stripe: `${NOMBRE_PASARELA} está conectado.`,
   clientes: 'Ya tienes tus primeras clientes.',
 };
 

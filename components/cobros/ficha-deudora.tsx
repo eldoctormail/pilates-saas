@@ -26,6 +26,7 @@ import { MenuRecibo } from './menu-recibo';
 import { PastillaEstado } from './piezas';
 import type { AccionesRecibo, AvisosCobros } from './use-acciones-recibo';
 import type { DatosCobros } from './use-datos-cobros';
+import { METODO_MOVIL } from '@/lib/cobros/metodo-movil';
 
 export function FichaDeudora({ grupo, datos, acciones, avisos, onCerrar }: {
   grupo: GrupoDeDeuda<Recibo>;
@@ -152,7 +153,7 @@ export function FichaDeudora({ grupo, datos, acciones, avisos, onCerrar }: {
             {cobrando && <Loader2 size={15} className="animate-spin" aria-hidden />}
             Cobrar <CifraPrivada inline>{formatEuro(totalACobrar)}</CifraPrivada>
           </button>
-          <p className="-mt-1 text-[12px] text-muted-foreground">Eliges cómo te paga: efectivo, tarjeta del mostrador, Bizum o transferencia.</p>
+          <p className="-mt-1 text-[12px] text-muted-foreground">Eliges cómo te paga: efectivo, tarjeta del mostrador, {METODO_MOVIL.etiqueta} o transferencia.</p>
           {conPagoAbierto && (
             <p className="-mt-1 flex items-start gap-1.5 text-[12px] text-muted-foreground">
               <AlertTriangle size={13} className="mt-0.5 shrink-0 text-warning" aria-hidden />

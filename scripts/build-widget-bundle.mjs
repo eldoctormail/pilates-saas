@@ -76,7 +76,6 @@ const opcionesComunes = {
     'process.env.NEXT_PUBLIC_ZONA_HORARIA': JSON.stringify(process.env.NEXT_PUBLIC_ZONA_HORARIA ?? ''),
     'process.env.NEXT_PUBLIC_LOCALE': JSON.stringify(process.env.NEXT_PUBLIC_LOCALE ?? ''),
     'process.env.NEXT_PUBLIC_MONEDA': JSON.stringify(process.env.NEXT_PUBLIC_MONEDA ?? ''),
-    'process.env.NEXT_PUBLIC_PASARELA': JSON.stringify(process.env.NEXT_PUBLIC_PASARELA ?? ''),
     'process.env.NEXT_PUBLIC_LOCALE_MONEDA': JSON.stringify(process.env.NEXT_PUBLIC_LOCALE_MONEDA ?? ''),
   },
   logLevel: 'info',

@@ -32,7 +32,7 @@ import type { PlanTarifa } from '@/lib/types';
 //      «Reservada ✓» si el servidor la confirma; si no hubo plaza, lo que tiene a su
 //      favor (nunca un ✓); si tarda, «no vuelvas a pagar».
 //
-// Autoalojado con Mercado Pago (`NEXT_PUBLIC_PASARELA=mercadopago`): el paso 2 pide a
+// Autoalojado con Mercado Pago (formato de Argentina, lib/mercadopago/config.ts): el paso 2 pide a
 // /api/mercadopago/checkout la URL de Checkout Pro y la alumna paga en Mercado Pago. A la
 // vuelta (`?mp=<compra>` en la ficha) la hoja se abre directamente en el paso 4, preguntando
 // a /api/mercadopago/estado-compra: el mismo «Confirmando tu plaza…» y los mismos desenlaces.

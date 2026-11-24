@@ -93,7 +93,6 @@ empezar)
   poner "$ENV_APP" NEXT_PUBLIC_APP_URL "$URL_APP"
   poner "$ENV_APP" NEXT_PUBLIC_SUPABASE_URL "$URL_SB"
   poner "$ENV_APP" NEXT_PUBLIC_LOCALE es-AR-u-hc-h23
-  poner "$ENV_APP" NEXT_PUBLIC_PASARELA mercadopago
   compilar
 
   echo "→ Supabase"

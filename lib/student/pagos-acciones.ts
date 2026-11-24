@@ -18,7 +18,7 @@ import { portalAuthHeader, prepararRenovacionPlan } from '@/lib/student/api-publ
 import { pasarelaEsMercadoPago } from '@/lib/mercadopago/config';
 
 /**
- * Autoalojado con Mercado Pago (NEXT_PUBLIC_PASARELA=mercadopago): el recibo se
+ * Autoalojado con Mercado Pago (formato de Argentina): el recibo se
  * paga en Checkout Pro, fuera de la app, y se vuelve a «Pagos», que comprueba
  * que llegó. El servidor (`/api/mercadopago/checkout`) aplica las mismas reglas
  * que el de Stripe; el webhook es quien lo da por cobrado.

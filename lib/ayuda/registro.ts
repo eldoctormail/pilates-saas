@@ -37,7 +37,7 @@ export const CATEGORIAS: CategoriaAyuda[] = [
   { slug: 'reservas', titulo: 'Reservas y calendario', descripcion: 'Clases, horarios, lista de espera, cancelaciones y las reglas con las que reserva cada cliente.', icono: 'CalendarDays' },
   { slug: 'clientes', titulo: 'Clientes y CRM', descripcion: 'Ficha de cada cliente, historial, notas e importación desde tu software anterior.', icono: 'Users' },
   { slug: 'instructores', titulo: 'Instructoras y equipo', descripcion: 'Altas, disponibilidad, tarifas, permisos y sustituciones cuando alguien no puede dar su clase.', icono: 'UserRound' },
-  { slug: 'pagos', titulo: 'Pagos y facturación', descripcion: 'Stripe, tarjeta guardada, cobros fallidos, reembolsos y factura de cada cobro.', icono: 'CreditCard' },
+  { slug: 'pagos', titulo: 'Pagos y facturación', descripcion: FUNCIONES_DE_ESPANA ? 'Stripe, tarjeta guardada, cobros fallidos, reembolsos y factura de cada cobro.' : 'Mercado Pago, cobros en el mostrador, reembolsos y comprobantes.', icono: 'CreditCard' },
   { slug: 'bonos', titulo: 'Bonos y membresías', descripcion: 'Bonos de sesiones, cuotas mensuales, clases fijas, créditos y caducidades.', icono: 'Ticket' },
   { slug: 'portal', titulo: 'App y página de reservas', descripcion: 'La app donde tus clientes reservan, su enlace y su QR, y la página de reservas que va en tu web: personalización, marca y acceso.', icono: 'LayoutTemplate' },
   { slug: 'widget', titulo: 'Widget para tu web', descripcion: 'Incrusta las reservas de Tentare en tu propia web, con WordPress, Webflow o HTML.', icono: 'CodeXml' },
@@ -65,8 +65,10 @@ export interface ArticuloAyuda {
   /** Slugs completos "categoria/articulo" de otros artículos de este registro. */
   relacionados?: string[];
   estado: 'publicado' | 'proximamente';
-  /** Solo tiene sentido en España (Veri*Factu, gestoría, datáfono de Stripe): con el formato de Argentina no se publica. */
+  /** Solo tiene sentido en España (Veri*Factu, gestoría, Stripe): con el formato de Argentina no se publica. */
   soloEspana?: true;
+  /** Solo tiene sentido en Argentina (Mercado Pago): con el formato de España no se publica. */
+  soloArgentina?: true;
 }
 
 const TODOS_LOS_ARTICULOS: ArticuloAyuda[] = [
@@ -279,7 +281,18 @@ const TODOS_LOS_ARTICULOS: ArticuloAyuda[] = [
   },
   // ─── Pagos y facturación ────────────────────────────────────────────────
   {
+    slug: 'conectar-mercadopago', categoria: 'pagos', tipo: 'guia',
+    soloArgentina: true,
+    titulo: 'Conectar Mercado Pago para cobrar online',
+    descripcion: 'Sin Mercado Pago conectado tus clientes no pagan desde su app: cómo cargar tu cuenta en Apps e integraciones.',
+    terminos: ['mercado pago', 'mercadopago', 'access token', 'webhook', 'checkout pro', 'cobrar online', 'pago online'],
+    actualizado: '2026-11-24',
+    relacionados: ['pagos/reembolsos', 'pagos/la-pantalla-de-cobros'],
+    estado: 'publicado',
+  },
+  {
     slug: 'conectar-stripe', categoria: 'pagos', tipo: 'guia',
+    soloEspana: true,
     titulo: 'Conectar Stripe para cobrar con tarjeta',
     descripcion: 'Sin Stripe conectado no hay cobro automático ni tarjeta guardada — cómo activarlo desde Configuración.',
     actualizado: '2026-09-15',
@@ -288,6 +301,7 @@ const TODOS_LOS_ARTICULOS: ArticuloAyuda[] = [
   },
   {
     slug: 'tarjeta-guardada-y-cobro-automatico', categoria: 'pagos', tipo: 'guia',
+    soloEspana: true,
     titulo: 'Tarjeta guardada y cobro automático',
     descripcion: 'Cómo guarda un cliente su tarjeta y qué pasa en cada renovación mensual.',
     actualizado: '2026-09-14',
@@ -296,6 +310,7 @@ const TODOS_LOS_ARTICULOS: ArticuloAyuda[] = [
   },
   {
     slug: 'cobros-fallidos', categoria: 'pagos', tipo: 'problema',
+    soloEspana: true,
     titulo: 'Un cobro ha fallado: qué hacer',
     descripcion: 'Reintentos automáticos, cuándo se avisa al cliente y cómo reintentarlo tú a mano.',
     actualizado: '2026-09-14',
@@ -532,7 +547,7 @@ const TODOS_LOS_ARTICULOS: ArticuloAyuda[] = [
   {
     slug: 'integraciones-disponibles', categoria: 'integraciones', tipo: 'guia',
     titulo: 'Integraciones disponibles hoy',
-    descripcion: 'Stripe, Google Calendar, WhatsApp, Zoom, Kisi, Zapier y más: qué hace cada una y cómo se conecta.',
+    descripcion: FUNCIONES_DE_ESPANA ? 'Stripe, Google Calendar, WhatsApp, Zoom, Kisi, Zapier y más: qué hace cada una y cómo se conecta.' : 'Mercado Pago, Google Calendar, WhatsApp, Zoom, Kisi, Zapier y más: qué hace cada una y cómo se conecta.',
     actualizado: '2026-09-15',
     relacionados: ['pagos/conectar-stripe', 'widget/que-es-el-widget'],
     estado: 'publicado',
@@ -671,9 +686,10 @@ const TODOS_LOS_ARTICULOS: ArticuloAyuda[] = [
   },
 ];
 
-// Con el formato de Argentina (lib/locale.ts) no se publican los de solo España:
+// Con el formato de Argentina (lib/locale.ts) no se publican los de solo España
+// (y con el de España, los de solo Argentina):
 // ni en la ayuda, ni en el buscador, ni en el sitemap.
-export const ARTICULOS: ArticuloAyuda[] = TODOS_LOS_ARTICULOS.filter(a => FUNCIONES_DE_ESPANA || !a.soloEspana);
+export const ARTICULOS: ArticuloAyuda[] = TODOS_LOS_ARTICULOS.filter(a => (FUNCIONES_DE_ESPANA ? !a.soloArgentina : !a.soloEspana));
 
 const CLAVE = (categoria: string, slug: string) => `${categoria}/${slug}`;
 const PORCLAVE = new Map(ARTICULOS.map((a) => [CLAVE(a.categoria, a.slug), a]));

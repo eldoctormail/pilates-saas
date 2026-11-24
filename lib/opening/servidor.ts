@@ -15,6 +15,8 @@ import type { AlertaApertura } from './alertas.ts';
 import { leerRespuestas, type RespuestasOnboarding } from './onboarding.ts';
 import { CLIENTAS_QUE_DELATAN_UN_ESTUDIO_ABIERTO } from './visibilidad.ts';
 import { cargarEstadosClientas } from '../clientas/estado-servidor.ts';
+import { estudioCobraConMercadoPago } from '../mercadopago/cuenta.ts';
+import { CON_MERCADOPAGO } from '../pasarela.ts';
 
 // Cargas de Opening OS con cliente service-role, compartidas por la API de la
 // home y el cron de alertas. ⚠️ La RLS no filtra: quien llama ya ha decidido
@@ -227,9 +229,12 @@ export async function cargarDatosListo(
     for (const t of data ?? []) (tiposPorPlan[t.plan_id as string] ??= []).push(t.tipo_clase_id as string);
   }
 
-  const cuenta = (s.stripe_account_id as string | null) ?? null;
+  // Con Mercado Pago (Argentina), «cobra online» es que el estudio tenga su cuenta.
+  const cuenta = CON_MERCADOPAGO ? null : (s.stripe_account_id as string | null) ?? null;
   const stripe = cuenta ? stripeServidor() : null;
-  const estadoStripe: DatosListo['stripe'] = !cuenta ? 'SIN_CUENTA'
+  const estadoStripe: DatosListo['stripe'] = CON_MERCADOPAGO
+    ? (await estudioCobraConMercadoPago(admin, studioId) ? 'PUEDE' : 'SIN_CUENTA')
+    : !cuenta ? 'SIN_CUENTA'
     : !stripe ? 'SIN_RESPUESTA'
     : await estadoCobroCuenta(stripe, cuenta, { timeoutMs: TIMEOUT_STRIPE_MS });
 

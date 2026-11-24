@@ -153,7 +153,7 @@ La primera compilación tarda varios minutos. Después:
 
 ## Mercado Pago (cobro online)
 
-Las alumnas pueden, desde la app y con Checkout Pro: **pagar sus recibos pendientes** (cuotas, renovaciones, lo que les cargues) y **comprar un bono o plan** de tu tienda (con código de descuento, matrícula y cobro proporcional, igual que con Stripe). **Hace falta un dominio con HTTPS**, porque Mercado Pago tiene que poder llamar al webhook.
+Las alumnas pueden, desde la app y con Checkout Pro: **pagar sus recibos pendientes** (cuotas, renovaciones, lo que les cargues) y **comprar un bono o plan** de tu tienda (con código de descuento, matrícula y cobro proporcional). **Hace falta un dominio con HTTPS**, porque Mercado Pago tiene que poder llamar al webhook.
 
 1. En [Tus integraciones](https://www.mercadopago.com.ar/developers/panel/app), creá una aplicación de **Checkout Pro**.
 2. En el panel de Tentare, como propietaria: **Apps e integraciones › Mercado Pago**. Ahí está la dirección del webhook para copiar.
@@ -168,11 +168,11 @@ Cada compra de plan queda en `compras_mercadopago` con lo que se decidió cobrar
 
 **Conciliador:** cada 30 minutos el contenedor `cron` repasa los pagos de tu cuenta de las últimas 72 h y aplica los que el webhook no haya aplicado (servidor caído, clave mal puesta, dominio sin resolver). Si eso pasa, queda un aviso en Sentry para revisar el webhook. Para forzarlo a mano: `docker compose exec cron llamar mercadopago-conciliar`.
 
-**Devoluciones:** en la ficha de la alumna, el botón «Devolver» de un recibo pagado con Mercado Pago le pide la devolución a Mercado Pago (con la política de devoluciones que tengas configurada: plazo y «solo sin usar»). Cuando Mercado Pago la confirma, Tentare marca el recibo como devuelto, anota la devolución, avisa a la alumna y te ofrece quitarle el bono, igual que con Stripe. Una devolución o un contracargo hechos desde tu cuenta de Mercado Pago siguen el mismo camino. Si la compra incluía matrícula, se devuelve el pago entero desde el recibo del plan.
+**Devoluciones:** en la ficha de la alumna, el botón «Devolver» de un recibo pagado con Mercado Pago le pide la devolución a Mercado Pago (con la política de devoluciones que tengas configurada: plazo y «solo sin usar»). Cuando Mercado Pago la confirma, Tentare marca el recibo como devuelto, anota la devolución, avisa a la alumna y te ofrece quitarle el bono. Una devolución o un contracargo hechos desde tu cuenta de Mercado Pago siguen el mismo camino. Si la compra incluía matrícula, se devuelve el pago entero desde el recibo del plan.
 
 **Pagar y reservar una clase en un paso:** en la ficha de una clase, si la alumna no tiene bono que la cubra, «Ver opciones» le ofrece la clase suelta (y los bonos que la incluyen). Antes de mandarla a Mercado Pago se comprueba que haya plaza para ella, y el pago caduca cuando se cierra la reserva de la clase (si quedan menos de 15 minutos, no se abre). Al volver, la ficha espera lo que diga el servidor: «Reservada» solo cuando la plaza está confirmada. Si la clase se llenó mientras pagaba, el bono queda entregado, entra en la lista de espera o lo tiene a su favor, y te llega el aviso de «pagó y no hubo plaza».
 
-**Sin cuenta (invitada):** en `/reservar/<tu-slug>` (y desde el widget de tu web, que manda ahí a quien no ha entrado) se puede pagar y reservar una clase solo con nombre, email y teléfono. Al confirmarse el pago, Tentare crea su ficha con esos datos, le entrega la clase o el bono y le reserva la plaza. Comprar un bono suelto sin cuenta sigue el ajuste «Compra pública» del estudio, igual que con Stripe. A la vuelta, la página avisa de que el pago se está confirmando.
+**Sin cuenta (invitada):** en `/reservar/<tu-slug>` (y desde el widget de tu web, que manda ahí a quien no ha entrado) se puede pagar y reservar una clase solo con nombre, email y teléfono. Al confirmarse el pago, Tentare crea su ficha con esos datos, le entrega la clase o el bono y le reserva la plaza. Comprar un bono suelto sin cuenta sigue el ajuste «Compra pública» del estudio. A la vuelta, la página avisa de que el pago se está confirmando.
 
 **Widget de tu web:** con sesión iniciada, «Planes» lleva a la alumna a Mercado Pago para pagar y, a la vuelta, llega a `/reservar/<tu-slug>`. Para que el widget pueda llamar al cobro desde tu dominio, ese dominio tiene que estar en los dominios autorizados del widget (Configuración › Mi web). Si cambiaste las condiciones del estudio, el widget no tiene la casilla para aceptarlas: la alumna las acepta comprando desde la app o desde `/reservar`.
 
@@ -232,4 +232,6 @@ Los archivos subidos (fotos, adjuntos) están en `~/supabase-project/volumes/sto
 
 ## Qué queda apagado
 
-Stripe (cobros online), VeriFactu, WhatsApp, Zoom, Google, Klaviyo, Cloudflare (Turnstile, R2, Stream), Sentry, PostHog e IA. Las variables quedan vacías y las pantallas que dependen de esos servicios no funcionan hasta configurarlos.
+WhatsApp, Zoom, Google, Klaviyo, Cloudflare (Turnstile, R2, Stream), Sentry, PostHog e IA. Las variables quedan vacías y las pantallas que dependen de esos servicios no funcionan hasta configurarlos.
+
+Stripe y lo que solo existe en España (Veri*Factu y la AEAT, las domiciliaciones SEPA, Bizum, el datáfono, Urban Sports Club, el cierre de año con el modelo 303) no se configuran ni se ven: con el formato de Argentina el panel, la app de las alumnas y el Centro de ayuda no los muestran. Los cobros online van por Mercado Pago y la factura es la electrónica de ARCA.

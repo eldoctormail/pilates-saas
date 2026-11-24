@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { QueEstaPasando, CausasComunes, ComoSolucionarlo } from '@/components/ayuda/TroubleshootShell';
 import { AyudaResultado } from '@/components/ayuda/AyudaPasos';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
 export default function Contenido() {
   return (
@@ -26,8 +27,8 @@ export default function Contenido() {
       </ComoSolucionarlo>
 
       <AyudaResultado>
-        Un cobro completado genera su bono o activa su plan al momento, y si el aviso de Stripe se pierde, Tentare
-        lo repasa cada hora — si el dinero entró y el bono no está, lo normal es que esté en un sitio distinto de
+        Un cobro completado genera su bono o activa su plan al momento, y si el aviso de {ES ? 'Stripe' : 'Mercado Pago'} se pierde, Tentare
+        lo repasa {ES ? 'cada hora' : 'cada 30 minutos'} — si el dinero entró y el bono no está, lo normal es que esté en un sitio distinto de
         donde se ha mirado, no que se haya perdido.
       </AyudaResultado>
     </>

@@ -10,6 +10,7 @@
 
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
+import { FUNCIONES_DE_ESPANA } from '@/lib/locale';
 import { Banknote, CheckCircle2, ChevronLeft, ChevronRight, Download, Loader2, Wallet } from 'lucide-react';
 import { useStudio } from '@/lib/studio-context';
 import type { Recibo } from '@/lib/types';
@@ -140,7 +141,7 @@ export function LoQueHeCobrado({ datos, acciones, avisos, nueva = false }: { dat
             )}
           >
             {descarga === 'loading' ? <Loader2 size={15} className="animate-spin" aria-hidden /> : descarga === 'done' ? <CheckCircle2 size={15} aria-hidden /> : <Download size={15} aria-hidden />}
-            {descarga === 'loading' ? 'Preparando…' : descarga === 'done' ? 'Descargado' : 'Descargar para la gestoría'}
+            {descarga === 'loading' ? 'Preparando…' : descarga === 'done' ? 'Descargado' : FUNCIONES_DE_ESPANA ? 'Descargar para la gestoría' : 'Descargar para tu contador'}
           </button>
         </span>
       </div>

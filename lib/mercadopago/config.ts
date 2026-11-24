@@ -5,16 +5,14 @@
 //   MERCADOPAGO_WEBHOOK_SECRET Clave secreta de la sección Webhooks de la
 //                              aplicación. Sin ella NO se acepta ningún aviso:
 //                              un aviso sin firma comprobada no mueve dinero.
-//   NEXT_PUBLIC_PASARELA       'mercadopago' para que la app de la alumna pague
-//                              con Mercado Pago en vez de Stripe; 'stripe' para
-//                              lo contrario. Sin poner, Mercado Pago con el
-//                              formato de Argentina (allí Stripe no opera).
 //
 // Desde el 23-nov-2026 el token y la clave también se cargan desde el panel,
 // por estudio (lib/mercadopago/cuenta.ts); estas dos variables quedan para un
 // estudio que no cargó la suya.
 //
-// Lo que sí se puede leer en el navegador es solo NEXT_PUBLIC_PASARELA.
+// La pasarela no se elige: con el formato de Argentina (lib/locale.ts) es
+// siempre Mercado Pago, porque Stripe no opera allí. Los caminos de Stripe solo
+// quedan para el formato de España (los tests).
 
 import { esArgentina } from '../locale.ts';
 
@@ -37,7 +35,5 @@ export function configMercadoPago(env: Record<string, string | undefined> = proc
 
 /** ¿La app de la alumna paga con Mercado Pago? (se lee también en el navegador) */
 export function pasarelaEsMercadoPago(): boolean {
-  const pasarela = (typeof process !== 'undefined' ? process.env.NEXT_PUBLIC_PASARELA : undefined)?.trim();
-  if (pasarela) return pasarela === 'mercadopago';
   return esArgentina();
 }

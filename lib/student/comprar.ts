@@ -218,7 +218,7 @@ export async function comprarConBizum(
 }
 
 /**
- * Mercado Pago (autoalojado, NEXT_PUBLIC_PASARELA=mercadopago): comprar el plan
+ * Mercado Pago (autoalojado, formato de Argentina): comprar el plan
  * en Checkout Pro. El servidor (`/api/mercadopago/checkout`) decide el importe
  * con las mismas reglas que Stripe y lo guarda; aquí solo se redirige. Se vuelve
  * a «Mis bonos» (`?compra=ok&plan=…`), que comprueba que el bono llegó.

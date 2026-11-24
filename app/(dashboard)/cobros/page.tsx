@@ -1,6 +1,6 @@
 'use client';
 
-import { LOCALE } from '../../../lib/locale.ts';
+import { LOCALE, FUNCIONES_DE_ESPANA } from '../../../lib/locale.ts';
 import { VistaDeLaUrl, useUrlSigueALaVista } from '@/components/layout/vista-de-la-url';
 import { Suspense, useEffect, useMemo, useState } from 'react';
 import { CreditCard, Landmark, Plus } from 'lucide-react';
@@ -27,6 +27,7 @@ import { CifrasCobros, GraficaCobros, type DestinoCifra } from '@/components/cob
 import { ProximasCuotasNueva, type PlazoProximas } from '@/components/cobros/proximas-cuotas';
 import { BotonVivo, PantallaVacia } from '@/components/dashboard/vivo';
 import { usePanelNuevo } from '@/lib/estudio/panel-nuevo-cliente';
+import { METODO_MOVIL } from '@/lib/cobros/metodo-movil';
 
 // "Cobrar" existe como un solo sitio. La caja (TPV) se queda fuera a propósito:
 // es otro modo de uso —pantalla completa, táctil, de pie en el mostrador—.
@@ -119,7 +120,7 @@ export default function Cobros() {
   const etiquetas: Record<TabId, string> = {
     deudas: 'Quién me debe',
     cobrado: 'Lo que he cobrado',
-    facturas: sinFacturacion ? 'Para tu gestoría' : 'Facturas',
+    facturas: sinFacturacion ? (FUNCIONES_DE_ESPANA ? 'Para tu gestoría' : 'Para tu contador') : 'Facturas',
     historial: 'Cambios del equipo',
   };
   const tabs = TABS.filter(t => t !== 'historial' || verHistorial);
@@ -206,7 +207,7 @@ export default function Cobros() {
           texto="Aquí verás quién te debe, lo que has cobrado y lo que viene. Cada cuota o bono que vendas deja aquí su recibo, y lo que te paguen en mano lo apuntas tú."
           ejemplos={[
             { accion: 'Vende una cuota o un bono', cuando: 'y su recibo aparece aquí' },
-            { accion: 'Apunta un pago en mano', cuando: 'en efectivo, Bizum o transferencia' },
+            { accion: 'Apunta un pago en mano', cuando: `en efectivo, ${METODO_MOVIL.etiqueta} o transferencia` },
             { accion: 'Cada renovación de una cuota', cuando: 'sale aquí sola el día que toca' },
           ]}
           accion={{ label: 'Nuevo cobro', onClick: () => setNuevoCobro(true), Icono: Plus }}

@@ -3,6 +3,7 @@ import { ZONA_HORARIA } from '../zona-horaria.ts';
 import { NOMBRE_ID_FISCAL, nifValido } from '../nif.ts';
 import { inicioDelDiaEstudio } from '../utils.ts';
 import { instanteDeApertura } from '../booking-logic.ts';
+import { HREF_CONECTAR_PASARELA, NOMBRE_PASARELA } from '../pasarela.ts';
 import type { EstadoCobroCuenta } from '../billing/cuenta-puede-cobrar.ts';
 
 // «¿Lista para abrir?» Cada punto mira el estado REAL (lo que usan el checkout,
@@ -74,7 +75,7 @@ export const HREF_LISTO: Record<IdComprobacion, string> = {
   clases: '/calendario',
   pagina: '/configuracion?tab=estudio',
   venta: '/productos',
-  stripe: '/configuracion?tab=conexiones#integracion-stripe',
+  stripe: HREF_CONECTAR_PASARELA,
   fiscal: '/configuracion?tab=cobros#datos-fiscales',
   antelacion: '/configuracion?tab=reservas#reservar',
   suave: '#apertura-suave',
@@ -85,7 +86,7 @@ export const ACCION_LISTO: Record<IdComprobacion, string> = {
   clases: 'Publica las clases de tu apertura',
   pagina: 'Pon la dirección de tu página de reservas',
   venta: 'Pon a la venta un plan que cubra tus clases',
-  stripe: 'Deja Stripe listo para cobrar',
+  stripe: `Deja ${NOMBRE_PASARELA} listo para cobrar`,
   fiscal: 'Completa tus datos fiscales',
   antelacion: 'Revisa con cuánta antelación se puede reservar',
   suave: 'Invita a alguien a tu apertura suave',
@@ -146,9 +147,9 @@ export function evaluarListo(d: DatosListo, now: Date, puedeAbrir: (href: string
     id: 'stripe', titulo: 'Cobro online', bloquea: d.exigirPlan,
     estado: d.stripe === 'PUEDE' ? 'OK' : d.stripe === 'SIN_RESPUESTA' ? 'SIN_COMPROBAR' : 'FALTA',
     detalle: d.stripe === 'PUEDE' ? ''
-      : d.stripe === 'SIN_CUENTA' ? 'Stripe sin conectar: nadie puede comprar un bono desde tu página.'
-      : d.stripe === 'NO_PUEDE' ? 'Stripe está conectado pero aún no puede cobrar: termina la verificación en Stripe.'
-      : 'Stripe no ha contestado. Vuelve a comprobarlo en un momento.',
+      : d.stripe === 'SIN_CUENTA' ? `${NOMBRE_PASARELA} sin conectar: nadie puede comprar un bono desde tu página.`
+      : d.stripe === 'NO_PUEDE' ? `${NOMBRE_PASARELA} está conectado pero aún no puede cobrar: termina la verificación en ${NOMBRE_PASARELA}.`
+      : `${NOMBRE_PASARELA} no ha contestado. Vuelve a comprobarlo en un momento.`,
   });
 
   // 5 · Datos fiscales como los pide la factura (NIF con dígito de control).

@@ -18,6 +18,7 @@
 import { conMoneda } from '../moneda.ts';
 import { ENTRADA_PRIMERA_CLASE } from '../alta/bienvenida-nueva.ts';
 import { otrasSedes, PRECIO_CADENA_MES, type TotalSedes } from '../alta/tu-estudio.ts';
+import { CON_MERCADOPAGO, HREF_CONECTAR_PASARELA, NOMBRE_PASARELA } from '../pasarela.ts';
 
 export interface TareaPrimerosPasos {
   /** Id del paso en `calcularOnboarding`, que es quien dice si está hecho. */
@@ -74,8 +75,8 @@ export const TAREAS: readonly TareaPrimerosPasos[] = [
 export const OPCIONAL: TareaPrimerosPasos = {
   id: 'stripe',
   titulo: 'Cobra online',
-  para: 'Con tarjeta o domiciliación. Si cobras en el mostrador, no te hace falta.',
-  href: '/configuracion?tab=conexiones#integracion-stripe',
+  para: CON_MERCADOPAGO ? 'Con Mercado Pago. Si cobras en el mostrador, no te hace falta.' : 'Con tarjeta o domiciliación. Si cobras en el mostrador, no te hace falta.',
+  href: HREF_CONECTAR_PASARELA,
   opcional: true,
 };
 
@@ -194,7 +195,7 @@ export interface OpcionalAlta {
  */
 const OPCIONALES_ALTA_NUEVA: readonly Omit<OpcionalAlta, 'hecha'>[] = [
   { id: 'marca', titulo: 'Pon tu logo y tu color', nota: '2 min', href: '/configuracion?tab=marca' },
-  { id: 'stripe', titulo: 'Cobra online con Stripe', nota: 'si cobras en el estudio, no', href: '/configuracion?tab=conexiones#integracion-stripe' },
+  { id: 'stripe', titulo: `Cobra online con ${NOMBRE_PASARELA}`, nota: 'si cobras en el estudio, no', href: HREF_CONECTAR_PASARELA },
   { id: 'fiscales', titulo: 'Tus datos fiscales, para facturar', nota: '3 min', href: '/configuracion?tab=cobros#datos-fiscales' },
   { id: 'equipo', titulo: 'Invita a tu equipo', nota: '2 min', href: '/equipo' },
 ];

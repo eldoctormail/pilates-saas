@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import { AyudaAntesDeEmpezar, AyudaResultado } from '@/components/ayuda/AyudaPasos';
 import { PLAZO_CONSERVACION_ANIOS } from '@/lib/auditoria/aviso-equipo';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
 export default function Contenido() {
   return (
@@ -16,15 +17,24 @@ export default function Contenido() {
       <h2 style={{ fontSize: 18, fontWeight: 700, margin: '24px 0 12px' }}>Quién me debe</h2>
       <p>
         Una fila por cliente, con lo que debe en total y desde cuándo. Al pulsarla se abre su ficha de deuda al lado:
-        cada recibo, cómo se le puede cobrar (su tarjeta, su domiciliación o en el mostrador) y, si el cobro automático
-        lo va a intentar solo, cuándo. Desde ahí cobras todo lo suyo de una vez o un recibo suelto. Para cobrar a varios
+        {ES
+          ? 'cada recibo, cómo se le puede cobrar (su tarjeta, su domiciliación o en el mostrador) y, si el cobro automático lo va a intentar solo, cuándo.'
+          : 'cada recibo y cómo se le puede cobrar (lo paga ella con Mercado Pago desde su app, o en el mostrador).'}{' '}
+        Desde ahí cobras todo lo suyo de una vez o un recibo suelto. Para cobrar a varios
         clientes a la vez, «Seleccionar varias» y eliges cómo te han pagado.
       </p>
-      <p>
-        Si una tarjeta falló, el recibo sigue aquí marcado como «No se pudo cobrar». No hay que buscarlo en otro sitio: lo que no ha
-        entrado se queda en esta lista hasta que entra. Debajo, «Próximas cuotas» te dice cómo se va a cobrar cada cuota
-        que se renueva en los próximos 30 días (sola con su tarjeta, por el banco, a mano…).
-      </p>
+      {ES ? (
+        <p>
+          Si una tarjeta falló, el recibo sigue aquí marcado como «No se pudo cobrar». No hay que buscarlo en otro sitio: lo que no ha
+          entrado se queda en esta lista hasta que entra. Debajo, «Próximas cuotas» te dice cómo se va a cobrar cada cuota
+          que se renueva en los próximos 30 días (sola con su tarjeta, por el banco, a mano…).
+        </p>
+      ) : (
+        <p>
+          No hay que buscar en otro sitio: lo que no ha entrado se queda en esta lista hasta que entra. Debajo,
+          «Próximas cuotas» te dice qué cuotas se renuevan en los próximos 30 días.
+        </p>
+      )}
 
       <h2 style={{ fontSize: 18, fontWeight: 700, margin: '28px 0 12px' }}>Nuevo cobro</h2>
       <p>
@@ -35,6 +45,7 @@ export default function Contenido() {
         ninguna sale sola: la haces desde el recibo cobrado. Es el mismo diálogo que el «Nuevo cobro» de la ficha del cliente.
       </p>
 
+      {ES && (<>
       <h2 style={{ fontSize: 18, fontWeight: 700, margin: '28px 0 12px' }}>Lo que está en el banco</h2>
       <p>
         «Preparar recibos para el banco» te enseña primero qué recibos entran (los pendientes de quien tiene la
@@ -48,6 +59,7 @@ export default function Contenido() {
         si era una cuota, se renueva) o <strong>«El banco lo devolvió»</strong> (vuelve a deberlo). Un recibo que
         devolvió el banco puede volver a la próxima remesa con «Reintentar», si el cliente tiene la domiciliación vigente.
       </p>
+      </>)}
 
       <h2 style={{ fontSize: 18, fontWeight: 700, margin: '28px 0 12px' }}>Devolver un cobro</h2>
       <p>
@@ -55,17 +67,20 @@ export default function Contenido() {
       </p>
       <ul style={{ margin: '0 0 12px', paddingLeft: 20 }}>
         <li>
-          <strong>«Le he devuelto el dinero»</strong>: se lo devolviste tú (en efectivo, por Bizum, por transferencia o en
-          el datáfono). Ya no lo debe, y si sale del cajón se apunta en la caja. Lo que compró no se le quita solo:
+          <strong>«Le he devuelto el dinero»</strong>: se lo devolviste tú ({ES
+            ? 'en efectivo, por Bizum, por transferencia o en el datáfono'
+            : 'en efectivo, por transferencia, por Mercado Pago o en el posnet'}). Ya no lo debe, y si sale del cajón se apunta en la caja. Lo que compró no se le quita solo:
           si hay que quitárselo, desde su ficha.
         </li>
         <li>
-          <strong>«El banco lo devolvió»</strong>: el banco devolvió el cargo (una tarjeta o una domiciliación). Vuelve a
+          <strong>«El banco lo devolvió»</strong>: el banco devolvió el cargo ({ES ? 'una tarjeta o una domiciliación' : 'una tarjeta'}). Vuelve a
           deberlo, y sale otra vez en «Quién me debe».
         </li>
       </ul>
       <p>
-        Lo que se cobró por Stripe se devuelve por Stripe, desde la ficha del cliente, y el recibo se marca solo.
+        {ES
+          ? 'Lo que se cobró por Stripe se devuelve por Stripe, desde la ficha del cliente, y el recibo se marca solo.'
+          : 'Lo que se cobró por Mercado Pago se devuelve por Mercado Pago, desde la ficha del cliente, y el recibo se marca solo.'}
       </p>
 
       <h2 style={{ fontSize: 18, fontWeight: 700, margin: '28px 0 12px' }}>Si se cancela una cuota</h2>
@@ -97,11 +112,13 @@ export default function Contenido() {
       <p>
         El dinero que ha entrado hoy, esta semana o este mes (con las flechas vas a los anteriores), ya restado lo
         devuelto y frente al mismo tramo del periodo anterior: responde a «¿este mes ha ido mejor?» sin abrir un
-        informe. Al lado, cómo te han pagado (domiciliación, tarjeta, efectivo, Bizum…), para cuadrar la caja y el
-        banco; y la lista de cobros por día, con la hora cuando la hay. «Descargar para la gestoría» baja lo cobrado
-        del periodo que estás viendo: el mismo fichero que Informes y el cierre del año.
+        informe. Al lado, cómo te han pagado ({ES ? 'domiciliación, tarjeta, efectivo, Bizum…' : 'Mercado Pago, tarjeta, efectivo, transferencia…'}), para cuadrar la caja y el
+        banco; y la lista de cobros por día, con la hora cuando la hay. {ES
+          ? '«Descargar para la gestoría» baja lo cobrado del periodo que estás viendo: el mismo fichero que Informes y el cierre del año.'
+          : '«Descargar para tu contador» baja lo cobrado del periodo que estás viendo: el mismo fichero que Informes.'}
       </p>
 
+      {ES ? (<>
       <h2 style={{ fontSize: 18, fontWeight: 700, margin: '28px 0 12px' }}>Facturas o «Para tu gestoría»</h2>
       <p>
         La pestaña «Facturas» enseña lo facturado este mes (base, IVA y total), los cobros en efectivo que se quedaron
@@ -113,6 +130,18 @@ export default function Contenido() {
         el que va y el año anterior, cada uno con su descarga. El resumen del año tiene su propia entrada en el menú,{' '}
         <Link href="/ayuda/pagos/cierre-de-ano" style={{ color: 'inherit', textDecoration: 'underline' }}>Cierre de año</Link>.
       </p>
+      </>) : (<>
+      <h2 style={{ fontSize: 18, fontWeight: 700, margin: '28px 0 12px' }}>Comprobantes o «Para tu contador»</h2>
+      <p>
+        La pestaña «Facturas» enseña los comprobantes internos de cada cobro, con su PDF. No valen como factura: la
+        factura legal es la electrónica de ARCA, que emites desde cada recibo cobrado.
+      </p>
+      <p style={{ margin: 0 }}>
+        Si no haces comprobantes con Tentare, la pestaña se llama «Para tu contador»: lo cobrado del trimestre anterior,
+        el que va y el año anterior, cada uno con su descarga. Las facturas de ARCA las ve tu contador en «Mis
+        Comprobantes» de ARCA.
+      </p>
+      </>)}
 
       <h2 style={{ fontSize: 18, fontWeight: 700, margin: '28px 0 12px' }}>Eliminar un recibo</h2>
       <p>
@@ -138,9 +167,9 @@ export default function Contenido() {
       </p>
       <p style={{ margin: 0 }}>
         Cuenta lo que se hace desde el panel, desde el día que se activó: no hay historial anterior. <strong>No incluye</strong>{' '}
-        los cobros automáticos, los reintentos ni lo que confirma Stripe por su cuenta, porque no los hace una
-        persona de tu equipo, ni un intento de cobro que el banco rechaza (no cambia ningún dato: eso lo ves en
-        Stripe). Las ventas de la caja y sus entradas y salidas de efectivo llevan su propio registro, con quién las
+        los cobros automáticos, los reintentos ni lo que confirma {ES ? 'Stripe' : 'Mercado Pago'} por su cuenta, porque no los hace una
+        persona de tu equipo, ni un intento de cobro que el banco rechaza (no cambia ningún dato: eso lo ves en{' '}
+        {ES ? 'Stripe' : 'Mercado Pago'}). Las ventas de la caja y sus entradas y salidas de efectivo llevan su propio registro, con quién las
         hizo, en la propia Caja. Todavía no recoge lo que se importa desde otra plataforma. Los descuentos de una sola
         sesión de un bono se esconden por defecto para que no tapen lo importante, y puedes mostrarlos.
       </p>

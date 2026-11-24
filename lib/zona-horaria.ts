@@ -8,3 +8,18 @@
 export const ZONA_HORARIA: string =
   (typeof process !== 'undefined' ? process.env.NEXT_PUBLIC_ZONA_HORARIA : undefined) ||
   'America/Argentina/Buenos_Aires';
+
+/**
+ * El lugar de la zona, para decirlo en una frase: «hora de Argentina», «hora de
+ * Madrid». Lo usa el asistente (prompt y herramientas), que antes decía «hora de
+ * Madrid» escrito a mano mientras el código ya calculaba en la zona del estudio.
+ * Constante por despliegue: no parte la caché del prompt.
+ */
+export function lugarDeLaZona(zona: string = ZONA_HORARIA): string {
+  if (zona === 'Europe/Madrid') return 'Madrid';
+  if (zona.startsWith('America/Argentina/')) return 'Argentina';
+  const ciudad = zona.split('/').pop() ?? zona;
+  return ciudad.replace(/_/g, ' ');
+}
+
+export const LUGAR_DE_LA_HORA: string = lugarDeLaZona();

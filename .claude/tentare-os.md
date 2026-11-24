@@ -98,8 +98,10 @@ aquí deja de ser cierto, corrígelo en vez de dejarlo como ruido.
   (lo que hizo #567 con `20260731103000` → `20260730155339`): si no, un `supabase db push`
   desde limpio la ve pendiente y la reaplica con OTRO timestamp, y la divergencia se
   multiplica en vez de cerrarse.
-- **El «hoy» de un estudio es el de Madrid, nunca el de UTC** (8-oct-2026). El servidor y la base de datos corren en UTC:
-  entre las 00:00 y las 02:00 de Madrid, `current_date` y `new Date().toISOString().slice(0, 10)` siguen en el día anterior.
+- **El «hoy» de un estudio es el de SU zona, nunca el de UTC** (8-oct-2026; en este fork la zona es Argentina por defecto,
+  `ZONA_HORARIA` en `lib/zona-horaria.ts` / `NEXT_PUBLIC_ZONA_HORARIA`, y la migr `20261122000000` pasó la BD a
+  `America/Argentina/Buenos_Aires`; donde abajo dice «Madrid», léase la zona del estudio. Los tests la fijan en Madrid).
+  El servidor y la base de datos corren en UTC: entre las 00:00 y las 02:00 de Madrid (21:00 a 00:00 en Argentina), `current_date` y `new Date().toISOString().slice(0, 10)` siguen en el día anterior.
   En TypeScript, `hoyEnEstudio()` (`lib/utils.ts`); en SQL, `public.hoy_estudio()`. Ya lo usan `crear_recuperacion` (una
   recuperación `FIN_MES` creada el día 1 a las 00:30 nacía caducada), toda la vigencia de bonos, cuotas, recuperaciones y plazas
   fijas (`evaluar_reserva`, `elegir_bono_consumible`, `socio_tiene_entitlement_activo`, `consumir_bono_interno`… y el `DEFAULT`
@@ -112,7 +114,8 @@ aquí deja de ser cierto, corrígelo en vez de dejarlo como ruido.
   sumar días, `masDias()` sobre el día del estudio, nunca `Date.now() + N días`. ⚠️ No ve otras formas del mismo error
   (`ahora.toISOString().slice(0, 10)` sobre un `Date` recibido, `nowISO.slice(0, 10)`): esas se miran a mano. Una función que
   reciba «ahora» como instante saca el día con `hoyEnEstudio(new Date(…))`, como `validarCodigoCanjeable`.
-  ⚠️ Convertir un día a instante con `::timestamptz` cae en UTC: usa `::timestamp at time zone 'Europe/Madrid'`.
+  ⚠️ Convertir un día a instante con `::timestamptz` cae en UTC: usa `::timestamp at time zone` con la zona del estudio
+  (en este fork, `'America/Argentina/Buenos_Aires'`), nunca `'Europe/Madrid'` escrito a mano.
 - **Seguridad**: la RLS es la cerradura real, la UI nunca es el límite de seguridad — regla
   explícita y repetida en `lib/permisos-reglas.ts`. Cualquier permiso nuevo se implementa en
   ambos sitios o no está terminado.

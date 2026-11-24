@@ -32,7 +32,7 @@ export const ESQUEMAS: Record<string, Esquema> = {
   Sede: obj({ id: strReq('Lo que va en la cabecera Tentare-Estudio.'), nombre: str() }),
   Estudio: obj({
     id: strReq(), nombre: str(), razonSocial: str(), nif: str(), direccion: str(),
-    zonaHoraria: strReq('Zona horaria de las fechas del estudio, p. ej. Europe/Madrid.'), moneda,
+    zonaHoraria: strReq('Zona horaria de las fechas del estudio, p. ej. America/Argentina/Buenos_Aires.'), moneda,
     ivaPorDefecto: { type: ['number', 'null'], description: 'Tipo de IVA (%) que aplica el estudio por defecto.' },
     modoFacturacion: str('`facturas`: Tentare emite las facturas, sin envío a la AEAT. `verifactu`: además las registra y las envía a la AEAT (Veri*Factu). `sin_facturas`: no las emite; la contabilidad sale de /recibos.'),
   }),

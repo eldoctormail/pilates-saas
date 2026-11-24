@@ -29,6 +29,7 @@ import { INSTRUCCION_REFERENCIAS, marca } from './referencias.ts';
 import { PLAN_INFO, type Plan } from '../billing/entitlements.ts';
 import { diaLargo, sumarDiasYmd } from './herramientas/definiciones.ts';
 import { conMoneda } from '../moneda.ts';
+import { LUGAR_DE_LA_HORA } from '../zona-horaria.ts';
 
 const ESTADOS = ESTADOS_CLIENTA.map(e => `- ${ETIQUETA_ESTADO[e]}: ${DEFINICION_ESTADO[e]}`).join('\n');
 
@@ -73,7 +74,7 @@ Con proponer_clase, proponer_sala, proponer_evento y proponer_cita preparas UNA 
 - Si falta algo imprescindible (día, hora, tipo de clase, sala, con quién), pregunta lo que falte en UNA sola pregunta corta, no en cinco. Si lo dice todo, propón directamente. Nunca rellenes con 0 ni inventes un dato que no dijo: pregunta, y mientras preguntas no llames a ninguna herramienta de propuesta.
 - Propón SOLO lo que pide el ÚLTIMO mensaje de ella, y una sola cosa por turno. Nunca retomes una petición anterior (ni las líneas «[acción ya propuesta…]» del historial) si no la repite.
 - Los nombres de tipo de clase y de sala son los que dice ella; si no existen, la herramienta te da los que hay y preguntas cuál. No inventes salas, tipos de clase ni personas. Las personas, con su marca exacta ([EQUIPO_n], [ALUMNA_n]); si una marca no es de nadie concreto ([PERSONA_n]), pregunta a quién se refiere.
-- Las fechas, en AAAA-MM-DD y las horas en HH:MM de Madrid; «el martes» es el próximo martes de la lista de días de hoy. Si la herramienta devuelve un error (sala ocupada, instructora ausente, día cerrado, fecha pasada), dilo en una frase y pregunta otra hora, sala o día.
+- Las fechas, en AAAA-MM-DD y las horas en HH:MM de ${LUGAR_DE_LA_HORA}; «el martes» es el próximo martes de la lista de días de hoy. Si la herramienta devuelve un error (sala ocupada, instructora ausente, día cerrado, fecha pasada), dilo en una frase y pregunta otra hora, sala o día.
 - Tras proponer, di en una frase qué propones (copia el resumen) y que pulse Confirmar. NUNCA digas que está creada, hecha o guardada: eso lo dice la tarjeta cuando se confirma. Si pide cambiar algo, propón otra vez con el cambio.
 - Un evento avisa a todos los clientes al confirmarse: dilo. Una cita se crea sin precio ni cobro.
 
@@ -154,7 +155,7 @@ Lo pendiente de cobro es «por cobrar» más «impagado»; lo que está en curso
 
 Ocupación de una clase: lugares reservados (vinieran o no: una falta también ocupó el lugar que otra no pudo coger) sobre el aforo. Solo cuentan las clases que ya han empezado y que no se cancelaron. «Vinieron» son solo las que pasaron lista como asistidas. Si el estudio no pasa lista, no se sabe quién vino.
 
-Franja: una clase que se repite, identificada por el día de la semana y la hora de Madrid (por ejemplo, «Martes 18:00») y el tipo de clase. Una franja con pocas clases en el periodo dice poco; por eso solo se comparan las que tienen dos o más.
+Franja: una clase que se repite, identificada por el día de la semana y la hora de ${LUGAR_DE_LA_HORA} (por ejemplo, «Martes 18:00») y el tipo de clase. Una franja con pocas clases en el periodo dice poco; por eso solo se comparan las que tienen dos o más.
 
 Lista de espera: clientes apuntados a una clase llena. Cuando se libera un lugar, se le ofrece a la primera (según cómo lo tenga configurado el estudio, al momento o con un plazo para aceptarlo).
 
@@ -212,7 +213,7 @@ function datoCorto(t: string | null | undefined, max = 60): string | null {
 export function contextoDelDia({ hoy, rol, estudio, quienEscribe }: {
   hoy: string; rol: Rol; estudio?: EstudioDelContexto | null; quienEscribe?: string | null;
 }): string {
-  const partes = [`Hoy es ${diaLargo(hoy)} de ${hoy.slice(0, 4)} (${hoy}), hora de Madrid. Próximos días: ${Array.from({ length: 10 }, (_, i) => { const d = sumarDiasYmd(hoy, i + 1); return `${diaLargo(d).split(' ')[0]} ${d}`; }).join('; ')}.`];
+  const partes = [`Hoy es ${diaLargo(hoy)} de ${hoy.slice(0, 4)} (${hoy}), hora de ${LUGAR_DE_LA_HORA}. Próximos días: ${Array.from({ length: 10 }, (_, i) => { const d = sumarDiasYmd(hoy, i + 1); return `${diaLargo(d).split(' ')[0]} ${d}`; }).join('; ')}.`];
   if (estudio) {
     const nombre = datoCorto(estudio.nombre);
     const ciudad = datoCorto(estudio.ciudad, 40);

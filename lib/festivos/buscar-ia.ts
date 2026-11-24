@@ -1,6 +1,8 @@
 import 'server-only';
 import Anthropic from '@anthropic-ai/sdk';
 import * as Sentry from '@sentry/nextjs';
+import { esArgentina } from '../locale.ts';
+import { ZONA_HORARIA } from '../zona-horaria.ts';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Módulo Festivos: buscar con IA las fiestas LOCALES de un municipio (y, si no
@@ -172,7 +174,7 @@ ${queBuscar}`;
         output_config: { effort: ESFUERZO },
         system: PROMPT,
         tools: [
-          { type: 'web_search_20260209', name: 'web_search', max_uses: MAX_BUSQUEDAS, user_location: { type: 'approximate', country: 'ES', timezone: 'Europe/Madrid' } },
+          { type: 'web_search_20260209', name: 'web_search', max_uses: MAX_BUSQUEDAS, user_location: { type: 'approximate', country: esArgentina() ? 'AR' : 'ES', timezone: ZONA_HORARIA } },
           HERRAMIENTA_ENTREGAR,
         ],
         tool_choice: { type: 'auto' },

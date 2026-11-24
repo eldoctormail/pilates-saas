@@ -6,6 +6,8 @@ import { AhrefsAnalytics } from '@/components/analitica/ahrefs';
 import { MetaPixel } from '@/components/analitica/meta-pixel';
 import { VERIFICACION_DOMINIO_META } from '@/lib/meta-pixel-reglas';
 import { LogSetup } from '@/components/log-setup';
+import { PreciosCliente } from '@/components/raiz/precios-cliente';
+import { cargarPrecios } from '@/lib/billing/precios-servidor';
 import { variablesDeFuente } from './_fuentes/fuentes';
 import './globals.css';
 
@@ -67,13 +69,17 @@ export const metadata: Metadata = {
 // cliente de Supabase se construya y capture `fetch`.
 const CARGADOR_PANEL_DEMO = `try{var d=JSON.parse(sessionStorage.getItem('tentare:demo-panel')||'null');if(d&&Date.now()-d.t<72e5&&d.guia&&d.guia.pasos.some(function(p){return p.pantalla&&p.pantalla.ruta.split('?')[0]===location.pathname})){document.write('<script src="/demo-panel.js"><\\/script>')}}catch(e){}`;
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  // Los precios de los planes se editan desde /interno/precios: se leen aquí
+  // (con caché de un minuto) y se pasan al navegador antes que nada.
+  const precios = await cargarPrecios();
   return (
     <html lang="es" className={`${variablesDeFuente} antialiased`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: CARGADOR_PANEL_DEMO }} />
       </head>
       <body className="bg-background">
+        <PreciosCliente precios={precios} />
         <LogSetup />
         {/* Fuera de los providers a propósito: no depende de sesión ni de
             estudio, y así no vuelve a montarse cada vez que uno de los dos

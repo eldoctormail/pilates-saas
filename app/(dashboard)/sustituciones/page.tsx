@@ -1,7 +1,7 @@
 'use client';
 
+import { precio } from '@/lib/billing/intervalo-ui';
 import { LOCALE } from '../../../lib/locale.ts';
-import { conMoneda } from '../../../lib/moneda.ts';
 import { ZONA_HORARIA } from '../../../lib/zona-horaria.ts';
 import { useEffect, useMemo, useRef, useState, useId, type ElementType } from 'react';
 import Link from 'next/link';
@@ -42,7 +42,7 @@ import { ADDONS, PLAN_INFO, planMinimoPara } from '@/lib/billing/entitlements';
 const PLAN_AUTONOMIA = PLAN_INFO[planMinimoPara('sustitucionesAutonomas') ?? 'ESTUDIO'].nombre;
 // En Founding con complementos aparte se activa sin cambiar de plan.
 const motivoBloqueo = (complemento: boolean) => complemento
-  ? `Con el complemento «${ADDONS.sustituciones.nombre}» (+${conMoneda(ADDONS.sustituciones.precioMes, '')}/mes)`
+  ? `Con el complemento «${ADDONS.sustituciones.nombre}» (+${precio(ADDONS.sustituciones.precioMes, '')}/mes)`
   : `Incluido a partir del plan ${PLAN_AUTONOMIA}`;
 
 type EstadoMeta = { label: string; cls: string; activa: boolean };
@@ -400,7 +400,7 @@ export default function SustitucionesPage() {
           </div>
           {!cargando && !autonomiaOk && autonomiaComplemento && (
             <Link href="/suscripcion#complementos" className="mt-3 inline-block text-[13px] font-semibold underline-offset-2 hover:underline" style={{ color: 'var(--t-text-link)' }}>
-              Activar «{ADDONS.sustituciones.nombre}» por {conMoneda(ADDONS.sustituciones.precioMes, '')}/mes
+              Activar «{ADDONS.sustituciones.nombre}» por {precio(ADDONS.sustituciones.precioMes, '')}/mes
             </Link>
           )}
           {!cargando && (

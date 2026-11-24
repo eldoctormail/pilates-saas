@@ -7,7 +7,9 @@
 // esperados están escritos en euros.
 //
 // Lo que queda en euros a propósito: Stripe (cobros online, apagado en esta
-// instalación), VeriFactu y las páginas comerciales de Centra.
+// instalación), VeriFactu y los artículos de /recursos. Los precios de los planes
+// de Centra van en esta moneda y se editan desde /interno/precios
+// (lib/billing/precios-plataforma.ts).
 
 import { LOCALE } from './locale.ts';
 

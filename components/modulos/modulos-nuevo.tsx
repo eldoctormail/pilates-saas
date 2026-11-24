@@ -28,7 +28,7 @@
 // estudio ya lo incluye, no hay chapa.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { conMoneda } from '../../lib/moneda.ts';
+import { precio } from '@/lib/billing/intervalo-ui';
 import { useMemo, useState, type CSSProperties, type ElementType } from 'react';
 import Link from 'next/link';
 import {
@@ -175,7 +175,7 @@ function TarjetaModulo({ m, estado, tinte, plan, complemento, puedeCambiar, guar
                 className="inline-flex items-center rounded-md px-1.5 py-0.5 text-[11px] font-semibold"
                 style={{ color: 'var(--warning)', backgroundColor: 'color-mix(in srgb, var(--warning) 12%, var(--card))' }}
               >
-                Complemento · +{conMoneda(ADDONS[complemento].precioMes, '')}/mes
+                Complemento · +{precio(ADDONS[complemento].precioMes, '')}/mes
               </span>
               <Link href="/suscripcion#complementos" className="text-[12px] font-semibold underline-offset-2 hover:underline" style={{ color: 'var(--t-text-link)' }}>
                 Activar

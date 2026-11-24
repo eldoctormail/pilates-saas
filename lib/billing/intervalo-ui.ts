@@ -7,12 +7,22 @@
 // ahorro se calcula, nunca se escribe a mano.
 
 import { ahorroAnual, precioAnual } from './entitlements.ts';
+import { LOCALE_MONEDA, conMoneda } from '../moneda.ts';
 
 export type IntervaloUi = 'mensual' | 'anual';
 
-/** Un número en euros a la española: «2.490» (miles con punto, sin decimales). */
+/**
+ * La cifra de un precio, sin símbolo, en el formato de la moneda de la
+ * instalación: «2.490» (miles con punto; decimales solo si los tiene). Se llama
+ * `euros` por historia: hoy vale para pesos igual.
+ */
 export function euros(n: number): string {
-  return n.toLocaleString('es-ES', { maximumFractionDigits: 0, useGrouping: n >= 1000 });
+  return n.toLocaleString(LOCALE_MONEDA, { maximumFractionDigits: 2, useGrouping: n >= 1000 });
+}
+
+/** Un precio con su símbolo: «79 €» o «$ 79.000». `sep`, lo que va entre cifra y símbolo. */
+export function precio(n: number, sep: string = ' '): string {
+  return conMoneda(euros(n), sep);
 }
 
 /** Lo que se cobra cada vez: el mes, o el año entero por adelantado. */
@@ -20,19 +30,19 @@ export function importeDe(precioMes: number, intervalo: IntervaloUi): number {
   return intervalo === 'anual' ? precioAnual(precioMes) : precioMes;
 }
 
-/** «79€/mes» o «790€/año». */
+/** «79€/mes» o «790€/año» («$79.000/mes» en pesos). */
 export function etiquetaPrecio(precioMes: number, intervalo: IntervaloUi): string {
-  return `${euros(importeDe(precioMes, intervalo))}€/${intervalo === 'anual' ? 'año' : 'mes'}`;
+  return `${precio(importeDe(precioMes, intervalo), '')}/${intervalo === 'anual' ? 'año' : 'mes'}`;
 }
 
 /** «Facturado 790 € al año» (anual) o «IVA incluido» (mensual): la línea bajo la cifra. */
 export function lineaFacturacion(precioMes: number, intervalo: IntervaloUi): string {
   return intervalo === 'anual'
-    ? `Facturado ${euros(precioAnual(precioMes))} € al año · IVA incluido`
+    ? `Facturado ${precio(precioAnual(precioMes))} al año · IVA incluido`
     : 'IVA incluido';
 }
 
-/** El ahorro del año frente a pagar doce meses, en euros: «Ahorras 158 €». */
+/** El ahorro del año frente a pagar doce meses: «Ahorras 158 €». */
 export function textoAhorro(precioMes: number): string {
-  return `Ahorras ${euros(ahorroAnual(precioMes))} €`;
+  return `Ahorras ${precio(ahorroAnual(precioMes))}`;
 }

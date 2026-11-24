@@ -3,9 +3,9 @@
 // (decisión del fundador, 15-oct-2026): todo Centra menos varias sedes,
 // mientras el estudio no pase de GRATIS_RESERVAS_MES reservas en un mes
 // (sin tope de alumnas desde el 13-nov-2026). Al pasarse tiene GRATIS_MARGEN_DIAS días
-// para pasarse a Founding Studio de pago (PRECIO_FOUNDING_PAGO), sin tope y, desde
+// para pasarse a Founding Studio de pago (precioFoundingPago), sin tope y, desde
 // el 19/20-oct-2026, con el Centro de Control, las sustituciones automáticas y la
-// redacción con IA como complementos aparte (COMPLEMENTOS_DE_PAGO); si no, se
+// redacción con IA como complementos aparte (complementosDePago); si no, se
 // cierra el panel y la app de sus alumnas sigue funcionando.
 // Pasar del límite lleva ahí: nadie va obligado a Estudio
 // (corrección del fundador, 15-oct por la mañana). Lo que distingue a Estudio es
@@ -26,6 +26,7 @@
 
 import { ADDONS, ENTITLEMENTS_GRATIS, PLAN_INFO, type Entitlements, type Plan } from '../billing/entitlements.ts';
 import { FRASE_PLAN_GRATIS, LIMITE_RESERVAS_MES, MARGEN_DIAS } from '../billing/plan-gratis.ts';
+import { precio } from '../billing/intervalo-ui.ts';
 
 export const GRATIS_RESERVAS_MES = LIMITE_RESERVAS_MES;
 /** Días para pasarse a Founding Studio de pago desde que se supera un límite. */
@@ -46,19 +47,23 @@ export const GRATIS_CON_LIMITES = `Gratis ${LIMITES_GRATIS}`;
 /**
  * Lo que paga Founding Studio cuando pasa de cualquiera de sus dos límites
  * (decisión del fundador, 15-oct-2026): sigue en Founding Studio, sin tope, y
- * paga su precio de siempre. Sale de PLAN_INFO, el mismo número que cobra
- * el price de Stripe del plan.
+ * paga su precio de siempre. Sale de PLAN_INFO.
+ *
+ * ⚠️ Funciones, no constantes: los precios se editan desde /interno/precios
+ * (lib/billing/precios-plataforma.ts) y una constante se quedaría con el valor
+ * que tuviera al cargar el módulo.
  */
-export const PRECIO_FOUNDING_PAGO = PLAN_INFO.BASE.precioMes;
+export const precioFoundingPago = (): number => PLAN_INFO.BASE.precioMes;
 
 /** «si pasas de ahí, 29 €/mes»: lo que viene después del «gratis hasta…». */
-export const SI_PASAS = `si pasas de ahí, ${PRECIO_FOUNDING_PAGO} €/mes`;
+export const siPasas = (): string => `si pasas de ahí, ${precio(precioFoundingPago())}/mes`;
 /**
  * Desde #2784 (20-oct-2026), el Founding Studio DE PAGO no incluye tres cosas: van
  * aparte como complementos (`ADDONS`). El gratis y la prueba siguen con todo, y
  * Estudio y Cadena las incluyen. Precios desde el catálogo, nunca a mano.
  */
-export const COMPLEMENTOS_DE_PAGO = `el ${ADDONS.decisiones.nombre} (${ADDONS.decisiones.precioMes} €/mes), las sustituciones automáticas (${ADDONS.sustituciones.precioMes} €/mes) y la redacción con IA (${ADDONS.ia.precioMes} €/mes)`;
+export const complementosDePago = (): string =>
+  `el ${ADDONS.decisiones.nombre} (${precio(ADDONS.decisiones.precioMes)}/mes), las sustituciones automáticas (${precio(ADDONS.sustituciones.precioMes)}/mes) y la redacción con IA (${precio(ADDONS.ia.precioMes)}/mes)`;
 /** Las tres, en corto, para las tarjetas de los planes. */
 export const COMPLEMENTOS_CORTO = 'Centro de Control, sustituciones automáticas y redacción con IA';
 /**
@@ -66,7 +71,7 @@ export const COMPLEMENTOS_CORTO = 'Centro de Control, sustituciones automáticas
  * «todas las funcionalidades» del gratis. Sin la coletilla, el «si pasas de ahí»
  * se leía «con lo mismo» (21-oct-2026).
  */
-export const SI_PASAS_CON_COMPLEMENTOS = `${SI_PASAS}, con ${COMPLEMENTOS_CORTO} aparte`;
+export const siPasasConComplementos = (): string => `${siPasas()}, con ${COMPLEMENTOS_CORTO} aparte`;
 
 /** El botón que lleva al alta. Sustituye a «Probar 7 días gratis». */
 export const CTA_ALTA = 'Empezar gratis';

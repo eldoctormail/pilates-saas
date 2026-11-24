@@ -560,3 +560,13 @@ export interface DenunciaInterna {
 export const fetchDenunciasInterno = () => pedir<{ denuncias: DenunciaInterna[] }>('/denuncias');
 export const decidirDenunciaInterno = (id: string, accion: DenunciaInterna['acciones'][number]) =>
   pedir<{ resultado: string }>(`/denuncias/${encodeURIComponent(id)}`, { method: 'POST', body: JSON.stringify({ accion }) });
+
+// ─── Precios de los planes (/interno/precios) ───────────────────────────────
+export interface RespuestaPrecios {
+  precios: import('@/lib/billing/precios-plataforma').Precios;
+  deSerie: import('@/lib/billing/precios-plataforma').Precios;
+  guardadosEn: string | null;
+}
+export const fetchPrecios = () => pedir<RespuestaPrecios>('/precios');
+export const guardarPrecios = (precios: import('@/lib/billing/precios-plataforma').Precios) =>
+  pedir<{ ok: true; precios: import('@/lib/billing/precios-plataforma').Precios }>('/precios', { method: 'PUT', body: JSON.stringify(precios) });

@@ -11,7 +11,7 @@ import { Check, Loader2 } from 'lucide-react';
 import { ADDONS, LISTA_ADDONS, PLAN_INFO, precioMensual, type Addon } from '@/lib/billing/entitlements';
 import { cambiarComplemento, pasarAEstudio } from '@/lib/api-client';
 import { cn } from '@/lib/utils';
-import { euros, importeDe, type IntervaloUi } from '@/lib/billing/intervalo-ui';
+import { importeDe, precio, type IntervaloUi } from '@/lib/billing/intervalo-ui';
 
 export function Complementos({
   contratados, disponibles, esPropietaria, onCambio, onPlanCambiado, intervalo = 'mensual', className,
@@ -34,7 +34,7 @@ export function Complementos({
   const [cambiandoPlan, setCambiandoPlan] = useState(false);
   const [errorPlan, setErrorPlan] = useState<string | null>(null);
   // Importe del periodo (mes o año) y su sufijo, para que las cifras sean las que de verdad se cobran.
-  const imp = (mes: number) => euros(importeDe(mes, intervalo));
+  const imp = (mes: number) => precio(importeDe(mes, intervalo), '');
   const per = intervalo === 'anual' ? 'año' : 'mes';
   const total = importeDe(precioMensual('BASE', contratados), intervalo);
 
@@ -88,7 +88,7 @@ export function Complementos({
                   <p className="mt-0.5 text-[13px] text-muted-foreground text-pretty">{info.resumen}</p>
                 </div>
                 <div className="flex shrink-0 items-center gap-3">
-                  <span className="text-[14px] font-semibold tabular-nums text-foreground">+{imp(info.precioMes)}€/{per}</span>
+                  <span className="text-[14px] font-semibold tabular-nums text-foreground">+{imp(info.precioMes)}/{per}</span>
                   {esPropietaria && !pidiendo && (
                     disponible || activo ? (
                       <button
@@ -113,8 +113,8 @@ export function Complementos({
                 <div role="group" aria-label={`Confirmar ${info.nombre}`} className="mt-3 rounded-xl bg-muted px-4 py-3">
                   <p className="text-[13.5px] text-foreground text-pretty">
                     {confirmar.activar
-                      ? <>Tu cuota pasará a <strong>{imp(precioMensual('BASE', [...contratados, a]))}€/{per}</strong>. Este mes se cobra solo la parte proporcional.</>
-                      : <>Tu cuota pasará a <strong>{imp(precioMensual('BASE', contratados.filter((x) => x !== a)))}€/{per}</strong> y dejarás de usar {info.nombre} ahora mismo.</>}
+                      ? <>Tu cuota pasará a <strong>{imp(precioMensual('BASE', [...contratados, a]))}/{per}</strong>. Este mes se cobra solo la parte proporcional.</>
+                      : <>Tu cuota pasará a <strong>{imp(precioMensual('BASE', contratados.filter((x) => x !== a)))}/{per}</strong> y dejarás de usar {info.nombre} ahora mismo.</>}
                   </p>
                   <div className="mt-3 flex flex-wrap gap-2">
                     <button
@@ -122,7 +122,7 @@ export function Complementos({
                       className="inline-flex items-center gap-1.5 rounded-xl bg-brand px-4 py-2 text-[13.5px] font-bold text-brand-foreground hover:brightness-110 disabled:opacity-60"
                     >
                       {trabajando === a && <Loader2 size={14} className="animate-spin motion-reduce:animate-none" aria-hidden="true" />}
-                      {confirmar.activar ? `Sí, activar por ${imp(info.precioMes)}€/${per}` : 'Sí, quitarlo'}
+                      {confirmar.activar ? `Sí, activar por ${imp(info.precioMes)}/${per}` : 'Sí, quitarlo'}
                     </button>
                     <button
                       type="button" onClick={() => setConfirmar(null)} disabled={trabajando !== null}
@@ -141,10 +141,10 @@ export function Complementos({
       {error && <p role="alert" className="mt-3 text-[13px] text-destructive">{error}</p>}
 
       <p className="mt-4 border-t border-border pt-4 text-[13.5px] text-muted-foreground">
-        {intervalo === 'anual' ? 'Total al año' : 'Total al mes'}: <strong className="text-foreground tabular-nums">{euros(total)}€</strong>, IVA incluido.
+        {intervalo === 'anual' ? 'Total al año' : 'Total al mes'}: <strong className="text-foreground tabular-nums">{precio(total, '')}</strong>, IVA incluido.
         {/* Con dos o más, Estudio empieza a salir a cuenta: se dice, sin empujar. */}
         {contratados.length >= 2 && (
-          <> Con {PLAN_INFO.ESTUDIO.nombre} ({imp(PLAN_INFO.ESTUDIO.precioMes)}€) los tienes todos incluidos.</>
+          <> Con {PLAN_INFO.ESTUDIO.nombre} ({imp(PLAN_INFO.ESTUDIO.precioMes)}) los tienes todos incluidos.</>
         )}
       </p>
       {/* Pasar a Estudio: con complementos, el portal de Stripe no puede hacerlo
@@ -168,7 +168,7 @@ export function Complementos({
           ) : (
             <div role="group" aria-label={`Confirmar el cambio a ${PLAN_INFO.ESTUDIO.nombre}`}>
               <p className="text-[13.5px] text-foreground text-pretty">
-                Tu cuota pasará de {euros(total)}€ a <strong>{imp(PLAN_INFO.ESTUDIO.precioMes)}€/{per}</strong>. Tus complementos siguen funcionando, ya incluidos en {PLAN_INFO.ESTUDIO.nombre}.
+                Tu cuota pasará de {precio(total, '')} a <strong>{imp(PLAN_INFO.ESTUDIO.precioMes)}/{per}</strong>. Tus complementos siguen funcionando, ya incluidos en {PLAN_INFO.ESTUDIO.nombre}.
                 Este mes se ajusta la parte proporcional en tu próxima factura.
               </p>
               <div className="mt-3 flex flex-wrap gap-2">

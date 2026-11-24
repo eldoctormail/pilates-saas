@@ -21,12 +21,16 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { PLAN_INFO } from '../billing/entitlements.ts';
-import { COMPLEMENTOS_DE_PAGO, LIMITES_GRATIS, PRECIO_FOUNDING_PAGO } from '../landing/founding-gratis.ts';
+import { complementosDePago, LIMITES_GRATIS, precioFoundingPago } from '../landing/founding-gratis.ts';
+import { precio } from '../billing/intervalo-ui.ts';
 import type { PreguntaFaq } from './faq-jsonld.ts';
 import { FUNCIONES_DE_ESPANA as ES } from '../locale.ts';
 
-const PRECIO_ESTUDIO = PLAN_INFO.ESTUDIO.precioMes;
-const PRECIO_CADENA = PLAN_INFO.CADENA.precioMes;
+// Funciones: los precios se editan desde /interno/precios. Las respuestas que
+// los dicen van como getters (`get a()`), para leer el precio de ahora.
+const precioEstudio = (): string => precio(PLAN_INFO.ESTUDIO.precioMes);
+const precioCadena = (): string => precio(PLAN_INFO.CADENA.precioMes);
+const precioFounding = (): string => precio(precioFoundingPago());
 
 /** Rango que el test exige: ni una pregunta suelta ni un muro. */
 export const FAQ_MIN = 4;
@@ -34,10 +38,10 @@ export const FAQ_MAX = 6;
 
 export const FAQ_FUNCIONALIDADES: PreguntaFaq[] = [
   {
-    // Fuente: lib/landing/founding-gratis.ts (TODO_MENOS_SEDES, COMPLEMENTOS_DE_PAGO) y
+    // Fuente: lib/landing/founding-gratis.ts (TODO_MENOS_SEDES, complementosDePago) y
     // `ADDONS` en lib/billing/entitlements.ts (#2784: tres complementos en el Founding de pago).
     q: '¿Hay funciones que se pagan aparte?',
-    a: `Mientras es gratis, no: Founding Studio incluye todas las funcionalidades menos varias sedes ${LIMITES_GRATIS}. Si pasas de ahí, cuesta ${PRECIO_FOUNDING_PAGO} €/mes, sin tope, y con ese plan ${COMPLEMENTOS_DE_PAGO} se contratan aparte; el plan Estudio los incluye. Varias sedes es lo que añade el plan Cadena, de ${PRECIO_CADENA} €/mes.`,
+    get a() { return `Mientras es gratis, no: Founding Studio incluye todas las funcionalidades menos varias sedes ${LIMITES_GRATIS}. Si pasas de ahí, cuesta ${precioFounding()}/mes, sin tope, y con ese plan ${complementosDePago()} se contratan aparte; el plan Estudio los incluye. Varias sedes es lo que añade el plan Cadena, de ${precioCadena()}/mes.`; },
   },
   {
     // Fuente: /funcionalidades/bonos-y-membresias (primera pregunta) y
@@ -103,7 +107,7 @@ export const FAQ_SOLUCIONES: PreguntaFaq[] = [
     // Fuente: /precios y lib/landing/founding-gratis.ts; «con IVA» y «sin
     // permanencia» como en /soluciones/estudio-de-yoga y /precios.
     q: '¿Cuánto cuesta y hace falta tarjeta para empezar?',
-    a: `Founding Studio es gratis ${LIMITES_GRATIS} con todas las funcionalidades menos varias sedes, y se empieza sin tarjeta; si pasas de ahí, ${PRECIO_FOUNDING_PAGO} €/mes, y con ese plan ${COMPLEMENTOS_DE_PAGO} van aparte. Estudio cuesta ${PRECIO_ESTUDIO} €/mes con IVA y Cadena, ${PRECIO_CADENA} €/mes. Todos sin permanencia.`,
+    get a() { return `Founding Studio es gratis ${LIMITES_GRATIS} con todas las funcionalidades menos varias sedes, y se empieza sin tarjeta; si pasas de ahí, ${precioFounding()}/mes, y con ese plan ${complementosDePago()} van aparte. Estudio cuesta ${precioEstudio()}/mes con IVA y Cadena, ${precioCadena()}/mes. Todos sin permanencia.`; },
   },
   {
     // Fuente: /soluciones/estudio-de-pilates-reformer y
@@ -120,6 +124,6 @@ export const FAQ_SOLUCIONES: PreguntaFaq[] = [
   {
     // Fuente: /funcionalidades/multi-centro (preguntas 1, 2 y 4) y /precios.
     q: '¿Y si tengo más de una sede?',
-    a: `Con el plan Cadena, que cubre varios centros bajo la misma suscripción (${PRECIO_CADENA} €/mes) y un solo acceso. Trabajas en una sede cada vez y los datos de las alumnas de cada sede están separados; no hay un panel que sume las cifras de todos los centros.`,
+    get a() { return `Con el plan Cadena, que cubre varios centros bajo la misma suscripción (${precioCadena()}/mes) y un solo acceso. Trabajas en una sede cada vez y los datos de las alumnas de cada sede están separados; no hay un panel que sume las cifras de todos los centros.`; },
   },
 ];

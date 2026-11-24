@@ -10,6 +10,7 @@
 // Todo sale de /api/billing/status, ya derivado: aquí no se cuenta nada.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { precio } from '@/lib/billing/intervalo-ui';
 import Link from 'next/link';
 import { CalendarCheck, CalendarClock, Gift, TrendingUp, Users } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -23,7 +24,8 @@ const fechaLarga = (ymd: string) =>
 
 
 /** A qué se pasa al pasar un límite, con su precio: siempre Founding Studio de pago. */
-const DESTINO = `Founding Studio de pago (${PLAN_INFO.BASE.precioMes} €/mes)`;
+// Función: los precios se editan desde /interno/precios.
+const destino = () => `Founding Studio de pago (${precio(PLAN_INFO.BASE.precioMes)}/mes)`;
 
 /** La frase que resume dónde está, por fase. */
 export function mensajeGratis(g: EstadoGratisApi): { titulo: string; texto: string; tono: 'bien' | 'aviso' | 'problema' | 'neutro' } {
@@ -31,7 +33,7 @@ export function mensajeGratis(g: EstadoGratisApi): { titulo: string; texto: stri
     case 'DENTRO':
       return {
         titulo: 'Te corresponde Founding Studio: gratis',
-        texto: `Todo Centra, sin pagar nada. Si un día pasas de ${textoLimite('reservas')}, pasas a ${PLAN_INFO.BASE.precioMes} €/mes, sin límites; con ese plan, el Centro de Control, las sustituciones automáticas y la redacción con IA van aparte. Te avisamos antes y tienes ${g.margenDias} días para hacerlo.`,
+        texto: `Todo Centra, sin pagar nada. Si un día pasas de ${textoLimite('reservas')}, pasas a ${precio(PLAN_INFO.BASE.precioMes)}/mes, sin límites; con ese plan, el Centro de Control, las sustituciones automáticas y la redacción con IA van aparte. Te avisamos antes y tienes ${g.margenDias} días para hacerlo.`,
         tono: 'bien',
       };
     case 'CERCA':
@@ -39,13 +41,13 @@ export function mensajeGratis(g: EstadoGratisApi): { titulo: string; texto: stri
     case 'MARGEN':
       return {
         titulo: `¡Felicidades, tu estudio ha crecido! Te quedan ${g.diasRestantes} ${g.diasRestantes === 1 ? 'día' : 'días'} en Founding Studio gratis`,
-        texto: `Has pasado de ${textoLimites(g.motivos)}. Tienes hasta el ${fechaLarga(g.cierraEl!)} para pasarte a ${DESTINO}: todo igual, sin límites. Si antes vuelves a estar por debajo, no tienes que hacer nada.`,
+        texto: `Has pasado de ${textoLimites(g.motivos)}. Tienes hasta el ${fechaLarga(g.cierraEl!)} para pasarte a ${destino()}: todo igual, sin límites. Si antes vuelves a estar por debajo, no tienes que hacer nada.`,
         tono: 'aviso',
       };
     case 'CERRADO':
       return {
         titulo: 'Tu estudio ha crecido',
-        texto: `Pasaste de ${textoLimites(g.motivos)} y se acabaron los ${g.margenDias} días de margen. Pásate a ${DESTINO} para seguir usando el panel. La app de tus clientes sigue funcionando: reservan y pagan como siempre.`,
+        texto: `Pasaste de ${textoLimites(g.motivos)} y se acabaron los ${g.margenDias} días de margen. Pásate a ${destino()} para seguir usando el panel. La app de tus clientes sigue funcionando: reservan y pagan como siempre.`,
         tono: 'problema',
       };
     case 'SIN_MEDIR':

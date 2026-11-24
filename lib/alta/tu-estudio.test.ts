@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  DIAS_ALTA, DIAS_POR_DEFECTO, HORARIOS_ALTA, PRECIO_CADENA_MES,
+  DIAS_ALTA, DIAS_POR_DEFECTO, HORARIOS_ALTA, precioCadenaMes,
   aHoraBd, aHoraCorta, diasDe, erroresCuando, erroresDonde, esCanarias, etiquetaCuando, etiquetaDonde, filasHorario,
   franjaDe, horarioGuardado, horarioIdDe, horarioOtroValido, limpiarDonde, lineaDireccion, onbCentrosDe, otrasSedes,
   horasDeLaFranja, restoDeSedes, semanaPrevista, sedesDeOnbCentros, textoProvincia, tituloDonde, tuEstudioGuardado,
@@ -85,7 +85,7 @@ test('sedes: lo que dice la pantalla con «Varias»', () => {
 });
 
 test('el precio de Cadena sale del catálogo de planes, nunca escrito a mano', () => {
-  assert.equal(PRECIO_CADENA_MES, PLAN_INFO.CADENA.precioMes);
+  assert.equal(precioCadenaMes(), PLAN_INFO.CADENA.precioMes);
 });
 
 test('las cuatro franjas son las horas de OPCIONES_HORARIO (las de la bienvenida de siempre)', () => {

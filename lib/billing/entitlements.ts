@@ -9,6 +9,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { TRIAL_DIAS } from './trial.ts';
+import { precioMesDe } from './precios-plataforma.ts';
 
 export type Plan = 'BASE' | 'ESTUDIO' | 'CADENA';
 
@@ -88,10 +89,12 @@ export const PLAN_ENTITLEMENTS: Record<Plan, Entitlements> = {
  * El plan de entrada se llama «Founding Studio» desde el 2-oct-2026 sin cambiar
  * su id: renombrarlo exigiría migrar la columna y los precios de Stripe.
  */
-export const PLAN_INFO: Record<Plan, { nombre: string; precioMes: number; resumen: string }> = {
-  BASE: { nombre: 'Founding Studio', precioMes: 29, resumen: 'Sin límite de alumnas ni de reservas. Centro de Control, sustituciones automáticas y redacción con IA, aparte.' },
-  ESTUDIO: { nombre: 'Estudio', precioMes: 79, resumen: 'Todo lo de Founding Studio con Centro de Control, sustituciones automáticas y redacción con IA incluidos, y más consultas al asistente.' },
-  CADENA: { nombre: 'Cadena', precioMes: 249, resumen: 'Multi-centro y todo incluido.' },
+// `precioMes` es un getter: el precio se edita desde /interno/precios y vive en
+// lib/billing/precios-plataforma.ts. Nunca lo copies a una constante del módulo.
+export const PLAN_INFO: Record<Plan, { nombre: string; readonly precioMes: number; resumen: string }> = {
+  BASE: { nombre: 'Founding Studio', get precioMes() { return precioMesDe('BASE'); }, resumen: 'Sin límite de alumnas ni de reservas. Centro de Control, sustituciones automáticas y redacción con IA, aparte.' },
+  ESTUDIO: { nombre: 'Estudio', get precioMes() { return precioMesDe('ESTUDIO'); }, resumen: 'Todo lo de Founding Studio con Centro de Control, sustituciones automáticas y redacción con IA incluidos, y más consultas al asistente.' },
+  CADENA: { nombre: 'Cadena', get precioMes() { return precioMesDe('CADENA'); }, resumen: 'Multi-centro y todo incluido.' },
 };
 
 export const PLANES: Plan[] = ['BASE', 'ESTUDIO', 'CADENA'];
@@ -128,7 +131,8 @@ export type Addon = 'decisiones' | 'sustituciones' | 'ia';
 
 export interface InfoAddon {
   nombre: string;
-  precioMes: number;
+  /** Getter: el precio se edita desde /interno/precios (lib/billing/precios-plataforma.ts). */
+  readonly precioMes: number;
   resumen: string;
   /** Qué features enciende. */
   features: ReadonlyArray<keyof Entitlements['features']>;
@@ -136,17 +140,17 @@ export interface InfoAddon {
 
 export const ADDONS: Record<Addon, InfoAddon> = {
   decisiones: {
-    nombre: 'Centro de Control', precioMes: 22,
+    nombre: 'Centro de Control', get precioMes() { return precioMesDe('decisiones'); },
     resumen: 'Un solo aviso al día con lo que merece tu atención, y el piloto automático.',
     features: ['decisiones'],
   },
   sustituciones: {
-    nombre: 'Sustituciones automáticas', precioMes: 12,
+    nombre: 'Sustituciones automáticas', get precioMes() { return precioMesDe('sustituciones'); },
     resumen: 'Busca sustituta, avisa y cierra la sustitución sin ti (modos Autónomo y Vacaciones).',
     features: ['sustitucionesAutonomas'],
   },
   ia: {
-    nombre: 'Redacción con IA', precioMes: 16,
+    nombre: 'Redacción con IA', get precioMes() { return precioMesDe('ia'); },
     // Sin «campañas»: el módulo de marketing está apagado (MARKETING_MODULE_ENABLED,
     // lib/feature-flags.ts) y /marketing lleva a Resumen. No se vende lo que no se usa.
     resumen: 'Notas de sesión y los mensajes de tus automatizaciones redactados con IA.',

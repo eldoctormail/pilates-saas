@@ -1,5 +1,6 @@
-import { COMPLEMENTOS_CORTO, COMPLEMENTOS_DE_PAGO, CTA_ALTA, GRATIS_RESERVAS_MES, PRECIO_FOUNDING_PAGO, SI_PASAS_CON_COMPLEMENTOS, TODO_MENOS_SEDES, TOPE_GRATIS } from '@/lib/landing/founding-gratis';
-import { PLAN_ENTITLEMENTS } from '@/lib/billing/entitlements';
+import { COMPLEMENTOS_CORTO, complementosDePago, CTA_ALTA, GRATIS_RESERVAS_MES, precioFoundingPago, siPasasConComplementos, TODO_MENOS_SEDES, TOPE_GRATIS } from '@/lib/landing/founding-gratis';
+import { PLAN_ENTITLEMENTS, PLAN_INFO } from '@/lib/billing/entitlements';
+import { precio } from '@/lib/billing/intervalo-ui';
 import { MENU_PUBLICO } from '@/lib/seo/navegacion-publica';
 import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
@@ -38,7 +39,8 @@ export const PLANS = [
     id: 'BASE' as const,
     name: 'Founding Studio',
     price: 'Gratis',
-    desc: `Para empezar. ${TOPE_GRATIS}; ${SI_PASAS_CON_COMPLEMENTOS}.`,
+    // Getters: los precios se editan desde /interno/precios.
+    get desc() { return `Para empezar. ${TOPE_GRATIS}; ${siPasasConComplementos()}.`; },
     features: [TODO_MENOS_SEDES, 'Reservas y calendario', 'Cobros, bonos y facturas', 'App con tu marca'],
     cta: CTA_ALTA,
     dark: false,
@@ -48,7 +50,7 @@ export const PLANS = [
   {
     id: 'ESTUDIO' as const,
     name: 'Estudio',
-    price: '79€',
+    get price() { return precio(PLAN_INFO.ESTUDIO.precioMes, ''); },
     desc: `Todo lo de Founding Studio, con ${COMPLEMENTOS_CORTO} incluidos.`,
     features: ['Todo lo de Founding Studio', `${COMPLEMENTOS_CORTO}, incluidos`, `${PLAN_ENTITLEMENTS.ESTUDIO.consultasAsistenteMes} consultas al mes al asistente`],
     cta: CTA_ALTA,
@@ -59,7 +61,7 @@ export const PLANS = [
   {
     id: 'CADENA' as const,
     name: 'Cadena',
-    price: '249€',
+    get price() { return precio(PLAN_INFO.CADENA.precioMes, ''); },
     desc: 'Varias sedes en un mismo panel.',
     features: ['Todo lo de Estudio', 'Varios centros', 'Un solo acceso para todas'],
     cta: 'Hablar con nosotros',
@@ -97,7 +99,7 @@ export const FAQ_ITEMS: { q: string; a: string }[] = [
   },
   {
     q: '¿Cuánto cuesta Centra?',
-    a: `Founding Studio es gratis hasta ${GRATIS_RESERVAS_MES} reservas al mes, con todas las funcionalidades menos varias sedes; si pasas de ahí, cuesta ${PRECIO_FOUNDING_PAGO} € al mes con IVA, sin tope, y con ese plan ${COMPLEMENTOS_DE_PAGO} se contratan aparte. El plan ${PLANS[1].name} cuesta ${PLANS[1].price.replace('€', ' €')}, y ${PLANS[2].name}, para varias sedes, ${PLANS[2].price.replace('€', ' €')}. Pagas mes a mes y Centra no se queda comisión de lo que cobras a tus alumnas.`,
+    get a() { return `Founding Studio es gratis hasta ${GRATIS_RESERVAS_MES} reservas al mes, con todas las funcionalidades menos varias sedes; si pasas de ahí, cuesta ${precio(precioFoundingPago())} al mes con IVA, sin tope, y con ese plan ${complementosDePago()} se contratan aparte. El plan ${PLANS[1].name} cuesta ${precio(PLAN_INFO.ESTUDIO.precioMes)}, y ${PLANS[2].name}, para varias sedes, ${precio(PLAN_INFO.CADENA.precioMes)}. Pagas mes a mes y Centra no se queda comisión de lo que cobras a tus alumnas.`; },
   },
   {
     q: '¿Hay permanencia?',

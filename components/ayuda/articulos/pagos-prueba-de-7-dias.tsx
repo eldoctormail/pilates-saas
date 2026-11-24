@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { AyudaResultado } from '@/components/ayuda/AyudaPasos';
 import { PLAN_INFO } from '@/lib/billing/entitlements';
-import { COMPLEMENTOS_DE_PAGO, GRATIS_MARGEN_DIAS, GRATIS_RESERVAS_MES, PRECIO_FOUNDING_PAGO } from '@/lib/landing/founding-gratis';
+import { complementosDePago, GRATIS_MARGEN_DIAS, GRATIS_RESERVAS_MES, precioFoundingPago } from '@/lib/landing/founding-gratis';
+import { precio } from '@/lib/billing/intervalo-ui';
 
 // Desde el 15-oct-2026 no hay prueba de 7 días: Founding Studio es gratis
 // (decisión del fundador; reglas en lib/billing/plan-gratis.ts). El artículo
@@ -19,8 +20,8 @@ export default function Contenido() {
 
       <h2 style={{ fontSize: 18, fontWeight: 700, margin: '24px 0 12px' }}>Qué pasa si te pasas</h2>
       <p>
-        Si pasas de cualquiera de los dos, sigues en {PLAN_INFO.BASE.nombre} por {PRECIO_FOUNDING_PAGO} € al mes, con
-        IVA incluido y sin tope de clientes ni de reservas. En ese plan de pago, {COMPLEMENTOS_DE_PAGO} van aparte,
+        Si pasas de cualquiera de los dos, sigues en {PLAN_INFO.BASE.nombre} por {precio(precioFoundingPago())} al mes, con
+        IVA incluido y sin tope de clientes ni de reservas. En ese plan de pago, {complementosDePago()} van aparte,
         como complementos. Te avisamos cuando llegas al 80 % y, si te pasas, tienes{' '}
         {GRATIS_MARGEN_DIAS} días para contratarlo desde Suscripción, en el menú. Si no lo contratas, el panel se cierra
         hasta que lo hagas; la app de tus clientes sigue funcionando todo el tiempo.

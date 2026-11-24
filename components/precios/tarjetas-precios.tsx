@@ -5,8 +5,8 @@ import Link from 'next/link';
 import { PLANES, PLAN_INFO, type Plan } from '@/lib/billing/entitlements';
 import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 import { novedadesFrenteAlAnterior, resumenCorto } from '@/lib/billing/catalogo-planes';
-import { euros, importeDe, textoAhorro, type IntervaloUi } from '@/lib/billing/intervalo-ui';
-import { CTA_ALTA, FRASE_FOUNDING, SI_PASAS_CON_COMPLEMENTOS, TOPE_GRATIS } from '@/lib/landing/founding-gratis';
+import { importeDe, precio, textoAhorro, type IntervaloUi } from '@/lib/billing/intervalo-ui';
+import { CTA_ALTA, FRASE_FOUNDING, siPasasConComplementos, TOPE_GRATIS } from '@/lib/landing/founding-gratis';
 import { NombrePlan } from '@/components/planes/nombre-plan';
 import { SelectorIntervalo } from '@/components/planes/selector-intervalo';
 
@@ -79,7 +79,7 @@ export function TarjetasPrecios({ anualDisponible }: { anualDisponible: boolean 
                   )}
                 </div>
                 <div style={{ fontSize: 46, fontWeight: 600, letterSpacing: '-.035em', color: destacado ? 'var(--w-sobre-noche)' : 'var(--w-texto)', lineHeight: 1 }}>
-                  {p === 'BASE' ? 'Gratis' : <>{euros(importeDe(PLAN_INFO[p].precioMes, intervalo))}€<span style={{ fontSize: 15, fontWeight: 500, color: destacado ? 'var(--w-sobre-noche-3)' : 'var(--w-texto-3)' }}>/{anual ? 'año' : 'mes'}</span></>}
+                  {p === 'BASE' ? 'Gratis' : <>{precio(importeDe(PLAN_INFO[p].precioMes, intervalo), '')}<span style={{ fontSize: 15, fontWeight: 500, color: destacado ? 'var(--w-sobre-noche-3)' : 'var(--w-texto-3)' }}>/{anual ? 'año' : 'mes'}</span></>}
                 </div>
                 {/* «IVA incluido» pegado a la cifra, no en una nota al pie de la
                     página: el precio de un SaaS español se lee para compararlo
@@ -90,11 +90,11 @@ export function TarjetasPrecios({ anualDisponible }: { anualDisponible: boolean 
                   <>
                     {/* Lo gratis tiene un límite de cobros; pasado, el mismo plan a su precio. */}
                     <div style={{ fontSize: 13.5, fontWeight: 500, color: 'var(--w-texto-3)', marginTop: 9, lineHeight: 1.45 }}>
-                      {TOPE_GRATIS} · {SI_PASAS_CON_COMPLEMENTOS}
+                      {TOPE_GRATIS} · {siPasasConComplementos()}
                     </div>
                     {anual && (
                       <div style={{ fontSize: 13.5, fontWeight: 600, color: 'var(--w-texto-2)', marginTop: 6, lineHeight: 1.45 }}>
-                        Pagando el año: {euros(importeDe(PLAN_INFO.BASE.precioMes, 'anual'))} € en vez de {euros(PLAN_INFO.BASE.precioMes * 12)} €. {textoAhorro(PLAN_INFO.BASE.precioMes)}.
+                        Pagando el año: {precio(importeDe(PLAN_INFO.BASE.precioMes, 'anual'))} en vez de {precio(PLAN_INFO.BASE.precioMes * 12)}. {textoAhorro(PLAN_INFO.BASE.precioMes)}.
                       </div>
                     )}
                     {/* La frase del fundador, junto a Founding Studio. En la
@@ -103,7 +103,7 @@ export function TarjetasPrecios({ anualDisponible }: { anualDisponible: boolean 
                   </>
                 ) : (
                   <div style={{ fontSize: 13.5, fontWeight: 500, color: destacado ? 'var(--w-sobre-noche-3)' : 'var(--w-texto-3)', marginTop: 9 }}>
-                    {anual ? `Facturado ${euros(importeDe(PLAN_INFO[p].precioMes, 'anual'))} € al año · IVA incluido` : 'IVA incluido'}
+                    {anual ? `Facturado ${precio(importeDe(PLAN_INFO[p].precioMes, 'anual'))} al año · IVA incluido` : 'IVA incluido'}
                     {anual && (
                       <div style={{ marginTop: 4, fontWeight: 600, color: destacado ? 'var(--w-sand)' : 'var(--w-exito)' }}>
                         {textoAhorro(PLAN_INFO[p].precioMes)} · 2 meses gratis

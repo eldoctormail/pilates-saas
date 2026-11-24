@@ -1,3 +1,4 @@
+import { FUNCIONES_DE_ESPANA as ES } from '../locale.ts';
 // ─────────────────────────────────────────────────────────────────────────────
 // La navegación de TODA la web pública (home, funcionalidades, soluciones,
 // comparativas, recursos, precios, glosario, sobre, seguridad, ayuda y legales):
@@ -177,12 +178,17 @@ export const PIE_PUBLICO: GrupoMenu[] = [
       { href: '/recursos/checklist-elegir-software-estudio', label: 'Cómo elegir software' },
       { href: '/recursos/mejor-software-para-estudios-de-pilates', label: 'Mejor software de Pilates' },
       { href: '/comparativa', label: 'Comparativas' },
-      { href: '/comparativa/tentare-vs-bsport', label: 'Alternativa a bsport' },
-      { href: '/comparativa/tentare-vs-eversports', label: 'Alternativa a Eversports' },
-      { href: '/comparativa/tentare-vs-momence', label: 'Alternativa a Momence' },
-      { href: '/comparativa/tentare-vs-mindbody', label: 'Alternativa a Mindbody' },
-      { href: '/comparativa/tentare-vs-timp', label: 'Alternativa a TIMP' },
-      { href: '/comparativa/tentare-vs-lorari', label: 'Alternativa a Lorari' },
+      // Las «Alternativa a…» son los rivales de España: en Argentina no se enlazan.
+      ...(ES
+        ? [
+            { href: '/comparativa/tentare-vs-bsport', label: 'Alternativa a bsport' },
+            { href: '/comparativa/tentare-vs-eversports', label: 'Alternativa a Eversports' },
+            { href: '/comparativa/tentare-vs-momence', label: 'Alternativa a Momence' },
+            { href: '/comparativa/tentare-vs-mindbody', label: 'Alternativa a Mindbody' },
+            { href: '/comparativa/tentare-vs-timp', label: 'Alternativa a TIMP' },
+            { href: '/comparativa/tentare-vs-lorari', label: 'Alternativa a Lorari' },
+          ]
+        : []),
       { href: '/glosario', label: 'Glosario' },
       { href: '/academy', label: 'Academy' },
       { href: '/ayuda', label: 'Centro de Ayuda' },
@@ -219,7 +225,8 @@ export const PIE_PUBLICO: GrupoMenu[] = [
 export const PIE_RESUMIDO: { titulo: string; hrefs: string[] }[] = [
   { titulo: 'Producto', hrefs: ['/funcionalidades/reservas-online', '/funcionalidades/bonos-y-membresias', '/funcionalidades/cobros-recurrentes', '/funcionalidades/app-para-alumnas', '/funcionalidades', '/precios'] },
   { titulo: 'Soluciones', hrefs: ['/soluciones/programa-de-gestion-para-estudio-de-pilates', '/soluciones/estudio-de-pilates-reformer', '/soluciones/estudio-de-yoga', '/soluciones/abrir-un-estudio', '/soluciones/cambiar-de-software', '/soluciones'] },
-  { titulo: 'Alternativas', hrefs: ['/comparativa/tentare-vs-bsport', '/comparativa/tentare-vs-eversports', '/comparativa/tentare-vs-momence', '/comparativa/tentare-vs-mindbody', '/comparativa/tentare-vs-timp', '/comparativa/tentare-vs-lorari'] },
+  // En Argentina (es-AR) los rivales de España no tienen sentido: la columna lleva a la comparativa de allí.
+  ES ? { titulo: 'Alternativas', hrefs: ['/comparativa/tentare-vs-bsport', '/comparativa/tentare-vs-eversports', '/comparativa/tentare-vs-momence', '/comparativa/tentare-vs-mindbody', '/comparativa/tentare-vs-timp', '/comparativa/tentare-vs-lorari'] } : { titulo: 'Comparativa', hrefs: ['/comparativa'] },
   { titulo: 'Recursos', hrefs: ['/recursos', '/recursos/cuanto-cuesta-abrir-un-estudio-de-pilates', '/recursos/rentabilidad-estudio-de-pilates', '/recursos/checklist-elegir-software-estudio', '/recursos/mejor-software-para-estudios-de-pilates', '/glosario', '/academy', '/ayuda'] },
   { titulo: 'Empresa', hrefs: ['/sobre-tentare', '/blog', '/seguridad', '/soporte'] },
 ];

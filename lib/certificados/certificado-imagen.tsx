@@ -25,11 +25,11 @@ import { TRAZADOS } from '@/components/marca/trazados.ts';
 // A4 apaisado a ~240 ppp: de sobra para pantalla, redes e impresión.
 export const CERTIFICADO_IMAGE_SIZE = { width: 2000, height: 1414 };
 
-const SOLIDO = '#222A33';
+const SOLIDO = '#3B3020';
 const GRIS = '#6B6B6B';
-const DISCO = '#B4537E';
-const MARCA_A = '#4C9CB0';
-const MARCA_B = '#B4537E';
+// Centra: las cuatro franjas del isotipo (naranja, oliva, verde agua, bordó).
+const FRANJAS_COLOR = ['#E8843C', '#5B4A22', '#7DB5A8', '#8C3B2E'] as const;
+const DISCO = FRANJAS_COLOR[3];
 
 function fechaLarga(iso: string): string {
   return new Date(iso).toLocaleDateString(LOCALE, { day: 'numeric', month: 'long', year: 'numeric' });
@@ -61,16 +61,12 @@ function LogotipoTentare({ alto }: { alto: number }) {
   // viewBox del kit para el horizontal, encuadre ceñido al dibujo (components/marca/logo-tentare.tsx).
   return (
     <svg width={alto * (369.08 / 111.22)} height={alto} viewBox="7 17 369.08 111.22" style={{ display: 'flex' }}>
-      <defs>
-        <linearGradient id="certTalloGrad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor={MARCA_A} />
-          <stop offset="1" stopColor={MARCA_B} />
-        </linearGradient>
-      </defs>
-      <path d={TRAZADOS.hojaIzquierda} fill={SOLIDO} />
-      <path d={TRAZADOS.hojaDerecha} fill={SOLIDO} />
-      <path d={TRAZADOS.disco} fill={DISCO} />
-      <path d={TRAZADOS.tallo} fill="url(#certTalloGrad)" />
+      <g transform="translate(0,6)">
+        <path d={TRAZADOS.hojaIzquierda} fill={FRANJAS_COLOR[0]} />
+        <path d={TRAZADOS.hojaDerecha} fill={FRANJAS_COLOR[1]} />
+        <path d={TRAZADOS.disco} fill={FRANJAS_COLOR[2]} />
+        <path d={TRAZADOS.tallo} fill={FRANJAS_COLOR[3]} />
+      </g>
       <path d={TRAZADOS.entare80} fill={SOLIDO} />
     </svg>
   );

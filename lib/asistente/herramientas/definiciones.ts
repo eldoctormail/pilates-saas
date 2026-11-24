@@ -29,6 +29,7 @@ import {
 import type { Rol } from '../../types.ts';
 import type { DefinicionHerramienta, NombreHerramienta } from '../tipos.ts';
 import { ROLES_ASISTENTE } from '../roles.ts';
+import { LUGAR_DE_LA_HORA } from '../../zona-horaria.ts';
 import { zCita, zClase, zClases, MAX_CLASES_LOTE, zEvento as zEventoPublicado, zSala, TIPOS_CITA } from '../acciones/esquemas.ts';
 import { puedeEjecutarAccion } from '../acciones/permisos.ts';
 
@@ -247,7 +248,7 @@ export const DEFINICIONES: readonly DefinicionHerramienta<unknown>[] = [
     esquema: objeto({
       tipo_clase: { type: 'string', description: 'Nombre del tipo de clase.' },
       fecha: { type: 'string', description: 'AAAA-MM-DD.' },
-      hora: { type: 'string', description: 'HH:MM, hora de Madrid.' },
+      hora: { type: 'string', description: `HH:MM, hora de ${LUGAR_DE_LA_HORA}.` },
       sala: { type: 'string', description: 'Nombre de la sala.' },
       instructora: { type: 'string', description: '[EQUIPO_n] o "".' },
       aforo: { type: 'integer', description: 'Lugares (al menos 1); omítelo si no lo dice.' },
@@ -272,7 +273,7 @@ export const DEFINICIONES: readonly DefinicionHerramienta<unknown>[] = [
     esquema: objeto({
       texto: { type: 'string', description: 'El anuncio.' },
       fecha: { type: 'string', description: 'AAAA-MM-DD.' },
-      hora: { type: 'string', description: 'HH:MM, hora de Madrid.' },
+      hora: { type: 'string', description: `HH:MM, hora de ${LUGAR_DE_LA_HORA}.` },
       aforo: { type: 'integer', description: 'Lugares (al menos 1); omítelo si no hay límite.' },
       lugar: { type: 'string' },
     }, ['aforo', 'lugar']),
@@ -288,7 +289,7 @@ export const DEFINICIONES: readonly DefinicionHerramienta<unknown>[] = [
       alumna: { type: 'string', description: '[ALUMNA_n].' },
       instructora: { type: 'string', description: '[EQUIPO_n].' },
       fecha: { type: 'string', description: 'AAAA-MM-DD.' },
-      hora: { type: 'string', description: 'HH:MM, hora de Madrid.' },
+      hora: { type: 'string', description: `HH:MM, hora de ${LUGAR_DE_LA_HORA}.` },
       duracion_min: { type: 'integer', description: 'Minutos (al menos 1); omítela si no la dice.' },
       tipo: enumerado(Object.keys(TIPOS_CITA), 'Tipo de cita.'),
     }, ['duracion_min']),
@@ -308,7 +309,7 @@ export const DEFINICIONES: readonly DefinicionHerramienta<unknown>[] = [
       aforo: { type: 'integer', description: 'Lugares (al menos 1); omítelo si no lo dice.' },
       horarios: {
         type: 'array', description: `Entre 2 y ${MAX_CLASES_LOTE} días y horas.`,
-        items: objeto({ fecha: { type: 'string', description: 'AAAA-MM-DD.' }, hora: { type: 'string', description: 'HH:MM, hora de Madrid.' } }),
+        items: objeto({ fecha: { type: 'string', description: 'AAAA-MM-DD.' }, hora: { type: 'string', description: `HH:MM, hora de ${LUGAR_DE_LA_HORA}.` } }),
       },
     }, ['aforo']),
     zod: zClases,

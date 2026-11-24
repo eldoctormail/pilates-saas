@@ -1,8 +1,8 @@
 'use client';
 
 // La zona horaria, a la vista y sin selector (decisión del fundador, 21-oct-2026).
-// Todo se calcula en hora de Madrid (`TZ_ESTUDIO`, lib/utils.ts) y ningún
-// estudio usa otra: ofrecer cambiarla sería prometer algo que no funciona. Con
+// Todo se calcula en la zona del despliegue (`ZONA_HORARIA`, lib/zona-horaria.ts:
+// Argentina por defecto) y ningún estudio usa otra: ofrecer cambiarla sería prometer algo que no funciona. Con
 // un código postal de Canarias (35 y 38) se dice lo que pasa allí.
 //
 // La enseñan el paso «Tu estudio» del alta nueva y «Nombre y dirección» de

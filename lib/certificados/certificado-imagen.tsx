@@ -27,8 +27,8 @@ export const CERTIFICADO_IMAGE_SIZE = { width: 2000, height: 1414 };
 
 const SOLIDO = '#3B3020';
 const GRIS = '#6B6B6B';
-// Centra: las cuatro franjas del isotipo (naranja, oliva, verde agua, bordó).
-const FRANJAS_COLOR = ['#E8843C', '#5B4A22', '#7DB5A8', '#8C3B2E'] as const;
+// Centra: las cinco franjas del isotipo (naranja, oliva, verde agua, bordó, oliva claro).
+const FRANJAS_COLOR = ['#E67C36', '#58481C', '#80B29E', '#883426', '#88863E'] as const;
 const DISCO = FRANJAS_COLOR[3];
 
 function fechaLarga(iso: string): string {
@@ -66,6 +66,7 @@ function LogotipoTentare({ alto }: { alto: number }) {
         <path d={TRAZADOS.hojaDerecha} fill={FRANJAS_COLOR[1]} />
         <path d={TRAZADOS.disco} fill={FRANJAS_COLOR[2]} />
         <path d={TRAZADOS.tallo} fill={FRANJAS_COLOR[3]} />
+        <path d={TRAZADOS.franja5} fill={FRANJAS_COLOR[4]} />
       </g>
       <path d={TRAZADOS.entare80} fill={SOLIDO} />
     </svg>

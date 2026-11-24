@@ -456,14 +456,15 @@
    hojas (#222A33) desaparecen sobre --background: #16161A. */
 .marca-auto {
   --marca-solido: #3B3020;
-  --marca-disco: var(--marca-disco-producto, #8C3B2E);
-  --marca-a: #E8843C;
-  --marca-b: #8C3B2E;
-  /* Centra: las cuatro franjas de la figura (naranja, oliva, verde agua, bordó). */
-  --marca-c1: #E8843C;
-  --marca-c2: #5B4A22;
-  --marca-c3: #7DB5A8;
-  --marca-c4: #8C3B2E;
+  --marca-disco: var(--marca-disco-producto, #883426);
+  --marca-a: #E67C36;
+  --marca-b: #883426;
+  /* Centra: las cinco franjas de la figura (naranja, oliva, verde agua, bordó, oliva claro). */
+  --marca-c1: #E67C36;
+  --marca-c2: #58481C;
+  --marca-c3: #80B29E;
+  --marca-c4: #883426;
+  --marca-c5: #88863E;
   --marca-producto: #6E6250;
 }
 .dark .marca-auto {
@@ -480,6 +481,7 @@
   --marca-c2: #CDB57E;
   --marca-c3: #A6D4C9;
   --marca-c4: #E0887A;
+  --marca-c5: #C9C77E;
   --marca-producto: #C9C0B0;
 }
 

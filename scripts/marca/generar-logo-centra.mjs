@@ -1,8 +1,8 @@
 // Genera el logo de Centra: el kit de docs/marca-centra/ y los trazados que hay
 // que pegar en components/marca/trazados.ts.
 //
-// Isotipo: una figura en postura de Pilates hecha con cuatro franjas
-// (scripts/marca/figura-centra.mjs). Palabra: «centra» en Quicksand 600,
+// Isotipo: la figura en postura de Pilates, cinco franjas de color
+// (docs/marca-centra/figura.json, ver scripts/marca/vectorizar-figura.py). Palabra: «centra» en Quicksand 600,
 // pasada a curvas (no depende de que la letra esté instalada).
 //
 // Uso (opentype.js no es dependencia del proyecto, se baja solo para esto):
@@ -39,7 +39,7 @@ const kit = `${repo}/docs/marca-centra`;
 for (const d of ['horizontal', 'icono-app', 'favicon']) fs.mkdirSync(`${kit}/${d}`, { recursive: true });
 fs.writeFileSync(`${kit}/trazados.json`, JSON.stringify({ FRANJAS, COLORES, H: H.d, V: V.d }));
 
-const CLASES = ['t-hoja-i', 't-hoja-d', 't-disco', 't-tallo'];
+const CLASES = ['t-hoja-i', 't-hoja-d', 't-disco', 't-tallo', 't-franja-5'];
 const iso = (transform, colores = COLORES) => `  <g class="t-marca">
   <g transform="${transform}">
 ${FRANJAS.map((d, i) => `    <path class="${CLASES[i]}" fill="${colores[i]}" d="${d}"></path>`).join('\n')}

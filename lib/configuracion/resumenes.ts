@@ -786,7 +786,7 @@ export function resumenFacturacion(s: Partial<Pick<Studio, 'modoFacturacion' | '
 
 export function resumenDevoluciones(s: Partial<Pick<Studio, 'reembolsosActivos' | 'reembolsoPlazoDias' | 'reembolsoSoloSinUsar'>>): string | null {
   if (s.reembolsosActivos === undefined) return null;
-  if (!s.reembolsosActivos) return 'Apagadas: devuelves desde Stripe';
+  if (!s.reembolsosActivos) return FUNCIONES_DE_ESPANA ? 'Apagadas: devuelves desde Stripe' : 'Apagadas: devuelves desde Mercado Pago';
   // Los mismos valores por defecto que lee el servidor (app/api/reembolsos).
   const plazo = s.reembolsoPlazoDias ?? 14;
   return unir([

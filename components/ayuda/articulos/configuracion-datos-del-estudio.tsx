@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { AyudaResultado } from '@/components/ayuda/AyudaPasos';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
 // Verificado en vivo el 28-ago-2026 contra la pestaña «Estudio > General».
 //
@@ -28,9 +29,10 @@ export default function Contenido() {
 
       <h2 style={{ fontSize: 18, fontWeight: 700, margin: '28px 0 12px' }}>Datos fiscales e IVA</h2>
       <p>
-        La razón social, el NIF/CIF y el IVA general están en Configuración &gt; Cobros y facturas, en la fila «Datos
-        fiscales e IVA»: tócala para cambiarlos y pulsa «Guardar». Si cambias el IVA, te pregunta antes. No toca las
-        facturas ya emitidas y selladas con Veri*Factu — solo afecta a partir de ese momento.
+        La razón social, el {ES ? 'NIF/CIF' : 'CUIT'} y el IVA general están en Configuración &gt; Cobros y facturas, en la fila «Datos
+        fiscales e IVA»: tócala para cambiarlos y pulsa «Guardar». Si cambias el IVA, te pregunta antes. No toca {ES
+          ? 'las facturas ya emitidas y selladas con Veri*Factu'
+          : 'los comprobantes ya emitidos'} — solo afecta a partir de ese momento.
       </p>
 
       <h2 style={{ fontSize: 18, fontWeight: 700, margin: '28px 0 12px' }}>Cómo te presentas</h2>
@@ -53,9 +55,9 @@ export default function Contenido() {
       </p>
 
       <AyudaResultado>
-        Revisa el NIF y la dirección antes de tu primer cobro: cambiarlos después no corrige las facturas que ya se
-        hayan emitido con los datos anteriores. Relacionado:{' '}
-        <Link href="/ayuda/pagos/facturas" style={{ color: 'inherit', textDecoration: 'underline' }}>facturas y Veri*Factu</Link>.
+        Revisa el {ES ? 'NIF' : 'CUIT'} y la dirección antes de tu primer cobro: cambiarlos después no corrige {ES ? 'las facturas' : 'los comprobantes'} que ya se
+        hayan emitido con los datos anteriores.{ES && (<>{' '}Relacionado:{' '}
+        <Link href="/ayuda/pagos/facturas" style={{ color: 'inherit', textDecoration: 'underline' }}>facturas y Veri*Factu</Link>.</>)}
       </AyudaResultado>
     </>
   );

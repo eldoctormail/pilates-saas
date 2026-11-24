@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { QueEstaPasando, CausasComunes, ComoSolucionarlo } from '@/components/ayuda/TroubleshootShell';
 import { AyudaResultado } from '@/components/ayuda/AyudaPasos';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
 export default function Contenido() {
   return (
@@ -24,8 +25,8 @@ export default function Contenido() {
 
       <AyudaResultado>
         Un pago que falla nunca deja al cliente con un plan activo a medias — si el cobro no se confirma, no se
-        activa nada. Relacionado:{' '}
-        <Link href="/ayuda/pagos/cobros-fallidos" style={{ color: 'inherit', textDecoration: 'underline' }}>cobros fallidos</Link>.
+        activa nada.{ES && (<>{' '}Relacionado:{' '}
+        <Link href="/ayuda/pagos/cobros-fallidos" style={{ color: 'inherit', textDecoration: 'underline' }}>cobros fallidos</Link>.</>)}
       </AyudaResultado>
     </>
   );

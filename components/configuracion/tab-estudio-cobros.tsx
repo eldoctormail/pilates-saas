@@ -23,6 +23,7 @@ import { formatoMoneda } from '@/lib/moneda';
 import {
   ALTA_AUN_CERRADA, SIN_PODER_VIGENTE, SOLO_CON_ENVIO_ACTIVO, avisoPermanencia, envioActivado, ofrecerAlta, pasoDelAlta, puedeEmitir,
 } from '@/lib/verifactu/facturacion-activa';
+import { NOMBRE_PASARELA } from '@/lib/pasarela';
 
 // Los cajones de «Domiciliaciones bancarias» y «Devoluciones», en Cobros y
 // facturas. Cada uno se guarda con el «Guardar» de su barra, que solo aparece
@@ -138,7 +139,7 @@ function confirmacion(antes: DevolucionesForm, ahora: Politica) {
   if (antes.activos && !ahora.reembolsosActivos) {
     return {
       titulo: '¿Dejar de devolver desde Tentare?',
-      descripcion: 'Desaparece «Devolver» de las fichas. Podrás seguir devolviendo desde Stripe.',
+      descripcion: `Desaparece «Devolver» de las fichas. Podrás seguir devolviendo desde ${NOMBRE_PASARELA}.`,
       textoConfirmar: 'Sí, dejar de devolver',
     };
   }

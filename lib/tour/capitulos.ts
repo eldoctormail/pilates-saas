@@ -28,6 +28,7 @@
 // Puro y sin React: se prueba con `node --test`.
 // ─────────────────────────────────────────────────────────────────────────────
 import { conMoneda } from '../moneda.ts';
+import { CON_MERCADOPAGO } from '../pasarela.ts';
 
 /** `mira`: se cierra con «Entendido». `hacer`: se cierra solo al cambiar los datos. */
 export type TipoPaso = 'mira' | 'hacer';
@@ -270,7 +271,7 @@ export const CAPITULOS: readonly CapituloVisita[] = [
     titulo: 'Reservas y cobros',
     paraQue: 'Para que tus clientes reserven y tú cobres sin líos: tu enlace, tus reglas y tu forma de cobrar.',
     minutos: 8,
-    aprendido: ['dónde está el enlace de la app de tus clientes', 'qué reglas puedes poner a las reservas', 'cómo cobrar en el mostrador y con tarjeta'],
+    aprendido: ['dónde está el enlace de la app de tus clientes', 'qué reglas puedes poner a las reservas', CON_MERCADOPAGO ? 'cómo cobrar en el mostrador y con Mercado Pago' : 'cómo cobrar en el mostrador y con tarjeta'],
     pasos: [
       {
         id: 'c6.1', ruta: '/configuracion', href: '/configuracion?tab=web', selector: '#direccion-y-enlaces', tipo: 'mira',
@@ -287,15 +288,18 @@ export const CAPITULOS: readonly CapituloVisita[] = [
       {
         id: 'c6.3', ruta: '/cobros', selector: 'cobros-vista', tipo: 'mira',
         titulo: 'Cobros',
-        texto: 'Lo que está pendiente de cobrar y lo que ya se cobró. Con Stripe conectado las cuotas se cobran solas; lo que no se pueda cobrar te lo marca aquí.',
+        texto: CON_MERCADOPAGO
+          ? 'Lo que está pendiente de cobrar y lo que ya se cobró. Con Mercado Pago conectado, tus clientes pagan sus cuotas desde su app; lo que quede pendiente te lo marca aquí.'
+          : 'Lo que está pendiente de cobrar y lo que ya se cobró. Con Stripe conectado las cuotas se cobran solas; lo que no se pueda cobrar te lo marca aquí.',
         accion: 'Mira lo pendiente y lo ya cobrado.',
       },
-      {
-        id: 'c6.4', ruta: '/configuracion', href: '/configuracion?tab=conexiones', selector: '#integracion-stripe', tipo: 'mira',
+      // Con Mercado Pago (Argentina) la fila de Stripe no existe: el paso no se enseña.
+      ...(CON_MERCADOPAGO ? [] : [{
+        id: 'c6.4', ruta: '/configuracion', href: '/configuracion?tab=conexiones', selector: '#integracion-stripe', tipo: 'mira' as const,
         titulo: 'Stripe, cuando quieras',
         texto: 'Sirve para cobrar con tarjeta por internet. No lo necesitas para recibir reservas: puedes cobrar en el mostrador y apuntarlo. Conéctalo cuando quieras que las cuotas se cobren solas.',
         accion: 'Mira la fila «Cobro con tarjeta (Stripe)». No hace falta que la conectes ahora.',
-      },
+      }]),
       {
         id: 'c6.5', ruta: '/configuracion', href: '/configuracion?tab=cobros', selector: '#datos-fiscales', tipo: 'hacer', hecho: 'datosFiscales',
         titulo: 'Tus datos fiscales',

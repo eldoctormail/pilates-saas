@@ -59,6 +59,7 @@ import { diaEnEstudio } from '../calendario-hora-estudio.ts';
 import { inicioDelDiaEstudio } from '../utils.ts';
 import { diaDeApertura } from '../opening/listo.ts';
 import { AVISO_VENTA_SIN_STRIPE } from '../onboarding.ts';
+import { NOMBRE_PASARELA } from '../pasarela.ts';
 import type { CierreGuardado } from '../cierres/quitar-cierre.ts';
 import type { EstadoCobroCuenta } from '../billing/cuenta-puede-cobrar.ts';
 
@@ -326,7 +327,7 @@ const TEXTO_MOTIVO: Record<MotivoNoReserva, (r: ExtraNo) => string | null | unde
   SIN_PLAN_QUE_CUBRA: () => `${NO_PUEDE_AUN}: pides bono para reservar y ninguno de tus planes a la venta incluye estas clases.`,
   // El mismo caso que ya avisaba el cliente (evaluación del 13-sep), con la misma frase.
   STRIPE_SIN_CUENTA: () => AVISO_VENTA_SIN_STRIPE,
-  STRIPE_NO_PUEDE: () => `${NO_PUEDE_AUN}: pides bono para reservar y Stripe aún no puede cobrar. Termina la verificación en Stripe o véndeselo tú en el mostrador.`,
+  STRIPE_NO_PUEDE: () => `${NO_PUEDE_AUN}: pides bono para reservar y ${NOMBRE_PASARELA} aún no puede cobrar. Termina la verificación en ${NOMBRE_PASARELA} o véndeselo tú en el mostrador.`,
 };
 
 const esMotivo = (m: string): m is MotivoNoReserva => Object.hasOwn(TEXTO_MOTIVO, m);
@@ -336,7 +337,7 @@ const esMotivo = (m: string): m is MotivoNoReserva => Object.hasOwn(TEXTO_MOTIVO
  * contestado (o no hay clave para preguntarle). No se sabe si cobra, y eso es lo
  * que se dice: ni la promesa ni un «no cobra» que quizá no es verdad.
  */
-const TEXTO_STRIPE_SIN_COMPROBAR = 'No hemos podido comprobar si Stripe ya puede cobrar, y pides bono para reservar: mientras no cobre, un cliente nuevo no podrá comprarlo desde tu app. Míralo en Stripe o véndeselo tú en el mostrador.';
+const TEXTO_STRIPE_SIN_COMPROBAR = `No hemos podido comprobar si ${NOMBRE_PASARELA} ya puede cobrar, y pides bono para reservar: mientras no cobre, un cliente nuevo no podrá comprarlo desde tu app. Míralo en ${NOMBRE_PASARELA} o véndeselo tú en el mostrador.`;
 
 /**
  * El aviso que se pinta bajo «Tu estudio ya puede recibir reservas».

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { AyudaResultado } from '@/components/ayuda/AyudaPasos';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
 // Reescrito el 28-ago-2026 tras verificar en vivo la lista de integraciones
 // con la cuenta de demostración: la versión anterior de este artículo decía
@@ -17,7 +18,7 @@ import { AyudaResultado } from '@/components/ayuda/AyudaPasos';
 // (lib/configuracion/secciones.ts): desde el 15-sep (v2) cada integración es una fila
 // con su estado, agrupadas por lo que hacen en Integraciones.
 
-const GRUPOS: { seccion: string; tarjetas: [string, string][] }[] = [
+const GRUPOS: { seccion: string; tarjetas: (readonly [string, string])[] }[] = [
   {
     seccion: 'Cómo me comunico',
     tarjetas: [
@@ -27,7 +28,9 @@ const GRUPOS: { seccion: string; tarjetas: [string, string][] }[] = [
   {
     seccion: 'Integraciones',
     tarjetas: [
-      ['Cobro con tarjeta (Stripe)', 'Cobra bonos y cuotas con tarjeta en tu propia cuenta de Stripe: el dinero entra directo en ella.'],
+      ES
+        ? ['Cobro con tarjeta (Stripe)', 'Cobra bonos y cuotas con tarjeta en tu propia cuenta de Stripe: el dinero entra directo en ella.']
+        : ['Mercado Pago', 'Tus clientes pagan online y el dinero entra en tu cuenta. Se conecta en Apps e integraciones.'],
       ['WhatsApp', 'Recordatorios y avisos desde tu número de WhatsApp Business.'],
       ['Google Calendar', 'Copia las clases de las próximas 4 semanas a tu calendario al pulsar «Sincronizar ahora»; no se actualiza solo.'],
       ['Zoom', 'Crea una reunión de Zoom para cada clase de los tipos marcados como online.'],
@@ -44,7 +47,7 @@ export default function Contenido() {
     <>
       <p>
         Puedes conectar Tentare con las herramientas que ya usas — cada una con un botón, sin tocar código. Cada
-        integración está en Configuración &gt; Integraciones (el cobro con tarjeta, WhatsApp, calendario, marketing, plataformas y tu API);
+        integración está en Configuración &gt; Integraciones ({ES ? 'el cobro con tarjeta' : 'Mercado Pago'}, WhatsApp, calendario, marketing, plataformas y tu API);
         solo el nombre y la respuesta de tus correos están en Cómo me comunico.
       </p>
 
@@ -64,9 +67,9 @@ export default function Contenido() {
 
       <h2 style={{ fontSize: 18, fontWeight: 700, margin: '28px 0 12px' }}>Cómo se conectan</h2>
       <p>
-        La mayoría se conecta entrando con tu cuenta (Google Calendar, Klaviyo, Stripe, Zoom): das permiso en
-        la ventana del propio servicio, sin copiar ninguna clave. Mailchimp y Kisi piden tu clave API, y WhatsApp los
-        datos de tu cuenta de Meta. Zapier funciona al revés: la conexión se autoriza desde Zapier, no desde Tentare.
+        La mayoría se conecta entrando con tu cuenta ({ES ? 'Google Calendar, Klaviyo, Stripe, Zoom' : 'Google Calendar, Klaviyo, Zoom'}): das permiso en
+        la ventana del propio servicio, sin copiar ninguna clave. Mailchimp y Kisi piden tu clave API, WhatsApp los
+        datos de tu cuenta de Meta{ES ? '' : ', y Mercado Pago el Access Token y la clave secreta de tu aplicación'}. Zapier funciona al revés: la conexión se autoriza desde Zapier, no desde Tentare.
       </p>
       <p>
         Para llevarte tus datos a una hoja de cálculo no hace falta conectar nada: en Configuración &gt; Datos y
@@ -75,7 +78,9 @@ export default function Contenido() {
 
       <AyudaResultado>
         Ninguna integración es obligatoria — Tentare funciona completo sin conectar ninguna. Relacionado:{' '}
-        <Link href="/ayuda/pagos/conectar-stripe" style={{ color: 'inherit', textDecoration: 'underline' }}>conectar Stripe</Link>.
+        {ES
+          ? <Link href="/ayuda/pagos/conectar-stripe" style={{ color: 'inherit', textDecoration: 'underline' }}>conectar Stripe</Link>
+          : <Link href="/ayuda/pagos/conectar-mercadopago" style={{ color: 'inherit', textDecoration: 'underline' }}>conectar Mercado Pago</Link>}.
       </AyudaResultado>
     </>
   );

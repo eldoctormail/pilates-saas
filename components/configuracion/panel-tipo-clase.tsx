@@ -33,6 +33,7 @@ import {
   type ClaseForm,
   type TriEstado,
 } from '@/lib/configuracion/tipo-clase-form';
+import { FUNCIONES_DE_ESPANA } from '@/lib/locale';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // El formulario de un tipo de clase, rediseñado.
@@ -1065,7 +1066,8 @@ export function PanelTipoClase({
             />
           )}
 
-          {!reglasDeDinero && (
+          {/* Con Mercado Pago (Argentina) no hay cargo por cancelar tarde: va a la tarjeta guardada en Stripe. */}
+          {!reglasDeDinero && FUNCIONES_DE_ESPANA && (
             <CampoSoloLectura
               label="¿Se le cobra algo por cancelar tarde o no venir?"
               valor={valorReglaDeDinero('penalizacionImporteEur', form, studio ?? {})}
@@ -1075,7 +1077,7 @@ export function PanelTipoClase({
               importe del ESTUDIO, y un importe propio distinto no se cobra nunca
               (lib/billing/penalizacion-consentimiento.ts). Lo único que decide un
               tipo de clase es si en él NO se cobra: 0. Heredar = como el estudio. */}
-          {reglasDeDinero && <CampoHeredado
+          {reglasDeDinero && FUNCIONES_DE_ESPANA && <CampoHeredado
             label="¿Se cobra el cargo por cancelar tarde o no venir?"
             hint={
               <InfoTip label="Qué decides aquí">
@@ -1123,7 +1125,7 @@ export function PanelTipoClase({
         {plataformasActivas.length > 0 && (
           <Seccion
             titulo="Plataformas que venden esta clase"
-            ayuda="Cuántos lugares de cada clase de este tipo pones a la venta en ClassPass, Urban Sports Club o Wellhub."
+            ayuda={FUNCIONES_DE_ESPANA ? 'Cuántos lugares de cada clase de este tipo pones a la venta en ClassPass, Urban Sports Club o Wellhub.' : 'Cuántos lugares de cada clase de este tipo pones a la venta en ClassPass o Wellhub.'}
           >
             <PlazasPlataformasTipo
               tipoClaseId={editando?.id ?? null}

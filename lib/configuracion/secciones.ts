@@ -168,7 +168,7 @@ export const SECCIONES = [
       { id: 'datos-fiscales', titulo: 'Datos fiscales e IVA', frase: FUNCIONES_DE_ESPANA ? 'Razón social, NIF e IVA de tus facturas. Cambiar el IVA solo afecta a las facturas nuevas.' : 'Razón social, CUIT e IVA de tus comprobantes. Cambiar el IVA solo afecta a los nuevos.', guardado: 'barra', palabras: ['nif', 'cif', 'cuit', 'razón social', 'facturas', 'impuestos'] },
       { id: 'cuando-se-cobra-la-cuota', titulo: 'Cuándo se cobra la cuota mensual', frase: 'Cada cliente en su aniversario, o todas el día 1 de cada mes.', guardado: 'barra', palabras: ['día 1', 'fecha de cobro', 'aniversario', 'mensual'] },
       { id: 'domiciliaciones', titulo: 'Domiciliaciones bancarias', frase: 'Los datos que pide tu banco para cobrar recibos domiciliados. Con ellos generas la remesa en Cobros.', guardado: 'barra', palabras: ['sepa', 'banco', 'remesa', 'recibos'] },
-      { id: 'devoluciones', titulo: 'Devoluciones', frase: 'Permite devolver un cobro desde la ficha del cliente; el dinero vuelve a su tarjeta.', guardado: 'barra', palabras: ['reembolso', 'devolver'] },
+      { id: 'devoluciones', titulo: 'Devoluciones', frase: FUNCIONES_DE_ESPANA ? 'Permite devolver un cobro desde la ficha del cliente; el dinero vuelve a su tarjeta.' : 'Permite devolver un cobro de Mercado Pago desde la ficha del cliente; el dinero vuelve por donde pagó.', guardado: 'barra', palabras: ['reembolso', 'devolver'] },
       { id: 'si-se-cancela-una-cuota', titulo: 'Si se cancela una cuota', frase: 'Qué pasa con su recibo pendiente al cancelarla, y si el cliente puede renovarla sola desde su app.', guardado: 'barra', palabras: ['recibo pendiente', 'deuda', 'anular recibo', 'reintentos', 'impago', 'renovar'] },
       { id: 'congelar-una-cuota', titulo: 'Congelar una cuota o un bono', frase: 'Si se puede congelar una cuota o un bono, y cuántos días como máximo alarga su fecha de fin.', guardado: 'barra', palabras: ['congelar', 'congelación', 'pausar', 'pausa', 'vacaciones', 'baja temporal', 'descongelar'] },
       // Salió de Motivación el 20-oct: un descuento es dinero, no constancia, y no
@@ -319,7 +319,7 @@ export const SECCIONES = [
       { id: 'integracion-kisi', titulo: 'Kisi', frase: 'Abre la puerta de tu estudio sola con cada check-in de tus clientes.', guardado: 'accion', palabras: ['puerta', 'cerradura'] },
       { id: 'integracion-klaviyo', titulo: 'Klaviyo', frase: 'Lleva a Klaviyo los clientes que aceptaron recibir marketing, cada vez que pulsas «Sincronizar ahora».', guardado: 'accion', palabras: ['marketing', 'listas'] },
       { id: 'integracion-mailchimp', titulo: 'Mailchimp', frase: 'Lleva a tu audiencia de Mailchimp los clientes que aceptaron recibir marketing, al pulsar «Sincronizar ahora».', guardado: 'accion', palabras: ['marketing', 'newsletter', 'audiencia'] },
-      { id: 'plataformas-externas', titulo: 'ClassPass, Urban Sports Club y Wellhub', frase: 'Si vendes lugares en estas plataformas, apunta sus reservas en la clase para no vender dos veces el mismo hueco.', guardado: 'accion', palabras: ['classpass', 'urban sports club', 'usc', 'wellhub', 'gympass', 'plataformas', 'agregadores'] },
+      { id: 'plataformas-externas', titulo: FUNCIONES_DE_ESPANA ? 'ClassPass, Urban Sports Club y Wellhub' : 'ClassPass y Wellhub', frase: 'Si vendes lugares en estas plataformas, apunta sus reservas en la clase para no vender dos veces el mismo hueco.', guardado: 'accion', palabras: ['classpass', 'urban sports club', 'usc', 'wellhub', 'gympass', 'plataformas', 'agregadores'] },
       { id: 'integracion-zapier', titulo: 'Zapier', frase: 'Conecta Tentare con miles de apps. La conexión se autoriza desde Zapier, no desde aquí.', guardado: 'accion', palabras: ['automatizar', 'apps'] },
       { id: 'aplicaciones-con-acceso', titulo: 'Aplicaciones con acceso', frase: 'Apps como Zapier con permiso para ver datos de tu estudio; puedes quitárselo.', guardado: 'accion', palabras: ['zapier', 'permisos'] },
       { id: 'api-publica', titulo: 'API para tu contabilidad', frase: 'Claves para que tu programa de contabilidad (u otro) lea tus cobros, facturas y clientes.', guardado: 'accion', palabras: ['api', 'contabilidad', 'gestoría', 'clave', 'integración', 'holded', 'a3', 'sage'] },
@@ -535,9 +535,11 @@ export function esTarjetaId(v: string): v is TarjetaId {
 
 /**
  * Tarjetas que solo sirven en España: con el formato de Argentina no se ven ni se buscan.
- * Stripe no admite cuentas argentinas, y el datáfono va con Stripe o SumUp.
+ * Stripe no admite cuentas argentinas, y el datáfono va con Stripe o SumUp. El cargo
+ * por cancelar tarde o no venir va a la tarjeta guardada en Stripe: con Mercado Pago
+ * no hay tarjeta guardada, así que no se cobraría nunca.
  */
-const TARJETAS_SOLO_ESPANA: ReadonlySet<string> = new Set(['domiciliaciones', 'integracion-stripe', 'datafono']);
+const TARJETAS_SOLO_ESPANA: ReadonlySet<string> = new Set(['domiciliaciones', 'integracion-stripe', 'datafono', 'si-cancela-tarde-o-no-viene']);
 /** Y al revés: lo que solo sirve en Argentina. */
 const TARJETAS_SOLO_ARGENTINA: ReadonlySet<string> = new Set(['factura-electronica']);
 

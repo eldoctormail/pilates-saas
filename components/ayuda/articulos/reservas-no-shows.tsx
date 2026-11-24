@@ -1,13 +1,16 @@
 import Link from 'next/link';
 import { AyudaAntesDeEmpezar, AyudaResultado } from '@/components/ayuda/AyudaPasos';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
 export default function Contenido() {
   return (
     <>
+      {ES && (
       <AyudaAntesDeEmpezar>
         Esto describe el comportamiento por defecto. La penalización económica de la sección final solo aplica si
         tu estudio la ha activado explícitamente.
       </AyudaAntesDeEmpezar>
+      )}
 
       <h2 style={{ fontSize: 18, fontWeight: 700, margin: '24px 0 12px' }}>Cómo se marca un no-show</h2>
       <p>
@@ -22,6 +25,8 @@ export default function Contenido() {
         cuenta como tardía, igual que un no-show, a efectos de si el bono se devuelve o no.
       </p>
 
+      {/* Con Mercado Pago (Argentina) no hay penalización: va a la tarjeta guardada en Stripe. */}
+      {ES && (<>
       <h2 style={{ fontSize: 18, fontWeight: 700, margin: '28px 0 12px' }}>Penalización económica (opcional)</h2>
       <p>
         Si tu estudio la ha activado, un no-show o una cancelación tardía puede generar un cargo a la tarjeta
@@ -34,10 +39,12 @@ export default function Contenido() {
         penalización a nadie.
       </p>
 
+      </>)}
+
       <AyudaResultado>
         Un no-show no bloquea al cliente para reservar de nuevo — es un registro en su historial, no una
-        restricción automática. Si un cobro por penalización falla, sigue el mismo camino que cualquier otro cobro:
-        ver <Link href="/ayuda/pagos/cobros-fallidos" style={{ color: 'inherit', textDecoration: 'underline' }}>cobros fallidos</Link>.
+        restricción automática.{ES && (<>{' '}Si un cobro por penalización falla, sigue el mismo camino que cualquier otro cobro:
+        ver <Link href="/ayuda/pagos/cobros-fallidos" style={{ color: 'inherit', textDecoration: 'underline' }}>cobros fallidos</Link>.</>)}
       </AyudaResultado>
     </>
   );

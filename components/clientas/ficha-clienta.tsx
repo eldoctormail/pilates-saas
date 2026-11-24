@@ -2955,7 +2955,7 @@ export function FichaClienta({ id, modo = 'pagina' }: {
                   Como siempre: empieza una cuota nueva hoy y se anota el precio entero del plan nuevo ({formatEuro(cambioDiferencia.precioNuevo)}).
                 </span>
               </button>
-              <p className="text-xs text-muted-foreground">La diferencia queda pendiente en Pagos y se cobra desde ahí (tarjeta guardada, efectivo…). Bajar a un plan más barato no cobra ni devuelve nada.</p>
+              <p className="text-xs text-muted-foreground">La diferencia queda pendiente en Pagos y se cobra desde ahí ({FUNCIONES_DE_ESPANA ? 'tarjeta guardada, efectivo…' : 'Mercado Pago, efectivo…'}). Bajar a un plan más barato no cobra ni devuelve nada.</p>
             </div>
           )}
         </DialogContent>

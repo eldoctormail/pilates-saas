@@ -25,6 +25,7 @@ const CONTENIDO: Record<string, () => Promise<{ default: ComponentType }>> = {
   'instructores/disponibilidad-y-tarifas': () => import('@/components/ayuda/articulos/instructores-disponibilidad-y-tarifas'),
   'instructores/sustituciones': () => import('@/components/ayuda/articulos/instructores-sustituciones'),
   'instructores/permisos-por-rol': () => import('@/components/ayuda/articulos/instructores-permisos-por-rol'),
+  'pagos/conectar-mercadopago': () => import('@/components/ayuda/articulos/pagos-conectar-mercadopago'),
   'pagos/conectar-stripe': () => import('@/components/ayuda/articulos/pagos-conectar-stripe'),
   'pagos/tarjeta-guardada-y-cobro-automatico': () => import('@/components/ayuda/articulos/pagos-tarjeta-guardada-y-cobro-automatico'),
   'pagos/cobros-fallidos': () => import('@/components/ayuda/articulos/pagos-cobros-fallidos'),

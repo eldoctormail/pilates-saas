@@ -3,6 +3,8 @@ import { estadoCobroCuenta } from '../billing/cuenta-puede-cobrar.ts';
 import { stripeServidor, TIMEOUT_STRIPE_MS } from '../opening/servidor.ts';
 import { horaHHMM } from '../booking-logic.ts';
 import { hoyEnEstudio } from '../utils.ts';
+import { estudioCobraConMercadoPago } from '../mercadopago/cuenta.ts';
+import { CON_MERCADOPAGO } from '../pasarela.ts';
 import {
   esVendibleDesdeElEnlace, puedeReservarAlumnaNueva, veredictoSinPreguntarAStripe,
   type DatosPuedeReservar, type PlanPuedeReservar, type ResultadoPuedeReservar,
@@ -110,6 +112,12 @@ export async function puedeReservarEnServidor(
   admin: SupabaseClient, studioId: string, now: Date,
 ): Promise<ResultadoPuedeReservar> {
   const { datos, cuentaStripe } = await cargarDatosPuedeReservar(admin, studioId, now);
+  // Con Mercado Pago (Argentina) la pregunta es si el estudio tiene su cuenta
+  // cargada (o la del servidor): con ella, la alumna nueva compra el bono online.
+  if (CON_MERCADOPAGO) {
+    const cobra = await estudioCobraConMercadoPago(admin, studioId);
+    return puedeReservarAlumnaNueva({ ...datos, stripe: cobra ? 'PUEDE' : 'SIN_CUENTA' }, now);
+  }
   if (!cuentaStripe) return puedeReservarAlumnaNueva({ ...datos, stripe: 'SIN_CUENTA' }, now);
   const sinPreguntar = veredictoSinPreguntarAStripe(datos, now);
   if (sinPreguntar) return sinPreguntar;

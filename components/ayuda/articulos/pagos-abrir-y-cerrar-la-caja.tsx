@@ -1,4 +1,5 @@
 import { AyudaPaso, AyudaAntesDeEmpezar, AyudaResultado } from '@/components/ayuda/AyudaPasos';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
 export default function Contenido() {
   return (
@@ -33,7 +34,7 @@ export default function Contenido() {
         </p>
         <p style={{ margin: 0 }}>
           Ese «debería haber» sale del libro, sumando <strong>solo el efectivo</strong>: fondo inicial, ventas en
-          efectivo y tus entradas y salidas. Un cobro con datáfono o Bizum es una venta, pero no pone un billete
+          efectivo y tus entradas y salidas. Un cobro con {ES ? 'datáfono o Bizum' : 'tarjeta o transferencia'} es una venta, pero no pone un billete
           en el cajón, así que no cuenta aquí.
         </p>
       </AyudaPaso>

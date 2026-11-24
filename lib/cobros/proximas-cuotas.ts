@@ -19,6 +19,7 @@ import { elegirMetodoCobro } from '../billing/metodo-cobro.ts';
 import { caducaAntesDe } from '../billing/tarjeta-caducidad.ts';
 import type { PagoGuardadoDeLaClienta } from './reintento-automatico.ts';
 import { sumarDias } from './lo-cobrado.ts';
+import { CON_MERCADOPAGO } from '../pasarela.ts';
 
 export type ComoSeCobraraLaCuota = 'SOLA_TARJETA' | 'SOLA_DOMICILIACION' | 'TARJETA_CADUCA' | 'REMESA' | 'A_MANO' | 'NO_SE_RENUEVA' | 'NO_SE_SABE';
 
@@ -106,7 +107,9 @@ export function textoComoSeCobrara(como: ComoSeCobraraLaCuota, fecha: string): s
     case 'SOLA_DOMICILIACION': return 'Se cobra sola por domiciliación';
     case 'TARJETA_CADUCA': return 'Su tarjeta caduca antes: pídele otra. Si no, fallará tres veces y su cuota se cancelará sola';
     case 'REMESA': return `Irá en la remesa que prepares a partir del ${fecha}`;
-    case 'A_MANO': return 'La cobras tú: no tiene tarjeta ni domiciliación. A ella se le avisa ese día';
+    case 'A_MANO': return CON_MERCADOPAGO
+      ? 'La paga ella desde su app con Mercado Pago, o se la cobras tú. A ella se le avisa ese día'
+      : 'La cobras tú: no tiene tarjeta ni domiciliación. A ella se le avisa ese día';
     case 'NO_SE_RENUEVA': return 'No se renueva: tiene la baja programada';
     case 'NO_SE_SABE': return 'No hemos podido leer sus datos de pago';
   }

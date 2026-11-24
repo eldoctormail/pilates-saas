@@ -12,6 +12,7 @@ import { getMetodoPago, getTarjetasApp, quitarTarjeta, quitarTarjetaApp } from '
 import { catalogo, invalidarCatalogo } from '@/lib/student/catalogo';
 import { clavePublicableStripe } from '@/lib/student/comprar';
 import { HojaGuardarTarjeta } from '@/components/student/domain/HojaGuardarTarjeta';
+import { CON_MERCADOPAGO } from '@/lib/pasarela';
 import type { TarjetaGuardada } from '@/lib/billing/tarjetas-guardadas';
 import { Button } from '@/components/student/ui/Button';
 import { Sheet } from '@/components/student/ui/Sheet';
@@ -34,7 +35,21 @@ import { EmptyState, ErrorState, ListSkeleton, OfflineState } from '@/components
 // guardada» solo lo dice cuando el servidor la lee en su ficha. Cambiar es la acción
 // principal; quitar, la secundaria.
 
+// Con Mercado Pago (Argentina) no hay tarjeta guardada: cada pago se hace en
+// Mercado Pago. La pantalla no existe; quien llegue con un enlace viejo vuelve a
+// su perfil.
 export default function PagoPage() {
+  return CON_MERCADOPAGO ? <VolverAlPerfil /> : <PagoConTarjetaGuardada />;
+}
+
+function VolverAlPerfil() {
+  const href = usePortalHref();
+  const router = useRouter();
+  useEffect(() => { router.replace(href('/perfil')); }, [router, href]);
+  return null;
+}
+
+function PagoConTarjetaGuardada() {
   const { estudio } = useEstudio();
   const href = usePortalHref();
   const router = useRouter();

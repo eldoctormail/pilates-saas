@@ -20,6 +20,7 @@ import { BOTON_DESTACADO, Baldosa, DEGRADADO_LOGO, type Tono } from '@/component
 import {
   hrefPaso, type IconoPaso, type PasoConEstado, type RutaPuestaEnMarcha,
 } from '@/lib/guia/ruta-puesta-en-marcha';
+import { NOMBRE_PASARELA } from '@/lib/pasarela';
 
 export const ICONOS_PASO: Record<IconoPaso, ElementType> = {
   estudio: Building2, sala: DoorOpen, equipo: Users, clase: LayoutGrid, reglas: SlidersHorizontal, tarifa: Tag,
@@ -214,7 +215,7 @@ export function GuiaPasoAPasoVista({ ruta, paso, onSaltar, onCompartir, ayudaHre
                   {ruta.faltaParaAbrir.map(p => <li key={p.id}>· {p.titulo}</li>)}
                 </ul>
               )}
-              <p className="mt-2 text-[14px] leading-[21px] text-muted-foreground">Los paquetes, Stripe y las clientas no bloquean: se piden solo si los vas a usar.</p>
+              <p className="mt-2 text-[14px] leading-[21px] text-muted-foreground">Los paquetes, {NOMBRE_PASARELA} y las clientas no bloquean: se piden solo si los vas a usar.</p>
             </section>
           )}
 

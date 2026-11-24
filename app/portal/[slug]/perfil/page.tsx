@@ -34,6 +34,7 @@ import { useFotoUrl } from '@/lib/foto-signed-url';
 import { CajaQr, useQrAcceso } from '@/components/student/domain/QrAcceso';
 import { CambiarDeEstudio } from '@/components/student/domain/CambiarDeEstudio';
 import { CREDITO_ICONOS } from '@/lib/gamificacion/insignias';
+import { CON_MERCADOPAGO } from '@/lib/pasarela';
 
 // Perfil (§A.17). Cerrar sesión es de verdad: `supabasePortal.auth.signOut()`.
 // El paquete solo navega a /login, que dejaría la sesión viva — y en un móvil
@@ -194,7 +195,8 @@ export default function PerfilPage() {
             // baldosa de Inicio pasó a ser «Chat» el 7-oct). Un nombre para cada cosa: «Tienda» y «Recibos», los mismos que en Mi plan.
             { label: 'Tienda', href: href('/comprar'), icono: 'bolsa' },
             { label: 'Recibos', href: href('/pagos'), icono: 'recibo', valor: valorRecibos, valorDestacado: !!valorRecibos },
-            { label: 'Método de pago', href: href('/perfil/pago'), valor: valorMetodo, icono: 'tarjeta' },
+            // Con Mercado Pago (Argentina) no se guarda tarjeta: cada pago se hace en Mercado Pago.
+            ...(CON_MERCADOPAGO ? [] : [{ label: 'Método de pago', href: href('/perfil/pago'), valor: valorMetodo, icono: 'tarjeta' as const }]),
             { label: 'Tarjeta regalo', href: href('/regalo'), icono: 'tarjeta' },
           ]}
         />

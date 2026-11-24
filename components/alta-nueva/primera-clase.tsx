@@ -54,6 +54,7 @@ import { BOTON_VIVO } from '@/components/dashboard/vivo';
 import { BOTON_BORDE } from '@/components/dashboard/vivo-seccion';
 import { CLASE_AYUDA, CLASE_CAMPO, CLASE_ERROR, CLASE_ETIQUETA, BarrasFoco, CabeceraPaso, ErrorGuardado, FocoContext, LineaDePasos } from './piezas';
 import { VistaPreviaClase } from './vista-previa-clase';
+import { CON_MERCADOPAGO } from '@/lib/pasarela';
 
 export interface PrimeraClasePublicada {
   clase: { nombre: string; cuando: string };
@@ -78,6 +79,8 @@ const VENTAS: readonly { id: Venta; texto: string; etiquetaPrecio: string }[] = 
 ];
 
 const AVISO_ONLINE_SIN_STRIPE = 'Hasta que conectes Stripe, un cliente nuevo no podrá pagar online ni reservar. Te pide tus datos y una cuenta bancaria; puedes hacerlo justo después de publicar.';
+// Con Mercado Pago (Argentina) no se sabe aquí si la cuenta está conectada: la
+// opción lo dice, y `avisoVentaOnline` no avisa (lo hace el servidor).
 
 /** Un id por intento de publicar. `randomUUID` solo existe en contextos seguros. */
 function nuevoIntento(): string {
@@ -595,8 +598,8 @@ export function PrimeraClase({ studio, onAtras, onPublicada, saliendo = false, e
                   <p className={CLASE_ETIQUETA} id={`${id}-cobro`}>¿Cómo te pagan?</p>
                   <div role="radiogroup" aria-labelledby={`${id}-cobro`} className="mt-2 grid gap-2 sm:grid-cols-2">
                     {([
-                      ['estudio', 'En el estudio', 'Reservan desde tu app y te pagan al llegar: efectivo, Bizum o datáfono.'],
-                      ['online', 'Online, con tarjeta', 'Pagan al reservar. Necesita conectar Stripe.'],
+                      ['estudio', 'En el estudio', CON_MERCADOPAGO ? 'Reservan desde tu app y te pagan al llegar: efectivo, posnet o transferencia.' : 'Reservan desde tu app y te pagan al llegar: efectivo, Bizum o datáfono.'],
+                      ['online', CON_MERCADOPAGO ? 'Online, con Mercado Pago' : 'Online, con tarjeta', CON_MERCADOPAGO ? 'Pagan al reservar. Necesita conectar tu cuenta de Mercado Pago.' : 'Pagan al reservar. Necesita conectar Stripe.'],
                     ] as const).map(([valor, texto, d]) => {
                       const activo = form.cobro === valor;
                       return (

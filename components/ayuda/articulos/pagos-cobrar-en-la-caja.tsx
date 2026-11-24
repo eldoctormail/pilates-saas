@@ -1,4 +1,5 @@
 import { AyudaPaso, AyudaAntesDeEmpezar, AyudaResultado } from '@/components/ayuda/AyudaPasos';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
 export default function Contenido() {
   return (
@@ -20,6 +21,7 @@ export default function Contenido() {
       </AyudaPaso>
 
       <AyudaPaso numero={2} titulo="Elige cómo paga">
+{ES ? (<>
         <p>Cinco formas, y no todas quieren decir lo mismo:</p>
         <ul style={{ paddingLeft: 20, lineHeight: 1.7 }}>
           <li><strong>Efectivo</strong> — lo cuentas tú, y el recuento del cierre lo verifica.</li>
@@ -40,6 +42,19 @@ export default function Contenido() {
           Bizum necesita Stripe conectado y no vale para una cuota, porque no deja la tarjeta guardada para renovar. Si
           falta algo, aparecen apagados: mejor eso que un botón que falla con alguien esperando.
         </p>
+        </>) : (<>
+        <p>Tres formas:</p>
+        <ul style={{ paddingLeft: 20, lineHeight: 1.7 }}>
+          <li><strong>Efectivo</strong> — lo cuentas tú, y el recuento del cierre lo verifica.</li>
+          <li><strong>Tarjeta</strong> — el posnet o el Point. Ese cobro Tentare no lo ve.</li>
+          <li><strong>Transferencia</strong> — ya te la han hecho, o te pagó con el QR de Mercado Pago.</li>
+        </ul>
+        <p style={{ margin: 0 }}>
+          En Tarjeta y Transferencia la pantalla dice <strong>«Registrado»</strong>: lo has dicho tú y nadie más puede
+          saberlo, así que Tentare te lo pregunta en vez de darlo por hecho. Registrarlo es correcto; pintarlo como un
+          cobro verificado no lo sería.
+        </p>
+        </>)}
       </AyudaPaso>
 
       <AyudaPaso numero={3} titulo="Si vendes un bono, di de quién es">
@@ -62,6 +77,7 @@ export default function Contenido() {
         </p>
       </AyudaPaso>
 
+      {ES ? (
       <AyudaResultado>
         Cada venta, salvo en efectivo, lleva su factura, igual que cualquier otro cobro de Tentare (la de efectivo la
         haces desde Cobros si te la piden), y queda en <strong>Ventas</strong>{' '}
@@ -69,6 +85,12 @@ export default function Contenido() {
         <strong>simplificada</strong>, y asignarla después <em>no</em> le cambia el receptor — un documento fiscal
         ya sellado no se reescribe. Si hace falta la factura a su nombre, se hace una rectificativa desde Facturas.
       </AyudaResultado>
+      ) : (
+      <AyudaResultado>
+        Cada venta queda en <strong>Ventas</strong> con su número y su método, y lleva su comprobante como cualquier
+        otro cobro de Tentare. La factura electrónica de ARCA la emites desde el recibo cobrado.
+      </AyudaResultado>
+      )}
     </>
   );
 }

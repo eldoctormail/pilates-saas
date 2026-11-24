@@ -14,6 +14,8 @@
 // (dos o tres líneas) — la pantalla enseña UNA pregunta por vez, no todo junto.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { CON_MERCADOPAGO, HREF_CONECTAR_PASARELA } from '../pasarela.ts';
+
 export type IdPaso =
   | 'estudio' | 'salas' | 'instructoras' | 'tipos' | 'reglas-reserva' | 'reglas-cancelacion'
   | 'tarifas' | 'cobros' | 'horario' | 'alumnas' | 'marca' | 'lanzamiento';
@@ -118,11 +120,19 @@ export const PASOS_RUTA: readonly PasoRuta[] = [
   },
   {
     id: 'cobros', icono: 'cobro', titulo: 'Decide cómo cobras', minutos: 5, saltable: true,
-    que: 'Puedes cobrar en el estudio (efectivo, datáfono, Bizum) o con tarjeta online conectando Stripe.',
-    porque: 'Para recibir reservas NO hace falta Stripe. Solo si quieres que tus clientas paguen con tarjeta desde su app.',
-    como: ['Si cobras en el estudio, salta este paso.', 'Si quieres cobrar online, conecta Stripe.', 'El dinero va a tu cuenta de Stripe.'],
-    boton: { label: 'Conectar Stripe', href: '/configuracion?tab=conexiones#integracion-stripe' },
-    siSaltas: 'Cobrarás en el estudio y lo apuntas en Tentare. Puedes conectar Stripe más adelante.',
+    ...(CON_MERCADOPAGO ? {
+      que: 'Puedes cobrar en el estudio (efectivo, posnet, transferencia) o online conectando Mercado Pago.',
+      porque: 'Para recibir reservas NO hace falta Mercado Pago. Solo si quieres que tus clientas paguen desde su app.',
+      como: ['Si cobras en el estudio, salta este paso.', 'Si quieres cobrar online, conecta Mercado Pago.', 'El dinero va a tu cuenta de Mercado Pago.'],
+      boton: { label: 'Conectar Mercado Pago', href: HREF_CONECTAR_PASARELA },
+      siSaltas: 'Cobrarás en el estudio y lo apuntas en Tentare. Puedes conectar Mercado Pago más adelante.',
+    } : {
+      que: 'Puedes cobrar en el estudio (efectivo, datáfono, Bizum) o con tarjeta online conectando Stripe.',
+      porque: 'Para recibir reservas NO hace falta Stripe. Solo si quieres que tus clientas paguen con tarjeta desde su app.',
+      como: ['Si cobras en el estudio, salta este paso.', 'Si quieres cobrar online, conecta Stripe.', 'El dinero va a tu cuenta de Stripe.'],
+      boton: { label: 'Conectar Stripe', href: '/configuracion?tab=conexiones#integracion-stripe' },
+      siSaltas: 'Cobrarás en el estudio y lo apuntas en Tentare. Puedes conectar Stripe más adelante.',
+    }),
     hecho: 'Ya cobras online',
   },
   {

@@ -12,6 +12,7 @@
 import { tarjetasEnLaApp, type BannerDelEstudio } from './student/descubre.ts';
 import { hoyEnEstudio } from './utils.ts';
 import { rutaApp } from './enlaces-estudio.ts';
+import { CON_MERCADOPAGO } from './pasarela.ts';
 
 export interface DatosOnboarding {
   nif: string | null | undefined;
@@ -74,6 +75,9 @@ export interface DatosOnboarding {
 export function avisoVentaOnline(
   d: Pick<DatosOnboarding, 'stripeAccountId' | 'reservaExigirPlan' | 'numPlanesActivos'>,
 ): string | null {
+  // Con Mercado Pago (Argentina) el panel no sabe aquí si la cuenta está
+  // conectada: lo dice el servidor (`puedeReservarEnServidor`), que sí lo mira.
+  if (CON_MERCADOPAGO) return null;
   if (d.stripeAccountId) return null;
   if (!d.reservaExigirPlan) return null;
   if (!d.numPlanesActivos) return null;
@@ -81,7 +85,9 @@ export function avisoVentaOnline(
 }
 
 /** El aviso de arriba, tal cual: lo repite el servidor cuando confirma el mismo caso (lib/onboarding/puede-reservar.ts). */
-export const AVISO_VENTA_SIN_STRIPE = 'Un cliente nuevo todavía no puede reservar desde tu app: pides bono para reservar y, sin Stripe, no puede comprarlo online. Conecta Stripe o véndeselo tú en el mostrador.';
+export const AVISO_VENTA_SIN_STRIPE = CON_MERCADOPAGO
+  ? 'Un cliente nuevo todavía no puede reservar desde tu app: pides bono para reservar y, sin Mercado Pago, no puede comprarlo online. Conecta tu cuenta de Mercado Pago o véndeselo tú en el mostrador.'
+  : 'Un cliente nuevo todavía no puede reservar desde tu app: pides bono para reservar y, sin Stripe, no puede comprarlo online. Conecta Stripe o véndeselo tú en el mostrador.';
 
 /**
  * Lo que el panel ya tiene cargado (`useStudio()`) y hace falta para el checklist.
@@ -296,7 +302,7 @@ export function calcularOnboarding(d: DatosOnboarding): {
   // pública. Cobrar online es otra cosa, y ya tiene su paso en «Pagos».
   const puedeRecibirReservas = d.numSesiones > 0 && !!d.slug;
   configuracionInicial.push({
-    id: 'reservas', label: 'Abre las reservas', descripcion: 'La app de tus clientes, lista para compartir con ellas. No necesitas Stripe para recibir reservas.',
+    id: 'reservas', label: 'Abre las reservas', descripcion: `La app de tus clientes, lista para compartir con ellas. No necesitas ${CON_MERCADOPAGO ? 'Mercado Pago' : 'Stripe'} para recibir reservas.`,
     minutos: 1, done: puedeRecibirReservas, href: d.slug ? rutaApp(d.slug) : '/configuracion?tab=estudio', externo: puedeRecibirReservas,
   });
   // El final del embudo, y el único paso que mide VALOR en vez de
@@ -308,9 +314,13 @@ export function calcularOnboarding(d: DatosOnboarding): {
     minutos: 1, done: estudioActivado(d), href: '/calendario',
   });
 
+  // Con Mercado Pago (Argentina) no hay paso «Conecta Stripe»: Stripe no opera
+  // allí, y si la cuenta de Mercado Pago está conectada no se sabe desde aquí.
   const pagos: PasoOnboarding[] = [
-    { id: 'stripe', label: 'Conecta Stripe', descripcion: 'Cobra online con tarjeta — sin esto, todos los cobros son manuales.', minutos: 5, done: !!d.stripeAccountId, href: '/configuracion?tab=conexiones#integracion-stripe' },
-    { id: 'renovacion', label: 'Activa una membresía con renovación automática', descripcion: 'Cobra la cuota sola cada mes, sin que tengas que perseguir a nadie.', minutos: 2, done: d.numSuscripcionesActivas > 0, href: '/productos' },
+    ...(CON_MERCADOPAGO ? [] : [
+      { id: 'stripe', label: 'Conecta Stripe', descripcion: 'Cobra online con tarjeta — sin esto, todos los cobros son manuales.', minutos: 5, done: !!d.stripeAccountId, href: '/configuracion?tab=conexiones#integracion-stripe' },
+    ]),
+    { id: 'renovacion', label: 'Activa una membresía con renovación automática', descripcion: CON_MERCADOPAGO ? 'Su recibo se genera solo cada mes, y tu cliente lo paga desde su app con Mercado Pago.' : 'Cobra la cuota sola cada mes, sin que tengas que perseguir a nadie.', minutos: 2, done: d.numSuscripcionesActivas > 0, href: '/productos' },
   ];
 
   const automatizaciones: PasoOnboarding[] = AUTOMATIZACIONES_ONBOARDING.map(a => ({
@@ -416,7 +426,7 @@ function calcularRecomendaciones(d: DatosOnboarding): RecomendacionOnboarding[] 
     // El aviso concreto sustituye al genérico de Stripe: dicen lo mismo, y el
     // concreto además explica qué se rompe.
     ventaOnline ? { id: 'venta-online', texto: ventaOnline, href: '/configuracion?tab=conexiones#integracion-stripe' } : null,
-    !d.stripeAccountId && !ventaOnline ? { id: 'stripe', texto: 'Vemos que todavía no has conectado Stripe.', href: '/configuracion?tab=conexiones#integracion-stripe' } : null,
+    !CON_MERCADOPAGO && !d.stripeAccountId && !ventaOnline ? { id: 'stripe', texto: 'Vemos que todavía no has conectado Stripe.', href: '/configuracion?tab=conexiones#integracion-stripe' } : null,
     !d.slug ? { id: 'slug', texto: 'Las reservas online aún están desactivadas: falta la dirección pública de tu estudio.', href: '/configuracion?tab=estudio' } : null,
     // ⚠️ Decía «Todavía no has creado ningún bono» también cuando el asistente
     // ya había dejado el bono y la cuota creados en borrador (sin precio e

@@ -26,6 +26,7 @@ import type { Instructor } from '@/lib/types';
 import { ProfileAvatar } from '@/components/ui/profile-avatar';
 import { RefreshCw, SlidersHorizontal } from 'lucide-react';
 import { Cifra, Etiqueta, MESES, Nota, SelectorMes, horasMin } from '@/components/equipo/piezas';
+import { METODO_MOVIL } from '@/lib/cobros/metodo-movil';
 
 
 
@@ -116,7 +117,7 @@ export default function LiquidacionesPage() {
   async function handleTransicion(liq: Liquidacion, accion: 'confirmar' | 'marcar_pagada') {
     let referenciaPago: string | undefined;
     if (accion === 'marcar_pagada') {
-      referenciaPago = window.prompt('Referencia del pago (opcional): transferencia, Bizum, fecha...') ?? undefined;
+      referenciaPago = window.prompt(`Referencia del pago (opcional): transferencia, ${METODO_MOVIL.etiqueta}, fecha...`) ?? undefined;
     }
     setProcesandoId(liq.instructorId);
     const r = await transicionarLiquidacion(liq.id, accion, referenciaPago);

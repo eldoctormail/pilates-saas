@@ -220,7 +220,17 @@ Con dos nombres, por ejemplo `pilates.ejemplo.com.ar` (app) y `api.pilates.ejemp
 1. `~/supabase-project/.env`: cambiar `SUPABASE_PUBLIC_URL`, `API_EXTERNAL_URL`, `SITE_URL` y `ADDITIONAL_REDIRECT_URLS`. Luego `docker compose up -d`.
 2. `deploy/.env`: cambiar `NEXT_PUBLIC_APP_URL` y `NEXT_PUBLIC_SUPABASE_URL`.
 3. `deploy/scripts/migrar.sh ~/supabase-project`, que actualiza `app_url` en Vault.
-4. `cd deploy && docker compose up -d --build`. Las URL públicas se graban al compilar, así que hay que reconstruir.
+4. `cd deploy && docker compose up -d`. No hace falta compilar: la app toma las dos direcciones de `deploy/.env` al arrancar (`deploy/scripts/aplicar-urls.mjs`).
+
+## Cambiar la IP
+
+Si al servidor le cambió la IP (sin dominio todavía), un solo comando hace los pasos de arriba con la IP nueva, sin compilar:
+
+```sh
+deploy/scripts/cambiar-ip.sh ~/supabase-project 192.168.1.60
+```
+
+Sin la IP, usa la que tenga el servidor ahora (`hostname -I`). Para que no vuelva a cambiar, conviene reservarle la IP en el router («Reserva DHCP»).
 
 ## Backup rápido
 

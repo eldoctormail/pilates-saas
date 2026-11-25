@@ -2,9 +2,12 @@
 # Imagen de la app (Next.js) para servidor propio.
 # Se construye desde la raíz del repo: ver deploy/docker-compose.yml.
 #
-# Las variables NEXT_PUBLIC_* se graban en el código al compilar: si cambia el
-# dominio o la URL de Supabase, hay que volver a construir la imagen
-# (`docker compose build app`).
+# Las variables NEXT_PUBLIC_* se graban en el código al compilar. Las dos
+# direcciones (NEXT_PUBLIC_APP_URL y NEXT_PUBLIC_SUPABASE_URL) se compilan con un
+# valor de relleno y deploy/scripts/aplicar-urls.mjs pone las de deploy/.env al
+# arrancar: cambiar la IP o pasar a dominio NO pide volver a compilar, alcanza
+# con `docker compose up -d`. El resto de NEXT_PUBLIC_* (la clave anónima, la
+# zona…) sí se graba al compilar: si cambian, `docker compose build app`.
 
 FROM node:24-bookworm-slim AS build
 WORKDIR /app
@@ -21,8 +24,6 @@ RUN npm ci --no-audit --no-fund \
 
 COPY . .
 
-ARG NEXT_PUBLIC_APP_URL
-ARG NEXT_PUBLIC_SUPABASE_URL
 ARG NEXT_PUBLIC_SUPABASE_ANON_KEY
 ARG NEXT_PUBLIC_ZONA_HORARIA=
 ARG NEXT_PUBLIC_LOCALE=
@@ -31,8 +32,9 @@ ARG NEXT_PUBLIC_VAPID_PUBLIC_KEY=
 # 1 = no repetir la revisión de tipos al compilar (la hacen `npm run typecheck` y
 # el CI de cada PR): ahorra varios minutos. 0 para revisarlos también aquí.
 ARG TENTARE_SALTAR_TYPECHECK=1
-ENV NEXT_PUBLIC_APP_URL=$NEXT_PUBLIC_APP_URL \
-    NEXT_PUBLIC_SUPABASE_URL=$NEXT_PUBLIC_SUPABASE_URL \
+# Relleno: lo cambia aplicar-urls.mjs al arrancar (mismos valores que RELLENO ahí).
+ENV NEXT_PUBLIC_APP_URL=http://centra-app-url.invalid \
+    NEXT_PUBLIC_SUPABASE_URL=http://centra-supabase-url.invalid \
     NEXT_PUBLIC_SUPABASE_ANON_KEY=$NEXT_PUBLIC_SUPABASE_ANON_KEY \
     NEXT_PUBLIC_ZONA_HORARIA=$NEXT_PUBLIC_ZONA_HORARIA \
     NEXT_PUBLIC_LOCALE=$NEXT_PUBLIC_LOCALE \
@@ -49,7 +51,8 @@ RUN --mount=type=cache,target=/app/.next/cache,id=tentare-next-cache npm run bui
 FROM node:24-bookworm-slim
 WORKDIR /app
 ENV NODE_ENV=production NEXT_TELEMETRY_DISABLED=1 PORT=3000
-COPY --from=build /app /app
+# Del usuario node: aplicar-urls.mjs escribe en .next y public al arrancar.
+COPY --from=build --chown=node:node /app /app
 USER node
 EXPOSE 3000
-CMD ["npx", "next", "start", "-p", "3000"]
+CMD ["sh", "-c", "node deploy/scripts/aplicar-urls.mjs && exec npx next start -p 3000"]

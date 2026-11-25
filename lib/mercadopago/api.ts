@@ -48,7 +48,7 @@ export interface PagoMercadoPago {
 
 type Resultado<T> = { ok: true; datos: T } | { ok: false; status: number; error: string };
 
-async function pedir<T>(
+export async function pedir<T>(
   token: string, ruta: string, init: RequestInit & { idempotencia?: string } = {}, timeoutMs = 10_000,
 ): Promise<Resultado<T>> {
   const ctl = new AbortController();

@@ -182,6 +182,27 @@ Cada compra de plan queda en `compras_mercadopago` con lo que se decidió cobrar
 
 Sin Turnstile configurado (lo normal en un servidor propio), la compra de regalos queda protegida por el límite de peticiones y el campo trampa contra bots, sin captcha. Si un pago llega a un recibo que ya estaba cobrado, no se aplica dos veces; queda anotado como `no_aplicable` y hay que devolverlo desde Mercado Pago.
 
+## Cobrarle el plan a cada estudio (Mercado Pago)
+
+Esto es lo que cada estudio le paga a Centra por mes, con **tu** cuenta de Mercado Pago (no la del estudio). Se cobra con suscripciones de Mercado Pago: la propietaria elige el plan en **Configuración › Plan** (o `/suscripcion`), pone la tarjeta en Mercado Pago y se le cobra solo cada mes. Hace falta dominio con HTTPS.
+
+1. En [Tus integraciones](https://www.mercadopago.com.ar/developers/panel/app), creá una aplicación **aparte** de la de cobrar a alumnas (por ejemplo «Centra suscripciones»).
+2. En esa aplicación › **Webhooks**, cargá `https://app.TU-DOMINIO/api/billing/mercadopago/webhook` con los eventos de **Planes y suscripciones** y copiá la clave secreta.
+3. En `deploy/.env`, completá `MP_PLATAFORMA_ACCESS_TOKEN` (Credenciales de producción) y `MP_PLATAFORMA_WEBHOOK_SECRET`. Para que un estudio sin pagar no pueda entrar al panel, agregá `BILLING_ENFORCED=true`.
+4. `docker compose up -d` para que tome las variables.
+
+Cómo funciona:
+
+- **El precio** es el de `/interno/precios` en el momento de suscribirse. Si después cambiás un precio, las suscripciones que ya existen siguen con el de antes.
+- **El plan se activa** cuando Mercado Pago autoriza la suscripción (aviso al webhook, o al volver a Centra). Nada se activa solo por abrir el pago.
+- **Cada cobro mensual** corre la fecha de «tenés el plan hasta». Si un cobro falla, el plan queda en «cobro pendiente» y Mercado Pago lo reintenta.
+- **La baja** (botón en la pantalla del plan) frena los cobros en el acto, pero el estudio sigue con su plan hasta el final de lo pagado. Pasado eso, más 5 días de margen, el panel se cierra (con `BILLING_ENFORCED=true`). Lo mismo si los cobros dejan de salir.
+- **Cambiar de plan** abre una suscripción nueva que empieza a cobrarse cuando termina lo ya pagado; cuando Mercado Pago la autoriza, Centra cancela la anterior. Nunca se cobran dos a la vez.
+- **El plan Cadena** todavía no se contrata desde acá: activalo a mano desde `/interno`.
+- **Conciliador:** cada 6 horas el contenedor `cron` relee las suscripciones por si un aviso no llegó (`docker compose exec cron llamar mp-suscripciones`).
+
+Para probar sin cobrar: usá el Access Token de un **usuario vendedor de prueba** y pagá con un **comprador de prueba**; en el campo «Correo de tu cuenta de Mercado Pago» va el correo de ese comprador.
+
 ## Factura electrónica de ARCA
 
 Con `NEXT_PUBLIC_LOCALE=es-AR`, Configuración › Cobros y facturas tiene la fila **Factura electrónica de ARCA**. Con ella configurada, cada recibo cobrado ofrece **Emitir factura de ARCA**: la factura sale con su CAE y su QR, y queda registrada en ARCA. Por ahora se emite a mano, recibo por recibo.

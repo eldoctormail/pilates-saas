@@ -7,12 +7,14 @@ import { ArrowLeft, Check, Loader2 } from 'lucide-react';
 import { useAuth } from '@/lib/auth-context';
 import { PLAN_ENTITLEMENTS, PLAN_INFO, entitlementsDe, precioMensual, type Plan } from '@/lib/billing/entitlements';
 import { MiSuscripcion } from '@/components/billing/mi-suscripcion';
+import { MiSuscripcionMp } from '@/components/billing/mi-suscripcion-mp';
+import { CON_MERCADOPAGO, NOMBRE_PASARELA } from '@/lib/pasarela';
 import { Complementos } from '@/components/billing/complementos';
 import { usoDelTope } from '@/lib/billing/uso-tope';
 import { useEstadosClientas } from '@/lib/clientas/use-estados-clientas';
 import { DIAS_VINO_HACE_POCO } from '@/lib/clientas/estado';
 import { TRIAL_DIAS } from '@/lib/billing/trial';
-import { estadoBilling, iniciarSuscripcion, gestionarSuscripcion, intervaloSuscripcion, registrarVisitaPlanes, type EstadoBilling } from '@/lib/api-client';
+import { confirmarSuscripcionMp, estadoBilling, iniciarSuscripcion, gestionarSuscripcion, intervaloSuscripcion, registrarVisitaPlanes, type EstadoBilling } from '@/lib/api-client';
 import { AyudaDePantalla } from '@/components/ayuda/AyudaDePantalla';
 import { SelectorPlan } from '@/components/planes/selector-plan';
 import { SelectorIntervalo } from '@/components/planes/selector-intervalo';
@@ -91,6 +93,23 @@ const fechaLarga = (iso: string | null | undefined) =>
   iso ? new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric', timeZone: TZ_ESTUDIO }) : null;
 
 /** «Tu plan Founding Studio, de 29 €/mes, se cancela al activar Cadena…»: lo que cancelará el webhook, dicho antes. */
+/** El correo de la cuenta de Mercado Pago con la que se paga (Mercado Pago exige que coincida). */
+function CampoEmailMp({ valor, onCambio }: { valor: string; onCambio: (v: string) => void }) {
+  return (
+    <label className="mb-3 mt-4 block text-[13px] text-muted-foreground">
+      Correo de tu cuenta de Mercado Pago
+      <input
+        type="email"
+        autoComplete="email"
+        value={valor}
+        onChange={(e) => onCambio(e.target.value)}
+        className="mt-1 block w-full max-w-sm rounded-xl border border-border bg-background px-3 py-2 text-[14px] text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+      />
+      <span className="mt-1 block text-[12px]">Tiene que ser el mismo con el que entrás a Mercado Pago para pagar.</span>
+    </label>
+  );
+}
+
 function fraseSueltoQueSeCancela(s: PlanSueltoQueCancelaCadena): string {
   const info = PLAN_INFO[s.plan];
   const cual = !s.otraSede ? `Tu plan ${info.nombre}`
@@ -154,6 +173,12 @@ export function SuscripcionVista({ embebida = false }: { embebida?: boolean }) {
   const [visitaASecas] = useState(() =>
     typeof window === 'undefined' ? false : !window.location.search && !window.location.hash);
   const [confirmacionAgotada, setConfirmacionAgotada] = useState(false);
+  // Mercado Pago vuelve con `?preapproval_id=…`: se confirma en el acto, sin esperar al aviso.
+  const [preapprovalVuelta] = useState(() =>
+    typeof window === 'undefined' ? null : new URLSearchParams(window.location.search).get('preapproval_id'));
+  // Mercado Pago exige el correo de la cuenta con la que se paga; de serie, el de la sesión.
+  const [emailEscrito, setEmailMp] = useState<string | null>(null);
+  const emailMp = emailEscrito ?? session?.user?.email ?? '';
   // El botón «Actualizar la tarjeta» de los avisos de impago llega con ?tarjeta=1: abre derecho el
   // cambio de tarjeta (una vez), sin que la propietaria tenga que buscar el botón.
   const [pideTarjeta] = useState(() =>
@@ -196,9 +221,10 @@ export function SuscripcionVista({ embebida = false }: { embebida?: boolean }) {
       if (++intentos >= REINTENTOS_CONFIRMACION) { setConfirmacionAgotada(true); return; }
       espera = setTimeout(cargar, ESPERA_CONFIRMACION_MS);
     });
-    cargar();
+    if (CON_MERCADOPAGO && preapprovalVuelta) void confirmarSuscripcionMp(preapprovalVuelta).finally(cargar);
+    else cargar();
     return () => { vivo = false; clearTimeout(espera); };
-  }, [session, retornoCheckout, embebida, router, visitaASecas]);
+  }, [session, retornoCheckout, embebida, router, visitaASecas, preapprovalVuelta]);
 
   // Cómo paga hoy (mensual o anual): solo si ya paga y solo la propietaria. Se lee
   // de Stripe una vez por visita; ante un fallo, «mensual» (lo de siempre).
@@ -210,10 +236,10 @@ export function SuscripcionVista({ embebida = false }: { embebida?: boolean }) {
     return () => { vivo = false; };
   }, [session, pagaYEsPropietaria]);
 
-  async function suscribir() {
+  async function suscribir(plan: Plan = elegido) {
     setError(null);
     setAccion('suscribir');
-    const r = await iniciarSuscripcion(elegido, estado?.anual ? intervalo : 'mensual');
+    const r = await iniciarSuscripcion(plan, estado?.anual ? intervalo : 'mensual', CON_MERCADOPAGO ? emailMp.trim() : undefined);
     if ('url' in r) window.location.assign(r.url);
     else { setError(r.error); setAccion(null); }
   }
@@ -279,9 +305,13 @@ export function SuscripcionVista({ embebida = false }: { embebida?: boolean }) {
   const textoEstado = gratis
     ? 'Gratis mientras tu estudio crece. Cuando pase de los límites, eliges cómo seguir en un momento.'
     : yaPaga && enImpago
-    ? 'Tu último cobro no ha salido. Actualiza la tarjeta en «Facturas, tarjeta y cambio de plan» para ponerte al día.'
+    ? (CON_MERCADOPAGO
+      ? 'Tu último cobro no salió. Revisá la tarjeta en tus suscripciones de Mercado Pago para ponerte al día.'
+      : 'Tu último cobro no ha salido. Actualiza la tarjeta en «Facturas, tarjeta y cambio de plan» para ponerte al día.')
     : yaPaga
-    ? 'Está al día. Puedes cambiar de plan, ver tus facturas o actualizar la tarjeta cuando quieras.'
+    ? (CON_MERCADOPAGO
+      ? 'Está al día. Podés cambiar de plan o darte de baja cuando quieras.'
+      : 'Está al día. Puedes cambiar de plan, ver tus facturas o actualizar la tarjeta cuando quieras.')
     : pruebaAgotada
       ? 'Tus datos están intactos: no se ha borrado nada. Elige un plan y sigues justo donde lo dejaste.'
       : enPrueba
@@ -326,13 +356,13 @@ export function SuscripcionVista({ embebida = false }: { embebida?: boolean }) {
               </div>
             ) : confirmacionAgotada ? (
               <div className="mb-5 rounded-xl border border-warning/25 bg-warning/10 px-4 py-3 text-[13.5px] text-warning">
-                Stripe ha aceptado el pago, pero su confirmación todavía no nos ha llegado y tu plan aún no aparece activo.
+                {NOMBRE_PASARELA} aceptó el pago, pero su confirmación todavía no nos ha llegado y tu plan aún no aparece activo.
                 Vuelve a mirar en unos minutos; si sigue igual, escríbenos a soporte@tentare.app.
               </div>
             ) : (
               <div className="mb-5 flex items-center gap-2 rounded-xl border border-border bg-card px-4 py-3 text-[13.5px] text-muted-foreground">
                 <Loader2 size={15} className="animate-spin motion-reduce:animate-none" aria-hidden="true" />
-                Stripe ha aceptado el pago. Estamos esperando su confirmación para activar tu plan.
+                {NOMBRE_PASARELA} aceptó el pago. Estamos esperando su confirmación para activar tu plan.
               </div>
             )
           )}
@@ -409,13 +439,14 @@ export function SuscripcionVista({ embebida = false }: { embebida?: boolean }) {
               {elegido === 'CADENA' && <div className="mt-4"><AvisoAlPasarACadena opciones={opciones} /></div>}
               {esPropietaria ? (
                 <>
+                  {CON_MERCADOPAGO && <CampoEmailMp valor={emailMp} onCambio={setEmailMp} />}
                   <button
-                    onClick={suscribir}
+                    onClick={() => suscribir()}
                     disabled={accion !== null || !stripeListo}
                     className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3.5 text-[15px] font-bold text-brand-foreground transition-all hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring motion-reduce:transition-none sm:w-auto"
                   >
                     {accion === 'suscribir' && <Loader2 size={15} className="animate-spin motion-reduce:animate-none" aria-hidden="true" />}
-                    {accion === 'suscribir' ? 'Redirigiendo a Stripe…' : `Pasarme a ${PLAN_INFO[elegido].nombre} · ${precio(importeDe(PLAN_INFO[elegido].precioMes, estado?.anual ? intervalo : 'mensual'))}/${estado?.anual && intervalo === 'anual' ? 'año' : 'mes'}`}
+                    {accion === 'suscribir' ? `Redirigiendo a ${NOMBRE_PASARELA}…` : `Pasarme a ${PLAN_INFO[elegido].nombre} · ${precio(importeDe(PLAN_INFO[elegido].precioMes, estado?.anual ? intervalo : 'mensual'))}/${estado?.anual && intervalo === 'anual' ? 'año' : 'mes'}`}
                   </button>
                   <p className="mt-2 text-[12.5px] text-muted-foreground">Tus datos y tu app siguen igual. Puedes cancelar cuando quieras desde esta misma pantalla.</p>
                 </>
@@ -464,7 +495,21 @@ export function SuscripcionVista({ embebida = false }: { embebida?: boolean }) {
               </p>
             )}
 
-            {esPropietaria ? (
+            {esPropietaria && CON_MERCADOPAGO ? (
+              <div className="mt-5 flex flex-wrap gap-2">
+                {(['BASE', 'ESTUDIO'] as const).filter((p) => p !== estado?.plan).map((p) => (
+                  <button
+                    key={p}
+                    onClick={() => suscribir(p)}
+                    disabled={accion !== null}
+                    className="flex items-center justify-center gap-2 rounded-xl border border-border px-4 py-2.5 text-[14px] font-semibold text-foreground transition-colors hover:bg-muted disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                  >
+                    {accion === 'suscribir' && <Loader2 size={15} className="animate-spin motion-reduce:animate-none" aria-hidden="true" />}
+                    {accion === 'suscribir' ? 'Redirigiendo a Mercado Pago…' : `Pasarme a ${PLAN_INFO[p].nombre} · ${precio(PLAN_INFO[p].precioMes, '')}/mes`}
+                  </button>
+                ))}
+              </div>
+            ) : esPropietaria ? (
               <>
                 <button
                   onClick={() => abrirPortal()}
@@ -483,7 +528,10 @@ export function SuscripcionVista({ embebida = false }: { embebida?: boolean }) {
             )}
           </div>
             {/* «Mi suscripción»: lo que paga, su tarjeta, sus facturas y lo que puede cambiar (Stripe, en vivo). */}
-            {esPropietaria && (
+            {esPropietaria && CON_MERCADOPAGO && (
+              <MiSuscripcionMp className="mt-6" onCambio={() => { void estadoBilling().then((e) => { if (e) setEstado(e); }); }} />
+            )}
+            {esPropietaria && !CON_MERCADOPAGO && (
               <MiSuscripcion
                 className="mt-6"
                 ocultarEstudio={Boolean(estado?.complementos?.pagaAparte)}
@@ -491,7 +539,7 @@ export function SuscripcionVista({ embebida = false }: { embebida?: boolean }) {
               />
             )}
             {/* Los complementos de Founding, solo para quien los paga aparte. */}
-            {estado?.complementos?.pagaAparte && (
+            {estado?.complementos?.pagaAparte && !CON_MERCADOPAGO && (
               <Complementos
                 className="mt-6"
                 contratados={estado.complementos.contratados}
@@ -520,13 +568,14 @@ export function SuscripcionVista({ embebida = false }: { embebida?: boolean }) {
               {elegido === 'CADENA' && <div className="mb-4"><AvisoAlPasarACadena opciones={opciones} /></div>}
               {esPropietaria ? (
                 <>
+                  {CON_MERCADOPAGO && <CampoEmailMp valor={emailMp} onCambio={setEmailMp} />}
                   <button
-                    onClick={suscribir}
+                    onClick={() => suscribir()}
                     disabled={accion !== null || !stripeListo}
                     className="flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3.5 text-[15px] font-bold text-brand-foreground transition-all hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring motion-reduce:transition-none"
                   >
                     {accion === 'suscribir' && <Loader2 size={15} className="animate-spin motion-reduce:animate-none" aria-hidden="true" />}
-                    {accion === 'suscribir' ? 'Redirigiendo a Stripe…' : `Continuar con ${PLAN_INFO[elegido].nombre} · ${precio(importeDe(PLAN_INFO[elegido].precioMes, estado?.anual ? intervalo : 'mensual'), '')}/${estado?.anual && intervalo === 'anual' ? 'año' : 'mes'}`}
+                    {accion === 'suscribir' ? `Redirigiendo a ${NOMBRE_PASARELA}…` : `Continuar con ${PLAN_INFO[elegido].nombre} · ${precio(importeDe(PLAN_INFO[elegido].precioMes, estado?.anual ? intervalo : 'mensual'), '')}/${estado?.anual && intervalo === 'anual' ? 'año' : 'mes'}`}
                   </button>
                   <p className="mt-2.5 text-center text-[12.5px] text-muted-foreground">
                     {enPrueba
@@ -561,7 +610,7 @@ export function SuscripcionVista({ embebida = false }: { embebida?: boolean }) {
             </section>
 
             <p className="mt-6 text-center text-[12.5px] text-muted-foreground">
-              Los pagos de tus clientes van directos a tu cuenta de Stripe — Centra no cobra comisión sobre ellos.
+              Los pagos de tus clientes van directos a tu cuenta de {NOMBRE_PASARELA} — Centra no cobra comisión sobre ellos.
             </p>
           </>
         )}

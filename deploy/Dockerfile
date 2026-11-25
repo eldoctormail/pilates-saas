@@ -10,7 +10,14 @@ FROM node:24-bookworm-slim AS build
 WORKDIR /app
 
 COPY package.json package-lock.json ./
-RUN npm ci --no-audit --no-fund
+# Después de instalar se comprueba que Next carga bien. Si el disco se llenó o la
+# instalación quedó a medias, los archivos de node_modules quedan vacíos o rotos
+# (sale «SyntaxError: Invalid or unexpected token» al compilar) y Docker guardaría
+# esa capa rota en caché para siempre. Fallando aquí, la capa no se guarda y la
+# siguiente compilación vuelve a instalar desde cero.
+RUN npm ci --no-audit --no-fund \
+ && node -e "require('next/dist/cli/next-build'); require('next/dist/server/lib/cpu-profile')" \
+ || { echo '✘ npm ci falló o node_modules quedó roto. Revisá el espacio en disco (df -h) y volvé a compilar.' >&2; exit 1; }
 
 COPY . .
 

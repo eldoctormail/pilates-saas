@@ -745,6 +745,7 @@ export default function EquipoPage() {
       ) : tarjetas.length === 0 && panelNuevo ? (
         // Panel nuevo: el vacío que enseña para qué sirve esto y cómo empezar.
         <PantallaVacia
+          imagen="equipo"
           tono="verde"
           Icono={Users}
           titulo="Añade a quien da clase contigo"
@@ -1427,6 +1428,7 @@ function ActividadTab({ actividadReciente, panelNuevo = false, cargado = true }:
   if (panelNuevo && cargado && relevantes.length === 0) {
     return (
       <PantallaVacia
+        imagen="equipo"
         tono="verde"
         Icono={History}
         titulo="Aquí verás quién ha hecho qué"

@@ -192,6 +192,7 @@ export const PIE_PUBLICO: GrupoMenu[] = [
       { href: '/glosario', label: 'Glosario' },
       { href: '/academy', label: 'Academy' },
       { href: '/ayuda', label: 'Centro de Ayuda' },
+      { href: '/edicion/invierno-26', label: 'Centra Edición Invierno 26' },
     ],
   },
   {

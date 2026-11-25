@@ -23,6 +23,7 @@ import { PartyPopper } from 'lucide-react';
 import { estadoBilling, iniciarSuscripcion, type EstadoBilling } from '@/lib/api-client';
 import { PLAN_INFO } from '@/lib/billing/entitlements';
 import { textoLimites } from '@/lib/billing/plan-gratis';
+import { alPagarFounding } from '@/lib/landing/founding-gratis';
 import { claveFelicidadesVista, fraseDeFelicidades, tocaFelicitar } from '@/lib/billing/felicidades';
 import { vistaPreviaSolicitada } from '@/lib/growth/vista-previa';
 import { TZ_ESTUDIO, hoyEnEstudio, masDias } from '@/lib/utils';
@@ -115,7 +116,7 @@ export function FelicidadesCrecimiento() {
             <p className="text-[15px] font-bold text-foreground tabular-nums">{cuota}<span className="text-[12.5px] font-medium text-muted-foreground">/mes</span></p>
           </div>
           <p className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground text-pretty">
-            Todo igual que ahora, sin límite de clientes ni de reservas. Tienes hasta el {fechaLarga(cierraEl)} para dar el paso; mientras tanto, nada cambia.
+            Sin límite de clientes ni de reservas. {alPagarFounding()} Tienes hasta el {fechaLarga(cierraEl)} para dar el paso; mientras tanto, nada cambia.
           </p>
         </div>
 

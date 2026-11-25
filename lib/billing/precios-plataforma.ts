@@ -31,7 +31,7 @@ export type Precios = Record<ClavePrecio, number>;
 /** Clave de `ajustes_plataforma` donde se guardan. */
 export const CLAVE_AJUSTE_PRECIOS = 'precios_planes';
 
-/** Los de Tentare, en euros. Solo si la instalación está en euros (los tests lo están). */
+/** Los de Centra, en euros. Solo si la instalación está en euros (los tests lo están). */
 const PRECIOS_EUROS: Precios = { BASE: 29, ESTUDIO: 79, CADENA: 249, decisiones: 22, sustituciones: 12, ia: 16 };
 
 /**

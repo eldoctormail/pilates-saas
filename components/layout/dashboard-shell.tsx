@@ -34,7 +34,8 @@ import { debeObservar } from '@/lib/analitica/hitos';
 import { cn, finDelDiaEstudio, hoyEnEstudio, inicioDelDiaEstudio } from '@/lib/utils';
 import { seccionesDelMenu } from '@/lib/nav-panel-nuevo';
 import { useInterruptor } from '@/lib/estudio/interruptores-cliente';
-import { useAltaNueva, useShellNuevo } from '@/lib/estudio/panel-nuevo-cliente';
+import { useAltaNueva, useShellNuevoConEspera } from '@/lib/estudio/panel-nuevo-cliente';
+import { AvisoEdicion } from '@/components/edicion/aviso-edicion';
 import { ColumnaAsistenteProvider, useColumnaAsistente } from '@/lib/asistente-columna';
 import { ColumnaAsistente, PildoraAsistente } from '@/components/asistente/columna-asistente';
 import { esRutaDelAlta } from '@/lib/alta/bienvenida-nueva';
@@ -119,7 +120,7 @@ function LienzoDelPanel({ shellNuevo, children }: { shellNuevo: boolean; childre
       data-columna-abierta={shellNuevo && abierta ? '' : undefined}
       className={cn(
         // Móvil y tablet incluidos: lienzo blanco redondeado a 4 px del marco oscuro (en escritorio, además, cede el hueco al asistente).
-        shellNuevo && 'mx-1 min-h-[calc(100dvh-0.5rem)] rounded-2xl bg-background md:ml-0 md:mr-1 lg:transition-[margin] lg:duration-300 lg:ease-[cubic-bezier(0.2,0.8,0,1)]',
+        shellNuevo && 'mx-1 min-h-[calc(100dvh-0.5rem)] rounded-2xl bg-background md:ml-0 md:mr-1 lg:transition-[margin] lg:duration-300 lg:ease-(--pn-ease-out-emphasized)',
         shellNuevo && (abierta ? 'lg:mr-[360px]' : 'lg:mr-1'),
       )}
     >
@@ -151,7 +152,8 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
   const panelNuevo = useInterruptor('panelNuevo', studio?.id);
   // Marco a sangre (`SHELL_NUEVO`): fondo oscuro, barra fija arriba y el contenido como un lienzo
   // claro redondeado. Solo en escritorio (`lg:`): en móvil el panel sigue como estaba.
-  const shellNuevo = useShellNuevo();
+  const shellNuevoEspera = useShellNuevoConEspera();
+  const shellNuevo = shellNuevoEspera === true;
   // El alta nueva (21-oct-2026): TRES estados, `null` mientras se pregunta. Elige
   // qué bienvenida se enseña (más abajo), y con `null` se espera con el esqueleto
   // en vez de pintar un instante la de siempre.
@@ -512,6 +514,12 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
     );
   }
 
+  // Aún no se sabe si este estudio ve el panel nuevo: ni el antiguo ni el nuevo, un fondo neutro (la pregunta tarda unas décimas y solo
+  // pasa la primera vez; después se pinta con lo recordado). Sin esto se enseñaba un instante el panel antiguo.
+  if (shellNuevoEspera === null) {
+    return <div aria-hidden className="panel-app min-h-dvh bg-background" />;
+  }
+
   return (
     <PanelPrivacyProvider>
       <PanelThemeProvider className="panel-app min-h-dvh bg-background" panelNuevo={panelNuevo} shellNuevo={shellNuevo}>
@@ -556,6 +564,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
                         aquí?» encima de un esqueleto de carga es hablarle a
                         una pantalla que todavía no existe. */}
                     {conSiguientePaso && <SiguientePaso key={studio?.id} />}
+                    {shellNuevo && <AvisoEdicion />}
                     {conPrimeraVez && <PrimeraVezAqui />}
                     {children}
                   </>
@@ -573,7 +582,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
               (components/guia/flotantes-del-panel.tsx). */}
           <FlotantesDelPanel />
           {/* Marco a sangre: el asistente como columna a la derecha y su píldora abajo al centro. */}
-          {shellNuevo && <><div aria-hidden data-marco-vivo /><div aria-hidden data-marco-brillo /><ColumnaAsistente /><PildoraAsistente /></>}
+          {shellNuevo && <><div aria-hidden data-marco-vivo /><ColumnaAsistente /><PildoraAsistente /></>}
           {/* «Primeros pasos» ya no flota aquí: es una píldora de la barra de arriba (topbar.tsx). */}
           </ColumnaAsistenteProvider>
           </AsistenteProvider>

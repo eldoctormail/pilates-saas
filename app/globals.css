@@ -4,6 +4,7 @@
 @import "../brand/tokens.css";
 @import "../brand/tailwind-theme.css";
 @import "../brand/legacy-bridge.css";
+@import "./estilos/panel-sistema.css";
 
 @custom-variant dark (&:is(.dark *));
 /* Un ordenador con poca pantalla de alto: los portátiles de 768 a 900 px (1366×768
@@ -106,7 +107,7 @@
   /* ── Sistema central de motion ─────────────────────────────────────────
      Duraciones y easing únicos para toda la app, en vez de valores sueltos
      repetidos por archivo. El easing coincide con el que ya usaban a mano
-     drawer/sheet/portal/reserva (`cubic-bezier(.16,1,.3,1)`, "ease-out expo"):
+     drawer/sheet/portal/reserva (`var(--pn-ease-out-expo)`, "ease-out expo"):
      no se inventa uno nuevo, se nombra el que el repo ya había convergido en
      usar por instinto. `--motion-fast` es el único pensado para operaciones
      MUY frecuentes (cambiar de tab, abrir un popover): más corto que el resto
@@ -119,7 +120,7 @@
      superficie grande que cambia de tamaño o nace de un botón. Con --motion-slow
      se leía como un corte; aquí manda la presencia, como en macOS. */
   --motion-ventana: 500ms;
-  --motion-ease: cubic-bezier(.16, 1, .3, 1);
+  --motion-ease: var(--pn-ease-out-expo);
   /* Y su curva propia, la única excepción a «no inventar easings», con la medida
      que la justifica: con --motion-ease una ventana va al 49 % a los 48 ms y al
      88 % a los 144 ms — grabado a 25 fps, la tarjeta del calendario cruzaba la
@@ -641,7 +642,7 @@ nextjs-portal { display: none !important; }
 
 /* Respuesta al gesto: sube un píxel al pasar por encima (solo con ratón: en
    táctil el hover se queda pegado) y cede al pulsar. */
-.reservar-boton { transition: transform .18s cubic-bezier(.16, 1, .3, 1); }
+.reservar-boton { transition: transform .18s var(--pn-ease-out-expo); }
 @media (hover: hover) { .reservar-boton:hover { transform: translateY(-1px); } }
 .reservar-boton:active { transform: scale(.97); }
 
@@ -649,7 +650,7 @@ nextjs-portal { display: none !important; }
 /* El desplegable de «Apps e integraciones» (menú lateral): sale desde el menú, 4 px. */
 @keyframes desplegable-entra { from { opacity: 0; transform: translateX(-4px); } to { opacity: 1; transform: none; } }
 @keyframes reservar-menu-in { from { opacity: 0; transform: translateY(-4px) scale(.98); } to { opacity: 1; transform: none; } }
-.reservar-menu { animation: reservar-menu-in .16s cubic-bezier(.16, 1, .3, 1) both; transform-origin: top right; }
+.reservar-menu { animation: reservar-menu-in .16s var(--pn-ease-out-expo) both; transform-origin: top right; }
 .reservar-menu-item { background: transparent; transition: background-color .15s ease; }
 .reservar-menu-item:hover,
 .reservar-menu-item[aria-current='page'] { background: var(--portal-surface-2); }
@@ -688,7 +689,7 @@ nextjs-portal { display: none !important; }
    aplicación va lenta, no como elegancia. Menos recorrido y menos de la mitad
    de tiempo — se nota que ha cambiado algo, sin hacer esperar. */
 @keyframes paso-rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-.paso-anim { animation: paso-rise .2s cubic-bezier(.16, 1, .3, 1) both; }
+.paso-anim { animation: paso-rise .2s var(--pn-ease-out-expo) both; }
 
 /* Landing page (app/page.tsx) */
 @keyframes lp-riseIn { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
@@ -1130,7 +1131,7 @@ body:has(.config-tactil) .panel-wa-fab .animate-wa-fab-ring { display: none; }
 .animate-sheet-pop-out { animation: sheet-pop-out .16s ease both; }
 .animate-sheet-backdrop-out { animation: sheet-backdrop-out .16s ease both; }
 .animate-sheet-backdrop-in { animation: sheet-backdrop-in .2s ease both; }
-.animate-sheet-pop-in { animation: sheet-pop-in .28s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-sheet-pop-in { animation: sheet-pop-in .28s var(--pn-ease-out-expo) both; }
 
 /* Widget de reservas (components/reserva/reserva-calendario.tsx) — pulido
    pedido por el fundador tras la fase de responsabilidad única (#1256).
@@ -1189,7 +1190,7 @@ body:has(.config-tactil) .panel-wa-fab .animate-wa-fab-ring { display: none; }
 .reserva-semana-chip:active { transform: scale(.97); }
 
 @keyframes reserva-banner-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-.reserva-banner-in { animation: reserva-banner-in .3s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.reserva-banner-in { animation: reserva-banner-in .3s var(--pn-ease-out-expo) both; }
 
 /* La hoja de reserva es `width:100%` (banda completa en móvil, columna
    centrada desde 560px) — a diferencia de PublicSheet, que siempre es una
@@ -1199,7 +1200,7 @@ body:has(.config-tactil) .panel-wa-fab .animate-wa-fab-ring { display: none; }
    viewport lo pilló (`reservar-escritorio-no-es-movil-estirado.spec.ts`).
    Sin `scale`, el ancho es el real desde el primer frame. */
 @keyframes reserva-sheet-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
-.reserva-sheet-in { animation: reserva-sheet-in .28s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.reserva-sheet-in { animation: reserva-sheet-in .28s var(--pn-ease-out-expo) both; }
 
 /* BookingSheet (ficha de clase) fuera de un iframe embebido: hoja anclada
    abajo en móvil, diálogo centrado en vertical a partir de 640px — mismo
@@ -1314,7 +1315,7 @@ body:has(.config-tactil) .panel-wa-fab .animate-wa-fab-ring { display: none; }
 /* Transición entre "Tus datos" y "Pago" — nunca un salto seco de página a
    página (eso es justo la sensación de "wizard" que se pidió evitar). */
 @keyframes pantalla-reserva-entra { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-.pantalla-reserva-seccion { animation: pantalla-reserva-entra .32s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.pantalla-reserva-seccion { animation: pantalla-reserva-entra .32s var(--pn-ease-out-expo) both; }
 
 /* Icono de "Reserva confirmada" (diseño "Centra Portal Reservas"): anillo que
    se expande y se disuelve detrás de un check que aparece con un ligero
@@ -1435,10 +1436,10 @@ body:has([data-barra-seleccion]) .panel-wa-fab { display: none; }
 }
 
 /* Construcción — el logo se monta solo al abrir el panel. */
-.t-construccion .t-hoja-i { animation: t-cons-hoja-i .5s cubic-bezier(.16,1,.3,1) both; }
-.t-construccion .t-hoja-d { animation: t-cons-hoja-d .5s cubic-bezier(.16,1,.3,1) .07s both; }
-.t-construccion .t-tallo  { animation: t-cons-tallo .55s cubic-bezier(.16,1,.3,1) .2s both; transform-origin: 50% 100%; }
-.t-construccion .t-disco  { animation: t-cons-disco .45s cubic-bezier(.16,1,.3,1) .45s both; transform-origin: 0% 50%; }
+.t-construccion .t-hoja-i { animation: t-cons-hoja-i .5s var(--pn-ease-out-expo) both; }
+.t-construccion .t-hoja-d { animation: t-cons-hoja-d .5s var(--pn-ease-out-expo) .07s both; }
+.t-construccion .t-tallo  { animation: t-cons-tallo .55s var(--pn-ease-out-expo) .2s both; transform-origin: 50% 100%; }
+.t-construccion .t-disco  { animation: t-cons-disco .45s var(--pn-ease-out-expo) .45s both; transform-origin: 0% 50%; }
 
 @keyframes t-cons-hoja-i { from { opacity: 0; transform: translate(-16px,-12px) rotate(-8deg); } to { opacity: 1; transform: none; } }
 @keyframes t-cons-hoja-d { from { opacity: 0; transform: translate(16px,-12px) rotate(8deg); } to { opacity: 1; transform: none; } }
@@ -1478,7 +1479,7 @@ body:has([data-barra-seleccion]) .panel-wa-fab { display: none; }
    scroll-reveal del resto de secciones vive en components/network-v2/Reveal.tsx
    (necesita IntersectionObserver, no una clase CSS suelta). */
 @keyframes nw-fade-up { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-.nw-fade-up { animation: nw-fade-up .7s cubic-bezier(.16,1,.3,1) both; }
+.nw-fade-up { animation: nw-fade-up .7s var(--pn-ease-out-expo) both; }
 @keyframes nw-pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .45; transform: scale(1.35); } }
 .nw-pulse-dot { animation: nw-pulse-dot 2.2s ease-in-out infinite; }
 
@@ -1723,7 +1724,13 @@ body.sin-primeros-pasos-flotante [data-primeros-pasos] { display: none !importan
 .shell-vidrio-busqueda { background-color: rgba(255, 255, 255, 0.19); }
 
 /* El resplandor de abajo del menú, con el color de Centra (turquesa → magenta en el haz). */
-.shell-brillo { height: 400px; }
+.shell-brillo {
+  height: 400px;
+  /* La misma máscara horizontal que el resplandor de ancho completo (medida en Shopify): el del menú también baja hacia su borde derecho
+     (a 224 px de 1440, ~70 %), y así enlaza sin corte con la franja y la esquina de debajo del lienzo. */
+  -webkit-mask-image: linear-gradient(90deg, #000 8.08vw, transparent 36.19vw);
+  mask-image: linear-gradient(90deg, #000 8.08vw, transparent 36.19vw);
+}
 .shell-brillo-base {
   position: absolute; inset: 0;
   background: linear-gradient(rgba(62, 106, 130, 0) 81.93%, rgba(62, 106, 130, 0.68) 96.87%, rgba(76, 156, 176, 0.68) 100%);
@@ -1808,11 +1815,11 @@ html:has(.panel-app[data-shell-nuevo]) body {
 }
 html:has(.panel-app[data-shell-nuevo]) { background-color: var(--shell-marco, #0a0a0a); }
 
-/* Ampliar / reducir con el marco a sangre: la curva y la duración que mide Shopify en su lienzo (0,4 s, cubic-bezier(0.2, 0.8, 0, 1):
+/* Ampliar / reducir con el marco a sangre: la curva y la duración que mide Shopify en su lienzo (0,4 s, var(--pn-ease-out-emphasized):
    sale rápido y frena al final, en vez del arranque lento de 0,5 s). El resto del panel conserva las suyas. */
 :root:has(.panel-app[data-shell-nuevo]) {
-  --motion-ventana: 400ms;
-  --motion-ease-ventana: cubic-bezier(0.2, 0.8, 0, 1);
+  --motion-ventana: 250ms;
+  --motion-ease-ventana: var(--pn-ease-out-emphasized);
 }
 
 /* Pie del menú a sangre: los desplegables (perfil, prueba, primeros pasos) salen hacia arriba y pegados a la
@@ -1883,28 +1890,28 @@ html:has(.panel-app[data-shell-nuevo]) { background-color: var(--shell-marco, #0
   /* Botones: 28 px, 12/500, píldora; la principal es `#1b1b1b` con el relieve de Polaris. */
   .panel-app[data-shell-nuevo] [data-slot='button'] {
     font-size: 12px; font-weight: 500; line-height: 16px; letter-spacing: -0.005em;
-    transition: background-color 0.15s cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 0.15s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.1s cubic-bezier(0.25, 0.1, 0.25, 1);
+    transition: background-color 0.15s var(--pn-ease), box-shadow 0.15s var(--pn-ease), transform 0.1s var(--pn-ease);
   }
   .panel-app[data-shell-nuevo] [data-slot='button']:active { transform: scale(0.97); }
   .panel-app[data-shell-nuevo] [data-slot='button'].bg-primary {
     background-color: #1b1b1b; color: #fcfcfc;
-    box-shadow: 0 1px 0.5px -0.5px #00000021, 0 1px 2px -0.5px #00000021, 0 4px 6px -2px #00000021, 0 2px 3px -1.5px #00000021, inset 0 0 4px 1px #101010, inset 0 0 4px 2px #ffffff1a, inset 0 0 12px -6px #ffffffbf;
+    box-shadow: var(--pn-sombra-boton-principal);
   }
   .panel-app[data-shell-nuevo] [data-slot='button'].bg-primary:hover { background-color: #303030; }
   .panel-app[data-shell-nuevo] [data-slot='button']:is(.bg-background, .bg-card, .bg-secondary) {
     background-color: #fff; border-color: transparent; color: #101010;
-    box-shadow: 0 2px 3px -1px #0000000a, 0 3px 4px -1.5px #0000000a, 0 0 0 1px #00000021;
+    box-shadow: var(--pn-sombra-control);
   }
   .panel-app[data-shell-nuevo] [data-slot='button']:is(.bg-background, .bg-card, .bg-secondary):hover { background-color: #f7f7f7; }
-  .panel-app[data-shell-nuevo] [data-slot='button']:focus-visible { outline: 2px solid oklch(62.89% 0.2036 263.44); outline-offset: 1px; box-shadow: none; }
+  .panel-app[data-shell-nuevo] [data-slot='button']:focus-visible { outline: 2px solid var(--pn-foco); outline-offset: 1px; box-shadow: none; }
 
   /* Campos: 30 px, radio 12, sombra de entrada y foco azul con halo. */
   .panel-app[data-shell-nuevo] [data-slot='input'] {
     min-height: 30px; height: 30px; border: 0; border-radius: 12px; background: #fff; font-size: 13px; letter-spacing: -0.01em;
-    box-shadow: 0 2px 3px -1px #0000000a, 0 3px 4px -1.5px #0000000a, 0 0 0 1px #00000021;
-    transition: box-shadow 0.15s cubic-bezier(0.25, 0.1, 0.25, 1);
+    box-shadow: var(--pn-sombra-control);
+    transition: box-shadow 0.15s var(--pn-ease);
   }
-  .panel-app[data-shell-nuevo] [data-slot='input']:hover:not(:focus-visible) { box-shadow: 0 2px 3px -1px #0000000a, 0 3px 4px -1.5px #0000000a, 0 0 0 1px #0000004d; }
+  .panel-app[data-shell-nuevo] [data-slot='input']:hover:not(:focus-visible) { box-shadow: var(--pn-sombra-control-hover); }
   .panel-app[data-shell-nuevo] [data-slot='input']:focus-visible {
     border: 0; outline: none;
     box-shadow: 0 2px 3px -1px #0000000a, 0 3px 4px -1.5px #0000000a, 0 4px 5px -2px #0000000a, 0 0 0 1px oklch(62.89% 0.2036 263.44), 0 0 0 3px #3573f60f, 0 4px 20px 2px #3573f60f, inset 0 0 8px 1px #3573f60d;
@@ -1923,7 +1930,7 @@ html:has(.panel-app[data-shell-nuevo]) { background-color: var(--shell-marco, #0
   .panel-app[data-shell-nuevo] [data-vivo='cifra'],
   .panel-app[data-shell-nuevo] [data-vivo='grafica'],
   .panel-app[data-shell-nuevo] [data-testid='tarjetas-de-paso'] > li {
-    animation: shell-tarjeta-entra 450ms cubic-bezier(0.2, 0.8, 0, 1) backwards;
+    animation: shell-tarjeta-entra 450ms var(--pn-ease-out-emphasized) backwards;
   }
   .panel-app[data-shell-nuevo] [data-vivo='cifra']:nth-child(2), .panel-app[data-shell-nuevo] [data-testid='tarjetas-de-paso'] > li:nth-child(2) { animation-delay: 150ms; }
   .panel-app[data-shell-nuevo] [data-vivo='cifra']:nth-child(3), .panel-app[data-shell-nuevo] [data-testid='tarjetas-de-paso'] > li:nth-child(3) { animation-delay: 220ms; }
@@ -1934,7 +1941,7 @@ html:has(.panel-app[data-shell-nuevo]) { background-color: var(--shell-marco, #0
   /* Sin fundido de entrada del contenido: Shopify cambia de pantalla en seco (medido 21-nov-2026). */
 
   /* Hover de una tarjeta: se levanta 1 px con la sombra más grande, 0,15 s. */
-  .panel-app[data-shell-nuevo] [data-vivo='cifra'] { transition: box-shadow 0.15s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.15s cubic-bezier(0.25, 0.1, 0.25, 1); }
+  .panel-app[data-shell-nuevo] [data-vivo='cifra'] { transition: box-shadow 0.15s var(--pn-ease), transform 0.15s var(--pn-ease); }
 
   /* Esqueleto: barrido de luz, como el de Shopify. */
   .panel-app[data-shell-nuevo] [class~='animate-pulse'] { /* por atributo: `css-shadow-sin-divergencia` solo cuenta clases animate-* escritas con punto */
@@ -1967,7 +1974,7 @@ html:has(.panel-app[data-shell-nuevo]) { background-color: var(--shell-marco, #0
   .panel-app[data-shell-nuevo] [role='tablist']:not([data-sin-estilo-shell]) > [role='tab'] {
     height: 28px; min-height: 28px; padding-inline: 10px; border-radius: 8px !important; font-size: 13px; font-weight: 500;
     background: transparent; box-shadow: none !important; color: #4a4a4a;
-    transition: background-color 0.15s cubic-bezier(0.25, 0.1, 0.25, 1), color 0.15s cubic-bezier(0.25, 0.1, 0.25, 1);
+    transition: background-color 0.15s var(--pn-ease), color 0.15s var(--pn-ease);
   }
   .panel-app[data-shell-nuevo] [role='tablist']:not([data-sin-estilo-shell]) > [role='tab']:hover { background: #f7f7f7; color: #101010; }
   .panel-app[data-shell-nuevo] [role='tablist']:not([data-sin-estilo-shell]) > [role='tab'][aria-selected='true'] { background: #ebebeb; color: #101010; font-weight: 600; }
@@ -1994,9 +2001,9 @@ html:has(.panel-app[data-shell-nuevo]) { background-color: var(--shell-marco, #0
   .panel-app[data-shell-nuevo] [data-config-raiz] { max-width: 784px; margin-inline: auto; padding-top: 32px; }
   .panel-app[data-shell-nuevo] [data-config-raiz] #seccion-titulo { margin-bottom: 18px; }
   .panel-app[data-shell-nuevo] [data-config-cabecera] { margin-bottom: 8px; }
-  .panel-app[data-shell-nuevo] [data-config-cabecera] [data-slot='page-header-title'] { font-size: 22px !important; line-height: 28px !important; font-weight: 500 !important; letter-spacing: -0.02em !important; }
-  .panel-app[data-shell-nuevo] [data-config-cabecera] [data-slot='page-header-icono'] > * { width: 28px !important; height: 28px !important; border-radius: 8px !important; background: var(--t-blue-500) !important; color: #fff !important; }
-  .panel-app[data-shell-nuevo] [data-config-cabecera] [data-slot='page-header-icono'] svg { color: #fff !important; }
+  .panel-app[data-shell-nuevo] [data-config-cabecera] [data-slot='page-header-title'] { font-size: 20px !important; line-height: 24px !important; font-weight: 600 !important; letter-spacing: -0.01em !important; }
+  .panel-app[data-shell-nuevo] [data-config-cabecera] [data-slot='page-header-icono'] > * { width: 20px !important; height: 20px !important; border-radius: 0 !important; background: transparent !important; box-shadow: none !important; }
+  .panel-app[data-shell-nuevo] [data-config-cabecera] [data-slot='page-header-icono'] svg { width: 18px; height: 18px; color: var(--foreground) !important; }
   .panel-app[data-shell-nuevo] [data-config-grupos] { grid-template-columns: minmax(0, 1fr) !important; gap: 16px; }
   .panel-app[data-shell-nuevo] [data-config-icono] { width: 20px !important; height: 20px !important; border-radius: 0 !important; background: transparent !important; color: #101010 !important; }
   .panel-app[data-shell-nuevo] [data-config-icono] svg { width: 16px; height: 16px; color: #303030 !important; }
@@ -2041,7 +2048,7 @@ html:has(.panel-app[data-shell-nuevo]) { background-color: var(--shell-marco, #0
   .panel-app[data-shell-nuevo] [data-movil-inferior],
   .panel-app[data-shell-nuevo] [data-movil-menu] { display: none !important; }
   .panel-app[data-shell-nuevo] main:not([data-chat-main]) { padding-left: var(--sidebar-w, 224px); }
-  .panel-app[data-shell-nuevo] [data-panel-contenido] { padding-top: 0.25rem !important; padding-bottom: 1.5rem !important; }
+  .panel-app[data-shell-nuevo] [data-panel-contenido] { padding-top: 0.25rem !important; padding-bottom: 6.5rem !important; }
   .panel-app[data-shell-nuevo] [data-compositor-inicio] { display: block; }
   .panel-app[data-shell-nuevo] [data-columna-asistente],
   .panel-app[data-shell-nuevo] [data-pildora-asistente] { display: flex; }
@@ -2090,18 +2097,18 @@ html:has(.panel-app[data-shell-nuevo]) { background-color: var(--shell-marco, #0
 /* Movimiento. Una sola curva (la de Shopify) para entrar, salir y reaccionar al dedo. */
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .panel-app[data-shell-nuevo] :is(a, button)[data-slot='card'] {
-    transition: transform 0.2s cubic-bezier(0.2, 0.8, 0, 1), box-shadow 0.2s cubic-bezier(0.2, 0.8, 0, 1);
+    transition: transform 0.2s var(--pn-ease-out-emphasized), box-shadow 0.2s var(--pn-ease-out-emphasized);
   }
   .panel-app[data-shell-nuevo] :is(a, button)[data-slot='card']:hover {
     transform: translateY(-1px); box-shadow: 0 0 2px #0000003d, 0 6px 20px #0000000f, 0 12px 40px #0000000a;
   }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .panel-app[data-shell-nuevo] :is(a, button, [role='tab'], [role='menuitem'], summary):not(:disabled) { transition-property: background-color, color, box-shadow, transform, opacity; transition-duration: 0.15s; transition-timing-function: cubic-bezier(0.2, 0.8, 0, 1); }
+  .panel-app[data-shell-nuevo] :is(a, button, [role='tab'], [role='menuitem'], summary):not(:disabled) { transition-property: background-color, color, box-shadow, transform, opacity; transition-duration: 0.15s; transition-timing-function: var(--pn-ease-out-emphasized); }
   .panel-app[data-shell-nuevo] :is(button, [role='tab']):not(:disabled):active { transform: scale(0.97); }
   .panel-app[data-shell-nuevo] :is(tbody tr, [role='row']) { transition: background-color 0.12s ease; }
 }
-.panel-app[data-shell-nuevo] :is(a, button, [role='tab'], summary):focus-visible { outline: 2px solid oklch(62.89% 0.2036 263.44); outline-offset: 2px; }
+.panel-app[data-shell-nuevo] :is(a, button, [role='tab'], summary):focus-visible { outline: 2px solid var(--pn-foco); outline-offset: 2px; }
 /* Con la columna del asistente abierta, el botón de ayuda se aparta: caía encima de su campo. */
 :root[data-columna-asistente-abierta] .panel-wa-fab { opacity: 0; pointer-events: none; transform: scale(0.9); transition: opacity 0.2s ease, transform 0.2s ease; }
 
@@ -2124,6 +2131,8 @@ html:has(.panel-app[data-shell-nuevo]) { background-color: var(--shell-marco, #0
    siempre. Aquí el scroll es el del documento, así que el marco negro es un panel fijo y transparente que dibuja SOLO el marco:
    cuatro tiras de 4 px y cuatro esquinas de 16 px (fondos en degradado radial), sin tocar lo de dentro. El contenido pasa por
    debajo, y el lienzo y la columna del asistente se ven como dos paneles redondeados con 4 px de marco entre ellos.
+   ⚠️ Va por ENCIMA de lo pegado dentro del lienzo (z 30, la barra de arriba) y por debajo de menús desplegados (40),
+   columna del asistente (45) y diálogos (50): con z 25 la barra tapaba la tira de arriba y las esquinas (25-nov-2026).
    Rendimiento (20-nov-2026): la primera versión era una sombra de 100vmax, una capa de ~4.300 × 3.400 px que se repintaba entera
    al abrir la columna y pesaba en cada fotograma del scroll. Esta es del tamaño de la ventana y casi toda transparente.
    `--marco-der` es el ancho de la tira de la derecha: 4 px, o lo que ocupa la columna del asistente cuando está abierta. No recibe toques. */
@@ -2132,7 +2141,7 @@ html:has(.panel-app[data-shell-nuevo]) { background-color: var(--shell-marco, #0
 @media (min-width: 768px) {
   .panel-app[data-shell-nuevo] [data-marco-vivo] {
     --marco-negro: #0a0a0a;
-    display: block; position: fixed; z-index: 25; pointer-events: none; contain: strict;
+    display: block; position: fixed; z-index: 38; pointer-events: none; contain: strict;
     top: 0; bottom: 0; right: 0; left: var(--sidebar-w, 224px);
     background-repeat: no-repeat;
     background-image:
@@ -2147,40 +2156,19 @@ html:has(.panel-app[data-shell-nuevo]) { background-color: var(--shell-marco, #0
     background-position:
       left top, left bottom, right top,
       left 0 top 4px, left 0 bottom 4px, right var(--marco-der) top 4px, right var(--marco-der) bottom 4px;
-    transition: --marco-der 0.3s cubic-bezier(0.2, 0.8, 0, 1);
+    transition: --marco-der 0.3s var(--pn-ease-out-emphasized);
   }
+}
+/* Aire al final de cada pantalla: la píldora del asistente flota abajo (52 px + 16) y tapaba la última tarjeta y su botón.
+   El calendario no: ocupa el alto entero a propósito. */
+@media (min-width: 768px) {
+  .panel-app[data-shell-nuevo] [data-panel-contenido]:not(:has([data-calendario-marco])) { padding-bottom: 6.5rem !important; }
 }
 @media (min-width: 1024px) {
   :root[data-columna-asistente-abierta] .panel-app[data-shell-nuevo] [data-marco-vivo] { --marco-der: 360px; }
 }
 @media (prefers-reduced-motion: reduce) { .panel-app[data-shell-nuevo] [data-marco-vivo] { transition: none; } }
 @media print { .panel-app[data-shell-nuevo] [data-marco-vivo] { display: none; } }
-
-/* (El radio de la máscara es ~1 px menor que el de la esquina del lienzo: el resplandor solapa su borde antialiasado y no
-   queda el aro negro de la cabecera de abajo a la izquierda.) */
-/* El resplandor del menú sigue por debajo del lienzo: por la franja de 4 px del marco y por la esquina redondeada de abajo a la
-   izquierda, desvaneciéndose hacia la derecha, como en Shopify. Estático y de 20 px de alto (la versión anterior clonaba el
-   resplandor ANIMADO y desenfocado del menú a 400 px de alto, que se repintaba sin parar). La máscara deja solo lo que queda
-   FUERA del panel (la franja y el hueco de la esquina), así que no tapa el contenido. */
-.panel-app[data-shell-nuevo] [data-marco-brillo] { display: none; }
-@media (min-width: 768px) {
-  .panel-app[data-shell-nuevo] [data-marco-brillo] {
-    display: block; position: fixed; z-index: 26; pointer-events: none; contain: strict;
-    left: var(--sidebar-w, 224px); bottom: 0; width: 560px; height: 20px;
-    background: linear-gradient(90deg, rgba(76, 156, 176, 0.66) 0%, rgba(76, 156, 176, 0.4) 35%, rgba(76, 156, 176, 0.12) 70%, rgba(76, 156, 176, 0) 100%);
-    -webkit-mask-image: radial-gradient(circle at 16px 0, transparent 14.8px, #000 15.4px), linear-gradient(#000, #000);
-    -webkit-mask-size: 16px 16px, 100% 4px;
-    -webkit-mask-position: 0 0, 0 100%;
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-composite: source-over;
-    mask-image: radial-gradient(circle at 16px 0, transparent 14.8px, #000 15.4px), linear-gradient(#000, #000);
-    mask-size: 16px 16px, 100% 4px;
-    mask-position: 0 0, 0 100%;
-    mask-repeat: no-repeat;
-    mask-composite: add;
-  }
-}
-@media print { .panel-app[data-shell-nuevo] [data-marco-brillo] { display: none; } }
 
 /* Calendario con el marco a sangre (19-nov-2026, fase 1): sin tarjeta dentro de la tarjeta, la barra de vistas y de filtros en los
    neutros de Shopify (no el crema de marca), la columna de mes y filtros sin su borde propio, y la semana que entra al cambiar. */
@@ -2192,7 +2180,7 @@ html:has(.panel-app[data-shell-nuevo]) { background-color: var(--shell-marco, #0
 .panel-app[data-shell-nuevo] [data-calendario-marco] [data-testid='semana-franjas'] { scrollbar-gutter: stable; }
 @keyframes calendario-semana-entra { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: no-preference) {
-  .panel-app[data-shell-nuevo] .calendario-semana-entra { animation: calendario-semana-entra 0.28s cubic-bezier(0.2, 0.8, 0, 1) backwards; }
+  .panel-app[data-shell-nuevo] .calendario-semana-entra { animation: calendario-semana-entra 0.28s var(--pn-ease-out-emphasized) backwards; }
 }
 
 /* Menú lateral a sangre (20-nov-2026): las filas responden al dedo y al puntero con las mismas curvas del resto del marco (fundido de fondo y
@@ -2201,7 +2189,7 @@ html:has(.panel-app[data-shell-nuevo]) { background-color: var(--shell-marco, #0
 @media (prefers-reduced-motion: no-preference) {
   .panel-app[data-shell-nuevo] aside[data-panel-menu] nav :is(a, button) {
     transition-property: background-color, color, box-shadow, transform, opacity;
-    transition-duration: 0.14s; transition-timing-function: cubic-bezier(0.2, 0.8, 0, 1);
+    transition-duration: 0.14s; transition-timing-function: var(--pn-ease-out-emphasized);
   }
   .panel-app[data-shell-nuevo] aside[data-panel-menu] nav :is(a, button):active { transform: scale(0.985); }
 }
@@ -2216,17 +2204,30 @@ html:has(.panel-app[data-shell-nuevo]) { background-color: var(--shell-marco, #0
    el doc anterior decía 16 y estaba mal). Las de Configuración se quedan en 16: son otro componente, con su propia regla más arriba. */
 .panel-app[data-shell-nuevo] [data-slot='card'], .panel-app[data-shell-nuevo] .rounded-t-card { border-radius: 20px; }
 
+/* La entrada del menú (23-nov-2026): los valores salen de `document.getAnimations()` en el admin de Shopify. Cada fila: desde −60 px,
+   fundido y desenfoque de 2 px, 400 ms, 10 ms de retraso por fila (`--i`, que pone el Sidebar). El pie sube desde abajo. */
+@keyframes shell-menu-fila { from { opacity: 0; translate: -60px 0; filter: blur(2px); } to { opacity: 1; translate: 0 0; filter: none; } }
+@keyframes shell-menu-pie { from { opacity: 0; translate: 0 60px; filter: blur(2px); } to { opacity: 1; translate: 0 0; filter: none; } }
+.panel-app[data-shell-nuevo] aside[data-panel-menu][data-entra] a,
+.panel-app[data-shell-nuevo] aside[data-panel-menu][data-entra] [data-tour='buscador'] {
+  animation: shell-menu-fila 400ms var(--pn-ease-out-emphasized) both; animation-delay: calc(var(--i, 0) * 10ms);
+}
+.panel-app[data-shell-nuevo] aside[data-panel-menu][data-entra] [data-pie-menu] a { animation-name: shell-menu-pie; }
+@media (prefers-reduced-motion: reduce) {
+  .panel-app[data-shell-nuevo] aside[data-panel-menu][data-entra] a, .panel-app[data-shell-nuevo] aside[data-panel-menu][data-entra] [data-tour='buscador'] { animation: none; }
+}
+
 /* La bienvenida del Inicio (22-nov-2026, el vídeo del admin de Shopify): el saludo entra palabra a palabra desde el desenfoque, en mitad
    del lienzo; sube a su sitio y el resto del Inicio va apareciendo debajo, escalonado. Solo con `data-bienvenida='on'` (una vez por
    sesión y sin «reducir movimiento»: `useBienvenidaInicio`). Curvas: las medidas en Shopify. */
 @keyframes bv-palabra { from { opacity: 0; filter: blur(10px); transform: translateY(6px); } to { opacity: 1; filter: blur(0); transform: none; } }
 @keyframes bv-sube { from { transform: translateY(min(24vh, 220px)); } to { transform: none; } }
 @keyframes bv-entra { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-.panel-app[data-shell-nuevo] [data-resumen-limpio][data-bienvenida='on'] > header { animation: bv-sube .8s cubic-bezier(0.2, 0.8, 0, 1) 1.7s both; }
+.panel-app[data-shell-nuevo] [data-resumen-limpio][data-bienvenida='on'] > header { animation: bv-sube .8s var(--pn-ease-out-emphasized) 1.7s both; }
 .panel-app[data-shell-nuevo] [data-resumen-limpio][data-bienvenida='on'] .bv-palabra {
-  display: inline-block; animation: bv-palabra .7s cubic-bezier(0.25, 0.1, 0.25, 1) both; animation-delay: calc(0.15s + var(--p, 0) * 0.11s);
+  display: inline-block; animation: bv-palabra .7s var(--pn-ease) both; animation-delay: calc(0.15s + var(--p, 0) * 0.11s);
 }
-.panel-app[data-shell-nuevo] [data-resumen-limpio][data-bienvenida='on'] > :not(header) { animation: bv-entra .7s cubic-bezier(0.25, 0.1, 0.25, 1) both; animation-delay: 1.9s; }
+.panel-app[data-shell-nuevo] [data-resumen-limpio][data-bienvenida='on'] > :not(header) { animation: bv-entra .7s var(--pn-ease) both; animation-delay: 1.9s; }
 .panel-app[data-shell-nuevo] [data-resumen-limpio][data-bienvenida='on'] > :nth-child(3) { animation-delay: 2s; }
 .panel-app[data-shell-nuevo] [data-resumen-limpio][data-bienvenida='on'] > :nth-child(4) { animation-delay: 2.1s; }
 .panel-app[data-shell-nuevo] [data-resumen-limpio][data-bienvenida='on'] > :nth-child(5) { animation-delay: 2.2s; }
@@ -2244,7 +2245,7 @@ html:has(.panel-app[data-shell-nuevo]) { background-color: var(--shell-marco, #0
 .panel-app[data-shell-nuevo] [data-resumen-limpio] section[aria-labelledby='accesos-titulo'] a {
   background-color: #fff !important; border-color: transparent !important; box-shadow: 0 0 0 1px #0000000f, 0 1px 2px #0000000a;
 }
-.panel-app[data-shell-nuevo] [data-resumen-limpio] [data-resumen-mas] > summary:focus-visible { outline: 2px solid oklch(62.89% 0.2036 263.44); outline-offset: -2px; border-radius: 20px; }
+.panel-app[data-shell-nuevo] [data-resumen-limpio] [data-resumen-mas] > summary:focus-visible { outline: 2px solid var(--pn-foco); outline-offset: -2px; border-radius: 20px; }
 
 /* ── Móvil como una app (20-nov-2026, < 768 px) ───────────────────────────────────────────────────────────
    Copia de la app de Shopify en iPhone. Medidas tomadas de las capturas del fundador (1206 px = 402 pt):
@@ -2252,7 +2253,7 @@ html:has(.panel-app[data-shell-nuevo]) { background-color: var(--shell-marco, #0
    · Las demás pantallas: blancas a pantalla completa, título grande a la izquierda y sin barra de arriba.
    · Barra inferior: redondo de buscar · píldora de 4 iconos · redondo del asistente (56 pt, a 24 de los bordes).
    · Píldora negra de la prueba, a 24 pt sobre la barra. Menú: pantalla completa con acordeón y tres botones flotantes.
-   Botones de dedo (≥ 48) y letra ≥ 16. Curva de todo el marco: cubic-bezier(0.2, 0.8, 0, 1). ──────────────── */
+   Botones de dedo (≥ 48) y letra ≥ 16. Curva de todo el marco: var(--pn-ease-out-emphasized). ──────────────── */
 @media (max-width: 767.98px) {
   .panel-app[data-shell-nuevo] { background-color: #000; }
   .panel-app[data-shell-nuevo] [data-movil-superior],
@@ -2303,14 +2304,14 @@ html:has(.panel-app[data-shell-nuevo]) { background-color: var(--shell-marco, #0
   }
   .panel-app[data-shell-nuevo] [data-movil-redondo] {
     width: 56px; height: 56px; flex: none; border-radius: 9999px; display: flex; align-items: center; justify-content: center; color: #4a4a4a;
-    transition: transform 0.2s cubic-bezier(0.2, 0.8, 0, 1);
+    transition: transform 0.2s var(--pn-ease-out-emphasized);
   }
   .panel-app[data-shell-nuevo] [data-movil-redondo-hueco] { display: none; }
   .panel-app[data-shell-nuevo] [data-movil-pildora] { flex: 1 1 0; min-width: 0; height: 56px; border-radius: 9999px; padding: 0 5px; display: flex; align-items: center; justify-content: space-between; }
   .panel-app[data-shell-nuevo] [data-movil-pildora] > a,
   .panel-app[data-shell-nuevo] [data-movil-pildora] > button {
     position: relative; flex: 1 1 0; min-width: 0; height: 46px; border-radius: 9999px; display: flex; align-items: center; justify-content: center; color: #6a6a6a;
-    transition: background-color 0.25s cubic-bezier(0.2, 0.8, 0, 1), transform 0.2s cubic-bezier(0.2, 0.8, 0, 1);
+    transition: background-color 0.25s var(--pn-ease-out-emphasized), transform 0.2s var(--pn-ease-out-emphasized);
   }
   .panel-app[data-shell-nuevo] [data-movil-pildora] > [data-activo] { background: #efefef; color: #0f0f0f; }
   .panel-app[data-shell-nuevo] [data-movil-pildora] > a > b { position: absolute; top: 9px; right: 14px; width: 9px; height: 9px; border-radius: 9999px; background: #e0483c; }
@@ -2384,7 +2385,7 @@ html:has(.panel-app[data-shell-nuevo]) { background-color: var(--shell-marco, #0
     background: #fff !important; background-image: none !important; border: 1px solid #e9e9e9 !important; border-radius: 24px !important;
     box-shadow: 0 1px 2px #0000000a, 0 10px 28px -14px #00000026 !important;
   }
-  .panel-app[data-shell-nuevo]:not(.dark) [data-movil-hoja='pantalla'] [data-panel-contenido] :is(.bg-card, .bg-t-card):is(.rounded-xl, .rounded-2xl, .rounded-3xl, .rounded-t-card):not(:has(input, select, textarea)):not(button):not(a) { padding: 20px; }
+  .panel-app[data-shell-nuevo]:not(.dark) [data-movil-hoja='pantalla'] [data-panel-contenido] :is(.bg-card, .bg-t-card):is(.rounded-xl, .rounded-2xl, .rounded-3xl, .rounded-t-card):not(:has(input, select, textarea)):not(button):not(a):not(input):not(select):not(textarea) { padding: 20px; }
   /* Tokens fríos: el beige del escritorio (bordes, campos, chips) pasa a grises de la app de Shopify. */
   .panel-app[data-shell-nuevo]:not(.dark) [data-movil-hoja='pantalla'] {
     --border: #ececec; --input: #ececec; --muted: #f4f4f4; --secondary: #f4f4f4; --accent: #f4f4f4;
@@ -2467,7 +2468,7 @@ html:has(.panel-app[data-shell-nuevo]) { background-color: var(--shell-marco, #0
 
   /* Cobros, Informes, Clientes y Productos: sus pestañas son solo texto, no baldosas con icono como las de Mensajería.
      Vuelven a ser chips grises que se deslizan en una fila; la activa, píldora negra (como los filtros de Shopify). */
-  .panel-app[data-shell-nuevo][data-shell-nuevo] [data-vistas-en-menu]:not(:has(> button > span[aria-hidden])) { flex-direction: row !important; align-items: center; gap: 8px !important; background: transparent !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; padding: 0 !important; width: auto !important; max-width: none; margin: 0 -24px !important; padding-inline: 24px !important; overflow-x: auto; scrollbar-width: none; }
+  .panel-app[data-shell-nuevo][data-shell-nuevo] [data-vistas-en-menu]:not(:has(> button > span[aria-hidden])) { flex-direction: row !important; align-items: center; gap: 8px !important; background: transparent !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; padding: 0 !important; width: auto !important; max-width: none; margin: 0 -24px 8px !important; padding-inline: 24px !important; overflow-x: auto; scrollbar-width: none; }
   .panel-app[data-shell-nuevo][data-shell-nuevo] [data-vistas-en-menu]:not(:has(> button > span[aria-hidden]))::-webkit-scrollbar { display: none; }
   .panel-app[data-shell-nuevo][data-shell-nuevo] [data-vistas-en-menu]:not(:has(> button > span[aria-hidden])) > button { flex: 0 0 auto; flex-direction: row !important; align-items: center !important; gap: 6px !important; min-height: 40px; height: 40px; padding: 0 16px !important; margin: 0 !important; border: 0 !important; border-radius: 9999px !important; background: #f1f1f1; color: #303030; font-size: 14px; font-weight: 600; white-space: nowrap; box-shadow: none !important; }
   .panel-app[data-shell-nuevo][data-shell-nuevo] [data-vistas-en-menu]:not(:has(> button > span[aria-hidden])) > button:is([aria-selected='true'], [aria-current='page']) { background: #1a1a1a !important; color: #fff !important; }
@@ -2577,10 +2578,18 @@ html:has(.panel-app[data-shell-nuevo]) { background-color: var(--shell-marco, #0
   }
   .panel-app[data-shell-nuevo] [data-config-raiz] button[role='switch'][aria-checked='true'],
   .cajon-modal button[role='switch'][aria-checked='true'] { background-color: #101010 !important; }
+  .dark .panel-app[data-shell-nuevo] [data-config-raiz] button[role='switch'][aria-checked='true'],
+  .dark .cajon-modal button[role='switch'][aria-checked='true'] { background-color: var(--foreground) !important; }
+  /* La bola: blanca con una sombra fina (así se ve también sobre una pista clara), y centrada. ⚠️ Con el interruptor encendido la pista
+     es el color de la TINTA, que en oscuro es claro: la bola lleva entonces el color de la tarjeta, no blanco, o desaparecería (23-nov-2026:
+     «al activar se vuelve todo negro»). `translate: 0 0` y no `none`: Tailwind lleva su propio `translate` en la bola y `none` no lo
+     anulaba, así que la bola salía 2 px corrida. */
   .panel-app[data-shell-nuevo] [data-config-raiz] button[role='switch'] > span,
-  .cajon-modal button[role='switch'] > span { width: 12px !important; height: 12px !important; background-color: #fff !important; translate: none !important; transform: translateX(2px) !important; }
+  .cajon-modal button[role='switch'] > span { width: 12px !important; height: 12px !important; background-color: #fff !important; box-shadow: 0 0 0 .5px #0000001f, 0 1px 2px #00000033; translate: 0 0 !important; transform: translateX(2px) !important; }
   .panel-app[data-shell-nuevo] [data-config-raiz] button[role='switch'][aria-checked='true'] > span,
   .cajon-modal button[role='switch'][aria-checked='true'] > span { transform: translateX(18px) !important; }
+  .dark .panel-app[data-shell-nuevo] [data-config-raiz] button[role='switch'][aria-checked='true'] > span,
+  .dark .cajon-modal button[role='switch'][aria-checked='true'] > span { background-color: var(--card) !important; }
 }
 
 /* Pastillas de estado de Configuración como las de Shopify (`SHELL_NUEVO`): relleno de color, sin borde ni icono,
@@ -2630,7 +2639,15 @@ html:has(.panel-app[data-shell-nuevo]) { background-color: var(--shell-marco, #0
    Shopify, y campos de texto de 30 px con radio 8 también fuera de los diálogos. */
 @media (min-width: 768px) {
   .panel-app[data-shell-nuevo] [data-config-raiz] :is(.max-w-2xl, .max-w-3xl, .max-w-4xl) { max-width: 784px; }
-  .panel-app[data-shell-nuevo] [data-config-raiz] :is(input:not([type]), input[type='text'], input[type='email'], input[type='url'], input[type='number'], input[type='tel'], input[type='search'], input[type='password']) {
+  .panel-app[data-shell-nuevo] [data-config-raiz] :is(input:not([type]), input[type='text'], input[type='email'], input[type='url'], input[type='number'], input[type='tel'], input[type='search'], input[type='password']):not([data-config-buscador] *) {
     height: 30px; min-height: 0; border-radius: 8px; font-size: 13px; line-height: 20px; padding-block: 4px; padding-inline: 8px; border-color: rgba(0, 0, 0, 0.2);
   }
+}
+
+/* Inicio con Tenti: solo la conversación. La píldora que la abriría sobra, y el aviso de la edición quedaría tapado a
+   medias por el chat (sigue saliendo en el resumen). En el móvil el chat deja sitio a la barra de navegación. */
+.panel-app:has([data-testid='inicio-tenti']) :is([data-pildora-asistente], [data-aviso-edicion]) { display: none !important; }
+@media (max-width: 767px) {
+  .panel-app[data-shell-nuevo]:has([data-testid='inicio-tenti']) [data-testid='chat-asistente']:not([data-teclado]) { bottom: calc(104px + env(safe-area-inset-bottom, 0px)) !important; }
+  .panel-app[data-shell-nuevo]:has([data-testid='inicio-tenti']) [data-movil-barra] { z-index: 37; }
 }

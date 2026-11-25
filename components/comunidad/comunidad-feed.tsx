@@ -274,6 +274,7 @@ export function ComunidadFeed() {
 
         {dataLoaded && sortedPosts.length === 0 && panelNuevo && (
           <PantallaVacia
+            imagen="mensajeria"
             tono="magenta"
             Icono={Megaphone}
             titulo="Tu tablón está en silencio"

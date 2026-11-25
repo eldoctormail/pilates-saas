@@ -1163,6 +1163,8 @@ export function resumenPlataformaVenta(p: {
   activa: boolean; conexionDisponible: boolean; conectada: boolean;
   /** Sin contrato o suspendido: conectada, pero ni publica ni entran reservas. */
   ventaCortada?: MotivoSinVentaExterna | null;
+  /** Sin conexión automática todavía (ClassPass, Wellhub): se pide acceso, y mientras tanto se apunta a mano. */
+  proximamente?: boolean;
 }): ResumenFila {
   if (p.activa && p.conectada && p.ventaCortada) {
     return { valor: `Sin publicar · ${porQueSinVentaExterna(p.ventaCortada)}`, estado: { tono: 'problema', etiqueta: 'En pausa' } };
@@ -1172,6 +1174,7 @@ export function resumenPlataformaVenta(p: {
     : 'Vendo aquí · apunto yo las reservas';
   if (p.activa && p.conectada) return { valor: uso, estado: { tono: 'activo', etiqueta: 'Conectado' } };
   if (p.conexionDisponible) return { valor: uso, estado: { tono: 'neutro', etiqueta: 'Sin conectar' } };
+  if (p.proximamente && !p.activa) return { valor: uso, estado: { tono: 'neutro', etiqueta: 'Próximamente' } };
   return { valor: uso, estado: { tono: 'neutro', etiqueta: p.activa ? 'Manual' : 'Sin activar' } };
 }
 

@@ -154,7 +154,7 @@ const NavItem = memo(function NavItem({ href, label, Icon, onClick, collapsed, n
         // encogiendo a todos. Lo correcto es que la fila SE DESPLACE.
         horizontal && 'shrink-0 whitespace-nowrap',
         active
-          ? (sangre ? 'shell-vidrio text-[#fcfcfc] font-medium' : 'bg-brand text-brand-foreground font-semibold')
+          ? (sangre ? 'shell-vidrio text-[#fcfcfc] font-[450]' : 'bg-brand text-brand-foreground font-semibold')
           : (sangre ? 'text-[#dcdcdc] font-[450] hover:text-white hover:bg-white/[0.06]' : 'text-white/45 hover:text-white/80 hover:bg-card/5')
       )}
     >
@@ -416,9 +416,9 @@ function MasDrawer({ open, onClose, userInitials, userEmail, handleSignOut, sect
                     >
                       <item.icon size={22} strokeWidth={abierto || active ? 2.2 : 1.6} className={cn('shrink-0', abierto || active ? 'text-white' : 'text-white/60')} aria-hidden="true" />
                       <span className="flex-1 truncate">{item.label}</span>
-                      <ChevronDown size={22} aria-hidden="true" className={cn('shrink-0 text-white/70 transition-transform duration-300 ease-[cubic-bezier(0.2,0.8,0,1)]', abierto && 'rotate-180')} />
+                      <ChevronDown size={22} aria-hidden="true" className={cn('shrink-0 text-white/70 transition-transform duration-300 ease-(--pn-ease-out-emphasized)', abierto && 'rotate-180')} />
                     </button>
-                    <div className={cn('grid transition-[grid-template-rows,opacity] duration-300 ease-[cubic-bezier(0.2,0.8,0,1)]', abierto ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0')} inert={!abierto}>
+                    <div className={cn('grid transition-[grid-template-rows,opacity] duration-300 ease-(--pn-ease-out-emphasized)', abierto ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0')} inert={!abierto}>
                       <ul className="min-h-0 overflow-hidden">
                         {sub.map(f => (
                           <li key={f.href}>
@@ -490,15 +490,15 @@ function MasDrawer({ open, onClose, userInitials, userEmail, handleSignOut, sect
 
       {shell && (
         <div className="pointer-events-none absolute inset-x-0 bottom-[max(22px,calc(env(safe-area-inset-bottom,0px)-6px))] z-10 flex items-center justify-center gap-2 px-4">
-          <Link href="/configuracion" onClick={() => onClose()} aria-label="Configuración" className="pointer-events-auto flex size-14 items-center justify-center rounded-full bg-[#1d1d1d] text-white shadow-[0_8px_24px_-8px_#000000a6,0_0_0_1px_#ffffff1f] transition-transform duration-200 ease-[cubic-bezier(0.2,0.8,0,1)] active:scale-95">
+          <Link href="/configuracion" onClick={() => onClose()} aria-label="Configuración" className="pointer-events-auto flex size-14 items-center justify-center rounded-full bg-[#1d1d1d] text-white shadow-[0_8px_24px_-8px_#000000a6,0_0_0_1px_#ffffff1f] transition-transform duration-200 ease-(--pn-ease-out-emphasized) active:scale-95">
             <Settings size={22} aria-hidden="true" />
           </Link>
           {puedeVer('/calendario') && (
-            <Link href="/calendario?nueva=1" onClick={() => onClose()} className="pointer-events-auto flex h-14 items-center gap-3 rounded-full bg-[#12141b] pl-4 pr-7 text-[18px] font-medium text-white shadow-[0_8px_24px_-8px_#000000a6,0_0_0_1px_#2a3040] transition-transform duration-200 ease-[cubic-bezier(0.2,0.8,0,1)] active:scale-95">
+            <Link href="/calendario?nueva=1" onClick={() => onClose()} className="pointer-events-auto flex h-14 items-center gap-3 rounded-full bg-[#12141b] pl-4 pr-7 text-[18px] font-medium text-white shadow-[0_8px_24px_-8px_#000000a6,0_0_0_1px_#2a3040] transition-transform duration-200 ease-(--pn-ease-out-emphasized) active:scale-95">
               <span aria-hidden="true" className="flex size-7 items-center justify-center rounded-full bg-white text-black"><Plus size={16} strokeWidth={2.6} /></span> Crear clase
             </Link>
           )}
-          <button type="button" onClick={onClose} aria-label="Cerrar el menú" className="pointer-events-auto flex size-14 items-center justify-center rounded-full bg-[#1d1d1d] text-white shadow-[0_8px_24px_-8px_#000000a6,0_0_0_1px_#ffffff1f] transition-transform duration-200 ease-[cubic-bezier(0.2,0.8,0,1)] active:scale-95">
+          <button type="button" onClick={onClose} aria-label="Cerrar el menú" className="pointer-events-auto flex size-14 items-center justify-center rounded-full bg-[#1d1d1d] text-white shadow-[0_8px_24px_-8px_#000000a6,0_0_0_1px_#ffffff1f] transition-transform duration-200 ease-(--pn-ease-out-emphasized) active:scale-95">
             <X size={22} aria-hidden="true" />
           </button>
         </div>
@@ -740,7 +740,9 @@ export function Sidebar() {
     raiz.toggleAttribute('data-menu-con-vistas', lleva);
     return () => raiz.removeAttribute('data-menu-con-vistas');
   }, [sangre, collapsed]);
-  const enConfiguracion = sangre && (pathnameMenu ?? '').startsWith('/configuracion');
+  // ⚠️ Con el menú PLEGADO no hay sitio para la columna de Configuración (buscador, estudio, secciones): se desbordaba sobre la pantalla
+  // blanca (24-nov-2026). Plegado, Configuración se ve como cualquier otro módulo: la tira de iconos.
+  const enConfiguracion = sangre && !collapsed && (pathnameMenu ?? '').startsWith('/configuracion');
   useEffect(() => {
     let vivo = true;
     function cargar() {
@@ -844,6 +846,23 @@ export function Sidebar() {
     ro.observe(el);
     return () => ro.disconnect();
   }, [horizontal]);
+
+  // La entrada del menú al cargar, como la del admin de Shopify (medida en vivo el 23-nov-2026 con `document.getAnimations()`): cada
+  // fila llega desde la izquierda (−60 px → 0) con fundido y desenfoque de 2 px, 400 ms con `cubic-bezier(.2,.8,0,1)`, y cada una 10 ms
+  // después de la anterior; las del pie suben desde abajo. Una vez por carga de la página (el menú vive en el layout: pasar de una
+  // pantalla a otra no la repite). Solo DOM (atributo + `--i` por fila): sin estado, sin repintar el menú. Las reglas, en `globals.css`.
+  useEffect(() => {
+    if (!sangre || horizontal) return;
+    const el = barraRef.current;
+    if (!el || el.dataset.yaEntro) return;
+    el.dataset.yaEntro = '1';
+    if (typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (navigator.webdriver) return;
+    el.querySelectorAll<HTMLElement>('a, [data-tour="buscador"]').forEach((fila, i) => fila.style.setProperty('--i', String(i)));
+    el.dataset.entra = '';
+    const t = setTimeout(() => { delete el.dataset.entra; }, 1600);
+    return () => clearTimeout(t);
+  }, [sangre, horizontal]);
 
   // ⚠️ La columna se desplaza, pero nada lo decía. En un portátil (800 px de
   // alto) con «Todo», el menú acababa a media lista y el resto quedaba debajo

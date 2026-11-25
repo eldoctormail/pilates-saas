@@ -201,6 +201,7 @@ export default function Cobros() {
 
       {tab === 'deudas' && (panelNuevo ? (estrenando ? (
         <PantallaVacia
+          imagen="cobros"
           tono="verde"
           Icono={CreditCard}
           titulo="Cobra tu primera cuota"

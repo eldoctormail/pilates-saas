@@ -1974,6 +1974,28 @@ vuelta ven el cobro pagado, idempotente por sesión. El código no lo lee el nav
 ⚠️ El IVA y la caducidad mínima están **pendientes de gestoría**: no activar la venta en estudios reales sin cerrarlos.
 Fase 2 ya acotada en el doc (Caja/POS, envío programado, bono regalado, pagar online con saldo).
 
+## Inicio es Tenti, y los correos como los de Shopify (25-nov-2026, decisión del fundador)
+
+- **Inicio (`/dashboard`) es solo la conversación con Tenti** (`components/dashboard/inicio-tenti.tsx`, el mismo chat que
+  `/asistente`) con el marco nuevo y el asistente disponible. El resumen de siempre sigue ENTERO en
+  `/dashboard?vista=resumen` (y se enseña en su lugar sin asistente, con la puesta en marcha sin terminar o con
+  `?compartir=1`). ⚠️ Las tarjetas de «lo que espera tu visto bueno» (cobros, devoluciones, reservas por aprobar…) viven
+  ahí: el enlace «N por decidir» de Inicio no se quita sin dar otra puerta.
+- **Correos**: anatomía del correo de Shopify (banda, logo, titular de 44 px ligero, píldora, foto, pie negro) en
+  `lib/emails/estudio/plantilla.ts` (marca del estudio) y `lib/emails/tentare/plantilla.ts` (la nuestra). Un correo nuevo
+  pasa por una de las dos; nunca HTML propio. ⚠️ Las plantillas de acceso de `supabase/templates/` van aparte y no se
+  despliegan con el merge.
+
+## Sistema de diseño y movimiento del panel (25-nov-2026)
+
+`app/estilos/panel-sistema.css` es la ÚNICA fuente de duraciones, curvas, radios, escala de letra, sombras y neutros
+del marco nuevo (`--pn-*`, valores del admin de Shopify). Un valor se cambia ahí, nunca a mano en una regla o un
+componente (`lib/panel-sistema.test.ts`). Lo que pinta va dentro de `.panel-app[data-shell-nuevo]`; las animaciones,
+solo `opacity`/`translate`/`scale`, con `backwards` y tras `prefers-reduced-motion: no-preference`.
+Las pantallas vacías (`PantallaVacia` con `imagen`) llevan escenas 3D (`components/ilustraciones/hero-3d.tsx`, iconos de
+3dicons.co, CC0, en `public/ilustraciones/3d/`); `docs/diseno/ilustraciones/ENCARGO-HERO.md` queda por si se crean propias.
+El marco (`data-marco-vivo`) va por encima de lo pegado (z 38), sin resplandor de color en las esquinas.
+
 ## Tentare Brain = Decision OS (no construir uno nuevo)
 
 El "Tentare Brain" es `lib/decision/`, que ya existe y corre dos veces al día

@@ -36,6 +36,8 @@ import { PageHeader } from '@/components/ui/page-header';
 import { CifraPrivada } from '@/components/ui/cifra-privada';
 import { HoyEnElEstudio } from '@/components/dashboard/hoy-en-el-estudio';
 import { ProximasClases } from '@/components/dashboard/proximas-clases';
+import { InicioConfiguracion } from '@/components/dashboard/inicio-configuracion';
+import { useGuiaPasoAPaso } from '@/components/guia/use-guia-paso-a-paso';
 import { PrimerosPasosTarjeta } from '@/components/guia/primeros-pasos-tarjeta';
 import { CompositorInicio } from '@/components/asistente/compositor-inicio';
 import { EmpiezaTarjetas } from '@/components/guia/empieza-tarjetas';
@@ -461,6 +463,16 @@ function ResumenLimpio(props: ResumenNuevoProps & {
   const conGraficas = visible('kpis');
   const bienvenida = useBienvenidaInicio();
   const palabrasTitulo = bienvenida ? props.titulo.split(' ').length : 0;
+  // El Inicio de configuración: mientras la guía de puesta en marcha no esté terminada, la pantalla es la de Shopify antes de
+  // configurar la tienda (saludo, caja de Tenti y tarjetas de pasos) y nada más; al terminarla vuelve la de siempre.
+  const guia = useGuiaPasoAPaso();
+  if (guia.activo === true && guia.ruta && !guia.ruta.terminada && conPrimerosPasos) {
+    return (
+      <div className="mx-auto flex w-full max-w-[1040px] flex-col gap-8 pb-12 pt-1" data-testid="resumen-nuevo" data-resumen-limpio data-inicio-configuracion data-bienvenida={bienvenida ? 'on' : undefined}>
+        <InicioConfiguracion ruta={guia.ruta} saltar={guia.saltar} estado={guia.estado} bienvenida={bienvenida} />
+      </div>
+    );
+  }
   return (
     <div className="mx-auto flex w-full max-w-[1040px] flex-col gap-10 pb-12 pt-1" data-testid="resumen-nuevo" data-resumen-limpio data-bienvenida={bienvenida ? 'on' : undefined}>
       <header className="text-center">
@@ -501,7 +513,7 @@ function ResumenLimpio(props: ResumenNuevoProps & {
       <details data-resumen-mas className="group rounded-[20px] bg-card shadow-[0_0_2px_#0000003d,0_2px_12px_#00000005,0_4px_16px_#00000005,0_4px_48px_#00000005] open:pb-5">
         <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 text-[13px] font-medium text-foreground [&::-webkit-details-marker]:hidden">
           <span>Más detalle del estudio</span>
-          <span aria-hidden className="text-muted-foreground transition-transform duration-300 ease-[cubic-bezier(0.2,0.8,0,1)] group-open:rotate-90"><ArrowRight size={14} /></span>
+          <span aria-hidden className="text-muted-foreground transition-transform duration-300 ease-(--pn-ease-out-emphasized) group-open:rotate-90"><ArrowRight size={14} /></span>
         </summary>
         <div className="grid grid-cols-1 items-start gap-5 px-5 xl:grid-cols-2">
           <div className="flex min-w-0 flex-col gap-5">

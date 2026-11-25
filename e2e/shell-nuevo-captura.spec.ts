@@ -100,6 +100,21 @@ test('a sangre — Informes (tarjetas y gráficos)', async ({ page }) => {
   await page.screenshot({ path: 'test-results/shell-sangre-informes.png' });
 });
 
+test('a sangre — con asistente, Inicio es solo Tenti y el resumen sigue en su dirección', async ({ page }) => {
+  await conAsistente(page);
+  await page.route((u) => u.pathname === '/api/estudio/interruptores', (r) => r.fulfill({
+    status: 200, contentType: 'application/json', body: JSON.stringify({ panelNuevo: true, shellNuevo: true }),
+  }));
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await ir(page, 'dashboard');
+  await listo(page);
+  await expect(page.getByTestId('inicio-tenti').getByTestId('chat-asistente')).toBeVisible({ timeout: 120_000 });
+  await expect(page.locator('[data-pildora-asistente]')).toBeHidden();
+  await page.getByRole('link', { name: /Resumen|por decidir/ }).and(page.locator('[href="/dashboard?vista=resumen"]')).click();
+  await expect(page.getByTestId('inicio-tenti')).toHaveCount(0, { timeout: 60_000 });
+  await expect(page.locator('[data-pildora-asistente]')).toBeVisible();
+});
+
 test('a sangre — el asistente abre como columna y el lienzo se encoge', async ({ page }) => {
   const errores: string[] = [];
   page.on('pageerror', (e) => errores.push(e.message));
@@ -108,7 +123,7 @@ test('a sangre — el asistente abre como columna y el lienzo se encoge', async 
     status: 200, contentType: 'application/json', body: JSON.stringify({ panelNuevo: true, shellNuevo: true }),
   }));
   await page.setViewportSize({ width: 1440, height: 900 });
-  await ir(page, 'dashboard');
+  await ir(page, 'dashboard?vista=resumen');
   await listo(page);
   const lienzo = page.locator('main > div').first();
   const antes = (await lienzo.boundingBox())?.width ?? 0;
@@ -238,7 +253,7 @@ test('a sangre — oscuro: Clientes, Configuración y el asistente', async ({ pa
   await listo(page);
   await expect(page.locator('.panel-app.dark')).toHaveCount(1, { timeout: 60_000 });
   await page.screenshot({ path: 'test-results/shell-sangre-oscuro-clientas.png' });
-  await ir(page, 'dashboard');
+  await ir(page, 'dashboard?vista=resumen');
   await listo(page);
   await page.locator('[data-pildora-asistente]').click();
   await expect(page.locator('[data-columna-asistente]')).toBeVisible();
@@ -252,7 +267,7 @@ test('a sangre — el compositor de Inicio abre la columna con la pregunta envia
     status: 200, contentType: 'application/json', body: JSON.stringify({ panelNuevo: true, shellNuevo: true }),
   }));
   await page.setViewportSize({ width: 1440, height: 900 });
-  await ir(page, 'dashboard');
+  await ir(page, 'dashboard?vista=resumen');
   await listo(page);
   const compositor = page.locator('[data-compositor-inicio]');
   await expect(compositor).toBeVisible({ timeout: 120_000 });
@@ -301,7 +316,7 @@ for (const ancho of [768, 900, 1024, 1180]) {
       status: 200, contentType: 'application/json', body: JSON.stringify({ panelNuevo: true, shellNuevo: true }),
     }));
     await page.setViewportSize({ width: ancho, height: 900 });
-    await ir(page, 'dashboard');
+    await ir(page, 'dashboard?vista=resumen');
     await listo(page);
     await page.locator('[data-pildora-asistente]').click();
     await expect(page.locator('[data-columna-asistente]')).toBeVisible();
@@ -336,13 +351,17 @@ test('a sangre — el menú despliega las vistas de un módulo en línea (Paquet
   }
 });
 
-test('a sangre — el resplandor del menú sigue bajo la esquina del lienzo', async ({ page }) => {
+test('a sangre — el marco queda por encima de lo pegado y al final de la página hay aire', async ({ page }) => {
   await preparar(page, true);
-  await page.setViewportSize({ width: 1440, height: 900 });
-  await ir(page, 'dashboard');
+  await page.setViewportSize({ width: 1440, height: 700 });
+  await ir(page, 'clientas');
   await listo(page);
-  await expect(page.locator('[data-marco-brillo]')).toBeAttached();
-  await page.screenshot({ path: 'test-results/shell-brillo-esquina.png', clip: { x: 0, y: 780, width: 700, height: 120 } });
+  const z = (sel: string) => page.locator(sel).first().evaluate((e) => Number(getComputedStyle(e).zIndex));
+  expect(await z('[data-marco-vivo]'), 'la barra pegada arriba no puede tapar el marco').toBeGreaterThan(await z('[data-panel-topbar]'));
+  const aire = await page.locator('[data-panel-contenido]').evaluate((e) => parseFloat(getComputedStyle(e).paddingBottom));
+  expect(aire, 'sin aire abajo, la píldora del asistente tapa el final').toBeGreaterThanOrEqual(80);
+  await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+  await page.screenshot({ path: 'test-results/shell-final-de-pagina.png' });
 });
 
 for (const [nombre, ancho, alto] of [['escritorio', 1440, 900], ['movil', 390, 844]] as const) {
@@ -459,7 +478,7 @@ test('a sangre — móvil como app: el asistente y los vacíos', async ({ page }
     status: 200, contentType: 'application/json', body: JSON.stringify({ panelNuevo: true, shellNuevo: true }),
   }));
   await page.setViewportSize({ width: 402, height: 874 });
-  await ir(page, 'dashboard');
+  await ir(page, 'dashboard?vista=resumen');
   await listo(page);
   await expect(page.locator('[data-movil-barra] a[aria-label="Pregúntale a Centra"]')).toBeVisible({ timeout: 60_000 });
   await page.screenshot({ path: 'test-results/shell-movil-asistente.png' });

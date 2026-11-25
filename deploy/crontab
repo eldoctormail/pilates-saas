@@ -9,3 +9,6 @@
 0 5 * * 1    /usr/local/bin/llamar dependency-risk
 # Mercado Pago: repasa los pagos de las últimas 72 h por si un aviso no llegó.
 */30 * * * * /usr/local/bin/llamar mercadopago-conciliar
+# Mensualidad de los estudios a Centra (Mercado Pago): relee las suscripciones y
+# cierra las que pasaron el fin de lo pagado.
+15 */6 * * * /usr/local/bin/llamar mp-suscripciones

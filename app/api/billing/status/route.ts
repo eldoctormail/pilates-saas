@@ -20,6 +20,10 @@ import { clientIp } from '@/lib/rate-limit-core';
 import { COOKIE_DISPOSITIVO, enDiasDeAlta, huellaAltaActiva } from '@/lib/billing/vinculos-gratis';
 import { apuntarHuellaAlta } from '@/lib/billing/vinculos-gratis-servidor';
 import { apuntarPaso } from '@/lib/alta/embudo-servidor';
+import { pasarelaEsMercadoPago } from '@/lib/mercadopago/config';
+import { mpPlataformaLista } from '@/lib/billing/mp-plataforma/config';
+import { cerrarSiVencida } from '@/lib/billing/mp-plataforma/servidor';
+import type { FilaEstudio } from '@/lib/billing/mp-plataforma/reglas';
 
 /**
  * Las opciones de plan de un estudio que no paga. Uno suelto no lee nada más (le
@@ -41,7 +45,8 @@ async function opcionesDePlan(admin: SupabaseClient, studio: SedeConPlan & { cad
 
 // Estado de suscripción del estudio para el cliente (gate de acceso + página de
 // suscripción). Diseño a prueba de foot-guns: `bloqueado` solo es true cuando la
-// enforcement está ACTIVADA (BILLING_ENFORCED=true) Y Stripe está configurado Y
+// enforcement está ACTIVADA (BILLING_ENFORCED=true) Y la pasarela (Stripe, o la
+// cuenta de Mercado Pago de Centra en Argentina) está configurada Y
 // el estudio no tiene suscripción activa. Si Stripe no está listo, falla ABIERTO
 // (nunca bloquea) — es imposible dejarte fuera de tu propio producto sin querer.
 export async function GET(req: NextRequest) {
@@ -71,6 +76,13 @@ export async function GET(req: NextRequest) {
   if (studio && sesion.rol === 'PROPIETARIO') {
     const creadoEn = (studio.creado_en as string | null | undefined) ?? null;
     after(() => apuntarPaso(admin, sesion.studioId, 'panel_abierto', { creadoEn }));
+  }
+
+  // Mensualidad con Mercado Pago (lib/billing/mp-plataforma): pasado el fin de
+  // lo pagado más el margen, se cierra AQUÍ, en cada petición, sin esperar al
+  // cron (mismo criterio que la prueba de abajo). Compare-and-set.
+  if (studio && (await cerrarSiVencida(admin, studio as unknown as FilaEstudio).catch(() => false))) {
+    studio.subscription_status = 'canceled';
   }
 
   let subscriptionStatus = studio?.subscription_status ?? null;
@@ -127,7 +139,8 @@ export async function GET(req: NextRequest) {
   const key = process.env.STRIPE_SECRET_KEY;
   const stripeListo = Boolean(key && !key.startsWith('sk_test_XXXX'));
   const preciosListos = PLANES.every((p) => priceIdDe(p));
-  const configurado = stripeListo && preciosListos;
+  // Con el formato de Argentina se cobra con la cuenta de Mercado Pago de Centra.
+  const configurado = pasarelaEsMercadoPago() ? mpPlataformaLista() : stripeListo && preciosListos;
   const enforcement = process.env.BILLING_ENFORCED === 'true';
 
   // Solo bloqueamos si: enforcement ON + Stripe configurado + sin suscripción.

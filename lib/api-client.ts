@@ -14,6 +14,7 @@ import type { ErrorEstiloWeb } from '@/lib/reservar/estilo-web';
 import type { LayoutConfig, LayoutDraft } from '@/lib/layout-schema';
 import { resolverBloques, type BloqueHome, type PantallaId, conFijos, PANTALLA_IDS } from '@/lib/portal-home-bloques';
 import { mensajeSeguro, mensajeHttp, type ResultadoEscritura } from '@/lib/errores';
+import { CON_MERCADOPAGO } from '@/lib/pasarela';
 import { hoyEnEstudio } from '@/lib/utils';
 import { leerAvisoCobro, type CobroAprobado } from '@/lib/billing/resultado-cobro';
 import {
@@ -1435,14 +1436,23 @@ export async function estadoBilling(): Promise<EstadoBilling | null> {
   });
 }
 
-// Abre el Checkout de Stripe para suscribir el estudio al plan elegido.
+// Abre el pago para suscribir el estudio al plan elegido: el Checkout de Stripe,
+// o con el formato de Argentina la suscripción de Mercado Pago de Centra.
 export async function iniciarSuscripcion(
   plan: 'BASE' | 'ESTUDIO' | 'CADENA',
   /** Sin él, mensual (lo de siempre). */
   intervalo: 'mensual' | 'anual' = 'mensual',
+  /** Mercado Pago: el correo de la cuenta con la que va a pagar. */
+  emailMercadoPago?: string,
 ): Promise<{ url: string } | { error: string }> {
   try {
-    const res = await fetch('/api/billing/checkout', {
+    const res = CON_MERCADOPAGO
+      ? await fetch('/api/billing/mercadopago/suscribir', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
+        body: JSON.stringify(emailMercadoPago ? { plan, email: emailMercadoPago } : { plan }),
+      })
+      : await fetch('/api/billing/checkout', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
       body: JSON.stringify(intervalo === 'anual' ? { plan, intervalo } : { plan }),
@@ -1592,6 +1602,47 @@ export const vistaPreviaCambio = (cambio: 'anual' | 'estudio') =>
 /** Mensual → anual, al momento y con el crédito del tiempo no usado. */
 export const cambiarAPagoAnual = () =>
   postBilling<{ ok: true }>('/api/billing/cambio-periodo', { a: 'anual' }, 'No se ha podido cambiar a pago anual. Vuelve a intentarlo.');
+
+// ── Mensualidad con Mercado Pago (lib/billing/mp-plataforma) ──────────────────
+
+export interface MiSuscripcionMpApi {
+  plan: string | null;
+  importe: number | null;
+  moneda: string | null;
+  proximoCobro: string | null;
+  accesoHasta: string | null;
+  estado: 'al_dia' | 'impago' | 'baja_programada' | 'pendiente' | 'cancelada';
+  puedeCancelar: boolean;
+}
+
+/** Lo que paga a Centra, leído de Mercado Pago. */
+export async function miSuscripcionMp(): Promise<MiSuscripcionMpApi | { error: string }> {
+  try {
+    const res = await fetch('/api/billing/mercadopago/suscripcion', { headers: { ...(await authHeader()) } });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || !data || typeof data !== 'object' || !('estado' in data)) return { error: mensajeSeguro((data as { error?: string })?.error, mensajeHttp(res.status)) };
+    return data as MiSuscripcionMpApi;
+  } catch {
+    return { error: 'No se pudo leer tu suscripción.' };
+  }
+}
+
+/** A la vuelta de Mercado Pago: que el servidor la relea ya, sin esperar al aviso. Nunca falla. */
+export async function confirmarSuscripcionMp(preapprovalId: string): Promise<void> {
+  try {
+    await fetch('/api/billing/mercadopago/suscripcion', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
+      body: JSON.stringify({ preapprovalId }),
+    });
+  } catch { /* el webhook y el cron la confirman igual */ }
+}
+
+/** Dar de baja la mensualidad de Mercado Pago. El acceso sigue hasta el fin de lo pagado. */
+export const darDeBajaMp = (motivo?: string) =>
+  postBilling<{ ok: boolean; accesoHasta: string | null }>(
+    '/api/billing/mercadopago/baja', motivo ? { motivo } : {}, 'No se pudo dar de baja. Probá de nuevo en un momento.',
+  );
 
 /** Baja al final del periodo pagado, o quitarla. El acceso no se corta antes. */
 export const cambiarBaja = (accion: 'programar' | 'reactivar', motivo?: string) =>

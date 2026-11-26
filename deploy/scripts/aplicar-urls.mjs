@@ -1,11 +1,14 @@
-// Pone las direcciones de la app y de Supabase en la app ya compilada, al
-// arrancar el contenedor (lo llama el CMD de deploy/Dockerfile).
+// Pone las direcciones de la app y de Supabase, y las dos claves públicas (la
+// anónima de Supabase y la de push), en la app ya compilada, al arrancar el
+// contenedor (lo llama el CMD de deploy/Dockerfile).
 //
 // Next graba las NEXT_PUBLIC_* dentro del código al compilar. La imagen se
-// compila con dos direcciones de relleno (RELLENO, abajo) y este script las
-// cambia por las de deploy/.env cada vez que arranca. Así, cambiar la IP o
-// pasar a dominio es editar deploy/.env y `docker compose up -d`, sin volver a
-// compilar.
+// compila con valores de relleno (RELLENO y RELLENO_CLAVES, abajo) y este
+// script los cambia por los de deploy/.env cada vez que arranca. Así, cambiar la
+// IP o pasar a dominio es editar deploy/.env y `docker compose up -d`, sin
+// volver a compilar; y la misma imagen sirve para cualquier servidor (la puede
+// compilar GitHub: .github/workflows/imagen-servidor.yml), porque no lleva
+// adentro nada de una instalación concreta.
 //
 // Lo que ya se aplicó queda anotado en .next/urls-aplicadas.json: si las
 // direcciones no cambiaron, no se toca nada y arranca al instante; si cambiaron
@@ -22,6 +25,14 @@ export const RELLENO = {
   NEXT_PUBLIC_SUPABASE_URL: 'http://centra-supabase-url.invalid',
 };
 
+// Claves que no son direcciones: se cambian tal cual. Tienen que ser texto que
+// no aparezca en ningún otro lado del código.
+export const RELLENO_CLAVES = {
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: 'centra-relleno-clave-anonima-supabase',
+  NEXT_PUBLIC_VAPID_PUBLIC_KEY: 'centra-relleno-clave-publica-vapid',
+};
+const OPCIONALES = new Set(['NEXT_PUBLIC_VAPID_PUBLIC_KEY']);
+
 const CARPETAS = [path.join(RAIZ, '.next'), path.join(RAIZ, 'public')];
 const SALTAR = new Set([path.join(RAIZ, '.next', 'cache')]);
 const EXTENSIONES = new Set(['.js', '.mjs', '.cjs', '.json', '.html', '.rsc', '.body', '.meta', '.txt', '.css', '.xml', '.webmanifest', '.map']);
@@ -34,7 +45,7 @@ function leerAnotadas() {
   try {
     return JSON.parse(fs.readFileSync(ANOTADAS, 'utf8'));
   } catch {
-    return { ...RELLENO };
+    return { ...RELLENO, ...RELLENO_CLAVES };
   }
 }
 
@@ -58,7 +69,13 @@ function pares(viejas, nuevas) {
     const dentroDeOtro = claves.some((o) => o !== clave && new URL(viejo(o)).host.includes(host));
     if (!dentroDeOtro) hosts.push([host, new URL(nueva).host]);
   }
-  return [...enteras, ...hosts].map(([a, b]) => [Buffer.from(a), Buffer.from(b)]);
+  const claves2 = [];
+  for (const clave of Object.keys(RELLENO_CLAVES)) {
+    const vieja = viejas[clave] ?? RELLENO_CLAVES[clave];
+    const nueva = nuevas[clave];
+    if (nueva && vieja !== nueva) claves2.push([vieja, nueva]);
+  }
+  return [...enteras, ...hosts, ...claves2].map(([a, b]) => [Buffer.from(a), Buffer.from(b)]);
 }
 
 function* archivos(dir) {
@@ -109,6 +126,20 @@ function main() {
     nuevas[clave] = sinBarra(v);
   }
 
+  for (const clave of Object.keys(RELLENO_CLAVES)) {
+    const v = (process.env[clave] ?? '').trim();
+    if (!v && !OPCIONALES.has(clave)) {
+      console.error(`✘ Falta ${clave} en deploy/.env. Copiala de ~/supabase-project/.env (ANON_KEY) y volvé a arrancar.`);
+      process.exit(1);
+    }
+    if (!v) console.warn(`⚠ Falta ${clave} en deploy/.env: las notificaciones push no van a andar (la crea deploy/scripts/generar-secretos.sh).`);
+    if (/["'\\\s]/.test(v)) {
+      console.error(`✘ ${clave} tiene comillas o espacios: copiala sin ellas.`);
+      process.exit(1);
+    }
+    nuevas[clave] = v;
+  }
+
   const viejas = leerAnotadas();
   const lista = pares(viejas, nuevas);
   if (lista.length === 0) {
@@ -134,7 +165,9 @@ function main() {
       }
     }
   }
-  fs.writeFileSync(ANOTADAS, JSON.stringify(nuevas, null, 2));
+  const anotar = { ...nuevas };
+  for (const clave of Object.keys(RELLENO_CLAVES)) if (!anotar[clave]) anotar[clave] = viejas[clave] ?? RELLENO_CLAVES[clave];
+  fs.writeFileSync(ANOTADAS, JSON.stringify(anotar, null, 2));
   console.log(`✔ Direcciones aplicadas en ${tocados} archivos: ${nuevas.NEXT_PUBLIC_APP_URL} y ${nuevas.NEXT_PUBLIC_SUPABASE_URL}`);
 }
 

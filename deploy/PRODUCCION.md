@@ -147,6 +147,8 @@ git pull                                       # desde tu fork
 deploy/scripts/migrar.sh ~/supabase-project
 # En la Pi: parar Supabase para compilar (deploy/README.md › Raspberry Pi)
 cd deploy && docker compose build app && docker compose up -d
+# Con APP_IMAGE (la imagen de GitHub, deploy/README.md), en vez de compilar:
+# cd deploy && docker compose pull app && docker compose up -d
 ```
 
 Hacé una copia antes de actualizar: `sudo systemctl start tentare-copia`.

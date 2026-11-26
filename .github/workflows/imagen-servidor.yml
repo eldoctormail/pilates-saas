@@ -1,0 +1,111 @@
+# Compila la imagen de la app para servidor propio y la publica en el registro
+# de GitHub (ghcr.io/<dueño>/<repo>). El servidor solo la descarga
+# (APP_IMAGE en deploy/.env + `docker compose pull app`): no compila nada, así
+# que alcanza con una máquina de 8 GB y no hay que parar Supabase.
+#
+# La imagen no lleva nada de una instalación: direcciones y claves públicas las
+# pone deploy/scripts/aplicar-urls.mjs al arrancar, con las de deploy/.env.
+# Lo único que se graba es el formato (zona, idioma, moneda): si tu instalación
+# usa otro que el de serie, ponelo en Settings › Secrets and variables ›
+# Actions › Variables (NEXT_PUBLIC_ZONA_HORARIA, NEXT_PUBLIC_LOCALE,
+# NEXT_PUBLIC_MONEDA).
+#
+#   push a main        compila y publica :latest y :<sha>
+#   PR que toca deploy compila y arranca la imagen para probarla, sin publicar
+#   a mano               Actions › Imagen del servidor › Run workflow
+
+name: Imagen del servidor
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'docs/**'
+      - '**/*.md'
+      - 'e2e/**'
+      - '**/*.test.ts'
+      - 'supabase/**'
+  pull_request:
+    paths:
+      - 'deploy/**'
+      - '.github/workflows/imagen-servidor.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: imagen-servidor-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  imagen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Nombre de la imagen
+        id: nombre
+        run: echo "imagen=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_OUTPUT"
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Entrar al registro de GitHub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Compilar
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: deploy/Dockerfile
+          platforms: linux/amd64
+          load: true
+          tags: |
+            ${{ steps.nombre.outputs.imagen }}:latest
+            ${{ steps.nombre.outputs.imagen }}:${{ github.sha }}
+          build-args: |
+            NEXT_PUBLIC_ZONA_HORARIA=${{ vars.NEXT_PUBLIC_ZONA_HORARIA }}
+            NEXT_PUBLIC_LOCALE=${{ vars.NEXT_PUBLIC_LOCALE }}
+            NEXT_PUBLIC_MONEDA=${{ vars.NEXT_PUBLIC_MONEDA }}
+          labels: org.opencontainers.image.source=https://github.com/${{ github.repository }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      # Antes de publicar: que arranque con un .env cualquiera, que conteste y
+      # que no quede ningún relleno sin cambiar.
+      - name: Probar que arranca
+        run: |
+          set -eu
+          img="${{ steps.nombre.outputs.imagen }}:${{ github.sha }}"
+          docker run -d --name prueba -p 3000:3000 \
+            -e NEXT_PUBLIC_APP_URL=http://prueba-app.example.com \
+            -e NEXT_PUBLIC_SUPABASE_URL=http://prueba-supabase.example.com \
+            -e NEXT_PUBLIC_SUPABASE_ANON_KEY=clave-anonima-de-prueba \
+            -e NEXT_PUBLIC_VAPID_PUBLIC_KEY=clave-vapid-de-prueba \
+            -e SUPABASE_SERVICE_ROLE_KEY=prueba \
+            "$img"
+          for i in $(seq 1 60); do
+            codigo="$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:3000/ || true)"
+            case "$codigo" in 2*|3*|4*) echo "contesta: $codigo"; break ;; esac
+            sleep 2
+          done
+          docker logs prueba | tail -n 20
+          case "$codigo" in 2*|3*|4*) ;; *) echo "✘ La app no contestó (último código: $codigo)"; exit 1 ;; esac
+          if docker exec prueba grep -rlE 'centra-relleno-|centra-(app|supabase)-url\.invalid' .next/static .next/server public 2>/dev/null | head -5 | grep .; then
+            echo "✘ Quedaron valores de relleno sin cambiar"; exit 1
+          fi
+          docker exec prueba grep -rlq 'clave-anonima-de-prueba' .next/static || { echo "✘ La clave anónima no se aplicó"; exit 1; }
+          docker rm -f prueba
+
+      - name: Publicar
+        if: github.event_name != 'pull_request'
+        run: |
+          docker push "${{ steps.nombre.outputs.imagen }}:${{ github.sha }}"
+          docker push "${{ steps.nombre.outputs.imagen }}:latest"

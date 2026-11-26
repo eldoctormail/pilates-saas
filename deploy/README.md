@@ -145,7 +145,7 @@ cd deploy
 docker compose up -d --build
 ```
 
-La primera compilación tarda varios minutos. Después:
+La primera compilación tarda varios minutos (o, sin compilar, la imagen de GitHub: ver más abajo). Después:
 
 - Abrir `http://IP:3000/crear-estudio` y crear el estudio.
 - Inngest: el panel queda en `http://127.0.0.1:8288`, solo desde el servidor. Ahí se ve si la app quedó registrada y si corren los trabajos.
@@ -233,6 +233,29 @@ git pull
 deploy/scripts/migrar.sh ~/supabase-project
 cd deploy && docker compose up -d --build
 ```
+
+Con la imagen de GitHub (abajo), en vez de `--build`:
+
+```sh
+git pull
+deploy/scripts/migrar.sh ~/supabase-project
+cd deploy && docker compose pull app && docker compose up -d
+```
+
+## La imagen compilada en GitHub (sin compilar en el servidor)
+
+Compilar la app pide hasta 6 GB de memoria y varios minutos. GitHub la puede compilar por vos cada vez que entra algo en `main` (`.github/workflows/imagen-servidor.yml`) y dejarla en `ghcr.io/eldoctormail/pilates-saas`. El servidor solo la descarga: alcanza con 8 GB y Supabase no se para.
+
+La imagen no lleva nada de tu instalación: las direcciones y las claves públicas (`NEXT_PUBLIC_SUPABASE_ANON_KEY`, `NEXT_PUBLIC_VAPID_PUBLIC_KEY`) las pone al arrancar desde `deploy/.env`. Lo único que se graba al compilar es el formato (zona, idioma, moneda), que de serie es el de Argentina.
+
+Una sola vez:
+
+1. En GitHub, en el repo › **Actions**, activá los workflows si dice que están apagados (en un fork vienen apagados).
+2. Actions › **Imagen del servidor** › **Run workflow** (o mergeá cualquier PR). Tarda unos 10 minutos la primera vez.
+3. En tu perfil de GitHub › **Packages** › `pilates-saas` › **Package settings**, poné la visibilidad en **Public**. La imagen no tiene secretos, y así el servidor la descarga sin iniciar sesión. Si preferís dejarla privada: `docker login ghcr.io` en el servidor con un token de GitHub con permiso `read:packages`.
+4. En `deploy/.env`: `APP_IMAGE=ghcr.io/eldoctormail/pilates-saas:latest`, y después `cd deploy && docker compose pull app && docker compose up -d`.
+
+Los scripts (`produccion.sh`, el ensayo) también la descargan en vez de compilar cuando `APP_IMAGE` está puesta. La imagen es para servidores x86 (Hetzner, la mayoría de las VPS); para una Raspberry Pi hay que seguir compilando en ella. Para volver a una versión anterior, en vez de `latest` usá el commit: `ghcr.io/eldoctormail/pilates-saas:<sha>`.
 
 ## Pasar a dominio
 

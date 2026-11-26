@@ -16,7 +16,7 @@ import assert from 'node:assert/strict';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import {
   clienteAdminLocal, crearInstructora, crearSocia, crearStudioConPropietaria, limpiarFixtures,
-  limpiarInstructora, type InstructoraFixture, type StudioFixture,
+  instanteQueEnUtcEsOtroDia, limpiarInstructora, zonaDelEstudio, type InstructoraFixture, type StudioFixture,
 } from '../../lib/db/rls-test-helpers.ts';
 import { contarConCandidatosNetwork } from '../../lib/estado-estudio.ts';
 import { situacionRecibo } from '../../lib/billing/situacion-recibo.ts';
@@ -290,17 +290,17 @@ test('un estudio vacío cuenta ceros y un estudio inexistente no inventa un NIF'
   assert.equal(nadie.facturasSinNif, null);
 });
 
-test('el día de la bandeja es el de Madrid: de 00:00 a 02:00 de Madrid «hoy» ya es el nuevo día', async () => {
+test('el día de la bandeja es el del estudio, no el de UTC', async () => {
   const f = await crearStudioConPropietaria(admin);
   fixtures.push(f);
   const perfil: Perfil = { userId: f.authUserId, ambitos: [], rolesFicha: [] };
   const socio = await crearSocia(admin, f.studioId);
-  // 00:30 en Madrid el 1 de julio de 2026 = 22:30 UTC del 30 de junio.
-  const ahora = new Date('2026-06-30T22:30:00Z');
+  // El 1-jul-2026 del estudio, a una hora que en UTC es el 30-jun (Madrid, 00:30) o el 2-jul (Argentina, 23:30).
+  const ahora = instanteQueEnUtcEsOtroDia('2026-07-01', await zonaDelEstudio(admin, f.studioId));
   const tarea = (vence: string) => admin.from('tareas').insert({
     id: idUnico('tarea'), studio_id: f.studioId, titulo: 'Llamar', estado: 'PENDIENTE', socio_id: socio, vence_el: vence,
   });
-  await ok('tarea de hoy en Madrid', tarea('2026-07-01'));
+  await ok('tarea de hoy en el estudio', tarea('2026-07-01'));
   await ok('tarea de mañana', tarea('2026-07-02'));
   const r = await conLaFuncion(f.studioId, perfil, ahora, ['seguimientosParaHoy']);
   assert.equal(r.seguimientosParaHoy, 1);

@@ -32,7 +32,14 @@ calcular_memoria() {
 ahora_iso() { date +%Y-%m-%dT%H:%M:%S%z; }
 
 # Compila la imagen de la app. Con poca memoria, con Supabase parado.
+# Con APP_IMAGE en deploy/.env no compila: descarga la que compiló GitHub.
 compilar() {
+  imagen="$(grep -E '^APP_IMAGE=' "$DEPLOY/.env" 2>/dev/null | tail -n 1 | cut -d= -f2-)"
+  if [ -n "$imagen" ]; then
+    echo "→ Descargando la app ($imagen)"
+    (cd "$DEPLOY" && docker compose pull app)
+    return
+  fi
   if [ "${POCA_MEMORIA:-no}" = si ]; then
     echo "→ Poca memoria: Supabase se para mientras compila la app"
     (cd "$DEPLOY" && docker compose stop app) >/dev/null 2>&1 || true

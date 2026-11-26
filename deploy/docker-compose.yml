@@ -11,12 +11,14 @@ services:
       context: ..
       dockerfile: deploy/Dockerfile
       args:
-        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
         NEXT_PUBLIC_ZONA_HORARIA: ${NEXT_PUBLIC_ZONA_HORARIA:-}
         NEXT_PUBLIC_LOCALE: ${NEXT_PUBLIC_LOCALE:-}
         NEXT_PUBLIC_MONEDA: ${NEXT_PUBLIC_MONEDA:-}
-        NEXT_PUBLIC_VAPID_PUBLIC_KEY: ${NEXT_PUBLIC_VAPID_PUBLIC_KEY:-}
-    image: tentare-app:local
+    # Con APP_IMAGE en deploy/.env (la que compila GitHub, p. ej.
+    # ghcr.io/eldoctormail/pilates-saas:latest) se descarga con
+    # `docker compose pull app` y el servidor no compila nada. Sin ella, se
+    # compila acá como siempre.
+    image: ${APP_IMAGE:-tentare-app:local}
     restart: unless-stopped
     env_file: .env
     environment:

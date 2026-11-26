@@ -3,11 +3,14 @@
 # Se construye desde la raíz del repo: ver deploy/docker-compose.yml.
 #
 # Las variables NEXT_PUBLIC_* se graban en el código al compilar. Las dos
-# direcciones (NEXT_PUBLIC_APP_URL y NEXT_PUBLIC_SUPABASE_URL) se compilan con un
-# valor de relleno y deploy/scripts/aplicar-urls.mjs pone las de deploy/.env al
-# arrancar: cambiar la IP o pasar a dominio NO pide volver a compilar, alcanza
-# con `docker compose up -d`. El resto de NEXT_PUBLIC_* (la clave anónima, la
-# zona…) sí se graba al compilar: si cambian, `docker compose build app`.
+# direcciones (NEXT_PUBLIC_APP_URL y NEXT_PUBLIC_SUPABASE_URL) y las dos claves
+# públicas (NEXT_PUBLIC_SUPABASE_ANON_KEY y NEXT_PUBLIC_VAPID_PUBLIC_KEY) se
+# compilan con un valor de relleno y deploy/scripts/aplicar-urls.mjs pone las de
+# deploy/.env al arrancar: cambiar la IP, pasar a dominio o cambiar de Supabase
+# NO pide volver a compilar, alcanza con `docker compose up -d`. Por eso la
+# imagen no lleva nada de una instalación y la puede compilar GitHub
+# (.github/workflows/imagen-servidor.yml). Lo que sí se graba es el formato
+# (zona, idioma, moneda): si cambia, `docker compose build app`.
 
 FROM node:24-bookworm-slim AS build
 WORKDIR /app
@@ -24,22 +27,21 @@ RUN npm ci --no-audit --no-fund \
 
 COPY . .
 
-ARG NEXT_PUBLIC_SUPABASE_ANON_KEY
 ARG NEXT_PUBLIC_ZONA_HORARIA=
 ARG NEXT_PUBLIC_LOCALE=
 ARG NEXT_PUBLIC_MONEDA=
-ARG NEXT_PUBLIC_VAPID_PUBLIC_KEY=
 # 1 = no repetir la revisión de tipos al compilar (la hacen `npm run typecheck` y
 # el CI de cada PR): ahorra varios minutos. 0 para revisarlos también aquí.
 ARG TENTARE_SALTAR_TYPECHECK=1
-# Relleno: lo cambia aplicar-urls.mjs al arrancar (mismos valores que RELLENO ahí).
+# Relleno: lo cambia aplicar-urls.mjs al arrancar (mismos valores que RELLENO y
+# RELLENO_CLAVES ahí).
 ENV NEXT_PUBLIC_APP_URL=http://centra-app-url.invalid \
     NEXT_PUBLIC_SUPABASE_URL=http://centra-supabase-url.invalid \
-    NEXT_PUBLIC_SUPABASE_ANON_KEY=$NEXT_PUBLIC_SUPABASE_ANON_KEY \
+    NEXT_PUBLIC_SUPABASE_ANON_KEY=centra-relleno-clave-anonima-supabase \
+    NEXT_PUBLIC_VAPID_PUBLIC_KEY=centra-relleno-clave-publica-vapid \
     NEXT_PUBLIC_ZONA_HORARIA=$NEXT_PUBLIC_ZONA_HORARIA \
     NEXT_PUBLIC_LOCALE=$NEXT_PUBLIC_LOCALE \
     NEXT_PUBLIC_MONEDA=$NEXT_PUBLIC_MONEDA \
-    NEXT_PUBLIC_VAPID_PUBLIC_KEY=$NEXT_PUBLIC_VAPID_PUBLIC_KEY \
     NEXT_TELEMETRY_DISABLED=1 \
     TENTARE_SALTAR_TYPECHECK=$TENTARE_SALTAR_TYPECHECK \
     NODE_OPTIONS=--max-old-space-size=6144

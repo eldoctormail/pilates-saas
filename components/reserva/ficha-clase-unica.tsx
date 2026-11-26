@@ -80,7 +80,7 @@ export function FichaClaseUnica({
                 ? <span style={{ color: 'var(--portal-muted)' }}>Completa</span>
                 : <span style={{ display: 'flex', alignItems: 'center', gap: 6, fontWeight: 700, color: plazasLibres <= 3 ? '#BC8434' : 'var(--portal-ink)' }}>
                     <span style={{ width: 6, height: 6, borderRadius: 999, background: plazasLibres <= 3 ? '#BC8434' : 'var(--portal-accent)' }} />
-                    {`Queda${plazasLibres === 1 ? '' : 'n'} ${plazasLibres} lugar${plazasLibres === 1 ? '' : 's'}`}
+                    {`Queda${plazasLibres === 1 ? '' : 'n'} ${plazasLibres} lugar${plazasLibres === 1 ? '' : 'es'}`}
                   </span>
             } />
           )}

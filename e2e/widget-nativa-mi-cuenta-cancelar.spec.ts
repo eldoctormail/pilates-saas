@@ -116,6 +116,6 @@ test('sin marco: un lugar ofrecido dice «Lugar para ti» y hasta cuándo', asyn
   await enSuWeb(page);
   const tarjeta = page.getByRole('article').filter({ hasText: 'Hoy · 18:00' });
   await expect(tarjeta.getByText('Lugar para ti', { exact: true })).toBeVisible();
-  await expect(tarjeta).toContainText('¡Se ha liberado un lugar! Tienes hasta las 08:30 para aceptarla.');
+  await expect(tarjeta).toContainText('¡Se ha liberado un lugar! Tienes hasta las 08:30 para aceptarlo.');
   await expect(tarjeta.getByRole('button', { name: 'Aceptar lugar' })).toBeVisible();
 });

@@ -370,15 +370,15 @@ test('una letra ELEGIDA («Editorial»), con dos widgets: una sola hoja de Centr
   // El navegador baja el woff2 que usa, y lo CARGA de verdad desde otro origen
   // (sin la cabecera CORS, `document.fonts` no lo daría por cargado).
   await expect.poll(() => fuentes.some(u => u.endsWith('/figtree/figtree-latin.woff2'))).toBe(true);
-  await expect.poll(() => page.evaluate(() => document.fonts.check("12px 'Centra Figtree'"))).toBe(true);
+  await expect.poll(() => page.evaluate(() => document.fonts.check("12px 'Tentare Figtree'"))).toBe(true);
 
   for (const i of [0, 1]) {
     const m = await medir(page, i);
-    expect(m.letra).toContain('Centra Figtree');
-    expect(m.titular).toContain('Centra Libre Caslon Text');
+    expect(m.letra).toContain('Tentare Figtree');
+    expect(m.titular).toContain('Tentare Libre Caslon Text');
   }
   // La rejilla lee la misma variable que el resto.
-  expect((await medir(page, 0)).celda?.letra).toContain('Centra Figtree');
+  expect((await medir(page, 0)).celda?.letra).toContain('Tentare Figtree');
 });
 
 test('⚠️ el diseño propio del código gana: ni se pide el estilo, ni se pinta, ni se piden fuentes', async ({ page, context }) => {
@@ -425,17 +425,17 @@ ${SCRIPT}`;
   await expect(linksFuentes(page)).toHaveAttribute('href', `${TENTARE}${HOJA_FUENTES_NATIVA}`);
   expect(fuentes.filter(u => u === HOJA_FUENTES_NATIVA)).toHaveLength(1);
   await expect.poll(() => fuentes.some(u => u.startsWith(`${RUTA_FUENTES_NATIVA}/poppins/`))).toBe(true);
-  await expect.poll(() => page.evaluate(() => document.fonts.check("12px 'Centra Poppins'"))).toBe(true);
+  await expect.poll(() => page.evaluate(() => document.fonts.check("12px 'Tentare Poppins'"))).toBe(true);
   // La de titulares solo baja cuando algo la pinta (en columnas, nada): se
   // pide a mano, y sale de Centra como la otra.
-  expect(await page.evaluate(() => document.fonts.load("12px 'Centra Cormorant Garamond'").then(f => f.length))).toBeGreaterThan(0);
+  expect(await page.evaluate(() => document.fonts.load("12px 'Tentare Cormorant Garamond'").then(f => f.length))).toBeGreaterThan(0);
   expect(fuentes.some(u => u.startsWith(`${RUTA_FUENTES_NATIVA}/cormorantgaramond/`))).toBe(true);
 
   const [uno, dos] = [await medir(page, 0), await medir(page, 1)];
-  expect(uno.letra).toContain('Centra Poppins');
-  expect(uno.titular).toContain('Centra Cormorant Garamond');
-  expect(uno.celda?.letra).toContain('Centra Poppins');
-  expect(dos.letra).toContain('Centra Poppins');
+  expect(uno.letra).toContain('Tentare Poppins');
+  expect(uno.titular).toContain('Tentare Cormorant Garamond');
+  expect(uno.celda?.letra).toContain('Tentare Poppins');
+  expect(dos.letra).toContain('Tentare Poppins');
   // La que no sirve Centra se nombra tal cual (se vería si su web la cargara).
   expect(dos.titular).toContain('Playfair Display');
   expect(dos.titular).not.toContain('Centra');

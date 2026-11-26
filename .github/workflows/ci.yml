@@ -49,6 +49,16 @@ env:
   # (registro · reserva · pago) corra de verdad y bloquee el deploy.
   E2E_TEST: '1'
   NEXT_TELEMETRY_DISABLED: '1'
+  # Formato, moneda y zona de España para el build y los E2E: los textos que
+  # esperan los tests (los del original) están en euros y en hora de Madrid, lo
+  # mismo que fija scripts/register-test-hooks.mjs para los unitarios. Sin esto
+  # fallaban casi todos los E2E por el formato, no por un error. El paso de RLS
+  # pone su propia zona (la de la base). La imagen del servidor se compila en
+  # imagen-servidor.yml, sin estas variables: allí manda Argentina.
+  NEXT_PUBLIC_LOCALE: es-ES
+  NEXT_PUBLIC_MONEDA: EUR
+  NEXT_PUBLIC_LOCALE_MONEDA: es-ES
+  NEXT_PUBLIC_ZONA_HORARIA: Europe/Madrid
 
 jobs:
   # ---------------------------------------------------------------------------

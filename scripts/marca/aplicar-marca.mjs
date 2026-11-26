@@ -60,6 +60,12 @@ const INTOCABLES = [
   // Nombre del segundo factor del panel interno: lo guarda Supabase y lo compara
   // la migración 20261005220308_factor_interno_solo_en_interno.sql.
   'Tentare Internal',
+  // Familias de letra que sirve la instalación (lib/widget/fuentes-nativa.ts):
+  // son nombres técnicos de la hoja publicada en la web de cada estudio, y los
+  // E2E las comprueban tal cual.
+  'Tentare Cormorant Garamond', 'Tentare Figtree', 'Tentare Instrument Sans', 'Tentare Instrument Serif',
+  'Tentare Libre Caslon Text', 'Tentare Outfit', 'Tentare Plus Jakarta Sans', 'Tentare Poppins',
+  "'(Tentare [A-Za-z ]+)'",
 ];
 
 /** Frases exactas que también cambian: [de, a, solo en archivos que empiezan por]. */

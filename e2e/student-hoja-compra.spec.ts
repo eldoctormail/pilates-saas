@@ -187,7 +187,7 @@ test.describe('Student PWA · hoja de compra', () => {
     const tentare = `url(${new URL(page.url()).origin}/widget-fuentes/v1/`;
     for (const o of opciones) {
       // La de su pareja de letras, sea cual sea: de las que sirve Centra.
-      const familia = /^'(Centra [A-Za-z ]+)', system-ui, sans-serif$/.exec(o.appearance?.variables?.fontFamily ?? '')?.[1];
+      const familia = /^'(Tentare [A-Za-z ]+)', system-ui, sans-serif$/.exec(o.appearance?.variables?.fontFamily ?? '')?.[1];
       expect(familia, o.appearance?.variables?.fontFamily).toBeTruthy();
       expect(o.fonts?.length).toBeGreaterThan(0);
       for (const cara of o.fonts ?? []) {

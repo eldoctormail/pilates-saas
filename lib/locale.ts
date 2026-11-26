@@ -10,8 +10,10 @@
 // Quedan en es-ES a propósito: VeriFactu y los festivos de España. Las páginas
 // comerciales (precios, funcionalidades, soluciones, seguridad, legales) cambian
 // de texto con FUNCIONES_DE_ESPANA: Mercado Pago y ARCA en Argentina.
+import { envPublica } from './env-publica.ts';
+
 export const LOCALE: string =
-  (typeof process !== 'undefined' ? process.env.NEXT_PUBLIC_LOCALE?.trim() : undefined) ||
+  /* @__PURE__ */ envPublica(() => process.env.NEXT_PUBLIC_LOCALE)?.trim() ||
   'es-AR-u-hc-h23';
 
 /** Un teléfono de ejemplo para los `placeholder`, con el formato del país. */

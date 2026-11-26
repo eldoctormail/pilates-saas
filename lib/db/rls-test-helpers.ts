@@ -52,7 +52,7 @@ export function sqlLocal() {
 }
 
 /**
- * La zona de un estudio de ESTA base: 'Europe/Madrid' en Tentare, la del país en
+ * La zona de un estudio de ESTA base: 'Europe/Madrid' en Centra, la del país en
  * un servidor propio (migr 20261122000000_autoalojado_zona_y_url). Un test que
  * escriba la zona a mano solo pasa en una de las dos.
  */

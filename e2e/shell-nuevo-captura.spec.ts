@@ -1,5 +1,5 @@
 import { test, expect, type Page } from '@playwright/test';
-import { montar, ir, enOscuro } from './panel-sembrado';
+import { montar, ir, enOscuro, STUDIO_ROW } from './panel-sembrado';
 import { conAsistente } from './asistente-andamiaje';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -172,6 +172,9 @@ test('a sangre — Resumen de un estudio nuevo: tarjetas de paso con imagen', as
   const tarjetas = page.getByTestId('tarjetas-de-paso');
   await expect(tarjetas).toBeVisible({ timeout: 120_000 });
   await expect(tarjetas.locator('li')).not.toHaveCount(0);
+  // Cada tarjeta pinta su escena 3D.
+  await expect(tarjetas.locator('[data-paso] [data-hero-3d]').first()).toBeVisible();
+  expect(await tarjetas.locator('[data-paso] [data-hero-3d]').count()).toBe(await tarjetas.locator('li').count());
   await page.screenshot({ path: 'test-results/shell-sangre-tarjetas-paso.png' });
   // Descartar una tarjeta la quita sin recargar.
   const titulo = (await tarjetas.locator('h3').first().innerText()).trim();
@@ -363,6 +366,123 @@ test('a sangre — el marco queda por encima de lo pegado y al final de la pági
   await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
   await page.screenshot({ path: 'test-results/shell-final-de-pagina.png' });
 });
+
+test('a sangre — el brillo del menú sigue por la esquina del marco y el submenú abierto se ve entero', async ({ page }) => {
+  await preparar(page, true);
+  // Sin ninguna reserva quedan pasos de la puesta en marcha: es cuando la tarjeta y la píldora salían en el menú.
+  await page.route('**/rest/v1/reservas**', (r) => r.fulfill({ status: 200, contentType: 'application/json', body: '[]' }));
+  // Bajo a propósito: con el menú sin caber entero es cuando el submenú quedaba cortado.
+  await page.setViewportSize({ width: 1440, height: 620 });
+  await ir(page, 'equipo');
+  await listo(page);
+  // La curva del lienzo y la del marco son la misma: con dos distintas asomaba una media luna negra en la esquina.
+  expect(await page.locator('[data-movil-hoja]').evaluate((e) => getComputedStyle(e).borderBottomLeftRadius)).toBe('16px');
+  const z = (sel: string) => page.locator(sel).first().evaluate((e) => Number(getComputedStyle(e).zIndex));
+  expect(await z('.shell-brillo-ventana'), 'el marco negro taparía la continuación del brillo').toBeGreaterThan(await z('[data-marco-vivo]'));
+  const menu = page.locator('aside[data-panel-menu] nav').first();
+  const bloque = menu.locator('[data-acordeon="/equipo"]');
+  await expect(bloque.getByRole('link')).not.toHaveCount(1);
+  await expect.poll(async () => {
+    const [m, b] = await Promise.all([menu.boundingBox(), bloque.boundingBox()]);
+    return m && b ? Math.round(b.y + b.height - (m.y + m.height)) : 999;
+  }, { message: 'el submenú no puede quedar cortado al final del menú' }).toBeLessThanOrEqual(0);
+  // «Configuración» va fuera de la lista y sin fondo propio: un fondo negro cortaba el brillo.
+  const anclado = page.locator('aside[data-panel-menu] [data-menu-anclado]');
+  await expect(anclado.getByRole('link', { name: 'Configuración' })).toBeInViewport();
+  expect(await anclado.evaluate((e) => getComputedStyle(e).backgroundColor)).toBe('rgba(0, 0, 0, 0)');
+  await expect(menu.getByRole('link', { name: 'Configuración' })).toHaveCount(0);
+  // La puesta en marcha vive en Inicio: el menú no lleva ni la tarjeta ni la píldora.
+  await expect(page.locator('aside[data-panel-menu]').getByTestId('tarjeta-menu-pasos')).toHaveCount(0);
+  await expect(page.locator('aside[data-panel-menu] [data-primeros-pasos-pildora]')).toHaveCount(0);
+  await page.screenshot({ path: 'test-results/shell-menu-y-esquina.png' });
+});
+
+for (const [nombre, ancho, alto] of [['escritorio', 1440, 900], ['movil', 390, 844]] as const) {
+  test(`a sangre — mensajería sin conversaciones: imagen nueva a todo el ancho y la campana se mueve (${nombre})`, async ({ page }) => {
+    await preparar(page, true);
+    await page.route((u) => u.pathname === '/api/mensajeria/conversaciones', (r) => r.fulfill({ status: 200, contentType: 'application/json', body: '{"conversaciones":[]}' }));
+    await page.setViewportSize({ width: ancho, height: alto });
+    await ir(page, 'mensajeria?tab=conversaciones');
+    await listo(page);
+    const invitacion = page.locator('[data-pantalla-vacia][data-hero]');
+    await expect(invitacion.getByRole('heading', { name: 'Aquí aparecerán tus conversaciones' })).toBeVisible({ timeout: 120_000 });
+    await expect(invitacion.locator('[data-hero-3d="mensajeria"]')).toBeVisible();
+    await expect(page.locator('img[src*="/ilustraciones/vacio-"]'), 'la ilustración antigua no vuelve').toHaveCount(0);
+    await expect(page.getByText('Elige una conversación')).toBeHidden();
+    const animacion = (sel: string) => page.locator(sel).first().evaluate((e) => getComputedStyle(e).animationName);
+    expect(await animacion('[data-hero-3d="mensajeria"] .hero3d-campana')).toBe('pn-campana-3d');
+    if (ancho >= 1024) {
+      // La del menú: suena sola con avisos sin leer y vuelve a sonar al acercarse.
+      const boton = page.locator('aside[data-panel-menu]').getByRole('button', { name: 'Notificaciones' });
+      await expect(boton.locator('[data-campana="suena"]')).toHaveCount(1);
+      expect(await animacion('aside[data-panel-menu] [data-campana="suena"]')).toBe('pn-campana');
+      await boton.hover();
+      expect(await animacion('aside[data-panel-menu] [data-campana-dibujo]')).toBe('pn-campana-toque');
+    }
+    // El botón se alcanza desplazando la página, sin una caja con scroll propio de por medio.
+    expect(await invitacion.evaluate((e) => getComputedStyle(e.parentElement!).overflowY)).toBe('visible');
+    // Y entera dentro de su tarjeta, que recorta lo que se salga.
+    expect(await invitacion.evaluate((e) => e.parentElement!.parentElement!.parentElement!.parentElement!.getBoundingClientRect().bottom - e.getBoundingClientRect().bottom)).toBeGreaterThanOrEqual(-1);
+    await page.screenshot({ path: `test-results/shell-mensajeria-vacia-${nombre}.png`, fullPage: true });
+  });
+}
+
+// Los estados vacíos que aún llevaban la ilustración anterior: ahora pintan la escena 3D y ninguna pide un archivo retirado.
+for (const [nombre, ruta, tabla, escena, panelNuevo] of [
+  ['salas', 'configuracion?tab=estudio&abrir=salas', 'salas', 'vacio', true],
+  ['notificaciones', 'notificaciones', null, 'avisos', false],
+  ['quien-me-debe', 'cobros', 'recibos', 'cobros', false],
+] as const) {
+  test(`a sangre — estado vacío con escena 3D: ${nombre}`, async ({ page }) => {
+    await preparar(page, true);
+    await page.route((u) => u.pathname === '/api/estudio/interruptores', (r) => r.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ panelNuevo, shellNuevo: true }) }));
+    if (tabla) await page.route(`**/rest/v1/${tabla}**`, (r) => r.fulfill({ status: 200, contentType: 'application/json', body: '[]' }));
+    const retiradas: string[] = [];
+    page.on('request', (r) => { if (/\/ilustraciones\/(vacio|paso)-/.test(r.url())) retiradas.push(r.url()); });
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await ir(page, ruta);
+    await listo(page);
+    const imagen = page.locator(`[data-hero-3d="${escena}"]`).first();
+    await expect(imagen).toBeVisible({ timeout: 120_000 });
+    await imagen.scrollIntoViewIfNeeded();
+    // Las piezas son `loading="lazy"`: se espera a que cada una haya llegado de verdad.
+    await expect.poll(() => imagen.locator('img').evaluateAll((is) => is.map((i) => { const x = i as HTMLImageElement; return x.complete && x.naturalWidth > 0 ? 'ok' : `${x.currentSrc || x.src} ${Math.round(x.getBoundingClientRect().width)}`; }).filter((v) => v !== 'ok')), { timeout: 60_000 }).toEqual([]);
+    expect((await imagen.boundingBox())!.width, 'la imagen no puede quedarse en nada').toBeGreaterThan(150);
+    expect(retiradas).toEqual([]);
+    if (nombre === 'salas') {
+      // El botón con icono de la misma pantalla: icono y texto en la misma línea (salían apilados).
+      expect(await page.getByRole('button', { name: 'Marcar avería' }).evaluate((b) => {
+        const icono = b.querySelector('svg')!.getBoundingClientRect();
+        const r = document.createRange();
+        r.selectNodeContents([...b.childNodes].find((n) => n.nodeType === 3 && n.textContent!.trim())!);
+        return icono.right <= r.getBoundingClientRect().left + 1 && b.getBoundingClientRect().height <= 44;
+      })).toBe(true);
+    }
+    await page.screenshot({ path: `test-results/shell-vacio-3d-${nombre}.png` });
+  });
+}
+
+// ⚠️ Este solo puede fallar contra el BUILD de producción (CI): el minificador cambia las reglas y en `next dev` se veía bien
+// mientras en tentare.app la bola salía fuera de la pista (26-nov-2026).
+for (const encendido of [true, false]) {
+  test(`a sangre — Configuración: la bola del interruptor va dentro de su pista (${encendido ? 'encendido' : 'apagado'})`, async ({ page }) => {
+    await preparar(page, true);
+    await page.route('**/rest/v1/studios**', (r) => r.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ ...STUDIO_ROW, avisar_alumnas: encendido }) }));
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await ir(page, 'configuracion?tab=reservas');
+    await listo(page);
+    const interruptor = page.locator('[data-config-raiz] button[role="switch"]').first();
+    await expect(interruptor).toHaveAttribute('aria-checked', String(encendido), { timeout: 120_000 });
+    await interruptor.scrollIntoViewIfNeeded();
+    // La transición de la bola dura 200 ms: se mide cuando ya ha llegado.
+    await expect.poll(() => interruptor.evaluate((e) => {
+      const p = e.getBoundingClientRect();
+      const b = e.querySelector('span')!.getBoundingClientRect();
+      return { dentro: b.left >= p.left && b.right <= p.right && b.top >= p.top && b.bottom <= p.bottom, lado: b.left + b.width / 2 > p.left + p.width / 2 ? 'derecha' : 'izquierda' };
+    })).toEqual({ dentro: true, lado: encendido ? 'derecha' : 'izquierda' });
+    await page.screenshot({ path: `test-results/shell-interruptor-${encendido ? 'encendido' : 'apagado'}.png` });
+  });
+}
 
 for (const [nombre, ancho, alto] of [['escritorio', 1440, 900], ['movil', 390, 844]] as const) {
   test(`a sangre — calendario (${nombre})`, async ({ page }) => {

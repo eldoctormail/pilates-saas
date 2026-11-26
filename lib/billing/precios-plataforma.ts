@@ -117,3 +117,28 @@ export function validarPrecios(body: unknown): { ok: true; precios: Precios } | 
   }
   return { ok: true, precios: p };
 }
+
+// ── Las páginas ya generadas, al día ─────────────────────────────────────────
+// Las páginas estáticas (/precios, la home, el layout que pasa los precios al
+// navegador…) se generan al COMPILAR, y en la imagen de Docker se compila sin
+// base de datos: salen con los precios de serie. Tras cada despliegue hay que
+// regenerarlas con los guardados; lo pide el cron (/api/cron/precios-al-dia)
+// al arrancar y cada pocos minutos. Pura: la usan la ruta del cron y
+// /interno/precios (y se prueba con `npm test`). Esta marca recuerda con qué precios se
+// regeneraron por última vez en este proceso, para no regenerar todo el sitio
+// en cada llamada.
+const LLAVE_PUBLICADOS = Symbol.for('centra.precios-plataforma.publicados');
+type ConPublicados = typeof globalThis & { [LLAVE_PUBLICADOS]?: string };
+
+const huella = (p: Precios) => CLAVES_PRECIO.map((k) => p[k]).join('|');
+
+/** ¿Las páginas de este proceso tienen otros precios que `p`? Sin marca, tienen los de serie (los del build). */
+export function paginasDesfasadas(p: Precios, deSerie: Precios): boolean {
+  const publicados = (globalThis as ConPublicados)[LLAVE_PUBLICADOS] ?? huella(deSerie);
+  return publicados !== huella(p);
+}
+
+/** Las páginas se acaban de mandar regenerar con `p`. */
+export function marcarPublicados(p: Precios): void {
+  (globalThis as ConPublicados)[LLAVE_PUBLICADOS] = huella(p);
+}

@@ -496,7 +496,10 @@ export function SuscripcionVista({ embebida = false }: { embebida?: boolean }) {
             )}
 
             {esPropietaria && CON_MERCADOPAGO ? (
-              <div className="mt-5 flex flex-wrap gap-2">
+              <>
+              {/* Cambiar de plan abre otra suscripción: Mercado Pago pide el correo de la cuenta con la que se paga, como en el alta. */}
+              <CampoEmailMp valor={emailMp} onCambio={setEmailMp} />
+              <div className="mt-1 flex flex-wrap gap-2">
                 {(['BASE', 'ESTUDIO'] as const).filter((p) => p !== estado?.plan).map((p) => (
                   <button
                     key={p}
@@ -509,6 +512,7 @@ export function SuscripcionVista({ embebida = false }: { embebida?: boolean }) {
                   </button>
                 ))}
               </div>
+              </>
             ) : esPropietaria ? (
               <>
                 <button

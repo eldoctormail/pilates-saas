@@ -166,6 +166,12 @@ jobs:
         run: npm ci
 
       - name: Tests unitarios (dinero · reservas · aforo · fiscal)
+        # Sin la URL de localhost de arriba: los tests de enlaces y dominios
+        # comprueban la dirección de producción por defecto, y con
+        # http://localhost:3000 fallaban 17. Vacía = como en producción sin
+        # NEXT_PUBLIC_APP_URL. El build y el e2e siguen usando la de arriba.
+        env:
+          NEXT_PUBLIC_APP_URL: ''
         run: npm test
 
   # ---------------------------------------------------------------------------

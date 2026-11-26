@@ -182,6 +182,16 @@ export const CLASIFICACION_SUPRESION: Record<string, ClasificacionTabla> = {
     detalle: 'IBAN. Se borra salvo que haya un recibo SEPA PENDIENTE/EN_CURSO: ese cargo puede devolverse y el mandato es la prueba. Entonces se conserva y la función lo devuelve como retenido.',
   },
   recibos: { accion: 'CONSERVAR', detalle: 'Fiscal. Seudónimo por socio_id.' },
+  compras_mercadopago: {
+    accion: 'CONSERVAR',
+    detalle: 'Compra de un plan con Mercado Pago: lo que se decidió cobrar y el pago que la saldó. Respaldo del cobro (fiscal). Seudónimo por socio_id.',
+    documentadaEn: '20261122020100_mercadopago_compras.sql',
+  },
+  pedidos_consumidor: {
+    accion: 'CONSERVAR',
+    detalle: 'Pedido de arrepentimiento o de baja (Ley 24.240, Disposición 954/2025): es la constancia de que se pidió y de cuándo, y hay que poder probarlo.',
+    documentadaEn: '20261122020500_pedidos_consumidor.sql',
+  },
   facturas: { accion: 'CONSERVAR', detalle: 'Fiscal (Veri*Factu). `receptor_nombre`/`receptor_nif` se conservan por obligación legal.' },
   ventas_pos: { accion: 'CONSERVAR', detalle: 'Fiscal.' },
   devoluciones: { accion: 'CONSERVAR', detalle: 'Fiscal.' },

@@ -14,6 +14,9 @@
 --
 -- Solo service_role.
 
+-- Supresión (RGPD): CONSERVAR. Al suprimir a una alumna, la compra queda como
+-- respaldo del cobro, seudonimizada por socio_id (lib/socios/supresion-clasificacion.ts).
+
 create table if not exists public.compras_mercadopago (
   id                       text primary key,
   studio_id                text not null references public.studios(id) on delete cascade,

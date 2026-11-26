@@ -339,7 +339,9 @@ así que todo lo que se versiona lo lee cualquiera:
 - **13-nov-2026, el fundador cambia el límite de lo gratis: SIN tope de alumnas y 150 reservas al mes** (antes 150
   alumnas «Activa» y 250 reservas). Sin comisión sobre los cobros (se valoró un 1,5 % y se descartó por ahora: solo
   aplica a pagos por Stripe Connect, que hoy usan 2 estudios, y «sin comisiones» es una ventaja frente a Bonsai). Mandan
-  `LIMITE_RESERVAS_MES` (`plan-gratis.ts`) y su espejo SQL `fase_plan_gratis` (migr `20261113115203`); lo que sigue dicho
+  `LIMITE_RESERVAS_MES` (`plan-gratis.ts`) y su espejo SQL `fase_plan_gratis` (migr `20261126122448`).
+  **26-nov-2026: el margen pasa a 7 días para quien se pase del límite desde el 1 de diciembre; quien se pasó antes
+  conserva 30** (`margenDe`); lo que sigue dicho
   abajo sobre «150 alumnas y 250 reservas» es la historia. ⚠️ Las páginas comerciales con la cifra escrita a mano
   (comparativas, soluciones, funcionalidades, recursos, home) las decide el fundador: no se reescriben solas.
 - **Founding Studio GRATIS (decisión del fundador, 15-oct-2026), tras el interruptor `FOUNDING_GRATIS`.**
@@ -1986,6 +1988,14 @@ Fase 2 ya acotada en el doc (Caja/POS, envío programado, bono regalado, pagar o
   pasa por una de las dos; nunca HTML propio. ⚠️ Las plantillas de acceso de `supabase/templates/` van aparte y no se
   despliegan con el merge.
 
+## Reactivar el pago (26-nov-2026, `/studio/<id>/access_account/reactivate`)
+
+Con el panel cerrado (`bloqueado`), la propietaria cae en esta pantalla (copia de la de Shopify) y paga dentro (Checkout
+`ui_mode: 'elements'`, misma ruta, cerrojos y webhook que /suscripcion). A quién se enseña: `lib/billing/reactivar.ts`
+(Cadena, sede secundaria y quien no es propietaria van a /suscripcion). El `<id>` de la URL no autoriza nada: manda la sesión.
+Abrirla no gasta el descuento de reseñas (`alojado` → página de Stripe al pulsar). ⚠️ /suscripcion «a secas» se decide
+mirando la dirección al contestar: por un enlace interno la vista se monta antes de que cambie.
+
 ## Sistema de diseño y movimiento del panel (25-nov-2026)
 
 `app/estilos/panel-sistema.css` es la ÚNICA fuente de duraciones, curvas, radios, escala de letra, sombras y neutros
@@ -1994,7 +2004,19 @@ componente (`lib/panel-sistema.test.ts`). Lo que pinta va dentro de `.panel-app[
 solo `opacity`/`translate`/`scale`, con `backwards` y tras `prefers-reduced-motion: no-preference`.
 Las pantallas vacías (`PantallaVacia` con `imagen`) llevan escenas 3D (`components/ilustraciones/hero-3d.tsx`, iconos de
 3dicons.co, CC0, en `public/ilustraciones/3d/`); `docs/diseno/ilustraciones/ENCARGO-HERO.md` queda por si se crean propias.
-El marco (`data-marco-vivo`) va por encima de lo pegado (z 38), sin resplandor de color en las esquinas.
+Desde el 26-nov-2026 también `EmptyState escena=…` y las tarjetas de paso pintan esas escenas (`escenas.tsx` y
+`pasos.tsx` solo eligen cuál): una escena nueva se añade en `hero-3d.tsx`, sin repetir pieza dentro de ella.
+El marco (`data-marco-vivo`) va por encima de lo pegado (z 38). El brillo animado del menú **se queda** (fundador,
+25-nov-2026) y sigue por la esquina y la franja de abajo con una segunda copia encima del marco (`.shell-brillo-ventana`,
+z 39). ⚠️ Lienzo (`rounded-[16px]`), marco y máscara del brillo comparten la curva de 16 px. En el menú nada pinta negro
+sobre el brillo: «Configuración» va fuera de la lista que se desplaza y el final de la lista se desvanece con máscara. Y el menú del marco
+nuevo **no lleva la puesta en marcha** (ni «Configuración inicial» ni «Siguiente: …»): vive en Inicio. Las campanas se
+mueven (la de avisos al llegar uno y al acercarse; la de las imágenes 3D, cada 4 s): `pn-campana*` en `panel-sistema.css`.
+
+⚠️ **En CSS, nunca `translate`/`scale`/`rotate` junto a `transform` en la misma regla** (26-nov-2026): el minificador de
+producción se queda con una y en `next dev` no se ve. Así salió la bola de todos los interruptores de Configuración fuera
+de su pista solo en tentare.app. Lo vigilan `lib/panel-sistema.test.ts` y un e2e contra el build. Un cambio visual del
+panel se da por bueno mirando el build o producción, no solo en local.
 
 ## Tentare Brain = Decision OS (no construir uno nuevo)
 

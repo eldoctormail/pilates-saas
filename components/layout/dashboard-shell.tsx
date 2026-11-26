@@ -27,6 +27,8 @@ import { PanelSkeleton } from '@/components/ui/panel-skeleton';
 import { PantallaCargaAlta } from '@/components/alta-nueva/pantalla-carga-alta';
 import { limpiarAltaEnCurso, useAltaEnCurso } from '@/lib/alta/alta-en-curso';
 import { estadoBilling } from '@/lib/api-client';
+import { rutaReactivar } from '@/lib/billing/reactivar';
+import { CON_MERCADOPAGO } from '@/lib/pasarela';
 import { pasoDobleFactorDelPanel } from '@/lib/auth/doble-factor-cliente';
 import { precargarAgenda } from '@/lib/agenda-precarga';
 import { asociarEstudio } from '@/lib/posthog-cliente';
@@ -120,7 +122,9 @@ function LienzoDelPanel({ shellNuevo, children }: { shellNuevo: boolean; childre
       data-columna-abierta={shellNuevo && abierta ? '' : undefined}
       className={cn(
         // Móvil y tablet incluidos: lienzo blanco redondeado a 4 px del marco oscuro (en escritorio, además, cede el hueco al asistente).
-        shellNuevo && 'mx-1 min-h-[calc(100dvh-0.5rem)] rounded-2xl bg-background md:ml-0 md:mr-1 lg:transition-[margin] lg:duration-300 lg:ease-(--pn-ease-out-emphasized)',
+        // ⚠️ 16 px exactos, los de las esquinas del marco (globals.css, `data-marco-vivo`). `rounded-2xl` son 28,8 px en este tema
+        // y al final de la página asomaba una media luna negra entre las dos curvas.
+        shellNuevo && 'mx-1 min-h-[calc(100dvh-0.5rem)] rounded-[16px] bg-background md:ml-0 md:mr-1 lg:transition-[margin] lg:duration-300 lg:ease-(--pn-ease-out-emphasized)',
         shellNuevo && (abierta ? 'lg:mr-[360px]' : 'lg:mr-1'),
       )}
     >
@@ -217,7 +221,9 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
     estadoBilling().then((e) => {
       if (!vivo) return;
       setBillingBloqueado(!!e?.bloqueado);
-      if (e?.bloqueado) router.replace('/suscripcion');
+      // La propietaria, a la pantalla de reactivación; el resto (y un servidor sin `estudioId`), a /suscripcion.
+      // Con Mercado Pago (fork Argentina), siempre a /suscripcion: la pantalla de reactivación solo paga con Stripe.
+      if (e?.bloqueado) router.replace(!CON_MERCADOPAGO && e.esPropietaria && e.estudioId ? rutaReactivar(e.estudioId) : '/suscripcion');
     });
     return () => { vivo = false; };
   }, [loading, session, router]);

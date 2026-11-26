@@ -27,11 +27,15 @@ concurrency:
 
 jobs:
   avisar:
+    # Solo en el repo original: espera a un despliegue de Vercel y avisa por las
+    # URLs de tentare.app. En el fork autoalojado no hay Vercel y esperaría 26
+    # minutos para terminar en rojo.
+    if: github.repository == 'EcomRodrii/pilates-saas'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: 24
       - name: Esperar al despliegue de Vercel de este commit

@@ -24,9 +24,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: '24'
 
@@ -93,9 +93,12 @@ jobs:
           DERIVA_DATABASE_URL: ${{ secrets.DERIVA_DATABASE_URL }}
           MIGRACIONES_EN_PRS_ABIERTOS: ${{ steps.en_prs.outputs.lista }}
         run: |
+          # En el fork autoalojado la base vive en el servidor propio y GitHub no
+          # tiene por qué llegar a ella: sin el secreto, se avisa y no se marca
+          # rojo. Con el secreto puesto, el check es tan estricto como siempre.
           if [ -z "$DERIVA_DATABASE_URL" ]; then
-            echo "Falta el secreto DERIVA_DATABASE_URL (rol deriva_ci)." >&2
-            exit 1
+            echo "::warning::Sin el secreto DERIVA_DATABASE_URL (rol deriva_ci) no hay base contra la que comprobar: se salta."
+            exit 0
           fi
           psql "$DERIVA_DATABASE_URL" -v ON_ERROR_STOP=1 -Atc \
             'select name from supabase_migrations.schema_migrations' \
@@ -123,9 +126,12 @@ jobs:
         env:
           DERIVA_DATABASE_URL: ${{ secrets.DERIVA_DATABASE_URL }}
         run: |
+          # En el fork autoalojado la base vive en el servidor propio y GitHub no
+          # tiene por qué llegar a ella: sin el secreto, se avisa y no se marca
+          # rojo. Con el secreto puesto, el check es tan estricto como siempre.
           if [ -z "$DERIVA_DATABASE_URL" ]; then
-            echo "Falta el secreto DERIVA_DATABASE_URL (rol deriva_ci)." >&2
-            exit 1
+            echo "::warning::Sin el secreto DERIVA_DATABASE_URL (rol deriva_ci) no hay base contra la que comprobar: se salta."
+            exit 0
           fi
           abiertas=$(psql "$DERIVA_DATABASE_URL" -v ON_ERROR_STOP=1 -Atc "
             select c.relname

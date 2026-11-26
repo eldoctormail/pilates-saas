@@ -6,6 +6,7 @@
 // /interno/precios, la ruta fija los nuevos al momento y regenera las páginas.
 import 'server-only';
 import { getSupabaseAdmin } from '@/lib/db/supabase-admin';
+import { senalConLimite } from '@/lib/senal-con-limite';
 import { CLAVE_AJUSTE_PRECIOS, fijarPrecios, leerPreciosGuardados, preciosActuales, type Precios } from './precios-plataforma';
 
 const VIGENCIA_MS = 60_000;
@@ -35,7 +36,7 @@ export async function cargarPrecios(opciones: { forzar?: boolean } = {}): Promis
   const lectura = (async () => {
     try {
       const { data, error } = await db.from('ajustes_plataforma').select('valor').eq('clave', CLAVE_AJUSTE_PRECIOS)
-        .retry(false).abortSignal(AbortSignal.timeout(ESPERA_MAXIMA_MS)).maybeSingle();
+        .retry(false).abortSignal(senalConLimite(ESPERA_MAXIMA_MS)).maybeSingle();
       if (error) throw error;
       fijarPrecios(leerPreciosGuardados(data?.valor));
     } catch (e) {

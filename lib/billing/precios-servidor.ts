@@ -16,9 +16,9 @@ type ConMarca = typeof globalThis & { [LLAVE]?: number };
  * Los precios vigentes. Va a la base de datos como mucho una vez por minuto;
  * sin base de datos (un build sin claves) o si falla, se quedan los que había.
  */
-export async function cargarPrecios(): Promise<Precios> {
+export async function cargarPrecios(opciones: { forzar?: boolean } = {}): Promise<Precios> {
   const g = globalThis as ConMarca;
-  if (g[LLAVE] && Date.now() - g[LLAVE]! < VIGENCIA_MS) return preciosActuales();
+  if (!opciones.forzar && g[LLAVE] && Date.now() - g[LLAVE]! < VIGENCIA_MS) return preciosActuales();
   const db = getSupabaseAdmin();
   if (!db) return preciosActuales();
   try {
@@ -37,3 +37,7 @@ export function preciosRecienGuardados(p: Precios): void {
   fijarPrecios(p);
   (globalThis as ConMarca)[LLAVE] = Date.now();
 }
+
+
+// Con qué precios están las páginas ya generadas: lib/billing/precios-plataforma.ts.
+export { marcarPublicados, paginasDesfasadas } from './precios-plataforma';

@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { CATEGORIAS, PARA_QUIEN, novedadesFrenteAlAnterior, resumenCorto, textoComplemento, textoGratisYComplemento, valorFoundingGratis } from './catalogo-planes.ts';
 import { ADDONS, ENTITLEMENTS_GRATIS, LISTA_ADDONS, PLANES, PLAN_ENTITLEMENTS, addonDeFeature, type Plan } from './entitlements.ts';
+import { precio } from './intervalo-ui.ts';
 
 test('ninguna fila promete menos en un plan caro que en uno barato', () => {
   // La escalera BASE → ESTUDIO → CADENA no puede tener escalones hacia abajo:
@@ -127,4 +128,8 @@ test('la columna Founding Studio de la web no llama «incluido» a lo que de pag
   }
   // Los tres complementos tienen su fila en la tabla.
   assert.deepEqual([...vistos].sort(), [...LISTA_ADDONS].sort());
+});
+
+test('el precio del complemento en la tabla de la web sale con el formato de la moneda, no con «€» escrito a mano', () => {
+  assert.ok(textoGratisYComplemento('decisiones').includes(`(+${precio(ADDONS.decisiones.precioMes)}/mes)`));
 });

@@ -63,7 +63,7 @@ const porFeature =
 // ⚠️ Con el NOMBRE del complemento: tres filas van en el mismo, y «+22 €/mes» a
 // secas en cada una se lee como tres cobros.
 export const textoGratisYComplemento = (addon: Addon) =>
-  `En el gratis. De pago, con ${ADDONS[addon].nombre} (+${ADDONS[addon].precioMes} €/mes)`;
+  `En el gratis. De pago, con ${ADDONS[addon].nombre} (+${precio(ADDONS[addon].precioMes)}/mes)`;
 
 /**
  * La celda de Founding Studio en la web, que enseña el nivel GRATIS. Una columna

@@ -2163,7 +2163,6 @@ export interface RowLiquidacionesInstructoras {
   n_penalizaciones: number;
   reparto_penalizaciones_eur: number;
   n_clases_sin_tarifa: number;
-  total_eur: number | null;
   detalle: any;
   estado: string;
   confirmada_en: string | null;
@@ -2194,6 +2193,8 @@ export interface RowLiquidacionesInstructoras {
   minutos_contrato: number | null;
   // migr 20260921211857.
   minutos_extra: number | null;
+  // migr 20261123210000.
+  total_eur: number | null;
 }
 
 export interface RowRetoParticipaciones {
@@ -4586,6 +4587,166 @@ export interface RowResenasClics {
   dia: string;
   origen: string;
   n: number;
+}
+
+export interface RowPagosMercadopago {
+  payment_id: string;
+  studio_id: string;
+  recibo_id: string | null;
+  estado: string;
+  estado_detalle: string | null;
+  importe: number;
+  moneda: string;
+  medio: string | null;
+  desenlace: string;
+  detalle: string | null;
+  creado_en: string;
+  actualizado_en: string;
+  // migr 20261122020100.
+  compra_id: string | null;
+  // migr 20261122020200.
+  importe_devuelto: number | null;
+  // migr 20261122020400.
+  regalo_id: string | null;
+}
+
+export interface RowComprasMercadopago {
+  id: string;
+  studio_id: string;
+  plan_id: string;
+  socio_id: string;
+  email: string | null;
+  importe_plan: number;
+  matricula: number;
+  moneda: string;
+  codigo_descuento_id: string | null;
+  terminos_hash: string | null;
+  ciclo_fin: string | null;
+  cuota_texto: string | null;
+  cupo_matricula_reservado: boolean;
+  preference_id: string | null;
+  url_pago: string | null;
+  estado: string;
+  payment_id: string | null;
+  expira_en: string;
+  creado_en: string;
+  actualizado_en: string;
+  // migr 20261122020300.
+  sesion_id: string | null;
+  // migr 20261122020300.
+  spot_id: string | null;
+  // migr 20261122020400.
+  es_invitada: boolean | null;
+  // migr 20261122020400.
+  nombre: string | null;
+  // migr 20261122020400.
+  telefono: string | null;
+  // migr 20261122020400.
+  origen_lead: string | null;
+  // migr 20261122020400.
+  widget_sesion: string | null;
+  // migr 20261122020400.
+  datos_adicionales: any | null;
+}
+
+export interface RowRegalosMercadopago {
+  id: string;
+  studio_id: string;
+  importe: number;
+  moneda: string;
+  caducidad_meses: number;
+  comprador_nombre: string;
+  comprador_email: string;
+  destinatario_nombre: string;
+  destinatario_email: string;
+  mensaje: string | null;
+  preference_id: string | null;
+  url_pago: string | null;
+  estado: string;
+  payment_id: string | null;
+  tarjeta_id: string | null;
+  expira_en: string;
+  creado_en: string;
+  actualizado_en: string;
+}
+
+export interface RowPedidosConsumidor {
+  id: string;
+  codigo: string;
+  studio_id: string;
+  tipo: string;
+  nombre: string;
+  email: string;
+  telefono: string | null;
+  documento: string | null;
+  detalle: string | null;
+  socio_id: string | null;
+  estado: string;
+  creado_en: string;
+  atendido_en: string | null;
+  atendido_por: string | null;
+}
+
+export interface RowArcaConfig {
+  studio_id: string;
+  cuit: string;
+  condicion: string;
+  punto_venta: number;
+  entorno: string;
+  razon_social: string | null;
+  domicilio: string | null;
+  ingresos_brutos: string | null;
+  inicio_actividades: string | null;
+  clave_privada: string | null;
+  csr: string | null;
+  certificado: string | null;
+  certificado_vence: string | null;
+  ticket_token: string | null;
+  ticket_sign: string | null;
+  ticket_vence: string | null;
+  actualizado_en: string;
+}
+
+export interface RowComprobantesArca {
+  id: string;
+  studio_id: string;
+  recibo_id: string;
+  entorno: string;
+  cuit_emisor: string;
+  punto_venta: number;
+  tipo_cbte: number;
+  numero: number;
+  fecha: string;
+  doc_tipo: number;
+  doc_nro: string;
+  condicion_iva_receptor: number;
+  receptor_nombre: string | null;
+  concepto: string | null;
+  imp_total: number;
+  imp_neto: number;
+  imp_iva: number;
+  imp_op_ex: number;
+  alicuota: number | null;
+  estado: string;
+  cae: string | null;
+  cae_vto: string | null;
+  solicitud: any;
+  mensajes: any;
+  creado_en: string;
+  emitido_en: string | null;
+}
+
+export interface RowMercadopagoConfig {
+  studio_id: string;
+  access_token: string;
+  webhook_secret: string;
+  cuenta_id: string;
+  cuenta_nombre: string | null;
+  sitio: string | null;
+  token_final: string;
+  de_prueba: boolean;
+  actualizado_en: string;
+  actualizado_por: string | null;
 }
 
 export interface RowAvisosInactividad {
@@ -8051,7 +8212,6 @@ export type LiquidacionesInstructorasInsert = {
   n_penalizaciones?: number | null;
   reparto_penalizaciones_eur?: number | null;
   n_clases_sin_tarifa?: number | null;
-  total_eur?: number | null | null;
   detalle?: any | null;
   estado?: string | null;
   confirmada_en?: string | null | null;
@@ -8071,6 +8231,7 @@ export type LiquidacionesInstructorasInsert = {
   minutos_retraso?: number | null | null;
   minutos_contrato?: number | null | null;
   minutos_extra?: number | null | null;
+  total_eur?: number | null | null;
 }
 
 export type LiquidacionesInstructorasUpdate = {
@@ -8087,7 +8248,6 @@ export type LiquidacionesInstructorasUpdate = {
   n_penalizaciones?: number | null;
   reparto_penalizaciones_eur?: number | null;
   n_clases_sin_tarifa?: number | null;
-  total_eur?: number | null | null;
   detalle?: any | null;
   estado?: string | null;
   confirmada_en?: string | null | null;
@@ -8107,6 +8267,7 @@ export type LiquidacionesInstructorasUpdate = {
   minutos_retraso?: number | null | null;
   minutos_contrato?: number | null | null;
   minutos_extra?: number | null | null;
+  total_eur?: number | null | null;
 }
 
 export type RetoParticipacionesInsert = {
@@ -12703,6 +12864,304 @@ export type ResenasClicsUpdate = {
   n?: number | null;
 }
 
+export type PagosMercadopagoInsert = {
+  payment_id?: string | null;
+  studio_id?: string | null;
+  recibo_id?: string | null | null;
+  estado?: string | null;
+  estado_detalle?: string | null | null;
+  importe?: number | null;
+  moneda?: string | null;
+  medio?: string | null | null;
+  desenlace?: string | null;
+  detalle?: string | null | null;
+  creado_en?: string | null;
+  actualizado_en?: string | null;
+  compra_id?: string | null | null;
+  importe_devuelto?: number | null | null;
+  regalo_id?: string | null | null;
+}
+
+export type PagosMercadopagoUpdate = {
+  payment_id?: string | null;
+  studio_id?: string | null;
+  recibo_id?: string | null | null;
+  estado?: string | null;
+  estado_detalle?: string | null | null;
+  importe?: number | null;
+  moneda?: string | null;
+  medio?: string | null | null;
+  desenlace?: string | null;
+  detalle?: string | null | null;
+  creado_en?: string | null;
+  actualizado_en?: string | null;
+  compra_id?: string | null | null;
+  importe_devuelto?: number | null | null;
+  regalo_id?: string | null | null;
+}
+
+export type ComprasMercadopagoInsert = {
+  id?: string | null;
+  studio_id?: string | null;
+  plan_id?: string | null;
+  socio_id?: string | null;
+  email?: string | null | null;
+  importe_plan?: number | null;
+  matricula?: number | null;
+  moneda?: string | null;
+  codigo_descuento_id?: string | null | null;
+  terminos_hash?: string | null | null;
+  ciclo_fin?: string | null | null;
+  cuota_texto?: string | null | null;
+  cupo_matricula_reservado?: boolean | null;
+  preference_id?: string | null | null;
+  url_pago?: string | null | null;
+  estado?: string | null;
+  payment_id?: string | null | null;
+  expira_en?: string | null;
+  creado_en?: string | null;
+  actualizado_en?: string | null;
+  sesion_id?: string | null | null;
+  spot_id?: string | null | null;
+  es_invitada?: boolean | null | null;
+  nombre?: string | null | null;
+  telefono?: string | null | null;
+  origen_lead?: string | null | null;
+  widget_sesion?: string | null | null;
+  datos_adicionales?: any | null | null;
+}
+
+export type ComprasMercadopagoUpdate = {
+  id?: string | null;
+  studio_id?: string | null;
+  plan_id?: string | null;
+  socio_id?: string | null;
+  email?: string | null | null;
+  importe_plan?: number | null;
+  matricula?: number | null;
+  moneda?: string | null;
+  codigo_descuento_id?: string | null | null;
+  terminos_hash?: string | null | null;
+  ciclo_fin?: string | null | null;
+  cuota_texto?: string | null | null;
+  cupo_matricula_reservado?: boolean | null;
+  preference_id?: string | null | null;
+  url_pago?: string | null | null;
+  estado?: string | null;
+  payment_id?: string | null | null;
+  expira_en?: string | null;
+  creado_en?: string | null;
+  actualizado_en?: string | null;
+  sesion_id?: string | null | null;
+  spot_id?: string | null | null;
+  es_invitada?: boolean | null | null;
+  nombre?: string | null | null;
+  telefono?: string | null | null;
+  origen_lead?: string | null | null;
+  widget_sesion?: string | null | null;
+  datos_adicionales?: any | null | null;
+}
+
+export type RegalosMercadopagoInsert = {
+  id?: string | null;
+  studio_id?: string | null;
+  importe?: number | null;
+  moneda?: string | null;
+  caducidad_meses?: number | null;
+  comprador_nombre?: string | null;
+  comprador_email?: string | null;
+  destinatario_nombre?: string | null;
+  destinatario_email?: string | null;
+  mensaje?: string | null | null;
+  preference_id?: string | null | null;
+  url_pago?: string | null | null;
+  estado?: string | null;
+  payment_id?: string | null | null;
+  tarjeta_id?: string | null | null;
+  expira_en?: string | null;
+  creado_en?: string | null;
+  actualizado_en?: string | null;
+}
+
+export type RegalosMercadopagoUpdate = {
+  id?: string | null;
+  studio_id?: string | null;
+  importe?: number | null;
+  moneda?: string | null;
+  caducidad_meses?: number | null;
+  comprador_nombre?: string | null;
+  comprador_email?: string | null;
+  destinatario_nombre?: string | null;
+  destinatario_email?: string | null;
+  mensaje?: string | null | null;
+  preference_id?: string | null | null;
+  url_pago?: string | null | null;
+  estado?: string | null;
+  payment_id?: string | null | null;
+  tarjeta_id?: string | null | null;
+  expira_en?: string | null;
+  creado_en?: string | null;
+  actualizado_en?: string | null;
+}
+
+export type PedidosConsumidorInsert = {
+  id?: string | null;
+  codigo?: string | null;
+  studio_id?: string | null;
+  tipo?: string | null;
+  nombre?: string | null;
+  email?: string | null;
+  telefono?: string | null | null;
+  documento?: string | null | null;
+  detalle?: string | null | null;
+  socio_id?: string | null | null;
+  estado?: string | null;
+  creado_en?: string | null;
+  atendido_en?: string | null | null;
+  atendido_por?: string | null | null;
+}
+
+export type PedidosConsumidorUpdate = {
+  id?: string | null;
+  codigo?: string | null;
+  studio_id?: string | null;
+  tipo?: string | null;
+  nombre?: string | null;
+  email?: string | null;
+  telefono?: string | null | null;
+  documento?: string | null | null;
+  detalle?: string | null | null;
+  socio_id?: string | null | null;
+  estado?: string | null;
+  creado_en?: string | null;
+  atendido_en?: string | null | null;
+  atendido_por?: string | null | null;
+}
+
+export type ArcaConfigInsert = {
+  studio_id?: string | null;
+  cuit?: string | null;
+  condicion?: string | null;
+  punto_venta?: number | null;
+  entorno?: string | null;
+  razon_social?: string | null | null;
+  domicilio?: string | null | null;
+  ingresos_brutos?: string | null | null;
+  inicio_actividades?: string | null | null;
+  clave_privada?: string | null | null;
+  csr?: string | null | null;
+  certificado?: string | null | null;
+  certificado_vence?: string | null | null;
+  ticket_token?: string | null | null;
+  ticket_sign?: string | null | null;
+  ticket_vence?: string | null | null;
+  actualizado_en?: string | null;
+}
+
+export type ArcaConfigUpdate = {
+  studio_id?: string | null;
+  cuit?: string | null;
+  condicion?: string | null;
+  punto_venta?: number | null;
+  entorno?: string | null;
+  razon_social?: string | null | null;
+  domicilio?: string | null | null;
+  ingresos_brutos?: string | null | null;
+  inicio_actividades?: string | null | null;
+  clave_privada?: string | null | null;
+  csr?: string | null | null;
+  certificado?: string | null | null;
+  certificado_vence?: string | null | null;
+  ticket_token?: string | null | null;
+  ticket_sign?: string | null | null;
+  ticket_vence?: string | null | null;
+  actualizado_en?: string | null;
+}
+
+export type ComprobantesArcaInsert = {
+  id?: string | null;
+  studio_id?: string | null;
+  recibo_id?: string | null;
+  entorno?: string | null;
+  cuit_emisor?: string | null;
+  punto_venta?: number | null;
+  tipo_cbte?: number | null;
+  numero?: number | null;
+  fecha?: string | null;
+  doc_tipo?: number | null;
+  doc_nro?: string | null;
+  condicion_iva_receptor?: number | null;
+  receptor_nombre?: string | null | null;
+  concepto?: string | null | null;
+  imp_total?: number | null;
+  imp_neto?: number | null;
+  imp_iva?: number | null;
+  imp_op_ex?: number | null;
+  alicuota?: number | null | null;
+  estado?: string | null;
+  cae?: string | null | null;
+  cae_vto?: string | null | null;
+  solicitud?: any | null;
+  mensajes?: any | null;
+  creado_en?: string | null;
+  emitido_en?: string | null | null;
+}
+
+export type ComprobantesArcaUpdate = {
+  id?: string | null;
+  studio_id?: string | null;
+  recibo_id?: string | null;
+  entorno?: string | null;
+  cuit_emisor?: string | null;
+  punto_venta?: number | null;
+  tipo_cbte?: number | null;
+  numero?: number | null;
+  fecha?: string | null;
+  doc_tipo?: number | null;
+  doc_nro?: string | null;
+  condicion_iva_receptor?: number | null;
+  receptor_nombre?: string | null | null;
+  concepto?: string | null | null;
+  imp_total?: number | null;
+  imp_neto?: number | null;
+  imp_iva?: number | null;
+  imp_op_ex?: number | null;
+  alicuota?: number | null | null;
+  estado?: string | null;
+  cae?: string | null | null;
+  cae_vto?: string | null | null;
+  solicitud?: any | null;
+  mensajes?: any | null;
+  creado_en?: string | null;
+  emitido_en?: string | null | null;
+}
+
+export type MercadopagoConfigInsert = {
+  studio_id?: string | null;
+  access_token?: string | null;
+  webhook_secret?: string | null;
+  cuenta_id?: string | null;
+  cuenta_nombre?: string | null | null;
+  sitio?: string | null | null;
+  token_final?: string | null;
+  de_prueba?: boolean | null;
+  actualizado_en?: string | null;
+  actualizado_por?: string | null | null;
+}
+
+export type MercadopagoConfigUpdate = {
+  studio_id?: string | null;
+  access_token?: string | null;
+  webhook_secret?: string | null;
+  cuenta_id?: string | null;
+  cuenta_nombre?: string | null | null;
+  sitio?: string | null | null;
+  token_final?: string | null;
+  de_prueba?: boolean | null;
+  actualizado_en?: string | null;
+  actualizado_por?: string | null | null;
+}
+
 export type AvisosInactividadInsert = {
   studio_id?: string | null;
   avisado_en?: string | null;
@@ -14142,6 +14601,41 @@ export type Database = {
         Row: RowResenasClics;
         Insert: ResenasClicsInsert;
         Update: ResenasClicsUpdate;
+      };
+      pagos_mercadopago: {
+        Row: RowPagosMercadopago;
+        Insert: PagosMercadopagoInsert;
+        Update: PagosMercadopagoUpdate;
+      };
+      compras_mercadopago: {
+        Row: RowComprasMercadopago;
+        Insert: ComprasMercadopagoInsert;
+        Update: ComprasMercadopagoUpdate;
+      };
+      regalos_mercadopago: {
+        Row: RowRegalosMercadopago;
+        Insert: RegalosMercadopagoInsert;
+        Update: RegalosMercadopagoUpdate;
+      };
+      pedidos_consumidor: {
+        Row: RowPedidosConsumidor;
+        Insert: PedidosConsumidorInsert;
+        Update: PedidosConsumidorUpdate;
+      };
+      arca_config: {
+        Row: RowArcaConfig;
+        Insert: ArcaConfigInsert;
+        Update: ArcaConfigUpdate;
+      };
+      comprobantes_arca: {
+        Row: RowComprobantesArca;
+        Insert: ComprobantesArcaInsert;
+        Update: ComprobantesArcaUpdate;
+      };
+      mercadopago_config: {
+        Row: RowMercadopagoConfig;
+        Insert: MercadopagoConfigInsert;
+        Update: MercadopagoConfigUpdate;
       };
       avisos_inactividad: {
         Row: RowAvisosInactividad;

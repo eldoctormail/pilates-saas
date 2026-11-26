@@ -12,3 +12,6 @@
 # Mensualidad de los estudios a Centra (Mercado Pago): relee las suscripciones y
 # cierra las que pasaron el fin de lo pagado.
 15 */6 * * * /usr/local/bin/llamar mp-suscripciones
+# Precios de /interno/precios en las páginas ya generadas (al compilar salen los
+# de serie). También corre al arrancar el contenedor de cron. Si no cambió nada, no hace nada.
+*/10 * * * * /usr/local/bin/llamar precios-al-dia

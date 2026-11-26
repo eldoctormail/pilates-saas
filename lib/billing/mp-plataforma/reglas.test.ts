@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
   cuerpoPreapproval, decidirAlta, decidirPorPago, decidirPorSuscripcion, estadoVisible, GRACIA_DIAS,
-  idSuscripcion, leerReferencia, preapprovalDe, referenciaDePlan, vencida,
+  idSuscripcion, leerReferencia, preapprovalDe, referenciaDePlan, vencida, yaEmpezo,
   type FilaEstudio, type Preapproval,
 } from './reglas.ts';
 import { configMpPlataforma } from './config.ts';
@@ -45,8 +45,11 @@ test('alta: Cadena no, mismo plan pagado no, cambio de plan empieza al terminar 
   const vigente = pre({ external_reference: referenciaDePlan('est-1', 'BASE') });
   assert.equal(decidirAlta(pagando, 'BASE', vigente, AHORA).ok, false);
   assert.deepEqual(decidirAlta(pagando, 'ESTUDIO', vigente, AHORA), { ok: true, empiezaEl: enDias(10) });
-  // Ya dada de baja en Mercado Pago: la nueva cobra hoy (no hay nada pagado que respetar más allá del acceso).
-  assert.deepEqual(decidirAlta(pagando, 'BASE', pre({ status: 'cancelled' }), AHORA), { ok: true, empiezaEl: null });
+  // Ya dada de baja en Mercado Pago pero con días pagados: la nueva empieza cuando se acaban, no cobra hoy otra vez.
+  assert.deepEqual(decidirAlta(pagando, 'BASE', pre({ status: 'cancelled' }), AHORA), { ok: true, empiezaEl: enDias(10) });
+  assert.deepEqual(decidirAlta(pagando, 'ESTUDIO', null, AHORA), { ok: true, empiezaEl: enDias(10) });
+  // Lo pagado ya se acabó: cobra hoy.
+  assert.deepEqual(decidirAlta({ ...pagando, current_period_end: enDias(-1) }, 'BASE', pre({ status: 'cancelled' }), AHORA), { ok: true, empiezaEl: null });
   // Con un cobro pendiente no se cambia de plan: primero la tarjeta.
   assert.equal(decidirAlta({ ...pagando, subscription_status: 'past_due' }, 'ESTUDIO', vigente, AHORA).ok, false);
 });
@@ -127,4 +130,30 @@ test('estado que ve la propietaria', () => {
   assert.equal(estadoVisible({ subscription_status: 'canceled' }, pre({ status: 'cancelled' })), 'cancelada');
   assert.equal(estadoVisible({ subscription_status: 'active' }, pre({ status: 'pending' })), 'pendiente');
   assert.equal(estadoVisible({ subscription_status: 'active' }, null), 'cancelada');
+});
+
+test('cambio de plan: el plan nuevo entra cuando empieza a cobrarse, no al autorizarse', () => {
+  const pagando = fila({ plan: 'BASE', subscription_status: 'active', subscription_id: 'mp:vieja1', current_period_end: enDias(10) });
+  const nueva = pre({ next_payment_date: enDias(10), auto_recurring: { start_date: enDias(10) } });
+  assert.equal(yaEmpezo(nueva, AHORA), false);
+  // Al autorizarse: toma el relevo (y cancela la vieja), pero sigue con el plan que pagó.
+  const d = decidirPorSuscripcion(pagando, nueva, AHORA);
+  assert.ok(d.aplicar);
+  assert.deepEqual(d.cambios, { plan: 'BASE', subscription_status: 'active', subscription_id: 'mp:abc123', current_period_end: enDias(10) });
+  assert.equal(d.cancelarAnterior, 'vieja1');
+  // Releída antes de empezar: sigue igual.
+  const relevada = fila({ plan: 'BASE', subscription_status: 'active', subscription_id: 'mp:abc123', current_period_end: enDias(10) });
+  const antes = decidirPorSuscripcion(relevada, nueva, AHORA);
+  assert.ok(antes.aplicar && antes.cambios.plan === 'BASE');
+  // Ya empezó (el primer cobro corrió la fecha): pasa al plan nuevo.
+  const despues = new Date(AHORA.getTime() + 11 * DIA);
+  const d2 = decidirPorSuscripcion(relevada, { ...nueva, next_payment_date: enDias(40) }, despues);
+  assert.ok(d2.aplicar);
+  assert.deepEqual(d2.cambios, { plan: 'ESTUDIO', current_period_end: enDias(40) });
+});
+
+test('sin fecha de inicio, o con la del alta, la suscripción ya empezó', () => {
+  assert.equal(yaEmpezo(pre(), AHORA), true);
+  assert.equal(yaEmpezo(pre({ auto_recurring: { start_date: AHORA.toISOString() } }), AHORA), true);
+  assert.equal(yaEmpezo(pre({ auto_recurring: { start_date: new Date(AHORA.getTime() + 60_000).toISOString() } }), AHORA), true);
 });

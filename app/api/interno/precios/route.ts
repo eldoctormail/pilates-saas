@@ -5,7 +5,7 @@ import { exigirPermiso } from '@/lib/interno/auth';
 import { registrar } from '@/lib/interno/auditoria';
 import { enforceRateLimit } from '@/lib/rate-limit';
 import { CLAVE_AJUSTE_PRECIOS, PRECIOS_DE_SERIE, leerPreciosGuardados, validarPrecios } from '@/lib/billing/precios-plataforma';
-import { preciosRecienGuardados } from '@/lib/billing/precios-servidor';
+import { marcarPublicados, preciosRecienGuardados } from '@/lib/billing/precios-servidor';
 
 export const runtime = 'nodejs';
 
@@ -47,6 +47,7 @@ export async function PUT(req: NextRequest) {
   // Todas las páginas que enseñan un precio (la web, /precios, el alta, la
   // suscripción…) se vuelven a generar con los nuevos en la próxima visita.
   revalidatePath('/', 'layout');
+  marcarPublicados(valido.precios);
   const p = valido.precios;
   await registrar(db, req, {
     actor: g.admin, accion: 'billing.precios.cambiados', objetivoTipo: 'ajuste', objetivoId: CLAVE_AJUSTE_PRECIOS,

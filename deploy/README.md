@@ -194,10 +194,12 @@ Esto es lo que cada estudio le paga a Centra por mes, con **tu** cuenta de Merca
 Cómo funciona:
 
 - **El precio** es el de `/interno/precios` en el momento de suscribirse. Si después cambiás un precio, las suscripciones que ya existen siguen con el de antes.
+- **Los precios en la web**: las páginas se compilan con los precios de serie, así que tras cada `docker compose up` con imagen nueva el contenedor `cron` las regenera con los de `/interno/precios` en cuanto la app contesta (y lo revisa cada 10 minutos). Si querés forzarlo: `docker compose exec cron llamar precios-al-dia`.
 - **El plan se activa** cuando Mercado Pago autoriza la suscripción (aviso al webhook, o al volver a Centra). Nada se activa solo por abrir el pago.
 - **Cada cobro mensual** corre la fecha de «tenés el plan hasta». Si un cobro falla, el plan queda en «cobro pendiente» y Mercado Pago lo reintenta.
 - **La baja** (botón en la pantalla del plan) frena los cobros en el acto, pero el estudio sigue con su plan hasta el final de lo pagado. Pasado eso, más 5 días de margen, el panel se cierra (con `BILLING_ENFORCED=true`). Lo mismo si los cobros dejan de salir.
-- **Cambiar de plan** abre una suscripción nueva que empieza a cobrarse cuando termina lo ya pagado; cuando Mercado Pago la autoriza, Centra cancela la anterior. Nunca se cobran dos a la vez.
+- **Cambiar de plan** abre una suscripción nueva que empieza a cobrarse cuando termina lo ya pagado; cuando Mercado Pago la autoriza, Centra cancela la anterior. Nunca se cobran dos a la vez. Hasta que la nueva empieza, el estudio sigue con el plan que pagó; el nuevo entra con su primer cobro.
+- **Volver tras una baja** antes de que se acabe lo pagado: la suscripción nueva empieza a cobrarse cuando termina lo ya pagado, no en el acto.
 - **El plan Cadena** todavía no se contrata desde acá: activalo a mano desde `/interno`.
 - **Conciliador:** cada 6 horas el contenedor `cron` relee las suscripciones por si un aviso no llegó (`docker compose exec cron llamar mp-suscripciones`).
 

@@ -138,8 +138,11 @@ export function decidirAlta(fila: FilaEstudio, plan: Plan, actual: Preapproval |
   if (fila.subscription_status === 'past_due' && vigente) {
     return { ok: false, status: 409, error: 'Tu último cobro no salió. Revisá la tarjeta en Mercado Pago antes de cambiar de plan.' };
   }
+  // Lo ya pagado se respeta siempre: también si la suscripción anterior ya está
+  // dada de baja (baja programada) y vuelve antes de que se acabe. Si no, se le
+  // cobraría hoy un mes que se solapa con días que ya pagó.
   const fin = ms(fila.current_period_end);
-  const empiezaEl = vigente && pagaAhora && fin !== null && fin > ahora.getTime() ? new Date(fin).toISOString() : null;
+  const empiezaEl = pagaAhora && fin !== null && fin > ahora.getTime() ? new Date(fin).toISOString() : null;
   return { ok: true, empiezaEl };
 }
 
@@ -178,6 +181,23 @@ export type Decision =
   | { aplicar: true; cambios: Cambios; cancelarAnterior: string | null }
   | { aplicar: false; motivo: string };
 
+/**
+ * Margen para dar por empezada una suscripción: sin `start_date` pedida,
+ * Mercado Pago pone la del alta, que puede llegar unos minutos «en el futuro».
+ */
+const MARGEN_INICIO_MS = DIA_MS;
+
+/**
+ * ¿Ya empezó a cobrarse? Un cambio de plan abre una suscripción que empieza
+ * cuando termina lo pagado (`start_date`): hasta entonces el estudio sigue con
+ * el plan que pagó, ni antes con el nuevo (lo tendría sin pagarlo) ni sin el
+ * viejo (lo pagó).
+ */
+export function yaEmpezo(pre: Preapproval, ahora: Date): boolean {
+  const inicio = ms(pre.auto_recurring?.start_date);
+  return inicio === null || inicio <= ahora.getTime() + MARGEN_INICIO_MS;
+}
+
 /** Qué hacer con la fila del estudio a partir de su suscripción releída en Mercado Pago. */
 export function decidirPorSuscripcion(fila: FilaEstudio, pre: Preapproval, ahora: Date): Decision {
   const ref = leerReferencia(pre.external_reference);
@@ -185,11 +205,13 @@ export function decidirPorSuscripcion(fila: FilaEstudio, pre: Preapproval, ahora
   if (!ID_PREAPPROVAL.test(pre.id)) return { aplicar: false, motivo: 'id-raro' };
   const id = idSuscripcion(pre.id);
   const propia = fila.subscription_id === id;
+  // El plan de la suscripción manda cuando empieza a cobrarse; antes, el que tenía.
+  const plan = yaEmpezo(pre, ahora) || !fila.plan ? ref.plan : fila.plan;
 
   if (pre.status === 'authorized') {
     const periodo = pre.next_payment_date ?? fila.current_period_end;
     if (propia) {
-      const cambios: Cambios = { plan: ref.plan, current_period_end: periodo };
+      const cambios: Cambios = { plan, current_period_end: periodo };
       // Un cobro que no salió lo deja en past_due el aviso del pago, no este.
       if (fila.subscription_status !== 'active' && fila.subscription_status !== 'past_due') cambios.subscription_status = 'active';
       return { aplicar: true, cambios, cancelarAnterior: null };
@@ -197,7 +219,7 @@ export function decidirPorSuscripcion(fila: FilaEstudio, pre: Preapproval, ahora
     // Una suscripción nueva (alta o cambio de plan) toma el relevo.
     return {
       aplicar: true,
-      cambios: { plan: ref.plan, subscription_status: 'active', subscription_id: id, current_period_end: periodo },
+      cambios: { plan, subscription_status: 'active', subscription_id: id, current_period_end: periodo },
       cancelarAnterior: preapprovalDe(fila.subscription_id),
     };
   }

@@ -195,7 +195,7 @@ export function RellenarHuecoPanel({
         <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Rellenar hueco</p>
         <h2 className="mt-1 text-[17px] font-bold text-foreground">{nombreClase}</h2>
         <p className="text-[12px] text-muted-foreground">
-          {horaEstudio(sesion.inicio)}–{horaEstudio(sesion.fin)} · {clase.huecos} lugar{clase.huecos === 1 ? '' : 's'} disponible{clase.huecos === 1 ? '' : 's'}
+          {horaEstudio(sesion.inicio)}–{horaEstudio(sesion.fin)} · {clase.huecos} lugar{clase.huecos === 1 ? '' : 'es'} disponible{clase.huecos === 1 ? '' : 's'}
         </p>
       </div>
 

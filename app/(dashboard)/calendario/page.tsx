@@ -4167,7 +4167,7 @@ export default function Calendario() {
         onOpenChange={setConfirmEliminar}
         titulo="¿Eliminar esta clase?"
         descripcion={apuntadasSesionActual > 0
-          ? `${apuntadasSesionActual} cliente${apuntadasSesionActual !== 1 ? 's' : ''} apuntada${apuntadasSesionActual !== 1 ? 's' : ''} se quedará${apuntadasSesionActual !== 1 ? 'n' : ''} sin lugar${apuntadasSesionActual !== 1 ? 's' : ''}${(studio?.cancelacionClaseDevuelveBono ?? true) ? ' — su bono se devuelve' : ''} y recibirá${apuntadasSesionActual !== 1 ? 'n' : ''} un aviso.`
+          ? `${apuntadasSesionActual} cliente${apuntadasSesionActual !== 1 ? 's' : ''} apuntada${apuntadasSesionActual !== 1 ? 's' : ''} se quedará${apuntadasSesionActual !== 1 ? 'n' : ''} sin lugar${(studio?.cancelacionClaseDevuelveBono ?? true) ? ' — su bono se devuelve' : ''} y recibirá${apuntadasSesionActual !== 1 ? 'n' : ''} un aviso.`
           : 'La clase no tiene clientes apuntados.'}
         textoConfirmar="Eliminar clase"
         destructivo

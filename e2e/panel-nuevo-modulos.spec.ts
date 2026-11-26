@@ -110,7 +110,7 @@ test('como Bonsai: cabecera con activos y total, buscador, grupos con su frase y
   await expect(tarjeta(page, '/configuracion').getByRole('switch')).toHaveCount(0);
 
   // El buscador filtra por nombre y por lo que hace, sin tildes.
-  await page.getByRole('searchbox', { name: 'Buscar un módulo' }).fill('festivo');
+  await page.getByRole('searchbox', { name: 'Buscar un módulo' }).fill('feriado');
   await expect(page.getByTestId('modulo-nuevo')).toHaveCount(1);
   await expect(tarjeta(page, '/festivos')).toBeVisible();
   await page.getByRole('searchbox', { name: 'Buscar un módulo' }).fill('zzz');

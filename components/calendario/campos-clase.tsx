@@ -23,8 +23,8 @@ export function AvisoAforoSala({ salas, salaId, aforo }: {
   if (!sala || !Number.isFinite(aforo) || aforo <= sala.capacidad) return null;
   return (
     <p role="alert" className="mt-1.5 text-[11px] leading-snug text-[var(--warning)]">
-      «{sala.nombre}» tiene {sala.capacidad} lugar{sala.capacidad === 1 ? '' : 's'}.
-      Con {aforo} estarías vendiendo {aforo - sala.capacidad} más de las que caben.
+      «{sala.nombre}» tiene {sala.capacidad} lugar{sala.capacidad === 1 ? '' : 'es'}.
+      Con {aforo} estarías vendiendo {aforo - sala.capacidad} más de los que caben.
     </p>
   );
 }

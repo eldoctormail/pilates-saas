@@ -100,7 +100,7 @@ test('un lugar ofrecido se acepta desde «Mis reservas»; si el servidor dice qu
 
   const tarjeta = page.getByRole('article').filter({ hasText: 'Hoy · 18:00' });
   await expect(tarjeta.getByText('Lugar para ti', { exact: true })).toBeVisible();
-  await expect(tarjeta).toContainText('¡Se ha liberado un lugar! Tienes hasta las 08:30 para aceptarla.');
+  await expect(tarjeta).toContainText('¡Se ha liberado un lugar! Tienes hasta las 08:30 para aceptarlo.');
   const aceptar = tarjeta.getByRole('button', { name: 'Aceptar lugar' });
 
   await aceptar.click();

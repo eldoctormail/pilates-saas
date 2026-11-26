@@ -15,9 +15,10 @@
 // Autoalojado: el origen sale de NEXT_PUBLIC_APP_URL (sin barra final). Sin ella,
 // el de Centra de siempre.
 import { FUNCIONES_DE_ESPANA as ES } from './locale.ts';
+import { envPublica } from './env-publica.ts';
 
 const URL_CANONICA = (
-  (typeof process !== 'undefined' ? process.env.NEXT_PUBLIC_APP_URL : undefined) || 'https://www.tentare.app'
+  /* @__PURE__ */ envPublica(() => process.env.NEXT_PUBLIC_APP_URL) || 'https://www.tentare.app'
 ).replace(/\/+$/, '');
 // `@__PURE__`: si un paquete (el widget) no usa LEGAL, el compilador puede
 // descartarlo entero; con una llamada «con efectos» dentro, lo arrastraría.

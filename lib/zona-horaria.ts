@@ -5,8 +5,10 @@
 // NEXT_PUBLIC_ZONA_HORARIA sin tocar código; los tests la fijan en Madrid
 // (scripts/register-test-hooks.mjs) porque sus fechas esperadas están
 // escritas en esa hora.
+import { envPublica } from './env-publica.ts';
+
 export const ZONA_HORARIA: string =
-  (typeof process !== 'undefined' ? process.env.NEXT_PUBLIC_ZONA_HORARIA : undefined) ||
+  /* @__PURE__ */ envPublica(() => process.env.NEXT_PUBLIC_ZONA_HORARIA) ||
   'America/Argentina/Buenos_Aires';
 
 /**

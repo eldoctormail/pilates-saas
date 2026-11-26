@@ -1,6 +1,6 @@
 import { test, expect, type Page, type Route } from '@playwright/test';
 import { montar, ir } from './panel-sembrado';
-import { SECCIONES, type TarjetaConfiguracion } from '../lib/configuracion/secciones';
+import { SECCIONES, tarjetaDeOtroPais, type TarjetaConfiguracion } from '../lib/configuracion/secciones';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Configuración cabe en un móvil, en el iPad de recepción y en un portátil.
@@ -229,6 +229,7 @@ for (const vista of VISTAS) {
 
         for (const t of seccion.tarjetas as readonly TarjetaConfiguracion[]) {
           if (t.condicion) continue; // sedes y catálogo de la cadena: solo con varias sedes
+          if (tarjetaDeOtroPais(t.id)) continue; // la del otro país no se pinta (ARCA en España, Stripe en Argentina)
           // En la sección, una herramienta es su fila; sus tarjetas están en su pantalla.
           // Se espera igual que a una tarjeta: en «Clases» y «Comunicación» la
           // fila es lo primero de la sección y se miraba antes de que cargara.

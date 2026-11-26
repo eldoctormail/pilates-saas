@@ -12,14 +12,15 @@
 // (lib/billing/precios-plataforma.ts).
 
 import { LOCALE } from './locale.ts';
+import { envPublica } from './env-publica.ts';
 
 const leer = (v: string | undefined): string | undefined => (v && v.trim()) || undefined;
 
 export const MONEDA: string =
-  (typeof process !== 'undefined' ? leer(process.env.NEXT_PUBLIC_MONEDA) : undefined) ?? 'ARS';
+  leer(/* @__PURE__ */ envPublica(() => process.env.NEXT_PUBLIC_MONEDA)) ?? 'ARS';
 
 export const LOCALE_MONEDA: string =
-  (typeof process !== 'undefined' ? leer(process.env.NEXT_PUBLIC_LOCALE_MONEDA) : undefined) ?? LOCALE;
+  leer(/* @__PURE__ */ envPublica(() => process.env.NEXT_PUBLIC_LOCALE_MONEDA)) ?? LOCALE;
 
 const partes = /* @__PURE__ */ new Intl.NumberFormat(LOCALE_MONEDA, {
   style: 'currency', currency: MONEDA, currencyDisplay: 'narrowSymbol',

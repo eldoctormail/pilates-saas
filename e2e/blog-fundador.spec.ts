@@ -9,7 +9,9 @@ test.describe.configure({ timeout: 120_000 });
 const SLUG = 'marcos-roca-rodriguez-quien-es-el-fundador-de-tentare';
 const ARTICULO = `/blog/marcos-roca/${SLUG}`;
 const BORRADOR = '/blog/marcos-roca/por-que-decidi-construir-tentare';
-const ORIGEN = 'https://www.tentare.app';
+// El origen canónico es el del despliegue (NEXT_PUBLIC_APP_URL, lib/legal-info.ts);
+// sin él, el de siempre.
+const ORIGEN = (process.env.NEXT_PUBLIC_APP_URL || 'https://www.tentare.app').replace(/\/+$/, '');
 
 async function jsonLd(page: Page): Promise<any[]> {
   const textos = await page.locator('script[type="application/ld+json"]').allTextContents();

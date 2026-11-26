@@ -139,7 +139,9 @@ test.describe('Apps e integraciones', () => {
   test('la API enseña su dirección, la cabecera y cada endpoint sin la clave en la URL', async ({ page }) => {
     await abrir(page, 'apps/api');
     await expect(page.getByTestId('api-de-desarrollador')).toBeVisible({ timeout: 60_000 });
-    await expect(page.getByTestId('base-api')).toHaveText('https://www.tentare.app/api/v1');
+    await expect(page.getByTestId('base-api')).toHaveText(
+      // La dirección sale del origen del despliegue (NEXT_PUBLIC_APP_URL); sin él, el de siempre.
+      `${(process.env.NEXT_PUBLIC_APP_URL || 'https://www.tentare.app').replace(/\/+$/, '')}/api/v1`);
     await expect(page.getByText('Authorization: Bearer').first()).toBeVisible();
     const n = await page.getByTestId('endpoint').count();
     expect(n).toBeGreaterThanOrEqual(10);

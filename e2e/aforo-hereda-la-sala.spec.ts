@@ -154,7 +154,7 @@ test.describe('El aforo sabe cuántos lugares tiene la sala', () => {
     const aviso = page.getByRole('alert').filter({ hasText: 'Sala Reformer' });
     await expect(aviso).toContainText('8 lugares');
     await expect(aviso, 'dice cuántas sobran, no solo que hay un problema')
-      .toContainText('4 más de las que caben');
+      .toContainText('4 más de los que caben');
 
     // Y no bloquea: hay estudios que meten una colchoneta extra a propósito.
     await expect(page.getByRole('button', { name: /Crear|Guardar/ }).first()).toBeEnabled();

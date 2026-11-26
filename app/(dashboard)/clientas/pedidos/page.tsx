@@ -32,6 +32,8 @@ export default function PedidosConsumidorPage() {
     const [p, a] = await Promise.all([listarPedidos(studioId, 'PENDIENTE'), listarPedidos(studioId, 'ATENDIDO')]);
     setPendientes(p); setAtendidos(a);
   }, [studioId]);
+  // setState tras await, no en cascada: el mismo falso positivo que /verificar-acceso.
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { void cargar(); }, [cargar]);
 
   async function atender(p: PedidoConsumidor) {

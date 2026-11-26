@@ -16,7 +16,6 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { LOCALE } from '../locale.ts';
-import { ZONA_HORARIA } from '../zona-horaria.ts';
 import type { PlanTarifa, Suscripcion } from '../types.ts';
 import { planCubreTipoClase } from '../bono-logic.ts';
 import { idReciboDeClaseSuelta, PREFIJO_RECIBO_DE_CLASE_SUELTA } from '../cobros/recibo-de-cita.ts';

@@ -163,6 +163,8 @@ export function HojaPagarYReservar({
     if (arrancada.current) return;
     arrancada.current = true;
     // De vuelta de Mercado Pago: ya pagó (o lo intentó). Nada de volver a ofrecerle pagar: lo que diga el servidor.
+    // Una sola vez por la guarda de arriba: no hay cascada.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (compraMercadoPago) { void confirmar(compraMercadoPago, true); return; }
     void comprobar();
   }, [comprobar, confirmar, compraMercadoPago]);

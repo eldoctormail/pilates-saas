@@ -94,6 +94,8 @@ export default function FichaClasePage() {
   const compraAlVolver = params.get('mp');
   useEffect(() => {
     if (!compraAlVolver || !esIdCompra(compraAlVolver)) return;
+    // Una vez, al volver de Mercado Pago (después se limpia la URL): no hay cascada.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setPagar({ spotId: null, compraMercadoPago: compraAlVolver });
     // Fuera de la URL: recargar o compartir la ficha no vuelve a abrir la espera de un pago viejo.
     try { window.history.replaceState(null, '', window.location.pathname); } catch { /* sin historial: da igual */ }

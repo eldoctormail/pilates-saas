@@ -73,6 +73,9 @@ export function ListaPlanes({
     const urlMercadoPago = (r.datos as { url?: string } | null)?.url;
     if (conMercadoPago) {
       // Se queda en «creando» (el botón cargando) hasta que la ventana se vaya a Mercado Pago.
+      // `href =` y no `.assign()`: el widget vive en un iframe de la web del estudio y, con `window.top` de otro
+      // origen, el navegador solo deja navegarlo asignando `href` (o con `replace`), no con `assign`.
+      // eslint-disable-next-line react-hooks/immutability
       if (typeof urlMercadoPago === 'string' && /^https:\/\//.test(urlMercadoPago)) { (window.top ?? window).location.href = urlMercadoPago; return; }
       setError('No se ha podido iniciar la compra.');
       setEstado({ fase: 'lista' });

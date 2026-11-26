@@ -13,7 +13,6 @@
 // pintada no era la del estudio. Igual que ya se hizo con los avisos (TZ_ESTUDIO
 // en utils), aquí se ancla Madrid.
 
-import { ZONA_HORARIA } from './zona-horaria.ts';
 import { fechaLocalDe, horaParedAInstante } from './citas/slots.ts';
 import { TZ_ESTUDIO } from './utils.ts';
 

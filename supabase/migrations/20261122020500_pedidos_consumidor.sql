@@ -16,6 +16,9 @@
 --   · `socio_id` se rellena si el email coincide con una ficha del estudio; si
 --     no, queda null (puede que no tenga ficha o que escribiera otro email).
 
+-- Supresión (RGPD): CONSERVAR. Al suprimir a una alumna, el pedido queda: es la
+-- constancia legal de que lo pidió (lib/socios/supresion-clasificacion.ts).
+
 create table if not exists public.pedidos_consumidor (
   id text primary key default gen_random_uuid()::text,
   codigo text not null unique check (codigo ~ '^(ARR|BAJ)-[0-9A-HJ-NP-Z]{6}$'),

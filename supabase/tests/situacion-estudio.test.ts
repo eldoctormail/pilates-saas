@@ -15,7 +15,7 @@ import { after, test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
   clienteAdminLocal, crearInstructora, crearSesion, crearSocia, crearStudioConPropietaria, limpiarFixtures, limpiarInstructora,
-  sqlLocal, type InstructoraFixture, type StudioFixture,
+  instanteQueEnUtcEsOtroDia, sqlLocal, zonaDelEstudio, type InstructoraFixture, type StudioFixture,
 } from '../../lib/db/rls-test-helpers.ts';
 import {
   DIAS_HASTA_INACTIVO, DIAS_HASTA_SUSPENDIDO, diasSinActividad, faseDelGratis, situacionDerivada, type EntradaSituacion,
@@ -181,17 +181,18 @@ test('acciones del registro de cambios: solo las de alguien del estudio, no las 
   }
 });
 
-test('el día es el de Madrid: una acción a las 00:30 de Madrid cuenta para ese día, no para el anterior', async () => {
+test('el día es el del estudio: una acción que en UTC ya es otro día cuenta para el día del estudio', async () => {
   const p = await crearStudioConPropietaria(admin);
   try {
     await ok('estudio gratis antiguo', admin.from('studios').update({ subscription_status: 'gratis', creado_en: '2026-01-01T10:00:00Z' }).eq('id', p.studioId));
-    // 20-oct-2026 00:30 en Madrid (CEST) = 19-oct 22:30 UTC.
-    await ok('acción a las 00:30', admin.from('actividad_reciente').insert({ id: id('act'), studio_id: p.studioId, tipo: 'prueba', texto: 'prueba', origen: 'EQUIPO', creado_en: '2026-10-19T22:30:00Z' }));
+    // El 20-oct-2026 del estudio, a una hora que en UTC es el 19 (Madrid, 00:30) o el 21 (Argentina, 23:30).
+    const momento = instanteQueEnUtcEsOtroDia('2026-10-20', await zonaDelEstudio(admin, p.studioId)).toISOString();
+    await ok('acción en el borde del día', admin.from('actividad_reciente').insert({ id: id('act'), studio_id: p.studioId, tipo: 'prueba', texto: 'prueba', origen: 'EQUIPO', creado_en: momento }));
     const [{ el19, el20 }] = await sql<{ el19: Date | null; el20: Date | null }[]>`
       select public.ultima_actividad_real(${p.studioId}, '2026-10-19'::date) as el19,
              public.ultima_actividad_real(${p.studioId}, '2026-10-20'::date) as el20`;
-    assert.equal(el19, null, 'una acción del día 20 de Madrid no puede contar el 19');
-    assert.equal(el20?.toISOString(), '2026-10-19T22:30:00.000Z');
+    assert.equal(el19, null, 'una acción del día 20 del estudio no puede contar el 19');
+    assert.equal(el20?.toISOString(), momento);
     const [f] = await sql<{ ancla: string; dias: number }[]>`
       select ancla::text as ancla, dias_sin_actividad as dias from public.situacion_estudio(${p.studioId}, '2026-10-20'::date)`;
     assert.deepEqual({ ...f }, { ancla: '2026-10-20', dias: 0 });

@@ -166,6 +166,12 @@ jobs:
         run: npm ci
 
       - name: Tests unitarios (dinero · reservas · aforo · fiscal)
+        # Sin la URL de localhost de arriba: los tests de enlaces y dominios
+        # comprueban la dirección de producción por defecto, y con
+        # http://localhost:3000 fallaban 17. Vacía = como en producción sin
+        # NEXT_PUBLIC_APP_URL. El build y el e2e siguen usando la de arriba.
+        env:
+          NEXT_PUBLIC_APP_URL: ''
         run: npm test
 
   # ---------------------------------------------------------------------------
@@ -339,6 +345,12 @@ jobs:
           } >> "$GITHUB_ENV"
 
       - name: Tests de RLS contra la base de datos real
+        # La zona de los tests (scripts/register-test-hooks.mjs pone Madrid) tiene
+        # que ser la de la base: la migr 20261122000000 la pasó a Argentina. Con
+        # Madrid, el «hoy» de los tests y el de la base no coinciden a la noche de
+        # Argentina, y los tests de fechas fallan o pasan según la hora del run.
+        env:
+          NEXT_PUBLIC_ZONA_HORARIA: America/Argentina/Buenos_Aires
         run: node --import ./scripts/register-test-hooks.mjs --test --experimental-strip-types "supabase/tests/**/*.test.ts"
 
   build:

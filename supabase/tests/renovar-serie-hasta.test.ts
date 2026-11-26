@@ -17,11 +17,18 @@
 // Se llama con `admin` (service_role) porque es como la llama la app.
 import { test, after } from 'node:test';
 import assert from 'node:assert/strict';
-import { clienteAdminLocal, crearStudioConPropietaria, limpiarFixtures, sqlLocal, type StudioFixture } from '../../lib/db/rls-test-helpers.ts';
+import { clienteAdminLocal, crearStudioConPropietaria, limpiarFixtures, sqlLocal, zonaDelEstudio, type StudioFixture } from '../../lib/db/rls-test-helpers.ts';
 
 const admin = clienteAdminLocal();
 const sql = sqlLocal();
 after(async () => { await sql.end(); });
+
+/** Si la zona cambia la hora en el año (su desfase en enero y en julio no es el mismo). */
+function tieneCambioDeHora(zona: string): boolean {
+  const desfase = (iso: string) => new Intl.DateTimeFormat('en-US', { timeZone: zona, timeZoneName: 'longOffset' })
+    .formatToParts(new Date(iso)).find((p) => p.type === 'timeZoneName')?.value;
+  return desfase('2026-01-15T12:00:00Z') !== desfase('2026-07-15T12:00:00Z');
+}
 
 let contador = 0;
 const idUnico = (p: string) => `${p}-rsh-${process.pid}-${Date.now()}-${contador++}`;
@@ -56,8 +63,8 @@ async function crearSerie(studioId: string, salaId: string, fechas: string[], ho
   await sql`
     insert into public.sesiones (id, studio_id, sala_id, inicio, fin, aforo_maximo, cancelada, serie_id)
     select 'ses-' || gen_random_uuid()::text, ${studioId}, ${salaId},
-           (d::date + ${hora}::time) at time zone 'Europe/Madrid',
-           (d::date + ${hora}::time) at time zone 'Europe/Madrid' + interval '50 minutes',
+           (d::date + ${hora}::time) at time zone (select z.zona_horaria from public.studios z where z.id = ${studioId}),
+           (d::date + ${hora}::time) at time zone (select z.zona_horaria from public.studios z where z.id = ${studioId}) + interval '50 minutes',
            8, false, ${serieId}
       from unnest(${fechas}::text[]) as d`;
   return serieId;
@@ -70,7 +77,7 @@ async function periodoActual(serieId: string): Promise<number> {
 
 async function fechasDeLaSerie(serieId: string): Promise<string[]> {
   const filas = await sql<{ d: string }[]>`
-    select ((inicio at time zone 'Europe/Madrid')::date)::text as d from public.sesiones
+    select ((inicio at time zone (select z.zona_horaria from public.studios z where z.id = sesiones.studio_id))::date)::text as d from public.sesiones
      where serie_id = ${serieId} and not cancelada order by inicio`;
   return filas.map((f) => f.d);
 }
@@ -195,7 +202,7 @@ test('con p_hasta: una fecha que ya pasó nunca se crea', async () => {
     assert.equal(r.omitidas.find((o) => o.fecha === (r.fechas as string[])[0])?.motivo, 'pasada');
     const [pasadas] = await sql<{ n: number }[]>`
       select count(*)::int as n from public.sesiones where serie_id = ${serieId} and inicio < now()
-        and ((inicio at time zone 'Europe/Madrid')::date) > ${r0.d}::date`;
+        and ((inicio at time zone (select z.zona_horaria from public.studios z where z.id = sesiones.studio_id))::date) > ${r0.d}::date`;
     assert.equal(pasadas.n, 0);
   });
 });
@@ -208,10 +215,12 @@ test('con p_hasta: la hora local se mantiene al cruzar el cambio de hora', async
     const r = await renovar(studioId, serieId, { p_semanas: null, p_simular: false, p_hasta: await masDias(lunes, 7 * 34) });
     assert.equal(r.creadas, 34);
     const horas = await sql<{ local: string; utc: string }[]>`
-      select to_char(inicio at time zone 'Europe/Madrid', 'HH24:MI') as local, to_char(inicio at time zone 'UTC', 'HH24') as utc
+      select to_char(inicio at time zone (select z.zona_horaria from public.studios z where z.id = sesiones.studio_id), 'HH24:MI') as local, to_char(inicio at time zone 'UTC', 'HH24') as utc
         from public.sesiones where serie_id = ${serieId}`;
-    assert.ok(horas.every((h) => h.local === '18:30'), 'todas a las 18:30 de Madrid');
-    assert.ok(new Set(horas.map((h) => h.utc)).size === 2, 'en UTC hay dos horas: ha cruzado un cambio de hora');
+    assert.ok(horas.every((h) => h.local === '18:30'), 'todas a las 18:30 del estudio');
+    // Con cambio de hora (Madrid), en UTC salen dos horas; sin él (Argentina), una sola.
+    const zona = await zonaDelEstudio(admin, studioId);
+    assert.equal(new Set(horas.map((h) => h.utc)).size, tieneCambioDeHora(zona) ? 2 : 1, 'las horas en UTC siguen al cambio de hora de la zona');
   });
 });
 
@@ -308,8 +317,8 @@ test('dos fechas saltadas por motivos distintos al final: no se pierde ningún d
     await sql`
       insert into public.sesiones (id, studio_id, sala_id, inicio, fin, aforo_maximo, cancelada)
       values (${idUnico('ses')}, ${studioId}, ${salaId},
-              (${ocupado}::date + '18:30'::time) at time zone 'Europe/Madrid',
-              (${ocupado}::date + '18:30'::time) at time zone 'Europe/Madrid' + interval '50 minutes', 8, false)`;
+              (${ocupado}::date + '18:30'::time) at time zone (select z.zona_horaria from public.studios z where z.id = ${studioId}),
+              (${ocupado}::date + '18:30'::time) at time zone (select z.zona_horaria from public.studios z where z.id = ${studioId}) + interval '50 minutes', 8, false)`;
     const cerrado = await masDias(lunes, 18);
     await cerrar(studioId, cerrado);
 

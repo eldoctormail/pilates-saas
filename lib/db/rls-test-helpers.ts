@@ -11,6 +11,7 @@
 // `.github/workflows/ci.yml`, job `calidad-rls`.
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import postgres from 'postgres';
+import { hoyEnEstudio, inicioDelDiaEstudio } from '../utils.ts';
 
 function env(nombre: string): string {
   const v = process.env[nombre];
@@ -48,6 +49,28 @@ function clienteAnonLocal(): SupabaseClient {
  */
 export function sqlLocal() {
   return postgres(env('SUPABASE_LOCAL_DB_URL'), { max: 1 });
+}
+
+/**
+ * La zona de un estudio de ESTA base: 'Europe/Madrid' en Tentare, la del país en
+ * un servidor propio (migr 20261122000000_autoalojado_zona_y_url). Un test que
+ * escriba la zona a mano solo pasa en una de las dos.
+ */
+export async function zonaDelEstudio(admin: SupabaseClient, studioId: string): Promise<string> {
+  const { data, error } = await admin.from('studios').select('zona_horaria').eq('id', studioId).single();
+  if (error || !data?.zona_horaria) throw new Error(`zona del estudio: ${error?.message ?? 'sin zona'}`);
+  return data.zona_horaria as string;
+}
+
+/**
+ * Un instante del día `fecha` de la zona que en UTC ya es otro día: las 00:30 al
+ * este de Greenwich (Madrid), las 23:30 al oeste (Argentina). Es el caso que
+ * delata un `current_date` de UTC.
+ */
+export function instanteQueEnUtcEsOtroDia(fecha: string, zona: string): Date {
+  const medianoche = new Date(inicioDelDiaEstudio(fecha, zona)).getTime();
+  const temprano = new Date(medianoche + 30 * 60_000);
+  return hoyEnEstudio(temprano, 'UTC') !== fecha ? temprano : new Date(medianoche + 23.5 * 3600_000);
 }
 
 let contador = 0;

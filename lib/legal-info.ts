@@ -9,21 +9,12 @@
 // titular/nif/domicilio y volver a añadir los datos registrales.
 // ─────────────────────────────────────────────────────────────────────────────
 
-// El origen canónico, suelto (ver `dominio` en LEGAL para el porqué del www).
-// `canonicalizarOrigen` lo lee de aquí y no de LEGAL: la usan los scripts que
-// se sirven en las webs de los estudios, y así no arrastran el resto del objeto.
-// Autoalojado: el origen sale de NEXT_PUBLIC_APP_URL (sin barra final). Sin ella,
-// el de Centra de siempre.
+// El origen canónico vive suelto en ./origen-canonico.ts: lo usan los scripts que
+// se sirven en las webs de los estudios, y así no arrastran nada de este fichero.
 import { FUNCIONES_DE_ESPANA as ES } from './locale.ts';
-import { envPublica } from './env-publica.ts';
+import { DOMINIO_CANONICO, URL_CANONICA, canonicalizarOrigen } from './origen-canonico.ts';
 
-const URL_CANONICA = (
-  /* @__PURE__ */ envPublica(() => process.env.NEXT_PUBLIC_APP_URL) || 'https://www.tentare.app'
-).replace(/\/+$/, '');
-// `@__PURE__`: si un paquete (el widget) no usa LEGAL, el compilador puede
-// descartarlo entero; con una llamada «con efectos» dentro, lo arrastraría.
-const hostDe = (url: string): string => new URL(url).host;
-const DOMINIO_CANONICO = /* @__PURE__ */ hostDe(URL_CANONICA);
+export { canonicalizarOrigen };
 
 // ── Titular y contacto de Centra en Argentina (es-AR) ─────────────────────────
 // En este fork, con el formato de Argentina, la web y el panel NO pueden
@@ -144,23 +135,6 @@ export const PROVEEDORES: { nombre: string; uso: string; ubicacion: string }[] =
   { nombre: 'Vimeo (opcional)', uso: 'Vídeos que el estudio inserta en la app de sus alumnas', ubicacion: 'EE. UU.' },
   { nombre: 'YouTube, de Google (opcional)', uso: 'Vídeos que el estudio inserta en la app de sus alumnas', ubicacion: 'UE / EE. UU.' },
 ];
-
-// ⚠️ El apex (`tentare.app` a secas) redirige 308 al host canónico con www —
-// ver el comentario de `dominio` arriba. Un <script> sigue redirects, pero un
-// preflight CORS NO: el bundle embebible cargado desde el apex se pintaba y
-// todas sus llamadas a la API morían en silencio (prueba de campo 2026-08-20).
-// Vive aquí y no en el bundle porque este fichero es la fuente ÚNICA del
-// origen (hay un test que prohíbe escribir el dominio a mano en otro sitio);
-// el apex se DERIVA del canónico quitando el prefijo www, nunca se escribe.
-export function canonicalizarOrigen(origen: string): string {
-  const canonico = new URL(URL_CANONICA);
-  const apex = canonico.hostname.replace(/^www\./, '');
-  try {
-    const u = new URL(origen);
-    if (u.protocol === 'https:' && u.hostname === apex) return canonico.origin;
-  } catch { /* origen raro: se devuelve tal cual */ }
-  return origen;
-}
 
 // Los proveedores de la instalación autoalojada de Centra en Argentina (deploy/): la app, la base de datos y la
 // autenticación corren en el servidor propio, así que no intervienen Vercel, Supabase en la nube, Sentry, PostHog

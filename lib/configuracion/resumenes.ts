@@ -19,7 +19,6 @@
 // Pura: la ejecuta `node --test` directamente.
 
 import { conMoneda } from '../moneda.ts';
-
 import type { DiaHorario, Studio, TipoIntegracion } from '../types.ts';
 import { avisoVentaOnline } from '../onboarding.ts';
 import { cuando, saludIntegracion, type FilaSalud, type SaludIntegracion } from '../integraciones/salud.ts';
@@ -36,8 +35,9 @@ import { hoyEnEstudio } from '../utils.ts';
 import { FUNCIONES_DE_ESPANA } from '../locale.ts';
 
 /**
- * En Argentina, WhatsApp va SOLO por enlace (wa.me, decisión del 27-nov-2026): no se conecta la API de Meta, que
- * pide a cada estudio su propia app de Meta. Lo que ya estaba conectado se puede seguir viendo y desconectar.
+ * En Argentina, WhatsApp funciona SIN conectar nada (decisiones del 27-nov-2026): los botones del panel abren el
+ * WhatsApp de la propietaria con el mensaje escrito (wa.me). Conectar su WhatsApp Business (API de Meta, con su
+ * propia app y la guía de pasos) es OPCIONAL y suma los avisos automáticos y el envío en grupo.
  */
 export const WHATSAPP_CON_ENLACE: boolean = !FUNCIONES_DE_ESPANA;
 
@@ -1026,7 +1026,7 @@ export function resumenRegla(
 export function resumenWhatsapp(s: SaludIntegracion): ResumenFila {
   switch (s.estado) {
     case 'APAGADA':
-      // En Argentina no se conecta nada (WHATSAPP_CON_ENLACE): los botones de WhatsApp abren el de la propietaria.
+      // En Argentina funciona sin conectar (WHATSAPP_CON_ENLACE): los botones de WhatsApp abren el de la propietaria.
       return WHATSAPP_CON_ENLACE
         ? { valor: 'Los botones de WhatsApp del panel abren tu WhatsApp con el mensaje ya escrito', estado: { tono: 'activo', etiqueta: 'Con tu WhatsApp' } }
         : { valor: 'Conéctalo para mandar recordatorios por WhatsApp', estado: { tono: 'neutro', etiqueta: 'Sin conectar' } };

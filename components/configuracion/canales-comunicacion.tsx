@@ -269,8 +269,6 @@ export function useWhatsapp(showToast: MostrarToast): CanalWhatsapp {
 export function FilaWhatsapp({ w, onAbrir }: { w: CanalWhatsapp; onAbrir: () => void }) {
   const logo = <WhatsAppAppIcon size={36} />;
   if (w.conectado) return <FilaCanal id="integracion-whatsapp" logo={logo} resumen={w.resumen} onAbrir={onAbrir} />;
-  // En Argentina no hay nada que conectar: los botones de WhatsApp abren el de la propietaria (WHATSAPP_CON_ENLACE).
-  if (WHATSAPP_CON_ENLACE) return <FilaCanal id="integracion-whatsapp" logo={logo} resumen={w.resumen} />;
   return (
     <FilaCanal
       id="integracion-whatsapp"
@@ -284,7 +282,7 @@ export function FilaWhatsapp({ w, onAbrir }: { w: CanalWhatsapp; onAbrir: () => 
           aria-haspopup={w.conMeta ? undefined : 'dialog'}
           className={cn(btnPrimary, 'shrink-0')}
         >
-          {w.conectando ? 'Conectando…' : 'Conectar'}
+          {w.conectando ? 'Conectando…' : WHATSAPP_CON_ENLACE ? 'Conectar Business' : 'Conectar'}
         </button>
       )}
     />

@@ -94,8 +94,8 @@ function Compositor({ socios }: { socios: SocioParaBroadcast[] }) {
   // clase del jueves» es transaccional, no comercial, y pasarlo por el filtro
   // de consentimiento lo haría desaparecer en silencio.
   const { addCampana, enviarCampana, suscripciones, recibos, integracionActiva } = useStudio();
-  // En Argentina WhatsApp va solo por enlace (WHATSAPP_CON_ENLACE): el envío en grupo necesita la API de Meta, así que
-  // sin ella conectada (de antes) no se ofrece.
+  // En Argentina WhatsApp funciona por enlace sin conectar nada (WHATSAPP_CON_ENLACE): el envío en grupo necesita la API de Meta, así que
+  // sin ella conectada no se ofrece.
   const conWhatsapp = !WHATSAPP_CON_ENLACE || integracionActiva('WHATSAPP');
   // El estado de cada clienta (el mismo que enseña Clientas): «Por estado…» y
   // los grupos «activas», «se enfriaron» y «con plan o bono» salen de aquí.

@@ -71,9 +71,9 @@ const INTEGRACIONES: AppDeTienda[] = ([
   { id: 'mercadopago', nombre: 'Mercado Pago', frase: 'Cobrá bonos, cuotas y clases online en tu propia cuenta de Mercado Pago.', categoria: 'cobros', pestana: 'mercadopago' },
   { id: 'stripe', nombre: 'Stripe', frase: 'Cobra bonos y cuotas con tarjeta en tu propia cuenta: el dinero entra directo en ella.', categoria: 'cobros', pestana: 'stripe' },
   { id: 'datafono', nombre: 'Datáfono', frase: 'Mandas el importe desde la Caja y la venta queda cobrada sola.', categoria: 'cobros', pestana: 'datafono' },
-  // En Argentina no se conecta la API de Meta (decisión del 27-nov-2026): los botones «WhatsApp» del panel abren tu
-  // propio WhatsApp con el mensaje escrito (wa.me). Ver FilaWhatsapp.
-  { id: 'whatsapp', nombre: 'WhatsApp', frase: esArgentina() ? 'Escribile a tus alumnas desde tu propio WhatsApp, con el mensaje ya escrito.' : 'Recordatorios y avisos desde tu número de WhatsApp Business.', categoria: 'comunicacion', pestana: 'whatsapp' },
+  // En Argentina los botones «WhatsApp» del panel abren tu propio WhatsApp con el mensaje escrito (wa.me) sin conectar
+  // nada; conectar WhatsApp Business (API de Meta) es opcional (decisiones del 27-nov-2026). Ver WHATSAPP_CON_ENLACE.
+  { id: 'whatsapp', nombre: 'WhatsApp', frase: esArgentina() ? 'Escribile desde tu WhatsApp con el mensaje escrito, o conectá Business para avisos solos.' : 'Recordatorios y avisos desde tu número de WhatsApp Business.', categoria: 'comunicacion', pestana: 'whatsapp' },
   { id: 'google-calendar', nombre: 'Google Calendar', frase: 'Copia tus clases de las próximas semanas a tu calendario.', categoria: 'agenda', pestana: 'google-calendar' },
   { id: 'zoom', nombre: 'Zoom', frase: 'Crea una reunión de Zoom para cada clase de los tipos marcados como online.', categoria: 'agenda', pestana: 'zoom' },
   { id: 'kisi', nombre: 'Kisi', frase: 'Abre la puerta de tu estudio sola con cada check-in de tus clientes.', categoria: 'agenda', pestana: 'kisi' },

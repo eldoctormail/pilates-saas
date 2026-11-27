@@ -462,11 +462,11 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
     "slug": "como-abrir-un-estudio-de-pilates",
     "titulo": "Cómo abrir un estudio de pilates: guía paso a paso, de la idea a la primera semana abierta",
     "tituloSeo": "Cómo abrir un estudio de pilates en 2026: guía",
-    "descripcion": "De la idea a la primera clase: inversión, local, máquinas, trámites, precios y equipo para abrir tu estudio de pilates en España. Con checklist.",
-    "resumen": "La guía completa para montar un estudio de pilates en España: concepto, números, local, reformers, trámites, precios, equipo, reservas y los primeros 90 días, con una checklist de todo el proceso.",
+    "descripcion": "De la idea a la primera clase: inversión, local, máquinas, trámites, precios y equipo para abrir tu estudio de pilates en Argentina. Con los pasos en orden.",
+    "resumen": "La guía completa para armar un estudio de pilates en Argentina: concepto, números, local, reformers, trámites, precios, equipo, reservas y los primeros 90 días, en orden.",
     "categoria": "abrir",
     "seccion": "Abrir un estudio",
-    "publicado": "2026-09-25",
+    "publicado": "2026-11-27",
     "relacionadas": [
       "/recursos/cuanto-cuesta-abrir-un-estudio-de-pilates",
       "/recursos/requisitos-para-abrir-un-estudio-de-pilates",
@@ -474,18 +474,17 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
       "/recursos/precios-reformer-mat",
       "/precios"
     ],
-    "palabras": 2837,
-    "actualizado": "2026-10-16"
+    "palabras": 2763
   },
   {
     "slug": "como-abrir-un-estudio-de-yoga",
-    "titulo": "Cómo abrir un estudio de yoga: estilos, local, material, trámites, titulación y precios",
-    "tituloSeo": "Abrir un estudio de yoga: requisitos y costes",
-    "descripcion": "Qué pide cada estilo al local (aéreo, sala caliente), material con precios reales, epígrafe e IVA, titulación oficial y lo que cobran 14 estudios españoles.",
-    "resumen": "Lo propio de montar un estudio de yoga en España: qué pide cada estilo al local, material con precios, epígrafe, CNAE e IVA, titulación oficial y lo que cobran 14 estudios.",
+    "titulo": "Cómo abrir un estudio de yoga: estilos, local, material, trámites, formación y precios",
+    "tituloSeo": "Abrir un estudio de yoga: requisitos y costos",
+    "descripcion": "Qué pide cada estilo al local (aéreo, sala caliente), material, trámites en ARCA y tu municipio, formación de profesoras y lo que cobran seis estudios del AMBA.",
+    "resumen": "Lo propio de armar un estudio de yoga en Argentina: qué pide cada estilo al local, el material, los trámites, la formación de las profesoras y lo que cobran seis estudios de Buenos Aires.",
     "categoria": "abrir",
     "seccion": "Abrir un estudio",
-    "publicado": "2026-09-25",
+    "publicado": "2026-11-27",
     "relacionadas": [
       "/soluciones/estudio-de-yoga",
       "/recursos/requisitos-para-abrir-un-estudio-de-pilates",
@@ -493,45 +492,43 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
       "/recursos/rentabilidad-estudio-de-pilates",
       "/recursos/politica-de-cancelacion-de-clases"
     ],
-    "palabras": 2490,
-    "actualizado": "2026-10-16"
+    "palabras": 2020
   },
   {
     "slug": "como-gestionar-un-estudio-de-pilates",
-    "titulo": "Cómo gestionar un estudio de Pilates: los cinco sistemas y la rutina semanal que lo sostienen",
-    "tituloSeo": "Cómo gestionar un estudio de Pilates: 5 sistemas",
-    "descripcion": "Cómo gestionar un estudio de Pilates sin vivir pegada al móvil: horario y aforo, reservas, bonos y cobros, equipo y los números que miras cada semana.",
-    "resumen": "Los cinco sistemas que mantienen un estudio de Pilates en marcha (horario, reservas, cobros, equipo y números), con cifras de estudios españoles y una rutina semanal de media hora.",
+    "titulo": "Cómo gestionar un estudio de pilates: los cinco sistemas y la rutina semanal que lo sostienen",
+    "tituloSeo": "Cómo gestionar un estudio de pilates: 5 sistemas",
+    "descripcion": "Cómo gestionar un estudio de pilates sin vivir pegada al celular: horario y cupos, reservas, packs y cobros, equipo y los números de cada semana.",
+    "resumen": "Los cinco sistemas que mantienen un estudio de pilates en marcha (horario, reservas, cobros, equipo y números), con cifras de estudios argentinos y una rutina semanal de media hora.",
     "categoria": "operacion",
     "seccion": "Operación",
-    "publicado": "2026-10-07",
+    "publicado": "2026-11-27",
     "relacionadas": [
       "/recursos/rentabilidad-estudio-de-pilates",
       "/recursos/bonos-de-pilates",
       "/recursos/politica-de-cancelacion-de-clases",
       "/funcionalidades"
     ],
-    "palabras": 2133,
-    "actualizado": "2026-10-16"
+    "palabras": 2204,
+    "actualizado": "2026-11-27"
   },
   {
     "slug": "mejor-software-para-estudios-de-pilates",
-    "titulo": "Mejor software para estudios y centros de Pilates en 2026",
-    "tituloSeo": "Mejor software para estudios de pilates 2026: 13 comparados",
-    "descripcion": "¿Cuál te conviene? Precio, permanencia, comisiones, Veri*Factu y sustituciones de 13 programas para pilates, con lo que dice la web de cada uno.",
-    "resumen": "Guía comparativa escrita por Centra: lo que necesita un estudio de pilates, una tabla con 13 programas según su web pública y una ficha breve de cada uno.",
+    "titulo": "Mejor software para estudios de pilates en Argentina (2026)",
+    "tituloSeo": "Mejor software para estudios de pilates en Argentina",
+    "descripcion": "¿Cuál te conviene? Precio en pesos, prueba, permanencia, Mercado Pago y cupos por reformer de seis programas para pilates, según la web de cada uno.",
+    "resumen": "Comparativa escrita por Centra: lo que necesita un estudio de pilates en Argentina, una tabla con seis programas según su web pública y una ficha breve de cada uno.",
     "categoria": "software",
     "seccion": "Elegir software",
-    "publicado": "2026-09-25",
+    "publicado": "2026-11-27",
     "relacionadas": [
-      "/comparativa",
       "/recursos/checklist-elegir-software-estudio",
       "/recursos/software-pilates-gratis",
       "/soluciones/cambiar-de-software",
       "/precios"
     ],
-    "palabras": 2957,
-    "actualizado": "2026-10-15"
+    "palabras": 2085,
+    "actualizado": "2026-11-27"
   },
   {
     "slug": "bsport-vs-timp",
@@ -785,21 +782,20 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
   },
   {
     "slug": "como-ser-instructora-de-pilates",
-    "titulo": "Cómo ser instructora de pilates en España: formación, cualificación oficial y trabajo",
+    "titulo": "Cómo ser instructora de pilates en Argentina: instructorado, título y trabajo",
     "tituloSeo": "Cómo ser instructora de pilates: cursos y precios",
-    "descripcion": "La cualificación oficial de 510 horas, las formaciones de Polestar, STOTT, BASI y Balanced Body con horas y precio, suelo o reformer y cómo encontrar trabajo.",
-    "resumen": "El camino para ser instructora de pilates en España: qué es la cualificación oficial AFD805_3, qué formaciones hay con sus horas y precios, suelo o reformer y cómo encontrar trabajo.",
+    "descripcion": "Instructorados de mat y reformer con horas y precio en pesos, qué pide la Ley 139 en la Ciudad, STOTT PILATES, el monotributo y cómo conseguir trabajo.",
+    "resumen": "El camino para ser instructora de pilates en Argentina: qué instructorados hay con sus horas y precios, qué título piden en la Ciudad de Buenos Aires, mat o reformer, el monotributo y cómo encontrar trabajo.",
     "categoria": "sustituciones",
     "seccion": "Sustituciones y equipo",
-    "publicado": "2026-09-25",
+    "publicado": "2026-11-27",
     "relacionadas": [
       "/recursos/requisitos-para-abrir-un-estudio-de-pilates",
       "/recursos/cuanto-cobra-una-instructora-de-pilates",
       "/recursos/iva-clases-de-pilates",
       "/recursos/cubrir-baja-instructora"
     ],
-    "palabras": 2142,
-    "actualizado": "2026-10-16"
+    "palabras": 1701
   },
   {
     "slug": "iva-clases-de-pilates",
@@ -820,21 +816,20 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
   },
   {
     "slug": "software-pilates-gratis",
-    "titulo": "Software de pilates gratis: qué puedes montar sin pagar y qué pierdes",
+    "titulo": "Software de pilates gratis: qué puedes armar sin pagar y qué pierdes",
     "tituloSeo": "Software de pilates gratis: qué sirve y límites",
-    "descripcion": "Google, WhatsApp, Excel y planes a 0 €: qué puedes montar gratis en tu estudio de pilates, qué pierdes por el camino y cuándo compensa empezar a pagar.",
-    "resumen": "Lo que de verdad puedes usar sin pagar en un estudio de pilates, con los límites que publica cada herramienta, el coste oculto de hacerlo a mano y cuándo compensa pagar.",
+    "descripcion": "Google, WhatsApp, una planilla, Mercado Pago y la factura de ARCA: qué puedes armar gratis en tu estudio de pilates, qué pierdes y cuándo conviene pagar.",
+    "resumen": "Lo que de verdad puedes usar sin pagar en un estudio de pilates en Argentina, con los límites que publica cada herramienta, el costo oculto de hacerlo a mano y cuándo conviene pagar.",
     "categoria": "software",
     "seccion": "Elegir software",
-    "publicado": "2026-09-25",
+    "publicado": "2026-11-27",
     "relacionadas": [
       "/recursos/mejor-software-para-estudios-de-pilates",
       "/recursos/plantilla-control-de-asistencia-pilates",
       "/recursos/checklist-elegir-software-estudio",
       "/precios"
     ],
-    "palabras": 1971,
-    "actualizado": "2026-10-16"
+    "palabras": 1873
   },
   {
     "slug": "plantilla-control-de-asistencia-pilates",
@@ -855,13 +850,13 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
   },
   {
     "slug": "franquicia-de-pilates",
-    "titulo": "Franquicia de pilates en España: cuánto cuesta, cómo funciona y qué revisar antes de firmar",
+    "titulo": "Franquicia de pilates en Argentina: cuánto cuesta, cómo funciona y qué revisar antes de firmar",
     "tituloSeo": "Franquicia de pilates: cuánto cuesta y qué revisar",
-    "descripcion": "Canon, royalty e inversión de franquicias de pilates reales, lo que la ley obliga a darte antes de firmar y cómo decidir entre franquicia o estudio propio.",
-    "resumen": "Cómo funciona una franquicia de pilates, cuánto piden las marcas que publican sus condiciones, qué dice la ley y qué preguntar antes de firmar o de abrir tu propio estudio.",
+    "descripcion": "Canon, regalías e inversión de franquicias reales en Argentina, lo que dice el Código Civil y Comercial y cómo decidir entre franquicia o estudio propio.",
+    "resumen": "Cómo funciona una franquicia de pilates en Argentina, cuánto piden las marcas que publican sus condiciones, qué dice el Código Civil y Comercial y qué preguntar antes de firmar o de abrir tu propio estudio.",
     "categoria": "abrir",
     "seccion": "Abrir un estudio",
-    "publicado": "2026-09-25",
+    "publicado": "2026-11-27",
     "relacionadas": [
       "/recursos/cuanto-cuesta-abrir-un-estudio-de-pilates",
       "/recursos/rentabilidad-estudio-de-pilates",
@@ -869,8 +864,7 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
       "/recursos/nombres-para-estudio-de-pilates",
       "/precios"
     ],
-    "palabras": 1980,
-    "actualizado": "2026-10-15"
+    "palabras": 1959
   },
   {
     "slug": "nombres-para-estudio-de-pilates",

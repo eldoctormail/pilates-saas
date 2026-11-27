@@ -38,6 +38,11 @@ async function seedSesion(page: Page) {
   }, [STORAGE_KEY, UID] as const);
 }
 
+// La API dice de dónde lee (`fuente`): Stripe en el original, Mercado Pago en el
+// fork argentino. Y el importe sale con la moneda del despliegue («49 €» o «$ 49,00»).
+const FUENTE = 'Mercado Pago';
+const importe = (n: number) => new RegExp(`^(${n}(,00)? €|\\$\\s?${n}(,00)?)$`);
+
 const linea = (o: Record<string, unknown>) => ({
   tipo: 'estudio', sedes: 1, planEnBd: 'ESTUDIO', estadoEnBd: 'active',
   eurosMes: 0, renuevaEl: null, diasDePrueba: null,
@@ -53,7 +58,7 @@ async function mockPanel(page: Page, facturacion: Record<string, unknown>) {
       lineas: [], mrrEuros: 0, mrrEnPruebaEuros: 0,
       pagando: 0, enPrueba: 0, impagos: 0, manuales: 0, descuadres: 0,
       pruebasQueAcaban: [], stripeDisponible: true, avisoStripe: null,
-      suscripcionesEnStripe: 0, ...facturacion,
+      suscripcionesEnStripe: 0, fuente: FUENTE, ...facturacion,
     }));
 }
 
@@ -68,7 +73,7 @@ test.describe('El panel de fundador no inventa dinero', () => {
     await page.goto('/interno/facturacion');
 
     await expect(page.getByText('MRR real')).toBeVisible({ timeout: 30_000 });
-    await expect(page.getByText('49 €').first()).toBeVisible();
+    await expect(page.getByText(importe(49)).first()).toBeVisible();
     await expect(page.getByText(/1 suscripción\(es\) cobrando de verdad/)).toBeVisible();
   });
 
@@ -85,7 +90,7 @@ test.describe('El panel de fundador no inventa dinero', () => {
 
     await expect(page.getByText('Pilates Boutique')).toBeVisible({ timeout: 30_000 });
     await expect(page.getByText('cadena · 4 sede(s)')).toBeVisible();
-    await expect(page.getByText('149 €').first()).toBeVisible();
+    await expect(page.getByText(importe(149)).first()).toBeVisible();
   });
 
   test('un customer sin suscripción sale como descuadre, no como cliente', async ({ page }) => {
@@ -118,7 +123,7 @@ test.describe('El panel de fundador no inventa dinero', () => {
     await expect(page.getByText('1 prueba(s) acaban esta semana')).toBeVisible({ timeout: 30_000 });
     await expect(page.getByText(/quedan 2 día\(s\)/)).toBeVisible();
     // Una prueba no es MRR: la tarjeta de MRR sigue a cero y lo explica.
-    await expect(page.getByText(/Ninguna suscripción activa en Stripe/)).toBeVisible();
+    await expect(page.getByText(new RegExp(`Ninguna suscripción activa en ${FUENTE}`))).toBeVisible();
   });
 
   test('si Stripe no contesta se dice, no se enseña 0 €', async ({ page }) => {
@@ -132,8 +137,8 @@ test.describe('El panel de fundador no inventa dinero', () => {
     await seedSesion(page);
     await page.goto('/interno/facturacion');
 
-    await expect(page.getByText('Estos números no vienen de Stripe')).toBeVisible({ timeout: 30_000 });
+    await expect(page.getByText(`Estos números no vienen de ${FUENTE}`)).toBeVisible({ timeout: 30_000 });
     await expect(page.getByText(/STRIPE_SECRET_KEY no está configurada/)).toBeVisible();
-    await expect(page.getByText('0 €')).toHaveCount(0);
+    await expect(page.getByText(importe(0))).toHaveCount(0);
   });
 });

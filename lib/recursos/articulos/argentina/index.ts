@@ -9,6 +9,10 @@ import reformerMat from './precios-reformer-mat.ts';
 import bonos from './bonos-de-pilates.ts';
 import nombres from './nombres-para-estudio-de-pilates.ts';
 import cubrirBaja from './cubrir-baja-instructora.ts';
+import politicaCancelacion from './politica-de-cancelacion-de-clases.ts';
+import reducirCancelaciones from './reducir-cancelaciones-ultima-hora.ts';
+import asistencia from './plantilla-control-de-asistencia-pilates.ts';
+import clasesValle from './ocupacion-clases-valle.ts';
 
 // Versiones argentinas (formato es-AR) de artículos que en España hablan de su
 // normativa. Mismo slug: la dirección no cambia, cambia el texto. Las elige
@@ -24,4 +28,8 @@ export const ARTICULOS_ARGENTINA: Articulo[] = [
   bonos,
   nombres,
   cubrirBaja,
+  politicaCancelacion,
+  reducirCancelaciones,
+  asistencia,
+  clasesValle,
 ];

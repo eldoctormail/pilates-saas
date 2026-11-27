@@ -54,6 +54,7 @@ import { MenuAcciones, type AccionMenu } from '@/components/ui/menu-acciones';
 import { BotonVivo, PantallaVacia, colorDeOcupacion } from '@/components/dashboard/vivo';
 import { BOTON_BORDE, BOTON_MENU, PestanasVivas } from '@/components/dashboard/vivo-seccion';
 import { CifrasEquipo, SemanaDelEquipo } from '@/components/equipo/resumen-equipo';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
 type FiltroEstadoEquipo = FiltroEstado;
 
@@ -849,7 +850,7 @@ export default function EquipoPage() {
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <label htmlFor={`${uid}-2`} className={labelCls}>Email</label>
-                <input id={`${uid}-2`} className={inputCls} value={form.email} placeholder="maria@tentare.es" onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
+                <input id={`${uid}-2`} className={inputCls} value={form.email} placeholder={ES ? "maria@tentare.es" : "maria@tuestudio.com"} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
                 {modal === 'editar' && editId && accesoSeReinicia(editId, form.email.trim() || null) && (
                   <p role="note" className="text-[11px] text-warning mt-1 flex items-start gap-1.5">
                     <AlertTriangle size={12} className="shrink-0 mt-0.5" />

@@ -11,12 +11,14 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
 const raiz = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
+// La demo pública es la de Argentina: su sembrado va en esa zona (lib/zona-horaria.ts). Fija, porque el
+// paquete no puede leer el entorno (lib/demo/panel/bundle.test.ts).
 await esbuild.build({
   bundle: true, minify: true, sourcemap: false, format: 'iife', target: 'es2020', platform: 'browser',
   entryPoints: [path.join(raiz, 'lib/demo/panel/entrada.ts')],
   outfile: path.join(raiz, 'public/demo-panel.js'),
   alias: { '@': raiz },
-  define: { 'process.env.NODE_ENV': '"production"' },
+  define: { 'process.env.NODE_ENV': '"production"', 'process.env.NEXT_PUBLIC_ZONA_HORARIA': '"America/Argentina/Buenos_Aires"' },
   logLevel: 'info',
 });
 console.log('✔ public/demo-panel.js generado');

@@ -25,9 +25,9 @@ const articulo: Articulo = {
     'qué hay que controlar en un estudio de pilates',
   ],
   respuesta:
-    'Gestionar un estudio de pilates es mantener cinco sistemas en marcha a la vez: el horario y el cupo de cada clase, las reservas con su política de cancelación y su lista de espera, la venta y el cobro de packs y abonos, el equipo de instructoras con un plan para las ausencias, y unos pocos números que mirás cada semana: ocupación, cobros pendientes y margen por clase. Lo que se repite cada día conviene automatizarlo; tu criterio, para lo que no se repite.',
+    'Gestionar un estudio de pilates es mantener cinco sistemas en marcha a la vez: el horario y el cupo de cada clase, las reservas con su política de cancelación y su lista de espera, la venta y el cobro de packs y abonos, el equipo de instructoras con un plan para las ausencias, y unos pocos números que miras cada semana: ocupación, cobros pendientes y margen por clase. Lo que se repite cada día conviene automatizarlo; tu criterio, para lo que no se repite.',
   entradilla:
-    'Un estudio de pilates rara vez se complica por las clases. Se complica por todo lo que pasa alrededor: el mensaje de las once de la noche para cambiar un turno, el pack que venció sin que nadie avisara, la instructora que se enferma a primera hora o la transferencia que nunca llegó. Acá tenés la gestión ordenada en cinco sistemas y una rutina semanal, con cifras de estudios argentinos.',
+    'Un estudio de pilates rara vez se complica por las clases. Se complica por todo lo que pasa alrededor: el mensaje de las once de la noche para cambiar un turno, el pack que venció sin que nadie avisara, la instructora que se enferma a primera hora o la transferencia que nunca llegó. Aquí tienes la gestión ordenada en cinco sistemas y una rutina semanal, con cifras de estudios argentinos.',
   secciones: [
     {
       id: 'cinco-sistemas',
@@ -35,15 +35,15 @@ const articulo: Articulo = {
       bloques: [
         {
           t: 'p',
-          texto: 'Cada uno responde a una pregunta que te vas a hacer todas las semanas. Si alguno vive solo en tu cabeza o en un grupo de WhatsApp, es justo ese el que te va a quitar las noches.',
+          texto: 'Cada uno responde a una pregunta que te harás todas las semanas. Si alguno vive solo en tu cabeza o en un grupo de WhatsApp, es justo ese el que te va a quitar las noches.',
         },
         {
           t: 'pasos',
           items: [
             { titulo: 'Horario y cupos', texto: '¿Qué clases doy, a qué hora, en qué sala, con cuántos lugares y quién las da? Es la base de todo lo demás.' },
             { titulo: 'Reservas y cancelaciones', texto: '¿Quién viene a cada clase, hasta cuándo puede cancelar sin perder la clase y qué pasa con el lugar que se libera?' },
-            { titulo: 'Packs, abonos y cobros', texto: '¿Qué vendés, cuánto sale cada clase, cuándo vence y cómo entra la plata sin perseguir a nadie?' },
-            { titulo: 'Equipo', texto: '¿Quién puede dar cada clase, cuánto te cuesta y qué hacés cuando alguien no puede venir?' },
+            { titulo: 'Packs, abonos y cobros', texto: '¿Qué vendes, cuánto sale cada clase, cuándo vence y cómo entra la plata sin perseguir a nadie?' },
+            { titulo: 'Equipo', texto: '¿Quién puede dar cada clase, cuánto te cuesta y qué haces cuando alguien no puede venir?' },
             { titulo: 'Números', texto: '¿Qué clases se llenan, cuáles no, qué te deben y cuánto deja cada clase después de pagarle a la instructora?' },
           ],
         },
@@ -55,15 +55,15 @@ const articulo: Articulo = {
       bloques: [
         {
           t: 'p',
-          texto: 'En un estudio de reformer el cupo de una clase es la cantidad de camas que tiene la sala, y una cama en reparación lo baja. En mat depende del espacio por colchoneta. Por eso conviene definir primero las salas y su capacidad, y después colgar de ellas las clases. Si combinás reformer y mat, son dos tipos de clase con sus propias reglas y su propio precio.',
+          texto: 'En un estudio de reformer el cupo de una clase es la cantidad de camas que tiene la sala, y una cama en reparación lo baja. En mat depende del espacio por colchoneta. Por eso conviene definir primero las salas y su capacidad, y después colgar de ellas las clases. Si combinas reformer y mat, son dos tipos de clase con sus propias reglas y su propio precio.',
         },
         {
           t: 'lista',
           items: [
-            '**Armá el horario como una grilla** que se repite cada semana, y revisala por trimestre: no clase por clase.',
-            '**Separá las franjas que se llenan de las que no.** La primera hora de la mañana y la salida del trabajo suelen llenarse; la media mañana y la siesta, menos. Qué hacer con esas, en [cómo llenar las clases valle](/recursos/ocupacion-clases-valle).',
-            '**Decidí quién da cada clase** con la disponibilidad real de tu equipo adelante, no de memoria.',
-            '**Dejá lugar para lo excepcional**: feriados, el receso de verano, un taller. Mejor marcarlo en la grilla que avisar clase por clase.',
+            '**Arma el horario como una grilla** que se repite cada semana, y revísala por trimestre: no clase por clase.',
+            '**Separa las franjas que se llenan de las que no.** La primera hora de la mañana y la salida del trabajo suelen llenarse; la media mañana y la siesta, menos. Qué hacer con esas, en [cómo llenar las clases valle](/recursos/ocupacion-clases-valle).',
+            '**Decide quién da cada clase** con la disponibilidad real de tu equipo adelante, no de memoria.',
+            '**Deja lugar para lo excepcional**: feriados, el receso de verano, un taller. Mejor marcarlo en la grilla que avisar clase por clase.',
           ],
         },
         {
@@ -102,7 +102,7 @@ const articulo: Articulo = {
       bloques: [
         {
           t: 'p',
-          texto: 'Un catálogo corto vende mejor que uno largo: clase suelta o de prueba y packs de 4, 8 y 12 clases al mes cubren casi todo. Lo importante es que cada escalón salga más barato por clase que el anterior y que el vencimiento esté por escrito antes de vender. Con inflación, poné también por escrito cada cuánto actualizás los precios.',
+          texto: 'Un catálogo corto vende mejor que uno largo: clase suelta o de prueba y packs de 4, 8 y 12 clases al mes cubren casi todo. Lo importante es que cada escalón salga más barato por clase que el anterior y que el vencimiento esté por escrito antes de vender. Con inflación, pon también por escrito cada cuánto actualizas los precios.',
         },
         {
           t: 'cifras',
@@ -117,10 +117,10 @@ const articulo: Articulo = {
         {
           t: 'lista',
           items: [
-            '**Cobrá por adelantado y online.** Lo que la alumna paga con un link o desde su app no hay que perseguirlo por WhatsApp ni conciliarlo transferencia por transferencia.',
-            '**Contá la comisión.** Mercado Pago publica para el link de pago un 4,39 % si el dinero se acredita a los 10 días y un 6,29 % si lo querés al instante: es parte del costo de cada clase.',
-            '**El IVA depende de tu categoría en ARCA.** Monotributista: va dentro de la cuota y emitís factura C. Responsable inscripto: la clase lleva IVA y emitís factura B. Los detalles, en [¿las clases de pilates llevan IVA?](/recursos/iva-clases-de-pilates).',
-            '**Facturá desde el primer cobro**, con el facturador de ARCA o el sistema que te arme tu contador.',
+            '**Cobra por adelantado y online.** Lo que la alumna paga con un link o desde su app no hay que perseguirlo por WhatsApp ni conciliarlo transferencia por transferencia.',
+            '**Cuenta la comisión.** Mercado Pago publica para el link de pago un 4,39 % si el dinero se acredita a los 10 días y un 6,29 % si lo quieres al instante: es parte del costo de cada clase.',
+            '**El IVA depende de tu categoría en ARCA.** Monotributista: va dentro de la cuota y emites factura C. Responsable inscripto: la clase lleva IVA y emites factura B. Los detalles, en [¿las clases de pilates llevan IVA?](/recursos/iva-clases-de-pilates).',
+            '**Factura desde el primer cobro**, con el facturador de ARCA o el sistema que te arme tu contador.',
           ],
         },
         {
@@ -129,7 +129,7 @@ const articulo: Articulo = {
         },
         {
           t: 'llamada',
-          texto: 'Con Mercado Pago conectado, en Centra la alumna compra su pack o paga su abono desde la app, y el lugar se reserva con lo que tiene vigente; vos ves en el panel quién pagó, qué vence este mes y qué queda pendiente.',
+          texto: 'Con Mercado Pago conectado, en Centra la alumna compra su pack o paga su abono desde la app, y el lugar se reserva con lo que tiene vigente; tú ves en el panel quién pagó, qué vence este mes y qué queda pendiente.',
         },
       ],
     },
@@ -139,15 +139,15 @@ const articulo: Articulo = {
       bloques: [
         {
           t: 'p',
-          texto: 'El equipo suele ser el costo más grande, por delante del alquiler, y el que más imprevistos genera. En relación de dependencia, el sueldo lo fija el convenio de UTEDYC para gimnasios (CCT 738/16): en la escala de octubre de 2026, la categoría de instructora y entrenadora tiene un básico de $1.351.856 por mes y la de profesora de Educación Física, de $1.466.432 a $1.547.040 según el tamaño del local, por 176 horas mensuales y antes de presentismo y antigüedad. Si la instructora factura como monotributista, el precio por hora o por clase lo acuerdan entre ustedes.',
+          texto: 'El equipo suele ser el costo más grande, por delante del alquiler, y el que más imprevistos genera. En relación de dependencia, el sueldo lo fija el convenio de UTEDYC para gimnasios (CCT 738/16): en la escala de octubre de 2026, la categoría de instructora y entrenadora tiene un básico de $1.351.856 por mes y la de profesora de Educación Física, de $1.466.432 a $1.547.040 según el tamaño del local, por 176 horas mensuales y antes de presentismo y antigüedad. Si la instructora factura como monotributista, el precio por hora o por clase lo acuerdan entre ella y el estudio.',
         },
         {
           t: 'lista',
           items: [
-            '**Tené la disponibilidad de cada instructora por escrito**, con sus vacaciones y licencias marcadas, antes de armar la grilla.',
+            '**Ten la disponibilidad de cada instructora por escrito**, con sus vacaciones y licencias marcadas, antes de armar la grilla.',
             '**Cuidado con depender de una sola persona.** Si una instructora da la mitad de tus clases, su ausencia te deja media semana en el aire.',
-            '**Decidí el orden de reemplazos antes de necesitarlo**: quién sabe dar esa clase, quién suele estar libre a esa hora, a quién se avisa primero.',
-            '**Pagá por lo que se da**: llevá las horas de cada una por clase dada, no de memoria a fin de mes.',
+            '**Decide el orden de reemplazos antes de necesitarlo**: quién sabe dar esa clase, quién suele estar libre a esa hora, a quién se avisa primero.',
+            '**Paga por lo que se da**: lleva las horas de cada una por clase dada, no de memoria a fin de mes.',
           ],
         },
         {
@@ -162,7 +162,7 @@ const articulo: Articulo = {
       bloques: [
         {
           t: 'p',
-          texto: 'No hacen falta veinte indicadores. Con cinco ves venir casi todos los problemas, y todos se calculan con lo que ya anotás al reservar y al cobrar:',
+          texto: 'No hacen falta veinte indicadores. Con cinco ves venir casi todos los problemas, y todos se calculan con lo que ya anotas al reservar y al cobrar:',
         },
         {
           t: 'tabla',
@@ -177,7 +177,7 @@ const articulo: Articulo = {
         },
         {
           t: 'p',
-          texto: 'Para saber a partir de qué ocupación ganás plata, hacé la cuenta con tus números en la calculadora de [¿es rentable un estudio de pilates?](/recursos/rentabilidad-estudio-de-pilates). En su ejemplo, 6 reformers con 30 clases por semana a $18.000 la clase cubren gastos hacia el 31 % de ocupación y necesitan cerca del 42 % para dejarte además $1.500.000 por mes.',
+          texto: 'Para saber a partir de qué ocupación ganas plata, haz la cuenta con tus números en la calculadora de [¿es rentable un estudio de pilates?](/recursos/rentabilidad-estudio-de-pilates). En su ejemplo, 6 reformers con 30 clases por semana a $18.000 la clase cubren gastos hacia el 31 % de ocupación y necesitan cerca del 42 % para dejarte además $1.500.000 por mes.',
         },
       ],
     },
@@ -192,7 +192,7 @@ const articulo: Articulo = {
         {
           t: 'pasos',
           items: [
-            { titulo: 'Lunes: la semana que empieza', texto: 'Clases con poca ocupación, ausencias previstas del equipo y avisos que haya que mandar. Si una clase viene casi vacía, decidí hoy si la movés, la anunciás o la juntás con otra.' },
+            { titulo: 'Lunes: la semana que empieza', texto: 'Clases con poca ocupación, ausencias previstas del equipo y avisos que haya que mandar. Si una clase viene casi vacía, decide hoy si la mueves, la anuncias o la juntas con otra.' },
             { titulo: 'Miércoles: la plata', texto: 'Pagos que no entraron, packs que vencen este mes y alumnas a las que les queda una clase. Es el mejor momento para ofrecer la renovación.' },
             { titulo: 'Viernes: la semana que viene', texto: 'Lista de espera de las clases llenas, grilla de la semana siguiente y cualquier cambio de instructora ya cerrado y avisado.' },
             { titulo: 'Fin de mes: el cierre', texto: 'Ingresos, altas y bajas, ocupación por franja y margen por clase. Las facturas y la categoría del monotributo, con tu contador. Y una sola decisión para el mes siguiente, que muchas veces es la actualización de precios.' },
@@ -206,17 +206,17 @@ const articulo: Articulo = {
       bloques: [
         {
           t: 'p',
-          texto: 'La regla es sencilla: lo que se repite igual cada vez, que lo haga el sistema; lo que depende de la persona o del momento, vos.',
+          texto: 'La regla es sencilla: lo que se repite igual cada vez, que lo haga el sistema; lo que depende de la persona o del momento, tú.',
         },
         {
           t: 'tabla',
-          cabecera: ['Que lo haga el sistema', 'Que lo decidas vos'],
+          cabecera: ['Que lo haga el sistema', 'Que lo decidas tú'],
           filas: [
             ['Reservar y cancelar con tus reglas', 'La grilla y los precios'],
             ['Pasarle el lugar libre a la lista de espera', 'Las excepciones a tu política'],
             ['Recordar la clase del día siguiente', 'Quién entra en tu equipo'],
-            ['Cobrar el pack y avisar del que vence', 'Cómo le hablás a una alumna que deja de venir'],
-            ['Avisar a quien le queda una clase', 'Qué clase abrís o cerrás'],
+            ['Cobrar el pack y avisar del que vence', 'Cómo le hablas a una alumna que deja de venir'],
+            ['Avisar a quien le queda una clase', 'Qué clase abres o cierras'],
           ],
         },
         {
@@ -229,8 +229,8 @@ const articulo: Articulo = {
   ],
   faq: [
     {
-      q: '¿Qué tiene que hacer el sistema con el que llevás el estudio?',
-      a: 'Que reserve con el cupo de cada clase o de cada cama, que cobre packs y abonos online (en Argentina, con Mercado Pago), que les dé a tus alumnas una app para reservar y cancelar, y que lleve la grilla de tu equipo. Fijate también que publique su precio y si tiene permanencia.',
+      q: '¿Qué tiene que hacer el sistema con el que llevas el estudio?',
+      a: 'Que reserve con el cupo de cada clase o de cada cama, que cobre packs y abonos online (en Argentina, con Mercado Pago), que les dé a tus alumnas una app para reservar y cancelar, y que lleve la grilla de tu equipo. Fíjate también que publique su precio y si tiene permanencia.',
     },
     {
       q: '¿A partir de qué ocupación es rentable un estudio de pilates?',
@@ -242,15 +242,15 @@ const articulo: Articulo = {
     },
     {
       q: '¿Cuánto cuesta una instructora de pilates?',
-      a: 'En relación de dependencia, el convenio de UTEDYC para gimnasios (CCT 738/16) fija en octubre de 2026 un básico de $1.351.856 por mes para la categoría de instructora y entrenadora, por 176 horas, más presentismo, antigüedad y cargas sociales. Si factura como monotributista, el precio lo acuerdan entre ustedes.',
+      a: 'En relación de dependencia, el convenio de UTEDYC para gimnasios (CCT 738/16) fija en octubre de 2026 un básico de $1.351.856 por mes para la categoría de instructora y entrenadora, por 176 horas, más presentismo, antigüedad y cargas sociales. Si factura como monotributista, el precio lo acuerdan entre ella y el estudio.',
     },
     {
       q: '¿Las clases de pilates llevan IVA?',
-      a: 'Si sos monotributista, el IVA va dentro de la cuota mensual y emitís factura C sin sumarlo al precio. Si sos responsable inscripto, la ley grava los servicios de gimnasios y la clase lleva IVA, con factura B a la alumna. Si tu caso tiene alguna exención, lo confirma tu contador.',
+      a: 'Si eres monotributista, el IVA va dentro de la cuota mensual y emites factura C sin sumarlo al precio. Si eres responsable inscripto, la ley grava los servicios de gimnasios y la clase lleva IVA, con factura B a la alumna. Si tu caso tiene alguna exención, lo confirma tu contador.',
     },
     {
       q: '¿Cada cuánto conviene actualizar los precios?',
-      a: 'No hay una regla, pero sí conviene que la alumna sepa de antemano cada cuánto lo hacés (por ejemplo, cada mes o cada trimestre) y que el aumento no cambie un pack ya pagado. Comparar con estudios de tu zona y con la fecha a la vista evita quedarte atrás sin darte cuenta.',
+      a: 'No hay una regla, pero sí conviene que la alumna sepa de antemano cada cuánto lo haces (por ejemplo, cada mes o cada trimestre) y que el aumento no cambie un pack ya pagado. Comparar con estudios de tu zona y con la fecha a la vista evita quedarte atrás sin darte cuenta.',
     },
   ],
   fuentes: [

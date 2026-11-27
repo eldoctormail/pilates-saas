@@ -509,27 +509,26 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
       "/recursos/politica-de-cancelacion-de-clases",
       "/funcionalidades"
     ],
-    "palabras": 2200,
+    "palabras": 2204,
     "actualizado": "2026-11-27"
   },
   {
     "slug": "mejor-software-para-estudios-de-pilates",
-    "titulo": "Mejor software para estudios y centros de Pilates en 2026",
-    "tituloSeo": "Mejor software para estudios de pilates 2026: 13 comparados",
-    "descripcion": "¿Cuál te conviene? Precio, permanencia, comisiones, Veri*Factu y sustituciones de 13 programas para pilates, con lo que dice la web de cada uno.",
-    "resumen": "Guía comparativa escrita por Centra: lo que necesita un estudio de pilates, una tabla con 13 programas según su web pública y una ficha breve de cada uno.",
+    "titulo": "Mejor software para estudios de pilates en Argentina (2026)",
+    "tituloSeo": "Mejor software para estudios de pilates en Argentina",
+    "descripcion": "¿Cuál te conviene? Precio en pesos, prueba, permanencia, Mercado Pago y cupos por reformer de seis programas para pilates, según la web de cada uno.",
+    "resumen": "Comparativa escrita por Centra: lo que necesita un estudio de pilates en Argentina, una tabla con seis programas según su web pública y una ficha breve de cada uno.",
     "categoria": "software",
     "seccion": "Elegir software",
-    "publicado": "2026-09-25",
+    "publicado": "2026-11-27",
     "relacionadas": [
-      "/comparativa",
       "/recursos/checklist-elegir-software-estudio",
       "/recursos/software-pilates-gratis",
       "/soluciones/cambiar-de-software",
       "/precios"
     ],
-    "palabras": 2957,
-    "actualizado": "2026-10-15"
+    "palabras": 2085,
+    "actualizado": "2026-11-27"
   },
   {
     "slug": "bsport-vs-timp",

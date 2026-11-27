@@ -19,6 +19,7 @@ import franquicia from './franquicia-de-pilates.ts';
 import abrirPilates from './como-abrir-un-estudio-de-pilates.ts';
 import abrirYoga from './como-abrir-un-estudio-de-yoga.ts';
 import gestionar from './como-gestionar-un-estudio-de-pilates.ts';
+import mejorSoftware from './mejor-software-para-estudios-de-pilates.ts';
 
 // Versiones argentinas (formato es-AR) de artículos que en España hablan de su
 // normativa. Mismo slug: la dirección no cambia, cambia el texto. Las elige
@@ -44,4 +45,5 @@ export const ARTICULOS_ARGENTINA: Articulo[] = [
   abrirPilates,
   abrirYoga,
   gestionar,
+  mejorSoftware,
 ];

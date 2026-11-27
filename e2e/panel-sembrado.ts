@@ -1,3 +1,4 @@
+import { ZONA_HORARIA } from '../lib/zona-horaria.ts';
 import type { Page, Route } from '@playwright/test';
 import type { MiembroCompleto } from '../lib/equipo-tarjetas.ts';
 import type { TarifaInstructor } from '../lib/api-client.ts';
@@ -21,7 +22,9 @@ const UID = 'auth-e2e-duena';
 // la del proceso de Playwright. Con la del proceso, en CI (UTC) entre las 22:00 y
 // las 24:00 UTC las clases sembradas «de hoy» ya eran de ayer para la app, y los
 // specs que cuentan las clases de hoy fallaban cada noche sin que nadie tocara nada.
-const TZ_ESTUDIO = 'Europe/Madrid';
+// La zona es la de la app (lib/zona-horaria.ts): la CI la fija en Madrid y la demo pública de /demo
+// usa este mismo sembrado, que en Argentina tiene que caer en la hora de Argentina.
+const TZ_ESTUDIO = ZONA_HORARIA;
 const hoyEstudio = new Intl.DateTimeFormat('en-CA', { timeZone: TZ_ESTUDIO }).format(new Date());
 /** El día `n` desde hoy (hora del estudio), anclado a las 12:00 UTC para que su fecha no se mueva. */
 const dia = (n: number) => {

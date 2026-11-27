@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { LEGAL } from '@/lib/legal-info';
 import Link from 'next/link';
 import { ArrowRight, CalendarCheck, CalendarClock, Check, FileText, LayoutGrid, Lock, Receipt, Ticket, Users } from 'lucide-react';
 import { Reveal } from '@/components/landing/Reveal';
@@ -73,7 +74,7 @@ const PASOS = [
 ] as const;
 
 // La misma puerta que el pie (PieWeb): el WhatsApp de soporte, con la pregunta ya empezada.
-const ENLACE_WA = enlaceWhatsApp(WHATSAPP_SOPORTE, 'Hola, tengo una duda sobre cambiarme a Centra:') ?? `https://wa.me/${WHATSAPP_SOPORTE.replace(/\D/g, '')}`;
+const ENLACE_WA = enlaceWhatsApp(WHATSAPP_SOPORTE, 'Hola, tengo una duda sobre cambiarme a Centra:') ?? `mailto:${LEGAL.email}`;
 
 const COMPARATIVAS = [
   { slug: 'bsport', nombre: 'bsport' },

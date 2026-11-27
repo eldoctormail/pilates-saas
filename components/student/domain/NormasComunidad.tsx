@@ -1,5 +1,6 @@
 'use client';
 
+import { LEGAL } from '@/lib/legal-info';
 import { useCallback, useRef, useState, type ReactNode } from 'react';
 import { Sheet } from '@/components/student/ui/Sheet';
 import { Button } from '@/components/student/ui/Button';
@@ -13,7 +14,7 @@ import { aceptarNormasComunidad } from '@/lib/student/normas';
 // aceptan y el mismo envío se repite solo — el borrador no se pierde.
 
 /** Contacto de Centra como desarrollador de la app (App Store 1.2). */
-export const CONTACTO_TENTARE = 'hola@tentare.app';
+export const CONTACTO_TENTARE: string = LEGAL.email;
 
 function ListaNormas() {
   return (

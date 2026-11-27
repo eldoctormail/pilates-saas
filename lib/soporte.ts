@@ -6,4 +6,7 @@
 // el contexto del estudio. Ese fichero lo reexporta para quien ya lo importaba de
 // ahí. El enlace con el mensaje escrito se monta con `enlaceWhatsApp`
 // (lib/decision/mensajes-socia.ts).
-export const SOPORTE_WHATSAPP = '+34603556580';
+// En Argentina es el de Centra (LEGAL.whatsappSoporte, lib/legal-info.ts), nunca el del software original.
+import { LEGAL } from './legal-info.ts';
+
+export const SOPORTE_WHATSAPP: string = LEGAL.whatsappSoporte;

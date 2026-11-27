@@ -12,7 +12,7 @@ test('public/demo-panel.js es exactamente lo que sale de compilar lib/demo/panel
   const r = await esbuild.build({
     bundle: true, minify: true, sourcemap: false, format: 'iife', target: 'es2020', platform: 'browser', write: false,
     entryPoints: [join(raiz, 'lib/demo/panel/entrada.ts')], outfile: join(raiz, 'public/demo-panel.js'),
-    alias: { '@': raiz }, define: { 'process.env.NODE_ENV': '"production"' }, logLevel: 'silent',
+    alias: { '@': raiz }, define: { 'process.env.NODE_ENV': '"production"', 'process.env.NEXT_PUBLIC_ZONA_HORARIA': '"America/Argentina/Buenos_Aires"' }, logLevel: 'silent',
   });
   const esperado = r.outputFiles[0].text;
   const actual = readFileSync(join(raiz, 'public/demo-panel.js'), 'utf8');

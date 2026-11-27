@@ -89,3 +89,59 @@ export function calcularBonos(e: EntradaBonos): ResultadoBonos {
   ];
   return { escalones, bonoCanibalizaCuota: porSesion.bono10 < porSesion.cuota1 };
 }
+
+// ── Argentina: clase suelta y packs de 4, 8 y 12 clases ──────────────────────
+// En Argentina la escalera publicada es la de los packs (una, dos o tres clases
+// por semana durante un mes), no bono de 5 + bono de 10 + cuota. Y el IVA no se
+// resta siempre: el monotributista no lo factura aparte, el responsable inscripto
+// sí. Ejemplo de partida: las tarifas de Aditi Pilates (24-nov-2026): $25.000 la
+// clase de prueba y packs de 4, 8 y 12 a $88.000, $144.000 y ~$199.000.
+
+export interface EntradaPacks {
+  /** Precio de la clase suelta o de prueba ($). */
+  suelta: number;
+  /** Descuento por clase frente a la suelta, en %. */
+  descuentoPack4: number;
+  descuentoPack8: number;
+  descuentoPack12: number;
+  /** Lo que te cuesta una plaza ocupada, sin IVA ($). 0 = no avisar. */
+  costePorPlaza: number;
+  /** Responsable inscripto: el precio lleva el 21 % de IVA y se resta antes de comparar. */
+  responsableInscripto: boolean;
+}
+
+export interface EscalonPack extends Omit<Escalon, 'id'> {
+  id: 'suelta' | 'pack4' | 'pack8' | 'pack12';
+}
+
+export interface ResultadoPacks {
+  escalones: EscalonPack[];
+  /** Algún pack sale igual o más caro por clase que el escalón anterior. */
+  escaleraNoBaja: boolean;
+}
+
+export function calcularPacks(e: EntradaPacks): ResultadoPacks {
+  const suelta = positivo(e.suelta);
+  const coste = positivo(e.costePorPlaza);
+  const iva = e.responsableInscripto ? IVA_CLASES : 0;
+  const fila = (id: EscalonPack['id'], nombre: string, sesiones: number, descuento: number): EscalonPack => {
+    const ps = Math.round(suelta * (1 - pct(descuento)));
+    return {
+      id,
+      nombre,
+      sesiones,
+      porSesion: ps,
+      precio: ps * sesiones,
+      ahorro: suelta > 0 ? Math.round((1 - ps / suelta) * 100) : 0,
+      porDebajoDelCoste: coste > 0 && ps / (1 + iva) < coste,
+    };
+  };
+  const escalones = [
+    fila('suelta', 'Clase suelta', 1, 0),
+    fila('pack4', 'Pack de 4 (1 por semana)', 4, e.descuentoPack4),
+    fila('pack8', 'Pack de 8 (2 por semana)', 8, e.descuentoPack8),
+    fila('pack12', 'Pack de 12 (3 por semana)', 12, e.descuentoPack12),
+  ];
+  const escaleraNoBaja = suelta > 0 && escalones.some((s, i) => i > 0 && s.porSesion >= escalones[i - 1].porSesion);
+  return { escalones, escaleraNoBaja };
+}

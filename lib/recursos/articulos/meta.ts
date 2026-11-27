@@ -700,21 +700,20 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
   },
   {
     "slug": "bonos-de-pilates",
-    "titulo": "Bonos de pilates: cómo diseñarlos (tipos, precio, caducidad y cancelaciones)",
-    "tituloSeo": "Bonos de pilates: cómo diseñarlos y su precio",
-    "descripcion": "Bono de sesiones, cuota o clase suelta: cuánto descontar, qué caducidad ponen los estudios (de un mes a un año) y qué hacer con las cancelaciones tardías.",
-    "resumen": "Tipos de bono, cuánto descontar por volumen, caducidades reales de estudios españoles, cancelaciones tardías y congelaciones: lo que decide si un bono te da caja o problemas.",
+    "titulo": "Packs y abonos de pilates: cómo armarlos (clases, precio, vencimiento y cancelaciones)",
+    "tituloSeo": "Packs y abonos de pilates: cómo armarlos y su precio",
+    "descripcion": "Clase suelta, pack de 4, 8 o 12 clases: cuánto descontar, qué publican hoy tres estudios porteños, el vencimiento y qué hacer con las cancelaciones.",
+    "resumen": "Cómo armar la escalera de packs y abonos de un estudio de pilates en Argentina: cuánto descontar, tarifas reales con su fecha, vencimiento, cancelaciones y lo que pide la ley.",
     "categoria": "rentabilidad",
     "seccion": "Rentabilidad",
-    "publicado": "2026-09-25",
+    "publicado": "2026-11-27",
     "relacionadas": [
       "/recursos/precio-clase-de-pilates",
       "/recursos/precios-reformer-mat",
       "/funcionalidades/bonos-y-membresias",
       "/funcionalidades/cancelaciones-y-politicas"
     ],
-    "palabras": 2077,
-    "actualizado": "2026-10-07"
+    "palabras": 1737
   },
   {
     "slug": "politica-de-cancelacion-de-clases",

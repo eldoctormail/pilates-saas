@@ -1,7 +1,9 @@
 'use client';
 
 import { useId, useMemo, useState } from 'react';
-import { calcularBonos, type EntradaBonos } from '@/lib/recursos/calculadora-bonos';
+import { calcularBonos, calcularPacks, type EntradaBonos, type EntradaPacks } from '@/lib/recursos/calculadora-bonos';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
+import { formatoMoneda } from '@/lib/moneda';
 import { capturarEvento } from '@/lib/posthog-cliente';
 
 // Calculadora de la escalera de precios (lib/recursos/calculadora-bonos.ts).
@@ -24,6 +26,10 @@ const CAMPOS: { clave: keyof EntradaBonos; etiqueta: string; ayuda: string; paso
 const euros = (n: number) => `${n.toLocaleString('es-ES', { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 })} €`;
 
 export function CalculadoraBonos() {
+  return ES ? <CalculadoraBonosEspana /> : <CalculadoraPacks />;
+}
+
+function CalculadoraBonosEspana() {
   const id = useId();
   const [e, setE] = useState<EntradaBonos>(EJEMPLO);
   const [usada, setUsada] = useState(false);
@@ -86,6 +92,101 @@ export function CalculadoraBonos() {
       )}
       <p style={{ margin: '12px 0 0', fontSize: 12, color: '#6B6B63', lineHeight: 1.5 }}>
         Cuotas con 4 y 8 sesiones al mes, la cuenta que enseñan los propios estudios. Para compararlo con tu coste se le quita al precio el 21 % de IVA. Precios redondeados al céntimo: redondéalos tú a una cifra fácil de recordar.
+      </p>
+    </section>
+  );
+}
+
+// Argentina (lib/recursos/articulos/argentina/bonos-de-pilates.ts): clase suelta
+// y packs de 4, 8 y 12, con el ejemplo de la tabla del artículo (tarifas de
+// Aditi Pilates, 24-nov-2026) y el IVA solo si eres responsable inscripto.
+const EJEMPLO_AR: EntradaPacks = { suelta: 25000, descuentoPack4: 12, descuentoPack8: 28, descuentoPack12: 34, costePorPlaza: 0, responsableInscripto: false };
+
+const CAMPOS_AR: { clave: Exclude<keyof EntradaPacks, 'responsableInscripto'>; etiqueta: string; ayuda: string; paso: number; sufijo: string }[] = [
+  { clave: 'suelta', etiqueta: 'Precio de la clase suelta', ayuda: 'O de la clase de prueba: lo que cobras por venir un día', paso: 500, sufijo: '$' },
+  { clave: 'descuentoPack4', etiqueta: 'Descuento del pack de 4', ayuda: 'Por clase, frente a la suelta', paso: 1, sufijo: '%' },
+  { clave: 'descuentoPack8', etiqueta: 'Descuento del pack de 8', ayuda: 'Por clase, frente a la suelta', paso: 1, sufijo: '%' },
+  { clave: 'descuentoPack12', etiqueta: 'Descuento del pack de 12', ayuda: 'Por clase, frente a la suelta', paso: 1, sufijo: '%' },
+  { clave: 'costePorPlaza', etiqueta: 'Tu costo por plaza ocupada, sin IVA', ayuda: 'Opcional: para avisarte si un pack no lo cubre', paso: 100, sufijo: '$' },
+];
+
+const pesos = (n: number) => formatoMoneda(n, 0);
+
+function CalculadoraPacks() {
+  const id = useId();
+  const [e, setE] = useState<EntradaPacks>(EJEMPLO_AR);
+  const [usada, setUsada] = useState(false);
+  const r = useMemo(() => calcularPacks(e), [e]);
+
+  function marcarUsada() {
+    if (!usada) { setUsada(true); capturarEvento('herramienta_usada', { herramienta: 'calculadora-bonos' }); }
+  }
+  function cambiar(clave: keyof EntradaPacks, valor: string) {
+    setE((prev) => ({ ...prev, [clave]: valor === '' ? Number.NaN : Number(valor) }));
+    marcarUsada();
+  }
+
+  return (
+    <section aria-labelledby={`${id}-t`} style={{ background: '#fff', border: '1px solid #E0E5D0', borderRadius: 20, padding: 'clamp(18px,3vw,26px)', margin: '26px 0' }}>
+      <h3 id={`${id}-t`} style={{ margin: '0 0 4px', fontSize: 19, fontWeight: 800, letterSpacing: '-.02em' }}>Calculadora de precios de packs</h3>
+      <p style={{ margin: '0 0 18px', fontSize: 13.5, color: '#5A5A52' }}>Los números de partida son los del ejemplo de arriba (tarifas publicadas por un estudio de CABA en noviembre de 2026): cámbialos por los tuyos.</p>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: 14 }}>
+        {CAMPOS_AR.map((c) => (
+          <label key={c.clave} htmlFor={`${id}-${c.clave}`} style={{ display: 'block' }}>
+            <span style={{ display: 'block', fontSize: 13.5, fontWeight: 700, marginBottom: 2 }}>{c.etiqueta} ({c.sufijo})</span>
+            <span style={{ display: 'block', fontSize: 12, color: '#6B6B63', marginBottom: 6 }}>{c.ayuda}</span>
+            <input
+              id={`${id}-${c.clave}`}
+              type="number"
+              inputMode="decimal"
+              min={0}
+              max={c.sufijo === '%' ? 95 : undefined}
+              step={c.paso}
+              value={Number.isNaN(e[c.clave]) ? '' : e[c.clave]}
+              onChange={(ev) => cambiar(c.clave, ev.target.value)}
+              style={{ width: '100%', fontSize: 16, padding: '10px 12px', borderRadius: 12, border: '1px solid #D6D6CE', background: '#FAFAF7' }}
+            />
+          </label>
+        ))}
+      </div>
+      <label htmlFor={`${id}-ri`} style={{ display: 'flex', gap: 8, alignItems: 'center', marginTop: 14, fontSize: 13.5 }}>
+        <input
+          id={`${id}-ri`}
+          type="checkbox"
+          checked={e.responsableInscripto}
+          onChange={(ev) => { const v = ev.target.checked; setE((prev) => ({ ...prev, responsableInscripto: v })); marcarUsada(); }}
+        />
+        Soy responsable inscripto (mis precios llevan el 21 % de IVA)
+      </label>
+      <div aria-live="polite" style={{ marginTop: 20, border: '1px solid #E7E7E0', borderRadius: 14, overflow: 'hidden' }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
+          <thead>
+            <tr style={{ background: '#0F0F0F', color: '#fff', textAlign: 'left' }}>
+              <th scope="col" style={{ padding: '10px 12px', fontWeight: 700 }}>Producto</th>
+              <th scope="col" style={{ padding: '10px 12px', fontWeight: 700 }}>Precio</th>
+              <th scope="col" style={{ padding: '10px 12px', fontWeight: 700 }}>Por clase</th>
+              <th scope="col" style={{ padding: '10px 12px', fontWeight: 700 }}>Ahorro</th>
+            </tr>
+          </thead>
+          <tbody>
+            {r.escalones.map((s) => (
+              <tr key={s.id} style={{ borderTop: '1px solid #EDEDE6', background: s.porDebajoDelCoste ? '#FBEFEC' : undefined }}>
+                <th scope="row" style={{ padding: '10px 12px', textAlign: 'left', fontWeight: 600 }}>{s.nombre}</th>
+                <td style={{ padding: '10px 12px', whiteSpace: 'nowrap' }}>{pesos(s.precio)}</td>
+                <td style={{ padding: '10px 12px', whiteSpace: 'nowrap' }}>{pesos(s.porSesion)}{s.porDebajoDelCoste ? ' · por debajo de tu costo' : ''}</td>
+                <td style={{ padding: '10px 12px' }}>{s.id === 'suelta' ? '—' : `${s.ahorro} %`}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {r.escaleraNoBaja && (
+        <p style={{ margin: '12px 0 0', fontSize: 13.5, lineHeight: 1.5, color: '#7A3B2A' }}>
+          Algún pack sale igual o más caro por clase que el anterior: así nadie tiene motivo para comprar el más grande. Sube el descuento de ese pack.
+        </p>
+      )}
+      <p style={{ margin: '12px 0 0', fontSize: 12, color: '#6B6B63', lineHeight: 1.5 }}>
+        Packs de un mes, con una, dos o tres clases por semana. Si eres monotributista, el precio se compara tal cual con tu costo; si eres responsable inscripto, se le quita antes el 21 % de IVA. Redondea tú los precios a una cifra fácil de recordar.
       </p>
     </section>
   );

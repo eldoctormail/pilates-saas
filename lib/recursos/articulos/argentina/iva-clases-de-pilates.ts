@@ -16,6 +16,7 @@ const articulo: Articulo = {
   categoria: 'espana',
   seccion: 'Argentina e impuestos',
   publicado: '2026-11-24',
+  actualizado: '2026-11-26',
   consultaPrincipal: '¿las clases de pilates llevan IVA?',
   consultas: [
     'IVA clases de pilates Argentina',

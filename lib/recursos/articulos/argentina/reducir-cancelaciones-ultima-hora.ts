@@ -24,6 +24,7 @@ const articulo: Articulo = {
   categoria: 'operacion',
   seccion: 'Operación',
   publicado: '2026-11-27',
+  actualizado: '2026-11-27',
   consultaPrincipal: 'reducir cancelaciones de último momento',
   consultas: [
     'cómo reducir los no-shows en clases',

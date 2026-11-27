@@ -82,9 +82,38 @@ export const RECURSO_POR_ARTICULO: Readonly<Record<string, ClaveRecurso>> = {
   'software-pilates-gratis': 'plantilla-control-asistencia',
 };
 
-export function recursoIntermedio(slug: string): RecursoIntermedio | undefined {
+/**
+ * La llamada de un artículo. Con `articulos` (los del país que se publica), un
+ * recurso que vive dentro de otra guía solo se ofrece si esa guía lo sigue
+ * llevando: las versiones argentinas no tienen las descargas de España, y la
+ * llamada prometería un Excel o un Word que no está.
+ */
+export function recursoIntermedio(
+  slug: string,
+  articulos?: readonly Pick<Articulo, 'slug' | 'secciones'>[],
+): RecursoIntermedio | undefined {
   const clave = RECURSO_POR_ARTICULO[slug];
-  return clave ? RECURSOS_INTERMEDIOS[clave] : undefined;
+  if (!clave) return undefined;
+  const r: RecursoIntermedio = RECURSOS_INTERMEDIOS[clave];
+  if (!articulos || !r.vive) return r;
+  const seccion = seccionDelRecurso(r.vive, articulos);
+  if (!seccion) return undefined;
+  // El ancla es la sección donde está el bloque en ESTA versión de la guía (la
+  // argentina no siempre titula igual que la de España).
+  const [base, ancla] = r.href.split('#');
+  return ancla === seccion ? r : { ...r, href: `${base}#${seccion}` };
+}
+
+/** El id de la sección de su guía que lleva el recurso, o null si ya no lo lleva. */
+function seccionDelRecurso(
+  vive: NonNullable<RecursoIntermedio['vive']>,
+  articulos: readonly Pick<Articulo, 'slug' | 'secciones'>[],
+): string | null {
+  const destino = articulos.find((a) => a.slug === vive.articulo);
+  const campo = vive.bloque === 'descarga' ? 'recurso' : 'id';
+  return destino?.secciones.find((s) => s.bloques.some(
+    (b) => b.t === vive.bloque && (b as unknown as Record<string, string>)[campo] === vive.id,
+  ))?.id ?? null;
 }
 
 const LLEVA_SU_PROPIA_LLAMADA = new Set(['llamada', 'producto', 'descarga', 'herramienta']);

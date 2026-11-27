@@ -83,14 +83,15 @@ test('lo que llega al cliente no importa el texto de los artículos', () => {
 });
 
 test('cada artículo tiene su portada, con alt y crédito, y no sobra ninguna', () => {
-  const slugs = new Set(ARTICULOS.map((a) => a.slug));
   for (const a of ARTICULOS) {
     const p = PORTADAS_ARTICULOS[a.slug];
     assert.ok(p, `${a.slug}: sin portada en lib/recursos/articulos/portadas.ts`);
     assert.ok(p.alt.length >= 20, `${a.slug}: alt demasiado corto`);
     assert.ok(p.credito.autor && p.credito.licencia && /^https:\/\//.test(p.credito.url), `${a.slug}: crédito incompleto`);
   }
-  for (const slug of Object.keys(PORTADAS_ARTICULOS)) assert.ok(slugs.has(slug), `portada de «${slug}», que no es ningún artículo`);
+  // Contra todos los de España: en Argentina no se publican algunos (ARTICULOS_SOLO_ESPANA), y su portada no sobra.
+  const todos = new Set(ARTICULOS_ESPANA.map((a) => a.slug));
+  for (const slug of Object.keys(PORTADAS_ARTICULOS)) assert.ok(todos.has(slug), `portada de «${slug}», que no es ningún artículo`);
 });
 
 test('cada versión argentina sustituye a un artículo de España con su mismo slug, una sola vez', () => {

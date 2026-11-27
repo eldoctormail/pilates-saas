@@ -16,6 +16,7 @@
     "lint": "eslint",
     "email": "email dev --dir emails --port 3010",
     "test": "node --import ./scripts/register-test-hooks.mjs --test --experimental-strip-types \"lib/**/*.test.ts\"",
+    "test:argentina": "node --import ./scripts/register-test-hooks.mjs --test --experimental-strip-types \"lib/seo/**/*.test.ts\" \"lib/landing/**/*.test.ts\" \"lib/recursos/**/*.test.ts\" \"lib/blog/**/*.test.ts\"",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "spacemail:check": "node --experimental-strip-types scripts/spacemail-check.ts",

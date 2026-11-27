@@ -8,6 +8,7 @@ import { firmarTokenDescarga, verificarTokenDescarga } from './descargas-token.t
 import { escrituraLeadDescarga, pedirConfirmacionNovedades, puedeRecibirNovedades, type LeadExistente } from './descargas-lead.ts';
 import { correoDescarga, paginaDescargas } from './descargas-correo.ts';
 import { ARTICULOS } from './articulos/index.ts';
+import { FUNCIONES_DE_ESPANA } from '../locale.ts';
 
 const RAIZ = join(import.meta.dirname, '..', '..');
 const SECRETO = 'secreto-de-prueba';
@@ -29,11 +30,13 @@ test('cada recurso descargable tiene su archivo en public/ y su guía publicada'
   assert.equal(esSlugDescarga('../../etc/passwd'), false);
 });
 
-test('la guía de cada recurso lleva su recuadro de descarga', () => {
+test('la guía de cada recurso lleva su recuadro de descarga (en Argentina, ninguna: los archivos son de España)', () => {
   for (const [slug, r] of Object.entries(RECURSOS_DESCARGABLES)) {
     const guia = ARTICULOS.find((a) => `/recursos/${a.slug}` === r.guia)!;
     const bloques = guia.secciones.flatMap((s) => s.bloques);
-    assert.ok(bloques.some((b) => b.t === 'descarga' && b.recurso === slug), `${slug}: su guía no tiene el recuadro`);
+    const lleva = bloques.some((b) => b.t === 'descarga' && b.recurso === slug);
+    if (FUNCIONES_DE_ESPANA) assert.ok(lleva, `${slug}: su guía no tiene el recuadro`);
+    else assert.ok(!lleva, `${slug}: la versión argentina ofrece un archivo escrito para España`);
   }
 });
 

@@ -17,6 +17,7 @@ const articulo: Articulo = {
   categoria: 'sustituciones',
   seccion: 'Sustituciones y equipo',
   publicado: '2026-11-24',
+  actualizado: '2026-11-26',
   consultaPrincipal: 'cuánto cobra una instructora de pilates',
   consultas: [
     'sueldo instructora de pilates Argentina',

@@ -18,6 +18,7 @@ const articulo: Articulo = {
   categoria: 'abrir',
   seccion: 'Abrir un estudio',
   publicado: '2026-11-27',
+  actualizado: '2026-11-27',
   consultaPrincipal: 'franquicia de pilates',
   consultas: [
     'franquicia de pilates en Argentina',

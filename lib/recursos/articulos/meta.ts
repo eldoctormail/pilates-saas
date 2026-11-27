@@ -474,7 +474,8 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
       "/recursos/precios-reformer-mat",
       "/precios"
     ],
-    "palabras": 2763
+    "palabras": 2763,
+    "actualizado": "2026-11-27"
   },
   {
     "slug": "como-abrir-un-estudio-de-yoga",
@@ -492,7 +493,8 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
       "/recursos/rentabilidad-estudio-de-pilates",
       "/recursos/politica-de-cancelacion-de-clases"
     ],
-    "palabras": 2020
+    "palabras": 2020,
+    "actualizado": "2026-11-27"
   },
   {
     "slug": "como-gestionar-un-estudio-de-pilates",
@@ -546,7 +548,8 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
       "/funcionalidades/informes-y-rentabilidad",
       "/precios"
     ],
-    "palabras": 1537
+    "palabras": 1537,
+    "actualizado": "2026-11-27"
   },
   {
     "slug": "precio-clase-de-pilates",
@@ -563,7 +566,8 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
       "/recursos/iva-clases-de-pilates",
       "/funcionalidades/bonos-y-membresias"
     ],
-    "palabras": 1153
+    "palabras": 1153,
+    "actualizado": "2026-11-26"
   },
   {
     "slug": "rentabilidad-estudio-de-pilates",
@@ -581,7 +585,8 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
       "/funcionalidades/informes-y-rentabilidad",
       "/precios"
     ],
-    "palabras": 1410
+    "palabras": 1410,
+    "actualizado": "2026-11-27"
   },
   {
     "slug": "precios-reformer-mat",
@@ -598,7 +603,8 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
       "/recursos/bonos-de-pilates",
       "/recursos/cuanto-cuesta-abrir-un-estudio-de-pilates"
     ],
-    "palabras": 1693
+    "palabras": 1693,
+    "actualizado": "2026-11-27"
   },
   {
     "slug": "ocupacion-clases-valle",
@@ -615,7 +621,8 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
       "/funcionalidades/informes-y-rentabilidad",
       "/recursos/bonos-de-pilates"
     ],
-    "palabras": 2094
+    "palabras": 2094,
+    "actualizado": "2026-11-27"
   },
   {
     "slug": "requisitos-para-abrir-un-estudio-de-pilates",
@@ -633,7 +640,8 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
       "/funcionalidades/ficha-de-clienta",
       "/funcionalidades/facturacion"
     ],
-    "palabras": 1515
+    "palabras": 1515,
+    "actualizado": "2026-11-26"
   },
   {
     "slug": "bonos-de-pilates",
@@ -650,7 +658,8 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
       "/funcionalidades/bonos-y-membresias",
       "/funcionalidades/cancelaciones-y-politicas"
     ],
-    "palabras": 1737
+    "palabras": 1737,
+    "actualizado": "2026-11-27"
   },
   {
     "slug": "politica-de-cancelacion-de-clases",
@@ -668,7 +677,8 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
       "/funcionalidades/lista-de-espera",
       "/recursos/como-abrir-un-estudio-de-yoga"
     ],
-    "palabras": 2312
+    "palabras": 2312,
+    "actualizado": "2026-11-27"
   },
   {
     "slug": "reducir-cancelaciones-ultima-hora",
@@ -685,7 +695,8 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
       "/funcionalidades/lista-de-espera",
       "/funcionalidades/automatizaciones-y-avisos"
     ],
-    "palabras": 1965
+    "palabras": 1965,
+    "actualizado": "2026-11-27"
   },
   {
     "slug": "cuanto-cobra-una-instructora-de-pilates",
@@ -702,7 +713,8 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
       "/recursos/rentabilidad-estudio-de-pilates",
       "/recursos/requisitos-para-abrir-un-estudio-de-pilates"
     ],
-    "palabras": 1112
+    "palabras": 1112,
+    "actualizado": "2026-11-26"
   },
   {
     "slug": "cubrir-baja-instructora",
@@ -719,7 +731,8 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
       "/funcionalidades/gestion-de-instructoras",
       "/recursos/como-gestionar-un-estudio-de-pilates"
     ],
-    "palabras": 1986
+    "palabras": 1986,
+    "actualizado": "2026-11-27"
   },
   {
     "slug": "como-ser-instructora-de-pilates",
@@ -736,7 +749,8 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
       "/recursos/iva-clases-de-pilates",
       "/recursos/cubrir-baja-instructora"
     ],
-    "palabras": 1701
+    "palabras": 1701,
+    "actualizado": "2026-11-27"
   },
   {
     "slug": "iva-clases-de-pilates",
@@ -753,7 +767,8 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
       "/recursos/precio-clase-de-pilates",
       "/recursos/cuanto-cuesta-abrir-un-estudio-de-pilates"
     ],
-    "palabras": 1388
+    "palabras": 1388,
+    "actualizado": "2026-11-26"
   },
   {
     "slug": "software-pilates-gratis",
@@ -770,7 +785,8 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
       "/recursos/checklist-elegir-software-estudio",
       "/precios"
     ],
-    "palabras": 1873
+    "palabras": 1873,
+    "actualizado": "2026-11-27"
   },
   {
     "slug": "plantilla-control-de-asistencia-pilates",
@@ -787,7 +803,8 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
       "/recursos/bonos-de-pilates",
       "/recursos/reducir-cancelaciones-ultima-hora"
     ],
-    "palabras": 1744
+    "palabras": 1744,
+    "actualizado": "2026-11-27"
   },
   {
     "slug": "franquicia-de-pilates",
@@ -805,7 +822,8 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
       "/recursos/nombres-para-estudio-de-pilates",
       "/precios"
     ],
-    "palabras": 1959
+    "palabras": 1959,
+    "actualizado": "2026-11-27"
   },
   {
     "slug": "nombres-para-estudio-de-pilates",
@@ -821,7 +839,8 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
       "/funcionalidades/app-para-alumnas",
       "/recursos/reservas-en-tu-web"
     ],
-    "palabras": 1681
+    "palabras": 1681,
+    "actualizado": "2026-11-27"
   }
 ];
 

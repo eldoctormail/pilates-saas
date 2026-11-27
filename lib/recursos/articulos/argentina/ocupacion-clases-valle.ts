@@ -16,6 +16,7 @@ const articulo: Articulo = {
   categoria: 'rentabilidad',
   seccion: 'Rentabilidad',
   publicado: '2026-11-27',
+  actualizado: '2026-11-27',
   consultaPrincipal: 'clases valle',
   consultas: [
     'cómo llenar clases a media mañana',

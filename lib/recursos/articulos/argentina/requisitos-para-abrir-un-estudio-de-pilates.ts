@@ -14,6 +14,7 @@ const articulo: Articulo = {
   categoria: 'abrir',
   seccion: 'Abrir un estudio',
   publicado: '2026-11-24',
+  actualizado: '2026-11-26',
   consultaPrincipal: 'requisitos para abrir un estudio de pilates',
   consultas: [
     'qué necesito para abrir un estudio de pilates en Argentina',

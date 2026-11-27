@@ -54,7 +54,8 @@ env:
   # mismo que fija scripts/register-test-hooks.mjs para los unitarios. Sin esto
   # fallaban casi todos los E2E por el formato, no por un error. El paso de RLS
   # pone su propia zona (la de la base). La imagen del servidor se compila en
-  # imagen-servidor.yml, sin estas variables: allí manda Argentina.
+  # imagen-servidor.yml, sin estas variables: allí manda Argentina, y el job
+  # `argentina` de abajo la prueba en cada PR.
   NEXT_PUBLIC_LOCALE: es-ES
   NEXT_PUBLIC_MONEDA: EUR
   NEXT_PUBLIC_LOCALE_MONEDA: es-ES
@@ -439,6 +440,55 @@ jobs:
           compression-level: 1
 
   # ---------------------------------------------------------------------------
+  # La versión argentina, que es la que corre en producción (Centra). Todo lo de
+  # arriba va con la configuración de España, porque los textos que esperan los
+  # tests son los del original. Aquí, con la de Argentina (la que pone la imagen
+  # del servidor):
+  #   · los tests de la web pública (SEO, home, recursos, blog): lo que se ve
+  #     desde Google y lo que más cambia entre países. El resto de la suite con
+  #     es-AR todavía no pasa (formatos de fecha y moneda escritos a mano en los
+  #     tests): se suma por carpetas a medida que se arregle, en `test:argentina`.
+  #   · el build de producción entero: rutas, redirecciones y páginas que solo
+  #     existen en Argentina.
+  argentina:
+    name: Versión argentina
+    needs: calidad-tipos
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      NEXT_PUBLIC_LOCALE: es-AR
+      NEXT_PUBLIC_MONEDA: ARS
+      NEXT_PUBLIC_LOCALE_MONEDA: es-AR
+      NEXT_PUBLIC_ZONA_HORARIA: America/Argentina/Buenos_Aires
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+          cache: npm
+
+      - name: Restaurar node_modules
+        id: cache-nm
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: nm-${{ runner.os }}-node24-${{ hashFiles('package-lock.json') }}
+
+      - name: Instalar dependencias
+        if: steps.cache-nm.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Tests de la web pública con es-AR
+        # Vacía, como en `calidad-test`: los tests de enlaces esperan la dirección de producción.
+        env:
+          NEXT_PUBLIC_APP_URL: ''
+        run: npm run test:argentina
+
+      - name: Build de producción con es-AR
+        run: npm run build
+
+  # ---------------------------------------------------------------------------
   # E2E repartida en shards, servida por `next start` sobre el build ya hecho.
   # Este era el 89% del tiempo de CI (1308s de 1473s) porque corría contra
   # `next dev`: cada ruta se compilaba bajo demanda dentro del propio test.
@@ -657,7 +707,7 @@ jobs:
   test:
     name: test
     if: always()
-    needs: [calidad-tipos, calidad-lint, calidad-test, calidad-rls, build, e2e]
+    needs: [calidad-tipos, calidad-lint, calidad-test, calidad-rls, build, argentina, e2e]
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -668,9 +718,10 @@ jobs:
           echo "calidad-test   = ${{ needs.calidad-test.result }}"
           echo "calidad-rls    = ${{ needs.calidad-rls.result }}"
           echo "build          = ${{ needs.build.result }}"
+          echo "argentina      = ${{ needs.argentina.result }}"
           echo "e2e            = ${{ needs.e2e.result }}"
           fallo=0
-          for r in "${{ needs.calidad-tipos.result }}" "${{ needs.calidad-lint.result }}" "${{ needs.calidad-test.result }}" "${{ needs.calidad-rls.result }}" "${{ needs.build.result }}" "${{ needs.e2e.result }}"; do
+          for r in "${{ needs.calidad-tipos.result }}" "${{ needs.calidad-lint.result }}" "${{ needs.calidad-test.result }}" "${{ needs.calidad-rls.result }}" "${{ needs.build.result }}" "${{ needs.argentina.result }}" "${{ needs.e2e.result }}"; do
             [ "$r" = "success" ] || fallo=1
           done
           if [ "$fallo" = "1" ]; then

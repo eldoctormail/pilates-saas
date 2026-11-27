@@ -24,6 +24,7 @@ const articulo: Articulo = {
   categoria: 'sustituciones',
   seccion: 'Sustituciones y equipo',
   publicado: '2026-11-27',
+  actualizado: '2026-11-27',
   consultaPrincipal: 'cubrir baja instructora',
   consultas: [
     'sustituir a una instructora de pilates',

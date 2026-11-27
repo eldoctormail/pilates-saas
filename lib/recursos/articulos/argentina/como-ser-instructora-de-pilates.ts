@@ -17,6 +17,7 @@ const articulo: Articulo = {
   categoria: 'sustituciones',
   seccion: 'Sustituciones y equipo',
   publicado: '2026-11-27',
+  actualizado: '2026-11-27',
   consultaPrincipal: 'cómo ser instructora de pilates',
   consultas: [
     'cómo ser profesora de pilates',

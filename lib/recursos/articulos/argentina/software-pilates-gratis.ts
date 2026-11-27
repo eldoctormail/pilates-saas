@@ -18,6 +18,7 @@ const articulo: Articulo = {
   categoria: 'software',
   seccion: 'Elegir software',
   publicado: '2026-11-27',
+  actualizado: '2026-11-27',
   consultaPrincipal: 'software de pilates gratis',
   consultas: [
     'programa de gestión de pilates gratis',

@@ -715,7 +715,7 @@ const TODAS_LAS_PAGINAS: PaginaSeo[] = [
     titulo: ES ? 'Programa de gestión para estudios de Pilates en España' : 'Programa de gestión para estudios de Pilates en Argentina',
     descripcion: ES
       ? 'Reservas, calendario con salas, bonos, cobros con tarjeta o remesa SEPA, facturas y sustituciones para estudios de Pilates en España. Empieza gratis.'
-      : 'Reservas, calendario con salas, bonos, cobros con Mercado Pago, factura electrónica de ARCA y sustituciones para estudios de Pilates en Argentina. Empieza gratis.',
+      : 'Reservas, calendario con salas, bonos, cobros con Mercado Pago, factura electrónica ARCA y sustituciones para estudios de Pilates en Argentina. Empieza gratis.',
     grupo: 'soluciones',
     etiqueta: 'Programa de gestión',
     resumen: 'El programa que lleva el estudio entero: reservas, bonos, cobros, facturas y equipo.',
@@ -777,7 +777,7 @@ const TODAS_LAS_PAGINAS: PaginaSeo[] = [
     titulo: 'Glosario: software para Pilates y yoga | Centra',
     descripcion: ES
       ? 'Definiciones claras y neutrales de los términos del sector: software de gestión, pilates reformer, Veri*factu, lista de espera automática, CRM de estudio y más.'
-      : 'Definiciones claras y neutrales de los términos del sector: software de gestión, pilates reformer, factura electrónica y CAE, lista de espera, monotributo y más.',
+      : 'Definiciones claras y neutrales de los términos del sector: software de gestión, pilates reformer, factura electrónica, CAE, lista de espera, monotributo y más.',
     grupo: 'recursos',
     etiqueta: 'Glosario',
     resumen: 'Qué significa cada término del sector, sin marketing.',

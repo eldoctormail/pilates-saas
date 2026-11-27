@@ -11,7 +11,7 @@ import { RecursosBlogStructuredData, RecursosBreadcrumb } from '@/components/rec
 import { PortadaRecursos } from '@/components/recursos/PortadaRecursos';
 import { OrganizationStructuredData } from '@/components/OrganizationStructuredData';
 import {
-  CATEGORIAS_RECURSOS, DESTACADA, GUIAS, ORDEN_LISTADO, TARJETAS_SIN_GUIA,
+  CATEGORIAS_RECURSOS, DESTACADA, GUIAS, TARJETAS_SIN_GUIA, ordenListadoDelPais,
   mesCorto, metaTarjeta, urlGuia,
   type CategoriaRecursos, type PortadaRecursos as Portada,
 } from '@/lib/recursos/guias';
@@ -54,7 +54,7 @@ const ARTICULOS_DATOS: Article[] = ARTICULOS_META.filter((a) => a.slug !== DESTA
   portada: portadaArticulo(a.slug),
 }));
 
-const ARTICLES: Article[] = [...ARTICULOS_DATOS, ...ORDEN_LISTADO.map((clave) => {
+const ARTICLES: Article[] = [...ARTICULOS_DATOS, ...ordenListadoDelPais().map((clave) => {
   const g = GUIAS.find((x) => x.slug === clave);
   if (g) return { category: g.categoria, title: g.titulo, body: g.resumen, href: urlGuia(g.slug), meta: metaTarjeta(g), portada: g.portada };
   const t = TARJETAS_SIN_GUIA.find((x) => x.clave === clave);

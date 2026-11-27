@@ -107,6 +107,7 @@ const nextConfig: NextConfig = {
   async redirects() {
     // En Argentina (formato es-AR, el de serie: lib/locale.ts) el blog personal del autor del software
     // original no es de Centra: sus direcciones llevan a las guías. No permanente: con es-ES vuelve.
+    // ⚠️ Lo que se redirige aquí sale también del listado y del sitemap: GUIAS_DEL_PAIS (lib/recursos/guias.ts).
     const argentina = /^es-AR\b/i.test(process.env.NEXT_PUBLIC_LOCALE?.trim() || 'es-AR');
     return [
       { source: '/network/unirse', destination: '/network', permanent: true },
@@ -114,6 +115,8 @@ const nextConfig: NextConfig = {
         ? [
             { source: '/blog', destination: '/recursos', permanent: false },
             { source: '/blog/:ruta*', destination: '/recursos', permanent: false },
+            // Veri*Factu es la ley española de facturación: en Argentina la factura es de ARCA.
+            { source: '/recursos/facturacion-electronica-verifactu', destination: '/recursos/iva-clases-de-pilates', permanent: false },
           ]
         : []),
     ];

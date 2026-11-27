@@ -234,6 +234,22 @@ export const ORDEN_LISTADO: string[] = [
   'tentare-vs-glofox',
 ];
 
+/**
+ * Guías que solo tienen sentido en España: con el formato de Argentina no salen
+ * en el listado ni en el sitemap, y su dirección redirige (next.config.ts).
+ */
+export const GUIAS_SOLO_ESPANA = ['facturacion-electronica-verifactu'];
+
+/** Las guías que se publican con el formato del país (lib/locale.ts). */
+export function guiasDelPais(espana: boolean = FUNCIONES_DE_ESPANA): Guia[] {
+  return espana ? GUIAS : GUIAS.filter((g) => !GUIAS_SOLO_ESPANA.includes(g.slug));
+}
+
+/** El orden del listado, sin lo que no se publica en el país. */
+export function ordenListadoDelPais(espana: boolean = FUNCIONES_DE_ESPANA): string[] {
+  return espana ? ORDEN_LISTADO : ORDEN_LISTADO.filter((clave) => !GUIAS_SOLO_ESPANA.includes(clave));
+}
+
 export function guia(slug: string): Guia {
   const g = GUIAS.find((x) => x.slug === slug);
   if (!g) throw new Error(`No hay ninguna guía «${slug}» en lib/recursos/guias.ts`);

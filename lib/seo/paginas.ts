@@ -23,7 +23,7 @@
 
 import { LEGAL } from '../legal-info.ts';
 import { FUNCIONES_DE_ESPANA as ES } from '../locale.ts';
-import { GUIAS, fechaModificada } from '../recursos/guias.ts';
+import { fechaModificada, guiasDelPais } from '../recursos/guias.ts';
 // meta.ts y no index.ts: este registro llega al cliente (la landing lo usa) y
 // index.ts arrastra el texto entero de los artículos.
 import { ARTICULOS_META } from '../recursos/articulos/meta.ts';
@@ -219,10 +219,10 @@ const FUNCIONALIDADES: PaginaSeo[] = [
     prioridad: 0.9,
     changeFrequency: 'monthly',
     actualizado: PUBLICADO,
-    // Las dos guías son de la normativa española: con el formato de Argentina no se enlazan.
+    // Veri*Factu es normativa española: con el formato de Argentina solo se enlaza la guía del IVA, que tiene versión argentina.
     relacionadas: ES
       ? ['/funcionalidades/cobros-recurrentes', '/recursos/facturacion-electronica-verifactu', '/recursos/iva-clases-de-pilates', '/seguridad']
-      : ['/funcionalidades/cobros-recurrentes', '/seguridad'],
+      : ['/funcionalidades/cobros-recurrentes', '/recursos/iva-clases-de-pilates', '/seguridad'],
   },
   {
     path: '/funcionalidades/ficha-de-clienta',
@@ -759,7 +759,7 @@ export const PAGINAS: PaginaSeo[] = [
   ...(ES ? PAGINAS_BLOG : []),
   // Las guías salen de su registro (lib/recursos/guias.ts), que también da las
   // fechas de su JSON-LD: antes esta lista las repetía a mano.
-  ...GUIAS.map((g): PaginaSeo => ({
+  ...guiasDelPais().map((g): PaginaSeo => ({
     path: `/recursos/${g.slug}`,
     titulo: g.tituloSeo,
     descripcion: g.descripcionSeo,

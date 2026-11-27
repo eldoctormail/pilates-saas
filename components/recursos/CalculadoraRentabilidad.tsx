@@ -3,6 +3,8 @@
 import { useId, useMemo, useState } from 'react';
 import { calcularRentabilidad, type EntradaRentabilidad } from '@/lib/recursos/calculadora-rentabilidad';
 import { capturarEvento } from '@/lib/posthog-cliente';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
+import { MONEDA_SIMBOLO, formatoMoneda } from '@/lib/moneda';
 
 // Calculadora de rentabilidad de un estudio (lib/recursos/calculadora-rentabilidad.ts).
 // Los valores iniciales son un EJEMPLO y la pantalla lo dice: la propietaria
@@ -10,21 +12,27 @@ import { capturarEvento } from '@/lib/posthog-cliente';
 // (6 reformers, 30 clases, 18,75 € con IVA menos un 2 % de comisiones, 25 € de
 // instructora, 2.400 € de local y 604 € de reserva para máquinas), para que la
 // herramienta y la tabla digan lo mismo: equilibrio hacia el 53 %.
+//
+// Con el formato de Argentina, en pesos y con un ejemplo de allí (artículo
+// «Cuánto cuesta abrir un estudio de pilates», nov-2026): $15.000 por plaza
+// (por debajo de lo que cuesta una clase dentro de un pack), $12.000 de
+// instructora por clase (algo más que la hora de convenio) y $2.500.000 de
+// fijos (el alquiler medio de CABA más lo que no es alquiler).
 
-const EJEMPLO: EntradaRentabilidad = {
-  plazasPorClase: 6, clasesPorSemana: 30, ocupacionPct: 60, ingresoPorPlaza: 15.19, costeInstructoraPorClase: 25, costesFijosMes: 3004,
-};
+const EJEMPLO: EntradaRentabilidad = ES
+  ? { plazasPorClase: 6, clasesPorSemana: 30, ocupacionPct: 60, ingresoPorPlaza: 15.19, costeInstructoraPorClase: 25, costesFijosMes: 3004 }
+  : { plazasPorClase: 6, clasesPorSemana: 30, ocupacionPct: 60, ingresoPorPlaza: 15000, costeInstructoraPorClase: 12000, costesFijosMes: 2500000 };
 
 const CAMPOS: { clave: keyof EntradaRentabilidad; etiqueta: string; ayuda: string; paso: number; sufijo: string }[] = [
   { clave: 'plazasPorClase', etiqueta: 'Plazas por clase', ayuda: 'Máquinas o esterillas', paso: 1, sufijo: '' },
   { clave: 'clasesPorSemana', etiqueta: 'Clases a la semana', ayuda: 'Todas las salas', paso: 1, sufijo: '' },
   { clave: 'ocupacionPct', etiqueta: 'Ocupación media', ayuda: 'Plazas llenas de cada 100', paso: 1, sufijo: '%' },
-  { clave: 'ingresoPorPlaza', etiqueta: 'Ingreso medio por plaza', ayuda: 'Sin IVA ni comisiones, con bonos y cuotas prorrateados', paso: 0.01, sufijo: '€' },
-  { clave: 'costeInstructoraPorClase', etiqueta: 'Coste de instructora por clase', ayuda: 'Lo que te cuesta cada clase dada', paso: 1, sufijo: '€' },
-  { clave: 'costesFijosMes', etiqueta: 'Costes fijos al mes', ayuda: 'Alquiler, suministros, seguros, software, reserva para máquinas…', paso: 1, sufijo: '€' },
+  { clave: 'ingresoPorPlaza', etiqueta: 'Ingreso medio por plaza', ayuda: ES ? 'Sin IVA ni comisiones, con bonos y cuotas prorrateados' : 'Sin impuestos ni comisiones, con packs y abonos prorrateados', paso: ES ? 0.01 : 100, sufijo: MONEDA_SIMBOLO },
+  { clave: 'costeInstructoraPorClase', etiqueta: 'Coste de instructora por clase', ayuda: 'Lo que te cuesta cada clase dada', paso: ES ? 1 : 100, sufijo: MONEDA_SIMBOLO },
+  { clave: 'costesFijosMes', etiqueta: 'Costes fijos al mes', ayuda: ES ? 'Alquiler, suministros, seguros, software, reserva para máquinas…' : 'Alquiler, expensas, servicios, seguro, software, reserva para máquinas…', paso: ES ? 1 : 1000, sufijo: MONEDA_SIMBOLO },
 ];
 
-const euros = (n: number) => `${Math.round(n).toLocaleString('es-ES')} €`;
+const euros = (n: number) => formatoMoneda(Math.round(n), 0);
 
 export function CalculadoraRentabilidad() {
   const id = useId();
@@ -66,7 +74,7 @@ export function CalculadoraRentabilidad() {
           { v: euros(r.ingresosMes), l: 'Ingresos al mes' },
           { v: euros(r.costesTotalesMes), l: 'Costes al mes (instructoras + fijos)' },
           { v: euros(r.resultadoMes), l: positivo ? 'Te queda al mes, antes de impuestos' : 'Pierdes al mes' },
-          { v: r.ocupacionEquilibrioPct === null ? 'No se alcanza' : `${Math.ceil(r.ocupacionEquilibrioPct)} %`, l: 'Ocupación para no perder dinero' },
+          { v: r.ocupacionEquilibrioPct === null ? 'No se alcanza' : `${Math.ceil(r.ocupacionEquilibrioPct)} %`, l: ES ? 'Ocupación para no perder dinero' : 'Ocupación para no perder plata' },
         ].map((x) => (
           <div key={x.l} style={{ background: '#0F0F0F', color: '#fff', borderRadius: 14, padding: '14px 16px' }}>
             <div style={{ fontSize: 22, fontWeight: 800, letterSpacing: '-.02em', color: x.l === 'Pierdes al mes' ? '#F2A48F' : '#fff' }}>{x.v}</div>
@@ -75,7 +83,7 @@ export function CalculadoraRentabilidad() {
         ))}
       </div>
       <p style={{ margin: '14px 0 0', fontSize: 12, color: '#6B6B63', lineHeight: 1.5 }}>
-        Cálculo orientativo con 52 semanas al año. No incluye impuestos sobre el beneficio, cuota de autónoma ni la amortización del equipo.
+        Cálculo orientativo con 52 semanas al año. No incluye {ES ? 'impuestos sobre el beneficio, cuota de autónoma' : 'impuestos, monotributo'} ni la amortización del equipo.
       </p>
     </section>
   );

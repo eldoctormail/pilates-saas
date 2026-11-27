@@ -213,8 +213,11 @@ export const PIE_PUBLICO: GrupoMenu[] = [
       { href: '/privacidad', label: 'Privacidad' },
       { href: '/terminos', label: 'Términos' },
       { href: '/cookies', label: 'Cookies' },
-      // Argentina: la Resolución 424/2020 pide un acceso fácil y directo desde la home al botón de arrepentimiento.
-      ...(ES ? [] : [{ href: '/terminos#arrepentimiento', label: 'Botón de arrepentimiento' }]),
+      // Argentina: la Disposición 954/2025 pide los dos botones a simple vista y en el primer acceso.
+      ...(ES ? [] : [
+        { href: '/terminos#arrepentimiento', label: 'Botón de arrepentimiento' },
+        { href: '/terminos#baja', label: 'Botón de baja de servicio' },
+      ]),
     ],
   },
 ];

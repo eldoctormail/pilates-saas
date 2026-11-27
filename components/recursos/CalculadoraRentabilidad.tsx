@@ -13,15 +13,13 @@ import { MONEDA_SIMBOLO, formatoMoneda } from '@/lib/moneda';
 // instructora, 2.400 € de local y 604 € de reserva para máquinas), para que la
 // herramienta y la tabla digan lo mismo: equilibrio hacia el 53 %.
 //
-// Con el formato de Argentina, en pesos y con un ejemplo de allí (artículo
-// «Cuánto cuesta abrir un estudio de pilates», nov-2026): $15.000 por plaza
-// (por debajo de lo que cuesta una clase dentro de un pack), $12.000 de
-// instructora por clase (algo más que la hora de convenio) y $2.500.000 de
-// fijos (el alquiler medio de CABA más lo que no es alquiler).
+// Con el formato de Argentina, en pesos y con el ejemplo del artículo argentino
+// de rentabilidad (nov-2026): $18.000 por clase menos el 4,39 % de Mercado Pago,
+// $12.000 de instructora por clase y $2.516.657 de fijos. Equilibrio hacia el 31 %.
 
 const EJEMPLO: EntradaRentabilidad = ES
   ? { plazasPorClase: 6, clasesPorSemana: 30, ocupacionPct: 60, ingresoPorPlaza: 15.19, costeInstructoraPorClase: 25, costesFijosMes: 3004 }
-  : { plazasPorClase: 6, clasesPorSemana: 30, ocupacionPct: 60, ingresoPorPlaza: 15000, costeInstructoraPorClase: 12000, costesFijosMes: 2500000 };
+  : { plazasPorClase: 6, clasesPorSemana: 30, ocupacionPct: 60, ingresoPorPlaza: 17210, costeInstructoraPorClase: 12000, costesFijosMes: 2516657 };
 
 const CAMPOS: { clave: keyof EntradaRentabilidad; etiqueta: string; ayuda: string; paso: number; sufijo: string }[] = [
   { clave: 'plazasPorClase', etiqueta: 'Plazas por clase', ayuda: 'Máquinas o esterillas', paso: 1, sufijo: '' },

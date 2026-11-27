@@ -117,6 +117,11 @@ const nextConfig: NextConfig = {
             { source: '/blog/:ruta*', destination: '/recursos', permanent: false },
             // Veri*Factu es la ley española de facturación: en Argentina la factura es de ARCA.
             { source: '/recursos/facturacion-electronica-verifactu', destination: '/recursos/iva-clases-de-pilates', permanent: false },
+            // Las comparativas con programas de España (bsport, TIMP, Mindbody…): en Argentina, /comparativa
+            // compara con los de allí, y las tres guías de bsport y TIMP llevan a la de «mejor software».
+            // Mismo criterio que lib/seo/paginas.ts (esComparativaUnoAUno) y ARTICULOS_SOLO_ESPANA.
+            { source: '/comparativa/:competidor(tentare-vs-.*)', destination: '/comparativa', permanent: false },
+            { source: '/recursos/:guia(alternativas-a-bsport|alternativas-a-timp|bsport-vs-timp)', destination: '/recursos/mejor-software-para-estudios-de-pilates', permanent: false },
           ]
         : []),
     ];

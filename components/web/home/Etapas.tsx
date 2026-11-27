@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { FUNCIONES_DE_ESPANA } from '@/lib/locale';
 import { FOTOS, rutaFoto, altoDe, type FotoRegistrada } from '@/components/landing/fotos';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -57,11 +58,14 @@ export function Etapas() {
               <p className="wh-etapa-et">Ya tengo estudio y quiero cambiar</p>
               <h3 className="wh-h3"><Link href="/soluciones/cambiar-de-software">Trae tus datos y sigue donde estabas.</Link></h3>
               <p className="wh-texto">Alumnas, bonos, horario y reservas desde tu programa actual, tú misma o con nuestra ayuda.</p>
-              <p className="wh-etapa-vienes">¿Vienes de…?{' '}
-                {COMPARATIVAS.map(([slug, nombre], i) => (
-                  <span key={slug}>{i > 0 && <span aria-hidden="true"> · </span>}<Link href={`/comparativa/tentare-vs-${slug}`}>{nombre}</Link></span>
-                ))}
-              </p>
+              {/* Programas de España: en Argentina sus comparativas no se publican (lib/seo/paginas.ts). */}
+              {FUNCIONES_DE_ESPANA && (
+                <p className="wh-etapa-vienes">¿Vienes de…?{' '}
+                  {COMPARATIVAS.map(([slug, nombre], i) => (
+                    <span key={slug}>{i > 0 && <span aria-hidden="true"> · </span>}<Link href={`/comparativa/tentare-vs-${slug}`}>{nombre}</Link></span>
+                  ))}
+                </p>
+              )}
             </div>
           </li>
           <li className="wh-etapa lp-rv">

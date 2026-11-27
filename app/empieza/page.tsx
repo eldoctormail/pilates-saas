@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { LEGAL } from '@/lib/legal-info';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 import Link from 'next/link';
 import { Check } from 'lucide-react';
 import { LogoTentare } from '@/components/marca/logo-tentare';
@@ -70,9 +71,12 @@ export default function EmpiezaPage() {
 
         <section id="precio" className="flex flex-col gap-4 text-center" data-cta-final>
           <p className="text-xl font-bold">{GRATIS_CON_LIMITES}.</p>
-          <a href={G2_URL} target="_blank" rel="noopener noreferrer" className="text-sm underline-offset-2 hover:underline" style={{ color: MUTED }}>
-            <span aria-hidden>★★★★★</span> Valorado {G2_NOTA} en G2 ({G2_RESENAS} reseñas)
-          </a>
+          {/* La nota de G2 es la del software original (su ficha): en Argentina, Centra no tiene ficha propia todavía. */}
+          {ES && (
+            <a href={G2_URL} target="_blank" rel="noopener noreferrer" className="text-sm underline-offset-2 hover:underline" style={{ color: MUTED }}>
+              <span aria-hidden>★★★★★</span> Valorado {G2_NOTA} en G2 ({G2_RESENAS} reseñas)
+            </a>
+          )}
           <Link href={ALTA} className={`${btnCta} px-6 py-4 text-lg font-bold`}>
             Empezar ahora
           </Link>

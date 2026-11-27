@@ -1,5 +1,6 @@
 import { SOPORTE_WHATSAPP } from '@/lib/soporte';
 import { enlaceWhatsApp } from '@/lib/decision/mensajes-socia';
+import { LEGAL } from '@/lib/legal-info';
 
 // «¿No encuentras lo que buscas?» con la forma sobria de Shopify: una caja gris clara, sin color de marca, con las dos vías a una persona.
 export function AyudaCTASoporte({ titulo = '¿No encuentras lo que buscas?', texto = 'Escríbenos y te responde una persona, no un bot.' }: {
@@ -14,7 +15,7 @@ export function AyudaCTASoporte({ titulo = '¿No encuentras lo que buscas?', tex
       </div>
       <div className="ay-soporte-acciones">
         {chat && <a href={chat} target="_blank" rel="noreferrer">Chat humano</a>}
-        <a href="mailto:soporte@tentare.app">Escribir un correo</a>
+        <a href={`mailto:${LEGAL.emailSoporte}`}>Escribir un correo</a>
       </div>
     </div>
   );

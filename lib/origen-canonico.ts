@@ -32,3 +32,6 @@ export function canonicalizarOrigen(origen: string): string {
   } catch { /* origen raro: se devuelve tal cual */ }
   return origen;
 }
+
+/** El host para ENSEÑAR en un texto («tentare.app/portal/tu-estudio»), sin el www. Autoalojado, el de la instalación. */
+export const DOMINIO_VISIBLE = /* @__PURE__ */ DOMINIO_CANONICO.replace(/^www\./, '');

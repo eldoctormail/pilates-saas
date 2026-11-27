@@ -1,7 +1,7 @@
 'use client';
 
 import { LOCALE } from '../../lib/locale.ts';
-import { conMoneda, LOCALE_MONEDA } from '../../lib/moneda.ts';
+import { conMoneda, LOCALE_MONEDA, MONEDA, MONEDA_SIMBOLO } from '../../lib/moneda.ts';
 import { useId, useMemo, useState } from 'react';
 import { calcularPlazasVacias, type EntradaPlazasVacias } from '@/lib/recursos/calculadora-plazas-vacias';
 import { capturarEvento } from '@/lib/posthog-cliente';
@@ -13,13 +13,15 @@ import { capturarEvento } from '@/lib/posthog-cliente';
 // muestra de 32 estudios, esa mediana sale de 23; /recursos/precio-clase-de-pilates
 // y bonos-de-pilates).
 
-const EJEMPLO: EntradaPlazasVacias = { reformers: 8, clasesPorSemana: 30, ocupacionPct: 80, ingresoPorPlaza: 18.75 };
+// En pesos, $ 19.000: la clase de reformer dentro de un pack va de $ 16.000 a $ 22.000 en los estudios que publican sus
+// tarifas en Argentina (lib/recursos/articulos/argentina/precio-clase-de-pilates.ts, nov-2026).
+const EJEMPLO: EntradaPlazasVacias = { reformers: 8, clasesPorSemana: 30, ocupacionPct: 80, ingresoPorPlaza: MONEDA === 'EUR' ? 18.75 : 19000 };
 
 const CAMPOS: { clave: keyof EntradaPlazasVacias; etiqueta: string; ayuda: string; paso: number; sufijo: string }[] = [
   { clave: 'reformers', etiqueta: 'Reformers por clase', ayuda: 'Plazas de cada clase', paso: 1, sufijo: '' },
   { clave: 'clasesPorSemana', etiqueta: 'Clases a la semana', ayuda: 'De todas las salas de reformer', paso: 1, sufijo: '' },
   { clave: 'ocupacionPct', etiqueta: 'Ocupación media', ayuda: 'Plazas llenas de cada 100', paso: 1, sufijo: '%' },
-  { clave: 'ingresoPorPlaza', etiqueta: 'Precio medio por plaza', ayuda: 'Lo que paga de media un cliente por clase', paso: 0.01, sufijo: '€' },
+  { clave: 'ingresoPorPlaza', etiqueta: 'Precio medio por plaza', ayuda: 'Lo que paga de media un cliente por clase', paso: MONEDA === 'EUR' ? 0.01 : 100, sufijo: MONEDA_SIMBOLO },
 ];
 
 const euros = (n: number) => `${conMoneda(Math.round(n).toLocaleString(LOCALE_MONEDA))}`;

@@ -69,3 +69,23 @@ const NOMBRES: Record<string, readonly [string, string]> = {
 export const MONEDA_NOMBRE: string = NOMBRES[MONEDA]?.[0] ?? MONEDA;
 /** «pesos» / «euros» («Escribí las cifras en pesos»). */
 export const MONEDA_NOMBRE_PLURAL: string = NOMBRES[MONEDA]?.[1] ?? MONEDA;
+
+/**
+ * Un importe de EJEMPLO (las pantallas dibujadas de la web, datos de muestra) en
+ * la moneda de la instalación. Se escribe en euros, como estaba; en pesos sale
+ * el equivalente redondeado (× 800, a miles; a centenas por debajo de $ 5.000),
+ * para que una cuota de 75 € no se lea «$ 75». No es un tipo de cambio: es el
+ * orden de magnitud de los precios de un estudio en Argentina (una clase suelta
+ * de 18 € ronda los $ 15.000).
+ */
+export function importeDeMuestra(euros: number): number {
+  if (MONEDA === 'EUR') return euros;
+  const pesos = euros * 800;
+  const paso = Math.abs(pesos) < 5000 ? 100 : 1000;
+  return Math.round(pesos / paso) * paso;
+}
+
+/** `importeDeMuestra` ya con su símbolo: «75 €» o «$ 60.000». `decimales` como en `formatoMoneda`. */
+export function muestra(euros: number, decimales: 2 | 0 | 'auto' = 'auto'): string {
+  return formatoMoneda(importeDeMuestra(euros), MONEDA === 'EUR' ? decimales : 0);
+}

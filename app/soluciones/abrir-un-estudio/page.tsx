@@ -185,7 +185,7 @@ export default function AbrirUnEstudioPage() {
           <p className="sol-eyebrow">Antes de firmar el local</p>
           <h2 className="sol-h2">Las guías para abrir tu estudio</h2>
           <div className="sol-prosa">
-            <p>Lo que cuesta, lo que pide la ley y cuánto cobrar, con las fuentes a la vista. Escritas para estudios de Pilates y yoga en España.</p>
+            <p>Lo que cuesta, lo que pide la ley y cuánto cobrar, con las fuentes a la vista. Escritas para estudios de Pilates y yoga en {ES ? 'España' : 'Argentina'}.</p>
           </div>
           <div className="sol-rel sol-rel-3">
             {GUIAS.map((g) => (

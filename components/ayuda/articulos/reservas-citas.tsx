@@ -1,4 +1,5 @@
 import { AyudaPaso, AyudaAntesDeEmpezar, AyudaResultado } from '@/components/ayuda/AyudaPasos';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
 export default function Contenido() {
   return (
@@ -26,10 +27,19 @@ export default function Contenido() {
           resto del equipo la cita existe, pero sin importe.
         </p>
         <p style={{ margin: 0 }}>
-          <strong>La fisioterapia es la excepción, y a propósito.</strong> Está exenta de IVA (art. 20.Uno.3º de
-          la Ley del IVA) y hoy la facturación de Centra no sabe emitir esa exención. Emitirla al tipo general
-          sería una factura <em>incorrecta</em>, así que ahí solo se marca «pagado» como apunte, sin factura — y
-          esa factura la haces por tu cuenta.
+          <strong>La fisioterapia es la excepción, y a propósito.</strong>{' '}
+          {ES ? (
+            <>
+              Está exenta de IVA (art. 20.Uno.3º de la Ley del IVA) y hoy la facturación de Centra no sabe emitir esa
+              exención. Emitirla al tipo general sería una factura <em>incorrecta</em>, así que ahí solo se marca
+              «pagado» como apunte, sin factura — y esa factura la haces por tu cuenta.
+            </>
+          ) : (
+            <>
+              Un servicio de salud puede tener otro tratamiento de IVA que una clase, así que ahí Centra no emite el
+              comprobante: solo se marca «pagado» como apunte, y la factura la haces por tu cuenta en ARCA.
+            </>
+          )}
         </p>
       </AyudaPaso>
 

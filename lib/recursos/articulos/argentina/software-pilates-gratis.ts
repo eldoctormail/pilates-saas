@@ -119,7 +119,7 @@ const articulo: Articulo = {
         {
           t: 'p',
           texto:
-            'Lo que sí es gratis es la página de reservas: la de Google o la de tu plan gratuito se abre con un enlace desde cualquier celular, y tus alumnas pueden guardarla en la pantalla de inicio. Para empezar, alcanza. Si quieres ponerla en tu web, tienes los pasos para WordPress, Wix y Squarespace en [cómo poner las reservas en tu web](/recursos/widget-vs-iframe-reservas-pilates).',
+            'Lo que sí es gratis es la página de reservas: la de Google o la de tu plan gratuito se abre con un enlace desde cualquier celular, y tus alumnas pueden guardarla en la pantalla de inicio. Para empezar, alcanza. Si quieres ponerla en tu web, tienes los pasos para WordPress, Wix y Squarespace en [cómo poner las reservas en tu web](/ayuda/widget).',
         },
       ],
     },
@@ -244,7 +244,7 @@ const articulo: Articulo = {
   relacionadas: [
     '/recursos/mejor-software-para-estudios-de-pilates',
     '/recursos/plantilla-control-de-asistencia-pilates',
-    '/recursos/checklist-elegir-software-estudio',
+    '/comparativa',
     '/precios',
   ],
   cta: {

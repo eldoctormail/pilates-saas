@@ -19,7 +19,7 @@ import { contarPalabras } from '@/lib/recursos/articulos/validar';
 import { ARTICULOS_META } from '@/lib/recursos/articulos/meta';
 import { elegirRelacionados, relacionadasDeProducto } from '@/lib/recursos/articulos/relacionados';
 import { recursoIntermedio, seccionDeLaLlamada } from '@/lib/recursos/articulos/recursos-intermedios';
-import { PAGINAS } from '@/lib/seo/paginas';
+import { PAGINAS, noSePublica } from '@/lib/seo/paginas';
 import type { Articulo, Bloque } from '@/lib/recursos/articulos/tipos';
 import { CTA_ALTA } from '@/lib/landing/founding-gratis';
 
@@ -129,10 +129,10 @@ export function ArticuloDatos({ a }: { a: Articulo }) {
   // «Sigue leyendo»: tres artículos (relacionados.ts) y, aparte, las páginas de
   // producto que el artículo ya enlazaba en `relacionadas`.
   const relacionados = elegirRelacionados(a.slug, ARTICULOS_META);
-  const deProducto = relacionadasDeProducto(a, ARTICULOS_META).map((href) => ({
-    href,
-    etiqueta: PAGINAS.find((x) => x.path === href)?.etiqueta ?? href,
-  }));
+  // Solo las publicadas en el país: en Argentina, una guía solo de España redirige (lib/seo/paginas.ts).
+  const deProducto = relacionadasDeProducto(a, ARTICULOS_META)
+    .filter((href) => !noSePublica(href))
+    .map((href) => ({ href, etiqueta: PAGINAS.find((x) => x.path === href)?.etiqueta ?? href }));
   // La llamada a mitad de texto, solo donde hay un recurso relevante (recursos-intermedios.ts).
   const recurso = recursoIntermedio(a.slug, ARTICULOS);
   const trasSeccion = recurso ? seccionDeLaLlamada(a) : -1;

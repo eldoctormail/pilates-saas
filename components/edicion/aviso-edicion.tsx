@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { X } from 'lucide-react';
 import { BannerEdicion } from './banner-edicion';
 import { EDICION } from '@/lib/edicion/invierno-26';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
 // El aviso de «hay panel nuevo» (24-nov-2026: «no hay mensaje al panel de que ha habido actualización»). Sale UNA vez, arriba del Inicio, con
 // el banner de la edición, y se queda cerrado cuando se pulsa la X (se recuerda en el navegador). Es lo que hace Shopify con sus Editions:
@@ -16,7 +17,8 @@ export function AvisoEdicion() {
   const [cerrado, setCerrado] = useState<boolean | null>(null);
   // eslint-disable-next-line react-hooks/set-state-in-effect -- lo recordado solo se puede leer en el navegador
   useEffect(() => { try { setCerrado(localStorage.getItem(CLAVE) === '1'); } catch { setCerrado(false); } }, []);
-  if (!enInicio || cerrado !== false) return null;
+  // En Argentina la edición no se publica (el banner no se pinta): sin aviso.
+  if (!ES || !enInicio || cerrado !== false) return null;
   return (
     <section data-aviso-edicion="" aria-label={`Novedad: ${EDICION.nombre} ${EDICION.temporada}`} className="relative mb-4">
       <p className="mb-2 text-[13px] text-muted-foreground">Hemos estrenado panel nuevo. Mira todo lo que ha cambiado:</p>

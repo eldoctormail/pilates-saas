@@ -246,7 +246,7 @@ const articulo: Articulo = {
         {
           t: 'p',
           texto:
-            'Es lo que hace [Centra](/funcionalidades/reservas-online): tus alumnas reservan y cancelan desde el celular e instalan la app del estudio en su pantalla de inicio con tu nombre y tu ícono; la lista de espera es automática; hay packs con vencimiento, abonos y clases sueltas, con reglas por tipo de clase; y cobras con Mercado Pago. Es gratis hasta 150 reservas al mes, sin permanencia ([precios](/precios)). Si ya tienes web, las reservas se ponen dentro con un widget: [reservas en tu web](/recursos/reservas-en-tu-web).',
+            'Es lo que hace [Centra](/funcionalidades/reservas-online): tus alumnas reservan y cancelan desde el celular e instalan la app del estudio en su pantalla de inicio con tu nombre y tu ícono; la lista de espera es automática; hay packs con vencimiento, abonos y clases sueltas, con reglas por tipo de clase; y cobras con Mercado Pago. Es gratis hasta 150 reservas al mes, sin permanencia ([precios](/precios)). Si ya tienes web, las reservas se ponen dentro con un widget: [el widget para tu web](/ayuda/widget/que-es-el-widget).',
         },
         {
           t: 'llamada',

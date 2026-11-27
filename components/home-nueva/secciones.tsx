@@ -8,6 +8,8 @@ import { FRASE_FOUNDING, GRATIS_CON_LIMITES, LIMITES_GRATIS, siPasas, TOPE_GRATI
 import { PLAN_INFO, precioAnual } from '@/lib/billing/entitlements';
 import { precio } from '@/lib/billing/intervalo-ui';
 import { anualDisponible } from '@/lib/billing/billing';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
+import { LEGAL } from '@/lib/legal-info';
 import { SelectorPreciosHome } from './selector-precios-home';
 import type { LogoCliente } from '@/lib/landing/logos-clientes';
 import { ALT, BENEFICIOS, CONFIANZA, CONTACTO, CTA, FAQ, FUNCIONES, HERO, PRECIOS } from './contenido';
@@ -291,7 +293,7 @@ export function Precios() {
                 // Los límites y lo que pasa al superarlos, enteros (la regla de precios de la web: el gratis no se vende sin sus topes), y la frase del fundador.
                 <p className="lf-plan-limites">{TOPE_GRATIS}; {siPasas()}. <span>{FRASE_FOUNDING}</span></p>
               )}
-              <Link href={p.nombre === 'Cadena' ? 'mailto:hola@tentare.app?subject=Plan%20Cadena' : '/crear-estudio'} className={p.destacado ? 'lf-plan-boton lf-plan-boton--verde' : 'lf-plan-boton'}>{p.boton} <ArrowUpRight size={16} strokeWidth={1.8} aria-hidden="true" /></Link>
+              <Link href={p.nombre === 'Cadena' ? `mailto:${LEGAL.email}?subject=Plan%20Cadena` : '/crear-estudio'} className={p.destacado ? 'lf-plan-boton lf-plan-boton--verde' : 'lf-plan-boton'}>{p.boton} <ArrowUpRight size={16} strokeWidth={1.8} aria-hidden="true" /></Link>
             </div>
             <ul className="lf-plan-lista">
               {p.lista.map(l => (
@@ -315,7 +317,7 @@ export function Preguntas() {
         <h2 id="lf-faq-t">{FAQ.titulo}</h2>
         <h3 className="lf-faq-que">¿Qué es Centra?</h3>
         <p>
-          Centra es el software para estudios y centros de Pilates y yoga en España que reúne en un solo panel las{' '}
+          Centra es el software para estudios y centros de Pilates y yoga en {ES ? 'España' : 'Argentina'} que reúne en un solo panel las{' '}
           <Link href="/funcionalidades/reservas-online">reservas online</Link> con lista de espera, la{' '}
           <Link href="/funcionalidades/app-para-alumnas">app de tus alumnas</Link>, los bonos y los{' '}
           <Link href="/funcionalidades/cobros-recurrentes">cobros recurrentes</Link>, el{' '}
@@ -324,7 +326,7 @@ export function Preguntas() {
         </p>
         <dl className="lf-faq-datos">
           <div><dt>Para quién</dt><dd>Estudios y centros de Pilates y yoga, independientes o con varias sedes</dd></div>
-          <div><dt>Dónde</dt><dd>España: interfaz y soporte en español, base de datos en la Unión Europea</dd></div>
+          <div><dt>Dónde</dt><dd>{ES ? 'España: interfaz y soporte en español, base de datos en la Unión Europea' : 'Argentina: interfaz y soporte en español, cobros con Mercado Pago y factura de ARCA'}</dd></div>
           <div><dt>Cuánto</dt><dd><Link href="/precios">Gratis</Link> {LIMITES_GRATIS}, sin permanencia</dd></div>
         </dl>
         <Link href={FAQ.boton.href} className="lf-faq-boton">{FAQ.boton.texto}<span aria-hidden="true"><ArrowUpRight size={16} strokeWidth={1.8} /></span></Link>

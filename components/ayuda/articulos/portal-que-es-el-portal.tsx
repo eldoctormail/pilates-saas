@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { AyudaCaptura } from '@/components/ayuda/AyudaCaptura';
 import { AyudaResultado } from '@/components/ayuda/AyudaPasos';
+import { DOMINIO_VISIBLE } from '@/lib/origen-canonico';
 
 // Desde el 22-oct-2026 el enlace que se da a las alumnas es el de su APP
 // (`/portal/<slug>`); la página de reservas (`/reservar/<slug>`) es la que se
@@ -19,7 +20,7 @@ export default function Contenido() {
 
       <h2 style={{ fontSize: 18, fontWeight: 700, margin: '28px 0 12px' }}>La app de tus clientes</h2>
       <p>
-        Es <code>tentare.app/portal/tu-estudio</code>: la app con el nombre, el logo y los colores de tu estudio. Tus
+        Es <code>{DOMINIO_VISIBLE}/portal/tu-estudio</code>: la app con el nombre, el logo y los colores de tu estudio. Tus
         clientes entran con su email y un código que les llega a ese correo —sin contraseña y sin descargarse nada— y
         se puede instalar en el móvil. Es lo que pones en tu bio de Instagram, en tu WhatsApp Business o en el grupo de
         tus clientes.
@@ -33,7 +34,7 @@ export default function Contenido() {
 
       <h2 style={{ fontSize: 18, fontWeight: 700, margin: '28px 0 12px' }}>La página de reservas, para tu web</h2>
       <p>
-        Es <code>tentare.app/reservar/tu-estudio</code>: tu horario con salas, instructoras y lugares libres, en una
+        Es <code>{DOMINIO_VISIBLE}/reservar/tu-estudio</code>: tu horario con salas, instructoras y lugares libres, en una
         página que se integra en tu propia web con un botón o con el{' '}
         <Link href="/ayuda/widget/que-es-el-widget" style={{ color: 'inherit', textDecoration: 'underline' }}>widget</Link>{' '}
         (ese mismo calendario dentro de tu web). No es el enlace que se reparte a los clientes.

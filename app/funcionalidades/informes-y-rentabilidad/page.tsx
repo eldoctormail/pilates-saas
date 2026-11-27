@@ -20,7 +20,9 @@ export const metadata: Metadata = {
 const FAQ = [
   {
     q: '¿Por qué dos alumnas de la misma clase aportan importes distintos?',
-    a: 'Porque pagan de forma distinta. Una con bono de 10 por 120 € aporta 12 € por sesión; una con mensualidad de 79 € que viene dos veces por semana aporta unos 9 €, y otra con la misma mensualidad que viene una vez aporta el doble. Repartir el ingreso mensual a partes iguales entre las clases escondería exactamente eso.',
+    a: ES
+      ? 'Porque pagan de forma distinta. Una con bono de 10 por 120 € aporta 12 € por sesión; una con mensualidad de 79 € que viene dos veces por semana aporta unos 9 €, y otra con la misma mensualidad que viene una vez aporta el doble. Repartir el ingreso mensual a partes iguales entre las clases escondería exactamente eso.'
+      : 'Porque pagan de forma distinta. Una con pack de 10 por $ 96.000 aporta $ 9.600 por clase; una con abono de $ 63.000 que viene dos veces por semana aporta unos $ 7.300, y otra con el mismo abono que viene una vez aporta el doble. Repartir el ingreso mensual a partes iguales entre las clases escondería exactamente eso.',
   },
   {
     q: '¿El margen incluye el alquiler del local?',

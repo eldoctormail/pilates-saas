@@ -12,6 +12,7 @@
 //     lo que el producto hace hoy.
 // Lo de las tarjetas de «Funciones» (calendario, gráfica, importes) es ilustrativo, como en el diseño.
 import { LEGAL } from '@/lib/legal-info';
+import { muestra } from '@/lib/moneda';
 
 export const NAV = {
   enlaces: [
@@ -78,9 +79,9 @@ export const FUNCIONES = {
     texto: 'Sigue tus cobros y tus facturas de una forma sencilla y segura.',
     chips: ['Cobros', 'Facturas', 'Transacciones', 'Recibos', 'Devoluciones'],
     recibido: 'Pago recibido',
-    importe: '120,00 €',
+    importe: muestra(120, 2),
     ingresos: 'Ingresos del mes',
-    total: '12.400 €',
+    total: muestra(12400, 0),
     variacion: '+12 % sobre el mes pasado',
   },
   datos: {

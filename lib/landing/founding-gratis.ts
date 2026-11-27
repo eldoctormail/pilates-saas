@@ -93,3 +93,13 @@ export const ENTITLEMENTS_FOUNDING_GRATIS: Entitlements = ENTITLEMENTS_GRATIS;
 export function precioMesWeb(plan: Plan): number {
   return plan === 'BASE' ? 0 : PLAN_INFO[plan].precioMes;
 }
+
+/**
+ * La respuesta entera a «¿cuánto cuesta?» de las landings de soluciones, con los precios del catálogo (que en
+ * Argentina son en pesos y se editan en /interno/precios). Antes cada página la tenía escrita a mano en euros.
+ */
+export const respuestaCuantoCuesta = (): string =>
+  `Founding Studio es gratis ${LIMITES_GRATIS}, con todas las funcionalidades menos varias sedes, también la app con tu marca; ${siPasas()}, y con ese plan el Centro de Control, las sustituciones automáticas y la redacción con IA van aparte. ${PLAN_INFO.ESTUDIO.nombre}, ${precio(PLAN_INFO.ESTUDIO.precioMes)}/mes con IVA, los incluye, y ${PLAN_INFO.CADENA.nombre}, ${precio(PLAN_INFO.CADENA.precioMes)}/mes, es para varias sedes. Sin permanencia y sin tarjeta para empezar.`;
+
+/** «con el complemento de 12 €/mes»: las sustituciones solas en Founding Studio de pago. */
+export const conComplementoSustituciones = (): string => `con el complemento de ${precio(ADDONS.sustituciones.precioMes)}/mes`;

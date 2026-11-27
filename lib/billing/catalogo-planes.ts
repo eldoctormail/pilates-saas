@@ -24,6 +24,7 @@
 import { ADDONS, PLAN_ENTITLEMENTS, addonDeFeature, type Addon, type Entitlements, type Plan } from './entitlements.ts';
 import { FUNCIONES_DE_ESPANA as ES } from '../locale.ts';
 import { precio } from './intervalo-ui.ts';
+import { DOMINIO_VISIBLE } from '../origen-canonico.ts';
 
 /** Cómo se pinta una fila para un plan concreto. */
 export type ValorPlan =
@@ -263,7 +264,7 @@ export const CATEGORIAS: CategoriaPlan[] = [
       { nombre: 'Portal de la alumna', detalle: 'Reserva, bonos, facturas y pase de acceso, desde el móvil.', valor: TODOS },
       { nombre: 'Se instala en la pantalla de inicio', valor: TODOS },
       { nombre: 'Ocultar tu página mientras la preparas', detalle: 'Enseña un aviso en vez de tus clases, y con una clave dejas entrar solo a quien tú quieras.', valor: TODOS },
-      { nombre: 'Tu dirección propia', detalle: 'tentare.app/portal/tu-estudio', valor: TODOS },
+      { nombre: 'Tu dirección propia', detalle: `${DOMINIO_VISIBLE}/portal/tu-estudio`, valor: TODOS },
       { nombre: 'App con tu marca', detalle: 'Tus colores, tu logo y tus pantallas: lo que ve la alumna es tu estudio.', valor: porFeature('marca') },
     ],
   },

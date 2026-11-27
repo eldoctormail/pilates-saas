@@ -17,6 +17,7 @@ import { CalculadoraPlazasVacias } from '@/components/soluciones/CalculadoraPlaz
 import { paginaDe, urlDe } from '@/lib/seo/paginas';
 import { PanelInformes } from '@/components/web/home/piezas';
 import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
+import { conComplementoSustituciones } from '@/lib/landing/founding-gratis';
 
 // Página pilar del estudio de Pilates REFORMER (fase 5 del rediseño, 23-sep;
 // rehecha el 7-oct-2026 como página de producto, no como artículo).
@@ -67,7 +68,9 @@ const FAQ = [
   },
   {
     q: '¿Qué pasa con una plaza cuando alguien cancela?',
-    a: 'Si hay lista de espera, la plaza pasa sola a la primera de la cola, al instante o con el plazo que tú decidas para que la acepte. Y si quieres, puedes activar una penalización por cancelación tardía o por no presentarse, que se cobra a la tarjeta guardada de la alumna con su consentimiento.',
+    a: 'Si hay lista de espera, la plaza pasa sola a la primera de la cola, al instante o con el plazo que tú decidas para que la acepte.' + (ES
+      ? ' Y si quieres, puedes activar una penalización por cancelación tardía o por no presentarse, que se cobra a la tarjeta guardada de la alumna con su consentimiento.'
+      : ''),
   },
   {
     q: '¿Y si mi estudio combina reformer con mat o con yoga?',
@@ -90,7 +93,7 @@ export default function EstudioDePilatesReformerPage() {
         miga="Pilates reformer"
         busqueda="Software para estudios de Pilates reformer"
         titular={<>Vendes reformers a una hora. Centra los gestiona así.</>}
-        entrada={<>Cada sala con su aforo, cada máquina con su plaza, las alumnas de siempre con su sitio fijo y una lista de espera que ofrece sola la plaza que se libera. Para estudios de Pilates reformer en España.</>}
+        entrada={<>Cada sala con su aforo, cada máquina con su plaza, las alumnas de siempre con su sitio fijo y una lista de espera que ofrece sola la plaza que se libera. Para estudios de Pilates reformer en {ES ? 'España' : 'Argentina'}.</>}
         foto={{
           src: '/landing/fotos/reformers-madera-tapizado-negro-plazas-movil-1170.webp',
           srcAvif: '/landing/fotos/reformers-madera-tapizado-negro-plazas-movil-1170.avif',
@@ -108,8 +111,16 @@ export default function EstudioDePilatesReformerPage() {
       <ResumenSolucion
         pregunta="¿Qué software necesita un estudio de Pilates reformer?"
         datos={[
-          { cifra: '25 €', texto: 'Precio mediano de una clase suelta de reformer, de una muestra de 32 estudios españoles' },
-          { cifra: '18,75 €', texto: 'Lo que sale cada sesión con una cuota de una clase a la semana' },
+          ...(ES
+            ? [
+                { cifra: '25 €', texto: 'Precio mediano de una clase suelta de reformer, de una muestra de 32 estudios españoles' },
+                { cifra: '18,75 €', texto: 'Lo que sale cada sesión con una cuota de una clase a la semana' },
+              ]
+            : [
+                // Las cifras de la guía argentina de precios (lib/recursos/articulos/argentina/precio-clase-de-pilates.ts, nov-2026).
+                { cifra: '$ 20.000–25.000', texto: 'La clase suelta o de prueba de reformer en los estudios que publican sus tarifas en Argentina' },
+                { cifra: '$ 16.000–22.000', texto: 'Lo que sale cada clase de reformer dentro de un pack' },
+              ]),
           { cifra: 'Gratis', texto: 'Centra Founding Studio, hasta 150 reservas al mes' },
         ]}
       >
@@ -178,7 +189,9 @@ export default function EstudioDePilatesReformerPage() {
         lado={<CalculadoraPlazasVacias />}
       >
         <p>Un reformer que sale a la venta y no se reserva no vuelve: la clase de las 19:00 de este martes no se puede vender el miércoles. Pon los números de tu estudio y mira cuánto vale lo que se queda sin vender cada mes.</p>
-        <p>El precio de partida, 18,75 €, es la mediana de una sesión de reformer con cuota de una clase semanal en nuestro <Link href="/recursos/precio-clase-de-pilates">estudio de precios de una muestra de 32 estudios españoles</Link>. Para las cuentas completas, con costes, usa la <Link href="/recursos/rentabilidad-estudio-de-pilates">calculadora de rentabilidad</Link>.</p>
+        {ES
+          ? <p>El precio de partida, 18,75 €, es la mediana de una sesión de reformer con cuota de una clase semanal en nuestro <Link href="/recursos/precio-clase-de-pilates">estudio de precios de una muestra de 32 estudios españoles</Link>. Para las cuentas completas, con costes, usa la <Link href="/recursos/rentabilidad-estudio-de-pilates">calculadora de rentabilidad</Link>.</p>
+          : <p>El precio de partida, $ 19.000, está en el medio de lo que sale una clase de reformer dentro de un pack en los estudios que publican sus tarifas (<Link href="/recursos/precio-clase-de-pilates">precio de una clase de pilates</Link>). Para las cuentas completas, con costos, usa la <Link href="/recursos/rentabilidad-estudio-de-pilates">calculadora de rentabilidad</Link>.</p>}
       </BandaOscura>
 
       <TablaSolucion
@@ -215,7 +228,7 @@ export default function EstudioDePilatesReformerPage() {
         captura={{ src: '/landing/fotos-aportadas/instructora-y-alumna-reformers-estudio-pilates.webp', alt: 'Una instructora y una alumna charlando sobre sus reformers en un estudio de Pilates con cortinas de luz', ancho: 434, alto: 600, foto: true }}
         enlace={{ href: '/funcionalidades/sustituciones', texto: 'Cómo funcionan las sustituciones' }}
       >
-        <p>Centra busca quién puede cubrirla según su disponibilidad y su costumbre, la contacta con tu visto bueno y avisa a las alumnas del cambio. Puede hacerlo sola, sin esperar a que lo apruebes, en el plan gratis, en Estudio y en Cadena; en Founding Studio de pago, con el complemento de 12 €/mes.</p>
+        <p>Centra busca quién puede cubrirla según su disponibilidad y su costumbre, la contacta con tu visto bueno y avisa a las alumnas del cambio. Puede hacerlo sola, sin esperar a que lo apruebes, en el plan gratis, en Estudio y en Cadena; en Founding Studio de pago, {conComplementoSustituciones()}.</p>
       </FilaProducto>
 
       <PlanesSolucion titulo="Lo que cuesta Centra para un estudio de reformer" />

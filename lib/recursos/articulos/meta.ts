@@ -474,7 +474,7 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
       "/recursos/precios-reformer-mat",
       "/precios"
     ],
-    "palabras": 2763,
+    "palabras": 2764,
     "actualizado": "2026-11-27"
   },
   {
@@ -524,12 +524,12 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
     "seccion": "Elegir software",
     "publicado": "2026-11-27",
     "relacionadas": [
-      "/recursos/checklist-elegir-software-estudio",
+      "/comparativa",
       "/recursos/software-pilates-gratis",
       "/soluciones/cambiar-de-software",
       "/precios"
     ],
-    "palabras": 2086,
+    "palabras": 2080,
     "actualizado": "2026-11-27"
   },
   {
@@ -782,7 +782,7 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
     "relacionadas": [
       "/recursos/mejor-software-para-estudios-de-pilates",
       "/recursos/plantilla-control-de-asistencia-pilates",
-      "/recursos/checklist-elegir-software-estudio",
+      "/comparativa",
       "/precios"
     ],
     "palabras": 1873,
@@ -837,9 +837,9 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
     "relacionadas": [
       "/recursos/requisitos-para-abrir-un-estudio-de-pilates",
       "/funcionalidades/app-para-alumnas",
-      "/recursos/reservas-en-tu-web"
+      "/funcionalidades/reservas-online"
     ],
-    "palabras": 1681,
+    "palabras": 1682,
     "actualizado": "2026-11-27"
   }
 ];

@@ -238,7 +238,15 @@ export const ORDEN_LISTADO: string[] = [
  * Guías que solo tienen sentido en España: con el formato de Argentina no salen
  * en el listado ni en el sitemap, y su dirección redirige (next.config.ts).
  */
-export const GUIAS_SOLO_ESPANA = ['facturacion-electronica-verifactu'];
+export const GUIAS_SOLO_ESPANA = [
+  'facturacion-electronica-verifactu',
+  // Las cuatro de abajo hablan del mercado y las normas de España (RGPD, SEPA, Bizum, Redsys, Veri*Factu, precios
+  // en euros, datos de estudios españoles) de punta a punta: en Argentina no se publican hasta tener versión propia.
+  'estudios-pilates-de-exito',
+  'checklist-elegir-software-estudio',
+  'reservas-en-tu-web',
+  'widget-vs-iframe-reservas-pilates',
+];
 
 /** Las guías que se publican con el formato del país (lib/locale.ts). */
 export function guiasDelPais(espana: boolean = FUNCIONES_DE_ESPANA): Guia[] {

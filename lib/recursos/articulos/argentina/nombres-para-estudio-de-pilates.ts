@@ -331,7 +331,7 @@ const articulo: Articulo = {
         {
           t: 'p',
           texto:
-            'Con el nombre y el dominio asegurados, lleva las reservas a tu web: con el widget de Centra pegas un código y tus alumnas reservan desde tu propia página ([reservas en tu web](/recursos/reservas-en-tu-web)). Si estás en plena apertura, sigue con [los requisitos para abrir un estudio de pilates](/recursos/requisitos-para-abrir-un-estudio-de-pilates).',
+            'Con el nombre y el dominio asegurados, lleva las reservas a tu web: con el widget de Centra pegas un código y tus alumnas reservan desde tu propia página ([el widget para tu web](/ayuda/widget/que-es-el-widget)). Si estás en plena apertura, sigue con [los requisitos para abrir un estudio de pilates](/recursos/requisitos-para-abrir-un-estudio-de-pilates).',
         },
         {
           t: 'llamada',
@@ -378,7 +378,7 @@ const articulo: Articulo = {
   relacionadas: [
     '/recursos/requisitos-para-abrir-un-estudio-de-pilates',
     '/funcionalidades/app-para-alumnas',
-    '/recursos/reservas-en-tu-web',
+    '/funcionalidades/reservas-online',
   ],
   cta: {
     titulo: 'Con el nombre elegido, abre tu estudio en Centra',

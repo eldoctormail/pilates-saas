@@ -9,6 +9,7 @@ import { PageBreadcrumb } from '@/components/recursos/ArticleStructuredData';
 import { OrganizationStructuredData } from '@/components/OrganizationStructuredData';
 import { paginaDe, urlDe } from '@/lib/seo/paginas';
 import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
+import { LEGAL } from '@/lib/legal-info';
 
 const PATH = '/seguridad';
 const pagina = paginaDe(PATH)!;
@@ -146,7 +147,7 @@ export default function SeguridadPage() {
             </ul>
           </Reveal>
           <p className="sec-dpa">
-            ¿Necesitas detalles para tu asesoría? Escríbenos a <a href="mailto:hola@tentare.app">hola@tentare.app</a>.
+            ¿Necesitas detalles para tu asesoría? Escríbenos a <a href={`mailto:${LEGAL.email}`}>{LEGAL.email}</a>.
           </p>
         </div>
       </section>

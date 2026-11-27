@@ -130,10 +130,13 @@ export function PieWeb() {
                 <span key={l.href}>{i > 0 && ' · '}<Link href={l.href}>{l.label}</Link></span>
               ))}
             </p>
-            <a href="https://sellwithboost.com" target="_blank" rel="noopener noreferrer" className="w-pie-sello">
-              {/* eslint-disable-next-line @next/next/no-img-element -- insignia externa, no un recurso propio */}
-              <img src="https://sellwithboost.com/badge/listing-dark.svg" alt="Listed on Sell With boost" width={110} height={40} loading="lazy" decoding="async" />
-            </a>
+            {/* La ficha de Sell With boost es la del software original: en Argentina no se enseña. */}
+            {ES && (
+              <a href="https://sellwithboost.com" target="_blank" rel="noopener noreferrer" className="w-pie-sello">
+                {/* eslint-disable-next-line @next/next/no-img-element -- insignia externa, no un recurso propio */}
+                <img src="https://sellwithboost.com/badge/listing-dark.svg" alt="Listed on Sell With boost" width={110} height={40} loading="lazy" decoding="async" />
+              </a>
+            )}
           </div>
         </div>
       </div>

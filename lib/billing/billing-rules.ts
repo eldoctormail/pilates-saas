@@ -17,6 +17,7 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { accesoProducto, tieneFeature, type Entitlements, COLUMNAS_PLAN, planDeFila, pagaAddonsAparte, addonDeFeature, ADDONS, type EstudioConPlan } from './entitlements.ts';
 import { estadoTrial } from './trial.ts';
+import { LEGAL } from '../legal-info.ts';
 
 /** Motivo de denegación (sin acoplar a HTTP: el status es orientativo del código). */
 export type Denegacion = {
@@ -73,8 +74,8 @@ export async function evaluarSuspension(admin: SupabaseClient | null, studioId: 
     status: 403,
     // El motivo se le enseña al cliente: por eso el panel lo exige por escrito.
     error: motivo
-      ? `Tu cuenta está suspendida: ${motivo}. Escríbenos a soporte@tentare.app.`
-      : 'Tu cuenta está suspendida. Escríbenos a soporte@tentare.app.',
+      ? `Tu cuenta está suspendida: ${motivo}. Escríbenos a ${LEGAL.emailSoporte}.`
+      : `Tu cuenta está suspendida. Escríbenos a ${LEGAL.emailSoporte}.`,
     code: 'ESTUDIO_SUSPENDIDO',
   };
 }

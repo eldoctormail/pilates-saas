@@ -91,8 +91,15 @@ test('la llamada a mitad de texto solo existe donde hay un recurso, y lleva a un
   const slugs = new Set(ARTICULOS.map((a) => a.slug));
   for (const [slug, clave] of Object.entries(RECURSO_POR_ARTICULO)) {
     assert.ok(slugs.has(slug), `${slug} del mapa no es ningún artículo`);
-    const r = recursoIntermedio(slug);
-    assert.ok(r && r === RECURSOS_INTERMEDIOS[clave]);
+    // Con los artículos del país: lo que no llevan (las descargas de España, en
+    // Argentina) no se anuncia a mitad de texto.
+    const r = recursoIntermedio(slug, ARTICULOS);
+    if (!r) {
+      const vive = (RECURSOS_INTERMEDIOS[clave] as { vive?: { articulo: string } }).vive;
+      assert.ok(vive, `${slug}: sin llamada y su recurso no vive en ninguna guía`);
+      continue;
+    }
+    assert.equal(r.texto, RECURSOS_INTERMEDIOS[clave].texto);
     const [base, ancla] = r.href.split('#');
     assert.ok(RUTAS.has(base), `${slug} → ${base} no existe en el registro`);
     assert.notEqual(base, urlArticulo(slug), `${slug} se enlaza a sí mismo`);
@@ -117,7 +124,7 @@ test('la llamada a mitad de texto solo existe donde hay un recurso, y lleva a un
 test('no se repite el recurso que el artículo ya lleva dentro, ni se pinta junto a otra llamada', () => {
   for (const a of ARTICULOS) {
     const clave = RECURSO_POR_ARTICULO[a.slug];
-    if (!clave) continue;
+    if (!clave || !recursoIntermedio(a.slug, ARTICULOS)) continue;
     const r = RECURSOS_INTERMEDIOS[clave];
     if ('vive' in r && r.vive) assert.notEqual(r.vive.articulo, a.slug, `${a.slug} ya lleva ${clave}`);
     const i = seccionDeLaLlamada(a);
@@ -151,4 +158,12 @@ test('nada de colores por categoría, cajas de colores, letra de máquina de esc
   const colores = [...bloque.matchAll(/#[0-9A-Fa-f]{3,8}\b/g)].map((m) => m[0].toUpperCase());
   const permitidos = new Set(['#E1E1D9', '#FFF', '#1A1A1A', '#6B6B63', '#4A4A44']);
   for (const c of colores) assert.ok(permitidos.has(c), `color nuevo en el CSS de los relacionados: ${c}`);
+});
+
+test('una llamada cuyo recurso ya no está en su guía no se ofrece', () => {
+  const sinDescarga = [{ slug: 'rentabilidad-estudio-de-pilates', secciones: [{ id: 'x', titulo: 'x', bloques: [{ t: 'p' as const, texto: 'x' }] }] }];
+  assert.equal(recursoIntermedio('como-abrir-un-estudio-de-pilates', sinDescarga as never), undefined);
+  // Sin lista de artículos, el mapa tal cual; y un recurso que no vive en una guía, siempre.
+  assert.ok(recursoIntermedio('como-abrir-un-estudio-de-pilates'));
+  assert.ok(recursoIntermedio('software-pilates-gratis', sinDescarga as never));
 });

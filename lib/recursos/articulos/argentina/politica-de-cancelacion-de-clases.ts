@@ -17,6 +17,7 @@ const articulo: Articulo = {
   categoria: 'operacion',
   seccion: 'Operación',
   publicado: '2026-11-27',
+  actualizado: '2026-11-27',
   consultaPrincipal: 'política de cancelación de clases',
   consultas: [
     'plantilla de política de cancelación para un estudio',

@@ -9,6 +9,11 @@ import { articuloBlogLd, blogLd, fechaRfc822, ID_ORGANIZACION_BLOG, migasBlogLd,
 import { fechaLargaBlog, metaBlogDe, minutosLecturaBlog, textoDeSecciones, textoPlanoBlog, urlArticuloBlog } from './util.ts';
 import { PAGINAS, paginaDe } from '../seo/paginas.ts';
 import { AUTOR, PUBLISHER } from '../recursos/schema.ts';
+import { FUNCIONES_DE_ESPANA } from '../locale.ts';
+
+// En Argentina el blog personal del autor original no se publica: /blog redirige a /recursos (next.config.ts) y las
+// guías las firma Centra. Lo que depende de esa página solo se comprueba en España.
+const SOLO_ESPANA = { skip: FUNCIONES_DE_ESPANA ? false : 'en Argentina el blog redirige a /recursos' };
 
 // El blog personal del fundador (nov-2026). Lo que se fija aquí: que no se publique nada que no conste, que los
 // borradores no se filtren a ningún sitio público y que la persona sea UNA sola entidad en todo el sitio.
@@ -65,7 +70,7 @@ test('los borradores no se filtran: ni meta, ni registro SEO, ni ruta, y llevan 
   assert.equal(ARTICULOS_BLOG_TODOS.length, 6);
 });
 
-test('todo enlace interno de un artículo lleva a una página que existe', () => {
+test('todo enlace interno de un artículo lleva a una página que existe', SOLO_ESPANA, () => {
   const existentes = new Set([...PAGINAS.map((p) => p.path), '/legal', '/blog/feed.xml', '/crear-estudio']);
   for (const a of ARTICULOS_BLOG) {
     const textos = [a.entradilla, ...a.secciones.flatMap((s) => s.bloques.flatMap((b) => (b.t === 'lista' ? b.items : [(b as { texto: string }).texto])))];
@@ -74,7 +79,7 @@ test('todo enlace interno de un artículo lleva a una página que existe', () =>
   }
 });
 
-test('el autor: un solo Person, con @id estable y sin nada que no conste', () => {
+test('el autor: un solo Person, con @id estable y sin nada que no conste', SOLO_ESPANA, () => {
   const p = personaLd() as Record<string, unknown>;
   assert.equal(p['@id'], ID_AUTOR);
   assert.equal(p.name, 'Marcos Roca Rodríguez');
@@ -89,7 +94,7 @@ test('el autor: un solo Person, con @id estable y sin nada que no conste', () =>
   assert.ok(!JSON.stringify(p).includes('company/tentare'), 'la página de la empresa no es un perfil de la persona');
 });
 
-test('la persona es UNA sola entidad en todo el sitio: guías, Organization y blog apuntan al mismo @id y a la misma página', () => {
+test('la persona es UNA sola entidad en todo el sitio: guías, Organization y blog apuntan al mismo @id y a la misma página', SOLO_ESPANA, () => {
   assert.equal(AUTOR['@id'], ID_AUTOR);
   assert.equal(AUTOR.name, AUTOR_BLOG.nombre);
   assert.ok(AUTOR.url.endsWith(RUTA_AUTOR));

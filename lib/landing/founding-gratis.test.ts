@@ -4,6 +4,10 @@ import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { PLAN_ENTITLEMENTS } from '../billing/entitlements.ts';
 import { LIMITE_RESERVAS_MES } from '../billing/plan-gratis.ts';
+import { MONEDA } from '../moneda.ts';
+
+// Los precios en euros son los del original. En pesos los fija Centra desde /interno/precios: no se escriben aquí.
+const SOLO_EUROS = { skip: MONEDA === 'EUR' ? false : 'en pesos el precio sale de /interno/precios' };
 import {
   siPasas,
   ENTITLEMENTS_FOUNDING_GRATIS,
@@ -27,7 +31,7 @@ test('las cifras son las de la decisión', () => {
   assert.equal(GRATIS_CON_LIMITES, 'Gratis hasta 150 reservas al mes');
 });
 
-test('si pasa de cualquiera de los dos límites, Founding Studio de pago a su precio de siempre (29 €)', () => {
+test('si pasa de cualquiera de los dos límites, Founding Studio de pago a su precio de siempre (29 €)', SOLO_EUROS, () => {
   assert.equal(precioFoundingPago(), 29);
   assert.equal(siPasas(), 'si pasas de ahí, 29 €/mes');
 });
@@ -55,7 +59,7 @@ test('el límite de reservas de la web es el del producto', () => {
   assert.equal(GRATIS_RESERVAS_MES, LIMITE_RESERVAS_MES);
 });
 
-test('precio en la web: Founding Studio 0, el resto el de su plan', () => {
+test('precio en la web: Founding Studio 0, el resto el de su plan', SOLO_EUROS, () => {
   assert.equal(precioMesWeb('BASE'), 0);
   assert.equal(precioMesWeb('ESTUDIO'), 79);
   assert.equal(precioMesWeb('CADENA'), 249);

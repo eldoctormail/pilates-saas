@@ -126,7 +126,7 @@ export const MENU_SOLUCIONES: EnlaceConResumen[] = [
 /** «Recursos»: el blog, las comparativas, el glosario y la ayuda. Sin calculadoras: no tienen ruta propia. */
 export const MENU_RECURSOS: EnlaceConResumen[] = [
   { href: '/recursos', label: 'Blog', resumen: 'Guías prácticas de gestión, sin humo.' },
-  { href: '/comparativa', label: 'Comparativas', resumen: 'Centra frente a las trece plataformas con las que más se compara.' },
+  { href: '/comparativa', label: 'Comparativas', resumen: ES ? 'Centra frente a las trece plataformas con las que más se compara.' : 'Centra frente a los programas que se usan en Argentina.' },
   { href: '/glosario', label: 'Glosario', resumen: 'Qué significa cada término del sector, sin marketing.' },
   { href: '/academy', label: 'Academy', resumen: 'Rutas, guías y vídeos para aprender Centra paso a paso.' },
   { href: '/ayuda', label: 'Centro de Ayuda', resumen: 'Documentación oficial de Centra, paso a paso.' },

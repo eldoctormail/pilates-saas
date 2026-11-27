@@ -17,6 +17,7 @@ const articulo: Articulo = {
   categoria: 'rentabilidad',
   seccion: 'Rentabilidad',
   publicado: '2026-11-27',
+  actualizado: '2026-11-27',
   consultaPrincipal: 'packs de pilates: cómo armarlos',
   consultas: [
     'pack de clases de pilates',

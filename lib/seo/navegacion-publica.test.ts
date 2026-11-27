@@ -15,7 +15,7 @@ const enlacesDelMenu = () => [
 
 test('todo enlace del menú y del pie públicos apunta a una página del registro', () => {
   const rotos = [...enlacesDelMenu(), ...PIE_PUBLICO.flatMap((c) => c.enlaces)]
-    .map((e) => e.href)
+    .map((e) => e.href.split('#')[0])
     .filter((href) => !paginaDe(href));
   assert.deepEqual(rotos, []);
 });
@@ -89,7 +89,8 @@ test('cada enlace del menú y del pie tiene su página en app/ (el sistema de fi
     const m = /^\/recursos\/([^/]+)$/.exec(href);
     return Boolean(m && slugs.has(m[1]) && existsSync(join(app, 'recursos', '[slug]', 'page.tsx')));
   };
-  const todos = [...new Set([...enlacesDelMenu(), ...PIE_PUBLICO.flatMap((c) => c.enlaces)].map((e) => e.href))];
+  // Un ancla (/terminos#baja) es la misma página.
+  const todos = [...new Set([...enlacesDelMenu(), ...PIE_PUBLICO.flatMap((c) => c.enlaces)].map((e) => e.href.split('#')[0]))];
   assert.deepEqual(todos.filter((h) => !existe(h)), []);
   // CONTROL: una ruta inventada no existe, y un artículo de datos sí.
   assert.equal(existe('/funcionalidades/no-existe'), false);

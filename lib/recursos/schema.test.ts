@@ -8,6 +8,10 @@ import { ARTICULOS } from './articulos/index.ts';
 import { ID_BLOG, blogLd, blogPostingLd, imagenesSitemap, openGraphGuia } from './schema.ts';
 import { imagenPortadaArticulo, articuloLd } from './articulos/schema.ts';
 import { PORTADAS_ARTICULOS } from './articulos/portadas.ts';
+import { FUNCIONES_DE_ESPANA as ES } from '../locale.ts';
+
+// Quién firma: en España el fundador (Person); en Argentina, Centra (schema.ts).
+const FIRMA = ES ? { tipo: 'Person', nombre: 'Marcos Roca Rodríguez' } : { tipo: 'Organization', nombre: 'el equipo de Centra' };
 
 // JSON-LD de /recursos: lo que Google necesita para leer cada guía como un post
 // de blog con imagen, y el listado como el Blog que las agrupa.
@@ -51,10 +55,10 @@ test('fechas ISO, idioma, sección y pertenencia al Blog', () => {
   }
 });
 
-test('autor Person y editor Organization con logo ImageObject absoluto', () => {
+test('autor (Person en España, Centra en Argentina) y editor Organization con logo ImageObject absoluto', () => {
   const post = ld(GUIAS[0].slug);
-  assert.equal(post.author['@type'], 'Person');
-  assert.equal(post.author.name, 'Marcos Roca Rodríguez');
+  assert.equal(post.author['@type'], FIRMA.tipo);
+  assert.equal(post.author.name, FIRMA.nombre);
   assert.equal(post.publisher['@type'], 'Organization');
   assert.equal(post.publisher.logo['@type'], 'ImageObject');
   assert.ok(absoluta(post.publisher.logo.url));
@@ -90,7 +94,7 @@ test('Open Graph de artículo y sitemap de imágenes', () => {
     const og = openGraphGuia(g.slug);
     assert.equal(og.publishedTime, g.publicado);
     assert.match(og.modifiedTime, ISO);
-    assert.deepEqual(og.authors, ['Marcos Roca Rodríguez']);
+    assert.deepEqual(og.authors, [FIRMA.nombre]);
     assert.equal(og.section, g.seccion);
     const imgs = imagenesSitemap(`/recursos/${g.slug}`);
     assert.equal(imgs.length, 1);

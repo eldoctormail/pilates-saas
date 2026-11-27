@@ -17,6 +17,7 @@ const articulo: Articulo = {
   categoria: 'rentabilidad',
   seccion: 'Rentabilidad',
   publicado: '2026-11-27',
+  actualizado: '2026-11-27',
   consultaPrincipal: 'precio reformer vs mat',
   consultas: [
     'cuánto factura un reformer al mes',

@@ -16,6 +16,7 @@ const articulo: Articulo = {
   categoria: 'rentabilidad',
   seccion: 'Rentabilidad',
   publicado: '2026-11-24',
+  actualizado: '2026-11-26',
   consultaPrincipal: 'precio de una clase de pilates',
   consultas: [
     'cuánto sale una clase de pilates',

@@ -13,7 +13,7 @@ import { CalculadoraBonos } from '@/components/recursos/CalculadoraBonos';
 import { DescargaRecurso } from '@/components/recursos/DescargaRecurso';
 import { RECURSOS_DESCARGABLES } from '@/lib/recursos/descargas';
 import { captchaDeServidorListo } from '@/lib/auth/captcha-servidor';
-import { fechaArticulo, minutosLectura } from '@/lib/recursos/articulos';
+import { ARTICULOS, fechaArticulo, minutosLectura } from '@/lib/recursos/articulos';
 import { articuloLd, faqLd, migasLd, textoPlano } from '@/lib/recursos/articulos/schema';
 import { contarPalabras } from '@/lib/recursos/articulos/validar';
 import { ARTICULOS_META } from '@/lib/recursos/articulos/meta';
@@ -134,7 +134,7 @@ export function ArticuloDatos({ a }: { a: Articulo }) {
     etiqueta: PAGINAS.find((x) => x.path === href)?.etiqueta ?? href,
   }));
   // La llamada a mitad de texto, solo donde hay un recurso relevante (recursos-intermedios.ts).
-  const recurso = recursoIntermedio(a.slug);
+  const recurso = recursoIntermedio(a.slug, ARTICULOS);
   const trasSeccion = recurso ? seccionDeLaLlamada(a) : -1;
 
   return (

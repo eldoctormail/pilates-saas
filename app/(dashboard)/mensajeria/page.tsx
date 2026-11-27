@@ -6,6 +6,7 @@ import { leerBorradorMensajeria } from '@/lib/opening/comunicaciones';
 import { Suspense, useState, useMemo, useId, useEffect, useCallback, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useStudio } from '@/lib/studio-context';
+import { WHATSAPP_CON_ENLACE } from '@/lib/configuracion/resumenes';
 import { authHeader } from '@/lib/api-client';
 import { useRol, puedeGestionarClientas } from '@/lib/permisos';
 import {
@@ -92,7 +93,10 @@ function Compositor({ socios }: { socios: SocioParaBroadcast[] }) {
   // El envío a UNA persona se queda como estaba, a propósito: un «te cambio la
   // clase del jueves» es transaccional, no comercial, y pasarlo por el filtro
   // de consentimiento lo haría desaparecer en silencio.
-  const { addCampana, enviarCampana, suscripciones, recibos } = useStudio();
+  const { addCampana, enviarCampana, suscripciones, recibos, integracionActiva } = useStudio();
+  // En Argentina WhatsApp funciona por enlace sin conectar nada (WHATSAPP_CON_ENLACE): el envío en grupo necesita la API de Meta, así que
+  // sin ella conectada no se ofrece.
+  const conWhatsapp = !WHATSAPP_CON_ENLACE || integracionActiva('WHATSAPP');
   // El estado de cada clienta (el mismo que enseña Clientas): «Por estado…» y
   // los grupos «activas», «se enfriaron» y «con plan o bono» salen de aquí.
   const { porSocio: estadosClientas, conteos } = useEstadosClientas();
@@ -259,14 +263,16 @@ function Compositor({ socios }: { socios: SocioParaBroadcast[] }) {
           <button type="button" onClick={() => setCanal('EMAIL')} aria-pressed={canal === 'EMAIL'} className={chip(canal === 'EMAIL')}>
             Email
           </button>
-          <button
-            type="button"
-            onClick={() => { setCanal('WHATSAPP'); setModo(m => (m === 'persona' ? 'todos' : m)); }}
-            aria-pressed={canal === 'WHATSAPP'}
-            className={chip(canal === 'WHATSAPP')}
-          >
-            WhatsApp
-          </button>
+          {conWhatsapp && (
+            <button
+              type="button"
+              onClick={() => { setCanal('WHATSAPP'); setModo(m => (m === 'persona' ? 'todos' : m)); }}
+              aria-pressed={canal === 'WHATSAPP'}
+              className={chip(canal === 'WHATSAPP')}
+            >
+              WhatsApp
+            </button>
+          )}
         </div>
         {canal === 'WHATSAPP' && (
           <p className="text-xs text-muted-foreground mt-1.5">

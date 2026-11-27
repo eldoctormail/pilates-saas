@@ -8,7 +8,7 @@ import { authHeader } from '@/lib/api-client';
 import { saludIntegracion } from '@/lib/integraciones/salud';
 import { hrefDeSeccion } from '@/lib/configuracion/destino';
 import { hayCambios } from '@/lib/configuracion/formulario-sincronizado';
-import { resumenGmail, resumenRemitente, resumenWhatsapp, type ResumenFila } from '@/lib/configuracion/resumenes';
+import { WHATSAPP_CON_ENLACE, resumenGmail, resumenRemitente, resumenWhatsapp, type ResumenFila } from '@/lib/configuracion/resumenes';
 import { revocarGmailEnGoogle } from '@/lib/integraciones/desconectar-gmail';
 import { seccionDeTarjeta, tarjetaPorId, type TarjetaId } from '@/lib/configuracion/secciones';
 import type { TipoIntegracion } from '@/lib/types';
@@ -282,7 +282,7 @@ export function FilaWhatsapp({ w, onAbrir }: { w: CanalWhatsapp; onAbrir: () => 
           aria-haspopup={w.conMeta ? undefined : 'dialog'}
           className={cn(btnPrimary, 'shrink-0')}
         >
-          {w.conectando ? 'Conectando…' : 'Conectar'}
+          {w.conectando ? 'Conectando…' : WHATSAPP_CON_ENLACE ? 'Conectar Business' : 'Conectar'}
         </button>
       )}
     />

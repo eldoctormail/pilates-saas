@@ -34,6 +34,13 @@ import { tarjetasEnLaApp, type BannerDelEstudio } from '../student/descubre.ts';
 import { hoyEnEstudio } from '../utils.ts';
 import { FUNCIONES_DE_ESPANA } from '../locale.ts';
 
+/**
+ * En Argentina, WhatsApp funciona SIN conectar nada (decisiones del 27-nov-2026): los botones del panel abren el
+ * WhatsApp de la propietaria con el mensaje escrito (wa.me). Conectar su WhatsApp Business (API de Meta, con su
+ * propia app y la guía de pasos) es OPCIONAL y suma los avisos automáticos y el envío en grupo.
+ */
+export const WHATSAPP_CON_ENLACE: boolean = !FUNCIONES_DE_ESPANA;
+
 export const MAX_RESUMEN = 44;
 /** Las filas de «Cómo reservan mis alumnas»: a dos líneas (ver `resumenRegla`). */
 export const MAX_RESUMEN_REGLA = 88;
@@ -1019,7 +1026,10 @@ export function resumenRegla(
 export function resumenWhatsapp(s: SaludIntegracion): ResumenFila {
   switch (s.estado) {
     case 'APAGADA':
-      return { valor: 'Conéctalo para mandar recordatorios por WhatsApp', estado: { tono: 'neutro', etiqueta: 'Sin conectar' } };
+      // En Argentina funciona sin conectar (WHATSAPP_CON_ENLACE): los botones de WhatsApp abren el de la propietaria.
+      return WHATSAPP_CON_ENLACE
+        ? { valor: 'Los botones de WhatsApp del panel abren tu WhatsApp con el mensaje ya escrito', estado: { tono: 'activo', etiqueta: 'Con tu WhatsApp' } }
+        : { valor: 'Conéctalo para mandar recordatorios por WhatsApp', estado: { tono: 'neutro', etiqueta: 'Sin conectar' } };
     case 'SIN_PROBAR':
       return { valor: 'Guardado, pero aún sin usar: pruébalo', estado: { tono: 'pendiente', etiqueta: 'Sin probar' } };
     case 'FUNCIONA':

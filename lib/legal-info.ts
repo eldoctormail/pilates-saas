@@ -46,7 +46,7 @@ export const TITULAR_ARGENTINA = {
   /** A dónde llegan los pedidos de soporte de los estudios. Vacío = el de contacto. */
   emailSoporte: '',
   /** WhatsApp de soporte con prefijo, «+54 9 …». Vacío = sin botón de WhatsApp. */
-  whatsapp: '',
+  whatsapp: '+5492994707622',
 };
 
 const correoPorDefecto = (): string => {

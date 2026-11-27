@@ -629,21 +629,21 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
   },
   {
     "slug": "rentabilidad-estudio-de-pilates",
-    "titulo": "¿Es rentable un estudio de pilates? Cómo calcularlo con tus números",
+    "titulo": "¿Es rentable un estudio de pilates en Argentina? Cómo calcularlo con tus números",
     "tituloSeo": "¿Es rentable un estudio de pilates? Calculadora",
-    "descripcion": "Cuánto gana un estudio de pilates: ingresos, costes y punto de equilibrio con 3 escenarios, precios de 32 estudios y una calculadora gratis.",
-    "resumen": "La cuenta que dice si tu estudio gana dinero: plazas, clases, ocupación y precio medio por plaza, costes fijos y variables, punto de equilibrio y tres escenarios de ejemplo.",
+    "descripcion": "Cuánto gana un estudio de pilates en Argentina: ingresos, costos y punto de equilibrio en pesos, con precios publicados en noviembre de 2026 y una calculadora.",
+    "resumen": "La cuenta que dice si tu estudio gana plata: plazas, clases, ocupación y precio por plaza, costos fijos y variables, punto de equilibrio y un ejemplo en pesos.",
     "categoria": "rentabilidad",
     "seccion": "Rentabilidad",
-    "publicado": "2026-09-25",
+    "publicado": "2026-11-27",
     "relacionadas": [
-      "/recursos/precio-clase-de-pilates",
-      "/recursos/ocupacion-clases-valle",
       "/recursos/cuanto-cuesta-abrir-un-estudio-de-pilates",
-      "/funcionalidades/informes-y-rentabilidad"
+      "/recursos/precio-clase-de-pilates",
+      "/recursos/cuanto-cobra-una-instructora-de-pilates",
+      "/funcionalidades/informes-y-rentabilidad",
+      "/precios"
     ],
-    "palabras": 2420,
-    "actualizado": "2026-10-08"
+    "palabras": 1410
   },
   {
     "slug": "precios-reformer-mat",

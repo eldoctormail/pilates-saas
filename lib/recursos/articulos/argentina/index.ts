@@ -4,6 +4,7 @@ import iva from './iva-clases-de-pilates.ts';
 import precioClase from './precio-clase-de-pilates.ts';
 import sueldoInstructora from './cuanto-cobra-una-instructora-de-pilates.ts';
 import cuantoCuestaAbrir from './cuanto-cuesta-abrir-un-estudio-de-pilates.ts';
+import rentabilidad from './rentabilidad-estudio-de-pilates.ts';
 
 // Versiones argentinas (formato es-AR) de artículos que en España hablan de su
 // normativa. Mismo slug: la dirección no cambia, cambia el texto. Las elige
@@ -14,4 +15,5 @@ export const ARTICULOS_ARGENTINA: Articulo[] = [
   precioClase,
   sueldoInstructora,
   cuantoCuestaAbrir,
+  rentabilidad,
 ];

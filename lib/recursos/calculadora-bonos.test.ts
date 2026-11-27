@@ -37,3 +37,32 @@ test('valores vacíos o fuera de rango no rompen la cuenta', () => {
   const tope = calcularBonos({ ...EJEMPLO, descuentoBono5: 140 }).escalones.find((e) => e.id === 'bono5')!;
   assert.equal(tope.ahorro, 95);
 });
+
+// Argentina: el ejemplo de /recursos/bonos-de-pilates en es-AR (tarifas de Aditi).
+const EJEMPLO_AR = { suelta: 25000, descuentoPack4: 12, descuentoPack8: 28, descuentoPack12: 34, costePorPlaza: 0, responsableInscripto: false };
+
+test('Argentina: con el ejemplo del artículo sale la misma escalera que su tabla', async () => {
+  const { calcularPacks } = await import('./calculadora-bonos.ts');
+  const por = Object.fromEntries(calcularPacks(EJEMPLO_AR).escalones.map((e) => [e.id, e]));
+  assert.equal(por.pack4.precio, 88000);
+  assert.equal(por.pack8.precio, 144000);
+  assert.equal(por.pack8.porSesion, 18000);
+  assert.equal(por.pack12.porSesion, 16500);
+  assert.equal(por.pack12.precio, 198000);
+});
+
+test('Argentina: el IVA solo se resta al responsable inscripto', async () => {
+  const { calcularPacks } = await import('./calculadora-bonos.ts');
+  // Pack de 12 a $16.500 por clase: monotributo, por encima de $15.000; con IVA
+  // ($13.636 sin IVA), por debajo.
+  const mono = calcularPacks({ ...EJEMPLO_AR, costePorPlaza: 15000 });
+  assert.deepEqual(mono.escalones.filter((e) => e.porDebajoDelCoste).map((e) => e.id), []);
+  const ri = calcularPacks({ ...EJEMPLO_AR, costePorPlaza: 15000, responsableInscripto: true });
+  assert.deepEqual(ri.escalones.filter((e) => e.porDebajoDelCoste).map((e) => e.id), ['pack8', 'pack12']);
+});
+
+test('Argentina: avisa si un pack no baja el precio por clase', async () => {
+  const { calcularPacks } = await import('./calculadora-bonos.ts');
+  assert.equal(calcularPacks(EJEMPLO_AR).escaleraNoBaja, false);
+  assert.equal(calcularPacks({ ...EJEMPLO_AR, descuentoPack8: 10 }).escaleraNoBaja, true);
+});

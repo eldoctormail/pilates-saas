@@ -11,6 +11,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { LEGAL } from '../legal-info.ts';
+import { FUNCIONES_DE_ESPANA as ES } from '../locale.ts';
 import { AUTOR_BLOG, ID_AUTOR, URL_AUTOR } from '../blog/autor.ts';
 import { ANCHO_MAX_PORTADA, GUIAS, fechaModificada, guia, rutaPortada, altoPortada, anchosPortada, urlGuia, type Guia } from './guias.ts';
 import { ARTICULOS_META } from './articulos/meta.ts';
@@ -27,7 +28,10 @@ const IDIOMA = 'es-ES';
  * /blog/marcos-roca, donde se define el Person completo; aquí solo se refiere a él. Antes era «Marcos Roca» y apuntaba a
  * /sobre-tentare: dos nombres y dos URL para la misma persona repartían la señal de autoría.
  */
-export const AUTOR = { '@type': 'Person', '@id': ID_AUTOR, name: AUTOR_BLOG.nombre, jobTitle: AUTOR_BLOG.cargo, url: URL_AUTOR } as const;
+export const AUTOR = ES
+  ? ({ '@type': 'Person', '@id': ID_AUTOR, name: AUTOR_BLOG.nombre, jobTitle: AUTOR_BLOG.cargo, url: URL_AUTOR } as const)
+  : // En Argentina firma Centra (la Organization de la página), no el autor del software original.
+    ({ '@type': 'Organization', '@id': `${LEGAL.url}/#organizacion`, name: 'el equipo de Centra', url: LEGAL.url } as const);
 
 /** El editor: la misma Organization que pinta cada página (por @id). */
 export const PUBLISHER = {

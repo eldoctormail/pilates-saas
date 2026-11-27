@@ -1,10 +1,11 @@
+import { LEGAL } from '@/lib/legal-info';
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { enforceRateLimit } from '@/lib/rate-limit';
 import { verificarSesionStaff } from '@/lib/auth-server';
 import { getSupabaseAdmin } from '@/lib/db/supabase-admin';
 
-// Aviso por correo a soporte@tentare.app cuando alguien del equipo de un estudio
+// Aviso por correo a soporte (LEGAL.emailSoporte) cuando alguien del equipo de un estudio
 // escribe desde el widget de ayuda del panel (Duda / Mejora / Problema). El
 // mensaje ya se guarda en la tabla `soporte_solicitudes` desde el cliente; esto
 // es lo que hace que a nosotros NOS LLEGUE (antes solo quedaba en la base de
@@ -65,7 +66,7 @@ export async function POST(req: NextRequest) {
     const resend = new Resend(apiKey);
     const { error } = await resend.emails.send({
       from: process.env.RESEND_FROM || 'Centra <onboarding@resend.dev>',
-      to: ['soporte@tentare.app'],
+      to: [LEGAL.emailSoporte],
       ...(staff.email ? { replyTo: staff.email } : {}),
       subject: `[${tipo}] Soporte Centra · ${estudio}`,
       html:

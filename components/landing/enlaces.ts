@@ -36,7 +36,7 @@ export const ALTA = '/crear-estudio';
  * que lo lleva literal; los bloques nuevos lo importan
  * de aquí.
  */
-export const WHATSAPP_SOPORTE = '+34603556580';
+export { SOPORTE_WHATSAPP as WHATSAPP_SOPORTE } from '@/lib/soporte';
 
 /**
  * Único enlace del menú que NO es una ancla de esta página: Centra Network

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { LEGAL } from '@/lib/legal-info';
 import Link from 'next/link';
 import { Check } from 'lucide-react';
 import { LogoTentare } from '@/components/marca/logo-tentare';
@@ -34,7 +35,7 @@ const VENTAJAS = [
 ];
 
 export default function EmpiezaPage() {
-  const whatsapp = enlaceWhatsApp(WHATSAPP_SOPORTE, 'Hola, vengo de TikTok y tengo una duda sobre Centra:') ?? '#';
+  const whatsapp = enlaceWhatsApp(WHATSAPP_SOPORTE, 'Hola, vengo de TikTok y tengo una duda sobre Centra:') ?? `mailto:${LEGAL.email}`;
   return (
     <main className="min-h-dvh px-4 py-8" style={{ background: BG, color: ACC }}>
       <MedicionLanding />

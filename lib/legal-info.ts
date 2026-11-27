@@ -25,6 +25,37 @@ const URL_CANONICA = (
 const hostDe = (url: string): string => new URL(url).host;
 const DOMINIO_CANONICO = /* @__PURE__ */ hostDe(URL_CANONICA);
 
+// ── Titular y contacto de Centra en Argentina (es-AR) ─────────────────────────
+// En este fork, con el formato de Argentina, la web y el panel NO pueden
+// presentarse con los datos del titular del software original (su nombre, su
+// NIF español, su domicilio, sus correos y su WhatsApp): sería decir que Centra
+// es suya y mandarle a él los pedidos de demo y de soporte de los estudios.
+// Los datos de abajo son los del titular de Centra. Un campo vacío no se
+// inventa: el titular sale como «Centra» y el correo, como el de la dirección de
+// la app (`hola@<dominio>`), hasta que se rellene.
+export const TITULAR_ARGENTINA = {
+  /** Nombre y apellido, o razón social. */
+  titular: 'Javier Amigo',
+  cuit: '23-32951555-9',
+  /** Ciudad y provincia alcanzan. */
+  domicilio: 'Plottier, Neuquén',
+  /** Contacto general: pedidos de demo, la web, los correos de Centra. */
+  email: 'centra@gmail.com',
+  /** Privacidad (Ley 25.326). Vacío = el de contacto. */
+  emailPrivacidad: '',
+  /** A dónde llegan los pedidos de soporte de los estudios. Vacío = el de contacto. */
+  emailSoporte: '',
+  /** WhatsApp de soporte con prefijo, «+54 9 …». Vacío = sin botón de WhatsApp. */
+  whatsapp: '',
+};
+
+const correoPorDefecto = (): string => {
+  const host = DOMINIO_CANONICO.replace(/^www\./, '').replace(/:\d+$/, '');
+  // Con una IP o un host de relleno no hay correo que valga: mejor uno a la vista que uno de otra persona.
+  return /^[\d.]+$/.test(host) || host.endsWith('.invalid') ? 'hola@centra.invalid' : `hola@${host}`;
+};
+const AR_EMAIL = TITULAR_ARGENTINA.email || /* @__PURE__ */ correoPorDefecto();
+
 export const LEGAL = {
   marca: 'Centra',
   // ⚠️ CON www, y no es un capricho de estilo.
@@ -50,13 +81,20 @@ export const LEGAL = {
 
   // ── Identificación del titular (LSSI-CE art. 10) ────────────────────────────
   // Persona física (autónomo). Sin datos registrales (ver cabecera).
-  titular: 'Marcos Roca Rodríguez',
-  nif: '27361301H',
-  domicilio: 'Barcelona',
+  // En Argentina, los de TITULAR_ARGENTINA (arriba).
+  titular: ES ? 'Marcos Roca Rodríguez' : TITULAR_ARGENTINA.titular || 'Centra',
+  nif: ES ? '27361301H' : TITULAR_ARGENTINA.cuit,
+  /** Cómo se llama el número de identificación fiscal en el país del titular. */
+  etiquetaNif: ES ? 'NIF' : 'CUIT',
+  domicilio: ES ? 'Barcelona' : TITULAR_ARGENTINA.domicilio || 'Argentina',
 
   // ── Contacto ────────────────────────────────────────────────────────────────
-  email: 'hola@tentare.app',
-  emailPrivacidad: 'privacidad@tentare.app',
+  email: ES ? 'hola@tentare.app' : AR_EMAIL,
+  emailPrivacidad: ES ? 'privacidad@tentare.app' : TITULAR_ARGENTINA.emailPrivacidad || AR_EMAIL,
+  /** A dónde llegan los pedidos de soporte del panel, de Network y de la app nativa. */
+  emailSoporte: ES ? 'soporte@tentare.app' : TITULAR_ARGENTINA.emailSoporte || AR_EMAIL,
+  /** WhatsApp de soporte (con prefijo). Vacío = no hay WhatsApp de soporte y no se pinta el botón. */
+  whatsappSoporte: ES ? '+34603556580' : TITULAR_ARGENTINA.whatsapp,
 } as const;
 
 // La versión de las condiciones de uso y la política de privacidad que acepta

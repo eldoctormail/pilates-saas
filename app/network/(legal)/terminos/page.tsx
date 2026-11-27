@@ -27,7 +27,7 @@ export default function TerminosNetwork() {
       <p>
         Centra Network es un directorio y buscador donde instructoras publican su perfil profesional y
         estudios buscan candidatas por especialidad, ciudad y disponibilidad. El titular del servicio es{' '}
-        {LEGAL.titular} (empresario individual / autónomo).
+        {LEGAL.titular}{LEGAL.etiquetaNif === 'NIF' ? ' (empresario individual / autónomo)' : ''}.
       </p>
 
       <h2>2. Centra Network no es parte de la relación</h2>

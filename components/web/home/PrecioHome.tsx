@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { LEGAL } from '@/lib/legal-info';
 import { PLANS } from '@/components/landing/data';
 import { enlaceWhatsApp } from '@/lib/decision/mensajes-socia';
 import { FRASE_FOUNDING } from '@/lib/landing/founding-gratis';
@@ -18,7 +19,7 @@ import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 // destino del enlace «Precios» de la isla.
 
 export function PrecioHome() {
-  const whatsappCadena = enlaceWhatsApp(WHATSAPP_SOPORTE, 'Hola, tengo varios centros y quiero saber más de Centra:') ?? '#';
+  const whatsappCadena = enlaceWhatsApp(WHATSAPP_SOPORTE, 'Hola, tengo varios centros y quiero saber más de Centra:') ?? `mailto:${LEGAL.email}`;
 
   return (
     <section id="precio" className="wh-seccion wh-precio" aria-labelledby="wh-precio-h">

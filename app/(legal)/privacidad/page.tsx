@@ -24,7 +24,7 @@ export default function Privacidad() {
 
       <h2>1. Responsable del tratamiento</h2>
       <ul>
-        <li><strong>Responsable:</strong> {LEGAL.titular} (NIF {LEGAL.nif})</li>
+        <li><strong>Responsable:</strong> {LEGAL.titular}{LEGAL.nif ? ` (${LEGAL.etiquetaNif} ${LEGAL.nif})` : ''}</li>
         <li><strong>Domicilio:</strong> {LEGAL.domicilio}</li>
         <li><strong>Contacto en materia de privacidad:</strong> <a href={`mailto:${LEGAL.emailPrivacidad}`}>{LEGAL.emailPrivacidad}</a></li>
       </ul>

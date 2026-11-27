@@ -711,44 +711,47 @@ export const PAGINAS: PaginaSeo[] = [
   })),
   // El blog personal del fundador (lib/blog): su propio grupo, aparte de los artículos corporativos de /recursos.
   // El listado y los artículos salen de lib/blog/meta.ts (solo lo PUBLICADO: un borrador no entra en el sitemap).
-  {
-    path: '/blog',
-    titulo: 'Blog del fundador de Centra: emprendimiento y tecnología | Centra',
-    descripcion:
-      'El blog personal de Marcos Roca Rodríguez, fundador de Centra: emprendimiento, tecnología, startups y cómo se construye un software para estudios de Pilates y yoga.',
-    grupo: 'blog',
-    etiqueta: 'Blog del fundador',
-    resumen: 'Emprendimiento, tecnología y la construcción de Centra, contados por su fundador.',
-    prioridad: 0.6,
-    changeFrequency: 'monthly',
-    ...(ARTICULOS_BLOG_META.length ? { actualizado: ARTICULOS_BLOG_META.map(fechaArticuloBlog).sort().at(-1)! } : {}),
-    relacionadas: ['/blog/marcos-roca', '/sobre-tentare', '/recursos'],
-  },
-  {
-    path: '/blog/marcos-roca',
-    titulo: 'Marcos Roca Rodríguez | Fundador de Centra',
-    descripcion:
-      'Marcos Roca Rodríguez es el fundador de Centra, un software de gestión para estudios de Pilates y yoga en España. Tiene 23 años y trabaja desde Barcelona.',
-    grupo: 'blog',
-    etiqueta: 'Marcos Roca Rodríguez',
-    resumen: 'Quién es el fundador de Centra y de qué escribe.',
-    prioridad: 0.7,
-    changeFrequency: 'monthly',
-    actualizado: FECHA_PERFIL,
-    relacionadas: ['/blog', '/sobre-tentare', '/precios'],
-  },
-  ...ARTICULOS_BLOG_META.map((a): PaginaSeo => ({
-    path: `/blog/marcos-roca/${a.slug}`,
-    titulo: `${a.tituloSeo} | Centra`,
-    descripcion: a.descripcion,
-    grupo: 'blog',
-    etiqueta: a.titulo,
-    resumen: a.resumen,
-    actualizado: fechaArticuloBlog(a),
-    prioridad: 0.6,
-    changeFrequency: 'monthly',
-    relacionadas: ['/blog/marcos-roca', ...a.enlaces],
-  })),
+  // En Argentina no existe: es el blog personal del autor del software original (redirige a /recursos, next.config.ts).
+  ...(ES ? ([
+    {
+      path: '/blog',
+      titulo: 'Blog del fundador de Centra: emprendimiento y tecnología | Centra',
+      descripcion:
+        'El blog personal de Marcos Roca Rodríguez, fundador de Centra: emprendimiento, tecnología, startups y cómo se construye un software para estudios de Pilates y yoga.',
+      grupo: 'blog',
+      etiqueta: 'Blog del fundador',
+      resumen: 'Emprendimiento, tecnología y la construcción de Centra, contados por su fundador.',
+      prioridad: 0.6,
+      changeFrequency: 'monthly',
+      ...(ARTICULOS_BLOG_META.length ? { actualizado: ARTICULOS_BLOG_META.map(fechaArticuloBlog).sort().at(-1)! } : {}),
+      relacionadas: ['/blog/marcos-roca', '/sobre-tentare', '/recursos'],
+    },
+    {
+      path: '/blog/marcos-roca',
+      titulo: 'Marcos Roca Rodríguez | Fundador de Centra',
+      descripcion:
+        'Marcos Roca Rodríguez es el fundador de Centra, un software de gestión para estudios de Pilates y yoga en España. Tiene 23 años y trabaja desde Barcelona.',
+      grupo: 'blog',
+      etiqueta: 'Marcos Roca Rodríguez',
+      resumen: 'Quién es el fundador de Centra y de qué escribe.',
+      prioridad: 0.7,
+      changeFrequency: 'monthly',
+      actualizado: FECHA_PERFIL,
+      relacionadas: ['/blog', '/sobre-tentare', '/precios'],
+    },
+    ...ARTICULOS_BLOG_META.map((a): PaginaSeo => ({
+      path: `/blog/marcos-roca/${a.slug}`,
+      titulo: `${a.tituloSeo} | Centra`,
+      descripcion: a.descripcion,
+      grupo: 'blog',
+      etiqueta: a.titulo,
+      resumen: a.resumen,
+      actualizado: fechaArticuloBlog(a),
+      prioridad: 0.6,
+      changeFrequency: 'monthly',
+      relacionadas: ['/blog/marcos-roca', ...a.enlaces],
+    })),
+  ] as PaginaSeo[]) : []),
   // Las guías salen de su registro (lib/recursos/guias.ts), que también da las
   // fechas de su JSON-LD: antes esta lista las repetía a mano.
   ...GUIAS.map((g): PaginaSeo => ({

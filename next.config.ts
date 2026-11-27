@@ -105,8 +105,17 @@ const nextConfig: NextConfig = {
   // viejo, así que un buscador o un enlace compartido antiguo aterriza en la
   // landing real, no en una copia obsoleta.
   async redirects() {
+    // En Argentina (formato es-AR, el de serie: lib/locale.ts) el blog personal del autor del software
+    // original no es de Centra: sus direcciones llevan a las guías. No permanente: con es-ES vuelve.
+    const argentina = /^es-AR\b/i.test(process.env.NEXT_PUBLIC_LOCALE?.trim() || 'es-AR');
     return [
       { source: '/network/unirse', destination: '/network', permanent: true },
+      ...(argentina
+        ? [
+            { source: '/blog', destination: '/recursos', permanent: false },
+            { source: '/blog/:ruta*', destination: '/recursos', permanent: false },
+          ]
+        : []),
     ];
   },
   async rewrites() {

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { TerminosArgentina } from './argentina';
 import { LEGAL } from '@/lib/legal-info';
 import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 import { paginaDe, urlDe } from '@/lib/seo/paginas';
@@ -14,6 +15,8 @@ export const metadata: Metadata = {
 };
 
 export default function Terminos() {
+  // Con el formato de Argentina, el texto argentino (./argentina.tsx); este es el de España.
+  if (!ES) return <TerminosArgentina />;
   return (
     <>
       <h1>Términos y condiciones</h1>
@@ -26,7 +29,7 @@ export default function Terminos() {
       <p>
         {LEGAL.marca} es un software como servicio (SaaS) que permite a estudios de Pilates y actividades
         afines gestionar su operativa (reservas, clientas, cobros, calendario, equipo y funciones
-        relacionadas). El titular del servicio es {LEGAL.titular} (empresario individual / autónomo).
+        relacionadas). El titular del servicio es {LEGAL.titular}{LEGAL.etiquetaNif === 'NIF' ? ' (empresario individual / autónomo)' : ''}.
       </p>
 
       <h2>2. Cuenta y registro</h2>

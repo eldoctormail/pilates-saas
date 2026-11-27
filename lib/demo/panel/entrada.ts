@@ -3,14 +3,15 @@
 // para que no pese en ninguna otra pantalla.
 import { montar, PLANES, SUSCRIPCIONES, STUDIO_ID, STUDIO_ROW } from '../../../e2e/panel-sembrado.ts';
 import { crearPagina } from './page-shim.ts';
+import { ZONA_HORARIA } from '../../zona-horaria.ts';
 import { leerMarca, montarGuia } from './guia.ts';
 import type { PantallaPanel } from '../modelo.ts';
 
 declare global { interface Window { __demoPanel?: { sinAtender: () => string[] } } }
 
-/** El día de hoy en el estudio (Madrid) más `n` días, como YYYY-MM-DD. */
+/** El día de hoy en el estudio (su zona) más `n` días, como YYYY-MM-DD. */
 function dia(n: number): string {
-  const hoy = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Madrid' }).format(new Date());
+  const hoy = new Intl.DateTimeFormat('en-CA', { timeZone: ZONA_HORARIA }).format(new Date());
   const d = new Date(`${hoy}T12:00:00.000Z`);
   d.setUTCDate(d.getUTCDate() + n);
   return d.toISOString().slice(0, 10);

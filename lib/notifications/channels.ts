@@ -270,7 +270,7 @@ const push: Canal = {
     const { data: st } = await admin.from('studios').select('logo_url, nombre, color_primario').eq('id', notificacion.studioId).maybeSingle();
     const logoUrl = st?.logo_url as string | null;
     const webpush = vapidListo ? (await import('web-push')).default : null;
-    if (webpush) webpush.setVapidDetails(process.env.VAPID_SUBJECT || 'mailto:soporte@tentare.app', publicKey!, privateKey!);
+    if (webpush) webpush.setVapidDetails(process.env.VAPID_SUBJECT || `mailto:${LEGAL.emailSoporte}`, publicKey!, privateKey!);
     const payload = JSON.stringify({
       title: notificacion.title, body: notificacion.body,
       url: notificacion.deepLink || '/',

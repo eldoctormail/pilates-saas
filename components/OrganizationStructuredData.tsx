@@ -46,17 +46,22 @@ export function OrganizationStructuredData() {
     '@id': ID_ORGANIZACION,
     name: LEGAL.marca,
     url: LEGAL.url,
-    founder: { '@id': ID_FUNDADOR },
+    // En Argentina, ni el fundador ni los perfiles ni el dominio del software original (no son de Centra).
+    ...(ES ? { founder: { '@id': ID_FUNDADOR } } : {}),
     logo: { '@type': 'ImageObject', url: `${LEGAL.url}/icon-512.png`, width: 512, height: 512 },
     description: `Software de gestión para estudios de Pilates y Yoga en ${ES ? 'España' : 'Argentina'}: reservas, app para clientes, bonos y cobros, calendario y equipo.`,
     // «tentare» es también una palabra italiana (infinitivo de «intentar»): sin esto un buscador o un modelo puede no saber si hablamos de
     // la palabra o de la empresa. `alternateName` recoge cómo se nos nombra en la práctica (el dominio); no se inventan marcas.
-    alternateName: ['tentare.app'],
-    disambiguatingDescription: 'Centra (tentare.app) es una plataforma de software para estudios de Pilates y yoga; no tiene relación con la palabra italiana «tentare».',
+    ...(ES
+      ? {
+          alternateName: ['tentare.app'],
+          disambiguatingDescription: 'Centra (tentare.app) es una plataforma de software para estudios de Pilates y yoga; no tiene relación con la palabra italiana «tentare».',
+        }
+      : {}),
     areaServed: { '@type': 'Country', name: ES ? 'España' : 'Argentina' },
     knowsAbout: ['Software de gestión para estudios de Pilates', 'Software de gestión para estudios de yoga', 'Reservas y bonos de clases', 'Cobros recurrentes para estudios'],
     email: LEGAL.email,
-    sameAs: [...REDES_SOCIALES_TENTARE, ...PERFILES_EN_DIRECTORIOS],
+    ...(ES ? { sameAs: [...REDES_SOCIALES_TENTARE, ...PERFILES_EN_DIRECTORIOS] } : {}),
     contactPoint: {
       '@type': 'ContactPoint',
       email: LEGAL.email,

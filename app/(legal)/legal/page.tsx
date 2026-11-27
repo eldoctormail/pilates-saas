@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
+import { AvisoLegalArgentina } from './argentina';
 import { LEGAL } from '@/lib/legal-info';
 import { paginaDe, urlDe } from '@/lib/seo/paginas';
 
@@ -13,6 +15,8 @@ export const metadata: Metadata = {
 };
 
 export default function AvisoLegal() {
+  // Con el formato de Argentina, el texto argentino (./argentina.tsx); este es el de España.
+  if (!ES) return <AvisoLegalArgentina />;
   return (
     <>
       <h1>Aviso legal</h1>
@@ -27,8 +31,8 @@ export default function AvisoLegal() {
         <strong>{LEGAL.dominio}</strong> y el servicio <strong>{LEGAL.marca}</strong> son titularidad de:
       </p>
       <ul>
-        <li><strong>Titular:</strong> {LEGAL.titular} (empresario individual / autónomo)</li>
-        <li><strong>NIF:</strong> {LEGAL.nif}</li>
+        <li><strong>Titular:</strong> {LEGAL.titular}{LEGAL.etiquetaNif === 'NIF' ? ' (empresario individual / autónomo)' : ''}</li>
+        {LEGAL.nif && <li><strong>{LEGAL.etiquetaNif}:</strong> {LEGAL.nif}</li>}
         <li><strong>Domicilio:</strong> {LEGAL.domicilio}</li>
         <li><strong>Correo de contacto:</strong> <a href={`mailto:${LEGAL.email}`}>{LEGAL.email}</a></li>
       </ul>

@@ -9,6 +9,7 @@ import { CTA_ALTA, GRATIS_CON_LIMITES } from '@/lib/landing/founding-gratis';
 import { PageBreadcrumb } from '@/components/recursos/ArticleStructuredData';
 import { ID_ORGANIZACION, OrganizationStructuredData } from '@/components/OrganizationStructuredData';
 import { LEGAL } from '@/lib/legal-info';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 import { G2_URL } from '@/lib/seo/g2';
 import { paginaDe, urlDe } from '@/lib/seo/paginas';
 
@@ -90,7 +91,7 @@ export default function SobreTentarePage() {
         <div className="st-ancho">
           <h1 className="st-h1">Sobre Centra.</h1>
           <p className="st-entrada">
-            Centra es un software de gestión para estudios de Pilates y yoga en España: reservas, cobros, bonos y sustituciones de instructoras, en un solo panel y con una app con la marca de cada estudio para sus alumnas.
+            Centra es un software de gestión para estudios de Pilates y yoga en {ES ? 'España' : 'Argentina'}: reservas, cobros, bonos y sustituciones de instructoras, en un solo panel y con una app con la marca de cada estudio para sus alumnas.
           </p>
         </div>
       </header>
@@ -98,10 +99,18 @@ export default function SobreTentarePage() {
       <div className="st-ancho st-cuerpo">
         <section id="quien" className="st-bloque">
           <h2>Quién está detrás</h2>
+          {ES ? (
           <p>
             Centra la fundó y la mantiene <strong><Link href="/blog/marcos-roca">{LEGAL.titular}</Link></strong>, desde {LEGAL.domicilio}. Es también quien firma las guías de{' '}
             <Link href="/recursos">recursos</Link>. Los datos del titular, tal como exige la ley, están en el <Link href="/legal">aviso legal</Link>.
           </p>
+          ) : (
+          <p>
+            Centra la mantiene <strong>{LEGAL.titular}</strong>, desde {LEGAL.domicilio}, y es quien escribe las guías de{' '}
+            <Link href="/recursos">recursos</Link>. Los datos del titular, tal como exige la ley, están en el <Link href="/legal">aviso legal</Link>.
+          </p>
+          )}
+          {ES && (
           <p className="st-enlaces">
             <a href="https://www.linkedin.com/company/tentare/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             <span aria-hidden> · </span>
@@ -109,6 +118,7 @@ export default function SobreTentarePage() {
             <span aria-hidden> · </span>
             <a href={G2_URL} target="_blank" rel="noopener noreferrer">Reseñas en G2</a>
           </p>
+          )}
         </section>
 
         <section className="st-bloque">

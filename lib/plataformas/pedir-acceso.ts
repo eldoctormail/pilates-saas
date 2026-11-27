@@ -10,10 +10,11 @@
 //
 // Sin alias `@/`: lo leen `node --test` y la ruta del servidor.
 
+import { LEGAL } from '../legal-info.ts';
 import { NOMBRE_PLATAFORMA, esPlataforma, type Plataforma } from './catalogo.ts';
 
 /** A dónde llega la petición. Es la dirección de la empresa, no la de una persona. */
-export const CORREO_PETICIONES_PLATAFORMA = 'soporte@tentare.app';
+export const CORREO_PETICIONES_PLATAFORMA: string = LEGAL.emailSoporte;
 
 /** Las que todavía no tienen conexión automática: se muestran como «Próximamente». */
 export const PLATAFORMAS_PROXIMAMENTE: readonly Plataforma[] = ['CLASSPASS', 'WELLHUB'];

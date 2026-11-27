@@ -13,6 +13,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { LEGAL } from '@/lib/legal-info';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import {
@@ -380,7 +381,7 @@ function Mensajes() {
   const [enviado, setEnviado] = useState(false);
   const [historial, setHistorial] = useState<SolicitudFila[] | null>(null);
 
-  const href = enlaceWhatsApp(SOPORTE_WHATSAPP, `Hola, soy de ${studio?.nombre ?? 'mi estudio'} y tengo una duda con Centra:`) ?? '#';
+  const href = enlaceWhatsApp(SOPORTE_WHATSAPP, `Hola, soy de ${studio?.nombre ?? 'mi estudio'} y tengo una duda con Centra:`) ?? `mailto:${LEGAL.emailSoporte}`;
 
   // Solo la propietaria las lee (RLS `soporte_leer_propietaria`): para el resto
   // del equipo ni se pide. `recarga` vuelve a pedirlas tras enviar uno.

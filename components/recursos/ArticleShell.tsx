@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 import { OrganizationStructuredData } from '@/components/OrganizationStructuredData';
 import { IslaWeb } from '@/components/web/IslaWeb';
 import { PieWeb } from '@/components/web/PieWeb';
@@ -72,7 +73,10 @@ export function ArticleShell({
         <p className="art-byline">
           {/* El nombre lleva a la página del autor (nov-2026), que a su vez enlaza a cómo se
               escriben y se comprueban las guías (/sobre-tentare#como-escribimos). */}
-          Por <Link href="/blog/marcos-roca" className="art-autor" rel="author"><strong>Marcos Roca Rodríguez</strong></Link>, fundador de Centra · {readTime} · Actualizado {actualizado ? <time dateTime={actualizado}>{mesCorto(actualizado)}</time> : 'jul 2026'} · <Link href="/sobre-tentare#como-escribimos" className="art-autor">Cómo escribimos</Link>
+          {/* En Argentina las guías las firma el equipo de Centra: el autor de arriba es el del software original. */}
+          {ES
+            ? <>Por <Link href="/blog/marcos-roca" className="art-autor" rel="author"><strong>Marcos Roca Rodríguez</strong></Link>, fundador de Centra</>
+            : <>Por <strong>el equipo de Centra</strong></>} · {readTime} · Actualizado {actualizado ? <time dateTime={actualizado}>{mesCorto(actualizado)}</time> : 'jul 2026'} · <Link href="/sobre-tentare#como-escribimos" className="art-autor">Cómo escribimos</Link>
         </p>
       </header>
 

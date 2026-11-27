@@ -9,21 +9,43 @@
 // titular/nif/domicilio y volver a añadir los datos registrales.
 // ─────────────────────────────────────────────────────────────────────────────
 
-// El origen canónico, suelto (ver `dominio` en LEGAL para el porqué del www).
-// `canonicalizarOrigen` lo lee de aquí y no de LEGAL: la usan los scripts que
-// se sirven en las webs de los estudios, y así no arrastran el resto del objeto.
-// Autoalojado: el origen sale de NEXT_PUBLIC_APP_URL (sin barra final). Sin ella,
-// el de Centra de siempre.
+// El origen canónico vive suelto en ./origen-canonico.ts: lo usan los scripts que
+// se sirven en las webs de los estudios, y así no arrastran nada de este fichero.
 import { FUNCIONES_DE_ESPANA as ES } from './locale.ts';
-import { envPublica } from './env-publica.ts';
+import { DOMINIO_CANONICO, URL_CANONICA, canonicalizarOrigen } from './origen-canonico.ts';
 
-const URL_CANONICA = (
-  /* @__PURE__ */ envPublica(() => process.env.NEXT_PUBLIC_APP_URL) || 'https://www.tentare.app'
-).replace(/\/+$/, '');
-// `@__PURE__`: si un paquete (el widget) no usa LEGAL, el compilador puede
-// descartarlo entero; con una llamada «con efectos» dentro, lo arrastraría.
-const hostDe = (url: string): string => new URL(url).host;
-const DOMINIO_CANONICO = /* @__PURE__ */ hostDe(URL_CANONICA);
+export { canonicalizarOrigen };
+
+// ── Titular y contacto de Centra en Argentina (es-AR) ─────────────────────────
+// En este fork, con el formato de Argentina, la web y el panel NO pueden
+// presentarse con los datos del titular del software original (su nombre, su
+// NIF español, su domicilio, sus correos y su WhatsApp): sería decir que Centra
+// es suya y mandarle a él los pedidos de demo y de soporte de los estudios.
+// Los datos de abajo son los del titular de Centra. Un campo vacío no se
+// inventa: el titular sale como «Centra» y el correo, como el de la dirección de
+// la app (`hola@<dominio>`), hasta que se rellene.
+export const TITULAR_ARGENTINA = {
+  /** Nombre y apellido, o razón social. */
+  titular: 'Javier Amigo',
+  cuit: '23-32951555-9',
+  /** Ciudad y provincia alcanzan. */
+  domicilio: 'Plottier, Neuquén',
+  /** Contacto general: pedidos de demo, la web, los correos de Centra. */
+  email: 'centra@gmail.com',
+  /** Privacidad (Ley 25.326). Vacío = el de contacto. */
+  emailPrivacidad: '',
+  /** A dónde llegan los pedidos de soporte de los estudios. Vacío = el de contacto. */
+  emailSoporte: '',
+  /** WhatsApp de soporte con prefijo, «+54 9 …». Vacío = sin botón de WhatsApp. */
+  whatsapp: '+5492994707622',
+};
+
+const correoPorDefecto = (): string => {
+  const host = DOMINIO_CANONICO.replace(/^www\./, '').replace(/:\d+$/, '');
+  // Con una IP o un host de relleno no hay correo que valga: mejor uno a la vista que uno de otra persona.
+  return /^[\d.]+$/.test(host) || host.endsWith('.invalid') ? 'hola@centra.invalid' : `hola@${host}`;
+};
+const AR_EMAIL = TITULAR_ARGENTINA.email || /* @__PURE__ */ correoPorDefecto();
 
 export const LEGAL = {
   marca: 'Centra',
@@ -46,17 +68,25 @@ export const LEGAL = {
   // Fecha de última revisión del contenido legal (no la de render).
   // ⚠️ Si cambia, cambia también `VERSION_TEXTOS_LEGALES` (abajo): es lo que se
   // guarda como aceptado en cada alta. Lo vigila lib/legal-info.test.ts.
-  actualizado: '6 de octubre de 2026',
+  // En Argentina, la de los textos legales argentinos (app/(legal)/*/argentina.tsx).
+  actualizado: ES ? '6 de octubre de 2026' : '27 de noviembre de 2026',
 
   // ── Identificación del titular (LSSI-CE art. 10) ────────────────────────────
   // Persona física (autónomo). Sin datos registrales (ver cabecera).
-  titular: 'Marcos Roca Rodríguez',
-  nif: '27361301H',
-  domicilio: 'Barcelona',
+  // En Argentina, los de TITULAR_ARGENTINA (arriba).
+  titular: ES ? 'Marcos Roca Rodríguez' : TITULAR_ARGENTINA.titular || 'Centra',
+  nif: ES ? '27361301H' : TITULAR_ARGENTINA.cuit,
+  /** Cómo se llama el número de identificación fiscal en el país del titular. */
+  etiquetaNif: ES ? 'NIF' : 'CUIT',
+  domicilio: ES ? 'Barcelona' : TITULAR_ARGENTINA.domicilio || 'Argentina',
 
   // ── Contacto ────────────────────────────────────────────────────────────────
-  email: 'hola@tentare.app',
-  emailPrivacidad: 'privacidad@tentare.app',
+  email: ES ? 'hola@tentare.app' : AR_EMAIL,
+  emailPrivacidad: ES ? 'privacidad@tentare.app' : TITULAR_ARGENTINA.emailPrivacidad || AR_EMAIL,
+  /** A dónde llegan los pedidos de soporte del panel, de Network y de la app nativa. */
+  emailSoporte: ES ? 'soporte@tentare.app' : TITULAR_ARGENTINA.emailSoporte || AR_EMAIL,
+  /** WhatsApp de soporte (con prefijo). Vacío = no hay WhatsApp de soporte y no se pinta el botón. */
+  whatsappSoporte: ES ? '+34603556580' : TITULAR_ARGENTINA.whatsapp,
 } as const;
 
 // La versión de las condiciones de uso y la política de privacidad que acepta
@@ -71,7 +101,7 @@ export const LEGAL = {
 // el texto legal es una decisión, y la versión aceptada tiene que cambiar con
 // ella, no por un retoque de redacción de la fecha. Si las dos dejan de decir el
 // mismo día, lib/legal-info.test.ts falla.
-export const VERSION_TEXTOS_LEGALES = '2026-10-06';
+export const VERSION_TEXTOS_LEGALES: string = ES ? '2026-10-06' : '2026-11-27';
 
 // Encargados/subencargados del tratamiento realmente usados por el producto
 // (RGPD art. 28). Se listan en la Política de Privacidad. Mantener en sync con
@@ -106,19 +136,21 @@ export const PROVEEDORES: { nombre: string; uso: string; ubicacion: string }[] =
   { nombre: 'YouTube, de Google (opcional)', uso: 'Vídeos que el estudio inserta en la app de sus alumnas', ubicacion: 'UE / EE. UU.' },
 ];
 
-// ⚠️ El apex (`tentare.app` a secas) redirige 308 al host canónico con www —
-// ver el comentario de `dominio` arriba. Un <script> sigue redirects, pero un
-// preflight CORS NO: el bundle embebible cargado desde el apex se pintaba y
-// todas sus llamadas a la API morían en silencio (prueba de campo 2026-08-20).
-// Vive aquí y no en el bundle porque este fichero es la fuente ÚNICA del
-// origen (hay un test que prohíbe escribir el dominio a mano en otro sitio);
-// el apex se DERIVA del canónico quitando el prefijo www, nunca se escribe.
-export function canonicalizarOrigen(origen: string): string {
-  const canonico = new URL(URL_CANONICA);
-  const apex = canonico.hostname.replace(/^www\./, '');
-  try {
-    const u = new URL(origen);
-    if (u.protocol === 'https:' && u.hostname === apex) return canonico.origin;
-  } catch { /* origen raro: se devuelve tal cual */ }
-  return origen;
-}
+// Los proveedores de la instalación autoalojada de Centra en Argentina (deploy/): la app, la base de datos y la
+// autenticación corren en el servidor propio, así que no intervienen Vercel, Supabase en la nube, Sentry, PostHog
+// ni Ahrefs. ⚠️ Si el servidor se muda (por ejemplo, a una VPS en otro país) o se enciende un servicio nuevo,
+// esta lista cambia con él: la Política de privacidad la publica tal cual.
+export const UBICACION_SERVIDOR = 'Argentina';
+export const PROVEEDORES_ARGENTINA: { nombre: string; uso: string; ubicacion: string }[] = [
+  { nombre: 'Servidor propio de Centra', uso: 'La aplicación, la base de datos, la autenticación, los archivos y las copias de seguridad', ubicacion: UBICACION_SERVIDOR },
+  { nombre: 'Mercado Pago', uso: 'Cobro de la suscripción a los estudios y de los pagos de las alumnas', ubicacion: 'Argentina' },
+  { nombre: 'ARCA', uso: 'Factura electrónica (obligación legal)', ubicacion: 'Argentina' },
+  { nombre: 'Proveedor de correo (Gmail o Resend)', uso: 'Envío de correos del servicio', ubicacion: 'EE. UU.' },
+  { nombre: 'Google (opcional)', uso: 'Inicio de sesión con Google e integración con Google Calendar, si la activás', ubicacion: 'EE. UU.' },
+  { nombre: 'Meta (opcional)', uso: 'WhatsApp Business, si el estudio lo activa', ubicacion: 'EE. UU.' },
+  { nombre: 'Anthropic (opcional)', uso: 'Asistente de IA, si está activado: redacción de mensajes y análisis de archivos importados', ubicacion: 'EE. UU.' },
+  { nombre: 'Cloudflare (opcional)', uso: 'Acceso seguro al servidor y copias de seguridad cifradas fuera del servidor, si están configurados', ubicacion: 'EE. UU.' },
+  { nombre: 'Zoom (opcional)', uso: 'Videollamadas, si las activás', ubicacion: 'EE. UU.' },
+  { nombre: 'Zapier (opcional)', uso: 'Datos que el estudio autorice (alumnas y reservas) hacia otras aplicaciones', ubicacion: 'EE. UU.' },
+  { nombre: 'Vimeo y YouTube (opcional)', uso: 'Videos que el estudio inserta en la app de sus alumnas', ubicacion: 'EE. UU.' },
+];

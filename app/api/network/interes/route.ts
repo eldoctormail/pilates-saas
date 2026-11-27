@@ -101,7 +101,7 @@ export async function POST(req: NextRequest) {
         : `Network: interés en una ciudad${ciudad ? ` (${esc(ciudad)})` : ''}`;
       const { error } = await resend.emails.send({
         from: process.env.RESEND_FROM || 'Centra <onboarding@resend.dev>',
-        to: ['soporte@tentare.app'],
+        to: [LEGAL.emailSoporte],
         replyTo: email,
         subject: asunto,
         html:
@@ -118,7 +118,7 @@ export async function POST(req: NextRequest) {
 
   if (!guardado && !puedeEnviar) {
     return NextResponse.json(
-      { error: 'No se ha podido registrar tu solicitud. Escríbenos a hola@tentare.app.' },
+      { error: `No se ha podido registrar tu solicitud. Escríbenos a ${LEGAL.email}.` },
       { status: 503 },
     );
   }

@@ -58,7 +58,7 @@ function IconoLinkedIn({ size = 18 }: { size?: number }) {
 }
 
 export function PieWeb() {
-  const enlaceWa = enlaceWhatsApp(WHATSAPP_SOPORTE, 'Hola, tengo una duda sobre Centra:') ?? `https://wa.me/${WHATSAPP_SOPORTE.replace(/\D/g, '')}`;
+  const enlaceWa = enlaceWhatsApp(WHATSAPP_SOPORTE, 'Hola, tengo una duda sobre Centra:') ?? `mailto:${LEGAL.email}`;
   // Las etiquetas salen del mapa completo (una sola fuente); en «Alternativas» solo el nombre del programa.
   const etiqueta = new Map(PIE_PUBLICO.flatMap((c) => c.enlaces.map((e) => [e.href, e.label] as const)));
   const nombre = (href: string, titulo: string) => {
@@ -85,7 +85,8 @@ export function PieWeb() {
               <li><a href={enlaceWa} target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
             </ul>
             <div className="w-pie-redes">
-              {REDES_TENTARE.map(({ href, label, Icono }) => (
+              {/* Los perfiles son los del software original: en Argentina no se enlazan. */}
+              {(ES ? REDES_TENTARE : []).map(({ href, label, Icono }) => (
                 <a key={href} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}>
                   <Icono />
                 </a>

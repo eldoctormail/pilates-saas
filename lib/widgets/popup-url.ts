@@ -6,7 +6,7 @@
 // apex cuenta como `www`, que es adonde redirige: `canonicalizarOrigen`). Cualquier otra
 // dirección se ignora: el script no puede convertirse en un visor de iframes
 // de cualquier sitio pegado en la web de un estudio.
-import { canonicalizarOrigen } from '../legal-info.ts';
+import { canonicalizarOrigen } from '../origen-canonico.ts';
 
 export function urlPopupPermitida(cruda: string | null, origen: string): string | null {
   if (!cruda) return null;

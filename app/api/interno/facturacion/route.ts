@@ -30,5 +30,9 @@ export async function GET(req: NextRequest) {
   if (!leida) return NextResponse.json({ error: 'No se han podido leer los estudios.' }, { status: 500 });
   const { resultado, subs, avisoStripe } = leida;
 
-  return NextResponse.json({ ...resultado, avisoStripe, suscripcionesEnStripe: subs.length });
+  // Con Mercado Pago no hay «lista de la cuenta»: se cuentan las suscripciones que se leyeron.
+  const suscripciones = resultado.fuente === 'Mercado Pago'
+    ? resultado.lineas.filter((l) => l.fuente === 'mercadopago').length
+    : subs.length;
+  return NextResponse.json({ ...resultado, avisoStripe, suscripcionesEnStripe: suscripciones });
 }

@@ -62,7 +62,7 @@ export async function GET(req: NextRequest) {
     if (!puede('billing.read')) { sinPermiso.push('cobros'); return null; }
     const f = await leerFacturacion(db);
     if (!f) { noLeidos.push('cobros'); return null; }
-    if (f.avisoStripe) noLeidos.push('Stripe');
+    if (f.avisoStripe) noLeidos.push(f.resultado.fuente);
     return f;
   };
 
@@ -224,7 +224,7 @@ export async function GET(req: NextRequest) {
   const entradaCifras: EntradaCifras = {
     dinero: !puede('billing.read') ? { motivo: sinPermisoDinero }
       : !f ? { motivo: 'No se ha podido leer la facturación.' }
-      : f.avisoStripe ? { motivo: `Sin respuesta de Stripe: ${f.avisoStripe}` }
+      : f.avisoStripe ? { motivo: `Sin respuesta de ${f.resultado.fuente}: ${f.avisoStripe}` }
       : { mrrEuros: f.resultado.mrrEuros, pagando: f.resultado.pagando, movimiento: movimientoSuscripciones(f.subs, ahora) },
     actividad: !puede('studios.read') ? { motivo: sinPermisoEstudios }
       : est?.actividad ?? { motivo: 'No se han podido leer las reservas por estudio.' },

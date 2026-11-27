@@ -13,10 +13,12 @@
 import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { AlertTriangle, RefreshCw } from 'lucide-react';
+import { formatEuro } from '@/lib/utils';
+import { MONEDA_SIMBOLO } from '@/lib/moneda';
 import { fetchFacturacion, fetchImpagos, type Facturacion, type ImpagosSaas, type LineaFacturacionCliente } from '@/lib/interno/client';
 
-const eur = (n: number) =>
-  `${n.toLocaleString('es-ES', { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 })} €`;
+// En la moneda del despliegue (pesos en Argentina, euros en España): la de lib/moneda.ts.
+const eur = (n: number) => formatEuro(n);
 
 const fecha = (iso: string | null) =>
   iso ? new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' }) : '—';
@@ -124,7 +126,7 @@ export default function FacturacionInterna() {
   useEffect(() => { void cargar(); }, [cargar]);
 
   if (error) return <p className="text-[13.5px] text-muted-foreground">{error}</p>;
-  if (!f) return <p className="text-[13.5px] text-muted-foreground">Preguntando a Stripe…</p>;
+  if (!f) return <p className="text-[13.5px] text-muted-foreground">Preguntando a la pasarela de cobro…</p>;
 
   const descuadres = f.lineas.filter(l => l.estado === 'descuadre');
   const impagos = f.lineas.filter(l => l.estado === 'impago');
@@ -144,8 +146,8 @@ export default function FacturacionInterna() {
           <h1 className="text-[17px] font-bold text-foreground">Cobros a estudios</h1>
           <p className="text-[12.5px] text-muted-foreground">
             {f.stripeDisponible
-              ? `Leído de Stripe ahora mismo · ${f.suscripcionesEnStripe} suscripción(es) en la cuenta.`
-              : 'No se ha podido preguntar a Stripe.'}
+              ? `Leído de ${f.fuente} ahora mismo · ${f.suscripcionesEnStripe} suscripción(es) en la cuenta.`
+              : `No se ha podido preguntar a ${f.fuente}.`}
           </p>
         </div>
         <button
@@ -160,7 +162,7 @@ export default function FacturacionInterna() {
       {/* Si Stripe no contesta, el resto de la página no es de fiar. Se dice
           arriba del todo y con el motivo exacto, no con un «error». */}
       {!f.stripeDisponible && (
-        <Atencion titulo="Estos números no vienen de Stripe" tono="rojo">
+        <Atencion titulo={`Estos números no vienen de ${f.fuente}`} tono="rojo">
           <p>{f.avisoStripe}</p>
           <p>
             Lo de abajo es solo lo que dice nuestra base de datos, que puede estar
@@ -175,12 +177,12 @@ export default function FacturacionInterna() {
         <div className="grid grid-cols-2 gap-2.5 sm:gap-3 lg:grid-cols-4">
           <Tarjeta
             titulo="MRR real" valor={f.stripeDisponible ? eur(f.mrrEuros) : '—'} acento
-            pie={!f.stripeDisponible ? 'Sin respuesta de Stripe.'
-              : f.pagando === 0 ? 'Ninguna suscripción activa en Stripe todavía.'
+            pie={!f.stripeDisponible ? `Sin respuesta de ${f.fuente}.`
+              : f.pagando === 0 ? `Ninguna suscripción activa en ${f.fuente} todavía.`
               : `${f.pagando} suscripción(es) cobrando de verdad.`} />
           <Tarjeta
             titulo="ARR" valor={f.stripeDisponible ? eur(f.mrrEuros * 12) : '—'}
-            pie="MRR × 12, con el importe que Stripe cobra de verdad (no la tarifa de lista)." />
+            pie={`MRR × 12, con el importe que ${f.fuente} cobra de verdad (no la tarifa de lista).`} />
           <Tarjeta
             titulo="En prueba" valor={String(f.enPrueba)}
             pie={f.enPrueba > 0 ? `${eur(f.mrrEnPruebaEuros)}/mes si convierten todas. No suma al MRR.` : 'Ninguna prueba en curso.'} />
@@ -215,7 +217,7 @@ export default function FacturacionInterna() {
       {descuadres.length > 0 && (
         <Atencion titulo={`${descuadres.length} cuenta(s) no cuadran`} tono="ambar">
           <p className="text-[12px]">
-            Les estamos dando el producto y Stripe no lo respalda. Puede ser
+            Les estamos dando el producto y {f.fuente} no lo respalda. Puede ser
             deliberado (cortesía, piloto) o un cobro que se perdió — esto no lo
             adivina el panel.
           </p>
@@ -237,7 +239,7 @@ export default function FacturacionInterna() {
             cabecera. Mismo patrón que /interno/estudios, que ya lo hacía bien. */}
         <div className="rounded-2xl border border-border bg-card">
           <div className="hidden sm:grid grid-cols-[2fr_auto_auto_auto_auto] gap-x-4 px-4 py-2 border-b border-border text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
-            <span>Cuenta</span><span>Estado</span><span className="text-right">€/mes</span>
+            <span>Cuenta</span><span>Estado</span><span className="text-right">{MONEDA_SIMBOLO}/mes</span>
             <span>Renueva</span><span>Plan en la base</span>
           </div>
           {lineas.map(l => {

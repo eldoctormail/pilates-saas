@@ -13,9 +13,11 @@ import { ZONA_HORARIA } from '../../../lib/zona-horaria.ts';
 import { useCallback, useEffect, useState } from 'react';
 import { AlertTriangle, RefreshCw } from 'lucide-react';
 import { fetchRevenue, type RevenueInterno } from '@/lib/interno/client';
+import { LOCALE_MONEDA, MONEDA } from '@/lib/moneda';
 
+// En la moneda del despliegue (lib/moneda.ts): pesos en Argentina.
 const eur = (cents: number) =>
-  new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: cents % 100 === 0 ? 0 : 2 }).format(cents / 100);
+  new Intl.NumberFormat(LOCALE_MONEDA, { style: 'currency', currency: MONEDA, maximumFractionDigits: cents % 100 === 0 ? 0 : 2 }).format(cents / 100);
 const pct = (x: number | null) => (x === null ? '—' : `${(x * 100).toLocaleString('es-ES', { maximumFractionDigits: 1 })} %`);
 const fecha = (iso: string) => new Date(iso).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric', timeZone: ZONA_HORARIA });
 
@@ -103,17 +105,17 @@ export default function RevenueInterno() {
 
       {!v.stripeDisponible && (
         <div className="rounded-2xl border border-red-500/30 bg-red-500/[0.04] px-4 py-3.5 text-[12.5px] text-muted-foreground">
-          <p className="flex items-center gap-1.5 font-bold text-foreground"><AlertTriangle className="size-3.5" aria-hidden />Stripe no ha contestado</p>
+          <p className="flex items-center gap-1.5 font-bold text-foreground"><AlertTriangle className="size-3.5" aria-hidden />{v.fuente ?? 'Stripe'} no ha contestado</p>
           <p className="mt-1">{v.avisoStripe} El MRR y las renovaciones salen «—» a propósito: un 0 se leería como «no cobras nada».</p>
         </div>
       )}
 
       <section aria-labelledby="ahora">
-        <h2 id="ahora" className="mb-2 text-[12px] font-bold uppercase tracking-wide text-muted-foreground">Ahora mismo · Stripe en vivo</h2>
+        <h2 id="ahora" className="mb-2 text-[12px] font-bold uppercase tracking-wide text-muted-foreground">Ahora mismo · {v.fuente ?? 'Stripe'} en vivo</h2>
         <div className="grid grid-cols-2 gap-2.5 sm:gap-3 lg:grid-cols-4">
           <Tarjeta titulo="MRR" acento valor={v.mrrEuros === null ? '—' : eur(v.mrrEuros * 100)} pie="Lo que se cobraría cada mes con lo vivo hoy (un anual cuenta entre 12). No es dinero recibido." />
           <Tarjeta titulo="ARR" valor={v.arrEuros === null ? '—' : eur(v.arrEuros * 100)} pie="MRR × 12. Una proyección, no lo facturado del año." />
-          <Tarjeta titulo="Estudios de pago" valor={v.pagando === null ? '—' : String(v.pagando)} pie="Suscripciones cobrando de verdad en Stripe." />
+          <Tarjeta titulo="Estudios de pago" valor={v.pagando === null ? '—' : String(v.pagando)} pie={`Suscripciones cobrando de verdad en ${v.fuente ?? 'Stripe'}.`} />
           <Tarjeta titulo="Activas al final" valor={String(m.activasAlFinal)} pie="Según el libro, al cierre del periodo." />
         </div>
       </section>
@@ -157,7 +159,7 @@ export default function RevenueInterno() {
 
         <section className="rounded-2xl border border-border bg-card px-4 py-3.5" aria-labelledby="renov">
           <h2 id="renov" className="text-[13px] font-bold text-foreground">Próximas renovaciones (30 días)</h2>
-          <p className="mb-1 text-[11.5px] text-muted-foreground">Importe mensual equivalente, de lo que Stripe cobra hoy.</p>
+          <p className="mb-1 text-[11.5px] text-muted-foreground">Importe mensual equivalente, de lo que {v.fuente ?? 'Stripe'} cobra hoy.</p>
           {v.renovaciones.length === 0
             ? <p className="py-2 text-[13px] text-muted-foreground">{v.stripeDisponible ? 'Ninguna en los próximos 30 días.' : '—'}</p>
             : v.renovaciones.map((r) => <Fila key={`${r.nombre}${r.renuevaEl}`} etiqueta={r.nombre} nota={`${fecha(r.renuevaEl)} · ${NOMBRE_PLAN[r.plan ?? ''] ?? r.plan ?? '—'}`} valor={eur(r.eurosMes * 100)} />)}

@@ -647,21 +647,20 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
   },
   {
     "slug": "precios-reformer-mat",
-    "titulo": "Reformer vs. mat: cuánto cuesta cada plaza, cuánto factura una máquina y qué precio ponerle",
-    "tituloSeo": "Reformer vs mat: coste por plaza y facturación",
-    "descripcion": "Cuánto cuesta ofrecer una plaza de reformer y una de mat, cuánto factura una máquina al mes y qué diferencia de precio cobran 32 estudios españoles.",
-    "resumen": "La cuenta de una plaza de reformer frente a una de suelo, lo que factura cada máquina según la ocupación y la diferencia de precio que cobran los estudios españoles.",
+    "titulo": "Reformer vs. mat en Argentina: cuánto cuesta cada plaza, cuánto factura una máquina y qué cobrar",
+    "tituloSeo": "Reformer vs mat: costo por plaza y facturación",
+    "descripcion": "Cuánto cuesta en pesos ofrecer una plaza de reformer y una de mat, cuánto factura un reformer al mes y qué publican hoy los estudios argentinos.",
+    "resumen": "La cuenta en pesos de una plaza de reformer frente a una de mat, lo que factura cada máquina según la ocupación y lo que cobran hoy tres estudios argentinos.",
     "categoria": "rentabilidad",
     "seccion": "Rentabilidad",
-    "publicado": "2026-07-01",
+    "publicado": "2026-11-27",
     "relacionadas": [
       "/recursos/precio-clase-de-pilates",
       "/recursos/rentabilidad-estudio-de-pilates",
       "/recursos/bonos-de-pilates",
-      "/soluciones/estudio-de-pilates-reformer"
+      "/recursos/cuanto-cuesta-abrir-un-estudio-de-pilates"
     ],
-    "palabras": 1713,
-    "actualizado": "2026-10-07"
+    "palabras": 1693
   },
   {
     "slug": "ocupacion-clases-valle",

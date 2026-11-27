@@ -10,7 +10,7 @@ import { enlaceWhatsApp } from '@/lib/decision/mensajes-socia';
 // diferencia es el mensaje: el del panel mete el nombre del estudio
 // (`useCore()`), que aquí no existe — quien visita la landing todavía no
 // tiene estudio. Mensaje genérico en su lugar.
-const SOPORTE_WHATSAPP = '+34603556580';
+import { SOPORTE_WHATSAPP } from '@/lib/soporte';
 const MENSAJE = 'Hola, tengo una duda sobre Centra:';
 
 export function WhatsAppFab() {
@@ -44,7 +44,9 @@ export function WhatsAppFab() {
     };
   }, [open]);
 
-  const href = enlaceWhatsApp(SOPORTE_WHATSAPP, MENSAJE) ?? '#';
+  const href = enlaceWhatsApp(SOPORTE_WHATSAPP, MENSAJE);
+  // Sin número de soporte configurado (lib/legal-info.ts), no hay botón: uno que no lleva a nadie es peor.
+  if (!href) return null;
 
   return (
     <div ref={ref} className="v5-wa-fab" data-oculto={enHeroe && !open ? '' : undefined}>

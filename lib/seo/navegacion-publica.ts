@@ -199,7 +199,7 @@ export const PIE_PUBLICO: GrupoMenu[] = [
     titulo: 'Empresa',
     enlaces: [
       { href: '/sobre-tentare', label: 'Sobre Centra' },
-      { href: '/blog', label: 'Blog del fundador' },
+      ...(ES ? [{ href: '/blog', label: 'Blog del fundador' }] : []),
       { href: '/seguridad', label: 'Seguridad y datos' },
       { href: '/soporte', label: 'Soporte' },
     ],
@@ -229,5 +229,5 @@ export const PIE_RESUMIDO: { titulo: string; hrefs: string[] }[] = [
   // En Argentina (es-AR) los rivales de España no tienen sentido: la columna lleva a la comparativa de allí.
   ES ? { titulo: 'Alternativas', hrefs: ['/comparativa/tentare-vs-bsport', '/comparativa/tentare-vs-eversports', '/comparativa/tentare-vs-momence', '/comparativa/tentare-vs-mindbody', '/comparativa/tentare-vs-timp', '/comparativa/tentare-vs-lorari'] } : { titulo: 'Comparativa', hrefs: ['/comparativa'] },
   { titulo: 'Recursos', hrefs: ['/recursos', '/recursos/cuanto-cuesta-abrir-un-estudio-de-pilates', '/recursos/rentabilidad-estudio-de-pilates', '/recursos/checklist-elegir-software-estudio', '/recursos/mejor-software-para-estudios-de-pilates', '/glosario', '/academy', '/ayuda'] },
-  { titulo: 'Empresa', hrefs: ['/sobre-tentare', '/blog', '/seguridad', '/soporte'] },
+  { titulo: 'Empresa', hrefs: ES ? ['/sobre-tentare', '/blog', '/seguridad', '/soporte'] : ['/sobre-tentare', '/seguridad', '/soporte'] },
 ];

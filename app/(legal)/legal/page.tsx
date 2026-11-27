@@ -27,8 +27,8 @@ export default function AvisoLegal() {
         <strong>{LEGAL.dominio}</strong> y el servicio <strong>{LEGAL.marca}</strong> son titularidad de:
       </p>
       <ul>
-        <li><strong>Titular:</strong> {LEGAL.titular} (empresario individual / autónomo)</li>
-        <li><strong>NIF:</strong> {LEGAL.nif}</li>
+        <li><strong>Titular:</strong> {LEGAL.titular}{LEGAL.etiquetaNif === 'NIF' ? ' (empresario individual / autónomo)' : ''}</li>
+        {LEGAL.nif && <li><strong>{LEGAL.etiquetaNif}:</strong> {LEGAL.nif}</li>}
         <li><strong>Domicilio:</strong> {LEGAL.domicilio}</li>
         <li><strong>Correo de contacto:</strong> <a href={`mailto:${LEGAL.email}`}>{LEGAL.email}</a></li>
       </ul>

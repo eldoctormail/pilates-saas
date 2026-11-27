@@ -1,4 +1,4 @@
-// Todo el texto de la maqueta, en español, en UN sitio: para corregir una frase se toca aquí y nada más. Sin imports.
+// Todo el texto de la maqueta, en español, en UN sitio: para corregir una frase se toca aquí y nada más. Solo importa el correo de contacto (lib/legal-info.ts).
 // La estructura y los mensajes salen del diseño de Figma (que está en inglés); el español es traducción, con cuatro cambios
 // de fondo que hay que conocer:
 //   · PRECIOS: los planes del diseño (Starter/Professional/Business, 19/49/99 $) eran de ejemplo y no son los de Centra. Aquí
@@ -11,6 +11,7 @@
 //   · FAQ: el diseño solo enseña la respuesta de «¿Cómo se gestionan los pagos?»; las otras cuatro son nuestras y dicen solo
 //     lo que el producto hace hoy.
 // Lo de las tarjetas de «Funciones» (calendario, gráfica, importes) es ilustrativo, como en el diseño.
+import { LEGAL } from '@/lib/legal-info';
 
 export const NAV = {
   enlaces: [
@@ -159,9 +160,9 @@ export const FAQ = {
 export const CONTACTO = {
   etiqueta: 'Contacto',
   titulo: 'Hablemos de tu estudio.',
-  texto: 'Cuéntanos un poco cómo trabajas. Te enseñaremos cómo puede encajar tentare.app en tu estudio y con tus alumnas.',
+  texto: 'Cuéntanos un poco cómo trabajas. Te enseñaremos cómo puede encajar Centra en tu estudio y con tus alumnas.',
   listos: '¿Listo para simplificar la gestión de tu estudio? Busquemos juntos la solución adecuada.',
-  boton: { texto: 'Escribir al equipo', href: 'mailto:hola@tentare.app' },
+  boton: { texto: 'Escribir al equipo', href: `mailto:${LEGAL.email}` },
   formulario: {
     titulo: 'Planifiquemos tu siguiente paso.',
     nombre: { etiqueta: 'Nombre', marcador: 'Tu nombre' },
@@ -175,7 +176,7 @@ export const CONTACTO = {
     enviando: 'Enviando…',
     enviadoTitulo: 'Recibido. Te escribimos pronto.',
     enviadoTexto: 'Hemos recibido tu mensaje. Te responderemos al correo que nos has dado, normalmente en un día laborable.',
-    errorEnvio: 'No hemos podido enviar tu mensaje. Escríbenos a hola@tentare.app.',
+    errorEnvio: `No hemos podido enviar tu mensaje. Escríbenos a ${LEGAL.email}.`,
     errorRed: 'No hemos podido enviarlo. Revisa tu conexión y vuelve a intentarlo.',
   },
 } as const;

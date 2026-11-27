@@ -23,6 +23,7 @@
 //
 // Puro, sin I/O ni `@/`: se prueba con `node --test`.
 
+import { LEGAL } from '../legal-info.ts';
 import { VINCULOS_CUENTA, type RecuentoVinculos } from '../socios/borrado-cuenta.ts';
 
 /** Lo que la alumna escribe para confirmar. Lo comprueban la hoja Y el servidor. */
@@ -71,7 +72,7 @@ export function decidirAutoborrado(recuento: RecuentoVinculos): DecisionAutoborr
   return { borrar: false, motivo, vinculos };
 }
 
-const CORREO = 'hola@tentare.app';
+const CORREO: string = LEGAL.email;
 
 /** Qué le decimos, y qué puede hacer. Sin ids ni nombres: le basta con saber el porqué. */
 export const MENSAJE_NO_BORRABLE: Record<MotivoNoBorrable | 'no_verificable', string> = {

@@ -30,6 +30,8 @@
 // Solo el tipo: este módulo es puro (recibe las suscripciones ya listadas), así
 // que el test unitario corre sin cargar el SDK ni tocar la red.
 import type Stripe from 'stripe';
+import type { Preapproval } from '../billing/mp-plataforma/reglas.ts';
+import { PREFIJO_ID } from '../billing/mp-plataforma/reglas.ts';
 
 export type EstadoCobro =
   | 'pagando'      // suscripción activa en Stripe
@@ -56,6 +58,8 @@ export interface LineaFacturacion {
   /** Días que quedan de prueba (solo si `en_prueba`). */
   diasDePrueba: number | null;
   stripeCustomerId: string | null;
+  /** De dónde sale el cobro de esta línea: Stripe, Mercado Pago (suscripción `mp:<id>`) o ninguno. */
+  fuente: 'stripe' | 'mercadopago' | null;
   /** Por qué esta línea es un descuadre, en cristiano. */
   motivoDescuadre: string | null;
 }
@@ -73,8 +77,11 @@ export interface FacturacionReal {
   descuadres: number;
   /** Pruebas que se acaban en los próximos 7 días — la lista para llamar hoy. */
   pruebasQueAcaban: LineaFacturacion[];
-  /** null si Stripe no está configurado: la UI debe DECIRLO, no enseñar 0 €. */
+  /** false si la fuente no está configurada o no contestó: la UI debe DECIRLO, no enseñar 0 €. (El nombre es
+   *  de cuando solo había Stripe; con Mercado Pago dice si respondió Mercado Pago.) */
   stripeDisponible: boolean;
+  /** A quién se le preguntó: «Stripe» o «Mercado Pago». */
+  fuente: string;
 }
 
 /** Estados de Stripe que significan que ese dinero entra de verdad. */
@@ -115,6 +122,85 @@ export interface FilaEstudio {
   id: string; nombre: string; plan: string | null;
   subscription_status: string | null; stripe_customer_id: string | null;
   cadena_id: string | null;
+  /** `mp:<id>` = suscripción de Mercado Pago (lib/billing/mp-plataforma). Opcional: las filas viejas no lo traen. */
+  subscription_id?: string | null;
+  current_period_end?: string | null;
+  /** Fin de la prueba local de 7 días (lib/billing/trial.ts), sin tarjeta y sin suscripción. */
+  trial_ends_at?: string | null;
+}
+
+/** Las suscripciones de Mercado Pago leídas para cruzar, por id de estudio (`null` = no se encontró). */
+export interface LecturaMercadoPago {
+  /** false si falta la configuración o Mercado Pago no contestó: entonces nada de MP se da por bueno. */
+  disponible: boolean;
+  /** Sin entrada = no se pudo leer; `null` = Mercado Pago no la encuentra. */
+  porEstudio: Map<string, Preapproval | null>;
+}
+
+/** Importe mensual de una suscripción de Mercado Pago, en su moneda (pesos). */
+export function importeMensualMp(pre: Preapproval): number {
+  const r = pre.auto_recurring;
+  const importe = r?.transaction_amount ?? 0;
+  const cada = r?.frequency && r.frequency > 0 ? r.frequency : 1;
+  const factor = r?.frequency_type === 'days' ? 30 / cada : 1 / cada;
+  return Math.round(importe * factor * 100) / 100;
+}
+
+/** La línea de un estudio que paga con Mercado Pago. Misma clasificación que la de Stripe. */
+export function lineaMercadoPago(e: FilaEstudio, mp: LecturaMercadoPago): LineaFacturacion {
+  const pre = mp.porEstudio.get(e.id) ?? null;
+  const estadoBd = e.subscription_status;
+  const creeQueTieneAcceso = estadoBd === 'active' || estadoBd === 'trialing' || estadoBd === 'past_due';
+  let estado: EstadoCobro;
+  let motivo: string | null = null;
+  if (!mp.disponible || !mp.porEstudio.has(e.id)) {
+    // Sin respuesta (de nadie o de esta en concreto): ni «pagando» ni «cancelado», que serían inventados.
+    estado = 'descuadre';
+    motivo = 'No se pudo preguntar a Mercado Pago por esta suscripción';
+  } else if (!pre) {
+    estado = creeQueTieneAcceso ? 'descuadre' : 'cancelado';
+    if (creeQueTieneAcceso) motivo = 'Mercado Pago no encuentra la suscripción y aquí sigue con acceso';
+  } else if (pre.status === 'authorized') {
+    if (estadoBd === 'gratis') {
+      estado = 'descuadre';
+      motivo = 'Está en el plan gratis y Mercado Pago le sigue cobrando';
+    } else estado = estadoBd === 'past_due' ? 'impago' : 'pagando';
+  } else if (pre.status === 'pending') {
+    estado = creeQueTieneAcceso ? 'descuadre' : 'cancelado';
+    if (creeQueTieneAcceso) motivo = 'La suscripción de Mercado Pago sigue pendiente: no terminó de autorizar el pago';
+  } else {
+    // cancelled | paused: dio de baja. Puede seguir con acceso hasta el final de lo pagado (baja programada).
+    estado = 'cancelado';
+  }
+  return {
+    tipo: 'estudio', id: e.id, nombre: e.nombre, sedes: 1,
+    planEnBd: e.plan, estadoEnBd: estadoBd, estado,
+    eurosMes: pre && estado === 'pagando' ? importeMensualMp(pre) : 0,
+    renuevaEl: (pre?.status === 'authorized' ? pre.next_payment_date : null) ?? e.current_period_end ?? null,
+    diasDePrueba: null,
+    stripeCustomerId: null,
+    fuente: 'mercadopago',
+    motivoDescuadre: motivo,
+  };
+}
+
+/**
+ * La prueba LOCAL de 7 días (sin tarjeta, sin suscripción en ningún lado): con Mercado Pago es lo normal, no un
+ * descuadre. Con Stripe sigue como siempre (la de Stripe la trae su suscripción).
+ */
+export function lineaPruebaLocal(e: FilaEstudio): LineaFacturacion {
+  const fin = e.trial_ends_at ?? null;
+  return {
+    tipo: 'estudio', id: e.id, nombre: e.nombre, sedes: 1,
+    planEnBd: e.plan, estadoEnBd: e.subscription_status, estado: 'en_prueba',
+    eurosMes: 0, renuevaEl: fin, diasDePrueba: diasHasta(fin),
+    stripeCustomerId: null, fuente: null, motivoDescuadre: null,
+  };
+}
+
+/** ¿Este estudio cobra con una suscripción de Mercado Pago? */
+export function pagaConMercadoPago(e: Pick<FilaEstudio, 'subscription_id'>): boolean {
+  return Boolean(e.subscription_id?.startsWith(PREFIJO_ID));
 }
 export interface FilaCadena {
   id: string; nombre: string; plan: string | null;
@@ -133,6 +219,8 @@ export function cruzarFacturacion(
   cadenas: FilaCadena[],
   subs: Stripe.Subscription[],
   stripeDisponible: boolean,
+  /** Con Mercado Pago (Argentina): los estudios con suscripción `mp:` se leen de aquí y no de Stripe. */
+  mp?: LecturaMercadoPago,
 ): FacturacionReal {
   const subPorCustomer = new Map<string, Stripe.Subscription>();
   for (const s of subs) {
@@ -197,6 +285,7 @@ export function cruzarFacturacion(
       renuevaEl: renueva,
       diasDePrueba: estado === 'en_prueba' ? diasHasta(iso(sub?.trial_end) ?? renueva) : null,
       stripeCustomerId: customer,
+      fuente: sub ? 'stripe' : null,
       motivoDescuadre: motivo,
     };
   };
@@ -209,7 +298,11 @@ export function cruzarFacturacion(
             c.plan, c.subscription_status, c.stripe_customer_id)),
     ...estudios
       .filter(e => !e.cadena_id)
-      .map(e => linea('estudio', e.id, e.nombre, 1, e.plan, e.subscription_status, e.stripe_customer_id)),
+      .map(e => mp && pagaConMercadoPago(e)
+        ? lineaMercadoPago(e, mp)
+        : mp && e.subscription_status === 'trialing' && !e.subscription_id && !e.stripe_customer_id
+          ? lineaPruebaLocal(e)
+          : linea('estudio', e.id, e.nombre, 1, e.plan, e.subscription_status, e.stripe_customer_id)),
   ];
 
   const cuenta = (x: EstadoCobro) => lineas.filter(l => l.estado === x).length;
@@ -228,6 +321,7 @@ export function cruzarFacturacion(
     pruebasQueAcaban: lineas
       .filter(l => l.estado === 'en_prueba' && l.diasDePrueba !== null && l.diasDePrueba <= 7)
       .sort((a, b) => (a.diasDePrueba ?? 99) - (b.diasDePrueba ?? 99)),
-    stripeDisponible,
+    stripeDisponible: mp ? mp.disponible : stripeDisponible,
+    fuente: mp ? 'Mercado Pago' : 'Stripe',
   };
 }

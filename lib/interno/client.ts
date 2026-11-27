@@ -77,6 +77,7 @@ export interface LineaFacturacionCliente {
   estado: 'pagando' | 'en_prueba' | 'impago' | 'cancelado' | 'manual' | 'descuadre';
   eurosMes: number; renuevaEl: string | null; diasDePrueba: number | null;
   stripeCustomerId: string | null; motivoDescuadre: string | null;
+  fuente: 'stripe' | 'mercadopago' | null;
 }
 
 export interface Facturacion {
@@ -88,6 +89,8 @@ export interface Facturacion {
   /** Por qué no se pudo preguntar a Stripe. null si se preguntó bien. */
   avisoStripe: string | null;
   suscripcionesEnStripe: number;
+  /** A quién se le preguntó: «Stripe» o «Mercado Pago». */
+  fuente: string;
 }
 
 export interface EstudioFila {
@@ -152,7 +155,7 @@ export const fetchImpagos = () => pedir<ImpagosSaas>('/impagos');
 export interface RevenueInterno {
   metricas: import('../billing/metricas/reglas.ts').Metricas;
   enVivo: {
-    stripeDisponible: boolean; avisoStripe: string | null; mrrEuros: number | null; arrEuros: number | null; pagando: number | null;
+    fuente?: string; stripeDisponible: boolean; avisoStripe: string | null; mrrEuros: number | null; arrEuros: number | null; pagando: number | null;
     renovaciones: Array<{ nombre: string; plan: string | null; renuevaEl: string; eurosMes: number }>;
   };
   hoy: string;

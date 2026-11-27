@@ -53,9 +53,9 @@ export async function GET(req: NextRequest) {
 
   // Lo de Stripe en vivo, con el mismo filtro de plan. `null` si Stripe no contestó (no se enseña un 0).
   let enVivo: {
-    stripeDisponible: boolean; avisoStripe: string | null; mrrEuros: number | null; arrEuros: number | null; pagando: number | null;
+    fuente: string; stripeDisponible: boolean; avisoStripe: string | null; mrrEuros: number | null; arrEuros: number | null; pagando: number | null;
     renovaciones: Array<{ nombre: string; plan: string | null; renuevaEl: string; eurosMes: number }>;
-  } = { stripeDisponible: false, avisoStripe: vivo?.avisoStripe ?? 'No se ha podido leer', mrrEuros: null, arrEuros: null, pagando: null, renovaciones: [] };
+  } = { fuente: vivo?.resultado.fuente ?? 'Stripe', stripeDisponible: false, avisoStripe: vivo?.avisoStripe ?? 'No se ha podido leer', mrrEuros: null, arrEuros: null, pagando: null, renovaciones: [] };
   if (vivo) {
     const { resultado } = vivo;
     const lineas = resultado.lineas.filter((l) => plan === 'TODOS' || l.planEnBd === plan);
@@ -63,7 +63,7 @@ export async function GET(req: NextRequest) {
     const mrr = pagando.reduce((t, l) => t + l.eurosMes, 0);
     const limite = Date.now() + 30 * 86_400_000;
     enVivo = {
-      stripeDisponible: resultado.stripeDisponible, avisoStripe: vivo.avisoStripe,
+      fuente: resultado.fuente, stripeDisponible: resultado.stripeDisponible, avisoStripe: vivo.avisoStripe,
       mrrEuros: resultado.stripeDisponible ? mrr : null, arrEuros: resultado.stripeDisponible ? mrr * 12 : null,
       pagando: resultado.stripeDisponible ? pagando.length : null,
       renovaciones: pagando

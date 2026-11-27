@@ -74,3 +74,22 @@ test('sin Mercado Pago (Stripe), el resultado es el de siempre', () => {
   assert.equal(r.fuente, 'Stripe');
   assert.equal(r.lineas[0].estado, 'descuadre');
 });
+
+test('una cadena que paga con Mercado Pago es UNA línea con sus sedes, y el anual cuenta su doceava parte al mes', () => {
+  const sedes = [estudio('s1', { cadena_id: 'c1', subscription_id: null }), estudio('s2', { cadena_id: 'c1', subscription_id: null })];
+  const cadena = { id: 'c1', nombre: 'Mi cadena', plan: 'CADENA', subscription_status: 'active', stripe_customer_id: null, subscription_id: 'mp:prec1' };
+  const anual = pre('authorized', 2_400_000, { auto_recurring: { transaction_amount: 2_400_000, currency_id: 'ARS', frequency: 12, frequency_type: 'months' } });
+  const r = cruzarFacturacion(sedes, [cadena], [], false, lectura([['c1', anual]]));
+  assert.equal(r.lineas.length, 1);
+  assert.equal(r.lineas[0].tipo, 'cadena');
+  assert.equal(r.lineas[0].sedes, 2);
+  assert.equal(r.mrrEuros, 200_000);
+});
+
+test('con Mercado Pago, la sede principal que paga su plan suelto (sin la cadena pagando) tiene su línea', () => {
+  const principal = estudio('s1', { cadena_id: 'c1' });
+  const cadena = { id: 'c1', nombre: 'Mi cadena', plan: null, subscription_status: null, stripe_customer_id: null, subscription_id: null };
+  const r = cruzarFacturacion([principal], [cadena], [], false, lectura([['s1', pre('authorized', 29000)]]));
+  assert.equal(r.pagando, 1);
+  assert.equal(r.mrrEuros, 29000);
+});

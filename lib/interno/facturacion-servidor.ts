@@ -12,7 +12,7 @@ import { preapprovalDe, type Preapproval } from '@/lib/billing/mp-plataforma/reg
  * una a la cuenta de Centra (Mercado Pago no lista preapprovals por cuenta sin filtros). Si falta la configuración o
  * Mercado Pago no contesta a ninguna, `disponible: false` y un aviso: nunca un MRR de 0 que parezca real.
  */
-async function leerMercadoPago(estudios: FilaEstudio[]): Promise<{ lectura: LecturaMercadoPago; aviso: string | null }> {
+async function leerMercadoPago(estudios: Pick<FilaEstudio, 'id' | 'subscription_id'>[]): Promise<{ lectura: LecturaMercadoPago; aviso: string | null }> {
   const porEstudio = new Map<string, Preapproval | null>();
   const cfg = configMpPlataforma();
   if (!cfg.ok) return { lectura: { disponible: false, porEstudio }, aviso: cfg.motivo };
@@ -52,7 +52,7 @@ export async function leerFacturacion(db: SupabaseClient): Promise<
 > {
   const [estudios, cadenas] = await Promise.all([
     db.from('studios').select('id, nombre, plan, subscription_status, stripe_customer_id, cadena_id, subscription_id, current_period_end, trial_ends_at'),
-    db.from('cadenas').select('id, nombre, plan, subscription_status, stripe_customer_id'),
+    db.from('cadenas').select('id, nombre, plan, subscription_status, stripe_customer_id, subscription_id, current_period_end'),
   ]);
   if (estudios.error) return null;
 
@@ -60,8 +60,10 @@ export async function leerFacturacion(db: SupabaseClient): Promise<
   // (lib/billing/mp-plataforma): ese es el dinero que hay que leer. Stripe solo si además tiene clave.
   if (CON_MERCADOPAGO) {
     const filas = (estudios.data ?? []) as unknown as FilaEstudio[];
-    const { lectura, aviso } = await leerMercadoPago(filas);
-    const resultado = cruzarFacturacion(filas, (cadenas.data ?? []) as unknown as FilaCadena[], [], false, lectura);
+    const deCadenas = (cadenas.data ?? []) as unknown as FilaCadena[];
+    // Estudios y cadenas (Cadena paga con una suscripción de la cadena): los ids no se pisan.
+    const { lectura, aviso } = await leerMercadoPago([...filas, ...deCadenas]);
+    const resultado = cruzarFacturacion(filas, deCadenas, [], false, lectura);
     return { resultado, subs: [], avisoStripe: aviso };
   }
 

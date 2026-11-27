@@ -142,7 +142,7 @@ function AvisoAlPasarACadena({ opciones }: { opciones: OpcionesDePlan | null | u
           {sueltos.map((s, i) => <li key={i} className="text-pretty">{fraseSueltoQueSeCancela(s)}</li>)}
         </ul>
       ) : (
-        <p className="text-pretty">Si alguna de tus sedes paga ahora Founding Studio o Estudio, ese plan se cancela al activar Cadena, y el mes que ya está pagado no se devuelve.</p>
+        <p className="text-pretty">Si alguna de tus sedes paga ahora Founding Studio o Estudio, ese plan se cancela al activar Cadena, y lo que ya está pagado no se devuelve.</p>
       )}
     </div>
   );
@@ -246,10 +246,10 @@ export function SuscripcionVista({ embebida = false }: { embebida?: boolean }) {
     return () => { vivo = false; };
   }, [session, pagaYEsPropietaria]);
 
-  async function suscribir(plan: Plan = elegido) {
+  async function suscribir(plan: Plan = elegido, cada: IntervaloUi = intervalo) {
     setError(null);
     setAccion('suscribir');
-    const r = await iniciarSuscripcion(plan, estado?.anual ? intervalo : 'mensual', CON_MERCADOPAGO ? emailMp.trim() : undefined);
+    const r = await iniciarSuscripcion(plan, estado?.anual ? cada : 'mensual', CON_MERCADOPAGO ? emailMp.trim() : undefined);
     if ('url' in r) window.location.assign(r.url);
     else { setError(r.error); setAccion(null); }
   }
@@ -510,15 +510,23 @@ export function SuscripcionVista({ embebida = false }: { embebida?: boolean }) {
               {/* Cambiar de plan abre otra suscripción: Mercado Pago pide el correo de la cuenta con la que se paga, como en el alta. */}
               <CampoEmailMp valor={emailMp} onCambio={setEmailMp} />
               <div className="mt-1 flex flex-wrap gap-2">
-                {(['BASE', 'ESTUDIO'] as const).filter((p) => p !== estado?.plan).map((p) => (
+                {/* Otro plan con el mismo periodo, y el mismo plan con el otro periodo (si hay anual). */}
+                {[
+                  ...(['BASE', 'ESTUDIO', 'CADENA'] as const).filter((p) => p !== estado?.plan).map((p) => ({ p, cada: intervaloActual })),
+                  ...(estado?.anual ? [{ p: ((estado?.plan as Plan) ?? 'BASE'), cada: (intervaloActual === 'anual' ? 'mensual' : 'anual') as IntervaloUi }] : []),
+                ].map(({ p, cada }) => (
                   <button
-                    key={p}
-                    onClick={() => suscribir(p)}
+                    key={`${p}-${cada}`}
+                    onClick={() => suscribir(p, cada)}
                     disabled={accion !== null}
                     className="flex items-center justify-center gap-2 rounded-xl border border-border px-4 py-2.5 text-[14px] font-semibold text-foreground transition-colors hover:bg-muted disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
                   >
                     {accion === 'suscribir' && <Loader2 size={15} className="animate-spin motion-reduce:animate-none" aria-hidden="true" />}
-                    {accion === 'suscribir' ? 'Redirigiendo a Mercado Pago…' : `Pasarme a ${PLAN_INFO[p].nombre} · ${precio(PLAN_INFO[p].precioMes, '')}/mes`}
+                    {accion === 'suscribir'
+                      ? 'Redirigiendo a Mercado Pago…'
+                      : p === estado?.plan
+                        ? `Pagar ${cada === 'anual' ? 'por año' : 'por mes'} · ${precio(importeDe(PLAN_INFO[p].precioMes, cada), '')}/${cada === 'anual' ? 'año' : 'mes'}`
+                        : `Pasarme a ${PLAN_INFO[p].nombre} · ${precio(importeDe(PLAN_INFO[p].precioMes, cada), '')}/${cada === 'anual' ? 'año' : 'mes'}`}
                   </button>
                 ))}
               </div>

@@ -11,8 +11,8 @@ import { enforceRateLimit } from '@/lib/rate-limit';
 import { getSupabaseAdmin } from '@/lib/db/supabase-admin';
 import { configMpPlataforma } from '@/lib/billing/mp-plataforma/config';
 import { leerSuscripcion } from '@/lib/billing/mp-plataforma/api';
-import { estadoVisible, leerReferencia, preapprovalDe } from '@/lib/billing/mp-plataforma/reglas';
-import { leerFila, sincronizarSuscripcion } from '@/lib/billing/mp-plataforma/servidor';
+import { estadoVisible, intervaloDe, leerReferencia, preapprovalDe } from '@/lib/billing/mp-plataforma/reglas';
+import { destinoDeLaSede, leerFila, sincronizarSuscripcion } from '@/lib/billing/mp-plataforma/servidor';
 import { errorInterno } from '@/lib/errores-servidor';
 
 export const dynamic = 'force-dynamic';
@@ -27,14 +27,16 @@ async function contexto(req: NextRequest, nombre: string) {
   const sesion = await verificarSesionStaff(req);
   if (!sesion) return { respuesta: NextResponse.json({ error: 'No autorizado' }, { status: 401 }) } as const;
   if (sesion.rol !== 'PROPIETARIO') return { respuesta: NextResponse.json({ error: 'Solo la propietaria ve la suscripción' }, { status: 403 }) } as const;
-  return { admin, token: config.accessToken, studioId: sesion.studioId } as const;
+  return { admin, token: config.accessToken, studioId: sesion.studioId, userId: sesion.userId } as const;
 }
 
 export async function GET(req: NextRequest) {
   const c = await contexto(req, 'billing-mp-suscripcion');
   if ('respuesta' in c) return c.respuesta;
   try {
-    const fila = await leerFila(c.admin, c.studioId);
+    // La del estudio, o la de su cadena (Cadena: una para todas las sedes).
+    const destino = await destinoDeLaSede(c.admin, c.studioId, c.userId);
+    const fila = destino?.fila;
     const id = preapprovalDe(fila?.subscription_id);
     if (!fila || !id) return NextResponse.json({ error: 'Este estudio aún no tiene suscripción.' }, { status: 409 });
     const r = await leerSuscripcion(c.token, id);
@@ -48,6 +50,7 @@ export async function GET(req: NextRequest) {
       proximoCobro: estado === 'al_dia' || estado === 'impago' ? (pre?.next_payment_date ?? fila.current_period_end) : null,
       accesoHasta: estado === 'baja_programada' ? fila.current_period_end : null,
       estado,
+      intervalo: intervaloDe(pre),
       puedeCancelar: pre?.status === 'authorized' || pre?.status === 'paused',
     });
   } catch (err) {
@@ -65,7 +68,12 @@ export async function POST(req: NextRequest) {
     const leida = await leerSuscripcion(c.token, id);
     if (!leida.ok) return NextResponse.json({ error: 'Mercado Pago no contesta.' }, { status: leida.status === 404 ? 404 : 502 });
     // Solo la del propio estudio: la referencia la puso el servidor al crearla.
-    if (leerReferencia(leida.datos.external_reference)?.studioId !== c.studioId) {
+    // De este estudio, o de su cadena.
+    const ref = leerReferencia(leida.datos.external_reference);
+    const propia = ref?.tabla === 'studios'
+      ? ref.id === c.studioId
+      : ref?.tabla === 'cadenas' && ref.id === (await leerFila(c.admin, c.studioId))?.cadena_id;
+    if (!propia) {
       return NextResponse.json({ error: 'Esa suscripción no es de tu estudio.' }, { status: 404 });
     }
     const r = await sincronizarSuscripcion(c.admin, c.token, id);

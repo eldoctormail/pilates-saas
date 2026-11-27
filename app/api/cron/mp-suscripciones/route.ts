@@ -24,17 +24,20 @@ export async function GET(req: NextRequest) {
   if (!admin) return NextResponse.json({ error: 'Persistencia no disponible' }, { status: 503 });
 
   const resumen = { revisados: 0, actualizados: 0, cerrados: 0, errores: 0 };
-  for (const f of await estudiosConSuscripcionMp(admin)) {
-    resumen.revisados++;
-    try {
-      const r = await sincronizarSuscripcion(admin, config.accessToken, preapprovalDe(f.subscription_id)!);
-      if (r.tipo === 'aplicado') resumen.actualizados++;
-      if (r.tipo === 'reintentar') resumen.errores++;
-      const fila = await leerFila(admin, f.id);
-      if (fila && (await cerrarSiVencida(admin, fila))) resumen.cerrados++;
-    } catch (err) {
-      resumen.errores++;
-      console.error('[cron/mp-suscripciones]', f.id, err instanceof Error ? err.message : err);
+  // Los estudios sueltos y las cadenas (una suscripción para todas sus sedes).
+  for (const tabla of ['studios', 'cadenas'] as const) {
+    for (const f of await estudiosConSuscripcionMp(admin, tabla)) {
+      resumen.revisados++;
+      try {
+        const r = await sincronizarSuscripcion(admin, config.accessToken, preapprovalDe(f.subscription_id)!);
+        if (r.tipo === 'aplicado') resumen.actualizados++;
+        if (r.tipo === 'reintentar') resumen.errores++;
+        const fila = await leerFila(admin, f.id, tabla);
+        if (fila && (await cerrarSiVencida(admin, fila, new Date(), tabla))) resumen.cerrados++;
+      } catch (err) {
+        resumen.errores++;
+        console.error('[cron/mp-suscripciones]', tabla, f.id, err instanceof Error ? err.message : err);
+      }
     }
   }
   return NextResponse.json(resumen);

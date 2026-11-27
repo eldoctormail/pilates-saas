@@ -1,4 +1,6 @@
 import type { Addon, Plan } from '@/lib/billing/entitlements';
+import { pasarelaEsMercadoPago } from '../mercadopago/config.ts';
+import { mpPlataformaLista } from './mp-plataforma/config.ts';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Billing del SaaS (Stripe Billing — la plataforma cobra al estudio).
@@ -39,11 +41,14 @@ export function priceIdDe(plan: Plan, intervalo: Intervalo = 'mensual'): string 
 }
 
 /**
- * ¿Se puede contratar ya el pago anual? Solo si están los TRES precios anuales:
+ * ¿Se puede contratar ya el pago anual? Con Stripe, solo si están los TRES precios anuales:
  * un selector que ofreciera «anual» y fallara en un plan sería peor que no
  * ofrecerlo.
  */
 export function anualDisponible(): boolean {
+  // Con Mercado Pago (Argentina) el anual es una suscripción cada 12 meses al
+  // precio de 10: basta con que el cobro con Mercado Pago esté configurado.
+  if (pasarelaEsMercadoPago()) return mpPlataformaLista();
   return (['BASE', 'ESTUDIO', 'CADENA'] as Plan[]).every((p) => !!priceIdDe(p, 'anual'));
 }
 

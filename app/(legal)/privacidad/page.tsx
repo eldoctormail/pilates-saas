@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { PrivacidadArgentina } from './argentina';
 import { LEGAL, PROVEEDORES } from '@/lib/legal-info';
 import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 import { paginaDe, urlDe } from '@/lib/seo/paginas';
@@ -14,6 +15,8 @@ export const metadata: Metadata = {
 };
 
 export default function Privacidad() {
+  // Con el formato de Argentina, el texto argentino (./argentina.tsx); este es el de España.
+  if (!ES) return <PrivacidadArgentina />;
   return (
     <>
       <h1>Política de privacidad</h1>

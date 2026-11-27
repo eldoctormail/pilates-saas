@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { TerminosArgentina } from './argentina';
 import { LEGAL } from '@/lib/legal-info';
 import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 import { paginaDe, urlDe } from '@/lib/seo/paginas';
@@ -14,6 +15,8 @@ export const metadata: Metadata = {
 };
 
 export default function Terminos() {
+  // Con el formato de Argentina, el texto argentino (./argentina.tsx); este es el de España.
+  if (!ES) return <TerminosArgentina />;
   return (
     <>
       <h1>Términos y condiciones</h1>

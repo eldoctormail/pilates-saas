@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
+import { AvisoLegalArgentina } from './argentina';
 import { LEGAL } from '@/lib/legal-info';
 import { paginaDe, urlDe } from '@/lib/seo/paginas';
 
@@ -13,6 +15,8 @@ export const metadata: Metadata = {
 };
 
 export default function AvisoLegal() {
+  // Con el formato de Argentina, el texto argentino (./argentina.tsx); este es el de España.
+  if (!ES) return <AvisoLegalArgentina />;
   return (
     <>
       <h1>Aviso legal</h1>

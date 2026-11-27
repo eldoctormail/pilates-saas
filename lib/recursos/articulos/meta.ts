@@ -773,19 +773,18 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
     "slug": "cubrir-baja-instructora",
     "titulo": "Cómo cubrir la baja de una instructora: protocolo, plazos y lo que dice la ley",
     "tituloSeo": "Cómo cubrir la baja de una instructora de pilates",
-    "descripcion": "Qué preparar antes de la primera baja, cuánto esperar a cada sustituta, qué decir a las alumnas y quién paga una baja médica en España.",
-    "resumen": "El protocolo para cubrir una clase cuando una instructora no puede darla: lo que hay que tener preparado, el orden para avisar, cuánto esperar y lo que dice la Seguridad Social.",
+    "descripcion": "Qué preparar antes de la primera baja, cuánto esperar a cada sustituta, qué decir a las alumnas y quién paga una licencia por enfermedad en Argentina.",
+    "resumen": "El protocolo para cubrir una clase cuando una instructora no puede darla: lo que hay que tener preparado, el orden para avisar, cuánto esperar y lo que dice la Ley de Contrato de Trabajo.",
     "categoria": "sustituciones",
     "seccion": "Sustituciones y equipo",
-    "publicado": "2026-07-01",
+    "publicado": "2026-11-27",
     "relacionadas": [
       "/funcionalidades/sustituciones",
       "/recursos/cuanto-cobra-una-instructora-de-pilates",
       "/funcionalidades/gestion-de-instructoras",
       "/recursos/como-gestionar-un-estudio-de-pilates"
     ],
-    "palabras": 2004,
-    "actualizado": "2026-10-07"
+    "palabras": 1997
   },
   {
     "slug": "como-ser-instructora-de-pilates",
@@ -881,20 +880,17 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
     "slug": "nombres-para-estudio-de-pilates",
     "titulo": "Nombres para estudio de pilates: más de 100 ideas y cómo comprobar que están libres",
     "tituloSeo": "Nombres para estudio de pilates: 100+ ideas",
-    "descripcion": "Más de 100 nombres para tu estudio de pilates o de barre, por estilos, y cómo comprobar gratis en la OEPM y en los .es que nadie los tiene ya.",
+    "descripcion": "Más de 100 nombres para tu estudio de pilates o de barre, por estilos, y cómo comprobar gratis en el INPI y en NIC Argentina que nadie los tiene ya.",
     "resumen": "Ideas de nombres para un estudio de pilates o de barre agrupadas por estilo, criterios para elegir y los pasos para comprobar que el nombre está libre antes de pagar el logotipo.",
     "categoria": "abrir",
     "seccion": "Abrir un estudio",
-    "publicado": "2026-09-25",
+    "publicado": "2026-11-27",
     "relacionadas": [
-      "/recursos/como-abrir-un-estudio-de-pilates",
       "/recursos/requisitos-para-abrir-un-estudio-de-pilates",
-      "/recursos/franquicia-de-pilates",
       "/funcionalidades/app-para-alumnas",
       "/recursos/reservas-en-tu-web"
     ],
-    "palabras": 1765,
-    "actualizado": "2026-10-16"
+    "palabras": 1681
   }
 ];
 

@@ -13,6 +13,8 @@ import {
   decidirPorPago, decidirPorSuscripcion, leerReferencia, preapprovalDe, vencida,
   type Cambios, type Decision, type FilaEstudio,
 } from './reglas';
+import { facturarMensualidad } from './factura-centra';
+import { emitirFactura } from '@/lib/arca/servidor';
 
 export const COLUMNAS_MP = 'id, plan, subscription_status, subscription_id, current_period_end, cadena_id';
 
@@ -88,7 +90,18 @@ export async function sincronizarPago(admin: SupabaseClient, token: string, pago
   if (!ref) return { tipo: 'ignorado', motivo: 'no-es-de-centra' };
   const fila = await leerFila(admin, ref.studioId);
   if (!fila) return { tipo: 'ignorado', motivo: 'estudio-desconocido' };
-  return aplicar(admin, token, fila, decidirPorPago(fila, pago));
+  const resultado = await aplicar(admin, token, fila, decidirPorPago(fila, pago));
+  // La factura de Centra de este cobro (apagada sin CENTRA_FACTURACION_ESTUDIO_ID). Un fallo no tumba el aviso:
+  // el recibo queda cobrado y la factura se emite a mano desde Cobros del estudio de Centra.
+  if (resultado.tipo !== 'reintentar' && fila.subscription_id === `mp:${pago.preapproval_id}`) {
+    const f = await facturarMensualidad(admin, { pago, preapproval: leida.datos, studioId: ref.studioId, fetch, emitir: emitirFactura });
+    if (f.tipo === 'sin-factura') {
+      Sentry.captureMessage('Mensualidad cobrada por Mercado Pago sin factura de ARCA', {
+        level: 'warning', tags: etiquetas, extra: { reciboId: f.reciboId, error: f.error },
+      });
+    }
+  }
+  return resultado;
 }
 
 /** Se acabó lo pagado (más el margen): se cierra. Devuelve si lo cerró. */

@@ -23,7 +23,7 @@
 
 import { LEGAL } from '../legal-info.ts';
 import { FUNCIONES_DE_ESPANA as ES } from '../locale.ts';
-import { fechaModificada, guiasDelPais } from '../recursos/guias.ts';
+import { GUIAS, fechaModificada, guiasDelPais, type Guia } from '../recursos/guias.ts';
 // meta.ts y no index.ts: este registro llega al cliente (la landing lo usa) y
 // index.ts arrastra el texto entero de los artículos.
 import { ARTICULOS_META } from '../recursos/articulos/meta.ts';
@@ -382,6 +382,18 @@ const PAGINAS_BLOG: PaginaSeo[] = [
     relacionadas: ['/blog/marcos-roca', ...a.enlaces],
   })),
 ];
+
+const paginaDeGuia = (g: Guia): PaginaSeo => ({
+  path: `/recursos/${g.slug}`,
+  titulo: g.tituloSeo,
+  descripcion: g.descripcionSeo,
+  grupo: 'recursos',
+  etiqueta: g.titulo,
+  actualizado: fechaModificada(g),
+  prioridad: 0.7,
+  changeFrequency: 'monthly',
+  relacionadas: ['/recursos'],
+});
 
 export const PAGINAS: PaginaSeo[] = [
   {
@@ -759,17 +771,7 @@ export const PAGINAS: PaginaSeo[] = [
   ...(ES ? PAGINAS_BLOG : []),
   // Las guías salen de su registro (lib/recursos/guias.ts), que también da las
   // fechas de su JSON-LD: antes esta lista las repetía a mano.
-  ...guiasDelPais().map((g): PaginaSeo => ({
-    path: `/recursos/${g.slug}`,
-    titulo: g.tituloSeo,
-    descripcion: g.descripcionSeo,
-    grupo: 'recursos',
-    etiqueta: g.titulo,
-    actualizado: fechaModificada(g),
-    prioridad: 0.7,
-    changeFrequency: 'monthly',
-    relacionadas: ['/recursos'],
-  })),
+  ...guiasDelPais().map(paginaDeGuia),
   {
     path: '/glosario',
     titulo: 'Glosario: software para Pilates y yoga | Centra',
@@ -897,7 +899,13 @@ export const PAGINAS: PaginaSeo[] = [
 
 // ─── Consultas ───────────────────────────────────────────────────────────────
 
-const PORPATH = new Map([...PAGINAS, ...(ES ? [] : PAGINAS_BLOG)].map((p) => [p.path, p]));
+// Lo que no se publica en el país (el blog y las guías solo de España) sigue compilándose —redirige, next.config.ts—
+// y su page.tsx lee la metadata con `paginaDe(...)!`: sin estar aquí, el build se cae al recoger esas páginas.
+const NO_PUBLICADAS: PaginaSeo[] = ES ? [] : [
+  ...PAGINAS_BLOG,
+  ...GUIAS.filter((g) => !guiasDelPais().includes(g)).map(paginaDeGuia),
+];
+const PORPATH = new Map([...PAGINAS, ...NO_PUBLICADAS].map((p) => [p.path, p]));
 
 export function paginaDe(path: string): PaginaSeo | undefined {
   return PORPATH.get(path);

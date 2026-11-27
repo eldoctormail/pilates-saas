@@ -666,19 +666,18 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
     "slug": "ocupacion-clases-valle",
     "titulo": "Clases valle: cómo llenar las franjas flojas (y cuándo quitarlas)",
     "tituloSeo": "Clases valle: cómo llenar las franjas flojas",
-    "descripcion": "Cuántas alumnas necesita una clase para no perder dinero, por qué fallan las franjas flojas y ocho formas de llenarlas antes de bajar el precio.",
-    "resumen": "La cuenta para saber si una clase valle te cuesta dinero, cómo averiguar por qué no se llena y qué hacer con ella: cambiarla, avisar a quien puede venir, ponerle precio de franja o quitarla.",
+    "descripcion": "Cuántas alumnas necesita una clase para no perder plata, por qué fallan las franjas flojas y ocho formas de llenarlas antes de bajar el precio.",
+    "resumen": "La cuenta en pesos para saber si una clase valle te cuesta plata, cómo averiguar por qué no se llena y qué hacer con ella: cambiarla, avisar a quien puede venir, ponerle precio de franja o quitarla.",
     "categoria": "rentabilidad",
     "seccion": "Rentabilidad",
-    "publicado": "2026-08-06",
+    "publicado": "2026-11-27",
     "relacionadas": [
       "/recursos/rentabilidad-estudio-de-pilates",
       "/recursos/precios-reformer-mat",
       "/funcionalidades/informes-y-rentabilidad",
       "/recursos/bonos-de-pilates"
     ],
-    "palabras": 2041,
-    "actualizado": "2026-10-07"
+    "palabras": 2094
   },
   {
     "slug": "requisitos-para-abrir-un-estudio-de-pilates",
@@ -719,11 +718,11 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
     "slug": "politica-de-cancelacion-de-clases",
     "titulo": "Política de cancelación de clases: plantilla para tu estudio y lo que dice la ley",
     "tituloSeo": "Política de cancelación de clases: plantilla y ley",
-    "descripcion": "Plantilla de política de cancelación lista para copiar en tu estudio de pilates o yoga: ventanas reales, no-shows y qué penalizaciones permite la ley.",
-    "resumen": "Qué tiene que decir la política de cancelación de tu estudio, cuántas horas piden estudios reales, qué permite la ley (penalizaciones y desistimiento) y una plantilla lista para adaptar.",
+    "descripcion": "Plantilla de política de cancelación para tu estudio de pilates o yoga: plazos de estudios porteños, clases perdidas, recuperos y qué permite la ley argentina.",
+    "resumen": "Qué tiene que decir la política de cancelación de tu estudio, con cuánta anticipación piden avisar estudios de Buenos Aires, qué permite la ley (Ley 24.240 y Código Civil y Comercial) y una plantilla lista para adaptar.",
     "categoria": "operacion",
     "seccion": "Operación",
-    "publicado": "2026-09-25",
+    "publicado": "2026-11-27",
     "relacionadas": [
       "/recursos/reducir-cancelaciones-ultima-hora",
       "/funcionalidades/cancelaciones-y-politicas",
@@ -731,26 +730,24 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
       "/funcionalidades/lista-de-espera",
       "/recursos/como-abrir-un-estudio-de-yoga"
     ],
-    "palabras": 2411,
-    "actualizado": "2026-10-16"
+    "palabras": 2312
   },
   {
     "slug": "reducir-cancelaciones-ultima-hora",
-    "titulo": "Cómo reducir las cancelaciones de última hora y los plantones en tus clases",
-    "tituloSeo": "Reducir cancelaciones de última hora y no-shows",
+    "titulo": "Cómo reducir las cancelaciones de último momento y los faltazos en tus clases",
+    "tituloSeo": "Reducir cancelaciones de último momento y faltazos",
     "descripcion": "Lo que miden los estudios sobre recordatorios, las ventanas que usan SoulCycle, Barry's o CorePower y seis medidas para que no se pierda ninguna plaza.",
     "resumen": "Por qué se falta a una clase, lo que dicen cinco estudios sobre los recordatorios, las reglas de las cadenas grandes y un plan en seis pasos para perder menos plazas.",
     "categoria": "operacion",
     "seccion": "Operación",
-    "publicado": "2026-08-06",
+    "publicado": "2026-11-27",
     "relacionadas": [
       "/recursos/politica-de-cancelacion-de-clases",
       "/funcionalidades/cancelaciones-y-politicas",
       "/funcionalidades/lista-de-espera",
       "/funcionalidades/automatizaciones-y-avisos"
     ],
-    "palabras": 1994,
-    "actualizado": "2026-10-07"
+    "palabras": 1965
   },
   {
     "slug": "cuanto-cobra-una-instructora-de-pilates",
@@ -784,7 +781,7 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
       "/funcionalidades/gestion-de-instructoras",
       "/recursos/como-gestionar-un-estudio-de-pilates"
     ],
-    "palabras": 1997
+    "palabras": 1986
   },
   {
     "slug": "como-ser-instructora-de-pilates",
@@ -843,19 +840,18 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
     "slug": "plantilla-control-de-asistencia-pilates",
     "titulo": "Plantilla de control de asistencia para clases de pilates (Excel gratis)",
     "tituloSeo": "Plantilla de control de asistencia (Excel)",
-    "descripcion": "Descarga gratis la plantilla en Excel para llevar la asistencia y los bonos de tu estudio: cómo usarla paso a paso, qué calcula sola y dónde se queda corta.",
-    "resumen": "Una plantilla gratuita de Excel con alumnas, clases y asistencia que descuenta sola las sesiones de cada bono, con instrucciones paso a paso y sus límites dichos claro.",
+    "descripcion": "Descarga gratis la plantilla en Excel para llevar la asistencia y los packs de tu estudio: cómo usarla paso a paso, qué calcula sola y dónde se queda corta.",
+    "resumen": "Una plantilla gratuita de Excel con alumnas, clases y asistencia que descuenta sola las clases de cada pack, con instrucciones paso a paso y sus límites dichos claro.",
     "categoria": "operacion",
     "seccion": "Operación",
-    "publicado": "2026-09-25",
+    "publicado": "2026-11-27",
     "relacionadas": [
       "/funcionalidades/control-de-asistencia",
       "/recursos/software-pilates-gratis",
       "/recursos/bonos-de-pilates",
       "/recursos/reducir-cancelaciones-ultima-hora"
     ],
-    "palabras": 1688,
-    "actualizado": "2026-10-16"
+    "palabras": 1744
   },
   {
     "slug": "franquicia-de-pilates",

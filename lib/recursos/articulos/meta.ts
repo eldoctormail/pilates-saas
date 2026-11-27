@@ -594,22 +594,21 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
   },
   {
     "slug": "cuanto-cuesta-abrir-un-estudio-de-pilates",
-    "titulo": "Cuánto cuesta abrir un estudio de pilates: presupuesto por partidas con precios reales",
+    "titulo": "Cuánto cuesta abrir un estudio de pilates en Argentina: reformers, local y gastos del mes",
     "tituloSeo": "Cuánto cuesta abrir un estudio de pilates en 2026",
-    "descripcion": "Precio real de un reformer con y sin IVA, fianza del local, cuota de autónoma, seguro, marca, software y un presupuesto de ejemplo con 6 reformers.",
-    "resumen": "Lo que cuesta cada partida de un estudio de pilates en España, con precios publicados por fabricantes, tiendas y organismos oficiales, y un presupuesto de ejemplo para seis reformers.",
+    "descripcion": "Reformers de fabricantes argentinos, alquiler de un local comercial en CABA y GBA, trámites y gastos del mes, con precios publicados en noviembre de 2026.",
+    "resumen": "Lo que cuesta cada partida de un estudio de pilates en Argentina, con precios publicados por fabricantes y relevamientos de alquileres, y un ejemplo para seis reformers.",
     "categoria": "abrir",
     "seccion": "Abrir un estudio",
-    "publicado": "2026-09-25",
+    "publicado": "2026-11-27",
     "relacionadas": [
-      "/recursos/como-abrir-un-estudio-de-pilates",
       "/recursos/requisitos-para-abrir-un-estudio-de-pilates",
-      "/recursos/precios-reformer-mat",
+      "/recursos/precio-clase-de-pilates",
+      "/recursos/cuanto-cobra-una-instructora-de-pilates",
       "/funcionalidades/informes-y-rentabilidad",
       "/precios"
     ],
-    "palabras": 2329,
-    "actualizado": "2026-10-16"
+    "palabras": 1537
   },
   {
     "slug": "precio-clase-de-pilates",

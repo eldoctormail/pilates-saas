@@ -7,6 +7,7 @@
 //   · Ninguna alerta sin dato: debajo de cada título van los datos que la sostienen.
 //   · «Nada que mostrar» solo vale para lo que se ha podido mirar: lo que falló se dice arriba.
 
+import { conMoneda, LOCALE_MONEDA } from '@/lib/moneda';
 import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { AlertTriangle, RefreshCw } from 'lucide-react';
@@ -92,7 +93,7 @@ export default function ExitoInterno() {
               <div className="flex flex-wrap items-center gap-2">
                 <span className={`rounded-full px-2.5 py-0.5 text-[11px] font-bold ${TONO[a.severidad].clase}`}>{TONO[a.severidad].texto}</span>
                 <span className="text-[11px] font-bold uppercase tracking-wide text-muted-foreground">{TEXTO_FAMILIA[a.familia]}</span>
-                {a.eurosMes !== null && <span className="ml-auto text-[12px] font-semibold tabular-nums text-foreground">{a.eurosMes.toLocaleString('es-ES')} €/mes</span>}
+                {a.eurosMes !== null && <span className="ml-auto text-[12px] font-semibold tabular-nums text-foreground">{conMoneda(a.eurosMes.toLocaleString(LOCALE_MONEDA))}/mes</span>}
               </div>
               <h2 className="mt-1.5 text-[14px] font-bold text-foreground">{a.titulo}</h2>
               <ul className="mt-1.5 list-disc space-y-0.5 pl-5 text-[12.5px] text-muted-foreground">

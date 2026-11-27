@@ -7,6 +7,7 @@
 //   · Nada de upgrades ni cobros automáticos: una oportunidad es una propuesta con su dato.
 //   · Ninguna alerta sin dato que la sostenga. Si la fuente no se pudo leer, no se inventa nada.
 import { ZONA_HORARIA } from '../../zona-horaria.ts';
+import { conMoneda, LOCALE_MONEDA } from '../../moneda.ts';
 import { PLAN_INFO, type Plan } from '../../billing/entitlements.ts';
 import { precio } from '../../billing/intervalo-ui.ts';
 
@@ -45,7 +46,8 @@ export const DIAS_SIN_USO = 14; //                  un cliente de pago que no en
 export const DIAS_RENOVACION_CERCA = 7;
 export const VECES_SIN_SALDO_ASISTENTE = 3; //       en 30 días
 
-const eur = (n: number) => `${n.toLocaleString('es-ES', { maximumFractionDigits: 2 })} €`;
+// Con la moneda de la instalación (en Centra, pesos): antes decía «€» a mano.
+const eur = (n: number) => conMoneda(n.toLocaleString(LOCALE_MONEDA, { maximumFractionDigits: 2 }));
 const eurCents = (c: number) => eur(c / 100);
 const plural = (n: number, uno: string, varios: string) => (n === 1 ? uno : varios);
 const fichaDe = (id: string | null) => (id ? `/interno/estudios/${id}` : null);

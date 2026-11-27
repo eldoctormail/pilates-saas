@@ -4,7 +4,7 @@
 // del código, que `regalo_huella_codigo` (SQL) calcula igual — lo ata el test de BD.
 // ⚠️ Sin `node:crypto`: lo importan componentes de cliente. La huella vive en `huella.ts` (solo servidor).
 
-import { conMoneda, LOCALE_MONEDA, MONEDA, MONEDA_NOMBRE_PLURAL } from '../moneda.ts';
+import { conMoneda, formatoMoneda, LOCALE_MONEDA, MONEDA, MONEDA_NOMBRE_PLURAL } from '../moneda.ts';
 export const ALFABETO_CODIGO = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 /** `RG-XXXX-XXXX-XXXX-XXXX`: 16 símbolos de un alfabeto de 32 = 80 bits. */
 export const FORMATO_CODIGO = /^RG-[A-HJ-NP-Z2-9]{4}(-[A-HJ-NP-Z2-9]{4}){3}$/;
@@ -58,7 +58,7 @@ export function validarImporte(a: AjustesRegalo, importeEur: unknown): { ok: tru
   const libre = a.permiteImporteLibre && importeEur >= a.importeMinEur && importeEur <= a.importeMaxEur;
   if (!fijo && !libre) {
     return { ok: false, motivo: a.permiteImporteLibre
-      ? `El importe tiene que estar entre ${conMoneda(a.importeMinEur)} y ${conMoneda(a.importeMaxEur)}.`
+      ? `El importe tiene que estar entre ${formatoMoneda(a.importeMinEur, 'auto')} y ${formatoMoneda(a.importeMaxEur, 'auto')}.`
       : 'Elige uno de los importes disponibles.' };
   }
   return { ok: true, centimos: importeEur * 100 };

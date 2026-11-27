@@ -3,6 +3,7 @@
 import { use, useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, ExternalLink } from 'lucide-react';
+import { conMoneda, LOCALE_MONEDA } from '@/lib/moneda';
 import { fetchFichaEstudio, type FichaEstudio } from '@/lib/interno/client';
 import { AccionesEstudio } from './acciones';
 import { CuentasVinculadas } from './vinculos';
@@ -85,7 +86,7 @@ export default function FichaEstudioInterno({ params }: { params: Promise<{ id: 
           <Dato etiqueta="Socias">{f.uso.socias}</Dato>
           <Dato etiqueta="Clases creadas">{f.uso.clases}</Dato>
           <Dato etiqueta="Reservas">{f.uso.reservas30d}</Dato>
-          <Dato etiqueta="Su facturación">{f.uso.facturacionPropia30d.toLocaleString('es-ES')} €</Dato>
+          <Dato etiqueta="Su facturación">{conMoneda(f.uso.facturacionPropia30d.toLocaleString(LOCALE_MONEDA))}</Dato>
         </Bloque>
 
         <Bloque titulo="Pagos">

@@ -15,6 +15,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import type Stripe from 'stripe';
 import { eurosAlMes } from './facturacion-real.ts';
+import { conMoneda, LOCALE_MONEDA } from '../moneda.ts';
 import { estadoGratis, LIMITE_RESERVAS_MES, type EstadoGratis, type UsoGratis } from '../billing/plan-gratis.ts';
 import { PLAN_INFO, type Plan } from '../billing/entitlements.ts';
 import type { EstadoApp } from '../app-nativa/pedir-app.ts';
@@ -223,9 +224,10 @@ export interface Cifra {
 
 // `useGrouping: 'always'`: en es-ES, Intl no pone el punto de miles a los
 // números de cuatro cifras («1247 €»), y en una cifra de dinero se lee mal.
-const NUMERO = new Intl.NumberFormat('es-ES', { maximumFractionDigits: 2, useGrouping: 'always' as unknown as boolean });
+const NUMERO = new Intl.NumberFormat(LOCALE_MONEDA, { maximumFractionDigits: 2, useGrouping: 'always' as unknown as boolean });
 export const miles = (n: number) => NUMERO.format(n);
-export const eur = (n: number) => `${miles(n)} €`;
+// En la moneda de la instalación (en Centra, pesos: el MRR de Mercado Pago).
+export const eur = (n: number) => conMoneda(miles(n));
 const conSigno = (n: number, f: (x: number) => string = String) => (n > 0 ? `+${f(n)}` : n < 0 ? `−${f(-n)}` : f(0));
 
 /**

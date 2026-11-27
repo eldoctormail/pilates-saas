@@ -19,6 +19,8 @@ Cuando haya dominio, ver [Pasar a dominio](#pasar-a-dominio).
 **Requisitos:** Linux con Docker y el plugin Compose, al menos 4 GB de RAM (8 GB para compilar la app con holgura), `git` y `openssl`.
 No hace falta Node en el servidor: `migrar.sh` aplica las migraciones con `psql` dentro del contenedor de la base.
 
+**Paso a paso con la imagen de GitHub** (encontrar la carpeta, cambiar la IP, arrancar y comprobar): [`deploy/INSTRUCTIVO.md`](INSTRUCTIVO.md).
+
 **Antes de abrir:** hay un ensayo general con Mercado Pago de prueba y sin dominio, en [`deploy/ensayo/`](ensayo/PRUEBAS.md).
 
 **Para abrir:** dominio propio con túnel de Cloudflare, copias de seguridad y cortes de luz, en [`deploy/PRODUCCION.md`](PRODUCCION.md).

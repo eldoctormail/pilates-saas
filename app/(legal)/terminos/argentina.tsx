@@ -47,10 +47,13 @@ export function TerminosArgentina() {
           <strong>Cambios de precio.</strong> Si cambia el precio de tu plan, te avisamos por correo con al menos 30
           días de anticipación. Si no estás de acuerdo, podés darte de baja antes de que se aplique.
         </li>
-        <li>
-          <strong>Baja.</strong> No hay permanencia. Podés dar de baja la suscripción cuando quieras desde el panel,
-          con el mismo medio que usaste para contratar. Seguís teniendo el plan hasta el final del mes ya pagado y no
-          se vuelve a cobrar.
+        <li id="baja">
+          <strong>Baja (Botón de baja de servicio).</strong> No hay permanencia. Podés dar de baja la suscripción
+          cuando quieras desde el panel, con el mismo medio que usaste para contratar, o escribiendo a{' '}
+          <a href={`mailto:${LEGAL.email}?subject=${encodeURIComponent('Botón de baja de servicio')}`}>{LEGAL.email}</a>{' '}
+          con el asunto «Botón de baja de servicio» y el correo de tu cuenta (art. 10 ter de la Ley 24.240). Te
+          respondemos dentro de las 24 horas con un código de trámite. Seguís teniendo el plan hasta el final del mes
+          ya pagado y no se vuelve a cobrar.
         </li>
       </ul>
 
@@ -58,7 +61,8 @@ export function TerminosArgentina() {
       <p>
         Si contrataste como consumidor (Ley 24.240), tenés derecho a revocar la contratación dentro de los{' '}
         <strong>10 días corridos</strong> desde que la hiciste, sin costo y sin dar explicaciones (art. 34 de la Ley
-        24.240 y Resolución 424/2020 de la Secretaría de Comercio Interior). Para hacerlo, escribí a{' '}
+        24.240, art. 1.110 del Código Civil y Comercial y Disposición 954/2025 de la Subsecretaría de Defensa del
+        Consumidor y Lealtad Comercial). Para hacerlo, escribí a{' '}
         <a href={`mailto:${LEGAL.email}?subject=${encodeURIComponent('Botón de arrepentimiento')}`}>{LEGAL.email}</a>{' '}
         con el asunto «Botón de arrepentimiento» y el correo de tu cuenta. Te respondemos dentro de las 24 horas con un
         código de trámite, cancelamos la suscripción y te devolvemos lo que hayas pagado por el mismo medio de pago.

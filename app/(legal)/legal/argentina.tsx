@@ -67,7 +67,7 @@ export function AvisoLegalArgentina() {
       <h2>8. Botón de arrepentimiento</h2>
       <p>
         Si contrataste {LEGAL.marca} como consumidor, podés revocar la contratación dentro de los 10 días corridos
-        desde que la hiciste, sin costo ni explicación (art. 34 de la Ley 24.240 y Resolución 424/2020). Cómo
+        desde que la hiciste, sin costo ni explicación (art. 34 de la Ley 24.240 y Disposición 954/2025). Cómo
         hacerlo está en <a href="/terminos#arrepentimiento">Términos y condiciones, punto 4</a>.
       </p>
 

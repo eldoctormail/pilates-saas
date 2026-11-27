@@ -77,7 +77,8 @@ export const LEGAL = {
   // Fecha de última revisión del contenido legal (no la de render).
   // ⚠️ Si cambia, cambia también `VERSION_TEXTOS_LEGALES` (abajo): es lo que se
   // guarda como aceptado en cada alta. Lo vigila lib/legal-info.test.ts.
-  actualizado: '6 de octubre de 2026',
+  // En Argentina, la de los textos legales argentinos (app/(legal)/*/argentina.tsx).
+  actualizado: ES ? '6 de octubre de 2026' : '27 de noviembre de 2026',
 
   // ── Identificación del titular (LSSI-CE art. 10) ────────────────────────────
   // Persona física (autónomo). Sin datos registrales (ver cabecera).
@@ -109,7 +110,7 @@ export const LEGAL = {
 // el texto legal es una decisión, y la versión aceptada tiene que cambiar con
 // ella, no por un retoque de redacción de la fecha. Si las dos dejan de decir el
 // mismo día, lib/legal-info.test.ts falla.
-export const VERSION_TEXTOS_LEGALES = '2026-10-06';
+export const VERSION_TEXTOS_LEGALES: string = ES ? '2026-10-06' : '2026-11-27';
 
 // Encargados/subencargados del tratamiento realmente usados por el producto
 // (RGPD art. 28). Se listan en la Política de Privacidad. Mantener en sync con
@@ -160,3 +161,22 @@ export function canonicalizarOrigen(origen: string): string {
   } catch { /* origen raro: se devuelve tal cual */ }
   return origen;
 }
+
+// Los proveedores de la instalación autoalojada de Centra en Argentina (deploy/): la app, la base de datos y la
+// autenticación corren en el servidor propio, así que no intervienen Vercel, Supabase en la nube, Sentry, PostHog
+// ni Ahrefs. ⚠️ Si el servidor se muda (por ejemplo, a una VPS en otro país) o se enciende un servicio nuevo,
+// esta lista cambia con él: la Política de privacidad la publica tal cual.
+export const UBICACION_SERVIDOR = 'Argentina';
+export const PROVEEDORES_ARGENTINA: { nombre: string; uso: string; ubicacion: string }[] = [
+  { nombre: 'Servidor propio de Centra', uso: 'La aplicación, la base de datos, la autenticación, los archivos y las copias de seguridad', ubicacion: UBICACION_SERVIDOR },
+  { nombre: 'Mercado Pago', uso: 'Cobro de la suscripción a los estudios y de los pagos de las alumnas', ubicacion: 'Argentina' },
+  { nombre: 'ARCA', uso: 'Factura electrónica (obligación legal)', ubicacion: 'Argentina' },
+  { nombre: 'Proveedor de correo (Gmail o Resend)', uso: 'Envío de correos del servicio', ubicacion: 'EE. UU.' },
+  { nombre: 'Google (opcional)', uso: 'Inicio de sesión con Google e integración con Google Calendar, si la activás', ubicacion: 'EE. UU.' },
+  { nombre: 'Meta (opcional)', uso: 'WhatsApp Business, si el estudio lo activa', ubicacion: 'EE. UU.' },
+  { nombre: 'Anthropic (opcional)', uso: 'Asistente de IA, si está activado: redacción de mensajes y análisis de archivos importados', ubicacion: 'EE. UU.' },
+  { nombre: 'Cloudflare (opcional)', uso: 'Acceso seguro al servidor y copias de seguridad cifradas fuera del servidor, si están configurados', ubicacion: 'EE. UU.' },
+  { nombre: 'Zoom (opcional)', uso: 'Videollamadas, si las activás', ubicacion: 'EE. UU.' },
+  { nombre: 'Zapier (opcional)', uso: 'Datos que el estudio autorice (alumnas y reservas) hacia otras aplicaciones', ubicacion: 'EE. UU.' },
+  { nombre: 'Vimeo y YouTube (opcional)', uso: 'Videos que el estudio inserta en la app de sus alumnas', ubicacion: 'EE. UU.' },
+];

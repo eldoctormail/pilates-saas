@@ -869,13 +869,13 @@ export const PAGINAS: PaginaSeo[] = [
   // `etiqueta` se queda corta a propósito: la usan breadcrumbs/footer/nav.
   ...([
     ['/legal', 'Aviso legal', 'Aviso legal — Centra',
-      'Información legal y datos identificativos del titular de tentare.app conforme a la LSSI-CE.'],
+      ES ? 'Información legal y datos identificativos del titular de tentare.app conforme a la LSSI-CE.' : 'Información legal y datos del titular de Centra: quién presta el servicio y cómo contactarlo.'],
     ['/privacidad', 'Privacidad', 'Política de privacidad — Centra',
-      'Cómo Centra trata los datos personales conforme al RGPD y la LOPDGDD: qué datos, con qué base legal y cómo ejercer tus derechos.'],
+      ES ? 'Cómo Centra trata los datos personales conforme al RGPD y la LOPDGDD: qué datos, con qué base legal y cómo ejercer tus derechos.' : 'Cómo Centra trata los datos personales según la Ley 25.326: qué datos, para qué y cómo ejercer tus derechos.'],
     ['/terminos', 'Términos', 'Términos y condiciones — Centra',
       'Condiciones de uso del servicio Centra para estudios de Pilates: contratación, planes, pagos y cancelación.'],
     ['/cookies', 'Cookies', 'Política de cookies — Centra',
-      'Qué cookies y tecnologías similares utiliza tentare.app, para qué sirven y cómo puedes gestionarlas o rechazarlas.'],
+      ES ? 'Qué cookies y tecnologías similares utiliza tentare.app, para qué sirven y cómo puedes gestionarlas o rechazarlas.' : 'Qué cookies y tecnologías similares usa Centra, para qué sirven y cómo gestionarlas o rechazarlas.'],
     ['/soporte', 'Soporte', 'Soporte — Centra',
       'Cómo pedir ayuda con Centra y con su app: quién gestiona tus reservas y pagos, cómo escribirnos y cómo borrar tu cuenta.'],
   ] as const).map(([path, etiqueta, titulo, descripcion]): PaginaSeo => ({

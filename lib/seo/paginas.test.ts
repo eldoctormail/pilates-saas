@@ -219,14 +219,15 @@ test('el origen canónico es el host que sirve el sitio de verdad', () => {
   assert.ok(!BASE_URL.endsWith('/'), 'sin barra final: urlDe la concatena');
 });
 
-test('nadie escribe el origen a mano fuera de lib/legal-info.ts', () => {
+test('nadie escribe el origen a mano fuera de lib/origen-canonico.ts', () => {
   // La divergencia que originó todo esto: el origen estaba copiado en
   // paginas.ts, en el layout raíz, en StructuredData y en 18 páginas con su
   // canonical a pelo. Se corrigieron todas a la vez; esto impide que vuelva a
   // colarse una copia nueva.
   const RAIZ = process.cwd();
   const EXENTOS = [
-    'lib/legal-info.ts',        // la definición
+    'lib/origen-canonico.ts',   // la definición
+    'lib/legal-info.ts',        // la documenta (el porqué del www, en `dominio`)
     'lib/seo/paginas.ts',       // la deriva y la documenta en un comentario
     'lib/seo/paginas.test.ts',  // este fichero
   ];

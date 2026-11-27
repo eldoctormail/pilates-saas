@@ -36,7 +36,7 @@ import { FormularioAccesoWidget } from '@/components/widget/formulario-acceso';
 import { MiCuenta, HojaCuentaWidget } from '@/components/cuenta-widget/mi-cuenta';
 import type { PropsListaPlanesLazy } from '@/components/checkout-widget/checkout-lazy-mount';
 import widgetCss from './widget.css';
-import { canonicalizarOrigen } from '@/lib/legal-info';
+import { canonicalizarOrigen } from '@/lib/origen-canonico';
 import { AVISO_PAGINA_OCULTA } from '@/lib/publico/aviso-pagina-oculta';
 
 // Tema base (modo día): el de siempre, sin nada elegido. Dos caminos lo cambian:

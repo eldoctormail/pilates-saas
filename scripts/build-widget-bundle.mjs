@@ -121,13 +121,17 @@ console.log('✔ public/widget-popup.js generado');
 // y eso no lo ve nadie sin abrir el minificado. Se comprueba con el NIF, LEÍDO
 // de ese fichero y nunca copiado aquí; si no se encuentra, se para: una guarda
 // que no sabe qué buscar no guarda nada.
-const nifTitular = /\bnif:\s*(['"])([^'"]+)\1/.exec(fs.readFileSync(path.join(raiz, 'lib/legal-info.ts'), 'utf8'))?.[2];
-if (!nifTitular) {
+// Desde que hay datos de dos titulares (España y Argentina, `nif: ES ? '…' : …` y
+// `cuit: '…'`), se buscan los dos: cualquiera que se cuele es el mismo fallo.
+const legal = fs.readFileSync(path.join(raiz, 'lib/legal-info.ts'), 'utf8');
+const idsTitular = [...legal.matchAll(/\b(?:nif|cuit):\s*(?:ES\s*\?\s*)?(['"])([^'"]+)\1/g)].map((m) => m[2]);
+if (idsTitular.length === 0) {
   console.error('✖ No se ha podido leer el NIF de lib/legal-info.ts para comprobar los bundles públicos.');
   process.exit(1);
 }
 for (const fichero of ['widget.js', 'widget-checkout.js', 'widget-popup.js']) {
-  if (fs.readFileSync(path.join(raiz, 'public', fichero), 'utf8').includes(nifTitular)) {
+  const contenido = fs.readFileSync(path.join(raiz, 'public', fichero), 'utf8');
+  if (idsTitular.some((id) => contenido.includes(id))) {
     console.error(`✖ public/${fichero} lleva los datos del titular (LEGAL, lib/legal-info.ts). Importa solo lo que haga falta, sin arrastrar LEGAL.`);
     process.exit(1);
   }

@@ -11,7 +11,7 @@
 // que no es la web del estudio, y la misma sesión lleva después el id de la
 // socia. Guardarlo ataría a una persona con la web de la que vino.
 
-import { canonicalizarOrigen } from '../legal-info.ts';
+import { canonicalizarOrigen } from '../origen-canonico.ts';
 import type { MetodoIntegracion } from './catalogo.ts';
 
 export type FormaPegada = 'incrustado' | 'ventana' | 'nativa';

@@ -38,7 +38,7 @@ import { urlPopupPermitida } from '@/lib/widgets/popup-url';
 import {
   RUTA_BOTON_VIVO, SELECTOR_POPUP, cssBotonVivo, leerBotonVivo, slugDePopup, traeBotonDePopup, usaBotonVivo,
 } from '@/lib/widgets/boton-vivo';
-import { canonicalizarOrigen } from '@/lib/legal-info';
+import { canonicalizarOrigen } from '@/lib/origen-canonico';
 
 const ANCHO_POR_DEFECTO = 720;
 const ALTO_MAXIMO = 860;

@@ -31,7 +31,7 @@ const GRUPOS: { seccion: string; tarjetas: (readonly [string, string])[] }[] = [
       ES
         ? ['Cobro con tarjeta (Stripe)', 'Cobra bonos y cuotas con tarjeta en tu propia cuenta de Stripe: el dinero entra directo en ella.']
         : ['Mercado Pago', 'Tus clientes pagan online y el dinero entra en tu cuenta. Se conecta en Apps e integraciones.'],
-      ['WhatsApp', 'Recordatorios y avisos desde tu número de WhatsApp Business.'],
+      ['WhatsApp', ES ? 'Recordatorios y avisos desde tu número de WhatsApp Business.' : 'Escribile a tus alumnas desde tu propio WhatsApp: el botón de su ficha lo abre con el mensaje ya escrito.'],
       ['Google Calendar', 'Copia las clases de las próximas 4 semanas a tu calendario al pulsar «Sincronizar ahora»; no se actualiza solo.'],
       ['Zoom', 'Crea una reunión de Zoom para cada clase de los tipos marcados como online.'],
       ['Kisi', 'Abre la puerta de tu estudio sola con cada check-in de tus clientes.'],

@@ -8,7 +8,7 @@ import { authHeader } from '@/lib/api-client';
 import { saludIntegracion } from '@/lib/integraciones/salud';
 import { hrefDeSeccion } from '@/lib/configuracion/destino';
 import { hayCambios } from '@/lib/configuracion/formulario-sincronizado';
-import { resumenGmail, resumenRemitente, resumenWhatsapp, type ResumenFila } from '@/lib/configuracion/resumenes';
+import { WHATSAPP_CON_ENLACE, resumenGmail, resumenRemitente, resumenWhatsapp, type ResumenFila } from '@/lib/configuracion/resumenes';
 import { revocarGmailEnGoogle } from '@/lib/integraciones/desconectar-gmail';
 import { seccionDeTarjeta, tarjetaPorId, type TarjetaId } from '@/lib/configuracion/secciones';
 import type { TipoIntegracion } from '@/lib/types';
@@ -269,6 +269,8 @@ export function useWhatsapp(showToast: MostrarToast): CanalWhatsapp {
 export function FilaWhatsapp({ w, onAbrir }: { w: CanalWhatsapp; onAbrir: () => void }) {
   const logo = <WhatsAppAppIcon size={36} />;
   if (w.conectado) return <FilaCanal id="integracion-whatsapp" logo={logo} resumen={w.resumen} onAbrir={onAbrir} />;
+  // En Argentina no hay nada que conectar: los botones de WhatsApp abren el de la propietaria (WHATSAPP_CON_ENLACE).
+  if (WHATSAPP_CON_ENLACE) return <FilaCanal id="integracion-whatsapp" logo={logo} resumen={w.resumen} />;
   return (
     <FilaCanal
       id="integracion-whatsapp"

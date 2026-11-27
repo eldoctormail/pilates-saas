@@ -19,6 +19,7 @@
 // Pura: la ejecuta `node --test` directamente.
 
 import { conMoneda } from '../moneda.ts';
+
 import type { DiaHorario, Studio, TipoIntegracion } from '../types.ts';
 import { avisoVentaOnline } from '../onboarding.ts';
 import { cuando, saludIntegracion, type FilaSalud, type SaludIntegracion } from '../integraciones/salud.ts';
@@ -33,6 +34,12 @@ import { porQueSinVentaExterna, type MotivoSinVentaExterna } from '../plataforma
 import { tarjetasEnLaApp, type BannerDelEstudio } from '../student/descubre.ts';
 import { hoyEnEstudio } from '../utils.ts';
 import { FUNCIONES_DE_ESPANA } from '../locale.ts';
+
+/**
+ * En Argentina, WhatsApp va SOLO por enlace (wa.me, decisión del 27-nov-2026): no se conecta la API de Meta, que
+ * pide a cada estudio su propia app de Meta. Lo que ya estaba conectado se puede seguir viendo y desconectar.
+ */
+export const WHATSAPP_CON_ENLACE: boolean = !FUNCIONES_DE_ESPANA;
 
 export const MAX_RESUMEN = 44;
 /** Las filas de «Cómo reservan mis alumnas»: a dos líneas (ver `resumenRegla`). */
@@ -1019,7 +1026,10 @@ export function resumenRegla(
 export function resumenWhatsapp(s: SaludIntegracion): ResumenFila {
   switch (s.estado) {
     case 'APAGADA':
-      return { valor: 'Conéctalo para mandar recordatorios por WhatsApp', estado: { tono: 'neutro', etiqueta: 'Sin conectar' } };
+      // En Argentina no se conecta nada (WHATSAPP_CON_ENLACE): los botones de WhatsApp abren el de la propietaria.
+      return WHATSAPP_CON_ENLACE
+        ? { valor: 'Los botones de WhatsApp del panel abren tu WhatsApp con el mensaje ya escrito', estado: { tono: 'activo', etiqueta: 'Con tu WhatsApp' } }
+        : { valor: 'Conéctalo para mandar recordatorios por WhatsApp', estado: { tono: 'neutro', etiqueta: 'Sin conectar' } };
     case 'SIN_PROBAR':
       return { valor: 'Guardado, pero aún sin usar: pruébalo', estado: { tono: 'pendiente', etiqueta: 'Sin probar' } };
     case 'FUNCIONA':

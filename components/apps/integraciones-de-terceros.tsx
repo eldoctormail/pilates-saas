@@ -36,6 +36,7 @@ import { CuentaMercadoPago } from '@/components/configuracion/cuenta-mercadopago
 import { DetalleDatafono, FilaDatafono } from '@/components/configuracion/datafono';
 import { ConectarDatafono } from '@/components/pos/conectar-datafono';
 import { DetalleWhatsapp, FilaWhatsapp } from '@/components/configuracion/canales-comunicacion';
+import { WHATSAPP_CON_ENLACE } from '@/lib/configuracion/resumenes';
 import { DetallePlataformasExternas, FilasPlataformas } from '@/components/configuracion/plataformas-externas';
 import {
   GoogleCalendarIcon, KisiIcon, KlaviyoIcon, MailchimpIcon, ZapierIcon, ZoomIcon,
@@ -57,7 +58,7 @@ const QUE_HACE: Record<PestanaIntegracion, string> = {
   mercadopago: 'Tus alumnas pagan bonos, cuotas, recibos, clases y tarjetas regalo con Mercado Pago, y el dinero entra en tu cuenta.',
   stripe: 'Cobra bonos y cuotas con tarjeta en tu propia cuenta de Stripe: el dinero entra directo en ella.',
   datafono: 'Mandas el importe desde la Caja y la venta queda cobrada sola. Hoy, el lector de Stripe; el de tu banco, más adelante.',
-  whatsapp: 'Recordatorios y avisos desde tu número de WhatsApp Business.',
+  whatsapp: WHATSAPP_CON_ENLACE ? 'Escribile a tus alumnas desde tu propio WhatsApp: el botón de su ficha lo abre con el mensaje ya escrito.' : 'Recordatorios y avisos desde tu número de WhatsApp Business.',
   'google-calendar': 'Copia las clases de las próximas 4 semanas a tu calendario al pulsar «Sincronizar ahora»; no se actualiza solo.',
   zoom: 'Crea una reunión de Zoom para cada clase de los tipos marcados como online.',
   kisi: 'Abre la puerta de tu estudio sola con cada check-in de tus clientes.',
@@ -228,8 +229,15 @@ function ContenidoDePropietaria({ pestana, showToast }: { pestana: PestanaIntegr
       return (
         <>
           <GrupoFilas titulo="Estado"><FilaWhatsapp w={whatsapp} onAbrir={sinAccion} /></GrupoFilas>
-          {(whatsapp.conectado || !whatsapp.conMeta) && <DetalleWhatsapp w={whatsapp} {...props} />}
-          {whatsapp.script}
+          {(whatsapp.conectado || (!whatsapp.conMeta && !WHATSAPP_CON_ENLACE)) && <DetalleWhatsapp w={whatsapp} {...props} />}
+          {!whatsapp.conectado && WHATSAPP_CON_ENLACE && (
+            <p className="text-sm text-muted-foreground">
+              No hace falta conectar nada. En la ficha de cada alumna y en la de quien te debe un pago, el botón de
+              WhatsApp abre tu WhatsApp con el mensaje ya escrito: lo revisás y lo mandás vos, desde tu número.
+              Los recordatorios automáticos de clase les llegan por correo y por la app.
+            </p>
+          )}
+          {!WHATSAPP_CON_ENLACE && whatsapp.script}
         </>
       );
     case 'google-calendar':

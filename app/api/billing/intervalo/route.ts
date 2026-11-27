@@ -5,6 +5,29 @@ import { enforceRateLimit } from '@/lib/rate-limit';
 import { getSupabaseAdmin } from '@/lib/db/supabase-admin';
 import { intervaloDePrice, planDePriceId } from '@/lib/billing/billing';
 import { errorInterno } from '@/lib/errores-servidor';
+import { pasarelaEsMercadoPago } from '@/lib/mercadopago/config';
+import { configMpPlataforma } from '@/lib/billing/mp-plataforma/config';
+import { leerSuscripcion } from '@/lib/billing/mp-plataforma/api';
+import { intervaloDe, preapprovalDe } from '@/lib/billing/mp-plataforma/reglas';
+import { destinoDeLaSede } from '@/lib/billing/mp-plataforma/servidor';
+
+/** Con Mercado Pago: cada cuánto cobra la suscripción del estudio (o de su cadena). Ante un fallo, mensual. */
+async function intervaloMp(req: NextRequest) {
+  const config = configMpPlataforma();
+  const admin = getSupabaseAdmin();
+  if (!config.ok || !admin) return NextResponse.json({ intervalo: 'mensual' });
+  const sesion = await verificarSesionStaff(req);
+  if (!sesion) return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
+  if (sesion.rol !== 'PROPIETARIO') return NextResponse.json({ error: 'Solo la propietaria puede ver la suscripción' }, { status: 403 });
+  try {
+    const id = preapprovalDe((await destinoDeLaSede(admin, sesion.studioId, sesion.userId))?.fila.subscription_id);
+    if (!id) return NextResponse.json({ intervalo: 'mensual' });
+    const r = await leerSuscripcion(config.accessToken, id);
+    return NextResponse.json({ intervalo: r.ok ? intervaloDe(r.datos) : 'mensual' });
+  } catch (err) {
+    return errorInterno('billing/intervalo:GET (mp)', err, 'No se pudo leer el periodo de facturación.');
+  }
+}
 
 // ¿Esta suscripción se cobra por meses o por años? Solo lo pregunta /suscripcion a
 // la propietaria que ya paga, para decir «al mes» o «al año» con su importe. Se lee
@@ -14,6 +37,8 @@ import { errorInterno } from '@/lib/errores-servidor';
 export async function GET(req: NextRequest) {
   const limited = await enforceRateLimit(req, 'billing-intervalo', { max: 30, windowSeconds: 60 });
   if (limited) return limited;
+
+  if (pasarelaEsMercadoPago()) return intervaloMp(req);
 
   const key = process.env.STRIPE_SECRET_KEY;
   const admin = getSupabaseAdmin();

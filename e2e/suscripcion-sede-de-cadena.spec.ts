@@ -153,7 +153,7 @@ test('si el servidor no pudo leer las sedes, al elegir Cadena lo dice en condici
   await page.goto('/suscripcion#tu-plan');
   await page.getByRole('radio', { name: /^Plan Cadena/ }).click({ timeout: 30_000 });
   await expect(page.getByRole('note', { name: 'Al activar Cadena' })).toHaveText(
-    'Si alguna de tus sedes paga ahora Founding Studio o Estudio, ese plan se cancela al activar Cadena, y el mes que ya está pagado no se devuelve.',
+    'Si alguna de tus sedes paga ahora Founding Studio o Estudio, ese plan se cancela al activar Cadena, y lo que ya está pagado no se devuelve.',
   );
 });
 

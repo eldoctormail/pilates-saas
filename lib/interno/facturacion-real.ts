@@ -147,7 +147,13 @@ export function importeMensualMp(pre: Preapproval): number {
 }
 
 /** La línea de un estudio que paga con Mercado Pago. Misma clasificación que la de Stripe. */
-export function lineaMercadoPago(e: FilaEstudio, mp: LecturaMercadoPago): LineaFacturacion {
+export function lineaMercadoPago(
+  e: Pick<FilaEstudio, 'id' | 'nombre' | 'plan' | 'subscription_status' | 'current_period_end'>,
+  mp: LecturaMercadoPago,
+  /** Una cadena es UNA línea con todas sus sedes. */
+  tipo: 'estudio' | 'cadena' = 'estudio',
+  sedes = 1,
+): LineaFacturacion {
   const pre = mp.porEstudio.get(e.id) ?? null;
   const estadoBd = e.subscription_status;
   const creeQueTieneAcceso = estadoBd === 'active' || estadoBd === 'trialing' || estadoBd === 'past_due';
@@ -173,7 +179,7 @@ export function lineaMercadoPago(e: FilaEstudio, mp: LecturaMercadoPago): LineaF
     estado = 'cancelado';
   }
   return {
-    tipo: 'estudio', id: e.id, nombre: e.nombre, sedes: 1,
+    tipo, id: e.id, nombre: e.nombre, sedes,
     planEnBd: e.plan, estadoEnBd: estadoBd, estado,
     eurosMes: pre && estado === 'pagando' ? importeMensualMp(pre) : 0,
     renuevaEl: (pre?.status === 'authorized' ? pre.next_payment_date : null) ?? e.current_period_end ?? null,
@@ -205,6 +211,9 @@ export function pagaConMercadoPago(e: Pick<FilaEstudio, 'subscription_id'>): boo
 export interface FilaCadena {
   id: string; nombre: string; plan: string | null;
   subscription_status: string | null; stripe_customer_id: string | null;
+  /** `mp:<id>` si la cadena paga con Mercado Pago. Opcional: las filas viejas no lo traen. */
+  subscription_id?: string | null;
+  current_period_end?: string | null;
 }
 
 /**
@@ -293,11 +302,14 @@ export function cruzarFacturacion(
   const lineas: LineaFacturacion[] = [
     // Una cadena es UNA línea, no una por sede: su suscripción cubre todas.
     // Contarlas por sede multiplicaba el MRR por el número de centros.
-    ...cadenas.map(c =>
-      linea('cadena', c.id, c.nombre, sedesPorCadena.get(c.id) ?? 0,
+    ...cadenas.map(c => mp && pagaConMercadoPago(c)
+      ? lineaMercadoPago(c, mp, 'cadena', sedesPorCadena.get(c.id) ?? 0)
+      : linea('cadena', c.id, c.nombre, sedesPorCadena.get(c.id) ?? 0,
             c.plan, c.subscription_status, c.stripe_customer_id)),
     ...estudios
-      .filter(e => !e.cadena_id)
+      // Las sedes las cuenta su cadena. Con Mercado Pago, una sede que paga su
+      // plan suelto (la principal, sin la cadena pagando) es su propia línea.
+      .filter(e => !e.cadena_id || (mp && pagaConMercadoPago(e) && !cadenas.some(c => c.id === e.cadena_id && pagaConMercadoPago(c))))
       .map(e => mp && pagaConMercadoPago(e)
         ? lineaMercadoPago(e, mp)
         : mp && e.subscription_status === 'trialing' && !e.subscription_id && !e.stripe_customer_id

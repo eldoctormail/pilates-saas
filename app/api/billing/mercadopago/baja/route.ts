@@ -10,7 +10,7 @@ import { getSupabaseAdmin } from '@/lib/db/supabase-admin';
 import { configMpPlataforma } from '@/lib/billing/mp-plataforma/config';
 import { cancelarSuscripcion, leerSuscripcion } from '@/lib/billing/mp-plataforma/api';
 import { preapprovalDe } from '@/lib/billing/mp-plataforma/reglas';
-import { leerFila } from '@/lib/billing/mp-plataforma/servidor';
+import { destinoDeLaSede } from '@/lib/billing/mp-plataforma/servidor';
 import { errorInterno } from '@/lib/errores-servidor';
 
 export const dynamic = 'force-dynamic';
@@ -29,7 +29,8 @@ export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => null) as { motivo?: unknown } | null;
   const motivo = typeof body?.motivo === 'string' ? body.motivo.trim().slice(0, 300) : '';
   try {
-    const fila = await leerFila(admin, sesion.studioId);
+    // La del estudio, o la de su cadena: dar de baja Cadena la da de baja en todas las sedes.
+    const fila = (await destinoDeLaSede(admin, sesion.studioId, sesion.userId))?.fila;
     const id = preapprovalDe(fila?.subscription_id);
     if (!fila || !id) return NextResponse.json({ error: 'Este estudio aún no tiene suscripción.' }, { status: 409 });
     const r = await cancelarSuscripcion(config.accessToken, id);

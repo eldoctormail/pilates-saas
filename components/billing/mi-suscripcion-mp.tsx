@@ -65,7 +65,7 @@ export function MiSuscripcionMp({ onCambio, className }: { onCambio?: () => void
       {d && (
         <dl className="mt-3 grid gap-2 text-[13.5px] sm:grid-cols-2">
           <div><dt className="text-muted-foreground">Estado</dt><dd className="font-semibold text-foreground">{TEXTO[d.estado]}</dd></div>
-          {d.importe !== null && <div><dt className="text-muted-foreground">Se cobra</dt><dd className="font-semibold tabular-nums text-foreground">{precio(d.importe, '')} por mes</dd></div>}
+          {d.importe !== null && <div><dt className="text-muted-foreground">Se cobra</dt><dd className="font-semibold tabular-nums text-foreground">{precio(d.importe, '')} {d.intervalo === 'anual' ? 'por año' : 'por mes'}</dd></div>}
           {dia(d.proximoCobro) && <div><dt className="text-muted-foreground">Próximo cobro</dt><dd className="font-semibold text-foreground">{dia(d.proximoCobro)}</dd></div>}
           {dia(d.accesoHasta) && <div><dt className="text-muted-foreground">Tenés el plan hasta el</dt><dd className="font-semibold text-foreground">{dia(d.accesoHasta)}</dd></div>}
         </dl>

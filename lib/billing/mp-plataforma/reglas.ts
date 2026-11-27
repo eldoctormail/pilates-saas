@@ -15,14 +15,25 @@
 //     corre esa fecha al mes siguiente, así que quien paga nunca llega.
 //   · Cambiar de plan es una suscripción NUEVA que empieza a cobrar cuando
 //     termina lo ya pagado; cuando Mercado Pago la autoriza, la anterior se
-//     cancela (`cancelarAnterior`). Nunca se cobran dos meses a la vez.
+//     cancela (`cancelarAnterior`). Nunca se cobran dos meses a la vez. Pasar
+//     de mensual a anual (o al revés) es lo mismo: otra suscripción.
+//   · Anual = una suscripción que cobra cada 12 meses el precio de 10
+//     (`precioAnual`, la misma regla que se enseña en /precios).
+//   · Cadena: la suscripción es de la CADENA (tabla `cadenas`, la misma fila
+//     que usa Stripe) y su referencia lo dice (`centra:cadena:<id>`). El
+//     trigger `propagar_plan_cadena` copia plan, estado y fin de periodo a
+//     todas sus sedes: aquí solo se escribe la cadena.
 
 import type { Plan } from '../entitlements.ts';
 
 export const PREFIJO_ID = 'mp:';
 /** Días de margen tras el fin de lo pagado antes de cerrar el panel (Mercado Pago reintenta el cobro). */
 export const GRACIA_DIAS = 5;
-export const PLANES_MP: readonly Plan[] = ['BASE', 'ESTUDIO'];
+export const PLANES_MP: readonly Plan[] = ['BASE', 'ESTUDIO', 'CADENA'];
+
+export type IntervaloMp = 'mensual' | 'anual';
+/** Dónde vive la suscripción: un estudio suelto o una cadena (todas sus sedes). */
+export type TablaMp = 'studios' | 'cadenas';
 
 const ID_PREAPPROVAL = /^[A-Za-z0-9]{1,64}$/;
 const ID_ESTUDIO = /^[A-Za-z0-9_-]{1,120}$/;
@@ -84,15 +95,41 @@ export function preapprovalDe(subscriptionId: string | null | undefined): string
   return ID_PREAPPROVAL.test(id) ? id : null;
 }
 
-/** `external_reference` de la suscripción: de qué estudio y qué plan. */
-export function referenciaDePlan(studioId: string, plan: Plan): string {
+/**
+ * `external_reference` de la suscripción: de qué estudio y qué plan, y `:anual`
+ * si cobra una vez al año. Sin sufijo, mensual (las de antes de que hubiera anual).
+ */
+export function referenciaDePlan(studioId: string, plan: Exclude<Plan, 'CADENA'>, intervalo: IntervaloMp = 'mensual'): string {
   if (!ID_ESTUDIO.test(studioId)) throw new Error('id de estudio no admitido en la referencia');
-  return `centra:plan:${studioId}:${plan}`;
+  return `centra:plan:${studioId}:${plan}${intervalo === 'anual' ? ':anual' : ''}`;
 }
 
-export function leerReferencia(ref: string | null | undefined): { studioId: string; plan: Plan } | null {
-  const m = /^centra:plan:([A-Za-z0-9_-]{1,120}):(BASE|ESTUDIO|CADENA)$/.exec(ref ?? '');
-  return m ? { studioId: m[1], plan: m[2] as Plan } : null;
+/** La de una cadena: la paga la cadena entera, no una sede. */
+export function referenciaDeCadena(cadenaId: string, intervalo: IntervaloMp = 'mensual'): string {
+  if (!ID_ESTUDIO.test(cadenaId)) throw new Error('id de cadena no admitido en la referencia');
+  return `centra:cadena:${cadenaId}${intervalo === 'anual' ? ':anual' : ''}`;
+}
+
+export interface Referencia {
+  tabla: TablaMp;
+  /** El id de la fila: el estudio o la cadena. */
+  id: string;
+  plan: Plan;
+  intervalo: IntervaloMp;
+}
+
+export function leerReferencia(ref: string | null | undefined): Referencia | null {
+  const deEstudio = /^centra:plan:([A-Za-z0-9_-]{1,120}):(BASE|ESTUDIO)(:anual)?$/.exec(ref ?? '');
+  if (deEstudio) return { tabla: 'studios', id: deEstudio[1], plan: deEstudio[2] as Plan, intervalo: deEstudio[3] ? 'anual' : 'mensual' };
+  const deCadena = /^centra:cadena:([A-Za-z0-9_-]{1,120})(:anual)?$/.exec(ref ?? '');
+  if (deCadena) return { tabla: 'cadenas', id: deCadena[1], plan: 'CADENA', intervalo: deCadena[2] ? 'anual' : 'mensual' };
+  return null;
+}
+
+/** Cada cuánto cobra una suscripción, según Mercado Pago (12 meses = anual). */
+export function intervaloDe(pre: Pick<Preapproval, 'auto_recurring'> | null | undefined): IntervaloMp {
+  const r = pre?.auto_recurring;
+  return r?.frequency === 12 && r.frequency_type === 'months' ? 'anual' : 'mensual';
 }
 
 // ── Fechas ───────────────────────────────────────────────────────────────────
@@ -127,14 +164,13 @@ export type DecisionAlta =
  * `null` si no tiene). Si ya hay una pagada, la nueva empieza a cobrar cuando
  * termina lo pagado (`empiezaEl`): es un cambio de plan, no un segundo cobro.
  */
-export function decidirAlta(fila: FilaEstudio, plan: Plan, actual: Preapproval | null, ahora: Date): DecisionAlta {
-  if (plan === 'CADENA' || fila.cadena_id) {
-    return { ok: false, status: 409, error: 'El plan Cadena todavía no se puede contratar desde acá. Escribinos y lo activamos a mano.' };
-  }
+export function decidirAlta(
+  fila: FilaEstudio, plan: Plan, actual: Preapproval | null, ahora: Date, intervalo: IntervaloMp = 'mensual',
+): DecisionAlta {
   if (!PLANES_MP.includes(plan)) return { ok: false, status: 400, error: 'Plan no válido' };
   const pagaAhora = fila.subscription_status === 'active' || fila.subscription_status === 'past_due';
   const vigente = actual && (actual.status === 'authorized' || actual.status === 'paused') ? actual : null;
-  if (vigente && pagaAhora && fila.plan === plan) {
+  if (vigente && pagaAhora && fila.plan === plan && intervaloDe(vigente) === intervalo) {
     return { ok: false, status: 409, error: 'Ya tenés este plan. Si querés cambiar la tarjeta, hacelo desde tu cuenta de Mercado Pago.' };
   }
   if (fila.subscription_status === 'past_due' && vigente) {
@@ -149,8 +185,11 @@ export function decidirAlta(fila: FilaEstudio, plan: Plan, actual: Preapproval |
 }
 
 export interface DatosAlta {
+  /** El estudio, o la cadena si `plan` es CADENA. */
   studioId: string;
   plan: Plan;
+  /** Sin él, mensual. */
+  intervalo?: IntervaloMp;
   nombrePlan: string;
   importe: number;
   moneda: string;
@@ -159,16 +198,19 @@ export interface DatosAlta {
   empiezaEl: string | null;
 }
 
-/** El cuerpo de `POST /preapproval`: suscripción sin plan asociado, mensual, a pagar en Mercado Pago. */
+/** El cuerpo de `POST /preapproval`: suscripción sin plan asociado, mensual o anual, a pagar en Mercado Pago. */
 export function cuerpoPreapproval(d: DatosAlta) {
+  const anual = d.intervalo === 'anual';
   return {
-    reason: `Centra · ${d.nombrePlan}`,
-    external_reference: referenciaDePlan(d.studioId, d.plan),
+    reason: `Centra · ${d.nombrePlan}${anual ? ' (anual)' : ''}`,
+    external_reference: d.plan === 'CADENA'
+      ? referenciaDeCadena(d.studioId, d.intervalo)
+      : referenciaDePlan(d.studioId, d.plan, d.intervalo),
     payer_email: d.email,
     back_url: d.backUrl,
     status: 'pending',
     auto_recurring: {
-      frequency: 1,
+      frequency: anual ? 12 : 1,
       frequency_type: 'months',
       transaction_amount: d.importe,
       currency_id: d.moneda,
@@ -209,7 +251,7 @@ export function yaEmpezo(pre: Preapproval, ahora: Date): boolean {
  */
 export function decidirPorSuscripcion(fila: FilaEstudio, pre: Preapproval, ahora: Date, actual?: Preapproval | null): Decision {
   const ref = leerReferencia(pre.external_reference);
-  if (!ref || ref.studioId !== fila.id) return { aplicar: false, motivo: 'referencia-de-otro' };
+  if (!ref || ref.id !== fila.id) return { aplicar: false, motivo: 'referencia-de-otro' };
   if (!ID_PREAPPROVAL.test(pre.id)) return { aplicar: false, motivo: 'id-raro' };
   const id = idSuscripcion(pre.id);
   const propia = fila.subscription_id === id;

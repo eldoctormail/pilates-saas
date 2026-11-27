@@ -1452,7 +1452,7 @@ export async function iniciarSuscripcion(
       ? await fetch('/api/billing/mercadopago/suscribir', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
-        body: JSON.stringify(emailMercadoPago ? { plan, email: emailMercadoPago } : { plan }),
+        body: JSON.stringify({ plan, ...(intervalo === 'anual' ? { intervalo } : {}), ...(emailMercadoPago ? { email: emailMercadoPago } : {}) }),
       })
       : await fetch('/api/billing/checkout', {
       method: 'POST',
@@ -1635,6 +1635,8 @@ export interface MiSuscripcionMpApi {
   proximoCobro: string | null;
   accesoHasta: string | null;
   estado: 'al_dia' | 'impago' | 'baja_programada' | 'pendiente' | 'cancelada';
+  /** Cada cuánto cobra. Ausente con un servidor anterior (= mensual). */
+  intervalo?: 'mensual' | 'anual';
   puedeCancelar: boolean;
 }
 

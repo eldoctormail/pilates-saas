@@ -527,7 +527,7 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
       "/soluciones/cambiar-de-software",
       "/precios"
     ],
-    "palabras": 2085,
+    "palabras": 2086,
     "actualizado": "2026-11-27"
   },
   {

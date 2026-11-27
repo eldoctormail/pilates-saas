@@ -20,9 +20,13 @@
 #   COPIA_CLAVE      frase para cifrar la copia (AES-256). Con ella, la copia
 #                    lleva los secretos protegidos. Guardala FUERA de la Pi: sin
 #                    ella no se puede restaurar.
-#   COPIA_REMOTO     opcional: un remoto de rclone («b2:mi-bucket/tentare»)
+#   COPIA_REMOTO     opcional: un remoto de rclone («gdrive:centra-copias»)
 #                    para mandar también una copia fuera. Exige COPIA_CLAVE.
-#                    Se configura una vez con  docker run --rm -it -v ~/.config/rclone:/config/rclone rclone/rclone config
+#                    Se configura una vez (deploy/PRODUCCION.md › Copia fuera).
+#   COPIA_REMOTO_DIAS cuántos días se guardan en el remoto (por defecto 30;
+#                    0 = no se borra nada allá).
+#   COPIA_RCLONE     carpeta de la configuración de rclone (por defecto
+#                    /root/.config/rclone: la copia corre como root).
 set -eu
 SB="$(cd "${1:?Uso: copia.sh /ruta/a/supabase-project}" && pwd)"
 DEPLOY="$(cd "$(dirname "$0")/.." && pwd)"
@@ -34,12 +38,20 @@ DESTINO="$(leer "$ENV_APP" COPIA_DESTINO)"; DESTINO="${DESTINO:-/var/backups/ten
 CONSERVAR="$(leer "$ENV_APP" COPIA_CONSERVAR)"; CONSERVAR="${CONSERVAR:-14}"
 CLAVE="$(leer "$ENV_APP" COPIA_CLAVE)"
 REMOTO="$(leer "$ENV_APP" COPIA_REMOTO)"
+REMOTO_DIAS="$(leer "$ENV_APP" COPIA_REMOTO_DIAS)"; REMOTO_DIAS="${REMOTO_DIAS:-30}"
+# El timer de systemd corre sin HOME: no se puede depender de «~».
+RCLONE_CONF="$(leer "$ENV_APP" COPIA_RCLONE)"; RCLONE_CONF="${RCLONE_CONF:-${HOME:-/root}/.config/rclone}"
 PGPASS="$(leer "$ENV_SB" POSTGRES_PASSWORD)"
 DATOS="$SB/volumes/db/data"
 STORAGE="$SB/volumes/storage"
 
 [ -n "$REMOTO" ] && [ -z "$CLAVE" ] && { echo "COPIA_REMOTO necesita COPIA_CLAVE: una copia fuera va cifrada siempre."; exit 1; }
 case "$CONSERVAR" in ''|*[!0-9]*) echo "COPIA_CONSERVAR tiene que ser un número"; exit 1 ;; esac
+case "$REMOTO_DIAS" in ''|*[!0-9]*) echo "COPIA_REMOTO_DIAS tiene que ser un número"; exit 1 ;; esac
+if [ -n "$REMOTO" ] && [ ! -f "$RCLONE_CONF/rclone.conf" ]; then
+  echo "COPIA_REMOTO está puesto pero no hay $RCLONE_CONF/rclone.conf: configurá rclone primero (deploy/PRODUCCION.md › Copia fuera)."
+  exit 1
+fi
 [ -d "$DATOS" ] || { echo "No está la carpeta de datos de Postgres ($DATOS)"; exit 1; }
 [ -r "$DATOS" ] && [ -x "$DATOS" ] || { echo "No se puede leer $DATOS: corré la copia con sudo (es de Postgres)."; exit 1; }
 
@@ -85,12 +97,6 @@ if [ -n "$CLAVE" ]; then
 fi
 chmod 600 "$ARCHIVO"
 
-if [ -n "$REMOTO" ]; then
-  echo "→ Copia fuera: $REMOTO"
-  docker run --rm -v "$HOME/.config/rclone:/config/rclone:ro" -v "$DESTINO:/data:ro" \
-    rclone/rclone copy "/data/$(basename "$ARCHIVO")" "$REMOTO"
-fi
-
 echo "→ Rotación: se guardan las últimas $CONSERVAR"
 ls -1t "$DESTINO"/tentare-*.tar "$DESTINO"/tentare-*.tar.enc 2>/dev/null | tail -n +"$((CONSERVAR + 1))" | while read -r viejo; do
   rm -f "$viejo"
@@ -98,3 +104,23 @@ done
 
 ahora_iso > "$DESTINO/ULTIMA-COPIA-OK"
 echo "✔ Copia: $ARCHIVO ($(du -h "$ARCHIVO" | cut -f1))"
+
+# La copia fuera va después de dejar la local hecha: si la red falla, la local
+# ya está, pero el servicio termina en error para que se vea en systemctl.
+if [ -n "$REMOTO" ]; then
+  echo "→ Copia fuera: $REMOTO"
+  rclone_() {
+    docker run --rm -v "$RCLONE_CONF:/config/rclone" -v "$DESTINO:/data:ro" rclone/rclone "$@"
+  }
+  if ! rclone_ copy "/data/$(basename "$ARCHIVO")" "$REMOTO"; then
+    echo "✖ No se pudo subir la copia a $REMOTO. La local está en $ARCHIVO."
+    exit 1
+  fi
+  if [ "$REMOTO_DIAS" -gt 0 ]; then
+    echo "→ Rotación fuera: se borran las de más de $REMOTO_DIAS días"
+    rclone_ delete "$REMOTO" --min-age "${REMOTO_DIAS}d" --include "tentare-*.tar.enc" \
+      || echo "⚠ No se pudieron borrar las copias viejas de $REMOTO (la de hoy sí subió)."
+  fi
+  ahora_iso > "$DESTINO/ULTIMA-COPIA-REMOTA-OK"
+  echo "✔ Copia fuera: $REMOTO"
+fi

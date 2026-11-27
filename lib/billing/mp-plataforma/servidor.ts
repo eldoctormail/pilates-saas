@@ -11,7 +11,7 @@ import * as Sentry from '@sentry/nextjs';
 import { cancelarSuscripcion, leerPagoAutorizado, leerSuscripcion } from './api';
 import {
   decidirPorPago, decidirPorSuscripcion, leerReferencia, preapprovalDe, vencida,
-  type Cambios, type Decision, type FilaEstudio,
+  type Cambios, type Decision, type FilaEstudio, type Preapproval,
 } from './reglas';
 import { facturarMensualidad } from './factura-centra';
 import { emitirFactura } from '@/lib/arca/servidor';
@@ -42,7 +42,24 @@ export async function escribir(admin: SupabaseClient, fila: FilaEstudio, cambios
 }
 
 async function aplicar(admin: SupabaseClient, token: string, fila: FilaEstudio, d: Decision): Promise<Resultado> {
-  if (!d.aplicar) return { tipo: 'ignorado', motivo: d.motivo };
+  if (!d.aplicar) {
+    if (d.cancelar) {
+      // Una vieja que seguía cobrando (su baja falló al cambiar de plan): se da de baja ahora.
+      const r = await cancelarSuscripcion(token, d.cancelar);
+      if (!r.ok) {
+        Sentry.captureMessage('[mp-plataforma] no se pudo cancelar la suscripción anterior', {
+          level: 'error', tags: etiquetas, extra: { studioId: fila.id, anterior: d.cancelar, error: r.error },
+        });
+        return { tipo: 'reintentar', motivo: 'cancelar-anterior' };
+      }
+      console.info('[mp-plataforma] suscripción anterior cancelada', { studioId: fila.id, anterior: d.cancelar });
+    } else if (d.motivo === 'dos-autorizadas-sin-fecha') {
+      Sentry.captureMessage('[mp-plataforma] el estudio tiene dos suscripciones autorizadas', {
+        level: 'error', tags: etiquetas, extra: { studioId: fila.id, actual: fila.subscription_id },
+      });
+    }
+    return { tipo: 'ignorado', motivo: d.motivo };
+  }
   if (!(await escribir(admin, fila, d.cambios))) return { tipo: 'reintentar', motivo: 'cambio-en-medio' };
   console.info('[mp-plataforma] estudio actualizado', { studioId: fila.id, ...d.cambios });
   if (d.cancelarAnterior) {
@@ -71,7 +88,15 @@ export async function sincronizarSuscripcion(
   if (!ref) return { tipo: 'ignorado', motivo: 'no-es-de-centra' };
   const fila = await leerFila(admin, ref.studioId);
   if (!fila) return { tipo: 'ignorado', motivo: 'estudio-desconocido' };
-  return aplicar(admin, token, fila, decidirPorSuscripcion(fila, leida.datos, ahora));
+  // Si la fila tiene OTRA suscripción, se relee también: decide cuál es la nueva.
+  let actual: Preapproval | null = null;
+  const idActual = preapprovalDe(fila.subscription_id);
+  if (leida.datos.status === 'authorized' && idActual && idActual !== leida.datos.id) {
+    const r = await leerSuscripcion(token, idActual);
+    if (r.ok) actual = r.datos;
+    else if (r.status !== 404 && r.status !== 400) return { tipo: 'reintentar', motivo: `mercadopago-${r.status}` };
+  }
+  return aplicar(admin, token, fila, decidirPorSuscripcion(fila, leida.datos, ahora, actual));
 }
 
 /** Un cobro mensual: primero la suscripción (corre la fecha), después el estado del cobro. */

@@ -38,6 +38,8 @@ export interface Preapproval {
   payer_email?: string | null;
   reason?: string | null;
   next_payment_date?: string | null;
+  /** Cuándo se creó: entre dos suscripciones del mismo estudio, la más nueva es la que vale. */
+  date_created?: string | null;
   init_point?: string | null;
   auto_recurring?: {
     transaction_amount?: number;
@@ -179,7 +181,8 @@ export function cuerpoPreapproval(d: DatosAlta) {
 
 export type Decision =
   | { aplicar: true; cambios: Cambios; cancelarAnterior: string | null }
-  | { aplicar: false; motivo: string };
+  /** `cancelar`: una suscripción vieja que sigue cobrando y hay que dar de baja (sin tocar la fila). */
+  | { aplicar: false; motivo: string; cancelar?: string | null };
 
 /**
  * Margen para dar por empezada una suscripción: sin `start_date` pedida,
@@ -198,8 +201,13 @@ export function yaEmpezo(pre: Preapproval, ahora: Date): boolean {
   return inicio === null || inicio <= ahora.getTime() + MARGEN_INICIO_MS;
 }
 
-/** Qué hacer con la fila del estudio a partir de su suscripción releída en Mercado Pago. */
-export function decidirPorSuscripcion(fila: FilaEstudio, pre: Preapproval, ahora: Date): Decision {
+/**
+ * Qué hacer con la fila del estudio a partir de su suscripción releída en Mercado Pago.
+ * `actual` es la suscripción que la fila tiene ahora, releída también, cuando
+ * `pre` es OTRA: sin ella no se sabe si `pre` es la nueva o una vieja que no se
+ * pudo cancelar al cambiar de plan.
+ */
+export function decidirPorSuscripcion(fila: FilaEstudio, pre: Preapproval, ahora: Date, actual?: Preapproval | null): Decision {
   const ref = leerReferencia(pre.external_reference);
   if (!ref || ref.studioId !== fila.id) return { aplicar: false, motivo: 'referencia-de-otro' };
   if (!ID_PREAPPROVAL.test(pre.id)) return { aplicar: false, motivo: 'id-raro' };
@@ -215,6 +223,16 @@ export function decidirPorSuscripcion(fila: FilaEstudio, pre: Preapproval, ahora
       // Un cobro que no salió lo deja en past_due el aviso del pago, no este.
       if (fila.subscription_status !== 'active' && fila.subscription_status !== 'past_due') cambios.subscription_status = 'active';
       return { aplicar: true, cambios, cancelarAnterior: null };
+    }
+    // Si la que tiene la fila sigue autorizada, `pre` solo toma el relevo si es
+    // MÁS NUEVA. Si es más vieja, es la anterior de un cambio de plan cuya baja
+    // falló: tomarla cancelaría la buena. Se da de baja ella, sin tocar la fila.
+    const idActual = preapprovalDe(fila.subscription_id);
+    if (idActual && actual && actual.id === idActual && actual.status === 'authorized') {
+      const creadaPre = ms(pre.date_created);
+      const creadaActual = ms(actual.date_created);
+      if (creadaPre === null || creadaActual === null) return { aplicar: false, motivo: 'dos-autorizadas-sin-fecha' };
+      if (creadaPre < creadaActual) return { aplicar: false, motivo: 'anterior-sin-cancelar', cancelar: pre.id };
     }
     // Una suscripción nueva (alta o cambio de plan) toma el relevo.
     return {

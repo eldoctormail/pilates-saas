@@ -81,6 +81,26 @@ test('una suscripción nueva toma el relevo y cancela la anterior de Mercado Pag
   assert.ok(s.aplicar && s.cancelarAnterior === null);
 });
 
+test('la vieja que no se pudo cancelar no le quita el relevo a la nueva', () => {
+  // Cambio de plan: la nueva (abc123) ya está en la fila y la baja de la vieja falló.
+  const f = fila({ plan: 'ESTUDIO', subscription_status: 'active', subscription_id: 'mp:abc123' });
+  const nueva = pre({ date_created: '2026-11-20T10:00:00.000Z' });
+  const vieja = pre({ id: 'vieja1', date_created: '2026-10-01T10:00:00.000Z' });
+  const d = decidirPorSuscripcion(f, vieja, AHORA, nueva);
+  assert.equal(d.aplicar, false);
+  assert.ok(!d.aplicar && d.cancelar === 'vieja1' && d.motivo === 'anterior-sin-cancelar');
+  // Al revés (la de la fila es la vieja): la nueva toma el relevo y cancela la vieja, como siempre.
+  const g = fila({ subscription_status: 'active', subscription_id: 'mp:vieja1' });
+  const r = decidirPorSuscripcion(g, nueva, AHORA, vieja);
+  assert.ok(r.aplicar && r.cancelarAnterior === 'vieja1' && r.cambios.subscription_id === 'mp:abc123');
+  // Sin fechas no se adivina: no se toca la fila.
+  const sinFecha = decidirPorSuscripcion(f, pre({ id: 'vieja1' }), AHORA, pre());
+  assert.ok(!sinFecha.aplicar && sinFecha.motivo === 'dos-autorizadas-sin-fecha' && !sinFecha.cancelar);
+  // Si la de la fila ya está cancelada, la autorizada toma el relevo (vuelve tras una baja).
+  const tras = decidirPorSuscripcion(f, vieja, AHORA, pre({ status: 'cancelled', date_created: '2026-11-20T10:00:00.000Z' }));
+  assert.ok(tras.aplicar && tras.cambios.subscription_id === 'mp:vieja1');
+});
+
 test('la misma suscripción autorizada otra vez: corre la fecha y no pisa un cobro pendiente', () => {
   const f = fila({ plan: 'ESTUDIO', subscription_status: 'past_due', subscription_id: 'mp:abc123', current_period_end: enDias(-1) });
   const d = decidirPorSuscripcion(f, pre(), AHORA);

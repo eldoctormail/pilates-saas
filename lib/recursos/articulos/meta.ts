@@ -527,67 +527,8 @@ export const ARTICULOS_META_ARGENTINA: ArticuloMeta[] = [
       "/soluciones/cambiar-de-software",
       "/precios"
     ],
-    "palabras": 2085,
+    "palabras": 2086,
     "actualizado": "2026-11-27"
-  },
-  {
-    "slug": "bsport-vs-timp",
-    "titulo": "bsport vs TIMP: diferencias para un estudio de pilates boutique",
-    "tituloSeo": "bsport vs TIMP en 2026: precio, app y diferencias",
-    "descripcion": "bsport o TIMP para tu estudio de pilates: precio, permanencia, prueba, app, cobros, Veri*Factu y sustituciones, con lo que dice hoy la web de cada uno.",
-    "resumen": "bsport y TIMP comparados para un estudio boutique de pilates con lo que publica hoy la web de cada uno: tabla lado a lado, para quién encaja cada uno y qué preguntar en la demo.",
-    "categoria": "software",
-    "seccion": "Elegir software",
-    "publicado": "2026-09-25",
-    "relacionadas": [
-      "/recursos/mejor-software-para-estudios-de-pilates",
-      "/comparativa/tentare-vs-bsport",
-      "/comparativa/tentare-vs-timp",
-      "/recursos/checklist-elegir-software-estudio",
-      "/soluciones/cambiar-de-software"
-    ],
-    "palabras": 1968,
-    "actualizado": "2026-10-07"
-  },
-  {
-    "slug": "alternativas-a-bsport",
-    "titulo": "Alternativas a bsport para tu estudio de pilates en España (2026)",
-    "tituloSeo": "Alternativas a bsport en 2026: la Nº1 en pilates y 5 más",
-    "descripcion": "¿Quieres dejar bsport? Seis alternativas para estudios de pilates en España, con precio, permanencia, app con tu marca y qué pasa con tus datos.",
-    "resumen": "Para estudios que quieren dejar bsport: por qué cambian, seis alternativas lado a lado según su web pública y cómo cambiarte sin perder alumnas, bonos ni historial.",
-    "categoria": "software",
-    "seccion": "Elegir software",
-    "publicado": "2026-10-01",
-    "relacionadas": [
-      "/comparativa/tentare-vs-bsport",
-      "/recursos/bsport-vs-timp",
-      "/recursos/alternativas-a-timp",
-      "/soluciones/cambiar-de-software",
-      "/recursos/mejor-software-para-estudios-de-pilates",
-      "/funcionalidades/app-para-alumnas"
-    ],
-    "palabras": 2543,
-    "actualizado": "2026-10-15"
-  },
-  {
-    "slug": "alternativas-a-timp",
-    "titulo": "Alternativas a TIMP para estudios de pilates y yoga en España (2026)",
-    "tituloSeo": "Alternativas a TIMP en 2026: la Nº1 en pilates y 5 más",
-    "descripcion": "¿Quieres dejar TIMP? Seis alternativas para estudios de pilates y yoga, con precio, permanencia, app y sustituciones, y cómo llevarte tus datos.",
-    "resumen": "Para estudios que quieren dejar TIMP: qué empuja a cambiar, seis alternativas lado a lado según su web pública y cómo llevarte alumnas, bonos e historial sin perder nada.",
-    "categoria": "software",
-    "seccion": "Elegir software",
-    "publicado": "2026-10-01",
-    "relacionadas": [
-      "/comparativa/tentare-vs-timp",
-      "/recursos/bsport-vs-timp",
-      "/recursos/alternativas-a-bsport",
-      "/soluciones/cambiar-de-software",
-      "/recursos/mejor-software-para-estudios-de-pilates",
-      "/funcionalidades/sustituciones"
-    ],
-    "palabras": 2481,
-    "actualizado": "2026-10-15"
   },
   {
     "slug": "cuanto-cuesta-abrir-un-estudio-de-pilates",

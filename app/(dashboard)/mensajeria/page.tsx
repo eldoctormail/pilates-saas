@@ -26,6 +26,7 @@ import { SEGMENTOS_AUDIENCIA, resolverDestinatariasCampana } from '@/lib/marketi
 import { fetchNotificaciones, accionNotificacion, type NotifItem, type AmbitoNotif } from '@/lib/notifications/client';
 import { ConversacionesTab } from '@/components/mensajeria/conversaciones-tab';
 import { ComunidadFeed } from '@/components/comunidad/comunidad-feed';
+import { LEGAL } from '@/lib/legal-info';
 
 // Misma fuente que la campana del topbar (components/notifications/notification-bell.tsx):
 // tabla `notification` vía /api/notifications, ámbito `staff`. Antes esta
@@ -242,7 +243,7 @@ function Compositor({ socios }: { socios: SocioParaBroadcast[] }) {
         )}
         {huboFallos && !resultado.enCola && (
           <p className="text-sm text-warning">
-            No hemos podido enviarlo. Inténtalo de nuevo en unos minutos; si sigue fallando, escríbenos a soporte@tentare.app.
+            No hemos podido enviarlo. Inténtalo de nuevo en unos minutos; si sigue fallando, escríbenos a {LEGAL.emailSoporte}.
           </p>
         )}
         <button onClick={reset} className="text-xs font-semibold text-brand-medio hover:underline mt-2">Escribir otro mensaje</button>

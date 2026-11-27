@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { BellRing, Check, Hourglass, ShieldCheck } from 'lucide-react';
 import { AppAlumna } from '@/components/web/home/piezas';
+import { muestra } from '@/lib/moneda';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Los fragmentos de producto de los índices (/funcionalidades y /soluciones): como en la home, no se enseña el panel entero sino el
@@ -55,9 +56,9 @@ export function EscenaCobros() {
       <div className="hx-c hx-c--ancha">
         <div className="hx-c-cab"><b>Cobros</b><span className="hx-c-sub hx-c-sub--r">Próximas cuotas · 30 días</span></div>
         {[
-          ['AM', 'Ana Martín', 'Mensual ilimitado', '75 €', 'Cobrada', 'ok'],
-          ['LR', 'Laura Ramos', 'Mensual 2 días', '59 €', 'Se reintenta solo', 'aviso'],
-          ['CD', 'Carmen Del Río', 'Bono 10 clases', '120 €', 'Cobrada', 'ok'],
+          ['AM', 'Ana Martín', 'Mensual ilimitado', muestra(75), 'Cobrada', 'ok'],
+          ['LR', 'Laura Ramos', 'Mensual 2 días', muestra(59), 'Se reintenta solo', 'aviso'],
+          ['CD', 'Carmen Del Río', 'Bono 10 clases', muestra(120), 'Cobrada', 'ok'],
         ].map(([ini, n, c, imp, est, tono]) => (
           <div className="hx-fi" key={n}>
             <Iniciales t={ini} />

@@ -175,7 +175,8 @@ export const PIE_PUBLICO: GrupoMenu[] = [
       // TODAS las páginas les restaría enlaces internos de golpe.
       { href: '/recursos/cuanto-cuesta-abrir-un-estudio-de-pilates', label: 'Cuánto cuesta abrir un estudio' },
       { href: '/recursos/rentabilidad-estudio-de-pilates', label: 'Rentabilidad de un estudio' },
-      { href: '/recursos/checklist-elegir-software-estudio', label: 'Cómo elegir software' },
+      // Habla de SEPA y Veri*Factu: en Argentina no se publica (GUIAS_SOLO_ESPANA).
+      ...(ES ? [{ href: '/recursos/checklist-elegir-software-estudio', label: 'Cómo elegir software' }] : []),
       { href: '/recursos/mejor-software-para-estudios-de-pilates', label: 'Mejor software de Pilates' },
       { href: '/comparativa', label: 'Comparativas' },
       // Las «Alternativa a…» son los rivales de España: en Argentina no se enlazan.
@@ -192,7 +193,8 @@ export const PIE_PUBLICO: GrupoMenu[] = [
       { href: '/glosario', label: 'Glosario' },
       { href: '/academy', label: 'Academy' },
       { href: '/ayuda', label: 'Centro de Ayuda' },
-      { href: '/edicion/invierno-26', label: 'Centra Edición Invierno 26' },
+      // La edición cuenta las versiones del software original: en Argentina no se enlaza (lib/seo/paginas.ts, esSoloDeEspana).
+      ...(ES ? [{ href: '/edicion/invierno-26', label: 'Centra Edición Invierno 26' }] : []),
     ],
   },
   {
@@ -233,6 +235,6 @@ export const PIE_RESUMIDO: { titulo: string; hrefs: string[] }[] = [
   { titulo: 'Soluciones', hrefs: ['/soluciones/programa-de-gestion-para-estudio-de-pilates', '/soluciones/estudio-de-pilates-reformer', '/soluciones/estudio-de-yoga', '/soluciones/abrir-un-estudio', '/soluciones/cambiar-de-software', '/soluciones'] },
   // En Argentina (es-AR) los rivales de España no tienen sentido: la columna lleva a la comparativa de allí.
   ES ? { titulo: 'Alternativas', hrefs: ['/comparativa/tentare-vs-bsport', '/comparativa/tentare-vs-eversports', '/comparativa/tentare-vs-momence', '/comparativa/tentare-vs-mindbody', '/comparativa/tentare-vs-timp', '/comparativa/tentare-vs-lorari'] } : { titulo: 'Comparativa', hrefs: ['/comparativa'] },
-  { titulo: 'Recursos', hrefs: ['/recursos', '/recursos/cuanto-cuesta-abrir-un-estudio-de-pilates', '/recursos/rentabilidad-estudio-de-pilates', '/recursos/checklist-elegir-software-estudio', '/recursos/mejor-software-para-estudios-de-pilates', '/glosario', '/academy', '/ayuda'] },
+  { titulo: 'Recursos', hrefs: ['/recursos', '/recursos/cuanto-cuesta-abrir-un-estudio-de-pilates', '/recursos/rentabilidad-estudio-de-pilates', ...(ES ? ['/recursos/checklist-elegir-software-estudio'] : []), '/recursos/mejor-software-para-estudios-de-pilates', '/glosario', '/academy', '/ayuda'] },
   { titulo: 'Empresa', hrefs: ES ? ['/sobre-tentare', '/blog', '/seguridad', '/soporte'] : ['/sobre-tentare', '/seguridad', '/soporte'] },
 ];

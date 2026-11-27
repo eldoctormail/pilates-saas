@@ -46,7 +46,7 @@ const articulo: Articulo = {
         {
           t: 'p',
           texto:
-            'Los programas son AgendaPro, Slottin, GymSmartAccess, SyncroFitness y My Gym Online, además de Centra. Elegimos los que venden a estudios de pilates en Argentina y publican en su web, en pesos, al menos parte de sus condiciones. Lo que mejor te encaje depende de cuántas alumnas tienes, de si das reformer o mat, de si vendes packs o abonos y de quién atiende la recepción. Para preparar la prueba, usa el [checklist para elegir el software de tu estudio](/recursos/checklist-elegir-software-estudio).',
+            'Los programas son AgendaPro, Slottin, GymSmartAccess, SyncroFitness y My Gym Online, además de Centra. Elegimos los que venden a estudios de pilates en Argentina y publican en su web, en pesos, al menos parte de sus condiciones. Lo que mejor te encaje depende de cuántas alumnas tienes, de si das reformer o mat, de si vendes packs o abonos y de quién atiende la recepción. Para comparar con más detalle, mira [la comparativa](/comparativa).',
         },
       ],
     },
@@ -257,7 +257,7 @@ const articulo: Articulo = {
     { titulo: 'Mercado Pago: link de pago, costos por plazo de acreditación', url: 'https://www.mercadopago.com.ar/herramientas-para-vender/link-de-pago', consultada: '2026-11-27' },
   ],
   relacionadas: [
-    '/recursos/checklist-elegir-software-estudio',
+    '/comparativa',
     '/recursos/software-pilates-gratis',
     '/soluciones/cambiar-de-software',
     '/precios',

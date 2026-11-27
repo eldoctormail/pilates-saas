@@ -31,6 +31,7 @@ import { decidirReactivacion, rutaReactivar } from '@/lib/billing/reactivar';
 import { cn } from '@/lib/utils';
 import type { OpcionesDePlan } from '@/lib/billing/sede-incluida-en-cadena';
 import type { PlanSueltoQueCancelaCadena } from '@/lib/billing/cancelar-suscripcion-anterior';
+import { LEGAL } from '@/lib/legal-info';
 
 // Suscripción del estudio a Centra.
 //
@@ -367,7 +368,7 @@ export function SuscripcionVista({ embebida = false }: { embebida?: boolean }) {
             ) : confirmacionAgotada ? (
               <div className="mb-5 rounded-xl border border-warning/25 bg-warning/10 px-4 py-3 text-[13.5px] text-warning">
                 {NOMBRE_PASARELA} aceptó el pago, pero su confirmación todavía no nos ha llegado y tu plan aún no aparece activo.
-                Vuelve a mirar en unos minutos; si sigue igual, escríbenos a soporte@tentare.app.
+                Vuelve a mirar en unos minutos; si sigue igual, escríbenos a {LEGAL.emailSoporte}.
               </div>
             ) : (
               <div className="mb-5 flex items-center gap-2 rounded-xl border border-border bg-card px-4 py-3 text-[13.5px] text-muted-foreground">
@@ -391,7 +392,7 @@ export function SuscripcionVista({ embebida = false }: { embebida?: boolean }) {
         {!cargando && !stripeListo && !activo && (
           <div className="mb-5 rounded-xl border border-warning/25 bg-warning/10 px-4 py-3 text-[13.5px] text-warning">
             Todavía no se puede contratar desde aquí: estamos terminando de configurar los pagos por nuestro lado.
-            Escríbenos a soporte@tentare.app y lo activamos contigo.
+            Escríbenos a {LEGAL.emailSoporte} y lo activamos contigo.
           </div>
         )}
 

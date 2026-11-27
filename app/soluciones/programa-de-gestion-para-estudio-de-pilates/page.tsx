@@ -14,6 +14,7 @@ import {
 import { paginaDe, urlDe } from '@/lib/seo/paginas';
 import { AgendaDia, PanelCobros, PanelInformes } from '@/components/web/home/piezas';
 import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
+import { respuestaCuantoCuesta, siPasas } from '@/lib/landing/founding-gratis';
 
 // Página de la búsqueda «programa de gestión para un estudio de pilates en
 // España» (11-oct-2026, auditoría SEO): la que no tenía ninguna página propia.
@@ -43,14 +44,15 @@ export const metadata: Metadata = {
   },
 };
 
-const FAQ = [
+// Función, no constante: los precios salen del catálogo (lib/billing/precios-plataforma.ts).
+const faq = () => [
   {
     q: '¿Qué es un programa de gestión para un estudio de Pilates?',
     a: 'Es el software con el que se lleva el estudio entero: el calendario de clases y salas, las reservas de las alumnas, los bonos y las cuotas, los cobros, las facturas y el equipo de instructoras. La diferencia con una agenda de citas es que entiende el aforo por sala o por reformer, las listas de espera y los bonos de sesiones.',
   },
   {
     q: `¿Cuánto cuesta un programa de gestión para un estudio de Pilates en ${ES ? 'España' : 'Argentina'}?`,
-    a: 'En Centra, Founding Studio es gratis hasta 150 reservas al mes, con todas las funcionalidades menos varias sedes, también la app con tu marca; si pasas de ahí, 29 €/mes, y con ese plan el Centro de Control, las sustituciones automáticas y la redacción con IA van aparte. Estudio, 79 €/mes con IVA, los incluye, y Cadena, 249 €/mes, es para varias sedes. Sin permanencia y sin tarjeta para empezar.',
+    a: `En Centra, ${respuestaCuantoCuesta()}`,
   },
   {
     q: ES ? '¿Sirve para cobrar y facturar en España?' : '¿Sirve para cobrar y facturar en Argentina?',
@@ -166,7 +168,7 @@ export default function ProgramaDeGestionPage() {
 
       <TablaSolucion
         titulo="Qué mirar al elegir un programa para tu estudio"
-        intro={<p>Diez minutos con esta lista evitan el error más caro: contratar algo pensado para otro tipo de negocio. Hay una versión más larga en la <Link href="/recursos/checklist-elegir-software-estudio">checklist para elegir software</Link>.</p>}
+        intro={<p>Diez minutos con esta lista evitan el error más caro: contratar algo pensado para otro tipo de negocio. {ES ? <> Hay una versión más larga en la <Link href="/recursos/checklist-elegir-software-estudio">checklist para elegir software</Link>.</> : null}</p>}
         cabeceras={['Qué comprobar', 'Por qué importa', 'En Centra']}
         filas={[
           ['Aforo por sala o por reformer', 'Un estudio vende plazas, no citas sueltas', 'Aforo propio por sala y plazas por reformer'],
@@ -178,14 +180,14 @@ export default function ProgramaDeGestionPage() {
             ? ['Facturas con numeración legal', 'Se exige a quien emite facturas', 'Numeración legal correlativa; Veri*Factu, todavía no activo']
             : ['Factura electrónica', 'ARCA la exige a quien factura', 'Factura electrónica de ARCA con su CAE, desde cada cobro'],
           ['Sustitución de instructoras', 'Una baja no debería cancelar la clase', 'Propone candidatas, contacta y avisa'],
-          ['Precio público y permanencia', 'Para comparar sin pedir demo', 'Gratis hasta 150 reservas al mes; si pasas de ahí, 29 €/mes con IVA. Sin permanencia'],
+          ['Precio público y permanencia', 'Para comparar sin pedir demo', `Gratis hasta 150 reservas al mes; ${siPasas()} con IVA. Sin permanencia`],
           ['Importar tus datos', 'Cambiar de programa no debe costar el histórico', 'Importador con acta y botón de deshacer'],
         ]}
       />
 
       <PlanesSolucion titulo="Lo que cuesta el programa" />
 
-      <FaqSolucion titulo="Preguntas sobre el programa de gestión" items={FAQ} />
+      <FaqSolucion titulo="Preguntas sobre el programa de gestión" items={faq()} />
 
       <CierreSolucion
         titulo="Tu estudio, funcionando solo."

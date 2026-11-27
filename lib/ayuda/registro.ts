@@ -86,7 +86,7 @@ export const TODOS_LOS_ARTICULOS: ArticuloAyuda[] = [
   {
     slug: 'configurar-tu-estudio', categoria: 'empezar', tipo: 'guia',
     titulo: 'Configura los datos de tu estudio',
-    descripcion: 'Nombre, NIF, dirección, color de marca y logo — todo lo que ven tus clientes cuando reservan.',
+    descripcion: `Nombre, ${FUNCIONES_DE_ESPANA ? 'NIF' : 'CUIT'}, dirección, color de marca y logo — todo lo que ven tus clientes cuando reservan.`,
     terminos: ['datos fiscales', 'marca', 'logo', 'color'],
     actualizado: '2026-09-16',
     relacionados: ['empezar/crear-tu-cuenta', 'configuracion/datos-del-estudio', 'portal/personalizar-tu-portal'],
@@ -577,7 +577,7 @@ export const TODOS_LOS_ARTICULOS: ArticuloAyuda[] = [
   {
     slug: 'datos-del-estudio', categoria: 'configuracion', tipo: 'guia',
     titulo: 'Datos del estudio y datos fiscales',
-    descripcion: 'Nombre, NIF, dirección y los datos que aparecen en tus facturas.',
+    descripcion: `Nombre, ${FUNCIONES_DE_ESPANA ? 'NIF' : 'CUIT'}, dirección y los datos que aparecen en tus facturas.`,
     actualizado: '2026-09-16',
     relacionados: ['empezar/configurar-tu-estudio'],
     estado: 'publicado',

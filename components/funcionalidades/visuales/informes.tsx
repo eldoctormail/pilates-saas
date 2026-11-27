@@ -1,5 +1,6 @@
 import { MUTED } from '@/components/landing/theme';
 import { PanelClaro } from './comunes';
+import { LOCALE_MONEDA, MONEDA, formatoMoneda, importeDeMuestra, muestra } from '@/lib/moneda';
 
 // ── Dibujos propios de /funcionalidades/informes-y-rentabilidad ──────────────
 // Fuente: lib/decision/margen-clase.ts. El cálculo es exactamente el que se
@@ -13,18 +14,29 @@ import { PanelClaro } from './comunes';
 // Los importes del ejemplo son ilustrativos; la fórmula y las reglas de
 // `null` no lo son. Si margen-clase.ts cambia, este dibujo miente.
 
+// Los importes se escriben en euros y en pesos salen con su equivalente de muestra (lib/moneda.ts,
+// importeDeMuestra): la fórmula es la misma, las cuentas se hacen con los importes ya convertidos.
+const BONO_10 = importeDeMuestra(120);
+const MENSUAL = importeDeMuestra(79);
+const SUELTA = importeDeMuestra(22);
+const BONO_20 = importeDeMuestra(200);
+const n0 = (n: number) => n.toLocaleString(LOCALE_MONEDA, { maximumFractionDigits: 0 });
+const enMoneda = (n: number) => formatoMoneda(n, MONEDA === 'EUR' ? 2 : 0);
+
 const ASISTENTES = [
-  { n: 'Nora', plan: 'Bono de 10 · 120 €', regla: '120 / 10', imputado: 12.0 },
-  { n: 'Marta', plan: 'Mensual 79 € · viene 2×/semana', regla: '79 / (2 × 4,33)', imputado: 9.12 },
-  { n: 'Elena', plan: 'Mensual 79 € · viene 1×/semana', regla: '79 / (1 × 4,33)', imputado: 18.24 },
-  { n: 'Lucía', plan: 'Clase suelta · 22 €', regla: 'precio del plan', imputado: 22.0 },
-  { n: 'Ana', plan: 'Bono de 20 · 200 €', regla: '200 / 20', imputado: 10.0 },
-  { n: 'Sara', plan: 'Bono de 10 · 120 €', regla: '120 / 10', imputado: 12.0 },
+  { n: 'Nora', plan: `Bono de 10 · ${muestra(120)}`, regla: `${n0(BONO_10)} / 10`, imputado: BONO_10 / 10 },
+  { n: 'Marta', plan: `Mensual ${muestra(79)} · viene 2×/semana`, regla: `${n0(MENSUAL)} / (2 × 4,33)`, imputado: MENSUAL / (2 * 4.33) },
+  { n: 'Elena', plan: `Mensual ${muestra(79)} · viene 1×/semana`, regla: `${n0(MENSUAL)} / (1 × 4,33)`, imputado: MENSUAL / 4.33 },
+  { n: 'Lucía', plan: `Clase suelta · ${muestra(22)}`, regla: 'precio del plan', imputado: SUELTA },
+  { n: 'Ana', plan: `Bono de 20 · ${muestra(200)}`, regla: `${n0(BONO_20)} / 20`, imputado: BONO_20 / 20 },
+  { n: 'Sara', plan: `Bono de 10 · ${muestra(120)}`, regla: `${n0(BONO_10)} / 10`, imputado: BONO_10 / 10 },
 ];
 
-const INGRESO = ASISTENTES.reduce((a, x) => a + x.imputado, 0);
-const COSTE = 42;
-const eur = (n: number) => n.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+// Cada línea se redondea como se pinta, para que la suma cuadre con lo que se ve.
+const redondo = (n: number) => (MONEDA === 'EUR' ? Math.round(n * 100) / 100 : Math.round(n));
+const INGRESO = ASISTENTES.reduce((a, x) => a + redondo(x.imputado), 0);
+const COSTE = importeDeMuestra(42);
+const eur = (n: number) => enMoneda(redondo(n));
 
 export function ComoSeCalculaElMargen() {
   return (
@@ -49,7 +61,7 @@ export function ComoSeCalculaElMargen() {
           <span className="lp-mono" style={{ color: '#fff' }}>{eur(INGRESO)}</span>
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 14, color: '#A9BDB0', marginBottom: 12 }}>
-          <span>Coste de instructora · 42 €/h × 1 h</span>
+          <span>Coste de instructora · {muestra(42)}/h × 1 h</span>
           <span className="lp-mono" style={{ color: '#E0785F' }}>−{eur(COSTE)}</span>
         </div>
         <div style={{ borderTop: '1px solid rgba(255,255,255,.12)', paddingTop: 12, display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 12 }}>

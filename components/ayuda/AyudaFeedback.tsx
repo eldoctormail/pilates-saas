@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { LEGAL } from '@/lib/legal-info';
 
 type Valoracion = 'MALO' | 'REGULAR' | 'BUENO';
 type Voto = Valoracion | 'DESACTUALIZADA';
@@ -65,7 +66,7 @@ export function AyudaFeedback({ categoria, articulo }: { categoria: string; arti
           ))}
         </div>
       )}
-      <a className="ay-feedback-link" href={`mailto:soporte@tentare.app?subject=${encodeURIComponent(`Comentario sobre la guía ${categoria}/${articulo}`)}`}>Dejar comentario</a>
+      <a className="ay-feedback-link" href={`mailto:${LEGAL.emailSoporte}?subject=${encodeURIComponent(`Comentario sobre la guía ${categoria}/${articulo}`)}`}>Dejar comentario</a>
       {/* «Esta guía ya no describe lo que veo»: lo mismo que votar (misma tabla), con otro valor. Es lo que dice qué actualizar primero. */}
       <p className="ay-feedback-desact">
         {desactualizada ? 'Gracias: la revisaremos.' : (

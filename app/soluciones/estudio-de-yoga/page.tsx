@@ -15,6 +15,7 @@ import {
 import { paginaDe, urlDe } from '@/lib/seo/paginas';
 import { AgendaDia, PanelCobros } from '@/components/web/home/piezas';
 import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
+import { conComplementoSustituciones, respuestaCuantoCuesta } from '@/lib/landing/founding-gratis';
 
 // Centra para estudios de YOGA (rehecha el 7-oct-2026: desde el 6-oct el
 // producto se presenta para Pilates y yoga, decisión del fundador). Ya no se
@@ -45,7 +46,8 @@ export const metadata: Metadata = {
   },
 };
 
-const FAQ = [
+// Función, no constante: los precios salen del catálogo (lib/billing/precios-plataforma.ts).
+const faq = () => [
   {
     q: '¿Centra sirve para un estudio de yoga?',
     a: 'Sí. Las reservas, los bonos, las mensualidades, la lista de espera, los cobros y la app con tu marca funcionan igual para el yoga que para el Pilates: cada estilo es un tipo de clase con su nombre, su horario, su aforo y su precio.',
@@ -60,7 +62,7 @@ const FAQ = [
   },
   {
     q: '¿Qué pasa si una profesora no puede dar su clase?',
-    a: 'Centra busca quién puede cubrirla según su disponibilidad, la contacta con tu visto bueno y avisa a las alumnas del cambio. Puede hacerlo sola, sin esperar a que lo apruebes, en el plan gratis, en Estudio y en Cadena; en Founding Studio de pago, con el complemento de 12 €/mes.',
+    a: `Centra busca quién puede cubrirla según su disponibilidad, la contacta con tu visto bueno y avisa a las alumnas del cambio. Puede hacerlo sola, sin esperar a que lo apruebes, en el plan gratis, en Estudio y en Cadena; en Founding Studio de pago, ${conComplementoSustituciones()}.`,
   },
   {
     q: '¿Hay funciones pensadas solo para yoga?',
@@ -68,7 +70,7 @@ const FAQ = [
   },
   {
     q: '¿Cuánto cuesta Centra para un estudio de yoga?',
-    a: 'Founding Studio es gratis hasta 150 reservas al mes, con todas las funcionalidades menos varias sedes, también la app con tu marca; si pasas de ahí, 29 €/mes, y con ese plan el Centro de Control, las sustituciones automáticas y la redacción con IA van aparte. Estudio, 79 €/mes con IVA, los incluye, y Cadena, 249 €/mes, es para varias sedes. Sin permanencia y sin tarjeta para empezar.',
+    a: respuestaCuantoCuesta(),
   },
 ];
 
@@ -190,7 +192,7 @@ export default function EstudioDeYogaPage() {
 
       <PlanesSolucion titulo="Lo que cuesta Centra para un estudio de yoga" />
 
-      <FaqSolucion titulo="Preguntas sobre Centra para estudios de yoga" items={FAQ} />
+      <FaqSolucion titulo="Preguntas sobre Centra para estudios de yoga" items={faq()} />
 
       <CierreSolucion
         titulo="Pruébalo con tu estudio de yoga."

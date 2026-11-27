@@ -46,6 +46,7 @@ import {
   type CampoRegistro,
   type DatosRegistro,
 } from '@/lib/alta/registro';
+import { DOMINIO_VISIBLE } from '@/lib/origen-canonico';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // El alta nueva: registro en una pantalla y el código en el asunto (PR-2 del
@@ -612,7 +613,7 @@ export function AltaNueva({ version, foundingGratis, piel = false }: { version: 
                 {/* La misma dirección que enseña el iPhone de al lado: la de la app de sus alumnas. */}
                 La app de tus clientes:{' '}
                 <span className="font-t-mono text-[12.5px] text-t-secondary [overflow-wrap:anywhere]" data-testid="direccion-prevista">
-                  tentare.app/portal/{slug}
+                  {DOMINIO_VISIBLE}/portal/{slug}
                 </span>
                 {/* La base sale de `slugify`, pero `dbCreateStudio` le pone «-2»,
                     «-3»… si ya es de otro estudio: no se promete la exacta. */}
@@ -1005,7 +1006,7 @@ function VistaPrevia({ nombre, slug }: { nombre: string; slug: string }) {
       <p className="t-label -mb-1 text-t-tertiary">Así empieza la app de tus clientes</p>
       <AppDeMuestra nombre={nombre} escala={escala} />
       <p className="max-w-full truncate rounded-full bg-t-raised px-3 py-1.5 font-t-mono text-[12px] leading-4 text-t-secondary shadow-t-card" data-testid="enlace-app-prevista">
-        tentare.app/portal/{slug}
+        {DOMINIO_VISIBLE}/portal/{slug}
       </p>
       <p className="max-w-[300px] text-[12.5px] leading-[18px] text-t-tertiary">
         Es tu app de verdad: lo primero que ve un cliente al abrir tu enlace. Tu logo y tu color los eliges en el paso 5;

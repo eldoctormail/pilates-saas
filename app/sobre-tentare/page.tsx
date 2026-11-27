@@ -41,7 +41,9 @@ const PRINCIPIOS = [
   { titulo: 'Precio público', texto: 'Los planes cuestan lo que dice la página de precios, IVA incluido. No hay que pedir presupuesto ni pasar por una demo para saberlo.' },
   { titulo: 'Sin permanencia', texto: 'Pagas mes a mes o por años, como prefieras. Si te vas, exportas tus alumnas, reservas, suscripciones, recibos y pagos.' },
   { titulo: 'Una persona al otro lado', texto: 'El soporte es por WhatsApp o por email, en español, con alguien que sabe cómo funciona un estudio.' },
-  { titulo: 'Lo que se dice, se cumple', texto: 'Cuando una función está en desarrollo lo escribimos así (por ejemplo, el envío automático de facturas a la AEAT), y cuando algo no lo hacemos, también.' },
+  { titulo: 'Lo que se dice, se cumple', texto: ES
+    ? 'Cuando una función está en desarrollo lo escribimos así (por ejemplo, el envío automático de facturas a la AEAT), y cuando algo no lo hacemos, también.'
+    : 'Cuando una función está en desarrollo lo escribimos así, y cuando algo no lo hacemos, también.' },
 ];
 
 const METODO = [

@@ -10,6 +10,7 @@ import { BannerEdicion } from '@/components/edicion/banner-edicion';
 import { CATEGORIAS, articulosPublicadosDe, urlArticulo } from '@/lib/ayuda/registro';
 import { buscarArticulos, categoriasSugeridas } from '@/lib/ayuda/busqueda';
 import { crearRegistroDeBusquedas } from '@/lib/ayuda/registrar-busqueda';
+import { LEGAL } from '@/lib/legal-info';
 
 // El Centro de Ayuda con la forma del de Shopify (22-nov-2026, medido en help.shopify.com): una barra mínima arriba
 // (logo + «Ayuda»), el buscador ancho y centrado en mitad de mucho aire, y «Explorar por tema» en tres columnas donde
@@ -102,7 +103,7 @@ export default function AyudaHomePage() {
                   ))}
                 </div>
                 <p className="ay-contacto">
-                  ¿No encuentras lo que buscas? Escríbenos a <a href="mailto:soporte@tentare.app">soporte@tentare.app</a>.
+                  ¿No encuentras lo que buscas? Escríbenos a <a href={`mailto:${LEGAL.emailSoporte}`}>{LEGAL.emailSoporte}</a>.
                 </p>
               </section>
             )}

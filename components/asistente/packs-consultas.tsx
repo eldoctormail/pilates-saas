@@ -8,6 +8,7 @@ import { authHeader } from '@/lib/api-client';
 import { mensajeSeguro, mensajeHttp } from '@/lib/errores';
 import { cn, TZ_ESTUDIO } from '@/lib/utils';
 import { PACKS_CONSULTAS, PACK_CADUCA_MESES, eurosDe, miles, precioPorConsulta, textoQuedan, type PackConsultas } from '@/lib/asistente/packs';
+import { LEGAL } from '@/lib/legal-info';
 
 // Los packs de consultas de «Pregúntale a Centra» en pantalla: la sección
 // «Consultas de Centra» de /suscripcion (uso del mes, packs vivos y comprar),
@@ -300,7 +301,7 @@ function AvisoCompra({ compra, agotado, volverAlChat }: { compra: EstadoCompra |
     if (agotado) {
       return (
         <Aviso tono="atencion">
-          Stripe ha aceptado el pago, pero su confirmación todavía no nos ha llegado. Tus consultas aparecerán aquí en cuanto llegue; si en unos minutos no están, escríbenos a soporte@tentare.app.
+          Stripe ha aceptado el pago, pero su confirmación todavía no nos ha llegado. Tus consultas aparecerán aquí en cuanto llegue; si en unos minutos no están, escríbenos a {LEGAL.emailSoporte}.
         </Aviso>
       );
     }

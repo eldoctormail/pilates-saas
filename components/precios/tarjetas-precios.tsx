@@ -9,6 +9,7 @@ import { importeDe, precio, textoAhorro, type IntervaloUi } from '@/lib/billing/
 import { CTA_ALTA, FRASE_FOUNDING, siPasasConComplementos, TOPE_GRATIS } from '@/lib/landing/founding-gratis';
 import { NombrePlan } from '@/components/planes/nombre-plan';
 import { SelectorIntervalo } from '@/components/planes/selector-intervalo';
+import { LEGAL } from '@/lib/legal-info';
 
 // Las tres tarjetas de /precios con el selector Mensual / Anual. Es cliente solo
 // por el selector: los precios, lo que añade cada plan y el ahorro salen de las
@@ -114,7 +115,7 @@ export function TarjetasPrecios({ anualDisponible }: { anualDisponible: boolean 
                 {/* Para quién es: lo primero que se lee tras el precio. */}
                 <p style={{ fontSize: 15, fontWeight: 500, lineHeight: 1.45, color: destacado ? 'var(--w-sobre-noche)' : 'var(--w-texto)', margin: '14px 0 0' }}>{RESUMEN[p].para}</p>
                 <Link
-                  href={p === 'CADENA' ? 'mailto:hola@tentare.app?subject=Plan%20Cadena' : '/crear-estudio'}
+                  href={p === 'CADENA' ? `mailto:${LEGAL.email}?subject=Plan%20Cadena` : '/crear-estudio'}
                   className="block hover:brightness-110 transition-all"
                   style={{ textAlign: 'center', display: 'block', background: destacado ? 'var(--w-sand)' : 'var(--w-olive)', color: destacado ? 'var(--w-olive)' : 'var(--w-sand)', fontWeight: 600, fontSize: destacado ? 16 : 15, padding: destacado ? '15px 18px' : '13px 18px', borderRadius: 999, textDecoration: 'none', marginTop: 20 }}
                 >

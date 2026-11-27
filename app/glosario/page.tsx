@@ -321,7 +321,15 @@ const EN_ARGENTINA: Record<string, Termino> = {
   },
 };
 
-const TERMINOS: Termino[] = ES ? TERMINOS_ESPANA : TERMINOS_ESPANA.map((t) => EN_ARGENTINA[t.slug] ?? t);
+// Los datos de estudios españoles (la muestra de precios y de caducidades) no valen en Argentina: se quitan.
+const SIN_DATOS_DE_ESPANA: Record<string, (t: Termino) => Termino> = {
+  'pilates-mat': (t) => ({ ...t, extra: undefined }),
+  'caducidad-del-bono': (t) => ({ ...t, description: t.description.replace(/ En 8 de cada 10 estudios españoles[^.]*\./, '') }),
+};
+
+const TERMINOS: Termino[] = ES
+  ? TERMINOS_ESPANA
+  : TERMINOS_ESPANA.map((t) => EN_ARGENTINA[t.slug] ?? SIN_DATOS_DE_ESPANA[t.slug]?.(t) ?? t);
 
 export default function GlosarioPage() {
   return (

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { LogoTentare } from '@/components/marca/logo-tentare';
 import { EDICION, TEXTO_PILDORA } from '@/lib/edicion/invierno-26';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 import { ArteRayos } from './arte-rayos';
 import './edicion.css';
 
@@ -11,6 +12,8 @@ import './edicion.css';
  * una etiqueta mono al lado, el logo a la derecha arriba y una píldora blanca abajo a la derecha. El arte se mueve despacio.
  */
 export function BannerEdicion({ className = '' }: { className?: string }) {
+  // En Argentina la edición no se publica (redirige: next.config.ts): el banner llevaría a otra página.
+  if (!ES) return null;
   return (
     <Link href={EDICION.ruta} className={`ed-banner ${className}`} aria-label={`${EDICION.nombre} ${EDICION.temporada}: ${TEXTO_PILDORA.toLowerCase()}`}>
       <span className="ed-banner-arte"><ArteRayos /></span>

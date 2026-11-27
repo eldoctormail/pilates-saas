@@ -48,6 +48,7 @@ import { usePanelNuevo } from '@/lib/estudio/panel-nuevo-cliente';
 import { BOTON_VIVO } from '@/components/dashboard/vivo';
 import { BOTON_BORDE } from '@/components/dashboard/vivo-seccion';
 import { PasosMigracion, QueSePuedeTraer, ZonaArrastreNueva } from '@/components/migracion/traer-datos-nuevo';
+import { LEGAL } from '@/lib/legal-info';
 
 type Paso = 'subir' | 'analizando' | 'revisar' | 'ejecutando' | 'acta';
 
@@ -942,7 +943,7 @@ export default function MigracionPage() {
               </p>
             )}
             {resultados.some(r => r.batchAviso) && (
-              <p className="mt-3 text-[12px] text-warning">⚠️ Parte del lote no quedó registrado para deshacer. Si necesitas revertir, escríbenos a soporte@tentare.app.</p>
+              <p className="mt-3 text-[12px] text-warning">⚠️ Parte del lote no quedó registrado para deshacer. Si necesitas revertir, escríbenos a {LEGAL.emailSoporte}.</p>
             )}
           </div>
 

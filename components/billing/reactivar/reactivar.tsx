@@ -11,6 +11,7 @@ import { decidirReactivacion, RUTA_TODOS_LOS_PLANES } from '@/lib/billing/reacti
 import { PagoReactivar } from './pago-reactivar';
 import { CON_MERCADOPAGO } from '@/lib/pasarela';
 import estilos from './reactivar.module.css';
+import { LEGAL } from '@/lib/legal-info';
 
 /**
  * La pantalla a la que llega un estudio al que se le ha acabado el plazo, con la
@@ -115,7 +116,7 @@ function MenuCuenta({ email, onSalir }: { email: string; onSalir: () => Promise<
         <div className={estilos.menu}>
           <p>{studio?.nombre}<span>{email}</span></p>
           <Link href="/suscripcion#exportar-datos">Descargar mis datos</Link>
-          <a href="mailto:soporte@tentare.app">Escribir a soporte</a>
+          <a href={`mailto:${LEGAL.emailSoporte}`}>Escribir a soporte</a>
           <button type="button" onClick={() => { void onSalir().then(() => router.replace('/login')); }}>Cerrar sesión</button>
         </div>
       )}

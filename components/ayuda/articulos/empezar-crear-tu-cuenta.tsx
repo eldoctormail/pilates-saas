@@ -4,6 +4,7 @@ import { AyudaPaso, AyudaAntesDeEmpezar, AyudaResultado } from '@/components/ayu
 import { PLAN_INFO } from '@/lib/billing/entitlements';
 import { COMPLEMENTOS_CORTO, LIMITES_GRATIS, precioFoundingPago } from '@/lib/landing/founding-gratis';
 import { precio } from '@/lib/billing/intervalo-ui';
+import { DOMINIO_VISIBLE } from '@/lib/origen-canonico';
 
 // Las capturas de los pasos 1 y 3 son reales, tomadas en vivo el 28-ago-2026
 // contra tentare.app/crear-estudio en producción (sin llegar a enviar el paso 3,
@@ -18,7 +19,7 @@ export default function Contenido() {
         {PLAN_INFO.BASE.nombre}, con todo menos varias sedes (ver <Link href="/ayuda/pagos/prueba-de-7-dias" style={{ color: 'inherit', textDecoration: 'underline' }}>cómo funciona {PLAN_INFO.BASE.nombre} gratis</Link>).
       </AyudaAntesDeEmpezar>
 
-      <AyudaPaso numero={1} titulo="Entra en tentare.app/crear-estudio">
+      <AyudaPaso numero={1} titulo={`Entra en ${DOMINIO_VISIBLE}/crear-estudio`}>
         <p style={{ margin: '0 0 12px' }}>
           Escribe el nombre de tu estudio (es el que verán tus clientes) y, si quieres, tu ciudad y cómo conociste
           Centra — los dos últimos son opcionales y no bloquean el alta.

@@ -1,5 +1,7 @@
 import { MUTED } from '@/components/landing/theme';
 import { PanelClaro, PanelOscuro } from './comunes';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
+import { muestra } from '@/lib/moneda';
 
 // ── Dibujos propios de /funcionalidades/multi-centro ─────────────────────────
 // Fuente:
@@ -10,10 +12,14 @@ import { PanelClaro, PanelOscuro } from './comunes';
 //     persona y sede, con su propio rol, tarifa y disponibilidad.
 //   · La RLS acota por estudio: una sede no lee los datos de otra.
 
+// Nombres de sede de ejemplo: barrios de Barcelona en España, de Buenos Aires en Argentina (SEDE_A/B/C, también en la página).
+export const SEDE_A = ES ? 'Gràcia' : 'Palermo';
+export const SEDE_B = ES ? 'Eixample' : 'Belgrano';
+export const SEDE_C = ES ? 'Sant Cugat' : 'Vicente López';
 const SEDES = [
-  { n: 'Gràcia', rol: 'Propietaria', activa: true },
-  { n: 'Eixample', rol: 'Gerencia', activa: false },
-  { n: 'Sant Cugat', rol: 'Instructora', activa: false },
+  { n: SEDE_A, rol: 'Propietaria', activa: true },
+  { n: SEDE_B, rol: 'Gerencia', activa: false },
+  { n: SEDE_C, rol: 'Instructora', activa: false },
 ];
 
 export function SelectorDeSede() {
@@ -96,8 +102,8 @@ export function InstructoraEnDosSedes() {
     >
       <div className="mc-dos" style={{ display: 'grid', gap: 14 }}>
         {[
-          { sede: 'Gràcia', rol: 'Gerencia', tarifa: '38 €/h', dispo: 'Lunes a viernes, mañanas', c: '#214E36' },
-          { sede: 'Sant Cugat', rol: 'Instructora', tarifa: '32 €/h', dispo: 'Martes y jueves, tardes', c: '#3E7C86' },
+          { sede: SEDE_A, rol: 'Gerencia', tarifa: `${muestra(38)}/h`, dispo: 'Lunes a viernes, mañanas', c: '#214E36' },
+          { sede: SEDE_C, rol: 'Instructora', tarifa: `${muestra(32)}/h`, dispo: 'Martes y jueves, tardes', c: '#3E7C86' },
         ].map((s) => (
           <div key={s.sede} style={{ background: '#F4F9F6', border: '1px solid #E3EEE8', borderRadius: 14, padding: '17px 18px', borderTop: `3px solid ${s.c}` }}>
             <div style={{ fontSize: 15.5, fontWeight: 800, letterSpacing: '-.02em', marginBottom: 12 }}>{s.sede}</div>

@@ -426,7 +426,10 @@ const TODAS_LAS_PAGINAS: PaginaSeo[] = [
     path: '/precios',
     titulo: 'Precios: software para estudios de Pilates y yoga | Centra',
     descripcion:
-      'Sin permanencia: Founding Studio gratis hasta 150 reservas al mes (si pasas, 29 €/mes), Estudio 79 € y Cadena 249 €. Empieza gratis.',
+      ES
+        ? 'Sin permanencia: Founding Studio gratis hasta 150 reservas al mes (si pasas, 29 €/mes), Estudio 79 € y Cadena 249 €. Empieza gratis.'
+        // Sin cifras: en Argentina los precios se editan en /interno/precios y una descripción fija quedaría vieja.
+        : 'Sin permanencia: Founding Studio gratis hasta 150 reservas al mes, y Estudio y Cadena con precio público en pesos, IVA incluido. Empieza gratis.',
     grupo: 'software',
     etiqueta: 'Precios',
     resumen: 'Tres planes, precio público, sin permanencia y Founding Studio gratis.',
@@ -792,7 +795,7 @@ const TODAS_LAS_PAGINAS: PaginaSeo[] = [
     path: '/sobre-tentare',
     titulo: 'Sobre Centra: quién hay detrás del software',
     descripcion:
-      'Centra es un software de gestión para estudios de Pilates y yoga hecho en España. Quién lo hace, cómo trabajamos y cómo contactar con nosotros.',
+      `Centra es un software de gestión para estudios de Pilates y yoga ${ES ? 'hecho en España' : 'para Argentina'}. Quién lo hace, cómo trabajamos y cómo contactar con nosotros.`,
     grupo: 'software',
     etiqueta: 'Sobre Centra',
     resumen: 'Quién hay detrás y cómo trabajamos.',
@@ -906,17 +909,29 @@ const TODAS_LAS_PAGINAS: PaginaSeo[] = [
  */
 export const esComparativaUnoAUno = (path: string): boolean => path.startsWith('/comparativa/tentare-vs-');
 
-export const PAGINAS: PaginaSeo[] = ES ? TODAS_LAS_PAGINAS : TODAS_LAS_PAGINAS.filter((p) => !esComparativaUnoAUno(p.path));
+/**
+ * Lo que en Argentina no tiene sentido y no se publica (ni sitemap ni enlaces): la «Edición Invierno 26», que cuenta
+ * las versiones del software original (Veri*Factu, euros) y enlaza a novedades que en una instalación nueva no existen
+ * (redirige, next.config.ts), y Centra Network, el buscador de instructoras que solo funciona en Barcelona y Madrid.
+ */
+export const esSoloDeEspana = (path: string): boolean =>
+  esComparativaUnoAUno(path) || path.startsWith('/edicion/') || path === '/network' || path.startsWith('/network/');
+
+export const PAGINAS: PaginaSeo[] = ES ? TODAS_LAS_PAGINAS : TODAS_LAS_PAGINAS.filter((p) => !esSoloDeEspana(p.path));
 
 // Lo que no se publica en el país (el blog, las guías solo de España y las comparativas uno a uno) sigue
 // compilándose —redirige, next.config.ts— y su page.tsx lee la metadata con `paginaDe(...)!`: sin estar aquí,
 // el build se cae al recoger esas páginas.
 const NO_PUBLICADAS: PaginaSeo[] = ES ? [] : [
-  ...TODAS_LAS_PAGINAS.filter((p) => esComparativaUnoAUno(p.path)),
+  ...TODAS_LAS_PAGINAS.filter((p) => esSoloDeEspana(p.path)),
   ...PAGINAS_BLOG,
   ...GUIAS.filter((g) => !guiasDelPais().includes(g)).map(paginaDeGuia),
 ];
 const PORPATH = new Map([...PAGINAS, ...NO_PUBLICADAS].map((p) => [p.path, p]));
+const PUBLICADAS = new Map(PAGINAS.map((p) => [p.path, p]));
+const SIN_PUBLICAR = new Set(NO_PUBLICADAS.map((p) => p.path));
+/** ¿Es una página que en este país no se publica (redirige, next.config.ts)? Para no enlazarla. */
+export const noSePublica = (path: string): boolean => SIN_PUBLICAR.has(path);
 
 export function paginaDe(path: string): PaginaSeo | undefined {
   return PORPATH.get(path);
@@ -937,7 +952,8 @@ export function funcionalidades(): PaginaSeo[] {
  * no la propietaria que está leyendo la página.
  */
 export function relacionadasDe(path: string): PaginaSeo[] {
-  return (paginaDe(path)?.relacionadas ?? []).map((r) => PORPATH.get(r)).filter((p): p is PaginaSeo => Boolean(p));
+  // Solo las publicadas en el país: lo que en Argentina no se publica (NO_PUBLICADAS) redirige y no se enlaza.
+  return (paginaDe(path)?.relacionadas ?? []).map((r) => PUBLICADAS.get(r)).filter((p): p is PaginaSeo => Boolean(p));
 }
 
 /** URL absoluta de un path del registro. `/` no lleva barra final duplicada. */

@@ -1,3 +1,5 @@
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
+
 // Una foto de las que dejó el fundador en el escritorio, ya derivadas (AVIF + WebP, dos tamaños) en public/landing-nueva/.
 // Con `ancho`/`alto` la caja reserva su sitio antes de que llegue el fichero (sin saltos de maquetación).
 const FOTOS = {
@@ -11,7 +13,8 @@ const FOTOS = {
   postura: { anchos: [640, 1100], ancho: 1219, alto: 1290 },
   meditacion: { anchos: [800, 1400], ancho: 1672, alto: 941 },
   retrato: { anchos: [800, 1600], ancho: 1672, alto: 941 },
-  panel: { archivo: 'panel-resumen', anchos: [900, 1600], ancho: 1600, alto: 1000 },
+  // En Argentina, la misma captura con el logo de Centra en vez del del software original (panel-resumen-ar-*).
+  panel: { archivo: ES ? 'panel-resumen' : 'panel-resumen-ar', anchos: [900, 1600], ancho: 1600, alto: 1000 },
 } as const;
 
 export type NombreFoto = keyof typeof FOTOS;

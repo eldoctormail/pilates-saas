@@ -1,6 +1,8 @@
 import type { ReactNode } from 'react';
 import { MarcoIphone } from '@/components/ui/marco-iphone';
 import { LogoTentare } from '@/components/marca/logo-tentare';
+import { muestra } from '@/lib/moneda';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Fragmentos del producto para la home nueva (fase 2.2, 19-oct-2026).
@@ -81,7 +83,8 @@ export const CAPTURAS_APP = {
     // barra de estado (la dibuja el marco del iPhone), y con la cabecera de un estudio FICTICIO («Estudio
     // Alma», monograma) y un nombre y un avatar genéricos en vez de los reales: el repo es público y la web
     // no enseña la marca de otro estudio. Altura real: 1696 a 780 px de ancho.
-    n: 'app-alumna-inicio-v2-estudio-pilates',
+    // En Argentina, la misma captura con «Neuquén» bajo el nombre del estudio en vez de «Madrid» (…-ar-*).
+    n: ES ? 'app-alumna-inicio-v2-estudio-pilates' : 'app-alumna-inicio-v2-estudio-pilates-ar',
     alt: 'Inicio de la app de la alumna con la marca de su estudio: su próxima clase con foto, accesos a reservar, su plan, la comunidad y sus favoritos, y su progreso de la semana',
     tinta: 'clara',
   },
@@ -94,7 +97,8 @@ export const CAPTURAS_APP = {
     tinta: 'oscura',
   },
   miPlan: {
-    n: 'app-alumna-mi-plan',
+    // En Argentina, el último recibo en pesos en vez de «175 €» (…-ar-*).
+    n: ES ? 'app-alumna-mi-plan' : 'app-alumna-mi-plan-ar',
     alt: 'Mi plan en la app de la alumna: su bono con las sesiones que le quedan y hasta cuándo, su próxima clase, la tienda y sus recibos',
     tinta: 'oscura',
   },
@@ -136,10 +140,10 @@ export function AgendaDia({ className = '' }: { className?: string }) {
 /** «Quién me debe» y las próximas cuotas: el resumen de Cobros. */
 export function PanelCobros({ className = '', completo = false }: { className?: string; completo?: boolean }) {
   const filas = [
-    { ini: 'LM', nombre: 'Laura Martín', concepto: 'Mensual ilimitado', importe: '75 €', estado: 'Se reintenta solo', tono: 'aviso' as Tono },
-    { ini: 'CD', nombre: 'Carmen Del Río', concepto: 'Bono 10 clases', importe: '120 €', estado: 'Cobrado', tono: 'ok' as Tono },
-    { ini: 'MG', nombre: 'María García', concepto: 'Mensual 2 días', importe: '59 €', estado: 'Se cobra solo', tono: 'neutro' as Tono },
-    { ini: 'BO', nombre: 'Bea Ortega', concepto: 'Clase suelta', importe: '18 €', estado: 'Sin cobrar', tono: 'error' as Tono },
+    { ini: 'LM', nombre: 'Laura Martín', concepto: 'Mensual ilimitado', importe: muestra(75), estado: 'Se reintenta solo', tono: 'aviso' as Tono },
+    { ini: 'CD', nombre: 'Carmen Del Río', concepto: 'Bono 10 clases', importe: muestra(120), estado: 'Cobrado', tono: 'ok' as Tono },
+    { ini: 'MG', nombre: 'María García', concepto: 'Mensual 2 días', importe: muestra(59), estado: 'Se cobra solo', tono: 'neutro' as Tono },
+    { ini: 'BO', nombre: 'Bea Ortega', concepto: 'Clase suelta', importe: muestra(18), estado: 'Sin cobrar', tono: 'error' as Tono },
   ];
   return (
     <div className={`wh-panel wh-cobros ${className}`.trim()}>

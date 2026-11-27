@@ -44,7 +44,7 @@ export default function Contenido() {
       </p>
 
       <p>
-        Cada botón guarda solo lo de su fila: guardar el teléfono no toca tu NIF ni tus textos, y lo que estés
+        Cada botón guarda solo lo de su fila: guardar el teléfono no toca tu {ES ? 'NIF' : 'CUIT'} ni tus textos, y lo que estés
         escribiendo en otra se queda como está.
       </p>
 

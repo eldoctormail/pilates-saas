@@ -1,4 +1,5 @@
 import { ImageOff } from 'lucide-react';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
 // Envoltorio de captura de pantalla para un artículo de /ayuda. Si `src` no
 // existe todavía en /public/help/, se pinta un estado "captura pendiente"
@@ -9,6 +10,9 @@ import { ImageOff } from 'lucide-react';
 export function AyudaCaptura({ src, alt, caption, pendiente }: {
   src?: string; alt: string; caption?: string; pendiente?: string;
 }) {
+  // Las capturas de /public/help/ son del panel del software original: llevan su logo, importes en euros y
+  // Stripe. En Argentina no se enseñan (el texto del artículo ya explica cada paso) hasta tener las de Centra.
+  if (!ES) return null;
   return (
     <figure style={{ margin: '20px 0', borderRadius: 16, overflow: 'hidden', border: '1px solid #E7E7E0', background: '#fff' }}>
       {src ? (

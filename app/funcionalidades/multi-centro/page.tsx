@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { FeatureShell } from '@/components/funcionalidades/FeatureShell';
 import { CierreCta, Entradilla, FeatureFaq, Limite, Rejilla, Seccion } from '@/components/funcionalidades/bloques';
-import { InstructoraEnDosSedes, QueSeCompartYQueNo, SelectorDeSede } from '@/components/funcionalidades/visuales/multicentro';
+import { InstructoraEnDosSedes, QueSeCompartYQueNo, SEDE_A, SEDE_C, SelectorDeSede } from '@/components/funcionalidades/visuales/multicentro';
 import { paginaDe, urlDe } from '@/lib/seo/paginas';
 
 const PATH = '/funcionalidades/multi-centro';
@@ -77,7 +77,7 @@ export default function MultiCentroPage() {
       <Seccion id="equipo" titulo="La instructora que trabaja en dos sitios">
         <p>
           Es el caso que más se complica en el software genérico, y el que decide si una cadena funciona. Tu instructora de
-          los martes en Gràcia también da clase en Sant Cugat los jueves, con otra tarifa y otro nivel de responsabilidad.
+          los martes en {SEDE_A} también da clase en {SEDE_C} los jueves, con otra tarifa y otro nivel de responsabilidad.
         </p>
         <InstructoraEnDosSedes />
         <p>
@@ -87,7 +87,7 @@ export default function MultiCentroPage() {
         </p>
         <p>
           Y hay una consecuencia práctica: <strong>las sustituciones no cruzan de sede</strong>. Cuando alguien no puede dar
-          una clase en Gràcia, se buscan candidatas de Gràcia. Es lo correcto —la disponibilidad y los desplazamientos son
+          una clase en {SEDE_A}, se buscan candidatas de {SEDE_A}. Es lo correcto —la disponibilidad y los desplazamientos son
           reales— y sale gratis: el motor de <Link href="/funcionalidades/sustituciones">sustituciones</Link> trabaja con la
           ficha de esa sede.
         </p>

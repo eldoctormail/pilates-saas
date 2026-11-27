@@ -84,13 +84,47 @@ COPIA_REMOTO=                        # opcional: copia fuera, con rclone
 ```
 
 - **`COPIA_CLAVE`.** Con ella, la copia va cifrada, y los secretos dentro, protegidos. **Anotala fuera de la Pi:** sin la frase no se puede restaurar.
-- **`COPIA_REMOTO`.** Manda además cada copia a la nube: Backblaze B2, Cloudflare R2, Google Drive o cualquier destino que soporte rclone. Exige `COPIA_CLAVE`. El remoto se configura una vez:
+- **`COPIA_REMOTO`.** Manda además cada copia a la nube (ver «Copia fuera», abajo). Exige `COPIA_CLAVE`. Allá se guardan los últimos `COPIA_REMOTO_DIAS` días (30 por defecto).
 
-  ```sh
-  sudo docker run --rm -it -v /root/.config/rclone:/config/rclone rclone/rclone config
-  ```
+### Copia fuera (Google Drive)
 
-  Ese comando crea, por ejemplo, un remoto `b2`. Después se pone `COPIA_REMOTO=b2:mi-bucket/tentare`.
+Si se rompe el disco o te roban la máquina, una copia que está en la misma máquina se pierde con ella. Con `COPIA_REMOTO`, cada copia se sube además a la nube, cifrada. Va con rclone, que se usa con Docker y no hace falta instalar.
+
+1. **Autorizar a rclone con tu cuenta de Google.** El servidor no tiene navegador, así que la autorización se saca desde tu computadora. Instalá rclone ahí (rclone.org/downloads) y corré:
+
+   ```sh
+   rclone authorize "drive"
+   ```
+
+   Se abre el navegador, entrás con la cuenta de Google y la terminal te devuelve un texto que empieza con `{"access_token":...}`. Copialo entero.
+
+2. **Crear el remoto en el servidor:**
+
+   ```sh
+   sudo docker run --rm -it -v /root/.config/rclone:/config/rclone rclone/rclone config
+   ```
+
+   Respondé así: `n` (remoto nuevo) → nombre `gdrive` → tipo `drive` → `client_id` y `client_secret` vacíos (Enter) → `scope` 1 (acceso completo) → lo demás con Enter → «Use web browser to automatically authenticate?» `n` → pegás el texto del paso 1 → «Configure this as a Shared Drive?» `n` → `y` para guardar → `q` para salir.
+
+3. **Probarlo:**
+
+   ```sh
+   sudo docker run --rm -v /root/.config/rclone:/config/rclone rclone/rclone mkdir gdrive:centra-copias
+   sudo docker run --rm -v /root/.config/rclone:/config/rclone rclone/rclone lsd gdrive:
+   ```
+
+   Tiene que aparecer la carpeta `centra-copias`.
+
+4. **Activarlo** en `deploy/.env`:
+
+   ```
+   COPIA_REMOTO=gdrive:centra-copias
+   COPIA_REMOTO_DIAS=30
+   ```
+
+   Hacé una copia a mano (`sudo systemctl start tentare-copia`) y fijate que esté en tu Drive y que `COPIA_DESTINO/ULTIMA-COPIA-REMOTA-OK` tenga la fecha de hoy.
+
+Otros destinos (Backblaze B2, Cloudflare R2, un servidor por SFTP) se configuran igual, eligiendo otro tipo en el paso 2. Si la subida falla, la copia local queda hecha igual, pero `systemctl status tentare-copia` sale en error. Las copias viejas que se borran en Drive van a la papelera, que sigue ocupando espacio hasta que se vacía.
 
 ### Programarla
 
@@ -134,6 +168,7 @@ La base de ahora no se borra: queda en `volumes/db/data.antes-de-restaurar-…`.
 - [ ] Una alumna de prueba entra con su correo y le llega el código.
 - [ ] Una compra real chica, con tu propia tarjeta, se acredita. Después, devolvela desde el panel.
 - [ ] Al día siguiente, `ULTIMA-COPIA-OK` tiene la fecha de esa madrugada.
+- [ ] Si pusiste `COPIA_REMOTO`, la copia de esa madrugada está en el remoto y `ULTIMA-COPIA-REMOTA-OK` tiene su fecha.
 - [ ] ARCA en producción, si vas a facturar:
   - En Configuración › Cobros y facturas › Factura electrónica de ARCA, cambiá el entorno a **Producción**.
   - Hacé el certificado de producción.

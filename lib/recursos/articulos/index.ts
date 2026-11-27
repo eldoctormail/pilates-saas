@@ -72,8 +72,13 @@ export const ARTICULOS_ESPANA: Articulo[] = [
 // argentina (./argentina, MISMO slug: los enlaces no cambian) la sustituye. El
 // orden es el de España.
 const DE_ARGENTINA = new Map(ARTICULOS_ARGENTINA.map((a) => [a.slug, a]));
+// Comparativas de programas españoles que en Argentina casi nadie usa ni busca
+// (27-nov-2026, decisión de Javier): con el formato de Argentina no se publican.
+// «Mejor software» sí tiene versión argentina, con los programas de allí.
+export const ARTICULOS_SOLO_ESPANA = ['alternativas-a-bsport', 'alternativas-a-timp', 'bsport-vs-timp'];
 export function articulosPara(espana: boolean): Articulo[] {
-  return espana ? ARTICULOS_ESPANA : ARTICULOS_ESPANA.map((a) => DE_ARGENTINA.get(a.slug) ?? a);
+  if (espana) return ARTICULOS_ESPANA;
+  return ARTICULOS_ESPANA.filter((a) => !ARTICULOS_SOLO_ESPANA.includes(a.slug)).map((a) => DE_ARGENTINA.get(a.slug) ?? a);
 }
 export const ARTICULOS: Articulo[] = articulosPara(FUNCIONES_DE_ESPANA);
 export { ARTICULOS_ARGENTINA };

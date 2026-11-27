@@ -5,7 +5,7 @@ import { join } from 'node:path';
 import { PAGINAS } from '../../seo/paginas.ts';
 import { ARTICULOS as AYUDA, CATEGORIAS, urlArticulo as urlAyuda } from '../../ayuda/registro.ts';
 import { GUIAS } from '../guias.ts';
-import { ARTICULOS, ARTICULOS_ARGENTINA, ARTICULOS_ESPANA, articulosPara } from './index.ts';
+import { ARTICULOS, ARTICULOS_ARGENTINA, ARTICULOS_ESPANA, ARTICULOS_SOLO_ESPANA, articulosPara } from './index.ts';
 import { enlacesInternos, validarArticulo } from './validar.ts';
 import { ARTICULOS_META, ARTICULOS_META_ARGENTINA, ARTICULOS_META_ESPANA } from './meta.ts';
 import { metaDe } from './proyeccion.ts';
@@ -102,4 +102,20 @@ test('cada versión argentina sustituye a un artículo de España con su mismo s
     vistos.add(a.slug);
   }
   assert.equal(ARTICULOS_META.length, ARTICULOS.length);
+});
+
+test('las comparativas solo de España no se publican con el formato de Argentina', () => {
+  const ar = new Set(articulosPara(false).map((a) => a.slug));
+  const es = new Set(articulosPara(true).map((a) => a.slug));
+  for (const slug of ARTICULOS_SOLO_ESPANA) {
+    assert.ok(es.has(slug), `${slug} debería existir en España`);
+    assert.ok(!ar.has(slug), `${slug} no debería publicarse en Argentina`);
+    assert.ok(!ARTICULOS_META_ARGENTINA.some((m) => m.slug === slug), `${slug} sigue en meta de Argentina: regenerar meta.ts`);
+  }
+  // Ningún artículo argentino enlaza a una guía que en Argentina no existe.
+  for (const a of articulosPara(false)) {
+    for (const url of enlacesInternos(a)) {
+      for (const slug of ARTICULOS_SOLO_ESPANA) assert.ok(!url.includes(`/recursos/${slug}`), `${a.slug} enlaza a ${slug}`);
+    }
+  }
 });

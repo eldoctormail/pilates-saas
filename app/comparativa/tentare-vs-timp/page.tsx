@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CompetitorPage, type ComparativaRow, type ResumenCompetidor, type SeccionAnalisis } from '@/components/comparativa/CompetitorPage';
 import { paginaDe, urlDe } from '@/lib/seo/paginas';
+import { FUNCIONES_DE_ESPANA } from '@/lib/locale';
 
 const PATH = '/comparativa/tentare-vs-timp';
 const pagina = paginaDe(PATH)!;
@@ -94,7 +95,7 @@ const ANALISIS: SeccionAnalisis[] = [
   {
     titulo: 'Cómo cambiarte de TIMP a Centra',
     cuerpo: (
-      <p>El importador de Centra lee los archivos CSV o Excel que exportas de TIMP: clientas, bonos, clases y reservas, con un acta para revisarlo y un botón para deshacerlo. <Link href="/soluciones/cambiar-de-software">Cómo es el cambio</Link>. Y si aún estás comparando, tenemos una guía con <Link href="/recursos/alternativas-a-timp">las alternativas a TIMP</Link>.</p>
+      <p>El importador de Centra lee los archivos CSV o Excel que exportas de TIMP: clientas, bonos, clases y reservas, con un acta para revisarlo y un botón para deshacerlo. <Link href="/soluciones/cambiar-de-software">Cómo es el cambio</Link>.{FUNCIONES_DE_ESPANA && <> Y si aún estás comparando, tenemos una guía con <Link href="/recursos/alternativas-a-timp">las alternativas a TIMP</Link>.</>}</p>
     ),
   },
 ];

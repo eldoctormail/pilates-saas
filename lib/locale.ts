@@ -12,9 +12,20 @@
 // de texto con FUNCIONES_DE_ESPANA: Mercado Pago y ARCA en Argentina.
 import { envPublica } from './env-publica.ts';
 
-export const LOCALE: string =
+/**
+ * `es-AR` a secas escribe la hora en 12 h («06:05 p. m.»): se le pone el reloj
+ * de 24 h, como al de serie. La guía del servidor dice `NEXT_PUBLIC_LOCALE=es-AR`
+ * y así quedaba toda la app con la hora en «p. m.». Con una extensión `-u-`
+ * puesta a propósito, se respeta.
+ */
+export function conReloj24(locale: string): string {
+  return /^es-AR$/i.test(locale) ? `${locale}-u-hc-h23` : locale;
+}
+
+export const LOCALE: string = conReloj24(
   /* @__PURE__ */ envPublica(() => process.env.NEXT_PUBLIC_LOCALE)?.trim() ||
-  'es-AR-u-hc-h23';
+  'es-AR-u-hc-h23',
+);
 
 /** Un teléfono de ejemplo para los `placeholder`, con el formato del país. */
 export const TELEFONO_EJEMPLO: string = /^es-AR\b/i.test(LOCALE) ? '+54 9 299 412 3456' : '+34 600 000 000';

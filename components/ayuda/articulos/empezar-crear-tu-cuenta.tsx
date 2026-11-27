@@ -5,6 +5,7 @@ import { PLAN_INFO } from '@/lib/billing/entitlements';
 import { COMPLEMENTOS_CORTO, LIMITES_GRATIS, precioFoundingPago } from '@/lib/landing/founding-gratis';
 import { precio } from '@/lib/billing/intervalo-ui';
 import { DOMINIO_VISIBLE } from '@/lib/origen-canonico';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
 // Las capturas de los pasos 1 y 3 son reales, tomadas en vivo el 28-ago-2026
 // contra tentare.app/crear-estudio en producción (sin llegar a enviar el paso 3,
@@ -21,13 +22,26 @@ export default function Contenido() {
 
       <AyudaPaso numero={1} titulo={`Entra en ${DOMINIO_VISIBLE}/crear-estudio`}>
         <p style={{ margin: '0 0 12px' }}>
-          Escribe el nombre de tu estudio (es el que verán tus clientes) y, si quieres, tu ciudad y cómo conociste
-          Centra — los dos últimos son opcionales y no bloquean el alta.
+          {ES ? (
+            <>
+              Escribe el nombre de tu estudio (es el que verán tus clientes) y, si quieres, tu ciudad y cómo conociste
+              Centra — los dos últimos son opcionales y no bloquean el alta.
+            </>
+          ) : (
+            <>
+              Escribe el nombre de tu estudio (es el que verán tus clientes), tu email y una contraseña. Debajo del
+              nombre ves la dirección que tendrá la app de tus clientes.
+            </>
+          )}
         </p>
         <AyudaCaptura
           src="/help/empezar/crear-estudio-paso-1.png"
           alt="Formulario de alta de estudio, paso 1 de 3: nombre del estudio, ciudad y cómo conociste Centra"
           caption="Paso 1 de 3 — datos de tu estudio."
+          argentina={{
+            alt: 'Primer paso del alta: nombre del estudio, email y contraseña, con la dirección de la app de tus clientes',
+            caption: 'Paso 1 de 5 — tu cuenta.',
+          }}
         />
       </AyudaPaso>
 
@@ -45,8 +59,12 @@ export default function Contenido() {
         />
       </AyudaPaso>
 
-      <AyudaPaso numero={3} titulo="Crea tu acceso">
-        <p>Tu nombre, email y una contraseña. Te llega un código de 6 dígitos a ese email: lo escribes en la misma pantalla y entras a tu panel.</p>
+      <AyudaPaso numero={3} titulo={ES ? 'Crea tu acceso' : 'Confirma tu email y termina'}>
+        <p>
+          {ES
+            ? 'Tu nombre, email y una contraseña. Te llega un código de 6 dígitos a ese email: lo escribes en la misma pantalla y entras a tu panel.'
+            : 'Te llega un código de 6 dígitos al email que pusiste: lo escribes en la misma pantalla. Después te pide dónde está tu estudio y cuándo abre; tus datos y tu marca son opcionales y los puedes completar más tarde.'}
+        </p>
         <AyudaCaptura
           src="/help/empezar/crear-estudio-paso-3.png"
           alt="Formulario de acceso, paso 3 de 3: nombre, email y contraseña"

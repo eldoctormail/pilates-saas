@@ -13,6 +13,12 @@ import politicaCancelacion from './politica-de-cancelacion-de-clases.ts';
 import reducirCancelaciones from './reducir-cancelaciones-ultima-hora.ts';
 import asistencia from './plantilla-control-de-asistencia-pilates.ts';
 import clasesValle from './ocupacion-clases-valle.ts';
+import softwareGratis from './software-pilates-gratis.ts';
+import serInstructora from './como-ser-instructora-de-pilates.ts';
+import franquicia from './franquicia-de-pilates.ts';
+import abrirPilates from './como-abrir-un-estudio-de-pilates.ts';
+import abrirYoga from './como-abrir-un-estudio-de-yoga.ts';
+import gestionar from './como-gestionar-un-estudio-de-pilates.ts';
 
 // Versiones argentinas (formato es-AR) de artículos que en España hablan de su
 // normativa. Mismo slug: la dirección no cambia, cambia el texto. Las elige
@@ -32,4 +38,10 @@ export const ARTICULOS_ARGENTINA: Articulo[] = [
   reducirCancelaciones,
   asistencia,
   clasesValle,
+  softwareGratis,
+  serInstructora,
+  franquicia,
+  abrirPilates,
+  abrirYoga,
+  gestionar,
 ];

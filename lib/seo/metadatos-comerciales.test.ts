@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { PAGINAS, paginaDe, type PaginaSeo } from './paginas.ts';
+import { FUNCIONES_DE_ESPANA } from '../locale.ts';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Título y descripción de las páginas COMERCIALES (Ronda 1 de la revisión de la
@@ -84,7 +85,8 @@ test('hay páginas comerciales que medir (y son las que deben ser)', () => {
   assert.equal(COMERCIALES.filter((p) => p.path.startsWith('/funcionalidades/')).length, 17);
   // La quinta, «Abrir un estudio», desde la fase 2.3 de la web (20-oct-2026).
   assert.equal(COMERCIALES.filter((p) => p.path.startsWith('/soluciones/')).length, 5);
-  assert.equal(COMERCIALES.filter(esDeComparativa).length, 13);
+  // En Argentina las comparativas uno a uno no se publican: redirigen a /comparativa (next.config.ts).
+  assert.equal(COMERCIALES.filter(esDeComparativa).length, FUNCIONES_DE_ESPANA ? 13 : 0);
 });
 
 test('toda página comercial tiene title y description, dentro de largos', () => {

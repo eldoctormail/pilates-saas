@@ -4,6 +4,7 @@ import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { paginaDe, PAGINAS } from '../seo/paginas.ts';
 import { ARTICULOS, urlArticulo } from '../recursos/articulos/index.ts';
+import { FUNCIONES_DE_ESPANA } from '../locale.ts';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Los enlaces de la landing (Ronda 1, 19-oct-2026).
@@ -112,7 +113,8 @@ test('las comparativas que enlaza la etapa «quiero cambiar» existen', () => {
   const fuente = readFileSync(join(DIR_HOME, 'Etapas.tsx'), 'utf8');
   const slugs = [...fuente.matchAll(/\['([a-z]+)', '[^']+'\]/g)].map((m) => m[1]);
   assert.ok(slugs.length >= 6, `solo se encontraron ${slugs.length} comparativas`);
-  const sinPagina = slugs.filter((s) => !PAGINAS.some((p) => p.path === `/comparativa/tentare-vs-${s}`));
+  // En Argentina la etapa no las enseña (Etapas.tsx) y no se publican: solo se miran con el formato de España.
+  const sinPagina = FUNCIONES_DE_ESPANA ? slugs.filter((s) => !PAGINAS.some((p) => p.path === `/comparativa/tentare-vs-${s}`)) : [];
   assert.deepEqual(sinPagina, []);
 });
 

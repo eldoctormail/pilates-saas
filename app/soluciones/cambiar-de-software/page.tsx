@@ -13,6 +13,7 @@ import { CTA_ALTA } from '@/lib/landing/founding-gratis';
 import { WHATSAPP_SOPORTE } from '@/components/landing/enlaces';
 import { enlaceWhatsApp } from '@/lib/decision/mensajes-socia';
 import { paginaDe, relacionadasDe, urlDe } from '@/lib/seo/paginas';
+import { FUNCIONES_DE_ESPANA } from '@/lib/locale';
 import { SE_LLEVA } from '@/lib/landing/migracion';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -297,7 +298,8 @@ export default function CambiarDeSoftwarePage() {
               <p>Compara Centra con tu software actual, punto por punto.</p>
               <Link href="/comparativa" className="cs-boton cs-boton-claro">Ver la comparativa <ArrowRight size={16} /></Link>
             </div>
-            <ul className="cs-comparativas">
+            {/* Programas de España: en Argentina sus comparativas no se publican (lib/seo/paginas.ts). */}
+            {FUNCIONES_DE_ESPANA && <ul className="cs-comparativas">
               {COMPARATIVAS.map((c) => (
                 <li key={c.slug}>
                   <Link href={`/comparativa/tentare-vs-${c.slug}`}>
@@ -306,7 +308,7 @@ export default function CambiarDeSoftwarePage() {
                   </Link>
                 </li>
               ))}
-            </ul>
+            </ul>}
           </div>
         </div>
       </section>

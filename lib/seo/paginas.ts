@@ -395,7 +395,7 @@ const paginaDeGuia = (g: Guia): PaginaSeo => ({
   relacionadas: ['/recursos'],
 });
 
-export const PAGINAS: PaginaSeo[] = [
+const TODAS_LAS_PAGINAS: PaginaSeo[] = [
   {
     // Título y descripción de la home (6-oct-2026): `app/page.tsx` los lee de
     // aquí (`paginaDe('/')`), igual que el sitemap y los tests. Título ≤ 60 y
@@ -899,9 +899,20 @@ export const PAGINAS: PaginaSeo[] = [
 
 // ─── Consultas ───────────────────────────────────────────────────────────────
 
-// Lo que no se publica en el país (el blog y las guías solo de España) sigue compilándose —redirige, next.config.ts—
-// y su page.tsx lee la metadata con `paginaDe(...)!`: sin estar aquí, el build se cae al recoger esas páginas.
+/**
+ * Las comparativas uno a uno (/comparativa/tentare-vs-*) son de los programas de
+ * España: con el formato de Argentina no se publican y su dirección lleva a
+ * /comparativa, que allí compara con los de Argentina (next.config.ts).
+ */
+export const esComparativaUnoAUno = (path: string): boolean => path.startsWith('/comparativa/tentare-vs-');
+
+export const PAGINAS: PaginaSeo[] = ES ? TODAS_LAS_PAGINAS : TODAS_LAS_PAGINAS.filter((p) => !esComparativaUnoAUno(p.path));
+
+// Lo que no se publica en el país (el blog, las guías solo de España y las comparativas uno a uno) sigue
+// compilándose —redirige, next.config.ts— y su page.tsx lee la metadata con `paginaDe(...)!`: sin estar aquí,
+// el build se cae al recoger esas páginas.
 const NO_PUBLICADAS: PaginaSeo[] = ES ? [] : [
+  ...TODAS_LAS_PAGINAS.filter((p) => esComparativaUnoAUno(p.path)),
   ...PAGINAS_BLOG,
   ...GUIAS.filter((g) => !guiasDelPais().includes(g)).map(paginaDeGuia),
 ];

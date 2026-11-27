@@ -247,7 +247,8 @@ export function guiasDelPais(espana: boolean = FUNCIONES_DE_ESPANA): Guia[] {
 
 /** El orden del listado, sin lo que no se publica en el país. */
 export function ordenListadoDelPais(espana: boolean = FUNCIONES_DE_ESPANA): string[] {
-  return espana ? ORDEN_LISTADO : ORDEN_LISTADO.filter((clave) => !GUIAS_SOLO_ESPANA.includes(clave));
+  // 'tentare-vs-glofox' es una comparativa uno a uno: en Argentina redirige a /comparativa (next.config.ts).
+  return espana ? ORDEN_LISTADO : ORDEN_LISTADO.filter((clave) => !GUIAS_SOLO_ESPANA.includes(clave) && !clave.startsWith('tentare-vs-'));
 }
 
 export function guia(slug: string): Guia {

@@ -8,6 +8,7 @@ import { estadoDemo } from '@/lib/demo/interruptor';
 import '@/components/home-nueva/figma.css';
 import { logosClientesLanding } from '@/lib/landing/logos-clientes-servidor';
 import { paginaDe, urlDe } from '@/lib/seo/paginas';
+import { FUNCIONES_DE_ESPANA as ES } from '@/lib/locale';
 
 // La franja de logos de clientes se lee en servidor (solo estudios con
 // consentimiento, lib/landing/logos-clientes-servidor.ts): la home se regenera
@@ -76,7 +77,9 @@ export const metadata: Metadata = {
 // «Pedir una demo» abre la demo personalizada (/demo) cuando está abierta a todos (lib/demo/interruptor.ts); si no, baja al contacto.
 
 export default async function HomePage() {
-  const logos = await logosClientesLanding();
+  // En Argentina no va la franja «Estudios que ya trabajan con Centra» (Javier, 28-nov-2026): todavía no hay
+  // estudios argentinos que la sostengan.
+  const logos = ES ? await logosClientesLanding() : [];
   const demoHref = estadoDemo(process.env.DEMO_PERSONALIZADA).boton ? '/demo' : '#contacto';
   return (
     <LandingCliente conArmazonPropio>

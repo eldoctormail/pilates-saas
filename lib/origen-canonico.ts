@@ -9,6 +9,7 @@
 // Autoalojado: el origen sale de NEXT_PUBLIC_APP_URL (sin barra final). Sin ella,
 // el de Centra de siempre.
 import { envPublica } from './env-publica.ts';
+import { FUNCIONES_DE_ESPANA } from './locale.ts';
 
 export const URL_CANONICA = (
   /* @__PURE__ */ envPublica(() => process.env.NEXT_PUBLIC_APP_URL) || 'https://www.tentare.app'
@@ -33,5 +34,9 @@ export function canonicalizarOrigen(origen: string): string {
   return origen;
 }
 
-/** El host para ENSEÑAR en un texto («tentare.app/portal/tu-estudio»), sin el www. Autoalojado, el de la instalación. */
-export const DOMINIO_VISIBLE = /* @__PURE__ */ DOMINIO_CANONICO.replace(/^www\./, '');
+/**
+ * El host para ENSEÑAR en un texto («tentare.app/portal/tu-estudio»), sin el www. En España es siempre tentare.app
+ * (lo que se escribía a mano, y lo que esperan los e2e, que corren con la URL de localhost); autoalojado en Argentina,
+ * el de la instalación.
+ */
+export const DOMINIO_VISIBLE: string = FUNCIONES_DE_ESPANA ? 'tentare.app' : /* @__PURE__ */ DOMINIO_CANONICO.replace(/^www\./, '');
